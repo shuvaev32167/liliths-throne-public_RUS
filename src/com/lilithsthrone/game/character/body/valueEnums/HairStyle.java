@@ -37,6 +37,8 @@ public enum HairStyle {
 	CURLY("кудряво", Femininity.ANDROGYNOUS, HairLength.ONE_VERY_SHORT),
 	STRAIGHT("прямо", Femininity.ANDROGYNOUS, HairLength.ONE_VERY_SHORT),
 	SLICKED_BACK("зачесанно назад", Femininity.ANDROGYNOUS, HairLength.ONE_VERY_SHORT),
+	SIDE_PARTED("с боковым пробором", Femininity.ANDROGYNOUS, HairLength.ONE_VERY_SHORT),
+
 	SIDECUT("боковой андеркат", Femininity.ANDROGYNOUS, HairLength.TWO_SHORT),
 	MOHAWK("ирокез", Femininity.ANDROGYNOUS, HairLength.TWO_SHORT),
 	DREADLOCKS("дреды", Femininity.ANDROGYNOUS, HairLength.TWO_SHORT),

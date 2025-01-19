@@ -841,7 +841,7 @@ public enum Quest {
 		}
 	},
 
-	// Doll sotrage:
+	// Doll storage:
 	
 	SIDE_DOLL_STORAGE_ASK_FOR_SPACE(QuestType.SIDE, 1, 5) {
 		@Override
@@ -2150,7 +2150,7 @@ public enum Quest {
 	DOLL_FACTORY_1(QuestType.SIDE, 30, 10) {
 		@Override
 		public String getName() {
-			return "По приказу Ловиенны";
+			return "Изучите Роскошь Ловиенны";
 		}
 		@Override
 		public String getDescription() {
@@ -2160,7 +2160,7 @@ public enum Quest {
 		@Override
 		public String getCompletedDescription() {
 			return "Вы отправились в магазин «Роскошь Ловиенны» и попытались выяснить, здесь ли забирают беженцев, похищенных Ангеликс."
-					+ " Хотя вы ничего не смогли обнаружить, к вам подошла женщина, когда вы уходили, и предложила свою помощь.";
+					+ " Хотя вы ничего не смогли обнаружить, к вам подошла репортерша по имени Фьямметта и предложила свою помощь.";
 		}
 	},
 	
@@ -2171,12 +2171,12 @@ public enum Quest {
 		}
 		@Override
 		public String getDescription() {
-			return "Женщина, которую вы встретили возле «Роскоши Ловиенны», знает, как пройти в заднюю часть помещения, где, по ее мнению, держат похищенных беженцев и используют их в качестве рабского труда."
+			return "Фьямметта знает способ проникнуть в заднюю часть магазина «Роскоши Ловиенны», где, по ее мнению, держат похищенных беженцев и используют их в качестве рабского труда."
 					+ " Не имея другого способа проникнуть внутрь и разобраться в том, что там происходит, вы согласились с ее планом и сказали, что встретитесь с ней возле магазина между [units.time(1)]-[units.time(4)].";
 		}
 		@Override
 		public String getCompletedDescription() {
-			return "Вы встретились с женщиной возле «Роскоши Ловиенны» и сумели проникнуть в заднюю часть помещения, не включив сигнализацию.";
+			return "Вы встретились с Фьяметту возле «Роскоши Ловиенны» и сумели проникнуть в заднюю часть помещения, не включив сигнализацию.";
 		}
 	},
 	
@@ -2187,12 +2187,11 @@ public enum Quest {
 		}
 		@Override
 		public String getDescription() {
-			return "Кукольная фабрика, расположенная на заднем дворе «Роскоши Ловиенны», оказалась всего лишь фасадом."
-					+ " Оказалось, что настоящая фабрика, где вы наверняка найдете похищенных беженцев, находится глубоко под землей, так что вам предстоит спуститься вниз...";
+			return "Теперь, когда вам удалось проникнуть в заднюю часть «Роскоши Ловиенны», вам нужно провести расследование и выяснить, где находятся похищенные беженцы.";
 		}
 		@Override
 		public String getCompletedDescription() {
-			return "Вы спустились на лифте на настоящую фабрику кукол, где стали свидетелями того, как Ангеликса превращает пленницу в секс-куклу.";
+			return "Вы обнаружили большой лифт в задней части «Роскоши Ловиенны» и, спустив его, обнаружили большой объект, спрятанный глубоко под Доминионом.";
 		}
 	},
 	
@@ -2203,64 +2202,102 @@ public enum Quest {
 		}
 		@Override
 		public String getDescription() {
-			return "Никто не поверит в то, что вы видели, поэтому вам придется собрать неопровержимые доказательства того, как создаются куклы Ловиенн."
-					+ " Бухгалтерские книги, схемы машин и другие подобные документы обязательно найдутся где-нибудь в офисе...";
+			return "Вам с Фьямметтой нужно найти сведения о том, что случилось с беженцами."
+					+ " Здесь наверняка найдутся бухгалтерские книги, схемы машин или другие подобные документы...";
 		}
 		@Override
 		public String getCompletedDescription() {
-			return "Вам удалось собрать неопровержимые доказательства того, как создаются куклы Ловиенн.";
+			return "Вам удалось собрать неопровержимые доказательства причастности Саэллатрикс и Ангеликс к похищениям и незаконному рабству, а также получить тревожные сведения о том, как создаются куклы Ловиенны.";
 		}
 	},
 	
-	DOLL_FACTORY_5(QuestType.SIDE, 30, 10) {
+	DOLL_FACTORY_5(QuestType.SIDE, 30, 250) {
 		@Override
 		public String getName() {
-			return "Вверх и в даль";
+			return "Время уходить";
 		}
 		@Override
 		public String getDescription() {
-			return "Теперь в вашем распоряжении неопровержимые доказательства создания кукол Ловиенн, и вам нужно сбежать с фабрики...";
+			return "Теперь, когда Фиа получила достаточно доказательств для публикации статьи, вам двоим нужно сбежать с фабрики...";
 		}
 		@Override
 		public String getCompletedDescription() {
-			return "Вам удалось сбежать с нижнего завода, но при выходе из лифта вы столкнулись с самой Ангеликс, которая предложила вам сделку...";
+			return "Вам и Фиа удалось сбежать с нижнего завода.";
 		}
 	},
 	
-	DOLL_FACTORY_6A(QuestType.SIDE, 30, 10) {
+	DOLL_FACTORY_5_DOLLIFIED(QuestType.SIDE, 30, 250) {
 		@Override
 		public String getName() {
-			return "Падение Ангеликс";
+			return "Куколизация";
 		}
 		@Override
 		public String getDescription() {
-			return "Вы отказались заключать сделку с Ангеликс и вместо этого передали собранные вами улики этой женщине."
-					+ " Когда информация о том, что происходит в ее магазине, станет достоянием общественности, Ловиенн, скорее всего, подвергнет Ангеликс суровому наказанию."
-					+ " Возможно, если вы вернетесь в магазин в часы работы, вы узнаете, что с ней стало...";
+			return "Поймав вас, Ангеликс превратила вас в куклу! Вам отчаянно нужно найти Фиа, чтобы отменить это тревожное превращение."
+					+ "<br/>[style.italics(Вам нужно найти и исследовать четыре)] [style.italicsExcellent(yellow)] [style.italics(плитки на территории фабрики, чтобы найти Фиа.)]";
 		}
 		@Override
 		public String getCompletedDescription() {
-			return "Вы отказались заключать сделку с Ангеликс и вместо этого передали собранные вами улики этой женщине."
-					+ " Вернувшись в «Роскошь Ловиенны» в часы работы, вы обнаружили, что представители общественности не воспринимают всерьез доказательства того, как создаются секс-куклы."
-					+ " Более того, в продажу поступила лимитированная секс-кукла суккуб, которая является точной копией Ангеликс...";
+			return "После того как Ангеликс превратил вас в куклу, вам удалось найти Фиа и обратить процесс вспять, после чего вы вдвоем сбежали с фабрики.";
 		}
 	},
 	
-	DOLL_FACTORY_6B(QuestType.SIDE, 30, 10) {
+	DOLL_FACTORY_6(QuestType.SIDE, 30, 500) {
 		@Override
 		public String getName() {
-			return "Помощник Ангеликс";
+			return "Сообщение Фьямметты";
 		}
 		@Override
 		public String getDescription() {
-			return "Вы предали доверие женщины и передали ее Ангеликс вместе с собранными вами уликами."
-					+ " Суккуб поблагодарила вас и сказала, что вы должны вернуться в магазин в часы работы, чтобы получить особую награду...";
+			return "Фьямметта обещала написать статью обо всем, чему вы двое стали свидетелями в «Роскошь Ловиенны»."
+					+ " Она обещала отправить вам сообщение, как только материал будет готов к публикации."
+					+ "<br/>[style.italicsMinorGood(По прошествии нескольких дней загляните в прихожую особняка Лилайи в светлое время суток.)]";
 		}
 		@Override
 		public String getCompletedDescription() {
-			return "Вы предали доверие женщины и передали ее Ангеликс вместе с собранными вами уликами."
-					+ " Взамен Ангеликс превратит ваших рабов в кукол за небольшую плату или заплатит вам, если вы не захотите их возвращать."
-					+ " Она также предложила вам интимную встречу...";
+			return "Вместо того чтобы получить сообщение от Фьямметты, вы столкнулись с Саэллатрикс."
+					+ " Используя свои интимные отношения с Лилайей, она поставила тебя в затруднительное положение и потребовала подписать документ о том, что Фьямметта лжет.";
+		}
+	},
+
+	//TODO
+
+	DOLL_FACTORY_7A(QuestType.SIDE, 30, 10) {
+		@Override
+		public String getName() {
+			return "Integrity Above All";
+		}
+		@Override
+		public String getDescription() {
+			return "You refused to make a deal with Saellatrix, and instead swore to tell the truth and back up all that Fiammetta has written in her article."
+					+ " Before swiftly leaving the mansion, Saellatrix mentioned that her store will be closed for a week or two while she waits for the public outrage to blow over."
+					+ "<br/>[style.italicsMinorGood(You should return to Lovienne's Luxuries once it's reopened to find out what's become of the dolls...)]";
+		}
+		@Override
+		public String getCompletedDescription() {
+			return "You refused to make a deal with Saellatrix, and instead swore to tell the truth and back up all that Fiammetta has written in her article."
+					+ " Returning to Lovienne's Luxuries after it'd been closed for a week, you discovered that Angelixx was made to take all of the blame for illegal enslavement,"
+						+ " and that Saellatrix is now only allowed to transform the worst of criminals into dolls."
+					+ "<br/>"
+					+ "Furthermore, not wanting to have you as an enemy, Saellatrix was keen to keep you as a customer, and even allowed you to decide what to do with Angelixx...";
+		}
+	},
+
+	DOLL_FACTORY_7B(QuestType.SIDE, 30, 10) {
+		@Override
+		public String getName() {
+			return "It's Just Good Business";
+		}
+		@Override
+		public String getDescription() {
+			return "You betrayed the trust of Fiammetta and signed a document which declares that the reporter is lying."
+					+ " Saellatrix was delighted by your decision, and asked you to return to her shop to talk more about your special rewards..."
+					+ "<br/>[style.italicsMinorGood(You should return to Lovienne's Luxuries once it's reopened after a couple of days...)]";
+		}
+		@Override
+		public String getCompletedDescription() {
+			return "You betrayed the trust of Fiammetta and signed the document declaring that the reporter is lying."
+					+ " In return, Saellatrix offered to convert any of your slaves into dolls in exchange for a small fee, or will instead pay you if you let her keep them to sell in her shop.";
 		}
 	},
 	

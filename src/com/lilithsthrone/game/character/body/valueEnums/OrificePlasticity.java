@@ -63,7 +63,7 @@ public enum OrificePlasticity {
 	/**Will recover none of its original size after sex.*/
 	SEVEN_MOULDABLE("формируем(ая,ый)",
 			"остается [style.italicsTerrible(постоянно растянуто)] [style.colourPlasticity(и не восстанавливает своей изначальной вместимости)]",
-			"остается [style.italicsTerrible(постоянно растянуто)] [style.colourPlasticity(и не восстанавливает их изначальной вместимости)]",
+			"остаются [style.italicsTerrible(постоянно растянутыми)] [style.colourPlasticity(и не восстанавливают их изначальной вместимости)]",
 			7, 1, 2/(60*60f*24), PresetColour.GENERIC_SIZE_EIGHT);
 
 	

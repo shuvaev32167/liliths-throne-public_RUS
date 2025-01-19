@@ -99,7 +99,6 @@ public class OptionsDialogue {
 								+ "Если разрешение игры не соответствует вашему экрану, нажмите клавиши: 'Windows' + 'Стрелка вверх' для увеличения!"
 							+ "</p>"
 							:"")
-					+ "<br/>"
 					+ (Main.game.isStarted() || Main.getProperties().name.isEmpty()
 							?""
 							:"<h4 style='text-align:center;'>Last save:</h4>"
@@ -1819,6 +1818,9 @@ public class OptionsDialogue {
 							Main.getProperties().setFeminineSubspeciesPreference(subspecies, subspecies.getSubspeciesPreferenceDefault());
 							Main.getProperties().setMasculineSubspeciesPreference(subspecies, subspecies.getSubspeciesPreferenceDefault());
 						}
+						Main.getProperties().humanSpawnRate = 5;
+						Main.getProperties().taurSpawnRate = 5;
+						Main.getProperties().halfDemonSpawnRate = 5;
 						Main.saveProperties();
 					}
 				};
@@ -2513,9 +2515,10 @@ public class OptionsDialogue {
 					Main.getProperties().hasValue(PropertyValue.enchantmentLimits)));
 			UtilText.nodeContentSB.append(getContentPreferenceDiv("BAD_END",
 					PresetColour.GENERIC_TERRIBLE,
-					"Плохие концы",
-					"Включите возможность встречать `плохие концы`, которые по сути заканчивают игру."
-							+"<br/>[style.italicsMinorBad(Пожалуйста отметьте что плохие концы содержат сцены без согласия. Выключено ли это предпочтение или включено.)]",
+					"Плохие Концовки",
+					"Переключите возможность вызывать 'плохие концовки', которые при встрече завершают игру для вашего персонажа."
+							+"<br/>[style.italicsMinorBad(Обратите внимание, что плохие концовки включают в себя неконсенсуальный контент, и поэтому игнорирует настройки неконсенсуальности.)]",
+//							+"<br/>[style.italicsTerrible(Имейте в виду, что некоторые плохие концовки не зависят от этой настройки и всегда присутствуют в игре.)]"
 					Main.getProperties().hasValue(PropertyValue.badEndContent)));
 			UtilText.nodeContentSB.append(getContentPreferenceDiv("LEVEL_DRAIN",
 					PresetColour.GENERIC_TERRIBLE,
@@ -2908,6 +2911,22 @@ public class OptionsDialogue {
 			}
 			UtilText.nodeContentSB.append("</div></div>");
 			
+			UtilText.nodeContentSB.append(getCustomContentPreferenceDivStart(PresetColour.BASE_BROWN_LIGHT, "Hair growth", "Select how often the player's hair will grow by 1cm. NPCs maintain their hair lengths, so this setting only affects you."));
+			int[] hairButtonOrder = new int[] {2, 1, 0, 3}; // Order buttons in this manner so that they appear to be a little more logical
+			for (int i : hairButtonOrder) {
+				boolean active = Main.getProperties().getHairGrowth() == i;
+				UtilText.nodeContentSB.append("<div id='HAIR_GROWTH_PREFERENCE_"+i+"' class='normal-button"+(Main.getProperties().getHairGrowth() == i?" selected":"")+"' style='width:calc(33% - 8px); margin-right:8px; text-align:center; float:right;'>"
+						+(i == 0
+								?"[style.bold"+(active?"Bad":"Disabled")+"(Never)]"
+								:(i == 1
+									?"[style.bold"+(active?"Size10":"Disabled")+"(Weekly)]"
+									:(i == 2
+										?"[style.bold"+(active?"Size5":"Disabled")+"(Daily)]"
+										:"[style.bold"+(active?"Size0":"Disabled")+"(Hourly)]")))
+						+"</div>");
+			}
+			UtilText.nodeContentSB.append("</div></div>");
+
 			UtilText.nodeContentSB.append(getContentPreferenceDiv("HAIR_FACIAL",
 					PresetColour.BASE_LILAC_LIGHT,
 					"Волосы на лице",
@@ -2951,7 +2970,7 @@ public class OptionsDialogue {
 					Main.getProperties().hasValue(PropertyValue.scalyHairContent)));
 			
 			UtilText.nodeContentSB.append(getContentPreferenceDiv("LIP_LISP",
-					PresetColour.BASE_GREEN_DARK,
+					PresetColour.BASE_PINK_SALMON,
 					"Шепелявость больших губ",
 					"Переключает, будут ли персонажи с очень большими губами шепелявить.",
 					Main.getProperties().hasValue(PropertyValue.lipLispContent)));

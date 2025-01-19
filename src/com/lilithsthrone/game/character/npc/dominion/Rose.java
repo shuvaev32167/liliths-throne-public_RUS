@@ -76,7 +76,7 @@ public class Rose extends NPC {
 				"Роза - рабыня Лилайи, и это единственный член ее семьи, которого вы когда-либо видели."
 						+ " Роза - частично девочка-кошка, и Лилая относится к ней с особой любовью, и, похоже, это единственный человек, с которым Лилая регулярно общается."
 						+ " Их отношения перерастают в нечто большее, чем соглашение между хозяином и рабом, и Розу и Лилайю часто можно увидеть обнимающимися и шепчущимися друг с другом.",
-				18, Month.MARCH, 5,
+				20, Month.MARCH, 5,
 				10, Gender.F_V_B_FEMALE, Subspecies.CAT_MORPH, RaceStage.PARTIAL_FULL,
 				new CharacterInventory(10), WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_ROSE, true);
 		
