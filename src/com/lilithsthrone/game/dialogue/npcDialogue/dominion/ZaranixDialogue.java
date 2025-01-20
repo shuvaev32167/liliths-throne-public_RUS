@@ -1,7 +1,5 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.dominion;
 
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
@@ -27,6 +25,8 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.List;
 
 /**
  * @since 0.4
@@ -98,8 +98,8 @@ public class ZaranixDialogue {
 			}
 		}
 	};
-	
-	public static final DialogueNode AFTER_SEX_VICTORY = new DialogueNode("Continue", "", true) {
+
+    public static final DialogueNode AFTER_SEX_VICTORY = new DialogueNode("Продолжить", "", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 2*60;
@@ -111,7 +111,7 @@ public class ZaranixDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Continue on your journey.", PlaceType.DOMINION_DEMON_HOME_ZARANIX.getDialogue(false)) {
+                return new Response("Продолжить", "Continue on your journey.", PlaceType.DOMINION_DEMON_HOME_ZARANIX.getDialogue(false)) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_DEMON_HOME_ZARANIX, false);
@@ -128,7 +128,7 @@ public class ZaranixDialogue {
 	public static final DialogueNode AFTER_COMBAT_DEFEAT = new DialogueNode("Defeated", "", true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -167,7 +167,7 @@ public class ZaranixDialogue {
 					}
 					
 				} else if(index==2) {
-					return new Response("Drink", "Agree to drink the transformative potion.", AFTER_COMBAT_DEFEAT_SWALLOW);
+                    return new Response("Выпить", "Agree to drink the transformative potion.", AFTER_COMBAT_DEFEAT_SWALLOW);
 				}
 				
 			} else {
@@ -201,7 +201,7 @@ public class ZaranixDialogue {
 		}
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -288,7 +288,7 @@ public class ZaranixDialogue {
 		}
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -375,7 +375,7 @@ public class ZaranixDialogue {
 	public static final DialogueNode AFTER_SEX_DEFEAT = new DialogueNode("Used", "Zaranix has had enough of experiencing your cock-sucking skills...", true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {

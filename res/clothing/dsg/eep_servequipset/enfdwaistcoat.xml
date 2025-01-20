@@ -359,49 +359,49 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(put)] [npc.her] arms through the waistcoat's arm holes and [npc.verb(button)] up the front.]]>
+            <![CDATA[[npc.Name] put [npc.her] arms through the waistcoat's arm holes and button up the front.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(help)] [npc2.name] [npc2.verb(put)] [npc2.her] arms through the waistcoat's arm holes and [npc.verb(button)] up the front.]]>
+            <![CDATA[[npc.Name] help [npc2.name] [npc2.verb(put)] [npc2.her] arms through the waistcoat's arm holes and button up the front.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(force)] [npc2.namePos] arms through the waistcoat's arm holes and hastily [npc.verb(button)] up the front.]]>
+            <![CDATA[[npc.Name] force [npc2.namePos] arms through the waistcoat's arm holes and hastily button up the front.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unbutton)] the front of [npc.her] waistcoat and [npc.verb(pull)] [npc.her] arms out of the arm holes.]]>
+            <![CDATA[[npc.Name] unbutton the front of [npc.her] waistcoat and pull [npc.her] arms out of the arm holes.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unbutton)] the front of [npc2.namePos] waistcoat and [npc.verb(help)] [npc2.her] [npc2.verb(pull)] [npc2.her] arms out of the arm holes.]]>
+            <![CDATA[[npc.Name] unbutton the front of [npc2.namePos] waistcoat and help [npc2.her] [npc2.verb(pull)] [npc2.her] arms out of the arm holes.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(pop)] open the buttons on the front of [npc2.namePos] waistcoat and roughly [npc.verb(pull)] [npc2.her] arms out of the arm holes.]]>
+            <![CDATA[[npc.Name] pop open the buttons on the front of [npc2.namePos] waistcoat and roughly pull [npc2.her] arms out of the arm holes.]]>
 		</otherRough>
 	</displacementText>
 
 	<replacementText type="UNBUTTONS">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(button)] up the front of [npc.namePos] waistcoat.]]>
+            <![CDATA[[npc.Name] button up the front of [npc.namePos] waistcoat.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(button)] up the front of [npc2.namePos] waistcoat.]]>
+            <![CDATA[[npc.Name] button up the front of [npc2.namePos] waistcoat.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] hastily [npc.verb(button)] up the front of [npc2.namePos] waistcoat.]]>
+            <![CDATA[[npc.Name] hastily button up the front of [npc2.namePos] waistcoat.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="UNBUTTONS">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unbutton)] [npc.her] waistcoat.]]>
+            <![CDATA[[npc.Name] unbutton [npc.her] waistcoat.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unbutton)] [npc2.namePos] waistcoat.]]>
+            <![CDATA[[npc.Name] unbutton [npc2.namePos] waistcoat.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(pop)] open the buttons on [npc2.namePos] waistcoat.]]>
+            <![CDATA[[npc.Name] pop open the buttons on [npc2.namePos] waistcoat.]]>
 		</otherRough>
 	</displacementText>
 	

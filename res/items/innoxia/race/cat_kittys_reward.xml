@@ -39,7 +39,7 @@
 			[##npc.incrementHealth(npc.getAttributeValue(ATTRIBUTE_HEALTH_MAXIMUM)/10)]
 			
 			<p style='margin-bottom:0; padding-bottom:0;'>
-				[npc.Name] [npc.verb(start)] to feel [npc.her] arcane power increasing...
+				[npc.Name] start to feel [npc.her] arcane power increasing...
 			</p>
 			[#npc.addPotionEffect(ATTRIBUTE_MAJOR_ARCANE, 3)]
 		]]></applyEffects>
@@ -54,10 +54,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		[npc.Name] [npc.verb(pull)] back the ring-pull and [npc.verb(peel)] off the lid to the can of Kitty's Reward. A rich, fishy smell accompanies the sight of what looks to be tinned salmon, and [npc.she] [npc.verb(find)] [npc.herself] unable to resist the tasty-looking meat. [npc.She] quickly [npc.verb(wolf)] down the can's contents, finding that it was as delicious as it looked.
+		[npc.Name] pull back the ring-pull and peel off the lid to the can of Kitty's Reward. A rich, fishy smell accompanies the sight of what looks to be tinned salmon, and [npc.she] find [npc.herself] unable to resist the tasty-looking meat. [npc.She] quickly wolf down the can's contents, finding that it was as delicious as it looked.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		[npc.Name] [npc.verb(pull)] back the ring-pull and [npc.verb(peel)] off the lid to the can of Kitty's Reward, before offering it to [npc2.name]. A rich, fishy smell accompanies the sight of what looks to be tinned salmon, and [npc2.name] [npc2.verb(find)] [npc2.herself] unable to resist the tasty-looking meat. [npc2.She] quickly [npc2.verb(wolf)] down the can's contents, finding that it was as delicious as it looked.
+		[npc.Name] pull back the ring-pull and peel off the lid to the can of Kitty's Reward, before offering it to [npc2.name]. A rich, fishy smell accompanies the sight of what looks to be tinned salmon, and [npc2.name] [npc2.verb(find)] [npc2.herself] unable to resist the tasty-looking meat. [npc2.She] quickly [npc2.verb(wolf)] down the can's contents, finding that it was as delicious as it looked.
 		]]></otherUse>
 	</useDescriptions>
 

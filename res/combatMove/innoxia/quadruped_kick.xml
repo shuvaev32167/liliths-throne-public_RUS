@@ -172,9 +172,9 @@
 		NOTE: The damage is automatically applied to the target, so you don't need to handle parsing of that. -->
 		<execute><![CDATA[
 			#IF(npc.isLegMovementHindered())
-				As [npc.her] clothing is restricting [npc.her] legs' movement, [npc.name] [npc.verb(struggle)] to put any power behind [npc.her] kick, and as a result only [npc.verb(deal)] half damage to [npc2.name]...
+				As [npc.her] clothing is restricting [npc.her] legs' movement, [npc.name] struggle to put any power behind [npc.her] kick, and as a result only deal half damage to [npc2.name]...
 			#ELSE
-				[npc.Name] [npc.verb(spin)] around on the spot, before kicking out with [npc.her] hind legs and powerfully striking [npc2.name] with [npc.her] rear [npc.feet]!
+				[npc.Name] spin around on the spot, before kicking out with [npc.her] hind legs and powerfully striking [npc2.name] with [npc.her] rear [npc.feet]!
 			#ENDIF
 			formattedHealthDamage
 		]]></execute>

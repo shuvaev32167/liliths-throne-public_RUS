@@ -1,12 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.gender.Gender;
@@ -60,6 +53,9 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.3.5
@@ -329,8 +325,8 @@ public class EnforcerWarehouse {
 		}
 	};
 
-	
-	public static final DialogueNode ENCLOSURE_SHELVING = new DialogueNode("Shelving", "", false) {
+
+    public static final DialogueNode ENCLOSURE_SHELVING = new DialogueNode("Стеллаж", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;
@@ -385,7 +381,7 @@ public class EnforcerWarehouse {
 //						Main.game.getPlayer().incrementMana(-manaCost);
 //						Main.game.getTextStartStringBuilder().append(
 //								UtilText.parse(Main.game.getPlayer(),
-//										"<p style='text-align:center;'><b>[npc.Name] [style.colourBad([npc.verb(lose)])] "+(manaCost)+" "+Attribute.MANA_MAXIMUM.getName()+"!</b></p>"));
+//										"<p style='text-align:center;'><b>[npc.Name] [style.colourBad(lose)] "+(manaCost)+" "+Attribute.MANA_MAXIMUM.getName()+"!</b></p>"));
 					}
 				};
 			}
@@ -420,8 +416,8 @@ public class EnforcerWarehouse {
 	
 
 	//---- CORRIDOR DIALOGUE ----//
-	
-	public static final DialogueNode CORRIDOR = new DialogueNode("Corridor", "", false) {
+
+    public static final DialogueNode CORRIDOR = new DialogueNode("Коридор", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;
@@ -487,7 +483,23 @@ public class EnforcerWarehouse {
 		}
 	};
 
-	public static final DialogueNode CLAIRE_WARNING = new DialogueNode("Corridor", "", true) {
+	public static final DialogueNode AFTER_CLAIRE_SEX = new DialogueNode("Relieved", "You helped Claire to deal with her lust...", true) {
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "AFTER_CLAIRE_SEX");
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+                return new Response("Продолжить", "Continue travelling through the warehouse...", Main.game.getDefaultDialogue());
+			}
+			return null;
+		}
+	};    public static final DialogueNode CLAIRE_WARNING = new DialogueNode("Коридор", "", true) {
 		@Override
 		public boolean isTravelDisabled() {
 			return !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.claireWarning);
@@ -509,7 +521,7 @@ public class EnforcerWarehouse {
 		public Response getResponse(int responseTab, int index) {
 			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.claireWarning)) {
 				if(index==1) {
-					return new Response("Continue", "Continue travelling through the warehouse...", CLAIRE_WARNING) {
+                    return new Response("Продолжить", "Continue travelling through the warehouse...", CLAIRE_WARNING) {
 						@Override
 						public void effects() {
 							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.claireWarning, true);
@@ -520,21 +532,73 @@ public class EnforcerWarehouse {
 			return null;
 		}
 	};
-
-	public static final DialogueNode AFTER_CLAIRE_SEX = new DialogueNode("Relieved", "You helped Claire to deal with her lust...", true) {
+    public static final DialogueNode ENFORCER_GUARD_POST = new DialogueNode("Охранный пост энфорсеров", "", true) {
+		@Override
+		public boolean isTravelDisabled() {
+			return !Main.game.getDialogueFlags().warehouseDefeatedIDs.contains(getEnforcersPresent().get(0).getId());
+		}
 		@Override
 		public int getSecondsPassed() {
 			return 60;
 		}
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "AFTER_CLAIRE_SEX");
+			if(Main.game.getDialogueFlags().warehouseDefeatedIDs.contains(getEnforcersPresent().get(0).getId())) {
+				return UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENFORCER_GUARD_POST_CLEARED", getEnforcersPresent());
+
+			} else {
+				return UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENFORCER_GUARD_POST", getEnforcersPresent());
+			}
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			GameCharacter guard = getEnforcersPresent().get(0);
+			if(!Main.game.getDialogueFlags().warehouseDefeatedIDs.contains(guard.getId())) {
+				if(index==1) {
+//					return new Response("Back off",
+//							"Step back into the warehouse and re-think how you're going to get out of here.",
+//							Main.game.getNpc(Claire.class).getCell().getPlace().getPlaceType().getDialogue(false)) {
+//						@Override
+//						public void effects() {
+//							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENFORCER_GUARD_POST_BACK_OFF", getEnforcersPresent()));
+//							Main.game.getPlayer().setLocation(Main.game.getNpc(Claire.class), false);
+//						}
+//					};
+//
+//				} else if(index==2) {
+					return new ResponseCombat("Defend yourself",
+							UtilText.parse(guard, "Defend yourself against the trigger-happy [npc.race] SWORD guard."),
+							(NPC) guard,
+							Util.newHashMapOfValues(
+									new Value<>(Main.game.getPlayer(), UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENFORCER_GUARD_POST_PLAYER_FIGHT_START", getEnforcersPresent())),
+									new Value<>(guard, UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENFORCER_GUARD_POST_GUARD_FIGHT_START", getEnforcersPresent()))));
+				}
+			}
+			return null;
+		}
+	};    public static final DialogueNode CRATES_LUST_WEAPON_OBTAINED = new DialogueNode("«Совершенно секретный» ящик", "", true) {
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "CRATES_LUST_WEAPON_OBTAINED");
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Continue travelling through the warehouse...", Main.game.getDefaultDialogue());
+                return new Response("Продолжить", "Trust that Claire will be able to control herself and continue on your way.", CRATES_LUST_WEAPON_OBTAINED_CONTINUE) {
+					@Override
+					public void effects() {
+//						Main.game.getPlayer().setNearestLocation(WorldType.ENFORCER_WAREHOUSE, PlaceType.ENFORCER_WAREHOUSE_CORRIDOR, false);
+					}
+				};
+
+			} else if(index==2) {
+				return getClaireCratesSexResponse();
 			}
+
 			return null;
 		}
 	};
@@ -559,8 +623,8 @@ public class EnforcerWarehouse {
 	
 	
 	//---- CRATES DIALOGUE ----//
-	
-	public static final DialogueNode CRATES = new DialogueNode("Crates", "", false) {
+
+    public static final DialogueNode CRATES = new DialogueNode("Ящики", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;
@@ -636,8 +700,8 @@ public class EnforcerWarehouse {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode CRATES_SEARCH = new DialogueNode("Crates", "", false) {
+
+    public static final DialogueNode CRATES_SEARCH = new DialogueNode("Ящики", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;
@@ -652,7 +716,7 @@ public class EnforcerWarehouse {
 		}
 	};
 
-	public static final DialogueNode CRATES_ARK = new DialogueNode("Crates", "", false) {
+    public static final DialogueNode CRATES_ARK = new DialogueNode("Ящики", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;
@@ -673,7 +737,7 @@ public class EnforcerWarehouse {
 		}
 	};
 
-	public static final DialogueNode CRATES_LUST_WEAPON = new DialogueNode("'Top Secret' Crate", "", false) {
+    public static final DialogueNode CRATES_LUST_WEAPON = new DialogueNode("«Совершенно секретный» ящик", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;
@@ -718,7 +782,7 @@ public class EnforcerWarehouse {
 		}
 	};
 
-	public static final DialogueNode CRATES_LUST_WEAPON_SEARCH = new DialogueNode("'Top Secret' Crate", "", true) {
+    public static final DialogueNode CRATES_LUST_WEAPON_SEARCH = new DialogueNode("«Совершенно секретный» ящик", "", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;
@@ -742,53 +806,45 @@ public class EnforcerWarehouse {
 			return null;
 		}
 	};
-
-	public static final DialogueNode CRATES_LUST_WEAPON_OBTAINED = new DialogueNode("'Top Secret' Crate", "", true) {
+	public static final DialogueNode AFTER_GUARD_COMBAT_VICTORY = new DialogueNode("Victory", "You've managed to defeat the SWORD guard!", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;
 		}
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "CRATES_LUST_WEAPON_OBTAINED");
+			return UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "AFTER_GUARD_COMBAT_VICTORY", getEnforcersPresent());
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
+			GameCharacter guard = getEnforcersPresent().get(0);
 			if(index==1) {
-				return new Response("Continue", "Trust that Claire will be able to control herself and continue on your way.", CRATES_LUST_WEAPON_OBTAINED_CONTINUE) {
-					@Override
-					public void effects() {
-//						Main.game.getPlayer().setNearestLocation(WorldType.ENFORCER_WAREHOUSE, PlaceType.ENFORCER_WAREHOUSE_CORRIDOR, false);
-					}
-				};
-				
-			} else if(index==2) {
-				return getClaireCratesSexResponse();
+                return new Response("Продолжить",
+						UtilText.parse(guard, "Leave the defeated [npc.race] behind and continue on your way through the warehouse."),
+						Main.game.getDefaultDialogue());
 			}
-			
 			return null;
 		}
 	};
 
-	public static final DialogueNode CRATES_LUST_WEAPON_OBTAINED_CONTINUE = new DialogueNode("'Top Secret' Crate", "", false) {
+    public static final DialogueNode CRATES_LUST_WEAPON_OBTAINED_CONTINUE = new DialogueNode("«Совершенно секретный» ящик", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;
 		}
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "CRATES_LUST_WEAPON_OBTAINED_CONTINUE"));
-			sb.append(CRATES_LUST_WEAPON.getContent());
-			return sb.toString();
+            String sb = UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "CRATES_LUST_WEAPON_OBTAINED_CONTINUE") +
+                    CRATES_LUST_WEAPON.getContent();
+			return sb;
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			return CRATES_LUST_WEAPON.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode SHELVES_SPELL_BOOK = new DialogueNode("Shelving", "", false) {
+
+    public static final DialogueNode SHELVES_SPELL_BOOK = new DialogueNode("Стеллаж", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;
@@ -832,8 +888,8 @@ public class EnforcerWarehouse {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode SHELVES_SPELL_BOOK_SEARCH = new DialogueNode("Crates", "", false) {
+
+    public static final DialogueNode SHELVES_SPELL_BOOK_SEARCH = new DialogueNode("Ящики", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;
@@ -851,69 +907,27 @@ public class EnforcerWarehouse {
 	
 	
 	//---- ENFORCER POST DIALOGUE ----//
-	
-	public static final DialogueNode ENFORCER_GUARD_POST = new DialogueNode("Enforcer guard post", "", true) {
-		@Override
-		public boolean isTravelDisabled() {
-			return !Main.game.getDialogueFlags().warehouseDefeatedIDs.contains(getEnforcersPresent().get(0).getId());
-		}
+
+
+	public static final DialogueNode STOCKS_SET_FREE = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 60;
+			return 5*60;
 		}
 		@Override
 		public String getContent() {
-			if(Main.game.getDialogueFlags().warehouseDefeatedIDs.contains(getEnforcersPresent().get(0).getId())) {
-				return UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENFORCER_GUARD_POST_CLEARED", getEnforcersPresent());
-				
-			} else {
-				return UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENFORCER_GUARD_POST", getEnforcersPresent());
-			}
+			return UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "STOCKS_SET_FREE");
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			GameCharacter guard = getEnforcersPresent().get(0);
-			if(!Main.game.getDialogueFlags().warehouseDefeatedIDs.contains(guard.getId())) {
-				if(index==1) {
-//					return new Response("Back off",
-//							"Step back into the warehouse and re-think how you're going to get out of here.",
-//							Main.game.getNpc(Claire.class).getCell().getPlace().getPlaceType().getDialogue(false)) {
-//						@Override
-//						public void effects() {
-//							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENFORCER_GUARD_POST_BACK_OFF", getEnforcersPresent()));
-//							Main.game.getPlayer().setLocation(Main.game.getNpc(Claire.class), false);
-//						}
-//					};
-//					
-//				} else if(index==2) {
-					return new ResponseCombat("Defend yourself",
-							UtilText.parse(guard, "Defend yourself against the trigger-happy [npc.race] SWORD guard."),
-							(NPC) guard,
-							Util.newHashMapOfValues(
-									new Value<>(Main.game.getPlayer(), UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENFORCER_GUARD_POST_PLAYER_FIGHT_START", getEnforcersPresent())),
-									new Value<>(guard, UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENFORCER_GUARD_POST_GUARD_FIGHT_START", getEnforcersPresent()))));
-				}
-			}
-			return null;
-		}
-	};
-	
-	public static final DialogueNode AFTER_GUARD_COMBAT_VICTORY = new DialogueNode("Victory", "You've managed to defeat the SWORD guard!", true) {
-		@Override
-		public int getSecondsPassed() {
-			return 60;
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "AFTER_GUARD_COMBAT_VICTORY", getEnforcersPresent());
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			GameCharacter guard = getEnforcersPresent().get(0);
 			if(index==1) {
-				return new Response("Continue",
-						UtilText.parse(guard, "Leave the defeated [npc.race] behind and continue on your way through the warehouse."),
-						Main.game.getDefaultDialogue());
+                return new Response("Продолжить", "Continue on your way...", Main.game.getDefaultDialogue()) {
+					@Override
+					public void effects() {
+						Main.game.getPlayer().setCaptive(false);
+						Main.game.getPlayer().equipAllClothingFromHoldingInventory();
+					}
+				};
 			}
 			return null;
 		}
@@ -1419,7 +1433,7 @@ public class EnforcerWarehouse {
 		}
 		@Override
 		public String getDescription() {
-			return UtilText.parse(randomSexPartners, "[npc.Name] and [npc2.name] have finished with you...");
+            return UtilText.parse(randomSexPartners, "[npc.Name] и [npc2.name] have finished with you...");
 		}
 		@Override
 		public void applyPreParsingEffects() {
@@ -1449,26 +1463,19 @@ public class EnforcerWarehouse {
 			return null;
 		}
 	};
-
-	public static final DialogueNode STOCKS_SET_FREE = new DialogueNode("", "", true, true) {
+	public static final DialogueNode CELLS_SET_FREE = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
 			return 5*60;
 		}
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "STOCKS_SET_FREE");
+			return UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "CELLS_SET_FREE");
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Continue on your way...", Main.game.getDefaultDialogue()) {
-					@Override
-					public void effects() {
-						Main.game.getPlayer().setCaptive(false);
-						Main.game.getPlayer().equipAllClothingFromHoldingInventory();
-					}
-				};
+                return new Response("Продолжить", "Continue on your way...", Main.game.getDefaultDialogue());
 			}
 			return null;
 		}
@@ -1533,22 +1540,6 @@ public class EnforcerWarehouse {
 		}
 	};
 
-	public static final DialogueNode CELLS_SET_FREE = new DialogueNode("", "", true, true) {
-		@Override
-		public int getSecondsPassed() {
-			return 5*60;
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "CELLS_SET_FREE");
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Continue", "Continue on your way...", Main.game.getDefaultDialogue());
-			}
-			return null;
-		}
-	};
+
 
 }

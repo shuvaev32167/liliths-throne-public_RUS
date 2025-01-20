@@ -1,11 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.warehouseDistrict;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
@@ -14,20 +8,7 @@ import com.lilithsthrone.game.character.body.types.AssType;
 import com.lilithsthrone.game.character.body.types.LegType;
 import com.lilithsthrone.game.character.body.types.PenisType;
 import com.lilithsthrone.game.character.body.types.VaginaType;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringModifier;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
-import com.lilithsthrone.game.character.body.valueEnums.HairLength;
-import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
-import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.body.valueEnums.NippleSize;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.body.valueEnums.PenisLength;
-import com.lilithsthrone.game.character.body.valueEnums.TesticleSize;
-import com.lilithsthrone.game.character.body.valueEnums.TongueModifier;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
@@ -51,13 +32,7 @@ import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.enchanting.PossibleItemEffect;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.item.TransformativePotion;
-import com.lilithsthrone.game.sex.InitialSexActionInformation;
-import com.lilithsthrone.game.sex.LubricationType;
-import com.lilithsthrone.game.sex.SexAreaInterface;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.managers.OrgasmBehaviour;
 import com.lilithsthrone.game.sex.managers.dominion.SMDominionExpress;
 import com.lilithsthrone.game.sex.positions.SexPosition;
@@ -76,6 +51,8 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
+import java.util.*;
+
 /**
  * @since 0.3.7
  * @version 0.3.7.7
@@ -87,7 +64,7 @@ public class DominionExpress {
 	private static int slavePointsReward = 1;
 	private static GameCharacter activeSlave;
 
-	private static List<FillyReward> fillyRewards;
+	private static final List<FillyReward> fillyRewards;
 	static {
 		fillyRewards = new ArrayList<>();
 		// Basic filly: Add horse-morph penis/ass, feminine++, boobs++:
@@ -171,13 +148,12 @@ public class DominionExpress {
 					public String applyEffect() {
 						UtilText.addSpecialParsingString(this.getName(), true);
 						UtilText.addSpecialParsingString(Util.intToString(this.getCost()), false);
-						StringBuilder sb = new StringBuilder(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_TRANSFORMATION_ASS_PUSSY"));
-						sb.append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_TRANSFORMATION_GENERIC_END"));
-						sb.append(Main.game.getPlayer().incrementAssWetness(3));
-						sb.append(Main.game.getPlayer().incrementAssDepth(3));
-						sb.append(Main.game.getPlayer().addAssOrificeModifier(OrificeModifier.PUFFY));
-						sb.append(Main.game.getPlayer().addAssOrificeModifier(OrificeModifier.MUSCLE_CONTROL));
-						return sb.toString();
+                        String sb = UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_TRANSFORMATION_ASS_PUSSY") + UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_TRANSFORMATION_GENERIC_END") +
+                                Main.game.getPlayer().incrementAssWetness(3) +
+                                Main.game.getPlayer().incrementAssDepth(3) +
+                                Main.game.getPlayer().addAssOrificeModifier(OrificeModifier.PUFFY) +
+                                Main.game.getPlayer().addAssOrificeModifier(OrificeModifier.MUSCLE_CONTROL);
+						return sb;
 					}
 				});
 		// Throat-pussy: Bigger lips, wetter throat, depth, muscles.
@@ -194,14 +170,13 @@ public class DominionExpress {
 					public String applyEffect() {
 						UtilText.addSpecialParsingString(this.getName(), true);
 						UtilText.addSpecialParsingString(Util.intToString(this.getCost()), false);
-						StringBuilder sb = new StringBuilder(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_TRANSFORMATION_THROAT_PUSSY"));
-						sb.append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_TRANSFORMATION_GENERIC_END"));
-						sb.append(Main.game.getPlayer().incrementFaceWetness(3));
-						sb.append(Main.game.getPlayer().incrementFaceDepth(3));
-						sb.append(Main.game.getPlayer().incrementLipSize(3));
-						sb.append(Main.game.getPlayer().addFaceOrificeModifier(OrificeModifier.PUFFY));
-						sb.append(Main.game.getPlayer().addFaceOrificeModifier(OrificeModifier.MUSCLE_CONTROL));
-						return sb.toString();
+                        String sb = UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_TRANSFORMATION_THROAT_PUSSY") + UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_TRANSFORMATION_GENERIC_END") +
+                                Main.game.getPlayer().incrementFaceWetness(3) +
+                                Main.game.getPlayer().incrementFaceDepth(3) +
+                                Main.game.getPlayer().incrementLipSize(3) +
+                                Main.game.getPlayer().addFaceOrificeModifier(OrificeModifier.PUFFY) +
+                                Main.game.getPlayer().addFaceOrificeModifier(OrificeModifier.MUSCLE_CONTROL);
+						return sb;
 					}
 				});
 		// Ass-licker: Bigger lips, wetter tongue, longer tongue.
@@ -218,14 +193,13 @@ public class DominionExpress {
 					public String applyEffect() {
 						UtilText.addSpecialParsingString(this.getName(), true);
 						UtilText.addSpecialParsingString(Util.intToString(this.getCost()), false);
-						StringBuilder sb = new StringBuilder(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_TRANSFORMATION_ASS_LICKER"));
-						sb.append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_TRANSFORMATION_GENERIC_END"));
-						sb.append(Main.game.getPlayer().incrementFaceWetness(3));
-						sb.append(Main.game.getPlayer().incrementLipSize(3));
-						sb.append(Main.game.getPlayer().addFaceOrificeModifier(OrificeModifier.PUFFY));
-						sb.append(Main.game.getPlayer().incrementTongueLength(10));
-						sb.append(Main.game.getPlayer().addTongueModifier(TongueModifier.STRONG));
-						return sb.toString();
+                        String sb = UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_TRANSFORMATION_ASS_LICKER") + UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_TRANSFORMATION_GENERIC_END") +
+                                Main.game.getPlayer().incrementFaceWetness(3) +
+                                Main.game.getPlayer().incrementLipSize(3) +
+                                Main.game.getPlayer().addFaceOrificeModifier(OrificeModifier.PUFFY) +
+                                Main.game.getPlayer().incrementTongueLength(10) +
+                                Main.game.getPlayer().addTongueModifier(TongueModifier.STRONG);
+						return sb;
 					}
 				});
 		// Hung: Penis size+, more cum, bigger balls.
@@ -307,13 +281,12 @@ public class DominionExpress {
 					public String applyEffect() {
 						UtilText.addSpecialParsingString(this.getName(), true);
 						UtilText.addSpecialParsingString(Util.intToString(this.getCost()), false);
-						StringBuilder sb = new StringBuilder(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_TRANSFORMATION_TOP_HEAVY"));
-						sb.append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_TRANSFORMATION_GENERIC_END"));
-						sb.append(Main.game.getPlayer().incrementBreastSize(3));
-						sb.append(Main.game.getPlayer().incrementNippleSize(1));
-						sb.append(Main.game.getPlayer().incrementAreolaeSize(1));
-						sb.append(Main.game.getPlayer().addNippleOrificeModifier(OrificeModifier.PUFFY));
-						return sb.toString();
+                        String sb = UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_TRANSFORMATION_TOP_HEAVY") + UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_TRANSFORMATION_GENERIC_END") +
+                                Main.game.getPlayer().incrementBreastSize(3) +
+                                Main.game.getPlayer().incrementNippleSize(1) +
+                                Main.game.getPlayer().incrementAreolaeSize(1) +
+                                Main.game.getPlayer().addNippleOrificeModifier(OrificeModifier.PUFFY);
+						return sb;
 					}
 				});
 		// Subby slut: submissive, oral giving, anal giving, penis receiving, anal receiving
@@ -330,14 +303,13 @@ public class DominionExpress {
 					public String applyEffect() {
 						UtilText.addSpecialParsingString(this.getName(), true);
 						UtilText.addSpecialParsingString(Util.intToString(this.getCost()), false);
-						StringBuilder sb = new StringBuilder(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_TRANSFORMATION_SUBBY"));
-						sb.append(Main.game.getPlayer().removeFetish(Fetish.FETISH_DOMINANT, true));
-						sb.append(Main.game.getPlayer().addFetish(Fetish.FETISH_SUBMISSIVE, true));
-						sb.append(Main.game.getPlayer().addFetish(Fetish.FETISH_ORAL_GIVING, true));
-						sb.append(Main.game.getPlayer().addFetish(Fetish.FETISH_ANAL_GIVING, true));
-						sb.append(Main.game.getPlayer().addFetish(Fetish.FETISH_PENIS_RECEIVING, true));
-						sb.append(Main.game.getPlayer().addFetish(Fetish.FETISH_ANAL_RECEIVING, true));
-						return sb.toString();
+                        String sb = UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_TRANSFORMATION_SUBBY") + Main.game.getPlayer().removeFetish(Fetish.FETISH_DOMINANT, true) +
+                                Main.game.getPlayer().addFetish(Fetish.FETISH_SUBMISSIVE, true) +
+                                Main.game.getPlayer().addFetish(Fetish.FETISH_ORAL_GIVING, true) +
+                                Main.game.getPlayer().addFetish(Fetish.FETISH_ANAL_GIVING, true) +
+                                Main.game.getPlayer().addFetish(Fetish.FETISH_PENIS_RECEIVING, true) +
+                                Main.game.getPlayer().addFetish(Fetish.FETISH_ANAL_RECEIVING, true);
+						return sb;
 					}
 				});
 		// Bimbo: Add bimbo fetish, big lips, bleach-blonde hair, breast size+
@@ -393,9 +365,9 @@ public class DominionExpress {
 					@Override
 					public String applyEffect() {
 						UtilText.addSpecialParsingString(Util.intToString(this.getCost()), true);
-						StringBuilder sb = new StringBuilder(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_SILVER_COLLAR"));
+                        String sb = UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_SILVER_COLLAR");
 						getPlayerCollar().setColour(0, PresetColour.CLOTHING_SILVER);
-						return sb.toString();
+						return sb;
 					}
 				});
 		
@@ -414,9 +386,9 @@ public class DominionExpress {
 					@Override
 					public String applyEffect() {
 						UtilText.addSpecialParsingString(Util.intToString(this.getCost()), true);
-						StringBuilder sb = new StringBuilder(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_GOLD_COLLAR"));
+                        String sb = UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "FILLY_STATION_REWARD_GOLD_COLLAR");
 						getPlayerCollar().setColour(0, PresetColour.CLOTHING_GOLD);
-						return sb.toString();
+						return sb;
 					}
 				});
 	}
@@ -560,38 +532,26 @@ public class DominionExpress {
 		activeSlave = null;
 	}
 	
-	public static final DialogueNode INITIAL_ENTRANCE = new DialogueNode("", "", true) {
-		@Override
-		public boolean isTravelDisabled() {
-			return !Main.game.getPlayer().hasQuest(QuestLine.ROMANCE_NATALYA);
-		}
+	public static final DialogueNode ENTRANCE = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 2*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "INITIAL_ENTRANCE");
+			return UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "ENTRANCE");
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if(Main.game.getPlayer().hasQuest(QuestLine.ROMANCE_NATALYA)) {
-				return ENTRANCE.getResponse(responseTab, index);
-				
-			} else {
-				if(index==0) {
-					return new Response("Exit", "Tell the receptionist that you made a mistake and head back out into the warehouse district.", Warehouses.WAREHOUSE_DISTRICT) {
-						@Override
-						public void effects() {
-							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_WAREHOUSES);
-						}
-					};
-					
-				} else if(index==1) {
-					return new Response("Show card", "Show the receptionist the card you received from Natalya.", INITIAL_ENTRANCE_CARD_SHOWN);
-				}
-				return null;
+			if(index==1) {
+                return new Response("Выход", "Head back out into the warehouse district.", Warehouses.WAREHOUSE_DISTRICT) {
+					@Override
+					public void effects() {
+						Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_WAREHOUSES);
+					}
+				};
 			}
+			return null;
 		}
 	};
 	
@@ -609,34 +569,45 @@ public class DominionExpress {
 			return ENTRANCE.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode ENTRANCE = new DialogueNode("", "", false) {
+	public static final DialogueNode INITIAL_ENTRANCE = new DialogueNode("", "", true) {
+		@Override
+		public boolean isTravelDisabled() {
+			return !Main.game.getPlayer().hasQuest(QuestLine.ROMANCE_NATALYA);
+		}
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 2*60;
 		}
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "ENTRANCE");
+			return UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "INITIAL_ENTRANCE");
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Exit", "Head back out into the warehouse district.", Warehouses.WAREHOUSE_DISTRICT) {
-					@Override
-					public void effects() {
-						Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_WAREHOUSES);
-					}
-				};
+			if(Main.game.getPlayer().hasQuest(QuestLine.ROMANCE_NATALYA)) {
+				return ENTRANCE.getResponse(responseTab, index);
+
+			} else {
+				if(index==0) {
+                    return new Response("Выход", "Tell the receptionist that you made a mistake and head back out into the warehouse district.", Warehouses.WAREHOUSE_DISTRICT) {
+						@Override
+						public void effects() {
+							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_WAREHOUSES);
+						}
+					};
+
+				} else if(index==1) {
+					return new Response("Show card", "Show the receptionist the card you received from Natalya.", INITIAL_ENTRANCE_CARD_SHOWN);
+				}
+				return null;
 			}
-			return null;
 		}
 	};
 
 	public static final DialogueNode CORRIDOR = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -673,7 +644,7 @@ public class DominionExpress {
 	public static final DialogueNode STORAGE = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -688,7 +659,7 @@ public class DominionExpress {
 	public static final DialogueNode OFFICE = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -703,7 +674,7 @@ public class DominionExpress {
 	public static final DialogueNode FILLY_STATION = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -727,7 +698,7 @@ public class DominionExpress {
 	public static final DialogueNode FILLY_STATION_POSTER = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -742,7 +713,7 @@ public class DominionExpress {
 	public static final DialogueNode FILLY_STATION_MACHINE = new DialogueNode("", "", true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -810,7 +781,6 @@ public class DominionExpress {
 			return null;
 		}
 	};
-
 	public static final DialogueNode FILLY_STATION_REWARD = new DialogueNode("", "", true) {
 		@Override
 		public int getSecondsPassed() {
@@ -823,55 +793,11 @@ public class DominionExpress {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Continue interacting with the filly reward station.", FILLY_STATION_MACHINE);
+                return new Response("Продолжить", "Continue interacting with the filly reward station.", FILLY_STATION_MACHINE);
 			}
 			return null;
 		}
 	};
-	
-	
-	public static final DialogueNode STABLES = new DialogueNode("", "", false) {
-		@Override
-		public int getSecondsPassed() {
-			return 1*60;
-		}
-		@Override
-		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "STABLES"));
-			if(!wearingFillyCollar()) {
-				sb.append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "STABLES_NO_COLLAR"));
-			} else if(!isPlayerBodyCorrect()) {
-				sb.append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "STABLES_WRONG_BODY"));
-			} else {
-				sb.append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "STABLES_ENTER"));
-			}
-			return sb.toString();
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				if(Main.game.getPlayer().isQuestCompleted(QuestLine.ROMANCE_NATALYA)) {
-					if(!wearingFillyCollar()) {
-						return new Response("Enter", "You cannot see Mistress Natalya without wearing your filly choker!", null);
-					} else if(!isPlayerBodyCorrect()) {
-						return new Response("Enter", "You cannot see Mistress Natalya without being a busty [style.shemale]!", null);
-					}
-					return new Response("Enter", "Enter the stables and look for centaur slaves to service...", STABLES_INTERIOR) {
-						@Override
-						public void effects() {
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "STABLES_ENTERED"));
-						}
-					};
-					
-				} else {
-					return new Response("Enter", "As you are not a slave or qualified filly, you cannot enter the stables...", null);
-				}
-			}
-			return null;
-		}
-	};
-	
 	public static final DialogueNode STABLES_INTERIOR = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
@@ -884,7 +810,7 @@ public class DominionExpress {
 		@Override
 		public String getResponseTabTitle(int index) {
 			if(index==0) {
-				return "Stables";
+                return "Конюшни";
 			} else if(index==1) {
 				return "Favourites";
 			}
@@ -893,14 +819,14 @@ public class DominionExpress {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==0) {
-				return new Response("Exit", "Exit the stables and head back out into the main warehouse...", CORRIDOR) {
+                return new Response("Выход", "Exit the stables and head back out into the main warehouse...", CORRIDOR) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setNearestLocation(WorldType.DOMINION_EXPRESS, PlaceType.DOMINION_EXPRESS_CORRIDOR, false);
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "STABLES_EXIT"));
 					}
 				};
-				
+
 			}
 			if(responseTab==0) {
 				if(index==1) {
@@ -923,7 +849,7 @@ public class DominionExpress {
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "STABLE_SEX_FIND_PARTNER", activeSlave));
 						}
 					};
-					
+
 				} else if(index==2) {
 					if(getSavedSlaves().size()>=10) {
 						return new Response("Centauress", "You already have the maximum amount of favourite slaves (10)...", null);
@@ -944,7 +870,7 @@ public class DominionExpress {
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "STABLE_SEX_FIND_PARTNER", activeSlave));
 						}
 					};
-					
+
 				} else if(index==5) {
 					if(Main.game.getCurrentDialogueNode()==STABLE_SHOWER) {
 						return new Response("Shower", "You have just taken a shower!", null);
@@ -955,13 +881,13 @@ public class DominionExpress {
 									+ "<br/>[style.italicsGood(This will clean <b>only</b> your currently equipped clothing.)]",
 								STABLE_SHOWER);
 				}
-				
+
 			} else if(responseTab==1) {
 				List<Response> responses = new ArrayList<>();
 				for(GameCharacter slave : getSavedSlaves()) {
 					if(!getSlaves().contains(slave)) {
 						responses.add(new Response(UtilText.parse(slave, "[npc.Name]"), UtilText.parse(slave, "[npc.Name] is out working at the moment, and as such is unavailable for you to sexually service..."), null));
-						
+
 					} else {
 						responses.add(new Response(UtilText.parse(slave, "[npc.Name]"), UtilText.parse(slave, "Find [npc.namePos] stall and offer to sexually service [npc.herHim] again..."), STABLE_SEX) {
 							@Override
@@ -981,6 +907,47 @@ public class DominionExpress {
 					if(index-1==i) {
 						return responses.get(i);
 					}
+				}
+			}
+			return null;
+		}
+	};
+	public static final DialogueNode STABLES = new DialogueNode("", "", false) {
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+		@Override
+		public String getContent() {
+			StringBuilder sb = new StringBuilder();
+			sb.append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "STABLES"));
+			if(!wearingFillyCollar()) {
+				sb.append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "STABLES_NO_COLLAR"));
+			} else if(!isPlayerBodyCorrect()) {
+				sb.append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "STABLES_WRONG_BODY"));
+			} else {
+				sb.append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "STABLES_ENTER"));
+			}
+			return sb.toString();
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+				if(Main.game.getPlayer().isQuestCompleted(QuestLine.ROMANCE_NATALYA)) {
+					if(!wearingFillyCollar()) {
+                        return new Response("Вход", "You cannot see Mistress Natalya without wearing your filly choker!", null);
+					} else if(!isPlayerBodyCorrect()) {
+                        return new Response("Вход", "You cannot see Mistress Natalya without being a busty [style.shemale]!", null);
+					}
+                    return new Response("Вход", "Enter the stables and look for centaur slaves to service...", STABLES_INTERIOR) {
+						@Override
+						public void effects() {
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "STABLES_ENTERED"));
+						}
+					};
+
+				} else {
+                    return new Response("Вход", "As you are not a slave or qualified filly, you cannot enter the stables...", null);
 				}
 			}
 			return null;
@@ -1144,7 +1111,7 @@ public class DominionExpress {
 				
 			} else if(index==3) {
 				if(Main.game.getHourOfDay()>4 && Main.game.getHourOfDay()<22) {
-					return new Response("Sleep", UtilText.parse(activeSlave, "You can only sleep with a slave between [style.time(22)] and [style.time(4)]."), null);
+                    return new Response("Sleep", UtilText.parse(activeSlave, "You can only sleep with a slave between [style.time(22)] и [style.time(4)]."), null);
 					
 				} else {
 					return new Response("Sleep", UtilText.parse(activeSlave, "Accept [npc.namePos] offer to sleep with [npc.herHim] for the night."), AFTER_STABLE_SEX_SLEEP);
@@ -1398,11 +1365,10 @@ public class DominionExpress {
 			return STABLES_INTERIOR.getResponse(responseTab, index);
 		}
 	};
-	
 	public static final DialogueNode OFFICE_STABLE = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -1412,13 +1378,13 @@ public class DominionExpress {
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
 				if(!Main.game.isAnalContentEnabled() && !Main.game.getPlayer().hasQuest(QuestLine.ROMANCE_NATALYA)) {
-					return new Response("Enter",
+                    return new Response("Вход",
 							"You get the feeling that you don't want anything to do with Natalya..."
 									+ "<br/>[style.italicsMinorBad(Natalya's scenes involve anal content, and as such will be disabled for as long as your 'Anal Content' setting is turned off.)]",
 							null);
 				}
-				
-				return new Response("Enter",
+
+                return new Response("Вход",
 						"Knock on the door to Natalya's office and step inside."
 						+ (!Main.game.getPlayer().hasQuest(QuestLine.ROMANCE_NATALYA)
 							?"<br/>[style.italicsQuestRomance(This will start Natalya's romance quest!)]"
@@ -1540,7 +1506,7 @@ public class DominionExpress {
 			} else {
 				if(!isPlayerBodyCorrect()) {
 					if(index==1) {
-						return new Response("Drink potion", "Drink the potion and be transformed into [style.a_shemale].", OFFICE_STABLE_ENTRY_TRANSFORMED){
+						return new Response("Выпить potion", "Выпить the potion and be transformed into [style.a_shemale].", OFFICE_STABLE_ENTRY_TRANSFORMED) {
 							@Override
 							public Colour getHighlightColour() {
 								return PresetColour.TRANSFORMATION_GENERIC;
@@ -2100,7 +2066,7 @@ public class DominionExpress {
 				
 			} else {
 				if(index==1) {
-					return new Response("Drink potion", "Drink the potion and transform into [style.a_shemale] filly.", OFFICE_STABLE_TRANSFORMED){
+					return new Response("Выпить potion", "Выпить the potion and transform into [style.a_shemale] filly.", OFFICE_STABLE_TRANSFORMED) {
 						@Override
 						public Colour getHighlightColour() {
 							return PresetColour.TRANSFORMATION_GENERIC;
@@ -2357,10 +2323,9 @@ public class DominionExpress {
 		}
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "OFFICE_STABLE_TRAINING_2_MAKEUP"));
-			sb.append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "OFFICE_STABLE_TRAINING_2_MAKEUP_LIFT_SKIRT"));
-			return sb.toString();
+            String sb = UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "OFFICE_STABLE_TRAINING_2_MAKEUP") +
+                    UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "OFFICE_STABLE_TRAINING_2_MAKEUP_LIFT_SKIRT");
+			return sb;
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {

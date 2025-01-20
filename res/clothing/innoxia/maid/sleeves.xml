@@ -47,25 +47,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(pull)] the sleeves down onto [npc.her] [npc.arms].]]>
+            <![CDATA[[npc.Name] pull the sleeves down onto [npc.her] [npc.arms].]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(pull)] the sleeves down onto [npc2.namePos] [npc2.arms].]]>
+            <![CDATA[[npc.Name] pull the sleeves down onto [npc2.namePos] [npc2.arms].]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(pull)] the sleeves down onto [npc2.namePos] [npc2.arms].]]>
+            <![CDATA[[npc.Name] roughly pull the sleeves down onto [npc2.namePos] [npc2.arms].]]>
 	  </otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(pull)] off [npc.her] sleeves.]]>
+            <![CDATA[[npc.Name] pull off [npc.her] sleeves.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(pull)] off [npc2.namePos] sleeves.]]>
+            <![CDATA[[npc.Name] pull off [npc2.namePos] sleeves.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(yank)] off [npc2.namePos] sleeves.]]>
+            <![CDATA[[npc.Name] roughly yank off [npc2.namePos] sleeves.]]>
 		</otherRough>
 	</displacementText>
 	

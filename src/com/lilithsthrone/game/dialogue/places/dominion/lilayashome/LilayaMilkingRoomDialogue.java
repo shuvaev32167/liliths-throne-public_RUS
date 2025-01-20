@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.lilayashome;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.FluidStored;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
@@ -22,6 +19,9 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.places.AbstractPlaceUpgrade;
 import com.lilithsthrone.world.places.PlaceUpgrade;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @since 0.3.9
  * @version 0.3.9
@@ -32,8 +32,8 @@ public class LilayaMilkingRoomDialogue {
 	private static GameCharacter getMilkingTarget() {
 		return MilkingRoom.getTargetedCharacter();
 	}
-	
-	public static final DialogueNode MILKING_ROOM = new DialogueNode("Room", "", false) {
+
+    public static final DialogueNode MILKING_ROOM = new DialogueNode("Комната", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 10;
@@ -88,26 +88,26 @@ public class LilayaMilkingRoomDialogue {
 				
 			} else if (index == 1) {
 				if(Main.game.getPlayer().isAbleToAccessRoomManagement()) {
-					return new Response("Manage room", "Enter the management screen for this particular room.", OccupantManagementDialogue.ROOM_UPGRADES) {
+                    return new Response("Управление комнатой", "Enter the management screen for this particular room.", OccupantManagementDialogue.ROOM_UPGRADES) {
 						@Override
 						public void effects() {
 							OccupantManagementDialogue.cellToInspect = Main.game.getPlayerCell();
 						}
 					};
 				} else {
-					return new Response("Manage room", "You need a slaver license or permission from Lilaya to house your friends or dolls in order to access this menu!",  null);
+                    return new Response("Управление комнатой", "Чтобы получить доступ к этому меню, нужна лицензия рабовладельца или разрешение от Лилайи на размещение своих друзей или кукол!", null);
 				}
 				
 			}  else if (index == 2) {
 				if(Main.game.getPlayer().isAbleToAccessRoomManagement()) {
-					return new Response("Manage people", "Enter the management screen for your slaves and friendly occupants.", OccupantManagementDialogue.getSlaveryRoomListDialogue(null, null)) {
+                    return new Response("Управление людьми", "Enter the management screen for your slaves and friendly occupants.", OccupantManagementDialogue.getSlaveryRoomListDialogue(null, null)) {
 						@Override
 						public void effects() {
 							CompanionManagement.initManagement(Main.game.getDefaultDialogue(), 0, null);
 						}
 					};
 				} else {
-					return new Response("Manage people", "You need a slaver license or permission from Lilaya to house your friends or dolls in order to access this menu!",  null);
+                    return new Response("Управление людьми", "Чтобы получить доступ к этому меню, нужна лицензия рабовладельца или разрешение от Лилайи на размещение своих друзей или кукол!", null);
 				}
 				
 			} else if(index>=3 && index<6) {
@@ -153,7 +153,7 @@ public class LilayaMilkingRoomDialogue {
 									(getMilkingTarget().getFetishDesire(Fetish.FETISH_LACTATION_SELF).isNegative()
 											?(getMilkingTarget().getFetishDesire(Fetish.FETISH_BREASTS_SELF).isNegative()
 												?"As [npc.sheIs] not your slave, [npc.name] not let you do this, as [npc.sheHasFull] a negative desire for both the "
-													+Fetish.FETISH_LACTATION_SELF.getName(getMilkingTarget())+" and "+Fetish.FETISH_BREASTS_SELF.getName(getMilkingTarget())+" fetishes."
+                                            + Fetish.FETISH_LACTATION_SELF.getName(getMilkingTarget()) + " и " + Fetish.FETISH_BREASTS_SELF.getName(getMilkingTarget()) + " fetishes."
 												:"As [npc.sheIs] not your slave, [npc.name] not let you do this, as [npc.sheHasFull] a negative desire for the "+Fetish.FETISH_LACTATION_SELF.getName(getMilkingTarget())+" fetish.")
 											:"As [npc.sheIs] not your slave, [npc.name] not let you do this, as [npc.sheHasFull] a negative desire for the "+Fetish.FETISH_BREASTS_SELF.getName(getMilkingTarget())+" fetish.")),
 							null);
@@ -246,7 +246,7 @@ public class LilayaMilkingRoomDialogue {
 									(getMilkingTarget().getFetishDesire(Fetish.FETISH_CUM_STUD).isNegative()
 											?(getMilkingTarget().getFetishDesire(Fetish.FETISH_PENIS_GIVING).isNegative()
 												?"As [npc.sheIs] not your slave, [npc.name] not let you do this, as [npc.sheHasFull] a negative desire for both the "
-													+Fetish.FETISH_CUM_STUD.getName(getMilkingTarget())+" and "+Fetish.FETISH_PENIS_GIVING.getName(getMilkingTarget())+" fetishes."
+                                            + Fetish.FETISH_CUM_STUD.getName(getMilkingTarget()) + " и " + Fetish.FETISH_PENIS_GIVING.getName(getMilkingTarget()) + " fetishes."
 												:"As [npc.sheIs] not your slave, [npc.name] not let you do this, as [npc.sheHasFull] a negative desire for the "+Fetish.FETISH_CUM_STUD.getName(getMilkingTarget())+" fetish.")
 											:"As [npc.sheIs] not your slave, [npc.name] not let you do this, as [npc.sheHasFull] a negative desire for the "+Fetish.FETISH_PENIS_GIVING.getName(getMilkingTarget())+" fetish.")),
 							null);
@@ -429,7 +429,7 @@ public class LilayaMilkingRoomDialogue {
 									(getMilkingTarget().getFetishDesire(Fetish.FETISH_LACTATION_SELF).isNegative()
 											?(getMilkingTarget().getFetishDesire(Fetish.FETISH_BREASTS_SELF).isNegative()
 												?"As [npc.sheIs] not your slave, [npc.name] not let you do this, as [npc.sheHasFull] a negative desire for both the "
-													+Fetish.FETISH_LACTATION_SELF.getName(getMilkingTarget())+" and "+Fetish.FETISH_BREASTS_SELF.getName(getMilkingTarget())+" fetishes."
+                                            + Fetish.FETISH_LACTATION_SELF.getName(getMilkingTarget()) + " и " + Fetish.FETISH_BREASTS_SELF.getName(getMilkingTarget()) + " fetishes."
 												:"As [npc.sheIs] not your slave, [npc.name] not let you do this, as [npc.sheHasFull] a negative desire for the "+Fetish.FETISH_LACTATION_SELF.getName(getMilkingTarget())+" fetish.")
 											:"As [npc.sheIs] not your slave, [npc.name] not let you do this, as [npc.sheHasFull] a negative desire for the "+Fetish.FETISH_BREASTS_SELF.getName(getMilkingTarget())+" fetish.")),
 							null);
@@ -518,8 +518,8 @@ public class LilayaMilkingRoomDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode MILKED = new DialogueNode("Room", ".", true) {
+
+    public static final DialogueNode MILKED = new DialogueNode("Комната", ".", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 60*60;
@@ -539,7 +539,7 @@ public class LilayaMilkingRoomDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Unstrap yourself from the milking machine and continue on your way.", MILKED) {
+                return new Response("Продолжить", "Unstrap yourself from the milking machine and continue on your way.", MILKED) {
 					@Override
 					public DialogueNode getNextDialogue() {
 						return Main.game.getDefaultDialogue(false);
@@ -554,7 +554,7 @@ public class LilayaMilkingRoomDialogue {
 	/**
 	 * Used in OccupantController when a character consumes fluids.
 	 */
-	public static final DialogueNode INGEST = new DialogueNode("Room", ".", true) {
+    public static final DialogueNode INGEST = new DialogueNode("Комната", ".", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 5*60;
@@ -574,7 +574,7 @@ public class LilayaMilkingRoomDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "You wonder what do do next...", INGEST) {
+                return new Response("Продолжить", "You wonder what do do next...", INGEST) {
 					@Override
 					public DialogueNode getNextDialogue() {
 						return Main.game.getDefaultDialogue(false);

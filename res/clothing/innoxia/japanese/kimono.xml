@@ -128,25 +128,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self><![CDATA[
-			[npc.Name] [npc.verb(pull)] on the kimono and [npc.verb(spend)] a moment securely tying it up.
+			[npc.Name] pull on the kimono and spend a moment securely tying it up.
 		]]></self>
 		<other> <![CDATA[
-			[npc.Name] [npc.verb(pull)] on the kimono onto [npc2.name] and [npc.verb(spend)] a moment securely tying it up.
+			[npc.Name] pull on the kimono onto [npc2.name] и spend a moment securely tying it up.
 		]]></other>
 		<otherRough><![CDATA[
-			[npc.Name] roughly [npc.verb(force)] [npc2.name] into the kimono and [npc.verb(spend)] a moment securely tying it up.
+			[npc.Name] roughly force [npc2.name] into the kimono and spend a moment securely tying it up.
 		]]></otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self><![CDATA[
-			[npc.Name] [npc.verb(untie)] [npc.her] kimono and [npc.verb(slip)] out of it.
+			[npc.Name] untie [npc.her] kimono and slip out of it.
 		]]></self>
 		<other><![CDATA[
-			[npc.Name] [npc.verb(untie)] [npc2.namePos] kimono and [npc.verb(pull)] it off of [npc2.herHim].
+			[npc.Name] untie [npc2.namePos] kimono and pull it off of [npc2.herHim].
 		]]></other>
 		<otherRough><![CDATA[
-			[npc.Name] roughly [npc.verb(untie)] [npc2.namePos] kimono and [npc.verb(yank)] it off of [npc2.herHim].
+			[npc.Name] roughly untie [npc2.namePos] kimono and yank it off of [npc2.herHim].
 		]]></otherRough>
 	</displacementText>
 	

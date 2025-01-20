@@ -1,9 +1,5 @@
 package com.lilithsthrone.controller.eventListeners.tooltips;
 
-import org.w3c.dom.events.Event;
-import org.w3c.dom.events.EventListener;
-import org.w3c.dom.events.MouseEvent;
-
 import com.lilithsthrone.controller.MainController;
 import com.lilithsthrone.controller.TooltipUpdateThread;
 import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
@@ -13,18 +9,20 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.PresetColour;
+import org.w3c.dom.events.Event;
+import org.w3c.dom.events.MouseEvent;
 
 /**
  * @since 0.1.0
  * @version 0.3.4.5
  * @author Innoxia
  */
-public class TooltipResponseDescriptionEventListener implements EventListener {
+public class TooltipResponseDescriptionEventListener implements ClonedEventListener {
 	private int index;
 	private boolean nextPage = false;
 	private boolean previousPage = false;
 	
-	private static StringBuilder tooltipSB;
+	private static final StringBuilder tooltipSB;
 	static {
 		tooltipSB = new StringBuilder();
 	}
@@ -101,7 +99,7 @@ public class TooltipResponseDescriptionEventListener implements EventListener {
 						if(((ResponseSex)response).isMasturbation()) {
 							tooltipSB.append("<div class='title'><span style='color:" + PresetColour.GENERIC_SEX_AS_DOM.toWebHexString() + ";'>Мастурбация</span></div>");
 						} else if(((ResponseSex)response).isPlayerInDominantSlot()) {
-							tooltipSB.append("<div class='title'><span style='color:" + PresetColour.GENERIC_SEX_AS_DOM.toWebHexString() + ";'>Доминирующий секс</span></div>");
+							tooltipSB.append("<div class='title'><span style='color:" + PresetColour.GENERIC_SEX_AS_DOM.toWebHexString() + ";'>Домин. секс</span></div>");
 						} else {
 							tooltipSB.append("<div class='title'><span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>Покорный секс</span></div>");
 						}
@@ -160,7 +158,7 @@ public class TooltipResponseDescriptionEventListener implements EventListener {
 					if(response.isAvailable()) {
 						if(response instanceof ResponseSex) {
 							if(((ResponseSex)response).isPlayerInDominantSlot()) {
-								tooltipSB.append("<div class='title'><span style='color:" + PresetColour.GENERIC_SEX_AS_DOM.toWebHexString() + ";'>Доминирующий секс</span> (<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Доступно</span>)</div>");
+								tooltipSB.append("<div class='title'><span style='color:" + PresetColour.GENERIC_SEX_AS_DOM.toWebHexString() + ";'>Домин. секс</span> (<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Доступно</span>)</div>");
 							} else {
 								tooltipSB.append("<div class='title'><span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>Покорный секс</span> (<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Доступно</span>)</div>");
 							}
@@ -182,7 +180,7 @@ public class TooltipResponseDescriptionEventListener implements EventListener {
 					} else if(response.isAbleToBypass()) {
 						if(response instanceof ResponseSex) {
 							if(((ResponseSex)response).isPlayerInDominantSlot()) {
-								tooltipSB.append("<div class='title'><span style='color:" + PresetColour.GENERIC_SEX_AS_DOM.toWebHexString() + ";'>Доминирующий секс</span>"
+								tooltipSB.append("<div class='title'><span style='color:" + PresetColour.GENERIC_SEX_AS_DOM.toWebHexString() + ";'>Домин. секс</span>"
 										+ " (<span style='color:" + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Развращает</span>)</div>");
 							} else {
 								tooltipSB.append("<div class='title'><span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>Покорный секс</span>"
@@ -206,7 +204,7 @@ public class TooltipResponseDescriptionEventListener implements EventListener {
 					} else {
 						if(response instanceof ResponseSex) {
 							if(((ResponseSex)response).isPlayerInDominantSlot()) {
-								tooltipSB.append("<div class='title'><span style='color:" + PresetColour.GENERIC_SEX_AS_DOM.toWebHexString() + ";'>Доминирующий секс</span>"
+								tooltipSB.append("<div class='title'><span style='color:" + PresetColour.GENERIC_SEX_AS_DOM.toWebHexString() + ";'>Домин. секс</span>"
 										+ " (<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Недоступно</span>)</div>");
 							} else {
 								tooltipSB.append("<div class='title'><span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>Покорный секс</span>"
@@ -309,4 +307,17 @@ public class TooltipResponseDescriptionEventListener implements EventListener {
 		return this;
 	}
 
+    public TooltipResponseDescriptionEventListener() {
+    }
+
+    public TooltipResponseDescriptionEventListener(int index, boolean nextPage, boolean previousPage) {
+        this.index = index;
+        this.nextPage = nextPage;
+        this.previousPage = previousPage;
+    }
+
+    @Override
+    public ClonedEventListener newInstance() {
+        return new TooltipResponseDescriptionEventListener(index, nextPage, previousPage);
+    }
 }

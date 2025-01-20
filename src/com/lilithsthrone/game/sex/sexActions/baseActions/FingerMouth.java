@@ -1,20 +1,16 @@
 package com.lilithsthrone.game.sex.sexActions.baseActions;
 
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.valueEnums.HairLength;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.sex.ArousalIncrease;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexPace;
-import com.lilithsthrone.game.sex.SexParticipantType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
+
+import java.util.List;
 
 /**
  * @since 0.3.2
@@ -44,7 +40,7 @@ public class FingerMouth {
 //
 //		@Override
 //		public String getDescription() {
-//			return "Lifting [npc.her] [npc.hand] up to [npc2.namePos] mouth, [npc.name] [npc.verb(slide)] [npc.her] [npc.fingers] past [npc2.her] [npc2.lips+], forcing [npc2.herHim] to start lewdly sucking on [npc.her] intruding digits.";
+//			return "Lifting [npc.her] [npc.hand] up to [npc2.namePos] mouth, [npc.name] slide [npc.her] [npc.fingers] past [npc2.her] [npc2.lips+], forcing [npc2.herHim] to start lewdly sucking on [npc.her] intruding digits.";
 //		}
 //	};
 //	
@@ -67,7 +63,7 @@ public class FingerMouth {
 //
 //		@Override
 //		public String getDescription() {
-//			return "With a little sigh, [npc.name] [npc.verb(slide)] [npc.her] saliva-coated [npc.fingers] out of [npc2.namePos] mouth.";
+//			return "With a little sigh, [npc.name] slide [npc.her] saliva-coated [npc.fingers] out of [npc2.namePos] mouth.";
 //		}
 //	};
 	
@@ -141,10 +137,10 @@ public class FingerMouth {
 								getBlowjobReceiver()),
 						UtilText.returnStringAtRandom(
 								(Main.sex.getCharacterTargetedForSexAction(this).hasHair() && Main.sex.getCharacterTargetedForSexAction(this).getHairRawLengthValue()>HairLength.THREE_SHOULDER_LENGTH.getMaximumValue()
-									?"Reaching up and roughly taking a fistful of [npc2.namePos] [npc2.hair+], [npc.name] [npc.verb(force)] [npc2.her] head down into [npc3.namePos] groin while ordering [npc2.herHim] to choke on [npc3.her] [npc3.cock+]."
+                                        ? "Reaching up and roughly taking a fistful of [npc2.namePos] [npc2.hair+], [npc.name] force [npc2.her] head down into [npc3.namePos] groin while ordering [npc2.herHim] to choke on [npc3.her] [npc3.cock+]."
 									:""),
-								"Roughly grabbing hold of the sides of [npc2.namePos] head, [npc.name] violently [npc.verb(slam)] [npc2.namePos] head up and down, forcing [npc2.herHim] to [npc2.verb(continue)] sucking [npc3.namePos] [npc3.cock+].",
-								"Snarling a series of lewd, degrading remarks into [npc2.her] [npc2.ear], [npc.name] [npc.verb(slam)] [npc2.namePos] head into [npc3.namePos] crotch,"
+                                "Roughly grabbing hold of the sides of [npc2.namePos] head, [npc.name] violently slam [npc2.namePos] head up and down, forcing [npc2.herHim] to [npc2.verb(continue)] sucking [npc3.namePos] [npc3.cock+].",
+                                "Snarling a series of lewd, degrading remarks into [npc2.her] [npc2.ear], [npc.name] slam [npc2.namePos] head into [npc3.namePos] crotch,"
 										+ " thereby forcing [npc2.herHim] to take [npc3.her] [npc3.cock+] fully into [npc2.her] mouth."));
 				
 			} else {
@@ -156,11 +152,11 @@ public class FingerMouth {
 						UtilText.returnStringAtRandom(
 								(Main.sex.getCharacterTargetedForSexAction(this).hasHair() && Main.sex.getCharacterTargetedForSexAction(this).getHairRawLengthValue()>HairLength.THREE_SHOULDER_LENGTH.getMaximumValue()
 									?"Reaching up and running [npc.her] [npc.fingers+] through [npc2.namePos] [npc2.hair+],"
-											+ " [npc.name] [npc.verb(gather)] it up and [npc.verb(hold)] "+(Main.sex.getCharacterTargetedForSexAction(this).getHairType().isDefaultPlural(Main.sex.getCharacterTargetedForSexAction(this))?"them":"it")
+                                        + " [npc.name] gather it up and hold " + (Main.sex.getCharacterTargetedForSexAction(this).getHairType().isDefaultPlural(Main.sex.getCharacterTargetedForSexAction(this)) ? "them" : "it")
 											+" out of the way as [npc2.name] [npc2.verb(continue)] to give [npc3.name] a blowjob."
 									:""),
-								"Taking hold of the sides of [npc2.namePos] head, [npc.name] [npc.verb(help)] to lift and push [npc2.her] head up and down, helping [npc2.herHim] to continue sucking on [npc3.namePos] [npc3.cock+].",
-								"Giving [npc2.herHim] some lewd words of encouragement, [npc.name] [npc.verb(help)] to push [npc2.namePos] head into [npc3.namePos] crotch,"
+                                "Taking hold of the sides of [npc2.namePos] head, [npc.name] help to lift and push [npc2.her] head up and down, helping [npc2.herHim] to continue sucking on [npc3.namePos] [npc3.cock+].",
+                                "Giving [npc2.herHim] some lewd words of encouragement, [npc.name] help to push [npc2.namePos] head into [npc3.namePos] crotch,"
 										+ " thereby ensuring that [npc2.she] [npc2.verb(take)] [npc3.her] [npc3.cock+] fully into [npc2.her] mouth."));
 			}
 		}

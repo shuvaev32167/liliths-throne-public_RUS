@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.sex.sexActions.dominion;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.ArousalLevel;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -18,6 +15,9 @@ import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionPriority;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @since 0.1.7
@@ -69,7 +69,7 @@ public class SALilayaSpecials {
 						|| (Main.sex.getOngoingCharactersUsingAreas(Main.sex.getCharacterPerformingAction(), SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS).contains(Main.sex.getCharacterTargetedForSexAction(this))
 								&& Main.sex.getCharacterTargetedForSexAction(this).hasPenisIgnoreDildo()))
 					&& Main.sex.getCharacterTargetedForSexAction(this).getArousal() >= ArousalLevel.FOUR_PASSIONATE.getMinimumValue()
-					&& !Main.sex.getCharactersRequestingPullout().keySet().contains(Main.sex.getCharacterPerformingAction())
+					&& !Main.sex.getCharactersRequestingPullout().containsKey(Main.sex.getCharacterPerformingAction())
 					&& !Main.game.getNpc(Lilaya.class).isVisiblyPregnant()
 					&& Main.game.getNpc(Lilaya.class).getFetishDesire(Fetish.FETISH_PREGNANCY).isNegative()
 					&& Main.sex.getCharacterPerformingAction().equals(Main.game.getNpc(Lilaya.class));
@@ -82,7 +82,7 @@ public class SALilayaSpecials {
 		public String getDescription() {
 			if(isAmazonsSecretActive(Main.sex.getCharacterTargetedForSexAction(this))) {
 				if(Main.sex.getCharacterPerformingAction().isSpeechMuffled()) {
-					return "While letting out desperate moans and lewd cries, [npc.name] [npc.verb(try)] to push [npc2.namePos] [npc2.hips] away from [npc.her] [npc.pussy],"
+                    return "While letting out desperate moans and lewd cries, [npc.name] try to push [npc2.namePos] [npc2.hips] away from [npc.her] [npc.pussy],"
 							+ " making it clear that [npc.she] doesn't want [npc2.herHim] orgasming in this position due to the effects gained from drinking a bottle of 'Amazon's Secret'.";
 					
 				} else {
@@ -92,7 +92,7 @@ public class SALilayaSpecials {
 				
 			} else {
 				if(Main.sex.getCharacterPerformingAction().isSpeechMuffled()) {
-					return "While letting out desperate moans and lewd cries, [npc.name] [npc.verb(try)] to push [npc2.namePos] [npc2.hips] away from [npc.her] [npc.pussy],"
+                    return "While letting out desperate moans and lewd cries, [npc.name] try to push [npc2.namePos] [npc2.hips] away from [npc.her] [npc.pussy],"
 							+ " making it clear that [npc.she] doesn't want [npc2.herHim] cumming inside of [npc.herHim].";
 					
 				} else {
@@ -207,7 +207,7 @@ public class SALilayaSpecials {
 		public String getDescription() {
 			if(isAmazonsSecretActive(Main.sex.getCharacterTargetedForSexAction(this))) {
 				if(Main.sex.getCharacterPerformingAction().isSpeechMuffled()) {
-					return "While letting out desperate moans and lewd cries, [npc.name] [npc.verb(try)] to push [npc2.namePos] [npc2.hips] away from [npc.her] [npc.pussy],"
+                    return "While letting out desperate moans and lewd cries, [npc.name] try to push [npc2.namePos] [npc2.hips] away from [npc.her] [npc.pussy],"
 							+ " making it clear that [npc.she] doesn't want [npc2.herHim] orgasming in this position due to the effects gained from drinking a bottle of 'Amazon's Secret'.";
 					
 				} else {
@@ -217,7 +217,7 @@ public class SALilayaSpecials {
 				
 			} else {
 				if(Main.sex.getCharacterPerformingAction().isSpeechMuffled()) {
-					return "While letting out desperate moans and lewd cries, [npc.name] [npc.verb(try)] to push [npc2.namePos] [npc2.hips] away from [npc.her] [npc.pussy],"
+                    return "While letting out desperate moans and lewd cries, [npc.name] try to push [npc2.namePos] [npc2.hips] away from [npc.her] [npc.pussy],"
 							+ " making it clear that [npc.she] doesn't want [npc2.herHim] cumming inside of [npc.herHim].";
 					
 				} else {

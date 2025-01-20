@@ -1,7 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.zaranixHome;
 
-import java.util.List;
-
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.dominion.Arthur;
@@ -27,6 +25,8 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
+import java.util.List;
+
 /**
  * @since 0.1.89
  * @version 0.3.4
@@ -43,7 +43,7 @@ public class ZaranixHomeFirstFloor {
 
 		@Override
 		public String getLabel() {
-			return "Staircase";
+            return "Лестница";
 		}
 
 		@Override
@@ -54,7 +54,7 @@ public class ZaranixHomeFirstFloor {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Downstairs", "Head downstairs to the ground floor of Zaranix's house.", PlaceType.ZARANIX_GF_STAIRS.getDialogue(false)) {
+                return new Response("Вниз", "Head downstairs to the ground floor of Zaranix's house.", PlaceType.ZARANIX_GF_STAIRS.getDialogue(false)) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setLocation(WorldType.ZARANIX_HOUSE_GROUND_FLOOR, PlaceType.ZARANIX_GF_STAIRS, false);
@@ -76,7 +76,7 @@ public class ZaranixHomeFirstFloor {
 
 		@Override
 		public String getLabel() {
-			return "Corridor";
+            return "Коридор";
 		}
 
 		@Override
@@ -116,7 +116,7 @@ public class ZaranixHomeFirstFloor {
 
 		@Override
 		public String getLabel() {
-			return "Corridor";
+            return "Коридор";
 		}
 
 		@Override
@@ -199,7 +199,7 @@ public class ZaranixHomeFirstFloor {
 
 		@Override
 		public String getLabel() {
-			return "Room";
+            return "Комната";
 		}
 
 		@Override
@@ -402,7 +402,7 @@ public class ZaranixHomeFirstFloor {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Continue on your journey.",  PlaceType.DOMINION_DEMON_HOME_ZARANIX.getDialogue(false)) {
+                return new Response("Продолжить", "Continue on your journey.", PlaceType.DOMINION_DEMON_HOME_ZARANIX.getDialogue(false)) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_DEMON_HOME_ZARANIX, false);

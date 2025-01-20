@@ -85,7 +85,7 @@
 			#IF(game.isSillyModeEnabled())
 				 But wait, is that Ah- [style.italics(Aurora Borealis!?)] At this time of year, at this time of day, in this part of the country, [style.italics(localized entirely around the tip of your tail!?)] <br/> [style.boldSalamanderFrost(Yes.)]
 			#ELSE
-				 Strangely, a cold, arcane aura soon begins emanating from its tip. Thankfully, the small, swirling cloud of frost is revealed to be comfortably cool to the touch. [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] complete control over [npc.her] new tail.
+				 Strangely, a cold, arcane aura soon begins emanating from its tip. Thankfully, the small, swirling cloud of frost is revealed to be comfortably cool to the touch. [npc.She] quickly realise that [npc.she] [npc.has] complete control over [npc.her] new tail.
 			#ENDIF
 			<br/>[npc.Name] now [npc.has] a [style.boldSalamanderFrost(frost-tipped salamander tail)], [npc.materialDescriptor] [npc.tailFullDescription(true)].
 		#ELSE
@@ -93,7 +93,7 @@
 			#IF(game.isSillyModeEnabled())
 				 But wait, is that Ah- [style.italics(Aurora Borealis!?)] At this time of year, at this time of day, in this part of the country, [style.italics(localized entirely around the tips of your tails!?)] <br/> [style.boldSalamanderFrost(Yes.)]
 			#ELSE
-				 Strangely, a cold, arcane aura soon begins emanating from each tip. Thankfully, the small, swirling clouds of frost are revealed to be comfortably cool to the touch. [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] complete control over [npc.her] new tails.
+				 Strangely, a cold, arcane aura soon begins emanating from each tip. Thankfully, the small, swirling clouds of frost are revealed to be comfortably cool to the touch. [npc.She] quickly realise that [npc.she] [npc.has] complete control over [npc.her] new tails.
 			#ENDIF
 			<br/>[npc.Name] now [npc.has] [npc.tailCount] [style.boldSalamanderFrost(frost-tipped salamander tails)], [npc.materialDescriptor] [npc.tailFullDescription(true)].
 		#ENDIF

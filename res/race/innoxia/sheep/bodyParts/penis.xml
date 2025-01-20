@@ -35,7 +35,7 @@
 	</defaultPenetrationModifiers>
 	
 	<transformationDescription><![CDATA[
-		Letting out an involuntary moan, [npc.name] [npc.verb(feel)] [npc.her] penis shifting into a new form, and [npc.sheIs] hit by a wave of overwhelming arousal as a thick sheath suddenly grows around the base of [npc.her] shaft.
+		Letting out an involuntary moan, [npc.name] feel [npc.her] penis shifting into a new form, and [npc.sheIs] hit by a wave of overwhelming arousal as a thick sheath suddenly grows around the base of [npc.her] shaft.
 		<br/>[npc.She] now [npc.has] a [style.boldSheep(sheep-like penis)], [npc.materialDescriptor] [npc.penisFullDescription(true)].
 		<br/>[npc.She] [npc.has] [style.boldSheep([npc.ballsCount]#IF(npc.isInternalTesticles()) internal#ELSE sheep#ENDIF balls)], [npc.materialDescriptor] [npc.ballsFullDescription(true)], which produce [npc.cumColour(true)] [style.boldSheep(sheep cum)].
 	]]></transformationDescription>

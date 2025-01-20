@@ -74,9 +74,9 @@ public class Ear implements BodyPartInterface {
 
 		sb.append("<p>");
 		if(owner.isArmMovementHindered()) {
-			sb.append("[npc.NamePos] [npc.ears] start to involuntarily twitch and itch, and [npc.she] [npc.verb(let)] out a gasp as [npc.she] [npc.verb(feel)] them start to transform. ");
+            sb.append("[npc.NamePos] [npc.ears] start to involuntarily twitch and itch, and [npc.she] let out a gasp as [npc.she] feel them start to transform. ");
 		} else {
-			sb.append("[npc.NamePos] [npc.ears] start to involuntarily twitch and itch, and, letting out a gasp, [npc.she] [npc.verb(reach)] up to rub at them as [npc.she] [npc.verb(feel)] them start to transform. ");
+            sb.append("[npc.NamePos] [npc.ears] start to involuntarily twitch and itch, and, letting out a gasp, [npc.she] reach up to rub at them as [npc.she] feel them start to transform. ");
 		}
 		
 		// Parse existing content before transformation:

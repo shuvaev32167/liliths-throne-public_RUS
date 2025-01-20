@@ -109,7 +109,7 @@
 			<response>
 				<responseTabIndex><![CDATA[0]]></responseTabIndex>
 				<index><![CDATA[2]]></index>
-				<responseTitle><![CDATA[Hannah]]></responseTitle>
+                <responseTitle><![CDATA[Ханна]]></responseTitle>
 				<responseTooltip><![CDATA[
 					#IF(game.getCharactersPresent().contains(hannah))
 						Sit down next to Hannah and say hello.

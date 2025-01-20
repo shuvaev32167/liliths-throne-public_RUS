@@ -1,12 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.nightlife;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.AlcoholLevel;
@@ -66,6 +59,9 @@ import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.population.Population;
 
+import java.io.File;
+import java.util.*;
+
 /**
  * @since 0.1.0
  * @version 0.4
@@ -103,9 +99,7 @@ public class NightlifeDistrict {
 	public static List<GameCharacter> getSavedClubbers(boolean submissiveClubbers) {
 		List<GameCharacter> clubbers = new ArrayList<>(Main.game.getCharactersPresent(WorldType.EMPTY, PlaceType.GENERIC_CLUB_HOLDING_CELL));
 		
-		clubbers.removeIf((npc) -> (submissiveClubbers
-						?npc.hasPersonalityTrait(PersonalityTrait.CONFIDENT)
-						:!npc.hasPersonalityTrait(PersonalityTrait.CONFIDENT)));
+		clubbers.removeIf((npc) -> (submissiveClubbers == npc.hasPersonalityTrait(PersonalityTrait.CONFIDENT)));
 		
 		return clubbers;
 	}
@@ -337,100 +331,221 @@ public class NightlifeDistrict {
 	private static boolean isEndConditionMet(int minutesPassedForNextScene) {
 		return isPartnerLeaving(false) || isPartnerPassingOut() || (!isClubOpen(minutesPassedForNextScene) && Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.passedJules));
 	}
-	
-	private static Response getEndResponse(int index, int minutesPassedForNextScene) {
-		if(isPartnerLeaving(false)) {
-			if(index==1) {
-				return new Response("Continue", UtilText.parse(getClubbersPresent(), "Perhaps you should have treated [npc.name] a little better..."), Main.game.getDefaultDialogue(false)) {
-					@Override
-					public void effects() {
-						if(isPartnerSub()) {
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_PARTNER_LEAVES", getClubbersPresent()));
-						} else {
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_PARTNER_DOM_LEAVES", getClubbersPresent()));
+
+    public static final DialogueNode WATERING_HOLE_SEARCH_GENERATE = new DialogueNode("Водопой", "", false, true) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+
+		@Override
+		public String getContent() {
+			if(isPartnerSub()) {
+				return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_SEARCH_GENERATE", getClubbersPresent())
+						+getClubberStatus(this.getSecondsPassed(), false);
+
+			} else {
+				return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_SEARCH_GENERATE_DOM", getClubbersPresent())
+						+getClubberStatus(this.getSecondsPassed(), false);
+			}
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
+		}
+    };
+    public static final DialogueNode WATERING_HOLE_FIND_CONTACT = new DialogueNode("Водопой", "", false, true) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_FIND_CONTACT", getClubbersPresent())
+					+getClubberStatus(this.getSecondsPassed(), false);
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
+		}
+    };    public static final DialogueNode WATERING_HOLE_ENTRANCE = new DialogueNode("Водопой", "", false) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+
+		@Override
+		public boolean isTravelDisabled() {
+			return !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.passedJules) || isEndConditionMet(0);
+		}
+
+		@Override
+		public String getContent() {
+			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.passedJules)) {
+				if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.julesIntroduced)) {
+					return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_ENTRANCE");
+				} else {
+					return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_ENTRANCE_REPEAT", getClubbersPresent());
+				}
+			} else {
+				return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_ENTRANCE_PASSED")
+						+ getClubberStatus(this.getSecondsPassed(), false);
+			}
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(!hasPartner()) {
+				if(index==0) {
+                    return new ResponseEffectsOnly("Выход",
+							"Leave 'The Watering Hole' and head back out into the district of Dominion known as 'Nightlife'.") {
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.julesIntroduced, true);
+							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_NIGHTLIFE_DISTRICT);
+
+							Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
 						}
-						removeClubbers();
+					};
+
+				} else if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.passedJules)) {
+					if(index==1) {
+						return new Response("Wait", "Wait patiently in the queue to get in to the club.", WATERING_HOLE_ENTRANCE_WAITING) {
+							@Override
+							public void effects() {
+								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.passedJules, true);
+								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.julesIntroduced, true);
+								Main.game.getPlayer().setNearestLocation(WorldType.NIGHTLIFE_CLUB, PlaceType.WATERING_HOLE_MAIN_AREA, false);
+							}
+						};
+
+					} else if(index==2) {
+						if(!Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.MOUTH, true)) {
+							return new Response("Suck cock", "You can't gain access to your mouth, so you can't suck Jules's cock!", null);
+						}
+						return new ResponseSex("Suck cock", "Suck Jules's cock in front of everyone in order to skip to the front of the queue.",
+								true,
+								false,
+								new SMJulesCockSucking(
+										Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Jules.class), SexSlotStanding.STANDING_DOMINANT)),
+										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL))),
+								null,
+								null,
+								AFTER_JULES_BLOWJOB,
+								UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_ENTRANCE_START_BLOWJOB")) {
+							@Override
+							public void effects() {
+								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.suckedJulesCock, true);
+								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.passedJules, true);
+								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.julesIntroduced, true);
+
+							}
+							@Override
+							public List<InitialSexActionInformation> getInitialSexActions() {
+								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Jules.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, true, true));
+							}
+						};
+
+					} else if(index==3 && Main.game.getPlayer().getRace()==Race.DEMON) {
+						return new Response("Skip queue", "Use your status as a demon to cut the queue.", WATERING_HOLE_ENTRANCE_SKIP_QUEUE) {
+							@Override
+							public void effects() {
+								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.passedJules, true);
+								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.julesIntroduced, true);
+								Main.game.getPlayer().setNearestLocation(WorldType.NIGHTLIFE_CLUB, PlaceType.WATERING_HOLE_MAIN_AREA, false);
+							}
+						};
+
 					}
-				};
-			}
-			
-		} else if(isPartnerPassingOut()) {
-			if(index==1) {
-				return new Response("Continue", UtilText.parse(getClubbersPresent(), "[npc.Name] collapses!"), Main.game.getDefaultDialogue(false)) {
-					@Override
-					public void effects() {
-						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_PARTNER_TOO_WASTED", getClubbersPresent()));
-						saveClubbers();
+					return null;
+
+				} else { // Passed Jules:
+					if(index==1 && Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.suckedJulesCock)) {
+						if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.fuckedJulesTonight)) {
+							return new Response("Jules", "You've already had a 'proper fuck' from Jules tonight, and he doesn't have time to do it again...", null);
+						}
+						return new ResponseSex("Jules", "Tell Jules that you want him to give you 'a proper fuck'...",
+								true, true,
+								new SMGeneric(
+										Util.newArrayListOfValues(Main.game.getNpc(Jules.class)),
+										Util.newArrayListOfValues(Main.game.getPlayer()),
+								null,
+								null) {
+									@Override
+									public boolean isPublicSex() {
+										return false;
+									}
+								},
+								AFTER_JULES_SEX,
+								UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_ENTRANCE_JULES_SEX", NightlifeDistrict.getClubbersPresent())){
+							@Override
+							public void effects() {
+								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.fuckedJules, true);
+								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.fuckedJulesTonight, true);
+							}
+						};
+
 					}
-				};
-			}
-			
-		} else if(!isClubOpen(minutesPassedForNextScene)) {
-			if(hasPartner()) {
+				}
+
+			} else {
 				if(index==1) {
 					return new ResponseEffectsOnly("Say goodbye",
-							UtilText.parse(getClubbersPresent(), "It's closing time, so you need to leave the club now. Say goodbye to [npc.name] before heading back out into the district of Dominion known as 'Nightlife'."
+							UtilText.parse(getClubbersPresent(), "Say goodbye to [npc.name] before heading back out into the district of Dominion known as 'Nightlife'."
 									+ "</br>[style.italicsGood(Saves this character, who can then be encountered in the club again.)]")) {
 						@Override
 						public void effects() {
 							saveClubbers();
-							
+
 							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_NIGHTLIFE_DISTRICT);
 							Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
 						}
 					};
-					
+
 				} else if(index==2) {
 					if(likesSex(getPartner(), false)) {
-						return new Response("Invite home",
-								UtilText.parse(getClubbersPresent(), "It's closing time, so you need to leave the club now. Ask [npc.name] to come back to your place."),
-								RoomPlayer.AUNT_HOME_PLAYERS_ROOM_CLUBBER_TAKEN_HOME) {
+						return new Response("Invite home", UtilText.parse(getClubbersPresent(), "Take [npc.name] back to your room."), RoomPlayer.AUNT_HOME_PLAYERS_ROOM_CLUBBER_TAKEN_HOME) {
 							@Override
 							public void effects() {
 								for(GameCharacter clubber : getClubbersPresent()) {
 									clubber.setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_PLAYER);
 								}
-								
+
 								Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_PLAYER);
+								Main.game.setRequestAutosave(false);
 							}
 						};
 					} else {
-						return new Response("Invite home", UtilText.parse(getClubbersPresent(),
-								"It's closing time, so you need to leave the club now. [npc.Name] is showing no interest in wanting to go back to your place..."), null);
+						return new Response("Invite home", UtilText.parse(getClubbersPresent(), "[npc.Name] is showing no interest in wanting to go back to your place. You should interact with [npc.herHim] a little more first..."), null);
 					}
-					
+
 				} else if(index==3) {
 					return new ResponseEffectsOnly("Lose company",
-							UtilText.parse(getClubbersPresent(), "It's closing time, so you need to leave the club now. Tell [npc.name] you've got to go before heading back out into the district of Dominion known as 'Nightlife'."
+							UtilText.parse(getClubbersPresent(), "Tell [npc.name] you've got to go before heading back out into the district of Dominion known as 'Nightlife'."
 									+ "</br>[style.italicsBad(Removes this character from the game.)]")) {
 						@Override
 						public void effects() {
 							removeClubbers();
-							
+
 							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_NIGHTLIFE_DISTRICT);
 							Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
 						}
 					};
-					
+
 				}
-				
-			} else {
-				if(index==1) {
-					return new ResponseEffectsOnly("Leave", "It's closing time, so you need to leave the club now.") {
-						@Override
-						public void effects() {
-							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_NIGHTLIFE_DISTRICT);
-							Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.kalahariWantsSex, false);
-						}
-					};
-				}
+				return null;
+
 			}
+
 			return null;
-			
 		}
-		return null;
-	}
+	};
 	
 	private static String getKalahariStatus(boolean withBreakTime, int secondsPassedForNextScene) {
 		StringBuilder sb = new StringBuilder();
@@ -525,182 +640,82 @@ public class NightlifeDistrict {
 			return null;
 		}
 	};
-
-	public static final DialogueNode WATERING_HOLE_ENTRANCE = new DialogueNode("The Watering Hole", "", false) {
-		
-		@Override
-		public int getSecondsPassed() {
-			return 60;
-		}
-		
-		@Override
-		public boolean isTravelDisabled() {
-			return !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.passedJules) || isEndConditionMet(0);
-		}
+	public static final DialogueNode WATERING_HOLE_BAR_KALAHARI_BREAK_AFTER_SEX = new DialogueNode("Finished", "Kalahari needs to get back to work...", true) {
 
 		@Override
 		public String getContent() {
-			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.passedJules)) {
-				if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.julesIntroduced)) {
-					return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_ENTRANCE");
-				} else {
-					return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_ENTRANCE_REPEAT", getClubbersPresent());
-				}
+			if(Main.sex.getNumberOfOrgasms(Main.game.getNpc(Kalahari.class))>=Main.game.getNpc(Kalahari.class).getOrgasmsBeforeSatisfied()) {
+				return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_BAR_KALAHARI_BREAK_AFTER_SEX");
 			} else {
-				return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_ENTRANCE_PASSED")
-						+ getClubberStatus(this.getSecondsPassed(), false);
+				return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_BAR_KALAHARI_BREAK_AFTER_SEX_NO_ORGASM");
 			}
 		}
 
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if(!hasPartner()) {
-				if(index==0) {
-					return new ResponseEffectsOnly("Exit",
-							"Leave 'The Watering Hole' and head back out into the district of Dominion known as 'Nightlife'.") {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.julesIntroduced, true);
-							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_NIGHTLIFE_DISTRICT);
-							
-							Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
-						}
-					};
-					
-				} else if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.passedJules)) {
-					if(index==1) {
-						return new Response("Wait", "Wait patiently in the queue to get in to the club.", WATERING_HOLE_ENTRANCE_WAITING) {
-							@Override
-							public void effects() {
-								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.passedJules, true);
-								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.julesIntroduced, true);
-								Main.game.getPlayer().setNearestLocation(WorldType.NIGHTLIFE_CLUB, PlaceType.WATERING_HOLE_MAIN_AREA, false);
-							}
-						};
-						
-					} else if(index==2) {
-						if(!Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.MOUTH, true)) {
-							return new Response("Suck cock", "You can't gain access to your mouth, so you can't suck Jules's cock!", null);
-						}
-						return new ResponseSex("Suck cock", "Suck Jules's cock in front of everyone in order to skip to the front of the queue.",
-								true,
-								false,
-								new SMJulesCockSucking(
-										Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Jules.class), SexSlotStanding.STANDING_DOMINANT)),
-										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL))),
-								null,
-								null,
-								AFTER_JULES_BLOWJOB,
-								UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_ENTRANCE_START_BLOWJOB")) {
-							@Override
-							public void effects() {
-								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.suckedJulesCock, true);
-								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.passedJules, true);
-								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.julesIntroduced, true);
-								
-							}
-							@Override
-							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Jules.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, true, true));
-							}
-						};
-						
-					} else if(index==3 && Main.game.getPlayer().getRace()==Race.DEMON) {
-						return new Response("Skip queue", "Use your status as a demon to cut the queue.", WATERING_HOLE_ENTRANCE_SKIP_QUEUE) {
-							@Override
-							public void effects() {
-								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.passedJules, true);
-								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.julesIntroduced, true);
-								Main.game.getPlayer().setNearestLocation(WorldType.NIGHTLIFE_CLUB, PlaceType.WATERING_HOLE_MAIN_AREA, false);
-							}
-						};
-						
+			if(index==1) {
+                return new Response("Продолжить", "Head back out into the main area of the club.", WATERING_HOLE_MAIN) {
+					@Override
+					public void effects() {
+						Main.game.getPlayer().setNearestLocation(WorldType.NIGHTLIFE_CLUB, PlaceType.WATERING_HOLE_MAIN_AREA, false);
 					}
-					return null;
-					
-				} else { // Passed Jules:
-					if(index==1 && Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.suckedJulesCock)) {
-						if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.fuckedJulesTonight)) {
-							return new Response("Jules", "You've already had a 'proper fuck' from Jules tonight, and he doesn't have time to do it again...", null);
-						}
-						return new ResponseSex("Jules", "Tell Jules that you want him to give you 'a proper fuck'...",
-								true, true,
-								new SMGeneric(
-										Util.newArrayListOfValues(Main.game.getNpc(Jules.class)),
-										Util.newArrayListOfValues(Main.game.getPlayer()),
-								null,
-								null) {
-									@Override
-									public boolean isPublicSex() {
-										return false;
-									}
-								},
-								AFTER_JULES_SEX,
-								UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_ENTRANCE_JULES_SEX", NightlifeDistrict.getClubbersPresent())){
-							@Override
-							public void effects() {
-								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.fuckedJules, true);
-								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.fuckedJulesTonight, true);
-							}
-						};
-						
-					}
-				}
-				
-			} else {
-				if(index==1) {
-					return new ResponseEffectsOnly("Say goodbye",
-							UtilText.parse(getClubbersPresent(), "Say goodbye to [npc.name] before heading back out into the district of Dominion known as 'Nightlife'."
-									+ "</br>[style.italicsGood(Saves this character, who can then be encountered in the club again.)]")) {
-						@Override
-						public void effects() {
-							saveClubbers();
-							
-							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_NIGHTLIFE_DISTRICT);
-							Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
-						}
-					};
-					
-				} else if(index==2) {
-					if(likesSex(getPartner(), false)) {
-						return new Response("Invite home", UtilText.parse(getClubbersPresent(), "Take [npc.name] back to your room."), RoomPlayer.AUNT_HOME_PLAYERS_ROOM_CLUBBER_TAKEN_HOME) {
-							@Override
-							public void effects() {
-								for(GameCharacter clubber : getClubbersPresent()) {
-									clubber.setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_PLAYER);
-								}
-								
-								Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_PLAYER);
-								Main.game.setRequestAutosave(false);
-							}
-						};
-					} else {
-						return new Response("Invite home", UtilText.parse(getClubbersPresent(), "[npc.Name] is showing no interest in wanting to go back to your place. You should interact with [npc.herHim] a little more first..."), null);
-					}
-					
-				} else if(index==3) {
-					return new ResponseEffectsOnly("Lose company",
-							UtilText.parse(getClubbersPresent(), "Tell [npc.name] you've got to go before heading back out into the district of Dominion known as 'Nightlife'."
-									+ "</br>[style.italicsBad(Removes this character from the game.)]")) {
-						@Override
-						public void effects() {
-							removeClubbers();
-							
-							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_NIGHTLIFE_DISTRICT);
-							Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
-						}
-					};
-					
-				} 
-				return null;
-				
+				};
 			}
-			
 			return null;
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_ENTRANCE_WAITING = new DialogueNode("The Watering Hole", "", false, true) {
+    public static final DialogueNode WATERING_HOLE_LOITER_GENERATE = new DialogueNode("Водопой", "", false) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+
+		@Override
+		public String getContent() {
+			List<GameCharacter> clubbers = getClubbersPresent();
+
+			if(clubbers.size()==1) {
+				return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_LOITER_GENERATE", clubbers);
+
+			} else {
+				if(Main.game.getPlayer().getNonElementalCompanions().isEmpty()) {
+					return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_LOITER_GENERATE_TWO", clubbers);
+
+				} else {
+					clubbers.addAll(Main.game.getPlayer().getNonElementalCompanions());
+					return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_LOITER_GENERATE_TWO_WITH_COMPANION", clubbers);
+				}
+			}
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
+		}
+    };
+    public static final DialogueNode WATERING_HOLE_TOILETS_AFTER_SEX_SEE_AGAIN = new DialogueNode("Водопой", "", false, true) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+
+		@Override
+		public boolean isTravelDisabled() {
+			return isEndConditionMet(0);
+		}
+
+		@Override
+		public String getContent() {
+			return getClubberStatus(this.getSecondsPassed(), false);
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return WATERING_HOLE_TOILETS.getResponse(responseTab, index);
+		}
+    };    public static final DialogueNode WATERING_HOLE_ENTRANCE_WAITING = new DialogueNode("Водопой", "", false, true) {
 		@Override
 		public int getSecondsPassed() {
 			return 30*60;
@@ -715,8 +730,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_MAIN.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_ENTRANCE_SKIP_QUEUE = new DialogueNode("The Watering Hole", "", false, true) {
+
+    public static final DialogueNode WATERING_HOLE_ENTRANCE_SKIP_QUEUE = new DialogueNode("Водопой", "", false, true) {
 		@Override
 		public int getSecondsPassed() {
 			return 2*60;
@@ -755,7 +770,7 @@ public class NightlifeDistrict {
 		}
 	};
 
-	public static final DialogueNode WATERING_HOLE_MAIN = new DialogueNode("The Watering Hole", "", false) {
+    public static final DialogueNode WATERING_HOLE_MAIN = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -978,8 +993,8 @@ public class NightlifeDistrict {
 			}
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_MAIN_TALK = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_MAIN_TALK = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -1002,8 +1017,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_MAIN.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_MAIN_FLIRT = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_MAIN_FLIRT = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -1026,8 +1041,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_MAIN.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_MAIN_KISS = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_MAIN_KISS = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -1049,8 +1064,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_MAIN.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_MAIN_GROPE = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_MAIN_GROPE = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -1072,8 +1087,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_MAIN.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_MAIN_LOSE_COMPANY = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_MAIN_LOSE_COMPANY = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -1095,12 +1110,12 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_MAIN.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_SEARCH_GENDER = new DialogueNode("The Watering Hole", "", true) {
+
+    public static final DialogueNode WATERING_HOLE_SEARCH_GENDER = new DialogueNode("Водопой", "", true) {
 		
 		@Override
 		public int getSecondsPassed() {
-			return 0*60;
+			return 0;
 		}
 
 		@Override
@@ -1153,8 +1168,8 @@ public class NightlifeDistrict {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_SEARCH_RACE = new DialogueNode("The Watering Hole", "", true, true) {
+
+    public static final DialogueNode WATERING_HOLE_SEARCH_RACE = new DialogueNode("Водопой", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
 			return 0;
@@ -1224,37 +1239,13 @@ public class NightlifeDistrict {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_SEARCH_GENERATE = new DialogueNode("The Watering Hole", "", false, true) {
+
+
+    public static final DialogueNode WATERING_HOLE_CONTACTS = new DialogueNode("Водопой", "", true) {
 		
 		@Override
 		public int getSecondsPassed() {
-			return 60;
-		}
-
-		@Override
-		public String getContent() {
-			if(isPartnerSub()) {
-				return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_SEARCH_GENERATE", getClubbersPresent())
-						+getClubberStatus(this.getSecondsPassed(), false);
-				
-			} else {
-				return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_SEARCH_GENERATE_DOM", getClubbersPresent())
-						+getClubberStatus(this.getSecondsPassed(), false);
-			}
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
-		}
-	};
-	
-	public static final DialogueNode WATERING_HOLE_CONTACTS = new DialogueNode("The Watering Hole", "", true) {
-		
-		@Override
-		public int getSecondsPassed() {
-			return 0*60;
+			return 0;
 		}
 
 		@Override
@@ -1297,25 +1288,8 @@ public class NightlifeDistrict {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_FIND_CONTACT = new DialogueNode("The Watering Hole", "", false, true) {
-		
-		@Override
-		public int getSecondsPassed() {
-			return 60;
-		}
 
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_FIND_CONTACT", getClubbersPresent())
-					+getClubberStatus(this.getSecondsPassed(), false);
-		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
-		}
-	};
 	
 	public static final DialogueNode WATERING_HOLE_IMPORT = new DialogueNode("", "", true) {
 		@Override
@@ -1372,39 +1346,9 @@ public class NightlifeDistrict {
 				+ "</td>"
 				+ "</tr>";
 	}
-	
-	public static final DialogueNode WATERING_HOLE_LOITER_GENERATE = new DialogueNode("The Watering Hole", "", false) {
-		
-		@Override
-		public int getSecondsPassed() {
-			return 60;
-		}
 
-		@Override
-		public String getContent() {
-			List<GameCharacter> clubbers = getClubbersPresent();
-			
-			if(clubbers.size()==1) {
-				return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_LOITER_GENERATE", clubbers);
-				
-			} else {
-				if(Main.game.getPlayer().getNonElementalCompanions().isEmpty()) {
-					return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_LOITER_GENERATE_TWO", clubbers);
-					
-				} else {
-					clubbers.addAll(Main.game.getPlayer().getNonElementalCompanions());
-					return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_LOITER_GENERATE_TWO_WITH_COMPANION", clubbers);
-				}
-			}
-		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
-		}
-	};
-
-	public static final DialogueNode WATERING_HOLE_SEATING = new DialogueNode("The Watering Hole", "", false) {
+    public static final DialogueNode WATERING_HOLE_SEATING = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -1452,11 +1396,8 @@ public class NightlifeDistrict {
 					};
 					
 				} else if(index==3) {
-					boolean bothBipeds = true;
-					if(Main.game.getPlayer().isTaur() || getPartner().isTaur()) {
-						bothBipeds = false;
-					}
-					return new Response( // If both partners are bipeds, play footsie. If not, feeling up occurs instead.
+					boolean bothBipeds = !Main.game.getPlayer().isTaur() && !getPartner().isTaur();
+                    return new Response( // If both partners are bipeds, play footsie. If not, feeling up occurs instead.
 							bothBipeds
 								?"Footsie"
 								:"Feel up",
@@ -1653,8 +1594,8 @@ public class NightlifeDistrict {
 			}
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_SEATING_TALK = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_SEATING_TALK = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -1677,8 +1618,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_SEATING.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_SEATING_FLIRT = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_SEATING_FLIRT = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -1701,8 +1642,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_SEATING.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_SEATING_FOOTSIE = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_SEATING_FOOTSIE = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -1724,8 +1665,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_SEATING.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_SEATING_SEX_AS_SUB_REJECTED = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_SEATING_SEX_AS_SUB_REJECTED = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -1747,8 +1688,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_SEATING.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_SEATING_SEX_AS_DOM_REJECTED = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_SEATING_SEX_AS_DOM_REJECTED = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -1824,8 +1765,8 @@ public class NightlifeDistrict {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_SEATING_AFTER_SEX_SEE_AGAIN = new DialogueNode("The Watering Hole", "", false, true) {
+
+    public static final DialogueNode WATERING_HOLE_SEATING_AFTER_SEX_SEE_AGAIN = new DialogueNode("Водопой", "", false, true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -1847,8 +1788,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_SEATING.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_SEATING_AFTER_SEX_DO_NOT_SEE_AGAIN = new DialogueNode("The Watering Hole", "", false, true) {
+
+    public static final DialogueNode WATERING_HOLE_SEATING_AFTER_SEX_DO_NOT_SEE_AGAIN = new DialogueNode("Водопой", "", false, true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -1870,8 +1811,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_SEATING.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_SEATING_LOSE_COMPANY = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_SEATING_LOSE_COMPANY = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -1894,7 +1835,7 @@ public class NightlifeDistrict {
 		}
 	};
 
-	public static final DialogueNode WATERING_HOLE_BAR = new DialogueNode("The Watering Hole", "", false) {
+    public static final DialogueNode WATERING_HOLE_BAR = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -1962,8 +1903,8 @@ public class NightlifeDistrict {
 		
 		return sb.toString();
 	}
-	
-	public static final DialogueNode WATERING_HOLE_BAR_KALAHARI_INTRO = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_BAR_KALAHARI_INTRO = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -2547,8 +2488,8 @@ public class NightlifeDistrict {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_BAR_TALK = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_BAR_TALK = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -2576,8 +2517,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_BAR_FLIRT = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_BAR_FLIRT = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -2605,8 +2546,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_BAR_KISS = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_BAR_KISS = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -2633,8 +2574,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_BAR_GROPE = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_BAR_GROPE = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -2661,8 +2602,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_BAR_LOSE_COMPANY = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_BAR_LOSE_COMPANY = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -2689,8 +2630,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_BAR_DRINK = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_BAR_DRINK = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -2717,8 +2658,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_BAR_KALAHARI = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_BAR_KALAHARI = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -2746,8 +2687,8 @@ public class NightlifeDistrict {
 		}
 	};
 
-	
-	public static final DialogueNode WATERING_HOLE_BAR_KALAHARI_TALK = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_BAR_KALAHARI_TALK = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -2774,8 +2715,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_BAR_KALAHARI_FLIRT = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_BAR_KALAHARI_FLIRT = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -2806,8 +2747,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_BAR_KALAHARI_BREAK_KRUGER_INTRO = new DialogueNode("The Watering Hole", "", true) {
+
+    public static final DialogueNode WATERING_HOLE_BAR_KALAHARI_BREAK_KRUGER_INTRO = new DialogueNode("Водопой", "", true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -2977,8 +2918,8 @@ public class NightlifeDistrict {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_BAR_KALAHARI_BREAK = new DialogueNode("The Watering Hole", "", true) {
+
+    public static final DialogueNode WATERING_HOLE_BAR_KALAHARI_BREAK = new DialogueNode("Водопой", "", true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -2996,9 +2937,9 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_BAR_KALAHARI_BREAK_KRUGER_INTRO.getResponse(responseTab, index);
 		}
 	};
-	
 
-	public static final DialogueNode WATERING_HOLE_KALAHARI_BREAK_TALK = new DialogueNode("The Watering Hole", "", true) {
+
+    public static final DialogueNode WATERING_HOLE_KALAHARI_BREAK_TALK = new DialogueNode("Водопой", "", true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3015,8 +2956,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_BAR_KALAHARI_BREAK_KRUGER_INTRO.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_KALAHARI_BREAK_FLIRT = new DialogueNode("The Watering Hole", "", true) {
+
+    public static final DialogueNode WATERING_HOLE_KALAHARI_BREAK_FLIRT = new DialogueNode("Водопой", "", true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3033,8 +2974,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_BAR_KALAHARI_BREAK_KRUGER_INTRO.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_KALAHARI_BREAK_KISS = new DialogueNode("The Watering Hole", "", true) {
+
+    public static final DialogueNode WATERING_HOLE_KALAHARI_BREAK_KISS = new DialogueNode("Водопой", "", true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3051,8 +2992,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_BAR_KALAHARI_BREAK_KRUGER_INTRO.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_KALAHARI_BREAK_GROPE = new DialogueNode("The Watering Hole", "", true) {
+
+    public static final DialogueNode WATERING_HOLE_KALAHARI_BREAK_GROPE = new DialogueNode("Водопой", "", true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3076,33 +3017,35 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_BAR_KALAHARI_BREAK_KRUGER_INTRO.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_BAR_KALAHARI_BREAK_AFTER_SEX = new DialogueNode("Finished", "Kalahari needs to get back to work...", true) {
-		
+    public static final DialogueNode WATERING_HOLE_TOILETS_GLORY_HOLE_USING_POST_SEX = new DialogueNode("Туалеты", "", true) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+
 		@Override
 		public String getContent() {
-			if(Main.sex.getNumberOfOrgasms(Main.game.getNpc(Kalahari.class))>=Main.game.getNpc(Kalahari.class).getOrgasmsBeforeSatisfied()) {
-				return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_BAR_KALAHARI_BREAK_AFTER_SEX");
-			} else {
-				return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_BAR_KALAHARI_BREAK_AFTER_SEX_NO_ORGASM");
-			}
+			return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_TOILETS_GLORY_HOLE_USING_POST_SEX", getGloryHoleCharacters());
 		}
 
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Head back out into the main area of the club.", WATERING_HOLE_MAIN) {
+                return new Response("Продолжить", "Walk out of the stall.", WATERING_HOLE_TOILETS) {
 					@Override
 					public void effects() {
-						Main.game.getPlayer().setNearestLocation(WorldType.NIGHTLIFE_CLUB, PlaceType.WATERING_HOLE_MAIN_AREA, false);
+						for(GameCharacter npc : getGloryHoleCharacters()) {
+							Main.game.banishNPC((NPC) npc);
+						}
 					}
 				};
 			}
 			return null;
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_KALAHARI_BREAK_END = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_KALAHARI_BREAK_END = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3124,8 +3067,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_VIP.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_KALAHARI_BREAK_OUT_OF_TIME = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_KALAHARI_BREAK_OUT_OF_TIME = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3147,9 +3090,9 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_BAR.getResponse(responseTab, index);
 		}
 	};
-	
-	
-	public static final DialogueNode WATERING_HOLE_VIP = new DialogueNode("The Watering Hole", "", false) {
+
+
+    public static final DialogueNode WATERING_HOLE_VIP = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3181,15 +3124,15 @@ public class NightlifeDistrict {
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.krugerIntroduced)) {
 				if(index==1) {
 					if(hasPartner()) {
-						return new Response("Kruger", UtilText.parse(getClubbersPresent(), "You can't talk to Kruger while [npc.name] is with you."), null);
+                        return new Response("Крюгер", UtilText.parse(getClubbersPresent(), "You can't talk to Kruger while [npc.name] is with you."), null);
 						
 					} else if(Main.game.getNpc(Kruger.class).getLastTimeHadSex() >= Main.game.getMinutesPassed()-(60*12)) {
-						return new Response("Kruger", "You've already had sex with Kruger tonight."
+                        return new Response("Крюгер", "You've already had sex with Kruger tonight."
 								+ " Although you wouldn't mind having some more fun with him, you can tell that his patience would soon wear thin if you keep going back to him."
 								+ " You can always come back and ride his cock tomorrow night.", null);
 						
 					} else {
-						return new Response("Kruger", "Walk up to Kruger and say hello.", WATERING_HOLE_VIP_KRUGER) {
+                        return new Response("Крюгер", "Walk up to Kruger and say hello.", WATERING_HOLE_VIP_KRUGER) {
 							@Override
 							public void effects() {
 								Main.game.getTextEndStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_VIP_KRUGER"));
@@ -3205,8 +3148,8 @@ public class NightlifeDistrict {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_VIP_KRUGER = new DialogueNode("The Watering Hole", "", true) {
+
+    public static final DialogueNode WATERING_HOLE_VIP_KRUGER = new DialogueNode("Водопой", "", true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3332,8 +3275,8 @@ public class NightlifeDistrict {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_VIP_KRUGER_TALK = new DialogueNode("The Watering Hole", "", true) {
+
+    public static final DialogueNode WATERING_HOLE_VIP_KRUGER_TALK = new DialogueNode("Водопой", "", true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3350,8 +3293,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_VIP_KRUGER.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_VIP_KRUGER_FLIRT = new DialogueNode("The Watering Hole", "", true) {
+
+    public static final DialogueNode WATERING_HOLE_VIP_KRUGER_FLIRT = new DialogueNode("Водопой", "", true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3368,8 +3311,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_VIP_KRUGER.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_VIP_KRUGER_KISSED = new DialogueNode("The Watering Hole", "", true) {
+
+    public static final DialogueNode WATERING_HOLE_VIP_KRUGER_KISSED = new DialogueNode("Водопой", "", true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3386,8 +3329,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_VIP_KRUGER.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_VIP_KRUGER_FELT_UP = new DialogueNode("The Watering Hole", "", true) {
+
+    public static final DialogueNode WATERING_HOLE_VIP_KRUGER_FELT_UP = new DialogueNode("Водопой", "", true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3415,8 +3358,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_VIP.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_VIP_KRUGER_LEAVE = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_VIP_KRUGER_LEAVE = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3434,7 +3377,7 @@ public class NightlifeDistrict {
 		}
 	};
 
-	public static final DialogueNode WATERING_HOLE_DANCE_FLOOR = new DialogueNode("The Watering Hole", "", false) {
+    public static final DialogueNode WATERING_HOLE_DANCE_FLOOR = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3545,8 +3488,8 @@ public class NightlifeDistrict {
 			}
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_DANCE_FLOOR_DANCE = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_DANCE_FLOOR_DANCE = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3572,8 +3515,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_DANCE_FLOOR.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_DANCE_FLOOR_KISS = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_DANCE_FLOOR_KISS = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3595,8 +3538,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_DANCE_FLOOR.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_DANCE_FLOOR_GROPE = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_DANCE_FLOOR_GROPE = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3618,8 +3561,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_DANCE_FLOOR.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_DANCE_FLOOR_LOSE_COMPANY = new DialogueNode("The Watering Hole", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_DANCE_FLOOR_LOSE_COMPANY = new DialogueNode("Водопой", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3642,7 +3585,7 @@ public class NightlifeDistrict {
 		}
 	};
 
-	public static final DialogueNode WATERING_HOLE_TOILETS = new DialogueNode("Toilets", "", false) {
+    public static final DialogueNode WATERING_HOLE_TOILETS = new DialogueNode("Туалеты", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3842,8 +3785,8 @@ public class NightlifeDistrict {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_TOILETS_GLORY_HOLE_USING_GET_READY = new DialogueNode("Toilets", "", true) {
+
+    public static final DialogueNode WATERING_HOLE_TOILETS_GLORY_HOLE_USING_GET_READY = new DialogueNode("Туалеты", "", true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3889,9 +3832,8 @@ public class NightlifeDistrict {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_TOILETS_GLORY_HOLE_USING_POST_SEX = new DialogueNode("Toilets", "", true) {
-		
+    public static final DialogueNode WATERING_HOLE_TOILETS_GLORY_HOLE_SERVICING_POST_SEX = new DialogueNode("Туалеты", "", true) {
+
 		@Override
 		public int getSecondsPassed() {
 			return 60;
@@ -3899,13 +3841,17 @@ public class NightlifeDistrict {
 
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_TOILETS_GLORY_HOLE_USING_POST_SEX", getGloryHoleCharacters());
+			if(Main.sex.isPublicSex()) {
+				return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_TOILETS_GLORY_HOLE_SERVICING_POST_SEX_PUBLIC", getGloryHoleCharacters());
+			} else {
+				return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_TOILETS_GLORY_HOLE_SERVICING_POST_SEX", getGloryHoleCharacters());
+			}
 		}
 
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Walk out of the stall.", WATERING_HOLE_TOILETS) {
+                return new Response("Продолжить", "Walk out of the stall.", WATERING_HOLE_TOILETS) {
 					@Override
 					public void effects() {
 						for(GameCharacter npc : getGloryHoleCharacters()) {
@@ -3917,8 +3863,8 @@ public class NightlifeDistrict {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_TOILETS_GLORY_HOLE_SERVICING_GET_READY = new DialogueNode("Toilets", "", true) {
+
+    public static final DialogueNode WATERING_HOLE_TOILETS_GLORY_HOLE_SERVICING_GET_READY = new DialogueNode("Туалеты", "", true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -3983,36 +3929,40 @@ public class NightlifeDistrict {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_TOILETS_GLORY_HOLE_SERVICING_POST_SEX = new DialogueNode("Toilets", "", true) {
-		
+    public static final DialogueNode WATERING_HOLE_DOM_PARTNER_REACT = new DialogueNode("Водопой", "", true, true) {
+
+		@Override
+		public String getLabel() {
+			return Main.game.getPlayer().getLocationPlace().getName();
+		}
+
 		@Override
 		public int getSecondsPassed() {
-			return 60;
+			return 5*60;
 		}
 
 		@Override
 		public String getContent() {
-			if(Main.sex.isPublicSex()) {
-				return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_TOILETS_GLORY_HOLE_SERVICING_POST_SEX_PUBLIC", getGloryHoleCharacters());
-			} else {
-				return UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_TOILETS_GLORY_HOLE_SERVICING_POST_SEX", getGloryHoleCharacters());
-			}
+			return getClubberStatus(this.getSecondsPassed(), true);
 		}
 
 		@Override
 		public Response getResponse(int responseTab, int index) {
+			if(isEndConditionMet(0)) {
+				return getEndResponse(index, 0);
+			}
+
 			if(index==1) {
-				return new Response("Continue", "Walk out of the stall.", WATERING_HOLE_TOILETS) {
+                return new Response("Продолжить", UtilText.parse(getClubbersPresent(), "See what [npc.name] wants to do next..."), WATERING_HOLE_DOM_PARTNER) {
 					@Override
 					public void effects() {
-						for(GameCharacter npc : getGloryHoleCharacters()) {
-							Main.game.banishNPC((NPC) npc);
-						}
+						applyBehaviourEffects();
 					}
 				};
+
+			} else {
+				return null;
 			}
-			return null;
 		}
 	};
 	
@@ -4213,31 +4163,9 @@ public class NightlifeDistrict {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_TOILETS_AFTER_SEX_SEE_AGAIN = new DialogueNode("The Watering Hole", "", false, true) {
-		
-		@Override
-		public int getSecondsPassed() {
-			return 60;
-		}
-		
-		@Override
-		public boolean isTravelDisabled() {
-			return isEndConditionMet(0);
-		}
 
-		@Override
-		public String getContent() {
-			return getClubberStatus(this.getSecondsPassed(), false);
-		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return WATERING_HOLE_TOILETS.getResponse(responseTab, index);
-		}
-	};
-	
-	public static final DialogueNode WATERING_HOLE_TOILETS_SEX_REJECTED = new DialogueNode("Toilets", "", false) {
+    public static final DialogueNode WATERING_HOLE_TOILETS_SEX_REJECTED = new DialogueNode("Туалеты", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -4260,8 +4188,8 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_TOILETS.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_TOILETS_USE = new DialogueNode("Toilets", "", false) {
+
+    public static final DialogueNode WATERING_HOLE_TOILETS_USE = new DialogueNode("Туалеты", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -4285,7 +4213,7 @@ public class NightlifeDistrict {
 		}
 	};
 
-	public static final DialogueNode WATERING_HOLE_TOILETS_WASH = new DialogueNode("Toilets", "", false) {
+    public static final DialogueNode WATERING_HOLE_TOILETS_WASH = new DialogueNode("Туалеты", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -4309,7 +4237,7 @@ public class NightlifeDistrict {
 		}
 	};
 
-	public static final DialogueNode WATERING_HOLE_TOILETS_POSTERS = new DialogueNode("Toilets", "", false) {
+    public static final DialogueNode WATERING_HOLE_TOILETS_POSTERS = new DialogueNode("Туалеты", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 2*60;
@@ -4330,8 +4258,8 @@ public class NightlifeDistrict {
 	};
 	
 	// Dom partner:
-	
-	public static final DialogueNode WATERING_HOLE_SEARCH_GENERATE_DOM = new DialogueNode("The Watering Hole", "", true, true) {
+
+    public static final DialogueNode WATERING_HOLE_SEARCH_GENERATE_DOM = new DialogueNode("Водопой", "", true, true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -4349,12 +4277,12 @@ public class NightlifeDistrict {
 			return WATERING_HOLE_DOM_PARTNER_REACT.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_CONTACTS_DOM = new DialogueNode("The Watering Hole", "", true) {
+
+    public static final DialogueNode WATERING_HOLE_CONTACTS_DOM = new DialogueNode("Водопой", "", true) {
 		
 		@Override
 		public int getSecondsPassed() {
-			return 0*60;
+			return 0;
 		}
 
 		@Override
@@ -4397,8 +4325,8 @@ public class NightlifeDistrict {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode WATERING_HOLE_FIND_CONTACT_DOM = new DialogueNode("The Watering Hole", "", true, true) {
+
+    public static final DialogueNode WATERING_HOLE_FIND_CONTACT_DOM = new DialogueNode("Водопой", "", true, true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -4703,8 +4631,8 @@ public class NightlifeDistrict {
 		
 		Main.game.getPlayer().setLocation(WorldType.NIGHTLIFE_CLUB, currentBehaviour.getPlaceType());
 	}
-	
-	public static final DialogueNode WATERING_HOLE_DOM_PARTNER = new DialogueNode("The Watering Hole", "", true) {
+
+    public static final DialogueNode WATERING_HOLE_DOM_PARTNER = new DialogueNode("Водопой", "", true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -5134,11 +5062,8 @@ public class NightlifeDistrict {
 					}
 					break;
 				case SIT_DOWN_FOOTSIE:
-					boolean bothBipeds = true;
-					if(Main.game.getPlayer().isTaur() || getPartner().isTaur()) {
-						bothBipeds = false;
-					}
-					// If both partners are bipeds, play footsie. If not, feeling up occurs instead.
+					boolean bothBipeds = !Main.game.getPlayer().isTaur() && !getPartner().isTaur();
+                    // If both partners are bipeds, play footsie. If not, feeling up occurs instead.
 					if(index==1) {
 						// Enjoy
 						return new Response(
@@ -5420,42 +5345,99 @@ public class NightlifeDistrict {
 		}
 	};
 	
-	public static final DialogueNode WATERING_HOLE_DOM_PARTNER_REACT = new DialogueNode("The Watering Hole", "", true, true) {
-		
-		@Override
-		public String getLabel() {
-			return Main.game.getPlayer().getLocationPlace().getName();
-		}
-		
-		@Override
-		public int getSecondsPassed() {
-			return 5*60;
-		}
-		
-		@Override
-		public String getContent() {
-			return getClubberStatus(this.getSecondsPassed(), true);
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(isEndConditionMet(0)) {
-				return getEndResponse(index, 0);
-			}
-			
+	private static Response getEndResponse(int index, int minutesPassedForNextScene) {
+		if(isPartnerLeaving(false)) {
 			if(index==1) {
-				return new Response("Continue", UtilText.parse(getClubbersPresent(), "See what [npc.name] wants to do next..."), WATERING_HOLE_DOM_PARTNER) {
+                return new Response("Продолжить", UtilText.parse(getClubbersPresent(), "Perhaps you should have treated [npc.name] a little better..."), Main.game.getDefaultDialogue(false)) {
 					@Override
 					public void effects() {
-						applyBehaviourEffects();
+						if(isPartnerSub()) {
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_PARTNER_LEAVES", getClubbersPresent()));
+						} else {
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_PARTNER_DOM_LEAVES", getClubbersPresent()));
+						}
+						removeClubbers();
 					}
 				};
-				
-			} else {
-				return null;
 			}
+
+		} else if(isPartnerPassingOut()) {
+			if(index==1) {
+                return new Response("Продолжить", UtilText.parse(getClubbersPresent(), "[npc.Name] collapses!"), Main.game.getDefaultDialogue(false)) {
+					@Override
+					public void effects() {
+						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_PARTNER_TOO_WASTED", getClubbersPresent()));
+						saveClubbers();
+					}
+				};
+			}
+
+		} else if(!isClubOpen(minutesPassedForNextScene)) {
+			if(hasPartner()) {
+				if(index==1) {
+					return new ResponseEffectsOnly("Say goodbye",
+							UtilText.parse(getClubbersPresent(), "It's closing time, so you need to leave the club now. Say goodbye to [npc.name] before heading back out into the district of Dominion known as 'Nightlife'."
+									+ "</br>[style.italicsGood(Saves this character, who can then be encountered in the club again.)]")) {
+						@Override
+						public void effects() {
+							saveClubbers();
+
+							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_NIGHTLIFE_DISTRICT);
+							Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+						}
+					};
+
+				} else if(index==2) {
+					if(likesSex(getPartner(), false)) {
+						return new Response("Invite home",
+								UtilText.parse(getClubbersPresent(), "It's closing time, so you need to leave the club now. Ask [npc.name] to come back to your place."),
+								RoomPlayer.AUNT_HOME_PLAYERS_ROOM_CLUBBER_TAKEN_HOME) {
+							@Override
+							public void effects() {
+								for(GameCharacter clubber : getClubbersPresent()) {
+									clubber.setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_PLAYER);
+								}
+
+								Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_PLAYER);
+							}
+						};
+					} else {
+						return new Response("Invite home", UtilText.parse(getClubbersPresent(),
+								"It's closing time, so you need to leave the club now. [npc.Name] is showing no interest in wanting to go back to your place..."), null);
+					}
+
+				} else if(index==3) {
+					return new ResponseEffectsOnly("Lose company",
+							UtilText.parse(getClubbersPresent(), "It's closing time, so you need to leave the club now. Tell [npc.name] you've got to go before heading back out into the district of Dominion known as 'Nightlife'."
+									+ "</br>[style.italicsBad(Removes this character from the game.)]")) {
+						@Override
+						public void effects() {
+							removeClubbers();
+
+							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_NIGHTLIFE_DISTRICT);
+							Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+						}
+					};
+
+				}
+
+			} else {
+				if(index==1) {
+					return new ResponseEffectsOnly("Leave", "It's closing time, so you need to leave the club now.") {
+						@Override
+						public void effects() {
+							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_NIGHTLIFE_DISTRICT);
+							Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.kalahariWantsSex, false);
+						}
+					};
+				}
+			}
+			return null;
+
 		}
-	};
+		return null;
+	}
 	
 	public static final DialogueNode WATERING_HOLE_DOM_PARTNER_TAKEN_HOME = new DialogueNode("", "", true) {
 

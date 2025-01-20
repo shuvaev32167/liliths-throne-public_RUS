@@ -33,13 +33,13 @@
 	<noseDescriptorsFeminine/>
 	
 	<transformationDescription><![CDATA[
-		[npc.Her] face twitches and transforms into a stubby, anthropomorphic, pig-like muzzle, while [npc.her] nose pushes up into a distinctly pig-like snout. Within [npc.her] mouth, [npc.she] [npc.verb(feel)] [npc.her] tongue similarly transforming into a strong, pig-like one.
+		[npc.Her] face twitches and transforms into a stubby, anthropomorphic, pig-like muzzle, while [npc.her] nose pushes up into a distinctly pig-like snout. Within [npc.her] mouth, [npc.she] feel [npc.her] tongue similarly transforming into a strong, pig-like one.
 		#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)
 			 A layer of very close-cropped, smooth hair quickly grows to cover [npc.her] new face, 
 		#ELSE
 			 Just like the rest of [npc.her] body, [npc.her] new face is [npc.materialDescriptor] [npc.faceSkin+], 
 		#ENDIF
-		and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] [npc.verb(try)] to catch [npc.her] breath.
+		and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] try to catch [npc.her] breath.
 		<br/>[npc.Name] now [npc.has] an anthropomorphic [style.boldPig(pig-like face and snout)], [npc.materialDescriptor] [npc.faceFullDescription]. Within [npc.her] [npc.mouth], [npc.she] [npc.has] a [style.boldPig(strong, pig-like tongue)].
 	]]></transformationDescription>
 	

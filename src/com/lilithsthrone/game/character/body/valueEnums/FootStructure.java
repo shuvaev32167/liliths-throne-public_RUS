@@ -11,24 +11,24 @@ public enum FootStructure {
 	NONE("нет", "[npc.She] [npc.do] не имеет ног."),
 	
 	/**walk with feet flat on the ground*/
-	PLANTIGRADE("плантиградное", "[npc.She] [npc.verb(walk)] со [npc.her] стопами плоско на земле."),
+    PLANTIGRADE("плантиградное", "[npc.She] walk со [npc.her] стопами плоско на земле."),
 
 	/**walk on toes with the heel permanently raised*/
-	DIGITIGRADE("дигитиградное", "[npc.She] [npc.verb(walk)] на [npc.her] [npc.toes], с помощью [npc.her] пяток которые постоянно подняты."),
+    DIGITIGRADE("дигитиградное", "[npc.She] walk на [npc.her] [npc.toes], с помощью [npc.her] пяток которые постоянно подняты."),
 
 	/**walk on hoof with the rest of the foot permanently raised*/
-	UNGULIGRADE("унгулиградное", "[npc.She] [npc.verb(walk)] на [npc.her] [npc.toes], с остальной частью [npc.her] стопы, которая постоянно поднята."),
+    UNGULIGRADE("унгулиградное", "[npc.She] walk на [npc.her] [npc.toes], с остальной частью [npc.her] стопы, которая постоянно поднята."),
 
 	/**have segmented legs like a spider, so foot is the 'tarsus' segment.*/
-	ARACHNOID("арахнид", "[npc.She] [npc.verb(walk)] на концах [npc.her] сегментированных паучьх ног."),
+    ARACHNOID("арахнид", "[npc.She] walk на концах [npc.her] сегментированных паучьх ног."),
 	
 	/**use tentacle-legs to walk around on*/
-	TENTACLED("щупальцевое", "[npc.She] [npc.verb(use)] нижние части [npc.her] щупалец для передвижения.");
+    TENTACLED("щупальцевое", "[npc.She] use нижние части [npc.her] щупалец для передвижения.");
 	
-	private String name;
-	private String description;
+	private final String name;
+	private final String description;
 
-	private FootStructure(String name, String description) {
+	FootStructure(String name, String description) {
 		this.name = name;
 		this.description = description;
 	}

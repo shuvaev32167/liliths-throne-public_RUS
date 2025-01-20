@@ -413,7 +413,7 @@
 	
 	<htmlContent tag="SLAVE_USES_OTHER_SLAVE_ALLEYWAY_CHECK"><![CDATA[
 	<p>
-		Curious, you edge towards the source of the noise, trying your best to keep your presence concealed as you prepare to spy on the noisy duo. As you peek around the corner, you see a pair of your slaves, [npc.name] and [npc2.name].
+		Curious, you edge towards the source of the noise, trying your best to keep your presence concealed as you prepare to spy on the noisy duo. As you peek around the corner, you see a pair of your slaves, [npc.name] и [npc2.name].
 		#IF(npc.hasPenis())
 			 [npc.Name] has [npc2.name] pinned, face-first, against the alley's wall,
 		#ELSE

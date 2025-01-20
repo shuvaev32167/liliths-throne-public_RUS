@@ -48,10 +48,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		After opening it, [npc.name] [npc.verb(bring)] the bottle of Orange Dragon Draft [npc.her] [npc.mouth]. The smell of fresh prickly pears punctuated by carbonation rises from the opening, and as [npc.she] [npc.verb(tilt)] [npc.her] head back and [npc.verb(start)] drinking the tingly liquid, [npc.she] [npc.verb(feel)] much more refreshed.
+		After opening it, [npc.name] bring the bottle of Orange Dragon Draft [npc.her] [npc.mouth]. The smell of fresh prickly pears punctuated by carbonation rises from the opening, and as [npc.she] tilt [npc.her] head back and start drinking the tingly liquid, [npc.she] feel much more refreshed.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		After opening it, [npc.name] [npc.verb(bring)] the can of Orange Dragon Draft up to [npc2.namePos] waiting [npc2.lips]. The smell of fresh prickly pears punctuated by carbonation rises from the opening, and as [npc2.she] [npc2.verb(tilt)] [npc2.her] head back and [npc2.verb(start)] drinking the tingly liquid, [npc.she] [npc.verb(feel)] much more refreshed.
+		After opening it, [npc.name] bring the can of Orange Dragon Draft up to [npc2.namePos] waiting [npc2.lips]. The smell of fresh prickly pears punctuated by carbonation rises from the opening, and as [npc2.she] [npc2.verb(tilt)] [npc2.her] head back and [npc2.verb(start)] drinking the tingly liquid, [npc.she] feel much more refreshed.
 		]]></otherUse>
 	</useDescriptions>
 

@@ -84,7 +84,7 @@ public enum RaceStage {
 	/**Some minor animal-morph parts.<br/>
 	 * When used in GameCharacter's setBody() method, will grant <b>only</b> hair, ears, eyes, tail, horns, antenna, and wings (no genitalia).<br/>
 	 * <i>"Not furry"</i> by most standards.*/
-	PARTIAL("partial", PresetColour.TRANSFORMATION_PARTIAL) {
+	PARTIAL("частичный", PresetColour.TRANSFORMATION_PARTIAL) {
 		@Override
 		public boolean isAntennaFurry() {
 			return true;
@@ -153,7 +153,7 @@ public enum RaceStage {
 
 	/**All minor animal-morph parts (including genitalia).<br/>
 	 * <i>"Borderline furry"</i> by most standards.*/
-	PARTIAL_FULL("minor", PresetColour.TRANSFORMATION_PARTIAL_FULL) {
+	PARTIAL_FULL("незначительный", PresetColour.TRANSFORMATION_PARTIAL_FULL) {
 		@Override
 		public boolean isAntennaFurry() {
 			return true;
@@ -222,7 +222,7 @@ public enum RaceStage {
 
 	/**All minor animal-morph parts (including genitalia), plus animal-morph arms and legs.<br/>
 	 * <i>"Low-level furry"</i> by most standards.*/
-	LESSER("lesser", PresetColour.TRANSFORMATION_LESSER) {
+	LESSER("начинающий", PresetColour.TRANSFORMATION_LESSER) {
 		@Override
 		public boolean isAntennaFurry() {
 			return true;
@@ -291,7 +291,7 @@ public enum RaceStage {
 
 	/**All minor animal-morph parts, animal-morph arms and legs, and animal-morph skin and face.<br/>
 	 * <i>"Furry"</i> by all standards.*/
-	GREATER("greater", PresetColour.TRANSFORMATION_GREATER) {
+	GREATER("значительный", PresetColour.TRANSFORMATION_GREATER) {
 		@Override
 		public boolean isAntennaFurry() {
 			return true;
@@ -357,8 +357,8 @@ public enum RaceStage {
 			return true;
 		}
 	},
-	
-	FERAL("feral", PresetColour.RACE_BESTIAL) {
+
+	FERAL("полный", PresetColour.RACE_BESTIAL) {
 		@Override
 		public boolean isAntennaFurry() {
 			return true;
@@ -425,10 +425,10 @@ public enum RaceStage {
 		}
 	};
 
-	private String name;
-	private Colour colour;
+	private final String name;
+	private final Colour colour;
 
-	private RaceStage(String name,Colour colour) {
+	RaceStage(String name, Colour colour) {
 		this.name = name;
 		this.colour = colour;
 	}

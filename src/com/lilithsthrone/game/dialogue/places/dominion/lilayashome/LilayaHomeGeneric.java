@@ -1,14 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.lilayashome;
 
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.format.TextStyle;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.NPC;
@@ -46,1528 +37,1575 @@ import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
-import com.lilithsthrone.world.places.AbstractPlaceUpgrade;
-import com.lilithsthrone.world.places.GenericPlace;
-import com.lilithsthrone.world.places.PlaceType;
-import com.lilithsthrone.world.places.PlaceUpgrade;
+import com.lilithsthrone.world.places.*;
+
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.format.TextStyle;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static com.lilithsthrone.utils.Constants.RUSSIAN_LOCALE;
 
 /**
- * @since 0.1.75
- * @version 0.3.9
  * @author Innoxia
+ * @version 0.3.9
+ * @since 0.1.75
  */
 public class LilayaHomeGeneric {
-	
-	static Response interactWithNPC(GameCharacter slave) {
-		return new Response(UtilText.parse(slave, "[npc.Name]"), UtilText.parse(slave, "Interact with [npc.name]."), slave.isSlave()?SlaveDialogue.SLAVE_START:OccupantDialogue.OCCUPANT_START) {
-			@Override
-			public Colour getHighlightColour() {
-				return slave.getFemininity().getColour();
-			}
-			@Override
-			public void effects() {
-				if(slave.isSlave()) {
-					SlaveDialogue.initDialogue((NPC) slave, false);
-				} else {
-					OccupantDialogue.initDialogue((NPC) slave, false, false);
-				}
-			}
-		};
-		
-	}
-	
-	public static void dailyUpdate() {
-		if(Main.game.getDialogueFlags().hasSavedLong(LilayaSpa.SPA_CONSTRUCTTION_TIMER_ID)) {
-			Cell constructionCell = Main.game.getWorlds().get(WorldType.LILAYAS_HOUSE_GROUND_FLOOR).getCell(PlaceType.LILAYA_HOME_UNDER_CONSTRUCTION);
-			if(constructionCell!=null) {
-				long dayInstalled = Main.game.getDialogueFlags().getSavedLong(LilayaSpa.SPA_CONSTRUCTTION_TIMER_ID);
-				if(Main.game.getDayNumber()-dayInstalled >=7) {
-					constructionCell.getPlace().setPlaceType(PlaceType.LILAYA_HOME_SPA);
-					Main.game.getDialogueFlags().removeSavedLong(LilayaSpa.SPA_CONSTRUCTTION_TIMER_ID);
-				}
-			}
-		}
-	}
-	
-	public static List<NPC> getSlavesAndOccupantsPresent() {
-		List<NPC> charactersPresent = Main.game.getNonCompanionCharactersPresent();
-		charactersPresent.removeIf((character) -> character.isElemental());
-		return charactersPresent;
-	}
-	
-	private static boolean isPlayerHasDolls() {
-		return Main.game.getPlayer().getSlavesOwnedAsCharacters().stream().anyMatch(slave->slave.isDoll());
-	}
-	
-	public static String getLilayasHouseStandardResponseTabs(int i) {
-		AbstractPlaceType playerPlaceType = Main.game.getPlayer().getLocationPlace().getPlaceType();
-		switch(i) {
-			case 0:
-				return "Actions";
-			case 1:
-				return "Fast Travel";
-			case 2:
-				if(playerPlaceType==PlaceType.LILAYA_HOME_ROOM_PLAYER) {
-					return "Bathroom";
-				}
-				if(isPlayerHasDolls()
-						&& (playerPlaceType==PlaceType.LILAYA_HOME_ENTRANCE_HALL
-							|| playerPlaceType==PlaceType.LILAYA_HOME_CORRIDOR
-							|| playerPlaceType==PlaceType.LILAYA_HOME_GARDEN
-							|| playerPlaceType==PlaceType.LILAYA_HOME_FOUNTAIN
-							|| playerPlaceType==PlaceType.LILAYA_HOME_STAIR_DOWN
-							|| playerPlaceType==PlaceType.LILAYA_HOME_STAIR_DOWN_SECONDARY
-							|| playerPlaceType==PlaceType.LILAYA_HOME_STAIR_UP
-							|| playerPlaceType==PlaceType.LILAYA_HOME_STAIR_UP_SECONDARY)) {
-					return "Doll Stations";
-				}
-				break;
-				
-		}
-		return null;
-	}
-	
-	public static Response getLilayasHouseDollStationResponses(int index) {
-		if(index==0) {
-			index = 15;
-		} else if(index<15) {
-			index--;
-		}
-		List<GameCharacter> dolls = Main.game.getPlayer().getSlavesOwnedAsCharacters().stream().filter(slave->slave.isDoll()).collect(Collectors.toList());
-		List<Response> responses = new ArrayList<>();
-		for(int i=0; i<dolls.size(); i++) {
-			GameCharacter doll = dolls.get(i);
-			boolean alreadyActive = doll.getSlaveStationWorldType()==Main.game.getPlayer().getWorldLocation() && Main.game.getPlayer().getLocation().equals(doll.getSlaveStationLocation());
-			responses.add(new Response(
-					UtilText.parse(doll, "[npc.Name]"),
-					UtilText.parse(doll, 
-							"Set this cell as <span style='color:"+doll.getFemininity().getColour().toWebHexString()+"'>[npc.name]"+(doll.hasSurname()?" [npc.surname]'s":"'s")+"</span> station for when [npc.sheIs] working as a statue."
-							+ "<br/>[style.italics("
-							+ (doll.getSlaveStationWorldType()==null
-								?"As [npc.sheHasFull] no station set, [npc.name] will use a random corridor tile as [npc.her] station."
-								:(alreadyActive
-										?"[style.colourExcellent(This tile is already set as [npc.namePos] station.)]"
-										:"[style.colourMinorGood(Although this tile is not [npc.namePos] station, [npc.she] already has one set elsewhere.)]"))
-							+ ")]"),
-					Main.game.getDefaultDialogue(false)) {
-				@Override
-				public Colour getHighlightColour() {
-					if(doll.getSlaveStationWorldType()==null) {
-						return super.getHighlightColour();
-					} else if(!alreadyActive) {
-						return PresetColour.GENERIC_MINOR_GOOD;
-					} else {
-						return PresetColour.GENERIC_EXCELLENT;
-					}
-				}
-				@Override
-				public void effects() {
-					doll.setSlaveStationWorldType(Main.game.getPlayer().getWorldLocation());
-					doll.setSlaveStationLocation(Main.game.getPlayer().getLocation());
-				}
-			});
-		}
-		if(responses.size()<=index) {
-			return null;
-		}
-		return responses.get(index);
-	}
-	
-	public static Response getLilayasHouseFastTravelResponses(int index) {
-		 if (index == 1) {
-			if(Main.game.getPlayer().getLocationPlace().getPlaceType()==PlaceType.LILAYA_HOME_ROOM_PLAYER) {
-				return new Response("Your room", "You are already in your room, so there is no need to fast travel there...", null);
-			}
-			return new Response("Your room", "Fast travel up to your room.", PlaceType.LILAYA_HOME_ROOM_PLAYER.getDialogue(false)){
-				@Override
-				public void effects() {
-					Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_PLAYER, false);
-					Main.game.setResponseTab(0);
-				}
-			};
 
-		} else if (index == 2) {
-			if(Main.game.getPlayer().getLocationPlace().getPlaceType()==PlaceType.LILAYA_HOME_LAB) {
-				return new Response("Lilaya's Lab", "You are already in Lilaya's lab, so there is no need to fast travel there...", null);
-			}
-			return new Response("Lilaya's Lab", "Fast travel to Lilaya's Lab.", PlaceType.LILAYA_HOME_LAB.getDialogue(false)){
-				@Override
-				public void effects() {
-					Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LAB, false);
-					Main.game.setResponseTab(0);
-				}
-			};
-			
-		} else if (index == 3) {
-			if(Main.game.getPlayer().getLocationPlace().getPlaceType()==PlaceType.LILAYA_HOME_KITCHEN) {
-				return new Response("Kitchen", "You are already in the kitchen, so there is no need to fast travel there...", null);
-			}
-			return new Response("Kitchen", "Fast travel to the kitchen.", PlaceType.LILAYA_HOME_KITCHEN.getDialogue(false)){
-				@Override
-				public void effects() {
-					Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_KITCHEN, false);
-					Main.game.setResponseTab(0);
-				}
-			};
-			
-		} else if (index == 4) {
-			if(Main.game.getPlayer().getLocationPlace().getPlaceType()==PlaceType.LILAYA_HOME_LIBRARY) {
-				return new Response("Library", "You are already in the library, so there is no need to fast travel there...", null);
-			}
-			return new Response("Library", "Fast travel to the library.", PlaceType.LILAYA_HOME_LIBRARY.getDialogue(false)){
-				@Override
-				public void effects() {
-					Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LIBRARY, false);
-					Main.game.setResponseTab(0);
-				}
-			};
-			
-		} else if (index == 5) {
-			if(Main.game.getPlayer().getLocationPlace().getPlaceType()==PlaceType.LILAYA_HOME_ENTRANCE_HALL) {
-				return new Response("Entrance hall", "You are already in the entrance hall, so there is no need to fast travel there...", null);
-			}
-			return new Response("Entrance hall", "Fast travel to the entrance hall.",PlaceType.LILAYA_HOME_ENTRANCE_HALL.getDialogue(false)){
-				@Override
-				public void effects() {
-					Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_ENTRANCE_HALL, false);
-					Main.game.setResponseTab(0);
-				}
-			};
-		}
-		
-		return null;
-	}
-	
-	private static Response getRoomResponse(int responseTab, int index) {
-		AbstractPlaceUpgrade coreUpgrade = null;
-		for(AbstractPlaceUpgrade pu : Main.game.getPlayer().getLocationPlace().getPlaceUpgrades()) {
-			if(pu.isCoreRoomUpgrade()) {
-				coreUpgrade = pu;
-			}
-		}
-		
-		if(responseTab==1) {
-			return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
-		}
-		
-		List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
-		List<NPC> slavesAssignedToRoom = new ArrayList<>();
-		
-		if(coreUpgrade==PlaceUpgrade.LILAYA_OFFICE
-				|| coreUpgrade==PlaceUpgrade.LILAYA_SPA) {
-			slavesAssignedToRoom.addAll(charactersPresent);
-			
-		} else {
-			for(String slave : Util.mergeLists(Main.game.getPlayer().getFriendlyOccupants(), Main.game.getPlayer().getSlavesOwned())) {
-				try {
-					NPC slaveNPC = (NPC)Main.game.getNPCById(slave);
-					if(slaveNPC != null && (slaveNPC.getHomeWorldLocation()==Main.game.getPlayer().getWorldLocation() && slaveNPC.getHomeLocation().equals(Main.game.getPlayer().getLocation()))) {
-						slavesAssignedToRoom.add(slaveNPC);
-					}
-				} catch (Exception e) {
-					Util.logGetNpcByIdError("getRoomResponse()", slave);
-				}
-			}
-		}
+    public static final DialogueNode STAIRCASE_UP = new DialogueNode("Лестница вверх", ".", false) {
+        @Override
+        public int getSecondsPassed() {
+            return 20;
+        }
+
+        @Override
+        public String getContent() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "STAIRCASE_UP"));
+            for (NPC slave : getSlavesAndOccupantsPresent()) {
+                sb.append(getSlavePresentDescription(slave));
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public String getResponseTabTitle(int index) {
+            return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
+        }
+
+        @Override
+        public Response getResponse(int responseTab, int index) {
+            if (responseTab == 1) {
+                return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
+            }
+            if (responseTab == 2) {
+                return getLilayasHouseDollStationResponses(index);
+            }
+
+            List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
+            if (index == 0) {
+                return null;
+
+            } else if (index == 1) {
+                return new Response("Наверх", "Подняться по лестнице на второй этаж.", PlaceType.LILAYA_HOME_STAIR_DOWN.getDialogue(false)) {
+                    @Override
+                    public void effects() {
+                        Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_STAIR_DOWN, false);
+                    }
+                };
+
+            } else if (index - 2 < charactersPresent.size()) {
+                GameCharacter slave = charactersPresent.get(index - 2);
+                return interactWithNPC(slave);
+            }
+
+            return null;
+        }
+    };
+    public static final DialogueNode CORRIDOR = new DialogueNode("Коридор", ".", false) {
+
+        @Override
+        public int getSecondsPassed() {
+            return 10;
+        }
+
+        @Override
+        public String getContent() {
+            UtilText.nodeContentSB.setLength(0);
+            List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
+
+            UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "CORRIDOR"));
+
+            if (charactersPresent.isEmpty()) {
+                UtilText.nodeContentSB.append("<p>"
+                        + "Этот коридор сейчас пустынен, и, похоже, здесь нечем заняться."
+                        + "</p>");
+            } else {
+                for (NPC slave : charactersPresent) {
+                    SlaveJob job = slave.getSlaveJob(Main.game.getHourOfDay());
+                    if (job == SlaveJob.CLEANING) {
+                        UtilText.nodeContentSB.append(getSlavePresentDescription(slave,
+                                "даже не пытается притвориться, что [npc.sheIs] убирается.",
+                                "полушутя-полусерьезно чистит ковер.",
+                                "вытирает пыль с плинтусов.",
+                                "деловито полирует доски пола.",
+                                "покорно вытирает пыль, полирует и чистит всё вокруг."));
+
+                    } else if (job == SlaveJob.SECURITY) {
+                        UtilText.nodeContentSB.append(getSlavePresentDescription(slave,
+                                "даже не пытается притвориться, что [npc.sheIs] заботится о безопасности.",
+                                "полусерьезно наблюдает за безопасностью.",
+                                "следит за любым признаком опасности.",
+                                "бдительно следит за любым признаком опасности.",
+                                "очень бдительно и внимательно следит за любым признаком опасности."));
+                    } else {
+                        UtilText.nodeContentSB.append(getSlavePresentDescription(slave));
+                    }
+                }
+            }
+
+            return UtilText.nodeContentSB.toString();
+        }
+
+        @Override
+        public String getResponseTabTitle(int index) {
+            return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
+        }
+
+        @Override
+        public Response getResponse(int responseTab, int index) {
+            if (responseTab == 1) {
+                return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
+            }
+            if (responseTab == 2) {
+                return getLilayasHouseDollStationResponses(index);
+            }
+
+            List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
+
+            if (index == 0) {
+                return null;
+
+            } else if (index - 1 < charactersPresent.size()) {
+                GameCharacter slave = charactersPresent.get(index - 1);
+                return interactWithNPC(slave);
+            } else {
+                return null;
+            }
+        }
+    };
+    public static final DialogueNode KITCHEN = new DialogueNode("Кухня", ".", false) {
+
+        @Override
+        public int getSecondsPassed() {
+            return 10;
+        }
+
+        @Override
+        public String getContent() {
+            UtilText.nodeContentSB.setLength(0);
+            List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
+
+            UtilText.nodeContentSB.append("<p>"
+                    + "Как и все остальные комнаты в доме Лилайи, кухня намного больше, чем все те, в какие ты когда-либо [pc.genderBasedWord(видел, видела)]."
+                    + " По краям комнаты выстроились ряды деревянных шкафов, увенчанных полированным гранитом, а в центре - пара длинных отдельно стоящих столешниц."
+                    + " Трио чугунных духовок в сочетании с дубовым полом в деревенском стиле и отсутствием современной техники придают кухне винтажный вид."
+                    + "</p>"
+                    + "<p>"
+                    + "В одной из сторон комнаты есть открытый дверной проем, заглянув в который, ты видишь ряд холодильников, морозильных камер и буфетов."
+                    + " Ингредиенты и продукты питания всех форм и размеров лежат на открытых полках, и ты удивляешься количеству и разнообразию запасов, которые хранятся на складе."
+                    + "</p>");
+
+            if (charactersPresent.isEmpty()) {
+                UtilText.nodeContentSB.append("<p>"
+                        + "На кухне сейчас пустынно, и, похоже, здесь нечем заняться."
+                        + "</p>");
+            } else {
+                for (NPC slave : charactersPresent) {
+                    if (slave.getSlaveJob(Main.game.getHourOfDay()) == SlaveJob.KITCHEN) {
+                        UtilText.nodeContentSB.append(getSlavePresentDescription(slave,
+                                "явно не занимается приготовлением пищи. Что ещё хуже, [npc.she], похоже, не заботится о том, что ты наблюдаешь за [npc.herHim] действиями, и поворачивается к тебе спиной.",
+                                "на другом конце кухни в данный момент неспешно готовит еду.",
+                                "занимается тем, что готовит что-то в одной из кухонных печей.",
+                                "в данный момент готовит еду. Видно, что [npc.sheIs] прилагает много усилий, чтобы обеспечить хорошее выполнение работы.",
+                                "послушно готовит Лилайе еду. Ты замечаешь, что [npc.sheIs] заботится о том, чтобы приготовить все так, как нравится твоей демонической [pc.morphSingleDativ([lilaya.relation(pc)])]."));
+                    } else {
+                        UtilText.nodeContentSB.append(getSlavePresentDescription(slave));
+                    }
+                }
+            }
+
+            return UtilText.nodeContentSB.toString();
+        }
+
+        @Override
+        public String getResponseTabTitle(int index) {
+            return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
+        }
+
+        @Override
+        public Response getResponse(int responseTab, int index) {
+            if (responseTab == 1) {
+                return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
+            }
+            List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
+
+            if (index == 0) {
+                return null;
+
+            } else if (index - 1 < charactersPresent.size()) {
+                GameCharacter slave = charactersPresent.get(index - 1);
+                return interactWithNPC(slave);
+            } else {
+                return null;
+            }
+        }
+    };
+    public static final DialogueNode ENTRANCE_HALL = new DialogueNode("Вестибюль", ".", false) {
+        private boolean fiammettaMessage = false;
+
+        @Override
+        public void applyPreParsingEffects() {
+            fiammettaMessage = Main.game.getPlayer().getQuest(QuestLine.SIDE_DOLL_FACTORY) == Quest.DOLL_FACTORY_6
+                    && Main.game.isDayTime()
+                    && Main.game.getDialogueFlags().hasSavedLong("fia_factory_finished")
+                    && (Main.game.getSecondsPassed() - Main.game.getDialogueFlags().getSavedLong("fia_factory_finished") > (2 * 24 * 60 * 60)); // 2 days
+
+            if (fiammettaMessage) {
+                Main.game.getNpc(Rose.class).setLocation(Main.game.getPlayer());
+            }
+        }
+
+        @Override
+        public int getSecondsPassed() {
+            if (fiammettaMessage) {
+                return 60;
+            }
+            return 10;
+        }
+
+        @Override
+        public boolean isTravelDisabled() {
+            return fiammettaMessage;
+        }
+
+        @Override
+        public String getContent() {
+            StringBuilder sb = new StringBuilder();
+
+            List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
+
+            if (fiammettaMessage) {
+                sb.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/doll_quest", "ENTRANCE_HALL_FIAMMETTA"));
+
+                return sb.toString();
+            }
+
+            sb.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "ENTRANCE_HALL"));
+
+            if (!charactersPresent.isEmpty()) {
+                for (NPC slave : charactersPresent) {
+                    if (slave.getSlaveJob(Main.game.getHourOfDay()) == SlaveJob.SECURITY) {
+                        sb.append(getSlavePresentDescription(slave,
+                                "даже не удосуживается притвориться, что [npc.sheIs] заботится о безопасности.",
+                                "полусерьезно высматривает опасность.",
+                                "следит за любым признаком опасности.",
+                                "бдительно и внимательно следит за любыми признаками опасности.",
+                                "очень бдительно и внимательно следит за любым признаком опасности."));
+                    } else {
+                        sb.append(getSlavePresentDescription(slave));
+                    }
+                }
+            }
+
+            return sb.toString();
+        }
+
+        @Override
+        public String getResponseTabTitle(int index) {
+            if (fiammettaMessage) {
+                return null;
+            }
+            return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
+        }
+
+        @Override
+        public Response getResponse(int responseTab, int index) {
+            if (fiammettaMessage) {
+                if (index == 1) {
+                    return new Response("Следовать за Розой", "Следуй за Розой в библиотеку, чтобы узнать, кто этот гость.", DialogueManager.getDialogueFromId("innoxia_places_dominion_lilayas_home_doll_quest_start"));
+                }
+                return null;
+            }
+
+            if (responseTab == 1) {
+                return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
+            }
+            if (responseTab == 2) {
+                return getLilayasHouseDollStationResponses(index);
+            }
+
+            List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
+
+            if (index == 0) {
+                return null;
+
+            } else if (index == 1) {
+                return new Response("Выход", "Покинуть дом Лилайи.", PlaceType.DOMINION_AUNTS_HOME.getDialogue(false)) {
+                    @Override
+                    public void effects() {
+                        Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_AUNTS_HOME, false);
+                    }
+                };
+
+            } else if (index - 2 < charactersPresent.size()) {
+                GameCharacter slave = charactersPresent.get(index - 2);
+                return new Response(UtilText.parse(slave, "[npc.Name]"), UtilText.parse(slave, "Взаимодействовать с [npc.morphSingleNameInstr([npc.name])]."), SlaveDialogue.SLAVE_START) {
+                    @Override
+                    public Colour getHighlightColour() {
+                        return slave.getFemininity().getColour();
+                    }
+
+                    @Override
+                    public void effects() {
+                        SlaveDialogue.initDialogue((NPC) slave, false);
+                    }
+                };
+
+            }
+            return null;
+        }
+    };
+    public static final DialogueNode DADDY_PACKAGE = new DialogueNode("Вестибюль", "", true) {
+
+        @Override
+        public int getSecondsPassed() {
+            return 60;
+        }
+
+        @Override
+        public String getContent() {
+            return "";
+        }
+
+        @Override
+        public Response getResponse(int responseTab, int index) {
+            if (index == 1) {
+                return new Response("Продолжить", "Продолжи путь к дому Лилайи.", ENTRANCE_HALL);
+            }
+            return null;
+        }
+    };
+    public static final DialogueNode OUTSIDE = new DialogueNode("", "", false) {
+
+        @Override
+        public int getSecondsPassed() {
+            return DominionPlaces.TRAVEL_TIME_STREET;
+        }
+
+        @Override
+        public String getLabel() {
+            return "Дом Лилайи - улица";
+        }
+
+        @Override
+        public String getContent() {
+            return UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "OUTSIDE");
+        }
+
+        @Override
+        public Response getResponse(int responseTab, int index) {
+            NPC characterAnsweringDoor;
+            Optional<NPC> guardAtEntrance =
+                    Main.game.getCharactersPresent(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_ENTRANCE_HALL).stream().filter(
+                            npc -> npc.isSlave() && npc.isAtWork() && npc.hasSlaveJobSetting(SlaveJob.SECURITY, SlaveJobSetting.SECURITY_ANSWER_DOOR)).findFirst();
+            if (guardAtEntrance.isPresent()) {
+                characterAnsweringDoor = guardAtEntrance.get();
+            } else {
+                characterAnsweringDoor = Main.game.getNpc(Rose.class);
+            }
+
+            if (index == 1) {
+                LocalDateTime time = Main.game.getDateNow();
+                if (!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.daddyFound)
+                        && !Main.game.getPlayer().getFetishDesire(Fetish.FETISH_INCEST).isNegative()
+                        && Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_2_D_MEETING_A_LILIN) // Only trigger after having met Lyssieth
+                        && Main.game.isExtendedWorkTime()
+                        && time.getMonth().equals(Month.JUNE) && time.getDayOfMonth() >= 14 && time.getDayOfMonth() <= 21) { // Father's day timing, 3rd week of June
+                    return new Response("Вход", UtilText.parse(characterAnsweringDoor, "Постучись в дверь и дождись, пока [npc.name] впустит тебя."), DaddyDialogue.FIRST_ENCOUNTER) {
+                        @Override
+                        public void effects() {
+                            Main.game.getNpc(Daddy.class).setLocation(Main.game.getPlayer(), false);
+                            Main.game.getDialogueFlags().setFlag(DialogueFlagValue.daddyFound, true);
+                        }
+                    };
+
+                } else if (Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.daddySendingReward)) {
+                    return new Response("Вход", UtilText.parse(characterAnsweringDoor, "Постучись в дверь и дождись, пока Роза впустит тебя."), DADDY_PACKAGE) {
+                        @Override
+                        public void effects() {
+                            Main.game.getDialogueFlags().setFlag(DialogueFlagValue.daddySendingReward, false);
+
+                            if (characterAnsweringDoor.equals(Main.game.getNpc(Rose.class))) {
+                                Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "OUTSIDE_DADDY_PACKAGE"));
+                            } else {
+                                Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "OUTSIDE_DADDY_PACKAGE_SECURITY", characterAnsweringDoor));
+                            }
+
+                            Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_ENTRANCE_HALL, false);
+
+                            Main.game.getTextStartStringBuilder().append(Main.game.getPlayer().addItem(Main.game.getItemGen().generateItem(ItemType.getSpellBookType(Spell.TELEKENETIC_SHOWER)), false, true));
+                            Main.game.getTextStartStringBuilder().append(Main.game.getPlayer().addItem(Main.game.getItemGen().generateItem(ItemType.getSpellScrollType(SpellSchool.EARTH)), 5, false, true));
+                        }
+                    };
+
+                } else {
+                    return new Response("Вход", UtilText.parse(characterAnsweringDoor, "Постучись в дверь и дождись, пока Роза впустит тебя."), PlaceType.LILAYA_HOME_ENTRANCE_HALL.getDialogue(false)) {
+                        @Override
+                        public void effects() {
+                            if (characterAnsweringDoor.equals(Main.game.getNpc(Rose.class))) {
+                                Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "OUTSIDE_KNOCK_ON_DOOR"));
+                            } else {
+                                Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "OUTSIDE_KNOCK_ON_DOOR_SECURITY", characterAnsweringDoor));
+                            }
+                            Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_ENTRANCE_HALL, false);
+                        }
+                    };
+                }
+
+            } else {
+                return null;
+            }
+        }
+    };
+    public static final DialogueNode ROOM_WINDOW = new DialogueNode("Комната", ".", false) {
+        @Override
+        public int getSecondsPassed() {
+            return 10;
+        }
+
+        @Override
+        public String getLabel() {
+            return Main.game.getPlayer().getLocationPlace().getName();
+        }
+
+        @Override
+        public String getContent() {
+            return getRoomModificationsDescription(true)
+                    + getRoomCharactersPresentDescription();
+        }
+
+        @Override
+        public String getResponseTabTitle(int index) {
+            return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
+        }
+
+        @Override
+        public Response getResponse(int responseTab, int index) {
+            return getRoomResponse(responseTab, index);
+        }
+    };
+    public static final DialogueNode ROOM_GARDEN_GROUND_FLOOR = new DialogueNode("Комната с видом на сад", ".", false) {
+        @Override
+        public int getSecondsPassed() {
+            return 10;
+        }
+
+        @Override
+        public String getLabel() {
+            return Main.game.getPlayer().getLocationPlace().getName();
+        }
+
+        @Override
+        public String getContent() {
+            return getRoomModificationsDescription(true)
+                    + getRoomCharactersPresentDescription();
+        }
+
+        @Override
+        public String getResponseTabTitle(int index) {
+            return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
+        }
+
+        @Override
+        public Response getResponse(int responseTab, int index) {
+            return getRoomResponse(responseTab, index);
+        }
+    };
+    public static final DialogueNode ROOM_GARDEN = new DialogueNode("Комната с видом на сад", ".", false) {
+        @Override
+        public int getSecondsPassed() {
+            return 10;
+        }
+
+        @Override
+        public String getLabel() {
+            return Main.game.getPlayer().getLocationPlace().getName();
+        }
+
+        @Override
+        public String getContent() {
+            return getRoomModificationsDescription(true)
+                    + getRoomCharactersPresentDescription();
+        }
+
+        @Override
+        public String getResponseTabTitle(int index) {
+            return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
+        }
+
+        @Override
+        public Response getResponse(int responseTab, int index) {
+            return getRoomResponse(responseTab, index);
+        }
+    };
+    public static final DialogueNode DUNGEON_CELL = new DialogueNode("Камера в подземелье", ".", false) {
+        @Override
+        public int getSecondsPassed() {
+            return 10;
+        }
+
+        @Override
+        public String getLabel() {
+            return Main.game.getPlayer().getLocationPlace().getName();
+        }
+
+        @Override
+        public String getContent() {
+            return getRoomModificationsDescription(true);
+        }
+
+        @Override
+        public String getResponseTabTitle(int index) {
+            return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
+        }
+
+        @Override
+        public Response getResponse(int responseTab, int index) {
+            return getRoomResponse(responseTab, index);
+        }
+    };
+    public static final DialogueNode BIRTHING_ROOM = new DialogueNode("Родильная комната", ".", false) {
+
+        @Override
+        public int getSecondsPassed() {
+            return 10;
+        }
+
+        @Override
+        public String getContent() {
+            return "<p>"
+                    + "Лилайя переоборудовала эту комнату, чтобы сделать её подходящим местом для родов."
+                    + "</p>"
+                    + "<p>"
+                    + "Вместо коврового покрытия, как в большинстве других комнат этого дома, для пола этой комнаты была выбрана чистая белая плитка."
+                    + " У одной из стен комнаты стоит удивительно современно выглядящая кровать для родов, но, кроме неё, здесь больше нет ничего из медицинского оборудования."
+                    + " По краям комнаты расставлено несколько удобных кресел, но кроме них и шкафа с напитками, стоящего в одном из углов, в комнате нет никакой другой мебели."
+                    + "</p>"
+                    + "<p>"
+                    + "В доме любого другого человека комната, предназначенная для принятия родов, могла бы шокировать, но Лилайя, похоже, занимается самыми разными странными вещами,"
+                    + " так что ты отмахиваешься от этого как от ещё одной особенности этого мира."
+                    + "</p>";
+        }
+
+        @Override
+        public String getResponseTabTitle(int index) {
+            return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
+        }
+
+        @Override
+        public Response getResponse(int responseTab, int index) {
+            if (responseTab == 1) {
+                return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
+            }
+            return null;
+        }
+    };
+    public static final DialogueNode STAIRCASE_DOWN = new DialogueNode("Лестница вниз", ".", false) {
+        @Override
+        public int getSecondsPassed() {
+            return 20;
+        }
+
+        @Override
+        public String getContent() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "STAIRCASE_DOWN"));
+            for (NPC slave : getSlavesAndOccupantsPresent()) {
+                sb.append(getSlavePresentDescription(slave));
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public String getResponseTabTitle(int index) {
+            return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
+        }
+
+        @Override
+        public Response getResponse(int responseTab, int index) {
+            if (responseTab == 1) {
+                return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
+            }
+            if (responseTab == 2) {
+                return getLilayasHouseDollStationResponses(index);
+            }
+
+            List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
+            if (index == 0) {
+                return null;
+
+            } else if (index == 1) {
+                return new Response("Вниз", "Спуститься вниз, на первый этаж.", PlaceType.LILAYA_HOME_STAIR_UP.getDialogue(false)) {
+                    @Override
+                    public void effects() {
+                        Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_STAIR_UP, false);
+                    }
+                };
+            } else if (index - 2 < charactersPresent.size()) {
+                GameCharacter slave = charactersPresent.get(index - 2);
+                return interactWithNPC(slave);
+            }
+
+            return null;
+        }
+    };
+    public static final DialogueNode ROSE_HANDS = new DialogueNode("", "", true) {
+
+        @Override
+        public String getLabel() {
+            return "Руки Розы";
+        }
+
+        @Override
+        public String getContent() {
+            return UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "ROSE_HANDS");
+        }
+
+        @Override
+        public Response getResponse(int responseTab, int index) {
+            if (index == 1) {
+                return new ResponseSex("Держание за ручки", "Предупреждение: Этот контент содержит экстремальные описания держания за руки, сосания пальцев и даже облизывания ладоней."
+                        + " <b>Пожалуйста, помните, что перед началом игры вам необходимо прочитать отказ от ответственности!</b> <b style='color:" + BaseColour.CRIMSON.toWebHexString() + ";'>Только для 18+!</b>",
+                        true, false,
+                        new SMRoseHands(
+                                Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotUnique.HAND_SEX_DOM_ROSE)),
+                                Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Rose.class), SexSlotUnique.HAND_SEX_SUB_ROSE))),
+                        null, null, Rose.END_HAND_SEX);
+
+            } else {
+                return null;
+            }
+        }
+
+        @Override
+        public boolean isInventoryDisabled() {
+            return true;
+        }
+    };
+    public static final DialogueNode FOUNTAIN = new DialogueNode("Водяной фонтан", ".", false) {
+
+        @Override
+        public int getSecondsPassed() {
+            return 10;
+        }
+
+        @Override
+        public String getContent() {
+            UtilText.nodeContentSB.setLength(0);
+            List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
+
+            UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "FOUNTAIN"));
+
+            if (!charactersPresent.isEmpty()) {
+                for (NPC slave : charactersPresent) {
+                    if (slave.getSlaveJob(Main.game.getHourOfDay()) == SlaveJob.GARDEN) {
+                        UtilText.nodeContentSB.append(getSlavePresentDescription(slave,
+                                "явно не занимается садоводством. Что ещё хуже, [npc.she], похоже, не заботится о том, что ты наблюдаешь за [npc.herHim] действиями, и поворачивает к тебе спиной.",
+                                "в настоящее время неумело подстригает живую изгородь.",
+                                "занимается прополкой одной из многочисленных дорожек, которые вьются по саду.",
+                                "в данный момент подстригает один из розовых кустов. Видно, что [npc.sheIs] прилагает много усилий, чтобы убедиться, что [npc.sheIs] хорошо справляется со своей работой.",
+                                "послушно сажает луковицы и вырывает сорняки. Заметно, что [npc.sheIs] заботится о том, чтобы посадить каждую луковицу в правильное место."));
+                    } else {
+                        UtilText.nodeContentSB.append(getSlavePresentDescription(slave));
+                    }
+                }
+            }
+
+            return UtilText.nodeContentSB.toString();
+        }
+
+        @Override
+        public String getResponseTabTitle(int index) {
+            return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
+        }
+
+        @Override
+        public Response getResponse(int responseTab, int index) {
+            if (responseTab == 1) {
+                return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
+            }
+            if (responseTab == 2) {
+                return getLilayasHouseDollStationResponses(index);
+            }
+            if (index == 1 && Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.getDialogueFlagValueFromId("acexp_dungeon_garden_access_found"))) {
+                return new Response("Подземелье Лилайи",
+                        "Нажать на замаскированную кнопку, чтобы открыть секретный проход в подземелье Лилайи.",
+                        DialogueManager.getDialogueFromId("acexp_dominion_lilaya_dungeon_stairsUp_garden")) {
+                    @Override
+                    public void effects() {
+                        Main.game.appendToTextStartStringBuilder(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "DUNGEON_OPENS_FOUNTAIN"));
+                        Main.game.appendToTextStartStringBuilder(UtilText.parseFromXMLFile("acexp/dominion/lilaya_dungeon", "DUNGEON_ENTRY"));
+                        Main.game.getPlayer().setLocation(WorldType.getWorldTypeFromId("acexp_dungeon"), PlaceType.getPlaceTypeFromId("acexp_dungeon_stairs_garden"), false);
+                    }
+                };
+            }
+            return null;
+        }
+    };
+    private static String roseContent = "";
+    private static boolean giftedRose = false;    public static final DialogueNode STAIRCASE_UP_SECONDARY = new DialogueNode("Лестница вверх", ".", false) {
+        @Override
+        public int getSecondsPassed() {
+            return 20;
+        }
+
+        @Override
+        public String getContent() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "CORRIDOR"));
+            sb.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "STAIRCASE_UP_SECONDARY"));
+            for (NPC slave : getSlavesAndOccupantsPresent()) {
+                sb.append(getSlavePresentDescription(slave));
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public String getResponseTabTitle(int index) {
+            return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
+        }
+
+        @Override
+        public Response getResponse(int responseTab, int index) {
+            if (responseTab == 1) {
+                return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
+            }
+            if (responseTab == 2) {
+                return getLilayasHouseDollStationResponses(index);
+            }
+
+            List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
+            if (index == 0) {
+                return null;
+
+            } else if (index == 1) {
+                return new Response("Наверх", "Подняться по лестнице на второй этаж.", STAIRCASE_DOWN_SECONDARY) {
+                    @Override
+                    public void effects() {
+                        Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, Main.game.getPlayer().getLocation(), false);
+                    }
+                };
+            } else if (index - 2 < charactersPresent.size()) {
+                GameCharacter slave = charactersPresent.get(index - 2);
+                return interactWithNPC(slave);
+            }
+
+            return null;
+        }
+    };
+
+    public static void dailyUpdate() {
+        if (Main.game.getDialogueFlags().hasSavedLong(LilayaSpa.SPA_CONSTRUCTTION_TIMER_ID)) {
+            Cell constructionCell = Main.game.getWorlds().get(WorldType.LILAYAS_HOUSE_GROUND_FLOOR).getCell(PlaceType.LILAYA_HOME_UNDER_CONSTRUCTION);
+            if (constructionCell != null) {
+                long dayInstalled = Main.game.getDialogueFlags().getSavedLong(LilayaSpa.SPA_CONSTRUCTTION_TIMER_ID);
+                if (Main.game.getDayNumber() - dayInstalled >= 7) {
+                    constructionCell.getPlace().setPlaceType(PlaceType.LILAYA_HOME_SPA);
+                    Main.game.getDialogueFlags().removeSavedLong(LilayaSpa.SPA_CONSTRUCTTION_TIMER_ID);
+                }
+            }
+        }
+    }    public static final DialogueNode ROOM_ROSE = new DialogueNode("Комната Розы", ".", false) {
+
+        @Override
+        public int getSecondsPassed() {
+            return 10;
+        }
+
+        @Override
+        public String getContent() {
+            return UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "ROOM_ROSE");
+        }
+
+        @Override
+        public String getResponseTabTitle(int index) {
+            return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
+        }
+
+        @Override
+        public Response getResponse(int responseTab, int index) {
+            if (responseTab == 1) {
+                return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
+            }
+            if (index == 1) {
+                if (!Main.game.isExtendedWorkTime()) {
+                    return new Response("Призвать Розу", "На табличке, висящей рядом с дверью Розы, прямо написано, что её нельзя беспокоить, поэтому, если хочешь поговорить с ней о чём-то, лучше вернуться в дневное время.", null);
+                }
+
+                return new Response("Призвать Розу", "Рабыня Лилайя, Роза, всегда рядом. Стоит позвонить в маленький колокольчик у двери её спальни, и она обязательно прибежит.", AUNT_HOME_ROSE) {
+                    @Override
+                    public void effects() {
+                        roseContent = UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "ROOM_ROSE_INITIAL_CALL");
+
+                        Main.game.getDialogueFlags().values.remove(DialogueFlagValue.auntHomeJustEntered);
+                        Main.game.getNpc(Rose.class).setLocation(Main.game.getActiveWorld().getWorldType(), Main.game.getPlayer().getLocation(), false);
+                    }
+                };
+
+            } else {
+                return null;
+            }
+        }
+    };
+
+    public static List<NPC> getSlavesAndOccupantsPresent() {
+        List<NPC> charactersPresent = Main.game.getNonCompanionCharactersPresent();
+        charactersPresent.removeIf((character) -> character.isElemental());
+        return charactersPresent;
+    }
+
+    private static boolean isPlayerHasDolls() {
+        return Main.game.getPlayer().getSlavesOwnedAsCharacters().stream().anyMatch(slave -> slave.isDoll());
+    }
+
+    public static String getLilayasHouseStandardResponseTabs(int i) {
+        AbstractPlaceType playerPlaceType = Main.game.getPlayer().getLocationPlace().getPlaceType();
+        switch (i) {
+            case 0:
+                return "Действия";
+            case 1:
+                return "Б. путешествие";
+            case 2:
+                if (playerPlaceType == PlaceType.LILAYA_HOME_ROOM_PLAYER) {
+                    return "Ванная";
+                }
+                if (isPlayerHasDolls()
+                        && (playerPlaceType == PlaceType.LILAYA_HOME_ENTRANCE_HALL
+                        || playerPlaceType == PlaceType.LILAYA_HOME_CORRIDOR
+                        || playerPlaceType == PlaceType.LILAYA_HOME_GARDEN
+                        || playerPlaceType == PlaceType.LILAYA_HOME_FOUNTAIN
+                        || playerPlaceType == PlaceType.LILAYA_HOME_STAIR_DOWN
+                        || playerPlaceType == PlaceType.LILAYA_HOME_STAIR_DOWN_SECONDARY
+                        || playerPlaceType == PlaceType.LILAYA_HOME_STAIR_UP
+                        || playerPlaceType == PlaceType.LILAYA_HOME_STAIR_UP_SECONDARY)) {
+                    return "Кукольные станции";
+                }
+                break;
+
+        }
+        return null;
+    }
+
+    public static Response getLilayasHouseDollStationResponses(int index) {
+        if (index == 0) {
+            index = 15;
+        } else if (index < 15) {
+            index--;
+        }
+        List<GameCharacter> dolls = Main.game.getPlayer().getSlavesOwnedAsCharacters().stream().filter(slave -> slave.isDoll()).collect(Collectors.toList());
+        List<Response> responses = new ArrayList<>();
+        for (int i = 0; i < dolls.size(); i++) {
+            GameCharacter doll = dolls.get(i);
+            boolean alreadyActive = doll.getSlaveStationWorldType() == Main.game.getPlayer().getWorldLocation() && Main.game.getPlayer().getLocation().equals(doll.getSlaveStationLocation());
+            responses.add(new Response(
+                    UtilText.parse(doll, "[npc.Name]"),
+                    UtilText.parse(doll,
+                            "Установить эту плитку как участок <span style='color:" + doll.getFemininity().getColour().toWebHexString() + "'>[npc.morphSingleNameGene([npc.name])]" + (doll.hasSurname() ? " [npc.morphSingleSurnameGene([npc.surname])]" : "") + "</span>, когда [npc.sheIs] работает как статуя."
+                                    + "<br/>[style.italics("
+                                    + (doll.getSlaveStationWorldType() == null
+                                    ? "Поскольку у н[npc.morphSingleNameGene([npc.sheHasFull])] нет установленной станции, [npc.name] будет использовать случайную плитку коридора в качестве [npc.her] станции."
+                                    : (alreadyActive
+                                    ? "[style.colourExcellent(Эта плитка уже установлена как станция [npc.morphSingleNameGene([npc.namePos])].)]"
+                                    : "[style.colourMinorGood(Хотя эта плитка не является станцией [npc.morphSingleNameGene([npc.namePos])], у н[npc.morphSingleNameGene([npc.she])] уже есть одна, установленная в другом месте.)]"))
+                                    + ")]"),
+                    Main.game.getDefaultDialogue(false)) {
+                @Override
+                public Colour getHighlightColour() {
+                    if (doll.getSlaveStationWorldType() == null) {
+                        return super.getHighlightColour();
+                    } else if (!alreadyActive) {
+                        return PresetColour.GENERIC_MINOR_GOOD;
+                    } else {
+                        return PresetColour.GENERIC_EXCELLENT;
+                    }
+                }
+
+                @Override
+                public void effects() {
+                    doll.setSlaveStationWorldType(Main.game.getPlayer().getWorldLocation());
+                    doll.setSlaveStationLocation(Main.game.getPlayer().getLocation());
+                }
+            });
+        }
+        if (responses.size() <= index) {
+            return null;
+        }
+        return responses.get(index);
+    }
+
+    public static String getRoomModificationsDescription(boolean includeDefaultRoomDescription) {
+        GenericPlace place = Main.game.getPlayer().getLocationPlace();
+
+        for (AbstractPlaceUpgrade pu : place.getPlaceUpgrades()) {
+            DialogueNode dn = pu.getRoomDialogue(Main.game.getPlayerCell());
+            if (dn != null) {
+                return dn.getContent();
+            }
+        }
+
+        StringBuilder roomSB = new StringBuilder();
+
+        if (includeDefaultRoomDescription) {
+            roomSB.append(getBaseRoomDescription());
+        }
+
+        for (AbstractPlaceUpgrade pu : PlaceUpgrade.getAllPlaceUpgrades()) { // For consistent ordering.
+            if (place.getPlaceUpgrades().contains(pu)) {
+                roomSB.append(formatRoomUpgrade(pu));
+            }
+        }
+
+        return roomSB.toString();
+    }
+
+    public static String getSlavePresentDescription(GameCharacter slave) {
+        return getSlavePresentDescription(slave, "", "", "", "", "");
+    }
+
+    /**
+     * Descriptions should fit into:<br/>
+     * <i>'She '</i> + <code>desc</code><br/>
+     * and<br/>
+     * <i>'As you've instructed her to crawl, she is down on all fours, and '</i> + <code>desc</code>
+     */
+    public static String getSlavePresentDescription(GameCharacter slave, String minimumObedienceText, String lowObedienceText, String neutralObedienceText, String highObedienceText, String maximumObedienceText) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<p>");
+
+        if (slave.getSlaveJob(Main.game.getHourOfDay()) == SlaveJob.DOLL_STATUE) {
+            sb.append(UtilText.parse(slave, "Получив приказ позировать как статуя, <b style='color:" + slave.getFemininity().getColour().toWebHexString() + ";'>[npc.name]</b> присутствует в этом районе."));
+
+            for (SlaveJobSetting sjs : slave.getSlaveJobSettings(SlaveJob.DOLL_STATUE)) {
+                switch (sjs) {
+                    case DOLL_STATUE_ALL_FOURS:
+                        sb.append(UtilText.parse(slave, " [npc.SheIsFull] на четвереньках"));
+                        break;
+                    case DOLL_STATUE_ARTISTIC:
+                        sb.append(UtilText.parse(slave, " [npc.SheIsFull] принимает артистическую позу"));
+                        break;
+                    case DOLL_STATUE_ATTENTION:
+                        sb.append(UtilText.parse(slave, " [npc.SheIsFull] стоит по стойке смирно"));
+                        break;
+                    case DOLL_STATUE_BRIDGE:
+                        sb.append(UtilText.parse(slave, " [npc.nameHasFull] наклоняется назад, чтобы выполнить мостик."));
+                        break;
+                    case DOLL_STATUE_MISSIONARY:
+                        sb.append(UtilText.parse(slave, " [npc.SheIsFull] лежит на спине, с [npc.her] раздвинутыми [npc.morphSingleInstr([npc.legs])]"));
+                        break;
+                    case DOLL_STATUE_SQUATTING:
+                        sb.append(UtilText.parse(slave, " [npc.SheIsFull] сидит на корточках, раздвинув колени и закинув [npc.her] [npc.morphSingleInstr([npc.hands])] за [npc.her] голову."));
+                        break;
+                    case DOLL_STATUE_STANDING_SPLIT:
+                        sb.append(UtilText.parse(slave, " [npc.SheIsFull] стоит на одной ноге, другая [npc.her] нога поднята вертикально."));
+                        break;
+                    default:
+                        break;
+                }
+            }
+            sb.append(UtilText.parse(slave, ", и совершенно [npc.genderBasedWord(неподвижен, неподвижна)]."));
+
+        } else {
+            sb.append(UtilText.parse(slave, "Получив задание работать как " + (slave.getSlaveJob(Main.game.getHourOfDay()).getName(slave))
+                    + ", <b style='color:" + slave.getFemininity().getColour().toWebHexString() + ";'>[npc.name]</b> присутствует в этой зоне."));
+
+            if (slave.hasSlavePermissionSetting(SlavePermissionSetting.GENERAL_CRAWLING)) {
+                sb.append(UtilText.parse(slave,
+                        " Поскольку ты приказал [npc.morphSingleNameDativ([npc.sheIs])] ползти, [npc.sheIs] опускается на четвереньки, и "));
+            } else {
+                sb.append(UtilText.parse(slave,
+                        " [npc.She] "));
+            }
+            switch (slave.getObedience()) {
+                case NEGATIVE_FIVE_REBELLIOUS:
+                case NEGATIVE_FOUR_DEFIANT:
+                case NEGATIVE_THREE_STRONG_INSUBORDINATE:
+                    sb.append(UtilText.parse(slave, minimumObedienceText));
+                    break;
+                case NEGATIVE_ONE_DISOBEDIENT:
+                case NEGATIVE_TWO_UNRULY:
+                    sb.append(UtilText.parse(slave, lowObedienceText));
+                    break;
+                case ZERO_FREE_WILLED:
+                    sb.append(UtilText.parse(slave, neutralObedienceText));
+                    break;
+                case POSITIVE_ONE_AGREEABLE:
+                case POSITIVE_TWO_OBEDIENT:
+                    sb.append(UtilText.parse(slave, highObedienceText));
+                    break;
+                case POSITIVE_THREE_DISCIPLINED:
+                case POSITIVE_FOUR_DUTIFUL:
+                case POSITIVE_FIVE_SUBSERVIENT:
+                    sb.append(UtilText.parse(slave, maximumObedienceText));
+                    break;
+            }
+            sb.append("</p>");
+        }
+
+        return sb.toString();
+    }
+
+    private static String formatRoomUpgrade(AbstractPlaceUpgrade upgrade) {
+        return "<p>"
+                + "<b style='color:" + upgrade.getColour().toWebHexString() + ";'>" + upgrade.getName() + "</b><br/>"
+                + upgrade.getRoomDescription(Main.game.getPlayerCell())
+                + "</p>";
+    }
+
+    static Response interactWithNPC(GameCharacter slave) {
+        return new Response(UtilText.parse(slave, "[npc.Name]"), UtilText.parse(slave, "Взаимодействовать с [npc.morphSingleNameInstr([npc.name])]."), slave.isSlave() ? SlaveDialogue.SLAVE_START : OccupantDialogue.OCCUPANT_START) {
+            @Override
+            public Colour getHighlightColour() {
+                return slave.getFemininity().getColour();
+            }
+
+            @Override
+            public void effects() {
+                if (slave.isSlave()) {
+                    SlaveDialogue.initDialogue((NPC) slave, false);
+                } else {
+                    OccupantDialogue.initDialogue((NPC) slave, false, false);
+                }
+            }
+        };
+
+    }
+
+    public static Response getLilayasHouseFastTravelResponses(int index) {
+        if (index == 1) {
+            if (Main.game.getPlayer().getLocationPlace().getPlaceType() == PlaceType.LILAYA_HOME_ROOM_PLAYER) {
+                return new Response("Твоя комната", "Ты уже в своей комнате, поэтому нет необходимости быстро перемещаться туда...", null);
+            }
+            return new Response("Твоя комната", "Быстрое перемещение в твою комнату", PlaceType.LILAYA_HOME_ROOM_PLAYER.getDialogue(false)) {
+                @Override
+                public void effects() {
+                    Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_PLAYER, false);
+                    Main.game.setResponseTab(0);
+                }
+            };
+
+        } else if (index == 2) {
+            if (Main.game.getPlayer().getLocationPlace().getPlaceType() == PlaceType.LILAYA_HOME_LAB) {
+                return new Response("Лаба Лилайи", "Ты уже в лаборатории Лилайи, так что нет необходимости быстро перемещаться туда...", null);
+            }
+            return new Response("Лаба Лилайи", "Быстрое перемещение в лабораторию Лилайи.", PlaceType.LILAYA_HOME_LAB.getDialogue(false)) {
+                @Override
+                public void effects() {
+                    Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LAB, false);
+                    Main.game.setResponseTab(0);
+                }
+            };
+
+        } else if (index == 3) {
+            if (Main.game.getPlayer().getLocationPlace().getPlaceType() == PlaceType.LILAYA_HOME_KITCHEN) {
+                return new Response("Кухня", "Ты уже на кухне, поэтому нет необходимости быстро перемещаться туда...", null);
+            }
+            return new Response("Кухня", "Быстрое перемещение на кухню.", PlaceType.LILAYA_HOME_KITCHEN.getDialogue(false)) {
+                @Override
+                public void effects() {
+                    Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_KITCHEN, false);
+                    Main.game.setResponseTab(0);
+                }
+            };
+
+        } else if (index == 4) {
+            if (Main.game.getPlayer().getLocationPlace().getPlaceType() == PlaceType.LILAYA_HOME_LIBRARY) {
+                return new Response("Библиотека", "Ты уже в библиотеке, поэтому нет необходимости быстро перемещаться туда...", null);
+            }
+            return new Response("Библиотека", "Быстрое перемещение в библиотеку.", PlaceType.LILAYA_HOME_LIBRARY.getDialogue(false)) {
+                @Override
+                public void effects() {
+                    Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LIBRARY, false);
+                    Main.game.setResponseTab(0);
+                }
+            };
+
+        } else if (index == 5) {
+            if (Main.game.getPlayer().getLocationPlace().getPlaceType() == PlaceType.LILAYA_HOME_ENTRANCE_HALL) {
+                return new Response("Вестибюль", "Ты уже в вестибюле, поэтому нет необходимости быстро перемещаться туда...", null);
+            }
+            return new Response("Вестибюль", "Быстрое перемещение в вестибюль.", PlaceType.LILAYA_HOME_ENTRANCE_HALL.getDialogue(false)) {
+                @Override
+                public void effects() {
+                    Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_ENTRANCE_HALL, false);
+                    Main.game.setResponseTab(0);
+                }
+            };
+        }
+
+        return null;
+    }    public static final DialogueNode STAIRCASE_DOWN_SECONDARY = new DialogueNode("Лестница вниз", ".", false) {
+        @Override
+        public int getSecondsPassed() {
+            return 20;
+        }
+
+        @Override
+        public String getContent() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "CORRIDOR"));
+            sb.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "STAIRCASE_DOWN_SECONDARY"));
+            for (NPC slave : getSlavesAndOccupantsPresent()) {
+                sb.append(getSlavePresentDescription(slave));
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public String getResponseTabTitle(int index) {
+            return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
+        }
+
+        @Override
+        public Response getResponse(int responseTab, int index) {
+            if (responseTab == 1) {
+                return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
+            }
+            if (responseTab == 2) {
+                return getLilayasHouseDollStationResponses(index);
+            }
+
+            List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
+            if (index == 0) {
+                return null;
+
+            } else if (index == 1) {
+                return new Response("Вниз", "Спуститься вниз, на первый этаж.", STAIRCASE_UP_SECONDARY) {
+                    @Override
+                    public void effects() {
+                        Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, Main.game.getPlayer().getLocation(), false);
+                    }
+                };
+            } else if (index - 2 < charactersPresent.size()) {
+                GameCharacter slave = charactersPresent.get(index - 2);
+                return interactWithNPC(slave);
+            }
+
+            return null;
+        }
+    };
+
+    private static Response getRoomResponse(int responseTab, int index) {
+        AbstractPlaceUpgrade coreUpgrade = null;
+        for (AbstractPlaceUpgrade pu : Main.game.getPlayer().getLocationPlace().getPlaceUpgrades()) {
+            if (pu.isCoreRoomUpgrade()) {
+                coreUpgrade = pu;
+            }
+        }
+
+        if (responseTab == 1) {
+            return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
+        }
+
+        List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
+        List<NPC> slavesAssignedToRoom = new ArrayList<>();
+
+        if (coreUpgrade == PlaceUpgrade.LILAYA_OFFICE
+                || coreUpgrade == PlaceUpgrade.LILAYA_SPA) {
+            slavesAssignedToRoom.addAll(charactersPresent);
+
+        } else {
+            for (String slave : Util.mergeLists(Main.game.getPlayer().getFriendlyOccupants(), Main.game.getPlayer().getSlavesOwned())) {
+                try {
+                    NPC slaveNPC = (NPC) Main.game.getNPCById(slave);
+                    if (slaveNPC != null && (slaveNPC.getHomeWorldLocation() == Main.game.getPlayer().getWorldLocation() && slaveNPC.getHomeLocation().equals(Main.game.getPlayer().getLocation()))) {
+                        slavesAssignedToRoom.add(slaveNPC);
+                    }
+                } catch (Exception e) {
+                    Util.logGetNpcByIdError("getRoomResponse()", slave);
+                }
+            }
+        }
 //		charactersPresent.removeIf((characterPresent) -> Main.game.getPlayer().hasCompanion(characterPresent) && !slavesAssignedToRoom.contains(characterPresent));
-		
-		if(index==0) {
-			return null;
-			
-		} else if (index == 1) {
-			if(Main.game.getPlayer().isAbleToAccessRoomManagement()) {
-				return new Response("Manage room", "Enter the management screen for this particular room.", OccupantManagementDialogue.ROOM_UPGRADES) {
-					@Override
-					public void effects() {
-						OccupantManagementDialogue.cellToInspect = Main.game.getPlayerCell();
-					}
-				};
-			} else {
-				return new Response("Manage room", "You need a slaver license or permission from Lilaya to house your friends or dolls in order to access this menu!",  null);
-			}
-			
-		}  else if (index == 2) {
-			if(Main.game.getPlayer().isAbleToAccessRoomManagement()) {
-				return new Response("Manage people", "Enter the management screen for your slaves and friendly occupants.", CORRIDOR) {
-					@Override
-					public DialogueNode getNextDialogue() {
-						return OccupantManagementDialogue.getSlaveryRoomListDialogue(null, null);
-					}
-					@Override
-					public void effects() {
-						CompanionManagement.initManagement(Main.game.getDefaultDialogue(), 0, null);
-					}
-				};
-			} else {
-				return new Response("Manage people", "You need a slaver license or permission from Lilaya to house your friends or dolls in order to access this menu!",  null);
-			}
-		}
-		
-		int indexPresentStart = 3;
-		
-		if(coreUpgrade==PlaceUpgrade.LILAYA_OFFICE) {
-			indexPresentStart = 4;
-			if(index==3) {
-				return new Response("Occupancy ledger", "Open the occupancy ledger screen, from which you can manage all rooms, slaves, and friendly occupants.", CORRIDOR) {
-					@Override
-					public DialogueNode getNextDialogue() {
-						return OccupantManagementDialogue.getSlaveryOverviewDialogue(null);
-					}
-					@Override
-					public void effects() {
-						CompanionManagement.initManagement(Main.game.getDefaultDialogue(), 0, null);
-					}
-				};
-			}
-		}
-		
-		if(coreUpgrade==PlaceUpgrade.LILAYA_SPA) {
-			indexPresentStart = 4;
-			if(index==3) {
-				return LilayaSpa.SPA_RECEPTION.getResponse(responseTab, index);
-			}
-		}
-		
-		if(index-indexPresentStart<slavesAssignedToRoom.size()) {
-			NPC character = slavesAssignedToRoom.get(index-indexPresentStart);
-			if(charactersPresent.contains(character) || (character.getHomeCell().equals(Main.game.getPlayerCell()) && Main.game.getPlayer().getCompanions().contains(character))) {
-				return interactWithNPC(character);
-			} else {
-				return new Response(UtilText.parse(character, "[npc.Name]"), 
-						UtilText.parse(character, "Although this is [npc.namePos] room, [npc.sheIs] "
-								+(character.getLocationPlace().getPlaceUpgrades().contains(PlaceUpgrade.LILAYA_SLAVE_LOUNGE)
-										?"relaxing in a slave lounge at the moment."
-										:"out at work at the moment.")), null);
-			}
-		}
-		
-		return null;
-	}
-	
-	public static String getBaseRoomDescription() {
-		if(Main.game.getPlayerCell().getPlace().getPlaceType()==PlaceType.LILAYA_HOME_ROOM_WINDOW_GROUND_FLOOR) {
-			return "<p>"
-						+ "This particular room has a series of large windows set into one wall, which allow a generous amount of natural daylight to flood out into the corridor when the door is left open."
-						+ " Through these windows it's possible to look out onto the hustle and bustle of Dominion's busy streets."
-					+ "</p>";
-			
-		} else if(Main.game.getPlayerCell().getPlace().getPlaceType()==PlaceType.LILAYA_HOME_ROOM_WINDOW_FIRST_FLOOR) {
-			return "<p>"
-						+ "This particular room has a series of large windows set into one wall, which allow a generous amount of natural daylight to flood out into the corridor when the door is left open."
-						+ " Through these windows it's possible to look out on the hustle and bustle of Dominion's busy streets."
-					+ "</p>";
-			
-		} else if(Main.game.getPlayerCell().getPlace().getPlaceType()==PlaceType.LILAYA_HOME_ROOM_GARDEN_GROUND_FLOOR) {
-			return "<p>"
-						+ "This room has a pair of French doors which connect it to the adjoining courtyard garden."
-						+ " Through these doors, and the windows alongside them, it's possible to look out on a large portion of the garden."
-					+ "</p>";
-			
-		} else if(Main.game.getPlayerCell().getPlace().getPlaceType()==PlaceType.LILAYA_HOME_ROOM_GARDEN_FIRST_FLOOR) {
-			return "<p>"
-						+ "This room has a series of large windows set into one wall, which allow a generous amount of natural daylight to flood out into the corridor when the door is left open."
-						+ " Through these windows it's possible to look down on to the courtyard garden."
-					+ "</p>";
-		}
-		return "";
-	}
-	
-	public static String getRoomModificationsDescription(boolean includeDefaultRoomDescription) {
-		GenericPlace place = Main.game.getPlayer().getLocationPlace();
-		
-		for(AbstractPlaceUpgrade pu : place.getPlaceUpgrades()) {
-			DialogueNode dn = pu.getRoomDialogue(Main.game.getPlayerCell());
-			if(dn!=null) {
-				return dn.getContent();
-			}
-		}
-		
-		StringBuilder roomSB = new StringBuilder();
-		
-		if(includeDefaultRoomDescription) {
-			roomSB.append(getBaseRoomDescription());
-		}
-		
-		for(AbstractPlaceUpgrade pu : PlaceUpgrade.getAllPlaceUpgrades()) { // For consistent ordering.
-			if(place.getPlaceUpgrades().contains(pu)) {
-				roomSB.append(formatRoomUpgrade(pu));
-			}
-		}
-		
-		return roomSB.toString();
-	}
-	
-	public static String getRoomCharactersPresentDescription() {
-		List<NPC> charactersHome = Main.game.getCharactersTreatingCellAsHome(Main.game.getPlayerCell());
-		StringBuilder sb = new StringBuilder();
-		
-		if(!charactersHome.isEmpty()) {
-			sb.append("<p>");
-			boolean first = true;
-			for(NPC npc : charactersHome) {
-				if(!first) {
-					sb.append("<br/>");
-				}
-				sb.append("<span style='color:"+npc.getFemininity().getColour().toWebHexString()+";'>");
-				sb.append(UtilText.parse(npc, "[npc.Name]"));
-				sb.append("</span>");
-				sb.append(" ");
-				
-				if(Main.game.getPlayer().getFriendlyOccupants().contains(npc.getId())) { // Friendly occupant:
-					if(!Main.game.getCharactersPresent().contains(npc)) {
-						sb.append(UtilText.parse(npc,
-									"[style.colourMinorBad(is not here)] at the moment, and as you briefly scan the room for any sign of [npc.herHim], you see a little note has been left on [npc.her] bedside cabinet."
-								+" Walking over and picking it up, you read:"
-								+"</p>"+
-								"<p style='text-align:center;'><i>"
-								+"Hi, [pc.name]!<br/>"));
-						if(npc.hasJob()) {
-							sb.append("I'm out at work at the moment, my hours are from "+npc.getHistory().getWorkHourStart()+":00 to "+npc.getHistory().getWorkHourEnd()+":00, "
-									+npc.getHistory().getStartDay().getDisplayName(TextStyle.FULL, Locale.ENGLISH)+"-"+npc.getHistory().getEndDay().getDisplayName(TextStyle.FULL, Locale.ENGLISH)+"<br/>");
-						} else {
-							sb.append(UtilText.parse(npc, "I'm helping around the mansion right now<br/>"));
-						}
-						sb.append(UtilText.parse(npc,
-								"- [npc.Name]"
-								+"</i>"
-							+ "</p>"
-							+ "<p>"));
-						sb.append(UtilText.parse(npc, "<i>[npc.Name] sleeps between the hours of [style.time("+npc.getSleepStartHour()+")]-[style.time("+npc.getSleepEndHour()+")]</i>"));
-						
-					} else {
-						sb.append(UtilText.parse(npc, "[style.colourMinorGood(is here)] at the moment,"));
-						if(npc.isAsleep()) {
-							sb.append(UtilText.parse(npc, " but [npc.sheIs] currently [style.colourSleep(sleeping)]..."));
-						} else {
-							sb.append(UtilText.parse(npc, " and so you could interact with [npc.herHim] if you wanted to..."));
-						}
-						sb.append("<br/>");
-						sb.append(UtilText.parse(npc, "<i>[npc.Name] sleeps between the hours of [style.time("+npc.getSleepStartHour()+")]-[style.time("+npc.getSleepEndHour()+")]</i>"));
-					}
-					
-				} else { // Slave:
-					if(!Main.game.getCharactersPresent().contains(npc)) {
-						sb.append(UtilText.parse(npc, "[style.colourMinorBad(is not here)] at the moment,"));
-						if(npc.isAtWork()) {
-							String jobName = npc.getSlaveJob(Main.game.getHourOfDay()).getName(npc);
-							sb.append(UtilText.parse(npc, " as [npc.sheIs] working as "+UtilText.generateSingularDeterminer(jobName)+" "+jobName+" at this time."));
-						} else {
-							boolean houseFree = npc.hasSlavePermissionSetting(SlavePermissionSetting.GENERAL_HOUSE_FREEDOM);
-							boolean outsideFree = npc.hasSlavePermissionSetting(SlavePermissionSetting.GENERAL_OUTSIDE_FREEDOM);
-							if(houseFree) {
-								if(outsideFree) {
-									sb.append(" and so must be either somewhere in the mansion or out in Dominion...");
-								} else {
-									sb.append(" and so must be somewhere in the mansion...");
-								}
-							} else if(outsideFree) {
-								sb.append(" and so must be out somewhere in Dominion...");
-							} else {
-								sb.append(" but will likely return here soon...");
-							}
-						}
-						
-					} else  {
-						sb.append(UtilText.parse(npc, "[style.colourMinorGood(is here)] at the moment,"));
-						if(npc.isAsleep()) {
-							sb.append(UtilText.parse(npc, " but [npc.sheIs] currently [style.colourSleep(sleeping)]..."));
-						} else {
-							sb.append(UtilText.parse(npc, " and so you could interact with [npc.herHim] if you wanted to..."));
-						}
-					}
-				}
-				first = false;
-			}
-			sb.append("</p>");
-		}
-		return sb.toString();
-	}
 
-	public static String getSlavePresentDescription(GameCharacter slave) {
-		return getSlavePresentDescription(slave, "", "", "", "", "");
-	}
-	/**
-	 * Descriptions should fit into:<br/>
-	 * <i>'She '</i> + <code>desc</code><br/>
-	 * and<br/>
-	 * <i>'As you've instructed her to crawl, she is down on all fours, and '</i> + <code>desc</code>
-	 */
-	public static String getSlavePresentDescription(GameCharacter slave, String minimumObedienceText, String lowObedienceText, String neutralObedienceText, String highObedienceText, String maximumObedienceText) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("<p>");
-		
-		if(slave.getSlaveJob(Main.game.getHourOfDay())==SlaveJob.DOLL_STATUE) {
-			sb.append(UtilText.parse(slave, "Having been ordered to pose as a statue, <b style='color:"+slave.getFemininity().getColour().toWebHexString()+";'>[npc.name]</b> is present in this area."));
-			
-			for(SlaveJobSetting sjs : slave.getSlaveJobSettings(SlaveJob.DOLL_STATUE)) {
-				switch(sjs) {
-					case DOLL_STATUE_ALL_FOURS:
-						sb.append(UtilText.parse(slave, " [npc.SheIsFull] down on all fours"));
-						break;
-					case DOLL_STATUE_ARTISTIC:
-						sb.append(UtilText.parse(slave, " [npc.SheIsFull] striking an artistic pose"));
-						break;
-					case DOLL_STATUE_ATTENTION:
-						sb.append(UtilText.parse(slave, " [npc.SheIsFull] standing to attention"));
-						break;
-					case DOLL_STATUE_BRIDGE:
-						sb.append(UtilText.parse(slave, " [npc.nameHasFull] bent over backwards to perform a gymnastic brige"));
-						break;
-					case DOLL_STATUE_MISSIONARY:
-						sb.append(UtilText.parse(slave, " [npc.SheIsFull] lying back with [npc.her] [npc.legs] spread"));
-						break;
-					case DOLL_STATUE_SQUATTING:
-						sb.append(UtilText.parse(slave, " [npc.SheIsFull] squatting down with [npc.her] knees spread and [npc.her] [npc.hands] behind [npc.her] head"));
-						break;
-					case DOLL_STATUE_STANDING_SPLIT:
-						sb.append(UtilText.parse(slave, " [npc.SheIsFull] standing one-legged, with [npc.her] other leg held up vertically"));
-						break;
-					default:
-						break;
-				}
-			}
-			sb.append(UtilText.parse(slave, ", and is completely and utterly motionless."));
-			
-		} else {
-			sb.append(UtilText.parse(slave, "Having been assigned to work as a "+(slave.getSlaveJob(Main.game.getHourOfDay()).getName(slave))
-					+", <b style='color:"+slave.getFemininity().getColour().toWebHexString()+";'>[npc.name]</b> is present in this area."));
-			
-			if(slave.hasSlavePermissionSetting(SlavePermissionSetting.GENERAL_CRAWLING)) {
-				sb.append(UtilText.parse(slave,
-						" As you've instructed [npc.herHim] to crawl, [npc.sheIs] down on all fours, and "));
-			} else {
-				sb.append(UtilText.parse(slave,
-						" [npc.She] "));
-			}
-			switch(slave.getObedience()) {
-				case NEGATIVE_FIVE_REBELLIOUS: case NEGATIVE_FOUR_DEFIANT: case NEGATIVE_THREE_STRONG_INSUBORDINATE:
-					sb.append(UtilText.parse(slave, minimumObedienceText));
-					break;
-				case NEGATIVE_ONE_DISOBEDIENT:  case NEGATIVE_TWO_UNRULY:
-					sb.append(UtilText.parse(slave, lowObedienceText));
-					break;
-				case ZERO_FREE_WILLED:
-					sb.append(UtilText.parse(slave, neutralObedienceText));
-					break;
-				case POSITIVE_ONE_AGREEABLE: case POSITIVE_TWO_OBEDIENT:
-					sb.append(UtilText.parse(slave, highObedienceText));
-					break;
-				case POSITIVE_THREE_DISCIPLINED: case POSITIVE_FOUR_DUTIFUL: case POSITIVE_FIVE_SUBSERVIENT:
-					sb.append(UtilText.parse(slave, maximumObedienceText));
-					break;
-			}
-			sb.append("</p>");
-		}
-		
-		return sb.toString();
-	}
+        if (index == 0) {
+            return null;
 
-	private static String formatRoomUpgrade(AbstractPlaceUpgrade upgrade) {
-		return "<p>"
-				+ "<b style='color:"+upgrade.getColour().toWebHexString()+";'>"+upgrade.getName()+"</b><br/>"
-				+ upgrade.getRoomDescription(Main.game.getPlayerCell())
-			+ "</p>";
-	}
-	
-	public static final DialogueNode OUTSIDE = new DialogueNode("", "", false) {
+        } else if (index == 1) {
+            if (Main.game.getPlayer().isAbleToAccessRoomManagement()) {
+                return new Response("Управление комнатой", "Открыть экран управления данной комнатой.", OccupantManagementDialogue.ROOM_UPGRADES) {
+                    @Override
+                    public void effects() {
+                        OccupantManagementDialogue.cellToInspect = Main.game.getPlayerCell();
+                    }
+                };
+            } else {
+                return new Response("Управление комнатой", "Чтобы получить доступ к этому меню, нужна лицензия рабовладельца или разрешение от Лилайи на размещение своих друзей или кукол!", null);
+            }
 
-		@Override
-		public int getSecondsPassed() {
-			return DominionPlaces.TRAVEL_TIME_STREET;
-		}
+        } else if (index == 2) {
+            if (Main.game.getPlayer().isAbleToAccessRoomManagement()) {
+                return new Response("Управление людьми", "Открыть экран управления своими рабами и дружелюбными жильцами.", CORRIDOR) {
+                    @Override
+                    public DialogueNode getNextDialogue() {
+                        return OccupantManagementDialogue.getSlaveryRoomListDialogue(null, null);
+                    }
 
-		@Override
-		public String getLabel() {
-			return "Lilaya's Home - Street";
-		}
+                    @Override
+                    public void effects() {
+                        CompanionManagement.initManagement(Main.game.getDefaultDialogue(), 0, null);
+                    }
+                };
+            } else {
+                return new Response("Управление людьми", "Чтобы получить доступ к этому меню, нужна лицензия рабовладельца или разрешение от Лилайи на размещение своих друзей или кукол!", null);
+            }
+        }
 
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "OUTSIDE");
-		}
+        int indexPresentStart = 3;
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			NPC characterAnsweringDoor;
-			Optional<NPC> guardAtEntrance =
-					Main.game.getCharactersPresent(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_ENTRANCE_HALL).stream().filter(
-							npc->npc.isSlave() && npc.isAtWork() && npc.hasSlaveJobSetting(SlaveJob.SECURITY, SlaveJobSetting.SECURITY_ANSWER_DOOR)).findFirst();
-			if(guardAtEntrance.isPresent()) {
-				characterAnsweringDoor = guardAtEntrance.get();
-			} else {
-				characterAnsweringDoor = Main.game.getNpc(Rose.class);
-			}
-			
-			if (index == 1) {
-				LocalDateTime time = Main.game.getDateNow();
-				if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.daddyFound)
-						&& !Main.game.getPlayer().getFetishDesire(Fetish.FETISH_INCEST).isNegative()
-						&& Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_2_D_MEETING_A_LILIN) // Only trigger after having met Lyssieth
-						&& Main.game.isExtendedWorkTime()
-						&& time.getMonth().equals(Month.JUNE) && time.getDayOfMonth()>=14 && time.getDayOfMonth()<=21) { // Father's day timing, 3rd week of June
-					return new Response("Enter", UtilText.parse(characterAnsweringDoor, "Knock on the door and wait for [npc.name] to let you in."), DaddyDialogue.FIRST_ENCOUNTER) {
-						@Override
-						public void effects() {
-							Main.game.getNpc(Daddy.class).setLocation(Main.game.getPlayer(), false);
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.daddyFound, true);
-						}
-					};
-					
-				} else if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.daddySendingReward)) {
-					return new Response("Enter", UtilText.parse(characterAnsweringDoor, "Knock on the door and wait for Rose to let you in."), DADDY_PACKAGE) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.daddySendingReward, false);
-							
-							if(characterAnsweringDoor.equals(Main.game.getNpc(Rose.class))) {
-								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "OUTSIDE_DADDY_PACKAGE"));
-							} else {
-								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "OUTSIDE_DADDY_PACKAGE_SECURITY", characterAnsweringDoor));
-							}
-							
-							Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_ENTRANCE_HALL, false);
+        if (coreUpgrade == PlaceUpgrade.LILAYA_OFFICE) {
+            indexPresentStart = 4;
+            if (index == 3) {
+                return new Response("Книга занятости", "Открыть экран «Книга занятости», с помощью которого можно управлять всеми комнатами, рабами и дружественными жильцами.", CORRIDOR) {
+                    @Override
+                    public DialogueNode getNextDialogue() {
+                        return OccupantManagementDialogue.getSlaveryOverviewDialogue(null);
+                    }
 
-							Main.game.getTextStartStringBuilder().append(Main.game.getPlayer().addItem(Main.game.getItemGen().generateItem(ItemType.getSpellBookType(Spell.TELEKENETIC_SHOWER)), false, true));
-							Main.game.getTextStartStringBuilder().append(Main.game.getPlayer().addItem(Main.game.getItemGen().generateItem(ItemType.getSpellScrollType(SpellSchool.EARTH)), 5, false, true));
-						}
-					};
-					
-				} else {
-					return new Response("Enter", UtilText.parse(characterAnsweringDoor, "Knock on the door and wait for Rose to let you in."), PlaceType.LILAYA_HOME_ENTRANCE_HALL.getDialogue(false)){
-						@Override
-						public void effects() {
-							if(characterAnsweringDoor.equals(Main.game.getNpc(Rose.class))) {
-								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "OUTSIDE_KNOCK_ON_DOOR"));
-							} else {
-								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "OUTSIDE_KNOCK_ON_DOOR_SECURITY", characterAnsweringDoor));
-							}
-							Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_ENTRANCE_HALL, false);
-						}
-					};
-				}
-				
-			} else {
-				return null;
-			}
-		}
-	};
-	public static final DialogueNode DADDY_PACKAGE = new DialogueNode("Entrance hall", "", true) {
+                    @Override
+                    public void effects() {
+                        CompanionManagement.initManagement(Main.game.getDefaultDialogue(), 0, null);
+                    }
+                };
+            }
+        }
 
-		@Override
-		public int getSecondsPassed() {
-			return 1*60;
-		}
+        if (coreUpgrade == PlaceUpgrade.LILAYA_SPA) {
+            indexPresentStart = 4;
+            if (index == 3) {
+                return LilayaSpa.SPA_RECEPTION.getResponse(responseTab, index);
+            }
+        }
 
-		@Override
-		public String getContent() {
-			return "";
-		}
+        if (index - indexPresentStart < slavesAssignedToRoom.size()) {
+            NPC character = slavesAssignedToRoom.get(index - indexPresentStart);
+            if (charactersPresent.contains(character) || (character.getHomeCell().equals(Main.game.getPlayerCell()) && Main.game.getPlayer().getCompanions().contains(character))) {
+                return interactWithNPC(character);
+            } else {
+                return new Response(UtilText.parse(character, "[npc.Name]"),
+                        UtilText.parse(character, "Хотя эта комната [npc.morphSingleNameGene([npc.namePos])], [npc.sheIs] "
+                                + (character.getLocationPlace().getPlaceUpgrades().contains(PlaceUpgrade.LILAYA_SLAVE_LOUNGE)
+                                ? "в данный момент отдыхает в комнате отдыха для рабов."
+                                : "сейчас на работе.")), null);
+            }
+        }
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Continue", "Continue onwards into Lilaya's house.", ENTRANCE_HALL);
-			}
-			return null;
-		}
-	};
-	
-	public static final DialogueNode CORRIDOR = new DialogueNode("Corridor", ".", false) {
+        return null;
+    }    public static final DialogueNode AUNT_HOME_ROSE = new DialogueNode("", "", true) {
+        @Override
+        public String getContent() {
+            return roseContent;
+        }
 
-		@Override
-		public int getSecondsPassed() {
-			return 10;
-		}
-		
-		@Override
-		public String getContent() {
-			UtilText.nodeContentSB.setLength(0);
-			List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
-			
-			UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "CORRIDOR"));
-			
-			if(charactersPresent.isEmpty()) {
-				UtilText.nodeContentSB.append("<p>"
-							+ "This corridor is deserted at the moment, and there doesn't really seem to be much to do here."
-						+ "</p>");
-			} else {
-				for(NPC slave : charactersPresent) {
-					SlaveJob job = slave.getSlaveJob(Main.game.getHourOfDay());
-					if(job==SlaveJob.CLEANING) {
-						UtilText.nodeContentSB.append(getSlavePresentDescription(slave,
-								"is not even bothering to pretend that [npc.sheIs] cleaning.",
-								"is half-heartedly cleaning the carpet.",
-								"is dusting the skirting boards.",
-								"is busily polishing the floorboards.",
-								"is dutifully dusting, polishing, and cleaning everything in this area."));
-						
-					} else if(job==SlaveJob.SECURITY) {
-						UtilText.nodeContentSB.append(getSlavePresentDescription(slave,
-								"is not even bothering to pretend that [npc.sheIs] looking out for trouble.",
-								"is half-heartedly looking out for trouble.",
-								"is looking out for any sign of trouble.",
-								"is alert and on the lookout for any sign of trouble.",
-								"is highly alert and dutifully looking out for any sign of trouble."));
-					} else {
-						UtilText.nodeContentSB.append(getSlavePresentDescription(slave));
-					}
-				}
-			}
-			
-			return UtilText.nodeContentSB.toString();
-		}
+        @Override
+        public Response getResponse(int responseTab, int index) {
+            if (index == 1) {
+                return new Response("Лилайя", "Спросить Розу о её хозяйке, Лилайе.", AUNT_HOME_ROSE) {
+                    @Override
+                    public void effects() {
+                        roseContent = UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "ROSE_TALK_LILAYA");
+                    }
+                };
 
-		@Override
-		public String getResponseTabTitle(int index) {
-			return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==1) {
-				return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
-			}
-			if(responseTab==2) {
-				return getLilayasHouseDollStationResponses(index);
-			}
-			
-			List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
-			
-			if(index==0) {
-				return null;
-				
-			} else if(index-1<charactersPresent.size()) {
-				GameCharacter slave = charactersPresent.get(index-1);
-				return interactWithNPC(slave);
-			} else {
-				return null;
-			}
-		}
-	};
-	
-	public static final DialogueNode ROOM_WINDOW = new DialogueNode("Room", ".", false) {
-		@Override
-		public int getSecondsPassed() {
-			return 10;
-		}
-		@Override
-		public String getLabel() {
-			return Main.game.getPlayer().getLocationPlace().getName();
-		}
-		@Override
-		public String getContent() {
-			return getRoomModificationsDescription(true)
-					+ getRoomCharactersPresentDescription();
-		}
-		@Override
-		public String getResponseTabTitle(int index) {
-			return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return getRoomResponse(responseTab, index);
-		}
-	};
-	
-	public static final DialogueNode ROOM_GARDEN_GROUND_FLOOR = new DialogueNode("Garden-view room", ".", false) {
-		@Override
-		public int getSecondsPassed() {
-			return 10;
-		}
-		@Override
-		public String getLabel() {
-			return Main.game.getPlayer().getLocationPlace().getName();
-		}
-		@Override
-		public String getContent() {
-			return getRoomModificationsDescription(true)
-					+ getRoomCharactersPresentDescription();
-		}
-		@Override
-		public String getResponseTabTitle(int index) {
-			return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return getRoomResponse(responseTab, index);
-		}
-	};
-	
-	public static final DialogueNode ROOM_GARDEN = new DialogueNode("Garden-view room", ".", false) {
-		@Override
-		public int getSecondsPassed() {
-			return 10;
-		}
-		@Override
-		public String getLabel() {
-			return Main.game.getPlayer().getLocationPlace().getName();
-		}
-		@Override
-		public String getContent() {
-			return getRoomModificationsDescription(true)
-					+ getRoomCharactersPresentDescription();
-		}
-		@Override
-		public String getResponseTabTitle(int index) {
-			return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return getRoomResponse(responseTab, index);
-		}
-	};
-	
-	public static final DialogueNode DUNGEON_CELL = new DialogueNode("Dungeon cell", ".", false) {
-		@Override
-		public int getSecondsPassed() {
-			return 10;
-		}
-		@Override
-		public String getLabel() {
-			return Main.game.getPlayer().getLocationPlace().getName();
-		}
-		@Override
-		public String getContent() {
-			return getRoomModificationsDescription(true);
-		}
-		@Override
-		public String getResponseTabTitle(int index) {
-			return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return getRoomResponse(responseTab, index);
-		}
-	};
-	
-	public static final DialogueNode BIRTHING_ROOM = new DialogueNode("Birthing room", ".", false) {
+            } else if (index == 2) {
+                return new Response("Рабство", "Спросить Розу, как она стала рабыней.", AUNT_HOME_ROSE) {
+                    @Override
+                    public void effects() {
+                        roseContent = UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "ROSE_TALK_SLAVE");
+                    }
+                };
 
-		@Override
-		public int getSecondsPassed() {
-			return 10;
-		}
+            } else if (index == 3) {
+                return new Response("Мир", "Попросить Розу рассказать что-нибудь об этом мире.", AUNT_HOME_ROSE) {
+                    @Override
+                    public void effects() {
+                        roseContent = UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "ROSE_TALK_WORLD");
+                    }
+                };
 
-		@Override
-		public String getContent() {
-			return "<p>"
-						+ "Lilaya has had this room repurposed in order to be a suitable place for delivering children."
-					+ "</p>"
-					+ "<p>"
-						+ "Instead of being carpeted, like most of the other rooms in this house, clean white tiles have been chosen for this room's flooring."
-						+ " A surprisingly modern-looking birthing bed is sitting against one wall of the room, but apart from that, there isn't much else in the way of medical equipment."
-						+ " A few comfortable chairs have been placed around the edges of the room, but other than those, and a drinks cabinet that's sitting in one corner, the room is devoid of any other furniture."
-					+ "</p>"
-					+ "<p>"
-						+ "In anyone else's house, finding a room dedicated to delivering pregnancies might come as a bit of a shock, but Lilaya seems to be involved in all manner of strange things,"
-							+ " so you shrug it off as just another peculiarity of this world."
-					+ "</p>";
-		}
+            } else if (index == 4) {
+                return new Response("Обязанности", "Спросить Розу о том, какие обязанности она должна выполнять.", AUNT_HOME_ROSE) {
+                    @Override
+                    public void effects() {
+                        roseContent = UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "ROSE_TALK_DUTIES");
+                    }
+                };
 
-		@Override
-		public String getResponseTabTitle(int index) {
-			return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==1) {
-				return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
-			}
-			return null;
-		}
-	};
-	
-	public static final DialogueNode KITCHEN = new DialogueNode("Kitchen", ".", false) {
+            } else if (index == 5) {
+                if (Main.game.getPlayer().hasClothingType(ClothingType.getClothingTypeFromId("innoxia_hair_rose"), false) && !giftedRose) {
+                    return new Response("Предложить розу", "Предложить Розе розу, которая есть у тебя в инвентаре.", AUNT_HOME_ROSE) {
+                        @Override
+                        public void effects() {
+                            roseContent = UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "ROSE_TALK_OFFER_ROSE");
+                            Main.game.getPlayer().removeClothingByType(ClothingType.getClothingTypeFromId("innoxia_hair_rose"));
+                            giftedRose = true;
+                        }
+                    };
 
-		@Override
-		public int getSecondsPassed() {
-			return 10;
-		}
+                } else if (giftedRose) {
+                    return new Response("Руки Розы", "Ты никогда раньше не [pc.genderBasedWord(замечал, замечала)], какие у Розы потрясающие руки...", ROSE_HANDS) {
+                        @Override
+                        public boolean isSexHighlight() {
+                            return true;
+                        }
 
-		@Override
-		public String getContent() {
-			UtilText.nodeContentSB.setLength(0);
-			List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
-			
-			UtilText.nodeContentSB.append("<p>"
-						+ "Just like every other room in Lilaya's house, the kitchen is far larger than any you've ever set foot in before."
-						+ " A row of wooden cabinets, topped with polished granite, line the edge of the room, and a pair of long, free-standing worktops sit in the middle of the cavernous space."
-						+ " The kitchen's trio of cast iron ovens, combined with its rustic oak flooring and lack of any modern-looking appliances, give it a rather vintage look."
-					+ "</p>"
-					+ "<p>"
-						+ "There's an open doorway set into one side of the room, and, looking through the opening, you see a series of fridges, freezers and larder units."
-						+ " Ingredients and foodstuffs of all shapes and sizes sit on open shelves, and you find yourself marvelling at the quantity and variety of supplies that are kept in stock."
-					+ "</p>");
-			
-			if(charactersPresent.isEmpty()) {
-				UtilText.nodeContentSB.append("<p>"
-							+ "The kitchen is deserted at the moment, and there doesn't really seem to be much to do here."
-						+ "</p>");
-			} else {
-				for(NPC slave : charactersPresent) {
-					if(slave.getSlaveJob(Main.game.getHourOfDay())==SlaveJob.KITCHEN) {
-						UtilText.nodeContentSB.append(getSlavePresentDescription(slave,
-								"is quite clearly not doing any cooking. To make matters worse, [npc.she] doesn't seem to care that you're watching [npc.herHim], and turns [npc.her] back on you.",
-								"is currently half-heartedly preparing some food on the other side of the kitchen.",
-								"is busy cooking something in one of the kitchen's ovens.",
-								"is currently preparing some food. You can see that [npc.sheIs] putting a lot of effort into making sure that [npc.sheIs] doing a good job.",
-								"is dutifully making Lilaya a meal. You notice that [npc.sheIs] taking care to prepare it just the way your demonic [lilaya.relation(pc)] likes."));
-					} else {
-						UtilText.nodeContentSB.append(getSlavePresentDescription(slave));
-					}
-				}
-			}
-			
-			return UtilText.nodeContentSB.toString();
-		}
+                        @Override
+                        public void effects() {
+                            giftedRose = false;
+                        }
+                    };
 
-		@Override
-		public String getResponseTabTitle(int index) {
-			return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==1) {
-				return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
-			}
-			List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
-			
-			if(index==0) {
-				return null;
-				
-			} else if(index-1<charactersPresent.size()) {
-				GameCharacter slave = charactersPresent.get(index-1);
-				return interactWithNPC(slave);
-			} else {
-				return null;
-			}
-		}
-	};
-	
-	public static final DialogueNode ROOM_ROSE = new DialogueNode("Rose's Room", ".", false) {
+                } else {
+                    return new Response("Предложить розу", "У тебя нет розы, чтобы предложить её Розе.", null);
+                }
 
-		@Override
-		public int getSecondsPassed() {
-			return 10;
-		}
+            } else if (index == 6
+                    && (Main.game.getNpc(Lilaya.class).isPregnant() && Main.game.getNpc(Lilaya.class).isCharacterReactedToPregnancy(Main.game.getPlayer()))) {
 
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "ROOM_ROSE");
-		}
+                if (Main.game.getPlayer().hasItemType(ItemType.MOTHERS_MILK)) {
+                    return new Response("Материнское молоко", "Дай Розе одно материнское молоко из своего инвентаря и попроси её дать его Лилайе, чтобы её беременность быстрее закончилась.", AUNT_HOME_ROSE) {
+                        @Override
+                        public void effects() {
+                            giftedRose = false;
+                            roseContent = UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "ROSE_TALK_MOTHERS_MILK");
+                            Main.game.getPlayer().removeItemByType(ItemType.MOTHERS_MILK);
+                            Main.game.getNpc(Lilaya.class).useItem(Main.game.getItemGen().generateItem(ItemType.MOTHERS_MILK), Main.game.getNpc(Lilaya.class), false);
+                        }
+                    };
 
-		@Override
-		public String getResponseTabTitle(int index) {
-			return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==1) {
-				return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
-			}
-			if (index == 1) {
-				if(!Main.game.isExtendedWorkTime()) {
-					return new Response("Call for Rose", "The sign hanging beside Rose's door explicitly says not to disturb her, so it would be best to return during the day if you wanted to talk to her about anything.", null);
-				}
-				
-				return new Response("Call for Rose", "Lilaya's slave, Rose, is always close at hand. If you were to ring the little bell beside her bedroom's door, she'd be sure to come running.", AUNT_HOME_ROSE){
-					@Override
-					public void effects() {
-						roseContent = UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "ROOM_ROSE_INITIAL_CALL");
-						
-						Main.game.getDialogueFlags().values.remove(DialogueFlagValue.auntHomeJustEntered);
-						Main.game.getNpc(Rose.class).setLocation(Main.game.getActiveWorld().getWorldType(), Main.game.getPlayer().getLocation(), false);
-					}
-				};
-				
-			} else {
-				return null;
-			}
-		}
-	};
-	
-	private static String roseContent = "";
-	private static boolean giftedRose = false;
-	public static final DialogueNode AUNT_HOME_ROSE = new DialogueNode("", "", true) {
-		@Override
-		public String getContent() {
-			return roseContent;
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Lilaya", "Ask Rose about her owner, Lilaya.", AUNT_HOME_ROSE){
-					@Override
-					public void effects() {
-						roseContent = UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "ROSE_TALK_LILAYA");
-					}
-				};
+                } else {
+                    return new Response("Материнское молоко", "Если у тебя в инвентаре есть «Материнское молоко», ты можешь попросить Розу дать его Лилайе, чтобы её беременность быстрее закончилась.", null);
+                }
 
-			} else if (index == 2) {
-				return new Response("Slavery", "Ask Rose how she became a slave.", AUNT_HOME_ROSE){
-					@Override
-					public void effects() {
-						roseContent = UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "ROSE_TALK_SLAVE");
-					}
-				};
+            } else if (index == 0) {
+                return new Response("Отпустить", "Позволить Розе вернуться к своей работе.", ROOM_ROSE) {
+                    @Override
+                    public void effects() {
+                        giftedRose = false;
+                        Main.game.getNpc(Rose.class).setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LAB, false);
+                    }
 
-			} else if (index == 3) {
-				return new Response("World", "Ask Rose to tell you something about this world.", AUNT_HOME_ROSE){
-					@Override
-					public void effects() {
-						roseContent = UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "ROSE_TALK_WORLD");
-					}
-				};
+                    @Override
+                    public DialogueNode getNextDialogue() {
+                        return Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true);
+                    }
+                };
 
-			} else if (index == 4) {
-				return new Response("Duties", "Ask Rose about what duties she's expected to perform.", AUNT_HOME_ROSE){
-					@Override
-					public void effects() {
-						roseContent = UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "ROSE_TALK_DUTIES");
-					}
-				};
+            } else {
+                return null;
+            }
+        }
+    };
 
-			} else if (index == 5) {
-				if(Main.game.getPlayer().hasClothingType(ClothingType.getClothingTypeFromId("innoxia_hair_rose"), false) && !giftedRose) {
-					return new Response("Offer rose", "Offer Rose the rose you have in your inventory.", AUNT_HOME_ROSE) {
-						@Override
-						public void effects() {
-							roseContent = UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "ROSE_TALK_OFFER_ROSE");
-							Main.game.getPlayer().removeClothingByType(ClothingType.getClothingTypeFromId("innoxia_hair_rose"));
-							giftedRose = true;
-						}
-					};
-					
-				} else if(giftedRose) {
-					return new Response("Rose's hands", "You've never noticed how amazing Rose's hands are before...", ROSE_HANDS) {
-						@Override
-						public boolean isSexHighlight() {
-							return true;
-						}
-						@Override
-						public void effects() {
-							giftedRose = false;
-						}
-					};
-					
-				} else {
-					return new Response("Offer rose", "You do not have a rose to offer to Rose.", null);
-				}
-				
-			} else if (index == 6
-					&& (Main.game.getNpc(Lilaya.class).isPregnant() && Main.game.getNpc(Lilaya.class).isCharacterReactedToPregnancy(Main.game.getPlayer()))) {
+    public static String getRoomCharactersPresentDescription() {
+        List<NPC> charactersHome = Main.game.getCharactersTreatingCellAsHome(Main.game.getPlayerCell());
+        StringBuilder sb = new StringBuilder();
 
-				if(Main.game.getPlayer().hasItemType(ItemType.MOTHERS_MILK)) {
-					return new Response("Mother's milk", "Give Rose one of the Mother's milk from your inventory, and ask her to give it to Lilaya so that her pregnancy can be over quicker.", AUNT_HOME_ROSE) {
-						@Override
-						public void effects() {
-							giftedRose = false;
-							roseContent = UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "ROSE_TALK_MOTHERS_MILK");
-							Main.game.getPlayer().removeItemByType(ItemType.MOTHERS_MILK);
-							Main.game.getNpc(Lilaya.class).useItem(Main.game.getItemGen().generateItem(ItemType.MOTHERS_MILK), Main.game.getNpc(Lilaya.class), false);
-						}
-					};
-					
-				} else {
-					return new Response("Mother's milk", "If you were to have a 'Mother's milk' in your inventory, you could ask Rose to give it to Lilaya so that her pregnancy can be over quicker.", null);
-				}
-				
-			} else if (index == 0) {
-				return new Response("Dismiss", "Let Rose get back on with her work.", ROOM_ROSE) {
-					@Override
-					public void effects() {
-						giftedRose = false;
-						Main.game.getNpc(Rose.class).setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LAB, false);
-					}
-					
-					@Override
-					public DialogueNode getNextDialogue() {
-						return Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true);
-					}
-				};
+        if (!charactersHome.isEmpty()) {
+            sb.append("<p>");
+            boolean first = true;
+            for (NPC npc : charactersHome) {
+                if (!first) {
+                    sb.append("<br/>");
+                }
+                sb.append("<span style='color:" + npc.getFemininity().getColour().toWebHexString() + ";'>");
+                sb.append(UtilText.parse(npc, "[npc.Name]"));
+                sb.append("</span>");
+                sb.append(" ");
 
-			} else {
-				return null;
-			}
-		}
-	};
+                if (Main.game.getPlayer().getFriendlyOccupants().contains(npc.getId())) { // Friendly occupant:
+                    if (!Main.game.getCharactersPresent().contains(npc)) {
+                        sb.append(UtilText.parse(npc,
+                                "в данный момент [style.colourMinorBad(не здесь)], и, бегло осмотрев комнату в поисках каких-либо [npc.herHim] признаков , ты видишь, что на  [npc.her] прикроватной тумбочке была оставлена небольшая записка."
+                                        + " Подойдя и взяв её в руки, ты читаешь:"
+                                        + "</p>" +
+                                        "<p style='text-align:center;'><i>"
+                                        + "Привет, [pc.name]!<br/>"));
+                        if (npc.hasJob()) {
+                            sb.append("Я сейчас на работе, мой график работы - с " + npc.getHistory().getWorkHourStart() + ":00 по " + npc.getHistory().getWorkHourEnd() + ":00, "
+                                    + npc.getHistory().getStartDay().getDisplayName(TextStyle.FULL, RUSSIAN_LOCALE) + "-" + npc.getHistory().getEndDay().getDisplayName(TextStyle.FULL, RUSSIAN_LOCALE) + "<br/>");
+                        } else {
+                            sb.append(UtilText.parse(npc, "Я сейчас помогаю в особняке.<br/>"));
+                        }
+                        sb.append(UtilText.parse(npc,
+                                "- [npc.Name]"
+                                        + "</i>"
+                                        + "</p>"
+                                        + "<p>"));
+                        sb.append(UtilText.parse(npc, "<i>[npc.Name] спит между [style.time(" + npc.getSleepStartHour() + ")]-[style.time(" + npc.getSleepEndHour() + ")]</i>"));
 
-	public static final DialogueNode ROSE_HANDS = new DialogueNode("", "", true) {
+                    } else {
+                        sb.append(UtilText.parse(npc, "colourMinorGood,"));
+                        if (npc.isAsleep()) {
+                            sb.append(UtilText.parse(npc, " но [npc.sheIs] сейчас [style.colourSleep(спит)]..."));
+                        } else {
+                            sb.append(UtilText.parse(npc, " и поэтому ты можешь взаимодействовать с [npc.herHim], если захочешь..."));
+                        }
+                        sb.append("<br/>");
+                        sb.append(UtilText.parse(npc, "<i>[npc.Name] спит между [style.time(" + npc.getSleepStartHour() + ")]-[style.time(" + npc.getSleepEndHour() + ")]</i>"));
+                    }
 
-		@Override
-		public String getLabel() {
-			return "Rose's hands";
-		}
+                } else { // Slave:
+                    if (!Main.game.getCharactersPresent().contains(npc)) {
+                        sb.append(UtilText.parse(npc, "в данный момент [style.colourMinorBad(не здесь)],"));
+                        if (npc.isAtWork()) {
+                            String jobName = npc.getSlaveJob(Main.game.getHourOfDay()).getName(npc);
+                            sb.append(UtilText.parse(npc, " [npc.sheIs] работает как " + UtilText.generateSingularDeterminer(jobName) + " " + jobName + " в это время."));
+                        } else {
+                            boolean houseFree = npc.hasSlavePermissionSetting(SlavePermissionSetting.GENERAL_HOUSE_FREEDOM);
+                            boolean outsideFree = npc.hasSlavePermissionSetting(SlavePermissionSetting.GENERAL_OUTSIDE_FREEDOM);
+                            if (houseFree) {
+                                if (outsideFree) {
+                                    sb.append(" и поэтому [npc.genderBasedWord(должен, должна)] быть либо где-то в особняке, либо в Доминионе...");
+                                } else {
+                                    sb.append(" и поэтому [npc.genderBasedWord(должен, должна)] быть где-то в особняке...");
+                                }
+                            } else if (outsideFree) {
+                                sb.append(" и поэтому [npc.genderBasedWord(должен, должна)] быть где-то в Доминионе...");
+                            } else {
+                                sb.append(" но, скорее всего, скоро вернётся сюда...");
+                            }
+                        }
 
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "ROSE_HANDS");
-		}
+                    } else {
+                        sb.append(UtilText.parse(npc, "colourMinorGood"));
+                        if (npc.isAsleep()) {
+                            sb.append(UtilText.parse(npc, " но [npc.sheIs] сейчас [style.colourSleep(спит)]..."));
+                        } else {
+                            sb.append(UtilText.parse(npc, " и поэтому ты можешь взаимодействовать с [npc.herHim], если захочешь..."));
+                        }
+                    }
+                }
+                first = false;
+            }
+            sb.append("</p>");
+        }
+        return sb.toString();
+    }
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new ResponseSex("Hand-holding", "Warning: This content contains extreme descriptions of hand-holding, finger sucking, and even palm-licking."
-						+ " <b>Please remember that you need to have read the disclaimer before playing this game!</b> <b style='color:"+BaseColour.CRIMSON.toWebHexString()+";'>18+ only!</b>",
-						true, false,
-						new SMRoseHands(
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotUnique.HAND_SEX_DOM_ROSE)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Rose.class), SexSlotUnique.HAND_SEX_SUB_ROSE))),
-						null, null, Rose.END_HAND_SEX);
+    public static String getBaseRoomDescription() {
+        if (Main.game.getPlayerCell().getPlace().getPlaceType() == PlaceType.LILAYA_HOME_ROOM_WINDOW_GROUND_FLOOR) {
+            return "<p>"
+                    + "В этой комнате в одну стену встроен ряд больших окон, благодаря которым в коридор проникает большое количество естественного дневного света, когда дверь оставлена открытой."
+                    + " Через эти окна можно наблюдать за суетой и шумом оживленных улиц Доминиона."
+                    + "</p>";
 
-			} else {
-				return null;
-			}
-		}
+        } else if (Main.game.getPlayerCell().getPlace().getPlaceType() == PlaceType.LILAYA_HOME_ROOM_WINDOW_FIRST_FLOOR) {
+            return "<p>"
+                    + "В этой комнате в одну стену встроен ряд больших окон, благодаря которым в коридор проникает большое количество естественного дневного света, когда дверь оставлена открытой."
+                    + " Через эти окна можно наблюдать за суетой и шумом оживленных улиц Доминиона."
+                    + "</p>";
 
-		@Override
-		public boolean isInventoryDisabled() {
-			return true;
-		}
-	};
-	
-	public static final DialogueNode GARDEN = new DialogueNode("Garden courtyard", "", false) {
-		@Override
-		public int getSecondsPassed() {
-			return 10;
-		}
-		@Override
-		public String getContent() {
-			UtilText.nodeContentSB.setLength(0);
-			List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
-			
-			UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "GARDEN"));
-			
-			if(!charactersPresent.isEmpty()) {
-				for(NPC slave : charactersPresent) {
-					if(slave.getSlaveJob(Main.game.getHourOfDay())==SlaveJob.GARDEN) {
-						UtilText.nodeContentSB.append(getSlavePresentDescription(slave,
-								"is quite clearly not doing any gardening. To make matters worse, [npc.she] doesn't seem to care that you're watching [npc.herHim], and turns [npc.her] back on you.",
-								"is currently half-heartedly trimming a hedge.",
-								"is busy weeding one of the many paths which wind through the garden.",
-								"is currently dead-heading one of the rose bushes. You can see that [npc.sheIs] putting a lot of effort into making sure that [npc.sheIs] doing a good job.",
-								"is dutifully planting bulbs and pulling out weeds. You notice that [npc.sheIs] taking care to plant each and every bulb in its correct place."));
-					} else {
-						UtilText.nodeContentSB.append(getSlavePresentDescription(slave));
-					}
-				}
-			}
-			
-			return UtilText.nodeContentSB.toString();
-		}
-		@Override
-		public String getResponseTabTitle(int index) {
-			return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==1) {
-				return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
-			}
-			if(responseTab==2) {
-				return getLilayasHouseDollStationResponses(index);
-			}
-			List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
-			
-			if(index==0) {
-				return null;
-				
-			} else if(index==1) {
-				if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.lilayaGardenPickRose)) {
-					return new Response("Pick rose", "You've already picked a rose today, and wouldn't want to upset Lilaya by taking too many...", null);
-				} else {
-					return new Response("Pick rose", "Pick a flower from one of the magnificent rose bushes.", GARDEN) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.lilayaGardenPickRose, true);
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "GARDEN_PICK ROSE"));
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("innoxia_hair_rose", false), false));
-						}
-						public boolean isStripContent() {
-							return true;
-						}
-					};
-				}
-				
-			} else if(index-2<charactersPresent.size()) {
-				GameCharacter slave = charactersPresent.get(index-2);
-				return new Response(UtilText.parse(slave, "[npc.Name]"), UtilText.parse(slave, "Interact with [npc.name]."), SlaveDialogue.SLAVE_START) {
-					@Override
-					public Colour getHighlightColour() {
-						return slave.getFemininity().getColour();
-					}
-					@Override
-					public void effects() {
-						SlaveDialogue.initDialogue((NPC) slave, false);
-					}
-				};
-			}
-			
-			return null;
-		}
-	};
-	
-	public static final DialogueNode FOUNTAIN = new DialogueNode("Water fountain", ".", false) {
+        } else if (Main.game.getPlayerCell().getPlace().getPlaceType() == PlaceType.LILAYA_HOME_ROOM_GARDEN_GROUND_FLOOR) {
+            return "<p>"
+                    + "В этой комнате есть пара французских дверей, которые соединяют её с прилегающим садом во внутреннем дворе."
+                    + " Через эти двери и окна рядом с ними можно наблюдать за большой частью сада."
+                    + "</p>";
 
-		@Override
-		public int getSecondsPassed() {
-			return 10;
-		}
+        } else if (Main.game.getPlayerCell().getPlace().getPlaceType() == PlaceType.LILAYA_HOME_ROOM_GARDEN_FIRST_FLOOR) {
+            return "<p>"
+                    + "В этой комнате на одной стене расположена серия больших окон, которые, когда дверь оставлена открытой, позволяют большому количеству естественного дневного света заливать коридор."
+                    + " Через эти окна можно смотреть вниз на дворик-сад."
+                    + "</p>";
+        }
+        return "";
+    }    public static final DialogueNode GARDEN = new DialogueNode("Садовый дворик", "", false) {
+        @Override
+        public int getSecondsPassed() {
+            return 10;
+        }
 
-		@Override
-		public String getContent() {
-			UtilText.nodeContentSB.setLength(0);
-			List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
-			
-			UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "FOUNTAIN"));
-			
-			if(!charactersPresent.isEmpty()) {
-				for(NPC slave : charactersPresent) {
-					if(slave.getSlaveJob(Main.game.getHourOfDay())==SlaveJob.GARDEN) {
-						UtilText.nodeContentSB.append(getSlavePresentDescription(slave,
-								"is quite clearly not doing any gardening. To make matters worse, [npc.she] doesn't seem to care that you're watching [npc.herHim], and turns [npc.her] back on you.",
-								"is currently half-heartedly trimming a hedge.",
-								"is busy weeding one of the many paths which wind through the garden.",
-								"is currently dead-heading one of the rose bushes. You can see that [npc.sheIs] putting a lot of effort into making sure that [npc.sheIs] doing a good job.",
-								"is dutifully planting bulbs and pulling out weeds. You notice that [npc.sheIs] taking care to plant each and every bulb in its correct place."));
-					} else {
-						UtilText.nodeContentSB.append(getSlavePresentDescription(slave));
-					}
-				}
-			}
-			
-			return UtilText.nodeContentSB.toString();
-		}
+        @Override
+        public String getContent() {
+            UtilText.nodeContentSB.setLength(0);
+            List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
 
-		@Override
-		public String getResponseTabTitle(int index) {
-			return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==1) {
-				return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
-			}
-			if(responseTab==2) {
-				return getLilayasHouseDollStationResponses(index);
-			}
-			if (index == 1 && Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.getDialogueFlagValueFromId("acexp_dungeon_garden_access_found"))) {
-				return new Response("Lilaya's dungeon",
-						"Press the disguised button to open the secret passage down to Lilaya's dungeon.",
-						DialogueManager.getDialogueFromId("acexp_dominion_lilaya_dungeon_stairsUp_garden")) {
-					@Override
-					public void effects() {
-						Main.game.appendToTextStartStringBuilder(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "DUNGEON_OPENS_FOUNTAIN"));
-						Main.game.appendToTextStartStringBuilder(UtilText.parseFromXMLFile("acexp/dominion/lilaya_dungeon", "DUNGEON_ENTRY"));
-						Main.game.getPlayer().setLocation(WorldType.getWorldTypeFromId("acexp_dungeon"), PlaceType.getPlaceTypeFromId("acexp_dungeon_stairs_garden"), false);
-					}
-				};
-			}
-			return null;
-		}
-	};
-	
-	public static final DialogueNode ENTRANCE_HALL = new DialogueNode("Entrance hall", ".", false) {
-		private boolean fiammettaMessage = false;
-		@Override
-		public void applyPreParsingEffects() {
-			fiammettaMessage = Main.game.getPlayer().getQuest(QuestLine.SIDE_DOLL_FACTORY)==Quest.DOLL_FACTORY_6
-					&& Main.game.isDayTime()
-					&& Main.game.getDialogueFlags().hasSavedLong("fia_factory_finished")
-					&& (Main.game.getSecondsPassed() - Main.game.getDialogueFlags().getSavedLong("fia_factory_finished") > (2 * 24* 60 * 60)); // 2 days
+            UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "GARDEN"));
 
-			if(fiammettaMessage) {
-				Main.game.getNpc(Rose.class).setLocation(Main.game.getPlayer());
-			}
-		}
-		@Override
-		public int getSecondsPassed() {
-			if(fiammettaMessage) {
-				return 60;
-			}
-			return 10;
-		}
-		@Override
-		public boolean isTravelDisabled() {
-			return fiammettaMessage;
-		}
-		@Override
-		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			
-			List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
-			
-			if(fiammettaMessage) {
-				sb.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/doll_quest", "ENTRANCE_HALL_FIAMMETTA"));
+            if (!charactersPresent.isEmpty()) {
+                for (NPC slave : charactersPresent) {
+                    if (slave.getSlaveJob(Main.game.getHourOfDay()) == SlaveJob.GARDEN) {
+                        UtilText.nodeContentSB.append(getSlavePresentDescription(slave,
+                                "явно не занимается садоводством. Что ещё хуже, [npc.she], похоже, не заботится о том, что ты наблюдаешь за [npc.herHim] действиями, и поворачивает к тебе спиной.",
+                                "в настоящее время неумело подстригает живую изгородь.",
+                                "занимается прополкой одной из многочисленных дорожек, которые вьются по саду.",
+                                "в данный момент подстригает один из розовых кустов. Видно, что [npc.sheIs] прилагает много усилий, чтобы убедиться, что [npc.sheIs] хорошо справляется со своей работой.",
+                                "послушно сажает луковицы и вырывает сорняки. Заметно, что [npc.sheIs] заботится о том, чтобы посадить каждую луковицу в правильное место."));
+                    } else {
+                        UtilText.nodeContentSB.append(getSlavePresentDescription(slave));
+                    }
+                }
+            }
 
-				return sb.toString();
-			}
-			
-			sb.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "ENTRANCE_HALL"));
-			
-			if(!charactersPresent.isEmpty()) {
-				for(NPC slave : charactersPresent) {
-					if(slave.getSlaveJob(Main.game.getHourOfDay())==SlaveJob.SECURITY) {
-						sb.append(getSlavePresentDescription(slave,
-								"is not even bothering to pretend that [npc.sheIs] looking out for trouble.",
-								"is half-heartedly looking out for trouble.",
-								"is looking out for any sign of trouble.",
-								"is alert and on the lookout for any sign of trouble.",
-								"is highly alert and dutifully looking out for any sign of trouble."));
-					} else {
-						sb.append(getSlavePresentDescription(slave));
-					}
-				}
-			}
-			
-			return sb.toString();
-		}
-		@Override
-		public String getResponseTabTitle(int index) {
-			if(fiammettaMessage) {
-				return null;
-			}
-			return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(fiammettaMessage) {
-				if(index==1) {
-					return new Response("Follow Rose", "Follow Rose to the library to see who this guest is.", DialogueManager.getDialogueFromId("innoxia_places_dominion_lilayas_home_doll_quest_start"));
-				}
-				return null;
-			}
-			
-			if(responseTab==1) {
-				return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
-			}
-			if(responseTab==2) {
-				return getLilayasHouseDollStationResponses(index);
-			}
+            return UtilText.nodeContentSB.toString();
+        }
 
-			List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
-			
-			if(index==0) {
-				return null;
-				
-			} else if (index == 1) {
-				return new Response("Exit", "Leave Lilaya's house.", PlaceType.DOMINION_AUNTS_HOME.getDialogue(false)){
-					@Override
-					public void effects() {
-						Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_AUNTS_HOME, false);
-					}
-				};
+        @Override
+        public String getResponseTabTitle(int index) {
+            return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
+        }
 
-			} else if(index-2<charactersPresent.size()) {
-				GameCharacter slave = charactersPresent.get(index-2);
-				return new Response(UtilText.parse(slave, "[npc.Name]"), UtilText.parse(slave, "Interact with [npc.name]."), SlaveDialogue.SLAVE_START) {
-					@Override
-					public Colour getHighlightColour() {
-						return slave.getFemininity().getColour();
-					}
-					@Override
-					public void effects() {
-						SlaveDialogue.initDialogue((NPC) slave, false);
-					}
-				};
-				
-			}
-			return null;
-		}
-	};
-	
-	public static final DialogueNode STAIRCASE_UP = new DialogueNode("Staircase up", ".", false) {
-		@Override
-		public int getSecondsPassed() {
-			return 20;
-		}
-		@Override
-		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "STAIRCASE_UP"));
-			for(NPC slave : getSlavesAndOccupantsPresent()) {
-				sb.append(getSlavePresentDescription(slave));
-			}
-			return sb.toString();
-		}
-		@Override
-		public String getResponseTabTitle(int index) {
-			return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==1) {
-				return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
-			}
-			if(responseTab==2) {
-				return getLilayasHouseDollStationResponses(index);
-			}
-			
-			List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
-			if(index==0) {
-				return null;
-				
-			} else if (index == 1) {
-				return new Response("Upstairs", "Go upstairs to the first floor.", PlaceType.LILAYA_HOME_STAIR_DOWN.getDialogue(false)){
-					@Override
-					public void effects() {
-						Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_STAIR_DOWN, false);
-					}
-				};
-				
-			} else if(index-2<charactersPresent.size()) {
-				GameCharacter slave = charactersPresent.get(index-2);
-				return interactWithNPC(slave);
-			}
-			
-			return null;
-		}
-	};
-	
-	public static final DialogueNode STAIRCASE_UP_SECONDARY = new DialogueNode("Staircase up", ".", false) {
-		@Override
-		public int getSecondsPassed() {
-			return 20;
-		}
-		@Override
-		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "CORRIDOR"));
-			sb.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "STAIRCASE_UP_SECONDARY"));
-			for(NPC slave : getSlavesAndOccupantsPresent()) {
-				sb.append(getSlavePresentDescription(slave));
-			}
-			return sb.toString();
-		}
-		@Override
-		public String getResponseTabTitle(int index) {
-			return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==1) {
-				return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
-			}
-			if(responseTab==2) {
-				return getLilayasHouseDollStationResponses(index);
-			}
-			
-			List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
-			if(index==0) {
-				return null;
-				
-			} else if (index == 1) {
-				return new Response("Upstairs", "Go upstairs to the first floor.", STAIRCASE_DOWN_SECONDARY){
-					@Override
-					public void effects() {
-						Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, Main.game.getPlayer().getLocation(), false);
-					}
-				};
-			} else if(index-2<charactersPresent.size()) {
-				GameCharacter slave = charactersPresent.get(index-2);
-				return interactWithNPC(slave);
-			}
-			
-			return null;
-		}
-	};
-	
-	public static final DialogueNode STAIRCASE_DOWN = new DialogueNode("Staircase down", ".", false) {
-		@Override
-		public int getSecondsPassed() {
-			return 20;
-		}
-		@Override
-		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "STAIRCASE_DOWN"));
-			for(NPC slave : getSlavesAndOccupantsPresent()) {
-				sb.append(getSlavePresentDescription(slave));
-			}
-			return sb.toString();
-		}
-		@Override
-		public String getResponseTabTitle(int index) {
-			return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==1) {
-				return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
-			}
-			if(responseTab==2) {
-				return getLilayasHouseDollStationResponses(index);
-			}
-			
-			List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
-			if(index==0) {
-				return null;
-				
-			} else if (index == 1) {
-				return new Response("Downstairs", "Go back downstairs to the ground floor.",PlaceType.LILAYA_HOME_STAIR_UP.getDialogue(false)){
-					@Override
-					public void effects() {
-						Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_STAIR_UP, false);
-					}
-				};
-			} else if(index-2<charactersPresent.size()) {
-				GameCharacter slave = charactersPresent.get(index-2);
-				return interactWithNPC(slave);
-			}
-			
-			return null;
-		}
-	};
-	
-	public static final DialogueNode STAIRCASE_DOWN_SECONDARY = new DialogueNode("Staircase down", ".", false) {
-		@Override
-		public int getSecondsPassed() {
-			return 20;
-		}
-		@Override
-		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "CORRIDOR"));
-			sb.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "STAIRCASE_DOWN_SECONDARY"));
-			for(NPC slave : getSlavesAndOccupantsPresent()) {
-				sb.append(getSlavePresentDescription(slave));
-			}
-			return sb.toString();
-		}
-		@Override
-		public String getResponseTabTitle(int index) {
-			return LilayaHomeGeneric.getLilayasHouseStandardResponseTabs(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==1) {
-				return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
-			}
-			if(responseTab==2) {
-				return getLilayasHouseDollStationResponses(index);
-			}
-			
-			List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
-			if(index==0) {
-				return null;
-				
-			} else if (index == 1) {
-				return new Response("Downstairs", "Go back downstairs to the ground floor.", STAIRCASE_UP_SECONDARY){
-					@Override
-					public void effects() {
-						Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, Main.game.getPlayer().getLocation(), false);
-					}
-				};
-			} else if(index-2<charactersPresent.size()) {
-				GameCharacter slave = charactersPresent.get(index-2);
-				return interactWithNPC(slave);
-			}
-			
-			return null;
-		}
-	};
+        @Override
+        public Response getResponse(int responseTab, int index) {
+            if (responseTab == 1) {
+                return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
+            }
+            if (responseTab == 2) {
+                return getLilayasHouseDollStationResponses(index);
+            }
+            List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
+
+            if (index == 0) {
+                return null;
+
+            } else if (index == 1) {
+                if (Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.lilayaGardenPickRose)) {
+                    return new Response("Сорвать розу", "Ты уже [pc.genderBasedWord(сорвал, сорвал)] сегодня розу и не [pc.genderBasedWord(хотел, хотела)] бы расстраивать Лилайю, взяв слишком много...", null);
+                } else {
+                    return new Response("Сорвать розу", "Сорвать цветок с одного из великолепных розовых кустов.", GARDEN) {
+                        @Override
+                        public void effects() {
+                            Main.game.getDialogueFlags().setFlag(DialogueFlagValue.lilayaGardenPickRose, true);
+                            Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "GARDEN_PICK ROSE"));
+                            Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("innoxia_hair_rose", false), false));
+                        }
+
+                        public boolean isStripContent() {
+                            return true;
+                        }
+                    };
+                }
+
+            } else if (index - 2 < charactersPresent.size()) {
+                GameCharacter slave = charactersPresent.get(index - 2);
+                return new Response(UtilText.parse(slave, "[npc.Name]"), UtilText.parse(slave, "Взаимодействовать с [npc.morphSingleNameInstr([npc.name])].\""), SlaveDialogue.SLAVE_START) {
+                    @Override
+                    public Colour getHighlightColour() {
+                        return slave.getFemininity().getColour();
+                    }
+
+                    @Override
+                    public void effects() {
+                        SlaveDialogue.initDialogue((NPC) slave, false);
+                    }
+                };
+            }
+
+            return null;
+        }
+    };
+
+
+
+
+
+
+
+
+
+
 }

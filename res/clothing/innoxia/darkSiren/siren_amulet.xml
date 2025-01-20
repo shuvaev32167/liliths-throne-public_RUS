@@ -68,25 +68,25 @@
 	
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(drape)] the amulet's chain around [npc.her] neck, before letting out an evil laugh as [npc.she] [npc.verb(feel)] the immense, corruptive power seeping into [npc.her] mind.]]>
+        <![CDATA[[npc.Name] drape the amulet's chain around [npc.her] neck, before letting out an evil laugh as [npc.she] feel the immense, corruptive power seeping into [npc.her] mind.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(drape)] the amulet's chain around [npc2.namePos] neck, which causes [npc2.herHim] to let out an evil laugh as [npc2.she] [npc2.verb(feel)] the immense, corruptive power seeping into [npc2.her] mind.]]>
+        <![CDATA[[npc.Name] drape the amulet's chain around [npc2.namePos] neck, which causes [npc2.herHim] to let out an evil laugh as [npc2.she] [npc2.verb(feel)] the immense, corruptive power seeping into [npc2.her] mind.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] firmly [npc.verb(grab)] [npc2.name], before draping the amulet's chain around [npc2.her] neck. Almost immediately, [npc2.name] [npc2.verb(let)] out an evil laugh as [npc2.she] [npc2.verb(feel)] the immense, corruptive power seeping into [npc2.her] mind.]]>
+        <![CDATA[[npc.Name] firmly grab [npc2.name], before draping the amulet's chain around [npc2.her] neck. Almost immediately, [npc2.name] [npc2.verb(let)] out an evil laugh as [npc2.she] [npc2.verb(feel)] the immense, corruptive power seeping into [npc2.her] mind.]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(take)] hold of [npc.her] amulet's chain, before lifting it up and over [npc.her] head.]]>
+        <![CDATA[[npc.Name] take hold of [npc.her] amulet's chain, before lifting it up and over [npc.her] head.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(take)] hold of the amulet's chain, before lifting it up and over [npc2.namePos] head.]]>
+        <![CDATA[[npc.Name] take hold of the amulet's chain, before lifting it up and over [npc2.namePos] head.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(grab)] the amulet's chain, before yanking it up and over [npc2.namePos] head.]]>
+        <![CDATA[[npc.Name] roughly grab the amulet's chain, before yanking it up and over [npc2.namePos] head.]]>
     </otherRough>
   </displacementText>
 	

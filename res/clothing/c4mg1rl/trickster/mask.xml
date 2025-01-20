@@ -49,25 +49,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(put)] on the mask and secure the straps behind [npc.her] head.]]>
+            <![CDATA[[npc.Name] put on the mask and secure the straps behind [npc.her] head.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(push)] the mask onto [npc2.namePos] face, then secure the straps behind [npc2.her] head.]]>
+            <![CDATA[[npc.Name] push the mask onto [npc2.namePos] face, then secure the straps behind [npc2.her] head.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(push)] the mask onto [npc2.namePos] [npc2.face], then secure the straps behind [npc.her] head.]]>
+            <![CDATA[[npc.Name] roughly push the mask onto [npc2.namePos] [npc2.face], then secure the straps behind [npc.her] head.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(unfasten)] the straps behind [npc.her] head, then [npc.verb(take)] off [npc.her] mask.]]>
+            <![CDATA[[npc.Name] unfasten the straps behind [npc.her] head, then take off [npc.her] mask.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(unfasten)] the straps behind [npc2.her] head, then [npc.verb(take)] off [npc2.namePos] mask.]]>
+            <![CDATA[[npc.Name] unfasten the straps behind [npc2.her] head, then take off [npc2.namePos] mask.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(grab)] [npc2.namePos] mask and roughly [npc.verb(pull)] it off [npc2.namePos] [npc2.face].]]>
+            <![CDATA[[npc.Name] grab [npc2.namePos] mask and roughly pull it off [npc2.namePos] [npc2.face].]]>
 		</otherRough>
 	</displacementText>
   

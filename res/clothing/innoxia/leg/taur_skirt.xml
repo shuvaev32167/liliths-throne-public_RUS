@@ -87,25 +87,25 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(pull)] the taur-skirt down over [npc.her] head, before allowing it to settle into place over [npc.her] [npc.legRace]'s body.]]>
+        <![CDATA[[npc.Name] pull the taur-skirt down over [npc.her] head, before allowing it to settle into place over [npc.her] [npc.legRace]'s body.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(pull)] the taur-skirt down over [npc2.namePos] head, before allowing it to settle into place over [npc2.her] [npc2.legRace]'s body.]]>
+        <![CDATA[[npc.Name] pull the taur-skirt down over [npc2.namePos] head, before allowing it to settle into place over [npc2.her] [npc2.legRace]'s body.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(yank)] the taur-skirt down over [npc2.namePos] head, before firmly pulling it down over [npc2.her] [npc2.legRace]'s body.]]>
+        <![CDATA[[npc.Name] yank the taur-skirt down over [npc2.namePos] head, before firmly pulling it down over [npc2.her] [npc2.legRace]'s body.]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(take)] hold of [npc.her] taur-skirt, before pulling it up and over [npc.her] head.]]>
+        <![CDATA[[npc.Name] take hold of [npc.her] taur-skirt, before pulling it up and over [npc.her] head.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(take)] hold of [npc2.namePos] taur-skirt, before pulling it up and over [npc2.her] head.]]>
+        <![CDATA[[npc.Name] take hold of [npc2.namePos] taur-skirt, before pulling it up and over [npc2.her] head.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(grab)] hold of [npc2.namePos] taur-skirt, before yanking it up and over [npc2.her] head.]]>
+        <![CDATA[[npc.Name] grab hold of [npc2.namePos] taur-skirt, before yanking it up and over [npc2.her] head.]]>
     </otherRough>
   </displacementText>
 	

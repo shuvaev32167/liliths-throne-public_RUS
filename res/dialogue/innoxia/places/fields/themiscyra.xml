@@ -1250,7 +1250,8 @@
 				<responseTabIndex><![CDATA[0]]></responseTabIndex>
 				<index><![CDATA[1]]></index>
 				<responseTitle><![CDATA[Fucked]]></responseTitle>
-				<responseTooltip><![CDATA[[attacker.name] and [attacker2.name] move to fuck you and Aurokaris...]]></responseTooltip>
+                <responseTooltip>
+                    <![CDATA[[attacker.name] и [attacker2.name] move to fuck you and Aurokaris...]]></responseTooltip>
 				<nextDialogue/>
 				<effects/>
 				<sexVariablesWithManager enabled="true">

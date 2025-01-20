@@ -52,25 +52,25 @@
 	
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(put)] on the webbing and securely [npc.verb(buckle)] the belt around [npc.her] waist.]]>
+            <![CDATA[[npc.Name] put on the webbing and securely buckle the belt around [npc.her] waist.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(put)] the webbing onto [npc2.name] and [npc.verb(buckle)] the belt around [npc2.her] waist.]]>
+            <![CDATA[[npc.Name] put the webbing onto [npc2.name] и buckle the belt around [npc2.her] waist.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(force)] the webbing onto [npc2.name] and roughly [npc.verb(buckle)] the belt around [npc2.her] waist.]]>
+            <![CDATA[[npc.Name] force the webbing onto [npc2.name] and roughly buckle the belt around [npc2.her] waist.]]>
 		</otherRough>
 	</replacementText>
 	
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(unbuckle)] the belt and [npc.verb(take)] off the webbing.]]>
+            <![CDATA[[npc.Name] unbuckle the belt and take off the webbing.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(unbuckle)] the belt from around [npc2.namePos] waist and [npc.verb(take)] off the webbing.]]>
+            <![CDATA[[npc.Name] unbuckle the belt from around [npc2.namePos] waist and take off the webbing.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(unbuckle)] the belt from around [npc2.namePos] waist and [npc.verb(tears)] the webbing from [npc2.namePos] torso.]]>
+            <![CDATA[[npc.Name] roughly unbuckle the belt from around [npc2.namePos] waist and tears the webbing from [npc2.namePos] torso.]]>
 		</otherRough>
 	</displacementText>
 	

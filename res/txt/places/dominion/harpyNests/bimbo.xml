@@ -183,7 +183,7 @@
 	
     <htmlContent tag="BIMBO_SEX_START_ORAL"><![CDATA[
     <p>
-        Eager to put [harpyBimbo.name] and [harpyBimboCompanion.name] in their place in front of their nest's inner-circle, you reach down and grab the bimbo matriarch's wings. Pulling her to her feet, you [pc.step] forwards, before planting a deep kiss on her [harpyBimbo.lips+] and drawing a series of excited giggles from the surrounding bimbo harpies.
+        Eager to put [harpyBimbo.name] и [harpyBimboCompanion.name] in their place in front of their nest's inner-circle, you reach down and grab the bimbo matriarch's wings. Pulling her to her feet, you [pc.step] forwards, before planting a deep kiss on her [harpyBimbo.lips+] and drawing a series of excited giggles from the surrounding bimbo harpies.
     </p>
 	#IF(!harpyBimboCompanion.isAttractedTo(pc))
 		<p>
@@ -217,7 +217,7 @@
 
     <htmlContent tag="BIMBO_SEX_START_MISSIONARY"><![CDATA[
     <p>
-        Eager to put [harpyBimbo.name] and [harpyBimboCompanion.name] in their place in front of their nest's inner-circle, you grab hold of both of them and push them down onto their backs before you. As you drop down between their legs, [harpyBimbo.name] passionately moans, [harpyBimbo.speechNoEffects(Come on, like, give us both a real good fuck! We're, like, super into this stuff, aren't we, [harpyBimboCompanion.name]?)]
+        Eager to put [harpyBimbo.name] и [harpyBimboCompanion.name] in their place in front of their nest's inner-circle, you grab hold of both of them and push them down onto their backs before you. As you drop down between their legs, [harpyBimbo.name] passionately moans, [harpyBimbo.speechNoEffects(Come on, like, give us both a real good fuck! We're, like, super into this stuff, aren't we, [harpyBimboCompanion.name]?)]
     </p>
 	#IF(!harpyBimboCompanion.isAttractedTo(pc))
 		<p>
@@ -300,7 +300,7 @@
 		[bimboHarpy.speechNoEffects(Good girl, [bimboHarpyCompanion.name]!)] you hear her respond. [bimboHarpy.speechNoEffects(Like, help her out, girls! It's time to teach this little [pc.race] a lesson!)]
 	</p>
 	<p>
-		As [bimboHarpyCompanion.name] continues holding you down, the rest of [bimboHarpy.NamePos] inner-circle moves in. Several of them help to pin your [pc.arms] and [pc.legs] to the floor, giggling all the while.
+		As [bimboHarpyCompanion.name] continues holding you down, the rest of [bimboHarpy.NamePos] inner-circle moves in. Several of them help to pin your [pc.arms] и [pc.legs] to the floor, giggling all the while.
 	</p>
     ]]>
     </htmlContent>
@@ -397,7 +397,7 @@
 	
     <htmlContent tag="COMBAT_LOST_TF_END"><![CDATA[
 	<p>
-		As the lollipop's transformative effects come to an end, the harpies' grip on your [pc.arms] and [pc.legs] loosens. Blinking slowly a few times, you let out an exhausted little moan. [pc.speechNoEffects(Like, I feel all bubbly inside! That was, like, super intense!)]
+		As the lollipop's transformative effects come to an end, the harpies' grip on your [pc.arms] и [pc.legs] loosens. Blinking slowly a few times, you let out an exhausted little moan. [pc.speechNoEffects(Like, I feel all bubbly inside! That was, like, super intense!)]
 	</p>
 	<p>
 		The flock of bimbo harpies bursts out into laughter, and the ones who were holding you down finally release you before backing off. Scrambling to your knees, you find yourself looking up at [bimboHarpy.Name] as she continues towering over you.
@@ -441,7 +441,7 @@
 	
     <htmlContent tag="COMBAT_LOST_BAD_END_TF_END"><![CDATA[
 	<p>
-		As the lollipop's transformative effects come to an end, the harpies' grip on your [pc.arms] and [pc.legs] loosens. Blinking slowly a few times, you let out an exhausted little moan and whine, [pc.speechNoEffects(Like, I feel all bubbly inside! That was, like, super intense!)]
+		As the lollipop's transformative effects come to an end, the harpies' grip on your [pc.arms] и [pc.legs] loosens. Blinking slowly a few times, you let out an exhausted little moan and whine, [pc.speechNoEffects(Like, I feel all bubbly inside! That was, like, super intense!)]
 	</p>
 	<p>
 		The flock of bimbo harpies bursts out into laughter, and the ones who were holding you down finally release you before backing off. Scrambling to your knees, you find yourself looking up at [bimboHarpy.Name] as she continues towering over you.

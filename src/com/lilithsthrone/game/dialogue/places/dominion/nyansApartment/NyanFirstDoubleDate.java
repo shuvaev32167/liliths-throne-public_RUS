@@ -304,6 +304,28 @@ public class NyanFirstDoubleDate {
 		}
 	};
 	
+	public static final DialogueNode POST_DATE_APARTMENT_LOUNGE = new DialogueNode("", "", true, true) {
+		@Override
+		public void applyPreParsingEffects() {
+			travelTo(WorldType.NYANS_APARTMENT, PlaceType.NYAN_APARTMENT_SPARE_BEDROOM);
+			Main.game.getPlayer().setLocation(WorldType.NYANS_APARTMENT, PlaceType.NYAN_APARTMENT_LOUNGE);
+		}
+		@Override
+		public int getSecondsPassed() {
+			return 5*60;
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/nyansApartment/firstDoubleDate", "POST_DATE_APARTMENT_LOUNGE");
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+                return new Response("Спальня", "Head into [nyanmum.namePos] bedroom...", POST_DATE_APARTMENT_BEDROOM);
+			}
+			return null;
+		}
+	};
 	public static final DialogueNode DATE_END_RETURN = new DialogueNode("", "", true, true) {
 		@Override
 		public void applyPreParsingEffects() {
@@ -311,7 +333,7 @@ public class NyanFirstDoubleDate {
 			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumGirlfriend)) {
 				getNyanMum().setLocation(WorldType.EMPTY, PlaceType.GENERIC_HOLDING_CELL, true);
 			}
-			((Nyan)getNyan()).wearCoat(false, true);
+            getNyan().wearCoat(false, true);
 			AbstractClothing shoes = getNyan().getClothingInSlot(InventorySlot.FOOT);
 			if(shoes!=null) {
 				getNyan().unequipClothingIntoVoid(shoes, true, getNyan());
@@ -341,14 +363,14 @@ public class NyanFirstDoubleDate {
 		public Response getResponse(int responseTab, int index) {
 				if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumGirlfriend)) {
 					if(index==1) {
-						return new Response("Lounge", "Do as [nyanmum.name] says and wait in the lounge...", POST_DATE_APARTMENT_LOUNGE) {
+                        return new Response("Гостиная", "Do as [nyanmum.name] says and wait in the lounge...", POST_DATE_APARTMENT_LOUNGE) {
 							@Override
 							public void effects() {
 								kinky = false;
 								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/nyansApartment/firstDoubleDate", "DATE_END_RETURN_LOUNGE"));
 							}
 						};
-						
+
 					} else if(index==2) {
 						return new Response("Lounge (kinky)", "Tell [nyanmum.name] that you like the sound of her 'kinky idea', before doing as she says and waiting in the lounge...", POST_DATE_APARTMENT_LOUNGE) {
 							@Override
@@ -358,10 +380,10 @@ public class NyanFirstDoubleDate {
 							}
 						};
 					}
-					
+
 				} else {
 					if(index==1) {
-						return new Response("Bedroom", "Head into Nyan's bedroom...", POST_DATE_APARTMENT_BEDROOM) {
+                        return new Response("Спальня", "Head into Nyan's bedroom...", POST_DATE_APARTMENT_BEDROOM) {
 							@Override
 							public int getSecondsPassed() {
 								return 5*60;
@@ -369,29 +391,6 @@ public class NyanFirstDoubleDate {
 						};
 					}
 				}
-			return null;
-		}
-	};
-	
-	public static final DialogueNode POST_DATE_APARTMENT_LOUNGE = new DialogueNode("", "", true, true) {
-		@Override
-		public void applyPreParsingEffects() {
-			travelTo(WorldType.NYANS_APARTMENT, PlaceType.NYAN_APARTMENT_SPARE_BEDROOM);
-			Main.game.getPlayer().setLocation(WorldType.NYANS_APARTMENT, PlaceType.NYAN_APARTMENT_LOUNGE);
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 5*60;
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/nyansApartment/firstDoubleDate", "POST_DATE_APARTMENT_LOUNGE");
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Bedroom", "Head into [nyanmum.namePos] bedroom...", POST_DATE_APARTMENT_BEDROOM);
-			}
 			return null;
 		}
 	};

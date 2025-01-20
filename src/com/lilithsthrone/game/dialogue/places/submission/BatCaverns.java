@@ -1,9 +1,6 @@
 package com.lilithsthrone.game.dialogue.places.submission;
 
-import java.time.DayOfWeek;
-
 import com.lilithsthrone.game.character.effects.Perk;
-import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
@@ -20,6 +17,8 @@ import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.time.DayOfWeek;
 
 /**
  * @since 0.2.3
@@ -49,8 +48,8 @@ public class BatCaverns {
 		}
 		return null;
 	}
-	
-	public static final DialogueNode STAIRCASE = new DialogueNode("Winding Staircase", "", false) {
+
+    public static final DialogueNode STAIRCASE = new DialogueNode("Винтовая лестница", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 5*60;
@@ -62,7 +61,7 @@ public class BatCaverns {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Submission", "Head back up to Submission.", PlaceType.SUBMISSION_BAT_CAVERNS.getDialogue(false)){
+				return new Response("Подземье", "Head back up to Submission.", PlaceType.SUBMISSION_BAT_CAVERNS.getDialogue(false)) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setLocation(WorldType.SUBMISSION, PlaceType.SUBMISSION_BAT_CAVERNS, false);
@@ -87,10 +86,10 @@ public class BatCaverns {
 			if (index == 1) {
 				if(Main.game.getPlayer().isAbleToFly()) {
 					if(!Main.game.getPlayer().isPartyAbleToFly()) {
-						return new Response("Dominion", "As your party members are unable to fly, you cannot use the shaft to travel up to Dominion...", null);
+						return new Response("Доминион", "As your party members are unable to fly, you cannot use the shaft to travel up to Dominion...", null);
 						
 					} else {
-						return new Response("Dominion", "Fly up the shaft to return to Dominion.", SHAFT_FLY_UP) {
+						return new Response("Доминион", "Fly up the shaft to return to Dominion.", SHAFT_FLY_UP) {
 							@Override
 							public void effects() {
 								if(Main.game.getWorlds().get(WorldType.DOMINION).getCell(PlaceType.DOMINION_EXIT_TO_BAT_CAVERNS)==null) {
@@ -108,7 +107,7 @@ public class BatCaverns {
 					}
 					
 				} else {
-					return new Response("Dominion", "As you are unable to fly, you cannot use the shaft to travel up to Dominion...", null);
+					return new Response("Доминион", "As you are unable to fly, you cannot use the shaft to travel up to Dominion...", null);
 				}
 			}
 			return null;
@@ -129,8 +128,8 @@ public class BatCaverns {
 			return DominionPlaces.CITY_EXIT_BAT_CAVERNS.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode CAVERN_DARK = new DialogueNode("Dark Cavern", "", false) {
+
+    public static final DialogueNode CAVERN_DARK = new DialogueNode("Тёмная пещера", "", false) {
 		@Override
 		public String getAuthor() {
 			return "Duner & Innoxia";
@@ -144,7 +143,7 @@ public class BatCaverns {
 			StringBuilder sb = new StringBuilder();
 			sb.append(UtilText.parseFromXMLFile("places/submission/batCaverns", "CAVERN_DARK"));
 			Main.game.getNonCompanionCharactersPresent().forEach((npc) -> {
-				sb.append(((NPC) npc).getPresentInTileDescription(false));
+				sb.append(npc.getPresentInTileDescription(false));
 			});
 			return sb.toString();
 		}
@@ -203,8 +202,8 @@ public class BatCaverns {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode CAVERN_LIGHT = new DialogueNode("Bioluminescent Cavern", "", false) {
+
+    public static final DialogueNode CAVERN_LIGHT = new DialogueNode("Биолюминесцентная пещера", "", false) {
 		@Override
 		public String getAuthor() {
 			return "Duner & Innoxia";
@@ -218,7 +217,7 @@ public class BatCaverns {
 			StringBuilder sb = new StringBuilder();
 			sb.append(UtilText.parseFromXMLFile("places/submission/batCaverns", "CAVERN_LIGHT"));
 			Main.game.getNonCompanionCharactersPresent().forEach((npc) -> {
-				sb.append(((NPC) npc).getPresentInTileDescription(false));
+				sb.append(npc.getPresentInTileDescription(false));
 			});
 			return sb.toString();
 		}
@@ -274,8 +273,8 @@ public class BatCaverns {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode RIVER = new DialogueNode("Underground River", "", false) {
+
+    public static final DialogueNode RIVER = new DialogueNode("Подземная река", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 5*60;
@@ -285,7 +284,7 @@ public class BatCaverns {
 			StringBuilder sb = new StringBuilder();
 			sb.append(UtilText.parseFromXMLFile("places/submission/batCaverns", "RIVER"));
 			Main.game.getNonCompanionCharactersPresent().forEach((npc) -> {
-				sb.append(((NPC) npc).getPresentInTileDescription(false));
+				sb.append(npc.getPresentInTileDescription(false));
 			});
 			return sb.toString();
 		}
@@ -308,8 +307,8 @@ public class BatCaverns {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode RIVER_BRIDGE = new DialogueNode("Mushroom Bridge", "", false) {
+
+    public static final DialogueNode RIVER_BRIDGE = new DialogueNode("Грибной мост", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 5*60;
@@ -319,7 +318,7 @@ public class BatCaverns {
 			StringBuilder sb = new StringBuilder();
 			sb.append(UtilText.parseFromXMLFile("places/submission/batCaverns", "RIVER_BRIDGE"));
 			Main.game.getNonCompanionCharactersPresent().forEach((npc) -> {
-				sb.append(((NPC) npc).getPresentInTileDescription(false));
+				sb.append(npc.getPresentInTileDescription(false));
 			});
 			return sb.toString();
 		}
@@ -342,8 +341,8 @@ public class BatCaverns {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode RIVER_END = new DialogueNode("Underground River", "", false) {
+
+    public static final DialogueNode RIVER_END = new DialogueNode("Подземная река", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 5*60;
@@ -353,7 +352,7 @@ public class BatCaverns {
 			StringBuilder sb = new StringBuilder();
 			sb.append(UtilText.parseFromXMLFile("places/submission/batCaverns", "RIVER_END"));
 			Main.game.getNonCompanionCharactersPresent().forEach((npc) -> {
-				sb.append(((NPC) npc).getPresentInTileDescription(false));
+				sb.append(npc.getPresentInTileDescription(false));
 			});
 			return sb.toString();
 		}
@@ -376,8 +375,50 @@ public class BatCaverns {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode SLIME_LAKE = new DialogueNode("Slime Lake", "", false) {
+    public static final DialogueNode REBEL_BASE_ENTRANCE_HANDLE = new DialogueNode("Странная ручка", "", false) {
+		@Override
+		public String getAuthor() {
+			return "DSG";
+		}
+		@Override
+		public int getSecondsPassed() {
+			return 30;
+		}
+		@Override
+		public String getContent() {
+
+            String sb = CAVERN_DARK.getContent() +
+                    UtilText.parseFromXMLFile("places/submission/batCaverns", "REBEL_BASE_ENTRANCE_HANDLE");
+
+			return sb;
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+				if (Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_PASSWORD_PART_ONE)) {
+					return new Response("Pull the handle", "What could possibly go wrong?", BatCavernsEncounterDialogue.REBEL_BASE_DOOR_NO_PASS);
+
+				} else if (Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_PASSWORD_PART_TWO)) {
+					return new Response("Pull the handle", "The handle won't budge. Looks like you really do need the password.", null);
+
+				} else if (Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_PASSWORD_COMPLETE)) {
+					return new Response("Pull the handle", "You don't have the complete password!", null);
+
+				} else if (Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_EXPLORATION)) {
+					return new Response("Pull the handle", "You have the complete password now and can therefore try to pull the handle again... if you really want to.", REBEL_BASE_DOOR_OPENED) {
+						@Override
+						public void effects() {
+							Main.game.getPlayerCell().getPlace().setPlaceType(PlaceType.BAT_CAVERNS_REBEL_BASE_ENTRANCE_EXTERIOR);
+							Main.game.getPlayerCell().getPlace().setName(PlaceType.BAT_CAVERNS_REBEL_BASE_ENTRANCE_EXTERIOR.getName());
+						}
+					};
+				}
+			} else {
+				return CAVERN_DARK.getResponse(responseTab, index-1);
+			}
+			return null;
+		}
+	};    public static final DialogueNode SLIME_LAKE = new DialogueNode("Озеро слизи", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -402,7 +443,7 @@ public class BatCaverns {
 			}
 
 			Main.game.getNonCompanionCharactersPresent().forEach((npc) -> {
-				UtilText.nodeContentSB.append(((NPC) npc).getPresentInTileDescription(false));
+				UtilText.nodeContentSB.append(npc.getPresentInTileDescription(false));
 			});
 			
 			return UtilText.nodeContentSB.toString();
@@ -454,8 +495,8 @@ public class BatCaverns {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode SLIME_LAKE_ISLAND = new DialogueNode("Slime Lake", "", true) {
+
+    public static final DialogueNode SLIME_LAKE_ISLAND = new DialogueNode("Озеро слизи", "", true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -514,52 +555,8 @@ public class BatCaverns {
 			return null;
 		}
 	};
-		
-	public static final DialogueNode REBEL_BASE_ENTRANCE_HANDLE = new DialogueNode("Strange Handle", "", false) {
-		@Override
-		public String getAuthor() {
-			return "DSG";
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 30;
-		}
-		@Override
-		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			
-			sb.append(CAVERN_DARK.getContent());
-			sb.append(UtilText.parseFromXMLFile("places/submission/batCaverns", "REBEL_BASE_ENTRANCE_HANDLE"));
-			
-			return sb.toString();
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				if (Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_PASSWORD_PART_ONE)) {
-					return new Response("Pull the handle", "What could possibly go wrong?", BatCavernsEncounterDialogue.REBEL_BASE_DOOR_NO_PASS);
-					
-				} else if (Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_PASSWORD_PART_TWO)) {
-					return new Response("Pull the handle", "The handle won't budge. Looks like you really do need the password.", null);
-					
-				} else if (Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_PASSWORD_COMPLETE)) {
-					return new Response("Pull the handle", "You don't have the complete password!", null);
-					
-				} else if (Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_EXPLORATION)) {
-					return new Response("Pull the handle", "You have the complete password now and can therefore try to pull the handle again... if you really want to.", REBEL_BASE_DOOR_OPENED) {
-						@Override
-						public void effects() {
-							Main.game.getPlayerCell().getPlace().setPlaceType(PlaceType.BAT_CAVERNS_REBEL_BASE_ENTRANCE_EXTERIOR);
-							Main.game.getPlayerCell().getPlace().setName(PlaceType.BAT_CAVERNS_REBEL_BASE_ENTRANCE_EXTERIOR.getName());
-						}
-					};
-				}
-			} else {
-				return CAVERN_DARK.getResponse(responseTab, index-1);
-			}
-			return null;
-		}
-	};
+
+
 			
 	public static final DialogueNode REBEL_BASE_DOOR_OPENED = new DialogueNode("Hidden Doorway", "", true) {
 		@Override
@@ -582,7 +579,7 @@ public class BatCaverns {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Enter", "This cave is not a natural formation. Someone built it, so it must lead somewhere.", PlaceType.REBEL_BASE_ENTRANCE.getDialogue(false)){
+                return new Response("Вход", "This cave is not a natural formation. Someone built it, so it must lead somewhere.", PlaceType.REBEL_BASE_ENTRANCE.getDialogue(false)) {
 					@Override
 					public void effects() {
 							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_EXPLORATION));
@@ -625,7 +622,7 @@ public class BatCaverns {
 			if(!Main.game.getPlayer().isQuestFailed(QuestLine.SIDE_REBEL_BASE) 
 					&& !Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_EXPLORATION)) {
 				if (index == 1) {
-					return new Response("Enter", "This cave is not a natural formation. Someone built it, so it must lead somewhere.", PlaceType.REBEL_BASE_ENTRANCE.getDialogue(false)){
+                    return new Response("Вход", "This cave is not a natural formation. Someone built it, so it must lead somewhere.", PlaceType.REBEL_BASE_ENTRANCE.getDialogue(false)) {
 						@Override
 						public void effects() {
 							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_EXPLORATION));

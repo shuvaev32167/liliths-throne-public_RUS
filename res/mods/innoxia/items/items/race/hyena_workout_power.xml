@@ -51,10 +51,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		After first popping up the cap, [npc.name] [npc.verb(bring)] the bottle of Workout Power up to [npc.her] [npc.mouth]. A very artificial smell of tropical fruits rises from the opening, and as [npc.she] [npc.verb(tilt)] [npc.her] head back and [npc.verb(start)] drinking the cool liquid, [npc.she] [npc.verb(discover)] that it tastes exactly the same as its smell.
+		After first popping up the cap, [npc.name] bring the bottle of Workout Power up to [npc.her] [npc.mouth]. A very artificial smell of tropical fruits rises from the opening, and as [npc.she] tilt [npc.her] head back and start drinking the cool liquid, [npc.she] discover that it tastes exactly the same as its smell.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		After first popping up the cap, [npc.name] [npc.verb(bring)] the bottle of Workout Power up to [npc2.namePos] waiting [npc2.lips]. A very artificial smell of tropical fruits rises from the opening, and as [npc2.she] [npc2.verb(tilt)] [npc2.her] head back and [npc2.verb(start)] drinking the cool liquid, [npc2.she] [npc2.verb(discover)] that it tastes exactly the same as its smell.
+		After first popping up the cap, [npc.name] bring the bottle of Workout Power up to [npc2.namePos] waiting [npc2.lips]. A very artificial smell of tropical fruits rises from the opening, and as [npc2.she] [npc2.verb(tilt)] [npc2.her] head back and [npc2.verb(start)] drinking the cool liquid, [npc2.she] [npc2.verb(discover)] that it tastes exactly the same as its smell.
 		]]></otherUse>
 	</useDescriptions>
 

@@ -1159,9 +1159,9 @@
 	</p>
 	<p>
 		#IF(pc.hasQuestInLine(QUEST_LINE_SIDE_WES, QUEST_WES_3_ELLE))
-			As it's currently outside of Elle's regular working hours ([style.colourMinorBad([units.time(9)] and [units.time(17)])]), a particularly bored-looking German-shepherd-boy is currently on duty behind the counter. Catching sight of you, this SWORD Enforcer stifles a yawn and asks, [style.speechMasculineStrong(Hey, you're that [pc.guy] who Elle gave the special pass to, right?)]
+			As it's currently outside of Elle's regular working hours ([style.colourMinorBad([units.time(9)] и [units.time(17)])]), a particularly bored-looking German-shepherd-boy is currently on duty behind the counter. Catching sight of you, this SWORD Enforcer stifles a yawn and asks, [style.speechMasculineStrong(Hey, you're that [pc.guy] who Elle gave the special pass to, right?)]
 		#ELSE
-			As it's currently outside of Wes's regular working hours ([style.colourMinorBad([units.time(9)] and [units.time(17)])]), a particularly bored-looking German-shepherd-boy is currently on duty behind the counter. Catching sight of you, this SWORD Enforcer stifles a yawn and asks, [style.speechMasculineStrong(Hey, you're that [pc.guy] who Wes gave the special pass to, right?)]
+			As it's currently outside of Wes's regular working hours ([style.colourMinorBad([units.time(9)] и [units.time(17)])]), a particularly bored-looking German-shepherd-boy is currently on duty behind the counter. Catching sight of you, this SWORD Enforcer stifles a yawn and asks, [style.speechMasculineStrong(Hey, you're that [pc.guy] who Wes gave the special pass to, right?)]
 		#ENDIF
 	</p>
 	<p>

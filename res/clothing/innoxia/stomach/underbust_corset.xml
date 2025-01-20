@@ -50,24 +50,24 @@
 	
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self><![CDATA[
-			[npc.Name] [npc.verb(place)] the corset around [npc.her] stomach before tying the laces up at [npc.her] back.
+			[npc.Name] place the corset around [npc.her] stomach before tying the laces up at [npc.her] back.
 		]]></self>
 		<other><![CDATA[
-			[npc.Name] [npc.verb(place)] the corset around [npc2.namePos] stomach before tying the laces up at [npc2.her] back.
+			[npc.Name] place the corset around [npc2.namePos] stomach before tying the laces up at [npc2.her] back.
 		]]></other>
 		<otherRough><![CDATA[
-			[npc.Name] roughly [npc.verb(place)] the corset around [npc2.namePos] stomach before impatiently tying the laces up at [npc2.her] back.
+			[npc.Name] roughly place the corset around [npc2.namePos] stomach before impatiently tying the laces up at [npc2.her] back.
 		]]></otherRough>
 	</replacementText>
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self><![CDATA[
-			[npc.Name] [npc.verb(untie)] [npc.her] corset's laces and [npc.verb(remove)] it from [npc.her] stomach.
+			[npc.Name] untie [npc.her] corset's laces and remove it from [npc.her] stomach.
 		]]></self>
 		<other><![CDATA[
-			[npc.Name] [npc.verb(untie)] the laces of [npc2.namePos] corset and [npc.verb(remove)] it from [npc2.her] stomach.
+			[npc.Name] untie the laces of [npc2.namePos] corset and remove it from [npc2.her] stomach.
 		]]></other>
 		<otherRough><![CDATA[
-			[npc.Name] impatiently [npc.verb(untie)] the laces of [npc2.namePos] corset and roughly [npc.verb(remove)] it from [npc2.her] stomach.
+			[npc.Name] impatiently untie the laces of [npc2.namePos] corset and roughly remove it from [npc2.her] stomach.
 		]]></otherRough>
 	</displacementText>
 	

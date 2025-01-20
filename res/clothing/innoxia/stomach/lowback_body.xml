@@ -111,70 +111,70 @@
 	
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self><![CDATA[
-			[npc.Name] [npc.verb(step)] into the lowback bodysuit and [npc.verb(pull)] it up to cover [npc.her] torso, before sliding the straps into place around [npc.her] shoulders.
+			[npc.Name] step into the lowback bodysuit and pull it up to cover [npc.her] torso, before sliding the straps into place around [npc.her] shoulders.
 		]]></self>
 		<other><![CDATA[
-			[npc.Name] [npc.verb(get)] [npc2.name] to [npc2.step] into the lowback bodysuit and [npc.verb(pull)] it up to cover [npc2.her] torso, before sliding the straps into place around [npc2.her] shoulders.
+			[npc.Name] get [npc2.name] to [npc2.step] into the lowback bodysuit and pull it up to cover [npc2.her] torso, before sliding the straps into place around [npc2.her] shoulders.
 		]]></other>
 		<otherRough><![CDATA[
-			[npc.Name] roughly [npc.verb(force)] [npc2.name] to [npc2.step] into the lowback bodysuit and [npc.verb(yank)] it up to cover [npc2.her] torso, before sliding the straps into place around [npc2.her] shoulders.
+			[npc.Name] roughly force [npc2.name] to [npc2.step] into the lowback bodysuit and yank it up to cover [npc2.her] torso, before sliding the straps into place around [npc2.her] shoulders.
 		]]></otherRough>
 	</replacementText>
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self><![CDATA[
-			[npc.Name] [npc.verb(slide)] [npc.her] bodysuit's straps from off of [npc.her] shoulders before tugging it all the way down [npc.her] [npc.legs] and [npc.stepping] out of it.
+			[npc.Name] slide [npc.her] bodysuit's straps from off of [npc.her] shoulders before tugging it all the way down [npc.her] [npc.legs] и [npc.stepping] out of it.
 		]]></self>
 		<other><![CDATA[
-			[npc.Name] [npc.verb(slide)] the straps of [npc2.namePos] bodysuit from off of [npc2.her] shoulders before tugging it all the way down [npc2.her] [npc2.legs] and making [npc2.herHim] [npc2.step] out of it.
+			[npc.Name] slide the straps of [npc2.namePos] bodysuit from off of [npc2.her] shoulders before tugging it all the way down [npc2.her] [npc2.legs] and making [npc2.herHim] [npc2.step] out of it.
 		]]></other>
 		<otherRough><![CDATA[
-			[npc.Name] roughly [npc.verb(yank)] the straps of [npc2.namePos] bodysuit from off of [npc2.her] shoulders before forcefully tugging it all the way down [npc2.her] [npc2.legs] and making [npc2.herHim] [npc2.step] out of it.
+			[npc.Name] roughly yank the straps of [npc2.namePos] bodysuit from off of [npc2.her] shoulders before forcefully tugging it all the way down [npc2.her] [npc2.legs] and making [npc2.herHim] [npc2.step] out of it.
 		]]></otherRough>
 	</displacementText>
 	
 	<replacementText type="SHIFTS_ASIDE">
 		<self><![CDATA[
-			[npc.Name] [npc.verb(slide)] the lower part of [npc.her] bodysuit back into its correct position so that [npc.her] groin is covered.
+			[npc.Name] slide the lower part of [npc.her] bodysuit back into its correct position so that [npc.her] groin is covered.
 		]]></self>
 		<other><![CDATA[
-			[npc.Name] [npc.verb(slide)] the lower part of [npc2.namePos] bodysuit back into its correct position so that [npc2.her] groin is covered.
+			[npc.Name] slide the lower part of [npc2.namePos] bodysuit back into its correct position so that [npc2.her] groin is covered.
 		]]></other>
 		<otherRough><![CDATA[
-			[npc.Name] roughly [npc.verb(yank)] the lower part of [npc2.namePos] bodysuit back into its correct position so that [npc2.her] groin is covered.
+			[npc.Name] roughly yank the lower part of [npc2.namePos] bodysuit back into its correct position so that [npc2.her] groin is covered.
 		]]></otherRough>
 	</replacementText>
 	<displacementText type="SHIFTS_ASIDE">
 		<self><![CDATA[
-			[npc.Name] [npc.verb(slide)] the lower part of [npc.her] bodysuit to one side in order to gain access to [npc.her] groin.
+			[npc.Name] slide the lower part of [npc.her] bodysuit to one side in order to gain access to [npc.her] groin.
 		]]></self>
 		<other><![CDATA[
-			[npc.Name] [npc.verb(slide)] the lower part of [npc2.namePos] bodysuit to one side in order to gain access to [npc2.her] groin.
+			[npc.Name] slide the lower part of [npc2.namePos] bodysuit to one side in order to gain access to [npc2.her] groin.
 		]]></other>
 		<otherRough><![CDATA[
-			[npc.Name] impatiently [npc.verb(yank)] the lower part of [npc2.namePos] bodysuit to one side in order to gain access to [npc2.her] groin.
+			[npc.Name] impatiently yank the lower part of [npc2.namePos] bodysuit to one side in order to gain access to [npc2.her] groin.
 		]]></otherRough>
 	</displacementText>
 	
 	<replacementText type="PULLS_DOWN">
 		<self><![CDATA[
-			[npc.Name] [npc.verb(pull)] the top part of [npc.her] bodysuit up into its correct position.
+			[npc.Name] pull the top part of [npc.her] bodysuit up into its correct position.
 		]]></self>
 		<other><![CDATA[
-			[npc.Name] [npc.verb(pull)] the top part of [npc2.namePos] bodysuit up into its correct position.
+			[npc.Name] pull the top part of [npc2.namePos] bodysuit up into its correct position.
 		]]></other>
 		<otherRough><![CDATA[
-			[npc.Name] roughly [npc.verb(yank)] the top part of [npc2.namePos] bodysuit up into its correct position.
+			[npc.Name] roughly yank the top part of [npc2.namePos] bodysuit up into its correct position.
 		]]></otherRough>
 	</replacementText>
 	<displacementText type="PULLS_DOWN">
 		<self><![CDATA[
-			[npc.Name] [npc.verb(pull)] down the top half of [npc.her] bodysuit.
+			[npc.Name] pull down the top half of [npc.her] bodysuit.
 		]]></self>
 		<other><![CDATA[
-			[npc.Name] [npc.verb(pull)] down the top half of [npc2.namePos] bodysuit.
+			[npc.Name] pull down the top half of [npc2.namePos] bodysuit.
 		]]></other>
 		<otherRough><![CDATA[
-			[npc.Name] roughly [npc.verb(pull)] down the top half of [npc2.namePos] bodysuit.
+			[npc.Name] roughly pull down the top half of [npc2.namePos] bodysuit.
 		]]></otherRough>
 	</displacementText>
 	

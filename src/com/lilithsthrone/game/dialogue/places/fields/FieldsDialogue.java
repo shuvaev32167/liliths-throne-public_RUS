@@ -1,9 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.fields;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.npc.submission.DarkSiren;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueManager;
@@ -18,6 +14,10 @@ import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.Season;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * @since 0.3.1
@@ -118,13 +118,13 @@ public class FieldsDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "With Meraxis having given her warning and departed, you're free to continue on your way out into the Fields.", Main.game.getDefaultDialogue(false));
+                return new Response("Продолжить", "With Meraxis having given her warning and departed, you're free to continue on your way out into the Fields.", Main.game.getDefaultDialogue(false));
 			}
 			return null;
 		}
 	};
-	
-	public static final DialogueNode DOMINION_EXTERIOR = new DialogueNode("Dominion", "", false) {
+
+    public static final DialogueNode DOMINION_EXTERIOR = new DialogueNode("Доминион", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 60 * 60;
@@ -153,8 +153,8 @@ public class FieldsDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode FOLOI_FIELDS = new DialogueNode("Foloi Fields", "", false) {
+
+    public static final DialogueNode FOLOI_FIELDS = new DialogueNode("Фолойские поля", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.hasSnowedThisWinter)
@@ -218,12 +218,11 @@ public class FieldsDialogue {
 		
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
+
+            String sb = UtilText.parseFromXMLFile("places/global/globalPlaces", "FOLOI_FOREST") +
+                    getUnavailableAreaText();
 			
-			sb.append(UtilText.parseFromXMLFile("places/global/globalPlaces", "FOLOI_FOREST"));
-			sb.append(getUnavailableAreaText());
-			
-			return sb.toString();
+			return sb;
 		}
 		
 		@Override
@@ -247,12 +246,11 @@ public class FieldsDialogue {
 		}
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
+
+            String sb = UtilText.parseFromXMLFile("places/global/globalPlaces", "GRASSLAND_WILDERNESS") +
+                    getUnavailableAreaText();
 			
-			sb.append(UtilText.parseFromXMLFile("places/global/globalPlaces", "GRASSLAND_WILDERNESS"));
-			sb.append(getUnavailableAreaText());
-			
-			return sb.toString();
+			return sb;
 		}
 		
 		@Override
@@ -286,12 +284,11 @@ public class FieldsDialogue {
 		
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
+
+            String sb = UtilText.parseFromXMLFile("places/global/globalPlaces", "RIVER_HUBUR") +
+                    getUnavailableAreaText();
 			
-			sb.append(UtilText.parseFromXMLFile("places/global/globalPlaces", "RIVER_HUBUR"));
-			sb.append(getUnavailableAreaText());
-			
-			return sb.toString();
+			return sb;
 		}
 		
 		@Override
@@ -316,8 +313,8 @@ public class FieldsDialogue {
 			}
 		}
 	};
-	
-	public static final DialogueNode ELIS = new DialogueNode("Elis", "", false) {
+
+    public static final DialogueNode ELIS = new DialogueNode("Элис", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 30 * 60;
@@ -325,12 +322,11 @@ public class FieldsDialogue {
 		
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
+
+            String sb = UtilText.parseFromXMLFile("places/global/globalPlaces", "ELIS") +
+                    getUnavailableAreaText();
 			
-			sb.append(UtilText.parseFromXMLFile("places/global/globalPlaces", "ELIS"));
-			sb.append(getUnavailableAreaText());
-			
-			return sb.toString();
+			return sb;
 		}
 		
 		@Override

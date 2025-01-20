@@ -248,24 +248,24 @@
 
   <replacementText slot="NECK" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(wrap)] the choker around [npc.her] neck and [npc.verb(fasten)] the buckle.]]>
+        <![CDATA[[npc.Name] wrap the choker around [npc.her] neck and fasten the buckle.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(wrap)] the choker around [npc2.namePos] neck and [npc.verb(fasten)] the buckle.]]>
+        <![CDATA[[npc.Name] wrap the choker around [npc2.namePos] neck and fasten the buckle.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(wrap)] the choker around [npc2.namePos] neck and tightly [npc.verb(fasten)] the buckle.]]>
+        <![CDATA[[npc.Name] roughly wrap the choker around [npc2.namePos] neck and tightly fasten the buckle.]]>
     </otherRough>
   </replacementText>
   <displacementText slot="NECK" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(unfasten)] the choker's buckle and [npc.verb(remove)] it from around [npc.her] neck.]]>
+        <![CDATA[[npc.Name] unfasten the choker's buckle and remove it from around [npc.her] neck.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(unfasten)] the buckle of [npc2.namePos] choker and [npc.verb(remove)] it from around [npc2.her] neck.]]>
+        <![CDATA[[npc.Name] unfasten the buckle of [npc2.namePos] choker and remove it from around [npc2.her] neck.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(unfasten)] the buckle of [npc2.namePos] choker and [npc.verb(yank)] it off from around [npc2.her] neck.]]>
+        <![CDATA[[npc.Name] roughly unfasten the buckle of [npc2.namePos] choker and yank it off from around [npc2.her] neck.]]>
     </otherRough>
   </displacementText>
   

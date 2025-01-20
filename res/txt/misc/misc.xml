@@ -3,7 +3,7 @@
 
 	<htmlContent tag="START_SEX_2KOMA"><![CDATA[
 	<p>
-		[npc2.Name] can't help but laugh as [npc2.she] [npc2.verb(realise)] that [npc.name] actually [npc.verb(think)] [npc.she] [npc.verb(stand)] a chance against [npc2.herHim]. With a mocking smirk on [npc2.her] face, [npc2.she] [npc2.verb(taunt)], [npc2.speech(Hah! You should know your place, you pathetic little thing! Get down and beg for my forgiveness, before I decide to end you!)]
+		[npc2.Name] can't help but laugh as [npc2.she] [npc2.verb(realise)] that [npc.name] actually think [npc.she] stand a chance against [npc2.herHim]. With a mocking smirk on [npc2.her] face, [npc2.she] [npc2.verb(taunt)], [npc2.speech(Hah! You should know your place, you pathetic little thing! Get down and beg for my forgiveness, before I decide to end you!)]
 	</p>
 	<p style='text-align:center;'>
 		[style.italics(A few moments later...)]

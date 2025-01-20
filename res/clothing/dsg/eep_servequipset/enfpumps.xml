@@ -70,25 +70,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(step)] into the pumps.]]>
+            <![CDATA[[npc.Name] step into the pumps.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(guide)] [npc2.namePos] [npc2.feet] into the pumps.]]>
+            <![CDATA[[npc.Name] guide [npc2.namePos] [npc2.feet] into the pumps.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(shove)] [npc2.namePos] [npc2.feet] into the pumps.]]>
+            <![CDATA[[npc.Name] shove [npc2.namePos] [npc2.feet] into the pumps.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(slip)] [npc.her] pumps off [npc.her] [npc.feet].]]>
+            <![CDATA[[npc.Name] slip [npc.her] pumps off [npc.her] [npc.feet].]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(slip)] [npc2.namePos] pumps off [npc2.her] [npc2.feet].]]>
+            <![CDATA[[npc.Name] slip [npc2.namePos] pumps off [npc2.her] [npc2.feet].]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(yank)] [npc2.namePos] pumps off [npc2.her] [npc2.feet].]]>
+            <![CDATA[[npc.Name] yank [npc2.namePos] pumps off [npc2.her] [npc2.feet].]]>
 		</otherRough>
 	</displacementText>
 	

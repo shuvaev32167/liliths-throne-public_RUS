@@ -181,7 +181,7 @@
 	
 	<htmlContent tag="SLIME_LAKE_PACIFIED"><![CDATA[
 	<p>
-		As you approach, you see that the front door is slightly ajar, and from within, a thin beam of golden light shines out onto the island's mossy knoll. Although there's no sign of life outside the tower, you know that [slimeIce.name] and [slimeFire.name] are standing guard just inside the entrance. As you've already come to an arrangement with the Slime Queen, you're free to come and go from her tower without having to worry about fighting her guards.
+		As you approach, you see that the front door is slightly ajar, and from within, a thin beam of golden light shines out onto the island's mossy knoll. Although there's no sign of life outside the tower, you know that [slimeIce.name] и [slimeFire.name] are standing guard just inside the entrance. As you've already come to an arrangement with the Slime Queen, you're free to come and go from her tower without having to worry about fighting her guards.
 	</p>
 	]]>
 	</htmlContent>

@@ -22,13 +22,13 @@ import com.lilithsthrone.utils.colours.PresetColour;
  */
 public class SlaveryAdministration {
 
-	private static int slaverLicenseCost = 5000;
+	private static final int slaverLicenseCost = 5000;
 	
 	private static Finch getFinch() {
 		return (Finch) Main.game.getNpc(Finch.class);
 	}
-	
-	public static final DialogueNode SLAVERY_ADMINISTRATION_EXTERIOR = new DialogueNode("Slavery Administration", ".", false) {
+
+    public static final DialogueNode SLAVERY_ADMINISTRATION_EXTERIOR = new DialogueNode("Управление рабовладением", ".", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;
@@ -40,7 +40,7 @@ public class SlaveryAdministration {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Enter", "Step inside the 'Slavery Administration' building.", SLAVERY_ADMINISTRATION);
+                return new Response("Вход", "Step inside the 'Slavery Administration' building.", SLAVERY_ADMINISTRATION);
 
 			} else if(index==2) {
 				if(Main.game.getCurrentDialogueNode()==SLAVERY_ADMINISTRATION_POSTERS) {
@@ -52,7 +52,7 @@ public class SlaveryAdministration {
 		}
 	};
 
-	public static final DialogueNode SLAVERY_ADMINISTRATION_POSTERS = new DialogueNode("Slavery Administration", ".", false) {
+    public static final DialogueNode SLAVERY_ADMINISTRATION_POSTERS = new DialogueNode("Управление рабовладением", ".", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 2*60;
@@ -66,8 +66,8 @@ public class SlaveryAdministration {
 			return SLAVERY_ADMINISTRATION_EXTERIOR.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode SLAVERY_ADMINISTRATION = new DialogueNode("Slavery Administration", ".", true) {
+
+    public static final DialogueNode SLAVERY_ADMINISTRATION = new DialogueNode("Управление рабовладением", ".", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 2*60;
@@ -154,8 +154,8 @@ public class SlaveryAdministration {
 			}
 		}
 	};
-	
-	public static final DialogueNode SLAVERY_ADMINISTRATION_ASK_ABOUT_SLAVER_LICENSE = new DialogueNode("Slavery Administration", ".", true) {
+
+    public static final DialogueNode SLAVERY_ADMINISTRATION_ASK_ABOUT_SLAVER_LICENSE = new DialogueNode("Управление рабовладением", ".", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 5*60;
@@ -169,8 +169,8 @@ public class SlaveryAdministration {
 			return SLAVERY_ADMINISTRATION.getResponse(0, index);
 		}
 	};
-	
-	public static final DialogueNode SLAVERY_ADMINISTRATION_SLAVER_LICENSE_OBTAINED = new DialogueNode("Slavery Administration", ".", true) {
+
+    public static final DialogueNode SLAVERY_ADMINISTRATION_SLAVER_LICENSE_OBTAINED = new DialogueNode("Управление рабовладением", ".", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 5*60;
@@ -195,8 +195,8 @@ public class SlaveryAdministration {
 			}
 		}
 	};
-	
-	public static final DialogueNode SLAVERY_ADMINISTRATION_SLAVER_LICENSE_OBTAINED_RULES = new DialogueNode("Slavery Administration", ".", true, true) {
+
+    public static final DialogueNode SLAVERY_ADMINISTRATION_SLAVER_LICENSE_OBTAINED_RULES = new DialogueNode("Управление рабовладением", ".", true, true) {
 		@Override
 		public int getSecondsPassed() {
 			return 5*60;

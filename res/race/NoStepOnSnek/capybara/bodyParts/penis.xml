@@ -22,7 +22,7 @@
 		<modifier>SHEATHED</modifier>
 	</defaultPenetrationModifiers>
 	<transformationDescription><![CDATA[
-		Letting out an involuntary moan, [npc.name] [npc.verb(feel)] [npc.her] penis shifting into a new form, and [npc.sheIs] hit by a wave of overwhelming arousal as a thick sheath suddenly grows around the base of [npc.her] shaft. 
+		Letting out an involuntary moan, [npc.name] feel [npc.her] penis shifting into a new form, and [npc.sheIs] hit by a wave of overwhelming arousal as a thick sheath suddenly grows around the base of [npc.her] shaft.
 		<br/>[npc.She] now [npc.has] a [style.boldCapybara(capybara-like penis)], [npc.materialDescriptor] [npc.penisFullDescription(true)].
 		<br/>[npc.She] [npc.has] [style.boldCapybara([npc.ballsCount]#IF(npc.isInternalTesticles()) internal#ENDIF balls)], [npc.materialDescriptor] [npc.ballsFullDescription(true)], which produce [npc.cumColour(true)] [style.boldCapybara(capybara cum)].
 	]]></transformationDescription>

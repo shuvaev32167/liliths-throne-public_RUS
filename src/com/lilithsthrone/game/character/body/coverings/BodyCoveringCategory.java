@@ -8,45 +8,57 @@ package com.lilithsthrone.game.character.body.coverings;
 public enum BodyCoveringCategory {
 
 	// Main covering types
-	MAIN_SKIN("skin"),
-	MAIN_HAIR("hair"),
-	MAIN_FUR("fur"),
-	MAIN_SCALES("scales"),
-	MAIN_FEATHER("feathers"),
-	MAIN_CHITIN("chitin"),
+	MAIN_SKIN("кожа"),
+	MAIN_HAIR("волосы"),
+	MAIN_FUR("мех"),
+	MAIN_SCALES("чешуя"),
+	MAIN_FEATHER("перья"),
+	MAIN_CHITIN("хитин"),
 	
 	// Eyes
-	EYE_IRIS("irises"),
-	EYE_PUPIL("pupils"),
-	EYE_SCLERA("sclerae"),
+	EYE_IRIS("радужки"),
+	EYE_PUPIL("зрачки"),
+	EYE_SCLERA("белки"),
 
 	// Head
-	ANTENNAE("antennae"),
-	HORN("horns"),
-	ANTLER("antlers"),
-	HAIR("hair"),
+	ANTENNAE("усики"),
+	HORN("рога"),
+	ANTLER("ветвистые рога"),
+	HAIR("волосы"),
 
 	// Orifices
-	ANUS("anus"),
-	MOUTH("mouth"),
-	TONGUE("tongue"),
-	NIPPLE("nipples"),
-	NIPPLE_CROTCH("crotch-nipples"),
-	VAGINA("vagina"),
-	PENIS("penis"),
-	SPINNERET("spinneret"),
+	ANUS("анус"),
+	MOUTH("рот"),
+	TONGUE("язык"),
+	NIPPLE("соски"),
+	NIPPLE_CROTCH("лобковые соски"),
+	VAGINA("вагина"),
+	PENIS("пенис"),
+	SPINNERET("прядущий орган"),
 
 	// Other
 	BODY_HAIR("body hair"),
 	
 	// Specials
-	ARTIFICIAL("dildo") { public boolean isInfluencedByMaterialType() { return false; } },
-	FLUID("fluid") { public boolean isInfluencedByMaterialType() { return false; } },
-	MAKEUP("makeup") { public boolean isInfluencedByMaterialType() { return false; } };
+	ARTIFICIAL("дилдо") {
+		public boolean isInfluencedByMaterialType() {
+			return false;
+		}
+	},
+	FLUID("жидкости") {
+		public boolean isInfluencedByMaterialType() {
+			return false;
+		}
+	},
+	MAKEUP("макияж") {
+		public boolean isInfluencedByMaterialType() {
+			return false;
+		}
+	};
 	
-	private String name;
+	private final String name;
 
-	private BodyCoveringCategory(String name) {
+	BodyCoveringCategory(String name) {
 		this.name = name;
 	}
 

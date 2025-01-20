@@ -9,19 +9,19 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @author Innoxia
  */
 public enum SexualOrientation {
-	ANDROPHILIC("Интерес к Мужчинам", false, true, PresetColour.MASCULINE, SexualOrientationPreference.THREE_AVERAGE),
+    ANDROPHILIC("Интерес к мужчинам", false, true, PresetColour.MASCULINE, SexualOrientationPreference.THREE_AVERAGE),
 
-	AMBIPHILIC("Нейтральный интерес", true, true, PresetColour.ANDROGYNOUS, SexualOrientationPreference.THREE_AVERAGE),
+    AMBIPHILIC("Интерес ко всем", true, true, PresetColour.ANDROGYNOUS, SexualOrientationPreference.THREE_AVERAGE),
 
-	GYNEPHILIC("Интерес к Женщинам", true, false, PresetColour.FEMININE, SexualOrientationPreference.THREE_AVERAGE);
+    GYNEPHILIC("Интерес к женщинам", true, false, PresetColour.FEMININE, SexualOrientationPreference.THREE_AVERAGE);
 
-	private String name;
-	private Colour colour;
-	private SexualOrientationPreference orientationPreferenceDefault;
-	private boolean attractedToFeminine;
-	private boolean attractedToMasculine;
+	private final String name;
+	private final Colour colour;
+	private final SexualOrientationPreference orientationPreferenceDefault;
+	private final boolean attractedToFeminine;
+	private final boolean attractedToMasculine;
 
-	private SexualOrientation(String name, boolean attractedToFeminine, boolean attractedToMasculine, Colour colour, SexualOrientationPreference orientationPreferenceDefault) {
+	SexualOrientation(String name, boolean attractedToFeminine, boolean attractedToMasculine, Colour colour, SexualOrientationPreference orientationPreferenceDefault) {
 		this.name = name;
 		this.colour = colour;
 		this.orientationPreferenceDefault = orientationPreferenceDefault;

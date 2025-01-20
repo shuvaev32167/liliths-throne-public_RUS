@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.character.body;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
@@ -14,6 +11,9 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.1.0
@@ -107,7 +107,7 @@ public class Tail implements BodyPartInterface {
 		
 		if(type == getType()) {
 			if(type == TailType.NONE) {
-				sb.append(UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already [npc.verb(lack)] a tail, so nothing happens...)]</p>"));
+                sb.append(UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already lack a tail, so nothing happens...)]</p>"));
 				
 			} else {
 				sb.append(UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already [npc.has] the [npc.tail] of [npc.a_tailRace], so nothing happens...)]</p>"));
@@ -118,13 +118,13 @@ public class Tail implements BodyPartInterface {
 		if(this.type == TailType.NONE) {
 			sb.append(
 					"<p>"
-						+ "[npc.Name] [npc.verb(rub)] at [npc.her] lower back as [npc.she] [npc.verb(feel)] it growing hot and sensitive, and as [npc.she] [npc.do] so, something starts pushing out from under [npc.her] [npc.skin].");
+                            + "[npc.Name] rub at [npc.her] lower back as [npc.she] feel it growing hot and sensitive, and as [npc.she] [npc.do] so, something starts pushing out from under [npc.her] [npc.skin].");
 		} else {
 			sb.append(
 					"<p>"
 						+ (owner.getTailCount()==1
-							?"[npc.Name] [npc.verb(feel)] [npc.her] [npc.tail] growing hot and itchy, and after just a moment it starts to transform."
-							:"[npc.Name] [npc.verb(feel)] [npc.her] [npc.tails] growing hot and itchy, and after just a moment they start to transform."));
+                            ? "[npc.Name] feel [npc.her] [npc.tail] growing hot and itchy, and after just a moment it starts to transform."
+                            : "[npc.Name] feel [npc.her] [npc.tails] growing hot and itchy, and after just a moment they start to transform."));
 		}
 
 		if(this.getLengthAsPercentageOfHeight()==this.getType().getDefaultLengthAsPercentageOfHeight()) {
@@ -287,7 +287,7 @@ public class Tail implements BodyPartInterface {
 			return UtilText.parse(owner,
 					"<p>"
 						+ "A tingling feeling spreads over [npc.namePos] [npc.tails], before moving down and concentrating in [npc.her] lower back."
-						+ " [npc.She] can't help but let out a cry as [npc.she] [npc.verb(feel)] some of them [style.boldShrink(shrinking away)] and disappearing back down into [npc.her] [npc.skin].<br/>"
+                            + " [npc.She] can't help but let out a cry as [npc.she] feel some of them [style.boldShrink(shrinking away)] and disappearing back down into [npc.her] [npc.skin].<br/>"
 						+ "After a few moments, [npc.sheIs] left with [style.boldTfGeneric("
 								+(tailCount==1
 									?"a single [npc.tail]"
@@ -299,7 +299,7 @@ public class Tail implements BodyPartInterface {
 			return UtilText.parse(owner,
 					"<p>"
 						+ "A tingling feeling spreads over [npc.namePos] [npc.tails], before moving down and concentrating in [npc.her] lower back."
-						+ " [npc.She] can't help but let out a little cry as [npc.she] [npc.verb(feel)] new [npc.tails] [style.boldGrow(pushing up)] and growing out of [npc.her] [npc.skin].<br/>"
+                            + " [npc.She] can't help but let out a little cry as [npc.she] feel new [npc.tails] [style.boldGrow(pushing up)] and growing out of [npc.her] [npc.skin].<br/>"
 						+ "After a few moments, [npc.sheIs] left with [style.boldTfGeneric("
 								+(tailCount==1
 									?"a single [npc.tail]"
@@ -332,7 +332,7 @@ public class Tail implements BodyPartInterface {
 		
 		if (girth <= 0) {
 			if (this.girth != 0) {
-				girthChange = 0 - this.girth;
+				girthChange = -this.girth;
 				this.girth = 0;
 			}
 		} else if (girth >= PenetrationGirth.getMaximum()) {

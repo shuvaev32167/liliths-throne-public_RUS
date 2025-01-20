@@ -75,25 +75,25 @@
 	
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(step)] into the boxers, before pulling them up to cover [npc.her] private parts.]]>
+            <![CDATA[[npc.Name] step into the boxers, before pulling them up to cover [npc.her] private parts.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the boxers up [npc2.namePos] [npc2.legs] to cover [npc2.her] private parts.]]>
+            <![CDATA[[npc.Name] pull the boxers up [npc2.namePos] [npc2.legs] to cover [npc2.her] private parts.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(pull)] the boxers up [npc2.namePos] [npc2.legs] to cover [npc2.her] private parts.]]>
+            <![CDATA[[npc.Name] roughly pull the boxers up [npc2.namePos] [npc2.legs] to cover [npc2.her] private parts.]]>
 	  </otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc.her] boxers down and [npc.verb(kick)] them off [npc.her] [npc.feet].]]>
+            <![CDATA[[npc.Name] pull [npc.her] boxers down and kick them off [npc.her] [npc.feet].]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(slide)] down [npc2.namePos] boxers and [npc.verb(pull)] them off [npc2.her] [npc2.feet].]]>
+            <![CDATA[[npc.Name] slide down [npc2.namePos] boxers and pull them off [npc2.her] [npc2.feet].]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(pull)] down [npc2.namePos] boxers and [npc.verb(yank)] them off [npc2.her] [npc2.feet].]]>
+            <![CDATA[[npc.Name] roughly pull down [npc2.namePos] boxers and yank them off [npc2.her] [npc2.feet].]]>
 		</otherRough>
 	</displacementText>
 	

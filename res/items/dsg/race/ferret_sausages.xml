@@ -40,7 +40,7 @@
 			[##npc.incrementMana(npc.getAttributeValue(ATTRIBUTE_MANA_MAXIMUM)/10)]
 			
 			<p style='margin-bottom:0; padding-bottom:0;'>
-				[npc.Name] [npc.verb(start)] to feel stronger...
+				[npc.Name] start to feel stronger...
 			</p>
 			[#npc.addPotionEffect(ATTRIBUTE_MAJOR_PHYSIQUE, 1)]
 		]]></applyEffects>
@@ -54,10 +54,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		[npc.Name] [npc.verb(remove)] the glass cover and [npc.verb(breathe)] in the smoky scent of the sausage mixed with a sharp undertone of seasoning. Unable to resist the delicious looking meal, [npc.she] eagerly [npc.verb(start)] wolfing it all down and [npc.verb(empty)] the plate in moments.
+		[npc.Name] remove the glass cover and breathe in the smoky scent of the sausage mixed with a sharp undertone of seasoning. Unable to resist the delicious looking meal, [npc.she] eagerly start wolfing it all down and empty the plate in moments.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		[npc.Name] [npc.verb(remove)] glass cover from the plate and [npc.verb(hold)] it out to [npc2.name], allowing [npc2.herHim] to [npc2.verb(breathe)] in the smoky scent of the sausage mixed with a sharp undertone of seasoning. Unable to resist the delicious-looking meal, [npc2.she] [npc2.verb(start)] wolfing it all down and [npc.verb(empty)] the plate in moments.
+		[npc.Name] remove glass cover from the plate and hold it out to [npc2.name], allowing [npc2.herHim] to [npc2.verb(breathe)] in the smoky scent of the sausage mixed with a sharp undertone of seasoning. Unable to resist the delicious-looking meal, [npc2.she] [npc2.verb(start)] wolfing it all down and empty the plate in moments.
 		]]></otherUse>
 	</useDescriptions>
 

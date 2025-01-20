@@ -1,13 +1,5 @@
 package com.lilithsthrone.game.dialogue.companions;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -41,6 +33,10 @@ import com.lilithsthrone.utils.time.SolarElevationAngle;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
+
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.*;
 
 /**
  * @since 0.2.10
@@ -355,16 +351,16 @@ public class OccupantDialogue {
 					} else if (index == 2) {
 						if(!occupant().NPCFlagValues.contains(NPCFlagValue.occupantTalkJob)) {
 							return new Response(hasJob()
-										?"Job"
+                                    ? "Работа"
 										:(occupant().getDesiredJobs().isEmpty()
-											?"Unemployment"
-											:"Job hunt"),
+                                    ? "Безработный"
+                                    : "В поиске работы"),
 									UtilText.parse(occupant(),
 											hasJob()
-											?"Ask [npc.name] about [npc.her] job."
+                                                    ? "Спросите [npc.name] о [npc.her] работе."
 											:(occupant().getDesiredJobs().isEmpty()
-												?"Ask [npc.name] if [npc.she] happy to remain unemployed."
-												:"Ask [npc.name] how [npc.her] job hunt is going.")),
+                                                    ? "Спросите [npc.name], рада ли [npc.she] остаться безработной."
+                                                    : "Спросите [npc.name], как продвигается поиск [npc.her] работы.")),
 									OCCUPANT_TALK_JOB) {
 								@Override
 								public void effects() {
@@ -382,7 +378,7 @@ public class OccupantDialogue {
 						
 					} else if (index == 3) {
 						if(!occupant().NPCFlagValues.contains(NPCFlagValue.occupantTalkLilaya)) {
-							return new Response("Lilaya", UtilText.parse(occupant(), "Ask [npc.name] about [npc.her] interactions with Lilaya and Rose."), OCCUPANT_TALK_LILAYA) {
+                            return new Response("Лилайя", UtilText.parse(occupant(), "Ask [npc.name] about [npc.her] interactions with Lilaya and Rose."), OCCUPANT_TALK_LILAYA) {
 								@Override
 								public void effects() {
 									applyReactionReset();
@@ -392,7 +388,7 @@ public class OccupantDialogue {
 							};
 							
 						} else {
-							return new Response("Lilaya", UtilText.parse(occupant(), "You've already talked with [npc.name] about [npc.her] interactions with Lilaya and Rose today."), null);
+                            return new Response("Лилайя", UtilText.parse(occupant(), "You've already talked with [npc.name] about [npc.her] interactions with Lilaya and Rose today."), null);
 						}
 						
 					} else if (index == 4) {
@@ -756,7 +752,7 @@ public class OccupantDialogue {
 							
 						} else {
 							return new ResponseSex("Side-by-side (as dom)",
-									UtilText.parse(characterForSex, characterForSexSecondary, "Push [npc.name] and [npc2.name] down onto all fours, before kneeling behind [npc.name], ready to fuck them both side-by-side."),
+                                    UtilText.parse(characterForSex, characterForSexSecondary, "Push [npc.name] и [npc2.name] down onto all fours, before kneeling behind [npc.name], ready to fuck them both side-by-side."),
 									null, null, null, null, null, null,
 									true, false,
 									new SMGeneric(
@@ -1707,7 +1703,7 @@ public class OccupantDialogue {
 				else if (index == 3) {
 					return new Response("Rest",
 							UtilText.parse(occupant(), "Ask [npc.name] if you can crash on [npc.her] sofa for four hours.")
-							+ " As well as replenishing your "+Attribute.HEALTH_MAXIMUM.getName()+" and "+Attribute.MANA_MAXIMUM.getName()+", you will also get the 'Well Rested' status effect.",
+                                    + "  также восполнение твоих " + Attribute.HEALTH_MAXIMUM.getName() + " и " + Attribute.MANA_MAXIMUM.getName() + ", вы также получите статусный эффект 'Хорошо отдохнувший'",
 							OCCUPANT_APARTMENT_SLEEP_OVER){
 						@Override
 						public void effects() {
@@ -1719,14 +1715,14 @@ public class OccupantDialogue {
 				} else if (index == 4) {
 					int timeUntilChange = Main.game.getMinutesUntilNextMorningOrEvening() + 5; // Add 5 minutes so that if the days are drawing in, you don't get stuck in a loop of always sleeping to sunset/sunrise
 					LocalDateTime[] sunriseSunset = DateAndTime.getTimeOfSolarElevationChange(Main.game.getDateNow(), SolarElevationAngle.SUN_ALTITUDE_SUNRISE_SUNSET, Game.DOMINION_LATITUDE, Game.DOMINION_LONGITUDE);
-					return new Response("Rest until " + (Main.game.isDayTime() ? "Sunset" : "Sunrise"),
+					return new Response("Отдых до " + (Main.game.isDayTime() ? "Заката" : "Восхода"),
 							UtilText.parse(occupant(), "Ask [npc.name] if you can crash on [npc.her] sofa for ")
 								+ (timeUntilChange >= 60 ?timeUntilChange / 60 + " hours " : " ")
 								+ (timeUntilChange % 60 != 0 ? timeUntilChange % 60 + " minutes" : "")
 								+ (Main.game.isDayTime()
-										? " until five minutes past sunset ("+Units.time(sunriseSunset[1].plusMinutes(5))+")."
-										: " until five minutes past sunrise ("+Units.time(sunriseSunset[0].plusMinutes(5))+").")
-								+ " As well as replenishing your "+Attribute.HEALTH_MAXIMUM.getName()+" and "+Attribute.MANA_MAXIMUM.getName()+", you will also get the 'Well Rested' status effect.",
+                                    ? " пока не пройдет пять минут заката (" + Units.time(sunriseSunset[1].plusMinutes(5)) + ")."
+                                    : " пока не пройдет пять минут рассвета (" + Units.time(sunriseSunset[0].plusMinutes(5)) + ").")
+                                    + "  также восполнение твоих " + Attribute.HEALTH_MAXIMUM.getName() + " и " + Attribute.MANA_MAXIMUM.getName() + ", вы также получите статусный эффект 'Хорошо отдохнувший'",
 								OCCUPANT_APARTMENT_SLEEP_OVER){
 						@Override
 						public void effects() {
@@ -1789,7 +1785,7 @@ public class OccupantDialogue {
 					};
 
 				} else if (index == 8) {
-					return new Response("Set alarm", "Set the alarm on your phone, so that you can wake at a specific time.", RoomPlayer.ROOM_SET_ALARM) {
+                    return new Response("Установить будильник", "Set the alarm on your phone, so that you can wake at a specific time.", RoomPlayer.ROOM_SET_ALARM) {
 						@Override
 						public void effects() {
 							Main.game.saveDialogueNode();
@@ -1801,10 +1797,10 @@ public class OccupantDialogue {
 					if(alarmTime >= 0) {
 						String alarmTimeStr = Main.game.getDisplayTime(LocalTime.ofSecondOfDay(alarmTime*60));
 						int timeUntilAlarm = Main.game.getMinutesUntilTimeInMinutes((int)alarmTime-1)+1; // -1+1 is so we get 1440 instead of 0
-						return new Response("Rest until alarm (" + alarmTimeStr + ")",
+						return new Response("Отдых до будильника (" + alarmTimeStr + ")",
 								"Ask [npc.name] if you can crash on [npc.her] sofa for " + (timeUntilAlarm >= 60 ? timeUntilAlarm / 60 + " hours, " : "")
 										+ (timeUntilAlarm % 60 != 0 ? timeUntilAlarm % 60 + " minutes, " : "")
-										+ " until your alarm goes off. As well as replenishing your " + Attribute.HEALTH_MAXIMUM.getName() + " and " + Attribute.MANA_MAXIMUM.getName() + ", you will also get the 'Well Rested' status effect.",
+                                        + " пока не прозвенит будильник. Также восполняет втои " + Attribute.HEALTH_MAXIMUM.getName() + " и " + Attribute.MANA_MAXIMUM.getName() + ", вы также получите статусный эффект 'Хорошо отдохнувший'",
 								OCCUPANT_APARTMENT_SLEEP_OVER) {
 							@Override
 							public void effects() {
@@ -1813,7 +1809,7 @@ public class OccupantDialogue {
 							}
 						};
 					} else {
-						return new Response("Rest until alarm (unset)", "<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Your alarm is unset!</span>", null);
+						return new Response("Отдых до будильника (Отключён)", "<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Your alarm is unset!</span>", null);
 					}
 					
 				} else if (index == 10) {

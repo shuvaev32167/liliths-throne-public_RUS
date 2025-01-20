@@ -42,7 +42,7 @@
 		<descriptor>scaly</descriptor>
 	</fingerDescriptorsFeminine>
 	<transformationDescription><![CDATA[
-		Within a matter of moments, a layer of [npc.armFullDescription] has quickly grown over them, and, looking down, [npc.she] [npc.verb(see)] [npc.her] new scales growing over the backs of [npc.her] hands as little claws push out to replace [npc.her] fingernails. [npc.Her] palms rapidly transform to be [npc.materialDescriptor] little scales, and at [npc.her] upper-biceps, [npc.her] scales smoothly transition into the [npc.skin] that's covering the rest of [npc.her] body.
+		Within a matter of moments, a layer of [npc.armFullDescription] has quickly grown over them, and, looking down, [npc.she] see [npc.her] new scales growing over the backs of [npc.her] hands as little claws push out to replace [npc.her] fingernails. [npc.Her] palms rapidly transform to be [npc.materialDescriptor] little scales, and at [npc.her] upper-biceps, [npc.her] scales smoothly transition into the [npc.skin] that's covering the rest of [npc.her] body.
 		<br/>As the transformation comes to an end, [npc.nameIsFull] left with anthropomorphic, [style.boldSnake(snake-like arms and hands)], which are [npc.materialDescriptor] [npc.armFullDescription].
 	]]></transformationDescription>
 	<bodyDescription><![CDATA[

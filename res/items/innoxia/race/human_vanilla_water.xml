@@ -51,10 +51,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		After first unscrewing the cap, [npc.name] [npc.verb(bring)] the plastic bottle of Vanilla Water up to [npc.her] [npc.mouth]. A faint sweet smell informs [npc.herHim] that this isn't any ordinary water, and as [npc.she] [npc.verb(tilt)] [npc.her] head back and [npc.verb(start)] drinking the cool liquid, the taste of vanilla overwhelms [npc.her] senses.
+		After first unscrewing the cap, [npc.name] bring the plastic bottle of Vanilla Water up to [npc.her] [npc.mouth]. A faint sweet smell informs [npc.herHim] that this isn't any ordinary water, and as [npc.she] tilt [npc.her] head back and start drinking the cool liquid, the taste of vanilla overwhelms [npc.her] senses.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		After first unscrewing the cap, [npc.name] [npc.verb(bring)] the plastic bottle of Vanilla Water up to [npc2.namePos] waiting [npc2.lips]. A faint sweet smell informs [npc2.herHim] that this isn't any ordinary water, and as [npc2.she] [npc2.verb(tilt)] [npc2.her] head back and [npc2.verb(start)] drinking the cool liquid, the taste of vanilla overwhelms [npc2.her] senses.
+		After first unscrewing the cap, [npc.name] bring the plastic bottle of Vanilla Water up to [npc2.namePos] waiting [npc2.lips]. A faint sweet smell informs [npc2.herHim] that this isn't any ordinary water, and as [npc2.she] [npc2.verb(tilt)] [npc2.her] head back and [npc2.verb(start)] drinking the cool liquid, the taste of vanilla overwhelms [npc2.her] senses.
 		]]></otherUse>
 	</useDescriptions>
 

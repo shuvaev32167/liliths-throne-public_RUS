@@ -287,51 +287,51 @@
 	<replacementText slot="SOCK" type="REMOVE_OR_EQUIP">
 		<self>
 			<!-- These lines follow all of the standard parsing rules, which can be found in-game by accessing the debug menu (type 'buggy' during gameplay), and then selecting 'Open parser', then 'Help'/'Targets'/'Commands' -->
-			<![CDATA[[npc.Name] [npc.verb(pull)] the socks on to cover [npc.her] [npc.feet].]]>
+            <![CDATA[[npc.Name] pull the socks on to cover [npc.her] [npc.feet].]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(pull)] the socks onto [npc2.namePos] [npc2.feet].]]>
+            <![CDATA[[npc.Name] pull the socks onto [npc2.namePos] [npc2.feet].]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(pull)] the socks onto [npc2.namePos] [npc2.feet].]]>
+            <![CDATA[[npc.Name] roughly pull the socks onto [npc2.namePos] [npc2.feet].]]>
 		</otherRough>
 	</replacementText>
 	<!-- 'displacementText' is used for removal and displacement. -->
 	<!-- - Example: This is the unequip text for when socks are removed from the "SOCK" slot:-->
 	<displacementText slot="SOCK" type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(pull)] off [npc.her] socks.]]>
+            <![CDATA[[npc.Name] pull off [npc.her] socks.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(pull)] off [npc2.namePos] socks.]]>
+            <![CDATA[[npc.Name] pull off [npc2.namePos] socks.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(pull)] off [npc2.namePos] socks.]]>
+            <![CDATA[[npc.Name] roughly pull off [npc2.namePos] socks.]]>
 		</otherRough>
 	</displacementText>
 	
 	<!-- - Example: This is the equip text for when socks are equipped to the "HAND" slot:-->
 	<replacementText slot="HAND" type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(pull)] the socks on to cover [npc.her] [npc.hands].]]>
+            <![CDATA[[npc.Name] pull the socks on to cover [npc.her] [npc.hands].]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(pull)] the socks onto [npc2.namePos] [npc2.hands].]]>
+            <![CDATA[[npc.Name] pull the socks onto [npc2.namePos] [npc2.hands].]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(pull)] the socks onto [npc2.namePos] [npc2.hands].]]>
+            <![CDATA[[npc.Name] roughly pull the socks onto [npc2.namePos] [npc2.hands].]]>
 		</otherRough>
 	</replacementText>
 	<!-- - Example: This is the unequip text for when socks are removed from the "HAND" slot:-->
 	<displacementText slot="HAND" type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(pull)] the socks from off of [npc.her] [npc.hands].]]>
+            <![CDATA[[npc.Name] pull the socks from off of [npc.her] [npc.hands].]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(pull)] the socks from off of [npc2.namePos] [npc2.hands].]]>
+            <![CDATA[[npc.Name] pull the socks from off of [npc2.namePos] [npc2.hands].]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(pull)] the socks from off of [npc2.namePos] [npc2.hands].]]>
+            <![CDATA[[npc.Name] roughly pull the socks from off of [npc2.namePos] [npc2.hands].]]>
 		</otherRough>
 	</displacementText>
 	

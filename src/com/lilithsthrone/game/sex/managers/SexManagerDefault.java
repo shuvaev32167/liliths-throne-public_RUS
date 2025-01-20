@@ -1,13 +1,5 @@
 package com.lilithsthrone.game.sex.managers;
 
-import java.util.AbstractMap.SimpleEntry;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.LustLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
@@ -18,23 +10,12 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.DisplacementType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.sex.OrgasmCumTarget;
-import com.lilithsthrone.game.sex.SexAreaInterface;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexFlags;
-import com.lilithsthrone.game.sex.SexPace;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotGeneric;
-import com.lilithsthrone.game.sex.sexActions.SexAction;
-import com.lilithsthrone.game.sex.sexActions.SexActionInterface;
-import com.lilithsthrone.game.sex.sexActions.SexActionPriority;
-import com.lilithsthrone.game.sex.sexActions.SexActionType;
-import com.lilithsthrone.game.sex.sexActions.SexActionUtility;
+import com.lilithsthrone.game.sex.sexActions.*;
 import com.lilithsthrone.game.sex.sexActions.baseActions.PenisFeet;
 import com.lilithsthrone.game.sex.sexActions.baseActions.PenisFoot;
 import com.lilithsthrone.game.sex.sexActions.baseActions.TongueNipple;
@@ -46,6 +27,9 @@ import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfTailMouth;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
+
+import java.util.AbstractMap.SimpleEntry;
+import java.util.*;
 
 /**
  * @since 0.1.0
@@ -80,10 +64,10 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 			try {
 				for(SexSlot slot : position.getAllAvailableSexPositions()) {
 					int count = 0;
-					if(this.dominants.values().contains(slot)) {
+					if(this.dominants.containsValue(slot)) {
 						count++;
 					}
-					if(this.submissives.values().contains(slot)) {
+					if(this.submissives.containsValue(slot)) {
 						count++;
 					}
 					if(count>1) {
@@ -128,14 +112,14 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 		return new HashMap<>();
 	}
 	
-	private static List<SexActionInterface> possibleActions = new ArrayList<>();
-	private static List<SexActionInterface> bannedActions = new ArrayList<>();
+	private static final List<SexActionInterface> possibleActions = new ArrayList<>();
+	private static final List<SexActionInterface> bannedActions = new ArrayList<>();
 	
 	/**
 	 * New:<br/>
 	 * - Get accessible areas<br/>
 	 * - Choose foreplay & main sex<br/>
-	 * - Choose [npc.verb(position)] for each<br/>
+     * - Choose position for each<br/>
 	 * - Clothing for foreplay<br/>
 	 * - position<br/>
 	 * - foreplay (self-actions take minimum priority)<br/>
@@ -811,29 +795,33 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 						System.out.print("A ");
 					}
 					for(SexAreaPenetration pen : action.getPerformingCharacterPenetrations()) {
-						if(pen.isTakesVirginity()) {
-							penetrationAction = true;
-						}
+                        if (pen.isTakesVirginity()) {
+                            penetrationAction = true;
+                            break;
+                        }
 					}
 					for(SexAreaPenetration pen : action.getTargetedCharacterPenetrations()) {
-						if(pen.isTakesVirginity()) {
-							penetrationAction = true;
-						}
+                        if (pen.isTakesVirginity()) {
+                            penetrationAction = true;
+                            break;
+                        }
 					}
 					if(penetrationAction) {
 						for(SexAreaOrifice orifice : action.getPerformingCharacterOrifices()) {
-							if(orifice.isInternalOrifice()) {
-								sexOrifice = true;
-							}
+                            if (orifice.isInternalOrifice()) {
+                                sexOrifice = true;
+                                break;
+                            }
 						}
 						for(SexAreaOrifice orifice : action.getTargetedCharacterOrifices()) {
-							if(orifice.isInternalOrifice()) {
-								sexOrifice = true;
-							}
+                            if (orifice.isInternalOrifice()) {
+                                sexOrifice = true;
+                                break;
+                            }
 						}
 						if(sexOrifice) {
 							isSexPenetrationPossible = true;
-							break actionLoop;
+							break;
 						}
 					}
 				} else {
@@ -1061,7 +1049,7 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 					}
 					bannedActions.add(action); // If they don't mind the associated fetishes, stop them from stopping it
 				} else {
-					int weight = ((NPC)Main.sex.getCharacterPerformingAction()).calculateSexTypeWeighting(action.getAsSexType(), targetedCharacter, null);
+					int weight = Main.sex.getCharacterPerformingAction().calculateSexTypeWeighting(action.getAsSexType(), targetedCharacter, null);
 					
 					if(weight<0) {
 						return (SexAction) action; // If they don't like the associated fetishes, stop it.
@@ -1093,7 +1081,7 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 		
 		availableTargets.removeIf((character) -> Main.sex.getSexPositionSlot(character)==SexSlotGeneric.MISC_WATCHING);
 		
-		GameCharacter preferredTarget = Main.sex.getInitialSexManager().getPreferredSexTarget((NPC) targeter);
+		GameCharacter preferredTarget = Main.sex.getInitialSexManager().getPreferredSexTarget(targeter);
 		
 		// Always target those who are about to cum:
 		if(Main.sex.isReadyToOrgasm(targeter) && SexFlags.playerPreparedForCharactersOrgasm.contains(targeter)) {
@@ -1139,9 +1127,9 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 			for(GameCharacter character : availableTargets) {
 				if(Main.sex.getActionsAvailablePartner(targeter, character)!=null && !Main.sex.getActionsAvailablePartner(targeter, character).isEmpty()) {
 					if(Main.sex.isInForeplay(targeter)) {
-						sexPreferences.put(character, Main.sex.getForeplayPreference(((NPC)targeter), character));
+						sexPreferences.put(character, Main.sex.getForeplayPreference(targeter, character));
 					} else {
-						sexPreferences.put(character, Main.sex.getMainSexPreference(((NPC)targeter), character));
+						sexPreferences.put(character, Main.sex.getMainSexPreference(targeter, character));
 					}
 				}
 			}
@@ -1201,7 +1189,7 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 						
 					} else {
 						if(Main.sex.getSexPace(targeter)!=SexPace.SUB_RESISTING) { // If resisting, don't target a sub (as resisting actions are targeted towards doms).
-							weightedTargets.put(character, 1*attractionModifier*availableActions.size());
+							weightedTargets.put(character, attractionModifier * availableActions.size());
 						}
 					}
 				}

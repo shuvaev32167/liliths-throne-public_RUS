@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.effects.StatusEffect;
@@ -35,6 +32,9 @@ import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.Weather;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.2.2
@@ -85,8 +85,102 @@ public class RedLightDistrict {
 			}
 		}
 	};
-	
-	public static final DialogueNode ANGELS_KISS_ENTRANCE = new DialogueNode("Entrance", ".", false) {
+
+    public static final DialogueNode ANGELS_KISS_BEDROOM_BUNNY_ENTER = new DialogueNode("Спальня Банни", "", true) {
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+		@Override
+		public String getContent() {
+			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.bunnyIntroduced)) {
+				return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "ANGELS_KISS_BEDROOM_BUNNY_ENTER");
+			} else {
+				return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "ANGELS_KISS_BEDROOM_BUNNY_ENTER_REPEAT");
+			}
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			int cost = 1500;
+			int threesomeCost = 5000;
+
+			if (index == 1) {
+				if(Main.game.getPlayer().getMoney()<cost) {
+					return new Response("Sex ("+UtilText.formatAsMoney(cost, "span")+")", "You don't have "+cost+" flames, so you can't afford to have sex with Bunny.", null);
+
+				} else {
+					return new ResponseSex("Sex ("+UtilText.formatAsMoney(cost, "span")+")",
+							"Pay "+cost+" flames to have sex with Bunny.",
+							true, false,
+							new SMGeneric(
+									Util.newArrayListOfValues(Main.game.getPlayer()),
+									Util.newArrayListOfValues(Main.game.getNpc(Bunny.class)),
+							null,
+							null), AFTER_SEX_BUNNY, UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_BUNNY_SEX")) {
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.bunnyIntroduced, true);
+							if(Main.game.getNpc(Bunny.class).isVisiblyPregnant()) {
+								Main.game.getNpc(Bunny.class).setCharacterReactedToPregnancy(Main.game.getPlayer(), true);
+							}
+							Main.game.getPlayer().incrementMoney(-cost);
+						}
+					};
+				}
+
+			} else if (index == 2) {
+				if(Main.game.getPlayer().getMoney()<threesomeCost) {
+					return new Response("Threesome ("+UtilText.formatAsMoney(threesomeCost, "span")+")", "You don't have "+threesomeCost+" flames, so you can't afford to have sex with both Bunny and Loppy at the same time.", null);
+
+				} else {
+					return new ResponseSex("Threesome ("+UtilText.formatAsMoney(threesomeCost, "span")+")",
+							"Pay "+threesomeCost+" flames to have sex with both Bunny and Loppy at the same time.",
+							true, false,
+							new SMGeneric(
+									Util.newArrayListOfValues(Main.game.getPlayer()),
+									Util.newArrayListOfValues(Main.game.getNpc(Bunny.class), Main.game.getNpc(Loppy.class)),
+									null,
+									null,
+									ResponseTag.PREFER_DOGGY),
+							AFTER_SEX_BUNNY_THREESOME,
+							UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_BUNNY_THREESOME")
+							+(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.loppyIntroduced)
+									?UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_BUNNY_THREESOME_LOPPY_INTRODUCED")
+									:UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_BUNNY_THREESOME_LOPPY_NOT_INTRODUCED"))) {
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.bunnyIntroduced, true);
+							if(Main.game.getNpc(Bunny.class).isVisiblyPregnant()) {
+								Main.game.getNpc(Bunny.class).setCharacterReactedToPregnancy(Main.game.getPlayer(), true);
+							}
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.loppyIntroduced, true);
+							if(Main.game.getNpc(Loppy.class).isVisiblyPregnant()) {
+								Main.game.getNpc(Loppy.class).setCharacterReactedToPregnancy(Main.game.getPlayer(), true);
+							}
+							Main.game.getNpc(Loppy.class).setLocation(WorldType.ANGELS_KISS_FIRST_FLOOR, PlaceType.ANGELS_KISS_BEDROOM_BUNNY, false);
+							Main.game.getPlayer().incrementMoney(-threesomeCost);
+						}
+					};
+				}
+
+			} else if(index == 3) {
+				return new Response("Decline", "You're not really interested in paying for sex with Bunny right now...", PlaceType.ANGELS_KISS_CORRIDOR.getDialogue(false)){
+					@Override
+					public void effects() {
+						Main.game.getPlayer().setNearestLocation(WorldType.ANGELS_KISS_FIRST_FLOOR, PlaceType.ANGELS_KISS_CORRIDOR, false);
+						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.bunnyIntroduced, true);
+						if(Main.game.getNpc(Bunny.class).isVisiblyPregnant()) {
+							Main.game.getNpc(Bunny.class).setCharacterReactedToPregnancy(Main.game.getPlayer(), true);
+						}
+						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_BUNNY_DECLINE"));
+					}
+				};
+			}
+
+			return null;
+		}
+	};
+    public static final DialogueNode ANGELS_KISS_ENTRANCE = new DialogueNode("Вход", ".", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -125,7 +219,7 @@ public class RedLightDistrict {
 		public Response getResponse(int responseTab, int index) {
 			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.angelIntroduced)) {
 				if (index == 1) {
-					return new Response("Continue", "Angel leaves you alone to explore Angel's Kiss by yourself...", ANGELS_KISS_ENTRANCE){
+                    return new Response("Продолжить", "Angel leaves you alone to explore Angel's Kiss by yourself...", ANGELS_KISS_ENTRANCE) {
 						@Override
 						public void effects() {
 							Main.game.getNpc(Angel.class).setLocation(WorldType.ANGELS_KISS_GROUND_FLOOR, PlaceType.ANGELS_KISS_OFFICE, false);
@@ -136,7 +230,7 @@ public class RedLightDistrict {
 				
 			} else {
 				if (index == 1) {
-					return new Response("Exit", "Exit the brothel and head back out into Dominion.", PlaceType.DOMINION_RED_LIGHT_DISTRICT.getDialogue(false)){
+                    return new Response("Выход", "Exit the brothel and head back out into Dominion.", PlaceType.DOMINION_RED_LIGHT_DISTRICT.getDialogue(false)) {
 						@Override
 						public void effects() {
 							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_RED_LIGHT_DISTRICT, false);
@@ -147,8 +241,8 @@ public class RedLightDistrict {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode ANGELS_KISS_CORRIDOR = new DialogueNode("Corridor", ".", false) {
+
+    public static final DialogueNode ANGELS_KISS_CORRIDOR = new DialogueNode("Коридор", ".", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -181,7 +275,7 @@ public class RedLightDistrict {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Upstairs", "Go up the staircase to the first floor of the brothel.", PlaceType.ANGELS_KISS_STAIRCASE_DOWN.getDialogue(false)){
+                return new Response("Наверх", "Go up the staircase to the first floor of the brothel.", PlaceType.ANGELS_KISS_STAIRCASE_DOWN.getDialogue(false)) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setLocation(WorldType.ANGELS_KISS_FIRST_FLOOR, PlaceType.ANGELS_KISS_STAIRCASE_DOWN, false);
@@ -209,7 +303,7 @@ public class RedLightDistrict {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Downstairs", "Go down the staircase to the ground floor of the brothel.", PlaceType.ANGELS_KISS_STAIRCASE_UP.getDialogue(false)){
+                return new Response("Вниз", "Go down the staircase to the ground floor of the brothel.", PlaceType.ANGELS_KISS_STAIRCASE_UP.getDialogue(false)) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setLocation(WorldType.ANGELS_KISS_GROUND_FLOOR, PlaceType.ANGELS_KISS_STAIRCASE_UP, false);
@@ -222,7 +316,30 @@ public class RedLightDistrict {
 		}
 	};
 
-	public static final DialogueNode ANGELS_KISS_BEDROOM = new DialogueNode("Bedroom", ".", false) {
+    public static final DialogueNode AFTER_SEX_PROSTITUTE = new DialogueNode("Спальня", "Disentangle yourself from [npc.namePos] clutches.", false) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 5*60;
+		}
+
+		@Override
+		public String getContent() {
+			List<NPC> charactersPresent = new ArrayList<>(Main.game.getCharactersPresent());
+			charactersPresent.removeIf((npc) -> Main.game.getPlayer().getCompanions().contains(npc));
+
+			if(Main.sex.getNumberOfOrgasms(charactersPresent.get(0))==0) {
+				return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "PROSTITUTE_AFTER_SEX_NO_ORGASM");
+			} else {
+				return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "PROSTITUTE_AFTER_SEX");
+			}
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return null;
+		}
+	};    public static final DialogueNode ANGELS_KISS_BEDROOM = new DialogueNode("Спальня", ".", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -482,33 +599,10 @@ public class RedLightDistrict {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode AFTER_SEX_PROSTITUTE = new DialogueNode("Bedroom", "Disentangle yourself from [npc.namePos] clutches.", false) {
 
-		@Override
-		public int getSecondsPassed() {
-			return 5*60;
-		}
 
-		@Override
-		public String getContent() {
-			List<NPC> charactersPresent = new ArrayList<>(Main.game.getCharactersPresent());
-			charactersPresent.removeIf((npc) -> Main.game.getPlayer().getCompanions().contains(npc));
-			
-			if(Main.sex.getNumberOfOrgasms(charactersPresent.get(0))==0) {
-				return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "PROSTITUTE_AFTER_SEX_NO_ORGASM");
-			} else {
-				return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "PROSTITUTE_AFTER_SEX");
-			}
-		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return null;
-		}
-	};
-	
-	public static final DialogueNode ANGELS_KISS_SELL_SELF_SUB = new DialogueNode("Bedroom", ".", true) {
+    public static final DialogueNode ANGELS_KISS_SELL_SELF_SUB = new DialogueNode("Спальня", ".", true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -557,8 +651,8 @@ public class RedLightDistrict {
 			}
 		}
 	};
-	
-	public static final DialogueNode ANGELS_KISS_SELL_SELF_DOM = new DialogueNode("Bedroom", ".", true) {
+
+    public static final DialogueNode ANGELS_KISS_SELL_SELF_DOM = new DialogueNode("Спальня", ".", true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -605,8 +699,8 @@ public class RedLightDistrict {
 			}
 		}
 	};
-	
-	public static final DialogueNode ANGELS_KISS_SELL_SELF_DECLINE = new DialogueNode("Bedroom", ".", false, true) {
+
+    public static final DialogueNode ANGELS_KISS_SELL_SELF_DECLINE = new DialogueNode("Спальня", ".", false, true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -623,8 +717,8 @@ public class RedLightDistrict {
 			return ANGELS_KISS_BEDROOM.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode AFTER_SEX_SELL_SELF_DOM = new DialogueNode("Bedroom", "Disentangle yourself from [npc.namePos] clutches.", true) {
+
+    public static final DialogueNode AFTER_SEX_SELL_SELF_DOM = new DialogueNode("Спальня", "Disentangle yourself from [npc.namePos] clutches.", true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -659,8 +753,8 @@ public class RedLightDistrict {
 			}
 		}
 	};
-	
-	public static final DialogueNode AFTER_SEX_SELL_SELF_SUB = new DialogueNode("Bedroom", "Disentangle yourself from [npc.namePos] clutches.", true) {
+
+    public static final DialogueNode AFTER_SEX_SELL_SELF_SUB = new DialogueNode("Спальня", "Disentangle yourself from [npc.namePos] clutches.", true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -695,8 +789,7 @@ public class RedLightDistrict {
 			}
 		}
 	};
-	
-	public static final DialogueNode ANGELS_KISS_BEDROOM_BUNNY = new DialogueNode("Bunny's Bedroom", "", false) {
+    public static final DialogueNode ANGELS_KISS_BEDROOM_BUNNY = new DialogueNode("Спальня Банни", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;
@@ -712,73 +805,97 @@ public class RedLightDistrict {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Enter", "Enter Bunny's room and say hello.", ANGELS_KISS_BEDROOM_BUNNY_ENTER);
+                return new Response("Вход", "Enter Bunny's room and say hello.", ANGELS_KISS_BEDROOM_BUNNY_ENTER);
 			}
 			return null;
 		}
-	};
-	
-	public static final DialogueNode ANGELS_KISS_BEDROOM_BUNNY_ENTER = new DialogueNode("Bunny's Bedroom", "", true) {
+    };
+    public static final DialogueNode ANGELS_KISS_BEDROOM_LOPPY_ENTER = new DialogueNode("Спальня Лоппи", "", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;
 		}
 		@Override
 		public String getContent() {
-			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.bunnyIntroduced)) {
-				return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "ANGELS_KISS_BEDROOM_BUNNY_ENTER");
+			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.loppyIntroduced)) {
+				return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "ANGELS_KISS_BEDROOM_LOPPY_ENTER");
 			} else {
-				return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "ANGELS_KISS_BEDROOM_BUNNY_ENTER_REPEAT");
+				return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "ANGELS_KISS_BEDROOM_LOPPY_ENTER_REPEAT");
 			}
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			int cost = 1500;
+			int cost = 2000;
+			int dominantCost = 2500;
 			int threesomeCost = 5000;
-			
+
 			if (index == 1) {
 				if(Main.game.getPlayer().getMoney()<cost) {
-					return new Response("Sex ("+UtilText.formatAsMoney(cost, "span")+")", "You don't have "+cost+" flames, so you can't afford to have sex with Bunny.", null);
-					
+					return new Response("Sex ("+UtilText.formatAsMoney(cost, "span")+")", "You don't have "+cost+" flames, so you can't afford to have sex with Loppy.", null);
+
 				} else {
 					return new ResponseSex("Sex ("+UtilText.formatAsMoney(cost, "span")+")",
-							"Pay "+cost+" flames to have sex with Bunny.",
+							"Pay "+cost+" flames to have sex with Loppy.",
 							true, false,
 							new SMGeneric(
 									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(Main.game.getNpc(Bunny.class)),
+									Util.newArrayListOfValues(Main.game.getNpc(Loppy.class)),
 							null,
-							null), AFTER_SEX_BUNNY, UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_BUNNY_SEX")) {
+							null), AFTER_SEX_LOPPY, UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_LOPPY_SEX")) {
 						@Override
 						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.bunnyIntroduced, true);
-							if(Main.game.getNpc(Bunny.class).isVisiblyPregnant()) {
-								Main.game.getNpc(Bunny.class).setCharacterReactedToPregnancy(Main.game.getPlayer(), true);
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.loppyIntroduced, true);
+							if(Main.game.getNpc(Loppy.class).isVisiblyPregnant()) {
+								Main.game.getNpc(Loppy.class).setCharacterReactedToPregnancy(Main.game.getPlayer(), true);
 							}
 							Main.game.getPlayer().incrementMoney(-cost);
 						}
 					};
 				}
-				
+
 			} else if (index == 2) {
+				if(Main.game.getPlayer().getMoney()<dominantCost) {
+					return new Response("Submissive Sex ("+UtilText.formatAsMoney(dominantCost, "span")+")", "You don't have "+dominantCost+" flames, so you can't afford to have submissive sex with Loppy.", null);
+
+				} else {
+					return new ResponseSex("Submissive Sex ("+UtilText.formatAsMoney(dominantCost, "span")+")",
+							"Pay "+dominantCost+" flames to let Loppy take charge and fuck you.",
+							true, true,
+							new SMGeneric(
+									Util.newArrayListOfValues(Main.game.getNpc(Loppy.class)),
+									Util.newArrayListOfValues(Main.game.getPlayer()),
+							null,
+							null), AFTER_SEX_LOPPY, UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_LOPPY_SEX_SUBMISSIVE")) {
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.loppyIntroduced, true);
+							if(Main.game.getNpc(Loppy.class).isVisiblyPregnant()) {
+								Main.game.getNpc(Loppy.class).setCharacterReactedToPregnancy(Main.game.getPlayer(), true);
+							}
+							Main.game.getPlayer().incrementMoney(-dominantCost);
+						}
+					};
+				}
+
+			} else if (index == 3) {
 				if(Main.game.getPlayer().getMoney()<threesomeCost) {
-					return new Response("Threesome ("+UtilText.formatAsMoney(threesomeCost, "span")+")", "You don't have "+threesomeCost+" flames, so you can't afford to have sex with both Bunny and Loppy at the same time.", null);
-					
+					return new Response("Threesome ("+UtilText.formatAsMoney(threesomeCost, "span")+")", "You don't have "+threesomeCost+" flames, so you can't afford to have sex with both Loppy and Bunny at the same time.", null);
+
 				} else {
 					return new ResponseSex("Threesome ("+UtilText.formatAsMoney(threesomeCost, "span")+")",
-							"Pay "+threesomeCost+" flames to have sex with both Bunny and Loppy at the same time.",
+							"Pay "+threesomeCost+" flames to have sex with both Loppy and Bunny at the same time.",
 							true, false,
 							new SMGeneric(
 									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(Main.game.getNpc(Bunny.class), Main.game.getNpc(Loppy.class)),
+									Util.newArrayListOfValues(Main.game.getNpc(Loppy.class), Main.game.getNpc(Bunny.class)),
 									null,
 									null,
 									ResponseTag.PREFER_DOGGY),
-							AFTER_SEX_BUNNY_THREESOME,
-							UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_BUNNY_THREESOME")
-							+(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.loppyIntroduced)
-									?UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_BUNNY_THREESOME_LOPPY_INTRODUCED")
-									:UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_BUNNY_THREESOME_LOPPY_NOT_INTRODUCED"))) {
+							AFTER_SEX_LOPPY_THREESOME,
+							UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_LOPPY_THREESOME")
+							+(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.bunnyIntroduced)
+									?UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_LOPPY_THREESOME_BUNNY_INTRODUCED")
+									:UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_LOPPY_THREESOME_BUNNY_NOT_INTRODUCED"))) {
 						@Override
 						public void effects() {
 							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.bunnyIntroduced, true);
@@ -789,27 +906,28 @@ public class RedLightDistrict {
 							if(Main.game.getNpc(Loppy.class).isVisiblyPregnant()) {
 								Main.game.getNpc(Loppy.class).setCharacterReactedToPregnancy(Main.game.getPlayer(), true);
 							}
-							Main.game.getNpc(Loppy.class).setLocation(WorldType.ANGELS_KISS_FIRST_FLOOR, PlaceType.ANGELS_KISS_BEDROOM_BUNNY, false);
+							Main.game.getNpc(Bunny.class).setLocation(WorldType.ANGELS_KISS_FIRST_FLOOR, PlaceType.ANGELS_KISS_BEDROOM_LOPPY, false);
 							Main.game.getPlayer().incrementMoney(-threesomeCost);
 						}
 					};
 				}
-				
-			} else if(index == 3) {
-				return new Response("Decline", "You're not really interested in paying for sex with Bunny right now...", PlaceType.ANGELS_KISS_CORRIDOR.getDialogue(false)){
+
+			} else if(index == 4) {
+				return new Response("Decline", "You're not really interested in paying for sex with Loppy right now...", PlaceType.ANGELS_KISS_CORRIDOR.getDialogue(false)){
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setNearestLocation(WorldType.ANGELS_KISS_FIRST_FLOOR, PlaceType.ANGELS_KISS_CORRIDOR, false);
-						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.bunnyIntroduced, true);
-						if(Main.game.getNpc(Bunny.class).isVisiblyPregnant()) {
-							Main.game.getNpc(Bunny.class).setCharacterReactedToPregnancy(Main.game.getPlayer(), true);
+						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.loppyIntroduced, true);
+						if(Main.game.getNpc(Loppy.class).isVisiblyPregnant()) {
+							Main.game.getNpc(Loppy.class).setCharacterReactedToPregnancy(Main.game.getPlayer(), true);
 						}
-						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_BUNNY_DECLINE"));
+						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_LOPPY_DECLINE"));
 					}
 				};
+
+			} else {
+				return null;
 			}
-			
-			return null;
 		}
 	};
 
@@ -852,8 +970,7 @@ public class RedLightDistrict {
 			return null;
 		}
 	};
-
-	public static final DialogueNode ANGELS_KISS_BEDROOM_LOPPY = new DialogueNode("Loppy's Bedroom", "", false) {
+    public static final DialogueNode ANGELS_KISS_BEDROOM_LOPPY = new DialogueNode("Спальня Лоппи", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;
@@ -869,131 +986,79 @@ public class RedLightDistrict {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Enter", "Enter Loppy's room and say hello.", ANGELS_KISS_BEDROOM_LOPPY_ENTER);
+                return new Response("Вход", "Enter Loppy's room and say hello.", ANGELS_KISS_BEDROOM_LOPPY_ENTER);
 			}
 			return null;
 		}
-	};
-	public static final DialogueNode ANGELS_KISS_BEDROOM_LOPPY_ENTER = new DialogueNode("Loppy's Bedroom", "", true) {
+	};    public static final DialogueNode ANGELS_KISS_OFFICE = new DialogueNode("Офис Ангела", ".", false) {
+
 		@Override
 		public int getSecondsPassed() {
 			return 60;
 		}
+
+		@Override
+		public boolean isTravelDisabled() {
+			return !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.angelsOfficeIntroduced);
+		}
+
 		@Override
 		public String getContent() {
-			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.loppyIntroduced)) {
-				return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "ANGELS_KISS_BEDROOM_LOPPY_ENTER");
+			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.angelsOfficeIntroduced)) {
+				return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "OFFICE");
 			} else {
-				return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "ANGELS_KISS_BEDROOM_LOPPY_ENTER_REPEAT");
+				if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.prostitutionLicenseObtained)) {
+					return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "OFFICE_REPEAT");
+				} else {
+					return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "OFFICE_REPEAT_WITH_LICENSE");
+				}
 			}
 		}
+
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			int cost = 2000;
-			int dominantCost = 2500;
-			int threesomeCost = 5000;
-			
-			if (index == 1) {
-				if(Main.game.getPlayer().getMoney()<cost) {
-					return new Response("Sex ("+UtilText.formatAsMoney(cost, "span")+")", "You don't have "+cost+" flames, so you can't afford to have sex with Loppy.", null);
-					
-				} else {
-					return new ResponseSex("Sex ("+UtilText.formatAsMoney(cost, "span")+")",
-							"Pay "+cost+" flames to have sex with Loppy.",
-							true, false,
-							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(Main.game.getNpc(Loppy.class)),
-							null,
-							null), AFTER_SEX_LOPPY, UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_LOPPY_SEX")) {
+			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.angelsOfficeIntroduced)) {
+				if (index == 1) {
+                    return new Response("Продолжить", "Now that Angel's offered you her deal, you could ask some other questions...", ANGELS_KISS_OFFICE_CONTINUE) {
 						@Override
 						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.loppyIntroduced, true);
-							if(Main.game.getNpc(Loppy.class).isVisiblyPregnant()) {
-								Main.game.getNpc(Loppy.class).setCharacterReactedToPregnancy(Main.game.getPlayer(), true);
-							}
-							Main.game.getPlayer().incrementMoney(-cost);
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.angelsOfficeIntroduced, true);
+							Main.game.updateResponses();
 						}
 					};
 				}
-				
-			} else if (index == 2) {
-				if(Main.game.getPlayer().getMoney()<dominantCost) {
-					return new Response("Submissive Sex ("+UtilText.formatAsMoney(dominantCost, "span")+")", "You don't have "+dominantCost+" flames, so you can't afford to have submissive sex with Loppy.", null);
-					
-				} else {
-					return new ResponseSex("Submissive Sex ("+UtilText.formatAsMoney(dominantCost, "span")+")",
-							"Pay "+dominantCost+" flames to let Loppy take charge and fuck you.",
-							true, true,
-							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getNpc(Loppy.class)),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-							null,
-							null), AFTER_SEX_LOPPY, UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_LOPPY_SEX_SUBMISSIVE")) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.loppyIntroduced, true);
-							if(Main.game.getNpc(Loppy.class).isVisiblyPregnant()) {
-								Main.game.getNpc(Loppy.class).setCharacterReactedToPregnancy(Main.game.getPlayer(), true);
-							}
-							Main.game.getPlayer().incrementMoney(-dominantCost);
-						}
-					};
-				}
-				
-			} else if (index == 3) {
-				if(Main.game.getPlayer().getMoney()<threesomeCost) {
-					return new Response("Threesome ("+UtilText.formatAsMoney(threesomeCost, "span")+")", "You don't have "+threesomeCost+" flames, so you can't afford to have sex with both Loppy and Bunny at the same time.", null);
-					
-				} else {
-					return new ResponseSex("Threesome ("+UtilText.formatAsMoney(threesomeCost, "span")+")",
-							"Pay "+threesomeCost+" flames to have sex with both Loppy and Bunny at the same time.",
-							true, false,
-							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(Main.game.getNpc(Loppy.class), Main.game.getNpc(Bunny.class)),
-									null,
-									null,
-									ResponseTag.PREFER_DOGGY),
-							AFTER_SEX_LOPPY_THREESOME,
-							UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_LOPPY_THREESOME")
-							+(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.bunnyIntroduced)
-									?UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_LOPPY_THREESOME_BUNNY_INTRODUCED")
-									:UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_LOPPY_THREESOME_BUNNY_NOT_INTRODUCED"))) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.bunnyIntroduced, true);
-							if(Main.game.getNpc(Bunny.class).isVisiblyPregnant()) {
-								Main.game.getNpc(Bunny.class).setCharacterReactedToPregnancy(Main.game.getPlayer(), true);
-							}
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.loppyIntroduced, true);
-							if(Main.game.getNpc(Loppy.class).isVisiblyPregnant()) {
-								Main.game.getNpc(Loppy.class).setCharacterReactedToPregnancy(Main.game.getPlayer(), true);
-							}
-							Main.game.getNpc(Bunny.class).setLocation(WorldType.ANGELS_KISS_FIRST_FLOOR, PlaceType.ANGELS_KISS_BEDROOM_LOPPY, false);
-							Main.game.getPlayer().incrementMoney(-threesomeCost);
-						}
-					};
-				}
-				
-			} else if(index == 4) {
-				return new Response("Decline", "You're not really interested in paying for sex with Loppy right now...", PlaceType.ANGELS_KISS_CORRIDOR.getDialogue(false)){
-					@Override
-					public void effects() {
-						Main.game.getPlayer().setNearestLocation(WorldType.ANGELS_KISS_FIRST_FLOOR, PlaceType.ANGELS_KISS_CORRIDOR, false);
-						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.loppyIntroduced, true);
-						if(Main.game.getNpc(Loppy.class).isVisiblyPregnant()) {
-							Main.game.getNpc(Loppy.class).setCharacterReactedToPregnancy(Main.game.getPlayer(), true);
-						}
-						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_LOPPY_DECLINE"));
-					}
-				};
-				
+
 			} else {
-				return null;
+				if (index == 1) {
+					return new Response("Prostitution", "Ask Angel about the laws and regulations regarding prostitution in Dominion.", ANGELS_KISS_OFFICE_PROSTITUTION);
+
+				} else if (index == 2) {
+					return new Response("Background", "Ask Angel about her background, and how she ended up owning Angel's Kiss.", ANGELS_KISS_OFFICE_BACKGROUND);
+
+				} else if (index == 3) {
+					if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.prostitutionLicenseObtained)) {
+						if(Main.game.getPlayer().getMoney()<5000) {
+							return new Response("License ("+UtilText.formatAsMoney(5000, "span")+")", "You don't have enough money to purchase a prostitution license!", null);
+						} else {
+							return new Response("License ("+UtilText.formatAsMoney(5000, "span")+")", "Agree to Angel's deal and purchase a prostitution license.", ANGELS_KISS_OFFICE_LICENSE_PURCHASE) {
+								@Override
+								public void effects() {
+									Main.game.getDialogueFlags().setFlag(DialogueFlagValue.prostitutionLicenseObtained, true);
+									Main.game.getPlayer().incrementMoney(-5000);
+								}
+							};
+						}
+
+					} else if(Main.game.getDialogueFlags().hasFlag("acexp_horny_angel_found")) {
+						return DialogueManager.getDialogueFromId("acexp_dominion_angel_office_misc_sex_access_node").getResponse(0, 1);
+					}
+
+				}
 			}
+			return null;
 		}
 	};
+
 	
 	public static final DialogueNode AFTER_SEX_LOPPY = new DialogueNode("Finished", "Disentangle yourself from Loppy's clutches.", false) {
 
@@ -1035,77 +1100,32 @@ public class RedLightDistrict {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode ANGELS_KISS_OFFICE = new DialogueNode("Angel's Office", ".", false) {
-
+	public static final DialogueNode ANGELS_KISS_PROSTITUTE_REMOVAL_PAID = new DialogueNode("", "", true, true) {
 		@Override
-		public int getSecondsPassed() {
-			return 60;
+		public void applyPreParsingEffects() {
+			List<NPC> charactersPresent = Main.game.getCharactersPresent();
+			charactersPresent.removeIf((npc) -> Main.game.getPlayer().getCompanions().contains(npc));
+			NPC npc = charactersPresent.get(0);
+			UtilText.addSpecialParsingString(Util.intToString(AlleywayProstituteDialogue.getModifiedFineAmount(npc)), true);
+			Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "PROSTITUTE_REMOVAL_PAID", npc));
+			Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().incrementMoney(-AlleywayProstituteDialogue.getModifiedFineAmount(npc)));
+			Main.game.banishNPC(npc);
 		}
-
-		@Override
-		public boolean isTravelDisabled() {
-			return !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.angelsOfficeIntroduced);
-		}
-		
 		@Override
 		public String getContent() {
-			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.angelsOfficeIntroduced)) {
-				return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "OFFICE");
-			} else {
-				if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.prostitutionLicenseObtained)) {
-					return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "OFFICE_REPEAT");
-				} else {
-					return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "OFFICE_REPEAT_WITH_LICENSE");
-				}
-			}
+			return "";
 		}
 
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.angelsOfficeIntroduced)) {
-				if (index == 1) {
-					return new Response("Continue", "Now that Angel's offered you her deal, you could ask some other questions...", ANGELS_KISS_OFFICE_CONTINUE) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.angelsOfficeIntroduced, true);
-							Main.game.updateResponses();
-						}
-					};
-				}
-				
-			} else {
-				if (index == 1) {
-					return new Response("Prostitution", "Ask Angel about the laws and regulations regarding prostitution in Dominion.", ANGELS_KISS_OFFICE_PROSTITUTION);
-					
-				} else if (index == 2) {
-					return new Response("Background", "Ask Angel about her background, and how she ended up owning Angel's Kiss.", ANGELS_KISS_OFFICE_BACKGROUND);
-					
-				} else if (index == 3) {
-					if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.prostitutionLicenseObtained)) {
-						if(Main.game.getPlayer().getMoney()<5000) {
-							return new Response("License ("+UtilText.formatAsMoney(5000, "span")+")", "You don't have enough money to purchase a prostitution license!", null);
-						} else {
-							return new Response("License ("+UtilText.formatAsMoney(5000, "span")+")", "Agree to Angel's deal and purchase a prostitution license.", ANGELS_KISS_OFFICE_LICENSE_PURCHASE) {
-								@Override
-								public void effects() {
-									Main.game.getDialogueFlags().setFlag(DialogueFlagValue.prostitutionLicenseObtained, true);
-									Main.game.getPlayer().incrementMoney(-5000);
-								}
-							};
-						}
-						
-					} else if(Main.game.getDialogueFlags().hasFlag("acexp_horny_angel_found")) {
-						return DialogueManager.getDialogueFromId("acexp_dominion_angel_office_misc_sex_access_node").getResponse(0, 1);
-					}
-					
-				}
+			if (index == 1) {
+                return new Response("Продолжить", "Feeling happy to have been able to help out one of Dominion's troubled citizens, you continue on your way...", Main.game.getDefaultDialogue(false));
 			}
 			return null;
 		}
 	};
-	
-	public static final DialogueNode ANGELS_KISS_OFFICE_CONTINUE = new DialogueNode("Angel's Office", ".", false, true) {
+
+    public static final DialogueNode ANGELS_KISS_OFFICE_CONTINUE = new DialogueNode("Офис Ангела", ".", false, true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -1122,8 +1142,8 @@ public class RedLightDistrict {
 			return ANGELS_KISS_OFFICE.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode ANGELS_KISS_OFFICE_PROSTITUTION = new DialogueNode("Angel's Office", ".", false) {
+
+    public static final DialogueNode ANGELS_KISS_OFFICE_PROSTITUTION = new DialogueNode("Офис Ангела", ".", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -1145,8 +1165,8 @@ public class RedLightDistrict {
 			}
 		}
 	};
-	
-	public static final DialogueNode ANGELS_KISS_OFFICE_BACKGROUND = new DialogueNode("Angel's Office", ".", false) {
+
+    public static final DialogueNode ANGELS_KISS_OFFICE_BACKGROUND = new DialogueNode("Офис Ангела", ".", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -1168,8 +1188,8 @@ public class RedLightDistrict {
 			}
 		}
 	};
-	
-	public static final DialogueNode ANGELS_KISS_OFFICE_LICENSE_PURCHASE = new DialogueNode("Angel's Office", ".", false) {
+
+    public static final DialogueNode ANGELS_KISS_OFFICE_LICENSE_PURCHASE = new DialogueNode("Офис Ангела", ".", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -1187,30 +1207,7 @@ public class RedLightDistrict {
 		}
 	};
 
-	public static final DialogueNode ANGELS_KISS_PROSTITUTE_REMOVAL_PAID = new DialogueNode("", "", true, true) {
-		@Override
-		public void applyPreParsingEffects() {
-			List<NPC> charactersPresent = Main.game.getCharactersPresent();
-			charactersPresent.removeIf((npc) -> Main.game.getPlayer().getCompanions().contains(npc));
-			NPC npc = charactersPresent.get(0);
-			UtilText.addSpecialParsingString(Util.intToString(AlleywayProstituteDialogue.getModifiedFineAmount(npc)), true);
-			Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "PROSTITUTE_REMOVAL_PAID", npc));
-			Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().incrementMoney(-AlleywayProstituteDialogue.getModifiedFineAmount(npc)));
-			Main.game.banishNPC(npc);
-		}
-		@Override
-		public String getContent() {
-			return "";
-		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Continue", "Feeling happy to have been able to help out one of Dominion's troubled citizens, you continue on your way...", Main.game.getDefaultDialogue(false));
-			}
-			return null;
-		}
-	};
 	
 	public static List<NPC> getProstitutes(boolean includeSlaves) {
 		List<NPC> prostitutes = new ArrayList<>();

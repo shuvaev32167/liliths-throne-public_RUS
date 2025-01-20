@@ -43,24 +43,24 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(fasten)] the diamond necklace around [npc.her] neck.]]>
+        <![CDATA[[npc.Name] fasten the diamond necklace around [npc.her] neck.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(fasten)] the diamond necklace around [npc2.namePos] neck.]]>
+        <![CDATA[[npc.Name] fasten the diamond necklace around [npc2.namePos] neck.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] firmly [npc.verb(grab)] [npc2.name], before fastening the diamond necklace around [npc2.her] neck.]]>
+        <![CDATA[[npc.Name] firmly grab [npc2.name], before fastening the diamond necklace around [npc2.her] neck.]]>
     </otherRough>
   </replacementText>
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(unfasten)] [npc.her] diamond necklace, before taking it off from around [npc.her] neck.]]>
+        <![CDATA[[npc.Name] unfasten [npc.her] diamond necklace, before taking it off from around [npc.her] neck.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(unfasten)] [npc2.namePos] diamond necklace, before taking it off from around [npc2.her] neck.]]>
+        <![CDATA[[npc.Name] unfasten [npc2.namePos] diamond necklace, before taking it off from around [npc2.her] neck.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(unfasten)] [npc2.namePos] diamond necklace, before yanking it off from around [npc2.her] neck.]]>
+        <![CDATA[[npc.Name] roughly unfasten [npc2.namePos] diamond necklace, before yanking it off from around [npc2.her] neck.]]>
     </otherRough>
   </displacementText>
 

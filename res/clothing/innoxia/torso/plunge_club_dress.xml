@@ -92,73 +92,73 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.steps] into the clubbing dress, before pulling it up around [npc.her] [npc.hips+] and [npc.breasts+] and then tying the straps into a loose bow behind [npc.her] neck.]]>
+            <![CDATA[[npc.Name] [npc.steps] into the clubbing dress, before pulling it up around [npc.her] [npc.hips+] и [npc.breasts+] and then tying the straps into a loose bow behind [npc.her] neck.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(get)] [npc2.name] to [npc2.step] into the clubbing dress, before pulling it up around [npc2.her] [npc2.hips+] and [npc2.breasts+] and then tying the straps into a loose bow behind [npc2.her] neck.]]>
+            <![CDATA[[npc.Name] get [npc2.name] to [npc2.step] into the clubbing dress, before pulling it up around [npc2.her] [npc2.hips+] и [npc2.breasts+] and then tying the straps into a loose bow behind [npc2.her] neck.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(force)] [npc2.name] to [npc2.step] into the clubbing dress, before yanking it up around [npc2.her] [npc2.hips+] and [npc2.breasts+] and then tying the straps into a loose bow behind [npc2.her] neck.]]>
+            <![CDATA[[npc.Name] roughly force [npc2.name] to [npc2.step] into the clubbing dress, before yanking it up around [npc2.her] [npc2.hips+] и [npc2.breasts+] and then tying the straps into a loose bow behind [npc2.her] neck.]]>
 	  </otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(untie)] the straps [npc.steps] out of [npc.her] clubbing dress.]]>
+            <![CDATA[[npc.Name] untie the straps [npc.steps] out of [npc.her] clubbing dress.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(untie)] the straps of [npc2.namePos] clubbing dress and [npc.verb(get)] [npc2.herHim] to [npc2.step] out of it.]]>
+            <![CDATA[[npc.Name] untie the straps of [npc2.namePos] clubbing dress and get [npc2.herHim] to [npc2.step] out of it.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(untie)] the straps of [npc2.namePos] clubbing dress and [npc.verb(force)] [npc2.herHim] to [npc2.step] out of it.]]>
+            <![CDATA[[npc.Name] roughly untie the straps of [npc2.namePos] clubbing dress and force [npc2.herHim] to [npc2.step] out of it.]]>
 		</otherRough>
 	</displacementText>
 
 	<replacementText type="PULLS_UP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the skirt of [npc.her] clubbing dress back down into the proper position.]]>
+            <![CDATA[[npc.Name] pull the skirt of [npc.her] clubbing dress back down into the proper position.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the skirt [npc2.namePos] clubbing dress back down into the proper position.]]>
+            <![CDATA[[npc.Name] pull the skirt [npc2.namePos] clubbing dress back down into the proper position.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(pull)] the skirt [npc2.namePos] clubbing dress back down into the proper position.]]>
+            <![CDATA[[npc.Name] roughly pull the skirt [npc2.namePos] clubbing dress back down into the proper position.]]>
 	  </otherRough>
 	</replacementText>
 
 	<displacementText type="PULLS_UP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] up the skirt of [npc.her] clubbing dress.]]>
+            <![CDATA[[npc.Name] pull up the skirt of [npc.her] clubbing dress.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] up the skirt of [npc2.namePos] clubbing dress.]]>
+            <![CDATA[[npc.Name] pull up the skirt of [npc2.namePos] clubbing dress.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(grab)] hold of the skirt of [npc2.namePos] clubbing dress, before roughly pulling it up.]]>
+            <![CDATA[[npc.Name] grab hold of the skirt of [npc2.namePos] clubbing dress, before roughly pulling it up.]]>
 		</otherRough>
 	</displacementText>
 
 	<displacementText type="PULLS_DOWN">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(untie)] the straps of [npc.her] clubbing dress and [npc.verb(allow)] the top half to fall down around [npc.her] waist.]]>
+            <![CDATA[[npc.Name] untie the straps of [npc.her] clubbing dress and allow the top half to fall down around [npc.her] waist.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(untie)] the straps of [npc2.namePos] clubbing dress and [npc.verb(allow)] the top half to fall down around [npc2.her] waist.]]>
+            <![CDATA[[npc.Name] untie the straps of [npc2.namePos] clubbing dress and allow the top half to fall down around [npc2.her] waist.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(untie)] the straps of [npc2.namePos] clubbing dress and [npc.verb(yank)] the top half down around [npc2.her] waist.]]>
+            <![CDATA[[npc.Name] roughly untie the straps of [npc2.namePos] clubbing dress and yank the top half down around [npc2.her] waist.]]>
 	  </otherRough>
 	</displacementText>
 
 	<replacementText type="PULLS_DOWN">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] up the top half of [npc.her] clubbing dress and [npc.verb(tie)] the straps into a loose bow behind [npc.her] neck.]]>
+            <![CDATA[[npc.Name] pull up the top half of [npc.her] clubbing dress and tie the straps into a loose bow behind [npc.her] neck.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] up the top half of [npc2.namePos] clubbing dress and [npc.verb(tie)] the straps into a loose bow behind [npc2.her] neck.]]>
+            <![CDATA[[npc.Name] pull up the top half of [npc2.namePos] clubbing dress and tie the straps into a loose bow behind [npc2.her] neck.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(yank)] up the top half of [npc2.namePos] clubbing dress and [npc.verb(tie)] the straps into a loose bow behind [npc2.her] neck.]]>
+            <![CDATA[[npc.Name] roughly yank up the top half of [npc2.namePos] clubbing dress and tie the straps into a loose bow behind [npc2.her] neck.]]>
 		</otherRough>
 	</replacementText>
 

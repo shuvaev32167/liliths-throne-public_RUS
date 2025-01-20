@@ -13,8 +13,9 @@
 		
 		<rarity>LEGENDARY</rarity>
 		<weaponSet/>
-		<equipText><![CDATA[[npc.Name] [npc.verb(take)] out [npc.her] LAR1A1, inserts a magazine, and pulls the charging handle, putting it into a state where it's ready to be used in combat.]]></equipText>
-		<unequipText><![CDATA[[npc.Name] [npc.verb(put)] [npc.her] LAR1A1 away.]]></unequipText>
+        <equipText>
+            <![CDATA[[npc.Name] take out [npc.her] LAR1A1, inserts a magazine, and pulls the charging handle, putting it into a state where it's ready to be used in combat.]]></equipText>
+        <unequipText><![CDATA[[npc.Name] put [npc.her] LAR1A1 away.]]></unequipText>
 		<imageName>lar1a1.svg</imageName>
 		<imageEquippedName/> 
 		
@@ -64,13 +65,13 @@
 
 	<hitDescriptions>
 		<hitText><![CDATA[
-		Taking aim with [npc.her] LAR1A1, [npc.name] [npc.verb(pull)] the trigger and [npc.verb(fire)] a bullet at [npc2.name], hitting [npc2.herHim] directly in the chest!<br/>Thankfully, there seems to be some kind of arcane force preventing [npc2.name] from being seriously wounded or killed...
+		Taking aim with [npc.her] LAR1A1, [npc.name] pull the trigger and fire a bullet at [npc2.name], hitting [npc2.herHim] directly in the chest!<br/>Thankfully, there seems to be some kind of arcane force preventing [npc2.name] from being seriously wounded or killed...
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		Taking aim with [npc.her] LAR1A1, [npc.name] [npc.verb(pull)] the trigger and fires a bullet at [npc2.name], but [npc.verb(end)] up missing [npc2.herHim]!
+		Taking aim with [npc.her] LAR1A1, [npc.name] pull the trigger and fires a bullet at [npc2.name], but end up missing [npc2.herHim]!
 		]]></missText>
 	</missDescriptions>
 	

@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.character.body;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTesticleType;
 import com.lilithsthrone.game.character.body.valueEnums.CumProduction;
@@ -13,6 +10,9 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.1.83
@@ -142,14 +142,14 @@ public class Testicle implements BodyPartInterface {
 		} else if (sizeChange > 0) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out a lewd moan as [npc.she] [npc.verb(feel)] [npc.her] [npc.balls] suddenly swell and [style.boldGrow(grow larger)].<br/>"
+                            + "[npc.Name] let out a lewd moan as [npc.she] feel [npc.her] [npc.balls] suddenly swell and [style.boldGrow(grow larger)].<br/>"
 						+ "[npc.She] now [npc.has] [style.boldSex(" + owner.getTesticleSize().getDescriptor() + " [pc.balls])]!"
 					+ "</p>");
 			
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out a surprised gasp as [npc.she] [npc.verb(feel)] [npc.her] [npc.balls] suddenly [style.boldShrink(shrink)].<br/>"
+                            + "[npc.Name] let out a surprised gasp as [npc.she] feel [npc.her] [npc.balls] suddenly [style.boldShrink(shrink)].<br/>"
 						+ "[npc.She] now has [style.boldSex(" +owner.getTesticleSize().getDescriptor()+ " [npc.balls])]!"
 					+ "</p>");
 		}
@@ -177,14 +177,14 @@ public class Testicle implements BodyPartInterface {
 		if(removingTesticles) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "A tingling feeling spreads down into [npc.namePos] [npc.balls], and [npc.she] [npc.verb(let)] out a shocked cry as [npc.she] [npc.verb(feel)] some of them shrinking away and [style.boldShrink(disappearing)].<br/>"
+                            + "A tingling feeling spreads down into [npc.namePos] [npc.balls], and [npc.she] let out a shocked cry as [npc.she] feel some of them shrinking away and [style.boldShrink(disappearing)].<br/>"
 						+ "After a few moments, [npc.sheIs] left with [style.boldTfGeneric([npc.a_balls])]."
 					+ "</p>");
 			
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "A tingling feeling spreads down into [npc.namePos] [npc.balls], and [npc.she] [npc.verb(let)] out a little cry as [npc.she] [npc.verb(feel)] them [style.boldGrow(multiplying)].<br/>"
+                            + "A tingling feeling spreads down into [npc.namePos] [npc.balls], and [npc.she] let out a little cry as [npc.she] feel them [style.boldGrow(multiplying)].<br/>"
 						+ "After a few moments, [npc.sheIs] left with [style.boldTfGeneric([npc.a_balls])]."
 					+ "</p>");
 		}
@@ -212,15 +212,15 @@ public class Testicle implements BodyPartInterface {
 		if(internal) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(feel)] [npc.her] [npc.balls] tightening and [style.boldShrink(withdrawing)] up into [npc.her] groin,"
-							+ " and [npc.she] [npc.verb(let)] out a shocked cry as [npc.she] [npc.verb(feel)] them shift up to sit inside [npc.her] body.<br/>"
+                            + "[npc.Name] feel [npc.her] [npc.balls] tightening and [style.boldShrink(withdrawing)] up into [npc.her] groin,"
+                            + " and [npc.she] let out a shocked cry as [npc.she] feel them shift up to sit inside [npc.her] body.<br/>"
 						+ "[npc.Her] [npc.balls+] [style.boldTfGeneric(are now internal)]."
 					+ "</p>");
 			
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(feel)] [npc.her] internal [npc.balls] slackening and [style.boldGrow(dropping down)], and [npc.she] [npc.verb(let)] out a deep [npc.moan] as they settle down into an external sack.<br/>"
+                            + "[npc.Name] feel [npc.her] internal [npc.balls] slackening and [style.boldGrow(dropping down)], and [npc.she] let out a deep [npc.moan] as they settle down into an external sack.<br/>"
 						+ "[npc.Her] [npc.balls+] [style.boldTfGeneric(are now external)]."
 					+ "</p>");
 		}
@@ -256,7 +256,7 @@ public class Testicle implements BodyPartInterface {
 		if(cumChange > 0) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(feel)] a strange bubbling and churning taking place deep within [npc.her] [npc.balls],"
+                            + "[npc.Name] feel a strange bubbling and churning taking place deep within [npc.her] [npc.balls],"
 							+ " and [npc.she] can't help but let out [npc.a_moan+] as a small squirt of precum suddenly drools out from [npc.her] [npc.cock];"
 								+ " clear evidence that [npc.her] [npc.cum] production has [style.boldGrow(increased)].<br/>"
 						+ "[npc.SheIsFull] now able to produce [style.boldSex(" + cumDescriptor + " [npc.cum])]!"
@@ -265,8 +265,8 @@ public class Testicle implements BodyPartInterface {
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(feel)] a strange sucking sensation taking place deep within [npc.her] [npc.balls],"
-							+ " and [npc.she] can't help but let out a shocked gasp as [npc.she] [npc.verb(realise)] that [npc.sheIs] feeling [npc.her] [npc.cum] production [style.boldShrink(drying up)].<br/>"
+                            + "[npc.Name] feel a strange sucking sensation taking place deep within [npc.her] [npc.balls],"
+                            + " and [npc.she] can't help but let out a shocked gasp as [npc.she] realise that [npc.sheIs] feeling [npc.her] [npc.cum] production [style.boldShrink(drying up)].<br/>"
 						+ "[npc.SheIsFull] now able to produce [style.boldSex(" + cumDescriptor + " [npc.cum])]!"
 					+ "</p>");
 		}
@@ -361,7 +361,7 @@ public class Testicle implements BodyPartInterface {
 		if (regenerationChange > 0) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(feel)] an alarming bubbling and churning taking place deep within [npc.her] [npc.balls],"
+                            + "[npc.Name] feel an alarming bubbling and churning taking place deep within [npc.her] [npc.balls],"
 							+ " and [npc.she] can't help but let out [npc.a_moan+] as a small squirt of precum suddenly drools out from [npc.her] [npc.cock];"
 								+ " clear evidence that [npc.her] [npc.cum] regeneration has [style.boldGrow(increased)].<br/>"
 						+ "[npc.Her] rate of [npc.cum] regeneration is now [style.boldSex(" + regenerationDescriptor + ")] ("+Units.fluid(cumRegeneration)+"/day)!"
@@ -370,8 +370,8 @@ public class Testicle implements BodyPartInterface {
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(feel)] strange sucking sensation taking place deep within [npc.her] [npc.balls],"
-							+ " and [npc.she] can't help but let out a shocked gasp as [npc.she] [npc.verb(realise)] that [npc.sheIs] feeling [npc.her] [npc.cum] regeneration [style.boldShrink(decreasing)].<br/>"
+                            + "[npc.Name] feel strange sucking sensation taking place deep within [npc.her] [npc.balls],"
+                            + " and [npc.she] can't help but let out a shocked gasp as [npc.she] realise that [npc.sheIs] feeling [npc.her] [npc.cum] regeneration [style.boldShrink(decreasing)].<br/>"
 						+ "[npc.Her] rate of [npc.cum] regeneration is now [style.boldSex(" + regenerationDescriptor + ")] ("+Units.fluid(cumRegeneration)+"/day)!"
 					+ "</p>");
 		}
@@ -404,7 +404,7 @@ public class Testicle implements BodyPartInterface {
 		if (expulsionChange > 0) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] suddenly [npc.verb(feel)] a strange tightening and building up of pressure deep within [npc.her] [npc.balls],"
+                            + "[npc.Name] suddenly feel a strange tightening and building up of pressure deep within [npc.her] [npc.balls],"
 								+ " and [npc.she] can't help but let out [npc.a_moan+] as a small amount of precum powerfully squirts out from [npc.her] [npc.cock];"
 									+ " clear evidence that [npc.her] [npc.cum] expulsion has [style.boldGrow(increased)].<br/>"
 						+ "[npc.She] will now expel [style.boldSex(" + UtilText.generateSingularDeterminer(expulsionDescriptor) + " "+expulsionDescriptor+")] amount of stored cum at each orgasm!"
@@ -413,7 +413,7 @@ public class Testicle implements BodyPartInterface {
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] suddenly [npc.verb(feel)] a strange loosening and reduction of pressure deep within [npc.her] [npc.balls],"
+                            + "[npc.Name] suddenly feel a strange loosening and reduction of pressure deep within [npc.her] [npc.balls],"
 							+ " and [npc.she] can't help but let out [npc.a_moan+] as a small amount of precum weakly dribbles out from [npc.her] [npc.cock];"
 								+ " clear evidence that [npc.her] [npc.cum] expulsion has [style.boldShrink(decreased)].<br/>"
 						+ "[npc.She] will now expel [style.boldSex(" + UtilText.generateSingularDeterminer(expulsionDescriptor) + " "+expulsionDescriptor+")] amount of stored cum at each orgasm!"

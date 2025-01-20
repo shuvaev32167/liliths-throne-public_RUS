@@ -172,9 +172,9 @@
 		NOTE: The damage is automatically applied to the target, so you don't need to handle parsing of that. -->
 		<execute><![CDATA[
 			#IF(!npc.isCoverableAreaExposed(CA_MOUTH))
-				As [npc.her] mouth is blocked, [npc.name] [npc.verb(fail)] to bite [npc2.name], and [npc.verb(end)] up doing no damage at all...
+				As [npc.her] mouth is blocked, [npc.name] fail to bite [npc2.name], and end up doing no damage at all...
 			#ELSE
-				[npc.Name] [npc.verb(charge)] with incredible speed at [npc2.name] and [npc.verb(open)] [npc.her] mouth just before impact, revealing extremely sharp teeth that [npc.she] [npc.verb(sink)] into [npc2.namePos] aura!
+				[npc.Name] charge with incredible speed at [npc2.name] и open [npc.her] mouth just before impact, revealing extremely sharp teeth that [npc.she] sink into [npc2.namePos] aura!
 			#ENDIF
 			formattedHealthDamage
 		]]></execute>

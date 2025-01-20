@@ -40,7 +40,7 @@ public class SexSlotAgainstWall {
 	public static final SexSlot BACK_TO_WALL = new SexSlot(
 			"Back against [pc.wall]",
 			"back to [pc.wall]",
-			"Leaning back, [npc.name] [npc.verb(brace)] [npc.herself] against the [pc.wall] as [npc.she] [npc.verb(feel)] [npc.herself] reaching [npc.her] climax.",
+            "Leaning back, [npc.name] brace [npc.herself] against the [pc.wall] as [npc.she] feel [npc.herself] reaching [npc.her] climax.",
 			true,
 			SexSlotTag.BACK_TO_WALL);
 	public static final SexSlot BACK_TO_WALL_TWO = new SexSlot(BACK_TO_WALL) {
@@ -90,7 +90,7 @@ public class SexSlotAgainstWall {
 	public static final SexSlot PERFORMING_ORAL_WALL = new SexSlot(
 			"Performing oral",
 			"performing oral",
-			"[npc.Name] [npc.verb(reach)] up and [npc.verb(place)] a [npc.hand] on one of [npc2.namePos] [npc2.legs], before letting out [npc.a_moan+] as [npc.she] [npc.verb(prepare)] to reach [npc.her] climax.",
+            "[npc.Name] reach up and place a [npc.hand] on one of [npc2.namePos] [npc2.legs], before letting out [npc.a_moan+] as [npc.she] prepare to reach [npc.her] climax.",
 			false) {
 		@Override
 		public boolean isStanding(GameCharacter target) {

@@ -72,25 +72,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(tighten)] the dress belt around [npc.her] waist and [npc.verb(thread)] excess through the buckle frame before inserting the double prongs through the closest adjustment hole. [npc.she] then [npc.verb(adjust)] the shoulder strap and [npc.verb(secure)] it in a similar fashion.]]>
+            <![CDATA[[npc.Name] tighten the dress belt around [npc.her] waist and thread excess through the buckle frame before inserting the double prongs through the closest adjustment hole. [npc.she] then adjust the shoulder strap and secure it in a similar fashion.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(tighten)] the dress belt around [npc2.namePos] waist and [npc.verb(thread)] excess through the buckle frame before inserting the double prongs through the closest adjustment hole. [npc.she] the [npc.verb(adjust)] the shoulder strap and [npc.verb(secure)] it in a similar fashion.]]>
+            <![CDATA[[npc.Name] tighten the dress belt around [npc2.namePos] waist and thread excess through the buckle frame before inserting the double prongs through the closest adjustment hole. [npc.she] the adjust the shoulder strap and secure it in a similar fashion.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(tighten)] the dress belt around [npc2.namePos] waist as much as possible and hastily [npc.verb(thread)] excess through the buckle frame before inserting the double prongs through the closest adjustment hole. [npc.she] then [npc.verb(does)] much the same with the shoulder strap.]]>
+            <![CDATA[[npc.Name] tighten the dress belt around [npc2.namePos] waist as much as possible and hastily thread excess through the buckle frame before inserting the double prongs through the closest adjustment hole. [npc.she] then does much the same with the shoulder strap.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unbuckle)] [npc.her] dress belt and its shoulder strap before taking it off.]]>
+            <![CDATA[[npc.Name] unbuckle [npc.her] dress belt and its shoulder strap before taking it off.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unbuckle)] [npc2.namePos] dress belt and its shoulder strap before taking it off.]]>
+            <![CDATA[[npc.Name] unbuckle [npc2.namePos] dress belt and its shoulder strap before taking it off.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] hastily [npc.verb(unbuckle)] [npc2.namePos] dress belt and its shoulder strap before tearing the whole thing away from [npc2.namePos] waist.]]>
+            <![CDATA[[npc.Name] hastily unbuckle [npc2.namePos] dress belt and its shoulder strap before tearing the whole thing away from [npc2.namePos] waist.]]>
 		</otherRough>
 	</displacementText>
 	

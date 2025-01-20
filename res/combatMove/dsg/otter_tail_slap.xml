@@ -157,7 +157,7 @@
 		<!-- The 'execute' section should be used for the main description of the attack, as well as any extra effects you want to apply.
 		NOTE: The damage is automatically applied to the target, so you don't need to handle parsing of that. -->
 		<execute><![CDATA[
-			[npc.Name] [npc.verb(charge)] at [npc2.name]! At the last second, [npc.she] [npc.verb(whip)] [npc.her] body around with great force, slapping [npc.her] tail against [npc2.namePos] aura! formattedHealthDamage
+			[npc.Name] charge at [npc2.name]! At the last second, [npc.she] whip [npc.her] body around with great force, slapping [npc.her] tail against [npc2.namePos] aura! formattedHealthDamage
 		]]></execute>
 		<critDescription><![CDATA[
 			[npc.NamePos] strike was extremely effective!

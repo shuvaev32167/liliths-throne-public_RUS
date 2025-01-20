@@ -1,13 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.slaverAlley;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
@@ -15,28 +7,14 @@ import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringModifier;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.body.valueEnums.LipSize;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.PenisLength;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.NPC;
-import com.lilithsthrone.game.character.npc.dominion.Brax;
-import com.lilithsthrone.game.character.npc.dominion.Finch;
-import com.lilithsthrone.game.character.npc.dominion.Helena;
-import com.lilithsthrone.game.character.npc.dominion.Scarlett;
-import com.lilithsthrone.game.character.npc.dominion.Sean;
-import com.lilithsthrone.game.character.npc.dominion.SlaveInStocks;
+import com.lilithsthrone.game.character.npc.dominion.*;
 import com.lilithsthrone.game.character.npc.misc.GenericFemaleNPC;
 import com.lilithsthrone.game.character.npc.misc.GenericMaleNPC;
 import com.lilithsthrone.game.character.npc.misc.GenericSexualPartner;
@@ -65,14 +43,7 @@ import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.occupantManagement.slave.SlaveJob;
 import com.lilithsthrone.game.occupantManagement.slave.SlaveJobSetting;
-import com.lilithsthrone.game.sex.GenericSexFlag;
-import com.lilithsthrone.game.sex.ImmobilisationType;
-import com.lilithsthrone.game.sex.InitialSexActionInformation;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexControl;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.managers.OrgasmBehaviour;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.managers.SexManagerInterface;
@@ -89,6 +60,9 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.io.File;
+import java.util.*;
 
 /**
  * @since 0.1.0
@@ -649,8 +623,8 @@ public class SlaverAlleyDialogue {
 				character.calculateGenericSexEffects(true, true, getMainCompanion(), sexType, GenericSexFlag.EXTENDED_DESCRIPTION_NEEDED),
 				!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.slaverAlleyTwoPartners));
 	}
-	
-	public static final DialogueNode OUTSIDE = new DialogueNode("Slaver Alley", "-", false) {
+
+    public static final DialogueNode OUTSIDE = new DialogueNode("Аллея работорговцев", "-", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -665,7 +639,7 @@ public class SlaverAlleyDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Slaver Alley", "Step through the gate and enter Slaver Alley.", PlaceType.SLAVER_ALLEY_ENTRANCE.getDialogue(false)){
+                return new Response("Аллея работорговцев", "Step through the gate and enter Slaver Alley.", PlaceType.SLAVER_ALLEY_ENTRANCE.getDialogue(false)) {
 					@Override
 					public void effects() {
 						// If Sean is not introduced and the stocks slaves are not present, then this must be the first time the player has entered slaver alley, in which case the slaves need to be initialised:
@@ -680,42 +654,8 @@ public class SlaverAlleyDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode GATEWAY = new DialogueNode("Gateway", "", false) {
-		@Override
-		public int getSecondsPassed() {
-			return 2*60;
-		}
-		@Override
-		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "GATEWAY"));
 
-			if(Main.game.getPlayer().getQuest(QuestLine.ROMANCE_HELENA)==Quest.ROMANCE_HELENA_6_ADVERTISING) {
-				sb.append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "GATEWAY_POSTERS"));
-			}
-			
-			return sb.toString();
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Leave", "Step back out into Dominion's alleyways.", PlaceType.DOMINION_SLAVER_ALLEY.getDialogue(false)) {
-					@Override
-					public void effects() {
-						Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_SLAVER_ALLEY, false);
-					}
-				};
-				
-			} else if(index==2 && Main.game.getPlayer().getQuest(QuestLine.ROMANCE_HELENA)==Quest.ROMANCE_HELENA_6_ADVERTISING) {
-				return new Response("Posters", "Ask the guards for permission to put up the posters which Helena gave to you.", GATEWAY_POSTER_PERMISSION);
-			}
-			
-			return null;
-		}
-	};
-	
-	public static final DialogueNode GATEWAY_POSTER_PERMISSION = new DialogueNode("Gateway", "", true) {
+    public static final DialogueNode GATEWAY_POSTER_PERMISSION = new DialogueNode("Ворота", "", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 2*60;
@@ -738,7 +678,7 @@ public class SlaverAlleyDialogue {
 							Main.game.getTextStartStringBuilder().append(Main.game.getPlayer().incrementMoney(-100));
 						}
 					};
-					
+
 //				} else {
 //					return new Response("Pay ("+UtilText.formatAsMoneyUncoloured(100, "span")+")", "You cannot afford to pay the guards the hundred flames they're asking for!", null);
 //				}
@@ -761,7 +701,7 @@ public class SlaverAlleyDialogue {
 									Main.game.getPlayer().incrementLust(15, false);
 								}
 							};
-							
+
 						} else {
 							return new Response("Flash breasts",
 									"Fully expose your breasts to the guards in exchange for them letting you put up the posters.",
@@ -778,12 +718,12 @@ public class SlaverAlleyDialogue {
 								}
 							};
 						}
-						
+
 					} else {
 						return new Response("Flash breasts", "You are unable to fully expose your breasts, so can't flash them at the guards in exchange for them letting you put up the posters...", null);
 					}
 				}
-				
+
 			}
 //			else if(index==0) {
 //				return new Response("Leave", "Tell the guards that you'll back with the money later...", GATEWAY) {
@@ -793,6 +733,39 @@ public class SlaverAlleyDialogue {
 //					}
 //				};
 //			}
+			return null;
+		}
+	};
+    public static final DialogueNode GATEWAY = new DialogueNode("Ворота", "", false) {
+		@Override
+		public int getSecondsPassed() {
+			return 2*60;
+		}
+		@Override
+		public String getContent() {
+			StringBuilder sb = new StringBuilder();
+			sb.append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "GATEWAY"));
+
+			if(Main.game.getPlayer().getQuest(QuestLine.ROMANCE_HELENA)==Quest.ROMANCE_HELENA_6_ADVERTISING) {
+				sb.append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "GATEWAY_POSTERS"));
+			}
+
+			return sb.toString();
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 1) {
+				return new Response("Leave", "Step back out into Dominion's alleyways.", PlaceType.DOMINION_SLAVER_ALLEY.getDialogue(false)) {
+					@Override
+					public void effects() {
+						Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_SLAVER_ALLEY, false);
+					}
+				};
+
+			} else if(index==2 && Main.game.getPlayer().getQuest(QuestLine.ROMANCE_HELENA)==Quest.ROMANCE_HELENA_6_ADVERTISING) {
+				return new Response("Posters", "Ask the guards for permission to put up the posters which Helena gave to you.", GATEWAY_POSTER_PERMISSION);
+			}
+
 			return null;
 		}
 	};
@@ -834,7 +807,7 @@ public class SlaverAlleyDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Scarlett", "Find out what it is Scarlett wants.", GATEWAY_POSTER_PERMISSION_END_RETURN);
+                return new Response("Скарлетт", "Find out what it is Scarlett wants.", GATEWAY_POSTER_PERMISSION_END_RETURN);
 			}
 			return null;
 		}
@@ -864,8 +837,8 @@ public class SlaverAlleyDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode ALLEYWAY = new DialogueNode("Alleyway", "", false) {
+
+	public static final DialogueNode ALLEYWAY = new DialogueNode("Переулок", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 2*60;
@@ -879,8 +852,7 @@ public class SlaverAlleyDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode DESERTED_ALLEYWAY = new DialogueNode("Deserted alleyway", "", false) {
+    public static final DialogueNode DESERTED_ALLEYWAY = new DialogueNode("Безлюдный переулок", "", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -897,8 +869,33 @@ public class SlaverAlleyDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode MARKET_STALL_FEMALE = new DialogueNode("A Woman's Touch", "", false) {
+    public static final DialogueNode MARKET_STALL_STATUE = new DialogueNode("Статуя падшего ангела", "", false) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+
+		@Override
+		public String getContent() {
+			StringBuilder sb = new StringBuilder();
+
+			sb.append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "MARKET_STALL_STATUE"));
+
+			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.statueTruthRevealed)) {
+				sb.append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "MARKET_STALL_STATUE_TRUTH"));
+			} else {
+				sb.append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "MARKET_STALL_STATUE_IGNORANCE"));
+			}
+
+			return sb.toString();
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return null;
+		}
+	};    public static final DialogueNode MARKET_STALL_FEMALE = new DialogueNode("Женское прикосновение", "", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -931,8 +928,23 @@ public class SlaverAlleyDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode MARKET_STALL_MALE = new DialogueNode("Iron & Steel", "", false) {
+    public static final DialogueNode MARKET_STALL_EXCLUSIVE = new DialogueNode("Магазин аренды рабов", "", false) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "MARKET_STALL_EXCLUSIVE");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return null;
+		}
+	};    public static final DialogueNode MARKET_STALL_MALE = new DialogueNode("Железо и сталь", "", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -965,8 +977,23 @@ public class SlaverAlleyDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode MARKET_STALL_ANAL = new DialogueNode("The Rear Entrance", "", false) {
+    public static final DialogueNode MARKET_STALL_BULK = new DialogueNode("Биржа Дзайбацу", "", false) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "MARKET_STALL_BULK");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return null;
+		}
+	};    public static final DialogueNode MARKET_STALL_ANAL = new DialogueNode("Задний вход", "", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -999,8 +1026,8 @@ public class SlaverAlleyDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode MARKET_STALL_VAGINAL = new DialogueNode("White Lilies", "", false) {
+
+    public static final DialogueNode MARKET_STALL_VAGINAL = new DialogueNode("Белые лилии", "", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -1033,8 +1060,8 @@ public class SlaverAlleyDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode MARKET_STALL_ORAL = new DialogueNode("Viva Voce", "", false) {
+
+    public static final DialogueNode MARKET_STALL_ORAL = new DialogueNode("Вива Воче", "", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -1067,70 +1094,12 @@ public class SlaverAlleyDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode MARKET_STALL_STATUE = new DialogueNode("Statue of the Fallen Angel", "", false) {
 
-		@Override
-		public int getSecondsPassed() {
-			return 60;
-		}
 
-		@Override
-		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			
-			sb.append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "MARKET_STALL_STATUE"));
-			
-			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.statueTruthRevealed)) {
-				sb.append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "MARKET_STALL_STATUE_TRUTH"));
-			} else {
-				sb.append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "MARKET_STALL_STATUE_IGNORANCE"));
-			}
-			
-			return sb.toString();
-		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return null;
-		}
-	};
-	
-	public static final DialogueNode MARKET_STALL_EXCLUSIVE = new DialogueNode("Slave Rental Store", "", false) {
 
-		@Override
-		public int getSecondsPassed() {
-			return 60;
-		}
 
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "MARKET_STALL_EXCLUSIVE");
-		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return null;
-		}
-	};
-	
-	public static final DialogueNode MARKET_STALL_BULK = new DialogueNode("Zaibatsu Exchange", "", false) {
-
-		@Override
-		public int getSecondsPassed() {
-			return 60;
-		}
-
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "MARKET_STALL_BULK");
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return null;
-		}
-	};
 	
 	public static final DialogueNode MARKET_STALL_CAFE = new DialogueNode("", "", false) {
 		@Override
@@ -1144,7 +1113,7 @@ public class SlaverAlleyDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Enter", "Enter the cafe and sit down at one of the tables.", MARKET_STALL_CAFE_INTERIOR);
+                return new Response("Вход", "Enter the cafe and sit down at one of the tables.", MARKET_STALL_CAFE_INTERIOR);
 			}
 			return null;
 		}
@@ -1390,7 +1359,7 @@ public class SlaverAlleyDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Enter", "Enter the establishment and take a look around inside...", BountyHunterLodge.ENTRANCE_INITITAL) {
+                return new Response("Вход", "Enter the establishment and take a look around inside...", BountyHunterLodge.ENTRANCE_INITITAL) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setLocation(WorldType.BOUNTY_HUNTER_LODGE, PlaceType.BOUNTY_HUNTER_LODGE_ENTRANCE, false);
@@ -1557,8 +1526,28 @@ public class SlaverAlleyDialogue {
 			}
 		}
 	};
-	
-	public static final DialogueNode AUCTION_BIDDING = new DialogueNode("Auctioning block", "", true) {
+    public static final DialogueNode AFTER_STOCKS_SEX = new DialogueNode("Общественные товары", "", true) {
+		@Override
+		public String getDescription() {
+			return UtilText.parse(stocksSlaveTargeted, "Having finished with [npc.name], you step away from [npc.herHim] and prepare to continue on your way.");
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "AFTER_STOCKS_SEX", stocksSlaveTargeted);
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+                return new Response("Продолжить", "Continue on your way.", PUBLIC_STOCKS) {
+					@Override
+					public void effects() {
+						stocksSlaveTargeted = null;
+					}
+				};
+			}
+			return null;
+		}
+	};	public static final DialogueNode AUCTION_BIDDING = new DialogueNode("Auctioning block", "", true) {
 		
 		@Override
 		public boolean isContinuesDialogue() {
@@ -1604,7 +1593,7 @@ public class SlaverAlleyDialogue {
 			if(biddingRounds==biddingRoundsTotal) {
 				if(index==1) {
 					if(playerBidLeader) {
-						return new Response("Continue", UtilText.parse(biddingNPC, "You won the bidding! [npc.Name] is now ready for collection from Slavery Administration."), AUCTION_BLOCK) {
+                        return new Response("Продолжить", UtilText.parse(biddingNPC, "You won the bidding! [npc.Name] is now ready for collection from Slavery Administration."), AUCTION_BLOCK) {
 							@Override
 							public void effects() {
 							}
@@ -1658,8 +1647,8 @@ public class SlaverAlleyDialogue {
 			}
 		}
 	};
-	
-	public static final DialogueNode PUBLIC_STOCKS = new DialogueNode("Public Stocks", "", false) {
+
+    public static final DialogueNode PUBLIC_STOCKS = new DialogueNode("Общественные товары", "", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -1838,23 +1827,37 @@ public class SlaverAlleyDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode AFTER_STOCKS_SEX = new DialogueNode("Public Stocks", "", true) {
+	public static final DialogueNode AFTER_SEAN_SEDUCE_ALLEYWAY_SEX = new DialogueNode("Finished", "", true) {
+		@Override
+		public int getSecondsPassed() {
+			return 2*60;
+		}
 		@Override
 		public String getDescription() {
-			return UtilText.parse(stocksSlaveTargeted, "Having finished with [npc.name], you step away from [npc.herHim] and prepare to continue on your way.");
+			if(isCompanionDialogue() && Main.sex.getAllParticipants(false).contains(getMainCompanion())) {
+				return "You, [com.name], and [sean.name] have finished having sex with one another...";
+			}
+			return "You and [sean.name] have finished having sex with one another...";
 		}
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "AFTER_STOCKS_SEX", stocksSlaveTargeted);
+			if(isCompanionDialogue() && Main.sex.getAllParticipants(false).contains(getMainCompanion())) {
+				return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "AFTER_SEAN_SEDUCE_ALLEYWAY_THREESOME_SEX");
+			}
+			return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "AFTER_SEAN_SEDUCE_ALLEYWAY_SEX");
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Continue on your way.", PUBLIC_STOCKS) {
+                return new Response("Продолжить",
+						"Head back out into Slaver Alley.",
+						PlaceType.SLAVER_ALLEY_PATH.getDialogue(false)) {
 					@Override
 					public void effects() {
-						stocksSlaveTargeted = null;
+						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "AFTER_SEAN_SEDUCE_ALLEYWAY_SEX_FINISHED"));
+						Main.game.getPlayer().setNearestLocation(WorldType.SLAVER_ALLEY, PlaceType.SLAVER_ALLEY_PATH, false);
+						Main.game.getNpc(Sean.class).setLocation(WorldType.SLAVER_ALLEY, PlaceType.SLAVER_ALLEY_PUBLIC_STOCKS);
+						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slaverAlleyVisitedHiddenAlleyway, true);
 					}
 				};
 			}
@@ -2021,7 +2024,7 @@ public class SlaverAlleyDialogue {
 				return new ResponseSex(
 						isCompanionDialogue()
 							?"Alleyway (solo)"
-							:"Alleyway",
+								: "Переулок",
 						"Tell [sean.name] that you want to go to the hidden alleyway and have sex with him there...",
 						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
 						null,
@@ -2355,8 +2358,7 @@ public class SlaverAlleyDialogue {
 			return PUBLIC_STOCKS_SEAN.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode AFTER_SEAN_SEDUCE_ALLEYWAY_SEX = new DialogueNode("Finished", "", true) {
+	public static final DialogueNode AFTER_SEAN_ALLEYWAY_SEX = new DialogueNode("Finished", "", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 2*60;
@@ -2370,23 +2372,23 @@ public class SlaverAlleyDialogue {
 		}
 		@Override
 		public String getContent() {
-			if(isCompanionDialogue() && Main.sex.getAllParticipants(false).contains(getMainCompanion())) {
-				return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "AFTER_SEAN_SEDUCE_ALLEYWAY_THREESOME_SEX");
+			if(isCompanionDialogue()) {
+				return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "AFTER_SEAN_ALLEYWAY_SEX_THREESOME");
 			}
-			return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "AFTER_SEAN_SEDUCE_ALLEYWAY_SEX");
+			return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "AFTER_SEAN_ALLEYWAY_SEX");
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue",
-						"Head back out into Slaver Alley.",
+                return new Response("Продолжить",
+						"Head back out into Slaver Alley",
 						PlaceType.SLAVER_ALLEY_PATH.getDialogue(false)) {
 					@Override
 					public void effects() {
-						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "AFTER_SEAN_SEDUCE_ALLEYWAY_SEX_FINISHED"));
+						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "AFTER_SEAN_ALLEYWAY_SEX_FINISHED"));
 						Main.game.getPlayer().setNearestLocation(WorldType.SLAVER_ALLEY, PlaceType.SLAVER_ALLEY_PATH, false);
 						Main.game.getNpc(Sean.class).setLocation(WorldType.SLAVER_ALLEY, PlaceType.SLAVER_ALLEY_PUBLIC_STOCKS);
-						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slaverAlleyVisitedHiddenAlleyway, true);
+						Main.game.getNpc(Sean.class).equipClothing(EquipClothingSetting.getAllClothingSettings());
 					}
 				};
 			}
@@ -2775,7 +2777,7 @@ public class SlaverAlleyDialogue {
 				return new ResponseSex(
 						"Seduce (threesome)",
 						"Tell [sean.name] that you and [com.name] were only really interested in getting some alone time with him..."
-								+ "<br/>[style.italicsMinorBad(Having a threesome with [sean.name] and [com.name] will not leave you with enough time in which to also free the slaves.)]",
+                                + "<br/>[style.italicsMinorBad(Having a threesome with [sean.name] и [com.name] will not leave you with enough time in which to also free the slaves.)]",
 						true,
 						true,
 						new SMGeneric(
@@ -2792,40 +2794,87 @@ public class SlaverAlleyDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode AFTER_SEAN_ALLEYWAY_SEX = new DialogueNode("Finished", "", true) {
+	public static final DialogueNode PUBLIC_STOCKS_LOCKED_UP = new DialogueNode("", "", true) {
 		@Override
 		public int getSecondsPassed() {
-			return 2*60;
-		}
-		@Override
-		public String getDescription() {
-			if(isCompanionDialogue() && Main.sex.getAllParticipants(false).contains(getMainCompanion())) {
-				return "You, [com.name], and [sean.name] have finished having sex with one another...";
-			}
-			return "You and [sean.name] have finished having sex with one another...";
+			return 10*60;
 		}
 		@Override
 		public String getContent() {
-			if(isCompanionDialogue()) {
-				return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "AFTER_SEAN_ALLEYWAY_SEX_THREESOME");
+			if(isSeanOfferingDeal(Main.game.getPlayer())) {
+				if(isCompanionDialogue() && Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.slaverAlleyCompanionInStocks) && isSeanOfferingDeal(getMainCompanion())) {
+					return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_LOCKED_UP_DEAL_BOTH");
+
+				} else {
+					return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_LOCKED_UP_DEAL");
+				}
+
+			} else {
+				if(isCompanionDialogue() && isSeanOfferingDeal(getMainCompanion())) {
+					return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_LOCKED_UP_DEAL_COMPANION");
+
+				} else {
+					return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_LOCKED_UP");
+				}
 			}
-			return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "AFTER_SEAN_ALLEYWAY_SEX");
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Continue",
-						"Head back out into Slaver Alley",
-						PlaceType.SLAVER_ALLEY_PATH.getDialogue(false)) {
-					@Override
-					public void effects() {
-						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "AFTER_SEAN_ALLEYWAY_SEX_FINISHED"));
-						Main.game.getPlayer().setNearestLocation(WorldType.SLAVER_ALLEY, PlaceType.SLAVER_ALLEY_PATH, false);
-						Main.game.getNpc(Sean.class).setLocation(WorldType.SLAVER_ALLEY, PlaceType.SLAVER_ALLEY_PUBLIC_STOCKS);
-						Main.game.getNpc(Sean.class).equipClothing(EquipClothingSetting.getAllClothingSettings());
-					}
-				};
+			if(isSeanOfferingDeal(Main.game.getPlayer())) {
+				if(index==1) {
+					return new Response("Accept",
+							"Swallow the "+ItemType.getItemTypeFromId("innoxia_pills_fertility").getName(false)+" that [sean.name] is offering you, thereby accepting his deal of protection in exchange for letting him try to impregnate you...",
+							PUBLIC_STOCKS_LOCKED_UP_FIRST_SEX) {
+						@Override
+						public void effects() {
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_LOCKED_UP_ACCEPTED_DEAL"));
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slaverAlleyAcceptedDeal, true);
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slaverAlleyTookPlace, true);
+							Main.game.getPlayer().clearFluidsStored(SexAreaOrifice.VAGINA);
+							Main.game.getNpc(Sean.class).useItem(Main.game.getItemGen().generateItem("innoxia_pills_fertility"), Main.game.getPlayer(), false);
+						}
+					};
+
+				} else if(index==2) {
+					return new Response("Refuse",
+							"Refuse to swallow the "+ItemType.getItemTypeFromId("innoxia_pills_fertility").getName(false)+" and instead accept the fact that you're going to be used by members of the public.",
+							PUBLIC_STOCKS_LOCKED_UP_FIRST_SEX) {
+						@Override
+						public int getSecondsPassed() {
+							return 10*60;
+						}
+						@Override
+						public void effects() {
+							banishRandomSexPartners();
+							randomSexPartners = SlaverAlleyDialogue.generateRandomStocksPartners(Main.game.getPlayer(), false);
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_LOCKED_UP_REFUSED_DEAL"));
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_LOCKED_UP_RANDOMS_APPROACH", randomSexPartners));
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slaverAlleyAcceptedDeal, false);
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slaverAlleyTookPlace, true);
+						}
+					};
+
+				}
+
+			} else {
+				if(index==1) {
+                    return new Response("Продолжить",
+							"All you can do is wait and see if you're going to be used by members of the public...",
+							PUBLIC_STOCKS_LOCKED_UP_FIRST_SEX) {
+						@Override
+						public int getSecondsPassed() {
+							return 10*60;
+						}
+						@Override
+						public void effects() {
+							banishRandomSexPartners();
+							randomSexPartners = SlaverAlleyDialogue.generateRandomStocksPartners(Main.game.getPlayer(), false);
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_LOCKED_UP_RANDOMS_APPROACH", randomSexPartners));
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slaverAlleyAcceptedDeal, false);
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slaverAlleyTookPlace, true);
+						}
+					};
+				}
 			}
 			return null;
 		}
@@ -2933,85 +2982,56 @@ public class SlaverAlleyDialogue {
 			return Main.game.getPlayerCell().getDialogue(false).getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode PUBLIC_STOCKS_LOCKED_UP = new DialogueNode("", "", true) {
+	public static final DialogueNode PUBLIC_STOCKS_LOCKED_UP_FINISHED = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 10*60;
+			return 30*60;
 		}
 		@Override
 		public String getContent() {
-			if(isSeanOfferingDeal(Main.game.getPlayer())) {
-				if(isCompanionDialogue() && Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.slaverAlleyCompanionInStocks) && isSeanOfferingDeal(getMainCompanion())) {
-					return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_LOCKED_UP_DEAL_BOTH");
-					
-				} else {
-					return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_LOCKED_UP_DEAL");
-				}
-				
-			} else {
-				if(isCompanionDialogue() && isSeanOfferingDeal(getMainCompanion())) {
-					return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_LOCKED_UP_DEAL_COMPANION");
-					
-				} else {
-					return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_LOCKED_UP");
-				}
-			}
+			return "";
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if(isSeanOfferingDeal(Main.game.getPlayer())) {
-				if(index==1) {
-					return new Response("Accept",
-							"Swallow the "+ItemType.getItemTypeFromId("innoxia_pills_fertility").getName(false)+" that [sean.name] is offering you, thereby accepting his deal of protection in exchange for letting him try to impregnate you...",
-							PUBLIC_STOCKS_LOCKED_UP_FIRST_SEX) {
-						@Override
-						public void effects() {
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_LOCKED_UP_ACCEPTED_DEAL"));
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slaverAlleyAcceptedDeal, true);
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slaverAlleyTookPlace, true);
-							Main.game.getPlayer().clearFluidsStored(SexAreaOrifice.VAGINA);
-							Main.game.getNpc(Sean.class).useItem(Main.game.getItemGen().generateItem("innoxia_pills_fertility"), Main.game.getPlayer(), false);
+			if(index==1) {
+                return new Response("Продолжить",
+						"Now that you're free, you can continue on your way once again...",
+						PUBLIC_STOCKS) {
+					@Override
+					public void effects() {
+						banishRandomSexPartners();
+						Main.game.getPlayer().setCaptive(false);
+						Main.game.getPlayer().equipAllClothingFromHoldingInventory();
+						if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.slaverAlleyCompanionInStocks)) {
+							getMainCompanion().equipAllClothingFromHoldingInventory();
 						}
-					};
-					
-				} else if(index==2) {
-					return new Response("Refuse",
-							"Refuse to swallow the "+ItemType.getItemTypeFromId("innoxia_pills_fertility").getName(false)+" and instead accept the fact that you're going to be used by members of the public.",
-							PUBLIC_STOCKS_LOCKED_UP_FIRST_SEX) {
-						@Override
-						public int getSecondsPassed() {
-							return 10*60;
+						if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.slaverAlleyAcceptedDeal)) {
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_LOCKED_UP_FINISHED_END"));
 						}
+					}
+				};
+			}
+			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.slaverAlleyAcceptedDeal)) {
+				if(index==2) {
+					return new Response("More",
+							"Tell [sean.name] that you want to stay in the stocks for a little longer...",
+							PUBLIC_STOCKS_LOCKED_UP_FINISHED_REPEAT,
+							Util.newArrayListOfValues(
+									Fetish.FETISH_EXHIBITIONIST,
+									Fetish.FETISH_SUBMISSIVE,
+									Fetish.FETISH_MASOCHIST),
+							CorruptionLevel.THREE_DIRTY,
+							null,
+							null,
+							null) {
 						@Override
-						public void effects() {
-							banishRandomSexPartners();
-							randomSexPartners = SlaverAlleyDialogue.generateRandomStocksPartners(Main.game.getPlayer(), false);
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_LOCKED_UP_REFUSED_DEAL"));
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_LOCKED_UP_RANDOMS_APPROACH", randomSexPartners));
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slaverAlleyAcceptedDeal, false);
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slaverAlleyTookPlace, true);
-						}
-					};
-					
-				}
-				
-			} else {
-				if(index==1) {
-					return new Response("Continue",
-							"All you can do is wait and see if you're going to be used by members of the public...",
-							PUBLIC_STOCKS_LOCKED_UP_FIRST_SEX) {
-						@Override
-						public int getSecondsPassed() {
-							return 10*60;
+						public boolean isSexHighlight() {
+							return true;
 						}
 						@Override
 						public void effects() {
 							banishRandomSexPartners();
 							randomSexPartners = SlaverAlleyDialogue.generateRandomStocksPartners(Main.game.getPlayer(), false);
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_LOCKED_UP_RANDOMS_APPROACH", randomSexPartners));
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slaverAlleyAcceptedDeal, false);
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slaverAlleyTookPlace, true);
 						}
 					};
 				}
@@ -3488,63 +3508,7 @@ public class SlaverAlleyDialogue {
 		}
 	};
 	
-	public static final DialogueNode PUBLIC_STOCKS_LOCKED_UP_FINISHED = new DialogueNode("", "", true, true) {
-		@Override
-		public int getSecondsPassed() {
-			return 30*60;
-		}
-		@Override
-		public String getContent() {
-			return "";
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Continue",
-						"Now that you're free, you can continue on your way once again...",
-						PUBLIC_STOCKS) {
-					@Override
-					public void effects() {
-						banishRandomSexPartners();
-						Main.game.getPlayer().setCaptive(false);
-						Main.game.getPlayer().equipAllClothingFromHoldingInventory();
-						if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.slaverAlleyCompanionInStocks)) {
-							getMainCompanion().equipAllClothingFromHoldingInventory();
-						}
-						if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.slaverAlleyAcceptedDeal)) {
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_LOCKED_UP_FINISHED_END"));
-						}
-					}
-				};
-			}
-			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.slaverAlleyAcceptedDeal)) {
-				if(index==2) {
-					return new Response("More",
-							"Tell [sean.name] that you want to stay in the stocks for a little longer...",
-							PUBLIC_STOCKS_LOCKED_UP_FINISHED_REPEAT,
-							Util.newArrayListOfValues(
-									Fetish.FETISH_EXHIBITIONIST,
-									Fetish.FETISH_SUBMISSIVE,
-									Fetish.FETISH_MASOCHIST),
-							CorruptionLevel.THREE_DIRTY,
-							null,
-							null,
-							null) {
-						@Override
-						public boolean isSexHighlight() {
-							return true;
-						}
-						@Override
-						public void effects() {
-							banishRandomSexPartners();
-							randomSexPartners = SlaverAlleyDialogue.generateRandomStocksPartners(Main.game.getPlayer(), false);
-						}
-					};
-				}
-			}
-			return null;
-		}
-	};
+
 	
 	public static final DialogueNode PUBLIC_STOCKS_LOCKED_UP_FINISHED_REPEAT = new DialogueNode("", "", true, true) {
 		@Override

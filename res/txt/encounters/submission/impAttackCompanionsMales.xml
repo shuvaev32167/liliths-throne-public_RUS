@@ -279,7 +279,7 @@
 				#ENDIF
 			</p>
 			<p>
-				With no further warning, and not even giving you time to do as [npc2.she] commands, [npc2.name] and [npc3.name] start force-feeding the potions to you and your companion, and your eyes open wide as you feel the warm, sickly-sweet liquid entering your mouth...
+				With no further warning, and not even giving you time to do as [npc2.she] commands, [npc2.name] и [npc3.name] start force-feeding the potions to you and your companion, and your eyes open wide as you feel the warm, sickly-sweet liquid entering your mouth...
 			</p>
 		#ELSE
 			<p>
@@ -353,7 +353,7 @@
 	
 	<htmlContent tag="IMP_ATTACK_OFFER_THREESOME_BOTH_SPIT"><![CDATA[
 	<p>
-		Neither you nor [npc.name] have any intention of swallowing the imps' transformative potion, and, almost simultaneously, you each jerk your heads back, before spitting the liquid out all over the floor. Your displays of resistance are immediately met by sharp slaps to the face, accompanied by furious screeching as [npc2.name] and [npc3.name] hurl their now-empty bottles to one side. [npc2.speech(You fucking [pc.insultPlural]! Fuck! Do you know how much trouble the boss goes through to get these potions for us?! Fucking stupid [pc.insultPlural]!)]
+		Neither you nor [npc.name] have any intention of swallowing the imps' transformative potion, and, almost simultaneously, you each jerk your heads back, before spitting the liquid out all over the floor. Your displays of resistance are immediately met by sharp slaps to the face, accompanied by furious screeching as [npc2.name] и [npc3.name] hurl their now-empty bottles to one side. [npc2.speech(You fucking [pc.insultPlural]! Fuck! Do you know how much trouble the boss goes through to get these potions for us?! Fucking stupid [pc.insultPlural]!)]
 	</p>
 	<p>
 		Knowing what the alternative was, [npc2.namePos] insults are easy for the two of you to weather, and you both cast your gazes to the floor as you wait for [npc2.herHim] to calm down. As you do this, however, the two alpha-imps suddenly reach forwards, and, grabbing you each by the back of the neck, they force the two of you down onto all fours. [npc2.speech(Get down, you [pc.insultPlural]! If you can't do something so simple as drinking a potion, all you're good for is being fuck-toys for us to use!)]
@@ -379,7 +379,7 @@
 		Much to your relief, [npc.name] seems willing to do as you say, and as you glance across at [npc.herHim], you see [npc.herHim] turn [npc.her] head to one side, before spitting [npc3.namePos] potion onto the floor.
 	</p>
 	<p>
-		Your displays of resistance are immediately met by sharp slaps to the face, accompanied by furious screeching as [npc2.name] and [npc3.name] hurl their now-empty bottles to one side. [npc2.speech(You fucking [pc.insultPlural]! Fuck! Do you know how much trouble the boss goes through to get these potions for us?! Fucking stupid [pc.insultPlural]!)]
+		Your displays of resistance are immediately met by sharp slaps to the face, accompanied by furious screeching as [npc2.name] и [npc3.name] hurl their now-empty bottles to one side. [npc2.speech(You fucking [pc.insultPlural]! Fuck! Do you know how much trouble the boss goes through to get these potions for us?! Fucking stupid [pc.insultPlural]!)]
 	</p>
 	<p>
 		Knowing what the alternative was, [npc2.namePos] insults are easy for the two of you to weather, and you both cast your gazes to the floor as you wait for [npc2.herHim] to calm down. As you do this, however, the two alpha-imps suddenly reach forwards, and, grabbing you each by the back of the neck, they force the two of you down onto all fours. [npc2.speech(Get down, you [pc.insultPlural]! If you can't do something so simple as drinking a potion, all you're good for is being fuck-toys for us to use!)]
@@ -447,7 +447,7 @@
 				#ENDIF
 			</p>
 			<p>
-				With no further warning, and not even giving you time to do as [npc2.she] commands, [npc2.name] and [npc3.name] start force-feeding the potions to you and your companion, and your eyes open wide as you feel the warm, sickly-sweet liquid entering your mouth...
+				With no further warning, and not even giving you time to do as [npc2.she] commands, [npc2.name] и [npc3.name] start force-feeding the potions to you and your companion, and your eyes open wide as you feel the warm, sickly-sweet liquid entering your mouth...
 			</p>
 		#ELSE
 			<p>

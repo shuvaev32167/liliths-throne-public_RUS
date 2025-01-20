@@ -2,11 +2,7 @@ package com.lilithsthrone.game.sex.sexActions.baseActionsSelf;
 
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.sex.ArousalIncrease;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexPace;
-import com.lilithsthrone.game.sex.SexParticipantType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
@@ -41,10 +37,10 @@ public class SelfTailAnus {
 		@Override
 		public String getDescription() {
 			return UtilText.returnStringAtRandom(
-					"Snaking [npc.her] [npc.tail] up to [npc.her] [npc.ass], [npc.name] [npc.verb(tease)] the tip over [npc.her] [npc.asshole+], [npc.moaning] in delight before thrusting it deep inside.",
-					"[npc.Name] [npc.verb(snake)] [npc.her] [npc.tail] up to [npc.her] [npc.ass], [npc.moaning] in delight as [npc.she] [npc.verb(force)] it deep into [npc.her] inviting [npc.asshole].",
-					"Sliding the tip of [npc.her] [npc.tail+] up to [npc.her] neglected [npc.asshole], [npc.name] suddenly [npc.verb(thrust)] it deep inside, letting out [npc.a_moan+] as [npc.she] [npc.verb(start)] tail-fucking [npc.her] own [npc.ass].",
-					"[npc.Name] eagerly [npc.verb(thrust)] [npc.her] [npc.tail+] deep into [npc.her] needy [npc.asshole], letting out a series of [npc.moans+] as [npc.she] [npc.verb(start)] tail-fucking [npc.her] own [npc.ass].");
+                    "Snaking [npc.her] [npc.tail] up to [npc.her] [npc.ass], [npc.name] tease the tip over [npc.her] [npc.asshole+], [npc.moaning] in delight before thrusting it deep inside.",
+                    "[npc.Name] snake [npc.her] [npc.tail] up to [npc.her] [npc.ass], [npc.moaning] in delight as [npc.she] force it deep into [npc.her] inviting [npc.asshole].",
+                    "Sliding the tip of [npc.her] [npc.tail+] up to [npc.her] neglected [npc.asshole], [npc.name] suddenly thrust it deep inside, letting out [npc.a_moan+] as [npc.she] start tail-fucking [npc.her] own [npc.ass].",
+                    "[npc.Name] eagerly thrust [npc.her] [npc.tail+] deep into [npc.her] needy [npc.asshole], letting out a series of [npc.moans+] as [npc.she] start tail-fucking [npc.her] own [npc.ass].");
 		}
 	};
 	
@@ -70,13 +66,13 @@ public class SelfTailAnus {
 		@Override
 		public String getDescription() {
 			return UtilText.returnStringAtRandom(
-					"[npc.A_moan+] escapes from between [npc.namePos] [npc.lips+] as [npc.she] slowly [npc.verb(push)] [npc.her] [npc.tail] deep inside [npc.her] [npc.asshole+].",
-					"Gently pumping [npc.her] [npc.tail] in and out of [npc.her] [npc.asshole+], [npc.name] [npc.verb(start)] letting out a series of delighted [npc.moans] as [npc.she] slowly [npc.verb(fuck)] [npc.her] own [npc.ass].",
-					"Slowly driving [npc.her] [npc.tail] deep inside [npc.her] [npc.asshole], [npc.name] [npc.verb(let)] out a little whimper as [npc.she] "
+                    "[npc.A_moan+] escapes from between [npc.namePos] [npc.lips+] as [npc.she] slowly push [npc.her] [npc.tail] deep inside [npc.her] [npc.asshole+].",
+                    "Gently pumping [npc.her] [npc.tail] in and out of [npc.her] [npc.asshole+], [npc.name] start letting out a series of delighted [npc.moans] as [npc.she] slowly fuck [npc.her] own [npc.ass].",
+                    "Slowly driving [npc.her] [npc.tail] deep inside [npc.her] [npc.asshole], [npc.name] let out a little whimper as [npc.she] "
 							+(Main.sex.getCharacterPerformingAction().hasPenis() && !Main.sex.getCharacterPerformingAction().hasVagina()
-							? "[npc.verb(use)] it to gently start massaging [npc.her] prostate."
-							: "gently [npc.verb(fuck)] [npc.her] own [npc.ass+]."),
-					"Focusing on pleasuring [npc.her] [npc.ass+], [npc.name] [npc.verb(start)] gently pumping [npc.her] [npc.tail] in and out of [npc.her] [npc.asshole+].");
+                            ? "use it to gently start massaging [npc.her] prostate."
+                            : "gently fuck [npc.her] own [npc.ass+]."),
+                    "Focusing on pleasuring [npc.her] [npc.ass+], [npc.name] start gently pumping [npc.her] [npc.tail] in and out of [npc.her] [npc.asshole+].");
 		}
 		
 	};
@@ -103,13 +99,13 @@ public class SelfTailAnus {
 		@Override
 		public String getDescription() {
 			return UtilText.returnStringAtRandom(
-					"[npc.A_moan+] escapes from between [npc.namePos] [npc.lips+] as [npc.she] greedily [npc.verb(push)] [npc.her] [npc.tail] deep inside [npc.her] [npc.asshole+].",
-					"Pumping [npc.her] [npc.tail] in and out of [npc.her] [npc.asshole+], [npc.name] [npc.verb(start)] letting out a series of delighted [npc.moans] as [npc.she] rhythmically [npc.verb(fuck)] [npc.her] own [npc.ass].",
-					"Driving [npc.her] [npc.tail] deep inside [npc.her] [npc.asshole], [npc.name] [npc.verb(let)] out [npc.a_moan] as [npc.she] "
+                    "[npc.A_moan+] escapes from between [npc.namePos] [npc.lips+] as [npc.she] greedily push [npc.her] [npc.tail] deep inside [npc.her] [npc.asshole+].",
+                    "Pumping [npc.her] [npc.tail] in and out of [npc.her] [npc.asshole+], [npc.name] start letting out a series of delighted [npc.moans] as [npc.she] rhythmically fuck [npc.her] own [npc.ass].",
+                    "Driving [npc.her] [npc.tail] deep inside [npc.her] [npc.asshole], [npc.name] let out [npc.a_moan] as [npc.she] "
 							+(Main.sex.getCharacterPerformingAction().hasPenis() && !Main.sex.getCharacterPerformingAction().hasVagina()
-							? "[npc.verb(use)] it to start massaging [npc.her] prostate."
-							: "steadily [npc.verb(fuck)] [npc.her] own [npc.ass+]."),
-					"Focusing on pleasuring [npc.her] [npc.ass+], [npc.name] [npc.verb(start)] pumping [npc.her] [npc.tail] in and out of [npc.her] [npc.asshole+].");
+                            ? "use it to start massaging [npc.her] prostate."
+                            : "steadily fuck [npc.her] own [npc.ass+]."),
+                    "Focusing on pleasuring [npc.her] [npc.ass+], [npc.name] start pumping [npc.her] [npc.tail] in and out of [npc.her] [npc.asshole+].");
 		}
 	};
 	
@@ -135,13 +131,13 @@ public class SelfTailAnus {
 		@Override
 		public String getDescription() {
 			return UtilText.returnStringAtRandom(
-					"[npc.A_moan+] escapes from between [npc.namePos] [npc.lips+] as [npc.she] roughly [npc.verb(slam)] [npc.her] [npc.tail] deep inside [npc.her] [npc.asshole+], before starting to roughly fuck [npc.her] own [npc.ass].",
-					"Roughly pumping [npc.her] [npc.tail] in and out of [npc.her] [npc.asshole+], [npc.name] [npc.verb(start)] letting out a series of delighted [npc.moans] as [npc.she] ruthlessly [npc.verb(fuck)] [npc.her] own [npc.ass].",
-					"Forcefully driving [npc.her] [npc.tail] deep inside [npc.her] [npc.asshole], [npc.name] [npc.verb(let)] out [npc.a_moan] as [npc.she] "
+                    "[npc.A_moan+] escapes from between [npc.namePos] [npc.lips+] as [npc.she] roughly slam [npc.her] [npc.tail] deep inside [npc.her] [npc.asshole+], before starting to roughly fuck [npc.her] own [npc.ass].",
+                    "Roughly pumping [npc.her] [npc.tail] in and out of [npc.her] [npc.asshole+], [npc.name] start letting out a series of delighted [npc.moans] as [npc.she] ruthlessly fuck [npc.her] own [npc.ass].",
+                    "Forcefully driving [npc.her] [npc.tail] deep inside [npc.her] [npc.asshole], [npc.name] let out [npc.a_moan] as [npc.she] "
 							+(Main.sex.getCharacterPerformingAction().hasPenis() && !Main.sex.getCharacterPerformingAction().hasVagina()
-							? "[npc.verb(start)] roughly grinding it up against [npc.her] prostate."
-							: "roughly [npc.verb(fuck)] [npc.her] own [npc.ass+]."),
-					"Focusing on pleasuring [npc.her] [npc.ass+], [npc.name] [npc.verb(start)] roughly slamming [npc.her] [npc.tail] in and out of [npc.her] [npc.asshole+].");
+                            ? "start roughly grinding it up against [npc.her] prostate."
+                            : "roughly fuck [npc.her] own [npc.ass+]."),
+                    "Focusing on pleasuring [npc.her] [npc.ass+], [npc.name] start roughly slamming [npc.her] [npc.tail] in and out of [npc.her] [npc.asshole+].");
 		}
 
 	};
@@ -168,13 +164,13 @@ public class SelfTailAnus {
 		@Override
 		public String getDescription() {
 			return UtilText.returnStringAtRandom(
-					"[npc.A_moan+] escapes from between [npc.namePos] [npc.lips+] as [npc.she] greedily [npc.verb(push)] [npc.her] [npc.tail] deep inside [npc.her] [npc.asshole+].",
-					"Pumping [npc.her] [npc.tail] in and out of [npc.her] [npc.asshole+], [npc.name] [npc.verb(start)] letting out a series of delighted [npc.moans] as [npc.she] rhythmically [npc.verb(fuck)] [npc.her] own [npc.ass].",
-					"Driving [npc.her] [npc.tail] deep inside [npc.her] [npc.asshole], [npc.name] [npc.verb(let)] out [npc.a_moan] as [npc.she] "
+                    "[npc.A_moan+] escapes from between [npc.namePos] [npc.lips+] as [npc.she] greedily push [npc.her] [npc.tail] deep inside [npc.her] [npc.asshole+].",
+                    "Pumping [npc.her] [npc.tail] in and out of [npc.her] [npc.asshole+], [npc.name] start letting out a series of delighted [npc.moans] as [npc.she] rhythmically fuck [npc.her] own [npc.ass].",
+                    "Driving [npc.her] [npc.tail] deep inside [npc.her] [npc.asshole], [npc.name] let out [npc.a_moan] as [npc.she] "
 							+(Main.sex.getCharacterPerformingAction().hasPenis() && !Main.sex.getCharacterPerformingAction().hasVagina()
-							? "[npc.verb(use)] it to start massaging [npc.her] prostate."
-							: "steadily [npc.verb(fuck)] [npc.her] own [npc.ass+]."),
-					"Focusing on pleasuring [npc.her] [npc.ass+], [npc.name] [npc.verb(start)] pumping [npc.her] [npc.tail] in and out of [npc.her] [npc.asshole+].");
+                            ? "use it to start massaging [npc.her] prostate."
+                            : "steadily fuck [npc.her] own [npc.ass+]."),
+                    "Focusing on pleasuring [npc.her] [npc.ass+], [npc.name] start pumping [npc.her] [npc.tail] in and out of [npc.her] [npc.asshole+].");
 		}
 	};
 	
@@ -200,13 +196,13 @@ public class SelfTailAnus {
 		@Override
 		public String getDescription() {
 			return UtilText.returnStringAtRandom(
-					"[npc.A_moan+] escapes from between [npc.namePos] [npc.lips+] as [npc.she] eagerly [npc.verb(slam)] [npc.her] [npc.tail] deep inside [npc.her] [npc.asshole+], before starting to desperately fuck [npc.her] own [npc.ass].",
-					"Enthusiastically pumping [npc.her] [npc.tail] in and out of [npc.her] [npc.asshole+], [npc.name] [npc.verb(start)] letting out a series of delighted [npc.moans] as [npc.she] frantically [npc.verb(fuck)] [npc.her] own [npc.ass].",
-					"Desperately driving [npc.her] [npc.tail] deep inside [npc.her] [npc.asshole], [npc.name] [npc.verb(let)] out [npc.a_moan] as [npc.she] "
+                    "[npc.A_moan+] escapes from between [npc.namePos] [npc.lips+] as [npc.she] eagerly slam [npc.her] [npc.tail] deep inside [npc.her] [npc.asshole+], before starting to desperately fuck [npc.her] own [npc.ass].",
+                    "Enthusiastically pumping [npc.her] [npc.tail] in and out of [npc.her] [npc.asshole+], [npc.name] start letting out a series of delighted [npc.moans] as [npc.she] frantically fuck [npc.her] own [npc.ass].",
+                    "Desperately driving [npc.her] [npc.tail] deep inside [npc.her] [npc.asshole], [npc.name] let out [npc.a_moan] as [npc.she] "
 							+(Main.sex.getCharacterPerformingAction().hasPenis() && !Main.sex.getCharacterPerformingAction().hasVagina()
-							? "[npc.verb(start)] eagerly grinding it up against [npc.her] prostate."
-							: "eagerly [npc.verb(fuck)] [npc.her] own [npc.ass+]."),
-					"Focusing on pleasuring [npc.her] [npc.ass+], [npc.name] eagerly [npc.verb(start)] slamming [npc.her] [npc.tail] in and out of [npc.her] [npc.asshole+].");
+                            ? "start eagerly grinding it up against [npc.her] prostate."
+                            : "eagerly fuck [npc.her] own [npc.ass+]."),
+                    "Focusing on pleasuring [npc.her] [npc.ass+], [npc.name] eagerly start slamming [npc.her] [npc.tail] in and out of [npc.her] [npc.asshole+].");
 		}
 	};
 	
@@ -230,7 +226,7 @@ public class SelfTailAnus {
 
 		@Override
 		public String getDescription() {
-			return "With [npc.a_groan+], [npc.name] [npc.verb(slide)] [npc.her] [npc.tail+] out of [npc.her] [npc.asshole+].";
+            return "With [npc.a_groan+], [npc.name] slide [npc.her] [npc.tail+] out of [npc.her] [npc.asshole+].";
 		}
 	};
 }

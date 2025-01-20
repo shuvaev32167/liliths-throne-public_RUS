@@ -1,20 +1,16 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractEarType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
+
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -25,14 +21,14 @@ public class EarType {
 	
 	public static AbstractEarType HUMAN = new AbstractEarType(BodyCoveringType.HUMAN,
 			Race.HUMAN,
-			"human",
-			"ear",
-			"ears",
+			"человеческие",
+			"ухо",
+			"уши",
 			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues("soft", "feminine"),
-			"The hot itching feeling passes after a few moments, leaving [npc.herHim] with normal-looking human ears.<br/>"
-				+ "[npc.Name] now [npc.has] [style.boldHuman(human ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
-			"[npc.She] [npc.has] a pair of normal, human ears, which are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)]#IF(npc.isPiercedEar()), and which have been pierced#ENDIF.") {
+			Util.newArrayListOfValues("мягкое", "женственное"),
+			"Острый зуд проходит через несколько мгновений, и у [npc.herHim] остаются нормальные человеческие уши.<br/>"
+					+ "[npc.Name] теперь [npc.has] [style.boldHuman(человеческие уши)], которые [npc.materialCompositionDescriptor] [npc.earFullDescription].",
+			"[npc.She] [npc.has] пара нормальных человеческих ушей, которые [npc.materialCompositionDescriptor] [npc.earFullDescription(true)]#IF(npc.isPiercedEar()), и которые были проколоты#ENDIF.") {
 	};
 
 	public static AbstractEarType ANGEL = new AbstractEarType(BodyCoveringType.ANGEL,
@@ -72,7 +68,7 @@ public class EarType {
 				+ "#ELSE"
 				+ " Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],"
 				+ "#ENDIF"
-				+ " and as the transformation finishes, [npc.she] experimentally [npc.verb(twitch)] [npc.her] new dog-like ears back and forth.<br/>"
+                    + " and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new dog-like ears back and forth.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldDog(floppy, dog-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of floppy,#IF(npc.isPiercedEar()) pierced,#ENDIF dog-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 		@Override
@@ -94,7 +90,7 @@ public class EarType {
 				+ "#ELSE"
 				+ " Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],"
 				+ "#ENDIF"
-				+ " and as the transformation finishes, [npc.she] experimentally [npc.verb(twitch)] [npc.her] new dog-like ears back and forth.<br/>"
+                    + " and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new dog-like ears back and forth.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldDog(pointed, dog-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of pointed,#IF(npc.isPiercedEar()) pierced,#ENDIF dog-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 	};
@@ -112,7 +108,7 @@ public class EarType {
 				+ "#ELSE"
 				+ " Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],"
 				+ "#ENDIF"
-				+ " and as the transformation finishes, [npc.she] experimentally [npc.verb(twitch)] [npc.her] new dog-like ears back and forth.<br/>"
+                    + " and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new dog-like ears back and forth.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldDog(folded, dog-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of folded,#IF(npc.isPiercedEar()) pierced,#ENDIF dog-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 	};
@@ -130,7 +126,7 @@ public class EarType {
 				+ "#ELSE"
 				+ " Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],"
 				+ "#ENDIF"
-				+ " and as the transformation finishes, [npc.she] experimentally [npc.verb(twitch)] [npc.her] new wolf-like ears back and forth.<br/>"
+                    + " and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new wolf-like ears back and forth.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldWolf(large, wolf-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of upright,#IF(npc.isPiercedEar()) pierced,#ENDIF wolf-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 	};
@@ -148,7 +144,7 @@ public class EarType {
 				+ "#ELSE"
 				+ " Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],"
 				+ "#ENDIF"
-				+ " and as the transformation finishes, [npc.she] experimentally [npc.verb(twitch)] [npc.her] new fox-like ears back and forth.<br/>"
+                    + " and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new fox-like ears back and forth.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldFox(pointed, fox-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of pointed,#IF(npc.isPiercedEar()) pierced,#ENDIF fox-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 	};
@@ -166,7 +162,7 @@ public class EarType {
 				+ "#ELSE"
 				+ " Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],"
 				+ "#ENDIF"
-				+ " and as the transformation finishes, [npc.she] experimentally [npc.verb(twitch)] [npc.her] new fox-like ears back and forth.<br/>"
+                    + " and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new fox-like ears back and forth.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldFox(massive, fennec-fox-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of massive,#IF(npc.isPiercedEar()) pierced,#ENDIF fennec-fox-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 		@Override
@@ -188,7 +184,7 @@ public class EarType {
 				+ "#ELSE"
 				+ " Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],"
 				+ "#ENDIF"
-				+ " and as the transformation finishes, [npc.she] experimentally [npc.verb(twitch)] [npc.her] new cow-like ears back and forth.<br/>"
+                    + " and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new cow-like ears back and forth.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldCow(cow-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of #IF(npc.isPiercedEar()) pierced,#ENDIF cow-like ears, which are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 	};
@@ -206,7 +202,7 @@ public class EarType {
 				+ "#ELSE"
 				+ " Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],"
 				+ "#ENDIF"
-				+ " and as the transformation finishes, [npc.she] experimentally [npc.verb(twitch)] [npc.her] new cat-like ears back and forth.<br/>"
+                    + " and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new cat-like ears back and forth.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldCat(cat-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of #IF(npc.isPiercedEar()) pierced,#ENDIF cat-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 	};
@@ -224,7 +220,7 @@ public class EarType {
 				+ "#ELSE"
 				+ " Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],"
 				+ "#ENDIF"
-				+ " and as the transformation finishes, [npc.she] experimentally [npc.verb(twitch)] [npc.her] new cat-like ears back and forth.<br/>"
+                    + " and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new cat-like ears back and forth.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldCat(tufted, cat-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of tufted,#IF(npc.isPiercedEar()) pierced,#ENDIF cat-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 	};
@@ -242,7 +238,7 @@ public class EarType {
 				+ "#ELSE"
 				+ " Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],"
 				+ "#ENDIF"
-				+ " and as the transformation finishes, [npc.she] experimentally [npc.verb(twitch)] [npc.her] new squirrel-like ears back and forth.<br/>"
+                    + " and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new squirrel-like ears back and forth.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldSquirrel(squirrel-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of#IF(npc.isPiercedEar()) pierced,#ENDIF squirrel-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 	};
@@ -260,7 +256,7 @@ public class EarType {
 				+ "#ELSE"
 				+ " Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],"
 				+ "#ENDIF"
-				+ " and as the transformation finishes, [npc.she] experimentally [npc.verb(twitch)] [npc.her] new rat-like ears back and forth.<br/>"
+                    + " and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new rat-like ears back and forth.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldRat(rat-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of #IF(npc.isPiercedEar()) pierced,#ENDIF rat-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 	};
@@ -278,7 +274,7 @@ public class EarType {
 				+ "#ELSE"
 				+ " Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],"
 				+ "#ENDIF"
-				+ " and as the transformation finishes, [npc.she] experimentally [npc.verb(twitch)] [npc.her] new rabbit-like ears back and forth.<br/>"
+                    + " and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new rabbit-like ears back and forth.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldRabbit(upright, rabbit-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of upright,#IF(npc.isPiercedEar()) pierced,#ENDIF rabbit-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 		@Override
@@ -300,7 +296,7 @@ public class EarType {
 				+ "#ELSE"
 				+ " Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],"
 				+ "#ENDIF"
-				+ " and as the transformation finishes, [npc.she] experimentally [npc.verb(twitch)] [npc.her] new rabbit-like ears back and forth.<br/>"
+                    + " and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new rabbit-like ears back and forth.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldRabbit(floppy, rabbit-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of floppy,#IF(npc.isPiercedEar()) pierced,#ENDIF rabbit-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 		@Override
@@ -322,7 +318,7 @@ public class EarType {
 				+ "#ELSE"
 				+ " Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],"
 				+ "#ENDIF"
-				+ " and as the transformation finishes, [npc.she] [npc.verb(discover)] that [npc.she] can easily twitch [npc.her] new bat-like ears back and forth.<br/>"
+                    + " and as the transformation finishes, [npc.she] discover that [npc.she] can easily twitch [npc.her] new bat-like ears back and forth.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldBat(large, bat-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of large,#IF(npc.isPiercedEar()) pierced,#ENDIF bat-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 		public List<BodyPartTag> getTags() {
@@ -343,7 +339,7 @@ public class EarType {
 				+ "#ELSE"
 				+ " Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],"
 				+ "#ENDIF"
-				+ " and as the transformation finishes, [npc.she] experimentally [npc.verb(twitch)] [npc.her] new horse-like ears back and forth.<br/>"
+                    + " and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new horse-like ears back and forth.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldHorse(horse-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of upright,#IF(npc.isPiercedEar()) pierced,#ENDIF horse-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 	};
@@ -361,7 +357,7 @@ public class EarType {
 				+ "#ELSE"
 				+ " Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],"
 				+ "#ENDIF"
-				+ " and as the transformation finishes, [npc.she] experimentally [npc.verb(twitch)] [npc.her] new horse-like ears back and forth.<br/>"
+                    + " and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new horse-like ears back and forth.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldHorse(tall, horse-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of tall, upright,#IF(npc.isPiercedEar()) pierced,#ENDIF horse-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 	};
@@ -379,7 +375,7 @@ public class EarType {
 				+ "#ELSE"
 				+ " Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],"
 				+ "#ENDIF"
-				+ " and as the transformation finishes, [npc.she] experimentally [npc.verb(twitch)] [npc.her] new reindeer-like ears back and forth.<br/>"
+                    + " and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new reindeer-like ears back and forth.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldReindeer(reindeer-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of#IF(npc.isPiercedEar()) pierced,#ENDIF reindeer-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 	};
@@ -422,9 +418,9 @@ public class EarType {
 				+ "#IF(npc.isPiercedEar()) They have been cleverly pierced so as to allow [npc.herHim] to wear ear-specific jewellery.#ENDIF") {
 	};
 	
-	private static List<AbstractEarType> allEarTypes;
-	private static Map<AbstractEarType, String> earToIdMap = new HashMap<>();
-	private static Map<String, AbstractEarType> idToEarMap = new HashMap<>();
+	private static final List<AbstractEarType> allEarTypes;
+	private static final Map<AbstractEarType, String> earToIdMap = new HashMap<>();
+	private static final Map<String, AbstractEarType> idToEarMap = new HashMap<>();
 	
 	static {
 		allEarTypes = new ArrayList<>();
@@ -516,7 +512,7 @@ public class EarType {
 		return allEarTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractEarType>> typesMap = new HashMap<>();
+	private static final Map<AbstractRace, List<AbstractEarType>> typesMap = new HashMap<>();
 	
 	public static List<AbstractEarType> getEarTypes(AbstractRace r) {
 		if(typesMap.containsKey(r)) {

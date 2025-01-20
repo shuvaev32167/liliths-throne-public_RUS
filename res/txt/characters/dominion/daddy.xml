@@ -913,9 +913,9 @@
 	<p>
 		At this point, the waiter returns to take your orders for drinks, and after he's done so, soon returns with your bottled water and a bottle of wine for Lilaya and [daddy.name] to share. You then place your orders for your meals, and after that's done,
 		#IF(game.getDialogueFlags().hasFlag(FLAG_flirtingWithDaddy))
-			 you're able to really get started on flirting with and teasing your [lilaya.relation(pc)] and [daddy.daddy].
+			 you're able to really get started on flirting with and teasing your [lilaya.relation(pc)] и [daddy.daddy].
 		#ELSE
-			 you're able to get a real conversation going with your [lilaya.relation(pc)] and [daddy.daddy].
+			 you're able to get a real conversation going with your [lilaya.relation(pc)] и [daddy.daddy].
 		#ENDIF
 	</p>
 	]]>
@@ -932,9 +932,9 @@
 	<p>
 		At this point, the waiter returns to take your orders for drinks, and after he's done so, soon returns with your chosen bottle of wine. You then place your orders for your meals, and after that's done,
 		#IF(game.getDialogueFlags().hasFlag(FLAG_flirtingWithDaddy))
-			 you're able to really get started on flirting with and teasing your [lilaya.relation(pc)] and [daddy.daddy].
+			 you're able to really get started on flirting with and teasing your [lilaya.relation(pc)] и [daddy.daddy].
 		#ELSE
-			 you're able to get a real conversation going with your [lilaya.relation(pc)] and [daddy.daddy].
+			 you're able to get a real conversation going with your [lilaya.relation(pc)] и [daddy.daddy].
 		#ENDIF
 	</p>
 	]]>
@@ -1286,7 +1286,7 @@
 		#IF(lilaya.isFeminine()==pc.isFeminine())
 			 [pc.girls]
 		#ELSE
-			 [pc.girl] and [lilaya.girl]
+			 [pc.girl] и [lilaya.girl]
 		#ENDIF
 		...)]
 	</p>
@@ -1301,7 +1301,7 @@
 		#IF(lilaya.isFeminine()==pc.isFeminine())
 			 [pc.girls]
 		#ELSE
-			 [pc.girl] and [lilaya.girl]
+			 [pc.girl] и [lilaya.girl]
 		#ENDIF
 		... Now get on my bed and present yourselves to me...)]
 	</p>
@@ -1324,7 +1324,7 @@
 		#IF(lilaya.isFeminine()==pc.isFeminine())
 			 [pc.girls]
 		#ELSE
-			 [pc.girl] and [lilaya.girl]
+			 [pc.girl] и [lilaya.girl]
 		#ENDIF
 		! I really had a lot of fun tonight as well, and please come back and visit me any evening you want.)]
 	</p>
@@ -1592,7 +1592,7 @@
 		#IF(lilaya.isFeminine()==pc.isFeminine())
 			 [pc.girls]
 		#ELSE
-			 [pc.girl] and [lilaya.girl]
+			 [pc.girl] и [lilaya.girl]
 		#ENDIF
 		... Now get on my bed and present yourselves to me...)]
 	</p>

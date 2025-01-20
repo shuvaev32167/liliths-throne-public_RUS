@@ -59,25 +59,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(put)] on the Witch's hat.]]>
+            <![CDATA[[npc.Name] put on the Witch's hat.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(put)] the Witch's hat onto [npc2.namePos] head.]]>
+            <![CDATA[[npc.Name] put the Witch's hat onto [npc2.namePos] head.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(force)] the Witch's hat onto [npc2.namePos] head.]]>
+            <![CDATA[[npc.Name] roughly force the Witch's hat onto [npc2.namePos] head.]]>
 	  </otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(take)] off [npc.her] Witch's hat.]]>
+            <![CDATA[[npc.Name] take off [npc.her] Witch's hat.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(take)] [npc2.namePos] Witch's hat off.]]>
+            <![CDATA[[npc.Name] take [npc2.namePos] Witch's hat off.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(grab)] [npc2.namePos] Witch's hat and [npc.verb(pull)] it off.]]>
+            <![CDATA[[npc.Name] grab [npc2.namePos] Witch's hat and pull it off.]]>
 		</otherRough>
 	</displacementText>
 	

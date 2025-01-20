@@ -61,10 +61,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		After first removing the cork, [npc.name] [npc.verb(bring)] the bottle of Vodka up to [npc.her] [npc.mouth]. A very potent smell of alcohol rises from the opening, and as [npc.she] [npc.verb(tilt)] [npc.her] head back and [npc.verb(start)] drinking the fiery liquid, a tingling warmth begins growing in the core of [npc.her] body.
+		After first removing the cork, [npc.name] bring the bottle of Vodka up to [npc.her] [npc.mouth]. A very potent smell of alcohol rises from the opening, and as [npc.she] tilt [npc.her] head back and start drinking the fiery liquid, a tingling warmth begins growing in the core of [npc.her] body.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		After first removing the cork, [npc.name] [npc.verb(bring)] the bottle of Grog up to [npc2.namePos] waiting [npc2.lips]. A very potent smell of alcohol rises from the opening, and as [npc2.she] [npc2.verb(tilt)] [npc2.her] head back and [npc2.verb(start)] drinking the fiery liquid, a tingling warmth begins growing in the core of [npc2.her] body.
+		After first removing the cork, [npc.name] bring the bottle of Grog up to [npc2.namePos] waiting [npc2.lips]. A very potent smell of alcohol rises from the opening, and as [npc2.she] [npc2.verb(tilt)] [npc2.her] head back and [npc2.verb(start)] drinking the fiery liquid, a tingling warmth begins growing in the core of [npc2.her] body.
 		]]></otherUse>
 	</useDescriptions>
 

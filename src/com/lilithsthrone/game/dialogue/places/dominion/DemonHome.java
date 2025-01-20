@@ -1,7 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion;
 
-import java.time.Month;
-
 import com.lilithsthrone.game.character.npc.dominion.Daddy;
 import com.lilithsthrone.game.character.npc.dominion.Felicia;
 import com.lilithsthrone.game.character.npc.dominion.Fiammetta;
@@ -23,6 +21,8 @@ import com.lilithsthrone.world.Season;
 import com.lilithsthrone.world.Weather;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.time.Month;
 
 /**
  * @since 0.1.0
@@ -296,34 +296,7 @@ public class DemonHome {
 		}
 	};
 
-	public static final DialogueNode DEMON_HOME_ARTHURS_APARTMENT_ARTHURS_ROOM = new DialogueNode("Arthur's Room", "-", true) {
-		@Override
-		public void applyPreParsingEffects() {
-            getFelicia().equipOutsideClothing();
-            getFelicia().setLocation(Main.game.getPlayer(), false);
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 5*60;
-		}
-		@Override
-		public String getLabel() {
-			return "Arthur's Room";
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/arthursApartment/apartment", "DEMON_HOME_ARTHURS_APARTMENT_ARTHURS_ROOM");
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Question dog-girl", "Ask the dog-girl if she knows anything about Arthur's arrest.", DEMON_HOME_ARTHURS_APARTMENT_ARTHURS_ROOM_END);
-			}
-			return null;
-		}
-	};
-
-	public static final DialogueNode DEMON_HOME_ARTHURS_APARTMENT_ARTHURS_ROOM_END = new DialogueNode("Arthur's Room", "-", true, true) {
+    public static final DialogueNode DEMON_HOME_ARTHURS_APARTMENT_ARTHURS_ROOM_END = new DialogueNode("Комната Артура", "-", true, true) {
 		@Override
 		public void applyPreParsingEffects() {
             getFelicia().setPlayerKnowsName(true);
@@ -346,6 +319,32 @@ public class DemonHome {
                             getFelicia().setLocation(WorldType.FELICIA_APARTMENT, PlaceType.FELICIA_APARTMENT_LIVING_AREA, true);
                         }
                     };
+			}
+			return null;
+		}
+	};
+    public static final DialogueNode DEMON_HOME_ARTHURS_APARTMENT_ARTHURS_ROOM = new DialogueNode("Комната Артура", "-", true) {
+		@Override
+		public void applyPreParsingEffects() {
+            getFelicia().equipOutsideClothing();
+            getFelicia().setLocation(Main.game.getPlayer(), false);
+		}
+		@Override
+		public int getSecondsPassed() {
+			return 5*60;
+		}
+		@Override
+		public String getLabel() {
+            return "Комната Артура";
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/arthursApartment/apartment", "DEMON_HOME_ARTHURS_APARTMENT_ARTHURS_ROOM");
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+				return new Response("Question dog-girl", "Ask the dog-girl if she knows anything about Arthur's arrest.", DEMON_HOME_ARTHURS_APARTMENT_ARTHURS_ROOM_END);
 			}
 			return null;
 		}
@@ -385,7 +384,7 @@ public class DemonHome {
 					
 				} else if(h >= 6 && h <= 14) {
 	                if (!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.feliciaToldAboutArthur)) {
-	                    return new Response("Enter", "Enter [felicia.namePos] home.", FeliciaApartment.ARTHUR_WHEREABOUTS) {
+                        return new Response("Вход", "Enter [felicia.namePos] home.", FeliciaApartment.ARTHUR_WHEREABOUTS) {
 	                        @Override
 	                        public void effects() {
 	                            getFelicia().setLocation(WorldType.FELICIA_APARTMENT, PlaceType.FELICIA_APARTMENT_LIVING_AREA, false);
@@ -394,7 +393,7 @@ public class DemonHome {
 	                    };
 	                    
 	                } else {
-	                   return new Response("Enter", "Enter [felicia.namePos] home.", FeliciaApartment.FELICIA_GREETINGS) {
+                        return new Response("Вход", "Enter [felicia.namePos] home.", FeliciaApartment.FELICIA_GREETINGS) {
 	                        @Override
 	                        public void effects() {
 	                            getFelicia().setLocation(WorldType.FELICIA_APARTMENT, PlaceType.FELICIA_APARTMENT_LIVING_AREA, false);
@@ -426,7 +425,7 @@ public class DemonHome {
             	}
             }
             if(Main.game.getPlayer().getQuest(QuestLine.SIDE_DOLL_FACTORY)==Quest.DOLL_FACTORY_7B
-            		&& Main.game.getSecondsPassed() - Main.game.getDialogueFlags().getSavedLong("doll_quest_choice_time") < (1 * 24 * 60 * 60)) {
+            		&& Main.game.getSecondsPassed() - Main.game.getDialogueFlags().getSavedLong("doll_quest_choice_time") < (24 * 60 * 60)) {
             	UtilText.addSpecialParsingString("[style.italicsGood(Lovienne's Luxuries will reopen in a day or so.)]", true);
             }
 		}
@@ -457,7 +456,7 @@ public class DemonHome {
 			}
 			
 			if(Main.game.getPlayer().getQuest(QuestLine.SIDE_DOLL_FACTORY)==Quest.DOLL_FACTORY_7B
-					&& (Main.game.getSecondsPassed() - Main.game.getDialogueFlags().getSavedLong("doll_quest_choice_time") < (1 * 24 * 60 * 60))) {
+					&& (Main.game.getSecondsPassed() - Main.game.getDialogueFlags().getSavedLong("doll_quest_choice_time") < (24 * 60 * 60))) {
 				return UtilText.parseFromXMLFile("places/dominion/dominionPlaces", "DEMON_HOME_SEX_SHOP_FIA_CLOSED");
 			}
 			
@@ -487,7 +486,7 @@ public class DemonHome {
 						
 					} else if((Main.game.getSecondsPassed() - Main.game.getDialogueFlags().getSavedLong("doll_quest_choice_time") >= (7 * 24 * 60 * 60))
 							&& !Main.game.getDialogueFlags().hasFlag("innoxia_doll_factory_ending_reopen_scene_seen")) {
-						return new Response("Continue",
+                        return new Response("Продолжить",
 								"Continue on your way.",
 								DEMON_HOME_SEX_SHOP) {
 							@Override
@@ -498,8 +497,8 @@ public class DemonHome {
 						
 					} else {
 						int daysRemaining = 7 - (int) ((Main.game.getSecondsPassed() - (Main.game.getDialogueFlags().getSavedLong("doll_quest_choice_time"))) / (24 * 60 * 60));
-						
-						return new Response("Lovienne's Luxuries",
+
+                        return new Response("Роскошь Ловиенны",
 								"Due to the public unrest, Lovienne's Luxuries is currently [style.colourBad(closed)]."
 									+ "<br/>[style.italicsMinorGood(It's likely to reopen within "+Util.intToString(daysRemaining)+" "+(daysRemaining<=1?"day":"days")+" or so...)]",
 								null);
@@ -507,19 +506,19 @@ public class DemonHome {
 					
 				} else if(Main.game.getPlayer().getQuest(QuestLine.SIDE_DOLL_FACTORY)==Quest.DOLL_FACTORY_7B
 						&& Main.game.getDialogueFlags().hasSavedLong("doll_quest_choice_time")
-						&& (Main.game.getSecondsPassed() - Main.game.getDialogueFlags().getSavedLong("doll_quest_choice_time") < (1 * 24 * 60 * 60))) { // 1 day
-					return new Response("Lovienne's Luxuries",
+						&& (Main.game.getSecondsPassed() - Main.game.getDialogueFlags().getSavedLong("doll_quest_choice_time") < (24 * 60 * 60))) { // 1 day
+                    return new Response("Роскошь Ловиенны",
 							"Due to having to deal with the situation with Fiammetta's article, Lovienne's Luxuries is currently [style.colourBad(closed)]."
 								+ "<br/>[style.italicsMinorGood(It's likely to reopen within a day or two...)]",
 							null);
 					
 				} else if(!Main.game.isHourBetween(11, 23)) {
-					return new Response("Lovienne's Luxuries",
+                    return new Response("Роскошь Ловиенны",
 							"Lovienne's Luxuries is open between [units.time(11)]-[units.time(23)], and as such is currently [style.colourBad(closed)].",
 							null);
 					
 				} else {
-					return new Response("Lovienne's Luxuries",
+                    return new Response("Роскошь Ловиенны",
 							"Push open the front door and enter Lovienne's Luxuries.",
 							DialogueManager.getDialogueFromId("innoxia_places_dominion_sex_shop_generic_enter")) {
 						@Override
@@ -592,18 +591,18 @@ public class DemonHome {
 					
 				} else if(Main.game.getPlayer().hasQuestInLine(QuestLine.SIDE_DOLL_FACTORY, Quest.DOLL_FACTORY_7B) && Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_DOLL_FACTORY)) {
 					if(!Main.game.isHourBetween(16, 22)) {
-						return new Response("Angelixx",
+                        return new Response("Ангеликс",
 								"Angelixx and her sons are out at 'work' at this time, so you'll have to come back later if you wanted to see them."
 								+ "<br/><i>Return between the hours of [units.time(16)]-[units.time(22)] to meet Angelixx and her sons.</i>",
 								null);
 						
 					} else if(Main.game.getDialogueFlags().hasFlag("innoxia_angelixx_apartment_visited")) {
-							return new Response("Angelixx",
+                        return new Response("Ангеликс",
 									"You've already paid a visit to Angelixx's apartment this evening, and can't do so again until tomorrow.",
 									null);
 							
 					} else {
-						return new Response("Angelixx",
+                        return new Response("Ангеликс",
 								"Head up to Angelixx's apartment and pay her and her sons a visit.",
 								DialogueManager.getDialogueFromId("innoxia_places_dominion_angelixx_apartment_generic_visit"));
 					}

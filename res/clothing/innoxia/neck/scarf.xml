@@ -45,24 +45,24 @@
 
   <replacementText slot="NECK" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(wrap)] the scarf around [npc.her] neck.]]>
+        <![CDATA[[npc.Name] wrap the scarf around [npc.her] neck.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(wrap)] the scarf around [npc2.namePos] neck.]]>
+        <![CDATA[[npc.Name] wrap the scarf around [npc2.namePos] neck.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] firmly [npc.verb(grab)] [npc2.name], before wrapping the scarf around [npc2.her] neck.]]>
+        <![CDATA[[npc.Name] firmly grab [npc2.name], before wrapping the scarf around [npc2.her] neck.]]>
     </otherRough>
   </replacementText>
   <displacementText slot="NECK" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(unwrap)] [npc.her] scarf, before taking it off from around [npc.her] neck.]]>
+        <![CDATA[[npc.Name] unwrap [npc.her] scarf, before taking it off from around [npc.her] neck.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(unwrap)] [npc2.namePos] scarf, before taking it off from around [npc2.her] neck.]]>
+        <![CDATA[[npc.Name] unwrap [npc2.namePos] scarf, before taking it off from around [npc2.her] neck.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(unwrap)] [npc2.namePos] scarf, before yanking it off from around [npc2.her] neck.]]>
+        <![CDATA[[npc.Name] roughly unwrap [npc2.namePos] scarf, before yanking it off from around [npc2.her] neck.]]>
     </otherRough>
   </displacementText>
 	

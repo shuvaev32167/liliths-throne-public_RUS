@@ -886,7 +886,7 @@
 		<p>
 			Making your way over to the bar, you and Angelixx strike your most seductive poses and try to catch the eye of any passing couples.
 	#ENDIF
-		 It doesn't take long before you're hit on, as after just a few minutes [stranger1.a_raceFull(true)] and [stranger2.a_raceFull(true)] notice your enticing poses and confidently approach you. Although they try to give you and Angelixx their best pickup lines, the club's background noise is too loud for you to make out what they're saying.
+		 It doesn't take long before you're hit on, as after just a few minutes [stranger1.a_raceFull(true)] и [stranger2.a_raceFull(true)] notice your enticing poses and confidently approach you. Although they try to give you and Angelixx their best pickup lines, the club's background noise is too loud for you to make out what they're saying.
 	</p>
 	<p>
 		[stranger1.speech(I'm [stranger1.Name]!)] the [stranger1.race] shouts as you gesture for [stranger1.herHim] to speak up.
@@ -1024,7 +1024,7 @@
 	
 	<htmlContent tag="ANGELIXX_CLUB_POSE_ALLEYWAY_AFTER_SEX"><![CDATA[
 	<p>
-		Having had their fun, [chosenStranger.name] and [angelixxStranger.name] bring an end to the sex and step back. Panting as you catch your breath, you look across at Angelixx and see a big, happy grin on her pretty face.
+		Having had their fun, [chosenStranger.name] и [angelixxStranger.name] bring an end to the sex and step back. Panting as you catch your breath, you look across at Angelixx and see a big, happy grin on her pretty face.
 	</p>
 	<p>
 		[angelixxStranger.speech(I told you they'd be easy,)] [angelixxStranger.name] laughs to [angelixxStranger.her] friend as [angelixxStranger.she] slaps Angelixx's ass. The succubus giggles as she hears this and raises her ass to receive another slap.
@@ -1033,7 +1033,7 @@
 		[chosenStranger.speech(Yeah, this slut was a good fuck,)] [chosenStranger.name] replies as [chosenStranger.she] gives your [pc.ass+] one last grope.
 	</p>
 	<p>
-		Laughing with one another about how easy it was to fuck you and Angelixx, [chosenStranger.name] and [angelixxStranger.name] walk off, leaving the two of you to recover in the alleyway.
+		Laughing with one another about how easy it was to fuck you and Angelixx, [chosenStranger.name] и [angelixxStranger.name] walk off, leaving the two of you to recover in the alleyway.
 	</p>
 	<p>
 		[angelixx.speech(That was fun!)] Angelixx giggles as she gets her clothing back in order. Standing up, you smile at the cute little succubus as she gives you a pleading look and asks in a sweet tone, [angelixx.speech(You're going to walk me home now, right, [pc.name]?)]

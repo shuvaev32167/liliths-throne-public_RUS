@@ -1,25 +1,11 @@
 package com.lilithsthrone.game.dialogue.utils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.FluidStored;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
-import com.lilithsthrone.game.character.body.valueEnums.HairLength;
-import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.gender.Gender;
@@ -30,11 +16,7 @@ import com.lilithsthrone.game.character.npc.dominion.Fiammetta;
 import com.lilithsthrone.game.character.npc.dominion.Saellatrix;
 import com.lilithsthrone.game.character.npc.fields.Angelixx;
 import com.lilithsthrone.game.character.npc.misc.BasicDoll;
-import com.lilithsthrone.game.character.race.AbstractRace;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
-import com.lilithsthrone.game.character.race.Race;
-import com.lilithsthrone.game.character.race.RaceStage;
-import com.lilithsthrone.game.character.race.Subspecies;
+import com.lilithsthrone.game.character.race.*;
 import com.lilithsthrone.game.dialogue.DialogueManager;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.DialogueNodeType;
@@ -63,6 +45,12 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 /**
  * @since 0.1.62
  * @version 0.3.7.7
@@ -70,7 +58,29 @@ import com.lilithsthrone.world.places.PlaceType;
  */
 public class MiscDialogue {
 	
-	public static final DialogueNode STATUS_EFFECTS = new DialogueNode("Important status effect updates", "", true) {
+	public static final DialogueNode DOLL_BROCHURE_END_FINAL = new DialogueNode("Doll Brochure", "", true) {
+		@Override
+		public void applyPreParsingEffects() {
+			Main.game.appendToTextEndStringBuilder(Main.game.parseFromFile("txt/places/dominion/sex_shop/generic", "DOLL_BROCHURE_NEW_DOLL_END", newDoll));
+		}
+		@Override
+		public int getSecondsPassed() {
+			return 60 * 15;
+		}
+		@Override
+		public String getContent() {
+			return Main.game.parseFromFile("txt/places/dominion/sex_shop/generic", "DOLL_BROCHURE_END_FINAL", newDoll);
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+                return new Response("Продолжить",
+						"You've obtained a new doll!",
+						DOLL_BROCHURE_NEW_DOLL_END);
+			}
+			return null;
+		}
+	};	public static final DialogueNode STATUS_EFFECTS = new DialogueNode("Important status effect updates", "", true) {
 		@Override
 		public String getContent() {
 			StringBuilder sb = new StringBuilder();
@@ -95,7 +105,7 @@ public class MiscDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 0) {
-				return new ResponseEffectsOnly("Continue", "Carry on with whatever you were doing."){
+                return new ResponseEffectsOnly("Продолжить", "Carry on with whatever you were doing.") {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().getStatusEffectDescriptions().clear();
@@ -281,7 +291,7 @@ public class MiscDialogue {
 						modList.add("<span style='color:"+mod.getColour().toWebHexString()+";'>"+mod.getName()+"</span>");
 					}
 					modifiersSB.append(Util.stringsToStringList(modList, false));
-					sb.append(modifiersSB.toString());
+					sb.append(modifiersSB);
 					sb.append(".");
 				}
 			sb.append("</p>");
@@ -553,18 +563,18 @@ public class MiscDialogue {
 							+ " Desperately stuffing "+userNamePosSelfHer+" [npc.ass] full of the condom's contents, "+targetNameSelfShe+" only [npc2.verb(discard)] the condom once [npc2.sheIs] sure that it's completely empty."));
 				} else {
 					sb.append(UtilText.parse(condomTarget, condomUser,
-							"[npc.Name] [npc.verb(shudder)] as "+targetNameSelfShe+" [npc2.verb(push)] the slimy fluid into [npc.her] [npc.asshole+],"
+                            "[npc.Name] shudder as " + targetNameSelfShe + " [npc2.verb(push)] the slimy fluid into [npc.her] [npc.asshole+],"
 									+ " trying [npc.her] best not to think about the cold "+cumName+" that's now in [npc.her] [npc.ass] as "+targetNameSelfShe+" [npc2.verb(throw)] the now-empty condom to the floor..."));
 				}
 				break;
 			case MOUTH:
 				if(condomTarget.hasFetish(Fetish.FETISH_CUM_ADDICT)) {
 					sb.append(UtilText.parse(condomTarget, condomUser,
-							"[npc.Name] can't help but let out a delighted [npc.moan] as [npc.she] greedily [npc.verb(gulp)] down the slimy fluid."
-							+ " Darting [npc.her] [npc.tongue] out, [npc.she] desperately [npc.verb(lick)] up every last drop of cum; only discarding the condom once [npc.sheIs] sure that it's completely empty."));
+                            "[npc.Name] can't help but let out a delighted [npc.moan] as [npc.she] greedily gulp down the slimy fluid."
+                                    + " Darting [npc.her] [npc.tongue] out, [npc.she] desperately lick up every last drop of cum; only discarding the condom once [npc.sheIs] sure that it's completely empty."));
 				} else {
 					sb.append(UtilText.parse(condomTarget, condomUser,
-							"[npc.Name] [npc.verb(scrunch)] [npc.her] [npc.eyes] shut as [npc.she] [npc.verb(gulp)] down the slimy fluid,"
+                            "[npc.Name] scrunch [npc.her] [npc.eyes] shut as [npc.she] gulp down the slimy fluid,"
 									+ " trying [npc.her] best not to think about what [npc.sheHas] just done as "+targetNameSelfShe+" [npc2.verb(throw)] the now-empty condom to the floor..."));
 				}
 				break;
@@ -575,7 +585,7 @@ public class MiscDialogue {
 							+ " Desperately stuffing "+userNamePosSelfHer+" [npc.breasts] full of the condom's contents, "+targetNameSelfShe+" only [npc2.verb(discard)] the condom once [npc2.sheIs] sure that it's completely empty."));
 				} else {
 					sb.append(UtilText.parse(condomTarget, condomUser,
-							"[npc.Name] [npc.verb(shudder)] as "+targetNameSelfShe+" [npc2.verb(push)] the slimy fluid into [npc.her] [npc.nipple+],"
+                            "[npc.Name] shudder as " + targetNameSelfShe + " [npc2.verb(push)] the slimy fluid into [npc.her] [npc.nipple+],"
 									+ " trying [npc.her] best not to think about the cold "+cumName+" that's now in [npc.her] [npc.breasts] as "+targetNameSelfShe+" [npc2.verb(throw)] the now-empty condom to the floor..."));
 				}
 				break;
@@ -586,7 +596,7 @@ public class MiscDialogue {
 							+ " Desperately stuffing "+userNamePosSelfHer+" [npc.crotchBoobs] full of the condom's contents, "+targetNameSelfShe+" only [npc2.verb(discard)] the condom once [npc2.sheIs] sure that it's completely empty."));
 				} else {
 					sb.append(UtilText.parse(condomTarget, condomUser,
-							"[npc.Name] [npc.verb(shudder)] as "+targetNameSelfShe+" [npc2.verb(push)] the slimy fluid into [npc.her] [npc.nippleCrotch+],"
+                            "[npc.Name] shudder as " + targetNameSelfShe + " [npc2.verb(push)] the slimy fluid into [npc.her] [npc.nippleCrotch+],"
 									+ " trying [npc.her] best not to think about the cold "+cumName+" that's now in [npc.her] [npc.crotchBoobs] as "+targetNameSelfShe+" [npc2.verb(throw)] the now-empty condom to the floor..."));
 				}
 				break;
@@ -597,7 +607,7 @@ public class MiscDialogue {
 							+ " Desperately stuffing "+userNamePosSelfHer+" web-spinning orifice full of the condom's contents, "+targetNameSelfShe+" only [npc2.verb(discard)] the condom once [npc2.sheIs] sure that it's completely empty."));
 				} else {
 					sb.append(UtilText.parse(condomTarget, condomUser,
-							"[npc.Name] [npc.verb(shudder)] as "+targetNameSelfShe+" [npc2.verb(push)] the slimy fluid into [npc.her] [npc.spinneret+],"
+                            "[npc.Name] shudder as " + targetNameSelfShe + " [npc2.verb(push)] the slimy fluid into [npc.her] [npc.spinneret+],"
 									+ " trying [npc.her] best not to think about the cold "+cumName+" that's now in [npc.her] web-spinning orifice as "+targetNameSelfShe+" [npc2.verb(throw)] the now-empty condom to the floor..."));
 				}
 				break;
@@ -608,7 +618,7 @@ public class MiscDialogue {
 							+ " Desperately stuffing "+userNamePosSelfHer+" [npc.cock] full of the condom's contents, "+targetNameSelfShe+" only [npc2.verb(discard)] the condom once [npc2.sheIs] sure that it's completely empty."));
 				} else {
 					sb.append(UtilText.parse(condomTarget, condomUser,
-							"[npc.Name] [npc.verb(shudder)] as "+targetNameSelfShe+" [npc2.verb(push)] the slimy fluid into [npc.her] [npc.urethraPenis+],"
+                            "[npc.Name] shudder as " + targetNameSelfShe + " [npc2.verb(push)] the slimy fluid into [npc.her] [npc.urethraPenis+],"
 									+ " trying [npc.her] best not to think about the cold "+cumName+" that's now in [npc.her] [npc.cock] as "+targetNameSelfShe+" [npc2.verb(throw)] the now-empty condom to the floor..."));
 				}
 				break;
@@ -619,7 +629,7 @@ public class MiscDialogue {
 							+ " Desperately stuffing "+userNamePosSelfHer+" [npc.pussy] full of the condom's contents, "+targetNameSelfShe+" only [npc2.verb(discard)] the condom once [npc2.sheIs] sure that it's completely empty."));
 				} else {
 					sb.append(UtilText.parse(condomTarget, condomUser,
-							"[npc.Name] [npc.verb(shudder)] as "+targetNameSelfShe+" [npc2.verb(push)] the slimy fluid into [npc.her] [npc.urethraVagina+],"
+                            "[npc.Name] shudder as " + targetNameSelfShe + " [npc2.verb(push)] the slimy fluid into [npc.her] [npc.urethraVagina+],"
 									+ " trying [npc.her] best not to think about the cold "+cumName+" that's now in [npc.her] [npc.pussy] as "+targetNameSelfShe+" [npc2.verb(throw)] the now-empty condom to the floor..."));
 				}
 				break;
@@ -630,7 +640,7 @@ public class MiscDialogue {
 							+ " Desperately stuffing "+userNamePosSelfHer+" [npc.pussy] full of the condom's contents, "+targetNameSelfShe+" only [npc2.verb(discard)] the condom once [npc2.sheIs] sure that it's completely empty."));
 				} else {
 					sb.append(UtilText.parse(condomTarget, condomUser,
-							"[npc.Name] [npc.verb(shudder)] as "+targetNameSelfShe+" [npc2.verb(push)] the slimy fluid into [npc.her] [npc.pussy+],"
+                            "[npc.Name] shudder as " + targetNameSelfShe + " [npc2.verb(push)] the slimy fluid into [npc.her] [npc.pussy+],"
 									+ " trying [npc.her] best not to think about the cold "+cumName+" that's now in [npc.her] [npc.pussy] as "+targetNameSelfShe+" [npc2.verb(throw)] the now-empty condom to the floor..."));
 				}
 				break;
@@ -646,26 +656,26 @@ public class MiscDialogue {
 	// Dolls:
 	
 	public static int dollOption = 0;
-	private static int[] dollCost = {200_000, 300_000, 600_000};
+	private static final int[] dollCost = {200_000, 300_000, 600_000};
 	public static int genitalsOption = 0;
-	private static int[] genitalCost = {0, 20_000, 30_000};
+	private static final int[] genitalCost = {0, 20_000, 30_000};
 	public static int ageOption = 0;
-	private static int[] ageCost = {0, 25_000, 25_000, 25_000, 25_000, 25_000};
+	private static final int[] ageCost = {0, 25_000, 25_000, 25_000, 25_000, 25_000};
 	public static int outfitOption = 0;
-	private static String[] outfitId = {null, "innoxia_rainbow", "innoxia_kitty", "innoxia_maid"};
-	private static int[] outfitCost = {0, 2_500, 5_000, 15_000};
+	private static final String[] outfitId = {null, "innoxia_rainbow", "innoxia_kitty", "innoxia_maid"};
+	private static final int[] outfitCost = {0, 2_500, 5_000, 15_000};
 	
 	public static boolean barcodeRemoval = false;
-	private static int barcodeCost = 5_000;
+	private static final int barcodeCost = 5_000;
 	public static boolean toySet = false;
-	private static int toyCost = 15_000;
+	private static final int toyCost = 15_000;
 	public static boolean hair = false;
-	private static int hairCost = 25_000;
+	private static final int hairCost = 25_000;
 	public static boolean deck = false;
 	public static int deckCost = 1_000_000;
 	
 	public static boolean fucked = false;
-	private static int fuckedCost = 1_000;
+	private static final int fuckedCost = 1_000;
 	
 	private static AbstractSubspecies dollSubspecies = Subspecies.HUMAN;
 	
@@ -870,7 +880,7 @@ public class MiscDialogue {
 			);
 	}
 	
-	private static List<AbstractSubspecies> dollCompatibleSubspecies = new ArrayList<>();
+	private static final List<AbstractSubspecies> dollCompatibleSubspecies = new ArrayList<>();
 	private static List<AbstractSubspecies> getDollCompatibleSubspecies() {
 		// check every subspecies for compatibility with dolls...
 		if(dollCompatibleSubspecies.isEmpty()) {
@@ -1004,24 +1014,23 @@ public class MiscDialogue {
 			return null;
 		}
 	};
-
-	public static final DialogueNode DOLL_BROCHURE_END_FINAL = new DialogueNode("Doll Brochure", "", true) {
+	public static final DialogueNode DOLL_BROCHURE_END_SLAVE_FINAL = new DialogueNode("Doll Brochure", "", true) {
 		@Override
 		public void applyPreParsingEffects() {
 			Main.game.appendToTextEndStringBuilder(Main.game.parseFromFile("txt/places/dominion/sex_shop/generic", "DOLL_BROCHURE_NEW_DOLL_END", newDoll));
 		}
 		@Override
 		public int getSecondsPassed() {
-			return 60 * 15;
+			return 60 * 30;
 		}
 		@Override
 		public String getContent() {
-			return Main.game.parseFromFile("txt/places/dominion/sex_shop/generic", "DOLL_BROCHURE_END_FINAL", newDoll);
+			return Main.game.parseFromFile("txt/places/dominion/sex_shop/generic", "DOLL_BROCHURE_END_SLAVE_FINAL", newDoll);
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue",
+                return new Response("Продолжить",
 						"You've obtained a new doll!",
 						DOLL_BROCHURE_NEW_DOLL_END);
 			}
@@ -1061,29 +1070,7 @@ public class MiscDialogue {
 		}
 	};
 	
-	public static final DialogueNode DOLL_BROCHURE_END_SLAVE_FINAL = new DialogueNode("Doll Brochure", "", true) {
-		@Override
-		public void applyPreParsingEffects() {
-			Main.game.appendToTextEndStringBuilder(Main.game.parseFromFile("txt/places/dominion/sex_shop/generic", "DOLL_BROCHURE_NEW_DOLL_END", newDoll));
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 60 * 30;
-		}
-		@Override
-		public String getContent() {
-			return Main.game.parseFromFile("txt/places/dominion/sex_shop/generic", "DOLL_BROCHURE_END_SLAVE_FINAL", newDoll);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Continue",
-						"You've obtained a new doll!",
-						DOLL_BROCHURE_NEW_DOLL_END);
-			}
-			return null;
-		}
-	};
+
 
 	public static final DialogueNode DOLL_BROCHURE_NEW_DOLL_END = new DialogueNode("Doll Brochure", "", false) {
 		@Override
@@ -1094,7 +1081,7 @@ public class MiscDialogue {
 		}
 		@Override
 		public int getSecondsPassed() {
-			return 60 * 1;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -1268,12 +1255,11 @@ public class MiscDialogue {
 	}
 	
 	private static String startWrapper(String title) {
-		StringBuilder sb = new StringBuilder();
+
+        String sb = "<div class='cosmetics-inner-container' style='margin:1% 1%; width:98%; padding:1%; box-sizing:border-box; position:relative;'>" +
+                "<b>" + title + "</b>";
 		
-		sb.append("<div class='cosmetics-inner-container' style='margin:1% 1%; width:98%; padding:1%; box-sizing:border-box; position:relative;'>");
-		sb.append("<b>"+title+"</b>");
-		
-		return sb.toString();
+		return sb;
 	}
 	
 	private static String endWrapper() {
@@ -1534,9 +1520,7 @@ public class MiscDialogue {
 		}
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(Main.game.parseFromFile("txt/places/dominion/sex_shop/generic", "SLAVE_DOLLIFICATION"));
-			return sb.toString();
+            return Main.game.parseFromFile("txt/places/dominion/sex_shop/generic", "SLAVE_DOLLIFICATION");
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {

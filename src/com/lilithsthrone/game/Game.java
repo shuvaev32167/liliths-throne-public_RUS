@@ -1,59 +1,10 @@
 package com.lilithsthrone.game;
 
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Month;
-import java.time.ZoneOffset;
-import java.time.temporal.ChronoField;
-import java.time.temporal.TemporalAccessor;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import com.lilithsthrone.controller.MainController;
 import com.lilithsthrone.controller.TooltipUpdateThread;
 import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInformationEventListener;
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
-import com.lilithsthrone.game.character.CharacterImportSetting;
-import com.lilithsthrone.game.character.CharacterUtils;
-import com.lilithsthrone.game.character.EquipClothingSetting;
-import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.PlayerCharacter;
-import com.lilithsthrone.game.character.SexCount;
+import com.lilithsthrone.game.character.*;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.ObedienceLevel;
@@ -72,159 +23,18 @@ import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.NPC;
-import com.lilithsthrone.game.character.npc.dominion.Amber;
-import com.lilithsthrone.game.character.npc.dominion.Angel;
-import com.lilithsthrone.game.character.npc.dominion.Arthur;
-import com.lilithsthrone.game.character.npc.dominion.Ashley;
-import com.lilithsthrone.game.character.npc.dominion.Brax;
-import com.lilithsthrone.game.character.npc.dominion.Bunny;
-import com.lilithsthrone.game.character.npc.dominion.Callie;
-import com.lilithsthrone.game.character.npc.dominion.CandiReceptionist;
-import com.lilithsthrone.game.character.npc.dominion.Cultist;
-import com.lilithsthrone.game.character.npc.dominion.Daddy;
-import com.lilithsthrone.game.character.npc.dominion.DominionAlleywayAttacker;
-import com.lilithsthrone.game.character.npc.dominion.DominionClubNPC;
-import com.lilithsthrone.game.character.npc.dominion.Elle;
-import com.lilithsthrone.game.character.npc.dominion.EnforcerPatrol;
-import com.lilithsthrone.game.character.npc.dominion.Felicia;
-import com.lilithsthrone.game.character.npc.dominion.Fiammetta;
-import com.lilithsthrone.game.character.npc.dominion.Finch;
-import com.lilithsthrone.game.character.npc.dominion.Hannah;
-import com.lilithsthrone.game.character.npc.dominion.HarpyBimbo;
-import com.lilithsthrone.game.character.npc.dominion.HarpyBimboCompanion;
-import com.lilithsthrone.game.character.npc.dominion.HarpyDominant;
-import com.lilithsthrone.game.character.npc.dominion.HarpyDominantCompanion;
-import com.lilithsthrone.game.character.npc.dominion.HarpyNympho;
-import com.lilithsthrone.game.character.npc.dominion.HarpyNymphoCompanion;
-import com.lilithsthrone.game.character.npc.dominion.Helena;
-import com.lilithsthrone.game.character.npc.dominion.Jules;
-import com.lilithsthrone.game.character.npc.dominion.Kalahari;
-import com.lilithsthrone.game.character.npc.dominion.Kate;
-import com.lilithsthrone.game.character.npc.dominion.Kay;
-import com.lilithsthrone.game.character.npc.dominion.Kruger;
-import com.lilithsthrone.game.character.npc.dominion.Lilaya;
-import com.lilithsthrone.game.character.npc.dominion.Loppy;
-import com.lilithsthrone.game.character.npc.dominion.Lovienne;
-import com.lilithsthrone.game.character.npc.dominion.Lumi;
-import com.lilithsthrone.game.character.npc.dominion.Natalya;
-import com.lilithsthrone.game.character.npc.dominion.Nyan;
-import com.lilithsthrone.game.character.npc.dominion.NyanMum;
-import com.lilithsthrone.game.character.npc.dominion.Pazu;
-import com.lilithsthrone.game.character.npc.dominion.Pix;
-import com.lilithsthrone.game.character.npc.dominion.Ralph;
-import com.lilithsthrone.game.character.npc.dominion.ReindeerOverseer;
-import com.lilithsthrone.game.character.npc.dominion.RentalMommy;
-import com.lilithsthrone.game.character.npc.dominion.Rose;
-import com.lilithsthrone.game.character.npc.dominion.Saellatrix;
-import com.lilithsthrone.game.character.npc.dominion.Scarlett;
-import com.lilithsthrone.game.character.npc.dominion.Sean;
-import com.lilithsthrone.game.character.npc.dominion.SupplierLeader;
-import com.lilithsthrone.game.character.npc.dominion.SupplierPartner;
-import com.lilithsthrone.game.character.npc.dominion.TestNPC;
-import com.lilithsthrone.game.character.npc.dominion.Vanessa;
-import com.lilithsthrone.game.character.npc.dominion.Vicky;
-import com.lilithsthrone.game.character.npc.dominion.Wes;
-import com.lilithsthrone.game.character.npc.dominion.Zaranix;
-import com.lilithsthrone.game.character.npc.dominion.ZaranixMaidKatherine;
-import com.lilithsthrone.game.character.npc.dominion.ZaranixMaidKelly;
-import com.lilithsthrone.game.character.npc.fields.Angelixx;
-import com.lilithsthrone.game.character.npc.fields.Arion;
-import com.lilithsthrone.game.character.npc.fields.Astrapi;
-import com.lilithsthrone.game.character.npc.fields.Aurokaris;
-import com.lilithsthrone.game.character.npc.fields.Belle;
-import com.lilithsthrone.game.character.npc.fields.Ceridwen;
-import com.lilithsthrone.game.character.npc.fields.Dale;
-import com.lilithsthrone.game.character.npc.fields.Daphne;
-import com.lilithsthrone.game.character.npc.fields.Eisek;
-import com.lilithsthrone.game.character.npc.fields.Evelyx;
-import com.lilithsthrone.game.character.npc.fields.EvelyxMilker;
-import com.lilithsthrone.game.character.npc.fields.EvelyxSexualPartner;
-import com.lilithsthrone.game.character.npc.fields.Fae;
-import com.lilithsthrone.game.character.npc.fields.Farah;
-import com.lilithsthrone.game.character.npc.fields.FieldsBandit;
-import com.lilithsthrone.game.character.npc.fields.Flash;
-import com.lilithsthrone.game.character.npc.fields.Ghost;
-import com.lilithsthrone.game.character.npc.fields.Golix;
-import com.lilithsthrone.game.character.npc.fields.Hale;
-import com.lilithsthrone.game.character.npc.fields.Hammer;
-import com.lilithsthrone.game.character.npc.fields.HeadlessHorseman;
-import com.lilithsthrone.game.character.npc.fields.Heather;
-import com.lilithsthrone.game.character.npc.fields.Imsu;
-import com.lilithsthrone.game.character.npc.fields.Jess;
-import com.lilithsthrone.game.character.npc.fields.Kazik;
-import com.lilithsthrone.game.character.npc.fields.Kheiron;
-import com.lilithsthrone.game.character.npc.fields.Lunette;
-import com.lilithsthrone.game.character.npc.fields.LunetteMelee;
-import com.lilithsthrone.game.character.npc.fields.LunetteRanged;
-import com.lilithsthrone.game.character.npc.fields.Lunexis;
-import com.lilithsthrone.game.character.npc.fields.Minotallys;
-import com.lilithsthrone.game.character.npc.fields.Monica;
-import com.lilithsthrone.game.character.npc.fields.Moreno;
-import com.lilithsthrone.game.character.npc.fields.Nir;
-import com.lilithsthrone.game.character.npc.fields.Nizhoni;
-import com.lilithsthrone.game.character.npc.fields.Oglix;
-import com.lilithsthrone.game.character.npc.fields.Penelope;
-import com.lilithsthrone.game.character.npc.fields.Silvia;
-import com.lilithsthrone.game.character.npc.fields.Sleip;
-import com.lilithsthrone.game.character.npc.fields.Sterope;
-import com.lilithsthrone.game.character.npc.fields.Ursa;
-import com.lilithsthrone.game.character.npc.fields.Vronti;
-import com.lilithsthrone.game.character.npc.fields.Wynter;
-import com.lilithsthrone.game.character.npc.fields.Yui;
-import com.lilithsthrone.game.character.npc.fields.Ziva;
-import com.lilithsthrone.game.character.npc.misc.ClubberImport;
-import com.lilithsthrone.game.character.npc.misc.Elemental;
-import com.lilithsthrone.game.character.npc.misc.GenericAndrogynousNPC;
-import com.lilithsthrone.game.character.npc.misc.GenericFemaleNPC;
-import com.lilithsthrone.game.character.npc.misc.GenericMaleNPC;
-import com.lilithsthrone.game.character.npc.misc.GenericSexualPartner;
-import com.lilithsthrone.game.character.npc.misc.GenericTrader;
-import com.lilithsthrone.game.character.npc.misc.LodgerImport;
-import com.lilithsthrone.game.character.npc.misc.ModdedCharacter;
-import com.lilithsthrone.game.character.npc.misc.NPCOffspring;
-import com.lilithsthrone.game.character.npc.misc.OffspringSeed;
-import com.lilithsthrone.game.character.npc.misc.PrologueFemale;
-import com.lilithsthrone.game.character.npc.misc.PrologueMale;
-import com.lilithsthrone.game.character.npc.misc.SlaveImport;
-import com.lilithsthrone.game.character.npc.submission.Axel;
-import com.lilithsthrone.game.character.npc.submission.Claire;
-import com.lilithsthrone.game.character.npc.submission.DarkSiren;
-import com.lilithsthrone.game.character.npc.submission.Elizabeth;
-import com.lilithsthrone.game.character.npc.submission.Epona;
-import com.lilithsthrone.game.character.npc.submission.FortressAlphaLeader;
-import com.lilithsthrone.game.character.npc.submission.FortressFemalesLeader;
-import com.lilithsthrone.game.character.npc.submission.FortressMalesLeader;
-import com.lilithsthrone.game.character.npc.submission.GamblingDenPatron;
-import com.lilithsthrone.game.character.npc.submission.HazmatRat;
-import com.lilithsthrone.game.character.npc.submission.Lyssieth;
-import com.lilithsthrone.game.character.npc.submission.Murk;
-import com.lilithsthrone.game.character.npc.submission.RatWarrensCaptive;
-import com.lilithsthrone.game.character.npc.submission.Roxy;
-import com.lilithsthrone.game.character.npc.submission.Shadow;
-import com.lilithsthrone.game.character.npc.submission.Silence;
-import com.lilithsthrone.game.character.npc.submission.SlimeGuardFire;
-import com.lilithsthrone.game.character.npc.submission.SlimeGuardIce;
-import com.lilithsthrone.game.character.npc.submission.SlimeQueen;
-import com.lilithsthrone.game.character.npc.submission.SlimeRoyalGuard;
-import com.lilithsthrone.game.character.npc.submission.Takahashi;
-import com.lilithsthrone.game.character.npc.submission.Vengar;
+import com.lilithsthrone.game.character.npc.dominion.*;
+import com.lilithsthrone.game.character.npc.fields.*;
+import com.lilithsthrone.game.character.npc.misc.*;
+import com.lilithsthrone.game.character.npc.submission.*;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.pregnancy.Litter;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
-import com.lilithsthrone.game.character.race.Race;
-import com.lilithsthrone.game.character.race.RaceStage;
-import com.lilithsthrone.game.character.race.RacialBody;
-import com.lilithsthrone.game.character.race.Subspecies;
+import com.lilithsthrone.game.character.race.*;
 import com.lilithsthrone.game.combat.spells.Spell;
-import com.lilithsthrone.game.dialogue.AbstractDialogueFlagValue;
-import com.lilithsthrone.game.dialogue.DialogueFlagValue;
-import com.lilithsthrone.game.dialogue.DialogueFlags;
-import com.lilithsthrone.game.dialogue.DialogueManager;
-import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
+import com.lilithsthrone.game.dialogue.*;
 import com.lilithsthrone.game.dialogue.companions.OccupantManagementDialogue;
 import com.lilithsthrone.game.dialogue.encounters.AbstractEncounter;
 import com.lilithsthrone.game.dialogue.encounters.Encounter;
@@ -243,28 +53,9 @@ import com.lilithsthrone.game.dialogue.places.submission.impFortress.ImpCitadelD
 import com.lilithsthrone.game.dialogue.places.submission.impFortress.ImpFortressDialogue;
 import com.lilithsthrone.game.dialogue.places.submission.ratWarrens.RatWarrensDialogue;
 import com.lilithsthrone.game.dialogue.places.submission.ratWarrens.VengarCaptiveDialogue;
-import com.lilithsthrone.game.dialogue.responses.Response;
-import com.lilithsthrone.game.dialogue.responses.ResponseCombat;
-import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
-import com.lilithsthrone.game.dialogue.responses.ResponseSex;
-import com.lilithsthrone.game.dialogue.responses.ResponseTrade;
-import com.lilithsthrone.game.dialogue.utils.BodyChanging;
-import com.lilithsthrone.game.dialogue.utils.CharactersPresentDialogue;
-import com.lilithsthrone.game.dialogue.utils.CosmeticsDialogue;
-import com.lilithsthrone.game.dialogue.utils.DebugDialogue;
-import com.lilithsthrone.game.dialogue.utils.InventoryDialogue;
-import com.lilithsthrone.game.dialogue.utils.InventoryInteraction;
-import com.lilithsthrone.game.dialogue.utils.MapTravelType;
-import com.lilithsthrone.game.dialogue.utils.MiscDialogue;
-import com.lilithsthrone.game.dialogue.utils.OptionsDialogue;
-import com.lilithsthrone.game.dialogue.utils.ParserTarget;
-import com.lilithsthrone.game.dialogue.utils.PhoneDialogue;
-import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractCoreItem;
-import com.lilithsthrone.game.inventory.CharacterInventory;
-import com.lilithsthrone.game.inventory.ItemGeneration;
-import com.lilithsthrone.game.inventory.ItemTag;
-import com.lilithsthrone.game.inventory.Rarity;
+import com.lilithsthrone.game.dialogue.responses.*;
+import com.lilithsthrone.game.dialogue.utils.*;
+import com.lilithsthrone.game.inventory.*;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
@@ -291,29 +82,50 @@ import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.Artwork;
 import com.lilithsthrone.rendering.SVGImages;
-import com.lilithsthrone.utils.SizedStack;
-import com.lilithsthrone.utils.Units;
-import com.lilithsthrone.utils.Util;
+import com.lilithsthrone.utils.*;
 import com.lilithsthrone.utils.Util.Value;
-import com.lilithsthrone.utils.Vector2i;
-import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.utils.time.DateAndTime;
 import com.lilithsthrone.utils.time.DayPeriod;
 import com.lilithsthrone.utils.time.SolarElevationAngle;
-import com.lilithsthrone.world.AbstractWorldType;
-import com.lilithsthrone.world.Cell;
-import com.lilithsthrone.world.Generation;
-import com.lilithsthrone.world.Season;
-import com.lilithsthrone.world.Weather;
-import com.lilithsthrone.world.World;
-import com.lilithsthrone.world.WorldRegion;
-import com.lilithsthrone.world.WorldType;
+import com.lilithsthrone.world.*;
 import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.GenericPlace;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.io.File;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.time.*;
+import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalAccessor;
+import java.util.List;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * @since 0.1.0
@@ -339,22 +151,22 @@ public class Game implements XMLSaving {
 	private long id;
 	
 	private PlayerCharacter player;
-	private ItemGeneration itemGeneration;
-	private CharacterUtils characterUtils;
+	private final ItemGeneration itemGeneration;
+	private final CharacterUtils characterUtils;
 	
 	// NPCs:
 	private NPC activeNPC;
-	private AtomicInteger npcTally = new AtomicInteger(0);
-	private AtomicInteger offspringSeedTally = new AtomicInteger(0);
+	private final AtomicInteger npcTally = new AtomicInteger(0);
+	private final AtomicInteger offspringSeedTally = new AtomicInteger(0);
 
 	//Note : this is a ConcurrentHashMap
-	private Map<String, NPC> NPCMap;
-	private Map<String, OffspringSeed> OffspringSeedMap;
+	private final Map<String, NPC> NPCMap;
+	private final Map<String, OffspringSeed> OffspringSeedMap;
 
 	/** Key is the world to which the Enforcers patrol. Value is a List of Enforcer groups who are patrolling. */
 	private Map<AbstractWorldType, List<List<String>>> savedEnforcers;
 	
-	private Map<AbstractWorldType, World> worlds;
+	private final Map<AbstractWorldType, World> worlds;
 	private long lastAutoSaveTime = 0;
 	private long secondsPassed; // Seconds passed since the start of the game
 	private LocalDateTime startingDate;
@@ -373,15 +185,15 @@ public class Game implements XMLSaving {
 	private Encounter currentEncounter;
 	// Need to always return the same encounter at the same time in case it gets triggered multiple times in logic somewhere, so once it's been calculated at a certain time, reuse that result.
 	// These two variables are responsible for holding that information (and are located here as they need to be reset upon new game or loading a game).
-	public Value<Long, DialogueNode> forcedEncounterAtSeconds = new Value<>(-1l, null);
-	public Value<Long, DialogueNode> encounterAtSeconds = new Value<>(-1l, null);
+	public Value<Long, DialogueNode> forcedEncounterAtSeconds = new Value<>(-1L, null);
+	public Value<Long, DialogueNode> encounterAtSeconds = new Value<>(-1L, null);
 
 	private boolean started;
 	
 	private static Map<String, CharacterInventory> savedInventories; // Map of ID to inventory
 
 	// Managing dialogue:
-	private DialogueManager dialogueManager;
+	private final DialogueManager dialogueManager;
 	private DialogueFlags dialogueFlags;
 	
 	// Responses:
@@ -400,16 +212,16 @@ public class Game implements XMLSaving {
 	private int responseTab = 0;
 	private int savedResponseTab = 0;
 	
-	private StringBuilder pastDialogueSB = new StringBuilder();
+	private final StringBuilder pastDialogueSB = new StringBuilder();
 	private StringBuilder choicesDialogueSB = new StringBuilder();
-	private StringBuilder textEndStringBuilder = new StringBuilder();
-	private StringBuilder textStartStringBuilder = new StringBuilder();
+	private final StringBuilder textEndStringBuilder = new StringBuilder();
+	private final StringBuilder textStartStringBuilder = new StringBuilder();
 
 	public static Map<String, TooltipInformationEventListener> informationTooltips = new HashMap<>();
 	
 	// Logs:
 	private SizedStack<EventLogEntry> eventLog = new SizedStack<>(50);
-	private SizedStack<Value<Integer, List<SlaveryEventLogEntry>>> slaveryEventLog = new SizedStack<>(7);
+	private final SizedStack<Value<Integer, List<SlaveryEventLogEntry>>> slaveryEventLog = new SizedStack<>(7);
 	
 	// Slavery:
 	private OccupancyUtil occupancyUtil = new OccupancyUtil();
@@ -417,11 +229,11 @@ public class Game implements XMLSaving {
 	public Game() {
 		// Surely this will work as a unique id (unless someone creates two new games within the same second, but surely that will never happen...)
 		id = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
-		
-		worlds = new HashMap<>();
-		for(AbstractWorldType type : WorldType.getAllWorldTypes()) {
-			worlds.put(type, null);
-		}
+
+		worlds = new ConcurrentHashMap<>(WorldType.getAllWorldTypes().size());
+//		for(AbstractWorldType type : WorldType.getAllWorldTypes()) {
+//			worlds.put(type, null);
+//		}
 		
 		itemGeneration = new ItemGeneration();
 		characterUtils = new CharacterUtils();
@@ -461,7 +273,7 @@ public class Game implements XMLSaving {
 		UtilText.resetParsingEngine();
 	}
 	
-	private static boolean timeLog = false;
+	private static final boolean timeLog = false;
 	private static long timeStart = 0;
 	
 	public static void exportCharacter(GameCharacter character) {
@@ -958,7 +770,7 @@ public class Game implements XMLSaving {
 		}
 	}
 	
-	private static boolean debug = false;
+	private static final boolean debug = false;
 
 	public static void importGame(String name) {
 		File file = new File("data"+System.getProperty("file.separator")+"saves"+System.getProperty("file.separator"), name+".xml");
@@ -1055,7 +867,7 @@ public class Game implements XMLSaving {
 							NodeList idNodes = enforcerIds.getElementsByTagName("id");
 							List<String> ids = new ArrayList<>();
 							for(int k=0; k < idNodes.getLength(); k++) {
-								ids.add(((Element)idNodes.item(k)).getTextContent());
+								ids.add(idNodes.item(k).getTextContent());
 							}
 							loadedEnforcers.add(ids);
 						}
@@ -1296,8 +1108,8 @@ public class Game implements XMLSaving {
 				if(debug) {
 					System.out.println("Maps finished: "+ (System.nanoTime()-time)/1000000000d);
 				}
-				
-				Main.game.player = PlayerCharacter.loadFromXML(null, (Element) ((Element) gameElement.getElementsByTagName("playerCharacter").item(0)), doc);
+
+				Main.game.player = PlayerCharacter.loadFromXML(null, (Element) gameElement.getElementsByTagName("playerCharacter").item(0), doc);
 				
 				if(debug) {
 					System.out.println("Player finished: "+ (System.nanoTime()-time)/1000000000d);
@@ -1316,8 +1128,8 @@ public class Game implements XMLSaving {
 								String className = ((Element)e.getElementsByTagName("pathName").item(0)).getAttribute("value");
 								if(Main.isVersionOlderThan(loadingVersion, "0.2.4")) {
 									int lastIndex = className.lastIndexOf('.');
-									if(className.substring(lastIndex-3, lastIndex).equals("npc")) {
-										className = className.substring(0, lastIndex) + ".misc" + className.substring(lastIndex, className.length());
+									if(className.startsWith("npc", lastIndex-3)) {
+										className = className.substring(0, lastIndex) + ".misc" + className.substring(lastIndex);
 									}
 								}
 								if(Main.isVersionOlderThan(loadingVersion, "0.4.1.5")) {
@@ -2636,7 +2448,7 @@ public class Game implements XMLSaving {
 				Main.game.getNpc(Kheiron.class).setAffection(Main.game.getNpc(Oglix.class), AffectionLevel.NEGATIVE_THREE_STRONG_DISLIKE.getMedianValue());
 			}
 			if(addedNpcs.contains(Golix.class)) {
-				((Oglix)Main.game.getNpc(Oglix.class)).createElemental(); // inits the summoner ID
+				Main.game.getNpc(Oglix.class).createElemental(); // inits the summoner ID
 				Main.game.getNpc(Kheiron.class).setAffection(Main.game.getNpc(Golix.class), AffectionLevel.POSITIVE_FIVE_WORSHIP.getMedianValue());
 				Main.game.getNpc(Golix.class).setAffection(Main.game.getNpc(Kheiron.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
 			}
@@ -2741,8 +2553,8 @@ public class Game implements XMLSaving {
 	public boolean pendingSlaveInStocksReset = false;
 	public boolean pendingSlaveShopsReset = false;
 	
-	private List<NPC> npcsToRemove = new ArrayList<>();
-	private List<NPC> npcsToAdd = new ArrayList<>();
+	private final List<NPC> npcsToRemove = new ArrayList<>();
+	private final List<NPC> npcsToAdd = new ArrayList<>();
 	
 	/** The time, in nano seconds, it took to complete the last turn.
 	 * <br/>Divide by 1000000000d to get the time in seconds.
@@ -2833,7 +2645,7 @@ public class Game implements XMLSaving {
 		if(slavesUpdated) {
 			for(int i=1; i <= hoursPassed; i++) {
 				Main.game.getPlayer().performHourlyFluidsCheck();
-				occupancyUtil.performHourlyUpdate(this.getDayNumber((startHour*60*60) + (i*60)), (hourStartTo24+i)%24);
+				occupancyUtil.performHourlyUpdate(this.getDayNumber((startHour*60*60) + (i* 60L)), (hourStartTo24+i)%24);
 				for(String slaveId : occupancyUtil.getAllCharacters()) { // Update slaves' status effects per hour to give them a chance to refill fluids and such.
 					try {
 						Main.game.getNPCById(slaveId).calculateStatusEffects(3600);
@@ -3464,7 +3276,7 @@ public class Game implements XMLSaving {
 							} else {
 								currentWeather = Weather.RAIN;
 							}
-							weatherTimeRemainingInSeconds = (1 * 60 + Util.random.nextInt(5 * 60))*60; // Rain lasts for 1-6 hours
+							weatherTimeRemainingInSeconds = (60 + Util.random.nextInt(5 * 60))*60; // Rain lasts for 1-6 hours
 						} else {
 							currentWeather = Weather.CLEAR;
 							weatherTimeRemainingInSeconds= (4 * 60 + Util.random.nextInt(4 * 60))*60; // Clear weather lasts for 4-8 hours
@@ -3541,9 +3353,9 @@ public class Game implements XMLSaving {
 				corruptionGains = ("<p style='text-align:center;'>"
 						+ "<b>You have gained +"+response.getCorruptionNeeded().getCorruptionBypass()+"</b> <b style='color:"+Attribute.MAJOR_CORRUPTION.getColour().toWebHexString()+";'>corruption</b><b>!</b>"
 						+ "</p>");
-			};
+			}
 
-			if(!response.isAvailable() && !response.isAbleToBypass()) {
+            if(!response.isAvailable() && !response.isAbleToBypass()) {
 				return;
 			}
 			
@@ -3657,7 +3469,7 @@ public class Game implements XMLSaving {
 						
 						pastDialogueSB.setLength(0);
 					}
-					String dialogueParsed = UtilText.parse(corruptionGains + textStartStringBuilder.toString())
+					String dialogueParsed = UtilText.parse(corruptionGains + textStartStringBuilder)
 						+ (node.isContentParsed() ? UtilText.parse(content) : content)
 						+ UtilText.parse(textEndStringBuilder.toString());
 					if(Main.game.isStarted() && Main.game.getPlayer().getHistory()==Occupation.TOURIST) {
@@ -3715,7 +3527,7 @@ public class Game implements XMLSaving {
 													? "<div "+(Main.getProperties().hasValue(PropertyValue.fadeInText)?"id='text-content'":"")
 															+" style='font-size:" + Main.getProperties().fontSize + "px; line-height:" + (Main.getProperties().fontSize + 6) + "px;"
 																+ (requiresYScroll(node)?" overflow-y:scroll; overflow-x:hidden;":"")+"'>"
-															+ pastDialogueSB.toString()
+															+ pastDialogueSB
 														+ "</div>"
 													: "")
 	//												+ textStartStringBuilder.toString() + pastDialogueSB.toString() + textEndStringBuilder.toString() + "</div>" : "")
@@ -3742,7 +3554,7 @@ public class Game implements XMLSaving {
 												? "<div "+(Main.getProperties().hasValue(PropertyValue.fadeInText)?"id='text-content'":"")
 														+" style='font-size:" + Main.getProperties().fontSize + "px; line-height:" + (Main.getProperties().fontSize + 6) + "px;"
 															+ (requiresYScroll(node)?" overflow-y:scroll; overflow-x:hidden;":"")+ "'>"
-														+ pastDialogueSB.toString()
+														+ pastDialogueSB
 													+ "</div>"
 												: "")
 	//									+ textStartStringBuilder.toString() + pastDialogueSB.toString() + textEndStringBuilder.toString() + "</div>" : "")
@@ -3905,7 +3717,7 @@ public class Game implements XMLSaving {
 				
 				dialogueParsed = UtilText.parse(
 					"<b id='position" + positionAnchor + "'></b>"
-					+ textStartStringBuilder.toString())
+					+ textStartStringBuilder)
 					+ (node.isContentParsed() ? UtilText.parse(content) : content)
 					+ UtilText.parse(textEndStringBuilder.toString());
 			}
@@ -3965,7 +3777,7 @@ public class Game implements XMLSaving {
 									? "<div "+(Main.getProperties().hasValue(PropertyValue.fadeInText)?"id='text-content'":"")
 											+" style='font-size:" + Main.getProperties().fontSize + "px; line-height:" + (Main.getProperties().fontSize + 6) + "px;"
 												+ (requiresYScroll(node)?" overflow-y:scroll; overflow-x:hidden;":"")+ "'>"
-									+ pastDialogueSB.toString() + "</div>" : "")
+									+ pastDialogueSB + "</div>" : "")
 	//									+ textStartStringBuilder.toString() + pastDialogueSB.toString() + textEndStringBuilder.toString() + "</div>" : "")
 //							+ "</div>"
 						+ "</div>"
@@ -3990,7 +3802,7 @@ public class Game implements XMLSaving {
 										? "<div "+(Main.getProperties().hasValue(PropertyValue.fadeInText)?"id='text-content'":"")
 												+" style='font-size:" + Main.getProperties().fontSize + "px; line-height:" + (Main.getProperties().fontSize + 6) + "px;"
 													+ (requiresYScroll(node)?" overflow-y:scroll; overflow-x:hidden;":"")+ "'>"
-												+ pastDialogueSB.toString()
+												+ pastDialogueSB
 											+ "</div>"
 										: "")
 	//								+ textStartStringBuilder.toString() + pastDialogueSB.toString() + textEndStringBuilder.toString() + "</div>" : "")
@@ -4358,11 +4170,11 @@ public class Game implements XMLSaving {
 								? "<div id='text-content'"
 									+ " style='font-size:" + Main.getProperties().fontSize + "px; line-height:" + (Main.getProperties().fontSize + 6) + "px;"
 										+ (requiresYScroll(currentDialogueNode)?" overflow-y:scroll; overflow-x:hidden;":"")+ "'>"
-									+ textStartStringBuilder.toString() + pastDialogueSB.toString() + textEndStringBuilder.toString() + "</div>"
+									+ textStartStringBuilder + pastDialogueSB + textEndStringBuilder + "</div>"
 								: "")
 					+ "</div>"
 				+ "</div>"
-				+"<p style='text-align:center;font-size:0.6em;color:#777;'>Dialogue written by "+currentDialogueNode.getAuthor()+" for <i>"+Main.GAME_NAME+" v"+Main.VERSION_NUMBER+"</i></p>"
+				+ "<p style='text-align:center;font-size:0.6em;color:#777;'>Диалог написан " + currentDialogueNode.getAuthor() + " for <i>" + Main.GAME_NAME + " v" + Main.VERSION_NUMBER + "</i></p>"
 				+ "</body>";
 	}
 
@@ -4385,11 +4197,7 @@ public class Game implements XMLSaving {
 			}
 		}
 		else if(response.hasRequirements()) {
-			if(response.isAvailable()) {
-				responseDisabled = false;
-			} else {
-				responseDisabled = true;
-			}
+            responseDisabled = !response.isAvailable();
 		}
 		
 		if(response.getSexPace()!=null) {
@@ -4918,6 +4726,10 @@ public class Game implements XMLSaving {
 		return secondsPassed;
 	}
 
+	public void setSecondsPassed(long secondsPassed) {
+		this.secondsPassed = secondsPassed;
+	}
+
 	public long getMinutesPassed() {
 		return secondsPassed/60;
 	}
@@ -5026,10 +4838,10 @@ public class Game implements XMLSaving {
 
 	public String getDisplayDate(TemporalAccessor dateNow, boolean withYear) {
 		if(isBadEnd()) {
-			return UtilText.parse("[style.colourBad(Unknown date)]");
+			return UtilText.parse("[style.colourBad(Дата неизвестна)]");
 		}
 		if(isInNewWorld() && !getDialogueFlags().hasFlag(DialogueFlagValue.knowsDate)) {
-			return UtilText.parse("[style.colourMinorBad(Unknown date)]");
+			return UtilText.parse("[style.colourMinorBad(Дата неизвестна)]");
 		}
 		
 		String date = Units.date(dateNow, Units.DateType.LONG);
@@ -5065,7 +4877,7 @@ public class Game implements XMLSaving {
 	}
 
 	public long getHour() {
-		return Main.game.getMinutesPassed() / 60l;
+		return Main.game.getMinutesPassed() / 60L;
 	}
 	
 	public int getHourOfDay() {
@@ -5410,7 +5222,7 @@ public class Game implements XMLSaving {
 			}
 		}
 		
-		if(NPCMap.keySet().contains(npc.getId())) {
+		if(NPCMap.containsKey(npc.getId())) {
 			throw new Exception("NPC map already contained an NPC with this Id ("+npc.getId()+"). SOMETHING HAS GONE HORRIBLY WRONG! PANIC!");
 		}
 		
@@ -5594,7 +5406,7 @@ public class Game implements XMLSaving {
 			os.setId(id+","+(os.getClass().getSimpleName()));
 		}
 
-		if(OffspringSeedMap.keySet().contains(os.getId())) {
+		if(OffspringSeedMap.containsKey(os.getId())) {
 			throw new Exception("OffspringSeed map already contained an OffspringSeed with this Id ("+os.getId()+"). SOMETHING HAS GONE HORRIBLY WRONG! PANIC!");
 		}
 

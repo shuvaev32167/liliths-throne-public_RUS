@@ -1,11 +1,5 @@
 package com.lilithsthrone.game.combat.moves;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.LustLevel;
@@ -22,6 +16,12 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * @since 0.4
@@ -232,8 +232,8 @@ public class CMBasicAttack {
         public String perform(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
     		boolean isCrit = canCrit(turnIndex, source, target, enemies, allies);
 
-        	StringBuilder attackStringBuilder = new StringBuilder("");
-        	StringBuilder weaponAttacksStringBuilder = new StringBuilder("");
+        	StringBuilder attackStringBuilder = new StringBuilder();
+        	StringBuilder weaponAttacksStringBuilder = new StringBuilder();
         	Map<GameCharacter, List<String>> weaponDamages = new LinkedHashMap<>();
         	
     		for(int i=0; i<Math.min(source.getArmRows(), source.getMainWeaponArray().length); i++) {
@@ -604,8 +604,8 @@ public class CMBasicAttack {
         public String perform(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
     		boolean isCrit = canCrit(turnIndex, source, target, enemies, allies);
 
-        	StringBuilder attackStringBuilder = new StringBuilder("");
-        	StringBuilder weaponAttacksStringBuilder = new StringBuilder("");
+        	StringBuilder attackStringBuilder = new StringBuilder();
+        	StringBuilder weaponAttacksStringBuilder = new StringBuilder();
         	Map<GameCharacter, List<String>> weaponDamages = new LinkedHashMap<>();
         	
     		for(int i=0; i<Math.min(source.getArmRows(), source.getOffhandWeaponArray().length); i++) {
@@ -952,8 +952,8 @@ public class CMBasicAttack {
         public String perform(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
         	boolean isCrit = canCrit(turnIndex, source, target, enemies, allies);
         	
-        	StringBuilder attackStringBuilder = new StringBuilder("");
-        	StringBuilder weaponAttacksStringBuilder = new StringBuilder("");
+        	StringBuilder attackStringBuilder = new StringBuilder();
+        	StringBuilder weaponAttacksStringBuilder = new StringBuilder();
         	Map<GameCharacter, List<String>> weaponDamages = new LinkedHashMap<>();
         	
     		for(int i=0; i<Math.min(source.getArmRows(), source.getMainWeaponArray().length); i++) {
@@ -1252,7 +1252,7 @@ public class CMBasicAttack {
             DamageType damageType = getDamageType(turnIndex, source);
             return (isCrit?"[style.colourExcellent(Critical)]: ":"")
             		+ "<span style='color:"+this.getColour().toWebHexString()+";'>Block</span> "
-                    + "<span style='color:" + damageType.getMultiplierAttribute().getColour().toWebHexString() + ";'>" + String.valueOf(getBlock(source, isCrit))+ " " + damageType.getName() + " </span>"
+                    + "<span style='color:" + damageType.getMultiplierAttribute().getColour().toWebHexString() + ";'>" + getBlock(source, isCrit) + " " + damageType.getName() + " </span>"
                     + " damage.";
         }
 
@@ -1260,7 +1260,7 @@ public class CMBasicAttack {
         public String getDescription(int turnIndex, GameCharacter source) {
             DamageType damageType = getDamageType(turnIndex, source);
             return "Focus on defending yourself, gaining protection against "
-                    + "<span style='color:" + damageType.getMultiplierAttribute().getColour().toWebHexString() + ";'>" + String.valueOf(getBlock(source, false)) + "</span>"
+                    + "<span style='color:" + damageType.getMultiplierAttribute().getColour().toWebHexString() + ";'>" + getBlock(source, false) + "</span>"
                     + " damage.";
         }
 
@@ -1272,7 +1272,7 @@ public class CMBasicAttack {
     				"[npc.Name] focused on defending [npc.herself].",
     				"[npc.SheIs] now protected against " + getFormattedDamage(getDamageType(turnIndex, source), getBlock(source, isCrit), target, true, false) + " damage!",
     				isCrit?"":null,
-    				isCrit?"[npc.Name] [npc.verb(double)] [npc.her] block!":""));
+                    isCrit ? "[npc.Name] double [npc.her] block!" : ""));
             
         }
 
@@ -1307,7 +1307,7 @@ public class CMBasicAttack {
             return 7;
         }
 
-        protected int getDamage(GameCharacter source, GameCharacter target, boolean critical) {
+        private int getDamage(GameCharacter source, GameCharacter target, boolean critical) {
             return Attack.calculateSeductionDamage(source, target, getBaseDamage(source), critical);
         }
         
@@ -1334,7 +1334,7 @@ public class CMBasicAttack {
 
         @Override
         public String perform(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
-        	StringBuilder sb = new StringBuilder("");
+        	StringBuilder sb = new StringBuilder();
 
     		DamageType finalDt = getDamageType(turnIndex, source);
         	
@@ -1387,7 +1387,7 @@ public class CMBasicAttack {
             return UtilText.parse(source,  target,
             		(isCrit?"[style.colourExcellent(Critical)]: ":"")
             		+ "<span style='color:"+this.getColour().toWebHexString()+";'>Resist</span> "
-	                + "<span style='color:" + damageType.getMultiplierAttribute().getColour().toWebHexString() + ";'>" + String.valueOf(getBlock(source, isCrit))+ " " + damageType.getName() + " </span>"
+	                + "<span style='color:" + damageType.getMultiplierAttribute().getColour().toWebHexString() + ";'>" + getBlock(source, isCrit) + " " + damageType.getName() + " </span>"
 	                + " damage.");
         }
 
@@ -1395,7 +1395,7 @@ public class CMBasicAttack {
         public String getDescription(int turnIndex, GameCharacter source) {
             DamageType damageType = getDamageType(turnIndex, source);
             return "Resist temptation, gaining protection against "
-            		+ "<span style='color:" + damageType.getMultiplierAttribute().getColour().toWebHexString() + ";'>" + String.valueOf(getBlock(source, false)) + "</span>"
+            		+ "<span style='color:" + damageType.getMultiplierAttribute().getColour().toWebHexString() + ";'>" + getBlock(source, false) + "</span>"
             		+ " damage.";
         }
 
@@ -1407,7 +1407,7 @@ public class CMBasicAttack {
     				"[npc.Name] focused on resisting any attempts at seduction.",
     				"[npc.SheIs] now protected against " + getFormattedDamage(getDamageType(turnIndex, source), getBlock(source, isCrit), target, true, false) + " damage!",
     				isCrit?"":null,
-    				isCrit?"[npc.Name] [npc.verb(double)] [npc.her] shielding!":"");
+                    isCrit ? "[npc.Name] double [npc.her] shielding!" : "");
         }
 
         @Override
@@ -1465,7 +1465,7 @@ public class CMBasicAttack {
             return source.getLevel()*2;
         }
         
-        protected int getDamage(GameCharacter source, GameCharacter target) {
+        private int getDamage(GameCharacter source, GameCharacter target) {
         	return Math.max(1, (int) (Attack.getModifiedDamage(source, target, Attack.SEDUCTION, null, DamageType.LUST, getBaseDamage(source))));
         }
 
@@ -1510,14 +1510,14 @@ public class CMBasicAttack {
 			
 			source.incrementMana(manaGain);
 			
-        	StringBuilder attackStringBuilder = new StringBuilder("");
+        	StringBuilder attackStringBuilder = new StringBuilder();
 
     		if(attackStringBuilder.length()>0) {
     			attackStringBuilder.append("<br/>");
     		}
     		
     		attackStringBuilder.append(formatAttackOutcome(source, target,
-    				"Harnessing [npc.her] knowledge of the arcane, [npc.name] [npc.verb(focus)] on replenishing [npc.her] aura as [npc.she] [npc.verb(launch)] a bolt of pure arcane energy at [npc2.name]!"+damageValue.getKey(),
+                    "Harnessing [npc.her] knowledge of the arcane, [npc.name] focus on replenishing [npc.her] aura as [npc.she] launch a bolt of pure arcane energy at [npc2.name]!" + damageValue.getKey(),
     				"[npc2.Name] took " + getFormattedDamage(getDamageType(turnIndex, source), dealtDamage, target, true, maxLust) + " damage, while [npc.name] recovered"
     						+ " <span style='color:" + PresetColour.ATTRIBUTE_MANA.toWebHexString() + ";'>"+manaGain+" "+Attribute.MANA_MAXIMUM.getName()+"</span>!",
     				isCrit?"":null,

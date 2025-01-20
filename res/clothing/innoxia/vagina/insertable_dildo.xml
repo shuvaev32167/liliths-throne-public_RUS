@@ -65,25 +65,25 @@
 	
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(push)] the dildo into [npc.her] [npc.pussy+].]]>
+            <![CDATA[[npc.Name] push the dildo into [npc.her] [npc.pussy+].]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(push)] the dildo into [npc2.namePos] [npc2.pussy+].]]>
+            <![CDATA[[npc.Name] push the dildo into [npc2.namePos] [npc2.pussy+].]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] firmly [npc.verb(hold)] [npc2.name] still as [npc.she] roughly [npc.verb(force)] the dildo into [npc2.her] [npc2.pussy+].]]>
+            <![CDATA[[npc.Name] firmly hold [npc2.name] still as [npc.she] roughly force the dildo into [npc2.her] [npc2.pussy+].]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(pull)] the dildo out from [npc.her] [npc.pussy+].]]>
+            <![CDATA[[npc.Name] pull the dildo out from [npc.her] [npc.pussy+].]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(pull)] the dildo out from [npc2.namePos] [npc2.pussy+].]]>
+            <![CDATA[[npc.Name] pull the dildo out from [npc2.namePos] [npc2.pussy+].]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] firmly [npc.verb(grab)] [npc2.namePos] dildo and [npc.verb(yank)] it out of [npc2.her] [npc2.pussy+].]]>
+            <![CDATA[[npc.Name] firmly grab [npc2.namePos] dildo and yank it out of [npc2.her] [npc2.pussy+].]]>
 		</otherRough>
 	</displacementText>
 	

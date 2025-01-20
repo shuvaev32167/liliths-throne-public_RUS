@@ -60,25 +60,25 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(fit)] the strap-on around [npc.her] waist.]]>
+        <![CDATA[[npc.Name] fit the strap-on around [npc.her] waist.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(fit)] the strap-on around [npc2.namePos] waist.]]>
+        <![CDATA[[npc.Name] fit the strap-on around [npc2.namePos] waist.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(fit)] the strap-on around [npc2.namePos] waist.]]>
+        <![CDATA[[npc.Name] roughly fit the strap-on around [npc2.namePos] waist.]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(take)] off [npc.her] strap-on.]]>
+        <![CDATA[[npc.Name] take off [npc.her] strap-on.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(take)] off [npc2.namePos] strap-on.]]>
+        <![CDATA[[npc.Name] take off [npc2.namePos] strap-on.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] impatiently [npc.verb(take)] off [npc2.namePos] strap-on.]]>
+        <![CDATA[[npc.Name] impatiently take off [npc2.namePos] strap-on.]]>
     </otherRough>
   </displacementText>
 

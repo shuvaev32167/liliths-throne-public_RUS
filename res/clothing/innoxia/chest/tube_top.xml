@@ -60,25 +60,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] on the tube top.]]>
+            <![CDATA[[npc.Name] pull on the tube top.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(guide)] [npc2.namePos] [npc2.arms] through the tube top and then [npc.verb(pull)] it down over [npc2.her] head.]]>
+            <![CDATA[[npc.Name] guide [npc2.namePos] [npc2.arms] through the tube top and then pull it down over [npc2.her] head.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(shove)] [npc2.namePos] [npc2.arms] through the tube top and then [npc.verb(pull)] it down over [npc2.her] head.]]>
+            <![CDATA[[npc.Name] roughly shove [npc2.namePos] [npc2.arms] through the tube top and then pull it down over [npc2.her] head.]]>
 	  </otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] off [npc.her] tube top.]]>
+            <![CDATA[[npc.Name] pull off [npc.her] tube top.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(slide)] [npc2.namePos] tube top up and over [npc2.her] head.]]>
+            <![CDATA[[npc.Name] slide [npc2.namePos] tube top up and over [npc2.her] head.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(yank)] [npc2.namePos] tube top up and over [npc2.her] head.]]>
+            <![CDATA[[npc.Name] roughly yank [npc2.namePos] tube top up and over [npc2.her] head.]]>
 		</otherRough>
 	</displacementText>
 	

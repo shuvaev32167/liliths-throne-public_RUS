@@ -1,14 +1,5 @@
 package com.lilithsthrone.game.character.npc.fields;
 
-import java.time.DayOfWeek;
-import java.time.Month;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.CharacterImportSetting;
@@ -16,39 +7,8 @@ import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractPenisType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
-import com.lilithsthrone.game.character.body.types.EyeType;
-import com.lilithsthrone.game.character.body.types.HornType;
-import com.lilithsthrone.game.character.body.types.LegType;
-import com.lilithsthrone.game.character.body.types.PenisType;
-import com.lilithsthrone.game.character.body.types.TailType;
-import com.lilithsthrone.game.character.body.types.WingType;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.ClitorisSize;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
-import com.lilithsthrone.game.character.body.valueEnums.HairLength;
-import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.body.valueEnums.HornLength;
-import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
-import com.lilithsthrone.game.character.body.valueEnums.LipSize;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
-import com.lilithsthrone.game.character.body.valueEnums.NippleSize;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
-import com.lilithsthrone.game.character.body.valueEnums.TesticleSize;
-import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
-import com.lilithsthrone.game.character.body.valueEnums.WingSize;
+import com.lilithsthrone.game.character.body.types.*;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -74,6 +34,14 @@ import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.time.DayOfWeek;
+import java.time.Month;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * @since 0.4
@@ -82,7 +50,7 @@ import com.lilithsthrone.world.places.PlaceType;
  */
 public class Minotallys extends NPC {
 	
-	private Map<DayOfWeek, FlavourInformation> flavourInformationMap = Util.newHashMapOfValues(
+	private final Map<DayOfWeek, FlavourInformation> flavourInformationMap = Util.newHashMapOfValues(
 			new Value<>(DayOfWeek.MONDAY, new FlavourInformation(FluidFlavour.VANILLA, PresetColour.COVERING_BLACK, PresetColour.COVERING_BLACK, PresetColour.COVERING_BLACK, PresetColour.CLOTHING_BLACK)),
 			new Value<>(DayOfWeek.TUESDAY, new FlavourInformation(FluidFlavour.STRAWBERRY, PresetColour.COVERING_PINK_LIGHT, PresetColour.COVERING_PINK, PresetColour.COVERING_PINK_DARK, PresetColour.CLOTHING_PINK_HOT)),
 			new Value<>(DayOfWeek.WEDNESDAY, new FlavourInformation(FluidFlavour.BLUEBERRY, PresetColour.COVERING_BLUE_LIGHT, PresetColour.COVERING_BLUE, PresetColour.COVERING_BLUE_DARK, PresetColour.CLOTHING_BLUE_LIGHT)),
@@ -97,7 +65,7 @@ public class Minotallys extends NPC {
 	private static Colour makeupColour = PresetColour.COVERING_BLACK;
 	private static Colour clothingColour = PresetColour.CLOTHING_BLACK;
 	
-	private static String earringId = "innoxia_piercing_ear_chain_dangle";
+	private static final String earringId = "innoxia_piercing_ear_chain_dangle";
 	
 	private class FlavourInformation {
 		FluidFlavour flavour;
@@ -135,7 +103,7 @@ public class Minotallys extends NPC {
 	
 	public Minotallys(boolean isImported) {
 		super(isImported,
-				new NameTriplet("Minotallys"), "Lilithmartuilani",
+                new NameTriplet("Миноталли"), "Лилитмартуилани",
 				"Transformed into a lilin by Lilith herself, Minotallys is unquestionably loyal to her mother."
 					+ " She typically defers to her assistant, Arion, on all matters related to the everyday running of Elis.",
 				643, Month.MAY, 18,

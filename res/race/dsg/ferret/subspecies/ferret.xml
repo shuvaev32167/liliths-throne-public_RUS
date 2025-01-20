@@ -166,7 +166,7 @@
 	
 	<!-- The description which is shown to the player in this subspecies' status effect tooltip. -->
 	<statusEffectDescription><![CDATA[
-		[npc.NamePos] ferret-like body is very flexible and quick. Once fixated on something, [npc.she] [npc.verb(gain)] the primal urge find out everything there is to know about it.
+		[npc.NamePos] ferret-like body is very flexible and quick. Once fixated on something, [npc.she] gain the primal urge find out everything there is to know about it.
 	]]></statusEffectDescription>
 	
 	<!-- The core attributes which a character of this subspecies benefits from.

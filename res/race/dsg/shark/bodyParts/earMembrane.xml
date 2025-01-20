@@ -51,7 +51,7 @@
 		#ELSE
 		 A thin membrane of quickly grows to cover them. Just like the rest of [npc.her] body, it's made out of [npc.earFullDescription],
 		#ENDIF
-		 and as the transformation finishes, [npc.she] notices [npc.verb(twitch)] [npc.her] hearing hasn't actually been affected at all.
+		 and as the transformation finishes, [npc.she] notices twitch [npc.her] hearing hasn't actually been affected at all.
 		<br/>[npc.Name] now [npc.has] [style.boldShark(hidden, shark-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].
 	]]></transformationDescription>
 	

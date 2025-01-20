@@ -24,7 +24,7 @@
 	'damageInflicted' will parse to the attacker's projected damage of this attack (using the defined 'baseDamage' field defined below).
 	'formattedDamageInflicted' will parse to a formatted damage prediction, taking into account whether or not the target is at maximum lust (therefore taking into account conversion of lust damage to health/mana damage). -->
 	<description><![CDATA[
-		Make a chilling hunting call with [npc.her] beak, granting [style.boldGood(+20)] to [npc.her] [style.boldMagenta(physique)] and [style.boldPurple(arcane ability)] for 5 turns. On [style.boldExcellent(critical)] hits, also debuffs opponent.
+		Make a chilling hunting call with [npc.her] beak, granting [style.boldGood(+20)] to [npc.her] [style.boldMagenta(physique)] и [style.boldPurple(arcane ability)] for 5 turns. On [style.boldExcellent(critical)] hits, also debuffs opponent.
 	]]></description>
 	
 	<!-- The type of damage that this move inflicts. 
@@ -138,12 +138,12 @@
 	'isCritical' will parse to the boolean return value for isCritical, and will therefore be either 'true' or 'false'.
 	-->
 	<movePredictionDescriptionWithTarget><![CDATA[
-		Make a chilling hunting call with [npc.her] beak, granting [style.boldGood(+20)] to [npc.her] [style.boldMagenta(physique)] and [style.boldPurple(arcane ability)].
+		Make a chilling hunting call with [npc.her] beak, granting [style.boldGood(+20)] to [npc.her] [style.boldMagenta(physique)] и [style.boldPurple(arcane ability)].
 	]]></movePredictionDescriptionWithTarget>
 	
 	<!-- This is almost identical to the defined description above, with the difference being that there is no targeted character. As such, the description cannot use any 'npc2' parsing. -->
 	<movePredictionDescriptionNoTarget><![CDATA[
-		Make a chilling hunting call with [npc.her] beak, granting [style.boldGood(+20)] to [npc.her] [style.boldMagenta(physique)] and [style.boldPurple(arcane ability)].
+		Make a chilling hunting call with [npc.her] beak, granting [style.boldGood(+20)] to [npc.her] [style.boldMagenta(physique)] и [style.boldPurple(arcane ability)].
 	]]></movePredictionDescriptionNoTarget>
 	
 	<!-- The code that's executed when this move is performed.
@@ -157,7 +157,7 @@
 		<!-- The 'execute' section should be used for the main description of the attack, as well as any extra effects you want to apply.
 		NOTE: The damage is automatically applied to the target, so you don't need to handle parsing of that. -->
 		<execute><![CDATA[
-			[npc.Name] [npc.verb(open)] [npc.her] beak and [npc.verb(screech)] out a mighty hunting call.
+			[npc.Name] open [npc.her] beak and screech out a mighty hunting call.
 			#IF (!npc.hasStatusEffect(SE_dsg_race_gryphon_hunting_cry))
 				[##npc.addStatusEffect(SE_dsg_race_gryphon_hunting_cry, 3)]
 			#ENDIF

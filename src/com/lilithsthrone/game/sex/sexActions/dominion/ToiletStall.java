@@ -98,7 +98,7 @@ public class ToiletStall {
 			null,
 			SexParticipantType.NORMAL) {
 
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.AGAINST_WALL,
 				Util.newArrayListOfValues(SexSlotAgainstWall.STANDING_WALL),
 				Util.newArrayListOfValues(SexSlotAgainstWall.FACE_TO_WALL));
@@ -117,7 +117,7 @@ public class ToiletStall {
 		}
 		@Override
 		public String getDescription() {
-			return "Taking hold of [npc2.namePos] shoulders, [npc.name] [npc.verb(push)] [npc2.herHim] up against the wall of the toilet stall."
+            return "Taking hold of [npc2.namePos] shoulders, [npc.name] push [npc2.herHim] up against the wall of the toilet stall."
 					+ " Grinding [npc.her] body up against [npc2.her] back, [npc.she] [npc.moansVerb] into [npc2.her] [npc2.ear],"
 					+ " [npc.speech(Good [npc2.girl]! Now hold still while I fuck you!)]";
 		}
@@ -135,7 +135,7 @@ public class ToiletStall {
 			null,
 			SexParticipantType.NORMAL) {
 
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.AGAINST_WALL,
 				Util.newArrayListOfValues(SexSlotAgainstWall.FACE_TO_WALL),
 				Util.newArrayListOfValues(SexSlotAgainstWall.STANDING_WALL));
@@ -171,7 +171,7 @@ public class ToiletStall {
 			null,
 			SexParticipantType.NORMAL) {
 
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.AGAINST_WALL,
 				Util.newArrayListOfValues(SexSlotAgainstWall.STANDING_WALL),
 				Util.newArrayListOfValues(SexSlotAgainstWall.BACK_TO_WALL));
@@ -190,7 +190,7 @@ public class ToiletStall {
 		}
 		@Override
 		public String getDescription() {
-			return "Taking hold of [npc2.namePos] shoulders, [npc.name] [npc.verb(push)] [npc2.herHim] back against one of the toilet stall's walls."
+            return "Taking hold of [npc2.namePos] shoulders, [npc.name] push [npc2.herHim] back against one of the toilet stall's walls."
 					+ " Grinding [npc.her] body up against [npc2.hers], [npc.she] [npc.moansVerb] into [npc2.her] [npc2.ear], "
 					+ "[npc.speech(Good [npc2.girl]! Now hold still while I fuck you!)]";
 		}
@@ -208,7 +208,7 @@ public class ToiletStall {
 			null,
 			SexParticipantType.NORMAL) {
 
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.AGAINST_WALL,
 				Util.newArrayListOfValues(SexSlotAgainstWall.BACK_TO_WALL),
 				Util.newArrayListOfValues(SexSlotAgainstWall.STANDING_WALL));
@@ -244,7 +244,7 @@ public class ToiletStall {
 			null,
 			SexParticipantType.NORMAL) {
 
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.STANDING,
 				Util.newArrayListOfValues(SexSlotStanding.STANDING_DOMINANT),
 				Util.newArrayListOfValues(SexSlotStanding.PERFORMING_ORAL));
@@ -263,7 +263,7 @@ public class ToiletStall {
 		}
 		@Override
 		public String getDescription() {
-			return "Taking hold of [npc2.namePos] shoulders, [npc.name] quickly [npc.verb(force)] [npc2.herHim] to [npc2.her] knees before [npc.herHim]."
+            return "Taking hold of [npc2.namePos] shoulders, [npc.name] quickly force [npc2.herHim] to [npc2.her] knees before [npc.herHim]."
 					+ " Looking up, [npc2.name] [npc2.verb(see)] [npc.herHim] grinning down at [npc2.her] submissive form, and with a little laugh, [npc.name] [npc.moansVerb],"
 					+ " [npc.speech(Time to put your mouth to use!)]";
 		}
@@ -281,7 +281,7 @@ public class ToiletStall {
 			null,
 			SexParticipantType.NORMAL) {
 
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.STANDING,
 				Util.newArrayListOfValues(SexSlotStanding.PERFORMING_ORAL),
 				Util.newArrayListOfValues(SexSlotStanding.STANDING_DOMINANT));
@@ -316,7 +316,7 @@ public class ToiletStall {
 			null,
 			SexParticipantType.NORMAL) {
 
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.STANDING,
 				Util.newArrayListOfValues(SexSlotStanding.PERFORMING_ORAL),
 				Util.newArrayListOfValues(SexSlotStanding.STANDING_DOMINANT));
@@ -335,7 +335,7 @@ public class ToiletStall {
 		}
 		@Override
 		public String getDescription() {
-			return "Running [npc.her] [npc.hands] down [npc2.namePos] body, [npc.name] [npc.verb(drop)] to [npc.her] knees before [npc2.herHim], before looking up and flashing [npc2.herHim] a seductive smile."
+            return "Running [npc.her] [npc.hands] down [npc2.namePos] body, [npc.name] drop to [npc.her] knees before [npc2.herHim], before looking up and flashing [npc2.herHim] a seductive smile."
 					+ " With a little laugh, [npc.she] then [npc.moansVerb],"
 					+ " [npc.speech(Stay still and enjoy this!)]";
 		}
@@ -353,7 +353,7 @@ public class ToiletStall {
 			null,
 			SexParticipantType.NORMAL) {
 
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.STANDING,
 				Util.newArrayListOfValues(SexSlotStanding.STANDING_DOMINANT),
 				Util.newArrayListOfValues(SexSlotStanding.PERFORMING_ORAL));

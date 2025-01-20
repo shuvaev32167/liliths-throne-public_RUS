@@ -51,25 +51,25 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(tuck)] the rose into [npc.her] [npc.hair(true)].]]>
+        <![CDATA[[npc.Name] tuck the rose into [npc.her] [npc.hair(true)].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(tuck)] the rose into [npc2.namePos] [npc2.hair(true)].]]>
+        <![CDATA[[npc.Name] tuck the rose into [npc2.namePos] [npc2.hair(true)].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(push)] the rose into [npc2.namePos] [npc2.hair(true)].]]>
+        <![CDATA[[npc.Name] roughly push the rose into [npc2.namePos] [npc2.hair(true)].]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(take)] the rose out of [npc.her] [npc.hair(true)].]]>
+        <![CDATA[[npc.Name] take the rose out of [npc.her] [npc.hair(true)].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(take)] the rose out of [npc2.namePos] [npc2.hair(true)].]]>
+        <![CDATA[[npc.Name] take the rose out of [npc2.namePos] [npc2.hair(true)].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(snatch)] the rose out of [npc2.namePos] [npc2.hair(true)].]]>
+        <![CDATA[[npc.Name] snatch the rose out of [npc2.namePos] [npc2.hair(true)].]]>
     </otherRough>
   </displacementText>
   

@@ -1,10 +1,5 @@
 package com.lilithsthrone.game.character.body;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTongueType;
 import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
@@ -14,6 +9,11 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @since 0.1.0
@@ -196,38 +196,38 @@ public class Tongue implements BodyPartInterface {
 		sb.append("<p>");
 			switch(modifier) {
 				case RIBBED:
-					sb.append("[npc.Name] [npc.verb(feel)] an intense pressure building up at the back of [npc.her] throat, but before [npc.she] [npc.has] a chance to panic it suddenly fades away,"
+                    sb.append("[npc.Name] feel an intense pressure building up at the back of [npc.her] throat, but before [npc.she] [npc.has] a chance to panic it suddenly fades away,"
 									+ " leaving [npc.herHim] with a series of [style.boldGrow(hard, fleshy ribs)] lining [npc.her] [npc.tongue].<br/>"
 								+ "[style.boldSex([npc.NamePos] [npc.tongue] is now ribbed!)]");
 					break;
 				case TENTACLED:
-					sb.append("[npc.Name] [npc.verb(feel)] an intense pressure building up at the back of [npc.her] throat, and [npc.she] [npc.verb(let)] out an involuntary gasp as [npc.she] [npc.verb(feel)]"
+                    sb.append("[npc.Name] feel an intense pressure building up at the back of [npc.her] throat, and [npc.she] let out an involuntary gasp as [npc.she] feel"
 									+ " [style.boldGrow(a series of little wriggling tentacles)] grow to cover [npc.her] [npc.tongue].<br/>"
 								+ "[style.boldSex([npc.NamePos] [npc.tongue] is now covered with little tentacles, which wriggle with a mind of their own!)]");
 					break;
 				case BIFURCATED:
-					sb.append("[npc.Name] [npc.verb(feel)] an intense pressure building up at the back of [npc.her] throat, and [npc.she] [npc.verb(let)] out an involuntary cry as [npc.she] [npc.verb(feel)]"
+                    sb.append("[npc.Name] feel an intense pressure building up at the back of [npc.her] throat, and [npc.she] let out an involuntary cry as [npc.she] feel"
 									+ " [style.boldGrow(the end of [npc.her] [npc.tongue] split in two)].<br/>"
 								+ "[style.boldSex([npc.NamePos] [npc.tongue] is now bifurcated, like a snake's!)]");
 					break;
 				case STRONG:
-					sb.append("[npc.Name] [npc.verb(feel)] a steady pressure building up at the back of [npc.her] throat, but before [npc.she] can react, the sensation shoots into [npc.her] [npc.tongue], transforming it into"
+                    sb.append("[npc.Name] feel a steady pressure building up at the back of [npc.her] throat, but before [npc.she] can react, the sensation shoots into [npc.her] [npc.tongue], transforming it into"
 									+ " [style.boldGrow(being particularly strong)].<br/>"
 								+ "[style.boldSex([npc.NamePos] [npc.tongue] is now very strong!)]");
 					break;
 				case FLAT:
-					sb.append("[npc.Name] [npc.verb(feel)] a steady pressure building up at the back of [npc.her] throat, but before [npc.she] can react, the sensation shoots into [npc.her] [npc.tongue], transforming it into"
+                    sb.append("[npc.Name] feel a steady pressure building up at the back of [npc.her] throat, but before [npc.she] can react, the sensation shoots into [npc.her] [npc.tongue], transforming it into"
 									+ " [style.boldGrow(being particularly flat)].<br/>"
 								+ "[style.boldSex([npc.NamePos] [npc.tongue] is now particularly flat!)]");
 					break;
 				case WIDE:
-					sb.append("[npc.Name] [npc.verb(feel)] a steady pressure building up at the back of [npc.her] throat, but before [npc.she] can react, the sensation shoots into [npc.her] [npc.tongue], transforming it into"
+                    sb.append("[npc.Name] feel a steady pressure building up at the back of [npc.her] throat, but before [npc.she] can react, the sensation shoots into [npc.her] [npc.tongue], transforming it into"
 									+ " [style.boldGrow(being particularly wide)].<br/>"
 								+ "[style.boldSex([npc.NamePos] [npc.tongue] is now particularly wide!)]");
 					break;
 				case TAPERED:
 					return "<p>"
-							+ "[npc.Name] [npc.verb(feel)] a constricting pressure on all sides of [npc.her] [npc.tongue], and [npc.she] [npc.verb(let)] out a gasp as [npc.she] [npc.verb(feel)]"
+                            + "[npc.Name] feel a constricting pressure on all sides of [npc.her] [npc.tongue], and [npc.she] let out a gasp as [npc.she] feel"
 							+ " [style.boldGrow(it taper down towards the tip)].<br/>"
 							+ "[style.boldSex([npc.NamePos] [npc.tongue] is now tapered!)]"
 						+ "</p>";
@@ -247,43 +247,43 @@ public class Tongue implements BodyPartInterface {
 		switch(modifier) {
 			case RIBBED:
 				return "<p>"
-							+ "[npc.Name] [npc.verb(feel)] a soft coolness rising up into [npc.her] [npc.tongue], but it suddenly fades away before [npc.she] [npc.has] a chance to react,"
+                        + "[npc.Name] feel a soft coolness rising up into [npc.her] [npc.tongue], but it suddenly fades away before [npc.she] [npc.has] a chance to react,"
 								+ " [style.boldShrink(removing)] [npc.her] hard, fleshy ribs in the process.<br/>"
 							+ "[style.boldSex([npc.NamePos] [npc.tongue] is no longer ribbed!)]"
 						+ "</p>";
 			case TENTACLED:
 				return "<p>"
-							+ "[npc.Name] [npc.verb(feel)] a soft coolness rising up into [npc.her] [npc.tongue], and [npc.she] [npc.verb(let)] out a gasp as [npc.she] [npc.verb(feel)] [npc.her]"
+                        + "[npc.Name] feel a soft coolness rising up into [npc.her] [npc.tongue], and [npc.she] let out a gasp as [npc.she] feel [npc.her]"
 								+ " [style.boldShrink(little wriggling tentacles disappear)].<br/>"
 							+ "[style.boldSex([npc.NamePos] [npc.tongue] is no longer covered with little tentacles!)]"
 						+ "</p>";
 			case BIFURCATED:
 				return "<p>"
-							+ "[npc.Name] [npc.verb(feel)] a soft coolness rising up into [npc.her] [npc.tongue], and [npc.she] [npc.verb(let)] out a gasp as [npc.she] [npc.verb(feel)]"
+                        + "[npc.Name] feel a soft coolness rising up into [npc.her] [npc.tongue], and [npc.she] let out a gasp as [npc.she] feel"
 							+ " [style.boldShrink(it fuse back into a single point)].<br/>"
 							+ "[style.boldSex([npc.NamePos] [npc.tongue] is no longer bifurcated!)]"
 						+ "</p>";
 			case FLAT:
 				return "<p>"
-							+ "[npc.Name] [npc.verb(feel)] a pulsating pressure rising up into [npc.her] [npc.tongue], and [npc.she] [npc.verb(let)] out a gasp as [npc.she] [npc.verb(feel)]"
+                        + "[npc.Name] feel a pulsating pressure rising up into [npc.her] [npc.tongue], and [npc.she] let out a gasp as [npc.she] feel"
 							+ " [style.boldShrink(it thicken up)].<br/>"
 							+ "[style.boldSex([npc.NamePos] [npc.tongue] is no longer particularly flat!)]"
 						+ "</p>";
 			case STRONG:
 				return "<p>"
-						+ "[npc.Name] [npc.verb(feel)] a pulsating pressure rising up into [npc.her] [npc.tongue], and [npc.she] [npc.verb(let)] out a gasp as [npc.she] [npc.verb(feel)]"
+                        + "[npc.Name] feel a pulsating pressure rising up into [npc.her] [npc.tongue], and [npc.she] let out a gasp as [npc.she] feel"
 						+ " [style.boldShrink(it soften and lose strength)].<br/>"
 						+ "[style.boldSex([npc.NamePos] [npc.tongue] is no longer extra strong!)]"
 					+ "</p>";
 			case WIDE:
 				return "<p>"
-						+ "[npc.Name] [npc.verb(feel)] a pulsating pressure rising up into [npc.her] [npc.tongue], and [npc.she] [npc.verb(let)] out a gasp as [npc.she] [npc.verb(feel)]"
+                        + "[npc.Name] feel a pulsating pressure rising up into [npc.her] [npc.tongue], and [npc.she] let out a gasp as [npc.she] feel"
 						+ " [style.boldShrink(it narrow down)].<br/>"
 						+ "[style.boldSex([npc.NamePos] [npc.tongue] is no longer particularly wide!)]"
 					+ "</p>";
 			case TAPERED:
 				return "<p>"
-						+ "[npc.Name] [npc.verb(feel)] a pulsating pressure building up within [npc.her] [npc.tongue], and [npc.she] [npc.verb(let)] out a gasp as [npc.she] [npc.verb(feel)]"
+                        + "[npc.Name] feel a pulsating pressure building up within [npc.her] [npc.tongue], and [npc.she] let out a gasp as [npc.she] feel"
 						+ " [style.boldShrink(it fill out and lose its tapered point)].<br/>"
 						+ "[style.boldSex([npc.NamePos] [npc.tongue] is no longer tapered!)]"
 					+ "</p>";

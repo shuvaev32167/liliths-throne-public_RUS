@@ -450,7 +450,7 @@
 			His speech is quickly and brutally interrupted as Hammer darts forwards with surprising speed and uses the butt of his shotgun to deliver a crushing blow to the side of the cat-boy's head. The gang member instantly crumples to the floor in an unconscious daze. Upon seeing his comrade being dealt with in such a swift and violent manner, one of the remaining three gang members turns and runs away.
 		</p>
 		<p>
-			The other two, [gangMember1.a_raceFull(true)] and [gangMember2.a_raceFull(true)] stand their ground, with the first one shouting in anger, [gangMember1.speech(You'll fucking pay for that!)] 
+			The other two, [gangMember1.a_raceFull(true)] и [gangMember2.a_raceFull(true)] stand their ground, with the first one shouting in anger, [gangMember1.speech(You'll fucking pay for that!)]
 		</p>
 		<p>
 			A fight seems inevitable, and so you need to decide whether to assist Hammer or stand back and watch...
@@ -584,7 +584,7 @@
 			This room, which once might have been a bedroom, has been converted into a storage space for the gang. Numerous crates, boxes, and barrels have been stacked up in here, and from the few containers which have been left open you're able to see that their contents range from wrapped food and bottles of drink to bags of clothing and other personal belongings which have no doubt been stolen. In the middle of the room, looking to have been dividing a pile of flames between themselves, are [gangMember1.a_raceFull(true)], [gangMember2.a_raceFull(true)], and [gangMember3.a_raceFull(true)].
 		</p>
 		<p>
-			[gangMember1.speech(What was all that noise downstairs? We could hear-)] the [gangMember1.race] starts to shout as the door swings open, before realising that [gangMember1.she] and [gangMember1.her] companions are under attack.
+			[gangMember1.speech(What was all that noise downstairs? We could hear-)] the [gangMember1.race] starts to shout as the door swings open, before realising that [gangMember1.she] и [gangMember1.her] companions are under attack.
 		</p>
 		<p>
 			Without a word, Hammer lifts his shotgun and aims it at the three gang members, while Ghost points her revolver at them and prepares to fire. You have a split second in which to decide whether to help the Enforcers or to stand back and watch...

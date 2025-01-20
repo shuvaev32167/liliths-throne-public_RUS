@@ -59,25 +59,25 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(slide)] the gemstone ring onto [npc.her] [npc.finger].]]>
+        <![CDATA[[npc.Name] slide the gemstone ring onto [npc.her] [npc.finger].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(slide)] the gemstone ring onto [npc2.namePos] [npc2.finger].]]>
+        <![CDATA[[npc.Name] slide the gemstone ring onto [npc2.namePos] [npc2.finger].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(push)] the gemstone ring onto [npc2.namePos] [npc2.finger].]]>
+        <![CDATA[[npc.Name] roughly push the gemstone ring onto [npc2.namePos] [npc2.finger].]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(slide)] the gemstone ring off [npc.her] [npc.finger].]]>
+        <![CDATA[[npc.Name] slide the gemstone ring off [npc.her] [npc.finger].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(slide)] the gemstone ring off [npc2.namePos] [npc2.finger].]]>
+        <![CDATA[[npc.Name] slide the gemstone ring off [npc2.namePos] [npc2.finger].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(snatch)] the gemstone ring off [npc2.namePos] [npc2.finger].]]>
+        <![CDATA[[npc.Name] snatch the gemstone ring off [npc2.namePos] [npc2.finger].]]>
     </otherRough>
   </displacementText>
   

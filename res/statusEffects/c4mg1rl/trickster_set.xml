@@ -17,7 +17,7 @@
 	<name><![CDATA[Trickster's Bounty]]></name>
 	
 	<description><![CDATA[
-		By wearing the Trickster's set, [npc.nameIs] filled with a sense of roguish delight. With all manner of cunning plots and schemes jumping into [npc.her] mind, [npc.name] [npc.verb(feel)] as though [npc.sheHas] become a trickster god#IF(npc.isFeminine())dess#ENDIF!
+		By wearing the Trickster's set, [npc.nameIs] filled with a sense of roguish delight. With all manner of cunning plots and schemes jumping into [npc.her] mind, [npc.name] feel as though [npc.sheHas] become a trickster god#IF(npc.isFeminine())dess#ENDIF!
 	]]></description>
 	
 	<imageName>trickster_set.svg</imageName>

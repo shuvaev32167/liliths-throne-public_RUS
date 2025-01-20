@@ -53,25 +53,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(put)] on the aviators.]]>
+            <![CDATA[[npc.Name] put on the aviators.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(push)] the aviators onto [npc2.namePos] face.]]>
+            <![CDATA[[npc.Name] push the aviators onto [npc2.namePos] face.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(push)] the aviators onto [npc2.namePos] face.]]>
+            <![CDATA[[npc.Name] roughly push the aviators onto [npc2.namePos] face.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(take)] off [npc.her] aviators.]]>
+            <![CDATA[[npc.Name] take off [npc.her] aviators.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(take)] off [npc2.namePos] aviators.]]>
+            <![CDATA[[npc.Name] take off [npc2.namePos] aviators.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(grab)] [npc2.namePos] aviators and roughly [npc.verb(pull)] them off.]]>
+            <![CDATA[[npc.Name] grab [npc2.namePos] aviators and roughly pull them off.]]>
 		</otherRough>
 	</displacementText>
   

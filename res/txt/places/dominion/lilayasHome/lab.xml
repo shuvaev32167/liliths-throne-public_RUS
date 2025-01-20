@@ -6,16 +6,16 @@
 	<htmlContent tag="LAB"><![CDATA[
 	#IF(lilaya.getLocationPlaceType()==PLACE_TYPE_LILAYA_HOME_LAB)
 		<p>
-			Lilaya's laboratory is located in this particular corner of the house, and as you approach it, you see that the door has been left wide [style.colourGood(open)]. With no physical barrier blocking your way, you could simply step forwards and enter the lab, or continue on your way and choose to come back at another time.
+			Лаборатория Лилайи находится именно в этом углу дома, и когда вы приближаетесь к ней, вы видите, что дверь осталась широко [style.colourGood(раскрытой)]. Поскольку вам не преграждают путь физические барьеры, вы можете просто сделать шаг вперед и войти в лабораторию или продолжить свой путь и вернуться в другое время.
 		</p>
 		#IF(!flags.hasFlag(FLAG_acexp_lilaya_daily_voyeurism))
 			<p>
-				As you stand before the door to Lilaya's laboratory, a lewd idea forms in your mind. Your demonic aunt and her cat-girl maid are always up to something whenever you enter, and you could try to sneak up on them and see for yourself what they're doing. All it would take is to move very quietly, and once you're inside, you're sure that you could find a good spot from which to observe them...
+				Когда вы стоите перед дверью в лабораторию Лилайи, в вашей голове возникает непристойная идея. Ваша демоническая тетя и ее горничная всегда что-то замышляют, когда вы входите. Вы можете попытаться подкрасться к ним и увидеть своими глазами, что они делают. Все, что для этого нужно, это двигаться очень тихо, пока не окажетесь внутри. После чего сможете найти хорошее место для наблюдения за ними...
 			</p>
 		#ENDIF
 	#ELSE
 		<p>
-			Lilaya's laboratory is located in this particular corner of the house, and as you approach it, you see that the door has been firmly [style.colourBad(closed)]. Considering the current hour, it's most likely that your [lilaya.relation(pc)] and her cat-girl maid have both retired to their rooms in order to get a good night's sleep. If you wanted to discuss something with Lilaya, you'll have to come back later during the day.
+			Лаборатория Лилайи находится именно в этом углу дома, и когда вы приближаетесь к ней, вы видите, что дверь надежно [style.colourBad(закрыта)]. Учитывая текущий час, наиболее вероятно, что ваша [lilaya.relation(pc)] и ее горничная-кошка удалились в свои комнаты, чтобы хорошо выспаться. Если вы хотели что-то обсудить с Лилайей, вам придется вернуться позже в течение дня.
 		</p>
 	#ENDIF
 	]]>

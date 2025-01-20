@@ -1,13 +1,5 @@
 package com.lilithsthrone.game.character.npc.dominion;
 
-import java.time.DayOfWeek;
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.CharacterImportSetting;
@@ -16,27 +8,7 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.ClitorisSize;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringModifier;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.HairLength;
-import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
-import com.lilithsthrone.game.character.body.valueEnums.LipSize;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
-import com.lilithsthrone.game.character.body.valueEnums.NippleSize;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
@@ -72,6 +44,13 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Weather;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.time.DayOfWeek;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.1.75
@@ -85,7 +64,7 @@ public class Helena extends NPC {
 	}
 	
 	public Helena(boolean isImported) {
-		super(isImported, new NameTriplet("Helena"), "Labelle",
+        super(isImported, new NameTriplet("Елена"), "Лабель",
 				"Helena is an extremely powerful harpy matriarch, and is in control of one of the largest harpy flocks in Dominion."
 						+ " Her beauty rivals that of even the most gorgeous of succubi, which, combined with her sharp mind and regal personality, makes her somewhat of an idol in harpy society.",
 				26, Month.MAY, 3,
@@ -119,7 +98,7 @@ public class Helena extends NPC {
 					PersonalityTrait.INNOCENT);
 		}
 		if(Main.isVersionOlderThan(Game.loadingVersion, "0.3.5.9")) {
-			this.setName(new NameTriplet("Helena"));
+            this.setName(new NameTriplet("Елена"));
 			this.getHomeCell().removeCharacterHomeId("-1,Alexa");
 			this.getHomeCell().addCharacterHomeId("-1,Helena");
 			this.getCell().removeCharacterPresentId("-1,Alexa");
@@ -127,7 +106,7 @@ public class Helena extends NPC {
 			this.setId("-1,Helena");
 		}
 		if(Main.isVersionOlderThan(Game.loadingVersion, "0.3.6.2")) {
-			this.setSurname("Labelle");
+            this.setSurname("Лабель");
 		}
 		if(Main.isVersionOlderThan(Game.loadingVersion, "0.3.6.9")) {
 			this.clearFetishes();

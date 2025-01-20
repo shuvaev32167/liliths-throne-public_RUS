@@ -1,13 +1,5 @@
 package com.lilithsthrone.game.character.npc.dominion;
 
-import java.time.Month;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
@@ -19,37 +11,13 @@ import com.lilithsthrone.game.character.body.types.HornType;
 import com.lilithsthrone.game.character.body.types.LegType;
 import com.lilithsthrone.game.character.body.types.TailType;
 import com.lilithsthrone.game.character.body.types.WingType;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.ClitorisSize;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.HairLength;
-import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
-import com.lilithsthrone.game.character.body.valueEnums.LipSize;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
-import com.lilithsthrone.game.character.body.valueEnums.NippleSize;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.body.valueEnums.TesticleSize;
-import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.NPC;
-import com.lilithsthrone.game.character.persona.NameTriplet;
-import com.lilithsthrone.game.character.persona.Occupation;
-import com.lilithsthrone.game.character.persona.PersonalityTrait;
-import com.lilithsthrone.game.character.persona.Relationship;
-import com.lilithsthrone.game.character.persona.SexualOrientation;
+import com.lilithsthrone.game.character.persona.*;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.character.race.RaceStage;
@@ -68,6 +36,13 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.time.Month;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @since 0.1.0
@@ -81,7 +56,7 @@ public class ZaranixMaidKelly extends NPC {
 	}
 	
 	public ZaranixMaidKelly(boolean isImported) {
-		super(isImported, new NameTriplet("Kelly"), "Lasiellemartu",
+        super(isImported, new NameTriplet("Келли"), "Лазиэльмарту",
 				"One of Zaranix's succubi maid twins, Kelly is assigned by her master to keep the first floor clean.",
 				26, Month.SEPTEMBER, 20,
 				10,
@@ -252,7 +227,7 @@ public class ZaranixMaidKelly extends NPC {
 			return "Zaranix's Maid";
 			
 		} else {
-			return "Kelly";
+            return "Келли";
 		}
 	}
 	
@@ -351,6 +326,52 @@ public class ZaranixMaidKelly extends NPC {
 		}
 	}
 	
+	public static final DialogueNode AFTER_SEX_VICTORY = new DialogueNode("Продолжить", "", true) {
+
+		@Override
+		public String getContent() {
+			UtilText.nodeContentSB.setLength(0);
+			if(Main.sex.getNumberOfOrgasms(Main.game.getNpc(ZaranixMaidKelly.class)) >= Main.game.getNpc(ZaranixMaidKelly.class).getOrgasmsBeforeSatisfied()) {
+				UtilText.nodeContentSB.append(
+						"<p>"
+							+ "With a satisfied sigh, Kelly slumps back against the wall,"
+							+ " [kelly.speech(~Ah!~ That was good...)]"
+						+ "</p>"
+						+ "<p>"
+							+ "Despite the fact that you only just brought her to an orgasm, her hands slip down between her legs, and, with an exceptionally lewd moan, she starts fingering herself."
+							+ " It's quite clear from her actions that she's still overwhelmed by the arousing power of your aura, so it would be safe to leave her behind and continue in your exploration of Zaranix's home."
+						+ "</p>");
+
+			} else {
+				UtilText.nodeContentSB.append(
+						"<p>"
+							+ "With a desperate moan, Kelly slumps back against the wall,"
+							+ " [kelly.speech(~Ah!~ I need more!)]"
+						+ "</p>"
+						+ "<p>"
+							+ "Her hands instantly slip down between her legs, and, with an exceptionally lewd moan, she starts fingering herself."
+							+ " It's quite clear from her actions that she's still overwhelmed by the arousing power of your aura, so it would be safe to leave her behind and continue in your exploration of Zaranix's home."
+						+ "</p>");
+			}
+
+			UtilText.nodeContentSB.append(
+					"<p>"
+						+ "Conscious of the fact that there are other maids to look out for, you prepare to set off further into the house..."
+					+ "</p>");
+
+			return UtilText.nodeContentSB.toString();
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+				return new Response("Продолжить", "Continue exploring Zaranix's house.", PlaceType.ZARANIX_FF_MAID.getDialogue(false));
+
+			} else {
+				return null;
+			}
+		}
+	};
 	public static final DialogueNode AFTER_COMBAT_VICTORY = new DialogueNode("Victory", "", true) {
 
 		@Override
@@ -373,8 +394,8 @@ public class ZaranixMaidKelly extends NPC {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Continue exploring Zaranix's house.", PlaceType.ZARANIX_FF_MAID.getDialogue(false));
-				
+				return new Response("Продолжить", "Continue exploring Zaranix's house.", PlaceType.ZARANIX_FF_MAID.getDialogue(false));
+
 			} if(index==2) {
 				return new ResponseSex("Use Kelly", "Have some fun with the horny maid.",
 						true, false,
@@ -391,7 +412,7 @@ public class ZaranixMaidKelly extends NPC {
 							+ "She pushes herself off from the wall, wrapping her arms around your back and desperately pressing her [kelly.lips+] against yours."
 							+ " You reciprocate the gesture, and after spending a few moments of sliding your tongues into one another's mouths, you pull back, grinning..."
 						+ "</p>");
-				
+
 			} else if(index==3) {
 				return new ResponseSex("Submit",
 						"You can't bring yourself to take the dominant role, but you <i>do</i> want to have sex with Kelly. Perhaps if you submitted, she'd be willing to fuck you?",
@@ -413,7 +434,7 @@ public class ZaranixMaidKelly extends NPC {
 							+ "You reciprocate the gesture, but only spend a few moments sliding your tongues into one another's mouths before Kelly pulls back, moaning,"
 							+ " [kelly.speech(Oh yes! Fuck... I'm so fucking horny! I <i>need</i> you!)]"
 						+ "</p>");
-				
+
 			} else if (index == 4) {
 				return new Response("Transformations",
 						"Get Kelly to use [kelly.her] demonic powers to transform [kelly.herself]...",
@@ -424,54 +445,7 @@ public class ZaranixMaidKelly extends NPC {
 						BodyChanging.setTarget(Main.game.getNpc(ZaranixMaidKelly.class));
 					}
 				};
-				
-			} else {
-				return null;
-			}
-		}
-	};
-	
-	public static final DialogueNode AFTER_SEX_VICTORY = new DialogueNode("Continue", "", true) {
 
-		@Override
-		public String getContent() {
-			UtilText.nodeContentSB.setLength(0);
-			if(Main.sex.getNumberOfOrgasms(Main.game.getNpc(ZaranixMaidKelly.class)) >= Main.game.getNpc(ZaranixMaidKelly.class).getOrgasmsBeforeSatisfied()) {
-				UtilText.nodeContentSB.append(
-						"<p>"
-							+ "With a satisfied sigh, Kelly slumps back against the wall,"
-							+ " [kelly.speech(~Ah!~ That was good...)]"
-						+ "</p>"
-						+ "<p>"
-							+ "Despite the fact that you only just brought her to an orgasm, her hands slip down between her legs, and, with an exceptionally lewd moan, she starts fingering herself."
-							+ " It's quite clear from her actions that she's still overwhelmed by the arousing power of your aura, so it would be safe to leave her behind and continue in your exploration of Zaranix's home."
-						+ "</p>");
-				
-			} else {
-				UtilText.nodeContentSB.append(
-						"<p>"
-							+ "With a desperate moan, Kelly slumps back against the wall,"
-							+ " [kelly.speech(~Ah!~ I need more!)]"
-						+ "</p>"
-						+ "<p>"
-							+ "Her hands instantly slip down between her legs, and, with an exceptionally lewd moan, she starts fingering herself."
-							+ " It's quite clear from her actions that she's still overwhelmed by the arousing power of your aura, so it would be safe to leave her behind and continue in your exploration of Zaranix's home."
-						+ "</p>");
-			}
-			
-			UtilText.nodeContentSB.append(
-					"<p>"
-						+ "Conscious of the fact that there are other maids to look out for, you prepare to set off further into the house..."
-					+ "</p>");
-			
-			return UtilText.nodeContentSB.toString();
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Continue", "Continue exploring Zaranix's house.", PlaceType.ZARANIX_FF_MAID.getDialogue(false));
-				
 			} else {
 				return null;
 			}

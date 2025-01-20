@@ -1,46 +1,21 @@
 package com.lilithsthrone.controller.eventListeners.tooltips;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.w3c.dom.events.Event;
-import org.w3c.dom.events.EventListener;
-
 import com.lilithsthrone.controller.TooltipUpdateThread;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
-import com.lilithsthrone.game.character.attributes.ArousalLevel;
-import com.lilithsthrone.game.character.attributes.Attribute;
-import com.lilithsthrone.game.character.attributes.CorruptionLevel;
-import com.lilithsthrone.game.character.attributes.IntelligenceLevel;
-import com.lilithsthrone.game.character.attributes.LustLevel;
-import com.lilithsthrone.game.character.attributes.PhysiqueLevel;
+import com.lilithsthrone.game.character.attributes.*;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.BodyPartInterface;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
-import com.lilithsthrone.game.character.body.types.AntennaType;
-import com.lilithsthrone.game.character.body.types.HornType;
-import com.lilithsthrone.game.character.body.types.TailType;
-import com.lilithsthrone.game.character.body.types.VaginaType;
-import com.lilithsthrone.game.character.body.types.WingType;
+import com.lilithsthrone.game.character.body.types.*;
 import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
 import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
-import com.lilithsthrone.game.character.effects.Perk;
-import com.lilithsthrone.game.character.effects.PerkCategory;
-import com.lilithsthrone.game.character.effects.PerkManager;
-import com.lilithsthrone.game.character.effects.StatusEffect;
+import com.lilithsthrone.game.character.effects.*;
 import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.fetishes.FetishLevel;
@@ -73,13 +48,25 @@ import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
+import org.w3c.dom.events.Event;
+import ru.shuvaev.morpher.tools.enams.Numeration;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static com.lilithsthrone.utils.translate.russian.Morpher.MORPHER;
+import static com.lilithsthrone.utils.translate.russian.Morpher.convertGender;
 
 /**
  * @since 0.1.0
  * @version 0.3.8.6
  * @author Innoxia
  */
-public class TooltipInformationEventListener implements EventListener {
+public class TooltipInformationEventListener implements ClonedEventListener {
 	private String title;
 	private String description;
 	
@@ -111,15 +98,27 @@ public class TooltipInformationEventListener implements EventListener {
 	
 	private static boolean attributeTableLeft = true;
 	
-	private static StringBuilder tooltipSB  = new StringBuilder();
+	private static final StringBuilder tooltipSB  = new StringBuilder();
 	
 	private int descriptionHeightOverride;
 	
 	private static final int LINE_HEIGHT= 16;
+    private final TooltipInformationEventListener parent;
 
-	
+    private TooltipInformationEventListener(TooltipInformationEventListener parent) {
+        this.parent = parent;
+    }
+
+    public TooltipInformationEventListener() {
+        parent = null;
+    }
+
 	@Override
 	public void handleEvent(Event event) {
+        if (parent != null) {
+            parent.handleEvent(event);
+            return;
+        }
 		Main.mainController.setTooltipSize(420, 200);
 		Main.mainController.setTooltipContent("");
 
@@ -138,8 +137,8 @@ public class TooltipInformationEventListener implements EventListener {
 				}
 				spacingHeight += 12 * additionalDescriptions.size();
 			}
-				
-			Main.mainController.setTooltipSize(360, 278 + spacingHeight + (yIncrease * LINE_HEIGHT));
+
+			Main.mainController.setTooltipSize(360, 285 + spacingHeight + (yIncrease * LINE_HEIGHT));
 			
 			
 			// Title:
@@ -228,21 +227,21 @@ public class TooltipInformationEventListener implements EventListener {
 						tooltipSB.append("<div class='subTitle'><b>Осталось времени: "
 								+ "<b style='color:"+timerColour.toWebHexString()+";'>"
 								+(days>0
-									?days+" дней"+(days>1?"s":"")
+								? days + " дней"
 										+(hours%24>0
-												?" "+(hours%24)+" часов"+((hours%24)>1?"сек":"")
+								? " " + (hours % 24) + " часов"
 														+ (minutes%60>0
-																?" "+(minutes%60)+" минут"+((minutes%60)>1?"сек":"")
+								? " " + (minutes % 60) + " минут"
 																		:"")
 												:(minutes%60>0
-														?" "+(minutes%60)+" минут"+((minutes%60)>1?"s":"")
+								? " " + (minutes % 60) + " минут"
 																:""))
 									:(hours>0
-											?" "+(hours)+" часов"+((hours)>1?"s":"")
+								? " " + (hours) + " часов"
 													+ (minutes%60>0
-															?" "+(minutes%60)+" минут"+((minutes%60)>1?"s":"")
+								? " " + (minutes % 60) + " минут"
 																	:"")
-											:(minutes)+" минут"+((minutes)>1?"сек":"")))
+								: (minutes) + " минут"))
 								+ "</b>"
 								+ "</div>");
 						//STATUS_EFFECT_TIME_OVERFLOW
@@ -509,7 +508,7 @@ public class TooltipInformationEventListener implements EventListener {
 					tooltipSB.append("<div class='subTitle' style='text-align:center;'>Стоимость: [style.boldArcane("
 							+ (FetishDesire.getCostToChange()==0
 								?"Бесплатно"
-								:Integer.toString(FetishDesire.getCostToChange())+" Магических Эссенций"+(FetishDesire.getCostToChange()>1?"s":""))
+								: FetishDesire.getCostToChange() +" Магических Эссенций"+(FetishDesire.getCostToChange()>1?"s":""))
 							+ ")]</div>");
 				}
 			}
@@ -557,7 +556,7 @@ public class TooltipInformationEventListener implements EventListener {
 				tooltipSB.append("<div class='title'>" + Util.capitaliseSentence(fetish.getName(owner)) + " фетиш</div>");
 				FetishLevel level = FetishLevel.getFetishLevelFromValue(owner.getFetishExperience(fetish));
 				tooltipSB.append("<div class='subTitle'>");
-				tooltipSB.append("Level "+level.getNumeral()+": <span style='color:"+level.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(level.getName())+"</span>"
+				tooltipSB.append("Уровень " + level.getNumeral() + ": <span style='color:" + level.getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(level.getName()) + "</span>"
 						+ " <span style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'>|</span> " + owner.getFetishExperience(fetish) +" / "+ level.getMaximumExperience() + " xp");
 
 				String appliedFetishLevelDescription = fetish.getAppliedFetishLevelEffectDescription(owner);
@@ -656,7 +655,7 @@ public class TooltipInformationEventListener implements EventListener {
 			// Description & turns remaining:
 			tooltipSB.append(
 					"<div class='description'>"
-							+ (spell.isForbiddenSpell() && !owner.hasSpell(spell)?"[style.italicsArcane(Это запрещенное заклинание и оно может был получено только через специальное задание!)]<br/>":"")
+							+ (spell.isForbiddenSpell() && !owner.hasSpell(spell) ? "[style.italicsArcane(Это запрещенное заклинание и оно может быть получено только через специальное задание!)]<br/>" : "")
 							+ spell.getDescription(owner)
 							+ "<br/>[style.colourExcellent(Требования крита)]: ");
 			for(String s : spell.getCritRequirements(owner, null, null, null)) {
@@ -749,7 +748,11 @@ public class TooltipInformationEventListener implements EventListener {
 				int yIncrease = (currentAttributeStatusEffect.getModifiersAsStringList(owner).size() > 4 ? currentAttributeStatusEffect.getModifiersAsStringList(owner).size() - 4 : 0)
 						+ (owner.hasStatusEffect(currentAttributeStatusEffect)?(owner.getStatusEffectDuration(currentAttributeStatusEffect) == -1 ? 0 : 2):0);
 
-				Main.mainController.setTooltipSize(380, 480 + (yIncrease * LINE_HEIGHT));
+				if (attribute == Attribute.LUST) {
+					yIncrease += 3;
+				}
+
+				Main.mainController.setTooltipSize(380, 450 + (yIncrease * LINE_HEIGHT));
 				
 				tooltipSB.setLength(0);
 				tooltipSB.append("<div class='title' style='color:" + attribute.getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(attribute.getName()) + "</div>"
@@ -763,16 +766,25 @@ public class TooltipInformationEventListener implements EventListener {
 						+ ((owner.getBonusAttributeValue(attribute)) > 0 ? "<span style='color: " + PresetColour.GENERIC_GOOD.getShades()[1] + ";'>"
 								: ((owner.getBonusAttributeValue(attribute)) == 0 ? "<span style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'>" : "<span style='color: " + PresetColour.GENERIC_BAD.getShades()[1] + ";'>"))
 						+ Units.number(owner.getBonusAttributeValue(attribute), 1, 1)+ "</span>" + "</div>"
-						
-						+ "<div class='subTitle-third'>" + "<b style='color:" + attribute.getColour().toWebHexString() + ";'>Total</b><br/>" + Units.number(owner.getAttributeValue(attribute), 1, 1)
+
+						+ "<div class='subTitle-third'>" + "<b style='color:" + attribute.getColour().toWebHexString() + ";'>Всего</b><br/>" + Units.number(owner.getAttributeValue(attribute), 1, 1)
 						+ "</span>" + "</div>");
-				
-				tooltipSB.append("<div class='description-half'>" + attribute.getDescription(owner) + "</div>");
-				
+
+				String temp;
+				if (attribute == Attribute.LUST) {
+					tooltipSB.append("<div class='description'>");
+					temp = MORPHER.morphGender(currentAttributeStatusEffect.getName(owner), convertGender(owner.getGender()), Numeration.SINGLE);
+				} else {
+					tooltipSB.append("<div class='description-half'>");
+					temp = currentAttributeStatusEffect.getName(owner);
+				}
+				tooltipSB.append(attribute.getDescription(owner)).append("</div>");
+
+
 				// Related status effect:
 				tooltipSB.append("<div class='title'>"
 												+ "<span style='color:"+currentAttributeStatusEffect.getColour().toWebHexString()+";'>"
-												+ currentAttributeStatusEffect.getName(owner)
+						+ temp
 												+"</span> ("+minimumLevelValue
 												+"-"
 												+ maximumLevelValue
@@ -838,9 +850,7 @@ public class TooltipInformationEventListener implements EventListener {
 								Util.capitaliseSentence(Util.intToString(Math.max(1, owner.getBreastCrotchRows()*2)))+" "
 										+(owner.getBreastRawSizeValue()>0?(owner.getBreastCrotchSize().getCupSizeName() + "-cup "):"flat ")
 										+(owner.getBreastCrotchShape()==BreastShape.UDDERS
-											?(owner.getBreastCrotchRows()==0
-												?"вымя"
-												:"вымя")
+											?("вымя")
 											:"груди рядом с пахом")));
 					}
 					if(Main.game.getPlayer().isKnowsCharacterArea(CoverableArea.PENIS, owner)) {
@@ -863,8 +873,8 @@ public class TooltipInformationEventListener implements EventListener {
 							tooltipSB.append(getEmptyBodyPartDiv("Вагина", "Нет"));
 						}
 					}
-					
-					Main.mainController.setTooltipSize(420, 64 + (knownAreas * 28));
+
+					Main.mainController.setTooltipSize(520, 64 + (knownAreas * 28));
 					
 					
 				} else {
@@ -887,7 +897,7 @@ public class TooltipInformationEventListener implements EventListener {
 					int crotchBreastAddition = crotchBreasts?24:0;
 					int spinneretAddition = spinneret?24:0;
 
-					int[] dimensions = new int[]{419, elemental?108+(((Elemental)owner).getSummoner().isPlayer()?28:0):(508+crotchBreastAddition+spinneretAddition)};
+					int[] dimensions = new int[]{519, elemental ? 108 + (((Elemental) owner).getSummoner().isPlayer() ? 28 : 0) : (508 + crotchBreastAddition + spinneretAddition)};
 					int imagePadding = 0;
 					int imageWidth = 0;
 					if (displayImage) {
@@ -909,8 +919,8 @@ public class TooltipInformationEventListener implements EventListener {
 								:"")
 							+ "<b style='color:"+owner.getSubspecies().getColour(owner).toWebHexString()+";'>"
 								+ (owner.isFeminine()
-										?Util.capitaliseSentence((showWinged ? "крылья " : "") + owner.getSubspecies().getSingularFemaleName(owner.getBody()))
-										:Util.capitaliseSentence((showWinged ? "крылья " : "") + owner.getSubspecies().getSingularMaleName(owner.getBody())))
+							? Util.capitaliseSentence((showWinged ? "крылатая " : "") + owner.getSubspecies().getSingularFemaleName(owner.getBody()))
+							: Util.capitaliseSentence((showWinged ? "крылатый " : "") + owner.getSubspecies().getSingularMaleName(owner.getBody())))
 							+ "</b>"
 							+ "</div>");
 					
@@ -987,10 +997,10 @@ public class TooltipInformationEventListener implements EventListener {
 						
 						// PARTIAL:
 						if (owner.getHairRawLengthValue() == 0) {
-							tooltipSB.append(getEmptyBodyPartDiv("Волосы", owner.isFaceBaldnessNatural()?"Нет":"Лысый"));
+							tooltipSB.append(getEmptyBodyPartDiv("Волосы", owner.isFaceBaldnessNatural() ? "Нет" : owner.isFeminine() ? "Лысая" : "Лысый"));
 						} else {
 							tooltipSB.append(getBodyPartDiv(owner,
-									Util.capitaliseSentence(owner.getHairLength().getDescriptor())+" "+owner.getHairStyle().getName(owner)+" "+owner.getHairName(), owner.getHairRace(), owner.getHairCovering(), owner.isHairFeral()));
+									Util.capitaliseSentence(owner.getHairLength().getDescriptor()) + ", " + owner.getHairStyle().getName(owner) + ", " + owner.getHairName(), owner.getHairRace(), owner.getHairCovering(), owner.isHairFeral()));
 						}
 						if(!owner.isPlayer() && !owner.isAreaKnownByCharacter(CoverableArea.EYES, Main.game.getPlayer())) {
 							tooltipSB.append(getEmptyBodyPartDiv("Eyes", "Unknown!"));
@@ -1107,9 +1117,7 @@ public class TooltipInformationEventListener implements EventListener {
 										Util.capitaliseSentence(Util.intToString(Math.max(1, owner.getBreastCrotchRows()*2)))+" "
 												+(owner.getBreastCrotchRawSizeValue()>0?(owner.getBreastCrotchSize().getCupSizeName() + "-чашка "):"плоско ")
 												+(owner.getBreastCrotchShape()==BreastShape.UDDERS
-													?(owner.getBreastCrotchRows()==0
-														?"вымя"
-														:"вымя")
+													?("вымя")
 													:"груди перед промежностью")));
 							} else {
 								tooltipSB.append(getBodyPartDiv(owner, "Соски",
@@ -1119,9 +1127,7 @@ public class TooltipInformationEventListener implements EventListener {
 										Util.capitaliseSentence(Util.intToString(Math.max(1, owner.getBreastCrotchRows()*2)))+" "
 												+(owner.getBreastCrotchRawSizeValue()>0?(owner.getBreastCrotchSize().getCupSizeName() + "-чашка "):"плоско ")
 												+(owner.getBreastCrotchShape()==BreastShape.UDDERS
-													?(owner.getBreastCrotchRows()==0
-														?"вымя"
-														:"вымя")
+													?("вымя")
 													:"груди перед промежностью")));
 							}
 						}
@@ -1154,7 +1160,13 @@ public class TooltipInformationEventListener implements EventListener {
 				Main.mainController.setTooltipContent(UtilText.parse(tooltipSB.toString()));
 
 			} else {
-				Main.mainController.setTooltipSize(360, 234);
+				if (attribute == Attribute.HEALTH_MAXIMUM) {
+					Main.mainController.setTooltipSize(360, 264);
+				} else if (attribute == Attribute.MANA_MAXIMUM) {
+					Main.mainController.setTooltipSize(360, 228);
+				} else {
+					Main.mainController.setTooltipSize(360, 234);
+				}
 				
 				Main.mainController.setTooltipContent(UtilText.parse(
 						"<div class='title' style='color:" + attribute.getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(attribute.getName()) + "</div>"
@@ -1168,7 +1180,7 @@ public class TooltipInformationEventListener implements EventListener {
 						+ "<div class='subTitle-third'>"
 						+ "<b style='color:"
 						+ PresetColour.TEXT_GREY.toWebHexString()
-						+ ";'>Bonus</b><br/>"
+								+ ";'>Бонус</b><br/>"
 						+ ((owner.getBonusAttributeValue(attribute)) > 0 ? "<span style='color: "
 								+ PresetColour.GENERIC_GOOD.getShades()[1]
 								+ ";'>"
@@ -1183,7 +1195,7 @@ public class TooltipInformationEventListener implements EventListener {
 						+ "</div>"
 						+ "<div class='subTitle-third'>"
 						+ "<b style='color:"
-						+ attribute.getColour().toWebHexString() + ";'>Total</b><br/>" + Units.number(owner.getAttributeValue(attribute), 1, 1) + "</span>"
+								+ attribute.getColour().toWebHexString() + ";'>Всего</b><br/>" + Units.number(owner.getAttributeValue(attribute), 1, 1) + "</span>"
 						+ "</div>"
 
 						+ "<div class='description'>" + attribute.getDescription(owner) + "</div>"));
@@ -1488,10 +1500,10 @@ public class TooltipInformationEventListener implements EventListener {
 							:"This is a [style.italicsGood(безопасная)] область.")
 					+ "</div>"
 					+ (yIncrease>0
-							?"<div class='description' style='height:"+(24 + yIncrease * LINE_HEIGHT)+"px;'>"+charactersPresentDescription.toString()+"</div>"
+							?"<div class='description' style='height:"+(24 + yIncrease * LINE_HEIGHT)+"px;'>"+ charactersPresentDescription +"</div>"
 							:"")
 					+ (teleport
-							?"<div class='description' style='height:48px; text-align:center;'>"+teleportingDescription.toString()+"</div>"
+							?"<div class='description' style='height:48px; text-align:center;'>"+ teleportingDescription +"</div>"
 							:"")));
 			
 		} else if(moneyTransferPercentage>0) {
@@ -1726,9 +1738,7 @@ public class TooltipInformationEventListener implements EventListener {
 						Util.capitaliseSentence(Util.intToString(Math.max(1, loadedBody.getBreastCrotch().getRows()*2)))+" "
 								+(loadedBody.getBreastCrotch().getRawSizeValue()>0?(loadedBody.getBreastCrotch().getSize().getCupSizeName() + "-чашка "):"плоско ")
 								+(loadedBody.getBreastCrotch().getShape()==BreastShape.UDDERS
-									?(loadedBody.getBreastCrotch().getRows()==0
-										?"вымя"
-										:"вымя")
+									?("вымя")
 									:"груди рядом с пахом")));
 			}
 		
@@ -1749,7 +1759,7 @@ public class TooltipInformationEventListener implements EventListener {
 						"<div class='description' style='height:"+(descriptionHeightOverride>0?(descriptionHeightOverride+26):"176")+"px;'>"+description+"</div>"));
 				
 			} else {
-				Main.mainController.setTooltipSize(360, descriptionHeightOverride>0?descriptionHeightOverride+64+20:175);
+				Main.mainController.setTooltipSize(360, descriptionHeightOverride > 0 ? descriptionHeightOverride + 64 + 20 : 195);
 
 				Main.mainController.setTooltipContent(UtilText.parse(
 						"<div class='title'>"+title+"</div>"
@@ -1983,6 +1993,11 @@ public class TooltipInformationEventListener implements EventListener {
 	}
 
 	public TooltipInformationEventListener setInformation(String title, String description) {
+        if (parent != null) {
+            parent.setInformation(title, description);
+            return this;
+        }
+
 		resetFields();
 		this.title = title;
 		this.description = description;
@@ -1990,24 +2005,40 @@ public class TooltipInformationEventListener implements EventListener {
 	}
 
 	public TooltipInformationEventListener setInformation(String title, String description, int descriptionHeightOverride) {
+        if (parent != null) {
+            parent.setInformation(title, description, descriptionHeightOverride);
+            return this;
+        }
 		setInformation(title, description);
 		this.descriptionHeightOverride = descriptionHeightOverride;
 		return this;
 	}
 
 	public TooltipInformationEventListener setWeather() {
+        if (parent != null) {
+            parent.setWeather();
+            return this;
+        }
 		resetFields();
 		weather = true;
 		return this;
 	}
 
 	public TooltipInformationEventListener setExtraAttributes(GameCharacter owner) {
+        if (parent != null) {
+            parent.setExtraAttributes(owner);
+            return this;
+        }
 		resetFields();
 		extraAttributes = true;
 		this.owner = owner;
 		return this;
 	}
 	public TooltipInformationEventListener setStatusEffect(AbstractStatusEffect statusEffect, GameCharacter owner) {
+        if (parent != null) {
+            parent.setStatusEffect(statusEffect, owner);
+            return this;
+        }
 		resetFields();
 		this.statusEffect = statusEffect;
 		this.owner = owner;
@@ -2015,6 +2046,10 @@ public class TooltipInformationEventListener implements EventListener {
 	}
 
 	public TooltipInformationEventListener setPerk(AbstractPerk perk, GameCharacter owner) {
+        if (parent != null) {
+            parent.setPerk(perk, owner);
+            return this;
+        }
 		resetFields();
 		this.perk = perk;
 		this.owner = owner;
@@ -2022,6 +2057,10 @@ public class TooltipInformationEventListener implements EventListener {
 	}
 	
 	public TooltipInformationEventListener setFetish(AbstractFetish fetish, GameCharacter owner) {
+        if (parent != null) {
+            parent.setFetish(fetish, owner);
+            return this;
+        }
 		resetFields();
 		this.fetish = fetish;
 		this.owner = owner;
@@ -2029,6 +2068,10 @@ public class TooltipInformationEventListener implements EventListener {
 	}
 
 	public TooltipInformationEventListener setFetishExperience(AbstractFetish fetish, GameCharacter owner) {
+        if (parent != null) {
+            parent.setFetishExperience(fetish, owner);
+            return this;
+        }
 		resetFields();
 		fetishExperience = true;
 		this.fetish = fetish;
@@ -2037,6 +2080,10 @@ public class TooltipInformationEventListener implements EventListener {
 	}
 	
 	public TooltipInformationEventListener setFetishDesire(AbstractFetish fetish, FetishDesire desire, GameCharacter owner) {
+        if (parent != null) {
+            parent.setFetishDesire(fetish, desire, owner);
+            return this;
+        }
 		resetFields();
 		this.desire = desire;
 		this.fetish = fetish;
@@ -2045,6 +2092,10 @@ public class TooltipInformationEventListener implements EventListener {
 	}
 
 	public TooltipInformationEventListener setLevelUpPerk(int perkRow, AbstractPerk levelUpPerk, GameCharacter owner, boolean availableForSelection) {
+        if (parent != null) {
+            parent.setLevelUpPerk(perkRow, levelUpPerk, owner, availableForSelection);
+            return this;
+        }
 		resetFields();
 		this.levelUpPerk = levelUpPerk;
 		this.perkRow = perkRow;
@@ -2054,6 +2105,10 @@ public class TooltipInformationEventListener implements EventListener {
 	}
 
 	public TooltipInformationEventListener setSpell(Spell spell, GameCharacter owner) {
+        if (parent != null) {
+            parent.setSpell(spell, owner);
+            return this;
+        }
 		resetFields();
 		this.spell = spell;
 		this.owner = owner;
@@ -2061,6 +2116,10 @@ public class TooltipInformationEventListener implements EventListener {
 	}
 
 	public TooltipInformationEventListener setSpellUpgrade(SpellUpgrade spellUpgrade, GameCharacter owner) {
+        if (parent != null) {
+            parent.setSpellUpgrade(spellUpgrade, owner);
+            return this;
+        }
 		resetFields();
 		this.spellUpgrade = spellUpgrade;
 		this.owner = owner;
@@ -2068,6 +2127,11 @@ public class TooltipInformationEventListener implements EventListener {
 	}
 
 	public TooltipInformationEventListener setAttribute(AbstractAttribute attribute, GameCharacter owner) {
+        if (parent != null) {
+            parent.setAttribute(attribute, owner);
+            return this;
+        }
+
 		resetFields();
 		this.attribute = attribute;
 		this.owner = owner;
@@ -2075,6 +2139,11 @@ public class TooltipInformationEventListener implements EventListener {
 	}
 	
 	public TooltipInformationEventListener setProtection(GameCharacter owner) {
+        if (parent != null) {
+            parent.setProtection(owner);
+            return this;
+        }
+
 		resetFields();
 		this.owner = owner;
 		protection=true;
@@ -2082,24 +2151,42 @@ public class TooltipInformationEventListener implements EventListener {
 	}
 	
 	public TooltipInformationEventListener setCopyInformation() {
+        if (parent != null) {
+            parent.setCopyInformation();
+            return this;
+        }
+
 		resetFields();
 		copyInformation = true;
 		return this;
 	}
 
 	public TooltipInformationEventListener setConcealedSlot(InventorySlot concealedSlot) {
+        if (parent != null) {
+            parent.setConcealedSlot(concealedSlot);
+            return this;
+        }
+
 		resetFields();
 		this.concealedSlot = concealedSlot;
 		return this;
 	}
 
 	public TooltipInformationEventListener setLoadedEnchantment(LoadedEnchantment loadedEnchantment) {
+        if (parent != null) {
+            parent.setLoadedEnchantment(loadedEnchantment);
+            return this;
+        }
 		resetFields();
 		this.loadedEnchantment = loadedEnchantment;
 		return this;
 	}
 
 	public TooltipInformationEventListener setCombatMove(AbstractCombatMove move, GameCharacter owner) {
+        if (parent != null) {
+            parent.setCombatMove(move, owner);
+            return this;
+        }
 		resetFields();
 		this.owner = owner;
 		this.move = move;
@@ -2107,12 +2194,20 @@ public class TooltipInformationEventListener implements EventListener {
 	}
 	
 	public TooltipInformationEventListener setCell(Cell cell) {
+        if (parent != null) {
+            parent.setCell(cell);
+            return this;
+        }
 		resetFields();
 		this.cell = cell;
 		return this;
 	}
 	
 	public TooltipInformationEventListener setMoneyTransferTarget(GameCharacter from, GameCharacter to, int moneyTransferPercentage) {
+        if (parent != null) {
+            parent.setMoneyTransferTarget(from, to, moneyTransferPercentage);
+            return this;
+        }
 		resetFields();
 		this.owner = from;
 		this.moneyTransferTarget = to;
@@ -2121,6 +2216,10 @@ public class TooltipInformationEventListener implements EventListener {
 	}
 
 	public TooltipInformationEventListener setSlaveJob(SlaveJob slaveJob, GameCharacter owner) {
+        if (parent != null) {
+            parent.setSlaveJob(slaveJob, owner);
+            return this;
+        }
 		resetFields();
 		this.owner = owner;
 		this.slaveJob = slaveJob;
@@ -2128,6 +2227,10 @@ public class TooltipInformationEventListener implements EventListener {
 	}
 	
 	public TooltipInformationEventListener setLoadedBody(Body loadedBody, GameCharacter owner) {
+        if (parent != null) {
+            parent.setLoadedBody(loadedBody, owner);
+            return this;
+        }
 		resetFields();
 		this.owner = owner;
 		this.loadedBody = loadedBody;
@@ -2161,4 +2264,9 @@ public class TooltipInformationEventListener implements EventListener {
 		slaveJob = null;
 		loadedBody = null;
 	}
+
+    @Override
+    public ClonedEventListener newInstance() {
+        return new TooltipInformationEventListener(this);
+    }
 }

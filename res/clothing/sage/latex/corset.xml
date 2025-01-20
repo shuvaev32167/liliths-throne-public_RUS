@@ -47,25 +47,25 @@
 	
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(tighten)] the latex corset around [npc.her] waist and [npc.verb(snap)] the clips together.]]>
+            <![CDATA[[npc.Name] tighten the latex corset around [npc.her] waist and snap the clips together.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(tighten)] the latex corset around [npc2.namePos] waist and [npc.verb(snap)] the clips together.]]>
+            <![CDATA[[npc.Name] tighten the latex corset around [npc2.namePos] waist and snap the clips together.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(tighten)] the latex corset around [npc2.namePos] waist as much as possible and forcibly [npc.verb(snap)] the clips together.]]>
+            <![CDATA[[npc.Name] tighten the latex corset around [npc2.namePos] waist as much as possible and forcibly snap the clips together.]]>
 		</otherRough>
 	</replacementText>
 	
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unclip)] [npc.her] latex corset.]]>
+            <![CDATA[[npc.Name] unclip [npc.her] latex corset.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unclip)] [npc2.namePos] latex corset.]]>
+            <![CDATA[[npc.Name] unclip [npc2.namePos] latex corset.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(rip)] the latex corset off [npc2.namePos] waist.]]>
+            <![CDATA[[npc.Name] rip the latex corset off [npc2.namePos] waist.]]>
 		</otherRough>
 	</displacementText>
 	

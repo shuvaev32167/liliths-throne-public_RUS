@@ -52,25 +52,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(open)] [npc.her] mouth wide and [npc.verb(slide)] in the bar gag, before reaching back and fastening the buckles to keep it in place.]]>
+            <![CDATA[[npc.Name] open [npc.her] mouth wide and slide in the bar gag, before reaching back and fastening the buckles to keep it in place.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(push)] the bar gag into [npc2.namePos] mouth, before reaching back and fastening the buckles to keep it in place.]]>
+            <![CDATA[[npc.Name] push the bar gag into [npc2.namePos] mouth, before reaching back and fastening the buckles to keep it in place.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(force)] the bar gag into [npc2.namePos] mouth, before reaching back and tightly fastening the buckles to keep it in place.]]>
+            <![CDATA[[npc.Name] roughly force the bar gag into [npc2.namePos] mouth, before reaching back and tightly fastening the buckles to keep it in place.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(unfasten)] the bar gag's straps and [npc.verb(take)] it out of [npc.her] mouth.]]>
+            <![CDATA[[npc.Name] unfasten the bar gag's straps and take it out of [npc.her] mouth.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(unfasten)] the bar gag's straps and [npc.verb(take)] it out of [npc2.namePos] mouth.]]>
+            <![CDATA[[npc.Name] unfasten the bar gag's straps and take it out of [npc2.namePos] mouth.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] impatiently [npc.verb(unfasten)] the bar gag's straps and [npc.verb(yank)] it out of [npc2.namePos] mouth.]]>
+            <![CDATA[[npc.Name] impatiently unfasten the bar gag's straps and yank it out of [npc2.namePos] mouth.]]>
 		</otherRough>
 	</displacementText>
 </clothing>

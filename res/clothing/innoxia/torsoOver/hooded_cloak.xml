@@ -129,24 +129,24 @@
 	
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self><![CDATA[
-			[npc.Name] [npc.verb(pull)] on the cloak.
+			[npc.Name] pull on the cloak.
 		]]></self>
 		<other><![CDATA[
-			[npc.Name] [npc.verb(pull)] the cloak onto [npc2.name].
+			[npc.Name] pull the cloak onto [npc2.name].
 		]]></other>
 		<otherRough><![CDATA[
-			[npc.Name] roughly [npc.verb(force)] the cloak onto [npc2.name].
+			[npc.Name] roughly force the cloak onto [npc2.name].
 		]]></otherRough>
 	</replacementText>
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self><![CDATA[
-			[npc.Name] [npc.verb(pull)] off [npc.her] cloak.
+			[npc.Name] pull off [npc.her] cloak.
 		]]></self>
 		<other><![CDATA[
-			[npc.Name] [npc.verb(pull)] off [npc2.namePos] cloak.
+			[npc.Name] pull off [npc2.namePos] cloak.
 		]]></other>
 		<otherRough><![CDATA[
-			[npc.Name] roughly [npc.verb(pull)] off [npc2.namePos] cloak.
+			[npc.Name] roughly pull off [npc2.namePos] cloak.
 		]]></otherRough>
 	</displacementText>
 	

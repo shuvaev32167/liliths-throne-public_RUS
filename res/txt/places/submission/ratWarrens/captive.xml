@@ -2749,7 +2749,7 @@
 		</i></p>
 	#ELSEIF(game.getDialogueFlags().getMurkTfStage(pc)==3)
 		<p style='text-align:center;'><i>
-			If you are unable to escape tonight, Murk is sure to [style.italicsTfGeneric(finish transforming you)] tomorrow, after which [style.italicsMilk(you'll be hooked up to the milking machine)] and [style.italicsSex(fucked all day)]!
+			If you are unable to escape tonight, Murk is sure to [style.italicsTfGeneric(finish transforming you)] tomorrow, after which [style.italicsMilk(you'll be hooked up to the milking machine)] и [style.italicsSex(fucked all day)]!
 		</i></p>
 	#ELSEIF(game.getDialogueFlags().getMurkTfStage(pc)>=4)
 		<p style='text-align:center;'><i>

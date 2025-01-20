@@ -1,7 +1,5 @@
 package com.lilithsthrone.game.dialogue.encounters;
 
-import java.time.Month;
-
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.responses.Response;
@@ -13,6 +11,8 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.time.Month;
 
 /**
  * @since 0.1.0
@@ -108,7 +108,7 @@ public class DominionEncounterDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Continue on your way.", Main.game.getDefaultDialogue(false));
+                return new Response("Продолжить", "Continue on your way.", Main.game.getDefaultDialogue(false));
 				
 			} else {
 				return null;
@@ -150,7 +150,7 @@ public class DominionEncounterDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Continue on your way.", Main.game.getDefaultDialogue(false));
+                return new Response("Продолжить", "Continue on your way.", Main.game.getDefaultDialogue(false));
 				
 			} else {
 				return null;

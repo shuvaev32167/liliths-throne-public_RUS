@@ -21,11 +21,11 @@
 		
 		<attackTooltipDescription>Bash your shield against [npc2.name].</attackTooltipDescription>
 		
-		<rarity>UNCOMMON</rarity> 
-		
-		<equipText><![CDATA[[npc.Name] [npc.verb(bring)] out the shield and [npc.verb(strap)] it to [npc.her] arm.]]></equipText>
-		
-		<unequipText><![CDATA[[npc.Name] [npc.verb(unstrap)] the shield from [npc.her] arm before putting it away.]]></unequipText>
+		<rarity>UNCOMMON</rarity>
+
+        <equipText><![CDATA[[npc.Name] bring out the shield and strap it to [npc.her] arm.]]></equipText>
+
+        <unequipText><![CDATA[[npc.Name] unstrap the shield from [npc.her] arm before putting it away.]]></unequipText>
 		
 		<imageName>riotshield.svg</imageName> 
 		
@@ -75,16 +75,16 @@
 
 	<hitDescriptions>
 		<hitText><![CDATA[
-		Charging forward with [npc.her] riot shield, [npc.name] [npc.verb(manage)] to hit [npc2.name] dead on. The enchanted polycarbonate bounces off [npc2.her] aura and knocks [npc2.herHim] back, draining [npc.her] energy!
+		Charging forward with [npc.her] riot shield, [npc.name] manage to hit [npc2.name] dead on. The enchanted polycarbonate bounces off [npc2.her] aura and knocks [npc2.herHim] back, draining [npc.her] energy!
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		Charging forward with [npc.her] riot shield, [npc.name] [npc.verb(attempt)] to hit [npc2.name] dead on but stumbles and misses completely!
+		Charging forward with [npc.her] riot shield, [npc.name] attempt to hit [npc2.name] dead on but stumbles and misses completely!
 		]]></missText>
 		<missText><![CDATA[
-		With a quick step forwards, [npc.name] [npc.verb(swings)] [npc.her] riot shield out at [npc2.name] but misses!
+		With a quick step forwards, [npc.name] swings [npc.her] riot shield out at [npc2.name] but misses!
 		]]></missText>
 	</missDescriptions>
 	

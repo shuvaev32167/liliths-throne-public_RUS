@@ -80,25 +80,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(clip)] the stud earrings into [npc.her] [npc.ears], before attaching the cuffs to [npc.her] upper [npc.ears] and allowing the chains to hang loose.]]>
+            <![CDATA[[npc.Name] clip the stud earrings into [npc.her] [npc.ears], before attaching the cuffs to [npc.her] upper [npc.ears] and allowing the chains to hang loose.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(clip)] the stud earrings into [npc2.namePos] [npc2.ears], before attaching the cuffs to [npc2.her] upper [npc2.ears] and allowing the chains to hang loose.]]>
+            <![CDATA[[npc.Name] clip the stud earrings into [npc2.namePos] [npc2.ears], before attaching the cuffs to [npc2.her] upper [npc2.ears] and allowing the chains to hang loose.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(clip)] the stud earrings into [npc2.namePos] [npc2.ears], before attaching the cuffs to [npc2.her] upper [npc2.ears] and allowing the chains to hang loose.]]>
+            <![CDATA[[npc.Name] roughly clip the stud earrings into [npc2.namePos] [npc2.ears], before attaching the cuffs to [npc2.her] upper [npc2.ears] and allowing the chains to hang loose.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(unclip)] [npc.her] stud earrings and [npc.verb(take)] them out, before removing the cuffs.]]>
+            <![CDATA[[npc.Name] unclip [npc.her] stud earrings and take them out, before removing the cuffs.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(unclip)] [npc2.namePos] stud earrings and [npc.verb(take)] them out, before removing the cuffs.]]>
+            <![CDATA[[npc.Name] unclip [npc2.namePos] stud earrings and take them out, before removing the cuffs.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(unclip)] [npc2.namePos] stud earrings and roughly [npc.verb(pull)] them out, before removing the cuffs.]]>
+            <![CDATA[[npc.Name] unclip [npc2.namePos] stud earrings and roughly pull them out, before removing the cuffs.]]>
 		</otherRough>
 	</displacementText>
 	

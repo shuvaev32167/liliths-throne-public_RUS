@@ -22,11 +22,12 @@
 		
 		<rarity>EPIC</rarity>
 		
-		<weaponSet/> 
-		
-		<equipText><![CDATA[[npc.Name] [npc.verb(position)] [npc.her] dagger at [npc.her] hip and releases the snap fastener on the retaining strap so that [npc.she] may draw it at a moment's notice.]]></equipText>
-		
-		<unequipText><![CDATA[[npc.Name] [npc.verb(sheath)] [npc.her] dagger, before putting it away.]]></unequipText>
+		<weaponSet/>
+
+        <equipText>
+            <![CDATA[[npc.Name] position [npc.her] dagger at [npc.her] hip and releases the snap fastener on the retaining strap so that [npc.she] may draw it at a moment's notice.]]></equipText>
+
+        <unequipText><![CDATA[[npc.Name] sheath [npc.her] dagger, before putting it away.]]></unequipText>
 		
 		<imageName>sword_sheathed.svg</imageName> 
 		
@@ -71,26 +72,26 @@
 	
 	<hitDescriptions>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(thrust)] [npc.her] dagger at [npc2.name], grinning as the ethereal arcane blade pierces [npc2.her] body!
+		[npc.Name] thrust [npc.her] dagger at [npc2.name], grinning as the ethereal arcane blade pierces [npc2.her] body!
 		]]></hitText>
 		<hitText><![CDATA[
-		Striking out at [npc2.name] with [npc.her] dagger, [npc.name] [npc.verb(grin)] as [npc.she] [npc.verb(see)] the ethereal blade travel straight into [npc2.her] body!
+		Striking out at [npc2.name] with [npc.her] dagger, [npc.name] grin as [npc.she] see the ethereal blade travel straight into [npc2.her] body!
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(thrust)] at [npc2.name] with [npc.her] dagger, causing [npc2.herHim] to stagger back as the ethereal blade stabs right into [npc2.her] chest!
+		[npc.Name] thrust at [npc2.name] with [npc.her] dagger, causing [npc2.herHim] to stagger back as the ethereal blade stabs right into [npc2.her] chest!
 		]]></hitText>
 	</hitDescriptions>
 
 	<!-- Descriptions that are used when missing an enemy. One of the missText values will be randomly selected each time the attacker misses their target. Follow the same guidelines as equipText. -->
 	<missDescriptions>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(thrust)] [npc.her] dagger at [npc2.name], but [npc.verb(end)] up missing [npc2.herHim]!
+		[npc.Name] thrust [npc.her] dagger at [npc2.name], but end up missing [npc2.herHim]!
 		]]></missText>
 		<missText><![CDATA[
-		Striking out at [npc2.name] with [npc.her] dagger, [npc.name] [npc.verb(let)] out a frustrated cry as [npc.she] [npc.verb(miss)] [npc.her] target!
+		Striking out at [npc2.name] with [npc.her] dagger, [npc.name] let out a frustrated cry as [npc.she] miss [npc.her] target!
 		]]></missText>
 		<missText><![CDATA[
-		With a quick step forwards, [npc.name] [npc.verb(thrust)] at [npc2.name] with [npc.her] dagger, but [npc.she] [npc.verb(miss)] [npc.her] target!
+		With a quick step forwards, [npc.name] thrust at [npc2.name] with [npc.her] dagger, but [npc.she] miss [npc.her] target!
 		]]></missText>
 	</missDescriptions>
 	

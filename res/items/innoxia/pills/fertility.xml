@@ -115,7 +115,7 @@
 		<applyEffects><![CDATA[
 			[##npc.removeStatusEffect(SE_PROMISCUITY_PILL)]
 			<p style='margin-bottom:0; padding-bottom:0;'>
-				The small pill easily slides down [npc.her] throat, and within moments [npc.she] [npc.verb(feel)]
+				The small pill easily slides down [npc.her] throat, and within moments [npc.she] feel
 				#IF(npc.hasVagina())
 					 a soothing, warm glow spreading out from [npc.her] ovaries into [npc.her] lower torso. [npc.Her] mind fogs over with an overwhelming desire to feel potent sperm spurting deep into [npc.her] 
 					#IF(npc.isVisiblyPregnant())
@@ -125,7 +125,7 @@
 					#ENDIF
 					 and before [npc.she] can stop it, a horny whimper escapes from between [npc.her] [npc.lips].
 					#IF(npc.hasPenisIgnoreDildo())
-						 At the same time, [npc.her] manhood begins to throb with need, and [npc.she] [npc.verb(feel)]
+						 At the same time, [npc.her] manhood begins to throb with need, and [npc.she] feel
 					#ENDIF
 				#ENDIF
 				#IF(npc.hasPenisIgnoreDildo())
@@ -152,10 +152,10 @@
 	-->
 	<useDescriptions>
 		<selfUse><![CDATA[
-		[npc.Name] [npc.verb(pop)] a breeder pill out of its little foil wrapper, before quickly placing it in [npc.her] mouth and swallowing it down.
+		[npc.Name] pop a breeder pill out of its little foil wrapper, before quickly placing it in [npc.her] mouth and swallowing it down.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		[npc.Name] [npc.verb(pop)] a breeder pill out of its little foil wrapper, before bringing it up to [npc2.namePos] [npc2.lips], forcing it into [npc2.her] mouth, and making sure that [npc2.she] [npc2.verb(swallow)] it down.
+		[npc.Name] pop a breeder pill out of its little foil wrapper, before bringing it up to [npc2.namePos] [npc2.lips], forcing it into [npc2.her] mouth, and making sure that [npc2.she] [npc2.verb(swallow)] it down.
 		]]></otherUse>
 	</useDescriptions>
 

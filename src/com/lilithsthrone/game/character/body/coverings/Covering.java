@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.character.body.coverings;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.valueEnums.Capacity;
@@ -13,6 +10,13 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+import com.lilithsthrone.utils.translate.russian.Morpher;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import ru.shuvaev.morpher.tools.enams.Gender;
+import ru.shuvaev.morpher.tools.enams.Numeration;
+
+import static com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory.*;
 
 /**
  * @since 0.1.83
@@ -20,14 +24,14 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @author Innoxia
  */
 public class Covering implements XMLSaving {
-	
+
 	protected AbstractBodyCoveringType type;
 	protected CoveringPattern pattern;
 	protected CoveringModifier modifier;
-	
+
 	protected Colour primaryColour;
 	protected Colour secondaryColour;
-	
+
 	protected boolean primaryGlowing;
 	protected boolean secondaryGlowing;
 
@@ -47,7 +51,7 @@ public class Covering implements XMLSaving {
 	public Covering(String typeId, CoveringPattern pattern, CoveringModifier modifier, Colour primaryColour, boolean primaryGlowing, Colour secondaryColour, boolean secondaryGlowing) {
 		this(BodyCoveringType.getBodyCoveringTypeFromId(typeId), pattern, modifier, primaryColour, primaryGlowing, secondaryColour, secondaryGlowing);
 	}
-	
+
 	/**
 	 * Constructor.<br/>
 	 * Initialises CoveringPattern pattern to a random value, and boolean glowing to false.
@@ -61,7 +65,7 @@ public class Covering implements XMLSaving {
 					?type.getNaturalColoursPrimary().get(Util.random.nextInt(type.getNaturalColoursPrimary().size()))
 					:type.getNaturalColoursSecondary().get(Util.random.nextInt(type.getNaturalColoursSecondary().size()))), false);
 	}
-	
+
 	/**
 	 * Constructor.<br/>
 	 * Initialises CoveringPattern pattern to the value with the highest probability, boolean glowing to false, and secondaryColour to same as primaryColour (where available).
@@ -92,7 +96,7 @@ public class Covering implements XMLSaving {
 						?primaryColour
 						:type.getNaturalColoursSecondary().get(Util.random.nextInt(type.getNaturalColoursSecondary().size()))), false);
 	}
-	
+
 	/**
 	 * Constructor.<br/>
 	 * Initialises CoveringPattern pattern to the value with the highest probability, boolean glowing to false, and secondaryColour to same as primaryColour (where available).
@@ -105,7 +109,7 @@ public class Covering implements XMLSaving {
 				primaryColour, false,
 				secondaryColour, false);
 	}
-	
+
 	/**
 	 * Constructor.
 	 * @param type The AbstractBodyCoveringType to set this skin to.
@@ -115,7 +119,7 @@ public class Covering implements XMLSaving {
 	public Covering(AbstractBodyCoveringType type, CoveringPattern pattern, Colour primaryColour, boolean primaryGlowing, Colour secondaryColour, boolean secondaryGlowing) {
 		this(type, pattern, type.getNaturalModifiers().get(0), primaryColour, primaryGlowing, secondaryColour, secondaryGlowing);
 	}
-	
+
 	public Covering(AbstractBodyCoveringType type, CoveringPattern pattern, CoveringModifier modifier, Colour primaryColour, boolean primaryGlowing, Colour secondaryColour, boolean secondaryGlowing) {
 		this.type = type;
 		this.pattern = pattern;
@@ -125,7 +129,7 @@ public class Covering implements XMLSaving {
 		this.secondaryColour = secondaryColour;
 		this.secondaryGlowing = secondaryGlowing;
 	}
-	
+
 	public Covering(Covering coveringToClone) {
 		this.type = coveringToClone.getType();
 		this.pattern = coveringToClone.getPattern();
@@ -134,25 +138,6 @@ public class Covering implements XMLSaving {
 		this.primaryGlowing = coveringToClone.isPrimaryGlowing();
 		this.secondaryColour = coveringToClone.getSecondaryColour();
 		this.secondaryGlowing = coveringToClone.isSecondaryGlowing();
-	}
-	
-	@Override
-	public Element saveAsXML(Element parentElement, Document doc) {
-		Element element = doc.createElement("covering");
-		parentElement.appendChild(element);
-		
-		XMLUtil.addAttribute(doc, element, "type", BodyCoveringType.getIdFromBodyCoveringType(type));
-		XMLUtil.addAttribute(doc, element, "pat", this.pattern.toString());
-		XMLUtil.addAttribute(doc, element, "mod", this.modifier.toString());
-		XMLUtil.addAttribute(doc, element, "c1", this.primaryColour.getId());
-		if(this.primaryGlowing) {
-			XMLUtil.addAttribute(doc, element, "g1", String.valueOf(this.primaryGlowing));
-		}
-		XMLUtil.addAttribute(doc, element, "c2", this.secondaryColour.getId());
-		if(this.secondaryGlowing) {
-			XMLUtil.addAttribute(doc, element, "g2", String.valueOf(this.secondaryGlowing));
-		}
-		return element;
 	}
 
 	public static Covering loadFromXML(StringBuilder log, Element parentElement, Document doc) {
@@ -169,13 +154,17 @@ public class Covering implements XMLSaving {
 					!parentElement.getAttribute("g2").isEmpty()
 						?Boolean.valueOf(parentElement.getAttribute("g2"))
 						:false);
-			
+
 		} catch(Exception ex) {
 			System.err.println(ex.getMessage());
 			return new Covering(BodyCoveringType.getBodyCoveringTypeFromId(parentElement.getAttribute("type")));
 		}
 	}
-	
+
+	public static String getFormattedColour(Colour colour, String additionalName, boolean glowing, boolean capitalised) {
+		return getFormattedColour(colour, additionalName, glowing, capitalised, null);
+	}
+
 	public String getDeterminer(GameCharacter gc) {
 		return type.getDeterminer(gc);
 	}
@@ -183,7 +172,7 @@ public class Covering implements XMLSaving {
 	public String getName(GameCharacter gc) {
 		return type.getName(gc);
 	}
-	
+
 //	public String getName(GameCharacter gc, boolean withDescriptor) {
 //		return (getDescriptor(gc).length() > 0 ? getDescriptor(gc) + " " : "") + getName(gc);
 //	}
@@ -199,19 +188,50 @@ public class Covering implements XMLSaving {
 	public String getDescriptor(GameCharacter gc) {
 		return modifier.getName();
 	}
-	
-	public static String getFormattedColour(Colour colour, String additionalName, boolean glowing, boolean capitalised) {
+
+	public static String getFormattedColour(Colour colour, String additionalName, boolean glowing, boolean capitalised, String colourName) {
+		if (colourName == null) {
+			colourName = (capitalised ? Util.capitaliseSentence(colour.getName()) : colour.getName());
+		}
 		return (glowing
 					?spanStartGlowing(colour)+getGlowingDescriptor()+" "
 					:"<span style='color:"+colour.toWebHexString()+";'>")
-				+(capitalised?Util.capitaliseSentence(colour.getName()):colour.getName())
+				+ colourName
 				+additionalName
 				+"</span>";
 	}
-	
+
+	@Override
+	public Element saveAsXML(Element parentElement, Document doc) {
+		Element element = doc.createElement("covering");
+		parentElement.appendChild(element);
+
+		XMLUtil.addAttribute(doc, element, "type", BodyCoveringType.getIdFromBodyCoveringType(type));
+		XMLUtil.addAttribute(doc, element, "pat", this.pattern.toString());
+		XMLUtil.addAttribute(doc, element, "mod", this.modifier.toString());
+		XMLUtil.addAttribute(doc, element, "c1", this.primaryColour.getId());
+		if(this.primaryGlowing) {
+			XMLUtil.addAttribute(doc, element, "g1", String.valueOf(this.primaryGlowing));
+		}
+		XMLUtil.addAttribute(doc, element, "c2", this.secondaryColour.getId());
+		if(this.secondaryGlowing) {
+			XMLUtil.addAttribute(doc, element, "g2", String.valueOf(this.secondaryGlowing));
+		}
+		return element;
+	}
+
 	public String getColourDescriptor(GameCharacter gc, boolean coloured, boolean capitalised) {
 		String primaryColourName = capitalised?Util.capitaliseSentence(primaryColour.getName()):primaryColour.getName();
 		String secondaryColourName = capitalised?Util.capitaliseSentence(secondaryColour.getName()):secondaryColour.getName();
+		if (this.getType() != null) {
+			if (VAGINA.equals(this.getType().getCategory()) || ANUS.equals(this.getType().getCategory()) || TONGUE.equals(this.getType().getCategory()) || PENIS.equals(this.getType().getCategory()) || MAIN_SKIN.equals(this.getType().getCategory()) || MAIN_SCALES.equals(this.getType().getCategory())) {
+				primaryColourName = Morpher.morphGender(primaryColourName, Gender.FEMALE, Numeration.SINGLE);
+				secondaryColourName = Morpher.morphGender(secondaryColourName, Gender.FEMALE, Numeration.SINGLE);
+			} else if (NIPPLE.equals(this.getType().getCategory()) || HAIR.equals(this.getType().getCategory()) || MAIN_HAIR.equals(this.getType().getCategory()) || MAIN_FEATHER.equals(this.getType().getCategory())) {
+				primaryColourName = Morpher.morphGender(primaryColourName, Gender.MALE, Numeration.PLURAL);
+				secondaryColourName = Morpher.morphGender(secondaryColourName, Gender.MALE, Numeration.PLURAL);
+			}
+		}
 //		if(gc.getRace()==Race.SLIME) {
 //			if(this.getType()!=BodyCoveringType.SLIME) {
 //				return gc.getCovering(BodyCoveringType.SLIME).getColourDescriptor(gc, coloured, capitalised);
@@ -222,54 +242,54 @@ public class Covering implements XMLSaving {
 				case NONE:
 				case FLUID:
 				case FRECKLED_FACE:
-					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised);
+					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised, primaryColourName);
 				case HIGHLIGHTS:
-					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised)+", "+getFormattedColour(secondaryColour, "-highlighted", secondaryGlowing, capitalised);
+					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised, primaryColourName) + ", " + getFormattedColour(secondaryColour, "-highlighted", secondaryGlowing, capitalised, secondaryColourName);
 				case OMBRE:
-					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised)+", fading into "+getFormattedColour(secondaryColour, "", secondaryGlowing, capitalised);
+					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised, primaryColourName) + ", fading into " + getFormattedColour(secondaryColour, "", secondaryGlowing, capitalised, secondaryColourName);
 				case MOTTLED:
-					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised)+", "+getFormattedColour(secondaryColour, "-mottled", secondaryGlowing, capitalised);
+					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised, primaryColourName) + ", " + getFormattedColour(secondaryColour, "-mottled", secondaryGlowing, capitalised, secondaryColourName);
 				case FRECKLED:
-					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised)+", "+getFormattedColour(secondaryColour, "-freckled", secondaryGlowing, capitalised);
+					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised, primaryColourName) + ", " + getFormattedColour(secondaryColour, "-freckled", secondaryGlowing, capitalised, secondaryColourName);
 				case SPOTTED:
-					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised)+", "+getFormattedColour(secondaryColour, "-spotted", secondaryGlowing, capitalised);
+					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised, primaryColourName) + ", " + getFormattedColour(secondaryColour, "-spotted", secondaryGlowing, capitalised, secondaryColourName);
 				case MARKED:
-					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised)+", "+getFormattedColour(secondaryColour, "-marked", secondaryGlowing, capitalised);
+					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised, primaryColourName) + ", " + getFormattedColour(secondaryColour, "-marked", secondaryGlowing, capitalised, secondaryColourName);
 				case STRIPED:
-					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised)+", "+getFormattedColour(secondaryColour, "-striped", secondaryGlowing, capitalised);
+					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised, primaryColourName) + ", " + getFormattedColour(secondaryColour, "-striped", secondaryGlowing, capitalised, secondaryColourName);
 				case ORIFICE_ANUS:
-					return getFormattedColour(primaryColour, "-rimmed", primaryGlowing, capitalised)+", "+getFormattedColour(secondaryColour, "-interiored", secondaryGlowing, capitalised);
+					return getFormattedColour(primaryColour, "-ободок", primaryGlowing, capitalised, primaryColourName) + ", " + getFormattedColour(secondaryColour, "-внутри", secondaryGlowing, capitalised, secondaryColourName);
 				case ORIFICE_NIPPLE:
-					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised)
+					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised, primaryColourName)
 								+(gc.getNippleCapacity()==Capacity.ZERO_IMPENETRABLE
 									?""
-									:", "+getFormattedColour(secondaryColour, "-interiored", secondaryGlowing, capitalised));
+							: ", " + getFormattedColour(secondaryColour, "-внутри", secondaryGlowing, capitalised, secondaryColourName));
 				case ORIFICE_NIPPLE_CROTCH:
-					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised)
+					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised, primaryColourName)
 								+(gc.getNippleCrotchCapacity()==Capacity.ZERO_IMPENETRABLE
 									?""
-									:", "+getFormattedColour(secondaryColour, "-interiored", secondaryGlowing, capitalised));
+							: ", " + getFormattedColour(secondaryColour, "-внутри", secondaryGlowing, capitalised, secondaryColourName));
 				case ORIFICE_VAGINA:
-					return getFormattedColour(primaryColour, "-lipped", primaryGlowing, capitalised)+", "+getFormattedColour(secondaryColour, "-interiored", secondaryGlowing, capitalised);
+					return getFormattedColour(primaryColour, "-губы", primaryGlowing, capitalised, primaryColourName) + ", " + getFormattedColour(secondaryColour, "-внутри", secondaryGlowing, capitalised, secondaryColourName);
 				case ORIFICE_SPINNERET:
-					return getFormattedColour(primaryColour, "-rimmed", primaryGlowing, capitalised)+", "+getFormattedColour(secondaryColour, "-interiored", secondaryGlowing, capitalised);
+					return getFormattedColour(primaryColour, "-ободок", primaryGlowing, capitalised, primaryColourName) + ", " + getFormattedColour(secondaryColour, "-внутри", secondaryGlowing, capitalised, secondaryColourName);
 				case ORIFICE_MOUTH:
-					return getFormattedColour(primaryColour, "-lipped", primaryGlowing, capitalised)+", "+getFormattedColour(secondaryColour, "-interiored", secondaryGlowing, capitalised);
+					return getFormattedColour(primaryColour, "-губы", primaryGlowing, capitalised, primaryColourName) + ", " + getFormattedColour(secondaryColour, "-внутри", secondaryGlowing, capitalised, secondaryColourName);
 				case EYE_IRISES:
-					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised);
+					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised, primaryColourName);
 				case EYE_IRISES_HETEROCHROMATIC:
-					return "heterochromatic " + getFormattedColour(primaryColour, "", primaryGlowing, capitalised)+" and "+getFormattedColour(secondaryColour, "", secondaryGlowing, capitalised);
+					return "heterochromatic " + getFormattedColour(primaryColour, "", primaryGlowing, capitalised, primaryColourName) + " и " + getFormattedColour(secondaryColour, "", secondaryGlowing, capitalised, secondaryColourName);
 				case EYE_PUPILS:
-					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised);
+					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised, primaryColourName);
 				case EYE_PUPILS_HETEROCHROMATIC:
-					return "heterochromatic " + getFormattedColour(primaryColour, "", primaryGlowing, capitalised)+" and "+getFormattedColour(secondaryColour, "", secondaryGlowing, capitalised);
+					return "heterochromatic " + getFormattedColour(primaryColour, "", primaryGlowing, capitalised, primaryColourName) + " и " + getFormattedColour(secondaryColour, "", secondaryGlowing, capitalised, secondaryColourName);
 				case EYE_SCLERA:
-					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised);
+					return getFormattedColour(primaryColour, "", primaryGlowing, capitalised, primaryColourName);
 				case EYE_SCLERA_HETEROCHROMATIC:
-					return "heterochromatic " + getFormattedColour(primaryColour, "", primaryGlowing, capitalised)+" and "+getFormattedColour(secondaryColour, "", secondaryGlowing, capitalised);
+					return "heterochromatic " + getFormattedColour(primaryColour, "", primaryGlowing, capitalised, primaryColourName) + " и " + getFormattedColour(secondaryColour, "", secondaryGlowing, capitalised, secondaryColourName);
 			}
 			return (primaryGlowing?spanStartGlowing(primaryColour)+getGlowingDescriptor()+" ":"<span style='color:"+primaryColour.toWebHexString()+";'>")+primaryColourName+"</span>";
-		
+
 		} else {
 			switch(pattern) {
 				case NONE:
@@ -279,7 +299,7 @@ public class Covering implements XMLSaving {
 				case HIGHLIGHTS:
 					return (primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColourName+", "+(secondaryGlowing?getGlowingDescriptor()+" ":"")+secondaryColourName+"-highlighted";
 				case OMBRE:
-					return (primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColourName+", fading into "+(secondaryGlowing?getGlowingDescriptor()+" ":"")+secondaryColourName+"";
+					return (primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColourName+", fading into "+(secondaryGlowing?getGlowingDescriptor()+" ":"")+secondaryColourName;
 				case MOTTLED:
 					return (primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColourName+", "+(secondaryGlowing?getGlowingDescriptor()+" ":"")+secondaryColourName+"-mottled";
 				case FRECKLED:
@@ -291,52 +311,52 @@ public class Covering implements XMLSaving {
 				case STRIPED:
 					return (primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColourName+", "+(secondaryGlowing?getGlowingDescriptor()+" ":"")+secondaryColourName+"-striped";
 				case ORIFICE_ANUS:
-					return (primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColourName+"-rimmed";
+					return (primaryGlowing ? getGlowingDescriptor() + " " : "") + primaryColourName + "-ободок";
 				case ORIFICE_NIPPLE:
 					return (primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColourName;
 				case ORIFICE_NIPPLE_CROTCH:
 					return (primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColourName;
 				case ORIFICE_VAGINA:
-					return (primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColourName+"-lipped";
+					return (primaryGlowing ? getGlowingDescriptor() + " " : "") + primaryColourName + "-губы";
 				case ORIFICE_MOUTH:
 					return (primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColourName+" lips";
 				case ORIFICE_SPINNERET:
-					return (primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColourName+"-rimmed";
+					return (primaryGlowing ? getGlowingDescriptor() + " " : "") + primaryColourName + "-ободок";
 				case EYE_IRISES:
 					return (primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColourName;
 				case EYE_IRISES_HETEROCHROMATIC:
-					return "heterochromatic "+(primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColourName+" and "+(secondaryGlowing?getGlowingDescriptor()+" ":"")+secondaryColourName;
+                    return "heterochromatic " + (primaryGlowing ? getGlowingDescriptor() + " " : "") + primaryColourName + " и " + (secondaryGlowing ? getGlowingDescriptor() + " " : "") + secondaryColourName;
 				case EYE_PUPILS:
 					return (primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColourName;
 				case EYE_PUPILS_HETEROCHROMATIC:
-					return "heterochromatic "+(primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColourName+" and "+(secondaryGlowing?getGlowingDescriptor()+" ":"")+secondaryColourName;
+                    return "heterochromatic " + (primaryGlowing ? getGlowingDescriptor() + " " : "") + primaryColourName + " и " + (secondaryGlowing ? getGlowingDescriptor() + " " : "") + secondaryColourName;
 				case EYE_SCLERA:
 					return (primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColourName;
 				case EYE_SCLERA_HETEROCHROMATIC:
-					return "heterochromatic "+(primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColourName+" and "+(secondaryGlowing?getGlowingDescriptor()+" ":"")+secondaryColourName;
+                    return "heterochromatic " + (primaryGlowing ? getGlowingDescriptor() + " " : "") + primaryColourName + " и " + (secondaryGlowing ? getGlowingDescriptor() + " " : "") + secondaryColourName;
 			}
 			return (primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColourName;
 		}
 	}
-	
+
 	public String getPrimaryColourDescriptor(boolean coloured) {
 		if(coloured) {
 			return (primaryGlowing?spanStartGlowing(primaryColour)+getGlowingDescriptor()+" ":"<span style='color:"+primaryColour.toWebHexString()+";'>")+primaryColour.getName()+"</span>";
-		
+
 		} else {
 			return (primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColour.getName();
 		}
 	}
-	
+
 	public String getSecondaryColourDescriptor(boolean coloured) {
 		if(coloured) {
 			return (secondaryGlowing?spanStartGlowing(secondaryColour)+getGlowingDescriptor()+" ":"<span style='color:"+secondaryColour.toWebHexString()+";'>")+secondaryColour.getName()+"</span>";
-		
+
 		} else {
 			return (secondaryGlowing?getGlowingDescriptor()+" ":"")+secondaryColour.getName();
 		}
 	}
-	
+
 	/**
 	 * @return A full description of this covering. e.g. "glowing black, wolf-like fur, with luminescent purple stripes" or "black, shaggy fur"
 	 */
@@ -344,13 +364,13 @@ public class Covering implements XMLSaving {
 		//text-shadow: 0px 0px 4px #FF0000;
 		String descriptor = modifier.getName();
 		String name = type.getName(gc);
-		
+
 		// For furry body hair, just call it 'fur'
 		if(modifier==CoveringModifier.FURRY && type.getCategory()==BodyCoveringCategory.BODY_HAIR) {
 			descriptor = "";
-			name = "fur";
+			name = "мех";
 		}
-		
+
 //		if(gc.getRace()==Race.SLIME) {
 //			if(this.getType()!=BodyCoveringType.SLIME) {
 //				return gc.getCovering(BodyCoveringType.SLIME).getFullDescription(gc, coloured);
@@ -431,9 +451,9 @@ public class Covering implements XMLSaving {
 				case EYE_SCLERA_HETEROCHROMATIC:
 					return "heterochromatic "+(primaryGlowing?spanStartGlowing(primaryColour)+getGlowingDescriptor()+" ":"<span style='color:"+primaryColour.toWebHexString()+";'>")+primaryColour.getName()+"</span> and "
 						+(secondaryGlowing?spanStartGlowing(secondaryColour)+getGlowingDescriptor()+" ":"<span style='color:"+secondaryColour.toWebHexString()+";'>")+secondaryColour.getName()+"</span> sclerae";
-			
+
 			}
-			
+
 		} else {
 			switch(pattern) {
 				case NONE:
@@ -485,46 +505,44 @@ public class Covering implements XMLSaving {
 				case EYE_IRISES:
 					return (primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColour.getName()+" irises";
 				case EYE_IRISES_HETEROCHROMATIC:
-					return "heterochromatic "+(primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColour.getName()+" and "+(secondaryGlowing?getGlowingDescriptor()+" ":"")+secondaryColour.getName()+" irises";
+                    return "heterochromatic " + (primaryGlowing ? getGlowingDescriptor() + " " : "") + primaryColour.getName() + " и " + (secondaryGlowing ? getGlowingDescriptor() + " " : "") + secondaryColour.getName() + " irises";
 				case EYE_PUPILS:
 					return (primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColour.getName()+" pupils";
 				case EYE_PUPILS_HETEROCHROMATIC:
-					return "heterochromatic "+(primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColour.getName()+" and "+(secondaryGlowing?getGlowingDescriptor()+" ":"")+secondaryColour.getName()+" sclerae";
+                    return "heterochromatic " + (primaryGlowing ? getGlowingDescriptor() + " " : "") + primaryColour.getName() + " и " + (secondaryGlowing ? getGlowingDescriptor() + " " : "") + secondaryColour.getName() + " sclerae";
 				case EYE_SCLERA:
 					return (primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColour.getName()+" pupils";
 				case EYE_SCLERA_HETEROCHROMATIC:
-					return "heterochromatic "+(primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColour.getName()+" and "+(secondaryGlowing?getGlowingDescriptor()+" ":"")+secondaryColour.getName()+" sclerae";
+                    return "heterochromatic " + (primaryGlowing ? getGlowingDescriptor() + " " : "") + primaryColour.getName() + " и " + (secondaryGlowing ? getGlowingDescriptor() + " " : "") + secondaryColour.getName() + " sclerae";
 			}
 		}
 		return (primaryGlowing?getGlowingDescriptor()+" ":"")+primaryColour.getName();
 	}
-	
+
 	private static String spanStartGlowing(Colour colour) {
 		return "<span style='color:"+colour.toWebHexString()+"; text-shadow: 0px 0px 4px "+colour.getShades()[4]+";'>";
 	}
-	
+
 	private static String getGlowingDescriptor() {
 		return UtilText.returnStringAtRandom("glowing", "luminescent", "luminous", "fluorescent");
 	}
-	
+
 	@Override
 	public boolean equals(Object o) {
 //		if(super.equals(o)){
 			if(o instanceof Covering){
-				if(((Covering)o).getType() == type
-						&& ((Covering)o).getPattern() == pattern
-						&& ((Covering)o).getModifier() == modifier
-						&& ((Covering)o).getPrimaryColour() == primaryColour
-						&& ((Covering)o).isPrimaryGlowing() == primaryGlowing
-						&& ((Covering)o).getSecondaryColour() == secondaryColour
-						&& ((Covering)o).isSecondaryGlowing() == secondaryGlowing){
-					return true;
-				}
+                return ((Covering) o).getType() == type
+                        && ((Covering) o).getPattern() == pattern
+                        && ((Covering) o).getModifier() == modifier
+                        && ((Covering) o).getPrimaryColour() == primaryColour
+                        && ((Covering) o).isPrimaryGlowing() == primaryGlowing
+                        && ((Covering) o).getSecondaryColour() == secondaryColour
+                        && ((Covering) o).isSecondaryGlowing() == secondaryGlowing;
 			}
 //		}
 		return false;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		int result = 17;

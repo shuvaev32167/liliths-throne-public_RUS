@@ -51,10 +51,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		Opening the carton of Rudolph's Egg Nog, [npc.name] [npc.verb(bring)] it up to [npc.her] [npc.lips] and [npc.verb(start)] drinking. Although there's nothing out of the ordinary about its creamy, sweet taste, [npc.name] soon [npc.verb(discover)] that the egg nog leaves a strange, slightly salty aftertaste lingering on [npc.her] [npc.tongue].
+		Opening the carton of Rudolph's Egg Nog, [npc.name] bring it up to [npc.her] [npc.lips] и start drinking. Although there's nothing out of the ordinary about its creamy, sweet taste, [npc.name] soon discover that the egg nog leaves a strange, slightly salty aftertaste lingering on [npc.her] [npc.tongue].
 		]]></selfUse>
 		<otherUse><![CDATA[
-		Opening the carton of Rudolph's Egg Nog, [npc.name] [npc.verb(bring)] it up to [npc2.namePos] [npc2.lips] and [npc.verb(get)] [npc2.herHim] to drink it. Although there's nothing out of the ordinary about its creamy, sweet taste, [npc2.name] soon [npc2.verb(discover)] that the egg nog leaves a strange, slightly salty aftertaste lingering on [npc2.her] [npc2.tongue].
+		Opening the carton of Rudolph's Egg Nog, [npc.name] bring it up to [npc2.namePos] [npc2.lips] и get [npc2.herHim] to drink it. Although there's nothing out of the ordinary about its creamy, sweet taste, [npc2.name] soon [npc2.verb(discover)] that the egg nog leaves a strange, slightly salty aftertaste lingering on [npc2.her] [npc2.tongue].
 		]]></otherUse>
 	</useDescriptions>
 

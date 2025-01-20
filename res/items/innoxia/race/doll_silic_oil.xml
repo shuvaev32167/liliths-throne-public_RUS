@@ -40,7 +40,7 @@
 				</p>
 			#ELSE
 				<p style='margin-bottom:0; padding-bottom:0;'>
-					[npc.Name] [npc.verb(feel)] the oil spreading throughout [npc.her] silicone body, and a moment later it begins to seep out of [npc.her] orifices...
+					[npc.Name] feel the oil spreading throughout [npc.her] silicone body, and a moment later it begins to seep out of [npc.her] orifices...
 				</p>
 				[#npc.incrementFaceWetness(1)]
 				#IF(npc.hasBreasts())
@@ -67,17 +67,17 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		[npc.Name] [npc.verb(pop)] the cap off of the bottle of Silic Oil, before lifting it to [npc.her] waiting [npc.lips] and promptly downing the entire bottle.
+		[npc.Name] pop the cap off of the bottle of Silic Oil, before lifting it to [npc.her] waiting [npc.lips] and promptly downing the entire bottle.
 		#IF(npc.getRace()!=RACE_DOLL)
-			 [npc.She] [npc.verb(choke)] and [npc.verb(splutter)] as the nasty silicone oil slides down [npc.her] throat.
+			 [npc.She] choke и splutter as the nasty silicone oil slides down [npc.her] throat.
 		#ELSE
-			 [npc.She] eagerly [npc.verb(swallow)] every last drop, finding the taste of the silicone oil to be absolutely delicious.
+			 [npc.She] eagerly swallow every last drop, finding the taste of the silicone oil to be absolutely delicious.
 		#ENDIF
 		]]></selfUse>
 		<otherUse><![CDATA[
-		[npc.Name] [npc.verb(pop)] the cap off of the bottle of Silic Oil, before lifting it to [npc2.namePos] waiting [npc2.lips] and getting [npc2.her] to down the entire bottle.
+		[npc.Name] pop the cap off of the bottle of Silic Oil, before lifting it to [npc2.namePos] waiting [npc2.lips] and getting [npc2.her] to down the entire bottle.
 		#IF(npc.getRace()!=RACE_DOLL)
-			 [npc2.Name] [npc2.verb(choke)] and [npc2.verb(splutter)] as the nasty silicone oil slides down [npc2.her] throat.
+			 [npc2.Name] [npc2.verb(choke)] и [npc2.verb(splutter)] as the nasty silicone oil slides down [npc2.her] throat.
 		#ELSE
 			 [npc2.Name] obediently [npc2.verb(swallow)] every last drop, finding the taste of the silicone oil to be absolutely delicious.
 		#ENDIF

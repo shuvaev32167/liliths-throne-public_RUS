@@ -35,16 +35,16 @@
 		<rarity>RARE</rarity> 
 		
 		<!-- The description that's used when equipping this weapon. The description should be generic, able to be used by both the player and NPCs. Just make sure to use the tag "[npc.verb()]" whenever using a verb, which will then, for example, parse like this:
-		[npc.verb(run)] if npc is player = "run"
-		[npc.verb(run)] if npc is not the player = "runs"
+		run if npc is player = "run"
+		run if npc is not the player = "runs"
 		Always use the first-person singular verb.
 		The target "npc" OR "npc1" should be used for the character using the weapon. e.g. If the player is the one attacking (and is called Innoxia), then [npc.Name] will return "Innoxia"
-		The target "npc2" should be used for the character being attacked. e.g. If Brax is the one being attacked, then [npc2.Name] will return "Brax"
+		The target "npc2" should be used for the character being attacked. e.g. If Brax is the one being attacked, then [npc2.Name] will return "Бракс"
 		-->
-		<equipText><![CDATA[[npc.Name] [npc.verb(ready)] [npc.her] staff, and [npc.verb(prepare)] to use it in combat.]]></equipText>
+        <equipText><![CDATA[[npc.Name] ready [npc.her] staff, and prepare to use it in combat.]]></equipText>
 		
 		<!-- The description that's used when equipping this weapon. Follow the same guidelines as equipText. -->
-		<unequipText><![CDATA[[npc.Name] [npc.verb(put)] [npc.her] staff away.]]></unequipText>
+        <unequipText><![CDATA[[npc.Name] put [npc.her] staff away.]]></unequipText>
 		
 		<!-- The file name of this weapon's image when in the character's inventory. The only supported file type is .svg. I use the free program "Inkscape" to make .svg images for the game. -->
 		<imageName>arcanist_staff.svg</imageName> 
@@ -124,26 +124,26 @@
 	<!-- Descriptions that are used when hitting an enemy. One of the hitText values will be randomly selected each time the attacker hits their target. Follow the same guidelines as equipText. -->
 	<hitDescriptions>
 		<hitText><![CDATA[
-		Swinging [npc.her] staff, [npc.name] [npc.verb(manage)] to whack [npc2.name] on the [npc2.arm], which causes [npc2.herHim] to let out a surprised yelp!
+		Swinging [npc.her] staff, [npc.name] manage to whack [npc2.name] on the [npc2.arm], which causes [npc2.herHim] to let out a surprised yelp!
 		]]></hitText>
 		<hitText><![CDATA[
-		Striking out at [npc2.name] with [npc.her] staff, [npc.name] [npc.verb(manage)] to land a solid hit on [npc2.her] [npc2.arm]!
+		Striking out at [npc2.name] with [npc.her] staff, [npc.name] manage to land a solid hit on [npc2.her] [npc2.arm]!
 		]]></hitText>
 		<hitText><![CDATA[
-		With a quick step forwards, [npc.name] [npc.verb(lunge)] out at [npc2.name] with [npc.her] staff, whacking the heavy end against [npc2.her] shoulder!
+		With a quick step forwards, [npc.name] lunge out at [npc2.name] with [npc.her] staff, whacking the heavy end against [npc2.her] shoulder!
 		]]></hitText>
 	</hitDescriptions>
 
 	<!-- Descriptions that are used when missing an enemy. One of the missText values will be randomly selected each time the attacker misses their target. Follow the same guidelines as equipText. -->
 	<missDescriptions>
 		<missText><![CDATA[
-		Thrusting out with [npc.her] staff, [npc.name] [npc.verb(attempt)] to whack [npc2.name] on the [npc2.arm], but [npc.verb(end)] up missing [npc2.herHim]!
+		Thrusting out with [npc.her] staff, [npc.name] attempt to whack [npc2.name] on the [npc2.arm], but end up missing [npc2.herHim]!
 		]]></missText>
 		<missText><![CDATA[
-		Striking out at [npc2.name] with [npc.her] staff, [npc.name] [npc.verb(let)] out a frustrated cry as [npc.she] [npc.verb(miss)] [npc.her] target!
+		Striking out at [npc2.name] with [npc.her] staff, [npc.name] let out a frustrated cry as [npc.she] miss [npc.her] target!
 		]]></missText>
 		<missText><![CDATA[
-		With a quick step forwards, [npc.name] [npc.verb(lunge)] out at [npc2.name] with [npc.her] staff, but [npc.she] [npc.verb(miss)] [npc.her] target!
+		With a quick step forwards, [npc.name] lunge out at [npc2.name] with [npc.her] staff, but [npc.she] miss [npc.her] target!
 		]]></missText>
 	</missDescriptions>
 	

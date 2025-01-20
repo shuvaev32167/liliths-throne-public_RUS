@@ -53,25 +53,25 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(slide)] a pair of nipple rings into [npc.her] [npc.nipples+].]]>
+        <![CDATA[[npc.Name] slide a pair of nipple rings into [npc.her] [npc.nipples+].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(slide)] a pair of nipple rings into [npc2.namePos] [npc2.nipples+].]]>
+        <![CDATA[[npc.Name] slide a pair of nipple rings into [npc2.namePos] [npc2.nipples+].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(slide)] a pair of nipple rings into [npc2.namePos] [npc2.nipples+], giving them a rough tug.]]>
+        <![CDATA[[npc.Name] slide a pair of nipple rings into [npc2.namePos] [npc2.nipples+], giving them a rough tug.]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(slide)] a pair of nipple rings out of [npc.her] [npc.nipples+].]]>
+        <![CDATA[[npc.Name] slide a pair of nipple rings out of [npc.her] [npc.nipples+].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(slide)] a pair of nipple rings out of [npc2.namePos] [npc2.nipples+].]]>
+        <![CDATA[[npc.Name] slide a pair of nipple rings out of [npc2.namePos] [npc2.nipples+].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(tug)] [npc2.NamePos] nipple rings before sliding them out.]]>
+        <![CDATA[[npc.Name] tug [npc2.NamePos] nipple rings before sliding them out.]]>
     </otherRough>
   </displacementText>
   

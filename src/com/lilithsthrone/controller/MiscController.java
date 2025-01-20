@@ -1,20 +1,10 @@
 package com.lilithsthrone.controller;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
-import org.w3c.dom.events.EventTarget;
-
 import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInformationEventListener;
 import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInventoryEventListener;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
-import com.lilithsthrone.game.character.effects.Perk;
-import com.lilithsthrone.game.character.effects.PerkCategory;
-import com.lilithsthrone.game.character.effects.PerkManager;
-import com.lilithsthrone.game.character.effects.TreeEntry;
+import com.lilithsthrone.game.character.effects.*;
 import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
@@ -32,15 +22,7 @@ import com.lilithsthrone.game.dialogue.companions.OccupantManagementDialogue;
 import com.lilithsthrone.game.dialogue.npcDialogue.elemental.ElementalDialogue;
 import com.lilithsthrone.game.dialogue.places.dominion.slaverAlley.ScarlettsShop;
 import com.lilithsthrone.game.dialogue.responses.Response;
-import com.lilithsthrone.game.dialogue.utils.BodyChanging;
-import com.lilithsthrone.game.dialogue.utils.CharactersPresentDialogue;
-import com.lilithsthrone.game.dialogue.utils.CombatMovesSetup;
-import com.lilithsthrone.game.dialogue.utils.GiftDialogue;
-import com.lilithsthrone.game.dialogue.utils.MapTravelType;
-import com.lilithsthrone.game.dialogue.utils.MiscDialogue;
-import com.lilithsthrone.game.dialogue.utils.PhoneDialogue;
-import com.lilithsthrone.game.dialogue.utils.SpellManagement;
-import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.game.dialogue.utils.*;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
@@ -59,8 +41,12 @@ import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
-
 import javafx.scene.input.KeyCode;
+import org.w3c.dom.events.EventTarget;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @since 0.4.6.4
@@ -199,7 +185,7 @@ public class MiscController {
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
 					Main.game.restoreSavedContent(false);
-					Main.game.setContent(new Response("Подарите подарок", "", GiftDialogue.getDialogueToProceedTo()) {
+					Main.game.setContent(new Response("Подарить подарок", "", GiftDialogue.getDialogueToProceedTo()) {
 						@Override
 						public void effects() {
 							Main.game.setResponseTab(GiftDialogue.getProceedDialogueTab());
@@ -216,7 +202,7 @@ public class MiscController {
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
 					Main.game.restoreSavedContent(false);
-					Main.game.setContent(new Response("Подарите подарок", "", GiftDialogue.getDialogueToProceedTo()) {
+					Main.game.setContent(new Response("Подарить подарок", "", GiftDialogue.getDialogueToProceedTo()) {
 						@Override
 						public void effects() {
 							Main.game.setResponseTab(GiftDialogue.getProceedDialogueTab());
@@ -233,7 +219,7 @@ public class MiscController {
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
 					Main.game.restoreSavedContent(false);
-					Main.game.setContent(new Response("Подарите подарок", "", GiftDialogue.getDialogueToProceedTo()) {
+					Main.game.setContent(new Response("Подарить подарок", "", GiftDialogue.getDialogueToProceedTo()) {
 						@Override
 						public void effects() {
 							Main.game.setResponseTab(GiftDialogue.getProceedDialogueTab());
@@ -727,7 +713,7 @@ public class MiscController {
 									DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true);
 									Main.game.getTextStartStringBuilder().append(
 											"<p style='text-align:center'>"
-													+"[style.italicsArcane(Вспомниная как выглядел ваш пункт назначения в последний раз, когда вы там были, вы произносите заклинание телепортации, и в одно мгновение оказываетесь там!)]"
+													+ "[style.italicsArcane(Вспоминая как выглядел твой пункт назначения в последний раз, когда ты там [pc.genderBasedWord(был, была)], ты произносишь заклинание телепортации, и в одно мгновение оказываешься там!)]"
 													+"</p>");
 									Main.game.setContent(new Response("", "", dn) {
 										@Override

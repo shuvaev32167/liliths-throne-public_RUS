@@ -134,25 +134,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(slide)] [npc.her] head through the plate carrier's neck hole and [npc.verb(secure)] the cummerbund on either side of [npc.her] torso.]]>
+            <![CDATA[[npc.Name] slide [npc.her] head through the plate carrier's neck hole and secure the cummerbund on either side of [npc.her] torso.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(slide)] [npc2.namePos] head through the plate carrier's neck hole and [npc.verb(secure)] the cummerbund on either side of [npc2.her] torso.]]>
+            <![CDATA[[npc.Name] slide [npc2.namePos] head through the plate carrier's neck hole and secure the cummerbund on either side of [npc2.her] torso.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(shove)] [npc2.namePos] head through the plate carrier's neck hole and hastily [npc.verb(secure)] the cummerbund on either side of [npc2.her] torso.]]>
+            <![CDATA[[npc.Name] shove [npc2.namePos] head through the plate carrier's neck hole and hastily secure the cummerbund on either side of [npc2.her] torso.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] un[npc.do] the cummerbund on either side of [npc.her] plate carrier and [npc.verb(slide)] [npc.her] head through the neck hole.]]>
+            <![CDATA[[npc.Name] un[npc.do] the cummerbund on either side of [npc.her] plate carrier and slide [npc.her] head through the neck hole.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] un[npc.do] the cummerbund on either side of [npc2.namePos] plate carrier and [npc.verb(slide)] [npc2.her] head through the neck hole.]]>
+            <![CDATA[[npc.Name] un[npc.do] the cummerbund on either side of [npc2.namePos] plate carrier and slide [npc2.her] head through the neck hole.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(rip)] open the cummerbund either side of [npc2.namePos] plate carrier and [npc.verb(yank)] the rest over [npc2.her] head.]]>
+            <![CDATA[[npc.Name] rip open the cummerbund either side of [npc2.namePos] plate carrier and yank the rest over [npc2.her] head.]]>
 		</otherRough>
 	</displacementText>
 	

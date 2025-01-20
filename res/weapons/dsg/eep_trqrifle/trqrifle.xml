@@ -22,11 +22,13 @@
 		
 		<attackTooltipDescription>Shoot [npc2.name] with your tranquiliser rifle.</attackTooltipDescription>
 		
-		<rarity>EPIC</rarity> 
-		
-		<equipText><![CDATA[[npc.Name] [npc.verb(bring)] out the rifle, [npc.verb(load)] a fresh gas bottle, and [npc.verb(insert)] a full-moon clip of six darts into the autoloader.]]></equipText>
-		
-		<unequipText><![CDATA[[npc.Name] [npc.verb(remove)] the unspent darts from the autoloader, [npc.verb(unload)] the gas bottle, and [npc.verb(put)] the rifle away.]]></unequipText>
+		<rarity>EPIC</rarity>
+
+        <equipText>
+            <![CDATA[[npc.Name] bring out the rifle, load a fresh gas bottle, and insert a full-moon clip of six darts into the autoloader.]]></equipText>
+
+        <unequipText>
+            <![CDATA[[npc.Name] remove the unspent darts from the autoloader, unload the gas bottle, and put the rifle away.]]></unequipText>
 		
 		<imageName>trqrifle_nogas.svg</imageName> 
 		
@@ -76,13 +78,13 @@
 
 	<hitDescriptions>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(line)] [npc2.name] up in [npc.her] sights and [npc.verb(pull)] the trigger. The needle on the end of the dart embeds itself in [npc2.namePos] aura and releases its contents.
+		[npc.Name] line [npc2.name] up in [npc.her] sights and pull the trigger. The needle on the end of the dart embeds itself in [npc2.namePos] aura and releases its contents.
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(line)] [npc2.name] up in [npc.her] sights and [npc.verb(pull)] the trigger. The shot goes wide! The dart clatters uselessly on the ground.
+		[npc.Name] line [npc2.name] up in [npc.her] sights and pull the trigger. The shot goes wide! The dart clatters uselessly on the ground.
 		]]></missText>
 	</missDescriptions>
 	

@@ -29,7 +29,7 @@ public class FeliciaApartment {
 	public static final DialogueNode ENTRYWAY = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -52,7 +52,7 @@ public class FeliciaApartment {
 	public static final DialogueNode FELICIA_BEDROOM = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -67,7 +67,7 @@ public class FeliciaApartment {
 	public static final DialogueNode BATHROOM = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -82,7 +82,7 @@ public class FeliciaApartment {
 	public static final DialogueNode KITCHEN = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -97,7 +97,7 @@ public class FeliciaApartment {
 	public static final DialogueNode DINING_AREA = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -112,7 +112,7 @@ public class FeliciaApartment {
 	public static final DialogueNode LIVING_AREA = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -130,7 +130,7 @@ public class FeliciaApartment {
 	public static final DialogueNode HALLWAY = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -145,7 +145,7 @@ public class FeliciaApartment {
 	public static final DialogueNode FELICIA_GREETINGS = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -160,7 +160,7 @@ public class FeliciaApartment {
 	public static final DialogueNode FELICIA_GREETINGS_APPROACH = new DialogueNode("", "", true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -175,7 +175,7 @@ public class FeliciaApartment {
 	public static final DialogueNode FELICIA_GOODBYE = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -190,7 +190,7 @@ public class FeliciaApartment {
 	public static final DialogueNode ARTHUR_WHEREABOUTS = new DialogueNode("", "", true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -219,7 +219,7 @@ public class FeliciaApartment {
 	public static final DialogueNode ARTHUR_WHEREABOUTS_NO = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -234,7 +234,7 @@ public class FeliciaApartment {
 	public static final DialogueNode ARTHUR_WHEREABOUTS_YES = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -250,7 +250,7 @@ public class FeliciaApartment {
 	public static final DialogueNode TALK_MENU = new DialogueNode("", "", true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {   
@@ -288,7 +288,7 @@ public class FeliciaApartment {
 	public static final DialogueNode TALK_MENU_ARTHUR = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -328,7 +328,7 @@ public class FeliciaApartment {
 	public static final DialogueNode TALK_MENU_ABOUT_HER = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -390,7 +390,7 @@ public class FeliciaApartment {
 	public static final DialogueNode TALK_ARTHUR_PERSONALITY = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -405,7 +405,7 @@ public class FeliciaApartment {
 	public static final DialogueNode TALK_ARTHUR_HOBBIES = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -420,7 +420,7 @@ public class FeliciaApartment {
 	public static final DialogueNode TALK_ABOUT_HER_NAME = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -435,7 +435,7 @@ public class FeliciaApartment {
 	public static final DialogueNode TALK_ABOUT_HER_PLACE = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -450,7 +450,7 @@ public class FeliciaApartment {
 	public static final DialogueNode TALK_ABOUT_HER_FUR = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -465,7 +465,7 @@ public class FeliciaApartment {
 	public static final DialogueNode TALK_ABOUT_HER_FAVORITE_STORE = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -480,7 +480,7 @@ public class FeliciaApartment {
 	public static final DialogueNode TALK_LEWD = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -489,7 +489,7 @@ public class FeliciaApartment {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Someone else, then?", TALK_LEWD_CONTINUE);
+                return new Response("Продолжить", "Someone else, then?", TALK_LEWD_CONTINUE);
 				
 			} else if (index == 2) {
 				return new Response("Back off", "Take the hint and talk about something else.", TALK_MENU) {
@@ -506,7 +506,7 @@ public class FeliciaApartment {
 	public static final DialogueNode TALK_LEWD_CONTINUE = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -537,7 +537,7 @@ public class FeliciaApartment {
 	public static final DialogueNode TALK_LEWD_PUSH = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -575,7 +575,7 @@ public class FeliciaApartment {
 	public static final DialogueNode TALK_LEWD_DIG_DEEP = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -599,7 +599,7 @@ public class FeliciaApartment {
 	public static final DialogueNode TALK_PET = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {

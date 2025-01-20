@@ -2,11 +2,7 @@ package com.lilithsthrone.game.sex.sexActions.baseActions;
 
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.sex.ArousalIncrease;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexPace;
-import com.lilithsthrone.game.sex.SexParticipantType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
@@ -52,36 +48,36 @@ public class FingerClit {
 					case DOM_GENTLE:
 						UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 								"Slowly sinking [npc.her] [npc.fingers+] deep into [npc2.namePos] [npc2.pussy+], [npc.name] lifts [npc.her] thumb up to [npc2.her] [npc2.clit],"
-										+ " before gently pressing down and rubbing against it as [npc.she] [npc.verb(continue)] curling [npc.her] digits up inside of [npc2.herHim].",
-								"Gently sliding [npc.her] [npc.fingers+] into [npc2.namePos] [npc2.pussy+], [npc.name] [npc.verb(press)] [npc.her] thumb down against [npc2.her] [npc2.clit+],"
-										+ " softly rubbing against it as [npc.she] [npc.verb(let)] out a little [npc.moan].",
+                                        + " before gently pressing down and rubbing against it as [npc.she] continue curling [npc.her] digits up inside of [npc2.herHim].",
+                                "Gently sliding [npc.her] [npc.fingers+] into [npc2.namePos] [npc2.pussy+], [npc.name] press [npc.her] thumb down against [npc2.her] [npc2.clit+],"
+                                        + " softly rubbing against it as [npc.she] let out a little [npc.moan].",
 								"Gently pushing [npc.her] [npc.fingers] deep into [npc2.namePos] [npc2.pussy+],"
 										+ " a little [npc.moan] escapes from between [npc.namePos] [npc.lips] as [npc.she] lifts [npc.her] thumb to start gently rubbing and pressing down on [npc2.her] [npc2.clit+]."));
 						break;
 					case DOM_ROUGH:
 						UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 								"Roughly digging [npc.her] [npc.fingers+] deep into [npc2.namePos] [npc2.pussy+], [npc.name] lifts [npc.her] thumb up to [npc2.her] [npc2.clit],"
-										+ " before forcefully pressing down and grinding against it as [npc.she] [npc.verb(continue)] dominantly curling [npc.her] digits up inside of [npc2.herHim].",
+                                        + " before forcefully pressing down and grinding against it as [npc.she] continue dominantly curling [npc.her] digits up inside of [npc2.herHim].",
 								"Forcing [npc.her] [npc.fingers+] deep into [npc2.namePos] [npc2.pussy+], [npc.name] grinds [npc.her] thumb down against [npc2.her] [npc2.clit+],"
-										+ " roughly rubbing against it as [npc.she] [npc.verb(let)] out [npc.a_moan+].",
+                                        + " roughly rubbing against it as [npc.she] let out [npc.a_moan+].",
 								"Slamming [npc.her] [npc.fingers] deep into [npc2.namePos] [npc2.pussy+],"
 										+ " [npc.a_moan+] escapes from between [npc.namePos] [npc.lips] as [npc.she] lifts [npc.her] thumb to start roughly rubbing and grinding down on [npc2.her] [npc2.clit+]."));
 						break;
 					case SUB_NORMAL:
 						UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 								"Sinking [npc.her] [npc.fingers+] deep into [npc2.namePos] [npc2.pussy+], [npc.name] lifts [npc.her] thumb up to [npc2.her] [npc2.clit],"
-										+ " before pressing down and rubbing against it as [npc.she] [npc.verb(continue)] curling [npc.her] digits up inside of [npc2.herHim].",
-								"Sliding [npc.her] [npc.fingers+] into [npc2.namePos] [npc2.pussy+], [npc.name] [npc.verb(press)] [npc.her] thumb down against [npc2.her] [npc2.clit+],"
-										+ " rubbing against it as [npc.she] [npc.verb(let)] out [npc.a_moan+].",
+                                        + " before pressing down and rubbing against it as [npc.she] continue curling [npc.her] digits up inside of [npc2.herHim].",
+                                "Sliding [npc.her] [npc.fingers+] into [npc2.namePos] [npc2.pussy+], [npc.name] press [npc.her] thumb down against [npc2.her] [npc2.clit+],"
+                                        + " rubbing against it as [npc.she] let out [npc.a_moan+].",
 								"Pushing [npc.her] [npc.fingers] deep into [npc2.namePos] [npc2.pussy+],"
 										+ " [npc.a_moan+] escapes from between [npc.namePos] [npc.lips] as [npc.she] lifts [npc.her] thumb to start rubbing and pressing down on [npc2.her] [npc2.clit+]."));
 						break;
 					default: // Dom normal and sub eager:
 						UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 								"Eagerly sinking [npc.her] [npc.fingers+] deep into [npc2.namePos] [npc2.pussy+], [npc.name] lifts [npc.her] thumb up to [npc2.her] [npc2.clit],"
-										+ " before greedily pressing down and rubbing against it as [npc.she] [npc.verb(continue)] curling [npc.her] digits up inside of [npc2.herHim].",
-								"Greedily sliding [npc.her] [npc.fingers+] into [npc2.namePos] [npc2.pussy+], [npc.name] [npc.verb(press)] [npc.her] thumb down against [npc2.her] [npc2.clit+],"
-										+ " eagerly rubbing against it as [npc.she] [npc.verb(let)] out [npc.a_moan+].",
+                                        + " before greedily pressing down and rubbing against it as [npc.she] continue curling [npc.her] digits up inside of [npc2.herHim].",
+                                "Greedily sliding [npc.her] [npc.fingers+] into [npc2.namePos] [npc2.pussy+], [npc.name] press [npc.her] thumb down against [npc2.her] [npc2.clit+],"
+                                        + " eagerly rubbing against it as [npc.she] let out [npc.a_moan+].",
 								"Pushing [npc.her] [npc.fingers] deep into [npc2.namePos] [npc2.pussy+],"
 										+ " [npc.a_moan+] escapes from between [npc.namePos] [npc.lips] as [npc.she] lifts [npc.her] thumb to start eagerly rubbing and pressing down on [npc2.her] [npc2.clit+]."));
 						break;
@@ -137,39 +133,39 @@ public class FingerClit {
 				switch(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())) {
 					case DOM_GENTLE:
 						UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-								"Slowly sliding [npc.her] [npc.fingers+] up the length of [npc2.namePos] [npc2.pussy+], [npc.name] [npc.verb(focus)] [npc.her] attention on [npc2.her] [npc2.clit+],"
-										+ " gently squeezing and rubbing it as [npc.she] [npc.verb(lean)] in against [npc2.herHim] and [npc.verb(let)] out a little [npc.moan].",
+                                "Slowly sliding [npc.her] [npc.fingers+] up the length of [npc2.namePos] [npc2.pussy+], [npc.name] focus [npc.her] attention on [npc2.her] [npc2.clit+],"
+                                        + " gently squeezing and rubbing it as [npc.she] lean in against [npc2.herHim] и let out a little [npc.moan].",
 								"Gently tracing [npc.her] [npc.fingers+] over [npc2.namePos] [npc2.pussy+],"
-										+ " [npc.name] [npc.verb(let)] out a little [npc.moan] as [npc.she] [npc.verb(home)] in on [npc2.her] [npc2.clit+], before starting to softly rub and pinch it.",
+                                        + " [npc.name] let out a little [npc.moan] as [npc.she] home in on [npc2.her] [npc2.clit+], before starting to softly rub and pinch it.",
 								"Teasing [npc.her] [npc.fingers] over [npc2.namePos] [npc2.pussy+],"
-										+ " a little [npc.moan] escapes from between [npc.namePos] [npc.lips] as [npc.she] [npc.verb(start)] to gently rub and pinch at [npc2.her] [npc2.clit+]."));
+                                        + " a little [npc.moan] escapes from between [npc.namePos] [npc.lips] as [npc.she] start to gently rub and pinch at [npc2.her] [npc2.clit+]."));
 						break;
 					case DOM_ROUGH:
 						UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-								"Roughly grinding [npc.her] [npc.fingers+] up the length of [npc2.namePos] [npc2.pussy+], [npc.name] [npc.verb(focus)] [npc.her] attention on [npc2.her] [npc2.clit+],"
-										+ " cruelly squeezing and pinching it as [npc.she] [npc.verb(lean)] in against [npc2.herHim] and [npc.verb(let)] out [npc.a_moan+].",
+                                "Roughly grinding [npc.her] [npc.fingers+] up the length of [npc2.namePos] [npc2.pussy+], [npc.name] focus [npc.her] attention on [npc2.her] [npc2.clit+],"
+                                        + " cruelly squeezing and pinching it as [npc.she] lean in against [npc2.herHim] и let out [npc.a_moan+].",
 								"Greedily tracing [npc.her] [npc.fingers+] over [npc2.namePos] [npc2.pussy+],"
-										+ " [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(home)] in on [npc2.her] [npc2.clit+], before starting to roughly rub and pinch it.",
+                                        + " [npc.name] let out [npc.a_moan+] as [npc.she] home in on [npc2.her] [npc2.clit+], before starting to roughly rub and pinch it.",
 								"Grinding [npc.her] [npc.fingers] over [npc2.namePos] [npc2.pussy+],"
-										+ " [npc.a_moan+] escapes from between [npc.namePos] [npc.lips] as [npc.she] [npc.verb(start)] to roughly rub and pinch at [npc2.her] [npc2.clit+]."));
+                                        + " [npc.a_moan+] escapes from between [npc.namePos] [npc.lips] as [npc.she] start to roughly rub and pinch at [npc2.her] [npc2.clit+]."));
 						break;
 					case SUB_NORMAL:
 						UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-								"Sliding [npc.her] [npc.fingers+] up the length of [npc2.namePos] [npc2.pussy+], [npc.name] [npc.verb(focus)] [npc.her] attention on [npc2.her] [npc2.clit+],"
-										+ " squeezing and rubbing it as [npc.she] [npc.verb(lean)] in against [npc2.herHim] and [npc.verb(let)] out [npc.a_moan+].",
+                                "Sliding [npc.her] [npc.fingers+] up the length of [npc2.namePos] [npc2.pussy+], [npc.name] focus [npc.her] attention on [npc2.her] [npc2.clit+],"
+                                        + " squeezing and rubbing it as [npc.she] lean in against [npc2.herHim] и let out [npc.a_moan+].",
 								"Tracing [npc.her] [npc.fingers+] over [npc2.namePos] [npc2.pussy+],"
-										+ " [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(home)] in on [npc2.her] [npc2.clit+], before starting to rub and pinch it.",
+                                        + " [npc.name] let out [npc.a_moan+] as [npc.she] home in on [npc2.her] [npc2.clit+], before starting to rub and pinch it.",
 								"Teasing [npc.her] [npc.fingers] over [npc2.namePos] [npc2.pussy+],"
-										+ " [npc.a_moan+] escapes from between [npc.namePos] [npc.lips] as [npc.she] [npc.verb(start)] to rub and pinch at [npc2.her] [npc2.clit+]."));
+                                        + " [npc.a_moan+] escapes from between [npc.namePos] [npc.lips] as [npc.she] start to rub and pinch at [npc2.her] [npc2.clit+]."));
 						break;
 					default: // Dom normal and sub eager:
 						UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-								"Greedily sliding [npc.her] [npc.fingers+] up the length of [npc2.namePos] [npc2.pussy+], [npc.name] [npc.verb(focus)] [npc.her] attention on [npc2.her] [npc2.clit+],"
-										+ " eagerly squeezing and rubbing it as [npc.she] [npc.verb(lean)] in against [npc2.herHim] and [npc.verb(let)] out [npc.a_moan+].",
+                                "Greedily sliding [npc.her] [npc.fingers+] up the length of [npc2.namePos] [npc2.pussy+], [npc.name] focus [npc.her] attention on [npc2.her] [npc2.clit+],"
+                                        + " eagerly squeezing and rubbing it as [npc.she] lean in against [npc2.herHim] и let out [npc.a_moan+].",
 								"Firmly tracing [npc.her] [npc.fingers+] over [npc2.namePos] [npc2.pussy+],"
-										+ " [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(home)] in on [npc2.her] [npc2.clit+], before starting to eagerly rub and pinch it.",
+                                        + " [npc.name] let out [npc.a_moan+] as [npc.she] home in on [npc2.her] [npc2.clit+], before starting to eagerly rub and pinch it.",
 								"Teasing [npc.her] [npc.fingers] over [npc2.namePos] [npc2.pussy+],"
-										+ " [npc.a_moan+] escapes from between [npc.namePos] [npc.lips] as [npc.she] [npc.verb(start)] to eagerly rub and pinch at [npc2.her] [npc2.clit+]."));
+                                        + " [npc.a_moan+] escapes from between [npc.namePos] [npc.lips] as [npc.she] start to eagerly rub and pinch at [npc2.her] [npc2.clit+]."));
 						break;
 				}
 				if(!isTargetedCharacterInanimate()) {

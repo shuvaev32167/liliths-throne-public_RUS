@@ -1,11 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.baseActionsSelf;
 
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
-import com.lilithsthrone.game.sex.ArousalIncrease;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexPace;
-import com.lilithsthrone.game.sex.SexParticipantType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
@@ -47,7 +43,7 @@ public class SelfFingerMouth {
 
 		@Override
 		public String getDescription() {
-			return "Lifting [npc.her] [npc.hand] up to [npc.her] mouth, [npc.name] [npc.verb(slide)] [npc.her] [npc.fingers] past [npc.her] [npc.lips+],"
+            return "Lifting [npc.her] [npc.hand] up to [npc.her] mouth, [npc.name] slide [npc.her] [npc.fingers] past [npc.her] [npc.lips+],"
 					+ " before lewdly sucking on them for a moment in order to get them well lubricated with [npc.her] saliva.";
 		}
 		
@@ -81,7 +77,7 @@ public class SelfFingerMouth {
 
 		@Override
 		public String getDescription() {
-			return "Lifting [npc.her] [npc.hand] up to [npc.her] [npc.mouth], [npc.name] [npc.verb(slide)] [npc.her] [npc.fingers] past [npc.her] [npc.lips+] before starting to lewdly suck on [npc.her] intruding digits.";
+            return "Lifting [npc.her] [npc.hand] up to [npc.her] [npc.mouth], [npc.name] slide [npc.her] [npc.fingers] past [npc.her] [npc.lips+] before starting to lewdly suck on [npc.her] intruding digits.";
 		}
 	};
 	
@@ -105,7 +101,7 @@ public class SelfFingerMouth {
 
 		@Override
 		public String getDescription() {
-			return "With a little sigh, [npc.name] [npc.verb(slide)] [npc.her] saliva-coated [npc.fingers] out of [npc.her] [npc.mouth].";
+            return "With a little sigh, [npc.name] slide [npc.her] saliva-coated [npc.fingers] out of [npc.her] [npc.mouth].";
 		}
 	};
 	

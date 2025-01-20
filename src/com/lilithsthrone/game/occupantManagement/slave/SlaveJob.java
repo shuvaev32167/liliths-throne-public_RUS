@@ -1,13 +1,5 @@
 package com.lilithsthrone.game.occupantManagement.slave;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.effects.Perk;
@@ -34,6 +26,8 @@ import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
+
+import java.util.*;
 
 /**
  * @since 0.1.87
@@ -247,9 +241,9 @@ public enum SlaveJob {
 			0.05f,
 			5,
 			2,
-			"cook",
-			"cook",
-			"Assign this character to work in Lilaya's kitchen as a cook.",
+            "повариха",
+            "повар",
+            "Назначить этого персонажа работать на кухне Лилайи поваром.",
 			0, 0.25f,
 			80,
 			0, 0.05f,
@@ -1131,46 +1125,46 @@ public enum SlaveJob {
 		}
 	};
 	
-	private Colour colour;
-	private float hourlyEventChance;
-	private int slaveLimit;
-	private float hourlyStaminaDrain;
-	private String nameFeminine;
-	private String nameMasculine;
-	private String description;
-	private float obedienceGain;
+	private final Colour colour;
+	private final float hourlyEventChance;
+	private final int slaveLimit;
+	private final float hourlyStaminaDrain;
+	private final String nameFeminine;
+	private final String nameMasculine;
+	private final String description;
+	private final float obedienceGain;
 	protected float affectionGain;
-	private int income;
-	private float obedienceIncomeModifier;
-	private float affectionIncomeModifier;
-	private List<SlaveJobSetting> mutualSettings;
-	private List<SlaveJobSetting> defaultMutualSettings;
-	private Map<String, List<SlaveJobSetting>> mutuallyExclusiveSettings;
-	private List<SlaveJobSetting> defaultMutuallyExclusiveSettings;
-	private List<SlaveJobFlag> flags;
-	private AbstractWorldType worldLocation;
-	private AbstractPlaceType placeLocation;
+	private final int income;
+	private final float obedienceIncomeModifier;
+	private final float affectionIncomeModifier;
+	private final List<SlaveJobSetting> mutualSettings;
+	private final List<SlaveJobSetting> defaultMutualSettings;
+	private final Map<String, List<SlaveJobSetting>> mutuallyExclusiveSettings;
+	private final List<SlaveJobSetting> defaultMutuallyExclusiveSettings;
+	private final List<SlaveJobFlag> flags;
+	private final AbstractWorldType worldLocation;
+	private final AbstractPlaceType placeLocation;
 	
-	private SlaveJob(
-			Colour colour,
-			float hourlyEventChance,
-			int slaveLimit,
-			float hourlyStaminaDrain,
-			String nameFeminine,
-			String nameMasculine,
-			String description,
-			float affectionGain,
-			float obedienceGain,
-			int income,
-			float affectionIncomeModifier,
-			float obedienceIncomeModifier,
-			List<SlaveJobSetting> mutualSettings,
-			List<SlaveJobSetting> defaultMutualSettings,
-			Map<String, List<SlaveJobSetting>> mutuallyExclusiveSettings,
-			List<SlaveJobSetting> defaultMutuallyExclusiveSettings,
-			List<SlaveJobFlag> flags,
-			AbstractWorldType worldLocation,
-			AbstractPlaceType placeLocation) {
+	SlaveJob(
+            Colour colour,
+            float hourlyEventChance,
+            int slaveLimit,
+            float hourlyStaminaDrain,
+            String nameFeminine,
+            String nameMasculine,
+            String description,
+            float affectionGain,
+            float obedienceGain,
+            int income,
+            float affectionIncomeModifier,
+            float obedienceIncomeModifier,
+            List<SlaveJobSetting> mutualSettings,
+            List<SlaveJobSetting> defaultMutualSettings,
+            Map<String, List<SlaveJobSetting>> mutuallyExclusiveSettings,
+            List<SlaveJobSetting> defaultMutuallyExclusiveSettings,
+            List<SlaveJobFlag> flags,
+            AbstractWorldType worldLocation,
+            AbstractPlaceType placeLocation) {
 		this.colour = colour;
 		this.hourlyEventChance = hourlyEventChance;
 		this.slaveLimit = slaveLimit;

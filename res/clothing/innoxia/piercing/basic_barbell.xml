@@ -54,49 +54,49 @@
 
   <replacementText slot="PIERCING_TONGUE" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(slide)] the barbell into [npc.her] [npc.tongue] piercing.]]>
+        <![CDATA[[npc.Name] slide the barbell into [npc.her] [npc.tongue] piercing.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(slide)] the barbell into [npc2.namePos] [npc2.tongue] piercing.]]>
+        <![CDATA[[npc.Name] slide the barbell into [npc2.namePos] [npc2.tongue] piercing.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(slide)] the barbell into [npc2.namePos] [npc2.tongue] piercing.]]>
+        <![CDATA[[npc.Name] roughly slide the barbell into [npc2.namePos] [npc2.tongue] piercing.]]>
     </otherRough>
   </replacementText>
 
   <displacementText slot="PIERCING_TONGUE" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(slide)] [npc.her] barbell out of [npc.her] [npc.tongue] piercing.]]>
+        <![CDATA[[npc.Name] slide [npc.her] barbell out of [npc.her] [npc.tongue] piercing.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(slide)] [npc2.namePos] barbell out of [npc2.her] [npc2.tongue] piercing.]]>
+        <![CDATA[[npc.Name] slide [npc2.namePos] barbell out of [npc2.her] [npc2.tongue] piercing.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(pull)] [npc2.namePos] barbell out of [npc2.her] [npc2.tongue] piercing.]]>
+        <![CDATA[[npc.Name] roughly pull [npc2.namePos] barbell out of [npc2.her] [npc2.tongue] piercing.]]>
     </otherRough>
   </displacementText>
 
   <replacementText slot="PIERCING_EAR" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(slide)] the barbell into [npc.her] [npc.ear]'s industrial piercing.]]>
+        <![CDATA[[npc.Name] slide the barbell into [npc.her] [npc.ear]'s industrial piercing.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(slide)] the barbell into [npc2.namePos] [npc2.ear]'s industrial piercing.]]>
+        <![CDATA[[npc.Name] slide the barbell into [npc2.namePos] [npc2.ear]'s industrial piercing.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(slide)] the barbell into [npc2.namePos] [npc2.ear]'s industrial piercing.]]>
+        <![CDATA[[npc.Name] roughly slide the barbell into [npc2.namePos] [npc2.ear]'s industrial piercing.]]>
     </otherRough>
   </replacementText>
 
   <displacementText slot="PIERCING_EAR" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(slide)] [npc.her] barbell out of [npc.her] [npc.ear]'s industrial piercing.]]>
+        <![CDATA[[npc.Name] slide [npc.her] barbell out of [npc.her] [npc.ear]'s industrial piercing.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(slide)] [npc2.namePos] barbell out of [npc2.her] [npc2.ear]'s industrial piercing.]]>
+        <![CDATA[[npc.Name] slide [npc2.namePos] barbell out of [npc2.her] [npc2.ear]'s industrial piercing.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(pull)] [npc2.namePos] barbell out of [npc2.her] [npc2.ear]'s industrial piercing.]]>
+        <![CDATA[[npc.Name] roughly pull [npc2.namePos] barbell out of [npc2.her] [npc2.ear]'s industrial piercing.]]>
     </otherRough>
   </displacementText>
 	

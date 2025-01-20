@@ -43,10 +43,10 @@
 	
 	<transformationDescription><![CDATA[
 		#IF(npc.getTailCount()==1)
-			A furry, deer-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long. [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] a very limited amount of control over it, and can only lift it up and down.
+			A furry, deer-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long. [npc.She] quickly realise that [npc.she] [npc.has] a very limited amount of control over it, and can only lift it up and down.
 			<br/>[npc.Name] now [npc.has] a [style.boldGoat(deer-like tail)], [npc.materialDescriptor] [npc.tailFullDescription(true)].
 		#ELSE
-			[npc.TailCount] furry, deer-like tails sprout from just above [npc.her] ass, rapidly growing in size until they're each about [npc.tailLength] long. [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] a very limited amount of control over them, and can only lift them up and down.
+			[npc.TailCount] furry, deer-like tails sprout from just above [npc.her] ass, rapidly growing in size until they're each about [npc.tailLength] long. [npc.She] quickly realise that [npc.she] [npc.has] a very limited amount of control over them, and can only lift them up and down.
 			<br/>[npc.Name] now [npc.has] [npc.tailCount] [style.boldGoat(deer-like tails)], [npc.materialDescriptor] [npc.tailFullDescription(true)].
 		#ENDIF
 	]]></transformationDescription>

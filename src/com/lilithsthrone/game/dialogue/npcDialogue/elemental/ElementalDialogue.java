@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.elemental;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.effects.PerkManager;
 import com.lilithsthrone.game.character.fetishes.AbstractFetish;
@@ -17,17 +14,16 @@ import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
 import com.lilithsthrone.game.dialogue.responses.ResponseSex;
-import com.lilithsthrone.game.dialogue.utils.BodyChanging;
-import com.lilithsthrone.game.dialogue.utils.CombatMovesSetup;
-import com.lilithsthrone.game.dialogue.utils.InventoryInteraction;
-import com.lilithsthrone.game.dialogue.utils.PhoneDialogue;
-import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.game.dialogue.utils.*;
 import com.lilithsthrone.game.sex.managers.universal.SMStanding;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.3.9
@@ -190,7 +186,7 @@ public class ElementalDialogue {
 					return new ResponseEffectsOnly("Inventory", "Manage [el.namePos] inventory.") {
 						@Override
 						public void effects() {
-							Main.mainController.openInventory((NPC) getElemental(), InventoryInteraction.FULL_MANAGEMENT);
+							Main.mainController.openInventory(getElemental(), InventoryInteraction.FULL_MANAGEMENT);
 						}
 					};
 					
@@ -465,7 +461,7 @@ public class ElementalDialogue {
 							+ "[el.NamePos] currently selected desire has a "+PresetColour.FETISH.getName()+" border, but [el.her] true desire (indicated by the coloured desire icon) may be modified by enchanted clothes or other items.<br/><br/>"
 							+ "[el.name] will earn experience for each fetish through performing related actions in sex."
 							+ " Experience is earned regardless of whether or not [el.she] has the associated fetish."
-							+ " Higher level fetishes will cause both [el.name] and [el.her] partner to gain more arousal from related sex actions, as well as increase the fetish's bonuses.<br/><br/>"
+                            + " Higher level fetishes will cause both [el.name] и [el.her] partner to gain more arousal from related sex actions, as well as increase the fetish's bonuses.<br/><br/>"
 							+ "Finally, derived fetishes cannot be directly unlocked, but are instead automatically applied when [el.name] meets their requirements."
 					+ "</details>");
 			

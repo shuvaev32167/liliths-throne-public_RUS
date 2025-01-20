@@ -1,19 +1,15 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractWingType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
+
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -54,9 +50,9 @@ public class WingType {
 			Util.newArrayListOfValues("angelic", "feathered"),
 			Util.newArrayListOfValues("angelic", "feathered"),
 			"#IF(npc.getLegConfiguration().isWingsOnLegConfiguration())"
-				+ "[npc.She] [npc.verb(bite)] [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], feathered, angelic wings push out from the sides of [npc.her] [npc.legConfiguration] body."
+                    + "[npc.She] bite [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], feathered, angelic wings push out from the sides of [npc.her] [npc.legConfiguration] body."
 			+ "#ELSE"
-				+ "[npc.She] [npc.verb(bite)] [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], feathered, angelic wings push out from [npc.her] shoulder blades."
+                    + "[npc.She] bite [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], feathered, angelic wings push out from [npc.her] shoulder blades."
 			+ "#ENDIF"
 			+ "<br/>"
 			+ "[npc.Name] now [npc.has] [style.boldAngel(angelic, feathered wings)].",
@@ -75,9 +71,9 @@ public class WingType {
 			Util.newArrayListOfValues("demonic", "leathery"),
 			Util.newArrayListOfValues("demonic", "leathery"),
 			"#IF(npc.getLegConfiguration().isWingsOnLegConfiguration())"
-				+ "[npc.She] [npc.verb(bite)] [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], leathery, demonic wings push out from the sides of [npc.her] [npc.legConfiguration] body."
+                    + "[npc.She] bite [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], leathery, demonic wings push out from the sides of [npc.her] [npc.legConfiguration] body."
 			+ "#ELSE"
-				+ "[npc.She] [npc.verb(bite)] [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], leathery, demonic wings push out from [npc.her] shoulder blades."
+                    + "[npc.She] bite [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], leathery, demonic wings push out from [npc.her] shoulder blades."
 			+ "#ENDIF"
 			+ "<br/>"
 			+ "#IF(npc.isShortStature())"
@@ -98,9 +94,9 @@ public class WingType {
 			Util.newArrayListOfValues("demonic", "feathered"),
 			Util.newArrayListOfValues("demonic", "feathered"),
 			"#IF(npc.getLegConfiguration().isWingsOnLegConfiguration())"
-				+ "[npc.She] [npc.verb(bite)] [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], feathered, demonic wings push out from the sides of [npc.her] [npc.legConfiguration] body."
+                    + "[npc.She] bite [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], feathered, demonic wings push out from the sides of [npc.her] [npc.legConfiguration] body."
 			+ "#ELSE"
-				+ "[npc.She] [npc.verb(bite)] [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], feathered, demonic wings push out from [npc.her] shoulder blades."
+                    + "[npc.She] bite [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], feathered, demonic wings push out from [npc.her] shoulder blades."
 			+ "#ENDIF"
 			+ "<br/>"
 			+ "#IF(npc.isShortStature())"
@@ -123,9 +119,9 @@ public class WingType {
 			Util.newArrayListOfValues("leathery"),
 			Util.newArrayListOfValues("leathery"),
 			"#IF(npc.getLegConfiguration().isWingsOnLegConfiguration())"
-				+ "[npc.She] [npc.verb(bite)] [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], leathery wings push out from the sides of [npc.her] [npc.legConfiguration] body."
+                    + "[npc.She] bite [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], leathery wings push out from the sides of [npc.her] [npc.legConfiguration] body."
 			+ "#ELSE"
-				+ "[npc.She] [npc.verb(bite)] [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], leathery wings push out from [npc.her] shoulder blades."
+                    + "[npc.She] bite [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], leathery wings push out from [npc.her] shoulder blades."
 			+ "#ENDIF"
 			+ "<br/>"
 			+ "[npc.Name] now [npc.has] [style.boldTfGeneric(leathery wings)].",
@@ -146,9 +142,9 @@ public class WingType {
 			Util.newArrayListOfValues("feathered"),
 			Util.newArrayListOfValues("feathered"),
 			"#IF(npc.getLegConfiguration().isWingsOnLegConfiguration())"
-				+ "[npc.She] [npc.verb(bite)] [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], feathered wings push out from the sides of [npc.her] [npc.legConfiguration] body."
+                    + "[npc.She] bite [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], feathered wings push out from the sides of [npc.her] [npc.legConfiguration] body."
 			+ "#ELSE"
-				+ "[npc.She] [npc.verb(bite)] [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], feathered wings push out from [npc.her] shoulder blades."
+                    + "[npc.She] bite [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], feathered wings push out from [npc.her] shoulder blades."
 			+ "#ENDIF"
 			+ "<br/>"
 			+ "[npc.Name] now [npc.has] [style.boldTfGeneric(feathered wings)].",
@@ -169,9 +165,9 @@ public class WingType {
 			Util.newArrayListOfValues("chitinous"),
 			Util.newArrayListOfValues("chitinous"),
 			"#IF(npc.getLegConfiguration().isWingsOnLegConfiguration())"
-				+ "[npc.She] [npc.verb(bite)] [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], insect-like wings push out from the sides of [npc.her] [npc.legConfiguration] body."
+                    + "[npc.She] bite [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], insect-like wings push out from the sides of [npc.her] [npc.legConfiguration] body."
 			+ "#ELSE"
-				+ "[npc.She] [npc.verb(bite)] [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], insect-like wings push out from [npc.her] shoulder blades."
+                    + "[npc.She] bite [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], insect-like wings push out from [npc.her] shoulder blades."
 			+ "#ENDIF"
 			+ "<br/>"
 			+ "[npc.Name] now [npc.has] [style.boldTfGeneric(chitinous, insect-like wings)].",
@@ -183,9 +179,9 @@ public class WingType {
 	};
 
 
-	private static List<AbstractWingType> allWingTypes;
-	private static Map<AbstractWingType, String> wingToIdMap = new HashMap<>();
-	private static Map<String, AbstractWingType> idToWingMap = new HashMap<>();
+	private static final List<AbstractWingType> allWingTypes;
+	private static final Map<AbstractWingType, String> wingToIdMap = new HashMap<>();
+	private static final Map<String, AbstractWingType> idToWingMap = new HashMap<>();
 	
 	static {
 		allWingTypes = new ArrayList<>();
@@ -277,7 +273,7 @@ public class WingType {
 		return allWingTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractWingType>> typesMap = new HashMap<>();
+	private static final Map<AbstractRace, List<AbstractWingType>> typesMap = new HashMap<>();
 	
 	public static List<AbstractWingType> getWingTypes(AbstractRace r) {
 		if(typesMap.containsKey(r)) {

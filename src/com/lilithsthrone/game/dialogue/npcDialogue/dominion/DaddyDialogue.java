@@ -1,9 +1,5 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.dominion;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.gender.Gender;
@@ -35,6 +31,10 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * @since 0.3.3.10
  * @version 0.3.3.10
@@ -65,8 +65,8 @@ public class DaddyDialogue {
 	}
 	
 	// Util place dialogues:
-	
-	public static final DialogueNode PLACE_ENTRANCE_HALL = new DialogueNode("Entrance Hall", "", false) {
+
+	public static final DialogueNode PLACE_ENTRANCE_HALL = new DialogueNode("Прихожая", "", false) {
 		@Override
 		public String getContent() {
 			return "";
@@ -76,8 +76,8 @@ public class DaddyDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode PLACE_LOUNGE = new DialogueNode("Lounge", "", false) {
+
+	public static final DialogueNode PLACE_LOUNGE = new DialogueNode("Гостиная", "", false) {
 		@Override
 		public String getContent() {
 			return "";
@@ -87,8 +87,8 @@ public class DaddyDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode PLACE_KITCHEN = new DialogueNode("Kitchen", "", false) {
+
+	public static final DialogueNode PLACE_KITCHEN = new DialogueNode("Кухня", "", false) {
 		@Override
 		public String getContent() {
 			return "";
@@ -98,8 +98,8 @@ public class DaddyDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode PLACE_BEDROOM = new DialogueNode("Bedroom", "", false) {
+
+	public static final DialogueNode PLACE_BEDROOM = new DialogueNode("Спальня", "", false) {
 		@Override
 		public String getContent() {
 			return "";
@@ -124,8 +124,8 @@ public class DaddyDialogue {
 			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode CONVINCING_LILAYA = new DialogueNode("Bedroom", "", true) {
+
+	public static final DialogueNode CONVINCING_LILAYA = new DialogueNode("Спальня", "", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 10*60;
@@ -897,7 +897,7 @@ public class DaddyDialogue {
 							if(isLilayaPresent()) {
 								Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_ENTRANCE_HALL);
 								Main.game.getNpc(Lilaya.class).setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LAB);
-								((Lilaya)Main.game.getNpc(Lilaya.class)).equipClothing();
+								Main.game.getNpc(Lilaya.class).equipClothing();
 							} else {
 								Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_DEMON_HOME_DADDY);
 							}
@@ -947,7 +947,7 @@ public class DaddyDialogue {
 							if(isLilayaPresent()) {
 								Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_ENTRANCE_HALL);
 								Main.game.getNpc(Lilaya.class).setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LAB);
-								((Lilaya)Main.game.getNpc(Lilaya.class)).equipClothing();
+								Main.game.getNpc(Lilaya.class).equipClothing();
 							} else {
 								Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_DEMON_HOME_DADDY);
 							}
@@ -1175,7 +1175,7 @@ public class DaddyDialogue {
 						if(isLilayaPresent()) {
 							Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_ENTRANCE_HALL);
 							Main.game.getNpc(Lilaya.class).setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LAB);
-							((Lilaya)Main.game.getNpc(Lilaya.class)).equipClothing();
+							Main.game.getNpc(Lilaya.class).equipClothing();
 						} else {
 							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_DEMON_HOME_DADDY);
 						}
@@ -1267,7 +1267,7 @@ public class DaddyDialogue {
 							if(isLilayaPresent()) {
 								Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_ENTRANCE_HALL);
 								Main.game.getNpc(Lilaya.class).setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LAB);
-								((Lilaya)Main.game.getNpc(Lilaya.class)).equipClothing();
+								Main.game.getNpc(Lilaya.class).equipClothing();
 							} else {
 								Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_DEMON_HOME_DADDY);
 							}

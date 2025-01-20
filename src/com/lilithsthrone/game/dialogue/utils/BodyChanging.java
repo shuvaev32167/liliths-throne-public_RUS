@@ -1,25 +1,5 @@
 package com.lilithsthrone.game.dialogue.utils;
 
-import java.io.File;
-import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
@@ -36,11 +16,7 @@ import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
 import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
 import com.lilithsthrone.game.character.npc.misc.Elemental;
-import com.lilithsthrone.game.character.race.AbstractRace;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
-import com.lilithsthrone.game.character.race.Race;
-import com.lilithsthrone.game.character.race.RacialBody;
-import com.lilithsthrone.game.character.race.Subspecies;
+import com.lilithsthrone.game.character.race.*;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.places.dominion.shoppingArcade.SuccubisSecrets;
@@ -54,6 +30,18 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
+import java.io.StringWriter;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.90
@@ -197,9 +185,9 @@ public class BodyChanging {
 			
 		} else if(index==11) {
 			if(Main.game.getCurrentDialogueNode()==BODY_CHANGING_SAVE_LOAD) {
-				return new Response("Save/Load", "You are already in this screen!", null);
+                return new Response("Сохр./Загруз.", "You are already in this screen!", null);
 			}
-			return new Response("Save/Load",
+            return new Response("Сохр./Загруз.",
 					UtilText.parse(getTarget(), "Save or load transformation presets, allowing you to quickly switch your appearance."),
 					BODY_CHANGING_SAVE_LOAD) {
 				@Override
@@ -2357,7 +2345,7 @@ public class BodyChanging {
 					// Cast magic:
 					doc.getDocumentElement().normalize();
 					
-					Body body = Body.loadFromXML(null, (Element) doc.getDocumentElement(), doc);
+					Body body = Body.loadFromXML(null, doc.getDocumentElement(), doc);
 					body.calculateRace(null);
 					
 					return body;
@@ -2374,12 +2362,8 @@ public class BodyChanging {
 	public static boolean isLoadBodyAvailable(String name) {
 		File file = new File("data/transformation_presets/"+name+".xml");
 
-		if(!file.exists()) {
-			return false;
-		}
-		
-		return true;
-	}
+        return file.exists();
+    }
 
 	public static void deleteBody(String name) {
 		File file = new File("data/transformation_presets/"+name+".xml");

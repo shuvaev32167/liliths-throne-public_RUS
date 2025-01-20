@@ -1,13 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.submission.ratWarrens;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.ObedienceLevel;
@@ -18,11 +10,7 @@ import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.NPC;
-import com.lilithsthrone.game.character.npc.submission.Murk;
-import com.lilithsthrone.game.character.npc.submission.RatGangMember;
-import com.lilithsthrone.game.character.npc.submission.RatWarrensCaptive;
-import com.lilithsthrone.game.character.npc.submission.Shadow;
-import com.lilithsthrone.game.character.npc.submission.Silence;
+import com.lilithsthrone.game.character.npc.submission.*;
 import com.lilithsthrone.game.character.persona.NameTriplet;
 import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.combat.spells.Spell;
@@ -39,31 +27,13 @@ import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
-import com.lilithsthrone.game.sex.GenericSexFlag;
-import com.lilithsthrone.game.sex.InitialSexActionInformation;
-import com.lilithsthrone.game.sex.LubricationType;
-import com.lilithsthrone.game.sex.OrgasmCumTarget;
-import com.lilithsthrone.game.sex.SexAreaInterface;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexControl;
-import com.lilithsthrone.game.sex.SexPace;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.managers.OrgasmBehaviour;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
-import com.lilithsthrone.game.sex.positions.slots.SexSlot;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotLyingDown;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotMilkingStall;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerPenis;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueMouth;
+import com.lilithsthrone.game.sex.positions.slots.*;
+import com.lilithsthrone.game.sex.sexActions.baseActions.*;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
@@ -72,6 +42,9 @@ import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * Dialogue for when the player is taken captive by the rats in the Rat Warrens.
@@ -1950,7 +1923,7 @@ public class RatWarrensCaptiveDialogue {
 		public Response getResponse(int responseTab, int index) {
 			if(Main.game.getPlayer().hasVagina()) {
 				if(index==1) {
-					return new Response("Drink",
+                    return new Response("Выпить",
 							"You're so turned on that you can't think of doing anything other than gulping down the transformative liquid..."
 								+ getObedienceResponseDescription(10),
 							CAPTIVE_DAY_3_MILKING_VAGINA_FINAL_TF) {
@@ -2501,7 +2474,7 @@ public class RatWarrensCaptiveDialogue {
 		@Override
 		public int getSecondsPassed() {
 			if(Main.game.getDialogueFlags().getMurkTfStage(Main.game.getPlayer())==0) {
-				return Main.game.getMinutesUntilTimeInMinutes(01*60)*60; // First night
+				return Main.game.getMinutesUntilTimeInMinutes(60)*60; // First night
 			}
 			return 5*60;
 		}
@@ -2566,7 +2539,7 @@ public class RatWarrensCaptiveDialogue {
 						player.cleanAllDirtySlots(true);
 						player.cleanAllClothing(false, true);
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/captive", "CAPTIVE_NIGHT_WASH", getCharacters(false)));
-						Main.game.getTextStartStringBuilder().append(sb.toString());
+						Main.game.getTextStartStringBuilder().append(sb);
 					}
 				};
 				
@@ -2625,9 +2598,9 @@ public class RatWarrensCaptiveDialogue {
 		@Override
 		public int getSecondsPassed() {
 			if(Main.game.getHourOfDay()>0) {
-				return Main.game.getMinutesUntilTimeInMinutes(Main.game.getHourOfDay()+1*60)*60;
+				return Main.game.getMinutesUntilTimeInMinutes(Main.game.getHourOfDay()+ 60)*60;
 			}
-			return Main.game.getMinutesUntilTimeInMinutes(01*60)*60;
+			return Main.game.getMinutesUntilTimeInMinutes(60)*60;
 		}
 		@Override
 		public String getContent() {
@@ -2675,7 +2648,7 @@ public class RatWarrensCaptiveDialogue {
 		}
 		@Override
 		public int getSecondsPassed() {
-			return 1*60*60;
+			return 60 * 60;
 		}
 		@Override
 		public String getContent() {
@@ -2747,10 +2720,9 @@ public class RatWarrensCaptiveDialogue {
 		}
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/captive", "CAPTIVE_GIVE_BIRTH_INITIAL_FINISHED", getCharacters(false)));
-			sb.append(CAPTIVE_NIGHT.getContent());
-			return sb.toString();
+            String sb = UtilText.parseFromXMLFile("places/submission/ratWarrens/captive", "CAPTIVE_GIVE_BIRTH_INITIAL_FINISHED", getCharacters(false)) +
+                    CAPTIVE_NIGHT.getContent();
+			return sb;
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
@@ -2766,15 +2738,12 @@ public class RatWarrensCaptiveDialogue {
 		}
 		@Override
 		public int getSecondsPassed() {
-			return 1*60*60;
+			return 60 * 60;
 		}
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
 
-			sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/captive", "CAPTIVE_LAY_EGGS"));
-			
-			return sb.toString();
+            return UtilText.parseFromXMLFile("places/submission/ratWarrens/captive", "CAPTIVE_LAY_EGGS");
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
@@ -2804,10 +2773,9 @@ public class RatWarrensCaptiveDialogue {
 		}
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/captive", "CAPTIVE_LAY_EGGS_INITIAL_FINISHED", getCharacters(false)));
-			sb.append(CAPTIVE_NIGHT.getContent());
-			return sb.toString();
+            String sb = UtilText.parseFromXMLFile("places/submission/ratWarrens/captive", "CAPTIVE_LAY_EGGS_INITIAL_FINISHED", getCharacters(false)) +
+                    CAPTIVE_NIGHT.getContent();
+			return sb;
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
@@ -3136,7 +3104,7 @@ public class RatWarrensCaptiveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Tunnels", "Head back through the tunnels and escape from the Rat Warrens.", CAPTIVE_ESCAPING) {
+                return new Response("Туннели", "Head back through the tunnels and escape from the Rat Warrens.", CAPTIVE_ESCAPING) {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/captive", "CAPTIVE_ESCAPE_FIGHT_VICTORY_ESCAPING", getCharacters(false)));

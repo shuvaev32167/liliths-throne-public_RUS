@@ -51,25 +51,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(slide)] the muzzle's cage over [npc.her] mouth, before reaching back and fastening the buckles to keep it in place.]]>
+            <![CDATA[[npc.Name] slide the muzzle's cage over [npc.her] mouth, before reaching back and fastening the buckles to keep it in place.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(slide)] the muzzle's cage over [npc2.namePos] mouth, before reaching back and fastening the buckles to keep it in place.]]>
+            <![CDATA[[npc.Name] slide the muzzle's cage over [npc2.namePos] mouth, before reaching back and fastening the buckles to keep it in place.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(force)] the muzzle's cage over [npc2.namePos] mouth, before reaching back and tightly fastening the buckles to keep it in place.]]>
+            <![CDATA[[npc.Name] roughly force the muzzle's cage over [npc2.namePos] mouth, before reaching back and tightly fastening the buckles to keep it in place.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(unfasten)] the muzzle's straps and [npc.verb(take)] it off.]]>
+            <![CDATA[[npc.Name] unfasten the muzzle's straps and take it off.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(unfasten)] the muzzle's straps and [npc.verb(take)] it off.]]>
+            <![CDATA[[npc.Name] unfasten the muzzle's straps and take it off.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] impatiently [npc.verb(unfasten)] the muzzle's straps and [npc.verb(yank)] it off.]]>
+            <![CDATA[[npc.Name] impatiently unfasten the muzzle's straps and yank it off.]]>
 		</otherRough>
 	</displacementText>
 </clothing>

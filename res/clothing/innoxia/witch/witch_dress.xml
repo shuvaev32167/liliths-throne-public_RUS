@@ -94,49 +94,49 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] on the Witch's dress, tidying the skirt down before moving the straps into a comfortable position on [npc.her] shoulders.]]>
+            <![CDATA[[npc.Name] pull on the Witch's dress, tidying the skirt down before moving the straps into a comfortable position on [npc.her] shoulders.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the Witch's dress over [npc2.namePos] head and down around [npc2.her] torso, tidying the skirt before moving the straps to sit comfortably on [npc2.her] shoulders.]]>
+            <![CDATA[[npc.Name] pull the Witch's dress over [npc2.namePos] head and down around [npc2.her] torso, tidying the skirt before moving the straps to sit comfortably on [npc2.her] shoulders.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(force)] the Witch's dress over [npc2.namePos] head and down around [npc2.her] torso, pulling down the skirt before moving the straps to sit on [npc2.her] shoulders.]]>
+            <![CDATA[[npc.Name] roughly force the Witch's dress over [npc2.namePos] head and down around [npc2.her] torso, pulling down the skirt before moving the straps to sit on [npc2.her] shoulders.]]>
 	  </otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc.her] Witch's dress up over [npc.her] head and [npc.verb(take)] it off.]]>
+            <![CDATA[[npc.Name] pull [npc.her] Witch's dress up over [npc.her] head and take it off.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc2.namePos] Witch's dress up over [npc2.her] head and [npc.verb(take)] it off.]]>
+            <![CDATA[[npc.Name] pull [npc2.namePos] Witch's dress up over [npc2.her] head and take it off.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(grab)] hold of [npc2.namePos] Witch's dress, before roughly pulling it up over [npc2.her] head and taking it off.]]>
+            <![CDATA[[npc.Name] grab hold of [npc2.namePos] Witch's dress, before roughly pulling it up over [npc2.her] head and taking it off.]]>
 		</otherRough>
 	</displacementText>
 
 	<replacementText type="PULLS_UP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc.her] Witch's dress back down into the proper position.]]>
+            <![CDATA[[npc.Name] pull [npc.her] Witch's dress back down into the proper position.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc2.namePos] Witch's dress back down into the proper position.]]>
+            <![CDATA[[npc.Name] pull [npc2.namePos] Witch's dress back down into the proper position.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(pull)] [npc2.namePos] Witch's dress back down into the proper position.]]>
+            <![CDATA[[npc.Name] roughly pull [npc2.namePos] Witch's dress back down into the proper position.]]>
 	  </otherRough>
 	</replacementText>
 
 	<displacementText type="PULLS_UP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] up the skirt of [npc.her] Witch's dress.]]>
+            <![CDATA[[npc.Name] pull up the skirt of [npc.her] Witch's dress.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] up the skirt of [npc2.namePos] Witch's dress.]]>
+            <![CDATA[[npc.Name] pull up the skirt of [npc2.namePos] Witch's dress.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(grab)] hold of the bottom of [npc2.namePos] Witch's dress, before roughly pulling the skirt up.]]>
+            <![CDATA[[npc.Name] grab hold of the bottom of [npc2.namePos] Witch's dress, before roughly pulling the skirt up.]]>
 		</otherRough>
 	</displacementText>
 

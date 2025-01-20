@@ -1,11 +1,5 @@
 package com.lilithsthrone.world.places;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.dominion.Arthur;
@@ -14,13 +8,7 @@ import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.places.dominion.lilayashome.Lab;
-import com.lilithsthrone.game.dialogue.places.dominion.lilayashome.LilayaDiningHallDialogue;
-import com.lilithsthrone.game.dialogue.places.dominion.lilayashome.LilayaMilkingRoomDialogue;
-import com.lilithsthrone.game.dialogue.places.dominion.lilayashome.LilayaOfficeDialogue;
-import com.lilithsthrone.game.dialogue.places.dominion.lilayashome.LilayaSlaveLoungeDialogue;
-import com.lilithsthrone.game.dialogue.places.dominion.lilayashome.LilayaSpa;
-import com.lilithsthrone.game.dialogue.places.dominion.lilayashome.RoomArthur;
+import com.lilithsthrone.game.dialogue.places.dominion.lilayashome.*;
 import com.lilithsthrone.game.occupantManagement.MilkingRoom;
 import com.lilithsthrone.game.occupantManagement.slave.SlavePermissionSetting;
 import com.lilithsthrone.game.sex.ImmobilisationType;
@@ -31,6 +19,12 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -57,12 +51,29 @@ public class PlaceUpgrade {
 			null) {
 	};
 	
-	public static final AbstractPlaceUpgrade LILAYA_EMPTY_ROOM = new AbstractPlaceUpgrade(true,
+	public static final AbstractPlaceUpgrade LILAYA_PLAYER_ROOM_BED = new AbstractPlaceUpgrade(false,
+			PresetColour.BASE_GOLD,
+			"Кровать императорского размера",
+			"Заменить нынешнюю кровать королевского размера на огромную, «императорского» размера. [style.italicsGood(Это улучшит бонус «хорошо отдохнувший», получаемый за отдых в своей комнате)].",
+			"Вместо старой двуспальной кровати появилась огромная, «императорского размера». [style.italicsGood(Бонус «хорошо отдохнувший», получаемый за отдых в своей комнате, был улучшен!)].",
+			"На месте старой двуспальной кровати появилась огромная, «императорского размера», которая занимает доминирующее положение у одной из стен комнаты."
+					+ " Удобный матрас, пушистые подушки и тёплое одеяло гарантируют, что после сна всегда будешь чувствовать себя хорошо отдохнувшим.",
+			10000,
+			-5000,
+			0,
+			0,
+			0.2f,
+			-0.1f,
+			null) {
+		public Value<Boolean, String> getAvailability(Cell cell) {
+			return new Value<>(true, "");
+		}
+	};	public static final AbstractPlaceUpgrade LILAYA_EMPTY_ROOM = new AbstractPlaceUpgrade(true,
 			PresetColour.BASE_GREY,
-			"Empty Room",
-			"Rose will return this room to its original state, which will render it unsuitable for housing any of your slaves.",
-			"This room is empty, and would need conversion work to be done if you'd like to house any of your slaves here.",
-			"This room is unoccupied, and although Rose seems to be doing an excellent job of keeping it clean and well-dusted, it seems a shame that it's not being used to its full potential...",
+			"Пустая комната",
+			"Роза вернёт эту комнату в её первоначальное состояние, что сделает её непригодной для размещения рабов.",
+			"Эта комната пуста, и для размещения здесь кого-либо потребуются работы по переоборудованию.",
+			"Эта комната не занята, и хотя Роза, похоже, отлично справляется с поддержанием её чистоты и опрятности, кажется обидным, что она не используется по своему полной...",
 			2000,
 			0,
 			0,
@@ -113,7 +124,7 @@ public class PlaceUpgrade {
 	
 	public static final AbstractPlaceUpgrade LILAYA_ARTHUR_ROOM = new AbstractPlaceUpgrade(true,
 			PresetColour.RACE_HUMAN,
-			"Arthur's Room",
+			"Комната Артура",
 			"Help Rose to move arcane instrumentation into this room in order to make it suitable for Arthur to stay in. <b>This is a permanent modification, and can never be undone!</b>",
 			"This room now belongs to Arthur, who uses it as his personal lab-cum-bedroom.",
 			"This room is unoccupied, and although Rose seems to be doing an excellent job of keeping it clean and well-dusted, it seems a shame that it's not being used to its full potential...",
@@ -137,7 +148,7 @@ public class PlaceUpgrade {
 					place.removePlaceUpgrade(c, upgrade);
 				}
 			}
-			c.getPlace().setName("Arthur's Room");
+			c.getPlace().setName("Комната Артура");
 			if(Main.game.isStarted()) {
 				Main.game.getNpc(Arthur.class).setLocation(c.getType(), c.getLocation(), true);
 			}
@@ -160,24 +171,7 @@ public class PlaceUpgrade {
 
 	//**** PLAYER'S ROOM UPGRADES ****//
 
-	public static final AbstractPlaceUpgrade LILAYA_PLAYER_ROOM_BED = new AbstractPlaceUpgrade(false,
-			PresetColour.BASE_GOLD,
-			"Emperor-Size Bed",
-			"Have your current, king-size bed replaced by a huge, 'emperor-size' one. [style.italicsGood(This will improve the 'well rested' bonus gained from resting in your room.)]",
-			"Your old, king-size bed has been replaced by a huge, 'emperor-size' one. [style.italicsGood(The 'well rested' bonus gained from resting in your room has been improved!)]",
-			"Your old, king-size bed has been replaced by a huge, 'emperor-size' one, which sits in a dominant position against one wall of your room."
-					+ " Its comfortable mattress, fluffy pillows, and warm duvet ensure that you always feel extremely well rested after sleeping in it.",
-			10000,
-			-5000,
-			0,
-			0,
-			0.2f,
-			-0.1f,
-			null) {
-		public Value<Boolean, String> getAvailability(Cell cell) {
-			return new Value<>(true, "");
-		}
-	};
+
 
 	//**** DOLL CLOSET ****//
 	
@@ -883,7 +877,7 @@ public class PlaceUpgrade {
 	
 	public static final AbstractPlaceUpgrade LILAYA_MILKING_ROOM = new AbstractPlaceUpgrade(true,
 			PresetColour.BASE_ORANGE,
-			"Milking Room",
+            "Доильная комната",
 			"Install milking machines in this room, allowing [style.colourGood(eight)] of your slaves to be assigned to work in here, each of which will be milked of their milk and cum.<br/>"
 					+ "<i>Milk: "+Units.fluid(MilkingRoom.BASE_MILKING_AMOUNT)+" per hour<br/>"
 					+ "Cum: "+Units.fluid(MilkingRoom.BASE_CUM_MILKING_AMOUNT)+" per hour<br/>"
@@ -1050,14 +1044,14 @@ public class PlaceUpgrade {
 	
 	public static final AbstractPlaceUpgrade LILAYA_OFFICE = new AbstractPlaceUpgrade(true,
 			PresetColour.BASE_TEAL,
-			"Office",
+			"Кабинет",
 			"Due to the heavily-regulated exotic materials which Lilaya regularly orders for use in her laboratory, she has a significant amount of paperwork which needs to be completed each month."
 					+ " By having Rose replace this room's furniture with desks, chairs, and filing cabinets, you could have it turned into an office space in which [style.colourGood(four)] of your slaves could be paid to complete this work for her."
-					+ " [style.italicsGood(You will also gain access to the 'Occupancy ledger' when in the office!)]",
+					+ " [style.italicsGood(You will also gain access to the 'Книга занятости' when in the office!)]",
 			"This room has been converted into an office, with enough desks and room to comfortably accommodate [style.colourGood(four)] workers."
-					+ " [style.italicsGood(You have also gained access to the 'Occupancy ledger' when in the office!)]",
+					+ " [style.italicsGood(You have also gained access to the 'Книга занятости' when in the office!)]",
 			"In order to help Lilaya with her copious amounts of paperwork related to exotic material acquisition, you've had this room converted into a four-person-capacity office."
-					+ " Along with the forms related to Lilaya's heavily-regulated purchases, the workers assigned here are tasked with keeping records in a general 'Occupancy ledger', which you can access here at any time.",
+					+ " Along with the forms related to Lilaya's heavily-regulated purchases, the workers assigned here are tasked with keeping records in a general 'Книга занятости', which you can access here at any time.",
 			8000,
 			500,
 			250,
@@ -1314,7 +1308,7 @@ public class PlaceUpgrade {
 	
 	public static final AbstractPlaceUpgrade LILAYA_SPA_BAR = new AbstractPlaceUpgrade(false,
 			PresetColour.BASE_ORANGE,
-			"Bar",
+            "Бар",
 			"",
 			"",
 			"",
@@ -1437,17 +1431,17 @@ public class PlaceUpgrade {
 		}
 	};
 	
-	private static ArrayList<AbstractPlaceUpgrade> coreRoomUpgrades;
-	private static ArrayList<AbstractPlaceUpgrade> guestRoomUpgrades;
-	private static ArrayList<AbstractPlaceUpgrade> dungeonCellUpgrades;
-	private static ArrayList<AbstractPlaceUpgrade> slaveQuartersUpgradesSingle;
-	private static ArrayList<AbstractPlaceUpgrade> slaveQuartersUpgradesDouble;
-	private static ArrayList<AbstractPlaceUpgrade> slaveQuartersUpgradesQuadruple;
-	private static ArrayList<AbstractPlaceUpgrade> milkingRoomUpgrades;
-	private static ArrayList<AbstractPlaceUpgrade> officeUpgrades;
-	private static ArrayList<AbstractPlaceUpgrade> spaUpgrades;
-	private static ArrayList<AbstractPlaceUpgrade> diningHallUpgrades;
-	private static ArrayList<AbstractPlaceUpgrade> slaveLoungeUpgrades;
+	private static final ArrayList<AbstractPlaceUpgrade> coreRoomUpgrades;
+	private static final ArrayList<AbstractPlaceUpgrade> guestRoomUpgrades;
+	private static final ArrayList<AbstractPlaceUpgrade> dungeonCellUpgrades;
+	private static final ArrayList<AbstractPlaceUpgrade> slaveQuartersUpgradesSingle;
+	private static final ArrayList<AbstractPlaceUpgrade> slaveQuartersUpgradesDouble;
+	private static final ArrayList<AbstractPlaceUpgrade> slaveQuartersUpgradesQuadruple;
+	private static final ArrayList<AbstractPlaceUpgrade> milkingRoomUpgrades;
+	private static final ArrayList<AbstractPlaceUpgrade> officeUpgrades;
+	private static final ArrayList<AbstractPlaceUpgrade> spaUpgrades;
+	private static final ArrayList<AbstractPlaceUpgrade> diningHallUpgrades;
+	private static final ArrayList<AbstractPlaceUpgrade> slaveLoungeUpgrades;
 	
 	public static ArrayList<AbstractPlaceUpgrade> getCoreRoomUpgrades() {
 		return coreRoomUpgrades;
@@ -1602,9 +1596,9 @@ public class PlaceUpgrade {
 	}
 	
 
-	private static List<AbstractPlaceUpgrade> allPlaceUpgrades = new ArrayList<>();
-	private static Map<AbstractPlaceUpgrade, String> placeUpgradeToIdMap = new HashMap<>();
-	private static Map<String, AbstractPlaceUpgrade> idToPlaceUpgradeMap = new HashMap<>();
+	private static final List<AbstractPlaceUpgrade> allPlaceUpgrades = new ArrayList<>();
+	private static final Map<AbstractPlaceUpgrade, String> placeUpgradeToIdMap = new HashMap<>();
+	private static final Map<String, AbstractPlaceUpgrade> idToPlaceUpgradeMap = new HashMap<>();
 
 	public static List<AbstractPlaceUpgrade> getAllPlaceUpgrades() {
 		return allPlaceUpgrades;

@@ -1,10 +1,5 @@
 package com.lilithsthrone.game.character.body;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
@@ -14,6 +9,11 @@ import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @since 0.2.8
@@ -247,7 +247,7 @@ public class Clitoris implements BodyPartInterface {
 		
 		if (girth <= 0) {
 			if (this.girth != 0) {
-				girthChange = 0 - this.girth;
+				girthChange = -this.girth;
 				this.girth = 0;
 			}
 		} else if (girth >= PenetrationGirth.getMaximum()) {
@@ -269,14 +269,14 @@ public class Clitoris implements BodyPartInterface {
 		if (girthChange > 0) {
 			return UtilText.parse(owner,
 					"</p>"
-						+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up within [npc.her] clit."
+                            + "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up within [npc.her] clit."
 						+ " [npc.Her] cheeks flush red as the feeling spreads throughout [npc.her] [npc.pussy+], and [npc.she] can't help but let out another [npc.moan+] as [npc.her] clit suddenly [style.boldGrow(grows thicker)].<br/>"
 						+ "[npc.She] now [npc.has] [style.boldSex([npc.a_clitGirth] [npc.clit])]!"
 					+ "</p>");
 		} else {
 			return UtilText.parse(owner,
 					"</p>"
-						+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up within [npc.her] clit."
+                            + "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up within [npc.her] clit."
 						+ " [npc.Her] cheeks flush red as the feeling works its way up [npc.her] shaft, and [npc.she] can't help but let out another [npc.moan+] as [npc.her] clit suddenly [style.boldShrink(thins down)].<br/>"
 						+ "[npc.She] now [npc.has] [style.boldSex([npc.a_clitGirth] [npc.cock])]!"
 					+ "</p>");
@@ -389,7 +389,7 @@ public class Clitoris implements BodyPartInterface {
 			case OVIPOSITOR:
 				returnText = "An intense tingling sensation works its up [npc.namePos] [npc.clit], and [npc.she] can't help but let out [npc.a_moan+] as [npc.she] feels it transforming into [style.boldGrow(an ovipositor)]."
 							+ "<br/>[style.boldSex([npc.NamePos] [npc.clit] is now able to lay eggs!)]"
-							+ "<br/><i>(To be fully functional, [npc.name] [npc.verb(require)] [npc.her] eggs to be fertilised before laying can occur. Eggs cannot be laid in an already-pregnant target's vagina.)</i>";
+                        + "<br/><i>(To be fully functional, [npc.name] require [npc.her] eggs to be fertilised before laying can occur. Eggs cannot be laid in an already-pregnant target's vagina.)</i>";
 				break;
 		}
 		

@@ -74,21 +74,21 @@
 	
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(turn)] up the dial on the milking machine, before sliding the now-pressurised pump down over [npc.her] [npc.cock+].
+            <![CDATA[[npc.Name] turn up the dial on the milking machine, before sliding the now-pressurised pump down over [npc.her] [npc.cock+].
 			#IF(npc.getTotalFluidInArea(ORIFICE_URETHRA_PENIS)>0)
 				<br/>[style.italicsCum(The cock-pump quickly drains [npc.namePos] urethra-creampie!)]
 			#ENDIF
 			]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(turn)] up the dial on the milking machine, before sliding the now-pressurised pump down over [npc2.namePos] [npc2.cock+].
+            <![CDATA[[npc.Name] turn up the dial on the milking machine, before sliding the now-pressurised pump down over [npc2.namePos] [npc2.cock+].
 			#IF(npc2.getTotalFluidInArea(ORIFICE_URETHRA_PENIS)>0)
 				<br/>[style.italicsCum(The cock-pump quickly drains [npc2.namePos] urethra-creampie!)]
 			#ENDIF
 			]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(crank)] up the dial on the milking machine, before roughly shoving the now-pressurised pump down over [npc2.namePos] [npc2.cock+].
+            <![CDATA[[npc.Name] crank up the dial on the milking machine, before roughly shoving the now-pressurised pump down over [npc2.namePos] [npc2.cock+].
 			#IF(npc2.getTotalFluidInArea(ORIFICE_URETHRA_PENIS)>0)
 				<br/>[style.italicsCum(The cock-pump quickly drains [npc2.namePos] urethra-creampie!)]
 			#ENDIF
@@ -98,13 +98,13 @@
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(turn)] down the dial on the milking machine, before letting the rapidly-depressurising pump slide off of [npc.her] [npc.cock+].]]>
+            <![CDATA[[npc.Name] turn down the dial on the milking machine, before letting the rapidly-depressurising pump slide off of [npc.her] [npc.cock+].]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(turn)] down the dial on the milking machine, before letting the rapidly-depressurising pump slide off of [npc2.namePos] [npc2.cock+].]]>
+            <![CDATA[[npc.Name] turn down the dial on the milking machine, before letting the rapidly-depressurising pump slide off of [npc2.namePos] [npc2.cock+].]]>
 		</other>
 		<otherRough>
-			<![CDATA[With no regard for [npc2.her] comfort, [npc.name] roughly [npc.verb(yank)] the still-pressurised pump off of [npc2.namePos] [npc2.cock+].]]>
+            <![CDATA[With no regard for [npc2.her] comfort, [npc.name] roughly yank the still-pressurised pump off of [npc2.namePos] [npc2.cock+].]]>
 		</otherRough>
 	</displacementText>
 </clothing>

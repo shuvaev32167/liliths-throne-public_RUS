@@ -42,7 +42,7 @@
 				</p>
 			#ELSE
 				<p style='margin-bottom:0; padding-bottom:0;'>
-					As the contents of the small bottle disappear between [npc.herPos] [npc.lips+], [npc.namePos] [npc.verb(feel)] a sensation similar to static electricity surging through [npc.her] body. Experiencing a rush of intense, stupefying arousal, [npc.she] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(find)] [npc.herself] struggling to think of anything but sex.
+					As the contents of the small bottle disappear between [npc.herPos] [npc.lips+], [npc.namePos] feel a sensation similar to static electricity surging through [npc.her] body. Experiencing a rush of intense, stupefying arousal, [npc.she] let out [npc.a_moan+] as [npc.she] find [npc.herself] struggling to think of anything but sex.
 				</p>
 			#ENDIF
 		]]></applyEffects>
@@ -53,10 +53,10 @@
 	</coreAttributes>
 	<useDescriptions>
 		<selfUse><![CDATA[
-			[npc.Name] [npc.verb(remove)] the cap and [npc.verb(glance)] down at the refractory philter in [npc.herPos] palm. Before [npc.she] [npc.verb(realize)] what [npc.sheIsFull] doing, the bottle is inverted above [npc.herPos] mouth.
+			[npc.Name] remove the cap and glance down at the refractory philter in [npc.herPos] palm. Before [npc.she] realize what [npc.sheIsFull] doing, the bottle is inverted above [npc.herPos] mouth.
 		]]></selfUse>
 		<otherUse><![CDATA[
-			[npc.Name] [npc.verb(remove)] the cap and quickly [npc.verb(press)] the refractory philter into [npc2.namePos] palm. Before [npc2.she] [npc2.verb(realize)] what [npc2.sheIsFull] doing, the bottle is inverted above [npc2.herPos] mouth.
+			[npc.Name] remove the cap and quickly press the refractory philter into [npc2.namePos] palm. Before [npc2.she] [npc2.verb(realize)] what [npc2.sheIsFull] doing, the bottle is inverted above [npc2.herPos] mouth.
 		]]></otherUse>
 	</useDescriptions>
 </item>

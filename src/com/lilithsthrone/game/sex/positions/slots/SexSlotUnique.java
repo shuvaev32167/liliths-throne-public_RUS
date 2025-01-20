@@ -63,38 +63,38 @@ public class SexSlotUnique {
 	public static final SexSlot HAND_SEX_DOM_ROSE = new SexSlot(
 			"Standing",
 			"hand sex (dominant)",
-			"[npc1.Name] [npc1.verb(look)] into [npc2.namePos] [npc2.eyes+] and [npc1.verb(let)] out [npc1.a_moan+] as [npc1.she] [npc1.verb(reach)] [npc1.her] climax.",
+            "[npc1.Name] [npc1.verb(look)] into [npc2.namePos] [npc2.eyes+] и [npc1.verb(let)] out [npc1.a_moan+] as [npc1.she] [npc1.verb(reach)] [npc1.her] climax.",
 			true);
 	
 	public static final SexSlot HAND_SEX_SUB_ROSE = new SexSlot(
 			"Standing",
 			"hand sex (submissive)",
-			"[npc1.Name] [npc1.verb(look)] into [npc2.namePos] [npc2.eyes+] and [npc1.verb(let)] out [npc1.a_moan+] as [npc1.she] [npc1.verb(reach)] [npc1.her] climax.",
+            "[npc1.Name] [npc1.verb(look)] into [npc2.namePos] [npc2.eyes+] и [npc1.verb(let)] out [npc1.a_moan+] as [npc1.she] [npc1.verb(reach)] [npc1.her] climax.",
 			true);
 	
 	
 	public static final SexSlot MISSIONARY_DESK_SUB = new SexSlot(
 			"Lying on desk",
 			"lying on desk",
-			"[npc1.Name] [npc1.verb(look)] up into [npc2.namePos] [npc2.eyes] and [npc1.verb(let)] out [npc1.a_moan+] as [npc1.she] [npc1.verb(prepare)] to reach [npc1.her] climax.",
+            "[npc1.Name] [npc1.verb(look)] up into [npc2.namePos] [npc2.eyes] и [npc1.verb(let)] out [npc1.a_moan+] as [npc1.she] [npc1.verb(prepare)] to reach [npc1.her] climax.",
 			false);
 	
 	public static final SexSlot MISSIONARY_DESK_SUB_SECOND = new SexSlot(
 			"Lying on desk",
 			"lying on desk (second)",
-			"[npc1.Name] [npc1.verb(look)] up into [npc2.namePos] [npc2.eyes] and [npc1.verb(let)] out [npc1.a_moan+] as [npc1.she] [npc1.verb(prepare)] to reach [npc1.her] climax.",
+            "[npc1.Name] [npc1.verb(look)] up into [npc2.namePos] [npc2.eyes] и [npc1.verb(let)] out [npc1.a_moan+] as [npc1.she] [npc1.verb(prepare)] to reach [npc1.her] climax.",
 			false);
 	
 	public static final SexSlot MISSIONARY_DESK_DOM = new SexSlot(
 			"Standing between legs",
 			"standing between legs",
-			"[npc1.Name] [npc1.verb(look)] down into [npc2.namePos] [npc2.eyes] and [npc1.verb(let)] out [npc1.a_moan+] as [npc1.she] [npc1.verb(prepare)] to reach [npc1.her] climax.",
+            "[npc1.Name] [npc1.verb(look)] down into [npc2.namePos] [npc2.eyes] и [npc1.verb(let)] out [npc1.a_moan+] as [npc1.she] [npc1.verb(prepare)] to reach [npc1.her] climax.",
 			true);
 	
 	public static final SexSlot MISSIONARY_DESK_DOM_SECOND = new SexSlot(
 			"Standing between legs",
 			"standing between legs (second)",
-			"[npc1.Name] [npc1.verb(look)] down into [npc2.namePos] [npc2.eyes] and [npc1.verb(let)] out [npc1.a_moan+] as [npc1.she] [npc1.verb(prepare)] to reach [npc1.her] climax.",
+            "[npc1.Name] [npc1.verb(look)] down into [npc2.namePos] [npc2.eyes] и [npc1.verb(let)] out [npc1.a_moan+] as [npc1.she] [npc1.verb(prepare)] to reach [npc1.her] climax.",
 			true);
 	
 	
@@ -127,13 +127,13 @@ public class SexSlotUnique {
 	public static final SexSlot MISSIONARY_ALTAR_LYING_ON_ALTAR = new SexSlot(
 			"Lying on altar",
 			"lying on altar",
-			"[npc1.Name] [npc1.verb(look)] up into [npc2.namePos] [npc2.eyes] and [npc1.verb(let)] out [npc1.a_moan+] as [npc1.she] [npc1.verb(prepare)] to reach [npc1.her] climax.",
+            "[npc1.Name] [npc1.verb(look)] up into [npc2.namePos] [npc2.eyes] и [npc1.verb(let)] out [npc1.a_moan+] as [npc1.she] [npc1.verb(prepare)] to reach [npc1.her] climax.",
 			false);
 
 	public static final SexSlot MISSIONARY_ALTAR_STANDING_BETWEEN_LEGS = new SexSlot(
 			"Between legs",
 			"between legs",
-			"[npc1.Name] [npc1.verb(look)] down into [npc2.namePos] [npc2.eyes] and [npc1.verb(let)] out [npc1.a_moan+] as [npc1.she] [npc1.verb(prepare)] to reach [npc1.her] climax.",
+            "[npc1.Name] [npc1.verb(look)] down into [npc2.namePos] [npc2.eyes] и [npc1.verb(let)] out [npc1.a_moan+] as [npc1.she] [npc1.verb(prepare)] to reach [npc1.her] climax.",
 			true);
 
 	public static final SexSlot MISSIONARY_ALTAR_KNEELING_BETWEEN_LEGS = new SexSlot(
@@ -145,13 +145,13 @@ public class SexSlotUnique {
 	public static final SexSlot MISSIONARY_ALTAR_SEALED_LYING_ON_ALTAR = new SexSlot(
 			"Lying on altar",
 			"lying on altar (sealed)",
-			"[npc1.Name] [npc1.verb(look)] up into [npc2.namePos] [npc2.eyes] and [npc1.verb(let)] out [npc1.a_moan+] as [npc1.she] [npc1.verb(prepare)] to reach [npc1.her] climax.",
+            "[npc1.Name] [npc1.verb(look)] up into [npc2.namePos] [npc2.eyes] и [npc1.verb(let)] out [npc1.a_moan+] as [npc1.she] [npc1.verb(prepare)] to reach [npc1.her] climax.",
 			false);
 
 	public static final SexSlot MISSIONARY_ALTAR_SEALED_STANDING_BETWEEN_LEGS = new SexSlot(
 			"Between legs",
 			"between legs (sealed)",
-			"[npc1.Name] [npc1.verb(look)] down into [npc2.namePos] [npc2.eyes] and [npc1.verb(let)] out [npc1.a_moan+] as [npc1.she] [npc1.verb(prepare)] to reach [npc1.her] climax.",
+            "[npc1.Name] [npc1.verb(look)] down into [npc2.namePos] [npc2.eyes] и [npc1.verb(let)] out [npc1.a_moan+] as [npc1.she] [npc1.verb(prepare)] to reach [npc1.her] climax.",
 			true);
 
 	public static final SexSlot MISSIONARY_ALTAR_SEALED_KNEELING_BETWEEN_LEGS = new SexSlot(

@@ -53,10 +53,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		[npc.Name] [npc.verb(bring)] the enchanted mince pie up to [npc.her] mouth, before taking an experimental bite. The warm, spiced fruit filling is absolutely delicious, leading [npc.herHim] to greedily wolf down the entire pie.
+		[npc.Name] bring the enchanted mince pie up to [npc.her] mouth, before taking an experimental bite. The warm, spiced fruit filling is absolutely delicious, leading [npc.herHim] to greedily wolf down the entire pie.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		[npc.Name] [npc.verb(bring)] the enchanted mince pie up to [npc2.namePos] mouth, before encouraging [npc2.herHim] to take an experimental bite. The warm, spiced fruit filling turns out to be absolutely delicious, leading [npc2.name] to eagerly wolf down the entire pie.
+		[npc.Name] bring the enchanted mince pie up to [npc2.namePos] mouth, before encouraging [npc2.herHim] to take an experimental bite. The warm, spiced fruit filling turns out to be absolutely delicious, leading [npc2.name] to eagerly wolf down the entire pie.
 		]]></otherUse>
 	</useDescriptions>
 

@@ -13,8 +13,10 @@
 		<attackTooltipDescription><![CDATA[Shoot [npc2.name] with your shotgun.]]></attackTooltipDescription>
 		<rarity>RARE</rarity>
 		<weaponSet/>
-		<equipText><![CDATA[[npc.Name] [npc.verb(take)] out the shotgun, [npc.verb(load)] it, [npc.verb(move)] the fore end forward with an intimidating clack before disengaging the safety.]]></equipText>
-		<unequipText><![CDATA[[npc.Name] [npc.verb(move)] the foreend back and [npc.verb(check)] to see that the chamber is empty before putting the shotgun away.]]></unequipText>
+        <equipText>
+            <![CDATA[[npc.Name] take out the shotgun, load it, move the fore end forward with an intimidating clack before disengaging the safety.]]></equipText>
+        <unequipText>
+            <![CDATA[[npc.Name] move the foreend back and check to see that the chamber is empty before putting the shotgun away.]]></unequipText>
 		<imageName>gbshotgun_uneq.svg</imageName>
 		<imageEquippedName>gbshotgun.svg</imageEquippedName>
 		<physicalResistance>0</physicalResistance>
@@ -67,13 +69,13 @@
 	
 	<hitDescriptions>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(line)] up [npc2.name] in [npc.her] sights and [npc.verb(pull)] the trigger at [npc2.name]. The grenade flies in a gracefull arc and lands by [npc2.namePos] [npc2.feet], [style.boldPoison(releasing a choking cloud of tear gas.)]
+		[npc.Name] line up [npc2.name] in [npc.her] sights and pull the trigger at [npc2.name]. The grenade flies in a gracefull arc and lands by [npc2.namePos] [npc2.feet], [style.boldPoison(releasing a choking cloud of tear gas.)]
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(line)] up [npc2.name] in [npc.her] sights and [npc.verb(pull)] the trigger at [npc2.name]. The grenade misses [npc2.herHim] completely and lands in the distance.
+		[npc.Name] line up [npc2.name] in [npc.her] sights and pull the trigger at [npc2.name]. The grenade misses [npc2.herHim] completely and lands in the distance.
 		]]></missText>
 	</missDescriptions>
 	

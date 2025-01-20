@@ -1,55 +1,17 @@
 package com.lilithsthrone.game.character.npc;
 
-import java.lang.reflect.Field;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Random;
-import java.util.Set;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AffectionLevel;
-import com.lilithsthrone.game.character.attributes.Attribute;
-import com.lilithsthrone.game.character.attributes.CorruptionLevel;
-import com.lilithsthrone.game.character.attributes.ObedienceLevel;
-import com.lilithsthrone.game.character.attributes.ObedienceLevelBasic;
+import com.lilithsthrone.game.character.attributes.*;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.BodyPartInterface;
 import com.lilithsthrone.game.character.body.CoverableArea;
-import com.lilithsthrone.game.character.body.types.AntennaType;
-import com.lilithsthrone.game.character.body.types.BreastType;
-import com.lilithsthrone.game.character.body.types.HornType;
-import com.lilithsthrone.game.character.body.types.PenisType;
-import com.lilithsthrone.game.character.body.types.TailType;
-import com.lilithsthrone.game.character.body.types.VaginaType;
-import com.lilithsthrone.game.character.body.types.WingType;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.CumProduction;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.body.valueEnums.LipSize;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
-import com.lilithsthrone.game.character.body.valueEnums.PenisLength;
-import com.lilithsthrone.game.character.body.valueEnums.TesticleSize;
+import com.lilithsthrone.game.character.body.types.*;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.AbstractFetish;
@@ -58,54 +20,24 @@ import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.gender.PronounType;
 import com.lilithsthrone.game.character.npc.dominion.ReindeerOverseer;
-import com.lilithsthrone.game.character.npc.misc.Elemental;
-import com.lilithsthrone.game.character.npc.misc.GenericAndrogynousNPC;
-import com.lilithsthrone.game.character.npc.misc.GenericFemaleNPC;
-import com.lilithsthrone.game.character.npc.misc.GenericMaleNPC;
-import com.lilithsthrone.game.character.npc.misc.NPCOffspring;
-import com.lilithsthrone.game.character.npc.misc.PrologueFemale;
-import com.lilithsthrone.game.character.npc.misc.PrologueMale;
+import com.lilithsthrone.game.character.npc.misc.*;
 import com.lilithsthrone.game.character.persona.NameTriplet;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.pregnancy.Litter;
 import com.lilithsthrone.game.character.pregnancy.PregnancyPossibility;
-import com.lilithsthrone.game.character.race.AbstractRacialBody;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
-import com.lilithsthrone.game.character.race.FurryPreference;
-import com.lilithsthrone.game.character.race.Race;
-import com.lilithsthrone.game.character.race.RaceStage;
-import com.lilithsthrone.game.character.race.RacialBody;
-import com.lilithsthrone.game.character.race.Subspecies;
+import com.lilithsthrone.game.character.race.*;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractCoreItem;
-import com.lilithsthrone.game.inventory.CharacterInventory;
-import com.lilithsthrone.game.inventory.InventorySlot;
-import com.lilithsthrone.game.inventory.ItemTag;
-import com.lilithsthrone.game.inventory.SetBonus;
+import com.lilithsthrone.game.inventory.*;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.DisplacementType;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
-import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
-import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
-import com.lilithsthrone.game.inventory.enchanting.PossibleItemEffect;
-import com.lilithsthrone.game.inventory.enchanting.TFModifier;
-import com.lilithsthrone.game.inventory.enchanting.TFPotency;
-import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
-import com.lilithsthrone.game.inventory.item.AbstractPotion;
-import com.lilithsthrone.game.inventory.item.FetishPotion;
-import com.lilithsthrone.game.inventory.item.ItemType;
-import com.lilithsthrone.game.inventory.item.TransformativePotion;
+import com.lilithsthrone.game.inventory.enchanting.*;
+import com.lilithsthrone.game.inventory.item.*;
 import com.lilithsthrone.game.occupantManagement.slave.SlaveJob;
 import com.lilithsthrone.game.settings.ForcedTFTendency;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexControl;
-import com.lilithsthrone.game.sex.SexPace;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotGeneric;
@@ -118,6 +50,15 @@ import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.places.AbstractPlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import java.lang.reflect.Field;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -370,19 +311,19 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			
 			npc.setBuyModifier(Float.valueOf(((Element)npcSpecificElement.getElementsByTagName("buyModifier").item(0)).getAttribute("value")));
 			npc.setSellModifier(Float.valueOf(((Element)npcSpecificElement.getElementsByTagName("sellModifier").item(0)).getAttribute("value")));
-			if(((Element)npcSpecificElement.getElementsByTagName("playerSurrenderCount").item(0))!=null) {
+			if(npcSpecificElement.getElementsByTagName("playerSurrenderCount").item(0) !=null) {
 				npc.playerSurrenderCount = Integer.valueOf(((Element)npcSpecificElement.getElementsByTagName("playerSurrenderCount").item(0)).getAttribute("value"));
 			}
 			npc.addedToContacts = (Boolean.valueOf(((Element)npcSpecificElement.getElementsByTagName("addedToContacts").item(0)).getAttribute("value")));
 		
 
-			if(((Element)npcSpecificElement.getElementsByTagName("generateExtraItems").item(0))!=null) {
+			if(npcSpecificElement.getElementsByTagName("generateExtraItems").item(0) !=null) {
 				npc.generateExtraItems = (Boolean.valueOf(((Element)npcSpecificElement.getElementsByTagName("generateExtraItems").item(0)).getAttribute("value")));
 			}
-			if(((Element)npcSpecificElement.getElementsByTagName("generateDisposableClothing").item(0))!=null) {
+			if(npcSpecificElement.getElementsByTagName("generateDisposableClothing").item(0) !=null) {
 				npc.generateDisposableClothing = (Boolean.valueOf(((Element)npcSpecificElement.getElementsByTagName("generateDisposableClothing").item(0)).getAttribute("value")));
 			}
-			if(((Element)npcSpecificElement.getElementsByTagName("generateExtraClothing").item(0))!=null) {
+			if(npcSpecificElement.getElementsByTagName("generateExtraClothing").item(0) !=null) {
 				npc.generateExtraClothing = (Boolean.valueOf(((Element)npcSpecificElement.getElementsByTagName("generateExtraClothing").item(0)).getAttribute("value")));
 			}
 	
@@ -1609,7 +1550,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 				} else {
 					possibleEffects.add(new PossibleItemEffect(
 						new ItemEffect(getItemEnchantmentEffect(genitalsItemType, body.getVagina()), TFModifier.TF_VAGINA, TFModifier.NONE, TFPotency.MINOR_BOOST, 1),
-						"Let's give you a nice "+(humanGenitals?"human":body.getVagina().getType().getTransformName())+" pussy!"));
+                            "Давай подарим тебе " + (humanGenitals ? "человеческую" : body.getVagina().getType().getTransformName()) + " киску!"));
 					if(possibleEffects.size()>=numberOfTransformations) { return new TransformativePotion(itemType, possibleEffects, body); }
 				}
 			}
@@ -1624,7 +1565,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 				} else {
 					possibleEffects.add(new PossibleItemEffect(
 						new ItemEffect(getItemEnchantmentEffect(genitalsItemType, body.getPenis()), TFModifier.TF_PENIS, TFModifier.NONE, TFPotency.MINOR_BOOST, 1),
-						"Let's give you a nice "+(humanGenitals?"human":body.getPenis().getType().getTransformName())+" cock!"));
+                            "Давай подарим тебе " + (humanGenitals ? "человеческий" : body.getPenis().getType().getTransformName()) + " член!"));
 					if(possibleEffects.size()>=numberOfTransformations) { return new TransformativePotion(itemType, possibleEffects, body); }
 				}
 			}
@@ -2198,9 +2139,9 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 						desiredGenders.put(Gender.F_P_V_B_FUTANARI, 2);
 						desiredGenders.put(Gender.F_P_B_SHEMALE, 2);
 						desiredGenders.put(Gender.F_P_TRAP, 2);
-					};
-					
-					// heavy masculine .getForcedTFTendency() option adds a bit of a chance for masculine preferences here
+					}
+
+                    // heavy masculine .getForcedTFTendency() option adds a bit of a chance for masculine preferences here
 					if (Main.getProperties().getForcedTFTendency() == ForcedTFTendency.MASCULINE_HEAVY) {
 						desiredGenders.put(Gender.M_P_V_HERMAPHRODITE, 4);
 						desiredGenders.put(Gender.M_V_CUNTBOY, 4);
@@ -2367,9 +2308,9 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		
 		AbstractFetish currentTopFetish = null, currentBottomFetish = null;
 		TFModifier currentTopModifier = null, currentBottomModifier = null;
-		TFPotency currentTopPotency = null, currentBottomPotency = null, currentTopRemovePotency = null, currentBottomRemovePotency = null;;
-		
-		int baseTopChance = 5, baseBottomChance = 5,  baseTopRemoveChance = 0, baseBottomRemoveChance = 0; 
+		TFPotency currentTopPotency = null, currentBottomPotency = null, currentTopRemovePotency = null, currentBottomRemovePotency = null;
+
+        int baseTopChance = 5, baseBottomChance = 5,  baseTopRemoveChance = 0, baseBottomRemoveChance = 0;
 		int currentTopChance = 0, currentBottomChance = 0, currentTopRemoveChance = 0, currentBottomRemoveChance = 0;
 		
 		int pairedFetishMultiplier = 5;  
@@ -3511,16 +3452,16 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 					return new Value<>(false,
 							UtilText.parse(user, target,
 							"<p>"
-								+ "[npc.Name] [npc.verb(try)] to give [npc2.name] [npc.her] "+item.getName()+", but [npc2.she] [npc2.verb(take)] one look at it and [npc2.verb(laugh)],"
+                                    + "[npc.Name] try to give [npc2.name] [npc.her] " + item.getName() + ", but [npc2.she] [npc2.verb(take)] one look at it and [npc2.verb(laugh)],"
 								+ " [npc2.speech(Hah! Nice try, but do you really expect me to drink some random potion?!)]<br/>"
-								+ "[npc.Name] reluctantly [npc.verb(put)] the "+item.getName()+" back in [npc.her] inventory, disappointed that [npc2.nameIsFull] not interested."
+                                    + "[npc.Name] reluctantly put the " + item.getName() + " back in [npc.her] inventory, disappointed that [npc2.nameIsFull] not interested."
 							+ "</p>"));
 				} else {
 					return new Value<>(false,
 							UtilText.parse(user, target,
 							"<p>"
-								+ "[npc.Name] [npc.verb(try)] to give [npc2.name] [npc.her] "+item.getName()+", but [npc2.she] refuses to take it."
-								+ " [npc.Name] reluctantly [npc.verb(put)] the "+item.getName()+" back in [npc.her] inventory."
+                                    + "[npc.Name] try to give [npc2.name] [npc.her] " + item.getName() + ", but [npc2.she] refuses to take it."
+                                    + " [npc.Name] reluctantly put the " + item.getName() + " back in [npc.her] inventory."
 							+ "</p>"));
 				}
 			}
@@ -3539,7 +3480,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			if(item.getItemType().equals(ItemType.getItemTypeFromId("innoxia_pills_sterility"))) {
 				sb.append(UtilText.parse(user, target,
 						"<p>"
-							+ "Holding out a '[#ITEM_innoxia_pills_sterility.getName(false)]' to [npc2.name], [npc.name] [npc.verb(tell)] [npc2.herHim] to swallow it so that [npc.she] [npc.does]'t have to worry about any unexpected pregnancies."));
+                                + "Holding out a '[#ITEM_innoxia_pills_sterility.getName(false)]' to [npc2.name], [npc.name] tell [npc2.herHim] to swallow it so that [npc.she] [npc.does]'t have to worry about any unexpected pregnancies."));
 				
 				if(isObedientSlave) {
 					sb.append(UtilText.parse(user, target, 
@@ -3565,7 +3506,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			} else if(item.getItemType().equals(ItemType.getItemTypeFromId("innoxia_pills_fertility"))) {
 				sb.append(UtilText.parse(user, target,
 						"<p>"
-							+ "Holding out a '[#ITEM_innoxia_pills_fertility.getName(false)]' to [npc2.name], [npc.name] [npc.verb(tell)] [npc2.herHim] to swallow it in order to boost the chance of a successful impregnation."));
+                                + "Holding out a '[#ITEM_innoxia_pills_fertility.getName(false)]' to [npc2.name], [npc.name] tell [npc2.herHim] to swallow it in order to boost the chance of a successful impregnation."));
 				
 				if(isObedientSlave) {
 					sb.append(UtilText.parse(user, target, 
@@ -3592,7 +3533,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			} else if(item.getItemType().equals(ItemType.getItemTypeFromId("innoxia_pills_broodmother"))) {
 				sb.append(UtilText.parse(user, target,
 						"<p>"
-							+ "Holding out a '[#ITEM_innoxia_pills_broodmother.getName(false)]' to [npc2.name], [npc.name] [npc.verb(tell)] [npc2.herHim] to swallow it in order to boost the chance of a successful impregnation."));
+                                + "Holding out a '[#ITEM_innoxia_pills_broodmother.getName(false)]' to [npc2.name], [npc.name] tell [npc2.herHim] to swallow it in order to boost the chance of a successful impregnation."));
 				
 				if(isObedientSlave) {
 					sb.append(UtilText.parse(user, target, 
@@ -3619,29 +3560,29 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			} else if(item.getItemType().equals(ItemType.ELIXIR)) {
 				sb.append(UtilText.parse(user, target,
 						"<p>"
-							+ "Taking [npc.her] "+item.getName()+" from out of [npc.her] inventory, [npc.name] [npc.verb(hold)] it out to [npc2.name]."));
+                                + "Taking [npc.her] " + item.getName() + " from out of [npc.her] inventory, [npc.name] hold it out to [npc2.name]."));
 				
 				if(isObedientSlave) {
-					sb.append(UtilText.parse(user, target, 
-								" Obediently doing what's expected of [npc2.herHim], [npc2.she] [npc2.verb(take)] the bottle of transformative fluid from [npc.name] and [npc2.verb(say)], "
+					sb.append(UtilText.parse(user, target,
+                            " Obediently doing what's expected of [npc2.herHim], [npc2.she] [npc2.verb(take)] the bottle of transformative fluid from [npc.name] и [npc2.verb(say)], "
 								+ " [npc2.speech(Of course I'll do my duty and be transformed into whatever form you desire...)]"
 							+ "</p>"
 							+ "<p>"
 								+ "Eager to please, [npc2.she] then [npc2.verb(remove)] the bottle's stopper, before lifting it up to [npc2.her] waiting [npc2.lips] and gulping down all of the liquid contained within."
-								+ " [npc2.She] [npc2.verb(cough)] and [npc2.verb(splutter)] for a moment, before taking a deep gasp as [npc2.she] [npc2.verb(start)] to feel the liquid's effects taking root deep in [npc2.her] body..."
+                                    + " [npc2.She] [npc2.verb(cough)] и [npc2.verb(splutter)] for a moment, before taking a deep gasp as [npc2.she] [npc2.verb(start)] to feel the liquid's effects taking root deep in [npc2.her] body..."
 							+ "</p>"));
 					
 				} else if(target.getSubspeciesOverrideRace()==Race.DEMON) {
 					sb.append(UtilText.parse(user, target,
 						"<p>"
-							+ "Taking [npc.her] "+item.getName()+" from out of [npc.her] inventory, [npc.name] [npc.verb(hold)] it out to [npc2.name]."
+                                + "Taking [npc.her] " + item.getName() + " from out of [npc.her] inventory, [npc.name] hold it out to [npc2.name]."
 							+ " Seeing what it is that [npc.nameIs] offering [npc2.herHim], [npc2.she] [npc2.verb(let)] out a mocking laugh, "
 							+ " [npc2.speech(Hah! Don't you know demons can't be transfo- ~Mrph!~)]"
 						+ "</p>"
 						+ "<p>"
-							+ "Not liking the start of [npc2.namePos] response, [npc.name] quickly [npc.verb(remove)] the bottle's stopper, before rather unceremoniously shoving the neck down [npc2.her] throat."
-							+ " Pinching [npc2.her] nose and holding [npc2.herHim] still, [npc.name] [npc.verb(make)] sure to force [npc2.name] to down all of the liquid before finally letting [npc2.herHim] go."
-							+ " [npc2.She] [npc2.verb(cough)] and [npc2.verb(splutter)] for a moment, before letting out an annoyed grumble as [npc2.she] [npc2.verb(wipe)] the liquid from [npc2.her] mouth,"
+                                + "Not liking the start of [npc2.namePos] response, [npc.name] quickly remove the bottle's stopper, before rather unceremoniously shoving the neck down [npc2.her] throat."
+                                + " Pinching [npc2.her] nose and holding [npc2.herHim] still, [npc.name] make sure to force [npc2.name] to down all of the liquid before finally letting [npc2.herHim] go."
+                                + " [npc2.She] [npc2.verb(cough)] и [npc2.verb(splutter)] for a moment, before letting out an annoyed grumble as [npc2.she] [npc2.verb(wipe)] the liquid from [npc2.her] mouth,"
 							+ " [npc2.speech(It doesn't taste too bad...)]"
 						+ "</p>"));
 					
@@ -3652,9 +3593,9 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 							+ " [npc2.speech(Is that a transformation elixir?! Please, let me drink it! Change me into whatever you want!)]"
 						+ "</p>"
 						+ "<p>"
-							+ "Smiling as [npc.she] [npc.verb(hear)] [npc2.namePos] enthusiastic response, [npc.name] quickly [npc.verb(remove)] the bottle's stopper, before bringing the potion up to the eager [npc2.race]'s mouth."
+                                    + "Smiling as [npc.she] hear [npc2.namePos] enthusiastic response, [npc.name] quickly remove the bottle's stopper, before bringing the potion up to the eager [npc2.race]'s mouth."
 							+ " Happily wrapping [npc2.her] [npc2.lips] around the bottle's opening, [npc2.name] [npc2.verb(gulp)] down all of the liquid in one huge swig."
-							+ " [npc2.She] [npc2.verb(cough)] and [npc2.verb(splutter)] for a moment, before letting out an ecstatic cry as [npc2.she] [npc2.verb(start)] to feel the liquid's effects taking root deep in [npc2.her] body..."
+                                    + " [npc2.She] [npc2.verb(cough)] и [npc2.verb(splutter)] for a moment, before letting out an ecstatic cry as [npc2.she] [npc2.verb(start)] to feel the liquid's effects taking root deep in [npc2.her] body..."
 						+ "</p>"));
 					
 				} else {
@@ -3664,9 +3605,9 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 								+ " [npc2.speech(You don't seriously expect me to drink some rando- ~Mrph!~)]"
 							+ "</p>"
 							+ "<p>"
-								+ "Not liking the start of [npc2.her] response, [npc.name] quickly [npc.verb(remove)] the bottle's stopper, before rather unceremoniously shoving the neck down [npc2.her] throat."
-								+ " Pinching [npc2.her] nose and holding [npc2.herHim] still, [npc.name] [npc.verb(make)] sure to force [npc2.name] to down all of the liquid before finally letting [npc2.herHim] go."
-								+ " [npc2.She] [npc2.verb(cough)] and [npc2.verb(splutter)] for a moment, before letting out a surprised cry as [npc2.she] [npc2.verb(start)] to feel the liquid's effects taking root deep in [npc2.her] body..."
+                                        + "Not liking the start of [npc2.her] response, [npc.name] quickly remove the bottle's stopper, before rather unceremoniously shoving the neck down [npc2.her] throat."
+                                        + " Pinching [npc2.her] nose and holding [npc2.herHim] still, [npc.name] make sure to force [npc2.name] to down all of the liquid before finally letting [npc2.herHim] go."
+                                        + " [npc2.She] [npc2.verb(cough)] и [npc2.verb(splutter)] for a moment, before letting out a surprised cry as [npc2.she] [npc2.verb(start)] to feel the liquid's effects taking root deep in [npc2.her] body..."
 							+ "</p>"));
 						
 					} else {
@@ -3675,9 +3616,9 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 								+ " [npc2.speech(Of course I'll drink it! I'll do anything for you...)]"
 							+ "</p>"
 							+ "<p>"
-								+ "Hearing [npc2.namePos] willing response, [npc.name] [npc.verb(remove)] the bottle's stopper, before handing it over to [npc2.herHim]."
+                                        + "Hearing [npc2.namePos] willing response, [npc.name] remove the bottle's stopper, before handing it over to [npc2.herHim]."
 								+ " Eager to please, [npc2.she] happily [npc2.verb(wrap)] [npc2.her] [npc2.lips] around the bottle's opening, before gulping down all of the liquid in one huge swig."
-								+ " [npc2.She] [npc2.verb(cough)] and [npc2.verb(splutter)] for a moment, before letting out a startled cry as [npc2.she] [npc2.verb(start)] to feel the liquid's effects taking root deep in [npc2.her] body..."
+                                        + " [npc2.She] [npc2.verb(cough)] и [npc2.verb(splutter)] for a moment, before letting out a startled cry as [npc2.she] [npc2.verb(start)] to feel the liquid's effects taking root deep in [npc2.her] body..."
 							+ "</p>"));
 					}
 				}
@@ -3689,16 +3630,16 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			} else if(item.getItemType().equals(ItemType.FETISH_REFINED)) {
 				sb.append(UtilText.parse(user, target,
 						"<p>"
-							+ "Taking [npc.her] "+item.getName()+" from out of [npc.her] inventory, [npc.name] [npc.verb(hold)] it out to [npc2.name]."));
+                                + "Taking [npc.her] " + item.getName() + " from out of [npc.her] inventory, [npc.name] hold it out to [npc2.name]."));
 				
 				if(isObedientSlave) {
-					sb.append(UtilText.parse(user, target, 
-								" Obediently doing what's expected of [npc2.herHim], [npc2.she] [npc2.verb(take)] the bottle of fetish-modifying fluid from [npc.name] and [npc2.verb(say)], "
+					sb.append(UtilText.parse(user, target,
+                            " Obediently doing what's expected of [npc2.herHim], [npc2.she] [npc2.verb(take)] the bottle of fetish-modifying fluid from [npc.name] и [npc2.verb(say)], "
 								+ " [npc2.speech(Of course I'll do my duty in becoming the sort of slave you desire...)]"
 							+ "</p>"
 							+ "<p>"
 								+ "Eager to please, [npc2.she] then [npc2.verb(remove)] the bottle's stopper, before lifting it up to [npc2.her] waiting [npc2.lips] and gulping down all of the liquid contained within."
-								+ " [npc2.She] [npc2.verb(cough)] and [npc2.verb(splutter)] for a moment, before taking a deep gasp as [npc2.she] [npc2.verb(start)] to feel the liquid's effects taking root deep in [npc2.her] mind..."
+                                    + " [npc2.She] [npc2.verb(cough)] и [npc2.verb(splutter)] for a moment, before taking a deep gasp as [npc2.she] [npc2.verb(start)] to feel the liquid's effects taking root deep in [npc2.her] mind..."
 							+ "</p>"));
 					
 				} else if(target.hasFetish(Fetish.FETISH_KINK_RECEIVING)) {
@@ -3707,9 +3648,9 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 							+ " [npc2.speech(Is that going to give me a new fetish?! Please, let me drink it!)]"
 						+ "</p>"
 						+ "<p>"
-							+ "Smiling as [npc.she] [npc.verb(hear)] [npc2.namePos] enthusiastic response, [npc.name] quickly [npc.verb(remove)] the bottle's stopper, before bringing the potion up to the eager [npc2.race]'s mouth."
+                                    + "Smiling as [npc.she] hear [npc2.namePos] enthusiastic response, [npc.name] quickly remove the bottle's stopper, before bringing the potion up to the eager [npc2.race]'s mouth."
 							+ " Happily wrapping [npc2.her] [npc2.lips] around the bottle's opening, [npc2.name] [npc2.verb(gulp)] down all of the liquid in one huge swig."
-							+ " [npc2.She] [npc2.verb(cough)] and [npc2.verb(splutter)] for a moment, before letting out an ecstatic cry as [npc2.she] [npc2.verb(start)] to feel the liquid's effects taking root deep in [npc2.her] mind..."
+                                    + " [npc2.She] [npc2.verb(cough)] и [npc2.verb(splutter)] for a moment, before letting out an ecstatic cry as [npc2.she] [npc2.verb(start)] to feel the liquid's effects taking root deep in [npc2.her] mind..."
 						+ "</p>"));
 					
 				} else {
@@ -3719,9 +3660,9 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 								+ " [npc2.speech(Hah! Don't you know demons can't be transfo- ~Mrph!~)]"
 							+ "</p>"
 							+ "<p>"
-								+ "Not liking the start of [npc2.namePos] response, [npc.name] quickly [npc.verb(remove)] the bottle's stopper, before rather unceremoniously shoving the neck down [npc2.her] throat."
-								+ " Pinching [npc2.her] nose and holding [npc2.herHim] still, [npc.name] [npc.verb(make)] sure to force [npc2.name] to down all of the liquid before finally letting [npc2.herHim] go."
-								+ " [npc2.She] [npc2.verb(cough)] and [npc2.verb(splutter)] for a moment, before letting out a lewd [npc2.moan] as [npc2.she] [npc2.verb(wipe)] the liquid from [npc2.her] mouth,"
+                                        + "Not liking the start of [npc2.namePos] response, [npc.name] quickly remove the bottle's stopper, before rather unceremoniously shoving the neck down [npc2.her] throat."
+                                        + " Pinching [npc2.her] nose and holding [npc2.herHim] still, [npc.name] make sure to force [npc2.name] to down all of the liquid before finally letting [npc2.herHim] go."
+                                        + " [npc2.She] [npc2.verb(cough)] и [npc2.verb(splutter)] for a moment, before letting out a lewd [npc2.moan] as [npc2.she] [npc2.verb(wipe)] the liquid from [npc2.her] mouth,"
 								+ " [npc2.speech(~Aah!~ Hey, that was a fetish transformative, wasn't it?! ~Ooh!~ I feel hot...)]"
 							+ "</p>"));
 						
@@ -3732,9 +3673,9 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 									+ " [npc2.speech(You don't seriously expect me to drink some rando- ~Mrph!~)]"
 								+ "</p>"
 								+ "<p>"
-									+ "Not liking the start of [npc2.her] response, [npc.name] quickly [npc.verb(remove)] the bottle's stopper, before rather unceremoniously shoving the neck down [npc2.her] throat."
-									+ " Pinching [npc2.her] nose and holding [npc2.herHim] still, [npc.name] [npc.verb(make)] sure to force [npc2.name] to down all of the liquid before finally letting [npc2.herHim] go."
-									+ " [npc2.She] [npc2.verb(cough)] and [npc2.verb(splutter)] for a moment, before letting out a surprised cry as [npc2.she] [npc2.verb(start)] to feel the liquid's effects taking root deep in [npc2.her] mind..."
+                                            + "Not liking the start of [npc2.her] response, [npc.name] quickly remove the bottle's stopper, before rather unceremoniously shoving the neck down [npc2.her] throat."
+                                            + " Pinching [npc2.her] nose and holding [npc2.herHim] still, [npc.name] make sure to force [npc2.name] to down all of the liquid before finally letting [npc2.herHim] go."
+                                            + " [npc2.She] [npc2.verb(cough)] и [npc2.verb(splutter)] for a moment, before letting out a surprised cry as [npc2.she] [npc2.verb(start)] to feel the liquid's effects taking root deep in [npc2.her] mind..."
 								+ "</p>"));
 							
 						} else {
@@ -3743,9 +3684,9 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 										+ " [npc2.speech(Of course I'll drink it! I'll do anything for you...)]"
 								+ "</p>"
 								+ "<p>"
-									+ "Hearing [npc2.namePos] willing response, [npc.name] [npc.verb(remove)] the bottle's stopper, before handing it over to [npc2.herHim]."
+                                            + "Hearing [npc2.namePos] willing response, [npc.name] remove the bottle's stopper, before handing it over to [npc2.herHim]."
 									+ " Eager to please, [npc2.she] happily [npc2.verb(wrap)] [npc2.her] [npc2.lips] around the bottle's opening, before gulping down all of the liquid in one huge swig."
-									+ " [npc2.She] [npc2.verb(cough)] and [npc2.verb(splutter)] for a moment, before letting out a startled cry as [npc2.she] [npc2.verb(start)] to feel the liquid's effects taking root deep in [npc2.her] mind..."
+                                            + " [npc2.She] [npc2.verb(cough)] и [npc2.verb(splutter)] for a moment, before letting out a startled cry as [npc2.she] [npc2.verb(start)] to feel the liquid's effects taking root deep in [npc2.her] mind..."
 								+ "</p>"));
 						}
 					}
@@ -3758,26 +3699,26 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 				if(isObedientSlave) {
 					sb.append(UtilText.parse(user, target,
 							"<p>"
-								+ "Taking [npc.her] "+item.getName()+" from out of [npc.her] inventory, [npc.name] [npc.verb(hold)] it out to [npc2.name]."
-								+ " Obediently doing what's expected of [npc2.herHim], [npc2.she] [npc2.verb(take)] the bottle of fluid from [npc.name] and [npc2.verb(say)], "
+                                    + "Taking [npc.her] " + item.getName() + " from out of [npc.her] inventory, [npc.name] hold it out to [npc2.name]."
+                                    + " Obediently doing what's expected of [npc2.herHim], [npc2.she] [npc2.verb(take)] the bottle of fluid from [npc.name] и [npc2.verb(say)], "
 								+ " [npc2.speech(Of course I'll drink whatever it is you give to me...)]"
 							+ "</p>"
 							+ "<p>"
 								+ "Eager to please, [npc2.she] then [npc2.verb(remove)] the bottle's stopper, before lifting it up to [npc2.her] waiting [npc2.lips] and gulping down all of the liquid contained within."
-								+ " [npc2.She] [npc2.verb(cough)] and [npc2.verb(splutter)] for a moment, before taking a deep gasp as [npc2.she] [npc2.verb(start)] to feel the liquid's effects taking effect..."
+                                    + " [npc2.She] [npc2.verb(cough)] и [npc2.verb(splutter)] for a moment, before taking a deep gasp as [npc2.she] [npc2.verb(start)] to feel the liquid's effects taking effect..."
 							+ "</p>"));
 					
 				} else {
 					sb.append(UtilText.parse(user, target,
 							"<p>"
-								+ "Taking [npc.her] "+item.getName()+" from out of [npc.her] inventory, [npc.name] [npc.verb(hold)] it out to [npc2.name]."
+                                    + "Taking [npc.her] " + item.getName() + " from out of [npc.her] inventory, [npc.name] hold it out to [npc2.name]."
 								+ " Seeing what it is that [npc.nameIs] offering [npc2.herHim], [npc2.she] [npc2.verb(shift)] about uncomfortably and [npc2.verb(ask)], "
 								+ " [npc2.speech(You don't seriously expect me to drink some rando- ~Mrph!~)]"
 							+ "</p>"
 							+ "<p>"
-								+ "Not liking the start of [npc2.her] response, [npc.name] quickly [npc.verb(remove)] the bottle's stopper, before rather unceremoniously shoving the neck down [npc2.her] throat."
-								+ " Pinching [npc2.her] nose and holding [npc2.herHim] still, [npc.name] [npc.verb(make)] sure to force [npc2.name] to down all of the liquid before finally letting [npc2.herHim] go."
-								+ " [npc2.She] [npc2.verb(cough)] and [npc2.verb(splutter)] for a moment, before letting out a surprised cry as [npc2.she] [npc2.verb(start)] to feel the liquid's effects taking effect..."
+                                    + "Not liking the start of [npc2.her] response, [npc.name] quickly remove the bottle's stopper, before rather unceremoniously shoving the neck down [npc2.her] throat."
+                                    + " Pinching [npc2.her] nose and holding [npc2.herHim] still, [npc.name] make sure to force [npc2.name] to down all of the liquid before finally letting [npc2.herHim] go."
+                                    + " [npc2.She] [npc2.verb(cough)] и [npc2.verb(splutter)] for a moment, before letting out a surprised cry as [npc2.she] [npc2.verb(start)] to feel the liquid's effects taking effect..."
 							+ "</p>"));
 				}
 				sb.append(itemOwner.useItem(item, target, false, true));
@@ -3788,23 +3729,23 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 				if(isObedientSlave) {
 					sb.append(UtilText.parse(user, target,
 							"<p>"
-								+ "Taking the eggplant from out of [npc.her] inventory, [npc.name] [npc.verb(hold)] it out to [npc2.name]."
+                                    + "Taking the eggplant from out of [npc.her] inventory, [npc.name] hold it out to [npc2.name]."
 								+ " Seeing what it is that [npc.nameIs] offering [npc2.herHim], [npc2.she] obediently [npc2.verb(take)] it and [npc2.verb(say)], "
 								+ " [npc2.speech(Of course I'll eat whatever it is you give to me...)]"
 							+ "</p>"
 							+ "<p>"
-								+ "Eager to please, [npc2.she] [npc2.verb(lift)] the purple fruit up to [npc2.her] waiting [npc2.lips] and [npc2.verb(munch)] down every last bit of it..."
+                                    + "Eager to please, [npc2.she] [npc2.verb(lift)] the purple fruit up to [npc2.her] waiting [npc2.lips] и [npc2.verb(munch)] down every last bit of it..."
 							+ "</p>"));
 					
 				} else {
 					sb.append(UtilText.parse(target,
 							"<p>"
-								+ "Taking the eggplant from out of [npc.her] inventory, [npc.name] [npc.verb(hold)] it out to [npc2.name]."
+                                    + "Taking the eggplant from out of [npc.her] inventory, [npc.name] hold it out to [npc2.name]."
 								+ " Seeing what it is that [npc.nameIs] offering [npc2.herHim], [npc2.she] [npc2.verb(shift)] about uncomfortably and [npc2.verb(ask)], "
 								+ " [npc2.speech(What are you going to do with th- -~Mrph!~)]"
 							+ "</p>"
 							+ "<p>"
-								+ "Not liking the start of [npc2.her] response, [npc.name] quickly [npc.verb(shove)] the eggplant into [npc2.namePos] mouth, grinning as [npc.she] [npc.verb(force)] [npc2.herHim] to eat every last bit of the purple fruit..."
+                                    + "Not liking the start of [npc2.her] response, [npc.name] quickly shove the eggplant into [npc2.namePos] mouth, grinning as [npc.she] force [npc2.herHim] to eat every last bit of the purple fruit..."
 							+ "</p>"));
 				}
 				sb.append(itemOwner.useItem(item, target, false, true));

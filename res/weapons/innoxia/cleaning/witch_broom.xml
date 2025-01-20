@@ -13,8 +13,8 @@
 		<attackTooltipDescription><![CDATA[Swipe your broom at [npc.name]!]]></attackTooltipDescription>
 		<rarity>EPIC</rarity>
 		<weaponSet>innoxia_witch</weaponSet>
-		<equipText><![CDATA[[npc.Name] [npc.verb(ready)] [npc.her] broom.]]></equipText>
-		<unequipText><![CDATA[[npc.Name] [npc.verb(put)] [npc.her] broom away.]]></unequipText>
+        <equipText><![CDATA[[npc.Name] ready [npc.her] broom.]]></equipText>
+        <unequipText><![CDATA[[npc.Name] put [npc.her] broom away.]]></unequipText>
 		<imageName>witch_broom.svg</imageName> 
 		<imageEquippedName/> 
 		<damage>8</damage> 
@@ -53,22 +53,22 @@
 	
 	<hitDescriptions>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(whack)] [npc2.namePos] [npc2.arm] with [npc.her] broom!
+		[npc.Name] whack [npc2.namePos] [npc2.arm] with [npc.her] broom!
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(swipe)] [npc.her] broom at [npc2.name] and [npc.verb(manage)] to whack [npc2.her] [npc2.arm]!
+		[npc.Name] swipe [npc.her] broom at [npc2.name] и manage to whack [npc2.her] [npc2.arm]!
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(swing)] [npc.her] broom at [npc2.name] and [npc.verb(hit)] [npc2.herHim] in the chest!
+		[npc.Name] swing [npc.her] broom at [npc2.name] и hit [npc2.herHim] in the chest!
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(swipe)] [npc.her] broom at [npc2.name], but [npc.verb(end)] up missing [npc2.herHim]!
+		[npc.Name] swipe [npc.her] broom at [npc2.name], but end up missing [npc2.herHim]!
 		]]></missText>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(swing)] [npc.her] broom at [npc2.name], but [npc.she] [npc.verb(miss)] [npc.her] target!
+		[npc.Name] swing [npc.her] broom at [npc2.name], but [npc.she] miss [npc.her] target!
 		]]></missText>
 	</missDescriptions>
 	

@@ -1,11 +1,5 @@
 package com.lilithsthrone.game.character.npc.dominion;
 
-import java.time.Month;
-import java.util.List;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
@@ -23,6 +17,11 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.time.Month;
+import java.util.List;
 
 /**
  * @since 0.1.83
@@ -36,7 +35,7 @@ public class TestNPC extends NPC {
 	}
 	
 	public TestNPC(boolean isImported) {
-		super(isImported, new NameTriplet("TestNPC"), "Scriven",
+        super(isImported, new NameTriplet("TestNPC"), "Скривен",
 				"Test NPC.",
 				28, Month.JUNE, 1,
 				1, Gender.F_V_B_FEMALE, Subspecies.CAT_MORPH, RaceStage.PARTIAL_FULL,

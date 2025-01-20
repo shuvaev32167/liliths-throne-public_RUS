@@ -1,63 +1,27 @@
 package com.lilithsthrone.game.sex.positions;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.Arm;
-import com.lilithsthrone.game.character.body.BodyPartInterface;
-import com.lilithsthrone.game.character.body.CoverableArea;
-import com.lilithsthrone.game.character.body.Leg;
-import com.lilithsthrone.game.character.body.Tail;
-import com.lilithsthrone.game.character.body.Tentacle;
-import com.lilithsthrone.game.character.body.Torso;
+import com.lilithsthrone.game.character.body.*;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.SexActionInteractions;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.positions.slots.SexSlot;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotAgainstWall;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotBreedingStall;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotDesk;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotGeneric;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotLyingDown;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotMasturbation;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotMilkingStall;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotSitting;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotStocks;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotTag;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotUnique;
+import com.lilithsthrone.game.sex.positions.slots.*;
 import com.lilithsthrone.game.sex.sexActions.SexActionInterface;
 import com.lilithsthrone.game.sex.sexActions.SexActionPresets;
 import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.GenericActions;
 import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.GenericOrgasms;
 import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.PlayerTalk;
 import com.lilithsthrone.game.sex.sexActions.dominion.MasturbationPanties;
-import com.lilithsthrone.game.sex.sexActions.universal.ChairSex;
-import com.lilithsthrone.game.sex.sexActions.universal.Cowgirl;
-import com.lilithsthrone.game.sex.sexActions.universal.DoggyStyle;
-import com.lilithsthrone.game.sex.sexActions.universal.FaceSitting;
-import com.lilithsthrone.game.sex.sexActions.universal.GloryHole;
-import com.lilithsthrone.game.sex.sexActions.universal.KneelingOral;
-import com.lilithsthrone.game.sex.sexActions.universal.Masturbation;
-import com.lilithsthrone.game.sex.sexActions.universal.MatingPress;
-import com.lilithsthrone.game.sex.sexActions.universal.MilkingStall;
-import com.lilithsthrone.game.sex.sexActions.universal.Missionary;
-import com.lilithsthrone.game.sex.sexActions.universal.MissionaryDesk;
-import com.lilithsthrone.game.sex.sexActions.universal.SixtyNine;
-import com.lilithsthrone.game.sex.sexActions.universal.StocksSex;
+import com.lilithsthrone.game.sex.sexActions.universal.*;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
+
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * AbstractSexPositions for taurs, including taur-biped interactions.
@@ -82,27 +46,27 @@ public class SexPosition {
 		@Override
 		public Value<Boolean, String> isSlotUnlocked(GameCharacter characterToTakeSlot, SexSlot slot, Map<GameCharacter, SexSlot> positioningSlots) {
 			if(characterToTakeSlot.isTaur() && slot==SexSlotMasturbation.SITTING) {
-				return new Value<Boolean, String>(false, UtilText.parse(characterToTakeSlot, "Due to the proportions of [npc.her] animalistic lower body, [npc.nameIsFull] unable to sit down and masturbate at the same time."));
+                return new Value<>(false, UtilText.parse(characterToTakeSlot, "Из-за пропорций [npc.her] животной нижней части тела, [npc.nameIsFull] не может сидеть и мастурбировать одновременно."));
 			}
-			
-			return new Value<Boolean, String>(true, "");
+
+            return new Value<>(true, "");
 		}
 		@Override
 		public String getDescription(Map<GameCharacter, SexSlot> occupiedSlots) {
 			if(Main.sex.getCharacterInPosition(SexSlotMasturbation.KNEELING)!=null) {
-				return UtilText.parse(Main.sex.getCharacterInPosition(SexSlotMasturbation.KNEELING), "[npc.NameIsFull] kneeling on the floor, ready to masturbate.");
+                return UtilText.parse(Main.sex.getCharacterInPosition(SexSlotMasturbation.KNEELING), "[npc.NameIsFull] стоит на коленях на полу, готовый мастурбировать.");
 			}
 			if(Main.sex.getCharacterInPosition(SexSlotMasturbation.STANDING)!=null) {
-				return UtilText.parse(Main.sex.getCharacterInPosition(SexSlotMasturbation.STANDING), "[npc.NameIsFull] standing upright, ready to masturbate.");
+                return UtilText.parse(Main.sex.getCharacterInPosition(SexSlotMasturbation.STANDING), "[npc.NameIsFull] стоит прямо, готовый мастурбировать.");
 			}
 			if(Main.sex.getCharacterInPosition(SexSlotMasturbation.SITTING)!=null) {
-				return UtilText.parse(Main.sex.getCharacterInPosition(SexSlotMasturbation.SITTING), "[npc.NameIsFull] sitting down, ready to masturbate.");
+                return UtilText.parse(Main.sex.getCharacterInPosition(SexSlotMasturbation.SITTING), "[npc.NameIsFull] сидит, готовый мастурбировать.");
 			}
 			if(Main.sex.getCharacterInPosition(SexSlotMasturbation.KNEELING_PANTIES)!=null) {
-				return UtilText.parse(Main.sex.getCharacterInPosition(SexSlotMasturbation.KNEELING_PANTIES), "[npc.NameIsFull] kneeling on the floor, ready to masturbate with the aid of Lilaya's panties.");
+                return UtilText.parse(Main.sex.getCharacterInPosition(SexSlotMasturbation.KNEELING_PANTIES), "[npc.NameIsFull] стоит на коленях на полу, готовый мастурбировать с помощью трусиков Лилайи.");
 			}
-			
-			return UtilText.parse("You are ready to masturbate.");
+
+            return UtilText.parse("Вы готовы мастурбировать.");
 		}
 		@Override
 		public Map<SexSlot, Map<SexSlot, SexActionInteractions>> getSlotTargets() {
@@ -125,9 +89,9 @@ public class SexPosition {
 			return true;
 		}
 	};
-	
-	
-	public static final AbstractSexPosition STANDING = new AbstractSexPosition("Standing",
+
+
+    public static final AbstractSexPosition STANDING = new AbstractSexPosition("Стоя",
 			8,
 			true,
 			SexActionPresets.positioningActionsNew, Util.newArrayListOfValues(KneelingOral.class)) {
@@ -149,17 +113,17 @@ public class SexPosition {
 					if(s==slot) {
 						for(Entry<GameCharacter, SexSlot> e : positioningSlots.entrySet()) {
 							if(entry.contains(e.getValue()) && e.getValue()!=slot && !e.getKey().equals(characterToTakeSlot)) {
-								return new Value<Boolean, String>(
-										false,
-										"The slot '"+Util.capitaliseSentence(slot.getDescription())+"' cannot be used while the slot"
-												+ " '"+Util.capitaliseSentence(e.getValue().getDescription())+"' is already assigned to "+(UtilText.parse(e.getKey(), "[npc.name]"))+".");
+                                return new Value<>(
+                                        false,
+                                        "The slot '" + Util.capitaliseSentence(slot.getDescription()) + "' cannot be used while the slot"
+                                                + " '" + Util.capitaliseSentence(e.getValue().getDescription()) + "' is already assigned to " + (UtilText.parse(e.getKey(), "[npc.name]")) + ".");
 							}
 						}
 					}
 				}
 			}
-			
-			return new Value<Boolean, String>(true, "");
+
+            return new Value<>(true, "");
 		}
 		@Override
 		public Value<Boolean, String> isAcceptablePosition(Map<GameCharacter, SexSlot> positioningSlots) {
@@ -175,9 +139,9 @@ public class SexPosition {
 				}
 			}
 			if(!suitablePosition) {
-				return new Value<Boolean, String>(false, "At least one character needs to be in a standing slot for this position to work.");
+                return new Value<>(false, "Чтобы эта позиция работала, хотя бы один персонаж должен находиться в стоячем положении.");
 			}
-			return new Value<Boolean, String>(true, "");
+            return new Value<>(true, "");
 		}
 		@Override
 		public String getDescription(Map<GameCharacter, SexSlot> occupiedSlots) {
@@ -334,13 +298,13 @@ public class SexPosition {
 			
 			int totalDoms = doms.size()+domTaurs.size();
 			if(totalDoms>=2) {
-				sb.append(Util.capitaliseSentence(Util.stringsToStringList(domNames, false))+" are standing side-by-side before ");
+                sb.append(Util.capitaliseSentence(Util.stringsToStringList(domNames, false)) + " стоят бок о бок перед ");
 			} else {
 				sb.append(Util.capitaliseSentence(Util.stringsToStringList(domNames, false))
-						+UtilText.parse(mainDom, " [npc.is]")+" standing before ");
+                        + UtilText.parse(mainDom, " [npc.is]") + " стоит перед ");
 			}
 
-			sb.append(Util.stringsToStringList(subNames, false)+", ready to have some fun with "
+            sb.append(Util.stringsToStringList(subNames, false) + ", готов повеселиться с "
 					+(subNames.size()>1
 							?(playerInSubs?(playerInSubs?"the "+Util.intToString(subs.size())+" of you":"them"):"them")
 							:UtilText.parse(subs.keySet().iterator().next(), " [npc.herHim]"))+". ");
@@ -348,7 +312,7 @@ public class SexPosition {
 			// Standing:
 			if(subStandingNames.size()>=2) {
 				sb.append(Util.capitaliseSentence(Util.stringsToStringList(subStandingNames, false))
-						+" are similarly standing beside one another in front of "+(totalDoms==1?UtilText.parse(mainDom, " [npc.herHim]"):(playerInDoms?"the "+Util.intToString(totalDoms)+" of you":"them"))+". ");
+                        + " одинаково стоят рядом друг с другом перед " + (totalDoms == 1 ? UtilText.parse(mainDom, " [npc.herHim]") : (playerInDoms ? "the " + Util.intToString(totalDoms) + " of you" : "them")) + ". ");
 				
 			} else if(subStandingNames.size()==1) {
 				sb.append(Util.capitaliseSentence(Util.stringsToStringList(subStandingNames, false))
@@ -374,10 +338,10 @@ public class SexPosition {
 				if(domTaurs.isEmpty()) {
 					sb.append(" before "+(totalDoms==1?UtilText.parse(mainDom, " [npc.herHim]"):(playerInDoms?" you":"the "+Util.intToString(totalDoms)+" of them"))+", ready to perform oral. ");
 				} else if(doms.isEmpty()) {
-					sb.append(" and "+UtilText.parse(mainKneelingSub, " [npc.is]")+" ready to shuffle forwards beneath "
+                    sb.append(" и " + UtilText.parse(mainKneelingSub, " [npc.is]") + " ready to shuffle forwards beneath "
 								+(totalDoms==1?UtilText.parse(mainDom, " [npc.her] animalistic body"):(playerInDoms?"one of your animalistic bodies":"one of their animalistic bodies"))+" in order to perform oral. ");
 				} else {
-					sb.append(" and "+UtilText.parse(mainKneelingSub, " [npc.is]")+" ready to shuffle forwards and start performing oral. ");
+                    sb.append(" и " + UtilText.parse(mainKneelingSub, " [npc.is]") + " ready to shuffle forwards and start performing oral. ");
 				}
 			}
 			// Kneeling size difference:
@@ -523,8 +487,7 @@ public class SexPosition {
 				sb.append("<br/>[style.italicsOrange(Some characters are significantly shorter than others, and as such will be in a position to perform oral on their larger partners even while standing:)]");
 				for(Entry<GameCharacter, List<String>> entry : shorterMap.entrySet()) {
 					sb.append(UtilText.parse(entry.getKey(), "<br/><span style='color:"+entry.getKey().getFemininity().getColour().toWebHexString()+";'>[npc.Name]</span> [npc.is] shorter than "));
-					sb.append("");
-					sb.append(Util.stringsToStringList(entry.getValue(), false));
+                    sb.append(Util.stringsToStringList(entry.getValue(), false));
 					sb.append(".");
 				}
 			}
@@ -632,17 +595,17 @@ public class SexPosition {
 					if(s==slot) {
 						for(Entry<GameCharacter, SexSlot> e : positioningSlots.entrySet()) {
 							if(entry.contains(e.getValue()) && e.getValue()!=slot && !e.getKey().equals(characterToTakeSlot)) {
-								return new Value<Boolean, String>(
-										false,
-										"The slot '"+Util.capitaliseSentence(slot.getDescription())+"' cannot be used while the slot"
-												+ " '"+Util.capitaliseSentence(e.getValue().getDescription())+"' is already assigned to "+(UtilText.parse(e.getKey(), "[npc.name]"))+".");
+                                return new Value<>(
+                                        false,
+                                        "The slot '" + Util.capitaliseSentence(slot.getDescription()) + "' cannot be used while the slot"
+                                                + " '" + Util.capitaliseSentence(e.getValue().getDescription()) + "' is already assigned to " + (UtilText.parse(e.getKey(), "[npc.name]")) + ".");
 							}
 						}
 					}
 				}
 			}
-			
-			return new Value<Boolean, String>(true, "");
+
+            return new Value<>(true, "");
 		}
 		@Override
 		public Value<Boolean, String> isAcceptablePosition(Map<GameCharacter, SexSlot> positioningSlots) {
@@ -671,9 +634,9 @@ public class SexPosition {
 				}
 			}
 			if(!suitablePositionWall || !suitablePositionStandingOrOral) {
-				return new Value<Boolean, String>(false, "At least one character needs to be against [pc.a_wall], and another either standing or performing oral for this position to work.");
+                return new Value<>(false, "At least one character needs to be against [pc.a_wall], and another either standing or performing oral for this position to work.");
 			}
-			return new Value<Boolean, String>(true, "");
+            return new Value<>(true, "");
 		}
 		@Override
 		public String getDescription(Map<GameCharacter, SexSlot> occupiedSlots) {
@@ -782,7 +745,7 @@ public class SexPosition {
 				if(facingWallCount>1) {
 					sb.append(", with each of "+(playerFacingWall?"you":"them")+" throwing the occasional glance back over "+(playerFacingWall?"your":"their")+" shoulders. ");
 				} else {
-					sb.append(UtilText.parse(mainFacingWall, ", and occasionally [npc.verb(throw)] a rearward glance back over [npc.her] shoulder. "));
+                    sb.append(UtilText.parse(mainFacingWall, ", and occasionally throw a rearward glance back over [npc.her] shoulder. "));
 				}
 			}
 
@@ -839,8 +802,7 @@ public class SexPosition {
 				sb.append("<br/>[style.italicsOrange(Some characters are significantly shorter than others, and as such will be in a position to perform oral on their larger partners even while standing:)]");
 				for(Entry<GameCharacter, List<String>> entry : shorterMap.entrySet()) {
 					sb.append(UtilText.parse(entry.getKey(), "<br/><span style='color:"+entry.getKey().getFemininity().getColour().toWebHexString()+";'>[npc.Name]</span> [npc.is] shorter than "));
-					sb.append("");
-					sb.append(Util.stringsToStringList(entry.getValue(), false));
+                    sb.append(Util.stringsToStringList(entry.getValue(), false));
 					sb.append(".");
 				}
 			}
@@ -922,11 +884,8 @@ public class SexPosition {
 		}
 		@Override
 		public boolean isSelfOralAvailable(GameCharacter autoOralCharacter) {
-			if(Main.sex.getSexPositionSlot(autoOralCharacter).hasTag(SexSlotTag.FACE_TO_WALL)) {
-				return false;
-			}
-			return true;
-		}
+            return !Main.sex.getSexPositionSlot(autoOralCharacter).hasTag(SexSlotTag.FACE_TO_WALL);
+        }
 	};
 	
 
@@ -957,10 +916,10 @@ public class SexPosition {
 					if(s==slot) {
 						for(Entry<GameCharacter, SexSlot> e : positioningSlots.entrySet()) {
 							if(entry.contains(e.getValue()) && e.getValue()!=slot && !e.getKey().equals(characterToTakeSlot)) {
-								return new Value<Boolean, String>(
-										false,
-										"The slot '"+Util.capitaliseSentence(slot.getDescription())+"' cannot be used while the slot"
-												+ " '"+Util.capitaliseSentence(e.getValue().getDescription())+"' is already assigned to "+(UtilText.parse(e.getKey(), "[npc.name]"))+".");
+                                return new Value<>(
+                                        false,
+                                        "The slot '" + Util.capitaliseSentence(slot.getDescription()) + "' cannot be used while the slot"
+                                                + " '" + Util.capitaliseSentence(e.getValue().getDescription()) + "' is already assigned to " + (UtilText.parse(e.getKey(), "[npc.name]")) + ".");
 							}
 						}
 					}
@@ -971,28 +930,28 @@ public class SexPosition {
 					|| (slot==SexSlotDesk.HUMPING_TWO && !positioningSlots.containsValue(SexSlotDesk.OVER_DESK_ON_FRONT_TWO) && !positioningSlots.containsValue(SexSlotDesk.OVER_DESK_ON_BACK_TWO))
 					|| (slot==SexSlotDesk.HUMPING_THREE && !positioningSlots.containsValue(SexSlotDesk.OVER_DESK_ON_FRONT_THREE) && !positioningSlots.containsValue(SexSlotDesk.OVER_DESK_ON_BACK_THREE))
 					|| (slot==SexSlotDesk.HUMPING_FOUR && !positioningSlots.containsValue(SexSlotDesk.OVER_DESK_ON_FRONT_FOUR) && !positioningSlots.containsValue(SexSlotDesk.OVER_DESK_ON_BACK_FOUR))) {
-				return new Value<Boolean, String>(false, UtilText.parse(characterToTakeSlot, "There is no free character lying over a [pc.desk] to hump!"));
+                return new Value<>(false, UtilText.parse(characterToTakeSlot, "There is no free character lying over a [pc.desk] to hump!"));
 			}
 
 			// Cannot hump when the person standing behind the intended target is a taur:
 			if((slot==SexSlotDesk.HUMPING && positioningSlots.containsValue(SexSlotDesk.BETWEEN_LEGS) && reversedPositioningSlotsMap.get(SexSlotDesk.BETWEEN_LEGS).isTaur())) {
-				return new Value<Boolean, String>(false, UtilText.parse(characterToTakeSlot, reversedPositioningSlotsMap.get(SexSlotDesk.BETWEEN_LEGS), "[npc.Name] cannot hump anyone while [npc2.namePos] [npc2.legRace]'s body is in the way!"));
+                return new Value<>(false, UtilText.parse(characterToTakeSlot, reversedPositioningSlotsMap.get(SexSlotDesk.BETWEEN_LEGS), "[npc.Name] cannot hump anyone while [npc2.namePos] [npc2.legRace]'s body is in the way!"));
 			} else if((slot==SexSlotDesk.HUMPING_TWO && positioningSlots.containsValue(SexSlotDesk.BETWEEN_LEGS_TWO) && reversedPositioningSlotsMap.get(SexSlotDesk.BETWEEN_LEGS_TWO).isTaur())) {
-				return new Value<Boolean, String>(false, UtilText.parse(characterToTakeSlot, reversedPositioningSlotsMap.get(SexSlotDesk.BETWEEN_LEGS_TWO), "[npc.Name] cannot hump anyone while [npc2.namePos] [npc2.legRace]'s body is in the way!"));
+                return new Value<>(false, UtilText.parse(characterToTakeSlot, reversedPositioningSlotsMap.get(SexSlotDesk.BETWEEN_LEGS_TWO), "[npc.Name] cannot hump anyone while [npc2.namePos] [npc2.legRace]'s body is in the way!"));
 			} else if((slot==SexSlotDesk.HUMPING_THREE && positioningSlots.containsValue(SexSlotDesk.BETWEEN_LEGS_THREE) && reversedPositioningSlotsMap.get(SexSlotDesk.BETWEEN_LEGS_THREE).isTaur())) {
-				return new Value<Boolean, String>(false, UtilText.parse(characterToTakeSlot, reversedPositioningSlotsMap.get(SexSlotDesk.BETWEEN_LEGS_THREE), "[npc.Name] cannot hump anyone while [npc2.namePos] [npc2.legRace]'s body is in the way!"));
+                return new Value<>(false, UtilText.parse(characterToTakeSlot, reversedPositioningSlotsMap.get(SexSlotDesk.BETWEEN_LEGS_THREE), "[npc.Name] cannot hump anyone while [npc2.namePos] [npc2.legRace]'s body is in the way!"));
 			} else if((slot==SexSlotDesk.HUMPING_FOUR && positioningSlots.containsValue(SexSlotDesk.BETWEEN_LEGS_FOUR) && reversedPositioningSlotsMap.get(SexSlotDesk.BETWEEN_LEGS_FOUR).isTaur())) {
-				return new Value<Boolean, String>(false, UtilText.parse(characterToTakeSlot, reversedPositioningSlotsMap.get(SexSlotDesk.BETWEEN_LEGS_FOUR), "[npc.Name] cannot hump anyone while [npc2.namePos] [npc2.legRace]'s body is in the way!"));
+                return new Value<>(false, UtilText.parse(characterToTakeSlot, reversedPositioningSlotsMap.get(SexSlotDesk.BETWEEN_LEGS_FOUR), "[npc.Name] cannot hump anyone while [npc2.namePos] [npc2.legRace]'s body is in the way!"));
 			}
 			// And vice-versa:
 			if((slot==SexSlotDesk.BETWEEN_LEGS && positioningSlots.containsValue(SexSlotDesk.HUMPING) && characterToTakeSlot.isTaur())) {
-				return new Value<Boolean, String>(false, UtilText.parse(characterToTakeSlot, reversedPositioningSlotsMap.get(SexSlotDesk.HUMPING), "[npc.NamePos] [npc2.legRace]'s body will not fit while [npc2.name] is in the way!"));
+                return new Value<>(false, UtilText.parse(characterToTakeSlot, reversedPositioningSlotsMap.get(SexSlotDesk.HUMPING), "[npc.NamePos] [npc2.legRace]'s body will not fit while [npc2.name] is in the way!"));
 			} else if((slot==SexSlotDesk.BETWEEN_LEGS_TWO && positioningSlots.containsValue(SexSlotDesk.HUMPING_TWO) && characterToTakeSlot.isTaur())) {
-				return new Value<Boolean, String>(false, UtilText.parse(characterToTakeSlot, reversedPositioningSlotsMap.get(SexSlotDesk.HUMPING_TWO), "[npc.NamePos] [npc2.legRace]'s body will not fit while [npc2.name] is in the way!"));
+                return new Value<>(false, UtilText.parse(characterToTakeSlot, reversedPositioningSlotsMap.get(SexSlotDesk.HUMPING_TWO), "[npc.NamePos] [npc2.legRace]'s body will not fit while [npc2.name] is in the way!"));
 			} else if((slot==SexSlotDesk.BETWEEN_LEGS_THREE && positioningSlots.containsValue(SexSlotDesk.HUMPING_THREE) && characterToTakeSlot.isTaur())) {
-				return new Value<Boolean, String>(false, UtilText.parse(characterToTakeSlot, reversedPositioningSlotsMap.get(SexSlotDesk.HUMPING_THREE), "[npc.NamePos] [npc2.legRace]'s body will not fit while [npc2.name] is in the way!"));
+                return new Value<>(false, UtilText.parse(characterToTakeSlot, reversedPositioningSlotsMap.get(SexSlotDesk.HUMPING_THREE), "[npc.NamePos] [npc2.legRace]'s body will not fit while [npc2.name] is in the way!"));
 			} else if((slot==SexSlotDesk.BETWEEN_LEGS_FOUR && positioningSlots.containsValue(SexSlotDesk.HUMPING_FOUR) && characterToTakeSlot.isTaur())) {
-				return new Value<Boolean, String>(false, UtilText.parse(characterToTakeSlot, reversedPositioningSlotsMap.get(SexSlotDesk.HUMPING_FOUR), "[npc.NamePos] [npc2.legRace]'s body will not fit while [npc2.name] is in the way!"));
+                return new Value<>(false, UtilText.parse(characterToTakeSlot, reversedPositioningSlotsMap.get(SexSlotDesk.HUMPING_FOUR), "[npc.NamePos] [npc2.legRace]'s body will not fit while [npc2.name] is in the way!"));
 			}
 			
 			if(characterToTakeSlot.isTaur()
@@ -1000,10 +959,10 @@ public class SexPosition {
 						|| slot==SexSlotDesk.OVER_DESK_ON_BACK_TWO
 						|| slot==SexSlotDesk.OVER_DESK_ON_BACK_THREE
 						|| slot==SexSlotDesk.OVER_DESK_ON_BACK_FOUR)) {
-				return new Value<Boolean, String>(false, UtilText.parse(characterToTakeSlot, "Due to the proportions of [npc.her] animalistic lower body, [npc.nameIsFull] unable to lie down on [npc.her] back over the [pc.desk]."));
+                return new Value<>(false, UtilText.parse(characterToTakeSlot, "Due to the proportions of [npc.her] animalistic lower body, [npc.nameIsFull] unable to lie down on [npc.her] back over the [pc.desk]."));
 			}
-			
-			return new Value<Boolean, String>(true, "");
+
+            return new Value<>(true, "");
 		}
 		@Override
 		public Value<Boolean, String> isAcceptablePosition(Map<GameCharacter, SexSlot> positioningSlots) {
@@ -1040,9 +999,9 @@ public class SexPosition {
 				}
 			}
 			if(!suitablePositionDesk || !suitablePositionStandingOrOral) {
-				return new Value<Boolean, String>(false, "At least one character needs to be on top of the [pc.desk], and another either standing, humping, receiving oral, or performing oral for this position to work.");
+                return new Value<>(false, "At least one character needs to be on top of the [pc.desk], and another either standing, humping, receiving oral, or performing oral for this position to work.");
 			}
-			return new Value<Boolean, String>(true, "");
+            return new Value<>(true, "");
 		}
 		@Override
 		public String getDescription(Map<GameCharacter, SexSlot> occupiedSlots) {
@@ -1482,11 +1441,8 @@ public class SexPosition {
 		}
 		@Override
 		public boolean isSelfOralAvailable(GameCharacter autoOralCharacter) {
-			if(Main.sex.getSexPositionSlot(autoOralCharacter).hasTag(SexSlotTag.OVER_DESK_FRONT)) {
-				return false;
-			}
-			return true;
-		}
+            return !Main.sex.getSexPositionSlot(autoOralCharacter).hasTag(SexSlotTag.OVER_DESK_FRONT);
+        }
 	};
 
 	
@@ -1502,13 +1458,13 @@ public class SexPosition {
 						|| positioningSlots.get(characterToTakeSlot)==SexSlotStocks.LOCKED_IN_STOCKS_TWO
 						|| positioningSlots.get(characterToTakeSlot)==SexSlotStocks.LOCKED_IN_STOCKS_THREE
 						|| positioningSlots.get(characterToTakeSlot)==SexSlotStocks.LOCKED_IN_STOCKS_FOUR) {
-					return new Value<Boolean, String>(false, UtilText.parse(characterToTakeSlot, "[npc.NameIsFull] locked into the stocks, and so cannot switch slot!"));
+                    return new Value<>(false, UtilText.parse(characterToTakeSlot, "[npc.NameIsFull] locked into the stocks, and so cannot switch slot!"));
 					
 				} else if(slot==SexSlotStocks.LOCKED_IN_STOCKS
 						|| slot==SexSlotStocks.LOCKED_IN_STOCKS_TWO
 						|| slot==SexSlotStocks.LOCKED_IN_STOCKS_THREE
 						|| slot==SexSlotStocks.LOCKED_IN_STOCKS_FOUR) {
-					return new Value<Boolean, String>(false, UtilText.parse(characterToTakeSlot, "Characters cannot be locked into or out of stocks during this sex scene!"));
+                    return new Value<>(false, UtilText.parse(characterToTakeSlot, "Characters cannot be locked into or out of stocks during this sex scene!"));
 				}
 			}
 			
@@ -1523,33 +1479,34 @@ public class SexPosition {
 					if(s==slot) {
 						for(Entry<GameCharacter, SexSlot> e : positioningSlots.entrySet()) {
 							if(entry.contains(e.getValue()) && e.getValue()!=slot && !e.getKey().equals(characterToTakeSlot)) {
-								return new Value<Boolean, String>(
-										false,
-										"The slot '"+Util.capitaliseSentence(slot.getDescription())+"' cannot be used while the slot"
-												+ " '"+Util.capitaliseSentence(e.getValue().getDescription())+"' is already assigned to "+(UtilText.parse(e.getKey(), "[npc.name]"))+".");
+                                return new Value<>(
+                                        false,
+                                        "The slot '" + Util.capitaliseSentence(slot.getDescription()) + "' cannot be used while the slot"
+                                                + " '" + Util.capitaliseSentence(e.getValue().getDescription()) + "' is already assigned to " + (UtilText.parse(e.getKey(), "[npc.name]")) + ".");
 							}
 						}
 					}
 				}
 			}
-			
-			return new Value<Boolean, String>(true, "");
+
+            return new Value<>(true, "");
 		}
 		@Override
 		public Value<Boolean, String> isAcceptablePosition(Map<GameCharacter, SexSlot> positioningSlots) {
 			boolean characterInStocks=false;
 			for(Entry<GameCharacter, SexSlot> e : positioningSlots.entrySet()) {
-				if(e.getValue()==SexSlotStocks.LOCKED_IN_STOCKS
-						|| e.getValue()==SexSlotStocks.LOCKED_IN_STOCKS_TWO
-						|| e.getValue()==SexSlotStocks.LOCKED_IN_STOCKS_THREE
-						|| e.getValue()==SexSlotStocks.LOCKED_IN_STOCKS_FOUR) {
-					characterInStocks = true;
-				}
+                if (e.getValue() == SexSlotStocks.LOCKED_IN_STOCKS
+                        || e.getValue() == SexSlotStocks.LOCKED_IN_STOCKS_TWO
+                        || e.getValue() == SexSlotStocks.LOCKED_IN_STOCKS_THREE
+                        || e.getValue() == SexSlotStocks.LOCKED_IN_STOCKS_FOUR) {
+                    characterInStocks = true;
+                    break;
+                }
 			}
 			if(!characterInStocks) {
-				return new Value<Boolean, String>(false, "At least one character needs to be locked into the stocks for this position to work.");
+                return new Value<>(false, "At least one character needs to be locked into the stocks for this position to work.");
 			}
-			return new Value<Boolean, String>(true, "");
+            return new Value<>(true, "");
 		}
 		@Override
 		public String getDescription(Map<GameCharacter, SexSlot> occupiedSlots) {
@@ -1732,8 +1689,8 @@ public class SexPosition {
 							+UtilText.parse(mainStanding," [npc.has] reared up on [npc.her] hind legs, before planting [npc.her] front [npc.feet] on the top of the stocks, allowing [npc.herHim] to ")
 							+(stocksCount>1
 									?(playerStocks
-											?UtilText.parse(mainStanding,"effectively mount whichever of the "+(Util.intToString(stocksCount))+" of you [npc.she] [npc.verb(want)]. ")
-											:UtilText.parse(mainStanding,"effectively mount whichever of the "+(Util.intToString(stocksCount))+" of them [npc.she] [npc.verb(want)]. "))
+                        ? UtilText.parse(mainStanding, "effectively mount whichever of the " + (Util.intToString(stocksCount)) + " of you [npc.she] want. ")
+                        : UtilText.parse(mainStanding, "effectively mount whichever of the " + (Util.intToString(stocksCount)) + " of them [npc.she] want. "))
 									:UtilText.parse(soloStocks, "effectively mount [npc.name]. ")));
 			}
 			
@@ -1844,7 +1801,7 @@ public class SexPosition {
 		@Override
 		public boolean isActionBlocked(GameCharacter performer, GameCharacter target, SexActionInterface action) {
 			if((Main.sex.getSexPositionSlot(performer).hasTag(SexSlotTag.LOCKED_IN_STOCKS)
-					&& action.getSexAreaInteractions().keySet().contains(SexAreaPenetration.FINGER)
+					&& action.getSexAreaInteractions().containsKey(SexAreaPenetration.FINGER)
 					&& action.getParticipantType()==SexParticipantType.SELF)) {
 				return true;
 			}
@@ -1881,11 +1838,8 @@ public class SexPosition {
 		}
 		@Override
 		public boolean isSelfOralAvailable(GameCharacter autoOralCharacter) {
-			if(Main.sex.getSexPositionSlot(autoOralCharacter).hasTag(SexSlotTag.LOCKED_IN_STOCKS)) {
-				return false;
-			}
-			return true;
-		}
+            return !Main.sex.getSexPositionSlot(autoOralCharacter).hasTag(SexSlotTag.LOCKED_IN_STOCKS);
+        }
 	};
 	
 	public static final AbstractSexPosition MILKING_STALL = new AbstractSexPosition("Milking stall",
@@ -1900,13 +1854,13 @@ public class SexPosition {
 						|| positioningSlots.get(characterToTakeSlot)==SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_TWO
 						|| positioningSlots.get(characterToTakeSlot)==SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_THREE
 						|| positioningSlots.get(characterToTakeSlot)==SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_FOUR) {
-					return new Value<Boolean, String>(false, UtilText.parse(characterToTakeSlot, "[npc.NameIsFull] locked into the stall, and so cannot switch slot!"));
+                    return new Value<>(false, UtilText.parse(characterToTakeSlot, "[npc.NameIsFull] locked into the stall, and so cannot switch slot!"));
 					
 				} else if(slot==SexSlotMilkingStall.LOCKED_IN_MILKING_STALL
 						|| slot==SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_TWO
 						|| slot==SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_THREE
 						|| slot==SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_FOUR) {
-					return new Value<Boolean, String>(false, UtilText.parse(characterToTakeSlot, "Characters cannot be locked into or out of stalls during this sex scene!"));
+                    return new Value<>(false, UtilText.parse(characterToTakeSlot, "Characters cannot be locked into or out of stalls during this sex scene!"));
 				}
 			}
 			
@@ -1921,33 +1875,34 @@ public class SexPosition {
 					if(s==slot) {
 						for(Entry<GameCharacter, SexSlot> e : positioningSlots.entrySet()) {
 							if(entry.contains(e.getValue()) && e.getValue()!=slot && !e.getKey().equals(characterToTakeSlot)) {
-								return new Value<Boolean, String>(
-										false,
-										"The slot '"+Util.capitaliseSentence(slot.getDescription())+"' cannot be used while the slot"
-												+ " '"+Util.capitaliseSentence(e.getValue().getDescription())+"' is already assigned to "+(UtilText.parse(e.getKey(), "[npc.name]"))+".");
+                                return new Value<>(
+                                        false,
+                                        "The slot '" + Util.capitaliseSentence(slot.getDescription()) + "' cannot be used while the slot"
+                                                + " '" + Util.capitaliseSentence(e.getValue().getDescription()) + "' is already assigned to " + (UtilText.parse(e.getKey(), "[npc.name]")) + ".");
 							}
 						}
 					}
 				}
 			}
-			
-			return new Value<Boolean, String>(true, "");
+
+            return new Value<>(true, "");
 		}
 		@Override
 		public Value<Boolean, String> isAcceptablePosition(Map<GameCharacter, SexSlot> positioningSlots) {
 			boolean characterInStocks=false;
 			for(Entry<GameCharacter, SexSlot> e : positioningSlots.entrySet()) {
-				if(e.getValue()==SexSlotMilkingStall.LOCKED_IN_MILKING_STALL
-						|| e.getValue()==SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_TWO
-						|| e.getValue()==SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_THREE
-						|| e.getValue()==SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_FOUR) {
-					characterInStocks = true;
-				}
+                if (e.getValue() == SexSlotMilkingStall.LOCKED_IN_MILKING_STALL
+                        || e.getValue() == SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_TWO
+                        || e.getValue() == SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_THREE
+                        || e.getValue() == SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_FOUR) {
+                    characterInStocks = true;
+                    break;
+                }
 			}
 			if(!characterInStocks) {
-				return new Value<Boolean, String>(false, "At least one character needs to be locked into the milking stall for this position to work.");
+                return new Value<>(false, "At least one character needs to be locked into the milking stall for this position to work.");
 			}
-			return new Value<Boolean, String>(true, "");
+            return new Value<>(true, "");
 		}
 		@Override
 		public String getDescription(Map<GameCharacter, SexSlot> occupiedSlots) {
@@ -2130,8 +2085,8 @@ public class SexPosition {
 							+UtilText.parse(mainStanding," [npc.has] reared up on [npc.her] hind legs, before planting [npc.her] front [npc.feet] on the top of the stall, allowing [npc.herHim] to ")
 							+(stocksCount>1
 									?(playerStocks
-											?UtilText.parse(mainStanding,"effectively mount whichever of the "+(Util.intToString(stocksCount))+" of you [npc.she] [npc.verb(want)]. ")
-											:UtilText.parse(mainStanding,"effectively mount whichever of the "+(Util.intToString(stocksCount))+" of them [npc.she] [npc.verb(want)]. "))
+                        ? UtilText.parse(mainStanding, "effectively mount whichever of the " + (Util.intToString(stocksCount)) + " of you [npc.she] want. ")
+                        : UtilText.parse(mainStanding, "effectively mount whichever of the " + (Util.intToString(stocksCount)) + " of them [npc.she] want. "))
 									:UtilText.parse(soloStocks, "effectively mount [npc.name]. ")));
 			}
 
@@ -2244,7 +2199,7 @@ public class SexPosition {
 		@Override
 		public boolean isActionBlocked(GameCharacter performer, GameCharacter target, SexActionInterface action) {
 			if((Main.sex.getSexPositionSlot(performer).hasTag(SexSlotTag.LOCKED_IN_STOCKS)
-					&& action.getSexAreaInteractions().keySet().contains(SexAreaPenetration.FINGER)
+					&& action.getSexAreaInteractions().containsKey(SexAreaPenetration.FINGER)
 					&& action.getParticipantType()==SexParticipantType.SELF)) {
 				return true;
 			}
@@ -2281,11 +2236,8 @@ public class SexPosition {
 		}
 		@Override
 		public boolean isSelfOralAvailable(GameCharacter autoOralCharacter) {
-			if(Main.sex.getSexPositionSlot(autoOralCharacter).hasTag(SexSlotTag.LOCKED_IN_STOCKS)) {
-				return false;
-			}
-			return true;
-		}
+            return !Main.sex.getSexPositionSlot(autoOralCharacter).hasTag(SexSlotTag.LOCKED_IN_STOCKS);
+        }
 	};
 	
 	
@@ -2311,10 +2263,10 @@ public class SexPosition {
 					if(s==slot) {
 						for(Entry<GameCharacter, SexSlot> e : positioningSlots.entrySet()) {
 							if(entry.contains(e.getValue()) && e.getValue()!=slot && !e.getKey().equals(characterToTakeSlot)) {
-								return new Value<Boolean, String>(
-										false,
-										"The slot '"+Util.capitaliseSentence(slot.getDescription())+"' cannot be used while the slot"
-												+ " '"+Util.capitaliseSentence(e.getValue().getDescription())+"' is already assigned to "+(UtilText.parse(e.getKey(), "[npc.name]"))+".");
+                                return new Value<>(
+                                        false,
+                                        "The slot '" + Util.capitaliseSentence(slot.getDescription()) + "' cannot be used while the slot"
+                                                + " '" + Util.capitaliseSentence(e.getValue().getDescription()) + "' is already assigned to " + (UtilText.parse(e.getKey(), "[npc.name]")) + ".");
 							}
 						}
 					}
@@ -2338,68 +2290,69 @@ public class SexPosition {
 //					}
 //				}
 //			}
-			if((!positioningSlots.values().contains(SexSlotAllFours.ALL_FOURS) || positioningSlots.get(characterToTakeSlot)==SexSlotAllFours.ALL_FOURS)
+			if((!positioningSlots.containsValue(SexSlotAllFours.ALL_FOURS) || positioningSlots.get(characterToTakeSlot)==SexSlotAllFours.ALL_FOURS)
 					&& (slot==SexSlotAllFours.BEHIND
 							|| slot==SexSlotAllFours.BEHIND_ORAL
 							|| slot==SexSlotAllFours.HUMPING
 							|| slot==SexSlotAllFours.IN_FRONT_ANAL
 							|| slot==SexSlotAllFours.IN_FRONT
 							|| slot==SexSlotAllFours.USING_FEET)) {
-				return new Value<Boolean, String>(
-						false,
-						"The slot '"+Util.capitaliseSentence(slot.getDescription())+"' cannot be used unless there is a character assigned to the '"+Util.capitaliseSentence(SexSlotAllFours.ALL_FOURS.getDescription())+"' slot.");
+                return new Value<>(
+                        false,
+                        "The slot '" + Util.capitaliseSentence(slot.getDescription()) + "' cannot be used unless there is a character assigned to the '" + Util.capitaliseSentence(SexSlotAllFours.ALL_FOURS.getDescription()) + "' slot.");
 			}
-			if((!positioningSlots.values().contains(SexSlotAllFours.ALL_FOURS_TWO) || positioningSlots.get(characterToTakeSlot)==SexSlotAllFours.ALL_FOURS_TWO)
+			if((!positioningSlots.containsValue(SexSlotAllFours.ALL_FOURS_TWO) || positioningSlots.get(characterToTakeSlot)==SexSlotAllFours.ALL_FOURS_TWO)
 					&& (slot==SexSlotAllFours.BEHIND_TWO
 							|| slot==SexSlotAllFours.BEHIND_ORAL_TWO
 							|| slot==SexSlotAllFours.HUMPING_TWO
 							|| slot==SexSlotAllFours.IN_FRONT_ANAL_TWO
 							|| slot==SexSlotAllFours.IN_FRONT_TWO
 							|| slot==SexSlotAllFours.USING_FEET_TWO)) {
-				return new Value<Boolean, String>(
-						false,
-						"The slot '"+Util.capitaliseSentence(slot.getDescription())+"' cannot be used unless there is a character assigned to the '"+Util.capitaliseSentence(SexSlotAllFours.ALL_FOURS_TWO.getDescription())+"' slot.");
+                return new Value<>(
+                        false,
+                        "The slot '" + Util.capitaliseSentence(slot.getDescription()) + "' cannot be used unless there is a character assigned to the '" + Util.capitaliseSentence(SexSlotAllFours.ALL_FOURS_TWO.getDescription()) + "' slot.");
 			}
-			if((!positioningSlots.values().contains(SexSlotAllFours.ALL_FOURS_THREE) || positioningSlots.get(characterToTakeSlot)==SexSlotAllFours.ALL_FOURS_THREE)
+			if((!positioningSlots.containsValue(SexSlotAllFours.ALL_FOURS_THREE) || positioningSlots.get(characterToTakeSlot)==SexSlotAllFours.ALL_FOURS_THREE)
 					&& (slot==SexSlotAllFours.BEHIND_THREE
 							|| slot==SexSlotAllFours.BEHIND_ORAL_THREE
 							|| slot==SexSlotAllFours.HUMPING_THREE
 							|| slot==SexSlotAllFours.IN_FRONT_ANAL_THREE
 							|| slot==SexSlotAllFours.IN_FRONT_THREE
 							|| slot==SexSlotAllFours.USING_FEET_THREE)) {
-				return new Value<Boolean, String>(
-						false,
-						"The slot '"+Util.capitaliseSentence(slot.getDescription())+"' cannot be used unless there is a character assigned to the '"+Util.capitaliseSentence(SexSlotAllFours.ALL_FOURS_THREE.getDescription())+"' slot.");
+                return new Value<>(
+                        false,
+                        "The slot '" + Util.capitaliseSentence(slot.getDescription()) + "' cannot be used unless there is a character assigned to the '" + Util.capitaliseSentence(SexSlotAllFours.ALL_FOURS_THREE.getDescription()) + "' slot.");
 			}
-			if((!positioningSlots.values().contains(SexSlotAllFours.ALL_FOURS_FOUR) || positioningSlots.get(characterToTakeSlot)==SexSlotAllFours.ALL_FOURS_FOUR)
+			if((!positioningSlots.containsValue(SexSlotAllFours.ALL_FOURS_FOUR) || positioningSlots.get(characterToTakeSlot)==SexSlotAllFours.ALL_FOURS_FOUR)
 					&& (slot==SexSlotAllFours.BEHIND_FOUR
 							|| slot==SexSlotAllFours.BEHIND_ORAL_FOUR
 							|| slot==SexSlotAllFours.HUMPING_FOUR
 							|| slot==SexSlotAllFours.IN_FRONT_ANAL_FOUR
 							|| slot==SexSlotAllFours.IN_FRONT_FOUR
 							|| slot==SexSlotAllFours.USING_FEET_FOUR)) {
-				return new Value<Boolean, String>(
-						false,
-						"The slot '"+Util.capitaliseSentence(slot.getDescription())+"' cannot be used unless there is a character assigned to the '"+Util.capitaliseSentence(SexSlotAllFours.ALL_FOURS_FOUR.getDescription())+"' slot.");
+                return new Value<>(
+                        false,
+                        "The slot '" + Util.capitaliseSentence(slot.getDescription()) + "' cannot be used unless there is a character assigned to the '" + Util.capitaliseSentence(SexSlotAllFours.ALL_FOURS_FOUR.getDescription()) + "' slot.");
 			}
-			
-			return new Value<Boolean, String>(true, "");
+
+            return new Value<>(true, "");
 		}
 		@Override
 		public Value<Boolean, String> isAcceptablePosition(Map<GameCharacter, SexSlot> positioningSlots) {
 			boolean suitablePosition=false;
 			for(Entry<GameCharacter, SexSlot> e : positioningSlots.entrySet()) {
-				if(e.getValue()==SexSlotAllFours.ALL_FOURS
-						|| e.getValue()==SexSlotAllFours.ALL_FOURS_TWO
-						|| e.getValue()==SexSlotAllFours.ALL_FOURS_THREE
-						|| e.getValue()==SexSlotAllFours.ALL_FOURS_FOUR) {
-					suitablePosition = true;
-				}
+                if (e.getValue() == SexSlotAllFours.ALL_FOURS
+                        || e.getValue() == SexSlotAllFours.ALL_FOURS_TWO
+                        || e.getValue() == SexSlotAllFours.ALL_FOURS_THREE
+                        || e.getValue() == SexSlotAllFours.ALL_FOURS_FOUR) {
+                    suitablePosition = true;
+                    break;
+                }
 			}
 			if(!suitablePosition) {
-				return new Value<Boolean, String>(false, "At least one character needs to be down on all fours for this position to work.");
+                return new Value<>(false, "At least one character needs to be down on all fours for this position to work.");
 			}
-			return new Value<Boolean, String>(true, "");
+            return new Value<>(true, "");
 		}
 		@Override
 		public String getDescription(Map<GameCharacter, SexSlot> occupiedSlots) {
@@ -2498,8 +2451,8 @@ public class SexPosition {
 						case 2:
 							sb.append(UtilText.parse(Util.newArrayListOfValues(allFours, fallBackAllFours3, fallBackAllFours2),
 									(!allFours.isTaur()
-										?" Just like [npc2.name] and [npc3.name], [npc.nameHasFull] sunk down onto [npc.her] [npc.hands] and knees. "
-										:" Just like [npc2.name] and [npc3.name], [npc.nameHasFull] sunk down onto [npc.her] front [npc.legs], while lifting [npc.her] [npc.ass+] up and presenting [npc.her] lower [npc.legRace]'s body to be rutted. ")));
+                                            ? " Just like [npc2.name] и [npc3.name], [npc.nameHasFull] sunk down onto [npc.her] [npc.hands] and knees. "
+                                            : " Just like [npc2.name] и [npc3.name], [npc.nameHasFull] sunk down onto [npc.her] front [npc.legs], while lifting [npc.her] [npc.ass+] up and presenting [npc.her] lower [npc.legRace]'s body to be rutted. ")));
 							break;
 						case 3:
 							sb.append(UtilText.parse(Util.newArrayListOfValues(allFours, fallBackAllFours3, fallBackAllFours2, fallBackAllFours1),
@@ -2690,15 +2643,12 @@ public class SexPosition {
 		}
 		@Override
 		public boolean isSelfOralAvailable(GameCharacter autoOralCharacter) {
-			if(Main.sex.getSexPositionSlot(autoOralCharacter).hasTag(SexSlotTag.ALL_FOURS)
-					|| Main.sex.getSexPositionSlot(autoOralCharacter)==SexSlotAllFours.HUMPING
-					|| Main.sex.getSexPositionSlot(autoOralCharacter)==SexSlotAllFours.HUMPING_TWO
-					|| Main.sex.getSexPositionSlot(autoOralCharacter)==SexSlotAllFours.HUMPING_THREE
-					|| Main.sex.getSexPositionSlot(autoOralCharacter)==SexSlotAllFours.HUMPING_FOUR) {
-				return false;
-			}
-			return true;
-		}
+            return !Main.sex.getSexPositionSlot(autoOralCharacter).hasTag(SexSlotTag.ALL_FOURS)
+                    && Main.sex.getSexPositionSlot(autoOralCharacter) != SexSlotAllFours.HUMPING
+                    && Main.sex.getSexPositionSlot(autoOralCharacter) != SexSlotAllFours.HUMPING_TWO
+                    && Main.sex.getSexPositionSlot(autoOralCharacter) != SexSlotAllFours.HUMPING_THREE
+                    && Main.sex.getSexPositionSlot(autoOralCharacter) != SexSlotAllFours.HUMPING_FOUR;
+        }
 	};
 	
 	
@@ -2719,19 +2669,19 @@ public class SexPosition {
 			SexActionPresets.positioningActionsNew,
 			Util.newArrayListOfValues(Cowgirl.class, FaceSitting.class, MatingPress.class, Missionary.class, SixtyNine.class)) {
 		
-		private List<SexSlot> position1 = Util.newArrayListOfValues(
+		private final List<SexSlot> position1 = Util.newArrayListOfValues(
 				SexSlotLyingDown.LYING_DOWN, //0
 				SexSlotLyingDown.COWGIRL, SexSlotLyingDown.COWGIRL_REVERSE, SexSlotLyingDown.MISSIONARY, SexSlotLyingDown.MATING_PRESS, SexSlotLyingDown.SCISSORING, //1-5
 				SexSlotLyingDown.FACE_SITTING, SexSlotLyingDown.FACE_SITTING_REVERSE, SexSlotLyingDown.SIXTY_NINE, SexSlotLyingDown.LAP_PILLOW, SexSlotLyingDown.MISSIONARY_ORAL, SexSlotLyingDown.BESIDE); //6-11
-		private List<SexSlot> position2 = Util.newArrayListOfValues(
+		private final List<SexSlot> position2 = Util.newArrayListOfValues(
 				SexSlotLyingDown.LYING_DOWN_TWO, //0
 				SexSlotLyingDown.COWGIRL_TWO, SexSlotLyingDown.COWGIRL_REVERSE_TWO, SexSlotLyingDown.MISSIONARY_TWO, SexSlotLyingDown.MATING_PRESS_TWO, SexSlotLyingDown.SCISSORING_TWO, //1-5
 				SexSlotLyingDown.FACE_SITTING_TWO, SexSlotLyingDown.FACE_SITTING_REVERSE_TWO, SexSlotLyingDown.SIXTY_NINE_TWO, SexSlotLyingDown.LAP_PILLOW_TWO, SexSlotLyingDown.MISSIONARY_ORAL_TWO, SexSlotLyingDown.BESIDE_TWO); //6-11
-		private List<SexSlot> position3 = Util.newArrayListOfValues(
+		private final List<SexSlot> position3 = Util.newArrayListOfValues(
 				SexSlotLyingDown.LYING_DOWN_THREE, //0
 				SexSlotLyingDown.COWGIRL_THREE, SexSlotLyingDown.COWGIRL_REVERSE_THREE, SexSlotLyingDown.MISSIONARY_THREE, SexSlotLyingDown.MATING_PRESS_THREE, SexSlotLyingDown.SCISSORING_THREE, //1-5
 				SexSlotLyingDown.FACE_SITTING_THREE, SexSlotLyingDown.FACE_SITTING_REVERSE_THREE, SexSlotLyingDown.SIXTY_NINE_THREE, SexSlotLyingDown.LAP_PILLOW_THREE, SexSlotLyingDown.MISSIONARY_ORAL_THREE, SexSlotLyingDown.BESIDE_THREE); //6-11
-		private List<SexSlot> position4 = Util.newArrayListOfValues(
+		private final List<SexSlot> position4 = Util.newArrayListOfValues(
 				SexSlotLyingDown.LYING_DOWN_FOUR, //0
 				SexSlotLyingDown.COWGIRL_FOUR, SexSlotLyingDown.COWGIRL_REVERSE_FOUR, SexSlotLyingDown.MISSIONARY_FOUR, SexSlotLyingDown.MATING_PRESS_FOUR, SexSlotLyingDown.SCISSORING_FOUR, //1-5
 				SexSlotLyingDown.FACE_SITTING_FOUR, SexSlotLyingDown.FACE_SITTING_REVERSE_FOUR, SexSlotLyingDown.SIXTY_NINE_FOUR, SexSlotLyingDown.LAP_PILLOW_FOUR, SexSlotLyingDown.MISSIONARY_ORAL_FOUR, SexSlotLyingDown.BESIDE_FOUR); //6-11
@@ -2759,10 +2709,10 @@ public class SexPosition {
 					if(s==slot) {
 						for(Entry<GameCharacter, SexSlot> e : positioningSlots.entrySet()) {
 							if(entry.contains(e.getValue()) && e.getValue()!=slot && !e.getKey().equals(characterToTakeSlot)) {
-								return new Value<Boolean, String>(
-										false,
-										"The slot '"+Util.capitaliseSentence(slot.getDescription())+"' cannot be used while the slot"
-												+ " '"+Util.capitaliseSentence(e.getValue().getDescription())+"' is already assigned to "+(UtilText.parse(e.getKey(), "[npc.name]"))+".");
+                                return new Value<>(
+                                        false,
+                                        "The slot '" + Util.capitaliseSentence(slot.getDescription()) + "' cannot be used while the slot"
+                                                + " '" + Util.capitaliseSentence(e.getValue().getDescription()) + "' is already assigned to " + (UtilText.parse(e.getKey(), "[npc.name]")) + ".");
 							}
 						}
 					}
@@ -2791,20 +2741,20 @@ public class SexPosition {
 						if(s==matingPressSlot) {
 							for(Entry<GameCharacter, SexSlot> e : positioningSlots.entrySet()) {
 								if(entry.contains(e.getValue()) && e.getValue()!=slot && !e.getKey().equals(characterToTakeSlot)) {
-									return new Value<Boolean, String>(
-											false,
-											"The slot '"+Util.capitaliseSentence(slot.getDescription())+"' cannot be used while the slot"
-													+ " '"+Util.capitaliseSentence(e.getValue().getDescription())+"' is already assigned to "+(UtilText.parse(e.getKey(), "[npc.name]"))+".");
+                                    return new Value<>(
+                                            false,
+                                            "The slot '" + Util.capitaliseSentence(slot.getDescription()) + "' cannot be used while the slot"
+                                                    + " '" + Util.capitaliseSentence(e.getValue().getDescription()) + "' is already assigned to " + (UtilText.parse(e.getKey(), "[npc.name]")) + ".");
 								}
 							}
 							
 						} else {
 							for(Entry<GameCharacter, SexSlot> e : positioningSlots.entrySet()) {
 								if(e.getValue()==matingPressSlot && e.getValue()!=slot && !e.getKey().equals(characterToTakeSlot)) {
-									return new Value<Boolean, String>(
-											false,
-											"The slot '"+Util.capitaliseSentence(slot.getDescription())+"' cannot be used while the slot"
-													+ " '"+Util.capitaliseSentence(e.getValue().getDescription())+"' is already assigned to "+(UtilText.parse(e.getKey(), "[npc.name]"))+".");
+                                    return new Value<>(
+                                            false,
+                                            "The slot '" + Util.capitaliseSentence(slot.getDescription()) + "' cannot be used while the slot"
+                                                    + " '" + Util.capitaliseSentence(e.getValue().getDescription()) + "' is already assigned to " + (UtilText.parse(e.getKey(), "[npc.name]")) + ".");
 								}
 							}
 						}
@@ -2817,17 +2767,17 @@ public class SexPosition {
 						|| slot==SexSlotLyingDown.SCISSORING_TWO
 						|| slot==SexSlotLyingDown.SCISSORING_THREE
 						|| slot==SexSlotLyingDown.SCISSORING_FOUR)) {
-				return new Value<Boolean, String>(false, "The slot '"+Util.capitaliseSentence(slot.getDescription())+"' can only be used by characters with a bipedal lower body.");
+                return new Value<>(false, "The slot '" + Util.capitaliseSentence(slot.getDescription()) + "' can only be used by characters with a bipedal lower body.");
 			}
 			if(characterToTakeSlot.isTaur()
 					&& (slot==SexSlotLyingDown.SIXTY_NINE
 						|| slot==SexSlotLyingDown.SIXTY_NINE_TWO
 						|| slot==SexSlotLyingDown.SIXTY_NINE_THREE
 						|| slot==SexSlotLyingDown.SIXTY_NINE_FOUR)) {
-				return new Value<Boolean, String>(false, "The slot '"+Util.capitaliseSentence(slot.getDescription())+"' can only be used by characters with a bipedal lower body.");
+                return new Value<>(false, "The slot '" + Util.capitaliseSentence(slot.getDescription()) + "' can only be used by characters with a bipedal lower body.");
 			}
 			
-			if((!positioningSlots.values().contains(SexSlotLyingDown.LYING_DOWN) || positioningSlots.get(characterToTakeSlot)==SexSlotLyingDown.LYING_DOWN)
+			if((!positioningSlots.containsValue(SexSlotLyingDown.LYING_DOWN) || positioningSlots.get(characterToTakeSlot)==SexSlotLyingDown.LYING_DOWN)
 					&& (slot==SexSlotLyingDown.COWGIRL
 							|| slot==SexSlotLyingDown.COWGIRL_REVERSE
 							|| slot==SexSlotLyingDown.FACE_SITTING
@@ -2838,11 +2788,11 @@ public class SexPosition {
 							|| slot==SexSlotLyingDown.MISSIONARY_ORAL
 							|| slot==SexSlotLyingDown.SCISSORING
 							|| slot==SexSlotLyingDown.SIXTY_NINE)) {
-				return new Value<Boolean, String>(
-						false,
-						"The slot '"+Util.capitaliseSentence(slot.getDescription())+"' cannot be used unless there is a character assigned to the '"+Util.capitaliseSentence(SexSlotLyingDown.LYING_DOWN.getDescription())+"' slot.");
+                return new Value<>(
+                        false,
+                        "The slot '" + Util.capitaliseSentence(slot.getDescription()) + "' cannot be used unless there is a character assigned to the '" + Util.capitaliseSentence(SexSlotLyingDown.LYING_DOWN.getDescription()) + "' slot.");
 			}
-			if((!positioningSlots.values().contains(SexSlotLyingDown.LYING_DOWN_TWO) || positioningSlots.get(characterToTakeSlot)==SexSlotLyingDown.LYING_DOWN_TWO)
+			if((!positioningSlots.containsValue(SexSlotLyingDown.LYING_DOWN_TWO) || positioningSlots.get(characterToTakeSlot)==SexSlotLyingDown.LYING_DOWN_TWO)
 					&& (slot==SexSlotLyingDown.COWGIRL_TWO
 							|| slot==SexSlotLyingDown.COWGIRL_REVERSE_TWO
 							|| slot==SexSlotLyingDown.FACE_SITTING_TWO
@@ -2853,11 +2803,11 @@ public class SexPosition {
 							|| slot==SexSlotLyingDown.MISSIONARY_ORAL_TWO
 							|| slot==SexSlotLyingDown.SCISSORING_TWO
 							|| slot==SexSlotLyingDown.SIXTY_NINE_TWO)) {
-				return new Value<Boolean, String>(
-						false,
-						"The slot '"+Util.capitaliseSentence(slot.getDescription())+"' cannot be used unless there is a character assigned to the '"+Util.capitaliseSentence(SexSlotLyingDown.LYING_DOWN_TWO.getDescription())+"' slot.");
+                return new Value<>(
+                        false,
+                        "The slot '" + Util.capitaliseSentence(slot.getDescription()) + "' cannot be used unless there is a character assigned to the '" + Util.capitaliseSentence(SexSlotLyingDown.LYING_DOWN_TWO.getDescription()) + "' slot.");
 			}
-			if((!positioningSlots.values().contains(SexSlotLyingDown.LYING_DOWN_THREE) || positioningSlots.get(characterToTakeSlot)==SexSlotLyingDown.LYING_DOWN_THREE)
+			if((!positioningSlots.containsValue(SexSlotLyingDown.LYING_DOWN_THREE) || positioningSlots.get(characterToTakeSlot)==SexSlotLyingDown.LYING_DOWN_THREE)
 					&& (slot==SexSlotLyingDown.COWGIRL_THREE
 							|| slot==SexSlotLyingDown.COWGIRL_REVERSE_THREE
 							|| slot==SexSlotLyingDown.FACE_SITTING_THREE
@@ -2868,11 +2818,11 @@ public class SexPosition {
 							|| slot==SexSlotLyingDown.MISSIONARY_ORAL_THREE
 							|| slot==SexSlotLyingDown.SCISSORING_THREE
 							|| slot==SexSlotLyingDown.SIXTY_NINE_THREE)) {
-				return new Value<Boolean, String>(
-						false,
-						"The slot '"+Util.capitaliseSentence(slot.getDescription())+"' cannot be used unless there is a character assigned to the '"+Util.capitaliseSentence(SexSlotLyingDown.LYING_DOWN_THREE.getDescription())+"' slot.");
+                return new Value<>(
+                        false,
+                        "The slot '" + Util.capitaliseSentence(slot.getDescription()) + "' cannot be used unless there is a character assigned to the '" + Util.capitaliseSentence(SexSlotLyingDown.LYING_DOWN_THREE.getDescription()) + "' slot.");
 			}
-			if((!positioningSlots.values().contains(SexSlotLyingDown.LYING_DOWN_FOUR) || positioningSlots.get(characterToTakeSlot)==SexSlotLyingDown.LYING_DOWN_FOUR)
+			if((!positioningSlots.containsValue(SexSlotLyingDown.LYING_DOWN_FOUR) || positioningSlots.get(characterToTakeSlot)==SexSlotLyingDown.LYING_DOWN_FOUR)
 					&& (slot==SexSlotLyingDown.COWGIRL_FOUR
 							|| slot==SexSlotLyingDown.COWGIRL_REVERSE_FOUR
 							|| slot==SexSlotLyingDown.FACE_SITTING_FOUR
@@ -2883,28 +2833,29 @@ public class SexPosition {
 							|| slot==SexSlotLyingDown.MISSIONARY_ORAL_FOUR
 							|| slot==SexSlotLyingDown.SCISSORING_FOUR
 							|| slot==SexSlotLyingDown.SIXTY_NINE_FOUR)) {
-				return new Value<Boolean, String>(
-						false,
-						"The slot '"+Util.capitaliseSentence(slot.getDescription())+"' cannot be used unless there is a character assigned to the '"+Util.capitaliseSentence(SexSlotLyingDown.LYING_DOWN_FOUR.getDescription())+"' slot.");
+                return new Value<>(
+                        false,
+                        "The slot '" + Util.capitaliseSentence(slot.getDescription()) + "' cannot be used unless there is a character assigned to the '" + Util.capitaliseSentence(SexSlotLyingDown.LYING_DOWN_FOUR.getDescription()) + "' slot.");
 			}
-			
-			return new Value<Boolean, String>(true, "");
+
+            return new Value<>(true, "");
 		}
 		@Override
 		public Value<Boolean, String> isAcceptablePosition(Map<GameCharacter, SexSlot> positioningSlots) {
 			boolean suitablePosition=false;
 			for(Entry<GameCharacter, SexSlot> e : positioningSlots.entrySet()) {
-				if(e.getValue()==SexSlotLyingDown.LYING_DOWN
-						|| e.getValue()==SexSlotLyingDown.LYING_DOWN_TWO
-						|| e.getValue()==SexSlotLyingDown.LYING_DOWN_THREE
-						|| e.getValue()==SexSlotLyingDown.LYING_DOWN_FOUR) {
-					suitablePosition = true;
-				}
+                if (e.getValue() == SexSlotLyingDown.LYING_DOWN
+                        || e.getValue() == SexSlotLyingDown.LYING_DOWN_TWO
+                        || e.getValue() == SexSlotLyingDown.LYING_DOWN_THREE
+                        || e.getValue() == SexSlotLyingDown.LYING_DOWN_FOUR) {
+                    suitablePosition = true;
+                    break;
+                }
 			}
 			if(!suitablePosition) {
-				return new Value<Boolean, String>(false, "At least one character needs to be lying down for this position to work.");
+                return new Value<>(false, "At least one character needs to be lying down for this position to work.");
 			}
-			return new Value<Boolean, String>(true, "");
+            return new Value<>(true, "");
 		}
 		@Override
 		public String getDescription(Map<GameCharacter, SexSlot> occupiedSlots) {
@@ -3012,8 +2963,8 @@ public class SexPosition {
 						case 2:
 							sb.append(UtilText.parse(Util.newArrayListOfValues(lyingDownCharacters.get(2), lyingDownCharacters.get(1), lyingDownCharacters.get(0)),
 									(!lyingDownCharacters.get(0).isTaur()
-										?" Just like [npc2.name] and [npc3.name], [npc.nameHasFull] sunk down onto the floor, before lying down on [npc.her] back. "
-										:" Just like [npc2.name] and [npc3.name], [npc.nameHasFull] sunk down onto [npc.her] feral [npc.legRace]'s body, before rolling over onto [npc.her] back and presenting [npc.herself]. ")));
+                                            ? " Just like [npc2.name] и [npc3.name], [npc.nameHasFull] sunk down onto the floor, before lying down on [npc.her] back. "
+                                            : " Just like [npc2.name] и [npc3.name], [npc.nameHasFull] sunk down onto [npc.her] feral [npc.legRace]'s body, before rolling over onto [npc.her] back and presenting [npc.herself]. ")));
 							break;
 						case 3:
 							sb.append(UtilText.parse(Util.newArrayListOfValues(lyingDownCharacters.get(3), lyingDownCharacters.get(2), lyingDownCharacters.get(1), lyingDownCharacters.get(0)),
@@ -3415,25 +3366,22 @@ public class SexPosition {
 		}
 		@Override
 		public boolean isSelfOralAvailable(GameCharacter autoOralCharacter) {
-			if(Main.sex.getSexPositionSlot(autoOralCharacter).hasTag(SexSlotTag.LAP_PILLOW)
-					|| Main.sex.getSexPositionSlot(autoOralCharacter).hasTag(SexSlotTag.MATING_PRESS)
-					|| Main.sex.getSexPositionSlot(autoOralCharacter).hasTag(SexSlotTag.SIXTY_NINE)
-				|| (Main.sex.getSexPositionSlot(autoOralCharacter)==SexSlotLyingDown.LYING_DOWN
-						&& !Collections.disjoint(Main.sex.getAllOccupiedSlots(false).values(), Util.newArrayListOfValues(
-							SexSlotLyingDown.COWGIRL, SexSlotLyingDown.COWGIRL_REVERSE, SexSlotLyingDown.FACE_SITTING, SexSlotLyingDown.FACE_SITTING_REVERSE, SexSlotLyingDown.MATING_PRESS, SexSlotLyingDown.SIXTY_NINE)))
-				|| (Main.sex.getSexPositionSlot(autoOralCharacter)==SexSlotLyingDown.LYING_DOWN_TWO
-						&& !Collections.disjoint(Main.sex.getAllOccupiedSlots(false).values(), Util.newArrayListOfValues(
-							SexSlotLyingDown.COWGIRL_TWO, SexSlotLyingDown.COWGIRL_REVERSE_TWO, SexSlotLyingDown.FACE_SITTING_TWO, SexSlotLyingDown.FACE_SITTING_REVERSE_TWO, SexSlotLyingDown.MATING_PRESS_TWO, SexSlotLyingDown.SIXTY_NINE_TWO)))
-				|| (Main.sex.getSexPositionSlot(autoOralCharacter)==SexSlotLyingDown.LYING_DOWN_THREE
-						&& !Collections.disjoint(Main.sex.getAllOccupiedSlots(false).values(), Util.newArrayListOfValues(
-							SexSlotLyingDown.COWGIRL_THREE, SexSlotLyingDown.COWGIRL_REVERSE_THREE, SexSlotLyingDown.FACE_SITTING_THREE, SexSlotLyingDown.FACE_SITTING_REVERSE_THREE, SexSlotLyingDown.MATING_PRESS_THREE, SexSlotLyingDown.SIXTY_NINE_THREE)))
-				|| (Main.sex.getSexPositionSlot(autoOralCharacter)==SexSlotLyingDown.LYING_DOWN_FOUR
-						&& !Collections.disjoint(Main.sex.getAllOccupiedSlots(false).values(), Util.newArrayListOfValues(
-							SexSlotLyingDown.COWGIRL_FOUR, SexSlotLyingDown.COWGIRL_REVERSE_FOUR, SexSlotLyingDown.FACE_SITTING_FOUR, SexSlotLyingDown.FACE_SITTING_REVERSE_FOUR, SexSlotLyingDown.MATING_PRESS_FOUR, SexSlotLyingDown.SIXTY_NINE_FOUR)))) {
-				return false;
-			}
-			return true;
-		}
+            return !Main.sex.getSexPositionSlot(autoOralCharacter).hasTag(SexSlotTag.LAP_PILLOW)
+                    && !Main.sex.getSexPositionSlot(autoOralCharacter).hasTag(SexSlotTag.MATING_PRESS)
+                    && !Main.sex.getSexPositionSlot(autoOralCharacter).hasTag(SexSlotTag.SIXTY_NINE)
+                    && (Main.sex.getSexPositionSlot(autoOralCharacter) != SexSlotLyingDown.LYING_DOWN
+                    || Collections.disjoint(Main.sex.getAllOccupiedSlots(false).values(), Util.newArrayListOfValues(
+                    SexSlotLyingDown.COWGIRL, SexSlotLyingDown.COWGIRL_REVERSE, SexSlotLyingDown.FACE_SITTING, SexSlotLyingDown.FACE_SITTING_REVERSE, SexSlotLyingDown.MATING_PRESS, SexSlotLyingDown.SIXTY_NINE)))
+                    && (Main.sex.getSexPositionSlot(autoOralCharacter) != SexSlotLyingDown.LYING_DOWN_TWO
+                    || Collections.disjoint(Main.sex.getAllOccupiedSlots(false).values(), Util.newArrayListOfValues(
+                    SexSlotLyingDown.COWGIRL_TWO, SexSlotLyingDown.COWGIRL_REVERSE_TWO, SexSlotLyingDown.FACE_SITTING_TWO, SexSlotLyingDown.FACE_SITTING_REVERSE_TWO, SexSlotLyingDown.MATING_PRESS_TWO, SexSlotLyingDown.SIXTY_NINE_TWO)))
+                    && (Main.sex.getSexPositionSlot(autoOralCharacter) != SexSlotLyingDown.LYING_DOWN_THREE
+                    || Collections.disjoint(Main.sex.getAllOccupiedSlots(false).values(), Util.newArrayListOfValues(
+                    SexSlotLyingDown.COWGIRL_THREE, SexSlotLyingDown.COWGIRL_REVERSE_THREE, SexSlotLyingDown.FACE_SITTING_THREE, SexSlotLyingDown.FACE_SITTING_REVERSE_THREE, SexSlotLyingDown.MATING_PRESS_THREE, SexSlotLyingDown.SIXTY_NINE_THREE)))
+                    && (Main.sex.getSexPositionSlot(autoOralCharacter) != SexSlotLyingDown.LYING_DOWN_FOUR
+                    || Collections.disjoint(Main.sex.getAllOccupiedSlots(false).values(), Util.newArrayListOfValues(
+                    SexSlotLyingDown.COWGIRL_FOUR, SexSlotLyingDown.COWGIRL_REVERSE_FOUR, SexSlotLyingDown.FACE_SITTING_FOUR, SexSlotLyingDown.FACE_SITTING_REVERSE_FOUR, SexSlotLyingDown.MATING_PRESS_FOUR, SexSlotLyingDown.SIXTY_NINE_FOUR)));
+        }
 	};
 	
 	public static final AbstractSexPosition SITTING = new AbstractSexPosition("Sitting Down",
@@ -3461,10 +3409,10 @@ public class SexPosition {
 					if(s==slot) {
 						for(Entry<GameCharacter, SexSlot> e : positioningSlots.entrySet()) {
 							if(entry.contains(e.getValue()) && e.getValue()!=slot && !e.getKey().equals(characterToTakeSlot)) {
-								return new Value<Boolean, String>(
-										false,
-										"The slot '"+Util.capitaliseSentence(slot.getDescription())+"' cannot be used while the slot"
-												+ " '"+Util.capitaliseSentence(e.getValue().getDescription())+"' is already assigned to "+(UtilText.parse(e.getKey(), "[npc.name]"))+".");
+                                return new Value<>(
+                                        false,
+                                        "The slot '" + Util.capitaliseSentence(slot.getDescription()) + "' cannot be used while the slot"
+                                                + " '" + Util.capitaliseSentence(e.getValue().getDescription()) + "' is already assigned to " + (UtilText.parse(e.getKey(), "[npc.name]")) + ".");
 							}
 						}
 					}
@@ -3483,25 +3431,26 @@ public class SexPosition {
 							|| slot==SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL_TWO
 							|| slot==SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL_THREE
 							|| slot==SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL_FOUR)) {
-				return new Value<Boolean, String>(false, UtilText.parse(characterToTakeSlot, "Only characters with the lower body of a feral animal can use the '"+Util.capitaliseSentence(slot.getDescription())+"' slot."));
+                return new Value<>(false, UtilText.parse(characterToTakeSlot, "Only characters with the lower body of a feral animal can use the '" + Util.capitaliseSentence(slot.getDescription()) + "' slot."));
 			}
-			return new Value<Boolean, String>(true, "");
+            return new Value<>(true, "");
 		}
 		@Override
 		public Value<Boolean, String> isAcceptablePosition(Map<GameCharacter, SexSlot> positioningSlots) {
 			boolean suitableSitting = false;
 			for(Entry<GameCharacter, SexSlot> e : positioningSlots.entrySet()) {
-				if(e.getValue()==SexSlotSitting.SITTING
-						|| e.getValue()==SexSlotSitting.SITTING_TWO
-						|| e.getValue()==SexSlotSitting.SITTING_THREE
-						|| e.getValue()==SexSlotSitting.SITTING_FOUR) {
-					suitableSitting = true;
-				}
+                if (e.getValue() == SexSlotSitting.SITTING
+                        || e.getValue() == SexSlotSitting.SITTING_TWO
+                        || e.getValue() == SexSlotSitting.SITTING_THREE
+                        || e.getValue() == SexSlotSitting.SITTING_FOUR) {
+                    suitableSitting = true;
+                    break;
+                }
 			}
 			if(!suitableSitting) {
-				return new Value<Boolean, String>(false, "At least one character needs to be sitting down for this position to work.");
+                return new Value<>(false, "At least one character needs to be sitting down for this position to work.");
 			}
-			return new Value<Boolean, String>(true, "");
+            return new Value<>(true, "");
 		}
 		@Override
 		public String getDescription(Map<GameCharacter, SexSlot> occupiedSlots) {
@@ -3955,23 +3904,20 @@ public class SexPosition {
 		}
 		@Override
 		public boolean isSelfOralAvailable(GameCharacter autoOralCharacter) {
-			if(Main.sex.getSexPositionSlot(autoOralCharacter).hasTag(SexSlotTag.SITTING_IN_LAP)
-					|| (Main.sex.getSexPositionSlot(autoOralCharacter)==SexSlotSitting.SITTING
-							&& !Collections.disjoint(Main.sex.getAllOccupiedSlots(false).values(), Util.newArrayListOfValues(
-									SexSlotSitting.SITTING_IN_LAP, SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL)))
-					|| Main.sex.getSexPositionSlot(autoOralCharacter)==SexSlotSitting.SITTING_TWO
-							&& !Collections.disjoint(Main.sex.getAllOccupiedSlots(false).values(), Util.newArrayListOfValues(
-									SexSlotSitting.SITTING_IN_LAP_TWO, SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL_TWO))
-					|| Main.sex.getSexPositionSlot(autoOralCharacter)==SexSlotSitting.SITTING_THREE
-							&& !Collections.disjoint(Main.sex.getAllOccupiedSlots(false).values(), Util.newArrayListOfValues(
-									SexSlotSitting.SITTING_IN_LAP_THREE, SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL_THREE))
-					|| Main.sex.getSexPositionSlot(autoOralCharacter)==SexSlotSitting.SITTING_FOUR
-							&& !Collections.disjoint(Main.sex.getAllOccupiedSlots(false).values(), Util.newArrayListOfValues(
-									SexSlotSitting.SITTING_IN_LAP_FOUR, SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL_FOUR))) {
-				return false;
-			}
-			return true;
-		}
+            return !Main.sex.getSexPositionSlot(autoOralCharacter).hasTag(SexSlotTag.SITTING_IN_LAP)
+                    && (Main.sex.getSexPositionSlot(autoOralCharacter) != SexSlotSitting.SITTING
+                    || Collections.disjoint(Main.sex.getAllOccupiedSlots(false).values(), Util.newArrayListOfValues(
+                    SexSlotSitting.SITTING_IN_LAP, SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL)))
+                    && (Main.sex.getSexPositionSlot(autoOralCharacter) != SexSlotSitting.SITTING_TWO
+                    || Collections.disjoint(Main.sex.getAllOccupiedSlots(false).values(), Util.newArrayListOfValues(
+                    SexSlotSitting.SITTING_IN_LAP_TWO, SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL_TWO)))
+                    && (Main.sex.getSexPositionSlot(autoOralCharacter) != SexSlotSitting.SITTING_THREE
+                    || Collections.disjoint(Main.sex.getAllOccupiedSlots(false).values(), Util.newArrayListOfValues(
+                    SexSlotSitting.SITTING_IN_LAP_THREE, SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL_THREE)))
+                    && (Main.sex.getSexPositionSlot(autoOralCharacter) != SexSlotSitting.SITTING_FOUR
+                    || Collections.disjoint(Main.sex.getAllOccupiedSlots(false).values(), Util.newArrayListOfValues(
+                    SexSlotSitting.SITTING_IN_LAP_FOUR, SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL_FOUR)));
+        }
 	};
 	
 	
@@ -3986,10 +3932,10 @@ public class SexPosition {
 		@Override
 		public Value<Boolean, String> isSlotUnlocked(GameCharacter characterToTakeSlot, SexSlot slot, Map<GameCharacter, SexSlot> positioningSlots) {
 			if(characterToTakeSlot.isTaur() && (slot==SexSlotBreedingStall.BREEDING_STALL_BACK)) {
-				return new Value<Boolean, String>(false, UtilText.parse(characterToTakeSlot, "Due to the proportions of [npc.her] animalistic lower body, [npc.nameIsFull] unable to lie down on [npc.her] back in order to get bred."));
+                return new Value<>(false, UtilText.parse(characterToTakeSlot, "Due to the proportions of [npc.her] animalistic lower body, [npc.nameIsFull] unable to lie down on [npc.her] back in order to get bred."));
 			}
-			
-			return new Value<Boolean, String>(true, "");
+
+            return new Value<>(true, "");
 		}
 		@Override
 		public String getDescription(Map<GameCharacter, SexSlot> occupiedSlots) {
@@ -4034,10 +3980,10 @@ public class SexPosition {
 		public boolean isActionBlocked(GameCharacter performer, GameCharacter target, SexActionInterface action) {
 			boolean performerIsMother = Main.sex.getSexPositionSlot(performer)==SexSlotBreedingStall.BREEDING_STALL_FRONT || Main.sex.getSexPositionSlot(performer)==SexSlotBreedingStall.BREEDING_STALL_BACK;
 			if((performerIsMother
-					&& (action.getSexAreaInteractions().keySet().contains(SexAreaPenetration.TAIL)
-							|| ((action.getSexAreaInteractions().values().contains(SexAreaOrifice.VAGINA) || action.getSexAreaInteractions().values().contains(SexAreaPenetration.PENIS)) && action.getParticipantType()==SexParticipantType.SELF)))
+					&& (action.getSexAreaInteractions().containsKey(SexAreaPenetration.TAIL)
+							|| ((action.getSexAreaInteractions().containsValue(SexAreaOrifice.VAGINA) || action.getSexAreaInteractions().containsValue(SexAreaPenetration.PENIS)) && action.getParticipantType()==SexParticipantType.SELF)))
 				|| (Main.sex.getSexPositionSlot(performer)==SexSlotBreedingStall.BREEDING_STALL_FUCKING
-						&& action.getSexAreaInteractions().values().contains(SexAreaPenetration.TAIL)
+						&& action.getSexAreaInteractions().containsValue(SexAreaPenetration.TAIL)
 						&& action.getParticipantType()!=SexParticipantType.SELF)) {
 				return true;
 			}
@@ -4112,7 +4058,7 @@ public class SexPosition {
 				boolean c2Taur = characters.get(2).isTaur();
 				
 				if(c1Taur || c2Taur) {
-					sb.append("[npc.NameIsFull] kneeling on the floor, ready to service whatever sets of genitals [npc2.name] and [npc3.name] put through the glory holes to either side of [npc.herHim].");
+                    sb.append("[npc.NameIsFull] kneeling on the floor, ready to service whatever sets of genitals [npc2.name] и [npc3.name] put through the glory holes to either side of [npc.herHim].");
 					for(int i=1; i<3; i++) {
 						GameCharacter character = characters.get(i);
 						if(character.hasPenis() && character.isAbleToAccessCoverableArea(CoverableArea.PENIS, true)) {
@@ -4133,7 +4079,7 @@ public class SexPosition {
 							&& characters.get(2).hasPenis() && characters.get(2).isAbleToAccessCoverableArea(CoverableArea.PENIS, true)) {
 						sb.append("[npc.NameIsFull] kneeling on the floor, ready to serve [npc2.namePos] [npc2.cock+] on one side, an [npc3.namePos] [npc3.cock+] on the other.");
 					} else {
-						sb.append("[npc.NameIsFull] kneeling on the floor, ready to service whatever sets of genitals [npc2.name] and [npc3.name] put through the glory holes to either side of [npc.herHim].");
+                        sb.append("[npc.NameIsFull] kneeling on the floor, ready to service whatever sets of genitals [npc2.name] и [npc3.name] put through the glory holes to either side of [npc.herHim].");
 					}
 				}
 				

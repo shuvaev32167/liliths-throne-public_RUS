@@ -173,7 +173,7 @@
 	
 	<!-- The description which is shown to the player in this subspecies' status effect tooltip. -->
 	<statusEffectDescription><![CDATA[
-		[npc.NamePos] samoyed-like body is hearty and well protected against the cold, and [npc.she] [npc.verb(tend)] to find purpose and comfort in doing work.
+		[npc.NamePos] samoyed-like body is hearty and well protected against the cold, and [npc.she] tend to find purpose and comfort in doing work.
 	]]></statusEffectDescription>
 	
 	<!-- The core attributes which a character of this subspecies benefits from.

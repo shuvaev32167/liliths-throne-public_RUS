@@ -270,25 +270,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(put)] the peaked cap on.]]>
+            <![CDATA[[npc.Name] put the peaked cap on.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(put)] the peaked cap on [npc2.namePos] head.]]>
+            <![CDATA[[npc.Name] put the peaked cap on [npc2.namePos] head.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(force)] the peaked cap down on [npc2.namePos] head.]]>
+            <![CDATA[[npc.Name] force the peaked cap down on [npc2.namePos] head.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(take)] [npc.her] peaked cap off.]]>
+            <![CDATA[[npc.Name] take [npc.her] peaked cap off.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(take)] [npc2.namePos] peaked cap off.]]>
+            <![CDATA[[npc.Name] take [npc2.namePos] peaked cap off.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(slap)] [npc2.namePos] peaked cap off.]]>
+            <![CDATA[[npc.Name] slap [npc2.namePos] peaked cap off.]]>
 		</otherRough>
 	</displacementText>
 	

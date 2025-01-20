@@ -41,10 +41,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		[npc.Name] [npc.verb(wipe)] off the peach and [npc.verb(take)] a big bite out of it. The sweet taste of the juicy fruit encourages [npc.herHim] to keep on going, and within a matter of moments [npc.sheHas] eaten the entire thing.
+		[npc.Name] wipe off the peach and take a big bite out of it. The sweet taste of the juicy fruit encourages [npc.herHim] to keep on going, and within a matter of moments [npc.sheHas] eaten the entire thing.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		[npc.Name] [npc.verb(wipe)] off the peach and [npc.verb(make)] [npc2.name] take a big bite out of it. The sweet taste of the juicy fruit encourages [npc2.herHim] to keep on going, and within a matter of moments [npc2.sheHas] eaten the entire thing.
+		[npc.Name] wipe off the peach and make [npc2.name] take a big bite out of it. The sweet taste of the juicy fruit encourages [npc2.herHim] to keep on going, and within a matter of moments [npc2.sheHas] eaten the entire thing.
 		]]></otherUse>
 	</useDescriptions>
 

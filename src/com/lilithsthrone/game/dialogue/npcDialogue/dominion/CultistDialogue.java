@@ -1,9 +1,5 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.dominion;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -27,6 +23,10 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @since 0.1.88
@@ -209,7 +209,32 @@ public class CultistDialogue {
 		}
 	};
 	
-	public static final DialogueNode ENCOUNTER_CHAPEL_LEAVING = new DialogueNode("The Witch's Chapel", "", true, true) {
+	public static final DialogueNode ENCOUNTER_CHAPEL_POST_ANAL_SEX = new DialogueNode("Post-sex", "", true) {
+		@Override
+		public String getDescription() {
+			return UtilText.parse(getCultist(), "[npc.Name] has had enough of fucking your ass...");
+		}
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("encounters/dominion/cultist", "ENCOUNTER_CHAPEL_POST_ANAL_SEX", getCultist());
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+                return new Response("Продолжить", "Continue on your way.", ENCOUNTER_CHAPEL_POST_VAGINAL_SEX) {
+					@Override
+					public DialogueNode getNextDialogue(){
+						return Main.game.getDefaultDialogue(false);
+					}
+				};
+
+			} else {
+				return null;
+			}
+		}
+	};	public static final DialogueNode ENCOUNTER_CHAPEL_LEAVING = new DialogueNode("The Witch's Chapel", "", true, true) {
 
 		@Override
 		public String getContent() {
@@ -219,7 +244,7 @@ public class CultistDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Leave the chapel and head back out into the streets of Dominion.", ENCOUNTER_CHAPEL_LEAVING){
+                return new Response("Продолжить", "Leave the chapel and head back out into the streets of Dominion.", ENCOUNTER_CHAPEL_LEAVING) {
 					@Override
 					public DialogueNode getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);
@@ -453,34 +478,6 @@ public class CultistDialogue {
 			}
 		}
 	};
-	
-	public static final DialogueNode ENCOUNTER_CHAPEL_POST_ANAL_SEX = new DialogueNode("Post-sex", "", true) {
-		@Override
-		public String getDescription() {
-			return UtilText.parse(getCultist(), "[npc.Name] has had enough of fucking your ass...");
-		}
-
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("encounters/dominion/cultist", "ENCOUNTER_CHAPEL_POST_ANAL_SEX", getCultist());
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Continue", "Continue on your way.", ENCOUNTER_CHAPEL_POST_VAGINAL_SEX){
-					@Override
-					public DialogueNode getNextDialogue(){
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
-				
-			} else {
-				return null;
-			}
-		}
-	};
-	
 	public static final DialogueNode ENCOUNTER_CHAPEL_POST_SUB_SEALED_SEX = new DialogueNode("Post-sex", "", true) {
 		@Override
 		public String getDescription() {
@@ -494,18 +491,20 @@ public class CultistDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Continue on your way.", ENCOUNTER_CHAPEL_POST_ORAL_SEX){
+                return new Response("Продолжить", "Continue on your way.", ENCOUNTER_CHAPEL_POST_ORAL_SEX) {
 					@Override
 					public DialogueNode getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);
 					}
 				};
-				
+
 			} else {
 				return null;
 			}
 		}
 	};
+	
+
 	
 	public static final DialogueNode ENCOUNTER_CHAPEL_POST_DOM_SEX = new DialogueNode("Post-sex", "", true) {
 		@Override

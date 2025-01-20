@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.dominion;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
@@ -32,6 +29,9 @@ import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.3.9.4
@@ -103,7 +103,7 @@ public class WesQuest {
 		}
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -112,7 +112,7 @@ public class WesQuest {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Continue on your way through Dominion...", Main.game.getPlayer().getLocationPlace().getPlaceType().getDialogue(false));
+                return new Response("Продолжить", "Continue on your way through Dominion...", Main.game.getPlayer().getLocationPlace().getPlaceType().getDialogue(false));
 			}
 			return null;
 		}
@@ -192,7 +192,7 @@ public class WesQuest {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Continue on your way through the Shopping Arcade...", Main.game.getPlayer().getLocationPlace().getPlaceType().getDialogue(false)) {
+                return new Response("Продолжить", "Continue on your way through the Shopping Arcade...", Main.game.getPlayer().getLocationPlace().getPlaceType().getDialogue(false)) {
 					@Override
 					public void effects() {
 						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.wesQuestMet, true);
@@ -224,7 +224,7 @@ public class WesQuest {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Continue on your way through the Shopping Arcade...", Main.game.getPlayer().getLocationPlace().getPlaceType().getDialogue(false));
+                return new Response("Продолжить", "Continue on your way through the Shopping Arcade...", Main.game.getPlayer().getLocationPlace().getPlaceType().getDialogue(false));
 			}
 			return null;
 		}
@@ -407,7 +407,7 @@ public class WesQuest {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Continue on your way...", Main.game.getPlayer().getLocationPlace().getPlaceType().getDialogue(false));
+                return new Response("Продолжить", "Continue on your way...", Main.game.getPlayer().getLocationPlace().getPlaceType().getDialogue(false));
 			}
 			return null;
 		}
@@ -878,12 +878,10 @@ public class WesQuest {
 			dialogueId = dialogueId + idAddition;
 			workTalkIds.remove(idAddition);
 
-			StringBuilder sb = new StringBuilder();
+            String sb = UtilText.parseFromXMLFile("characters/dominion/wes", "REQUISITIONS_WORK") +
+                    UtilText.parseFromXMLFile("characters/dominion/wes", dialogueId);
 			
-			sb.append(UtilText.parseFromXMLFile("characters/dominion/wes", "REQUISITIONS_WORK"));
-			sb.append(UtilText.parseFromXMLFile("characters/dominion/wes", dialogueId));
-			
-			return sb.toString();
+			return sb;
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
@@ -1011,7 +1009,7 @@ public class WesQuest {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Step out into the corridor and continue on your way...", EnforcerHQDialogue.CORRIDOR_PLAIN) {
+                return new Response("Продолжить", "Step out into the corridor and continue on your way...", EnforcerHQDialogue.CORRIDOR_PLAIN) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setNearestLocation(WorldType.ENFORCER_HQ, PlaceType.ENFORCER_HQ_CELLS_CORRIDOR, false);
@@ -1149,7 +1147,7 @@ public class WesQuest {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Step out into the corridor and continue on your way...", EnforcerHQDialogue.CORRIDOR_PLAIN) {
+                return new Response("Продолжить", "Step out into the corridor and continue on your way...", EnforcerHQDialogue.CORRIDOR_PLAIN) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setNearestLocation(WorldType.ENFORCER_HQ, PlaceType.ENFORCER_HQ_CELLS_CORRIDOR, false);
@@ -1296,7 +1294,7 @@ public class WesQuest {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Step out into the corridor and continue on your way...", EnforcerHQDialogue.CORRIDOR_PLAIN) {
+                return new Response("Продолжить", "Step out into the corridor and continue on your way...", EnforcerHQDialogue.CORRIDOR_PLAIN) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setNearestLocation(WorldType.ENFORCER_HQ, PlaceType.ENFORCER_HQ_CELLS_CORRIDOR, false);
@@ -1371,7 +1369,7 @@ public class WesQuest {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Step out into the corridor and continue on your way...", EnforcerHQDialogue.CORRIDOR_PLAIN) {
+                return new Response("Продолжить", "Step out into the corridor and continue on your way...", EnforcerHQDialogue.CORRIDOR_PLAIN) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setNearestLocation(WorldType.ENFORCER_HQ, PlaceType.ENFORCER_HQ_CELLS_CORRIDOR, false);

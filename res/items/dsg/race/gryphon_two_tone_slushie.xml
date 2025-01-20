@@ -52,10 +52,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		[npc.Name] [npc.verb(bring)] the cup of Two-Tone Slushie up to [npc.her] [npc.mouth]. The smell of kiwis and strawberries rises from the straw, and as [npc.she] [npc.verb(wrap)] [npc.her] lips around it and [npc.verb(start)] sucking down the cold semi-solid [npc.she] [npc.verb(feel)] much more refreshed.
+		[npc.Name] bring the cup of Two-Tone Slushie up to [npc.her] [npc.mouth]. The smell of kiwis and strawberries rises from the straw, and as [npc.she] wrap [npc.her] lips around it and start sucking down the cold semi-solid [npc.she] feel much more refreshed.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		[npc.Name] [npc.verb(bring)] the cup of Two-Tone Slushie up to [npc2.namePos] waiting [npc2.lips]. The smell of kiwis and strawberries rises from the straw, and as [npc2.she] [npc2.verb(warp)] [npc2.her] lips around it and [npc2.verb(start)] sucking down the cold semi-solid, [npc.she] [npc.verb(feel)] much more refreshed.
+		[npc.Name] bring the cup of Two-Tone Slushie up to [npc2.namePos] waiting [npc2.lips]. The smell of kiwis and strawberries rises from the straw, and as [npc2.she] [npc2.verb(warp)] [npc2.her] lips around it and [npc2.verb(start)] sucking down the cold semi-solid, [npc.she] feel much more refreshed.
 		]]></otherUse>
 	</useDescriptions>
 

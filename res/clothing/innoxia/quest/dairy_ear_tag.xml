@@ -93,25 +93,25 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(clip)] the tag into [npc.her] [npc.ear(true)].]]>
+        <![CDATA[[npc.Name] clip the tag into [npc.her] [npc.ear(true)].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(clip)] the tag into [npc2.namePos] [npc2.ear(true)].]]>
+        <![CDATA[[npc.Name] clip the tag into [npc2.namePos] [npc2.ear(true)].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(clip)] the tag into [npc2.namePos] [npc2.ear(true)].]]>
+        <![CDATA[[npc.Name] roughly clip the tag into [npc2.namePos] [npc2.ear(true)].]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(unclip)] [npc.her] tag and [npc.verb(take)] it out of [npc.her] [npc.ear(true)] piercing.]]>
+        <![CDATA[[npc.Name] unclip [npc.her] tag and take it out of [npc.her] [npc.ear(true)] piercing.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(unclip)] [npc2.namePos] tag and [npc.verb(take)] it out of [npc2.her] [npc2.ear(true)] piercing.]]>
+        <![CDATA[[npc.Name] unclip [npc2.namePos] tag and take it out of [npc2.her] [npc2.ear(true)] piercing.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(unclip)] [npc2.namePos] tag and roughly [npc.verb(yank)] it out of [npc2.her] [npc2.ear(true)] piercing.]]>
+        <![CDATA[[npc.Name] unclip [npc2.namePos] tag and roughly yank it out of [npc2.her] [npc2.ear(true)] piercing.]]>
     </otherRough>
   </displacementText>
 	

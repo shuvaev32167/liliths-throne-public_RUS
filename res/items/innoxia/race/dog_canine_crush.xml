@@ -54,10 +54,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		[npc.Name] [npc.verb(pop)] the cap off of the bottle of Canine Crush, before lifting it to [npc.her] waiting [npc.lips] and promptly downing the entire bottle. Although it tastes like a regular beer, a strange, musky aftertaste is left lingering on [npc.namePos] [npc.tongue].
+		[npc.Name] pop the cap off of the bottle of Canine Crush, before lifting it to [npc.her] waiting [npc.lips] and promptly downing the entire bottle. Although it tastes like a regular beer, a strange, musky aftertaste is left lingering on [npc.namePos] [npc.tongue].
 		]]></selfUse>
 		<otherUse><![CDATA[
-		[npc.Name] [npc.verb(pop)] the cap off of the bottle of Canine Crush, before lifting it to [npc2.namePos] waiting [npc2.lips] and getting [npc2.her] to down the entire bottle. Although it tastes like a regular beer, a strange, musky aftertaste is left lingering on [npc2.namePos] [npc2.tongue].
+		[npc.Name] pop the cap off of the bottle of Canine Crush, before lifting it to [npc2.namePos] waiting [npc2.lips] and getting [npc2.her] to down the entire bottle. Although it tastes like a regular beer, a strange, musky aftertaste is left lingering on [npc2.namePos] [npc2.tongue].
 		]]></otherUse>
 	</useDescriptions>
 

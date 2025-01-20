@@ -11,8 +11,9 @@
 		<attackDescriptor>whack</attackDescriptor>
 		<attackTooltipDescription>Whack [npc2.name] with your flashlight.</attackTooltipDescription>
 		<rarity>COMMON</rarity>
-		<equipText><![CDATA[[npc.Name] [npc.verb(ready)] [npc.her] flashlight and [npc.verb(prepare)] to use it to illuminate any dark areas [npc.she] [npc.verb(encounter)].]]></equipText>
-		<unequipText><![CDATA[[npc.Name] [npc.verb(put)] [npc.her] flashlight away.]]></unequipText>
+        <equipText>
+            <![CDATA[[npc.Name] ready [npc.her] flashlight and prepare to use it to illuminate any dark areas [npc.she] encounter.]]></equipText>
+        <unequipText><![CDATA[[npc.Name] put [npc.her] flashlight away.]]></unequipText>
 		
 		<imageName>flashlight.svg</imageName> 
 		<imageEquippedName>flashlight.svg</imageEquippedName>
@@ -46,25 +47,25 @@
 
 	<hitDescriptions>
 		<hitText><![CDATA[
-		Swinging [npc.her] flashlight, [npc.name] [npc.verb(manage)] to whack [npc2.name] on the [npc2.arm], which causes [npc2.herHim] to let out a surprised yelp!
+		Swinging [npc.her] flashlight, [npc.name] manage to whack [npc2.name] on the [npc2.arm], which causes [npc2.herHim] to let out a surprised yelp!
 		]]></hitText>
 		<hitText><![CDATA[
-		Striking out at [npc2.name] with [npc.her] flashlight, [npc.name] [npc.verb(manage)] to land a solid hit on [npc2.her] [npc2.arm]!
+		Striking out at [npc2.name] with [npc.her] flashlight, [npc.name] manage to land a solid hit on [npc2.her] [npc2.arm]!
 		]]></hitText>
 		<hitText><![CDATA[
-		With a quick step forwards, [npc.name] [npc.verb(lunge)] out at [npc2.name] with [npc.her] flashlight, whacking the heavy end against [npc2.her] shoulder!
+		With a quick step forwards, [npc.name] lunge out at [npc2.name] with [npc.her] flashlight, whacking the heavy end against [npc2.her] shoulder!
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		Thrusting out with [npc.her] flashlight, [npc.name] [npc.verb(attempt)] to whack [npc2.name] on the [npc2.arm], but [npc.verb(end)] up missing [npc2.herHim]!
+		Thrusting out with [npc.her] flashlight, [npc.name] attempt to whack [npc2.name] on the [npc2.arm], but end up missing [npc2.herHim]!
 		]]></missText>
 		<missText><![CDATA[
-		Striking out at [npc2.name] with [npc.her] flashlight, [npc.name] [npc.verb(let)] out a frustrated cry as [npc.she] [npc.verb(miss)] [npc.her] target!
+		Striking out at [npc2.name] with [npc.her] flashlight, [npc.name] let out a frustrated cry as [npc.she] miss [npc.her] target!
 		]]></missText>
 		<missText><![CDATA[
-		With a quick step forwards, [npc.name] [npc.verb(lunge)] out at [npc2.name] with [npc.her] flashlight, but [npc.she] [npc.verb(miss)] [npc.her] target!
+		With a quick step forwards, [npc.name] lunge out at [npc2.name] with [npc.her] flashlight, but [npc.she] miss [npc.her] target!
 		]]></missText>
 	</missDescriptions>
 	

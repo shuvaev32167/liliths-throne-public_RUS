@@ -13,8 +13,10 @@
 		<attackTooltipDescription><![CDATA[Shoot [npc2.name] with your submachine gun.]]></attackTooltipDescription>
 		<rarity>RARE</rarity>
 		<weaponSet/>
-		<equipText><![CDATA[[npc.Name] [npc.verb(take)] out the submachine gun, [npc.verb(load)] a fresh magazine, and [npc.verb(pulls)] the charging handle before disengaging the safety.]]></equipText>
-		<unequipText><![CDATA[[npc.Name] [npc.verb(open)] the bolt and [npc.verb(check)] to see that the chamber is empty before removing the magazine and putting the submachine gun away.]]></unequipText>
+        <equipText>
+            <![CDATA[[npc.Name] take out the submachine gun, load a fresh magazine, and pulls the charging handle before disengaging the safety.]]></equipText>
+        <unequipText>
+            <![CDATA[[npc.Name] open the bolt and check to see that the chamber is empty before removing the magazine and putting the submachine gun away.]]></unequipText>
 		<imageName>pbsmg_uneq.svg</imageName>
 		<imageEquippedName>pbsmg.svg</imageEquippedName>
 		<physicalResistance>0</physicalResistance>
@@ -47,13 +49,13 @@
 
 	<hitDescriptions>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(line)] up [npc2.name] in [npc.her] sights and [npc.verb(squeeze)] off a burst at [npc2.name]. The gelatin capsules burst on impact with [npc2.namePos] aura, splattering [npc2.herHim] with stinging, burning oil.
+		[npc.Name] line up [npc2.name] in [npc.her] sights and squeeze off a burst at [npc2.name]. The gelatin capsules burst on impact with [npc2.namePos] aura, splattering [npc2.herHim] with stinging, burning oil.
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(line)] up [npc2.name] in [npc.her] sights and [npc.verb(squeeze)] off a burst at [npc2.name]. The capsules miss [npc2.herHim] completely and splatters uselessly in the distance.
+		[npc.Name] line up [npc2.name] in [npc.her] sights and squeeze off a burst at [npc2.name]. The capsules miss [npc2.herHim] completely and splatters uselessly in the distance.
 		]]></missText>
 	</missDescriptions>
 	

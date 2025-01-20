@@ -95,7 +95,8 @@
 		<fingerActionsAvailable>false</fingerActionsAvailable>
 		<hairPresent>false</hairPresent>
 	</feralAttributes>
-	<statusEffectDescription><![CDATA[[npc.NamePos] dalmatian-like body is strong and full of energy. Friendly and loyal to those [npc.she] [npc.verb(know)] and [npc.verb(trust)], [npc.she] also [npc.has] a strong instinct to guard [npc.her] territory, as well as a natural resistance to fire.]]></statusEffectDescription>
+    <statusEffectDescription>
+        <![CDATA[[npc.NamePos] dalmatian-like body is strong and full of energy. Friendly and loyal to those [npc.she] know и trust, [npc.she] also [npc.has] a strong instinct to guard [npc.her] territory, as well as a natural resistance to fire.]]></statusEffectDescription>
 	<statusEffectAttributeModifiers>
 		<attribute value="15">MAJOR_PHYSIQUE</attribute>
 		<attribute value="5">RESISTANCE_PHYSICAL</attribute>

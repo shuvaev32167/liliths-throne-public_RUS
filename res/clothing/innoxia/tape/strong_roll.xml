@@ -100,70 +100,70 @@
 
 	<replacementText slot="WRIST" type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(wrap)] the tape around [npc.her] wrists, effectively binding them together.]]>
+            <![CDATA[[npc.Name] wrap the tape around [npc.her] wrists, effectively binding them together.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(wrap)] the tape around [npc2.namePos] wrists, effectively binding them together.]]>
+            <![CDATA[[npc.Name] wrap the tape around [npc2.namePos] wrists, effectively binding them together.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(wrap)] the tape around [npc2.namePos] wrists, effectively binding them together.]]>
+            <![CDATA[[npc.Name] roughly wrap the tape around [npc2.namePos] wrists, effectively binding them together.]]>
 		</otherRough>
 	</replacementText>
 	<displacementText slot="WRIST" type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(tear)] off the tape from around [npc.her] wrists.]]>
+            <![CDATA[[npc.Name] tear off the tape from around [npc.her] wrists.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(tear)] off the tape from around [npc2.namePos] wrists.]]>
+            <![CDATA[[npc.Name] tear off the tape from around [npc2.namePos] wrists.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(tear)] off the tape from around [npc2.namePos] wrists.]]>
+            <![CDATA[[npc.Name] roughly tear off the tape from around [npc2.namePos] wrists.]]>
 		</otherRough>
 	</displacementText>
 
 	<replacementText slot="ANKLE" type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(wrap)] the tape around [npc.her] ankles, effectively binding them together.]]>
+            <![CDATA[[npc.Name] wrap the tape around [npc.her] ankles, effectively binding them together.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(wrap)] the tape around [npc2.namePos] ankles, effectively binding them together.]]>
+            <![CDATA[[npc.Name] wrap the tape around [npc2.namePos] ankles, effectively binding them together.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(wrap)] the tape around [npc2.namePos] ankles, effectively binding them together.]]>
+            <![CDATA[[npc.Name] roughly wrap the tape around [npc2.namePos] ankles, effectively binding them together.]]>
 		</otherRough>
 	</replacementText>
 	<displacementText slot="ANKLE" type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(tear)] off the tape from around [npc.her] ankles.]]>
+            <![CDATA[[npc.Name] tear off the tape from around [npc.her] ankles.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(tear)] off the tape from around [npc2.namePos] ankles.]]>
+            <![CDATA[[npc.Name] tear off the tape from around [npc2.namePos] ankles.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(tear)] off the tape from around [npc2.namePos] ankles.]]>
+            <![CDATA[[npc.Name] roughly tear off the tape from around [npc2.namePos] ankles.]]>
 		</otherRough>
 	</displacementText>
 	
 	<replacementText slot="MOUTH" type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(tear)] off a long piece of tape and [npc.verb(stick)] it over [npc.her] mouth.]]>
+            <![CDATA[[npc.Name] tear off a long piece of tape and stick it over [npc.her] mouth.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(tear)] off a long piece of tape and [npc.verb(stick)] it over [npc2.namePos] mouth.]]>
+            <![CDATA[[npc.Name] tear off a long piece of tape and stick it over [npc2.namePos] mouth.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(tear)] off a long piece of tape and roughly [npc.verb(stick)] it over [npc2.namePos] mouth.]]>
+            <![CDATA[[npc.Name] tear off a long piece of tape and roughly stick it over [npc2.namePos] mouth.]]>
 		</otherRough>
 	</replacementText>
 	<displacementText slot="MOUTH" type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(wince)] as [npc.she] [npc.verb(peel)] the tape off [npc.her] mouth.]]>
+            <![CDATA[[npc.Name] wince as [npc.she] peel the tape off [npc.her] mouth.]]>
 		</self>
 		<other>
-			<![CDATA[[npc2.Name] [npc2.verb(wince)] as [npc.name] [npc.verb(peel)] the tape off [npc2.her] mouth.]]>
+            <![CDATA[[npc2.Name] [npc2.verb(wince)] as [npc.name] peel the tape off [npc2.her] mouth.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc2.Name] [npc2.verb(wince)] and [npc2.verb(let)] out a cry as [npc.name] roughly [npc.verb(rip)] the tape off [npc2.her] mouth.]]>
+            <![CDATA[[npc2.Name] [npc2.verb(wince)] и [npc2.verb(let)] out a cry as [npc.name] roughly rip the tape off [npc2.her] mouth.]]>
 		</otherRough>
 	</displacementText>
 	

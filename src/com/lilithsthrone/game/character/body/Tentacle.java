@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.character.body;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTentacleType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
@@ -13,6 +10,9 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.2.8
@@ -99,7 +99,7 @@ public class Tentacle implements BodyPartInterface {
 		
 		if (type == getType()) {
 			if(type == TentacleType.NONE) {
-				return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already [npc.verb(lack)] a tentacle, so nothing happens...)]</p>");
+                return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already lack a tentacle, so nothing happens...)]</p>");
 				
 			} else {
 				return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already [npc.has] the [npc.tentacle] of [npc.a_tentacleRace], so nothing happens...)]</p>");
@@ -111,13 +111,13 @@ public class Tentacle implements BodyPartInterface {
 		if(this.type == TentacleType.NONE) {
 			sb.append(
 					"<p>"
-						+ "[npc.Name] rubs at [npc.her] lower back as [npc.she] [npc.verb(feel)] it growing hot and sensitive, and as [npc.she] [npc.do] so, something starts pushing out from under [npc.her] [npc.skin].");
+                            + "[npc.Name] rubs at [npc.her] lower back as [npc.she] feel it growing hot and sensitive, and as [npc.she] [npc.do] so, something starts pushing out from under [npc.her] [npc.skin].");
 		} else {
 			sb.append(
 					"<p>"
 						+ (owner.getTentacleCount()==1
-							?"[npc.Name] [npc.verb(feel)] [npc.her] [npc.tentacle] growing hot and itchy, and after just a moment it starts to transform."
-							:"[npc.Name] [npc.verb(feel)] [npc.her] [npc.tentacles] growing hot and itchy, and after just a moment they start to transform."));
+                            ? "[npc.Name] feel [npc.her] [npc.tentacle] growing hot and itchy, and after just a moment it starts to transform."
+                            : "[npc.Name] feel [npc.her] [npc.tentacles] growing hot and itchy, and after just a moment they start to transform."));
 		}
 
 		if(this.getLengthAsPercentageOfHeight()==this.getType().getDefaultLengthAsPercentageOfHeight()) {
@@ -175,7 +175,7 @@ public class Tentacle implements BodyPartInterface {
 			return UtilText.parse(owner,
 					"<p>"
 						+ "A tingling feeling spreads over [npc.namePos] [npc.tentacles], before moving down and concentrating in [npc.her] lower back."
-						+ " [npc.She] can't help but let out a cry as [npc.she] [npc.verb(feel)] some of them [style.boldShrink(shrinking away)] and disappearing back down into [npc.her] [npc.skin].<br/>"
+                            + " [npc.She] can't help but let out a cry as [npc.she] feel some of them [style.boldShrink(shrinking away)] and disappearing back down into [npc.her] [npc.skin].<br/>"
 						+ "After a few moments, [npc.sheIs] left with [style.boldTfGeneric("
 								+(tentacleCount==1
 									?"a single [npc.tentacle]"
@@ -187,7 +187,7 @@ public class Tentacle implements BodyPartInterface {
 			return UtilText.parse(owner,
 					"<p>"
 						+ "A tingling feeling spreads over [npc.namePos] [npc.tentacles], before moving down and concentrating in [npc.her] lower back."
-						+ " [npc.She] can't help but let out a little cry as [npc.she] [npc.verb(feel)] new [npc.tentacles] [style.boldGrow(pushing up)] and growing out of [npc.her] [npc.skin].<br/>"
+                            + " [npc.She] can't help but let out a little cry as [npc.she] feel new [npc.tentacles] [style.boldGrow(pushing up)] and growing out of [npc.her] [npc.skin].<br/>"
 						+ "After a few moments, [npc.sheIs] left with [style.boldTfGeneric("
 								+(tentacleCount==1
 									?"a single [npc.tentacle]"
@@ -224,7 +224,7 @@ public class Tentacle implements BodyPartInterface {
 		
 		if (girth <= 0) {
 			if (this.girth != 0) {
-				girthChange = 0 - this.girth;
+				girthChange = -this.girth;
 				this.girth = 0;
 			}
 		} else if (girth >= PenetrationGirth.getMaximum()) {

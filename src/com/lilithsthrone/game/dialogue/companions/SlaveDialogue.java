@@ -1,13 +1,5 @@
 package com.lilithsthrone.game.dialogue.companions;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevelBasic;
@@ -53,6 +45,9 @@ import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.AbstractPlaceUpgrade;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @since 0.1.85
@@ -459,7 +454,7 @@ public class SlaveDialogue {
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
 				if(enslavementWorked) {
-					return new Response("Continue",
+                    return new Response("Продолжить",
 							"Carry on your way.",
 							SlaveDialogue.getFollowupEnslavementDialogue()){
 						@Override
@@ -474,7 +469,7 @@ public class SlaveDialogue {
 					};
 					
 				} else {
-					return new Response("Continue",
+                    return new Response("Продолжить",
 							UtilText.parse(SlaveDialogue.getEnslavementTarget(), "That didn't work, but it doesn't mean you're finished with [npc.name] yet!"),
 							SlaveDialogue.getFollowupEnslavementDialogue());
 				}
@@ -501,7 +496,7 @@ public class SlaveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue",
+                return new Response("Продолжить",
 						UtilText.parse(SlaveDialogue.getEnslavementTarget(), "That didn't work, but it doesn't mean you're finished with [npc.name] yet!"),
 						SlaveDialogue.getFollowupEnslavementDialogue());
 			}
@@ -806,7 +801,21 @@ public class SlaveDialogue {
 		};
 	}
 	
-	public static final DialogueNode SLAVE_START = new DialogueNode("", ".", true) {
+	private static String partInspection() {
+		if(getSlave().hasPenis()) {
+			if(getSlave().hasVagina()) {
+				return ("[npc.penis+] и [npc.vagina+] for your inspection.");
+			} else {
+				return ("[npc.penis+] for your inspection.");
+			}
+
+		} else if(getSlave().hasVagina()) {
+			return ("[npc.vagina+] for your inspection.");
+
+		} else {
+			return ("genderless mound for your inspection.");
+		}
+	}	public static final DialogueNode SLAVE_START = new DialogueNode("", ".", true) {
 		@Override
 		public DialogueNodeType getDialogueNodeType() {
 			return DialogueNodeType.OCCUPANT_MANAGEMENT;
@@ -953,11 +962,11 @@ public class SlaveDialogue {
 							&& !Main.getProperties().hasValue(PropertyValue.companionContent)
 							&& Main.game.getPlayer().getQuest(QuestLine.ROMANCE_HELENA)==Quest.ROMANCE_HELENA_4_SCARLETTS_RETURN) {
 						if(Main.game.getNpc(Helena.class).getLocationPlace().getPlaceType()!=PlaceType.SLAVER_ALLEY_SCARLETTS_SHOP) {
-							return new Response("Helena",
+                            return new Response("Елена",
 									UtilText.parse(getSlave(), "Helena's shop is currently closed, so you're unable to take [npc.name] to her at the moment..."),
 									null);
 						}
-						return new Response("Helena",
+                        return new Response("Елена",
 								UtilText.parse(getSlave(), "Accompany [npc.name] to Helena's store in Slaver Alley."),
 								ScarlettsShop.ROMANCE_SHOP_CORE) {
 							@Override
@@ -1554,7 +1563,7 @@ public class SlaveDialogue {
 									isRape
 										?"Side-by-side rape (as dom)"
 										:"Side-by-side (as dom)",
-									UtilText.parse(characterForSex, characterForSexSecondary, "Push [npc.name] and [npc2.name] down onto all fours, before kneeling behind [npc.name], ready to fuck them both side-by-side."),
+									UtilText.parse(characterForSex, characterForSexSecondary, "Push [npc.name] и [npc2.name] down onto all fours, before kneeling behind [npc.name], ready to fuck them both side-by-side."),
 									null, null, null, null, null, null,
 									!isRape, false,
 									getGenericSlaveSexManager(
@@ -3452,21 +3461,7 @@ public class SlaveDialogue {
 		}
 	};
 	
-	private static String partInspection() {
-		if(getSlave().hasPenis()) {
-			if(getSlave().hasVagina()) {
-				return ("[npc.penis+] and [npc.vagina+] for your inspection.");
-			} else {
-				return ("[npc.penis+] for your inspection.");
-			}
-			
-		} else if(getSlave().hasVagina()) {
-			return ("[npc.vagina+] for your inspection.");
-			
-		} else {
-			return ("genderless mound for your inspection.");
-		}
-	}
+
 	
 	
 	public static final DialogueNode SLAVE_SPANKING = new DialogueNode("", "", true) { //TODO
@@ -3899,12 +3894,12 @@ public class SlaveDialogue {
 					UtilText.nodeContentSB.append(
 								" "+secondReaction+" as you grope, stroke, and fondle [npc.her] [npc.penis+], and you can't help but [pc.moan] into your slave's [npc.ear] as"+thirdReaction+" you feel [npc.her] [npc.cock+] growing hard under your touch."
 								+ " Dropping your [pc.hand] down yet further, you shift your attention to [npc.her] [npc.pussy+],"
-									+ " grinning once again as you feel that your stimulation of [npc.her] [npc.clit+] and [npc.labia+] have already gotten [npc.her] wet."
+										+ " grinning once again as you feel that your stimulation of [npc.her] [npc.clit+] и [npc.labia+] have already gotten [npc.her] wet."
 							+ "</p>");
 					
 				} else if(getSlave().hasVagina()) {
 					UtilText.nodeContentSB.append(
-							" "+secondReaction+" as you grope, stroke, and probe at [npc.her] [npc.clit+] and [npc.labia+], and you can't help but [pc.moan] into your slave's [npc.ear] as"+thirdReaction+" you feel [npc.her] [npc.pussy+]"
+							" " + secondReaction + " as you grope, stroke, and probe at [npc.her] [npc.clit+] и [npc.labia+], and you can't help but [pc.moan] into your slave's [npc.ear] as" + thirdReaction + " you feel [npc.her] [npc.pussy+]"
 									+ " is already wet from your touch."
 						+ "</p>");
 					
@@ -4008,7 +4003,7 @@ public class SlaveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Decide what to do next.", SLAVE_START_NO_CONTENT) {
+                return new Response("Продолжить", "Decide what to do next.", SLAVE_START_NO_CONTENT) {
 					@Override
 					public void effects() {
 						SlaveDialogue.initDialogue(getSlave(), false); // Need to re-init this dialogue as it gets cleared in Game turnUpdate during this scene.

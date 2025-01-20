@@ -22,11 +22,12 @@
 		
 		<rarity>COMMON</rarity> 
 		
-		<weaponSet/> 
-		
-		<equipText><![CDATA[[npc.Name] [npc.verb(heft)] [npc.her] sledgehammer, ready to swing it at a moment's notice.]]></equipText>
-		
-		<unequipText><![CDATA[[npc.Name] [npc.verb(put)] [npc.her] sledgehammer away.]]></unequipText>
+		<weaponSet/>
+
+        <equipText>
+            <![CDATA[[npc.Name] heft [npc.her] sledgehammer, ready to swing it at a moment's notice.]]></equipText>
+
+        <unequipText><![CDATA[[npc.Name] put [npc.her] sledgehammer away.]]></unequipText>
 		
 		<imageName>sledgehammer.svg</imageName> 
 		
@@ -67,25 +68,25 @@
 	
 	<hitDescriptions>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(swing)] [npc.her] sledgehammer at [npc2.name], grinning as the ethereal arcane head smacks into [npc2.her] body!
+		[npc.Name] swing [npc.her] sledgehammer at [npc2.name], grinning as the ethereal arcane head smacks into [npc2.her] body!
 		]]></hitText>
 		<hitText><![CDATA[
-		Lunging out at [npc2.name] with [npc.her] sledgehammer, [npc.name] [npc.verb(grin)] as [npc.she] [npc.verb(see)] the ethereal arcane head connect with [npc2.her] body!
+		Lunging out at [npc2.name] with [npc.her] sledgehammer, [npc.name] grin as [npc.she] see the ethereal arcane head connect with [npc2.her] body!
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(swing)] at [npc2.name] with [npc.her] sledgehammer, causing [npc2.herHim] to stagger back as the ethereal arcane head whacks into [npc2.her] chest!
+		[npc.Name] swing at [npc2.name] with [npc.her] sledgehammer, causing [npc2.herHim] to stagger back as the ethereal arcane head whacks into [npc2.her] chest!
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(swing)] [npc.her] sledgehammer at [npc2.name], but [npc.verb(end)] up missing [npc2.herHim]!
+		[npc.Name] swing [npc.her] sledgehammer at [npc2.name], but end up missing [npc2.herHim]!
 		]]></missText>
 		<missText><![CDATA[
-		Lunging out at [npc2.name] with [npc.her] sledgehammer, [npc.name] [npc.verb(let)] out a frustrated cry as [npc.she] [npc.verb(miss)] [npc.her] target!
+		Lunging out at [npc2.name] with [npc.her] sledgehammer, [npc.name] let out a frustrated cry as [npc.she] miss [npc.her] target!
 		]]></missText>
 		<missText><![CDATA[
-		With a quick step forwards, [npc.name] [npc.verb(swing)] at [npc2.name] with [npc.her] sledgehammer, but [npc.she] [npc.verb(miss)] [npc.her] target!
+		With a quick step forwards, [npc.name] swing at [npc2.name] with [npc.her] sledgehammer, but [npc.she] miss [npc.her] target!
 		]]></missText>
 	</missDescriptions>
 	

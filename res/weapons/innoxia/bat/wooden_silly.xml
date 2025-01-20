@@ -16,11 +16,12 @@
 		
 		<rarity>LEGENDARY</rarity> 
 		
-		<weaponSet/> 
-		
-		<equipText><![CDATA[[npc.Name] [npc.verb(ready)] [npc.her] wooden 'BONK!' bat in anticipation of sending some people to horny jail.]]></equipText>
-		
-		<unequipText><![CDATA[[npc.Name] [npc.verb(put)] away [npc.her] wooden 'BONK!' bat.]]></unequipText>
+		<weaponSet/>
+
+        <equipText>
+            <![CDATA[[npc.Name] ready [npc.her] wooden 'BONK!' bat in anticipation of sending some people to horny jail.]]></equipText>
+
+        <unequipText><![CDATA[[npc.Name] put away [npc.her] wooden 'BONK!' bat.]]></unequipText>
 		
 		<imageName>wooden_silly.svg</imageName> 
 		
@@ -82,25 +83,25 @@
 	
 	<hitDescriptions>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(bonk)] [npc2.name] with [npc.her] wooden 'BONK!' bat in an attempt to send [npc2.herHim] straight to horny jail!
+		[npc.Name] bonk [npc2.name] with [npc.her] wooden 'BONK!' bat in an attempt to send [npc2.herHim] straight to horny jail!
 		]]></hitText>
 		<hitText><![CDATA[
-		Whacking [npc2.name] with [npc.her] wooden 'BONK!' bat, [npc.name] [npc.verb(grin)] as [npc.she] [npc.verb(bonk)] the horny right out of [npc2.herHim]!
+		Whacking [npc2.name] with [npc.her] wooden 'BONK!' bat, [npc.name] grin as [npc.she] bonk the horny right out of [npc2.herHim]!
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(bonk)] [npc2.name] with [npc.her] wooden 'BONK!' bat, causing [npc2.herHim] to stagger back and stop being so outrageously horny!
+		[npc.Name] bonk [npc2.name] with [npc.her] wooden 'BONK!' bat, causing [npc2.herHim] to stagger back and stop being so outrageously horny!
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(swing)] [npc.her] wooden 'BONK!' bat at [npc2.name], but [npc.verb(end)] up missing [npc2.herHim]!
+		[npc.Name] swing [npc.her] wooden 'BONK!' bat at [npc2.name], but end up missing [npc2.herHim]!
 		]]></missText>
 		<missText><![CDATA[
-		Striking out at [npc2.name] with [npc.her] wooden 'BONK!' bat, [npc.name] [npc.verb(let)] out a frustrated cry as [npc.she] [npc.verb(miss)] [npc.her] target!
+		Striking out at [npc2.name] with [npc.her] wooden 'BONK!' bat, [npc.name] let out a frustrated cry as [npc.she] miss [npc.her] target!
 		]]></missText>
 		<missText><![CDATA[
-		With a quick step forwards, [npc.name] [npc.verb(swipe)] at [npc2.name] with [npc.her] wooden 'BONK!' bat, but [npc.she] [npc.verb(miss)] [npc.her] target!
+		With a quick step forwards, [npc.name] swipe at [npc2.name] with [npc.her] wooden 'BONK!' bat, but [npc.she] miss [npc.her] target!
 		]]></missText>
 	</missDescriptions>
 	

@@ -25,7 +25,8 @@
 		
 		<effectTooltipLines>
 			<line><![CDATA[[style.boldGood(Restores)] 5% [style.boldHealth([#ATTRIBUTE_HEALTH_MAXIMUM.getName()])]]]></line>
-			<line><![CDATA[[style.boldGood(Increases)] [style.boldPoison([#ATTRIBUTE_RESISTANCE_POISON.getName()])] and [style.boldHealth([#ATTRIBUTE_ENERGY_SHIELDING.getName()])] by 5 for 1 hour.]]></line>
+            <line>
+                <![CDATA[[style.boldGood(Increases)] [style.boldPoison([#ATTRIBUTE_RESISTANCE_POISON.getName()])] и [style.boldHealth([#ATTRIBUTE_ENERGY_SHIELDING.getName()])] by 5 for 1 hour.]]></line>
 		</effectTooltipLines>
 		
 		<applyEffects><![CDATA[
@@ -33,7 +34,7 @@
 			[##npc.removeStatusEffect(SE_dsg_item_fruit_buff)]
 			[##npc.addStatusEffect(SE_dsg_item_fruit_buff_plus, 3600)]
 			<p style='margin-bottom:0; padding-bottom:0;'>
-				[npc.Name] [npc.verb(feel)] vaguely healthier...
+				[npc.Name] feel vaguely healthier...
 			</p>
 		]]></applyEffects>
 		
@@ -45,10 +46,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-			[npc.Name] [npc.verb(find)] the apple surprisingly easy to bite into and [npc.verb(start)] eating it eagerly. It doesn't take long to consume the whole thing.
+			[npc.Name] find the apple surprisingly easy to bite into and start eating it eagerly. It doesn't take long to consume the whole thing.
 		]]></selfUse>
 		<otherUse><![CDATA[
-			[npc.Name] [npc.verb(find)] the tangerine surprisingly easy to bite into and [npc.verb(start)] feeding it to [npc2.name] eagerly. It doesn't take long to consume the whole thing.
+			[npc.Name] find the tangerine surprisingly easy to bite into and start feeding it to [npc2.name] eagerly. It doesn't take long to consume the whole thing.
 		]]></otherUse>
 	</useDescriptions>
 

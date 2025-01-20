@@ -17,8 +17,8 @@ import com.lilithsthrone.utils.Util;
 public enum SlavePermissionSetting {
 
 	// General/Misc.:
-	
-	GENERAL_SILENCE(false, "Silence", "Forbid this slave from talking. [style.italics(This slave will be treated as though they're mute while this permission is active.)]"),
+
+	GENERAL_SILENCE(false, "Сайленс", "Forbid this slave from talking. [style.italics(This slave will be treated as though they're mute while this permission is active.)]"),
 	GENERAL_CRAWLING(false, "Crawling", "Forbid this slave from walking, forcing them to crawl around on all fours."),
 	GENERAL_HOUSE_FREEDOM(false, "House Freedom", "Grant this slave the freedom to walk around Lilaya's house in their free time."),
 	GENERAL_OUTSIDE_FREEDOM(false, "Outside Freedom", "Grant this slave the freedom to leave Lilaya's house in their free time."),
@@ -213,11 +213,11 @@ public enum SlavePermissionSetting {
 	
 	;
 	
-	private String name;
-	private String description;
-	private boolean defaultValue;
+	private final String name;
+	private final String description;
+	private final boolean defaultValue;
 	
-	private SlavePermissionSetting(boolean defaultValue, String name, String description) {
+	SlavePermissionSetting(boolean defaultValue, String name, String description) {
 		this.name = name;
 		this.description = description;
 		this.defaultValue = defaultValue;

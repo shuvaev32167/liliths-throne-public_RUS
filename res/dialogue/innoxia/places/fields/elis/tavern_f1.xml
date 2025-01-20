@@ -40,13 +40,13 @@
 		<travelDisabled>false</travelDisabled>
 		<responseTabs>
 			<tab index="0"><![CDATA[
-				Actions
+				Действия
 			]]></tab>
 			<tab index="1"><![CDATA[
-				Fast Travel
+				Б. путешествие
 			]]></tab>
 			<tab index="2"><![CDATA[
-				Bathroom
+				Ванная
 			]]></tab>
 		</responseTabs>
 		<responses>
@@ -54,8 +54,9 @@
 			<response>
 				<responseTabIndex><![CDATA[0]]></responseTabIndex>
 				<index><![CDATA[1]]></index>
-				<responseTitle><![CDATA[Rest (1 hour)]]></responseTitle>
-				<responseTooltip><![CDATA[Rest for an hour. As well as replenishing your [#ATTRIBUTE_HEALTH_MAXIMUM.getName()] and [#ATTRIBUTE_MANA_MAXIMUM.getName()], you will also get the 'Well Rested' status effect.]]></responseTooltip>
+                <responseTitle><![CDATA[Отдых (1ч)]]></responseTitle>
+                <responseTooltip>
+                    <![CDATA[Отдохнуть час. А также восполнение твоих [#ATTRIBUTE_HEALTH_MAXIMUM.getName()] и [#ATTRIBUTE_MANA_MAXIMUM.getName()], вы также получите статусный эффект 'Хорошо отдохнувший']]></responseTooltip>
 				<nextDialogue stripContent="true"><![CDATA[innoxia_places_fields_elis_tavern_f1_room_player]]></nextDialogue>
 				<secondsPassed minutes="true"><![CDATA[60]]></secondsPassed>
 				<effects><![CDATA[
@@ -66,8 +67,9 @@
 			<response>
 				<responseTabIndex><![CDATA[0]]></responseTabIndex>
 				<index><![CDATA[2]]></index>
-				<responseTitle><![CDATA[Rest (4 hours)]]></responseTitle>
-				<responseTooltip><![CDATA[Rest for four hours. As well as replenishing your [#ATTRIBUTE_HEALTH_MAXIMUM.getName()] and [#ATTRIBUTE_MANA_MAXIMUM.getName()], you will also get the 'Well Rested' status effect.]]></responseTooltip>
+                <responseTitle><![CDATA[Отдых (4ч)]]></responseTitle>
+                <responseTooltip>
+                    <![CDATA[Отдохнуть 4 часа. А также восполнение твоих [#ATTRIBUTE_HEALTH_MAXIMUM.getName()] и [#ATTRIBUTE_MANA_MAXIMUM.getName()], вы также получите статусный эффект 'Хорошо отдохнувший']]></responseTooltip>
 				<nextDialogue stripContent="true"><![CDATA[innoxia_places_fields_elis_tavern_f1_room_player]]></nextDialogue>
 				<secondsPassed minutes="true"><![CDATA[240]]></secondsPassed>
 				<effects><![CDATA[
@@ -78,8 +80,9 @@
 			<response>
 				<responseTabIndex><![CDATA[0]]></responseTabIndex>
 				<index><![CDATA[3]]></index>
-				<responseTitle><![CDATA[Rest (8 hours)]]></responseTitle>
-				<responseTooltip><![CDATA[Rest for eight hours. As well as replenishing your [#ATTRIBUTE_HEALTH_MAXIMUM.getName()] and [#ATTRIBUTE_MANA_MAXIMUM.getName()], you will also get the 'Well Rested' status effect.]]></responseTooltip>
+                <responseTitle><![CDATA[Отдых (8ч)]]></responseTitle>
+                <responseTooltip>
+                    <![CDATA[Отдохнуть 8 часов. А также восполнение твоих [#ATTRIBUTE_HEALTH_MAXIMUM.getName()] и [#ATTRIBUTE_MANA_MAXIMUM.getName()], вы также получите статусный эффект 'Хорошо отдохнувший']]></responseTooltip>
 				<nextDialogue stripContent="true"><![CDATA[innoxia_places_fields_elis_tavern_f1_room_player]]></nextDialogue>
 				<secondsPassed minutes="true"><![CDATA[480]]></secondsPassed>
 				<effects><![CDATA[
@@ -90,8 +93,9 @@
 			<response>
 				<responseTabIndex><![CDATA[0]]></responseTabIndex>
 				<index><![CDATA[4]]></index>
-				<responseTitle><![CDATA[Rest (12 hours)]]></responseTitle>
-				<responseTooltip><![CDATA[Rest for twelve hours. As well as replenishing your [#ATTRIBUTE_HEALTH_MAXIMUM.getName()] and [#ATTRIBUTE_MANA_MAXIMUM.getName()], you will also get the 'Well Rested' status effect.]]></responseTooltip>
+                <responseTitle><![CDATA[Отдых (12ч)]]></responseTitle>
+                <responseTooltip>
+                    <![CDATA[Отдохнуть 12 часов. А также восполнение твоих [#ATTRIBUTE_HEALTH_MAXIMUM.getName()] и [#ATTRIBUTE_MANA_MAXIMUM.getName()], вы также получите статусный эффект 'Хорошо отдохнувший']]></responseTooltip>
 				<nextDialogue stripContent="true"><![CDATA[innoxia_places_fields_elis_tavern_f1_room_player]]></nextDialogue>
 				<secondsPassed minutes="true"><![CDATA[720]]></secondsPassed>
 				<effects><![CDATA[
@@ -103,15 +107,15 @@
 				<responseTabIndex><![CDATA[0]]></responseTabIndex>
 				<index><![CDATA[5]]></index>
 				<responseTitle><![CDATA[
-					Rest until
+					Отдых до
 					#IF(game.isDayTime())
-						 Sunset
+						 Заката
 					#ELSE
-						 Sunrise
+						 Восхода
 					#ENDIF
 				]]></responseTitle>
 				<responseTooltip><![CDATA[
-					Rest for
+					Отдохнуть
 					#IF(game.getMinutesUntilNextMorningOrEvening() >= 60)
 						 [#~~(game.getMinutesUntilNextMorningOrEvening()/60)] hours
 					#ENDIF
@@ -124,7 +128,7 @@
 					#ELSE
 						 sunrise.
 					#ENDIF
-					 As well as replenishing your [#ATTRIBUTE_HEALTH_MAXIMUM.getName()] and [#ATTRIBUTE_MANA_MAXIMUM.getName()], you will also get the 'Well Rested' status effect.
+					  также восполнение твоих [#ATTRIBUTE_HEALTH_MAXIMUM.getName()] и [#ATTRIBUTE_MANA_MAXIMUM.getName()], вы также получите статусный эффект 'Хорошо отдохнувший'
 				]]></responseTooltip>
 				<nextDialogue stripContent="true"><![CDATA[innoxia_places_fields_elis_tavern_f1_room_player]]></nextDialogue>
 				<secondsPassed minutes="true"><![CDATA[
@@ -140,7 +144,7 @@
 			<response>
 				<responseTabIndex><![CDATA[0]]></responseTabIndex>
 				<index><![CDATA[9]]></index>
-				<responseTitle><![CDATA[Set alarm]]></responseTitle>
+                <responseTitle><![CDATA[Установить будильник]]></responseTitle>
 				<responseTooltip><![CDATA[Set the alarm on your phone, so that you can wake at a specific time.]]></responseTooltip>
 				<nextDialogue stripContent="false"><![CDATA[ROOM_SET_ALARM]]></nextDialogue>
 				<secondsPassed minutes="true"><![CDATA[1]]></secondsPassed>
@@ -151,9 +155,9 @@
 				<index><![CDATA[10]]></index>
 				<responseTitle><![CDATA[
 					#IF(flags.getSavedLong('player_phone_alarm') < 0)
-						Rest until alarm (unset)
+						Отдых до будильника (Отключён)
 					#ELSE
-						Rest until alarm ([#
+						Отдых до будильника ([#
 							var alarm = flags.getSavedLong('player_phone_alarm');
 							var alarmObj = game.getCustomTime(alarm/60, alarm%60, 0);
 							game.getDisplayTime(alarmObj)
@@ -164,7 +168,7 @@
 					#IF(flags.getSavedLong('player_phone_alarm') < 0)
 						[style.colourBad(Your alarm is unset!)]
 					#ELSE
-						Rest for
+						Отдохнуть
 						#IF(game.getMinutesUntilTimeInMinutes(flags.getSavedLong('player_phone_alarm'))==0)
 							 24 hours,
 						#ELSE
@@ -175,7 +179,7 @@
 								 [#~~((game.getMinutesUntilTimeInMinutes(flags.getSavedLong('player_phone_alarm'))) % 60)] minutes,
 							#ENDIF
 						#ENDIF
-						 until your alarm goes off. As well as replenishing your [#ATTRIBUTE_HEALTH_MAXIMUM.getName()] and [#ATTRIBUTE_MANA_MAXIMUM.getName()], you will also get the 'Well Rested' status effect.
+						 пока не прозвенит будильник. Также восполняет втои [#ATTRIBUTE_HEALTH_MAXIMUM.getName()] и [#ATTRIBUTE_MANA_MAXIMUM.getName()], вы также получите статусный эффект 'Хорошо отдохнувший'
 					#ENDIF
 				]]></responseTooltip>
 				<nextDialogue stripContent="true"><![CDATA[
@@ -218,7 +222,7 @@
 			<response>
 				<responseTabIndex><![CDATA[1]]></responseTabIndex>
 				<index><![CDATA[2]]></index>
-				<responseTitle><![CDATA[Your room]]></responseTitle>
+                <responseTitle><![CDATA[Твоя комната]]></responseTitle>
 				<responseTooltip><![CDATA[You are already in your room!]]></responseTooltip>
 				<nextDialogue>null</nextDialogue>
 			</response>

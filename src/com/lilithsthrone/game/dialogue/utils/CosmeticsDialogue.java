@@ -1,24 +1,5 @@
 package com.lilithsthrone.game.dialogue.utils;
 
-import java.io.File;
-import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.Map.Entry;
-
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
@@ -41,6 +22,18 @@ import com.lilithsthrone.rendering.SVGImages;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
+import java.io.StringWriter;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * Holds generic dialogue nodes associated with application of cosmetics, for use in external dialogue files.
@@ -489,7 +482,7 @@ public class CosmeticsDialogue {
 				}
 			
 			} else if(index==2) {
-				return new Response("Save/Load", "Save/Load tattoo presets.", TATTOO_SAVE_LOAD) {
+                return new Response("Сохр./Загруз.", "Save/Load tattoo presets.", TATTOO_SAVE_LOAD) {
 					@Override
 					public void effects() {
 						initTattooSaveLoadDialogue(BEAUTICIAN_TATTOOS_ADD);
@@ -812,12 +805,8 @@ public class CosmeticsDialogue {
 	public static boolean isLoadTattooAvailable(String name) {
 		File file = new File("data/tattoos/"+name+".xml");
 
-		if(!file.exists()) {
-			return false;
-		}
-		
-		return true;
-	}
+        return file.exists();
+    }
 
 	public static void deleteTattoo(String name) {
 		File file = new File("data/tattoos/"+name+".xml");

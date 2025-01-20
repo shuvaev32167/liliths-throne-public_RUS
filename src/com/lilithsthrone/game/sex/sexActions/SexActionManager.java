@@ -1,5 +1,11 @@
 package com.lilithsthrone.game.sex.sexActions;
 
+import com.lilithsthrone.game.sex.sexActions.baseActions.*;
+import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.*;
+import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.*;
+import com.lilithsthrone.utils.Util;
+import com.lilithsthrone.utils.Util.Value;
+
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -7,85 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import com.lilithsthrone.game.sex.sexActions.baseActions.ClitAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.ClitClit;
-import com.lilithsthrone.game.sex.sexActions.baseActions.ClitMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.ClitNipple;
-import com.lilithsthrone.game.sex.sexActions.baseActions.ClitNippleCrotch;
-import com.lilithsthrone.game.sex.sexActions.baseActions.ClitVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerBreasts;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerBreastsCrotch;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerClit;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerFinger;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerNipple;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerNippleCrotch;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerPenis;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FootMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisArmpit;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisAss;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisBreasts;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisBreastsCrotch;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisFeet;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisFoot;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisNipple;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisNippleCrotch;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisSpinneret;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisThighs;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisUrethraPenis;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisUrethraVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TailAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TailMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TailVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TentacleAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TentacleMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TentacleVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueArmpit;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueBreasts;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueBreastsCrotch;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueMound;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueNipple;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueNippleCrotch;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.GenericActions;
-import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.GenericOrgasms;
-import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.GenericPositioning;
-import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.GenericTalk;
-import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.LovingActions;
-import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.PartnerTalk;
-import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.PlayerTalk;
-import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.PositioningMenu;
-import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.SadisticActions;
-import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfFingerAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfFingerBreasts;
-import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfFingerCrotchNipple;
-import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfFingerMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfFingerNipple;
-import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfFingerPenis;
-import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfFingerVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfNoPen;
-import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfPenisAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfPenisMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfPenisNipple;
-import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfPenisVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfTailAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfTailMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfTailNipple;
-import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfTailVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfTongueAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfTongueMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfTongueNipple;
-import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfTongueVagina;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * Handles the loading and id generation of SexActions from both internal and external files.
@@ -96,9 +23,9 @@ import com.lilithsthrone.utils.Util.Value;
  */
 public class SexActionManager {
 	
-	private static List<SexAction> allSexActions = new ArrayList<>();
-	private static Map<SexAction, String> sexActionToIdMap = new HashMap<>();
-	private static Map<String, SexAction> idToSexActionMap = new HashMap<>();
+	private static final List<SexAction> allSexActions = new ArrayList<>();
+	private static final Map<SexAction, String> sexActionToIdMap = new HashMap<>();
+	private static final Map<String, SexAction> idToSexActionMap = new HashMap<>();
 	
 	public static List<SexAction> getAllSexActions() {
 		return allSexActions;
@@ -163,8 +90,8 @@ public class SexActionManager {
 		}
 
 		// Add in hard-coded sex actions:
-		
-		Map<String, Field[]> sexActionClassIdToFields = Util.newHashMapOfValues(
+
+        Map<String, Field[]> sexActionClassIdToFields = Util.<String, Field[]>newHashMapOfValues(
 				new Value<>("PositioningMenu", PositioningMenu.class.getFields()),
 				new Value<>("GenericPositioning", GenericPositioning.class.getFields()),
 				

@@ -78,76 +78,76 @@
 
   <replacementText slot="TAIL" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(tie)] the ribbon into place around [npc.her] [npc.tail+].]]>
+        <![CDATA[[npc.Name] tie the ribbon into place around [npc.her] [npc.tail+].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(tie)] the ribbon into place around [npc2.namePos] [npc2.tail+].]]>
+        <![CDATA[[npc.Name] tie the ribbon into place around [npc2.namePos] [npc2.tail+].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(tie)] the ribbon into place around [npc2.namePos] [npc2.tail+].]]>
+        <![CDATA[[npc.Name] roughly tie the ribbon into place around [npc2.namePos] [npc2.tail+].]]>
     </otherRough>
   </replacementText>
   <displacementText slot="TAIL" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(untie)] the ribbon from around [npc.her] [npc.tail+].]]>
+        <![CDATA[[npc.Name] untie the ribbon from around [npc.her] [npc.tail+].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(untie)] the ribbon from around [npc2.namePos] [npc2.tail+].]]>
+        <![CDATA[[npc.Name] untie the ribbon from around [npc2.namePos] [npc2.tail+].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(untie)] the ribbon from around [npc2.namePos] [npc2.tail+].]]>
+        <![CDATA[[npc.Name] roughly untie the ribbon from around [npc2.namePos] [npc2.tail+].]]>
     </otherRough>
   </displacementText>
 
   <replacementText slot="HAIR" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(tie)] the ribbon into place into [npc.her] [npc.hair+].]]>
+        <![CDATA[[npc.Name] tie the ribbon into place into [npc.her] [npc.hair+].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(tie)] the ribbon into place into [npc2.namePos] [npc2.hair+].]]>
+        <![CDATA[[npc.Name] tie the ribbon into place into [npc2.namePos] [npc2.hair+].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(tie)] the ribbon into place into [npc2.namePos] [npc2.hair+].]]>
+        <![CDATA[[npc.Name] roughly tie the ribbon into place into [npc2.namePos] [npc2.hair+].]]>
     </otherRough>
   </replacementText>
   <displacementText slot="HAIR" type="REMOVE_OR_EQUIP">
     <self>
       <![CDATA[
 	  #IF(npc.hasHair())
-		[npc.Name] [npc.verb(untie)] the ribbon from [npc.her] [npc.hair+].
+		[npc.Name] untie the ribbon from [npc.her] [npc.hair+].
 	  #ELSE
-		As [npc.name] no longer [npc.has] any [npc.hair], [npc.her] ribbon [npc.verb(falls)] off of [npc.her] head.
+		As [npc.name] no longer [npc.has] any [npc.hair], [npc.her] ribbon falls off of [npc.her] head.
 	  #ENDIF
 	  ]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(untie)] the ribbon from [npc2.namePos] [npc2.hair+].]]>
+        <![CDATA[[npc.Name] untie the ribbon from [npc2.namePos] [npc2.hair+].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(untie)] the ribbon from [npc2.namePos] [npc2.hair+].]]>
+        <![CDATA[[npc.Name] roughly untie the ribbon from [npc2.namePos] [npc2.hair+].]]>
     </otherRough>
   </displacementText>
   
   <replacementText slot="PENIS" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(tie)] the ribbon into place around [npc.her] [npc.penis+].]]>
+        <![CDATA[[npc.Name] tie the ribbon into place around [npc.her] [npc.penis+].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(tie)] the ribbon into place around [npc2.namePos] [npc2.penis+].]]>
+        <![CDATA[[npc.Name] tie the ribbon into place around [npc2.namePos] [npc2.penis+].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(tie)] the ribbon into place around [npc2.namePos] [npc2.penis+].]]>
+        <![CDATA[[npc.Name] roughly tie the ribbon into place around [npc2.namePos] [npc2.penis+].]]>
     </otherRough>
   </replacementText>
   <displacementText slot="PENIS" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(untie)] the ribbon from around [npc.her] [npc.penis+].]]>
+        <![CDATA[[npc.Name] untie the ribbon from around [npc.her] [npc.penis+].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(untie)] the ribbon from around [npc2.namePos] [npc2.penis+].]]>
+        <![CDATA[[npc.Name] untie the ribbon from around [npc2.namePos] [npc2.penis+].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(untie)] the ribbon from around [npc2.namePos] [npc2.penis+].]]>
+        <![CDATA[[npc.Name] roughly untie the ribbon from around [npc2.namePos] [npc2.penis+].]]>
     </otherRough>
   </displacementText>
   

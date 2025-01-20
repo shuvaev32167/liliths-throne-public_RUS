@@ -11,11 +11,7 @@ import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.npcDialogue.QuickTransformations;
 import com.lilithsthrone.game.dialogue.places.dominion.RedLightDistrict;
-import com.lilithsthrone.game.dialogue.responses.Response;
-import com.lilithsthrone.game.dialogue.responses.ResponseCombat;
-import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
-import com.lilithsthrone.game.dialogue.responses.ResponseSex;
-import com.lilithsthrone.game.dialogue.responses.ResponseTag;
+import com.lilithsthrone.game.dialogue.responses.*;
 import com.lilithsthrone.game.dialogue.utils.BodyChanging;
 import com.lilithsthrone.game.dialogue.utils.InventoryInteraction;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -271,7 +267,7 @@ public class AlleywayProstituteDialogue {
 						
 					} else if(Main.game.getPlayer().getMoney()<threesomeCost) {
 						return new Response("Threesome ("+UtilText.formatAsMoney(threesomeCost, "span")+")",
-								UtilText.parse(getProstitute(), "You don't have "+threesomeCost+" flames, so you can't afford to have a threesome with [com.name] and [npc.name]."),
+                                UtilText.parse(getProstitute(), "You don't have " + threesomeCost + " flames, so you can't afford to have a threesome with [com.name] и [npc.name]."),
 								null);
 						
 					} else {
@@ -503,7 +499,7 @@ public class AlleywayProstituteDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Knowing that you can now find [npc.name] at Angel's Kiss, you set off on your way once again...", Main.game.getDefaultDialogue(false));
+                return new Response("Продолжить", "Knowing that you can now find [npc.name] at Angel's Kiss, you set off on your way once again...", Main.game.getDefaultDialogue(false));
 			}
 			return null;
 		}
@@ -527,7 +523,7 @@ public class AlleywayProstituteDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Now that you've cleaned up this area of the city, you can continue on your way...", Main.game.getDefaultDialogue(false));
+                return new Response("Продолжить", "Now that you've cleaned up this area of the city, you can continue on your way...", Main.game.getDefaultDialogue(false));
 			}
 			return null;
 		}
@@ -564,7 +560,7 @@ public class AlleywayProstituteDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Feeling happy to have been able to help out one of Dominion's troubled citizens, you continue on your way...", Main.game.getDefaultDialogue(false));
+                return new Response("Продолжить", "Feeling happy to have been able to help out one of Dominion's troubled citizens, you continue on your way...", Main.game.getDefaultDialogue(false));
 			}
 			return null;
 		}
@@ -770,8 +766,69 @@ public class AlleywayProstituteDialogue {
 			return null;
 		}
 	};
+	public static final DialogueNode AFTER_SEX_PAID = new DialogueNode("Step back", "", true) {
+		@Override
+		public String getDescription(){
+			return "Now that you've had your fun, you can step back and leave [npc.name] to recover.";
+		}
+		@Override
+		public String getContent() {
+			if(inApartment) {
+				if(Main.game.getPlayer().hasCompanions()) {
+					if(Main.sex.getAllParticipants(false).contains(Main.game.getPlayer().getMainCompanion())) {
+						if(Main.sex.getAllParticipants(false).contains(Main.game.getPlayer())) {
+							return UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_PAID_THREESOME", getProstitute());
+						} else {
+							return UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_PAID_COMPANION", getProstitute());
+						}
+					}
+				}
+				return UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_PAID", getProstitute());
 
-	public static final DialogueNode AFTER_COMBAT_DEFEAT = new DialogueNode("Defeat", "", true) {
+			} else {
+				if(Main.game.getPlayer().hasCompanions()) {
+					if(Main.sex.getAllParticipants(false).contains(Main.game.getPlayer().getMainCompanion())) {
+						if(Main.sex.getAllParticipants(false).contains(Main.game.getPlayer())) {
+							return UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_STORM_THREESOME", getProstitute());
+						} else {
+							return UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_STORM_COMPANION", getProstitute());
+						}
+					}
+				}
+				return UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_STORM", getProstitute());
+			}
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 1) {
+                return new Response("Продолжить",
+						UtilText.parse(getProstitute(), "Leave [npc.name] behind and continue on your way."),
+						Main.game.getDefaultDialogue(false)) {
+					@Override
+					public void effects() {
+						if(inApartment) {
+							if(Main.game.getPlayer().hasCompanions() && Main.sex.getAllParticipants(false).contains(Main.game.getPlayer().getMainCompanion())) {
+								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_PAID_LEAVE_COMPANION", getProstitute()));
+							} else {
+								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_PAID_LEAVE", getProstitute()));
+							}
+
+						} else {
+							if(Main.game.getPlayer().hasCompanions() && Main.sex.getAllParticipants(false).contains(Main.game.getPlayer().getMainCompanion())) {
+								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_STORM_LEAVE_COMPANION", getProstitute()));
+							} else {
+								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_STORM_LEAVE", getProstitute()));
+							}
+						}
+					}
+				};
+
+			} else if(index >= 4) {
+				return ALLEY_PROSTITUTE.getResponse(responseTab, index);
+			}
+			return null;
+		}
+	};	public static final DialogueNode AFTER_COMBAT_DEFEAT = new DialogueNode("Defeat", "", true) {
 		@Override
 		public String getDescription() {
 			return UtilText.parse(getProstitute(), "You have been defeated by [npc.name]!");
@@ -824,7 +881,7 @@ public class AlleywayProstituteDialogue {
 				
 			} else {
 				if (index == 1) {
-					return new Response("Continue",
+                    return new Response("Продолжить",
 							"Carry on your way."
 									+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]",
 							AFTER_COMBAT_DEFEAT){
@@ -846,68 +903,48 @@ public class AlleywayProstituteDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode AFTER_SEX_PAID = new DialogueNode("Step back", "", true) {
+	public static final DialogueNode AFTER_SEX_DEFEAT = new DialogueNode("Collapse", "", true) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 15*60;
+		}
+
 		@Override
 		public String getDescription(){
-			return "Now that you've had your fun, you can step back and leave [npc.name] to recover.";
+			return "You're completely worn out from [npc.namePos] dominant treatment, and need a while to recover.";
 		}
+
 		@Override
 		public String getContent() {
 			if(inApartment) {
-				if(Main.game.getPlayer().hasCompanions()) {
-					if(Main.sex.getAllParticipants(false).contains(Main.game.getPlayer().getMainCompanion())) {
-						if(Main.sex.getAllParticipants(false).contains(Main.game.getPlayer())) {
-							return UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_PAID_THREESOME", getProstitute());
-						} else {
-							return UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_PAID_COMPANION", getProstitute());
-						}
-					}
-				}
-				return UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_PAID", getProstitute());
-				
+				return UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_DEFEAT_APARTMENT", getProstitute());
 			} else {
-				if(Main.game.getPlayer().hasCompanions()) {
-					if(Main.sex.getAllParticipants(false).contains(Main.game.getPlayer().getMainCompanion())) {
-						if(Main.sex.getAllParticipants(false).contains(Main.game.getPlayer())) {
-							return UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_STORM_THREESOME", getProstitute());
-						} else {
-							return UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_STORM_COMPANION", getProstitute());
-						}
-					}
-				}
-				return UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_STORM", getProstitute());
+				return UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_DEFEAT", getProstitute());
 			}
 		}
+
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue",
-						UtilText.parse(getProstitute(), "Leave [npc.name] behind and continue on your way."),
-						Main.game.getDefaultDialogue(false)) {
+                return new Response("Продолжить",
+						"Carry on your way."
+							+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]",
+						Main.game.getDefaultDialogue(false)){
+					@Override
+					public Colour getHighlightColour() {
+						return PresetColour.GENERIC_NPC_REMOVAL;
+					}
 					@Override
 					public void effects() {
-						if(inApartment) {
-							if(Main.game.getPlayer().hasCompanions() && Main.sex.getAllParticipants(false).contains(Main.game.getPlayer().getMainCompanion())) {
-								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_PAID_LEAVE_COMPANION", getProstitute()));
-							} else {
-								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_PAID_LEAVE", getProstitute()));
-							}
-							
-						} else {
-							if(Main.game.getPlayer().hasCompanions() && Main.sex.getAllParticipants(false).contains(Main.game.getPlayer().getMainCompanion())) {
-								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_STORM_LEAVE_COMPANION", getProstitute()));
-							} else {
-								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_STORM_LEAVE", getProstitute()));
-							}
-						}
+						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_DEFEAT_LEAVE", getProstitute()));
+						Main.game.banishNPC(getProstitute());
 					}
 				};
-				
-			} else if(index >= 4) {
-				return ALLEY_PROSTITUTE.getResponse(responseTab, index);
+
+			} else {
+				return null;
 			}
-			return null;
 		}
 	};
 	
@@ -962,49 +999,6 @@ public class AlleywayProstituteDialogue {
 		}
 	};
 	
-	public static final DialogueNode AFTER_SEX_DEFEAT = new DialogueNode("Collapse", "", true) {
-		
-		@Override
-		public int getSecondsPassed() {
-			return 15*60;
-		}
-		
-		@Override
-		public String getDescription(){
-			return "You're completely worn out from [npc.namePos] dominant treatment, and need a while to recover.";
-		}
 
-		@Override
-		public String getContent() {
-			if(inApartment) {
-				return UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_DEFEAT_APARTMENT", getProstitute());
-			} else {
-				return UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_DEFEAT", getProstitute());
-			}
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Continue",
-						"Carry on your way."
-							+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]",
-						Main.game.getDefaultDialogue(false)){
-					@Override
-					public Colour getHighlightColour() {
-						return PresetColour.GENERIC_NPC_REMOVAL;
-					}
-					@Override
-					public void effects() {
-						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_DEFEAT_LEAVE", getProstitute()));
-						Main.game.banishNPC(getProstitute());
-					}
-				};
-				
-			} else {
-				return null;
-			}
-		}
-	};
 	
 }

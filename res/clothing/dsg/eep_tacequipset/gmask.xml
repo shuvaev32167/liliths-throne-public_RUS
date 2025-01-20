@@ -82,25 +82,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(put)] on the gas mask and [npc.verb(screw)] in a new filter cartridge.]]>
+            <![CDATA[[npc.Name] put on the gas mask and screw in a new filter cartridge.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(push)] the gas mask onto [npc2.namePos] [npc2.face] and [npc.verb(screw)] in a new filter cartridge.]]>
+            <![CDATA[[npc.Name] push the gas mask onto [npc2.namePos] [npc2.face] и screw in a new filter cartridge.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(force)] the gas mask onto [npc2.namePos] [npc2.face] and hastily [npc.verb(screw)] in a new filter cartridge.]]>
+            <![CDATA[[npc.Name] force the gas mask onto [npc2.namePos] [npc2.face] and hastily screw in a new filter cartridge.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(take)] off [npc.her] gas mask.]]>
+            <![CDATA[[npc.Name] take off [npc.her] gas mask.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(take)] [npc2.namePos] gas mask off [npc2.her] [npc2.face].]]>
+            <![CDATA[[npc.Name] take [npc2.namePos] gas mask off [npc2.her] [npc2.face].]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(yank)] [npc2.namePos] gas mask from [npc2.her] [npc2.face].]]>
+            <![CDATA[[npc.Name] yank [npc2.namePos] gas mask from [npc2.her] [npc2.face].]]>
 		</otherRough>
 	</displacementText>
 	

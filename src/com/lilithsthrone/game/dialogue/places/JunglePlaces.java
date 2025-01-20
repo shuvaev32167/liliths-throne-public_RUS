@@ -104,7 +104,7 @@ public class JunglePlaces {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Dominion", "Travel to Dominion. (This will be added later!)", null);
+                return new Response("Доминион", "Travel to Dominion. (This will be added later!)", null);
 
 			} else {
 				return null;

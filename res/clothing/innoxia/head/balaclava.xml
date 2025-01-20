@@ -68,25 +68,25 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(pull)] the balaclava down over [npc.her] head.]]>
+        <![CDATA[[npc.Name] pull the balaclava down over [npc.her] head.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(pull)] the balaclava down over [npc2.namePos] head.]]>
+        <![CDATA[[npc.Name] pull the balaclava down over [npc2.namePos] head.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(pull)] the balaclava down over [npc2.namePos] head.]]>
+        <![CDATA[[npc.Name] roughly pull the balaclava down over [npc2.namePos] head.]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(pull)] off [npc.her] balaclava.]]>
+        <![CDATA[[npc.Name] pull off [npc.her] balaclava.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(pull)] off [npc2.namePos] balaclava.]]>
+        <![CDATA[[npc.Name] pull off [npc2.namePos] balaclava.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(yank)] off [npc2.namePos] balaclava.]]>
+        <![CDATA[[npc.Name] yank off [npc2.namePos] balaclava.]]>
     </otherRough>
   </displacementText>
 	

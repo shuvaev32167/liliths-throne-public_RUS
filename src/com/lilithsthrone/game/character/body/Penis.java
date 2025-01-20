@@ -1,20 +1,9 @@
 package com.lilithsthrone.game.character.body;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractPenisType;
 import com.lilithsthrone.game.character.body.types.PenisType;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
-import com.lilithsthrone.game.character.body.valueEnums.PenisLength;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
@@ -22,6 +11,11 @@ import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @since 0.1.0
@@ -238,7 +232,7 @@ public class Penis implements BodyPartInterface {
 		
 		if (type == getType()) {
 			if(type==PenisType.NONE) {
-				return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already [npc.verb(lack)] a cock, so nothing happens...)]</p>");
+				return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already lack a cock, so nothing happens...)]</p>");
 			} else {
 				return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already [npc.has] [npc.a_cockRace]'s cock, so nothing happens...)]</p>");
 			}
@@ -252,7 +246,7 @@ public class Penis implements BodyPartInterface {
 					length = 1;
 				}
 				sb.append(
-					"[npc.Name] [npc.verb(feel)] an intense heat building up in [npc.her] groin, and [npc.she] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] the [npc.skin] "
+						"[npc.Name] feel an intense heat building up in [npc.her] groin, and [npc.she] let out [npc.a_moan+] as [npc.she] feel the [npc.skin] "
 								+ (owner.hasVagina()
 										? (!owner.isTaur()
 											?"above [npc.her] pussy"
@@ -272,24 +266,24 @@ public class Penis implements BodyPartInterface {
 							" As [npc.her] new cock flops down "
 								+ (owner.hasVagina()
 									? (!owner.isTaur()
-											?"to bump against [npc.her] pussy, [npc.she] [npc.verb(feel)] [npc.a_balls] growing within [npc.her] groin,"
-											:"beneath [npc.her] pussy, [npc.she] [npc.verb(feel)] [npc.a_balls] growing within [npc.her] groin,")
-									: "between [npc.her] legs, [npc.she] [npc.verb(feel)] [npc.a_balls] growing within [npc.her] groin,")
-							+ " and [npc.she] [npc.verb(let)] out an unwitting [npc.moan] as [npc.her] new sexual organ finishes growing.<br/>");
+									? "to bump against [npc.her] pussy, [npc.she] feel [npc.a_balls] growing within [npc.her] groin,"
+									: "beneath [npc.her] pussy, [npc.she] feel [npc.a_balls] growing within [npc.her] groin,")
+									: "between [npc.her] legs, [npc.she] feel [npc.a_balls] growing within [npc.her] groin,")
+									+ " and [npc.she] let out an unwitting [npc.moan] as [npc.her] new sexual organ finishes growing.<br/>");
 				} else {
 					sb.append(
 							" As [npc.her] new cock flops down "
 								+ (owner.hasVagina()
 									? (!owner.isTaur()
-											?"to bump against [npc.her] pussy, [npc.she] [npc.verb(feel)] [npc.a_balls] pushing out between [npc.her] two sexes,"
-											:"beneath [npc.her] pussy, [npc.she] [npc.verb(feel)] [npc.a_balls] pushing out between [npc.her] two sexes,")
-									: "between [npc.her] legs, [npc.she] [npc.verb(feel)] [npc.a_balls] push out underneath the base of [npc.her] new shaft,")
-							+ " and [npc.she] [npc.verb(let)] out an unwitting [npc.moan] as [npc.her] new sexual organ finishes growing.<br/>");
+									? "to bump against [npc.her] pussy, [npc.she] feel [npc.a_balls] pushing out between [npc.her] two sexes,"
+									: "beneath [npc.her] pussy, [npc.she] feel [npc.a_balls] pushing out between [npc.her] two sexes,")
+									: "between [npc.her] legs, [npc.she] feel [npc.a_balls] push out underneath the base of [npc.her] new shaft,")
+									+ " and [npc.she] let out an unwitting [npc.moan] as [npc.her] new sexual organ finishes growing.<br/>");
 				}
 				
 			} else {
 				sb.append(
-						"[npc.Name] [npc.verb(let)] out a gasp as [npc.she] [npc.verb(feel)] [npc.her] [npc.cock] suddenly stand to attention,"
+						"[npc.Name] let out a gasp as [npc.she] feel [npc.her] [npc.cock] suddenly stand to attention,"
 								+ " and before [npc.sheIs] able to try and get [npc.her] unexpected erection under control, [npc.her] gasp turns into [npc.a_moan+] as [npc.her] cock starts to transform.<br/>");
 			}
 		sb.append("</p>");
@@ -380,7 +374,7 @@ public class Penis implements BodyPartInterface {
 		
 		if (girth <= 0) {
 			if (this.girth != 0) {
-				girthChange = 0 - this.girth;
+				girthChange = -this.girth;
 				this.girth = 0;
 			}
 		} else if (girth >= PenetrationGirth.getMaximum()) {
@@ -402,18 +396,18 @@ public class Penis implements BodyPartInterface {
 		if (girthChange > 0) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] cock."
+							+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] cock."
 						+ " [npc.Her] cheeks flush red as the feeling works its way up [npc.her] shaft, and as a trickle of precum leaks out from the head of [npc.her] now-hard member,"
-							+ " [npc.she] [npc.verb(realise)] that [npc.her] cock has [style.boldGrow(grown thicker)].<br/>"
+							+ " [npc.she] realise that [npc.her] cock has [style.boldGrow(grown thicker)].<br/>"
 						+ "[npc.She] now [npc.has] [style.boldSex([npc.a_penisGirth] [npc.cock])]!"
 					+ "</p>");
 			
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] cock."
+							+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] cock."
 						+ " [npc.Her] cheeks flush red as the feeling works its way up [npc.her] shaft, and as a trickle of precum leaks out from the head of [npc.her] now-hard member,"
-							+ " [npc.she] [npc.verb(realise)] that [npc.her] cock has [style.boldShrink(got thinner)].<br/>"
+							+ " [npc.she] realise that [npc.her] cock has [style.boldShrink(got thinner)].<br/>"
 						+ "[npc.She] now [npc.has] [style.boldSex([npc.a_penisGirth] [npc.cock])]!"
 					+ "</p>");
 		}
@@ -441,7 +435,7 @@ public class Penis implements BodyPartInterface {
 		
 		if (length <= 0) {
 			if (this.length != 0) {
-				lengthChange = 0 - this.length;
+				lengthChange = -this.length;
 				this.length = 0;
 			}
 		} else if (length >= PenisLength.SEVEN_STALLION.getMaximumValue()) {
@@ -467,17 +461,17 @@ public class Penis implements BodyPartInterface {
 		if (lengthChange > 0) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out [npc.a_moan] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] cock."
+							+ "[npc.Name] let out [npc.a_moan] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] cock."
 						+ " [npc.Her] cheeks flush red as the feeling works its way up [npc.her] shaft, and as a trickle of precum leaks out from the head of [npc.her] now-hard member,"
-							+ " [npc.she] [npc.verb(realise)] that [npc.her] cock has [style.boldGrow(grown larger)].<br/>"
+							+ " [npc.she] realise that [npc.her] cock has [style.boldGrow(grown larger)].<br/>"
 						+ "[npc.She] now [npc.has] [style.boldSex([npc.a_penisSize] [npc.cock])]!"
 					+ "</p>");
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-							+ "[npc.Name] [npc.verb(let)] out [npc.a_moan] as [npc.she] [npc.verb(feel)] an intense tightening sensation building up at the base of [npc.her] cock."
+							+ "[npc.Name] let out [npc.a_moan] as [npc.she] feel an intense tightening sensation building up at the base of [npc.her] cock."
 							+ " [npc.Her] cheeks flush red as the feeling works its way up [npc.her] shaft, and as a trickle of precum leaks out from the head of [npc.her] now-hard member,"
-								+ " [npc.she] [npc.verb(realise)] that [npc.her] cock has [style.boldShrink(shrunk)].<br/>"
+							+ " [npc.she] realise that [npc.her] cock has [style.boldShrink(shrunk)].<br/>"
 						+ "[npc.She] now [npc.has] [style.boldSex([npc.a_penisSize] [npc.cock])]!"
 					+ "</p>");
 		}
@@ -620,7 +614,7 @@ public class Penis implements BodyPartInterface {
 			case OVIPOSITOR:
 				returnText = "An intense tingling sensation works its up [npc.namePos] [npc.cock], and [npc.she] can't help but let out [npc.a_moan+] as [npc.she] feels it transforming into [style.boldGrow(an ovipositor)]."
 							+ "<br/>[style.boldSex([npc.NamePos] [npc.cock] is now able to lay eggs!)]"
-							+ "<br/><i>(To be fully functional, [npc.name] [npc.verb(require)] [npc.her] eggs to be fertilised before laying can occur. Eggs cannot be laid in an already-pregnant target's vagina.)</i>";
+						+ "<br/><i>(To be fully functional, [npc.name] require [npc.her] eggs to be fertilised before laying can occur. Eggs cannot be laid in an already-pregnant target's vagina.)</i>";
 				break;
 		}
 		

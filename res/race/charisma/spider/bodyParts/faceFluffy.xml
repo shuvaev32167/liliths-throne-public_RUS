@@ -23,7 +23,7 @@
 	<noseDescriptorsMasculine/>
 	<noseDescriptorsFeminine/>
 	<transformationDescription><![CDATA[
-		[npc.Her] face burns as large chitinous chelicerae emerge from the sides of [npc.her] face and surround [npc.her] [npc.mouth]. [npc.She] also [npc.verb(feel)] a burning in [npc.her] cheeks as venom glands start to form that feed into them. As the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] [npc.verb(try)] to catch [npc.her] breath.
+		[npc.Her] face burns as large chitinous chelicerae emerge from the sides of [npc.her] face and surround [npc.her] [npc.mouth]. [npc.She] also feel a burning in [npc.her] cheeks as venom glands start to form that feed into them. As the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] try to catch [npc.her] breath.
 		<br/>[npc.Name] now [npc.has] an anthropomorphic [style.boldSpider(spider-like face)], [npc.materialDescriptor] [npc.skinFullDescription], complete with large fang-like chelicerae, which are [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)]. Within [npc.her] [npc.mouth], [npc.she] [npc.has] a humanoid tongue.
 	]]></transformationDescription>
 	<bodyDescription><![CDATA[

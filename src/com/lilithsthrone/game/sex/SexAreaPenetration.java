@@ -83,7 +83,7 @@ public enum SexAreaPenetration implements SexAreaInterface {
 												+ " cruelly teasing [npc2.herHim] with the promise of penetration.");
 										break;
 									case SUB_RESISTING:
-										sb.append("[npc.Name] tried to resist as [npc.she] [npc.was] forced to rub [npc.her] [npc.cock+] over [npc2.namePos] [npc2.pussy] and [npc2.clit].");
+                                        sb.append("[npc.Name] tried to resist as [npc.she] [npc.was] forced to rub [npc.her] [npc.cock+] over [npc2.namePos] [npc2.pussy] и [npc2.clit].");
 										break;
 								}
 							}
@@ -1903,7 +1903,7 @@ public enum SexAreaPenetration implements SexAreaInterface {
 									case SUB_EAGER:
 									case SUB_NORMAL:
 									case DOM_ROUGH:
-										sb.append(" Letting out muffled [npc2.moans], [npc2.name] leant into [npc.name] and [npc2.sexPaceVerb] started thrusting [npc2.her] [npc2.tongue] into [npc.her] [npc.mouth].");
+                                        sb.append(" Letting out muffled [npc2.moans], [npc2.name] leant into [npc.name] и [npc2.sexPaceVerb] started thrusting [npc2.her] [npc2.tongue] into [npc.her] [npc.mouth].");
 										break;
 									case SUB_RESISTING:
 										sb.append(" [npc2.Name] tried to resist, but [npc2.was] unable to stop [npc.name] from thrusting [npc.her] [npc.tongue] into [npc2.her] [npc2.mouth].");
@@ -1929,7 +1929,7 @@ public enum SexAreaPenetration implements SexAreaInterface {
 										sb.append("[npc.Name] pressed [npc.her] [npc.lips+] against [npc2.namePos] [npc2.breasts], before starting to [npc.sexPaceVerb] kiss and suck on [npc2.her] [npc2.nipples+].");
 										break;
 									case SUB_RESISTING:
-										sb.append("[npc.Name] tried to resist, but [npc.was] unable to stop [npc2.name] from pulling [npc.herHim] into [npc2.her] [npc2.breasts] and [npc2.sexPaceVerb] making [npc.herHim] kiss [npc2.her] [npc2.nipples+].");
+                                        sb.append("[npc.Name] tried to resist, but [npc.was] unable to stop [npc2.name] from pulling [npc.herHim] into [npc2.her] [npc2.breasts] и [npc2.sexPaceVerb] making [npc.herHim] kiss [npc2.her] [npc2.nipples+].");
 										break;
 								}
 							}
@@ -1972,7 +1972,7 @@ public enum SexAreaPenetration implements SexAreaInterface {
 										break;
 									case SUB_RESISTING:
 										sb.append("[npc.Name] tried to resist,"
-												+ " but [npc.was] unable to stop [npc2.name] from pulling [npc.herHim] into [npc2.her] [npc2.crotchBoobs] and [npc2.sexPaceVerb] making [npc.herHim] kiss [npc2.her] [npc2.crotchNipples+].");
+                                                + " but [npc.was] unable to stop [npc2.name] from pulling [npc.herHim] into [npc2.her] [npc2.crotchBoobs] и [npc2.sexPaceVerb] making [npc.herHim] kiss [npc2.her] [npc2.crotchNipples+].");
 										break;
 								}
 							}
@@ -2303,7 +2303,7 @@ public enum SexAreaPenetration implements SexAreaInterface {
 										break;
 									case SUB_RESISTING:
 										sb.append("[npc.Name] tried to resist,"
-												+ " but [npc.was] unable to stop [npc2.name] from pulling [npc.her] [npc.hands] into [npc2.her] [npc2.breasts] and [npc2.sexPaceVerb] making [npc.herHim] grope and squeeze them.");
+                                                + " but [npc.was] unable to stop [npc2.name] from pulling [npc.her] [npc.hands] into [npc2.her] [npc2.breasts] и [npc2.sexPaceVerb] making [npc.herHim] grope and squeeze them.");
 										break;
 								}
 							}
@@ -2346,7 +2346,7 @@ public enum SexAreaPenetration implements SexAreaInterface {
 										break;
 									case SUB_RESISTING:
 										sb.append("[npc.Name] tried to resist,"
-												+ " but [npc.was] unable to stop [npc2.name] from pulling [npc.her] [npc.hands] into [npc2.her] [npc2.crotchBoobs] and [npc2.sexPaceVerb] making [npc.herHim] grope and squeeze them.");
+                                                + " but [npc.was] unable to stop [npc2.name] from pulling [npc.her] [npc.hands] into [npc2.her] [npc2.crotchBoobs] и [npc2.sexPaceVerb] making [npc.herHim] grope and squeeze them.");
 										break;
 								}
 							}
@@ -2391,7 +2391,7 @@ public enum SexAreaPenetration implements SexAreaInterface {
 										break;
 									case SUB_RESISTING:
 										sb.append("[npc.Name] tried to resist,"
-												+ " but [npc.was] unable to stop [npc2.name] from pulling [npc.herHim] into [npc2.her] [npc2.breasts] and [npc2.sexPaceVerb] making [npc.herHim] pinch and play with [npc2.her] [npc2.nipples+].");
+                                                + " but [npc.was] unable to stop [npc2.name] from pulling [npc.herHim] into [npc2.her] [npc2.breasts] и [npc2.sexPaceVerb] making [npc.herHim] pinch and play with [npc2.her] [npc2.nipples+].");
 										break;
 								}
 							}
@@ -2434,7 +2434,7 @@ public enum SexAreaPenetration implements SexAreaInterface {
 										break;
 									case SUB_RESISTING:
 										sb.append("[npc.Name] tried to resist,"
-												+ " but [npc.was] unable to stop [npc2.name] from pulling [npc.herHim] into [npc2.her] [npc2.crotchBoobs] and [npc2.sexPaceVerb] making [npc.herHim] pinch and play with [npc2.her] [npc2.crotchNipples+].");
+                                                + " but [npc.was] unable to stop [npc2.name] from pulling [npc.herHim] into [npc2.her] [npc2.crotchBoobs] и [npc2.sexPaceVerb] making [npc.herHim] pinch and play with [npc2.her] [npc2.crotchNipples+].");
 										break;
 								}
 							}
@@ -2811,7 +2811,7 @@ public enum SexAreaPenetration implements SexAreaInterface {
 												+ " cruelly teasing [npc2.herHim] with the promise of penetration.");
 										break;
 									case SUB_RESISTING:
-										sb.append("[npc.Name] tried to resist as [npc.she] [npc.was] forced to rub [npc.her] [npc.tail+] over [npc2.namePos] [npc2.pussy] and [npc2.clit].");
+                                        sb.append("[npc.Name] tried to resist as [npc.she] [npc.was] forced to rub [npc.her] [npc.tail+] over [npc2.namePos] [npc2.pussy] и [npc2.clit].");
 										break;
 								}
 							}
@@ -3309,7 +3309,7 @@ public enum SexAreaPenetration implements SexAreaInterface {
 												+ " cruelly teasing [npc2.herHim] with the promise of penetration.");
 										break;
 									case SUB_RESISTING:
-										sb.append("[npc.Name] tried to resist as [npc.she] [npc.was] forced to rub [npc.her] [npc.tentacle+] over [npc2.namePos] [npc2.pussy] and [npc2.clit].");
+                                        sb.append("[npc.Name] tried to resist as [npc.she] [npc.was] forced to rub [npc.her] [npc.tentacle+] over [npc2.namePos] [npc2.pussy] и [npc2.clit].");
 										break;
 								}
 							}
@@ -4026,11 +4026,11 @@ public enum SexAreaPenetration implements SexAreaInterface {
 //	};
 
 	
-	private float baseArousalWhenPenetrating;
-	private float arousalChangePenetratingDry;
-	private boolean takesVirginity;
+	private final float baseArousalWhenPenetrating;
+	private final float arousalChangePenetratingDry;
+	private final boolean takesVirginity;
 
-	private SexAreaPenetration(float baseArousalWhenPenetrating, float arousalChangePenetratingDry, boolean takesVirginity) {
+	SexAreaPenetration(float baseArousalWhenPenetrating, float arousalChangePenetratingDry, boolean takesVirginity) {
 		this.baseArousalWhenPenetrating = baseArousalWhenPenetrating;
 		this.arousalChangePenetratingDry = arousalChangePenetratingDry;
 		this.takesVirginity = takesVirginity;
@@ -4050,9 +4050,9 @@ public enum SexAreaPenetration implements SexAreaInterface {
 	/** The diameter of the owner's SexAreaPenetration at the length specified, measured from the base. Diameter is the unit of measurement for all Capacity values. */
 	public float getDiameter(GameCharacter owner, int atLength) {
 		return -1;
-	};
-	
-	public float getBaseArousalWhenPenetrating() {
+	}
+
+    public float getBaseArousalWhenPenetrating() {
 		return baseArousalWhenPenetrating;
 	}
 	

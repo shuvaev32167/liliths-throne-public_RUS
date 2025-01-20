@@ -1,23 +1,17 @@
 package com.lilithsthrone.game.character.body;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractBreastType;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeShape;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.FluidRegeneration;
-import com.lilithsthrone.game.character.body.valueEnums.Lactation;
-import com.lilithsthrone.game.character.body.valueEnums.NippleShape;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.1.0
@@ -100,13 +94,13 @@ public class Breast implements BodyPartInterface {
 			return UtilText.parse(owner,
 					"<p>"
 						+ "A strange tingling feeling rises up into [npc.namePos] [npc.breasts+], but as [npc.she] [npc.do]n't have any breasts, nothing seems to happen...<br/>"
-						+ "If [npc.she] ever [npc.verb(grow)] any, [npc.name] will now have [style.boldSex("+shape.getDescriptor()+" breasts)]!"
+                            + "If [npc.she] ever grow any, [npc.name] will now have [style.boldSex(" + shape.getDescriptor() + " breasts)]!"
 					+ "</p>");
 		}
 		
 		return UtilText.parse(owner,
 				"<p>"
-					+ "A strange tingling feeling rises up into [npc.namePos] [npc.breasts+], and before [npc.she] [npc.verb(know)] what's happening, they've transformed into a new shape...<br/>"
+                        + "A strange tingling feeling rises up into [npc.namePos] [npc.breasts+], and before [npc.she] know what's happening, they've transformed into a new shape...<br/>"
 					+ "[npc.Name] now [npc.has] [style.boldSex("+shape.getDescriptor()+" breasts)]!"
 				+ "</p>");
 		
@@ -191,10 +185,10 @@ public class Breast implements BodyPartInterface {
 		
 		sb.append(
 				"<p>"
-					+ "The front of [npc.namePos] torso suddenly feels extremely soft and sensitive, and [npc.she] can't help but let out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a transformation start to take place."
+                        + "The front of [npc.namePos] torso suddenly feels extremely soft and sensitive, and [npc.she] can't help but let out [npc.a_moan+] as [npc.she] feel a transformation start to take place."
 					+" [npc.Her] nipples and areolae tingle and harden, causing [npc.herHim] to pant and let out a lewd [npc.moan] as the intense transformation runs its course."
 					+ " While there's no change to the [npc.breastFullDescription] which covers [npc.her] [npc.breasts],"
-						+ " [npc.she] [npc.verb(feel)] #IFnpc.hasBreasts()#THENtheir#ELSEits#ENDIF interior structure shifting and changing into a new form."
+                        + " [npc.she] feel #IFnpc.hasBreasts()#THENtheir#ELSEits#ENDIF interior structure shifting and changing into a new form."
 					+ " After just a moment, the transformation ends, leaving [npc.herHim] with [npc.totalNipples] new nipples."
 					+ "<br/>");
 		
@@ -258,16 +252,16 @@ public class Breast implements BodyPartInterface {
 		if (sizeChange > 0) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(feel)] a tingling heat quickly spreading throughout [npc.her] torso, and [npc.she] can't help but let out [npc.a_moan+] as [npc.her] "
+                            + "[npc.Name] feel a tingling heat quickly spreading throughout [npc.her] torso, and [npc.she] can't help but let out [npc.a_moan+] as [npc.her] "
 						+ (hadBreasts
 								? "[npc.breasts] swell up and [style.boldGrow(grow larger)].<br/>"
-								: "chest swells up, and before [npc.she] [npc.verb(know)] what's happening, a pair of breasts have [style.boldGrow(grown)] out of [npc.her] previously-flat torso.<br/>")
+                            : "chest swells up, and before [npc.she] know what's happening, a pair of breasts have [style.boldGrow(grown)] out of [npc.her] previously-flat torso.<br/>")
 						+ "[npc.Name] now [npc.has] [style.boldSex(" + sizeDescriptor + (getSize().getMeasurement()>CupSize.AA.getMeasurement()?", "+getSize().getCupSizeName()+"-cup":"") + " breasts)]!"
 					+ "</p>");
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(feel)] a tingling heat quickly spreading throughout [npc.her] torso,"
+                            + "[npc.Name] feel a tingling heat quickly spreading throughout [npc.her] torso,"
 							+ " and [npc.she] can't help but let out a frustrated [npc.moan] as [npc.her] [npc.breasts] shrink down and [style.boldShrink(get smaller)].<br/>"
 						+ (this.size==0
 							? "[npc.Name] now [npc.has] [style.boldSex(a completely flat chest)]!"
@@ -305,7 +299,7 @@ public class Breast implements BodyPartInterface {
 		if (lactationChange > 0) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(feel)] a strange bubbling and churning taking place deep within [npc.her] [npc.breasts], and [npc.a_moan+] drifts out from between [npc.her] [npc.lips] as a few drops of [npc.milk] suddenly leak"
+                            + "[npc.Name] feel a strange bubbling and churning taking place deep within [npc.her] [npc.breasts], and [npc.a_moan+] drifts out from between [npc.her] [npc.lips] as a few drops of [npc.milk] suddenly leak"
 							+ " from [npc.her] [npc.nipples]; clear evidence that [npc.her] [npc.milk] production has [style.boldGrow(increased)].<br/>"
 						+ "[npc.NameIsFull] now able to produce [style.boldSex(" + lactationDescriptor + " [npc.milk])]!"
 					+ "</p>");
@@ -313,8 +307,8 @@ public class Breast implements BodyPartInterface {
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(feel)] a strange sucking sensation deep within [npc.her] [npc.breasts],"
-							+ " and a frustrated sigh drifts out from between [npc.her] [npc.lips] as [npc.she] [npc.verb(realise)] that [npc.sheIs] feeling [npc.her] [npc.milk] production [style.boldShrink(drying up)].<br/>"
+                            + "[npc.Name] feel a strange sucking sensation deep within [npc.her] [npc.breasts],"
+                            + " and a frustrated sigh drifts out from between [npc.her] [npc.lips] as [npc.she] realise that [npc.sheIs] feeling [npc.her] [npc.milk] production [style.boldShrink(drying up)].<br/>"
 						+ "[npc.NameIsFull] now able to produce [style.boldSex(" + lactationDescriptor + " [npc.milk])]."
 					+ "</p>");
 		}
@@ -390,7 +384,7 @@ public class Breast implements BodyPartInterface {
 		if (regenerationChange > 0) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(feel)] an alarming bubbling and churning taking place deep within [npc.her] [npc.breasts], and [npc.a_moan+] drifts out from between [npc.her] [npc.lips] as a few drops of [npc.milk] suddenly leak"
+                            + "[npc.Name] feel an alarming bubbling and churning taking place deep within [npc.her] [npc.breasts], and [npc.a_moan+] drifts out from between [npc.her] [npc.lips] as a few drops of [npc.milk] suddenly leak"
 							+ " from [npc.her] [npc.nipples]; clear evidence that [npc.her] [npc.milk] regeneration has [style.boldGrow(increased)].<br/>"
 						+ "[npc.NamePos] rate of [npc.milk] regeneration is now [style.boldSex(" + regenerationDescriptor + ")] ("+Units.fluid(milkRegeneration)+"/day)!"
 					+ "</p>");
@@ -398,7 +392,7 @@ public class Breast implements BodyPartInterface {
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(feel)] a strange sucking sensation deep within [npc.her] [npc.breasts],"
+                            + "[npc.Name] feel a strange sucking sensation deep within [npc.her] [npc.breasts],"
 							+ " and a frustrated sigh drifts out from between [npc.her] [npc.lips] as [npc.she] realises that [npc.sheIs] feeling [npc.her] [npc.milk] regeneration [style.boldShrink(decreasing)].<br/>"
 						+ "[npc.NamePos] rate of [npc.milk] regeneration is now [style.boldSex(" + regenerationDescriptor + ")] ("+Units.fluid(milkRegeneration)+"/day)!"
 					+ "</p>");
@@ -432,7 +426,7 @@ public class Breast implements BodyPartInterface {
 		if (rows < getRows()) {
 			transformation = UtilText.parse(owner,
 						"<p>"
-							+ "[npc.Name] [npc.verb(glance)] down worriedly as [npc.she] [npc.verb(feel)] a strange tightening sensation in [npc.her] torso, and before [npc.sheHasFull] time to react, [npc.her] "
+                                + "[npc.Name] glance down worriedly as [npc.she] feel a strange tightening sensation in [npc.her] torso, and before [npc.sheHasFull] time to react, [npc.her] "
 							+ (rowsDifference==1
 								?"lowest pair of [npc.breasts]"
 								:"lowest "+Util.intToString(rowsDifference)+" pairs of [npc.breasts]")
@@ -443,7 +437,7 @@ public class Breast implements BodyPartInterface {
 		} else if (rows > getRows()) {
 			transformation = UtilText.parse(owner,
 						"<p>"
-							+ "[npc.Name] [npc.verb(glance)] down in surprise as [npc.she] [npc.verb(feel)] a strange swelling sensation in [npc.her] torso, and before [npc.sheHasFull] time to react, "
+                                + "[npc.Name] glance down in surprise as [npc.she] feel a strange swelling sensation in [npc.her] torso, and before [npc.sheHasFull] time to react, "
 							+ (rowsDifference==1
 								?"an extra pair of [npc.breasts]"
 								:Util.intToString(rowsDifference)+" extra pairs of [npc.breasts]")
@@ -491,18 +485,18 @@ public class Breast implements BodyPartInterface {
 		if (nippleCountPerBreast < getNippleCountPerBreast()) {
 			transformation = UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(feel)] a strange tingling sensation running just beneath the surface of the [npc.breastSkin] that covers [npc.her] [npc.breasts]."
+                            + "[npc.Name] feel a strange tingling sensation running just beneath the surface of the [npc.breastSkin] that covers [npc.her] [npc.breasts]."
 						+ " A shocked gasp bursts from [npc.her] mouth as the force shoots up into [npc.her] [npc.nipples],"
-							+ " and [npc.she] [npc.verb(continue)] [npc.moaning] as some of them [style.boldShrink(shrink)] into the flesh of [npc.her] [npc.breasts].<br/>"
+                            + " and [npc.she] continue [npc.moaning] as some of them [style.boldShrink(shrink)] into the flesh of [npc.her] [npc.breasts].<br/>"
 						+ "[npc.Name] now [npc.has] [style.boldSex("+ Util.intToString(nippleCountPerBreast) + " "+ (nippleCountPerBreast > 1 ? "[npc.nipples]" : "[npc.nipple(true)]") + " on each of [npc.her] " + (hasBreasts() ? "breasts" : "pecs") +")]!" 
 					+ "</p>");
 			
 		} else if (nippleCountPerBreast > getNippleCountPerBreast()) {
 			transformation = UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(feel)] a strange tingling sensation running just beneath the surface of the [npc.breastSkin] that covers [npc.her] [npc.breasts]."
+                            + "[npc.Name] feel a strange tingling sensation running just beneath the surface of the [npc.breastSkin] that covers [npc.her] [npc.breasts]."
 						+ " A shocked gasp bursts from [npc.her] mouth as the force shoots up into [npc.her] [npc.nipples],"
-							+ " and [npc.she] [npc.verb(continue)] [npc.moaning] as [npc.she] feels new ones [style.boldGrow(growing)] out of the flesh of [npc.her] [npc.breasts].<br/>"
+                            + " and [npc.she] continue [npc.moaning] as [npc.she] feels new ones [style.boldGrow(growing)] out of the flesh of [npc.her] [npc.breasts].<br/>"
 						+ "[npc.Name] now [npc.has] [style.boldSex("+ Util.intToString(nippleCountPerBreast) + " "+ (nippleCountPerBreast > 1 ? "[npc.nipples]" : "[npc.nipple(true)]") + " on each of [npc.her] " + (hasBreasts() ? "breasts" : "pecs") +")]!" 
 					+ "</p>");
 			

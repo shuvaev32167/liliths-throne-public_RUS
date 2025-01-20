@@ -1,14 +1,5 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTentacleType;
@@ -21,6 +12,11 @@ import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
+
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -62,8 +58,8 @@ public class LegType {
 			Util.newArrayListOfValues("angelic"),
 			Util.newArrayListOfValues("angelic"),
 			Util.newArrayListOfValues("angelic"),
-			"They quickly shift into a pair of smooth, slender legs, and [npc.she] [npc.verb(let)] out a gasp as a layer of flawless, angelic skin rapidly grows to cover them."
-				+ " As they finish transforming, [npc.she] almost [npc.verb(lose)] [npc.her] balance as the bones in [npc.her] feet start to shift and rearrange themselves."
+			"They quickly shift into a pair of smooth, slender legs, and [npc.she] let out a gasp as a layer of flawless, angelic skin rapidly grows to cover them."
+					+ " As they finish transforming, [npc.she] almost lose [npc.her] balance as the bones in [npc.her] feet start to shift and rearrange themselves."
 				+ " After a moment, they've transformed into slender, human-like feet, ending in soft, delicate toes.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldAngel(angelic legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs and feet are human in shape, but are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)].",
@@ -92,15 +88,15 @@ public class LegType {
 		public String getTransformationDescription(GameCharacter owner) {
 			if (!owner.isShortStature()) {
 				return UtilText.parse(owner,
-						" They quickly shift into a pair of smooth, slender legs, and [npc.she] [npc.verb(let)] out a gasp as a layer of flawless, demonic skin rapidly grows to cover them."
-						+ " As they finish transforming, [npc.she] almost [npc.verb(lose)] [npc.her] balance as the bones in [npc.her] feet start to shift and rearrange themselves."
+						" They quickly shift into a pair of smooth, slender legs, and [npc.she] let out a gasp as a layer of flawless, demonic skin rapidly grows to cover them."
+								+ " As they finish transforming, [npc.she] almost lose [npc.her] balance as the bones in [npc.her] feet start to shift and rearrange themselves."
 						+ " After a moment, they've transformed into slender human-like feet, ending in soft, delicate toes.<br/>"
 						+ "[npc.Name] now [npc.has] [style.boldDemon(demonic legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription]."
 					+ "</p>");
 			} else {
 				return UtilText.parse(owner,
-						" They quickly shift into a pair of smooth, slender legs, and [npc.she] [npc.verb(let)] out a gasp as a layer of flawless, impish skin rapidly grows to cover them."
-						+ " As they finish transforming, [npc.she] almost [npc.verb(lose)] [npc.her] balance as the bones in [npc.her] feet start to shift and rearrange themselves."
+						" They quickly shift into a pair of smooth, slender legs, and [npc.she] let out a gasp as a layer of flawless, impish skin rapidly grows to cover them."
+								+ " As they finish transforming, [npc.she] almost lose [npc.her] balance as the bones in [npc.her] feet start to shift and rearrange themselves."
 						+ " After a moment, they've transformed into slender human-like feet, ending in soft, delicate toes.<br/>"
 						+ "[npc.Name] now [npc.has] [style.boldImp(impish legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription]."
 					+ "</p>");
@@ -129,18 +125,18 @@ public class LegType {
 		public String getTransformationDescription(GameCharacter owner) {
 			if (!owner.isShortStature()) {
 				return UtilText.parse(owner,
-							" They quickly shift into a pair of smooth, slender legs, and [npc.name] [npc.verb(let)] out a gasp as a layer of flawless, demonic skin rapidly grows to cover them."
-							+ " As [npc.her] new skin spreads down to the ends of [npc.her] toes, they suddenly push together, and [npc.she] [npc.verb(let)] out a cry as a thick, hoof-like nail grows in their place,"
+						" They quickly shift into a pair of smooth, slender legs, and [npc.name] let out a gasp as a layer of flawless, demonic skin rapidly grows to cover them."
+								+ " As [npc.her] new skin spreads down to the ends of [npc.her] toes, they suddenly push together, and [npc.she] let out a cry as a thick, hoof-like nail grows in their place,"
 								+ " quickly transforming to turn [npc.her] feet into hard, demonic hoofs."
-							+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new skin smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
+								+ " As the transformation ends, [npc.she] see that [npc.her] new skin smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 							+ "[npc.NameIsFull] left with [style.boldDemon(demonic legs and hoofed feet)], which are [npc.materialDescriptor] [npc.legFullDescription]."
 						+ "</p>");
 			} else {
 				return UtilText.parse(owner,
-						" They quickly shift into a pair of smooth, slender legs, and [npc.name] [npc.verb(let)] out a gasp as a layer of flawless, demonic skin rapidly grows to cover them."
-						+ " As [npc.her] new skin spreads down to the ends of [npc.her] toes, they suddenly push together, and [npc.she] [npc.verb(let)] out a cry as a thick, hoof-like nail grows in their place,"
+						" They quickly shift into a pair of smooth, slender legs, and [npc.name] let out a gasp as a layer of flawless, demonic skin rapidly grows to cover them."
+								+ " As [npc.her] new skin spreads down to the ends of [npc.her] toes, they suddenly push together, and [npc.she] let out a cry as a thick, hoof-like nail grows in their place,"
 							+ " quickly transforming to turn [npc.her] feet into hard, demonic hoofs."
-						+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new skin smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
+								+ " As the transformation ends, [npc.she] see that [npc.her] new skin smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 						+ "[npc.NameIsFull] left with [style.boldImp(impish legs and hoofed feet)], which are [npc.materialDescriptor] [npc.legFullDescription]."
 					+ "</p>");
 			}
@@ -173,9 +169,9 @@ public class LegType {
 		public String getTransformationDescription(GameCharacter owner) {
 			return UtilText.parse(owner,
 					"A layer of short, horse-like hair quickly grows over [npc.her] demonic legs as they shift into a new form."
-					+ " As this hair spreads down to the ends of [npc.her] toes, they suddenly push together, and [npc.she] [npc.verb(let)] out a cry as a thick, hoof-like nail grows in their place,"
+							+ " As this hair spreads down to the ends of [npc.her] toes, they suddenly push together, and [npc.she] let out a cry as a thick, hoof-like nail grows in their place,"
 						+ " before quickly transforming to turn [npc.her] feet into hard, demonic hoofs."
-					+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new hair smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh."
+							+ " As the transformation ends, [npc.she] see that [npc.her] new hair smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh."
 					+ "<br/>[npc.Name] now [npc.has]"
 						+ (!owner.isShortStature()
 							?" [style.boldDemon(animalistic, demonic legs with hoofed feet)], which are [npc.materialDescriptor] [npc.legFullDescription]."
@@ -422,9 +418,9 @@ public class LegType {
 			Util.newArrayListOfValues("cow-like", "bovine"),
 			Util.newArrayListOfValues("cow-like", "bovine"),
 			"A layer of short, cow-like hair quickly grows over [npc.her] legs as they shift into a new form."
-				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, they suddenly push together, and [npc.she] [npc.verb(let)] out a cry as a thick, hoof-like nail grows in their place,"
+					+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, they suddenly push together, and [npc.she] let out a cry as a thick, hoof-like nail grows in their place,"
 					+ " before quickly transforming to turn [npc.her] feet into cow-like hoofs."
-				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
+					+ " As the transformation ends, [npc.she] see that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldCowMorph(cow-like legs and hoofed feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic cow-like hoofs.",
 			Util.newArrayListOfValues(
@@ -447,7 +443,7 @@ public class LegType {
 			Util.newArrayListOfValues("dog-like", "canine"),
 			"A layer of dog-like fur quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, [npc.her] toenails thicken into little blunt claws, and leathery pads grow to cover [npc.her] soles, leaving [npc.herHim] with paw-like feet."
-				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
+					+ " As the transformation ends, [npc.she] see that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldDogMorph(dog-like legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic dog-like paws, complete with little blunt claws and leathery pads.",
 			Util.newArrayListOfValues(
@@ -470,7 +466,7 @@ public class LegType {
 			Util.newArrayListOfValues("wolf-like", "lupine"),
 			"A layer of wolf-like fur quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, [npc.her] toenails thicken into sharp claws, and tough leathery pads grow to cover [npc.her] soles, leaving [npc.herHim] with paw-like feet."
-				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
+					+ " As the transformation ends, [npc.she] see that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldWolfMorph(wolf-like legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic wolf-like paws, complete with sharp claws and tough leathery pads.",
 			Util.newArrayListOfValues(
@@ -493,7 +489,7 @@ public class LegType {
 			Util.newArrayListOfValues("fox-like", "vulpine"),
 			"A layer of fox-like fur quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, [npc.her] toenails thicken into sharp claws, and little pads grow to cover [npc.her] soles, leaving [npc.herHim] with paw-like feet."
-				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.</br>"
+					+ " As the transformation ends, [npc.she] see that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.</br>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldFoxMorph(fox-like legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic fox-like paws, complete with sharp claws and tough leathery pads.",
 			Util.newArrayListOfValues(
@@ -516,7 +512,7 @@ public class LegType {
 			Util.newArrayListOfValues("squirrel-like"),
 			"A layer of squirrel-like fur quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, [npc.her] toenails thicken into sharp claws, and little pink pads grow to cover [npc.her] soles, leaving [npc.herHim] with paw-like feet."
-				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
+					+ " As the transformation ends, [npc.she] see that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldSquirrelMorph(squirrel-like legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic squirrel-like paws, complete with claws and pink pads.",
 			Util.newArrayListOfValues(
@@ -539,7 +535,7 @@ public class LegType {
 			Util.newArrayListOfValues("rat-like"),
 			"A layer of rat-like fur quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, [npc.her] toenails thicken into sharp claws, and little pink pads grow to cover [npc.her] soles, leaving [npc.herHim] with paw-like feet."
-				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
+					+ " As the transformation ends, [npc.she] see that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldRatMorph(rat-like legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic rat-like paws, complete with claws and leathery pads.",
 			Util.newArrayListOfValues(
@@ -562,7 +558,7 @@ public class LegType {
 			Util.newArrayListOfValues("rabbit-like"),
 			"A layer of rabbit-like fur quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, [npc.her] toenails thicken into blunt claws, and soft little pads grow to cover [npc.her] soles, leaving [npc.herHim] with long, paw-like feet."
-				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
+					+ " As the transformation ends, [npc.she] see that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldRabbitMorph(rabbit-like legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into long, anthropomorphic, rabbit-like paws, complete with blunt claws and soft pads.",
 			Util.newArrayListOfValues(
@@ -585,7 +581,7 @@ public class LegType {
 			Util.newArrayListOfValues("bat-like"),
 			"A layer of bat-like fur quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, [npc.her] toenails thicken into sharp claws, and little pink pads grow to cover [npc.her] soles, leaving [npc.herHim] with paw-like feet."
-				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
+					+ " As the transformation ends, [npc.she] see that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldBatMorph(bat-like legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic bat-like paws, complete with claws and leathery pads.",
 			Util.newArrayListOfValues(
@@ -607,7 +603,7 @@ public class LegType {
 			Util.newArrayListOfValues("cat-like", "feline"),
 			"A layer of cat-like fur quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, [npc.her] toenails thicken into sharp, retractable claws, and little pink pads grow to cover [npc.her] soles, leaving [npc.herHim] with paw-like feet."
-				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
+					+ " As the transformation ends, [npc.she] see that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldCatMorph(cat-like legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic cat-like paws, complete with retractable claws and pink pads.",
 			Util.newArrayListOfValues(
@@ -630,7 +626,7 @@ public class LegType {
 			Util.newArrayListOfValues("alligator-like", "scaly", "reptilian"),
 			"A layer of alligator-like scales quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new scales spread down to the ends of [npc.her] toes, [npc.her] toenails thicken into sharp claws, and little scales grow to cover [npc.her] soles, leaving [npc.herHim] with alligator-like feet."
-				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new scales smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
+					+ " As the transformation ends, [npc.she] see that [npc.her] new scales smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldGatorMorph(alligator-like legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic alligator-like feet, complete with sharp claws.",
 			Util.newArrayListOfValues(
@@ -652,9 +648,9 @@ public class LegType {
 			Util.newArrayListOfValues("horse-like", "equine"),
 			Util.newArrayListOfValues("horse-like", "equine"),
 			"A layer of short, horse-like hair quickly grows over [npc.her] legs as they shift into a new form."
-				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, they suddenly push together, and [npc.she] [npc.verb(let)] out a cry as a thick, hoof-like nail grows in their place,"
+					+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, they suddenly push together, and [npc.she] let out a cry as a thick, hoof-like nail grows in their place,"
 					+ " before quickly transforming to turn [npc.her] feet into horse-like hoofs."
-				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new hair smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
+					+ " As the transformation ends, [npc.she] see that [npc.her] new hair smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldHorseMorph(horse-like legs and hoofed feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic horse-like hoofs.",
 			Util.newArrayListOfValues(
@@ -727,9 +723,9 @@ public class LegType {
 			Util.newArrayListOfValues("reindeer-like"),
 			Util.newArrayListOfValues("reindeer-like"),
 			"A layer of furry, reindeer-like hair quickly grows over [npc.her] legs as they shift into a new form."
-				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, they suddenly push together, and [npc.she] [npc.verb(let)] out a cry as a crescent-shaped, cloven hoof grows in their place,"
+					+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, they suddenly push together, and [npc.she] let out a cry as a crescent-shaped, cloven hoof grows in their place,"
 					+ " before quickly transforming to turn [npc.her] feet into reindeer-like hoofs."
-				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
+					+ " As the transformation ends, [npc.she] see that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldReindeerMorph(reindeer-like legs and hoofed feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic reindeer-like hoofs.",
 			Util.newArrayListOfValues(
@@ -762,9 +758,9 @@ public class LegType {
 						LegConfiguration.AVIAN), false) {
 	};
 	
-	private static List<AbstractLegType> allLegTypes;
-	private static Map<AbstractLegType, String> legToIdMap = new HashMap<>();
-	private static Map<String, AbstractLegType> idToLegMap = new HashMap<>();
+	private static final List<AbstractLegType> allLegTypes;
+	private static final Map<AbstractLegType, String> legToIdMap = new HashMap<>();
+	private static final Map<String, AbstractLegType> idToLegMap = new HashMap<>();
 	
 	static {
 		allLegTypes = new ArrayList<>();
@@ -857,7 +853,7 @@ public class LegType {
 		return allLegTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractLegType>> typesMap = new HashMap<>();
+	private static final Map<AbstractRace, List<AbstractLegType>> typesMap = new HashMap<>();
 	public static List<AbstractLegType> getLegTypes(AbstractRace r) {
 		if(typesMap.containsKey(r)) {
 			return typesMap.get(r);

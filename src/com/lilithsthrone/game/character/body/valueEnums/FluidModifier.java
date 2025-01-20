@@ -97,7 +97,7 @@ public enum FluidModifier {
 				return UtilText.parse(target,
 						"<p style='padding:0; margin:0; text-align:center;'>"
 							+ "Благодаря свойствам, вызывающим привыкание "+(fluidProvider==null?"":(fluidProvider.equals(target)?"[npc.her]":UtilText.parse(fluidProvider, "[npc.namePos]")))+" "+fluid.getName(fluidProvider)
-								+", [npc.name] [npc.verb(find)] [npc.herself] [style.colourArcane(craving)]"
+                                + ", [npc.name] find [npc.herself] [style.colourArcane(craving)]"
 								+ " <span style='color:"+fluid.getType().getRace().getColour().toWebHexString()+";'>"+fluid.getType().getRace().getName(fluidProvider.getBody(), fluid.isFeral(fluidProvider))+"</span> "+fluid.getName(fluidProvider)+"!"
 						+ "</p>");
 				
@@ -112,9 +112,9 @@ public enum FluidModifier {
 								+"</span> "+fluid.getName(fluidProvider)
 									+" удовлетворе(н,на)!"
 								+ (curedWithdrawal
-									?" [npc.She] [npc.verb(feel)] глубоко признател(ен,ьна) "+(fluidProvider==null?"":UtilText.parse(fluidProvider, "[npc.name]"))+" за предоставление [npc.herHim] с тем, что [npc.she] нужно больше всего..."
+                                    ? " [npc.She] feel глубоко признател(ен,ьна) " + (fluidProvider == null ? "" : UtilText.parse(fluidProvider, "[npc.name]")) + " за предоставление [npc.herHim] с тем, что [npc.she] нужно больше всего..."
 											+ (target.isSlave()?target.incrementObedience(5):"")
-									:" [npc.She] [npc.was] не страдает от синдрома отмены, но [npc.she] до сих пор [npc.verb(feel)] благодарен "
+                                    : " [npc.She] [npc.was] не страдает от синдрома отмены, но [npc.she] до сих пор feel благодарен "
 											+(fluidProvider==null?"":UtilText.parse(fluidProvider, "[npc.name]"))+" за рещение [npc.her] зависимости...")
 							+ "</p>");
 				}
@@ -140,20 +140,20 @@ public enum FluidModifier {
 				return UtilText.parse(target,
 						"<p style='padding:0; margin:0; text-align:center;'>"
 							+ "Из-за психоактивных свойств "+(fluidProvider==null?"":(fluidProvider.equals(target)?"[npc.her]":UtilText.parse(fluidProvider, "[npc.namePos]")))+" "+fluid.getName(fluidProvider)
-								+", [npc.name] [npc.verb(start)] <span style='color:"+PresetColour.PSYCHOACTIVE.toWebHexString()+";'>под приходом</span>!"
+                                + ", [npc.name] start <span style='color:" + PresetColour.PSYCHOACTIVE.toWebHexString() + ";'>под приходом</span>!"
 						+ "</p>");
 			}
 			return "";
 		}
 	};
 	
-	private Colour colour;
-	private boolean specialEffects;
-	private String name;
-	private String description;
-	private String briefDescription;
+	private final Colour colour;
+	private final boolean specialEffects;
+	private final String name;
+	private final String description;
+	private final String briefDescription;
 	
-	private FluidModifier(Colour colour, boolean specialEffects, String name, String briefDescription, String description) {
+	FluidModifier(Colour colour, boolean specialEffects, String name, String briefDescription, String description) {
 		this.colour = colour;
 		this.specialEffects = specialEffects;
 		this.name = name;

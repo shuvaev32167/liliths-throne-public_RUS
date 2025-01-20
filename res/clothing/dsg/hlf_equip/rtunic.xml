@@ -112,49 +112,49 @@
 	
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unbutton)] [npc.her] tunic and [npc.verb(pull)] it off.]]>
+            <![CDATA[[npc.Name] unbutton [npc.her] tunic and pull it off.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unbutton)] [npc2.namePos] tunic and [npc.verb(pull)] it off.]]>
+            <![CDATA[[npc.Name] unbutton [npc2.namePos] tunic and pull it off.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] practically [npc.verb(rip)] [npc2.namePos] tunic.]]>
+            <![CDATA[[npc.Name] practically rip [npc2.namePos] tunic.]]>
 		</otherRough>
 	</displacementText>
 	
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the tunic and [npc.verb(button)] it up.]]>
+            <![CDATA[[npc.Name] pull the tunic and button it up.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(help)] [npc2.name] put the tunic on and [npc.verb(button)] it up.]]>
+            <![CDATA[[npc.Name] help [npc2.name] put the tunic on and button it up.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[CDATA[[npc.Name] [npc.verb(force)] the tunic onto [npc2.name] before roughly buttoning it up.]]>
+            <![CDATA[CDATA[[npc.Name] force the tunic onto [npc2.name] before roughly buttoning it up.]]>
 		</otherRough>
 	</replacementText>
 	
 	<displacementText type="UNBUTTONS">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unbutton)] [npc.her] tunic.]]>
+            <![CDATA[[npc.Name] unbutton [npc.her] tunic.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unbutton)] [npc2.namePos] tunic.]]>
+            <![CDATA[[npc.Name] unbutton [npc2.namePos] tunic.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(unbutton)] [npc2.namePos] tunic.]]>
+            <![CDATA[[npc.Name] roughly unbutton [npc2.namePos] tunic.]]>
 		</otherRough>
 	</displacementText>
 
 	<replacementText type="UNBUTTONS">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(button)] up [npc.her] tunic.]]>
+            <![CDATA[[npc.Name] button up [npc.her] tunic.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(button)] up [npc2.namePos] tunic.]]>
+            <![CDATA[[npc.Name] button up [npc2.namePos] tunic.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(button)] up [npc2.namePos] tunic.]]>
+            <![CDATA[[npc.Name] roughly button up [npc2.namePos] tunic.]]>
 		</otherRough>
 	</replacementText>
 	

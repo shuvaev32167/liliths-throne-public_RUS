@@ -58,25 +58,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(push)] the anal beads into [npc.her] [npc.ass+].]]>
+            <![CDATA[[npc.Name] push the anal beads into [npc.her] [npc.ass+].]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(push)] the anal beads into [npc2.namePos] [npc2.ass+].]]>
+            <![CDATA[[npc.Name] push the anal beads into [npc2.namePos] [npc2.ass+].]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(hold)] [npc2.name] still as [npc.she] roughly [npc.verb(force)] the anal beads into [npc2.her] [npc2.ass+].]]>
+            <![CDATA[[npc.Name] hold [npc2.name] still as [npc.she] roughly force the anal beads into [npc2.her] [npc2.ass+].]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(pull)] [npc.her] anal beads out of [npc.her] [npc.ass+].]]>
+            <![CDATA[[npc.Name] pull [npc.her] anal beads out of [npc.her] [npc.ass+].]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(pull)] [npc2.namePos] anal beads out of [npc2.her] [npc2.ass+].]]>
+            <![CDATA[[npc.Name] pull [npc2.namePos] anal beads out of [npc2.her] [npc2.ass+].]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] firmly [npc.verb(grab)] [npc2.namePos] anal beads and [npc.verb(yank)] them out of [npc2.her] [npc2.ass+].]]>
+            <![CDATA[[npc.Name] firmly grab [npc2.namePos] anal beads and yank them out of [npc2.her] [npc2.ass+].]]>
 		</otherRough>
 	</displacementText>
 	

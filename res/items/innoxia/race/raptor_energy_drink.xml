@@ -52,10 +52,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-			Popping open the cap, [npc.name] [npc.verb(bring)] the can of Raptor energy drink up to [npc.her] [npc.mouth]. A sweet, artificial smell rises from the opening, and as [npc.she] [npc.verb(tilt)] [npc.her] head back and [npc.verb(start)] drinking the fizzy liquid, [npc.she] quickly [npc.verb(find)] [npc.herself] feeling full of energy.
+			Popping open the cap, [npc.name] bring the can of Raptor energy drink up to [npc.her] [npc.mouth]. A sweet, artificial smell rises from the opening, and as [npc.she] tilt [npc.her] head back and start drinking the fizzy liquid, [npc.she] quickly find [npc.herself] feeling full of energy.
 		]]></selfUse>
 		<otherUse><![CDATA[
-			Popping open the cap, [npc.name] [npc.verb(bring)] the can of Raptor energy drink up to [npc2.namePos] waiting [npc2.lips]. A sweet, artificial smell rises from the opening, and as [npc2.name] [npc2.verb(tilt)] [npc2.her] head back and [npc2.verb(start)] drinking the fizzy liquid, [npc2.she] quickly [npc2.verb(find)] [npc2.herself] feeling full of energy.
+			Popping open the cap, [npc.name] bring the can of Raptor energy drink up to [npc2.namePos] waiting [npc2.lips]. A sweet, artificial smell rises from the opening, and as [npc2.name] [npc2.verb(tilt)] [npc2.her] head back and [npc2.verb(start)] drinking the fizzy liquid, [npc2.she] quickly [npc2.verb(find)] [npc2.herself] feeling full of energy.
 		]]></otherUse>
 	</useDescriptions>
 

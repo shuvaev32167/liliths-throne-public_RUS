@@ -176,9 +176,9 @@
 		NOTE: The damage is automatically applied to the target, so you don't need to handle parsing of that. -->
 		<execute><![CDATA[
 			#IF(npc.isArmMovementHindered())
-				As [npc.her] arms are restricted, [npc.name] [npc.verb(fail)] to hit [npc2.name], and [npc.verb(end)] up doing no damage at all...
+				As [npc.her] arms are restricted, [npc.name] fail to hit [npc2.name], and end up doing no damage at all...
 			#ELSE
-				[npc.Name] [npc.verb(lunge)] at [npc2.name] with [npc.her] claws and [npc.verb(leave)] deep gashes in [npc2.namePos] aura!
+				[npc.Name] lunge at [npc2.name] with [npc.her] claws and leave deep gashes in [npc2.namePos] aura!
 			#ENDIF
 			formattedHealthDamage
 		]]></execute>

@@ -1,17 +1,8 @@
 package com.lilithsthrone.game.character;
 
-import java.util.Objects;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.character.attributes.Attribute;
-import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.FluidCum;
-import com.lilithsthrone.game.character.body.FluidGirlCum;
-import com.lilithsthrone.game.character.body.FluidInterface;
-import com.lilithsthrone.game.character.body.FluidMilk;
+import com.lilithsthrone.game.character.body.*;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.race.AbstractSubspecies;
@@ -20,6 +11,10 @@ import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.XMLSaving;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.util.Objects;
 
 /**
  * @since 0.2.7
@@ -28,10 +23,10 @@ import com.lilithsthrone.utils.XMLSaving;
  */
 public class FluidStored implements XMLSaving {
 	
-	private String charactersFluidID;
+	private final String charactersFluidID;
 //	private AbstractSubspecies cumSubspecies; // used for calculating pregnancy.
 //	private AbstractSubspecies cumHalfDemonSubspecies; // used for calculating pregnancy.
-	private Body body; // Body has to be stored as otherwise the character who provided the cum could be transformed, and their new body would no longer reflect the genetics of this FluidStored
+	private final Body body; // Body has to be stored as otherwise the character who provided the cum could be transformed, and their new body would no longer reflect the genetics of this FluidStored
 	private boolean cumVirile;
 	private float virility;
 	private boolean feral;
@@ -77,7 +72,7 @@ public class FluidStored implements XMLSaving {
 		try {
 			GameCharacter owner = charactersFluidID==null||charactersFluidID.isEmpty()?null:Main.game.getNPCById(charactersFluidID);
 			this.feral = cum.isFeral(owner);
-			this.cumVirile = owner==null?true:owner.isVirile(Attribute.VIRILITY);
+			this.cumVirile = owner == null || owner.isVirile(Attribute.VIRILITY);
 			this.virility = owner==null?25:owner.getAttributeValue(Attribute.VIRILITY);
 		} catch (Exception e) {
 			this.feral = false;
@@ -155,18 +150,16 @@ public class FluidStored implements XMLSaving {
 	public boolean equals(Object o) {
 		// Does not take into account quantity on purpose.
 		if(o instanceof FluidStored){
-			if(((FluidStored)o).getFluid().equals(this.getFluid())
-					&& ((FluidStored)o).getCharactersFluidID().equals(this.getCharactersFluidID())
-					&& ((FluidStored)o).isFeral() == this.isFeral()
-					// For the purposes of FluidStored, it's good enough to make a very basic equality check for Body:
-					&& (this.getBody()!=null && this.body!=null
-						?Objects.equals(((FluidStored)o).getBody().getSubspecies(), this.body.getSubspecies())
-								&& Objects.equals(((FluidStored)o).getBody().getGender(), this.body.getGender())
-						:this.getBody()==null && this.body==null)
-					&& ((FluidStored)o).isCumVirile() == this.isCumVirile()
-					&& ((FluidStored)o).getVirility() == this.getVirility()) {
-				return true;
-			}
+            return ((FluidStored) o).getFluid().equals(this.getFluid())
+                    && ((FluidStored) o).getCharactersFluidID().equals(this.getCharactersFluidID())
+                    && ((FluidStored) o).isFeral() == this.isFeral()
+                    // For the purposes of FluidStored, it's good enough to make a very basic equality check for Body:
+                    && (this.getBody() != null && this.body != null
+                    ? Objects.equals(((FluidStored) o).getBody().getSubspecies(), this.body.getSubspecies())
+                    && Objects.equals(((FluidStored) o).getBody().getGender(), this.body.getGender())
+                    : this.getBody() == null && this.body == null)
+                    && ((FluidStored) o).isCumVirile() == this.isCumVirile()
+                    && ((FluidStored) o).getVirility() == this.getVirility();
 		}
 		return false;
 	}
@@ -187,6 +180,100 @@ public class FluidStored implements XMLSaving {
 		return result;
 	}
 	
+	public static FluidStored loadFromXML(StringBuilder log, Element parentElement, Document doc) {
+		String ID = parentElement.getAttribute("charactersFluidID");
+
+		float millimetres = Float.parseFloat(parentElement.getAttribute("millilitres"));
+		FluidStored fluid;
+		boolean feral = false;
+		boolean cumVirile = true;
+		float virility = 25;
+		try {
+			feral = Boolean.parseBoolean(parentElement.getAttribute("bestial"));
+            virility = Float.parseFloat(parentElement.getAttribute("вирильность"));
+		} catch(Exception ex) {
+		}
+		if(!parentElement.getAttribute("cumVirile").isEmpty()) {
+			cumVirile = Boolean.parseBoolean(parentElement.getAttribute("cumVirile"));
+		}
+
+		if(parentElement.getElementsByTagName("body").item(0)!=null) {
+			// Cum:
+			if(parentElement.getElementsByTagName("fluidCum").item(0)!=null) {
+				fluid = new FluidStored(ID,
+						Body.loadFromXML(log, (Element) parentElement.getElementsByTagName("body").item(0), doc),
+						FluidCum.loadFromXML("fluidCum", parentElement, doc), millimetres);
+				fluid.feral=feral;
+				fluid.cumVirile = cumVirile;
+				fluid.virility=virility;
+				return fluid;
+			}
+
+		} else { // Old version support:
+			// Milk:
+			if(parentElement.getElementsByTagName("milk").item(0)!=null) {
+				fluid = new FluidStored(ID, FluidMilk.loadFromXML("milk", parentElement, doc), millimetres);
+				fluid.feral=feral;
+				fluid.cumVirile = false;
+				fluid.virility=0;
+				return fluid;
+
+			} else if(parentElement.getElementsByTagName("fluidMilk").item(0)!=null) {
+				fluid = new FluidStored(ID, FluidMilk.loadFromXML("fluidMilk", parentElement, doc), millimetres);
+				fluid.feral=feral;
+				fluid.cumVirile = false;
+				fluid.virility=0;
+				return fluid;
+			}
+
+			// Girlcum:
+			if(parentElement.getElementsByTagName("girlcum").item(0)!=null) {
+				fluid = new FluidStored(ID, FluidGirlCum.loadFromXML("girlcum", parentElement, doc), millimetres);
+				fluid.feral=feral;
+				fluid.cumVirile = false;
+				fluid.virility=0;
+				return fluid;
+
+			} else if(parentElement.getElementsByTagName("fluidGirlCum").item(0)!=null) {
+				fluid = new FluidStored(ID, FluidGirlCum.loadFromXML("fluidGirlCum", parentElement, doc), millimetres);
+				fluid.feral=feral;
+				fluid.cumVirile = false;
+				fluid.virility=0;
+				return fluid;
+			}
+
+			// Cum:
+			if(parentElement.getElementsByTagName("cum").item(0)!=null) {
+				AbstractSubspecies subspecies = Subspecies.HUMAN;
+				AbstractSubspecies halfDemonSubspecies = Subspecies.HUMAN;
+				try {
+					subspecies = Subspecies.getSubspeciesFromId(parentElement.getAttribute("cumSubspecies"));
+					halfDemonSubspecies = Subspecies.getSubspeciesFromId(parentElement.getAttribute("cumHalfDemonSubspecies"));
+				} catch(Exception ex) {
+				}
+
+				fluid = new FluidStored(ID,
+						subspecies==Subspecies.HALF_DEMON
+							?Main.game.getCharacterUtils().generateHalfDemonBody(null, Gender.M_P_MALE, halfDemonSubspecies, false)
+							:Main.game.getCharacterUtils().generateBody(null, Gender.M_P_MALE, subspecies, RaceStage.GREATER),
+						FluidCum.loadFromXML("cum", parentElement, doc), millimetres);
+
+				fluid.feral=feral;
+				fluid.cumVirile = cumVirile;
+				fluid.virility=virility;
+				return fluid;
+			}
+		}
+
+
+
+
+		System.err.println("WARNING: FluidStored failed to load!");
+		new Exception().printStackTrace();
+
+		return null;
+	}
+	
 	@Override
 	public Element saveAsXML(Element parentElement, Document doc) {
 		// Core:
@@ -195,9 +282,9 @@ public class FluidStored implements XMLSaving {
 		XMLUtil.addAttribute(doc, fluidStoredElement, "charactersFluidID", charactersFluidID);
 		XMLUtil.addAttribute(doc, fluidStoredElement, "bestial", String.valueOf(feral));
 		XMLUtil.addAttribute(doc, fluidStoredElement, "cumVirile", String.valueOf(cumVirile));
-		XMLUtil.addAttribute(doc, fluidStoredElement, "virility", String.valueOf(virility));
+        XMLUtil.addAttribute(doc, fluidStoredElement, "вирильность", String.valueOf(virility));
 		XMLUtil.addAttribute(doc, fluidStoredElement, "millilitres", String.valueOf(millilitres));
-		
+
 		if(isCum()) {
 //			XMLUtil.addAttribute(doc, fluidStoredElement, "cumSubspecies", Subspecies.getIdFromSubspecies(cumSubspecies));
 //			if(cumHalfDemonSubspecies!=null) {
@@ -215,102 +302,8 @@ public class FluidStored implements XMLSaving {
 		if(isGirlCum()) {
 			girlCum.saveAsXML("fluidGirlCum", fluidStoredElement, doc);
 		}
-		
-		return fluidStoredElement;
-	}
-	
-	public static FluidStored loadFromXML(StringBuilder log, Element parentElement, Document doc) {
-		String ID = parentElement.getAttribute("charactersFluidID");
-		
-		float millimetres = Float.parseFloat(parentElement.getAttribute("millilitres"));
-		FluidStored fluid;
-		boolean feral = false;
-		boolean cumVirile = true;
-		float virility = 25;
-		try {
-			feral = Boolean.parseBoolean(parentElement.getAttribute("bestial"));
-			virility = Float.parseFloat(parentElement.getAttribute("virility"));
-		} catch(Exception ex) {
-		}
-		if(!parentElement.getAttribute("cumVirile").isEmpty()) {
-			cumVirile = Boolean.parseBoolean(parentElement.getAttribute("cumVirile"));
-		}
-		
-		if(parentElement.getElementsByTagName("body").item(0)!=null) {
-			// Cum:
-			if(parentElement.getElementsByTagName("fluidCum").item(0)!=null) {
-				fluid = new FluidStored(ID,
-						Body.loadFromXML(log, (Element) parentElement.getElementsByTagName("body").item(0), doc),
-						FluidCum.loadFromXML("fluidCum", parentElement, doc), millimetres);
-				fluid.feral=feral;
-				fluid.cumVirile = cumVirile;
-				fluid.virility=virility;
-				return fluid;
-			}
-			
-		} else { // Old version support:
-			// Milk:
-			if(parentElement.getElementsByTagName("milk").item(0)!=null) {
-				fluid = new FluidStored(ID, FluidMilk.loadFromXML("milk", parentElement, doc), millimetres);
-				fluid.feral=feral;
-				fluid.cumVirile = false;
-				fluid.virility=0;
-				return fluid;
-				
-			} else if(parentElement.getElementsByTagName("fluidMilk").item(0)!=null) {
-				fluid = new FluidStored(ID, FluidMilk.loadFromXML("fluidMilk", parentElement, doc), millimetres);
-				fluid.feral=feral;
-				fluid.cumVirile = false;
-				fluid.virility=0;
-				return fluid;
-			}
 
-			// Girlcum:
-			if(parentElement.getElementsByTagName("girlcum").item(0)!=null) {
-				fluid = new FluidStored(ID, FluidGirlCum.loadFromXML("girlcum", parentElement, doc), millimetres);
-				fluid.feral=feral;
-				fluid.cumVirile = false;
-				fluid.virility=0;
-				return fluid;
-				
-			} else if(parentElement.getElementsByTagName("fluidGirlCum").item(0)!=null) {
-				fluid = new FluidStored(ID, FluidGirlCum.loadFromXML("fluidGirlCum", parentElement, doc), millimetres);
-				fluid.feral=feral;
-				fluid.cumVirile = false;
-				fluid.virility=0;
-				return fluid;
-			}
-			
-			// Cum:
-			if(parentElement.getElementsByTagName("cum").item(0)!=null) {
-				AbstractSubspecies subspecies = Subspecies.HUMAN;
-				AbstractSubspecies halfDemonSubspecies = Subspecies.HUMAN;
-				try {
-					subspecies = Subspecies.getSubspeciesFromId(parentElement.getAttribute("cumSubspecies"));
-					halfDemonSubspecies = Subspecies.getSubspeciesFromId(parentElement.getAttribute("cumHalfDemonSubspecies"));
-				} catch(Exception ex) {
-				}
-				
-				fluid = new FluidStored(ID,
-						subspecies==Subspecies.HALF_DEMON
-							?Main.game.getCharacterUtils().generateHalfDemonBody(null, Gender.M_P_MALE, halfDemonSubspecies, false)
-							:Main.game.getCharacterUtils().generateBody(null, Gender.M_P_MALE, subspecies, RaceStage.GREATER),
-						FluidCum.loadFromXML("cum", parentElement, doc), millimetres);
-				
-				fluid.feral=feral;
-				fluid.cumVirile = cumVirile;
-				fluid.virility=virility;
-				return fluid;
-			}
-		}
-		
-		
-		
-		
-		System.err.println("WARNING: FluidStored failed to load!");
-		new Exception().printStackTrace();
-		
-		return null;
+		return fluidStoredElement;
 	}
 	
 	

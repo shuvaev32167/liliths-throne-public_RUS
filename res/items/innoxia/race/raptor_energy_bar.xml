@@ -58,10 +58,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-			Tearing off the plastic wrapper, [npc.name] [npc.verb(take)] a big bite out of the Raptor energy bar. Although its savoury, meaty taste has an artificial hint to it, it's not at all unpleasant, and so [npc.she] happily [npc.verb(finish)] it off, after which [npc.she] quickly [npc.verb(find)] [npc.herself] feeling full of energy.
+			Tearing off the plastic wrapper, [npc.name] take a big bite out of the Raptor energy bar. Although its savoury, meaty taste has an artificial hint to it, it's not at all unpleasant, and so [npc.she] happily finish it off, after which [npc.she] quickly find [npc.herself] feeling full of energy.
 		]]></selfUse>
 		<otherUse><![CDATA[
-			Tearing off the plastic wrapper, [npc.name] [npc.verb(make)] [npc2.name] take a big bite out of the Raptor energy bar. Although its savoury, meaty taste has an artificial hint to it, it's not at all unpleasant, and so [npc2.she] happily [npc2.verb(finish)] it off, after which [npc2.she] quickly [npc2.verb(find)] [npc2.herself] feeling full of energy.
+			Tearing off the plastic wrapper, [npc.name] make [npc2.name] take a big bite out of the Raptor energy bar. Although its savoury, meaty taste has an artificial hint to it, it's not at all unpleasant, and so [npc2.she] happily [npc2.verb(finish)] it off, after which [npc2.she] quickly [npc2.verb(find)] [npc2.herself] feeling full of energy.
 		]]></otherUse>
 	</useDescriptions>
 

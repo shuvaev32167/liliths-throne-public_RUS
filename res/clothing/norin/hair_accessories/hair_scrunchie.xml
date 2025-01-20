@@ -80,70 +80,70 @@
 	
 	<displacementText slot="HAIR" type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the scrunchie from out of [npc.her] [npc.hairSkin+].]]>
+            <![CDATA[[npc.Name] pull the scrunchie from out of [npc.her] [npc.hairSkin+].]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the scrunchie from out of [npc2.NamePos] [npc2.hairSkin+].]]>
+            <![CDATA[[npc.Name] pull the scrunchie from out of [npc2.NamePos] [npc2.hairSkin+].]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(tug)] the scrunchie from out of [npc2.NamePos] [npc2.hairSkin+].]]>
+            <![CDATA[[npc.Name] tug the scrunchie from out of [npc2.NamePos] [npc2.hairSkin+].]]>
 		</otherRough>
 	</displacementText>
 	<replacementText slot="HAIR" type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(gather)] [npc.her] [npc.hairSkin+] and [npc.verb(pull)] it through the scrunchie.]]>
+            <![CDATA[[npc.Name] gather [npc.her] [npc.hairSkin+] и pull it through the scrunchie.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(gather)] [npc2.NamePos] [npc2.hairSkin+] and [npc.verb(pull)] it through the scrunchie.]]>
+            <![CDATA[[npc.Name] gather [npc2.NamePos] [npc2.hairSkin+] и pull it through the scrunchie.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(gather)] [npc2.NamePos] [npc2.hairSkin+] and [npc.verb(tug)] it through the scrunchie.]]>
+            <![CDATA[[npc.Name] gather [npc2.NamePos] [npc2.hairSkin+] и tug it through the scrunchie.]]>
 		</otherRough>
 	</replacementText>
 	
 	<displacementText slot="TAIL" type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the scrunchie off from around [npc.her] [npc.tail+].]]>
+            <![CDATA[[npc.Name] pull the scrunchie off from around [npc.her] [npc.tail+].]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the scrunchie off from around [npc2.NamePos] [npc2.tail+].]]>
+            <![CDATA[[npc.Name] pull the scrunchie off from around [npc2.NamePos] [npc2.tail+].]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(tug)] the scrunchie off from around [npc2.NamePos] [npc2.tail+].]]>
+            <![CDATA[[npc.Name] tug the scrunchie off from around [npc2.NamePos] [npc2.tail+].]]>
 		</otherRough>
 	</displacementText>
 	<replacementText slot="TAIL" type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(slide)] the scrunchie down around [npc.her] [npc.tail+].]]>
+            <![CDATA[[npc.Name] slide the scrunchie down around [npc.her] [npc.tail+].]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(slide)] the scrunchie down around [npc2.namePos] [npc2.tail+].]]>
+            <![CDATA[[npc.Name] slide the scrunchie down around [npc2.namePos] [npc2.tail+].]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(push)] the scrunchie down around [npc2.namePos] [npc2.tail+].]]>
+            <![CDATA[[npc.Name] roughly push the scrunchie down around [npc2.namePos] [npc2.tail+].]]>
 		</otherRough>
 	</replacementText>
 	
 	<displacementText slot="WRIST" type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(slide)] the scrunchie off from around [npc.her] wrist.]]>
+            <![CDATA[[npc.Name] slide the scrunchie off from around [npc.her] wrist.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(slide)] the scrunchie off from around [npc2.NamePos] wrist.]]>
+            <![CDATA[[npc.Name] slide the scrunchie off from around [npc2.NamePos] wrist.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(tug)] the scrunchie off from around [npc2.NamePos] wrist.]]>
+            <![CDATA[[npc.Name] roughly tug the scrunchie off from around [npc2.NamePos] wrist.]]>
 		</otherRough>
 	</displacementText>
 	<replacementText slot="WRIST" type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(slide)] the scrunchie down around [npc.her] wrist.]]>
+            <![CDATA[[npc.Name] slide the scrunchie down around [npc.her] wrist.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(slide)] the scrunchie down around [npc2.namePos] wrist.]]>
+            <![CDATA[[npc.Name] slide the scrunchie down around [npc2.namePos] wrist.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(push)] the scrunchie down around [npc2.namePos] wrist.]]>
+            <![CDATA[[npc.Name] roughly push the scrunchie down around [npc2.namePos] wrist.]]>
 		</otherRough>
 	</replacementText>
 	

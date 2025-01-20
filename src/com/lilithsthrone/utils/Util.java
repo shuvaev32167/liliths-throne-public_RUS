@@ -1,35 +1,5 @@
 package com.lilithsthrone.utils;
 
-import java.awt.Desktop;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.NoSuchElementException;
-import java.util.Random;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.function.Function;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-
-import org.w3c.dom.Document;
-
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
@@ -40,9 +10,24 @@ import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.DisplacementType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.colours.Colour;
-
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import org.w3c.dom.Document;
+
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.time.Instant;
+import java.util.List;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.function.Function;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * This is just a big mess of utility classes that I wanted to throw somewhere.
@@ -55,7 +40,7 @@ public class Util {
 	
 	public static Random random = new Random();
 
-	private static Map<KeyCode, String> KEY_NAMES = new LinkedHashMap<KeyCode, String>() {
+	private static final Map<KeyCode, String> KEY_NAMES = new LinkedHashMap<KeyCode, String>() {
 		private static final long serialVersionUID = 1L;
 	{
 		put(KeyCode.ADD, "+");
@@ -77,7 +62,7 @@ public class Util {
 		put(KeyCode.DOLLAR, "$");
 		put(KeyCode.DOWN, "Down");
 		put(KeyCode.END, "End");
-		put(KeyCode.ENTER, "Enter");
+        put(KeyCode.ENTER, "Вход");
 		put(KeyCode.EQUALS, "=");
 		put(KeyCode.ESCAPE, "Esc");
 		put(KeyCode.EURO_SIGN, "&euro;"); // €
@@ -308,8 +293,8 @@ public class Util {
 	}
 	
 	public static class Value<T, S> {
-		private T key;
-		private S value;
+		private final T key;
+		private final S value;
 		
 		public Value(T key, S value) {
 			this.key = key;
@@ -598,7 +583,7 @@ public class Util {
 		return null;
 	}
 	
-private static String[] numbersLessThanTwenty = {
+private static final String[] numbersLessThanTwenty = {
         "ноль",
         "один",
         "два",
@@ -620,7 +605,7 @@ private static String[] numbersLessThanTwenty = {
         "восемнадцать",
         "девятнадцать"
 };
-private static String[] positionsLessThanTwenty = {
+private static final String[] positionsLessThanTwenty = {
         "нулевой",
         "первый",
         "второй",
@@ -642,7 +627,7 @@ private static String[] positionsLessThanTwenty = {
         "восемнадцатый",
         "девятнадцатый"
 };
-private static String[] tensGreaterThanNineteen = {
+private static final String[] tensGreaterThanNineteen = {
         "",
         "",
         "двадцать",
@@ -657,56 +642,60 @@ private static String[] tensGreaterThanNineteen = {
 	
 	/**
 	 * Only works for values -99,999 to 99,999.
+	 *
+	 * Пускай число остаётся числом
+	 *
 	 * @param integer
 	 * @return
 	 */
 	public static String intToString(int integer) {
-		String intToString = "";
-		
-		if(integer<0) {
-			intToString = "minus ";
-		}
-		integer = Math.abs(integer);
-		if (integer >= 100_000) {
-			return String.valueOf(integer); // Too big
-		}
-		
-		
-		if(integer>=1000) {
-			if((integer/1000)<20) {
-				intToString+=numbersLessThanTwenty[(integer/1000)]+" тысяч";
-			} else {
-				intToString+=tensGreaterThanNineteen[integer/10000] + (((integer/1000)%10!=0)?"-"+numbersLessThanTwenty[(integer/1000)%10]:"")+" тысяч";
-			}
-		}
-		
-		if(integer>=100) {
-			if(integer>=1000 && integer%1000 != 0) {
-				intToString+=", ";
-			}
-			integer = integer % 1000;
-			if (intToString.isEmpty() || integer>=100) {
-				intToString += numbersLessThanTwenty[integer/100]+" сотен";
-			}
-			if(integer%100!=0) {
-				intToString+=" and ";
-				integer = integer % 100;
-			}
-		}
-		
-		if(integer%100<20) {
-			if (integer%100 == 0) {
-				if (intToString.isEmpty()) {
-					return "ноль";
-				}
-			} else {
-				intToString+=numbersLessThanTwenty[integer%100];
-			}
-		} else {
-			intToString+=tensGreaterThanNineteen[(integer%100)/10] + ((integer%10!=0)?"-"+numbersLessThanTwenty[integer%10]:"");
-		}
-		
-		return intToString;
+//		String intToString = "";
+//
+//		if(integer<0) {
+//			intToString = "minus ";
+//		}
+//		integer = Math.abs(integer);
+//		if (integer >= 100_000) {
+//			return String.valueOf(integer); // Too big
+//		}
+//
+//
+//		if(integer>=1000) {
+//			if((integer/1000)<20) {
+//				intToString+=numbersLessThanTwenty[(integer/1000)]+" тысяч";
+//			} else {
+//				intToString+=tensGreaterThanNineteen[integer/10000] + (((integer/1000)%10!=0)?"-"+numbersLessThanTwenty[(integer/1000)%10]:"")+" тысяч";
+//			}
+//		}
+//
+//		if(integer>=100) {
+//			if(integer>=1000 && integer%1000 != 0) {
+//				intToString+=", ";
+//			}
+//			integer = integer % 1000;
+//			if (intToString.isEmpty() || integer>=100) {
+//				intToString += numbersLessThanTwenty[integer/100]+" сотен";
+//			}
+//			if(integer%100!=0) {
+//				intToString += " и ";
+//				integer = integer % 100;
+//			}
+//		}
+//
+//		if(integer%100<20) {
+//			if (integer%100 == 0) {
+//				if (intToString.isEmpty()) {
+//					return "ноль";
+//				}
+//			} else {
+//				intToString+=numbersLessThanTwenty[integer%100];
+//			}
+//		} else {
+//			intToString+=tensGreaterThanNineteen[(integer%100)/10] + ((integer%10!=0)?"-"+numbersLessThanTwenty[integer%10]:"");
+//		}
+//
+//		return intToString;
+		return String.valueOf(integer);
 	}
 
 	/**
@@ -742,7 +731,7 @@ private static String[] tensGreaterThanNineteen = {
 		return sb.toString();
 	}
 	
-private static String[] primarySequence = {
+private static final String[] primarySequence = {
         "первичный",
         "вторичный",
         "третичный",
@@ -824,7 +813,7 @@ private static String[] primarySequence = {
 				intToString += numbersLessThanTwenty[integer/100]+" сотен";
 			}
 			if(integer%100!=0) {
-				intToString+=" and ";
+				intToString += " и ";
 				integer = integer % 100;
 			}
 		}
@@ -888,7 +877,7 @@ private static String[] primarySequence = {
 		return numeralSB.toString();
 	}
 
-	private static String[] zhengPhase = {"丨","丄","上","止"};
+	private static final String[] zhengPhase = {"丨","丄","上","止"};
 
 	public static String intToZheng(int integer, int max) {
 		StringBuilder numeralSB = new StringBuilder();
@@ -1000,7 +989,7 @@ private static String[] primarySequence = {
 		return modifiedSentence.toString();
 	}
 
-	private static Pattern endOfSentence = Pattern.compile("[,.!?]");
+	private static final Pattern endOfSentence = Pattern.compile("[,.!?]");
 	
 	private static boolean isEndOfSentence(char c) {
 		return endOfSentence.matcher(String.valueOf(c)).matches();
@@ -1094,7 +1083,7 @@ private static String[] primarySequence = {
 				conditionalHashIndex = i;
 				for(String s : conditionalTags) {
 					try {
-						if(sentence.substring(conditionalHashIndex, conditionalHashIndex+s.length()).equals(s)) {
+						if(sentence.startsWith(s, conditionalHashIndex)) {
 							conditionalHashIndexEnd = conditionalHashIndex+s.length();
 							break;
 						}
@@ -1352,12 +1341,12 @@ private static String[] primarySequence = {
 		String returnString = utilitiesStringBuilder.toString();
 		returnString = returnString.replaceAll("Hello", "Приветик");
 		returnString = returnString.replaceAll("hello", "приветик");
-		returnString = returnString.replaceAll("Goodbye", "Прка");
+		returnString = returnString.replaceAll("Goodbye", "Пока");
 		returnString = returnString.replaceAll("goodbye", "пока");
 		return returnString;
 	}
 	
-	private static String[] broWords = new String[] { ", типа,", ", типа, чувак,", ", типа, братан,", ", типа,", ", ээ,", ", эм,", ", ах," };
+	private static final String[] broWords = new String[] { ", типа,", ", типа, чувак,", ", типа, братан,", ", типа,", ", ээ,", ", эм,", ", ах," };
 	public static String addBro(String sentence, int frequency) {
 		sentence = insertIntoSentences(sentence, frequency, broWords);
 		StringBuilder utilitiesStringBuilder = new StringBuilder();
@@ -1386,7 +1375,7 @@ private static String[] primarySequence = {
 		return utilitiesStringBuilder.toString();
 	}
 
-	private static String[] muteSexSounds = new String[] { "... ~Оох!~", "... ~Ммм!~", "... ~Аах!~" };
+	private static final String[] muteSexSounds = new String[] { "... ~Оох!~", "... ~Ммм!~", "... ~Аах!~" };
 	/**
 	 * @param sentence The sentence to mute.
 	 * @param sexMoans If the character should moan/pant due to being in sex.
@@ -1408,7 +1397,7 @@ private static String[] primarySequence = {
 		return muteSB.toString();
 	}
 		
-	private static String[] muffledSounds = new String[] { " ~Хрмм~", " ~Ммм~", " ~Мрмм~" };
+	private static final String[] muffledSounds = new String[] { " ~Хрмм~", " ~Ммм~", " ~Мрмм~" };
 	/**
 	 * Turns a normal sentence into a muffled sentence.<br/>
 	 * Example:<br/>
@@ -1436,7 +1425,7 @@ private static String[] primarySequence = {
 		return muffleSB.toString();
 	}
 
-	private static String[] sexSounds = new String[] { " ~Аах!~", " ~Ммм!~", " ~Оох!~" };
+	private static final String[] sexSounds = new String[] { " ~Аах!~", " ~Ммм!~", " ~Оох!~" };
 	/**
 	 * Turns a normal sentence into a sexy sentence.<br/>
 	 * Example:<br/>
@@ -1454,7 +1443,7 @@ private static String[] primarySequence = {
 		return insertIntoSentences(sentence, frequency, sexSounds);
 	}
 
-	private static String[] drunkSounds = new String[] { " ~Ик!~" };
+	private static final String[] drunkSounds = new String[] { " ~Ик!~" };
 	/**
 	 * Turns a normal sentence into a drunk one.<br/>
 	 * Example:<br/>
@@ -1496,7 +1485,7 @@ private static String[] primarySequence = {
 //			.replaceAll("so", "sho");
 	}
 
-private static Map<String, String> slovenlySpeechReplacementMap = new LinkedHashMap<>();
+private static final Map<String, String> slovenlySpeechReplacementMap = new LinkedHashMap<>();
 static {
     slovenlySpeechReplacementMap.put("What are", "Чё за");
     slovenlySpeechReplacementMap.put("what are", "чё за");
@@ -2024,7 +2013,7 @@ static {
 		return costs[inputTwo.length()];
 	}
 	
-	private static Map<String, List<String>> errorLogMap = new HashMap<>();
+	private static final Map<String, List<String>> errorLogMap = new HashMap<>();
 	public static void logGetNpcByIdError(String method, String id) {
 		if(Main.DEBUG) { // So this doesn't flood error.log
 			errorLogMap.putIfAbsent(method, new ArrayList<>());

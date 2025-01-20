@@ -13,8 +13,10 @@
 		<attackTooltipDescription><![CDATA[Shoot [npc2.name] with your revolver.]]></attackTooltipDescription>
 		<rarity>RARE</rarity>
 		<weaponSet/>
-		<equipText><![CDATA[[npc.Name] [npc.verb(take)] out the revolver and carefully [npc.verb(load)] it before disengaging the safety.]]></equipText>
-		<unequipText><![CDATA[[npc.Name] [npc.verb(swing)] out the cylinder and [npc.verb(gives)] it a shake to make sure that it's empty before putting the revolver away.]]></unequipText>
+        <equipText>
+            <![CDATA[[npc.Name] take out the revolver and carefully load it before disengaging the safety.]]></equipText>
+        <unequipText>
+            <![CDATA[[npc.Name] swing out the cylinder and gives it a shake to make sure that it's empty before putting the revolver away.]]></unequipText>
 		<imageName>pbrevolver.svg</imageName>
 		<imageEquippedName>pbrevolver.svg</imageEquippedName>
 		<physicalResistance>0</physicalResistance>
@@ -49,13 +51,13 @@
 
 	<hitDescriptions>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(line)] up [npc2.name] in [npc.her] sights and [npc.verb(pull)] the trigger at [npc2.name]. The gelatin capsule bursts on impact with [npc2.namePos] aura, splattering [npc2.herHim] with stinging, burning oil.
+		[npc.Name] line up [npc2.name] in [npc.her] sights and pull the trigger at [npc2.name]. The gelatin capsule bursts on impact with [npc2.namePos] aura, splattering [npc2.herHim] with stinging, burning oil.
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(line)] up [npc2.name] in [npc.her] sights and [npc.verb(pull)] the trigger at [npc2.name]. The capsule misses [npc2.herHim] completely and splatters uselessly in the distance.
+		[npc.Name] line up [npc2.name] in [npc.her] sights and pull the trigger at [npc2.name]. The capsule misses [npc2.herHim] completely and splatters uselessly in the distance.
 		]]></missText>
 	</missDescriptions>
 	

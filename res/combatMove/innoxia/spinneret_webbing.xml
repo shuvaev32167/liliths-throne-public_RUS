@@ -88,7 +88,7 @@
 	
 	<performMove>
 		<execute><![CDATA[
-			[npc.Name] [npc.verb(point)] [npc.her] spinneret at [npc2.name], and before [npc2.sheIs] able to dodge out of the way, [npc.name] [npc.verb(fire)] a sticky stream of thick, strong webbing all over [npc2.herHim]!
+			[npc.Name] point [npc.her] spinneret at [npc2.name], and before [npc2.sheIs] able to dodge out of the way, [npc.name] fire a sticky stream of thick, strong webbing all over [npc2.herHim]!
 			#IF(npc2.hasStatusEffect(SE_WEBBED_3))
 				[##npc2.setHealth(0)]
 				<br/>[style.italicsTerrible([npc2.NameIsFull] now totally wrapped up in a cocoon, and as such [npc2.is] completely defeated!)]

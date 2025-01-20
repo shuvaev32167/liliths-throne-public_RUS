@@ -1,9 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.nyansApartment;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.effects.StatusEffect;
@@ -15,27 +11,14 @@ import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseSex;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
-import com.lilithsthrone.game.sex.InitialSexActionInformation;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexControl;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.managers.dominion.nyan.SMNyanSex;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotLyingDown;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotSitting;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
-import com.lilithsthrone.game.sex.sexActions.baseActions.ClitClit;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisBreasts;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
+import com.lilithsthrone.game.sex.sexActions.baseActions.*;
 import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfFingerVagina;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
@@ -44,6 +27,10 @@ import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @since 0.4
@@ -102,7 +89,7 @@ public class NyanApartment {
 	public static final DialogueNode HALLWAY = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -117,7 +104,7 @@ public class NyanApartment {
 	public static final DialogueNode ENTRANCE_HALL = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -132,7 +119,7 @@ public class NyanApartment {
 	public static final DialogueNode NYAN_BEDROOM = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -147,7 +134,7 @@ public class NyanApartment {
 	public static final DialogueNode ENSUITE = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -162,7 +149,7 @@ public class NyanApartment {
 	public static final DialogueNode SPARE_BEDROOM = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -177,7 +164,7 @@ public class NyanApartment {
 	public static final DialogueNode BATHROOM = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -192,7 +179,7 @@ public class NyanApartment {
 	public static final DialogueNode KITCHEN = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -207,7 +194,7 @@ public class NyanApartment {
 	public static final DialogueNode DINING_ROOM = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -222,7 +209,7 @@ public class NyanApartment {
 	public static final DialogueNode LOUNGE = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -286,7 +273,7 @@ public class NyanApartment {
 			});
 			
 			responses.add(
-				new ResponseSex("Fingering", UtilText.parse(getActiveSexPartner(), "Push [npc.name] down on the bed and finger her while kissing her."),
+					new ResponseSex("Ласкание пальцами", UtilText.parse(getActiveSexPartner(), "Push [npc.name] down on the bed and finger her while kissing her."),
 					true, true,
 					new SMNyanSex(
 							Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN_TWO)),
@@ -1223,7 +1210,7 @@ public class NyanApartment {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Kitchen", "Head into the kitchen...", POST_SOLO_SEX_KITCHEN);
+                return new Response("Кухня", "Head into the kitchen...", POST_SOLO_SEX_KITCHEN);
 			}
 			return null;
 		}
@@ -1251,13 +1238,16 @@ public class NyanApartment {
 			} else if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumCreampied)) {
 				UtilText.addSpecialParsingString(ItemEffectType.PREGNANCY_TEST.applyEffect(null, null, null, 0, getNyanMum(), getNyanMum(), null), true);
 			}
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "POST_SOLO_SEX_KITCHEN"+(getActiveSexPartner() instanceof Nyan?"_NYAN":"_NYANMUM")));
+            //			if((Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanCreampied) && getNyan().isPregnant())
+//					|| (Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumCreampied) && getNyanMum().isPregnant())) {
+//				sb.append(UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "PREGNANCY_ADDITION"));
+//			}
+			return UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "POST_SOLO_SEX_KITCHEN" + (getActiveSexPartner() instanceof Nyan ? "_NYAN" : "_NYANMUM"))
 //			if((Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanCreampied) && getNyan().isPregnant())
 //					|| (Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumCreampied) && getNyanMum().isPregnant())) {
 //				sb.append(UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "PREGNANCY_ADDITION"));
 //			}
-			return sb.toString();
+                    ;
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
@@ -1378,7 +1368,7 @@ public class NyanApartment {
 				};
 				
 			} else if(index==2) {
-				return new ResponseSex("Fingering", "Push the horny cat-girls down on [nyanmum.namePos] bed and start fingering them.",
+				return new ResponseSex("Ласкание пальцами", "Push the horny cat-girls down on [nyanmum.namePos] bed and start fingering them.",
 						true, true,
 						new SMNyanSex(
 								SexPosition.LYING_DOWN,
@@ -2702,7 +2692,7 @@ public class NyanApartment {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Kitchen", "Head into the kitchen...", POST_DOUBLE_SEX_KITCHEN);
+                return new Response("Кухня", "Head into the kitchen...", POST_DOUBLE_SEX_KITCHEN);
 			}
 			return null;
 		}
@@ -2729,14 +2719,17 @@ public class NyanApartment {
 			}
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanCreampied)) {
 				UtilText.addSpecialParsingString(ItemEffectType.PREGNANCY_TEST.applyEffect(null, null, null, 0, getNyan(), getNyan(), null), !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumCreampied));
-			} 
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "POST_DOUBLE_SEX_KITCHEN"));
+			}
+            //			if((Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanCreampied) && getNyan().isPregnant())
+//					|| (Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumCreampied) && getNyanMum().isPregnant())) {
+//				sb.append(UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "PREGNANCY_ADDITION"));
+//			}
+			return UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "POST_DOUBLE_SEX_KITCHEN")
 //			if((Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanCreampied) && getNyan().isPregnant())
 //					|| (Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumCreampied) && getNyanMum().isPregnant())) {
 //				sb.append(UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "PREGNANCY_ADDITION"));
 //			}
-			return sb.toString();
+                    ;
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {

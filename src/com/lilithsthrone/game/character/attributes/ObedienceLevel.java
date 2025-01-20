@@ -36,12 +36,12 @@ public enum ObedienceLevel {
 	POSITIVE_FIVE_SUBSERVIENT("subservient", 90, 100, PresetColour.AFFECTION_POSITIVE_FIVE);
 	
 	
-	private String name;
-	private int minimumValue;
-	private int maximumValue;
-	private Colour colour;
+	private final String name;
+	private final int minimumValue;
+	private final int maximumValue;
+	private final Colour colour;
 
-	private ObedienceLevel(String name, int minimumValue, int maximumValue, Colour colour) {
+	ObedienceLevel(String name, int minimumValue, int maximumValue, Colour colour) {
 		this.name = name;
 		this.minimumValue = minimumValue;
 		this.maximumValue = maximumValue;
@@ -67,24 +67,24 @@ public enum ObedienceLevel {
 		
 		switch(affectionLevel) {
 			case NEGATIVE_FIVE_REBELLIOUS:
-				sb.append(UtilText.parse(character, "[npc.Name] [npc.is] "+obedienceName+(longDescription?", and outright [npc.verb(refuse)] to obey any command.":".")));
+                sb.append(UtilText.parse(character, "[npc.Name] [npc.is] " + obedienceName + (longDescription ? ", and outright refuse to obey any command." : ".")));
 				break;
 			case NEGATIVE_FOUR_DEFIANT:
-				sb.append(UtilText.parse(character, "[npc.Name] [npc.is] "+obedienceName+(longDescription?", and only [npc.verb(obey)] commands when "+(character.isRaceConcealed()?"they are":"[npc.sheIs]")+" physically forced to.":".")));
+                sb.append(UtilText.parse(character, "[npc.Name] [npc.is] " + obedienceName + (longDescription ? ", and only obey commands when " + (character.isRaceConcealed() ? "they are" : "[npc.sheIs]") + " physically forced to." : ".")));
 				break;
 			case NEGATIVE_THREE_STRONG_INSUBORDINATE:
-				sb.append(UtilText.parse(character, "[npc.Name] [npc.is] "+obedienceName+(longDescription?", and sometimes [npc.verb(refuse)] to obey commands.":".")));
+                sb.append(UtilText.parse(character, "[npc.Name] [npc.is] " + obedienceName + (longDescription ? ", and sometimes refuse to obey commands." : ".")));
 				break;
 			case NEGATIVE_TWO_UNRULY:
 				sb.append(UtilText.parse(character, "[npc.Name] [npc.is] "+obedienceName+(longDescription?", and will refuse to obey commands if"
-						+(character.isRaceConcealed()?" they think that they":" [npc.she] [npc.verb(think)] that [npc.she]")
+                        + (character.isRaceConcealed() ? " they think that they" : " [npc.she] think that [npc.she]")
 						+ " can get away with it.":".")));
 				break;
 			case NEGATIVE_ONE_DISOBEDIENT:
 				sb.append(UtilText.parse(character, "[npc.Name] [npc.is] "+obedienceName+(longDescription?", and will often complain about having to follow orders.":".")));
 				break;
 			case ZERO_FREE_WILLED:
-				sb.append(UtilText.parse(character, "[npc.Name] [npc.is] "+obedienceName+(longDescription?" and will do whatever "+(character.isRaceConcealed()?"they want.":"[npc.she] [npc.verb(want)]."):".")));
+                sb.append(UtilText.parse(character, "[npc.Name] [npc.is] " + obedienceName + (longDescription ? " and will do whatever " + (character.isRaceConcealed() ? "they want." : "[npc.she] want.") : ".")));
 				break;
 			case POSITIVE_ONE_AGREEABLE:
 				sb.append(UtilText.parse(character, "[npc.Name] [npc.is] "+obedienceName+(longDescription?", and will carry out most orders without complaint.":".")));

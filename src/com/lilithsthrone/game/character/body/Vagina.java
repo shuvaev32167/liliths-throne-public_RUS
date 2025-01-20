@@ -1,18 +1,9 @@
 package com.lilithsthrone.game.character.body;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractVaginaType;
 import com.lilithsthrone.game.character.body.types.VaginaType;
-import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -21,6 +12,9 @@ import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.1.0
@@ -186,7 +180,7 @@ public class Vagina implements BodyPartInterface {
 		
 		if (type == owner.getVaginaType()) {
 			if(type == VaginaType.NONE) {
-				return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already [npc.verb(lack)] a vagina, so nothing happens...)]</p>");
+                return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already lack a vagina, so nothing happens...)]</p>");
 			} else {
 				return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already [npc.has] [npc.a_vaginaRace] pussy, so nothing happens...)]</p>");
 			}
@@ -200,9 +194,9 @@ public class Vagina implements BodyPartInterface {
 				&& (owner.isPregnant() || owner.hasStatusEffect(StatusEffect.PREGNANT_0) || owner.getIncubationLitter(SexAreaOrifice.VAGINA)!=null)) {
 			sb.append(UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out a lewd moan as [npc.she] [npc.verb(feel)] [npc.her] [npc.pussy+] starting to grow hot and sensitive,"
+                            + "[npc.Name] let out a lewd moan as [npc.she] feel [npc.her] [npc.pussy+] starting to grow hot and sensitive,"
 							+ " and as a wave of tingling excitement washes through [npc.her] lower abdomen, [npc.her] moan turns into a desperate gasp."
-						+ " Much to [npc.her] surprise, the feeling fades away almost as quickly as it came, and with a sigh, [npc.she] [npc.verb(realise)] that "
+                            + " Much to [npc.her] surprise, the feeling fades away almost as quickly as it came, and with a sigh, [npc.she] realise that "
 						+ (owner.getIncubationLitter(SexAreaOrifice.VAGINA)!=null
 							?"<b>the eggs being incubated in [npc.her] womb have prevented [npc.her] vagina from being removed</b>!"
 							:(owner.hasStatusEffect(StatusEffect.PREGNANT_0)
@@ -212,7 +206,7 @@ public class Vagina implements BodyPartInterface {
 						+ "[npc.NamePos] pussy remains [style.boldTfSex(unchanged)]."
 					+ "</p>"));
 			
-			return sb.toString()
+			return sb
 					+ "<p>"
 						+owner.postTransformationCalculation()
 					+"</p>";
@@ -222,7 +216,7 @@ public class Vagina implements BodyPartInterface {
 		if(owner.getVaginaType() == VaginaType.NONE) {
 			sb.append(UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(blush)] as [npc.she] [npc.verb(feel)] a strange heat spreading through [npc.her] groin, and can't help but let out a low [npc.moan] as the [npc.skin] "
+                            + "[npc.Name] blush as [npc.she] feel a strange heat spreading through [npc.her] groin, and can't help but let out a low [npc.moan] as the [npc.skin] "
 						+ (!owner.hasPenisIgnoreDildo()
 							? "in the middle of [npc.her] groin"
 							: (!owner.isTaur()
@@ -235,9 +229,9 @@ public class Vagina implements BodyPartInterface {
 						+ " The opening to this new orifice then quickly transforms into the distinctive shape of a vagina, complete with a [npc.clitSize] clit and [npc.labiaSize] labia."
 					+ "</p>"
 					+ "<p>"
-						+ "Just as [npc.she] [npc.verb(start)] to think that the transformation is over, one final intense wave of heat pulses up into [npc.namePos] lower abdomen,"
-							+ " and [npc.she] can't help but let out a desperate [npc.moan] as [npc.she] instinctively [npc.verb(realise)] that a completely-functional female reproductive system has grown inside of [npc.herHim]."
-						+ " As [npc.her] transformation finally comes to an end, [npc.namePos] suddenly [npc.verb(become)] aware of the fact that [npc.her] new cunt is already soaking wet from arousal, "
+                            + "Just as [npc.she] start to think that the transformation is over, one final intense wave of heat pulses up into [npc.namePos] lower abdomen,"
+                            + " and [npc.she] can't help but let out a desperate [npc.moan] as [npc.she] instinctively realise that a completely-functional female reproductive system has grown inside of [npc.herHim]."
+                            + " As [npc.her] transformation finally comes to an end, [npc.namePos] suddenly become aware of the fact that [npc.her] new cunt is already soaking wet from arousal, "
 							+ "causing [npc.herHim] to let out one final, sensual [npc.moan]."
 						+ "<br/>"));
 			
@@ -258,7 +252,7 @@ public class Vagina implements BodyPartInterface {
 								+ "[style.boldExcellent(Pure Virgin)]"
 								+ "<br/><i>"
 								+ "Now that [npc.name] [npc.has] a vagina, [npc.she] can finally consider [npc.herself] to be a truly pure virgin!"
-								+ " Letting a delighted smile settle on [npc.her] [npc.face], [npc.she] can't help but feel extremely elated, and that for as long as [npc.she] [npc.verb(retain)] [npc.her] virginity,"
+                                    + " Letting a delighted smile settle on [npc.her] [npc.face], [npc.she] can't help but feel extremely elated, and that for as long as [npc.she] retain [npc.her] virginity,"
 									+ " [npc.she]'ll represent the perfect image of a proud, virtuous being!"
 								+ "</i>"
 								+ "<br/>"
@@ -270,12 +264,12 @@ public class Vagina implements BodyPartInterface {
 								+ "[style.boldGood(Pure 'Virgin')]"
 								+ "<br/><i>"
 								+ "Finding [npc.herself] once again in possession of an unspoiled vagina, a huge wave of euphoria crashes over [npc.name]."
-								+ " Convincing [npc.herself] that [npc.her] unbroken hymen means that [npc.sheIs] technically a virgin again, [npc.she] [npc.verb(feel)] tears of joy start to well up in [npc.her] [npc.eyes]."
+                                    + " Convincing [npc.herself] that [npc.her] unbroken hymen means that [npc.sheIs] technically a virgin again, [npc.she] feel tears of joy start to well up in [npc.her] [npc.eyes]."
 								+ " Despite this feeling of elation, however, there's a small nagging voice in the back of [npc.her] mind which reminds [npc.herHim] that [npc.she]'ll never be a 'real' virgin ever again."
 								+ "<br/>"
-								+ "Shaking [npc.her] head clear of this unwelcome thought, [npc.name] [npc.verb(focus)] on the fact that for as long as [npc.her] hymen remains intact, [npc.she] can at least pretend that [npc.sheHas] never been fucked before."
+                                    + "Shaking [npc.her] head clear of this unwelcome thought, [npc.name] focus on the fact that for as long as [npc.her] hymen remains intact, [npc.she] can at least pretend that [npc.sheHas] never been fucked before."
 								+ " Not even wanting to consider the notion that [npc.her] pussy might at some point be broken in again,"
-									+ " [npc.she] [npc.verb(hold)] [npc.her] head up high and [npc.verb(tell)] [npc.herself] that [npc.sheIs] once again the perfect image of a proud, virtuous being!"
+                                    + " [npc.she] hold [npc.her] head up high and tell [npc.herself] that [npc.sheIs] once again the perfect image of a proud, virtuous being!"
 								+ "</i>"
 								+ "<br/>"
 								+ "[npc.NameIsFull] now a [style.boldGood(Pure 'Virgin')]!"
@@ -288,19 +282,19 @@ public class Vagina implements BodyPartInterface {
 			
 			if(type==VaginaType.HUMAN) {
 				this.girlcum.setType(type.getFluidType());
-				return sb.toString()
+				return sb
 						+ "<p>"
 							+owner.postTransformationCalculation()
 						+"</p>";
 			} else {
-				return sb.toString()
+				return sb
 						+ owner.setVaginaType(type);
 			}
 			
 		} else {
 			sb.append(UtilText.parse(owner,
 					"<p>"
-						+"[npc.Name] [npc.verb(feel)] a strange heat throbbing within [npc.her] pussy, and [npc.she] can't help but blush and pant for breath as [npc.her] pussy begins to transform.<br/>"));
+                            + "[npc.Name] feel a strange heat throbbing within [npc.her] pussy, and [npc.she] can't help but blush and pant for breath as [npc.her] pussy begins to transform.<br/>"));
 		}
 
 		sb.append(this.type.applyAdditionalTransformationEffects(owner, false));
@@ -316,9 +310,9 @@ public class Vagina implements BodyPartInterface {
 		if(this.type != VaginaType.NONE) {
 			sb.append("<p style='text-align:center;'>");
 				if(this.eggLayer) {
-					sb.append(UtilText.parse(owner,"<i>Instead of giving birth to live young, [npc.name] now [style.colourEgg([npc.verb(lay)] eggs)]!</i>"));
+                    sb.append(UtilText.parse(owner, "<i>Instead of giving birth to live young, [npc.name] now [style.colourEgg(lay eggs)]!</i>"));
 				} else {
-					sb.append(UtilText.parse(owner,"<i>[npc.Name] now [style.colourSex([npc.verb(give)] birth to live young)]!</i>"));
+                    sb.append(UtilText.parse(owner, "<i>[npc.Name] now [style.colourSex(give birth to live young)]!</i>"));
 				}
 			sb.append("</p>");
 		}
@@ -343,7 +337,7 @@ public class Vagina implements BodyPartInterface {
 			sb.append("</p>");
 		}
 		
-		return sb.toString()
+		return sb
 				+ "<p>"
 					+ owner.postTransformationCalculation()
 				+ "</p>";
@@ -462,8 +456,8 @@ public class Vagina implements BodyPartInterface {
 		if(owner.isPregnant()) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out a shocked gasp as an unpleasant tingling sensation suddenly spreads throughout [npc.her] lower abdomen."
-						+ " Almost as soon as it arrived, however, this alarming feeling fades away, and [npc.name] [npc.verb(realise)] that [npc.her] ongoing pregnancy is preventing [npc.her] womb from being transformed!"
+                            + "[npc.Name] let out a shocked gasp as an unpleasant tingling sensation suddenly spreads throughout [npc.her] lower abdomen."
+                            + " Almost as soon as it arrived, however, this alarming feeling fades away, and [npc.name] realise that [npc.her] ongoing pregnancy is preventing [npc.her] womb from being transformed!"
 					+ "</p>");
 		}
 		
@@ -472,7 +466,7 @@ public class Vagina implements BodyPartInterface {
 		if(eggLayer) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out a shocked gasp as an unpleasant tingling sensation suddenly spreads throughout [npc.her] lower abdomen."
+                            + "[npc.Name] let out a shocked gasp as an unpleasant tingling sensation suddenly spreads throughout [npc.her] lower abdomen."
 						+ " An intense cramp quickly replaces this feeling, causing [npc.namePos] gasp to turn into a distressed groan."
 						+ "<br/>"
 						+ "Thankfully, this uncomfortable transformation quickly runs its course, leaving [npc.name] panting for breath and instinctively knowing that [style.boldEgg([npc.she] will now lay eggs instead of birthing live young)]!"
@@ -481,7 +475,7 @@ public class Vagina implements BodyPartInterface {
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out a shocked gasp as an unpleasant tingling sensation suddenly spreads throughout [npc.her] lower abdomen."
+                            + "[npc.Name] let out a shocked gasp as an unpleasant tingling sensation suddenly spreads throughout [npc.her] lower abdomen."
 						+ " An intense cramp quickly replaces this feeling, causing [npc.namePos] gasp to turn into a distressed groan."
 						+ "<br/>"
 						+ "Thankfully, this uncomfortable transformation quickly runs its course, leaving [npc.name] panting for breath and instinctively knowing that [style.boldSex([npc.she] will now birth live young instead of laying eggs)]!"

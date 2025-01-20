@@ -1,13 +1,13 @@
 package com.lilithsthrone.world.population;
 
+import com.lilithsthrone.main.Main;
+import com.lilithsthrone.utils.Util;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
 
 /**
  * @since 0.2.12
@@ -40,12 +40,15 @@ public class PopulationType {
 	public static AbstractPopulationType CROWD = new AbstractPopulationType("толпа", "толпы") {};
 
 	public static AbstractPopulationType PRIVATE_SECURITY_GUARD = new AbstractPopulationType("частный охранник", "частные охранники") {};
-	
-	public static AbstractPopulationType ENFORCER = new AbstractPopulationType("Энфорсер", "Энфорсеры") {};
-	
-	public static AbstractPopulationType SWORD = new AbstractPopulationType("МЕЧ Энфорсер", "МЕЧ Энфорсеры") {};
 
-	public static AbstractPopulationType CENTAUR_CARTS = new AbstractPopulationType("повозка, запряженная кентавром", "повозки, запряженные кентаврами") {};
+	public static AbstractPopulationType ENFORCER = new AbstractPopulationType("энфорсер", "энфорсеры") {
+	};
+
+	public static AbstractPopulationType SWORD = new AbstractPopulationType("энфорсер SWORD", "энфорсеры SWORD") {
+	};
+
+	public static AbstractPopulationType CENTAUR_CARTS = new AbstractPopulationType("повозка, запряжённая кентавром", "повозки, запряжённые кентаврами") {
+	};
 	
 	public static AbstractPopulationType SHOPPER = new AbstractPopulationType("покупатель", "покупатели") {};
 	
@@ -84,10 +87,12 @@ public class PopulationType {
 	public static AbstractPopulationType MASSEUSE = new AbstractPopulationType("массажист", "массажисты") {};
 	
 	public static AbstractPopulationType AMAZON = new AbstractPopulationType("Амазонка", "Амазонки") {};
-	
-	public static AbstractPopulationType AMAZON_GUARD = new AbstractPopulationType("Амазонка охранник", "Амазонки охранники") {};
-	
-	public static AbstractPopulationType LUNETTE_DAUGTHER = new AbstractPopulationType("Дочь Люнетты", "Дочери Люнетты") {};
+
+	public static AbstractPopulationType AMAZON_GUARD = new AbstractPopulationType("амазонка охранник", "амазонки охранники") {
+	};
+
+	public static AbstractPopulationType LUNETTE_DAUGTHER = new AbstractPopulationType("дочь Люнетты", "дочери Люнетты") {
+	};
 	
 	public static AbstractPopulationType COCK_SLEEVE = new AbstractPopulationType("любитель членов", "любители членов") {};
 
@@ -96,16 +101,16 @@ public class PopulationType {
 	public static AbstractPopulationType OVERSEER = new AbstractPopulationType("надзиратель", "надзиратели") {};
 	
 	
-	private static List<AbstractPopulationType> allPopulationTypes = new ArrayList<>();
-	private static Map<AbstractPopulationType, String> populationToIdMap = new HashMap<>();
-	private static Map<String, AbstractPopulationType> idToPlaceMap = new HashMap<>();
+	private static final List<AbstractPopulationType> allPopulationTypes = new ArrayList<>();
+	private static final Map<AbstractPopulationType, String> populationToIdMap = new HashMap<>();
+	private static final Map<String, AbstractPopulationType> idToPlaceMap = new HashMap<>();
 
 	public static List<AbstractPopulationType> getAllPopulationTypes() {
 		return allPopulationTypes;
 	}
 	
 	public static boolean hasId(String id) {
-		return idToPlaceMap.keySet().contains(id);
+		return idToPlaceMap.containsKey(id);
 	}
 	
 	public static AbstractPopulationType getPopulationTypeFromId(String id) {

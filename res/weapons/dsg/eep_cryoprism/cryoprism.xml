@@ -22,11 +22,13 @@
 		
 		<attackTooltipDescription>Shoot [npc2.name] with your cryoprism gun.</attackTooltipDescription>
 		
-		<rarity>EPIC</rarity> 
-		
-		<equipText><![CDATA[[npc.Name] [npc.verb(bring)] out the cryoprism and [npc.verb(turn)] the selector switch to the fire position. There is a brief, unnerving hum as the arcane power source inside comes to life.]]></equipText>
-		
-		<unequipText><![CDATA[[npc.Name] [npc.verb(turn)] the selector switch back to the safe position and [npc.verb(put)] the rifle away.]]></unequipText>
+		<rarity>EPIC</rarity>
+
+        <equipText>
+            <![CDATA[[npc.Name] bring out the cryoprism and turn the selector switch to the fire position. There is a brief, unnerving hum as the arcane power source inside comes to life.]]></equipText>
+
+        <unequipText>
+            <![CDATA[[npc.Name] turn the selector switch back to the safe position and put the rifle away.]]></unequipText>
 		
 		<imageName>cryoprism_safe.svg</imageName> 
 		
@@ -80,13 +82,13 @@
 
 	<hitDescriptions>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(line)] [npc2.name] up in [npc.her] sights and [npc.verb(pull)] the trigger. A bright blue beam of light smashes into [npc2.her] aura. A faint trail of snowflakes flutters delicately in the air as the light fades.
+		[npc.Name] line [npc2.name] up in [npc.her] sights and pull the trigger. A bright blue beam of light smashes into [npc2.her] aura. A faint trail of snowflakes flutters delicately in the air as the light fades.
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(line)] [npc2.name] up in [npc.her] sights and [npc.verb(pull)] the trigger. The shot goes wide! The beam uselessly creates a large patch of ice some distance away.
+		[npc.Name] line [npc2.name] up in [npc.her] sights and pull the trigger. The shot goes wide! The beam uselessly creates a large patch of ice some distance away.
 		]]></missText>
 	</missDescriptions>
 	

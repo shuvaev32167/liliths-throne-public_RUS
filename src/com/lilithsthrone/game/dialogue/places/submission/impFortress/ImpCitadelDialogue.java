@@ -1,11 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.submission.impFortress;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -15,13 +9,7 @@ import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.NPC;
-import com.lilithsthrone.game.character.npc.submission.DarkSiren;
-import com.lilithsthrone.game.character.npc.submission.FortressAlphaLeader;
-import com.lilithsthrone.game.character.npc.submission.FortressFemalesLeader;
-import com.lilithsthrone.game.character.npc.submission.FortressMalesLeader;
-import com.lilithsthrone.game.character.npc.submission.ImpAttacker;
-import com.lilithsthrone.game.character.npc.submission.Lyssieth;
-import com.lilithsthrone.game.character.npc.submission.Takahashi;
+import com.lilithsthrone.game.character.npc.submission.*;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.character.race.AbstractSubspecies;
@@ -31,11 +19,7 @@ import com.lilithsthrone.game.combat.DamageType;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.responses.Response;
-import com.lilithsthrone.game.dialogue.responses.ResponseCombat;
-import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
-import com.lilithsthrone.game.dialogue.responses.ResponseSex;
-import com.lilithsthrone.game.dialogue.responses.ResponseTag;
+import com.lilithsthrone.game.dialogue.responses.*;
 import com.lilithsthrone.game.dialogue.utils.BodyChanging;
 import com.lilithsthrone.game.dialogue.utils.InventoryInteraction;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -60,6 +44,12 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @since 0.2.11
@@ -363,8 +353,8 @@ public class ImpCitadelDialogue {
 			}
 		};
 	}
-	
-	public static final DialogueNode ENTRANCE = new DialogueNode("Gateway", "", false) {
+
+    public static final DialogueNode ENTRANCE = new DialogueNode("Ворота", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;
@@ -536,7 +526,7 @@ public class ImpCitadelDialogue {
 		public Response getResponse(int responseTab, int index) {
 			if(getImpGroup().isEmpty()) {
 				if(index==1) {
-					return new Response("Continue", "As you've enslaved all of the imps, there's nothing left to do but continue on your way through the citadel...", Main.game.getDefaultDialogue(false));
+                    return new Response("Продолжить", "As you've enslaved all of the imps, there's nothing left to do but continue on your way through the citadel...", Main.game.getDefaultDialogue(false));
 				}
 				return null;
 			}
@@ -1099,7 +1089,7 @@ public class ImpCitadelDialogue {
 		}
 	};
 
-	public static final DialogueNode COURTYARD = new DialogueNode("Courtyard", ".", false) {
+    public static final DialogueNode COURTYARD = new DialogueNode("Внутренний двор", ".", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -1172,7 +1162,7 @@ public class ImpCitadelDialogue {
 		}
 	};
 
-	public static final DialogueNode LABORATORY = new DialogueNode("Laboratory", ".", false) {
+    public static final DialogueNode LABORATORY = new DialogueNode("Лаборатория", ".", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -1230,7 +1220,7 @@ public class ImpCitadelDialogue {
 
 							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().incrementMoney(1000));
 
-							TransformativePotion effects = ((NPC)getArcanist()).generateTransformativePotion(Main.game.getPlayer());
+							TransformativePotion effects = getArcanist().generateTransformativePotion(Main.game.getPlayer());
 							AbstractItem potion = EnchantingUtils.craftItem(
 								Main.game.getItemGen().generateItem(effects.getItemType()),
 								effects.getEffects().stream().map(x -> x.getEffect()).collect(Collectors.toList()));
@@ -1238,7 +1228,7 @@ public class ImpCitadelDialogue {
 							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addItem(potion, 1, false, true));
 							
 							if(isCompanionDialogue()) {
-								effects = ((NPC)getArcanist()).generateTransformativePotion(Main.game.getPlayer().getMainCompanion());
+								effects = getArcanist().generateTransformativePotion(Main.game.getPlayer().getMainCompanion());
 								potion = EnchantingUtils.craftItem(
 									Main.game.getItemGen().generateItem(effects.getItemType()),
 									effects.getEffects().stream().map(x -> x.getEffect()).collect(Collectors.toList()));
@@ -1341,7 +1331,7 @@ public class ImpCitadelDialogue {
 					public void effects() {
 						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.impCitadelArcanistEncountered, true);
 
-						TransformativePotion effects = ((NPC)getArcanist()).generateTransformativePotion(Main.game.getPlayer());
+						TransformativePotion effects = getArcanist().generateTransformativePotion(Main.game.getPlayer());
 						AbstractItem potion = EnchantingUtils.craftItem(
 							Main.game.getItemGen().generateItem(effects.getItemType()),
 							effects.getEffects().stream().map(x -> x.getEffect()).collect(Collectors.toList()));
@@ -1424,7 +1414,7 @@ public class ImpCitadelDialogue {
 					public void effects() {
 						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.impCitadelArcanistEncountered, true);
 						
-						TransformativePotion effects = ((NPC)getArcanist()).generateTransformativePotion(getMainCompanion());
+						TransformativePotion effects = getArcanist().generateTransformativePotion(getMainCompanion());
 						AbstractItem potion = EnchantingUtils.craftItem(
 							Main.game.getItemGen().generateItem(effects.getItemType()),
 							effects.getEffects().stream().map(x -> x.getEffect()).collect(Collectors.toList()));
@@ -1521,7 +1511,7 @@ public class ImpCitadelDialogue {
 					public void effects() {
 						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.impCitadelArcanistEncountered, true);
 
-						TransformativePotion effects = ((NPC)getArcanist()).generateTransformativePotion(Main.game.getPlayer());
+						TransformativePotion effects = getArcanist().generateTransformativePotion(Main.game.getPlayer());
 						AbstractItem potion = EnchantingUtils.craftItem(
 							Main.game.getItemGen().generateItem(effects.getItemType()),
 							effects.getEffects().stream().map(x -> x.getEffect()).collect(Collectors.toList()));
@@ -1529,7 +1519,7 @@ public class ImpCitadelDialogue {
 						
 						Main.game.getTextEndStringBuilder().append(UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "ARCANIST_BOTH_TF", getAllCharacters()));
 
-						effects = ((NPC)getArcanist()).generateTransformativePotion(getMainCompanion());
+						effects = getArcanist().generateTransformativePotion(getMainCompanion());
 						potion = EnchantingUtils.craftItem(
 							Main.game.getItemGen().generateItem(effects.getItemType()),
 							effects.getEffects().stream().map(x -> x.getEffect()).collect(Collectors.toList()));
@@ -1749,13 +1739,13 @@ public class ImpCitadelDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "", Main.game.getDefaultDialogue(false));
+                return new Response("Продолжить", "", Main.game.getDefaultDialogue(false));
 			}
 			return null;
 		}
 	};
 
-	public static final DialogueNode TREASURY = new DialogueNode("Treasury", ".", false) {
+    public static final DialogueNode TREASURY = new DialogueNode("Казна", ".", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -1857,7 +1847,7 @@ public class ImpCitadelDialogue {
 		public Response getResponse(int responseTab, int index) {
 			if(!isDefeated()) {
 				if(index==1) {
-					return new Response("Enter", "Push open the doors of the keep and step inside.", KEEP_ENTRY) {
+                    return new Response("Вход", "Push open the doors of the keep and step inside.", KEEP_ENTRY) {
 						@Override
 						public void effects() {
 							getBoss().setPlayerKnowsName(true);
@@ -2632,37 +2622,7 @@ public class ImpCitadelDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode PRISONER_STRIPPED_AFTER_SEX = new DialogueNode("", "", true) {
-
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "PRISONER_STRIPPED_AFTER_SEX"+getOwnerDialogueIdEnding(), getAllCharacters());
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Cells",
-						isCompanionDialogue()
-							?UtilText.parse(getOwner(), getMainCompanion(), "[npc.Name] takes you and [npc2.name] to the citadel's cell block...")
-							:UtilText.parse(getOwner(), "[npc.Name] takes you to the citadel's cell block..."),
-							CELLS) {
-					@Override
-					public void effects() {
-						Main.game.getPlayer().setLocation(WorldType.IMP_FORTRESS_DEMON, PlaceType.FORTRESS_DEMON_CELLS);
-						cellTimePassed = Main.game.getMinutesUntilTimeInMinutes(7*60);
-						if(cellTimePassed<120) {
-							cellTimePassed+=24*60;
-						}
-					}
-				};	
-			}
-			return null;
-		}
-	};
-	
-	public static final DialogueNode CELLS = new DialogueNode("Cells", "", false) {
+    public static final DialogueNode CELLS = new DialogueNode("Клетки", "", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -2672,10 +2632,10 @@ public class ImpCitadelDialogue {
 		@Override
 		public String getContent() {
 			UtilText.nodeContentSB.setLength(0);
-			
+
 			if(isPrisoner()) {
 				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "PRISONER_CELL"+getOwnerDialogueIdEnding(), getAllCharacters()));
-				
+
 			} else {
 				if(isDefeated()) {
 					UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "CELLS_RUINS", getAllCharacters()));
@@ -2683,7 +2643,7 @@ public class ImpCitadelDialogue {
 					UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "CELLS", getAllCharacters()));
 				}
 			}
-			
+
 			return UtilText.nodeContentSB.toString();
 		}
 
@@ -2706,43 +2666,69 @@ public class ImpCitadelDialogue {
 					Orifice training
 					Walks around citadel
 			*/
-			
+
 			if(isPrisoner()) {
 				if(Main.game.getHourOfDay()<=8) { // Wake up event
 					// Imp arrives to give breakfast. Imp is generated based on player's SO.
 					// Fucks player's throat. If player refuses, gain ring gag.
 					// If player has cum addict, the imp cums on food.
-					
+
 					// TF
-					
+
 				} else if(Main.game.getHourOfDay()<=11) { // Morning event
 					// If being milked, append milking description
 					if(getOwner().getMinutesSinceLastTimeHadSex()>36*60) {
 						// Demon sex. If player refuses, gain spreader bar.
 					}
-					
+
 				} else if(Main.game.getHourOfDay()<=14) { // Lunch event
 					// Imp feeds you. If player has cum addict, the imp cums on food.
 
 					// TF
-					
+
 				} else if(Main.game.getHourOfDay()<=18) { // Afternoon event
 					// Use same as morning
-					
+
 				} else if(Main.game.getHourOfDay()<=21) { // Dinner event
 
 					// TF
-					
+
 				} else if(Main.game.getHourOfDay()<=24) { // Night event
 					// Sleep or Escape chance
 				}
 			}
-			
+
 			return null;
 		}
 	};
-	
+	public static final DialogueNode PRISONER_STRIPPED_AFTER_SEX = new DialogueNode("", "", true) {
 
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "PRISONER_STRIPPED_AFTER_SEX"+getOwnerDialogueIdEnding(), getAllCharacters());
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+                return new Response("Клетки",
+						isCompanionDialogue()
+							?UtilText.parse(getOwner(), getMainCompanion(), "[npc.Name] takes you and [npc2.name] to the citadel's cell block...")
+							:UtilText.parse(getOwner(), "[npc.Name] takes you to the citadel's cell block..."),
+							CELLS) {
+					@Override
+					public void effects() {
+						Main.game.getPlayer().setLocation(WorldType.IMP_FORTRESS_DEMON, PlaceType.FORTRESS_DEMON_CELLS);
+						cellTimePassed = Main.game.getMinutesUntilTimeInMinutes(7*60);
+						if(cellTimePassed<120) {
+							cellTimePassed+=24*60;
+						}
+					}
+				};
+			}
+			return null;
+		}
+	};
 	public static final DialogueNode PRISONER_BREAKFAST = new DialogueNode("", "", true) {
 
 		@Override
@@ -2753,7 +2739,7 @@ public class ImpCitadelDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Cells",
+                return new Response("Клетки",
 						isCompanionDialogue()
 							?UtilText.parse(getOwner(), getMainCompanion(), "[npc.Name] takes you and [npc2.name] to the citadel's cell block...")
 							:UtilText.parse(getOwner(), "[npc.Name] takes you to the citadel's cell block..."),

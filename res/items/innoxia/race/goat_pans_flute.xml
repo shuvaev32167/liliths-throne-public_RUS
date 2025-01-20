@@ -54,10 +54,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		After releasing the cork with a loud bang, [npc.name] [npc.verb(bring)] the glass bottle of Pan's Flute up to [npc.her] [npc.mouth]. Tilting [npc.her] head back, [npc.she] [npc.verb(start)] drinking the bubbly champagne, and [npc.is] very pleased to discover that it has a truly excellent taste.
+		After releasing the cork with a loud bang, [npc.name] bring the glass bottle of Pan's Flute up to [npc.her] [npc.mouth]. Tilting [npc.her] head back, [npc.she] start drinking the bubbly champagne, and [npc.is] very pleased to discover that it has a truly excellent taste.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		After releasing the cork with a loud bang, [npc.name] [npc.verb(bring)] the glass bottle of Pan's Flute up to [npc2.namePos] waiting [npc2.lips]. Tilting [npc2.her] head back, [npc2.she] [npc2.verb(start)] drinking the bubbly champagne, and [npc2.is] very pleased to discover that it has a truly excellent taste.
+		After releasing the cork with a loud bang, [npc.name] bring the glass bottle of Pan's Flute up to [npc2.namePos] waiting [npc2.lips]. Tilting [npc2.her] head back, [npc2.she] [npc2.verb(start)] drinking the bubbly champagne, and [npc2.is] very pleased to discover that it has a truly excellent taste.
 		]]></otherUse>
 	</useDescriptions>
 

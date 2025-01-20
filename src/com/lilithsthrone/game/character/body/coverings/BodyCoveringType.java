@@ -1,13 +1,5 @@
 package com.lilithsthrone.game.character.body.coverings;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
 import com.lilithsthrone.game.character.body.valueEnums.CoveringModifier;
 import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
@@ -16,6 +8,14 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.ColourListPresets;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -40,8 +40,8 @@ public class BodyCoveringType {
 			BodyCoveringCategory.MAIN_FUR,
 			"a layer of",
 			false,
-			"fur",
-			"fur",
+			"меха",
+			"мех",
 			Util.newArrayListOfValues(
 					CoveringModifier.FLUFFY,
 					CoveringModifier.SMOOTH),
@@ -444,8 +444,8 @@ public class BodyCoveringType {
 			BodyCoveringCategory.TONGUE,
 			"a layer of",
 			false,
-			"skin",
-			"skin",
+			"кожи",
+			"кожа",
 			Util.newArrayListOfValues(CoveringModifier.SMOOTH),
 			null,
 			null,
@@ -1179,7 +1179,7 @@ public class BodyCoveringType {
 						}
 						
 						if(bct!=null) {
-							String id =  mat.toString()+"_"+cat.toString();
+							String id =  mat +"_"+ cat;
 							bodyCoveringTypesToIdMap.put(bct,id);
 							idToBodyCoveringTypesMap.put(id, bct);
 							allBodyCoveringTypes.add(bct);
@@ -1254,7 +1254,7 @@ public class BodyCoveringType {
 						}
 						
 						if(bct!=null) {
-							String id =  mat.toString()+"_"+cat.toString();
+							String id =  mat +"_"+ cat;
 							bodyCoveringTypesToIdMap.put(bct,id);
 							idToBodyCoveringTypesMap.put(id, bct);
 							allBodyCoveringTypes.add(bct);
@@ -1371,7 +1371,7 @@ public class BodyCoveringType {
 							}
 							AbstractBodyCoveringType bct = new AbstractBodyCoveringType(cat, BodyCoveringTemplateFactory.createElemental(name, modifier, pattern, naturalColours)) {};
 							
-							String id =  mat.toString()+"_"+cat.toString();
+							String id =  mat +"_"+ cat;
 							bodyCoveringTypesToIdMap.put(bct, id);
 							idToBodyCoveringTypesMap.put(id, bct);
 							allBodyCoveringTypes.add(bct);

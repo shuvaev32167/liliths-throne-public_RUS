@@ -1,15 +1,5 @@
 package com.lilithsthrone.game.character.npc.dominion;
 
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
@@ -19,55 +9,8 @@ import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
-import com.lilithsthrone.game.character.body.types.ArmType;
-import com.lilithsthrone.game.character.body.types.AssType;
-import com.lilithsthrone.game.character.body.types.BreastType;
-import com.lilithsthrone.game.character.body.types.EarType;
-import com.lilithsthrone.game.character.body.types.EyeType;
-import com.lilithsthrone.game.character.body.types.FaceType;
-import com.lilithsthrone.game.character.body.types.HairType;
-import com.lilithsthrone.game.character.body.types.HornType;
-import com.lilithsthrone.game.character.body.types.LegType;
-import com.lilithsthrone.game.character.body.types.PenisType;
-import com.lilithsthrone.game.character.body.types.TailType;
-import com.lilithsthrone.game.character.body.types.TorsoType;
-import com.lilithsthrone.game.character.body.types.VaginaType;
-import com.lilithsthrone.game.character.body.types.WingType;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
-import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.ClitorisSize;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringModifier;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
-import com.lilithsthrone.game.character.body.valueEnums.CumProduction;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
-import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
-import com.lilithsthrone.game.character.body.valueEnums.FluidRegeneration;
-import com.lilithsthrone.game.character.body.valueEnums.HairLength;
-import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.body.valueEnums.HornLength;
-import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
-import com.lilithsthrone.game.character.body.valueEnums.Lactation;
-import com.lilithsthrone.game.character.body.valueEnums.LipSize;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
-import com.lilithsthrone.game.character.body.valueEnums.NippleSize;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeDepth;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
-import com.lilithsthrone.game.character.body.valueEnums.PenisLength;
-import com.lilithsthrone.game.character.body.valueEnums.TesticleSize;
-import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
-import com.lilithsthrone.game.character.body.valueEnums.TongueModifier;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
+import com.lilithsthrone.game.character.body.types.*;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
@@ -76,11 +19,7 @@ import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.gender.Gender;
-import com.lilithsthrone.game.character.markings.Tattoo;
-import com.lilithsthrone.game.character.markings.TattooCountType;
-import com.lilithsthrone.game.character.markings.TattooCounter;
-import com.lilithsthrone.game.character.markings.TattooCounterType;
-import com.lilithsthrone.game.character.markings.TattooWriting;
+import com.lilithsthrone.game.character.markings.*;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.npc.fields.Angelixx;
 import com.lilithsthrone.game.character.npc.fields.Nir;
@@ -97,11 +36,7 @@ import com.lilithsthrone.game.combat.DamageType;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.utils.ParserTarget;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractCoreItem;
-import com.lilithsthrone.game.inventory.CharacterInventory;
-import com.lilithsthrone.game.inventory.InventorySlot;
-import com.lilithsthrone.game.inventory.ItemTag;
-import com.lilithsthrone.game.inventory.SetBonus;
+import com.lilithsthrone.game.inventory.*;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
@@ -124,6 +59,15 @@ import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * @since 0.4.9
@@ -137,7 +81,7 @@ public class Saellatrix extends NPC {
 	}
 	
 	public Saellatrix(boolean isImported) {
-		super(isImported, new NameTriplet("Saellatrix"), "Loviennemartuilani",
+        super(isImported, new NameTriplet("Саэллатрикс"), "Ловиеннамартуилани",
 				"Saellatrix is a recognised daughter of the elder lilin, Lovienne, and as such commands an immense deal of respect."
 					+ " The fact that she works at her mother's sex shop shows how important the business is to Lovienne.",
 				187, Month.AUGUST, 2,
@@ -651,7 +595,7 @@ public class Saellatrix extends NPC {
 	
 	// Methods for during the actual factory side quest with Fiammetta:
 	
-	private static Map<AbstractFetish, String> sisterFetishesToFlagIds = Util.newHashMapOfValues(
+	private static final Map<AbstractFetish, String> sisterFetishesToFlagIds = Util.newHashMapOfValues(
 			new Value<>(Fetish.FETISH_ANAL_RECEIVING, "innoxia_doll_factory_succubus_seen_anal"),
 			new Value<>(Fetish.FETISH_PURE_VIRGIN, "innoxia_doll_factory_succubus_seen_virgin"),
 			new Value<>(Fetish.FETISH_ORAL_GIVING, "innoxia_doll_factory_succubus_seen_oral"),
@@ -1198,8 +1142,8 @@ public class Saellatrix extends NPC {
 		Main.game.getNpc(Nir.class).returnToHome();
 	}
 	
-	private static String[] toyNames = new String[]{"dildos", "anal beads", "cock rings", "strap-ons", "onaholes"};
-	private static Colour[] toyColours = new Colour[]{
+	private static final String[] toyNames = new String[]{"dildos", "anal beads", "cock rings", "strap-ons", "onaholes"};
+	private static final Colour[] toyColours = new Colour[]{
 			PresetColour.CLOTHING_PURPLE,
 			PresetColour.CLOTHING_ORANGE,
 			PresetColour.CLOTHING_BLACK,
@@ -1806,20 +1750,16 @@ public class Saellatrix extends NPC {
 		}
 		
 		// Vagina:
-		if(doll.getClitorisRawGirthValue()!=PenetrationGirth.ZERO_THIN.getValue()
-				|| doll.getVaginaRawClitorisSizeValue()!=ClitorisSize.ZERO_AVERAGE.getMedianValue()
-				|| !doll.getClitorisModifiers().isEmpty()
-				|| doll.getVaginaLabiaSize()!=LabiaSize.ZERO_TINY
-				|| doll.getVaginaCapacity()!=Capacity.TWO_TIGHT
-				|| doll.getVaginaUrethraCapacity()!=Capacity.ONE_EXTREMELY_TIGHT
-				|| doll.getVaginaWetness()!=Wetness.THREE_WET
-				|| !doll.isVaginaSquirter()
-				|| !doll.getVaginaOrificeModifiers().equals(Util.newHashSetOfValues(OrificeModifier.RIBBED))) {
-			return false;
-		}
-		
-		return true;
-	}
+        return doll.getClitorisRawGirthValue() == PenetrationGirth.ZERO_THIN.getValue()
+                && doll.getVaginaRawClitorisSizeValue() == ClitorisSize.ZERO_AVERAGE.getMedianValue()
+                && doll.getClitorisModifiers().isEmpty()
+                && doll.getVaginaLabiaSize() == LabiaSize.ZERO_TINY
+                && doll.getVaginaCapacity() == Capacity.TWO_TIGHT
+                && doll.getVaginaUrethraCapacity() == Capacity.ONE_EXTREMELY_TIGHT
+                && doll.getVaginaWetness() == Wetness.THREE_WET
+                && doll.isVaginaSquirter()
+                && doll.getVaginaOrificeModifiers().equals(Util.newHashSetOfValues(OrificeModifier.RIBBED));
+    }
 	
 	public boolean isAnySlaveAvailableForDollification() {
 		return Main.game.getPlayer().getSlavesOwnedAsCharacters().stream().anyMatch(c->!c.isDoll() && !c.isUnique());

@@ -1,14 +1,5 @@
 package com.lilithsthrone.game.character.body.abstractTypes;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.lilithsthrone.main.Main;
-import org.w3c.dom.Document;
-
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
@@ -20,8 +11,16 @@ import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
+import org.w3c.dom.Document;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @since 0.3.8.9
@@ -32,21 +31,21 @@ public abstract class AbstractVaginaType implements BodyPartTypeInterface {
 	
 	// Maps the name to weighting for use in random selection:
 	protected static final Map<String, Integer> BASE_NAMES_SINGULAR = Util.newHashMapOfValues(
-			new Value<>("cherry", 2),
-			new Value<>("cunt", 2),
-			new Value<>("kitty", 1),
-			new Value<>("pussy", 4),
-			new Value<>("sex", 1),
-			new Value<>("slit", 1),
-			new Value<>("twat", 2));
+            new Value<>("вишенка", 2),
+            new Value<>("пизда", 2),
+            new Value<>("киска", 1),
+            new Value<>("писька", 4),
+            new Value<>("манда", 1),
+            new Value<>("щель", 1),
+            new Value<>("вагина", 2));
 	protected static final Map<String, Integer> BASE_NAMES_PLURAL = Util.newHashMapOfValues(
-			new Value<>("cherries", 2),
-			new Value<>("cunts", 2),
-			new Value<>("kitties", 1),
-			new Value<>("pussies", 4),
-			new Value<>("sexes", 1),
-			new Value<>("slits", 1),
-			new Value<>("twats", 2));
+            new Value<>("вишенки", 2),
+            new Value<>("пизды", 2),
+            new Value<>("киски", 1),
+            new Value<>("письки", 4),
+            new Value<>("манды", 1),
+            new Value<>("щели", 1),
+            new Value<>("вагины", 2));
 
 	private boolean mod;
 	private boolean fromExternalFile;

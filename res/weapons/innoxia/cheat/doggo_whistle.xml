@@ -12,8 +12,8 @@
 		<attackTooltipDescription><![CDATA[Blow the whistle at [npc.name]!]]></attackTooltipDescription>
 		<rarity>LEGENDARY</rarity>
 		<weaponSet/>
-		<equipText><![CDATA[[npc.Name] [npc.verb(ready)] [npc.her] suspicious dog whistle.]]></equipText>
-		<unequipText><![CDATA[[npc.Name] [npc.verb(put)] [npc.her] suspicious dog whistle away.]]></unequipText>
+        <equipText><![CDATA[[npc.Name] ready [npc.her] suspicious dog whistle.]]></equipText>
+        <unequipText><![CDATA[[npc.Name] put [npc.her] suspicious dog whistle away.]]></unequipText>
 		<imageName>doggo_whistle.svg</imageName> 
 		<imageEquippedName/> 
 		<damage>0</damage> 
@@ -56,13 +56,13 @@
 	
 	<hitDescriptions>
 		<hitText><![CDATA[
-		Bringing the dog whistle up to [npc.her] [npc.lips], [npc.name] [npc.verb(give)] it a short, sharp blow. There's a faint, unnatural shrill within the high-pitched noise that's produced...
+		Bringing the dog whistle up to [npc.her] [npc.lips], [npc.name] give it a short, sharp blow. There's a faint, unnatural shrill within the high-pitched noise that's produced...
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		Bringing the dog whistle up to [npc.her] [npc.lips], [npc.name] [npc.verb(give)] it a short, sharp blow. There's a faint, unnatural shrill within the high-pitched noise that's produced...
+		Bringing the dog whistle up to [npc.her] [npc.lips], [npc.name] give it a short, sharp blow. There's a faint, unnatural shrill within the high-pitched noise that's produced...
 		]]></missText>
 	</missDescriptions>
 	

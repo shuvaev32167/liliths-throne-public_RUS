@@ -1,9 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.shoppingArcade;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
@@ -33,6 +29,10 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * @since 0.1.82
@@ -65,9 +65,9 @@ public class RalphsSnacks {
 			if(responseTab==0) {
 				if (index == 1) {
 					if(!Main.game.isExtendedWorkTime()) {
-						return new Response("Enter", "'Ralph's Snacks' is currently closed, so you'll have to come back during opening hours if you wanted to take a look inside.", null);
+                        return new Response("Вход", "'Ralph's Snacks' is currently closed, so you'll have to come back during opening hours if you wanted to take a look inside.", null);
 					}
-					return new Response("Enter", "Step inside Ralph's Snacks.", INTERIOR){
+                    return new Response("Вход", "Step inside Ralph's Snacks.", INTERIOR) {
 						@Override
 						public void effects() {
 							resetDiscountCheck();
@@ -78,8 +78,8 @@ public class RalphsSnacks {
 			return ShoppingArcadeDialogue.getFastTravelResponses(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode INTERIOR = new DialogueNode("Ralph's Snacks", "-", true) {
+
+    public static final DialogueNode INTERIOR = new DialogueNode("Закуски Ральфа", "-", true) {
 
 		@Override
 		public String getContent() {
@@ -184,8 +184,8 @@ public class RalphsSnacks {
 			}
 		}
 	};
-	
-	public static final DialogueNode INTERIOR_ASK_FOR_DISCOUNT = new DialogueNode("Ralph's Snacks", "-", true, true) {
+
+    public static final DialogueNode INTERIOR_ASK_FOR_DISCOUNT = new DialogueNode("Закуски Ральфа", "-", true, true) {
 
 
 		@Override
@@ -315,8 +315,8 @@ public class RalphsSnacks {
 			}
 		}
 	};
-	
-	public static final DialogueNode INTERIOR_REFUSE_DISCOUNT_CONDITIONS = new DialogueNode("Ralph's Snacks", "-", true) {
+
+    public static final DialogueNode INTERIOR_REFUSE_DISCOUNT_CONDITIONS = new DialogueNode("Закуски Ральфа", "-", true) {
 
 		@Override
 		public String getContent() {
@@ -365,7 +365,7 @@ public class RalphsSnacks {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on browsing the wares in Ralph's shop.", RalphsSnacks.INTERIOR);
+                return new Response("Продолжить", "Carry on browsing the wares in Ralph's shop.", RalphsSnacks.INTERIOR);
 			} else {
 				return null;
 			}
@@ -379,8 +379,8 @@ public class RalphsSnacks {
 		
 		return price;
 	}
-	
-	public static final DialogueNode CANDI_LIPSTICK = new DialogueNode("Ralph's Snacks", "-", true) {
+
+    public static final DialogueNode CANDI_LIPSTICK = new DialogueNode("Закуски Ральфа", "-", true) {
 
 		@Override
 		public String getContent() {
@@ -491,8 +491,8 @@ public class RalphsSnacks {
 			}
 		}
 	};
-	
-	public static final DialogueNode CANDI_LIPSTICK_PURCHASE = new DialogueNode("Ralph's Snacks", "-", true) {
+
+    public static final DialogueNode CANDI_LIPSTICK_PURCHASE = new DialogueNode("Закуски Ральфа", "-", true) {
 
 		@Override
 		public String getContent() {
@@ -545,8 +545,8 @@ public class RalphsSnacks {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode BACK_TO_INTERIOR = new DialogueNode("Ralph's Snacks", "-", true) {
+
+    public static final DialogueNode BACK_TO_INTERIOR = new DialogueNode("Закуски Ральфа", "-", true) {
 
 		@Override
 		public String getContent() {

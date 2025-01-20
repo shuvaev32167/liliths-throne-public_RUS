@@ -1,32 +1,9 @@
 package com.lilithsthrone.game.character.npc.fields;
 
-import java.time.Month;
-import java.util.List;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
-import com.lilithsthrone.game.character.body.types.BreastType;
-import com.lilithsthrone.game.character.body.types.LegType;
-import com.lilithsthrone.game.character.body.types.PenisType;
-import com.lilithsthrone.game.character.body.types.VaginaType;
-import com.lilithsthrone.game.character.body.types.WingType;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.ClitorisSize;
-import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
-import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
-import com.lilithsthrone.game.character.body.valueEnums.PenisLength;
-import com.lilithsthrone.game.character.body.valueEnums.TesticleSize;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
+import com.lilithsthrone.game.character.body.types.*;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.AbstractPerk;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
@@ -54,6 +31,11 @@ import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.time.Month;
+import java.util.List;
 
 /**
  * @since 0.4
@@ -62,8 +44,8 @@ import com.lilithsthrone.world.places.PlaceType;
  */
 public class LunetteRanged extends NPC {
 
-	private static List<String> defaultNamePrefixes = Util.newArrayListOfValues("malevolent", "malicious", "spiteful");
-	private static String defaultName = "raider";
+	private static final List<String> defaultNamePrefixes = Util.newArrayListOfValues("malevolent", "malicious", "spiteful");
+	private static final String defaultName = "raider";
 	
 	public LunetteRanged() {
 		this(defaultNamePrefixes, defaultName, false);
@@ -91,7 +73,7 @@ public class LunetteRanged extends NPC {
 			
 			this.setGenericName(Util.randomItemFrom(namePrefixes)+" "+name);
 			setName(Name.getRandomTriplet(this.getSubspecies()));
-			this.setSurname("Lunettemartu");
+            this.setSurname("Лунеттамарту");
 			this.setPlayerKnowsName(false);
 			
 			// INVENTORY:
@@ -243,7 +225,7 @@ public class LunetteRanged extends NPC {
 
 		this.setEssenceCount(200+Util.random.nextInt(101));
 		
-		Util.random.setSeed(this.getDayOfBirth()*this.getBirthMonth().getValue()); // Set seed based on birthday so that the clothing is always the same
+		Util.random.setSeed((long) this.getDayOfBirth() *this.getBirthMonth().getValue()); // Set seed based on birthday so that the clothing is always the same
 		
 		Colour clothingColour = Util.randomItemFromValues(
 				PresetColour.CLOTHING_WHITE,

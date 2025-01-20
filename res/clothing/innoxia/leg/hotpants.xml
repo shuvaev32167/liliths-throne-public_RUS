@@ -60,25 +60,25 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(step)] into the hot pants, before pulling them up to fit around [npc.her] waist.]]>
+        <![CDATA[[npc.Name] step into the hot pants, before pulling them up to fit around [npc.her] waist.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(get)] [npc2.name] to step into the hot pants, before pulling them up to fit around [npc2.her] waist.]]>
+        <![CDATA[[npc.Name] get [npc2.name] to step into the hot pants, before pulling them up to fit around [npc2.her] waist.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(force)] [npc2.name] to step into the hot pants, before yanking them up to fit around [npc2.her] waist.]]>
+        <![CDATA[[npc.Name] force [npc2.name] to step into the hot pants, before yanking them up to fit around [npc2.her] waist.]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(pull)] down [npc.her] hot pants, before slipping them off.]]>
+        <![CDATA[[npc.Name] pull down [npc.her] hot pants, before slipping them off.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(pull)] down [npc2.namePos] hot pants, before slipping them off.]]>
+        <![CDATA[[npc.Name] pull down [npc2.namePos] hot pants, before slipping them off.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(pull)] down [npc2.namePos] hot pants, before yanking them off.]]>
+        <![CDATA[[npc.Name] roughly pull down [npc2.namePos] hot pants, before yanking them off.]]>
     </otherRough>
   </displacementText>
 	

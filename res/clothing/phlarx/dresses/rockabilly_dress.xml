@@ -88,50 +88,50 @@
 	
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(untie)] the sash, before pulling [npc.her] rockabilly dress off over [npc.her] head.]]>
+            <![CDATA[[npc.Name] untie the sash, before pulling [npc.her] rockabilly dress off over [npc.her] head.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(untie)] the sash, before pulling [npc2.namePos] rockabilly dress off over [npc2.her] head.]]>
+            <![CDATA[[npc.Name] untie the sash, before pulling [npc2.namePos] rockabilly dress off over [npc2.her] head.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(untie)] the sash, before roughly pulling [npc2.namePos] rockabilly dress off over [npc2.her] head.]]>
+            <![CDATA[[npc.Name] untie the sash, before roughly pulling [npc2.namePos] rockabilly dress off over [npc2.her] head.]]>
 		</otherRough>
 	</displacementText>
 	
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the rockabilly dress down over [npc.her] head and torso, then [npc.verb(tie)] the sash around [npc.her] waist.]]>
+            <![CDATA[[npc.Name] pull the rockabilly dress down over [npc.her] head and torso, then tie the sash around [npc.her] waist.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the rockabilly dress down over [npc2.namePos] head and torso, then [npc.verb(tie)] the sash around [npc2.her] waist.]]>
+            <![CDATA[[npc.Name] pull the rockabilly dress down over [npc2.namePos] head and torso, then tie the sash around [npc2.her] waist.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(pull)] the rockabilly dress down over [npc2.namePos] head and torso, then [npc.verb(tie)] the sash around [npc2.her] waist.]]>
+            <![CDATA[[npc.Name] roughly pull the rockabilly dress down over [npc2.namePos] head and torso, then tie the sash around [npc2.her] waist.]]>
 		</otherRough>
 	</replacementText>
 
 	
 	<displacementText type="PULLS_UP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] up the skirt of [npc.her] rockabilly dress.]]>
+            <![CDATA[[npc.Name] pull up the skirt of [npc.her] rockabilly dress.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] up the skirt of [npc2.namePos] rockabilly dress.]]>
+            <![CDATA[[npc.Name] pull up the skirt of [npc2.namePos] rockabilly dress.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(pull)] up the skirt of [npc2.namePos] rockabilly dress.]]>
+            <![CDATA[[npc.Name] roughly pull up the skirt of [npc2.namePos] rockabilly dress.]]>
 		</otherRough>
 	</displacementText>
 	
 	<replacementText type="PULLS_UP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] down the skirt of [npc.her] rockabilly dress.]]>
+            <![CDATA[[npc.Name] pull down the skirt of [npc.her] rockabilly dress.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] down the skirt of [npc2.namePos] rockabilly dress.]]>
+            <![CDATA[[npc.Name] pull down the skirt of [npc2.namePos] rockabilly dress.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(pull)] down the skirt of [npc2.namePos] rockabilly dress.]]>
+            <![CDATA[[npc.Name] roughly pull down the skirt of [npc2.namePos] rockabilly dress.]]>
 		</otherRough>
 	</replacementText>
 </clothing>

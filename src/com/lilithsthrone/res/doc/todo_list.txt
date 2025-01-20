@@ -6641,7 +6641,7 @@ It's most noticeable with Lilaya an the other succubi, but it can happen with an
 	  I think this might have something to do with the penis virginity section as when you select max sexual experience it does say that you have lost your mouth virginity, just not your genitals' virginity.
 	   When you have a vagina, it does give your virginity's status, but if you are bi then it says you lost your virginity to a guy in a club's restroom and a your first girlfriend on two separate lines {I'm pretty sure you can only lose your virginity once :) }.
 	
-	I noticed a problem with strings that get cut off after certain characters. For instance, when you want to name a room "Scarlett's Room" (which is, IMO, not such an unusual way to name a room), everything after the apostrophe will be cut off and the room is now simply named "Scarlett". Same thing happens with savegame names.
+	I noticed a problem with strings that get cut off after certain characters. For instance, when you want to name a room "Scarlett's Room" (which is, IMO, not such an unusual way to name a room), everything after the apostrophe will be cut off and the room is now simply named "Скарлетт". Same thing happens with savegame names.
 	
 	- I will try to make the sex system a little smoother in future; including adding little 'displace/remove' buttons to the clothing icons (you can strip them all in one go using the 'Unequip all (them)' action int eh inventory). ^^
 - I'll add the ability to shift your body parts while a demon soon! :3
@@ -9066,7 +9066,7 @@ Also noticed the Stop partner self action option disappears.
 		Pressing continue (or 1) isn't doing anything
 	
 	
-	[Ashley.they], [Ashley.them] and [Ashley.theirpro]
+	[Ashley.they], [Ashley.them] и [Ashley.theirpro]
 	
 	No option to be bottom if you win as a male.
 	 Also, I've seen a rather odd bug: at random I'll get a notice when an NPC has breasts or genitals exposed that I've never seen what that body part looks like, even though I'm now staring right at them.

@@ -1,13 +1,5 @@
 package com.lilithsthrone.game.inventory.item;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.character.FluidStored;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -33,6 +25,13 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.1.86
@@ -41,7 +40,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
  */
 public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
 	
-	private FluidStored cum;
+	private final FluidStored cum;
 	
 	public AbstractFilledCondom(AbstractItemType itemType, Colour colour, GameCharacter cumProvider, FluidCum cum, int millilitresStored) {
 //		super(itemType);
@@ -136,12 +135,12 @@ public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
 				?25
 				:Float.valueOf(parentElement.getAttribute("millilitresStored"));
 		
-		FluidStored fs = null;;
-		if(parentElement.getElementsByTagName("fluidStored").item(0)!=null) {
+		FluidStored fs = null;
+        if(parentElement.getElementsByTagName("fluidStored").item(0)!=null) {
 			fs = FluidStored.loadFromXML(null, (Element) parentElement.getElementsByTagName("fluidStored").item(0), doc);
 			
 		} else { // Old version support to generate Body based on cum type:
-			FluidCum fluidCum = ((Element) parentElement.getElementsByTagName("cum").item(0)==null
+			FluidCum fluidCum = (parentElement.getElementsByTagName("cum").item(0) ==null
 					?new FluidCum(FluidType.CUM_HUMAN)
 					:FluidCum.loadFromXML("cum", (Element) parentElement.getElementsByTagName("cum").item(0), doc));
 			
@@ -193,8 +192,8 @@ public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
 //		if(target.hasFetish(Fetish.FETISH_CUM_ADDICT)) {
 //			return UtilText.parse(target, user,
 //					"<p>"
-//						+ "[npc.Name] can't help but let out a delighted [npc.moan] as [npc.she] greedily [npc.verb(gulp)] down the slimy fluid."
-//						+ " Darting [npc.her] [npc.tongue] out, [npc.she] desperately [npc.verb(lick)] up every last drop of cum; only discarding the condom once [npc.sheIs] sure that it's completely empty."
+//						+ "[npc.Name] can't help but let out a delighted [npc.moan] as [npc.she] greedily gulp down the slimy fluid."
+//						+ " Darting [npc.her] [npc.tongue] out, [npc.she] desperately lick up every last drop of cum; only discarding the condom once [npc.sheIs] sure that it's completely empty."
 //					+ "</p>"
 //					+ (cum==null
 //						?""
@@ -202,8 +201,8 @@ public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
 //		} else {
 //			return UtilText.parse(target, user,
 //					"<p>"
-//						+ "[npc.Name] [npc.verb(scrunch)] [npc.her] [npc.eyes] shut as [npc.she] [npc.verb(gulp)] down the slimy fluid,"
-//						+ " trying [npc.her] best not to think about what [npc.sheHas] just done as "+(user.equals(target)?"[npc.she] [npc.verb(throw)]":"[npc2.name] [npc2.verb(throw)]")+" the now-empty condom to the floor..."
+//						+ "[npc.Name] scrunch [npc.her] [npc.eyes] shut as [npc.she] gulp down the slimy fluid,"
+//						+ " trying [npc.her] best not to think about what [npc.sheHas] just done as "+(user.equals(target)?"[npc.she] throw":"[npc2.name] [npc2.verb(throw)]")+" the now-empty condom to the floor..."
 //					+ "</p>"
 //					+ (cum==null
 //						?""

@@ -73,40 +73,8 @@ public class BatCavernsEncounterDialogue {
 			}
 		}
 	};
-		
-	public static final DialogueNode REBEL_BASE_DISCOVERED = new DialogueNode("Strange Handle", "", true) {
-		@Override
-		public void applyPreParsingEffects() {
-			Main.game.getPlayerCell().getPlace().setPlaceType(PlaceType.BAT_CAVERNS_REBEL_BASE_ENTRANCE_HANDLE);
-			Main.game.getPlayerCell().getPlace().setName(PlaceType.BAT_CAVERNS_REBEL_BASE_ENTRANCE_HANDLE.getName());
-			Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_HANDLE_REFUSED));
-		}
-		@Override
-		public String getAuthor() {
-			return "DSG";
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 30;
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/batCaverns", "REBEL_BASE_DISCOVERED");
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Pull the handle", "What could possibly go wrong?", REBEL_BASE_DOOR_NO_PASS);
 
-			} else if (index == 2) {
-				return new Response("Leave it alone", "Nothing good ever came of pulling strange handles in caves.", PlaceType.BAT_CAVERNS_REBEL_BASE_ENTRANCE_HANDLE.getDialogue(false));
-			}
-			return null;
-		}
-	};
-	
-	public static final DialogueNode REBEL_BASE_DOOR_NO_PASS = new DialogueNode("Strange Handle", "", true, true) {
+    public static final DialogueNode REBEL_BASE_DOOR_NO_PASS = new DialogueNode("Странная ручка", "", true, true) {
 		@Override
 		public void applyPreParsingEffects() {
 			Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_PASSWORD_PART_ONE));
@@ -127,9 +95,40 @@ public class BatCavernsEncounterDialogue {
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
 				return new Response("Pull harder", "The handle won't budge. Looks like you really do need the password.", null);
-					
+
 			} else if (index == 2) {
 				return new Response("Leave it alone", "Go look for the password instead.", PlaceType.BAT_CAVERNS_REBEL_BASE_ENTRANCE_HANDLE.getDialogue(false));
+			}
+			return null;
+		}
+	};
+    public static final DialogueNode REBEL_BASE_DISCOVERED = new DialogueNode("Странная ручка", "", true) {
+		@Override
+		public void applyPreParsingEffects() {
+			Main.game.getPlayerCell().getPlace().setPlaceType(PlaceType.BAT_CAVERNS_REBEL_BASE_ENTRANCE_HANDLE);
+			Main.game.getPlayerCell().getPlace().setName(PlaceType.BAT_CAVERNS_REBEL_BASE_ENTRANCE_HANDLE.getName());
+			Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_HANDLE_REFUSED));
+		}
+		@Override
+		public String getAuthor() {
+			return "DSG";
+		}
+		@Override
+		public int getSecondsPassed() {
+			return 30;
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/submission/batCaverns", "REBEL_BASE_DISCOVERED");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 1) {
+				return new Response("Pull the handle", "What could possibly go wrong?", REBEL_BASE_DOOR_NO_PASS);
+
+			} else if (index == 2) {
+				return new Response("Leave it alone", "Nothing good ever came of pulling strange handles in caves.", PlaceType.BAT_CAVERNS_REBEL_BASE_ENTRANCE_HANDLE.getDialogue(false));
 			}
 			return null;
 		}
@@ -170,7 +169,7 @@ public class BatCavernsEncounterDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "This is only one part of the password, you need to find the other", Main.game.getDefaultDialogue(false));
+                return new Response("Продолжить", "This is only one part of the password, you need to find the other", Main.game.getDefaultDialogue(false));
 			}
 			return null;
 		}
@@ -205,7 +204,7 @@ public class BatCavernsEncounterDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "You've found both parts of the password, you can head back to the mysterious handle when you're ready.", Main.game.getDefaultDialogue(false));
+                return new Response("Продолжить", "You've found both parts of the password, you can head back to the mysterious handle when you're ready.", Main.game.getDefaultDialogue(false));
 			}
 			return null;
 		}
@@ -250,7 +249,7 @@ public class BatCavernsEncounterDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "You win. Hooray.", Main.game.getDefaultDialogue(false)) {
+                return new Response("Продолжить", "You win. Hooray.", Main.game.getDefaultDialogue(false)) {
 				    @Override
 				    public void effects() {
 						Main.game.getWorlds().get(WorldType.BAT_CAVERNS).getCell(PlaceType.BAT_CAVERNS_REBEL_BASE_ENTRANCE_HANDLE).getPlace().setPlaceType(PlaceType.BAT_CAVERNS_REBEL_BASE_ENTRANCE_EXTERIOR);

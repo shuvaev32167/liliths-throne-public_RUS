@@ -421,17 +421,17 @@
 	<htmlContent tag="SEX_SIDE_BY_SIDE_START"><![CDATA[
 	#IF(npc.isDollStatue() || npc2.isDollStatue())
 		<p>
-			Wanting nothing more than to fuck [npc.name] and [npc2.name], you grab hold of them and push them to the floor. Dropping down onto all fours beside on another, they assume just the position you were looking for, and eagerly drop down behind them.
+			Wanting nothing more than to fuck [npc.name] и [npc2.name], you grab hold of them and push them to the floor. Dropping down onto all fours beside on another, they assume just the position you were looking for, and eagerly drop down behind them.
 		</p>
 		<p>
 			Slapping each of their asses in turn, you suffle forwards and prepare to fuck them side-by-side...
 		</p>
 	#ELSEIF(npc.isAttractedTo(pc) && npc2.isAttractedTo(pc))
 		<p>
-			[pc.speech(You know, I was thinking that I could have some fun with the two of you at once...)] you tease, turning to face both [npc.name] and [npc2.name], before glaring dominantly at the two of them.
+			[pc.speech(You know, I was thinking that I could have some fun with the two of you at once...)] you tease, turning to face both [npc.name] и [npc2.name], before glaring dominantly at the two of them.
 		</p>
 		<p>
-			Sensing what it is that you want, both [npc.name] and [npc2.name] step towards each other, casting submissive glances at you before turning and dropping down onto all fours. Letting out a delighted [pc.moan], you step towards the two of them as they present their rear ends for your use.
+			Sensing what it is that you want, both [npc.name] и [npc2.name] step towards each other, casting submissive glances at you before turning and dropping down onto all fours. Letting out a delighted [pc.moan], you step towards the two of them as they present their rear ends for your use.
 		</p>
 		<p>
 			[npc.speech(Come and take us!)] [npc.name] [npc.moans], looking back over [npc.her] shoulder and seductively biting [npc.her] [npc.lip]. 
@@ -448,11 +448,11 @@
 		</p>
 	#ELSE
 		<p>
-			[pc.speech(You know, I was thinking that I could have some fun with the two of you at once...)] you tease, turning to face both [npc.name] and [npc2.name], before glaring dominantly at the two of them.
+			[pc.speech(You know, I was thinking that I could have some fun with the two of you at once...)] you tease, turning to face both [npc.name] и [npc2.name], before glaring dominantly at the two of them.
 		</p>
 		#IF(!npc.isAttractedTo(pc) && !npc2.isAttractedTo(pc))
 			<p>
-				Sensing what it is that you want, both [npc.name] and [npc2.name] start to back off, casting nervous glances at one another as you quickly move up to stand in front of them. Before they have a chance to struggle or run, you grab them by the shoulders and shove each one down onto all fours in front of you. Letting out a delighted [pc.moan], you step towards the two rear ends now presented for your use.
+				Sensing what it is that you want, both [npc.name] и [npc2.name] start to back off, casting nervous glances at one another as you quickly move up to stand in front of them. Before they have a chance to struggle or run, you grab them by the shoulders and shove each one down onto all fours in front of you. Letting out a delighted [pc.moan], you step towards the two rear ends now presented for your use.
 			</p>
 			<p>
 				Feeling as though this is the time in which to do something, [npc.name] tries to stand back up, complaining, [npc.speech(S-Stop it, [pc.name]! Can't you see we don't wan-)]
@@ -475,7 +475,7 @@
 				#ENDIF
 			</p>
 			<p>
-				With both [npc.namePos] and [npc2.namePos] resistance now being limited to tears and distressed wails, you're finally ready to start fucking them. With one final threatening snarl, you wonder out loud,
+				With both [npc.namePos] и [npc2.namePos] resistance now being limited to tears and distressed wails, you're finally ready to start fucking them. With one final threatening snarl, you wonder out loud,
 				#IF(pc.getFetishDesire(FETISH_SADIST).isPositive() || pc.getFetishDesire(FETISH_NON_CON_DOM).isPositive())
 					 [pc.speech(Now, which one of you worthless cunts should I fuck first?)]
 				#ELSE
@@ -500,7 +500,7 @@
 				[npc2.speech(Don't worry, [npc.name], I'm sure you'll get into it,)] [npc2.name] offers as [npc2.she] drops down beside [npc.herHim]. 
 			</p>
 			<p>
-				With [npc.namePos] resistance now being limited to tears and distressed wails, you're finally ready to start fucking both [npc.herHim] and [npc2.name]. With one final threatening snarl, you wonder out loud,
+				With [npc.namePos] resistance now being limited to tears and distressed wails, you're finally ready to start fucking both [npc.herHim] и [npc2.name]. With one final threatening snarl, you wonder out loud,
 				#IF(pc.getFetishDesire(FETISH_SADIST).isPositive() || pc.getFetishDesire(FETISH_NON_CON_DOM).isPositive())
 					 [pc.speech(Now, should I fuck the worthless cunt, or the obedient slut first?)]
 				#ELSE
@@ -525,7 +525,7 @@
 				[npc.speech(Don't worry, [npc2.name], I'm sure you'll get into it,)] [npc.name] offers as [npc.she] drops down beside [npc2.herHim]. 
 			</p>
 			<p>
-				With [npc2.namePos] resistance now being limited to tears and distressed wails, you're finally ready to start fucking both [npc2.herHim] and [npc.name]. With one final threatening snarl, you wonder out loud,
+				With [npc2.namePos] resistance now being limited to tears and distressed wails, you're finally ready to start fucking both [npc2.herHim] и [npc.name]. With one final threatening snarl, you wonder out loud,
 				#IF(pc.getFetishDesire(FETISH_SADIST).isPositive() || pc.getFetishDesire(FETISH_NON_CON_DOM).isPositive())
 					 [pc.speech(Now, should I fuck the worthless cunt, or the obedient slut first?)]
 				#ELSE
@@ -639,7 +639,7 @@
 	
 	<htmlContent tag="SEX_SPITROASTED_START"><![CDATA[
 	<p>
-		[pc.speech(You know, I was thinking that the three of us could have some fun together...)] you tease, turning to face both [npc.name] and [npc2.name], before biting your [pc.lip] and putting on your most submissive, seductive look.
+		[pc.speech(You know, I was thinking that the three of us could have some fun together...)] you tease, turning to face both [npc.name] и [npc2.name], before biting your [pc.lip] and putting on your most submissive, seductive look.
 	</p>
 	#IF(npc2.getAffectionLevelBasic(pc)==AFFECTION_BASIC_DISLIKE && npc.getAffectionLevelBasic(pc)==AFFECTION_BASIC_DISLIKE)
 		<p>
@@ -892,20 +892,20 @@
 	#IF(!npc.isAttractedTo(pc) && game.isNonConEnabled())
 		#IF(!npc2.isAttractedTo(pc))
 			<p>
-				You step back from [npc.name] and [npc2.name], panting and sighing as the two of them let out relieved sighs at the realisation that you've finished. After you've recovered, you start to get your things back in order, before commanding the two of them to follow you once more.
+				You step back from [npc.name] и [npc2.name], panting and sighing as the two of them let out relieved sighs at the realisation that you've finished. After you've recovered, you start to get your things back in order, before commanding the two of them to follow you once more.
 			</p>
 			<p>
-				[npc.speech(Yes, [pc.name]...)] [npc.name] sobs, casting [npc.her] gaze to the floor as [npc.she] and [npc2.name] gather their own things and fall in line.
+				[npc.speech(Yes, [pc.name]...)] [npc.name] sobs, casting [npc.her] gaze to the floor as [npc.she] и [npc2.name] gather their own things and fall in line.
 			</p>
 			<p>
 				Smirking at the two of them, you then turn and set off on your way, wondering when you'll rape them next...
 			</p>
 		#ELSE
 			<p>
-				You step back from [npc.name] and [npc2.name], panting and sighing as you each catch your breath. After you've recovered, you start to get your things back in order, before commanding the two of them to follow you once more.
+				You step back from [npc.name] и [npc2.name], panting and sighing as you each catch your breath. After you've recovered, you start to get your things back in order, before commanding the two of them to follow you once more.
 			</p>
 			<p>
-				[npc.speech(Yes, [pc.name]...)] [npc.name] sobs, casting [npc.her] gaze to the floor as [npc.she] and [npc2.name] gather their own things and fall in line.
+				[npc.speech(Yes, [pc.name]...)] [npc.name] sobs, casting [npc.her] gaze to the floor as [npc.she] и [npc2.name] gather their own things and fall in line.
 			</p>
 			<p>
 				Smirking at the two of them, you then turn and set off on your way, wondering when you'll get [npc2.name] to join you in raping [npc.name] next...
@@ -922,7 +922,7 @@
 			[npc2.speech(Yeah, that really was great,)] [npc2.name] replies, [npc2.speech(We really should do this again some time, right, [pc.name]?)]
 		</p>
 		<p>
-			[pc.speech(We'll see,)] you tease, smiling and letting out a small laugh as [npc.name] and [npc2.name] whine in unison.
+			[pc.speech(We'll see,)] you tease, smiling and letting out a small laugh as [npc.name] и [npc2.name] whine in unison.
 		</p>
 	#ENDIF
 	]]>

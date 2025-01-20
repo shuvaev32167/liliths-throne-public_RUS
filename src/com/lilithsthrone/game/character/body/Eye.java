@@ -89,7 +89,7 @@ public class Eye implements BodyPartInterface {
 		if(owner.isArmMovementHindered()) {
 			sb.append("[npc.NamePos] [npc.eyes] suddenly grow hot and itchy, causing [npc.herHim] to instinctively scrunch them up tight. ");
 		} else {
-			sb.append("[npc.NamePos] [npc.eyes] suddenly grow hot and itchy, and [npc.she] instinctively [npc.verb(scrunch)] them up tight as [npc.she] [npc.verb(reach)] up to rub at them. ");
+            sb.append("[npc.NamePos] [npc.eyes] suddenly grow hot and itchy, and [npc.she] instinctively scrunch them up tight as [npc.she] reach up to rub at them. ");
 		}
 
 		// Parse existing content before transformation:
@@ -130,7 +130,7 @@ public class Eye implements BodyPartInterface {
 			return UtilText.parse(owner,
 					"<p>"
 						+ "A tingling feeling spreads over [npc.namePos] [npc.face], before moving up and concentrating in [npc.her] [npc.eyes]."
-						+ " [npc.She] [npc.verb(scrunch)] them shut and [npc.verb(let)] out an involuntary cry as [npc.she] [npc.verb(feel)] some of them [style.boldShrink(disappearing)] into the [npc.faceSkin] above [npc.her] main pair.<br/>"
+                            + " [npc.She] scrunch them shut and let out an involuntary cry as [npc.she] feel some of them [style.boldShrink(disappearing)] into the [npc.faceSkin] above [npc.her] main pair.<br/>"
 						+ "After a few moments, [npc.sheIs] left with [style.boldTfGeneric([npc.a_eyes])]."
 					+ "</p>");
 			
@@ -138,7 +138,7 @@ public class Eye implements BodyPartInterface {
 			return UtilText.parse(owner,
 					"<p>"
 						+ "A tingling feeling spreads over [npc.namePos] [npc.face], before moving up and concentrating in [npc.her] [npc.eyes]."
-						+ " [npc.She] [npc.verb(scrunch)] them shut and [npc.verb(let)] out an involuntary cry as [npc.she] [npc.verb(feel)] the alarming sensation"
+                            + " [npc.She] scrunch them shut and let out an involuntary cry as [npc.she] feel the alarming sensation"
 							+ " of new [npc.eyes] [style.boldGrow(growing)] out of the [npc.faceSkin] above [npc.her] main pair.<br/>"
 						+ "After a few moments, [npc.sheIs] left with [style.boldTfGeneric([npc.a_eyes])]."
 					+ "</p>");

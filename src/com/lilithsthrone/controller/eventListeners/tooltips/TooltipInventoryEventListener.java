@@ -1,34 +1,14 @@
 package com.lilithsthrone.controller.eventListeners.tooltips;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.w3c.dom.events.Event;
-import org.w3c.dom.events.EventListener;
-
 import com.lilithsthrone.controller.TooltipUpdateThread;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.coverings.Covering;
-import com.lilithsthrone.game.character.body.types.HornType;
-import com.lilithsthrone.game.character.body.types.PenisType;
-import com.lilithsthrone.game.character.body.types.TailType;
-import com.lilithsthrone.game.character.body.types.VaginaType;
-import com.lilithsthrone.game.character.body.types.WingType;
+import com.lilithsthrone.game.character.body.types.*;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.markings.AbstractTattooType;
-import com.lilithsthrone.game.character.markings.Scar;
-import com.lilithsthrone.game.character.markings.Tattoo;
-import com.lilithsthrone.game.character.markings.TattooCountType;
-import com.lilithsthrone.game.character.markings.TattooCounter;
-import com.lilithsthrone.game.character.markings.TattooCounterType;
-import com.lilithsthrone.game.character.markings.TattooWriting;
-import com.lilithsthrone.game.character.markings.TattooWritingStyle;
+import com.lilithsthrone.game.character.markings.*;
 import com.lilithsthrone.game.combat.Attack;
 import com.lilithsthrone.game.combat.DamageType;
 import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
@@ -59,6 +39,13 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+import org.w3c.dom.events.Event;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Shows the tooltip at the given element's position.
@@ -67,7 +54,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.3.9
  * @author Innoxia
  */
-public class TooltipInventoryEventListener implements EventListener {
+public class TooltipInventoryEventListener implements ClonedEventListener {
 	private GameCharacter owner;
 	private GameCharacter equippedToCharacter;
 	
@@ -98,14 +85,27 @@ public class TooltipInventoryEventListener implements EventListener {
 	private TFModifier enchantmentModifier;
 	private TFPotency potency;
 	
-	private static StringBuilder tooltipSB = new StringBuilder();
+	private static final StringBuilder tooltipSB = new StringBuilder();
 
 	private static final int LINE_HEIGHT = 17;
 	private static final int TOOLTIP_WIDTH = 400;
+
+    private final TooltipInventoryEventListener parent;
+
+    private TooltipInventoryEventListener(TooltipInventoryEventListener parent) {
+        this.parent = parent;
+    }
+
+    public TooltipInventoryEventListener() {
+        parent = null;
+    }
 	
 	@Override
 	public void handleEvent(Event event) {
-		
+        if (parent != null) {
+            parent.handleEvent(event);
+            return;
+        }
 		if (item != null || (coreItem instanceof AbstractItem)) {
 			if(coreItem != null) {
 				item = (AbstractItem) coreItem;
@@ -297,12 +297,8 @@ public class TooltipInventoryEventListener implements EventListener {
 						AbstractWeapon primary = equippedToCharacter.getMainWeapon(0);
 						if(primary!=null && primary.getWeaponType().isTwoHanded()) {
 							setBlockedTooltipContent(getTooltipText(equippedToCharacter,
-									primary.getWeaponType().isPlural()
-										?"As your "+primary.getName()+" требует две руки чтобы использовать, вы не можете использовать его одной рукой"
-										:"As your "+primary.getName()+" требует две руки чтобы использовать, вы не можете использовать его одной рукой",
-									primary.getWeaponType().isPlural()
-										?"As [npc.namePos] "+primary.getName()+" требует две руки чтобы использовать, [npc.sheIsFull] не может использовать его одной рукой."
-										:"As [npc.namePos] "+primary.getName()+" требует две руки чтобы использовать, [npc.sheIsFull] не может использовать его одной рукой."));
+                                    "As your " + primary.getName() + " требует две руки чтобы использовать, вы не можете использовать его одной рукой",
+                                    "As [npc.namePos] " + primary.getName() + " требует две руки чтобы использовать, [npc.sheIsFull] не может использовать его одной рукой."));
 							
 						} else {
 							setUnarmedWeaponSlotTooltip(InventorySlot.WEAPON_OFFHAND_1, "Вторичное оружие");
@@ -352,12 +348,8 @@ public class TooltipInventoryEventListener implements EventListener {
 						AbstractWeapon primary = equippedToCharacter.getMainWeapon(2);
 						if(primary!=null && primary.getWeaponType().isTwoHanded()) {
 							setBlockedTooltipContent(getTooltipText(equippedToCharacter,
-									primary.getWeaponType().isPlural()
-										?"As your "+primary.getName()+" требует две руки чтобы использовать, вы не можете использовать его одной рукой."
-										:"As your "+primary.getName()+" требует две руки чтобы использовать, вы не можете использовать его одной рукой.",
-									primary.getWeaponType().isPlural()
-										?"As [npc.namePos] "+primary.getName()+" требует две руки чтобы использовать, [npc.sheIsFull] не может использовать его одной рукой"
-										:"As [npc.namePos] "+primary.getName()+" требует две руки чтобы использовать, [npc.sheIsFull] не может использовать его одной рукой"));
+                                    "As your " + primary.getName() + " требует две руки чтобы использовать, вы не можете использовать его одной рукой.",
+                                    "As [npc.namePos] " + primary.getName() + " требует две руки чтобы использовать, [npc.sheIsFull] не может использовать его одной рукой"));
 							
 						} else if(equippedToCharacter.getArmRows()<3) {
 							setBlockedTooltipContent(getTooltipText(equippedToCharacter,
@@ -376,14 +368,10 @@ public class TooltipInventoryEventListener implements EventListener {
 
 			} else {
 				if (equippedToCharacter != null) {
-					boolean renderingTattoos = false;
-					
-					if((equippedToCharacter.isPlayer() && RenderingEngine.ENGINE.isRenderingTattoosLeft()) || (!equippedToCharacter.isPlayer() && RenderingEngine.ENGINE.isRenderingTattoosRight())
-							&& !invSlot.isJewellery()) {
-						renderingTattoos = true;
-					}
-						
-					if ((!renderingTattoos && equippedToCharacter.getClothingInSlot(invSlot)==null)
+					boolean renderingTattoos = (equippedToCharacter.isPlayer() && RenderingEngine.ENGINE.isRenderingTattoosLeft()) || (!equippedToCharacter.isPlayer() && RenderingEngine.ENGINE.isRenderingTattoosRight())
+                            && !invSlot.isJewellery();
+
+                    if ((!renderingTattoos && equippedToCharacter.getClothingInSlot(invSlot)==null)
 							|| (renderingTattoos && equippedToCharacter.getTattooInSlot(invSlot)==null)) {
 						
 						List<String> clothingBlockingThisSlot = new ArrayList<>();
@@ -681,7 +669,7 @@ public class TooltipInventoryEventListener implements EventListener {
 			}
 			
 			if(dirty) {
-				sb.append("[npc.NamePos] "+invSlot.getName()+" "+(invSlot.isPlural(equippedToCharacter)?"был":"был")
+				sb.append("[npc.NamePos] "+invSlot.getName()+" "+("был")
 						+ " [style.colourDirty(загрязнен)]!");
 				if(Main.game.isInSex()) {
 					sb.append("<br/>");
@@ -708,6 +696,11 @@ public class TooltipInventoryEventListener implements EventListener {
 	
 	
 	public TooltipInventoryEventListener setCoreItem(AbstractCoreItem coreItem, GameCharacter owner, GameCharacter equippedToCharacter) {
+        if (parent != null) {
+            parent.setCoreItem(coreItem, owner, equippedToCharacter);
+            return this;
+        }
+
 		resetVariables();
 		this.coreItem = coreItem;
 		this.equippedToCharacter = equippedToCharacter;
@@ -716,6 +709,11 @@ public class TooltipInventoryEventListener implements EventListener {
 	}
 	
 	public TooltipInventoryEventListener setItem(AbstractItem item, GameCharacter owner, GameCharacter equippedToCharacter) {
+        if (parent != null) {
+            parent.setItem(item, owner, equippedToCharacter);
+            return this;
+        }
+
 		resetVariables();
 		this.item = item;
 		this.equippedToCharacter = equippedToCharacter;
@@ -724,6 +722,10 @@ public class TooltipInventoryEventListener implements EventListener {
 	}
 	
 	public TooltipInventoryEventListener setTattoo(InventorySlot invSlot, Tattoo tattoo, GameCharacter owner, GameCharacter equippedToCharacter) {
+        if (parent != null) {
+            parent.setTattoo(invSlot, tattoo, owner, equippedToCharacter);
+            return this;
+        }
 		resetVariables();
 		this.invSlot = invSlot;
 		this.tattoo = tattoo;
@@ -733,12 +735,20 @@ public class TooltipInventoryEventListener implements EventListener {
 	}
 	
 	public TooltipInventoryEventListener setGenericItem(AbstractItemType genericItem) {
+        if (parent != null) {
+            parent.setGenericItem(genericItem);
+            return this;
+        }
 		resetVariables();
 		this.genericItem = genericItem;
 		return this;
 	}
 
 	public TooltipInventoryEventListener setClothing(AbstractClothing clothing, GameCharacter owner, GameCharacter equippedToCharacter) {
+        if (parent != null) {
+            parent.setClothing(clothing, owner, equippedToCharacter);
+            return this;
+        }
 		resetVariables();
 		this.clothing = clothing;
 		this.equippedToCharacter = equippedToCharacter;
@@ -747,6 +757,10 @@ public class TooltipInventoryEventListener implements EventListener {
 	}
 	
 	public TooltipInventoryEventListener setDyeClothing(AbstractClothing dyeClothing, int colourIndex, Colour colour) {
+        if (parent != null) {
+            parent.setDyeClothing(dyeClothing, colourIndex, colour);
+            return this;
+        }
 		resetVariables();
 		this.dyeClothing = dyeClothing;
 		this.colourIndex = colourIndex;
@@ -755,6 +769,10 @@ public class TooltipInventoryEventListener implements EventListener {
 	}
 	
 	public TooltipInventoryEventListener setDyeClothingPattern(AbstractClothing dyeClothing, int colourIndex, Colour patternColour) {
+        if (parent != null) {
+            parent.setDyeClothingPattern(dyeClothing, colourIndex, patternColour);
+            return this;
+        }
 		resetVariables();
 		this.dyeClothing = dyeClothing;
 		this.colourIndex = colourIndex;
@@ -763,6 +781,10 @@ public class TooltipInventoryEventListener implements EventListener {
 	}
 
 	public TooltipInventoryEventListener setDyeWeapon(AbstractWeapon dyeWeapon, int colourIndex, Colour colour) {
+        if (parent != null) {
+            parent.setDyeWeapon(dyeWeapon, colourIndex, colour);
+            return this;
+        }
 		resetVariables();
 		this.dyeWeapon = dyeWeapon;
 		this.colourIndex = colourIndex;
@@ -771,6 +793,10 @@ public class TooltipInventoryEventListener implements EventListener {
 	}
 	
 	public TooltipInventoryEventListener setDamageTypeWeapon(AbstractWeapon dyeWeapon, DamageType damageType) {
+        if (parent != null) {
+            parent.setDamageTypeWeapon(dyeWeapon, damageType);
+            return this;
+        }
 		resetVariables();
 		this.dyeWeapon = dyeWeapon;
 		this.damageType = damageType;
@@ -778,12 +804,20 @@ public class TooltipInventoryEventListener implements EventListener {
 	}
 	
 	public TooltipInventoryEventListener setGenericClothing(AbstractClothingType genericClothing) {
+        if (parent != null) {
+            parent.setGenericClothing(genericClothing);
+            return this;
+        }
 		resetVariables();
 		this.genericClothing = genericClothing;
 		return this;
 	}
 	
 	public TooltipInventoryEventListener setGenericClothing(AbstractClothingType genericClothing, Colour colour) {
+        if (parent != null) {
+            parent.setGenericClothing(genericClothing, colour);
+            return this;
+        }
 		resetVariables();
 		this.genericClothing = genericClothing;
 		this.colour = colour;
@@ -791,6 +825,10 @@ public class TooltipInventoryEventListener implements EventListener {
 	}
 	
 	public TooltipInventoryEventListener setGenericTattoo(AbstractTattooType genericTattoo) {
+        if (parent != null) {
+            parent.setGenericTattoo(genericTattoo);
+            return this;
+        }
 		resetVariables();
 		this.genericTattoo = genericTattoo;
 		invSlot = genericTattoo.getSlotAvailability().contains(InventorySlot.TORSO_UNDER)?InventorySlot.TORSO_UNDER:genericTattoo.getSlotAvailability().get(0);
@@ -798,6 +836,10 @@ public class TooltipInventoryEventListener implements EventListener {
 	}
 
 	public TooltipInventoryEventListener setGenericWeapon(AbstractWeaponType genericWeapon, DamageType dt) {
+        if (parent != null) {
+            parent.setGenericWeapon(genericWeapon, dt);
+            return this;
+        }
 		resetVariables();
 		this.genericWeapon = genericWeapon;
 		this.dt = dt;
@@ -805,6 +847,10 @@ public class TooltipInventoryEventListener implements EventListener {
 	}
 
 	public TooltipInventoryEventListener setWeapon(AbstractWeapon weapon, GameCharacter owner, boolean isEquipped) {
+        if (parent != null) {
+            parent.setWeapon(weapon, owner, isEquipped);
+            return this;
+        }
 		resetVariables();
 		this.weapon = weapon;
 		if(isEquipped) {
@@ -815,6 +861,10 @@ public class TooltipInventoryEventListener implements EventListener {
 	}
 
 	public TooltipInventoryEventListener setInventorySlot(InventorySlot invSlot, GameCharacter equippedToCharacter) {
+        if (parent != null) {
+            parent.setInventorySlot(invSlot, equippedToCharacter);
+            return this;
+        }
 		resetVariables();
 		this.invSlot = invSlot;
 		this.equippedToCharacter = equippedToCharacter;
@@ -823,12 +873,20 @@ public class TooltipInventoryEventListener implements EventListener {
 	}
 	
 	public TooltipInventoryEventListener setTFModifier(TFModifier enchantmentModifier) {
+        if (parent != null) {
+            parent.setTFModifier(enchantmentModifier);
+            return this;
+        }
 		resetVariables();
 		this.enchantmentModifier = enchantmentModifier;
 		return this;
 	}
 	
 	public TooltipInventoryEventListener setTFPotency(TFPotency potency) {
+        if (parent != null) {
+            parent.setTFPotency(potency);
+            return this;
+        }
 		resetVariables();
 		this.potency = potency;
 		return this;
@@ -1673,7 +1731,7 @@ public class TooltipInventoryEventListener implements EventListener {
 			if(lipsticks!=null) {
 				lipstickYIncrease = 24 + (1+lipsticks.size())*LINE_HEIGHT;
 				tooltipSB.append("<div class='container-full-width' style='text-align:center; padding:8px; height:"+(16+(1+lipsticks.size())*LINE_HEIGHT)+"px;'>");
-				tooltipSB.append(UtilText.parse(owner, "[npc.NamePos] ")+invSlot.getNameOfAssociatedPart(owner)+" "+(invSlot.isPlural(owner)?"был":"был")+" помечен:");
+				tooltipSB.append(UtilText.parse(owner, "[npc.NamePos] ")+invSlot.getNameOfAssociatedPart(owner)+" "+("был")+" помечен:");
 					for(int i=lipsticks.size()-1; i>=0; i--) {
 						tooltipSB.append("<br/>"+Util.capitaliseSentence(lipsticks.get(i).getFullDescription(owner, true)));
 					}
@@ -1737,4 +1795,9 @@ public class TooltipInventoryEventListener implements EventListener {
 		
 		Main.mainController.setTooltipContent(sb.toString());
 	}
+
+    @Override
+    public ClonedEventListener newInstance() {
+        return new TooltipInventoryEventListener(this);
+    }
 }

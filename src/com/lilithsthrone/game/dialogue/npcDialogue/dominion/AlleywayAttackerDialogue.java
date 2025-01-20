@@ -1,9 +1,5 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.dominion;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
@@ -18,11 +14,7 @@ import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.dialogue.DialogueManager;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.npcDialogue.QuickTransformations;
-import com.lilithsthrone.game.dialogue.responses.Response;
-import com.lilithsthrone.game.dialogue.responses.ResponseCombat;
-import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
-import com.lilithsthrone.game.dialogue.responses.ResponseSex;
-import com.lilithsthrone.game.dialogue.responses.ResponseTag;
+import com.lilithsthrone.game.dialogue.responses.*;
 import com.lilithsthrone.game.dialogue.utils.BodyChanging;
 import com.lilithsthrone.game.dialogue.utils.InventoryInteraction;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -38,6 +30,10 @@ import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.Weather;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @since 0.2.10
@@ -587,7 +583,7 @@ public class AlleywayAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Let [npc.name] go.", Main.game.getDefaultDialogue(false));
+                return new Response("Продолжить", "Let [npc.name] go.", Main.game.getDefaultDialogue(false));
 			}
 			return null;
 		}
@@ -617,7 +613,7 @@ public class AlleywayAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Let [npc.name] go and buy food.", Main.game.getDefaultDialogue(false));
+                return new Response("Продолжить", "Let [npc.name] go and buy food.", Main.game.getDefaultDialogue(false));
 			}
 			return null;
 		}
@@ -658,7 +654,7 @@ public class AlleywayAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Let [npc.name] get settled in.", Main.game.getDefaultDialogue(false));
+                return new Response("Продолжить", "Let [npc.name] get settled in.", Main.game.getDefaultDialogue(false));
 			}
 			return null;
 		}
@@ -690,8 +686,8 @@ public class AlleywayAttackerDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode AFTER_SEX_PEACEFUL = new DialogueNode("Continue", "Step away from [npc.name] and prepare to continue on your way.", true) {
+
+    public static final DialogueNode AFTER_SEX_PEACEFUL = new DialogueNode("Продолжить", "Step away from [npc.name] and prepare to continue on your way.", true) {
 		
 		@Override
 		public String getContent() {
@@ -705,13 +701,13 @@ public class AlleywayAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false));
+                return new Response("Продолжить", "Carry on your way.", Main.game.getDefaultDialogue(false));
 			}
 			return null;
 		}
 	};
-	
-	public static final DialogueNode AFTER_SEX_PEACEFUL_THREESOME = new DialogueNode("Continue", "Step away from [npc.name] and prepare to continue on your way.", true) {
+
+    public static final DialogueNode AFTER_SEX_PEACEFUL_THREESOME = new DialogueNode("Продолжить", "Step away from [npc.name] and prepare to continue on your way.", true) {
 		
 		@Override
 		public String getContent() {
@@ -721,13 +717,13 @@ public class AlleywayAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false));
+                return new Response("Продолжить", "Carry on your way.", Main.game.getDefaultDialogue(false));
 			}
 			return null;
 		}
 	};
-	
-	public static final DialogueNode AFTER_SEX_PEACEFUL_OFFERED_COMPANION = new DialogueNode("Continue", "Step away from [npc.name] and prepare to continue on your way.", true) {
+
+    public static final DialogueNode AFTER_SEX_PEACEFUL_OFFERED_COMPANION = new DialogueNode("Продолжить", "Step away from [npc.name] and prepare to continue on your way.", true) {
 		
 		@Override
 		public String getContent() {
@@ -741,13 +737,28 @@ public class AlleywayAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false));
+                return new Response("Продолжить", "Carry on your way.", Main.game.getDefaultDialogue(false));
 			}
 			return null;
 		}
 	};
-	
-	public static final DialogueNode AFTER_COMBAT_VICTORY = new DialogueNode("Victory", "", true) {
+	public static final DialogueNode AFTER_COMBAT_VICTORY_TALK = new DialogueNode("Talk", "", true) {
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("encounters/dominion/alleywayAttack", "AFTER_COMBAT_VICTORY_TALK", getAllCharacters());
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 1) {
+                return new Response("Продолжить",
+						"Let [npc.name] go.",
+						Main.game.getDefaultDialogue(false));
+			}
+			return null;
+		}
+	};	public static final DialogueNode AFTER_COMBAT_VICTORY = new DialogueNode("Victory", "", true) {
 		@Override
 		public void applyPreParsingEffects() {
 			getMugger().setPlayerSurrenderCount(0);
@@ -778,7 +789,7 @@ public class AlleywayAttackerDialogue {
 			boolean rapePlay = getMugger().isPostCombatRapePlay();
 			
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way...", Main.game.getDefaultDialogue(false)){
+                return new Response("Продолжить", "Carry on your way...", Main.game.getDefaultDialogue(false)) {
 					@Override
 					public void effects() {
 						if(getMugger().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {
@@ -1042,23 +1053,7 @@ public class AlleywayAttackerDialogue {
 		}
 	};
 	
-	public static final DialogueNode AFTER_COMBAT_VICTORY_TALK = new DialogueNode("Talk", "", true) {
-		
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("encounters/dominion/alleywayAttack", "AFTER_COMBAT_VICTORY_TALK", getAllCharacters());
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Continue",
-						"Let [npc.name] go.",
-						Main.game.getDefaultDialogue(false));
-			}
-			return null;
-		}
-	};
+
 
 	private static String applyTransformation(GameCharacter target,
 			TransformativePotion potion,
@@ -1208,7 +1203,7 @@ public class AlleywayAttackerDialogue {
 		public Response getResponse(int responseTab, int index) {
 			if(getMugger().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {
 				if (index == 1) {
-					return new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false)) {
+                    return new Response("Продолжить", "Carry on your way.", Main.game.getDefaultDialogue(false)) {
 						@Override
 						public void effects() {
 							Main.game.banishNPC(getMugger());
@@ -1381,8 +1376,8 @@ public class AlleywayAttackerDialogue {
 				if (index == 1) {
 					if(Main.game.isSpittingDisabled()) {
 						return Response.getDisallowedSpittingResponse();
-					};
-					if(Main.game.getPlayer().hasFetish(Fetish.FETISH_TRANSFORMATION_RECEIVING)) {
+					}
+                    if(Main.game.getPlayer().hasFetish(Fetish.FETISH_TRANSFORMATION_RECEIVING)) {
 						return new Response("Spit",
 								"Due to your <b style='color:"+PresetColour.FETISH.toWebHexString()+";'>"+Fetish.FETISH_TRANSFORMATION_RECEIVING.getName(Main.game.getPlayer())
 									+"</b> fetish, you love being transformed so much that you can't bring yourself to spit out the transformative "+(multiplePotions?"potions":"potion")+"!",
@@ -1798,7 +1793,7 @@ public class AlleywayAttackerDialogue {
 				}
 			}
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false)) {
+                return new Response("Продолжить", "Carry on your way.", Main.game.getDefaultDialogue(false)) {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/alleywayAttack", "DEFEATED_NO_SEX", getAllCharacters()));
@@ -1838,7 +1833,7 @@ public class AlleywayAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false)){
+                return new Response("Продолжить", "Carry on your way.", Main.game.getDefaultDialogue(false)) {
 					@Override
 					public void effects() {
 						if(getMugger().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {
@@ -1895,7 +1890,7 @@ public class AlleywayAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", AFTER_SEX_VICTORY) {
+                return new Response("Продолжить", "Carry on your way.", AFTER_SEX_VICTORY) {
 					@Override
 					public void effects() {
 						if(getMugger().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {

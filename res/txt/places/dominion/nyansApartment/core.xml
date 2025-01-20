@@ -1002,7 +1002,7 @@
 		Instead of her usual blouse and miniskirt combo, you see that Nyan is wearing [nyan.a_slotClothing(TORSO_UNDER, true)], and over the top of that, she's wearing [nyan.a_slotClothing(TORSO_OVER, true)]. As you approach, you see that she's just finished drying up, and as she turns and sees you, she throws you a happy smile and exclaims, [nyan.speech([pc.Name]! I was just about to come and wake you! Look, I made pastries!)]
 	</p>
 	<p>
-		Alerted to your presence by her daughter's greeting, [nyanmum.name] turns around and flashes you a sly smile. Instead of the dress which she was wearing last night, she's now clothed in [nyanmum.a_slotClothing(TORSO_UNDER, true)] and [nyanmum.a_slotClothing(LEG, true)], which together show off a good deal of her muscular arms and legs. Patting the stool next to her, she declares, [nyanmum.speech(Come and sit down, [pc.name].)]
+		Alerted to your presence by her daughter's greeting, [nyanmum.name] turns around and flashes you a sly smile. Instead of the dress which she was wearing last night, she's now clothed in [nyanmum.a_slotClothing(TORSO_UNDER, true)] и [nyanmum.a_slotClothing(LEG, true)], which together show off a good deal of her muscular arms and legs. Patting the stool next to her, she declares, [nyanmum.speech(Come and sit down, [pc.name].)]
 	</p>
 	#IF(game.getDialogueFlags().hasFlag(FLAG_nyanmumCreampied))
 		#IF(nyanmum.isPregnant())
@@ -1934,7 +1934,7 @@
 		Instead of her usual blouse and miniskirt combo, you see that Nyan is wearing [nyan.a_slotClothing(TORSO_UNDER, true)], and over the top of that, she's wearing [nyan.a_slotClothing(TORSO_OVER, true)]. As you approach, you see that she's just finished drying up, and as she turns and sees you, she throws you a happy smile and exclaims, [nyan.speech([pc.Name]! I was just about to come and wake you! Look, I made pastries!)]
 	</p>
 	<p>
-		Alerted to your presence by her daughter's greeting, [nyanmum.name] turns around and flashes you a sly smile. Instead of the dress which she was wearing last night, she's now clothed in [nyanmum.a_slotClothing(TORSO_UNDER, true)] and [nyanmum.a_slotClothing(LEG, true)], which together show off a good deal of her muscular arms and legs. Patting the stool next to her, she declares, [nyanmum.speech(Come and sit down, [pc.name].)]
+		Alerted to your presence by her daughter's greeting, [nyanmum.name] turns around and flashes you a sly smile. Instead of the dress which she was wearing last night, she's now clothed in [nyanmum.a_slotClothing(TORSO_UNDER, true)] и [nyanmum.a_slotClothing(LEG, true)], which together show off a good deal of her muscular arms and legs. Patting the stool next to her, she declares, [nyanmum.speech(Come and sit down, [pc.name].)]
 	</p>
 	#IF(game.getDialogueFlags().hasFlag(FLAG_nyanmumCreampied))
 		#IF(game.getDialogueFlags().hasFlag(FLAG_nyanCreampied))

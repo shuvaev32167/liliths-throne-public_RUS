@@ -93,70 +93,70 @@
 
   <displacementText slot="NIPPLE" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] carefully [npc.verb(remove)] the clover clamps from [npc.her] [npc.nipples+].]]>
+        <![CDATA[[npc.Name] carefully remove the clover clamps from [npc.her] [npc.nipples+].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] carefully [npc.verb(remove)] the clover clamps from [npc2.namePos] [npc2.nipples+].]]>
+        <![CDATA[[npc.Name] carefully remove the clover clamps from [npc2.namePos] [npc2.nipples+].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(give)] [npc2.namePos] clover clamps a rough tug before removing them from [npc2.her] [npc2.nipples+].]]>
+        <![CDATA[[npc.Name] give [npc2.namePos] clover clamps a rough tug before removing them from [npc2.her] [npc2.nipples+].]]>
     </otherRough>
   </displacementText>
   <replacementText slot="NIPPLE" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(wince)] as [npc.she] [npc.verb(affix)] the clover clamps on [npc.her] [npc.nipples+].]]>
+        <![CDATA[[npc.Name] wince as [npc.she] affix the clover clamps on [npc.her] [npc.nipples+].]]>
     </self>
     <other>
-      <![CDATA[[npc2.Name] [npc2.verb(wince)] as [npc.name] [npc.verb(affix)] the clover clamps on [npc2.her] [npc2.nipples+].]]>
+        <![CDATA[[npc2.Name] [npc2.verb(wince)] as [npc.name] affix the clover clamps on [npc2.her] [npc2.nipples+].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(affix)] the clover clamps to [npc2.namePos] [npc2.nipples+] before giving them a sharp tug.]]>
+        <![CDATA[[npc.Name] affix the clover clamps to [npc2.namePos] [npc2.nipples+] before giving them a sharp tug.]]>
     </otherRough>
   </replacementText>
 
   <displacementText slot="VAGINA" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] carefully [npc.verb(remove)] the clover clamps from [npc.her] [npc.vaginaColourSecondary] [npc.vagina] lips.]]>
+        <![CDATA[[npc.Name] carefully remove the clover clamps from [npc.her] [npc.vaginaColourSecondary] [npc.vagina] lips.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] carefully [npc.verb(remove)] the clover clamps from [npc2.namePos] [npc2.vaginaColourSecondary] [npc2.vagina] lips.]]>
+        <![CDATA[[npc.Name] carefully remove the clover clamps from [npc2.namePos] [npc2.vaginaColourSecondary] [npc2.vagina] lips.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(give)] [npc2.namePos] clover clamps a rough tug before removing them from [npc2.her] [npc2.vaginaColourSecondary] [npc2.vagina] lips.]]>
+        <![CDATA[[npc.Name] give [npc2.namePos] clover clamps a rough tug before removing them from [npc2.her] [npc2.vaginaColourSecondary] [npc2.vagina] lips.]]>
     </otherRough>
   </displacementText>
   <replacementText slot="VAGINA" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(wince)] as [npc.she] [npc.verb(affix)] the clover clamps on [npc.her] [npc.vaginaColourSecondary] [npc.vagina] lips.]]>
+        <![CDATA[[npc.Name] wince as [npc.she] affix the clover clamps on [npc.her] [npc.vaginaColourSecondary] [npc.vagina] lips.]]>
     </self>
     <other>
-      <![CDATA[[npc2.Name] [npc2.verb(wince)] as [npc.name] [npc.verb(affix)] the clover clamps on [npc2.her] [npc2.vaginaColourSecondary] [npc2.vagina] lips.]]>
+        <![CDATA[[npc2.Name] [npc2.verb(wince)] as [npc.name] affix the clover clamps on [npc2.her] [npc2.vaginaColourSecondary] [npc2.vagina] lips.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(affix)] the clover clamps to [npc2.namePos] [npc2.vaginaColourSecondary] [npc2.vagina] lips before giving them a sharp tug.]]>
+        <![CDATA[[npc.Name] affix the clover clamps to [npc2.namePos] [npc2.vaginaColourSecondary] [npc2.vagina] lips before giving them a sharp tug.]]>
     </otherRough>
   </replacementText>
 
   <displacementText slot="VAGINA" type="SHIFTS_ASIDE">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(use)] the clover clamps to spread [npc.her] [npc.vaginaColourSecondary] [npc.vagina].]]>
+        <![CDATA[[npc.Name] use the clover clamps to spread [npc.her] [npc.vaginaColourSecondary] [npc.vagina].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(use)] the clover clamps to spread [npc2.namePos] [npc2.vaginaColourSecondary] [npc2.vagina].]]>
+        <![CDATA[[npc.Name] use the clover clamps to spread [npc2.namePos] [npc2.vaginaColourSecondary] [npc2.vagina].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(tug)] on [npc2.namePos] clover clamps, painfully spreading [npc2.her] [npc2.vaginaColourSecondary] [npc2.vagina].]]>
+        <![CDATA[[npc.Name] tug on [npc2.namePos] clover clamps, painfully spreading [npc2.her] [npc2.vaginaColourSecondary] [npc2.vagina].]]>
     </otherRough>
   </displacementText>
   <replacementText slot="VAGINA" type="SHIFTS_ASIDE">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(wince)] as the clover clamps bite into [npc.her] [npc.vaginaColourSecondary] [npc.vagina].]]>
+        <![CDATA[[npc.Name] wince as the clover clamps bite into [npc.her] [npc.vaginaColourSecondary] [npc.vagina].]]>
     </self>
     <other>
       <![CDATA[[npc2.Name] [npc2.verb(wince)] as the clover clamps bite into [npc.her] [npc.vaginaColourSecondary] [npc.vagina].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc2.Name] [npc2.verb(yelp)] as [npc.name] [npc.verb(tug)] the clover clamps on [npc2.her] [npc2.vaginaColourSecondary] [npc2.vagina] before letting them hang free.]]>
+        <![CDATA[[npc2.Name] [npc2.verb(yelp)] as [npc.name] tug the clover clamps on [npc2.her] [npc2.vaginaColourSecondary] [npc2.vagina] before letting them hang free.]]>
     </otherRough>
   </replacementText>
 </clothing>

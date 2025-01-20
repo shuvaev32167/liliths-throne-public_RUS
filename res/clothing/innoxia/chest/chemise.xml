@@ -51,25 +51,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] on the chemise.]]>
+            <![CDATA[[npc.Name] pull on the chemise.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the chemise onto [npc2.name].]]>
+            <![CDATA[[npc.Name] pull the chemise onto [npc2.name].]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(force)] the chemise onto [npc2.name].]]>
+            <![CDATA[[npc.Name] roughly force the chemise onto [npc2.name].]]>
 	  </otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] off [npc.her] chemise.]]>
+            <![CDATA[[npc.Name] pull off [npc.her] chemise.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the chemise off of [npc2.name].]]>
+            <![CDATA[[npc.Name] pull the chemise off of [npc2.name].]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(yank)] the chemise off of [npc2.name].]]>
+            <![CDATA[[npc.Name] roughly yank the chemise off of [npc2.name].]]>
 		</otherRough>
 	</displacementText>
 	

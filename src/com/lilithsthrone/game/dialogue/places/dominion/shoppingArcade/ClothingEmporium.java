@@ -1,10 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.shoppingArcade;
 
-import java.time.DayOfWeek;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
@@ -19,20 +14,12 @@ import com.lilithsthrone.game.dialogue.responses.ResponseTrade;
 import com.lilithsthrone.game.dialogue.utils.GiftDialogue;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.sex.InitialSexActionInformation;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.managers.dominion.nyan.SMNyanSex;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotAgainstWall;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
+import com.lilithsthrone.game.sex.sexActions.baseActions.*;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
@@ -43,6 +30,11 @@ import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.time.DayOfWeek;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @since 0.1.82
@@ -112,13 +104,13 @@ public class ClothingEmporium {
 			if(responseTab==0) {
 				if (index == 1) {
 					if(!Main.game.isHourBetween(9, 20)) {
-						return new Response("Enter", "Nyan's Clothing Emporium is currently closed. You'll have to come back later...", null);
+                        return new Response("Вход", "Nyan's Clothing Emporium is currently closed. You'll have to come back later...", null);
 						
 					} else if(Main.game.getDialogueFlags().values.contains(DialogueFlagValue.nyanIntroduced)) {
-						return new Response("Enter", "Step inside Nyan's Clothing Emporium.", SHOP_CLOTHING_REPEAT);
+                        return new Response("Вход", "Step inside Nyan's Clothing Emporium.", SHOP_CLOTHING_REPEAT);
 						
 					} else {
-						return new Response("Enter", "Step inside Nyan's Clothing Emporium.", SHOP_CLOTHING);
+                        return new Response("Вход", "Step inside Nyan's Clothing Emporium.", SHOP_CLOTHING);
 					}
 				}
 			}
@@ -1029,7 +1021,7 @@ public class ClothingEmporium {
 		public Response getResponse(int responseTab, int index) {
 			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanFirstKissed)) {
 				if(index==1) {
-					return new Response("Continue", "Continue walking with Nyan around the Arcade.", ROMANCE_WALK_INITIAL_CONTINUE);
+                    return new Response("Продолжить", "Continue walking with Nyan around the Arcade.", ROMANCE_WALK_INITIAL_CONTINUE);
 				}
 				
 			} else {
@@ -1217,7 +1209,7 @@ public class ClothingEmporium {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Bring an end to your makeout session.", POST_MAKEOUT);
+                return new Response("Продолжить", "Bring an end to your makeout session.", POST_MAKEOUT);
 				
 			} else if(index==2) {
 				return new ResponseSex("Cunnilingus", "Suggest to the horny cat-girl that you could eat her out right here in the storeroom.",
@@ -1260,7 +1252,7 @@ public class ClothingEmporium {
 				};
 				
 			} else if(index==3) {
-				return new ResponseSex("Fingering", "Pull up Nyan's miniskirt and start fingering her while continuing to kiss her.",
+                return new ResponseSex("Ласкание пальцами", "Pull up Nyan's miniskirt and start fingering her while continuing to kiss her.",
 						true, true,
 						new SMNyanSex(
 								SexPosition.AGAINST_WALL,

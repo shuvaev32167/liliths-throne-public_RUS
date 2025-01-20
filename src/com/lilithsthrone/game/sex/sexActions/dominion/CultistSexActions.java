@@ -48,8 +48,8 @@ public class CultistSexActions {
 
 		@Override
 		public String getDescription() {
-			return "Having had enough of pleasuring [npc2.name] with [npc.her] mouth, [npc.name] [npc.verb(stand)] up and #IF(npc.isPlayer())[npc.step]#ELSE[npc.steps]#ENDIF forwards, bringing [npc.her] groin up against [npc2.hers]."
-					+ " Grabbing hold of [npc2.her] [npc2.legs+], [npc.she] [npc.verb(push)] them apart, grinning as [npc.she] [npc.moanVerb],"
+            return "Having had enough of pleasuring [npc2.name] with [npc.her] mouth, [npc.name] stand up and #IF(npc.isPlayer())[npc.step]#ELSE[npc.steps]#ENDIF forwards, bringing [npc.her] groin up against [npc2.hers]."
+                    + " Grabbing hold of [npc2.her] [npc2.legs+], [npc.she] push them apart, grinning as [npc.she] [npc.moanVerb],"
 					+ " [npc.speech(Time to have some real fun!)]";
 		}
 
@@ -100,7 +100,7 @@ public class CultistSexActions {
 
 		@Override
 		public String getDescription() {
-			return "Dropping down to [npc.her] knees, [npc.name] [npc.verb(position)] [npc.her] head between [npc2.namePos] [npc2.legs], ready to pleasure [npc2.herHim] with [npc.her] mouth."
+            return "Dropping down to [npc.her] knees, [npc.name] position [npc.her] head between [npc2.namePos] [npc2.legs], ready to pleasure [npc2.herHim] with [npc.her] mouth."
 					+ " As [npc2.namePos] [npc2.scent+] washes over [npc.herHim], [npc.name] [npc.moanVerb],"
 					+ " [npc.speech(Oh, this is going to be <i>so</i> much fun!)]";
 		}

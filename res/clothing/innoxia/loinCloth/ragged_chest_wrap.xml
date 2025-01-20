@@ -80,25 +80,25 @@
 	
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(pull)] the ragged chest wrap down over [npc.her] head and [npc.verb(fit)] it into place over [npc.her] [npc.breasts].]]>
+        <![CDATA[[npc.Name] pull the ragged chest wrap down over [npc.her] head and fit it into place over [npc.her] [npc.breasts].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(pull)] the ragged chest wrap down over [npc2.namePos] head and [npc.verb(fit)] it into place over [npc2.her] [npc2.breasts].]]>
+        <![CDATA[[npc.Name] pull the ragged chest wrap down over [npc2.namePos] head and fit it into place over [npc2.her] [npc2.breasts].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(pull)] the ragged chest wrap down over [npc2.namePos] head and [npc.verb(fit)] it into place over [npc2.her] [npc2.breasts].]]>
+        <![CDATA[[npc.Name] roughly pull the ragged chest wrap down over [npc2.namePos] head and fit it into place over [npc2.her] [npc2.breasts].]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(pull)] off [npc.her] ragged chest wrap.]]>
+        <![CDATA[[npc.Name] pull off [npc.her] ragged chest wrap.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(pull)] off [npc2.namePos] ragged chest wrap.]]>
+        <![CDATA[[npc.Name] pull off [npc2.namePos] ragged chest wrap.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(pull)] off [npc2.namePos] ragged chest wrap.]]>
+        <![CDATA[[npc.Name] roughly pull off [npc2.namePos] ragged chest wrap.]]>
     </otherRough>
   </displacementText>
 	

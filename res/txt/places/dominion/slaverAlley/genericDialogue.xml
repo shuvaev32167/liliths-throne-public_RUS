@@ -1192,7 +1192,7 @@
 						#ENDIF
 					</p>
 					<p>
-						#IF(brax.getName().equals("Brax"))
+						#IF(brax.getName().equals("Бракс"))
 							[pc.speech([brax.Name] is my slave,)] you reveal, [pc.speech(I take it you know [brax.herHim]?)]
 						#ELSE
 							[pc.speech(<i>[brax.Name]</i> is my slave,)] you reveal, [pc.speech(I take it you know [brax.herHim]?)]
@@ -1241,7 +1241,7 @@
 				#ELSEIF(com.isVisiblyPregnant() && com.isCharacterPossiblyFather(sean))
 					#IF(!com.isCharacterReactedToPregnancy(sean))
 						<p>
-							#IF(com.getName().equals("Brax"))
+							#IF(com.getName().equals("Бракс"))
 								Looking across to [com.name], [sean.name] grins and comments on [com.her] swollen belly, [sean.speech(Well, well, well. You wondering if it was me who got you pregnant, eh, [com.name]? You just say right there and we'll find out together!)]
 							#ELSE
 								Looking across to [com.name], [sean.name] grins and comments on [com.her] swollen belly, [sean.speech(Well, well, well. You wondering if it was me who got you pregnant, eh, <i>'Brax'</i>? Oh, sorry, that's '[com.name]' now, isn't it? You just say right there and we'll find out together!)]
@@ -1323,7 +1323,7 @@
 				#ENDIF
 			</p>
 			<p>
-				#IF(brax.getName().equals("Brax"))
+				#IF(brax.getName().equals("Бракс"))
 					[pc.speech([brax.Name] is my slave,)] you reveal, [pc.speech(I take it you know [brax.herHim]?)]
 				#ELSE
 					[pc.speech('[brax.Name]' is my slave,)] you reveal, [pc.speech(I take it you know [brax.herHim]?)]
@@ -1395,7 +1395,7 @@
 	#IF(pc.hasCompanions() && com.equals(brax))
 		#IF(game.getDialogueFlags().hasFlag(FLAG_slaverAlleyTalkedBraxReveal))
 			<p>
-				#IF(com.getName().equals("Brax"))
+				#IF(com.getName().equals("Бракс"))
 					Looking over and glaring at [brax.name], [sean.name] says, [sean.speech(Well, if you remember what I said last time, it's your slave here who's the one responsible for me being demoted and stationed at this pointless post. Isn't that right, [brax.name]?)]
 				#ELSE
 					Looking over and glaring at [brax.name], [sean.name] says, [sean.speech(Well, if you remember what I said last time, it's your slave here who's the one responsible for me being demoted and stationed at this pointless post. Isn't that right, <i>'[brax.name]'</i>?)]
@@ -1427,7 +1427,7 @@
 			</p>
 		#ELSE
 			<p>
-				#IF(com.getName().equals("Brax"))
+				#IF(com.getName().equals("Бракс"))
 					Looking over and glaring at [brax.name], [sean.name] reveals, [sean.speech(It's your slave here who's the one responsible for me being demoted and stationed at this pointless post. Isn't that right, [brax.name]?)]
 				#ELSE
 					Looking over and glaring at [brax.name], [sean.name] reveals, [sean.speech(It's your slave here who's the one responsible for me being demoted and stationed at this pointless post. Isn't that right, <i>'[brax.name]'</i>?)]
@@ -2280,7 +2280,7 @@
 		#IF(npc.getRace()==npc2.getRace())
 			 a pair of [npc.races],
 		#ELSE
-			 [npc.a_race] and [npc2.a_race],
+			 [npc.a_race] и [npc2.a_race],
 		#ENDIF
 		 who not only are locked up beside one another, but who also look to be particularly worn-out and over-used. A short queue of random members of the public has formed behind the two of them, waiting for the guys who are currently roughly fucking them to be done so that they can have a turn. Pointing to these unfortunate slaves, you tell [sean.name(true)] that you'd like to give them the opportunity to take a break.
 	</p>
@@ -2289,7 +2289,7 @@
 		#IF(npc.getRace()==npc2.getRace())
 			 [npc.races]
 		#ELSE
-			 [npc.race] and [npc2.race]
+			 [npc.race] и [npc2.race]
 		#ENDIF
 		 are being swiftly released from their restraints. Taking their place, you and [com.name] allow [sean.name(true)] to strip the two of you and lock you into the stocks, telling yourself all the while that this is the right thing to do in order to help out the slaves.
 	</p>
@@ -2324,7 +2324,7 @@
 		#IF(npc.getRace()==npc2.getRace())
 			 a pair of [npc.races],
 		#ELSE
-			 [npc.a_race] and [npc2.a_race],
+			 [npc.a_race] и [npc2.a_race],
 		#ENDIF
 		 who not only are locked up beside one another, but who also look to be particularly worn-out and over-used. A short queue of random members of the public has formed behind the two of them, waiting for the guys who are currently roughly fucking them to be done so that they can have a turn. Pointing to these unfortunate slaves, you tell [sean.name(true)] that you'd like to give them the opportunity to take a break.
 	</p>
@@ -2333,7 +2333,7 @@
 		#IF(npc.getRace()==npc2.getRace())
 			 [npc.races]
 		#ELSE
-			 [npc.race] and [npc2.race]
+			 [npc.race] и [npc2.race]
 		#ENDIF
 		 are being swiftly released from their restraints. Taking their place, you and [com.name] allow [sean.name(true)] to strip the two of you and lock you into the stocks, telling yourself all the while that this is the right thing to do in order to help out the slaves.
 	</p>
@@ -2849,7 +2849,7 @@
 			Copying [npc2.her] friend's lead, [npc2.name] similarly displaces [npc2.her] clothing, presenting you with [npc2.her]
 			#IF(npc2.hasPenis())
 				#IF(npc2.hasVagina())
-					 [npc2.cock+] and [npc2.pussy+].
+					 [npc2.cock+] и [npc2.pussy+].
 				#ELSE
 					 [npc2.cock+].
 				#ENDIF
@@ -2867,7 +2867,7 @@
 				Eager to get started, [npc.name] displaces [npc.her] clothing, presenting you with [npc.her]
 				#IF(npc.hasPenis())
 					#IF(npc.hasVagina())
-						 [npc.cock+] and [npc.pussy+].
+						 [npc.cock+] и [npc.pussy+].
 					#ELSE
 						 [npc.cock+].
 					#ENDIF
@@ -3090,7 +3090,7 @@
 			[npc2.speech(Oh yeah, this is going to be fun!)] the [npc2.race] [npc2.moansVerb] as [npc2.she] steps up in front of [com.name], before quickly displacing [npc2.her] clothing and presenting your [com.companion] with [npc2.her]
 			#IF(npc2.hasPenis())
 				#IF(npc2.hasVagina())
-					 [npc2.cock+] and [npc2.pussy+].
+					 [npc2.cock+] и [npc2.pussy+].
 				#ELSE
 					 [npc2.cock+].
 				#ENDIF
@@ -3270,7 +3270,7 @@
 				Finishing [npc.her] inspection, the more dominant [npc.race] steps around behind [com.name] and teases, [npc.speech(I'm going to enjoy fucking you, slut!)]
 			</p>
 			<p>
-				Following the [npc.race]'s lead, [npc.name] moves up in front of your [com.companion] and [npc2.moansVerb], [npc.speech(This is going to be fun!)]
+				Following the [npc.race]'s lead, [npc.name] moves up in front of your [com.companion] и [npc2.moansVerb], [npc.speech(This is going to be fun!)]
 			</p>
 		#ENDIF
 	#ELSE
@@ -3748,7 +3748,7 @@
 			[npc2.speech(Oh yeah, this is going to be fun!)] the [npc2.race] [npc2.moansVerb] as [npc2.she] steps up in front of [com.name], before quickly displacing [npc2.her] clothing and presenting your [com.companion] with [npc2.her]
 			#IF(npc2.hasPenis())
 				#IF(npc2.hasVagina())
-					 [npc2.cock+] and [npc2.pussy+].
+					 [npc2.cock+] и [npc2.pussy+].
 				#ELSE
 					 [npc2.cock+].
 				#ENDIF

@@ -43,8 +43,8 @@
 	<!-- The description which is shown when a character transforms to obtain this eye type.
 	This description immediately follows a brief description of the eye type undergoing a transformation. -->
 	<transformationDescription><![CDATA[
-		By the time [npc.she] hesitantly [npc.verb(open)] them again, they've changed into bear-like eyes, with large irises and pupils.
-		<br/>[npc.Name] now [npc.has] [style.boldHyena(bear-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] and [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].
+		By the time [npc.she] hesitantly open them again, they've changed into bear-like eyes, with large irises and pupils.
+		<br/>[npc.Name] now [npc.has] [style.boldHyena(bear-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].
 	]]></transformationDescription>
 	
 	<!-- How this eye is described in a character's description page. -->

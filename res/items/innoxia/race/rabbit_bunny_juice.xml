@@ -53,10 +53,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		[npc.Name] [npc.verb(unscrew)] the Bunny Juice's cap and [npc.verb(start)] drinking the liquid contained within. An intense taste of carrots instantly fills [npc.her] mouth, and after greedily gulping down the entire beverage, [npc.she] [npc.verb(discover)] that it has an unusually sweet aftertaste.
+		[npc.Name] unscrew the Bunny Juice's cap and start drinking the liquid contained within. An intense taste of carrots instantly fills [npc.her] mouth, and after greedily gulping down the entire beverage, [npc.she] discover that it has an unusually sweet aftertaste.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		[npc.Name] [npc.verb(unscrew)] the Bunny Juice's cap and [npc.verb(get)] [npc2.name] to drink the liquid contained within. An intense taste of carrots instantly fills [npc2.her] mouth, and after greedily gulping down the entire beverage, [npc2.she] [npc2.verb(discover)] that it has an unusually sweet aftertaste.
+		[npc.Name] unscrew the Bunny Juice's cap and get [npc2.name] to drink the liquid contained within. An intense taste of carrots instantly fills [npc2.her] mouth, and after greedily gulping down the entire beverage, [npc2.she] [npc2.verb(discover)] that it has an unusually sweet aftertaste.
 		]]></otherUse>
 	</useDescriptions>
 

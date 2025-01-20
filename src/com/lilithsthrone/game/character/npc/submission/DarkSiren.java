@@ -1,12 +1,5 @@
 package com.lilithsthrone.game.character.npc.submission;
 
-import java.time.Month;
-import java.util.List;
-import java.util.Set;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.CharacterImportSetting;
@@ -18,29 +11,7 @@ import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.types.HornType;
 import com.lilithsthrone.game.character.body.types.TailType;
 import com.lilithsthrone.game.character.body.types.WingType;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.ClitorisSize;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.HairLength;
-import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
-import com.lilithsthrone.game.character.body.valueEnums.LipSize;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
-import com.lilithsthrone.game.character.body.valueEnums.NippleSize;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
-import com.lilithsthrone.game.character.body.valueEnums.WingSize;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
@@ -48,11 +19,7 @@ import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.NPC;
-import com.lilithsthrone.game.character.persona.NameTriplet;
-import com.lilithsthrone.game.character.persona.Occupation;
-import com.lilithsthrone.game.character.persona.PersonalityTrait;
-import com.lilithsthrone.game.character.persona.Relationship;
-import com.lilithsthrone.game.character.persona.SexualOrientation;
+import com.lilithsthrone.game.character.persona.*;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.character.race.Race;
@@ -75,6 +42,12 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.time.Month;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @since 0.2.11
@@ -89,14 +62,14 @@ public class DarkSiren extends NPC {
 	
 	public DarkSiren(boolean isImported) {
 		super(isImported,
-				new NameTriplet("Meraxis"), "Lyssiethmartuilani",
+                new NameTriplet("Мераксис"), "Лиссиетмартуилани",
 				"The ruler of Submission's central imp citadel, 'The Dark Siren' is an incredibly powerful arcane user...",
 				26, Month.OCTOBER, 13,
 				30, Gender.F_V_B_FEMALE, Subspecies.DEMON, RaceStage.PARTIAL_FULL, new CharacterInventory(10), WorldType.IMP_FORTRESS_DEMON, PlaceType.FORTRESS_DEMON_KEEP, true);
 
 		if(!isImported) {
 			this.setPlayerKnowsName(false);
-			this.setGenericName("dark siren");
+            this.setGenericName("тёмная сирена");
 			
 			this.addTrait(Perk.CHUUNI);
 			
@@ -108,7 +81,7 @@ public class DarkSiren extends NPC {
 	public void loadFromXML(Element parentElement, Document doc, CharacterImportSetting... settings) {
 		loadNPCVariablesFromXML(this, null, parentElement, doc, settings);
 
-		this.setGenericName("dark siren");
+        this.setGenericName("тёмная сирена");
 		
 		if(Main.isVersionOlderThan(Game.loadingVersion, "0.2.12.5")) {
 			this.setBody(Gender.F_V_B_FEMALE, Subspecies.DEMON, RaceStage.PARTIAL_FULL, false);
@@ -120,7 +93,7 @@ public class DarkSiren extends NPC {
 			equipClothing(EquipClothingSetting.getAllClothingSettings());
 		}
 		if(Main.isVersionOlderThan(Game.loadingVersion, "0.3.0.6")) {
-			this.setGenericName("dark siren");
+            this.setGenericName("тёмная сирена");
 			
 			this.setEssenceCount(10000);
 			
@@ -130,7 +103,7 @@ public class DarkSiren extends NPC {
 		if(Main.isVersionOlderThan(Game.loadingVersion, "0.3.1.6")) {
 			this.setWingSize(WingSize.ONE_SMALL.getValue());
 		}
-		setName(new NameTriplet("Meraxis"));
+        setName(new NameTriplet("Мераксис"));
 		if(Main.isVersionOlderThan(Game.loadingVersion, "0.3.3.7")) {
 			this.setLevel(30);
 			this.resetPerksMap(true);
@@ -434,7 +407,7 @@ public class DarkSiren extends NPC {
 			if(this.isVisiblyPregnant()) {
 				return "MeraxisPregnant";
 			}
-			return "Meraxis";
+            return "Мераксис";
 			
 		} else {
 			if(this.isVisiblyPregnant()) {
@@ -617,8 +590,6 @@ public class DarkSiren extends NPC {
 	}
 	
 	public String duelSquirter(boolean squirter) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(this.setVaginaSquirter(squirter));
-		return sb.toString();
+        return this.setVaginaSquirter(squirter);
 	}
 }

@@ -5,11 +5,7 @@ import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.types.PenisType;
 import com.lilithsthrone.game.character.body.types.VaginaType;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.dominion.Brax;
 import com.lilithsthrone.game.character.npc.dominion.CandiReceptionist;
@@ -33,8 +29,8 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.utils.Util.Value;
+import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -76,7 +72,7 @@ public class EnforcerHQDialogue {
 		Main.game.getNpc(Brax.class).setLocation(WorldType.SLAVER_ALLEY, PlaceType.SLAVER_ALLEY_SLAVERY_ADMINISTRATION, true);
 	}
 
-	public static final DialogueNode EXTERIOR = new DialogueNode("Enforcer HQ", "Enforcer HQ", false) {
+	public static final DialogueNode EXTERIOR = new DialogueNode("Штаб-квартира энфорсеров", "Штаб-квартира энфорсеров", false) {
 		@Override
 		public int getSecondsPassed() {
 			return DominionPlaces.TRAVEL_TIME_STREET;
@@ -88,7 +84,7 @@ public class EnforcerHQDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Enter", "Cross the grounds and enter the Enforcer HQ.", PlaceType.ENFORCER_HQ_ENTRANCE.getDialogue(false)){
+                return new Response("Вход", "Cross the grounds and enter the Enforcer HQ.", PlaceType.ENFORCER_HQ_ENTRANCE.getDialogue(false)) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setLocation(WorldType.ENFORCER_HQ, PlaceType.ENFORCER_HQ_ENTRANCE, false);
@@ -176,7 +172,7 @@ public class EnforcerHQDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Exit", "Leave the Enforcer HQ.", PlaceType.DOMINION_ENFORCER_HQ.getDialogue(false)){
+                return new Response("Выход", "Leave the Enforcer HQ.", PlaceType.DOMINION_ENFORCER_HQ.getDialogue(false)) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_ENFORCER_HQ, false);
@@ -263,8 +259,8 @@ public class EnforcerHQDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode GUARDED_DOOR = new DialogueNode("Guarded door", "", true) {
+
+	public static final DialogueNode GUARDED_DOOR = new DialogueNode("Охраняемая дверь", "", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 20;
@@ -349,8 +345,28 @@ public class EnforcerHQDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode RECEPTION_DESK = new DialogueNode("Reception desk", "", true) {
+	public static final DialogueNode INTERIOR_SECRETARY_BRAX = new DialogueNode("Штаб-квартира энфорсеров", "", true) {
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "INTERIOR_SECRETARY_BRAX");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 1) {
+				return new Response("Step back",
+						"Now that you've got what you were after, you can step away from Candi's desk, allowing the bimbo enforcer to continue applying her makeup.",
+						WAITING_AREA) {
+						@Override
+						public void effects() {
+							Main.game.getPlayer().setLocation(WorldType.ENFORCER_HQ, PlaceType.ENFORCER_HQ_WAITING_AREA);
+						}
+					};
+			}
+			return null;
+		}
+	};	public static final DialogueNode RECEPTION_DESK = new DialogueNode("Стойка администратора", "", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 2*60;
@@ -625,13 +641,13 @@ public class EnforcerHQDialogue {
 				if(Main.game.getPlayer().getQuest(QuestLine.SIDE_WES)==Quest.WES_3_WES) {
 					if(Main.game.getMinutesPassed()-Main.game.getDialogueFlags().getSavedLong(WesQuest.QUEST_COMPLETION_MINUTES_TIMER_ID)<60*24*7) {
 						long days = 7-((Main.game.getMinutesPassed()-Main.game.getDialogueFlags().getSavedLong(WesQuest.QUEST_COMPLETION_MINUTES_TIMER_ID))/(60*24));
-						return new Response("Wes",
+                        return new Response("Уэс",
 								"It hasn't yet been a week since you anonymously handed in the arcane recorder, so you shouldn't ask to see Wes just yet..."
 									+ "<br/>You need to wait another [style.italicsMinorBad("+days+" day"+(days==1?"":"s")+")]!",
 								null);
 						
 					} else {
-						return new Response("Wes",
+                        return new Response("Уэс",
 								"As it's now been more than a week since you anonymously handed in the arcane recorder, you could tell Candi that you're here to see Wes.",
 								WesQuest.INTRO_HQ_WES);
 					}
@@ -655,8 +671,7 @@ public class EnforcerHQDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode INTERIOR_SECRETARY = new DialogueNode("Enforcer HQ", "", true) {
+	public static final DialogueNode INTERIOR_SECRETARY = new DialogueNode("Штаб-квартира энфорсеров", "", true) {
 
 		@Override
 		public String getContent() {
@@ -689,14 +704,13 @@ public class EnforcerHQDialogue {
 			}
 		}
 	};
-	
-	public static final DialogueNode INTERIOR_SECRETARY_BRAX = new DialogueNode("Enforcer HQ", "", true) {
+	public static final DialogueNode INTERIOR_SECRETARY_BRAX_BIMBO = new DialogueNode("Штаб-квартира энфорсеров", "", true) {
 
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "INTERIOR_SECRETARY_BRAX");
+			return UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "INTERIOR_SECRETARY_BRAX_BIMBO");
 		}
-		
+
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
@@ -712,8 +726,7 @@ public class EnforcerHQDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode INTERIOR_SECRETARY_BIMBO = new DialogueNode("Enforcer HQ", "", true) {
+	public static final DialogueNode INTERIOR_SECRETARY_BIMBO = new DialogueNode("Штаб-квартира энфорсеров", "", true) {
 
 		@Override
 		public String getContent() {
@@ -746,31 +759,41 @@ public class EnforcerHQDialogue {
 			}
 		}
 	};
-	
-	public static final DialogueNode INTERIOR_SECRETARY_BRAX_BIMBO = new DialogueNode("Enforcer HQ", "", true) {
+	public static final DialogueNode INTERIOR_SECRETARY_BRAX_FEMINISE_COMPLETED = new DialogueNode("Штаб-квартира энфорсеров", "", true) {
 
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "INTERIOR_SECRETARY_BRAX_BIMBO");
+			return UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "INTERIOR_SECRETARY_BRAX_FEMINISE_COMPLETED");
 		}
-		
+
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Step back",
-						"Now that you've got what you were after, you can step away from Candi's desk, allowing the bimbo enforcer to continue applying her makeup.",
-						WAITING_AREA) {
-						@Override
-						public void effects() {
-							Main.game.getPlayer().setLocation(WorldType.ENFORCER_HQ, PlaceType.ENFORCER_HQ_WAITING_AREA);
-						}
-					};
+				return new ResponseSex("Sex with [brax.name]", "Have sex with [brax.name].",
+						false, false,
+						new SMStanding(
+							Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
+							Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Brax.class), SexSlotStanding.PERFORMING_ORAL))),
+						null,
+						null,
+						AFTER_SEX,
+						UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "INTERIOR_SECRETARY_BRAX_FEMINISE_COMPLETED_SEX"));
+
+			} else if(index==2) {
+				return new Response("Decline", "Decide against having sex with Bree.", WAITING_AREA) {
+					@Override
+					public void effects() {
+						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "INTERIOR_SECRETARY_BRAX_FEMINISE_COMPLETED_NO_SEX"));
+						Main.game.getPlayer().setLocation(WorldType.ENFORCER_HQ, PlaceType.ENFORCER_HQ_WAITING_AREA);
+					}
+				};
+
+			} else {
+				return null;
 			}
-			return null;
 		}
 	};
-	
-	public static final DialogueNode INTERIOR_SECRETARY_BRAX_FEMINISE = new DialogueNode("Enforcer HQ", "", true) {
+	public static final DialogueNode INTERIOR_SECRETARY_BRAX_FEMINISE = new DialogueNode("Штаб-квартира энфорсеров", "", true) {
 
 		@Override
 		public String getContent() {
@@ -780,7 +803,7 @@ public class EnforcerHQDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Bree",
+                return new Response("Бри",
 						"You and Candi force-feed [brax.name] his own potion, turning him into a wolf-girl named Bree.",
 						INTERIOR_SECRETARY_BRAX_FEMINISE_COMPLETED,
 						Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_GIVING),
@@ -791,7 +814,7 @@ public class EnforcerHQDialogue {
 					@Override
 					public void effects() {
 						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.feminisedBrax, true);
-						Main.game.getNpc(Brax.class).setName(new NameTriplet("Bree", "Bree", "Bree"));
+                        Main.game.getNpc(Brax.class).setName(new NameTriplet("Бри", "Бри", "Бри"));
 						
 						Main.game.getNpc(Brax.class).removeFetish(Fetish.FETISH_DOMINANT);
 						Main.game.getNpc(Brax.class).addFetish(Fetish.FETISH_SUBMISSIVE);
@@ -830,7 +853,7 @@ public class EnforcerHQDialogue {
 					@Override
 					public void effects() {
 						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.feminisedBrax, true);
-						Main.game.getNpc(Brax.class).setName(new NameTriplet("Bree", "Bree", "Bree"));
+                        Main.game.getNpc(Brax.class).setName(new NameTriplet("Бри", "Бри", "Бри"));
 						
 						Main.game.getNpc(Brax.class).removeFetish(Fetish.FETISH_DOMINANT);
 						Main.game.getNpc(Brax.class).addFetish(Fetish.FETISH_SUBMISSIVE);
@@ -871,43 +894,41 @@ public class EnforcerHQDialogue {
 			}
 		}
 	};
-	
-	public static final DialogueNode INTERIOR_SECRETARY_BRAX_FEMINISE_COMPLETED = new DialogueNode("Enforcer HQ", "", true) {
+	public static final DialogueNode INTERIOR_SECRETARY_BRAX_BIMBOFY_COMPLETED = new DialogueNode("Штаб-квартира энфорсеров", "", true) {
 
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "INTERIOR_SECRETARY_BRAX_FEMINISE_COMPLETED");
+			return UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "INTERIOR_SECRETARY_BRAX_BIMBOFY_COMPLETED");
 		}
-		
+
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new ResponseSex("Sex with [brax.name]", "Have sex with [brax.name].",
-						false, false,
+				return new ResponseSex("Sex with Brandi", "Have sex with Brandi.",
+						true, false,
 						new SMStanding(
 							Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
 							Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Brax.class), SexSlotStanding.PERFORMING_ORAL))),
 						null,
 						null,
 						AFTER_SEX,
-						UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "INTERIOR_SECRETARY_BRAX_FEMINISE_COMPLETED_SEX"));
-				
+						UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "INTERIOR_SECRETARY_BRAX_BIMBOFY_COMPLETED_SEX"));
+
 			} else if(index==2) {
-				return new Response("Decline", "Decide against having sex with Bree.", WAITING_AREA) {
+				return new Response("Decline", "Decide against having sex with Brandi.",  WAITING_AREA) {
 					@Override
 					public void effects() {
-						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "INTERIOR_SECRETARY_BRAX_FEMINISE_COMPLETED_NO_SEX"));
+						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "INTERIOR_SECRETARY_BRAX_BIMBOFY_COMPLETED_NO_SEX"));
 						Main.game.getPlayer().setLocation(WorldType.ENFORCER_HQ, PlaceType.ENFORCER_HQ_WAITING_AREA);
 					}
 				};
-				
+
 			} else {
 				return null;
 			}
 		}
 	};
-	
-	public static final DialogueNode INTERIOR_SECRETARY_BRAX_BIMBOFY = new DialogueNode("Enforcer HQ", "", true) {
+	public static final DialogueNode INTERIOR_SECRETARY_BRAX_BIMBOFY = new DialogueNode("Штаб-квартира энфорсеров", "", true) {
 
 		@Override
 		public String getContent() {
@@ -917,7 +938,7 @@ public class EnforcerHQDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Brandi", "Transform Bree into a brain-dead bimbo, called Brandi.", INTERIOR_SECRETARY_BRAX_BIMBOFY_COMPLETED,
+                return new Response("Брэнди", "Transform Bree into a brain-dead bimbo, called Brandi.", INTERIOR_SECRETARY_BRAX_BIMBOFY_COMPLETED,
 						Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_GIVING),
 						Fetish.FETISH_TRANSFORMATION_GIVING.getAssociatedCorruptionLevel(),
 						null,
@@ -926,7 +947,7 @@ public class EnforcerHQDialogue {
 					@Override
 					public void effects() {
 						Main.game.getDialogueFlags().values.add(DialogueFlagValue.bimbofiedBrax);
-						Main.game.getNpc(Brax.class).setName(new NameTriplet("Brandi", "Brandi", "Brandi"));
+                        Main.game.getNpc(Brax.class).setName(new NameTriplet("Брэнди", "Брэнди", "Брэнди"));
 						
 						Main.game.getNpc(Brax.class).addFetish(Fetish.FETISH_BIMBO);
 						
@@ -960,7 +981,7 @@ public class EnforcerHQDialogue {
 					@Override
 					public void effects() {
 						Main.game.getDialogueFlags().values.add(DialogueFlagValue.bimbofiedBrax);
-						Main.game.getNpc(Brax.class).setName(new NameTriplet("Brandi", "Brandi", "Brandi"));
+                        Main.game.getNpc(Brax.class).setName(new NameTriplet("Брэнди", "Брэнди", "Брэнди"));
 						
 						Main.game.getNpc(Brax.class).addFetish(Fetish.FETISH_BIMBO);
 						
@@ -998,39 +1019,44 @@ public class EnforcerHQDialogue {
 			}
 		}
 	};
-	
-	public static final DialogueNode INTERIOR_SECRETARY_BRAX_BIMBOFY_COMPLETED = new DialogueNode("Enforcer HQ", "", true) {
-
+	public static final DialogueNode BUYING_BRAX_LIPSTICK_DELIVERY = new DialogueNode("Стойка администратора", "", true) {
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "INTERIOR_SECRETARY_BRAX_BIMBOFY_COMPLETED");
+			return UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "BUYING_BRAX_LIPSTICK_DELIVERY");
 		}
-		
+
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new ResponseSex("Sex with Brandi", "Have sex with Brandi.",
-						true, false,
-						new SMStanding(
-							Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-							Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Brax.class), SexSlotStanding.PERFORMING_ORAL))),
-						null,
-						null,
-						AFTER_SEX,
-						UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "INTERIOR_SECRETARY_BRAX_BIMBOFY_COMPLETED_SEX"));
+			if(index==1) {
+				if(Main.game.getSecondsPassed()-Main.game.getDialogueFlags().getSavedLong(CandiReceptionist.CANDI_SEX_TIMER_ID)>60*60*12) {
+					return new ResponseSex("Help Candi",
+							"Agree to help Candi deal with her overwhelming horniness.",
+							null, null, null, null, null, null,
+							true,
+							true,
+							new SMStanding(
+									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
+									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(CandiReceptionist.class), SexSlotStanding.STANDING_SUBMISSIVE))),
+							null,
+							null,
+							AFTER_SEX_CANDI,
+							UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "START_SEX_CANDI"));
 
-			} else if(index==2) {
-				return new Response("Decline", "Decide against having sex with Brandi.",  WAITING_AREA) {
-					@Override
-					public void effects() {
-						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "INTERIOR_SECRETARY_BRAX_BIMBOFY_COMPLETED_NO_SEX"));
-						Main.game.getPlayer().setLocation(WorldType.ENFORCER_HQ, PlaceType.ENFORCER_HQ_WAITING_AREA);
-					}
-				};
-				
-			} else {
-				return null;
-			}
+				} else {
+					return new Response("Help Candi", "You've recently helped Candi to deal with her overwhelming horniness, but it's only going to be a matter of hours before she's begging to have sex with you again...", null);
+				}
+
+			} else
+				if(index==2) {
+					return new Response("Refuse", "Refuse to help Candi with her overwhelming horniness, before stepping back into the waiting area.", WAITING_AREA) {
+						@Override
+						public void effects() {
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "HELP_CANDI_DENIED"));
+							Main.game.getPlayer().setLocation(WorldType.ENFORCER_HQ, PlaceType.ENFORCER_HQ_WAITING_AREA);
+						}
+					};
+				}
+			return null;
 		}
 	};
 	
@@ -1041,10 +1067,9 @@ public class EnforcerHQDialogue {
 		}
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "AFTER_SEX"));
-			sb.append(WAITING_AREA.getContent());
-			return sb.toString();
+            String sb = UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "AFTER_SEX") +
+                    WAITING_AREA.getContent();
+			return sb;
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
@@ -1074,8 +1099,8 @@ public class EnforcerHQDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode BUYING_BRAX_INITIAL = new DialogueNode("Reception desk", "", true) {
+
+	public static final DialogueNode BUYING_BRAX_INITIAL = new DialogueNode("Стойка администратора", "", true) {
 		@Override
 		public String getContent() {
 			return UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "BUYING_BRAX_INITIAL");
@@ -1087,7 +1112,7 @@ public class EnforcerHQDialogue {
 		}
 	};
 
-	public static final DialogueNode BUYING_BRAX_PERFUME_DELIVERY = new DialogueNode("Reception desk", "", true) {
+	public static final DialogueNode BUYING_BRAX_PERFUME_DELIVERY = new DialogueNode("Стойка администратора", "", true) {
 		@Override
 		public String getContent() {
 			return UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "BUYING_BRAX_PERFUME_DELIVERY");
@@ -1099,7 +1124,7 @@ public class EnforcerHQDialogue {
 		}
 	};
 
-	public static final DialogueNode BUYING_BRAX_LOLLIPOP_DELIVERY = new DialogueNode("Reception desk", "", true) {
+	public static final DialogueNode BUYING_BRAX_LOLLIPOP_DELIVERY = new DialogueNode("Стойка администратора", "", true) {
 		@Override
 		public String getContent() {
 			return UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "BUYING_BRAX_LOLLIPOP_DELIVERY");
@@ -1111,46 +1136,7 @@ public class EnforcerHQDialogue {
 		}
 	};
 
-	public static final DialogueNode BUYING_BRAX_LIPSTICK_DELIVERY = new DialogueNode("Reception desk", "", true) {
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "BUYING_BRAX_LIPSTICK_DELIVERY");
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				if(Main.game.getSecondsPassed()-Main.game.getDialogueFlags().getSavedLong(CandiReceptionist.CANDI_SEX_TIMER_ID)>60*60*12) {
-					return new ResponseSex("Help Candi",
-							"Agree to help Candi deal with her overwhelming horniness.",
-							null, null, null, null, null, null,
-							true,
-							true,
-							new SMStanding(
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(CandiReceptionist.class), SexSlotStanding.STANDING_SUBMISSIVE))),
-							null,
-							null,
-							AFTER_SEX_CANDI,
-							UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "START_SEX_CANDI"));
-					
-				} else {
-					return new Response("Help Candi", "You've recently helped Candi to deal with her overwhelming horniness, but it's only going to be a matter of hours before she's begging to have sex with you again...", null);
-				}
-				
-			} else 
-				if(index==2) {
-					return new Response("Refuse", "Refuse to help Candi with her overwhelming horniness, before stepping back into the waiting area.", WAITING_AREA) {
-						@Override
-						public void effects() {
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/enforcerHQ/generic", "HELP_CANDI_DENIED"));
-							Main.game.getPlayer().setLocation(WorldType.ENFORCER_HQ, PlaceType.ENFORCER_HQ_WAITING_AREA);
-						}
-					};
-				}
-			return null;
-		}
-	};
+
 	
 	public static final DialogueNode ENTRANCE_ENFORCER = new DialogueNode("", "", false) {
 		@Override
@@ -1164,7 +1150,7 @@ public class EnforcerHQDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Exit", "Leave the Enforcer HQ.", PlaceType.DOMINION_ENFORCER_HQ.getDialogue(false)){
+                return new Response("Выход", "Leave the Enforcer HQ.", PlaceType.DOMINION_ENFORCER_HQ.getDialogue(false)) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_ENFORCER_HQ, false);

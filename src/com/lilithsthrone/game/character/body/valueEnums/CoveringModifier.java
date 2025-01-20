@@ -33,24 +33,24 @@ public enum CoveringModifier {
 	},
 	
 	// Generic:
-	SMOOTH("гладкая", false),
-	ROUGH("жесткая", false),
+	SMOOTH("гладкий", false),
+	ROUGH("жесткий", false),
 	
 	//Skin:
 	LEATHERY("кожистая", false),
 	
 	// Fur/hair:
-	SHORT("короткая", true),
-	SILKEN("шелковистая", true),
-	FLUFFY("пушистая", true),
-	SHAGGY("лохматая", true),
+	SHORT("короткий", true),
+	SILKEN("шелковистый", true),
+	FLUFFY("пушистый", true),
+	SHAGGY("лохматый", true),
 	FURRY("как шерсть", true), // FURRY is only used for head hair, not body-covering fur.
-	COARSE("грубая", true);
+	COARSE("грубый", true);
 	
-	private String descriptor;
-	private boolean furryModifier;
+	private final String descriptor;
+	private final boolean furryModifier;
 
-	private CoveringModifier(String descriptor, boolean furryModifier) {
+	CoveringModifier(String descriptor, boolean furryModifier) {
 		this.descriptor = descriptor;
 		this.furryModifier = furryModifier;
 	}

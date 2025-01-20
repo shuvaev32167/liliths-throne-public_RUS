@@ -1,36 +1,12 @@
 package com.lilithsthrone.game.character.npc.submission;
 
-import java.time.Month;
-import java.util.List;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.ClitorisSize;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.HairLength;
-import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
-import com.lilithsthrone.game.character.body.valueEnums.LipSize;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
-import com.lilithsthrone.game.character.body.valueEnums.NippleSize;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
@@ -69,6 +45,11 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.time.Month;
+import java.util.List;
 
 /**
  * @since 0.3.5.5
@@ -82,7 +63,7 @@ public class Shadow extends NPC {
 	}
 	
 	public Shadow(boolean isImported) {
-		super(isImported, new NameTriplet("Shadow"), "Werlock",
+        super(isImported, new NameTriplet("Тень"), "Верлок",
 				"",
 				23, Month.DECEMBER, 29,
 				15, Gender.F_V_B_FEMALE, Subspecies.RAT_MORPH, RaceStage.GREATER,
@@ -332,7 +313,7 @@ public class Shadow extends NPC {
 			if(this.isVisiblyPregnant()) {
 				return "ShadowPregnant";
 			}
-			return "Shadow";
+            return "Тень";
 		}
 	}
 	
@@ -396,7 +377,7 @@ public class Shadow extends NPC {
 				&& Main.combat.getAllCombatants(false).contains(Main.game.getNpc(Silence.class))
 				&& Main.combat.isCombatantDefeated(this)
 				&& !Main.combat.isCombatantDefeated(Main.game.getNpc(Silence.class))) {
-			return new Response("Silence",
+            return new Response("Сайленс",
 					"As she sees Shadow fall to the floor, Silence stumbles back, looking as though she's about to faint.",
 					RatWarrensDialogue.BODYGUARDS_COMBAT_SHADOW_DEFEATED){
 				@Override
@@ -409,7 +390,7 @@ public class Shadow extends NPC {
 				&& Main.combat.getAllCombatants(false).contains(Main.game.getNpc(Silence.class))
 				&& !Main.combat.isCombatantDefeated(this)
 				&& Main.combat.isCombatantDefeated(Main.game.getNpc(Silence.class))) {
-			return new Response("Shadow",
+            return new Response("Тень",
 					"As she sees Silence fall to the floor, Shadow lets out a furious scream, looking as though she's about to completely lose her mind.",
 					RatWarrensDialogue.BODYGUARDS_COMBAT_SILENCE_DEFEATED){
 				@Override
@@ -419,9 +400,9 @@ public class Shadow extends NPC {
 			};
 		}
 		return null;
-	};
-	
-	@Override
+	}
+
+    @Override
 	public int getEscapeChance() {
 		return 0;
 	}

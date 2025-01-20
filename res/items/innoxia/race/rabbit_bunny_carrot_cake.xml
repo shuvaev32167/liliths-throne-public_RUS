@@ -41,7 +41,7 @@
 			[##npc.incrementHealth(npc.getAttributeValue(ATTRIBUTE_HEALTH_MAXIMUM)/10)]
 			
 			<p style='margin-bottom:0; padding-bottom:0;'>
-				[npc.Name] [npc.verb(start)] to feel like [npc.she] [npc.verb(need)] to breed...
+				[npc.Name] start to feel like [npc.she] need to breed...
 			</p>
 			[#npc.addPotionEffect(ATTRIBUTE_FERTILITY, 15)]
 			[#npc.addPotionEffect(ATTRIBUTE_VIRILITY, 15)]
@@ -59,10 +59,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		Tearing off the Bunny Carrot-Cake's plastic wrapper, [npc.name] [npc.verb(pop)] the small slice of cake into [npc.her] mouth. It turns out to be absolutely delicious, and after [npc.sheHas] swallowed down the sweet mess, a delightful carroty aftertaste lingers on [npc.her] [npc.tongue].
+		Tearing off the Bunny Carrot-Cake's plastic wrapper, [npc.name] pop the small slice of cake into [npc.her] mouth. It turns out to be absolutely delicious, and after [npc.sheHas] swallowed down the sweet mess, a delightful carroty aftertaste lingers on [npc.her] [npc.tongue].
 		]]></selfUse>
 		<otherUse><![CDATA[
-		Tearing off the Bunny Carrot-Cake's plastic wrapper, [npc.name] [npc.verb(pop)] the small slice of cake into [npc2.namePos] mouth. It turns out to be absolutely delicious, and after [npc2.sheHas] swallowed down the sweet mess, a delightful carroty aftertaste lingers on [npc2.namePos] [npc2.tongue].
+		Tearing off the Bunny Carrot-Cake's plastic wrapper, [npc.name] pop the small slice of cake into [npc2.namePos] mouth. It turns out to be absolutely delicious, and after [npc2.sheHas] swallowed down the sweet mess, a delightful carroty aftertaste lingers on [npc2.namePos] [npc2.tongue].
 		]]></otherUse>
 	</useDescriptions>
 

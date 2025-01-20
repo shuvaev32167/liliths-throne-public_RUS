@@ -1,34 +1,13 @@
 package com.lilithsthrone.game.dialogue.utils;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
-import com.lilithsthrone.game.character.attributes.Attribute;
-import com.lilithsthrone.game.character.attributes.CorruptionLevel;
-import com.lilithsthrone.game.character.attributes.IntelligenceLevel;
-import com.lilithsthrone.game.character.attributes.PhysiqueLevel;
+import com.lilithsthrone.game.character.attributes.*;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.types.VaginaType;
-import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeDepth;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.PerkManager;
 import com.lilithsthrone.game.character.effects.StatusEffect;
@@ -45,11 +24,7 @@ import com.lilithsthrone.game.character.pregnancy.PregnancyPossibility;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.character.quests.QuestType;
-import com.lilithsthrone.game.character.race.AbstractRace;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
-import com.lilithsthrone.game.character.race.Race;
-import com.lilithsthrone.game.character.race.RaceStage;
-import com.lilithsthrone.game.character.race.Subspecies;
+import com.lilithsthrone.game.character.race.*;
 import com.lilithsthrone.game.combat.DamageType;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.DialogueNodeType;
@@ -85,6 +60,11 @@ import com.lilithsthrone.utils.time.SolarElevationAngle;
 import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.WorldRegion;
 import com.lilithsthrone.world.WorldType;
+
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 /**
  * @since 0.1.0
@@ -738,7 +718,7 @@ public class PhoneDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Having successfully laid your eggs, you're now free to continue on your way.", Main.game.getDefaultDialogue(false));
+				return new Response("Продолжить", "Having successfully laid your eggs, you're now free to continue on your way.", Main.game.getDefaultDialogue(false));
 			}
 			return null;
 		}
@@ -754,7 +734,7 @@ public class PhoneDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Continue on your way...", Main.game.getDefaultDialogue(false));
+				return new Response("Продолжить", "Continue on your way...", Main.game.getDefaultDialogue(false));
 
 			} else {
 				return null;
@@ -778,7 +758,7 @@ public class PhoneDialogue {
 				journalSB.append(
 						"<details open>"
 						+ "<summary class='quest-title' style='color:" + questLine.getType().getColour().getShades()[1] + ";'>"
-							+ "Completed - " + questLine.getName()
+								+ "Завершено - " + questLine.getName()
 						+ "</summary>");
 				journalSB.append(getQuestBoxDiv(q, true));
 				
@@ -886,7 +866,7 @@ public class PhoneDialogue {
 						journalSB.append(
 								"<details>"
 								+ "<summary class='quest-title' style='color:" + questLine.getType().getColour().getShades()[1] + ";'>"
-									+ "Completed - " + questLine.getName()
+										+ "Завершено - " + questLine.getName()
 								+ "</summary>");
 						journalSB.append(getQuestBoxDiv(q, true));
 						
@@ -978,7 +958,7 @@ public class PhoneDialogue {
 						journalSB.append(
 								"<details>"
 								+ "<summary class='quest-title' style='color:" + questLine.getType().getColour().getShades()[1] + ";'>"
-									+ "Completed - " + questLine.getName()
+										+ "Завершено - " + questLine.getName()
 								+ "</summary>");
 						journalSB.append(getQuestBoxDiv(q, true));
 						
@@ -1055,7 +1035,7 @@ public class PhoneDialogue {
 			return "";
 //			return "<div class='quest-box'>"
 //					+ "<h6 style='color:" + q.getQuestType().getColour().getShades()[1] + ";text-align:center;'>"
-//							+ "<b>Completed - "+ q.getName() + "</b>"
+//							+ "<b>Завершено - "+ q.getName() + "</b>"
 //					+ "</h6>"
 //				+ "</div>";
 		}
@@ -1064,7 +1044,7 @@ public class PhoneDialogue {
 			return "<div class='quest-box'>"
 					+ getLevelAndExperienceHTML(q, completed)
 					+ "<h6 style='color:" + q.getQuestType().getColour().getShades()[1] + ";text-align:center;'>"
-							+ "<b>Completed - "+ q.getName() + "</b>"
+                    + "<b>Завершено - " + q.getName() + "</b>"
 					+ "</h6>"
 					+ "<p style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";text-align:center; margin-top:0;'>"
 						+ q.getCompletedDescription()
@@ -1812,8 +1792,8 @@ public class PhoneDialogue {
 			sb.append(sexStatHeader());
 			
 			boolean oddRow = false;
-			
-			sb.append(sexStatRow(PresetColour.AROUSAL_STAGE_ONE, "Fingering",
+
+			sb.append(sexStatRow(PresetColour.AROUSAL_STAGE_ONE, "Ласкание пальцами",
 							Main.game.getPlayer().getTotalSexCount(new SexType(SexParticipantType.NORMAL, SexAreaPenetration.FINGER, SexAreaOrifice.VAGINA)),
 							-1,
 							Main.game.getPlayer().getTotalSexCount(new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.FINGER)),
@@ -2321,29 +2301,27 @@ public class PhoneDialogue {
 	}
 	
 	private static String pregnancyRow(String topLeft, String bottomLeft, String topRight, String bottomRight) {
-		StringBuilder contentSB = new StringBuilder();
+
+        String contentSB = "<div class='container-full-width' style='text-align:center; margin-top:0; margin-bottom:4px;'>" +
+                "<div class='container-full-width' style='float:left; margin:0; width:25%; background:transparent;'>" +
+                "<div class='container-full-width' style='float:left; margin:0; padding:0; width:100%; background:transparent;'>" +
+                topLeft +
+                "</div>" +
+                "<div class='container-full-width' style='float:left; margin:0; padding:0; width:100%; background:transparent; white-space:nowrap;'>" +
+                bottomLeft +
+                "</div>" +
+                "</div>" +
+                "<div class='container-full-width' style='float:left; margin:0; width:75%; background:transparent;'>" +
+                "<div class='container-full-width' style='float:left; margin:0; padding:0; width:100%; background:transparent;'>" +
+                topRight +
+                "</div>" +
+                "<div class='container-full-width' style='float:left; margin:0; padding:0; width:100%; background:transparent;'>" +
+                bottomRight +
+                "</div>" +
+                "</div>" +
+                "</div>";
 		
-		contentSB.append("<div class='container-full-width' style='text-align:center; margin-top:0; margin-bottom:4px;'>");
-			contentSB.append("<div class='container-full-width' style='float:left; margin:0; width:25%; background:transparent;'>");
-				contentSB.append("<div class='container-full-width' style='float:left; margin:0; padding:0; width:100%; background:transparent;'>");
-					contentSB.append(topLeft);
-				contentSB.append("</div>");
-				contentSB.append("<div class='container-full-width' style='float:left; margin:0; padding:0; width:100%; background:transparent; white-space:nowrap;'>");
-					contentSB.append(bottomLeft);
-				contentSB.append("</div>");
-			contentSB.append("</div>");
-	
-			contentSB.append("<div class='container-full-width' style='float:left; margin:0; width:75%; background:transparent;'>");
-				contentSB.append("<div class='container-full-width' style='float:left; margin:0; padding:0; width:100%; background:transparent;'>");
-					contentSB.append(topRight);
-				contentSB.append("</div>");
-				contentSB.append("<div class='container-full-width' style='float:left; margin:0; padding:0; width:100%; background:transparent;'>");
-					contentSB.append(bottomRight);
-				contentSB.append("</div>");
-			contentSB.append("</div>");
-		contentSB.append("</div>");
-		
-		return contentSB.toString();
+		return contentSB;
 	}
 	
 	private static String pregnancyDetails() {
@@ -3079,11 +3057,11 @@ public class PhoneDialogue {
 		}
 	};
 
-	private static List<AbstractItemType> itemsDiscoveredList = new ArrayList<>();
-	private static List<AbstractClothingType> clothingDiscoveredList = new ArrayList<>();
-	private static List<AbstractWeaponType> weaponsDiscoveredList = new ArrayList<>();
+	private static final List<AbstractItemType> itemsDiscoveredList = new ArrayList<>();
+	private static final List<AbstractClothingType> clothingDiscoveredList = new ArrayList<>();
+	private static final List<AbstractWeaponType> weaponsDiscoveredList = new ArrayList<>();
 	
-	private static Map<String, List<InventorySlot>> clothingSlotCategories;
+	private static final Map<String, List<InventorySlot>> clothingSlotCategories;
 	private static String clothingSlotKey;
 	
 	static {
@@ -3204,7 +3182,7 @@ public class PhoneDialogue {
 					}
 					sbMelee.append("<div class='container-full-width' style='width:11.5%; padding:0; margin:0.5%;'>");
 						sbMelee.append(entry);
-						sbMelee.append(sbDamageTypes.toString());
+						sbMelee.append(sbDamageTypes);
 					sbMelee.append("</div>");
 					
 				} else {
@@ -3214,7 +3192,7 @@ public class PhoneDialogue {
 					}
 					sbRanged.append("<div class='container-full-width' style='width:11.5%; padding:0; margin:0.5%;'>");
 						sbRanged.append(entry);
-						sbRanged.append(sbDamageTypes.toString());
+						sbRanged.append(sbDamageTypes);
 					sbRanged.append("</div>");
 				}
 			}
@@ -3223,14 +3201,14 @@ public class PhoneDialogue {
 				sb.append("<p style='width:100%; text-align:center; padding:0 margin:0;'>");
 					sb.append("[style.boldBlue(Melee Weapons ("+meleeKnownCount+"/"+meleeCount+"))]");
 				sb.append("</p>");
-				sb.append(sbMelee.toString());
+				sb.append(sbMelee);
 			sb.append("</div>");
 			
 			sb.append("<div class='container-full-width'>");
 				sb.append("<p style='width:100%; text-align:center; padding:0 margin:0;'>");
 					sb.append("[style.boldYellow(Ranged Weapons ("+rangedKnownCount+"/"+rangedCount+"))]");
 				sb.append("</p>");
-				sb.append(sbRanged.toString());
+				sb.append(sbRanged);
 			sb.append("</div>");
 			
 			return sb.toString();
@@ -3395,7 +3373,7 @@ public class PhoneDialogue {
 					sb.append("<p style='width:100%; text-align:center; padding:0 margin:0;'>");
 						sb.append("[style.boldBlueLight(Items ("+itemKnownCount+"/"+itemCount+"))]");
 					sb.append("</p>");
-					sb.append(sbItems.toString());
+					sb.append(sbItems);
 				sb.append("</div>");
 			}
 
@@ -3404,14 +3382,14 @@ public class PhoneDialogue {
 					sb.append("<p style='width:100%; text-align:center; padding:0 margin:0;'>");
 						sb.append("[style.boldOrange(Books ("+bookKnownCount+"/"+bookCount+"))]");
 					sb.append("</p>");
-					sb.append(sbBooks.toString());
+					sb.append(sbBooks);
 				sb.append("</div>");
 				
 				sb.append("<div class='container-full-width'>");
 					sb.append("<p style='width:100%; text-align:center; padding:0 margin:0;'>");
 						sb.append("[style.boldArcane(Essences ("+essenceKnownCount+"/"+essenceCount+"))]");
 					sb.append("</p>");
-					sb.append(sbEssences.toString());
+					sb.append(sbEssences);
 				sb.append("</div>");
 			}
 
@@ -3420,7 +3398,7 @@ public class PhoneDialogue {
 					sb.append("<p style='width:100%; text-align:center; padding:0 margin:0;'>");
 						sb.append("[style.boldSpells(Spells ("+spellKnownCount+"/"+spellCount+"))]");
 					sb.append("</p>");
-					sb.append(sbSpells.toString());
+					sb.append(sbSpells);
 				sb.append("</div>");
 			}
 			
@@ -3483,12 +3461,12 @@ public class PhoneDialogue {
 		}
 	};
 
-	private static List<AbstractRace> racesDiscovered = new ArrayList<>();
-	private static List<AbstractSubspecies> subspeciesDiscovered = new ArrayList<>();
+	private static final List<AbstractRace> racesDiscovered = new ArrayList<>();
+	private static final List<AbstractSubspecies> subspeciesDiscovered = new ArrayList<>();
 	private static AbstractRace raceSelected;
 	private static AbstractSubspecies subspeciesSelected;
 	private static Body bodyForSubspeciesSelected;
-	private static StringBuilder subspeciesSB = new StringBuilder();
+	private static final StringBuilder subspeciesSB = new StringBuilder();
 	
 	public static void resetContentForRaces() {
 		
@@ -4033,11 +4011,11 @@ public class PhoneDialogue {
 		@Override
 		public String getResponseTabTitle(int index) {
 			if(index==0) {
-				return "Dominion";
+                return "Доминион";
 			} else if(index==1) {
-				return "Submission";
+                return "Подземье";
 			} else if(index==2) {
-				return "Elis";
+                return "Элис";
 			}
 			return null;
 		}
@@ -4238,7 +4216,7 @@ public class PhoneDialogue {
 				return new ResponseEffectsOnly("Next sunrise",
 						"Loiter in this area for " + (timeUntilChange >= 60 ?timeUntilChange / 60 + " hours " : " ")
 							+ (timeUntilChange % 60 != 0 ? timeUntilChange % 60 + " minutes" : "")
-							+ " until five minutes past sunrise ("+Units.time(sunriseSunset[0].plusMinutes(5))+")."){
+								+ " пока не пройдет пять минут рассвета (" + Units.time(sunriseSunset[0].plusMinutes(5)) + ").") {
 					@Override
 					public void effects() {
 						loiter(timeUntilChange);
@@ -4251,7 +4229,7 @@ public class PhoneDialogue {
 				return new ResponseEffectsOnly("Next sunset",
 						"Loiter in this area for " + (timeUntilChange >= 60 ?timeUntilChange / 60 + " hours " : " ")
 							+ (timeUntilChange % 60 != 0 ? timeUntilChange % 60 + " minutes" : "")
-							+ " until five minutes past sunrise ("+Units.time(sunriseSunset[1].plusMinutes(5))+")."){
+								+ " пока не пройдет пять минут рассвета (" + Units.time(sunriseSunset[1].plusMinutes(5)) + ").") {
 					@Override
 					public void effects() {
 						loiter(timeUntilChange);

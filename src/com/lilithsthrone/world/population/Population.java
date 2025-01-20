@@ -1,17 +1,20 @@
 package com.lilithsthrone.world.population;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.character.race.SubspeciesSpawnRarity;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
+import com.lilithsthrone.utils.translate.russian.Morpher;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+import ru.shuvaev.morpher.tools.enams.Case;
+import ru.shuvaev.morpher.tools.enams.Numeration;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @since 0.2.12
@@ -20,10 +23,10 @@ import com.lilithsthrone.world.places.PlaceType;
  * Без перевода
  */
 public class Population {
-	
-	private boolean pluralPopulation;
-	private AbstractPopulationType type;
-	private PopulationDensity density;
+
+	private final boolean pluralPopulation;
+	private final AbstractPopulationType type;
+	private final PopulationDensity density;
 	private Map<AbstractSubspecies, SubspeciesSpawnRarity> species; //TODO refactor this into a list of AbstractSubspecies as the SubspeciesSpawnRarity is never used
 	
 	// For use when loaded from external files:
@@ -88,15 +91,21 @@ public class Population {
 		StringBuilder sb = new StringBuilder();
 		
 		if(includeDeterminer) {
-			sb.append(getDensity().getName()+" ");
+			sb.append(getDensity().getName()).append(" ");
 		}
 		
 		if(isPluralPopulation()) {
+            if (getDensity() == PopulationDensity.DENSE || getDensity() == PopulationDensity.NUMEROUS || getDensity() == PopulationDensity.SPARSE) {
+				sb.append(getType().getNamePlural());
+			} else {
+				sb.append(Morpher.morphNoun(getType().getNamePlural(), Case.GENITIVUS, Numeration.PLURAL));
+			}
+		} else if (getDensity() == PopulationDensity.OCCASIONAL) {
 			sb.append(getType().getNamePlural());
 		} else {
 			sb.append(getType().getName());
 		}
-		
+
 		return sb.toString();
 	}
 	

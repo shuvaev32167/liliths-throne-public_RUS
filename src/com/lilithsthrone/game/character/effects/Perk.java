@@ -1,11 +1,5 @@
 package com.lilithsthrone.game.character.effects;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -23,6 +17,12 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @since 0.1.0
@@ -660,7 +660,7 @@ public class Perk {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner,
-					"[npc.NameIsFull] one of the seven elder lilin, and [npc.verb(hold)] powers that mere mortals can only dream of.");
+                    "[npc.NameIsFull] one of the seven elder lilin, and hold powers that mere mortals can only dream of.");
 		}
 	};
 
@@ -1118,7 +1118,7 @@ public class Perk {
 			Util.newArrayListOfValues("[style.boldExcellent(Triples)] all mugging income")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.Name] [npc.verb(live)] a life of crime, stealing from the rich and poor alike.");
+            return UtilText.parse(owner, "[npc.Name] live a life of crime, stealing from the rich and poor alike.");
 		}
 	};
 	
@@ -1151,7 +1151,7 @@ public class Perk {
 			null, null, null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.NameHasFull] [npc.verb(spent)] a while working in the construction industry, helping to build and repair both infrastructure and property.");
+            return UtilText.parse(owner, "[npc.NameHasFull] spent a while working in the construction industry, helping to build and repair both infrastructure and property.");
 		}
 	};
 	
@@ -1179,7 +1179,7 @@ public class Perk {
 	
 	public static AbstractPerk JOB_UNEMPLOYED = new AbstractPerk(20,
 			true,
-			"NEET",
+			"НЭТ",
 			PerkCategory.JOB,
 			"perks/jobs/unemployed",
 			PresetColour.BASE_RED,
@@ -1187,35 +1187,35 @@ public class Perk {
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 2),
 					new Value<>(Attribute.DAMAGE_UNARMED, 5),
 					new Value<>(Attribute.DAMAGE_PHYSICAL, 5)),
-			Util.newArrayListOfValues("[style.boldExcellent(Boosts)] 'Well Rested' bonus")) {
+			Util.newArrayListOfValues("[style.boldExcellent(Усиление)] 'Хорошо отдохнувший'")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "With so much free time on [npc.herPos] hands, [npc.nameHas] managed to improve [npc.herself] in several different ways."
-					+ " [npc.Name] also [npc.verb(benefit)] from knowing exactly how best to relax, boosting the bonus [npc.she] [npc.verb(get)] from sleeping.");
+            return UtilText.parse(owner, "Имея в [pc.morphPluralPreap([npc.herPos])] руках столько свободного времени, [npc.nameHas] [npc.targetBasedWord(удаётся, удалось)] улучшить [npc.herself] по нескольким направлениям."
+                    + " Также благодаря точному знанию того, как лучше всего расслабиться, [npc.she] увеличиваешь бонус получаемый от сна.");
 		}
 	};
 	
 	public static AbstractPerk JOB_OFFICE_WORKER = new AbstractPerk(20,
 			true,
-			"The Salaryman",
+			"Служащий",
 			PerkCategory.JOB,
 			"perks/jobs/officeWorker",
 			PresetColour.BASE_BROWN,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.CRITICAL_DAMAGE, 50)),
-			Util.newArrayListOfValues("[style.boldExcellent(+25%)] all slave income")) {
+			Util.newArrayListOfValues("[style.boldExcellent(+25%)] все рабские доходы")) {
 		@Override
 		public String getName(GameCharacter owner) {
 			if(owner!=null && owner.isFeminine()) {
-				return "The Career Woman";
+				return "Карьеристка";
 			} else {
-				return "The Salaryman";
+				return "Служащий";
 			}
 		}
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "From [npc.herPos] considerable office experience, [npc.name] [npc.verb(know)] exactly how to motivate those working beneath [npc.herPro]."
-					+ " The stressful work environment has caused [npc.herPro] to bottle up a lot of frustration, which manifests in increased critical power.");
+			return UtilText.parse(owner, "Благодаря значительному опыту работы в офисе, [npc.name] точно [npc.targetBasedWord(знаешь, знает)], как мотивировать тех, кто работает под [npc.morphSingleNameInstr([npc.herPro])]."
+					+ " Напряженная рабочая среда привела к тому, что [npc.herPro] [npc.genderBasedWord(накопил, накопила)] много разочарований, что проявляется в увеличении критической силы.");
 		}
 	};
 	
@@ -1246,8 +1246,8 @@ public class Perk {
 			Util.newArrayListOfValues("[style.boldExcellent(Double)] length of all spell effects")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.Name] [npc.verb(find)] that [npc.herPos] abilities as a musician translate quite well into the art of seduction."
-					+ " [npc.She] [npc.verb(feel)] the same sort of rhythm in casting spells as [npc.she] [npc.do] with music, resulting in all of [npc.herPos] spell effects lasting twice as long as usual.");
+            return UtilText.parse(owner, "[npc.Name] find that [npc.herPos] abilities as a musician translate quite well into the art of seduction."
+                    + " [npc.She] feel the same sort of rhythm in casting spells as [npc.she] [npc.do] with music, resulting in all of [npc.herPos] spell effects lasting twice as long as usual.");
 		}
 	};
 	
@@ -1262,7 +1262,7 @@ public class Perk {
 			Util.newArrayListOfValues("[style.boldExcellent(Triple)] all slave obedience gains")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.Name] [npc.verb(know)] exactly how to deal with unruly students."
+            return UtilText.parse(owner, "[npc.Name] know exactly how to deal with unruly students."
 					+ " [npc.HerPos] ability to clearly understand and explain difficult subjects is reflected in a reduced cost of casting spells.");
 		}
 	};
@@ -1278,7 +1278,7 @@ public class Perk {
 			Util.newArrayListOfValues("[style.boldExcellent(+25%)] to all experience gains")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.Name] [npc.verb(keep)] a diary of [npc.herPos] personal thoughts and encounters, allowing [npc.herPro] to reflect upon and learn from [npc.herPos] experiences."
+            return UtilText.parse(owner, "[npc.Name] keep a diary of [npc.herPos] personal thoughts and encounters, allowing [npc.herPro] to reflect upon and learn from [npc.herPos] experiences."
 					+ " [npc.HerPos] keen interest in books also allows [npc.herPro] to quickly read up on the most effective application of spells.");
 		}
 	};
@@ -1314,7 +1314,7 @@ public class Perk {
 			null, null, null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "Thanks to [npc.her] considerable experience in the industry, [npc.name] [npc.verb(know)] how to efficiently manage construction projects."
+            return UtilText.parse(owner, "Thanks to [npc.her] considerable experience in the industry, [npc.name] know how to efficiently manage construction projects."
 					+ " [npc.Her] time performing manual labour has also given [npc.herHim] a healthy body.");
 		}
 	};
@@ -1370,7 +1370,7 @@ public class Perk {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner, "[npc.NameIsFull] from an ancient aristocratic family, and [npc.has] been given the best education money can buy."
-					+ " Insufferably arrogant, [npc.name] [npc.verb(know)] that [npc.sheIsFull] better than everyone else, and won't let any filthy peasant get the better of [npc.herHim]!");
+                    + " Insufferably arrogant, [npc.name] know that [npc.sheIsFull] better than everyone else, and won't let any filthy peasant get the better of [npc.herHim]!");
 		}
 	};
 	
@@ -1389,8 +1389,8 @@ public class Perk {
 					"[style.boldExcellent(Double)] slave income from maids and butlers")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.Name] [npc.is] the perfect example of a hard-working maid, and while wearing a complete set of maid's clothes, the bonus that [npc.she] [npc.verb(receive)] is considerably boosted."
-					+ " [npc.She] also [npc.verb(know)] how to train butlers and other maids to be exceptional at their jobs.");
+            return UtilText.parse(owner, "[npc.Name] [npc.is] the perfect example of a hard-working maid, and while wearing a complete set of maid's clothes, the bonus that [npc.she] receive is considerably boosted."
+                    + " [npc.She] also know how to train butlers and other maids to be exceptional at their jobs.");
 		}
 	};
 
@@ -1408,8 +1408,8 @@ public class Perk {
 					"[style.boldExcellent(Double)] slave income from maids and butlers")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.Name] [npc.is] the perfect example of a hard-working butler, and while wearing a complete set of butler's clothes, the bonus that [npc.she] [npc.verb(receive)] is considerably boosted."
-					+ " [npc.She] also [npc.verb(know)] how to train maids and other butlers to be exceptional at their jobs.");
+            return UtilText.parse(owner, "[npc.Name] [npc.is] the perfect example of a hard-working butler, and while wearing a complete set of butler's clothes, the bonus that [npc.she] receive is considerably boosted."
+                    + " [npc.She] also know how to train maids and other butlers to be exceptional at their jobs.");
 		}
 	};
 
@@ -1450,7 +1450,7 @@ public class Perk {
 
 	public static AbstractPerk CRITICAL_BOOST = new AbstractPerk(20,
 			false,
-			"critical power",
+            "критический урон",
 			PerkCategory.PHYSICAL,
 			"perks/critical_power",
 			PresetColour.BASE_ORANGE,
@@ -1461,13 +1461,13 @@ public class Perk {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.NameIsFull] able to really get the most out of any critical moves [npc.she] [npc.verb(make)].");
+            return UtilText.parse(owner, "[npc.NameIsFull] able to really get the most out of any critical moves [npc.she] make.");
 		}
 	};
 
 	public static AbstractPerk CRITICAL_BOOST_LUST = new AbstractPerk(20,
 			false,
-			"critical power",
+            "критический урон",
 			PerkCategory.LUST,
 			"perks/critical_power",
 			PresetColour.BASE_PINK,
@@ -1478,13 +1478,13 @@ public class Perk {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.NameIsFull] able to really get the most out of any critical moves [npc.she] [npc.verb(make)].");
+            return UtilText.parse(owner, "[npc.NameIsFull] able to really get the most out of any critical moves [npc.she] make.");
 		}
 	};
 
 	public static AbstractPerk CRITICAL_BOOST_ARCANE = new AbstractPerk(20,
 			false,
-			"critical power",
+            "критический урон",
 			PerkCategory.ARCANE,
 			"perks/critical_power",
 			PresetColour.BASE_PURPLE,
@@ -1495,7 +1495,7 @@ public class Perk {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.NameIsFull] able to really get the most out of any critical moves [npc.she] [npc.verb(make)].");
+            return UtilText.parse(owner, "[npc.NameIsFull] able to really get the most out of any critical moves [npc.she] make.");
 		}
 	};
 	
@@ -1620,7 +1620,7 @@ public class Perk {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "Having little time for strategies which don't involve an all-out show of force, [npc.name] [npc.verb(throw)] [npc.herself] into battle with a complete disregard for [npc.her] own safety.");
+            return UtilText.parse(owner, "Having little time for strategies which don't involve an all-out show of force, [npc.name] throw [npc.herself] into battle with a complete disregard for [npc.her] own safety.");
 		}
 	};
 	
@@ -1688,7 +1688,7 @@ public class Perk {
 	
 	public static AbstractPerk SPELL_EFFICIENCY = new AbstractPerk(20,
 			false,
-			"spell efficiency",
+            "эффективность заклинаний",
 			PerkCategory.ARCANE,
 			"perks/spell_efficiency",
 			PresetColour.ATTRIBUTE_ARCANE,
@@ -1893,7 +1893,7 @@ public class Perk {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.Name] [npc.verb(know)] exactly what sort of lewd things the residents of Dominion get up to, and so can use this knowledge to [npc.her] advantage...");
+            return UtilText.parse(owner, "[npc.Name] know exactly what sort of lewd things the residents of Dominion get up to, and so can use this knowledge to [npc.her] advantage...");
 		}
 	};
 	
@@ -2037,7 +2037,7 @@ public class Perk {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.NameIsFull] an expert harnessing the arcane for combat applications. [npc.She] [npc.verb(gain)] a bonus to [npc.her] spell damage and efficiency.");
+            return UtilText.parse(owner, "[npc.NameIsFull] an expert harnessing the arcane for combat applications. [npc.She] gain a bonus to [npc.her] spell damage and efficiency.");
 		}
 	};
 	
@@ -2136,7 +2136,7 @@ public class Perk {
 			Util.newHashMapOfValues(),
 			Util.newArrayListOfValues(
 					"Will not wake during [style.colourSex(gentle)] sex",
-					"[style.boldExcellent(10x)] [style.colourHealth(health)] and [style.colourMana(aura)] regeneration rate")) {
+                    "[style.boldExcellent(10x)] [style.colourHealth(health)] и [style.colourMana(aura)] regeneration rate")) {
 		@Override
 		public String applyPerkGained(GameCharacter character) {
 			return UtilText.parsePlayerThought("");
@@ -2149,7 +2149,7 @@ public class Perk {
 		public String getDescription(GameCharacter owner) {
 			if(owner!=null) {
 				return UtilText.parse(owner,
-						"[npc.Name] [npc.verb(sleep)] very deeply, with even shouting and physically shaking [npc.herHim] often not being enough to wake [npc.herHim] up."
+                        "[npc.Name] sleep very deeply, with even shouting and physically shaking [npc.herHim] often not being enough to wake [npc.herHim] up."
 							+" [npc.SheIs] so unresponsive while sleeping that a gentle partner could get away with having sex with [npc.herHim] without causing [npc.herHim] to wake...");
 			}
 			return "";
@@ -2439,7 +2439,7 @@ public class Perk {
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.Name] [npc.verb(love)] a good brawl, and [npc.is] a fearsome opponent in unarmed combat.");
+            return UtilText.parse(owner, "[npc.Name] love a good brawl, and [npc.is] a fearsome opponent in unarmed combat.");
 		}
 	};
 
@@ -2463,7 +2463,7 @@ public class Perk {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.NameIsFull] very flirtatious, and although [npc.her] charms work well on both sexes, [npc.she] [npc.verb(find)] that [npc.her] advances are particularly effective against feminine people.");
+            return UtilText.parse(owner, "[npc.NameIsFull] very flirtatious, and although [npc.her] charms work well on both sexes, [npc.she] find that [npc.her] advances are particularly effective against feminine people.");
 		}
 
 	};
@@ -2488,7 +2488,7 @@ public class Perk {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.NameIsFull] quite a tease, and although [npc.her] charms work well on both sexes, [npc.she] [npc.verb(find)] that [npc.her] advances are particularly effective against masculine people.");
+            return UtilText.parse(owner, "[npc.NameIsFull] quite a tease, and although [npc.her] charms work well on both sexes, [npc.she] find that [npc.her] advances are particularly effective against masculine people.");
 		}
 	};
 	
@@ -2506,7 +2506,7 @@ public class Perk {
 			null, null, null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.NameHasFull] mastered the art of sexual persuasion, and [npc.is] able to convince even the cruelest of dominant partners to do as [npc.she] [npc.verb(ask)].");
+            return UtilText.parse(owner, "[npc.NameHasFull] mastered the art of sexual persuasion, and [npc.is] able to convince even the cruelest of dominant partners to do as [npc.she] ask.");
 		}
 	};
 	
@@ -2561,7 +2561,7 @@ public class Perk {
 					new Value<>(Attribute.RESISTANCE_LUST, -2)),
 			Util.newArrayListOfValues(
 					"[style.colourExcellent(x2)] [style.colourArcane(essence gain)] from orgasming",
-					"Gain [style.colourSex(pent-up)] and [style.colourSex(chastity)] status effects [style.colourTerrible(2x faster)]")) {
+                    "Gain [style.colourSex(pent-up)] и [style.colourSex(chastity)] status effects [style.colourTerrible(2x faster)]")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -2581,7 +2581,7 @@ public class Perk {
 			Util.newArrayListOfValues("Goes [style.colourSex(ahegao)] upon orgasming")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.NamePos] orgasms are particularly intense, and [npc.she] can't help but make an exaggerated facial expression every time [npc.she] [npc.verb(climax)].");
+            return UtilText.parse(owner, "[npc.NamePos] orgasms are particularly intense, and [npc.she] can't help but make an exaggerated facial expression every time [npc.she] climax.");
 		}
 	};
 
@@ -2612,7 +2612,7 @@ public class Perk {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner, "Steeling [npc.her] mind against any lustful advances, [npc.nameIsFull] able to enter a meditative state,"
-					+ " reacting to any lust damage [npc.she] [npc.verb(receive)] by regenerating some of [npc.her] "+Attribute.MANA_MAXIMUM.getName()+".");
+                    + " reacting to any lust damage [npc.she] receive by regenerating some of [npc.her] " + Attribute.MANA_MAXIMUM.getName() + ".");
 		}
 	};
 	
@@ -2851,7 +2851,7 @@ public class Perk {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.Name] always [npc.verb(feel)] comfortable wearing masculine clothing, no matter how feminine [npc.her] body may be.");
+            return UtilText.parse(owner, "[npc.Name] always feel comfortable wearing masculine clothing, no matter how feminine [npc.her] body may be.");
 		}
 		@Override
 		public boolean isHiddenPerk() {
@@ -2871,7 +2871,7 @@ public class Perk {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.Name] always [npc.verb(feel)] comfortable wearing feminine clothing, no matter how masculine [npc.her] body may be.");
+            return UtilText.parse(owner, "[npc.Name] always feel comfortable wearing feminine clothing, no matter how masculine [npc.her] body may be.");
 		}
 		@Override
 		public boolean isHiddenPerk() {
@@ -2893,7 +2893,7 @@ public class Perk {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.NameIsFull] very dirty-minded, and often [npc.verb(find)] [npc.her] thoughts dwelling on sex.");
+            return UtilText.parse(owner, "[npc.NameIsFull] very dirty-minded, and often find [npc.her] thoughts dwelling on sex.");
 		}
 		@Override
 		public boolean isHiddenPerk() {
@@ -4854,7 +4854,7 @@ public class Perk {
 
 	public static AbstractPerk ELEMENTAL_EARTH_BOOST_MINOR = new AbstractPerk(20,
 			false,
-			"impact",
+            "влияние",
 			PerkCategory.PHYSICAL_EARTH,
 			"perks/elemental/earth1",
 			PresetColour.SPELL_SCHOOL_EARTH,
@@ -6475,7 +6475,7 @@ public class Perk {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner,
-					"[npc.Name] only [npc.verb(want)] one thing - to be fucked non-stop, no matter who's doing the fucking nor how rough they are.");
+                    "[npc.Name] only want one thing - to be fucked non-stop, no matter who's doing the fucking nor how rough they are.");
 		}
 	};
 
@@ -6493,7 +6493,7 @@ public class Perk {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner,
-					"[npc.Name] [npc.verb(know)] that [npc.sheIs] nothing more than an object, and will do absolutely anything [npc.her] owner asks of [npc.herHim].");
+                    "[npc.Name] know that [npc.sheIs] nothing more than an object, and will do absolutely anything [npc.her] owner asks of [npc.herHim].");
 		}
 	};
 
@@ -6553,7 +6553,7 @@ public class Perk {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner,
-					"As [npc.sheIs] just a doll, and not a real person, [npc.name] [npc.verb(lack)] an arcane aura, and as such cannot absorb nor generate essences."
+                    "As [npc.sheIs] just a doll, and not a real person, [npc.name] lack an arcane aura, and as such cannot absorb nor generate essences."
 						+ " Normal transformation methods also have no effect on [npc.herHim], with only special doll-specific transformatives having any effect.");
 		}
 	};
@@ -6591,7 +6591,7 @@ public class Perk {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner,
-					"Instead of requiring calories from food or drink to function, [npc.name] passively [npc.verb(absorb)] background arcane energy to power [npc.herself]."
+                    "Instead of requiring calories from food or drink to function, [npc.name] passively absorb background arcane energy to power [npc.herself]."
 						+ " Thanks to this, arcane storms grant [npc.herHim] a significant amount of vitality.");
 		}
 	};

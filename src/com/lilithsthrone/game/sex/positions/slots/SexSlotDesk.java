@@ -15,7 +15,7 @@ public class SexSlotDesk {
 	public static final SexSlot OVER_DESK_ON_BACK = new SexSlot(
 			"Lying back",
 			"lying back",
-			"[npc.Name] [npc.verb(collapse)] back down onto the [pc.desk], before letting out [npc.a_moan+] as [npc.she] [npc.verb(prepare)] to reach [npc.her] climax.",
+            "[npc.Name] collapse back down onto the [pc.desk], before letting out [npc.a_moan+] as [npc.she] prepare to reach [npc.her] climax.",
 			false,
 			SexSlotTag.OVER_DESK_BACK);
 	public static final SexSlot OVER_DESK_ON_BACK_TWO = new SexSlot(OVER_DESK_ON_BACK) {
@@ -41,7 +41,7 @@ public class SexSlotDesk {
 	public static final SexSlot OVER_DESK_ON_FRONT = new SexSlot(
 			"Bent over",
 			"bent over",
-			"[npc.Name] [npc.verb(collapse)] down onto the [pc.desk], before letting out [npc.a_moan+] as [npc.she] [npc.verb(prepare)] to reach [npc.her] climax.",
+            "[npc.Name] collapse down onto the [pc.desk], before letting out [npc.a_moan+] as [npc.she] prepare to reach [npc.her] climax.",
 			false,
 			SexSlotTag.OVER_DESK_FRONT);
 	public static final SexSlot OVER_DESK_ON_FRONT_TWO = new SexSlot(OVER_DESK_ON_FRONT) {
@@ -92,7 +92,7 @@ public class SexSlotDesk {
 	public static final SexSlot HUMPING = new SexSlot(
 			"Humping",
 			"humping",
-			"[npc.Name] wildly [npc.verb(buck)] [npc.her] [npc.hips] against [npc2.name], before letting out [npc.a_moan+] as [npc.she] [npc.verb(prepare)] to reach [npc.her] climax.",
+            "[npc.Name] wildly buck [npc.her] [npc.hips] against [npc2.name], before letting out [npc.a_moan+] as [npc.she] prepare to reach [npc.her] climax.",
 			false) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -105,7 +105,7 @@ public class SexSlotDesk {
 	public static final SexSlot HUMPING_TWO = new SexSlot(
 			"Humping",
 			"humping (2nd)",
-			"[npc.Name] wildly [npc.verb(buck)] [npc.her] [npc.hips] against [npc2.name], before letting out [npc.a_moan+] as [npc.she] [npc.verb(prepare)] to reach [npc.her] climax.",
+            "[npc.Name] wildly buck [npc.her] [npc.hips] against [npc2.name], before letting out [npc.a_moan+] as [npc.she] prepare to reach [npc.her] climax.",
 			false) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -118,7 +118,7 @@ public class SexSlotDesk {
 	public static final SexSlot HUMPING_THREE = new SexSlot(
 			"Humping",
 			"humping (3rd)",
-			"[npc.Name] wildly [npc.verb(buck)] [npc.her] [npc.hips] against [npc2.name], before letting out [npc.a_moan+] as [npc.she] [npc.verb(prepare)] to reach [npc.her] climax.",
+            "[npc.Name] wildly buck [npc.her] [npc.hips] against [npc2.name], before letting out [npc.a_moan+] as [npc.she] prepare to reach [npc.her] climax.",
 			false) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -131,7 +131,7 @@ public class SexSlotDesk {
 	public static final SexSlot HUMPING_FOUR = new SexSlot(
 			"Humping",
 			"humping (4th)",
-			"[npc.Name] wildly [npc.verb(buck)] [npc.her] [npc.hips] against [npc2.name], before letting out [npc.a_moan+] as [npc.she] [npc.verb(prepare)] to reach [npc.her] climax.",
+            "[npc.Name] wildly buck [npc.her] [npc.hips] against [npc2.name], before letting out [npc.a_moan+] as [npc.she] prepare to reach [npc.her] climax.",
 			false) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -145,7 +145,7 @@ public class SexSlotDesk {
 	public static final SexSlot PERFORMING_ORAL = new SexSlot(
 			"Performing oral",
 			"performing oral",
-			"[npc.Name] [npc.verb(lower)] [npc.her] head down into [npc2.namePos] groin, before letting out [npc.a_moan+] as [npc.she] [npc.verb(prepare)] to reach [npc.her] climax.",
+            "[npc.Name] lower [npc.her] head down into [npc2.namePos] groin, before letting out [npc.a_moan+] as [npc.she] prepare to reach [npc.her] climax.",
 			false) {
 		@Override
 		public boolean isStanding(GameCharacter target) {
@@ -187,7 +187,7 @@ public class SexSlotDesk {
 	public static final SexSlot RECEIVING_ORAL = new SexSlot(
 			"Receiving oral",
 			"receiving oral",
-			"[npc.Name] [npc.verb(press)] [npc.herself] up close against [npc2.name], before letting out [npc.a_moan+] as [npc.she] [npc.verb(prepare)] to reach [npc.her] climax.",
+            "[npc.Name] press [npc.herself] up close against [npc2.name], before letting out [npc.a_moan+] as [npc.she] prepare to reach [npc.her] climax.",
 			true);
 	public static final SexSlot RECEIVING_ORAL_TWO = new SexSlot(RECEIVING_ORAL) {
 		@Override

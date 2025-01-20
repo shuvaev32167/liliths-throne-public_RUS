@@ -91,25 +91,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(open)] [npc.her] mouth wide and [npc.verb(slide)] the bridle's bit into it, before reaching back and fastening the buckles to keep the headstall in place.]]>
+            <![CDATA[[npc.Name] open [npc.her] mouth wide and slide the bridle's bit into it, before reaching back and fastening the buckles to keep the headstall in place.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(push)] the bridle's bit into [npc2.namePos] mouth, before reaching back and fastening the buckles to keep the headstall in place.]]>
+            <![CDATA[[npc.Name] push the bridle's bit into [npc2.namePos] mouth, before reaching back and fastening the buckles to keep the headstall in place.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(force)] the bridle's bit into [npc2.namePos] mouth, before reaching back and tightly fastening the buckles to keep the headstall in place.]]>
+            <![CDATA[[npc.Name] roughly force the bridle's bit into [npc2.namePos] mouth, before reaching back and tightly fastening the buckles to keep the headstall in place.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(unfasten)] the bridle's straps and [npc.verb(take)] it off.]]>
+            <![CDATA[[npc.Name] unfasten the bridle's straps and take it off.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(unfasten)] the bridle's straps and [npc.verb(take)] it off.]]>
+            <![CDATA[[npc.Name] unfasten the bridle's straps and take it off.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] impatiently [npc.verb(unfasten)] the bridle's straps and [npc.verb(yank)] it off.]]>
+            <![CDATA[[npc.Name] impatiently unfasten the bridle's straps and yank it off.]]>
 		</otherRough>
 	</displacementText>
 </clothing>

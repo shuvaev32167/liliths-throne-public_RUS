@@ -48,25 +48,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(wrap)] the sarashi tightly around [npc.her] chest.]]>
+            <![CDATA[[npc.Name] wrap the sarashi tightly around [npc.her] chest.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(wrap)] the sarashi tightly around [npc2.namePos] chest.]]>
+            <![CDATA[[npc.Name] wrap the sarashi tightly around [npc2.namePos] chest.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(wrap)] the sarashi tightly around [npc2.namePos] chest.]]>
+            <![CDATA[[npc.Name] roughly wrap the sarashi tightly around [npc2.namePos] chest.]]>
 	  </otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unwrap)] the sarashi from around [npc.her] chest and [npc.verb(take)] it off.]]>
+            <![CDATA[[npc.Name] unwrap the sarashi from around [npc.her] chest and take it off.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unwrap)] the sarashi from around [npc2.namePos] chest and [npc.verb(take)] it off.]]>
+            <![CDATA[[npc.Name] unwrap the sarashi from around [npc2.namePos] chest and take it off.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(unwrap)] the sarashi from around [npc2.namePos] chest and [npc.verb(yank)] it off.]]>
+            <![CDATA[[npc.Name] roughly unwrap the sarashi from around [npc2.namePos] chest and yank it off.]]>
 		</otherRough>
 	</displacementText>
 	

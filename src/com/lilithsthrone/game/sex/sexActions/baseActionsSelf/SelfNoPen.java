@@ -1,7 +1,5 @@
 package com.lilithsthrone.game.sex.sexActions.baseActionsSelf;
 
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
@@ -17,6 +15,8 @@ import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
+
+import java.util.List;
 
 /**
  * @since 0.1.79
@@ -52,19 +52,19 @@ public class SelfNoPen {
 		public String getDescription() {
 			if(Main.sex.getCharacterPerformingAction().isCoverableAreaExposed(CoverableArea.VAGINA)) {
 				return UtilText.returnStringAtRandom(
-						"Reaching down between [npc.her] legs, [npc.name] [npc.verb(tease)] [npc.her] fingers over the entrance to [npc.her] [npc.pussy+], letting out [npc.a_moan+] as [npc.she] [npc.verb(stimulate)] [npc.her] outer folds.",
-						"[npc.Name] [npc.verb(probe)] [npc.her] fingers down between [npc.her] legs, [npc.moaning] softly as [npc.she] [npc.verb(tease)] [npc.her] fingers over the entrance to [npc.her] inviting [npc.pussy].",
-						"Sliding [npc.her] fingertips over [npc.her] neglected [npc.pussy+], [npc.name] [npc.verb(let)] out a [npc.moan] as [npc.she] [npc.verb(stimulate)] [npc.her] outer labia.",
-						"[npc.Name] eagerly [npc.verb(slide)] [npc.her] fingers over [npc.her] needy [npc.pussy], [npc.moaning+] as [npc.she] gently [npc.verb(press)] down on [npc.her] outer labia.");
+                        "Reaching down between [npc.her] legs, [npc.name] tease [npc.her] fingers over the entrance to [npc.her] [npc.pussy+], letting out [npc.a_moan+] as [npc.she] stimulate [npc.her] outer folds.",
+                        "[npc.Name] probe [npc.her] fingers down between [npc.her] legs, [npc.moaning] softly as [npc.she] tease [npc.her] fingers over the entrance to [npc.her] inviting [npc.pussy].",
+                        "Sliding [npc.her] fingertips over [npc.her] neglected [npc.pussy+], [npc.name] let out a [npc.moan] as [npc.she] stimulate [npc.her] outer labia.",
+                        "[npc.Name] eagerly slide [npc.her] fingers over [npc.her] needy [npc.pussy], [npc.moaning+] as [npc.she] gently press down on [npc.her] outer labia.");
 			} else {
 				return UtilText.returnStringAtRandom(
-						"[npc.Name] [npc.verb(run)] [npc.her] hand down over [npc.her] groin, pressing [npc.her] "+Main.sex.getCharacterPerformingAction().getLowestZLayerCoverableArea(CoverableArea.VAGINA).getName()
-							+" down hard against [npc.her] needy [npc.pussy] as [npc.she] [npc.verb(let)] out a little whimper.",
-						"[npc.Name] [npc.verb(push)] [npc.her] fingers down between [npc.her] legs, [npc.moaning+] as [npc.she] [npc.verb(rub)] [npc.her] "+Main.sex.getCharacterPerformingAction().getLowestZLayerCoverableArea(CoverableArea.VAGINA).getName()
+                        "[npc.Name] run [npc.her] hand down over [npc.her] groin, pressing [npc.her] " + Main.sex.getCharacterPerformingAction().getLowestZLayerCoverableArea(CoverableArea.VAGINA).getName()
+                                + " down hard against [npc.her] needy [npc.pussy] as [npc.she] let out a little whimper.",
+                        "[npc.Name] push [npc.her] fingers down between [npc.her] legs, [npc.moaning+] as [npc.she] rub [npc.her] " + Main.sex.getCharacterPerformingAction().getLowestZLayerCoverableArea(CoverableArea.VAGINA).getName()
 							+" against [npc.her] pussy lips.",
-						"[npc.Name] [npc.verb(slide)] [npc.her] fingertips over [npc.her] "+Main.sex.getCharacterPerformingAction().getHighestZLayerCoverableArea(CoverableArea.VAGINA).getName()
-							+", letting out [npc.a_moan+] as [npc.she] [npc.verb(press)] down and [npc.verb(try)] to stimulate [npc.her] [npc.pussy+] through [npc.her] clothing.",
-						"Pushing down between [npc.her] legs with the palm of [npc.her] hand, [npc.name] [npc.verb(squeeze)] [npc.her] thighs together as [npc.she] [npc.verb(press)] [npc.her] "
+                        "[npc.Name] slide [npc.her] fingertips over [npc.her] " + Main.sex.getCharacterPerformingAction().getHighestZLayerCoverableArea(CoverableArea.VAGINA).getName()
+                                + ", letting out [npc.a_moan+] as [npc.she] press down and try to stimulate [npc.her] [npc.pussy+] through [npc.her] clothing.",
+                        "Pushing down between [npc.her] legs with the palm of [npc.her] hand, [npc.name] squeeze [npc.her] thighs together as [npc.she] press [npc.her] "
 								+Main.sex.getCharacterPerformingAction().getLowestZLayerCoverableArea(CoverableArea.VAGINA).getName() +" tightly against [npc.her] neglected [npc.pussy].");
 			}
 		}
@@ -107,19 +107,19 @@ public class SelfNoPen {
 		public String getDescription() {
 			if(Main.sex.getCharacterPerformingAction().isCoverableAreaExposed(CoverableArea.PENIS)) {
 				return UtilText.returnStringAtRandom(
-						"Reaching down between [npc.her] [npc.legs], [npc.name] [npc.verb(run)] [npc.her] fingertips over [npc.her] doll-like mound, [npc.moaning+] as [npc.she] [npc.verb(tease)] the sensitive area.",
-						"[npc.Name] [npc.verb(tease)] [npc.her] fingers over the sensitive doll-like mound between [npc.her] legs, [npc.moaning+] as [npc.she] [npc.verb(stimulate)] [npc.herself].",
-						"With probing fingers, [npc.name] [npc.verb(reach)] down and [npc.verb(start)] to pinch and rub at [npc.her] delicate genderless crotch.",
-						"Despite lacking genitalia, [npc.namePos] crotch remains a highly sensitive erogenous zone, and [npc.she] eagerly [npc.verb(start)] rubbing and pressing down on it with greedy fingers.");
+                        "Reaching down between [npc.her] [npc.legs], [npc.name] run [npc.her] fingertips over [npc.her] doll-like mound, [npc.moaning+] as [npc.she] tease the sensitive area.",
+                        "[npc.Name] tease [npc.her] fingers over the sensitive doll-like mound between [npc.her] legs, [npc.moaning+] as [npc.she] stimulate [npc.herself].",
+                        "With probing fingers, [npc.name] reach down and start to pinch and rub at [npc.her] delicate genderless crotch.",
+                        "Despite lacking genitalia, [npc.namePos] crotch remains a highly sensitive erogenous zone, and [npc.she] eagerly start rubbing and pressing down on it with greedy fingers.");
 			} else {
 				return UtilText.returnStringAtRandom(
-						"[npc.Name] [npc.verb(run)] [npc.her] [npc.hand] over [npc.her] groin, pressing [npc.her] "+Main.sex.getCharacterPerformingAction().getLowestZLayerCoverableArea(CoverableArea.VAGINA).getName()
-							+" down against [npc.her] doll-like mound as [npc.she] [npc.verb(let)] out a little sigh.",
-						"[npc.Name] [npc.verb(push)] [npc.her] fingers down between [npc.her] legs, [npc.moaning+] as [npc.she] [npc.verb(rub)] [npc.her] "+Main.sex.getCharacterPerformingAction().getLowestZLayerCoverableArea(CoverableArea.VAGINA).getName()
+                        "[npc.Name] run [npc.her] [npc.hand] over [npc.her] groin, pressing [npc.her] " + Main.sex.getCharacterPerformingAction().getLowestZLayerCoverableArea(CoverableArea.VAGINA).getName()
+                                + " down against [npc.her] doll-like mound as [npc.she] let out a little sigh.",
+                        "[npc.Name] push [npc.her] fingers down between [npc.her] legs, [npc.moaning+] as [npc.she] rub [npc.her] " + Main.sex.getCharacterPerformingAction().getLowestZLayerCoverableArea(CoverableArea.VAGINA).getName()
 								+" against [npc.her] genderless crotch.",
-						"[npc.Name] [npc.verb(slide)] [npc.her] fingertips over [npc.her] "+Main.sex.getCharacterPerformingAction().getHighestZLayerCoverableArea(CoverableArea.VAGINA).getName()
+                        "[npc.Name] slide [npc.her] fingertips over [npc.her] " + Main.sex.getCharacterPerformingAction().getHighestZLayerCoverableArea(CoverableArea.VAGINA).getName()
 								+", before pressing down and trying to stimulate [npc.her] doll-like mound through [npc.her] clothing.",
-						"Pushing down between [npc.her] [npc.legs] with the palm of [npc.her] [npc.hand], [npc.name] [npc.verb(squeeze)] [npc.her] thighs together as [npc.she] [npc.verb(press)] [npc.her] "
+                        "Pushing down between [npc.her] [npc.legs] with the palm of [npc.her] [npc.hand], [npc.name] squeeze [npc.her] thighs together as [npc.she] press [npc.her] "
 								+Main.sex.getCharacterPerformingAction().getLowestZLayerCoverableArea(CoverableArea.VAGINA).getName()+" tightly down against [npc.her] genderless mound.");
 			}
 		}

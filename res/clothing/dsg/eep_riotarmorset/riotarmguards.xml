@@ -67,25 +67,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(slip)] the arm guards over [npc.her] forearms and [npc.verb(tighten)] the straps.]]>
+            <![CDATA[[npc.Name] slip the arm guards over [npc.her] forearms and tighten the straps.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(slip)] the arm guards over [npc2.namePos] forearms and [npc.verb(tighten)] the straps.]]>
+            <![CDATA[[npc.Name] slip the arm guards over [npc2.namePos] forearms and tighten the straps.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(stuff)] [npc2.namePos] forearms through the arm guards and hastily [npc.verb(tighten)] the straps.]]>
+            <![CDATA[[npc.Name] stuff [npc2.namePos] forearms through the arm guards and hastily tighten the straps.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(loosen)] the straps on [npc.her] arm guards and [npc.verb(slip)] them off.]]>
+            <![CDATA[[npc.Name] loosen the straps on [npc.her] arm guards and slip them off.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(loosen)] the straps on [npc2.namePos] arm guards and [npc.verb(slip)] them off.]]>
+            <![CDATA[[npc.Name] loosen the straps on [npc2.namePos] arm guards and slip them off.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(tear)] at the straps on [npc2.namePos] arm guards until they're loose enough and [npc.verb(toss)] them aside.]]>
+            <![CDATA[[npc.Name] tear at the straps on [npc2.namePos] arm guards until they're loose enough and toss them aside.]]>
 		</otherRough>
 	</displacementText>
 	

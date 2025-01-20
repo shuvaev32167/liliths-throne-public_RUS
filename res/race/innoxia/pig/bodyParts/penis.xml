@@ -32,7 +32,7 @@
 	</defaultPenetrationModifiers>
 	
 	<transformationDescription><![CDATA[
-		Letting out an involuntary moan, [npc.name] [npc.verb(feel)] [npc.her] penis shifting into a new form, and [npc.sheIs] hit by a wave of overwhelming arousal as a thick sheath suddenly grows around the base of [npc.her] shaft, before the head suddenly tapers down.
+		Letting out an involuntary moan, [npc.name] feel [npc.her] penis shifting into a new form, and [npc.sheIs] hit by a wave of overwhelming arousal as a thick sheath suddenly grows around the base of [npc.her] shaft, before the head suddenly tapers down.
 		<br/>[npc.She] now [npc.has] a [style.boldPig(pig-like penis)], [npc.materialDescriptor] [npc.penisFullDescription(true)].
 		<br/>[npc.She] [npc.has] [style.boldPig([npc.ballsCount]#IF(npc.isInternalTesticles()) internal#ELSE pig#ENDIF balls)], [npc.materialDescriptor] [npc.ballsFullDescription(true)], which produce [npc.cumColour(true)] [style.boldPig(pig cum)].
 	]]></transformationDescription>

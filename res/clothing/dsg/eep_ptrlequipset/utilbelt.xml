@@ -68,25 +68,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(tighten)] the utility belt around [npc.her] waist and [npc.verb(snap)] the buckle together.]]>
+            <![CDATA[[npc.Name] tighten the utility belt around [npc.her] waist and snap the buckle together.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(tighten)] the utility belt around [npc2.namePos] waist and [npc.verb(snap)] the buckle together.]]>
+            <![CDATA[[npc.Name] tighten the utility belt around [npc2.namePos] waist and snap the buckle together.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(tighten)] the utility belt around [npc2.namePos] waist as much as possible and forcibly [npc.verb(snap)] the buckle together.]]>
+            <![CDATA[[npc.Name] tighten the utility belt around [npc2.namePos] waist as much as possible and forcibly snap the buckle together.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unbuckle)] [npc.her] utility belt.]]>
+            <![CDATA[[npc.Name] unbuckle [npc.her] utility belt.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unbuckle)] [npc2.namePos] utility belt.]]>
+            <![CDATA[[npc.Name] unbuckle [npc2.namePos] utility belt.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(rip)] the utility belt off [npc2.namePos] waist.]]>
+            <![CDATA[[npc.Name] rip the utility belt off [npc2.namePos] waist.]]>
 		</otherRough>
 	</displacementText>
 	

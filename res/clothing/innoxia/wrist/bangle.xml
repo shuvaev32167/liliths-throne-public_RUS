@@ -58,49 +58,49 @@
 
   <replacementText slot="WRIST" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(slide)] the bangle into place around [npc.her] wrist.]]>
+        <![CDATA[[npc.Name] slide the bangle into place around [npc.her] wrist.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(slide)] the bangle into place around [npc2.namePos] wrist.]]>
+        <![CDATA[[npc.Name] slide the bangle into place around [npc2.namePos] wrist.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(push)] the bangle into place around [npc2.namePos] wrist.]]>
+        <![CDATA[[npc.Name] roughly push the bangle into place around [npc2.namePos] wrist.]]>
     </otherRough>
   </replacementText>
 
   <displacementText slot="WRIST" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(slide)] the bangle off [npc.her] wrist.]]>
+        <![CDATA[[npc.Name] slide the bangle off [npc.her] wrist.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(slide)] the bangle off [npc2.namePos] wrist.]]>
+        <![CDATA[[npc.Name] slide the bangle off [npc2.namePos] wrist.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(pull)] the bangle off [npc2.namePos] wrist.]]>
+        <![CDATA[[npc.Name] pull the bangle off [npc2.namePos] wrist.]]>
     </otherRough>
   </displacementText>
   
   <replacementText slot="TAIL" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(slide)] the bangle into place around [npc.her] [npc.tail(true)].]]>
+        <![CDATA[[npc.Name] slide the bangle into place around [npc.her] [npc.tail(true)].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(slide)] the bangle into place around [npc2.namePos] [npc2.tail(true)].]]>
+        <![CDATA[[npc.Name] slide the bangle into place around [npc2.namePos] [npc2.tail(true)].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(push)] the bangle into place around [npc2.namePos] [npc2.tail(true)].]]>
+        <![CDATA[[npc.Name] roughly push the bangle into place around [npc2.namePos] [npc2.tail(true)].]]>
     </otherRough>
   </replacementText>
 
   <displacementText slot="TAIL" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(slide)] the bangle off [npc.her] [npc.tail(true)].]]>
+        <![CDATA[[npc.Name] slide the bangle off [npc.her] [npc.tail(true)].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(slide)] the bangle off [npc2.namePos] [npc2.tail(true)].]]>
+        <![CDATA[[npc.Name] slide the bangle off [npc2.namePos] [npc2.tail(true)].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(pull)] the bangle off [npc2.namePos] [npc2.tail(true)].]]>
+        <![CDATA[[npc.Name] pull the bangle off [npc2.namePos] [npc2.tail(true)].]]>
     </otherRough>
   </displacementText>
   

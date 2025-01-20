@@ -22,7 +22,7 @@
 		#ELSE
 			 Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],
 		#ENDIF
-		 and as the transformation finishes, [npc.she] experimentally [npc.verb(twitch)] [npc.her] new capybara-like ears back and forth.
+		 and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new capybara-like ears back and forth.
 		<br/>[npc.Name] now [npc.has] [style.boldCapybara(large, capybara-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].
 	]]></transformationDescription>
 	<bodyDescription><![CDATA[

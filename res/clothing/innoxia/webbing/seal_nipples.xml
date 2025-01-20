@@ -56,25 +56,25 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(use)] [npc.her] spinneret to quickly shoot a thick binding of spider-webbing all over [npc.her] [npc.nipples+].]]>
+        <![CDATA[[npc.Name] use [npc.her] spinneret to quickly shoot a thick binding of spider-webbing all over [npc.her] [npc.nipples+].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(use)] [npc.her] spinneret to quickly shoot a thick binding of spider-webbing all over [npc2.namePos] [npc2.nipples+].]]>
+        <![CDATA[[npc.Name] use [npc.her] spinneret to quickly shoot a thick binding of spider-webbing all over [npc2.namePos] [npc2.nipples+].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] impatiently [npc.verb(use)] [npc.her] spinneret to quickly shoot a thick binding of spider-webbing all over [npc2.namePos] [npc2.nipples+].]]>
+        <![CDATA[[npc.Name] impatiently use [npc.her] spinneret to quickly shoot a thick binding of spider-webbing all over [npc2.namePos] [npc2.nipples+].]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(tear)] off the webbing which was covering [npc.her] [npc.nipples] and [npc.verb(throw)] it away.]]>
+        <![CDATA[[npc.Name] tear off the webbing which was covering [npc.her] [npc.nipples] и throw it away.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(tear)] off the webbing which was covering [npc2.namePos] [npc2.nipples] and [npc.verb(throw)] it away.]]>
+        <![CDATA[[npc.Name] tear off the webbing which was covering [npc2.namePos] [npc2.nipples] и throw it away.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] impatiently [npc.verb(tear)] off the webbing which was covering [npc2.namePos] [npc2.nipples] and [npc.verb(throw)] it away.]]>
+        <![CDATA[[npc.Name] impatiently tear off the webbing which was covering [npc2.namePos] [npc2.nipples] и throw it away.]]>
     </otherRough>
   </displacementText>
 

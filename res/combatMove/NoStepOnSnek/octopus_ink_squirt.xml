@@ -171,9 +171,9 @@
 		NOTE: The damage is automatically applied to the target, so you don't need to handle parsing of that. -->
 		<execute><![CDATA[
 			#IF(!npc.isCoverableAreaExposed(CA_MOUTH))
-				As [npc.her] mouth is blocked, [npc.name] [npc.verb(fail)] to bite [npc2.name], and [npc.verb(end)] up doing no damage at all...
+				As [npc.her] mouth is blocked, [npc.name] fail to bite [npc2.name], and end up doing no damage at all...
 			#ELSE
-				[npc.Name] [npc.verb(open)] [npc.her] mouth and [npc.verb(spit)] a cloud of ink at [npc2.name]!
+				[npc.Name] open [npc.her] mouth and spit a cloud of ink at [npc2.name]!
 			#ENDIF
 		]]></execute>
 		<critDescription><![CDATA[

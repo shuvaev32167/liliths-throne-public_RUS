@@ -882,7 +882,7 @@
 	</p>
 	#IF(npc.hasFetish(FETISH_NON_CON_SUB))
 		<p>
-			Despite [npc.her] rejection of your advances, [npc.name] suddenly [npc.verb(let)] out a horny little moan, letting you know that [npc.sheHas] got a kink for being taken against [npc.her] will. Perhaps if you tried initiating sex with [npc.herHim] in a less public place, such as the toilets, [npc.she]'d engage in some rape-play with you...
+			Despite [npc.her] rejection of your advances, [npc.name] suddenly let out a horny little moan, letting you know that [npc.sheHas] got a kink for being taken against [npc.her] will. Perhaps if you tried initiating sex with [npc.herHim] in a less public place, such as the toilets, [npc.she]'d engage in some rape-play with you...
 		</p>
 	#ELSE
 		<p>

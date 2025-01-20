@@ -51,7 +51,7 @@
 	</toeDescriptorsFeminine>
 	
 	<transformationDescription><![CDATA[
-		A layer of short, pig-like hair quickly grows over [npc.her] legs as they shift into a new form. As [npc.her] new hair spreads down to [npc.her] feet, [npc.her] toes suddenly push together, and [npc.she] [npc.verb(let)] out a cry as they transform into thick, hoof-like nails, making [npc.her] feet look very similar to a pig's hoofs. As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.
+		A layer of short, pig-like hair quickly grows over [npc.her] legs as they shift into a new form. As [npc.her] new hair spreads down to [npc.her] feet, [npc.her] toes suddenly push together, and [npc.she] let out a cry as they transform into thick, hoof-like nails, making [npc.her] feet look very similar to a pig's hoofs. As the transformation ends, [npc.she] see that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.
 		<br/>[npc.Name] now [npc.has] anthropomorphic, [style.boldPig(pig-like legs and hoofed feet)], which are [npc.materialDescriptor] [npc.legFullDescription].
 	]]></transformationDescription>
 	

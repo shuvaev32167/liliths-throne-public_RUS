@@ -1,7 +1,5 @@
 package com.lilithsthrone.game.dialogue.utils;
 
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.combat.spells.SpellSchool;
@@ -11,6 +9,8 @@ import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
+
+import java.util.List;
 
 /**
  * @since 0.3.5.1
@@ -492,7 +492,7 @@ public class SpellManagement {
 	public static final DialogueNode SPELL_CAST_DIALOGUE = new DialogueNode("", "", true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getLabel() {
@@ -505,7 +505,7 @@ public class SpellManagement {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Return to the spell management screen.", spellScreenAfterCasting);
+                return new Response("Продолжить", "Return to the spell management screen.", spellScreenAfterCasting);
 			}
 			return null;
 		}

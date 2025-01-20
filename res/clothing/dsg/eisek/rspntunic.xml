@@ -92,49 +92,49 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] on the tunic. [npc.She] then securely [npc.verb(fasten)] the belt around [npc.namePos] waist.]]>
+            <![CDATA[[npc.Name] pull on the tunic. [npc.She] then securely fasten the belt around [npc.namePos] waist.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(help)] [npc2.name] [npc2.verb(put)] [npc2.her] arms through the tunic's sleeves as [npc.she] [npc.verb(pull)] the rest down over [npc2.her] torso. [npc.She] then securely [npc.verb(fasten)] the belt around [npc2.namePos] waist.]]>
+            <![CDATA[[npc.Name] help [npc2.name] [npc2.verb(put)] [npc2.her] arms through the tunic's sleeves as [npc.she] pull the rest down over [npc2.her] torso. [npc.She] then securely fasten the belt around [npc2.namePos] waist.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(stuff)] [npc2.name] [npc2.verb(put)] [npc2.her] arms into the tunic's sleeves as [npc.she] roughly [npc.verb(pull)] the rest down over [npc2.her] torso. [npc.She] then [npc.verb(yanks)] the belt around [npc2.namePos] waist and [npc.verb(cinch)] it up as tightly as possible.]]>
+            <![CDATA[[npc.Name] stuff [npc2.name] [npc2.verb(put)] [npc2.her] arms into the tunic's sleeves as [npc.she] roughly pull the rest down over [npc2.her] torso. [npc.She] then yanks the belt around [npc2.namePos] waist and cinch it up as tightly as possible.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(undo)] the belt around [npc.namePos] waist and [npc.verb(pull)] off [npc.her] tunic.]]>
+            <![CDATA[[npc.Name] undo the belt around [npc.namePos] waist and pull off [npc.her] tunic.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(undo)] the belt around [npc2.namePos] waist [npc.verb(pull)] off [npc2.her] tunic.]]>
+            <![CDATA[[npc.Name] undo the belt around [npc2.namePos] waist pull off [npc2.her] tunic.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] hastily [npc.verb(undo)] the belt around [npc2.namePos] waist, then [npc.verb(grab)] hold of [npc2.namePos] tunic and roughly [npc.verb(pull)] it off over [npc2.her] head.]]>
+            <![CDATA[[npc.Name] hastily undo the belt around [npc2.namePos] waist, then grab hold of [npc2.namePos] tunic and roughly pull it off over [npc2.her] head.]]>
 		</otherRough>
 	</displacementText>
 
 	<replacementText type="PULLS_DOWN">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc.her] tunic back down over [npc.her] torso and securely [npc.verb(fasten)] the belt around [npc.namePos] waist.]]>
+            <![CDATA[[npc.Name] pull [npc.her] tunic back down over [npc.her] torso and securely fasten the belt around [npc.namePos] waist.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc2.namePos] tunic back down over [npc2.her] torso and securely [npc2.verb(fasten)] the belt around [npc2.namePos] waist.]]>
+            <![CDATA[[npc.Name] pull [npc2.namePos] tunic back down over [npc2.her] torso and securely [npc2.verb(fasten)] the belt around [npc2.namePos] waist.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(pull)] [npc2.namePos] tunic back down over [npc2.her] torso before yanking the belt around [npc2.namePos] waist and cinching it up as tightly as possible.]]>
+            <![CDATA[[npc.Name] roughly pull [npc2.namePos] tunic back down over [npc2.her] torso before yanking the belt around [npc2.namePos] waist and cinching it up as tightly as possible.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="PULLS_UP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(undo)] the belt around [npc.namePos] waist and [npc.verb(pull)] [npc.her] tunic up to just below [npc.her] chin.]]>
+            <![CDATA[[npc.Name] undo the belt around [npc.namePos] waist and pull [npc.her] tunic up to just below [npc.her] chin.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(undo)] the belt around [npc2.namePos] waist and [npc.verb(pull)] [npc2.namePos] tunic up to just below [npc2.her] chin.]]>
+            <![CDATA[[npc.Name] undo the belt around [npc2.namePos] waist and pull [npc2.namePos] tunic up to just below [npc2.her] chin.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] hastily [npc.verb(undo)] the belt around [npc2.namePos] waist and roughly [npc.verb(pull)] [npc2.namePos] tunic up to just below [npc2.her] chin.]]>
+            <![CDATA[[npc.Name] hastily undo the belt around [npc2.namePos] waist and roughly pull [npc2.namePos] tunic up to just below [npc2.her] chin.]]>
 		</otherRough>
 	</displacementText>
 	

@@ -85,73 +85,73 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(gather)] the peplos about [npc.her] waist, before folding the top edges over [npc.her] shoulders and pinning them in place.]]>
+            <![CDATA[[npc.Name] gather the peplos about [npc.her] waist, before folding the top edges over [npc.her] shoulders and pinning them in place.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(gather)] the peplos about [npc2.namePos] waist, before folding the top edges over [npc2.her] shoulders and pinning them in place.]]>
+            <![CDATA[[npc.Name] gather the peplos about [npc2.namePos] waist, before folding the top edges over [npc2.her] shoulders and pinning them in place.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(gather)] the peplos about [npc2.namePos] waist, before folding the top edges over [npc2.her] shoulders and pinning them in place.]]>
+            <![CDATA[[npc.Name] roughly gather the peplos about [npc2.namePos] waist, before folding the top edges over [npc2.her] shoulders and pinning them in place.]]>
 	  </otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unpin)] the peplos, before taking it off.]]>
+            <![CDATA[[npc.Name] unpin the peplos, before taking it off.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unpin)] [npc2.namePos] peplos, before taking it off.]]>
+            <![CDATA[[npc.Name] unpin [npc2.namePos] peplos, before taking it off.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(unpin)] [npc2.namePos] peplos, before taking it off.]]>
+            <![CDATA[[npc.Name] roughly unpin [npc2.namePos] peplos, before taking it off.]]>
 		</otherRough>
 	</displacementText>
 
 	<replacementText type="PULLS_UP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the skirt of [npc.her] peplos back down into the proper position.]]>
+            <![CDATA[[npc.Name] pull the skirt of [npc.her] peplos back down into the proper position.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the skirt [npc2.namePos] peplos back down into the proper position.]]>
+            <![CDATA[[npc.Name] pull the skirt [npc2.namePos] peplos back down into the proper position.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(pull)] the skirt [npc2.namePos] peplos back down into the proper position.]]>
+            <![CDATA[[npc.Name] roughly pull the skirt [npc2.namePos] peplos back down into the proper position.]]>
 	  </otherRough>
 	</replacementText>
 
 	<displacementText type="PULLS_UP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] up the skirt of [npc.her] peplos.]]>
+            <![CDATA[[npc.Name] pull up the skirt of [npc.her] peplos.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] up the skirt of [npc2.namePos] peplos.]]>
+            <![CDATA[[npc.Name] pull up the skirt of [npc2.namePos] peplos.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(grab)] hold of the skirt of [npc2.namePos] peplos, before roughly pulling it up.]]>
+            <![CDATA[[npc.Name] grab hold of the skirt of [npc2.namePos] peplos, before roughly pulling it up.]]>
 		</otherRough>
 	</displacementText>
 
 	<displacementText type="PULLS_DOWN">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unpin)] [npc.her] peplos and [npc.verb(allow)] the top half to fall down around [npc.her] waist.]]>
+            <![CDATA[[npc.Name] unpin [npc.her] peplos and allow the top half to fall down around [npc.her] waist.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unpin)] [npc2.namePos] peplos and [npc.verb(allow)] the top half to fall down around [npc2.her] waist.]]>
+            <![CDATA[[npc.Name] unpin [npc2.namePos] peplos and allow the top half to fall down around [npc2.her] waist.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(unpin)] [npc2.namePos] peplos and [npc.verb(yank)] the top half down around [npc2.her] waist.]]>
+            <![CDATA[[npc.Name] roughly unpin [npc2.namePos] peplos and yank the top half down around [npc2.her] waist.]]>
 	  </otherRough>
 	</displacementText>
 
 	<replacementText type="PULLS_DOWN">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] up the top half of [npc.her] peplos and [npc.verb(pin)] the top edges into place over [npc.her] shoulders.]]>
+            <![CDATA[[npc.Name] pull up the top half of [npc.her] peplos and pin the top edges into place over [npc.her] shoulders.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] up the top half of [npc2.namePos] peplos and [npc.verb(pin)] the top edges into place over [npc.her] shoulders.]]>
+            <![CDATA[[npc.Name] pull up the top half of [npc2.namePos] peplos and pin the top edges into place over [npc.her] shoulders.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(yank)] up the top half of [npc2.namePos] peplos and [npc.verb(pin)] the top edges into place over [npc.her] shoulders.]]>
+            <![CDATA[[npc.Name] roughly yank up the top half of [npc2.namePos] peplos and pin the top edges into place over [npc.her] shoulders.]]>
 		</otherRough>
 	</replacementText>
 

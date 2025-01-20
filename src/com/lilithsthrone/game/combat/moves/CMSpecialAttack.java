@@ -1,9 +1,5 @@
 package com.lilithsthrone.game.combat.moves;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.CoverableArea;
@@ -25,6 +21,10 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @since 0.1.0
@@ -59,7 +59,7 @@ public class CMSpecialAttack {
         @Override
         protected int getDamage(int turnIndex, GameCharacter source, GameCharacter target, boolean isCrit) {
             DamageType damageType = getDamageType(turnIndex, source);
-            return (int) Attack.calculateSpecialAttackDamage(source, target, getType(), damageType, getBaseDamage(source), getDamageVariance(), false);
+            return Attack.calculateSpecialAttackDamage(source, target, getType(), damageType, getBaseDamage(source), getDamageVariance(), false);
         }
         @Override
         public Value<Boolean, String> isAvailableFromSpecialCase(GameCharacter source) {
@@ -93,8 +93,8 @@ public class CMSpecialAttack {
             
             return formatAttackOutcome(source, target,
             		(source.isLegMovementHindered()
-            				?"As [npc.her] clothing is restricting [npc.her] leg movement, [npc.name] [npc.verb(struggle)] to put any power behind [npc.her] kick, dealing minimal damage to [npc2.name]..."
-            				:"[npc.Name] [npc.verb(turn)] to one side, before kicking out and powerfully striking [npc2.name] with [npc.her] "+(source.getLegConfiguration()==LegConfiguration.QUADRUPEDAL?"hoofs":"hoof")+"!")
+                            ? "As [npc.her] clothing is restricting [npc.her] leg movement, [npc.name] struggle to put any power behind [npc.her] kick, dealing minimal damage to [npc2.name]..."
+                            : "[npc.Name] turn to one side, before kicking out and powerfully striking [npc2.name] with [npc.her] " + (source.getLegConfiguration() == LegConfiguration.QUADRUPEDAL ? "hoofs" : "hoof") + "!")
             			+damageValue.getKey(),
             		"[npc2.Name] took " + getFormattedDamage(damageType, damageValue.getValue(), target, true, maxLust) + " damage!",
             		(isCrit
@@ -111,10 +111,8 @@ public class CMSpecialAttack {
         public boolean canCrit(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
         	int damage = getDamage(turnIndex, source, target, false);
             int potentialDamage = getDamageType(turnIndex, source).shieldCheckNoDamage(source, target, damage);
-            if(potentialDamage<=0) {// != damage) {
-                return true;
-            }
-            return false;
+            // != damage) {
+            return potentialDamage <= 0;
         }
     };
 
@@ -140,7 +138,7 @@ public class CMSpecialAttack {
         @Override
         protected int getDamage(int turnIndex, GameCharacter source, GameCharacter target, boolean isCrit) {
             DamageType damageType = getDamageType(turnIndex, source);
-            return (int) Attack.calculateSpecialAttackDamage(source, target, getType(), damageType, getBaseDamage(source), getDamageVariance(), isCrit);
+            return Attack.calculateSpecialAttackDamage(source, target, getType(), damageType, getBaseDamage(source), getDamageVariance(), isCrit);
         }
         @Override
         public Value<Boolean, String> isAvailableFromSpecialCase(GameCharacter source) {
@@ -171,8 +169,8 @@ public class CMSpecialAttack {
             
             return formatAttackOutcome(source, target,
             		(source.isArmMovementHindered()
-            				?"As [npc.her] clothing is restricting [npc.her] arm movement, [npc.name] [npc.verb(struggle)] to land [npc.her] scratch attack, dealing only half damage to [npc2.name]..."
-            				:"Extending the claws on [npc.her] anthropomorphic cat-like hands, [npc.name] quickly [npc.verb(dash)] forwards, attempting to scratch [npc2.name]!")+damageValue.getKey(),
+                            ? "As [npc.her] clothing is restricting [npc.her] arm movement, [npc.name] struggle to land [npc.her] scratch attack, dealing only half damage to [npc2.name]..."
+                            : "Extending the claws on [npc.her] anthropomorphic cat-like hands, [npc.name] quickly dash forwards, attempting to scratch [npc2.name]!") + damageValue.getKey(),
             		"[npc2.Name] took " + getFormattedDamage(damageType, damageValue.getValue(), target, true, maxLust) + " damage!",
             		(isCrit
             			?"[npc.NamePos] scratch is particularly effective!"
@@ -215,7 +213,7 @@ public class CMSpecialAttack {
         @Override
         protected int getDamage(int turnIndex, GameCharacter source, GameCharacter target, boolean isCrit) {
             DamageType damageType = getDamageType(turnIndex, source);
-            return (int) Attack.calculateSpecialAttackDamage(source, target, getType(), damageType, getBaseDamage(source), getDamageVariance(), isCrit);
+            return Attack.calculateSpecialAttackDamage(source, target, getType(), damageType, getBaseDamage(source), getDamageVariance(), isCrit);
         }
         @Override
         public Value<Boolean, String> isAvailableFromSpecialCase(GameCharacter source) {
@@ -246,7 +244,7 @@ public class CMSpecialAttack {
             Value<String, Integer> damageValue = damageType.damageTarget(source, target, getDamage(turnIndex, source, target, isCrit));
             
             return formatAttackOutcome(source, target,
-            		"[npc.Name] [npc.verb(turn)] to one side, using the momentum to smack [npc.her] huge [npc.tailRace]-tail straight into [npc2.name]!"+damageValue.getKey(),
+                    "[npc.Name] turn to one side, using the momentum to smack [npc.her] huge [npc.tailRace]-tail straight into [npc2.name]!" + damageValue.getKey(),
             		"[npc2.Name] took " + getFormattedDamage(damageType, damageValue.getValue(), target, true, maxLust) + " damage!",
             		(isCrit
         				?"[npc.NamePos] tail swipe is particularly effective!"
@@ -264,10 +262,7 @@ public class CMSpecialAttack {
         }
         @Override
         public boolean canCrit(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
-            if(source.getTailGirth().getValue()>=PenetrationGirth.FIVE_THICK.getValue()) {
-                return true;
-            }
-            return false;
+            return source.getTailGirth().getValue() >= PenetrationGirth.FIVE_THICK.getValue();
         }
     };
 
@@ -293,7 +288,7 @@ public class CMSpecialAttack {
         @Override
         protected int getDamage(int turnIndex, GameCharacter source, GameCharacter target, boolean isCrit) {
             DamageType damageType = getDamageType(turnIndex, source);
-            return (int) Attack.calculateSpecialAttackDamage(source, target, getType(), damageType, getBaseDamage(source), getDamageVariance(), isCrit);
+            return Attack.calculateSpecialAttackDamage(source, target, getType(), damageType, getBaseDamage(source), getDamageVariance(), isCrit);
         }
         @Override
         public Value<Boolean, String> isAvailableFromSpecialCase(GameCharacter source) {
@@ -329,11 +324,11 @@ public class CMSpecialAttack {
             
             return formatAttackOutcome(source, target,
             		(source.isArmMovementHindered()
-            				?"As [npc.her] clothing is restricting [npc.her] arm movement, [npc.name] [npc.verb(struggle)] to land [npc.her] scratch attack, dealing only half damage to [npc2.name]..."
-            				:"Extending the claws on [npc.her] anthropomorphic squirrel-like hands, [npc.name] quickly [npc.verb(dash)] forwards, attempting to scratch at [npc2.name]!")+damageValue.getKey(),
+                            ? "As [npc.her] clothing is restricting [npc.her] arm movement, [npc.name] struggle to land [npc.her] scratch attack, dealing only half damage to [npc2.name]..."
+                            : "Extending the claws on [npc.her] anthropomorphic squirrel-like hands, [npc.name] quickly dash forwards, attempting to scratch at [npc2.name]!") + damageValue.getKey(),
             		"[npc2.Name] took " + getFormattedDamage(damageType, damageValue.getValue(), target, true, maxLust) + " damage!",
             		(isCrit
-            			?"[npc.Name] rapidly [npc.verb(scratch)] [npc2.name] two more times!"
+                            ? "[npc.Name] rapidly scratch [npc2.name] two more times!"
             			:null),
                 	"[npc2.Name] took an additional "+getFormattedDamage(damageType, dealtCritDamage2, target, true, maxLust)+", and then another "+getFormattedDamage(damageType, dealtCritDamage3, target, true, maxLust)+" damage!");
         }
@@ -369,7 +364,7 @@ public class CMSpecialAttack {
         @Override
         protected int getDamage(int turnIndex, GameCharacter source, GameCharacter target, boolean isCrit) {
             DamageType damageType = getDamageType(turnIndex, source);
-            return (int) Attack.calculateSpecialAttackDamage(source, target, getType(), damageType, getBaseDamage(source), getDamageVariance(), isCrit);
+            return Attack.calculateSpecialAttackDamage(source, target, getType(), damageType, getBaseDamage(source), getDamageVariance(), isCrit);
         }
         @Override
         public Value<Boolean, String> isAvailableFromSpecialCase(GameCharacter source) {
@@ -400,8 +395,8 @@ public class CMSpecialAttack {
             
             return formatAttackOutcome(source, target,
             		(source.isArmMovementHindered()
-            				?"As [npc.her] clothing is restricting [npc.her] arm movement, [npc.name] [npc.verb(struggle)] to land [npc.her] savage slashes, dealing only half damage to [npc2.name]..."
-            				:"With a savage howl, [npc.name] [npc.verb(launch)] [npc.herself] at [npc2.name], managing to do considerable damage to [npc2.herHim] by raking at [npc2.her] body with [npc.her] sharp claws.")+damageValue.getKey(),
+                            ? "As [npc.her] clothing is restricting [npc.her] arm movement, [npc.name] struggle to land [npc.her] savage slashes, dealing only half damage to [npc2.name]..."
+                            : "With a savage howl, [npc.name] launch [npc.herself] at [npc2.name], managing to do considerable damage to [npc2.herHim] by raking at [npc2.her] body with [npc.her] sharp claws.") + damageValue.getKey(),
             		"[npc2.Name] took " + getFormattedDamage(damageType, damageValue.getValue(), target, true, maxLust) + " damage!",
             		(isCrit
             			?"The ferocity of [npc.namePos] attack catches [npc2.name] off guard!"
@@ -445,7 +440,7 @@ public class CMSpecialAttack {
         @Override
         protected int getDamage(int turnIndex, GameCharacter source, GameCharacter target, boolean isCrit) {
             DamageType damageType = getDamageType(turnIndex, source);
-            return (int) Attack.calculateSpecialAttackDamage(source, target, getType(), damageType, getBaseDamage(source), getDamageVariance(), isCrit);
+            return Attack.calculateSpecialAttackDamage(source, target, getType(), damageType, getBaseDamage(source), getDamageVariance(), isCrit);
         }
         @Override
         public Value<Boolean, String> isAvailableFromSpecialCase(GameCharacter source) {
@@ -473,7 +468,7 @@ public class CMSpecialAttack {
             Value<String, Integer> damageValue = damageType.damageTarget(source, target, getDamage(turnIndex, source, target, isCrit));
             
             return formatAttackOutcome(source, target,
-            		"With a burst of energy, [npc.name] [npc.verb(leap)] forwards, ramming [npc.her] forehead into [npc2.namePos] body and whacking [npc2.herHim] with the sides of [npc.her] antlers."+damageValue.getKey(),
+                    "With a burst of energy, [npc.name] leap forwards, ramming [npc.her] forehead into [npc2.namePos] body and whacking [npc2.herHim] with the sides of [npc.her] antlers." + damageValue.getKey(),
             		"[npc2.Name] took " + getFormattedDamage(damageType, damageValue.getValue(), target, true, maxLust) + " damage!",
             		(isCrit
             			? "[npc.NamePos] headbutt is particularly effective!"
@@ -490,10 +485,7 @@ public class CMSpecialAttack {
         }
         @Override
         public boolean canCrit(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
-            if(source.getHeightValue()>target.getHeightValue()*1.5f) {
-                return true;
-            }
-            return false;
+            return source.getHeightValue() > target.getHeightValue() * 1.5f;
         }
     };
 
@@ -519,7 +511,7 @@ public class CMSpecialAttack {
         @Override
         protected int getDamage(int turnIndex, GameCharacter source, GameCharacter target, boolean isCrit) {
             DamageType damageType = getDamageType(turnIndex, source);
-            return (int) Attack.calculateSpecialAttackDamage(source, target, getType(), damageType, getBaseDamage(source), getDamageVariance(), isCrit);
+            return Attack.calculateSpecialAttackDamage(source, target, getType(), damageType, getBaseDamage(source), getDamageVariance(), isCrit);
         }
         @Override
         public Value<Boolean, String> isAvailableFromSpecialCase(GameCharacter source) {
@@ -547,7 +539,7 @@ public class CMSpecialAttack {
             Value<String, Integer> damageValue = damageType.damageTarget(source, target, getDamage(turnIndex, source, target, isCrit));
             
             return formatAttackOutcome(source, target,
-            		"With a burst of energy, [npc.name] [npc.verb(leap)] forwards, ramming [npc.her] forehead into [npc2.namePos] body and whacking [npc2.herHim] with the sides of [npc.her] horns."+damageValue.getKey(),
+                    "With a burst of energy, [npc.name] leap forwards, ramming [npc.her] forehead into [npc2.namePos] body and whacking [npc2.herHim] with the sides of [npc.her] horns." + damageValue.getKey(),
             		"[npc2.Name] took " + getFormattedDamage(damageType, damageValue.getValue(), target, true, maxLust) + " damage!",
             		(isCrit
             			?"[npc.NamePos] headbutt is particularly effective!"
@@ -564,10 +556,7 @@ public class CMSpecialAttack {
         }
         @Override
         public boolean canCrit(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
-            if(source.getHeightValue()>target.getHeightValue()*1.5f) {
-                return true;
-            }
-            return false;
+            return source.getHeightValue() > target.getHeightValue() * 1.5f;
         }
     };
     
@@ -616,7 +605,7 @@ public class CMSpecialAttack {
         @Override
         protected int getDamage(int turnIndex, GameCharacter source, GameCharacter target, boolean isCrit) {
             DamageType damageType = getDamageType(turnIndex, source);
-            return (int) Attack.calculateSpecialAttackDamage(source, target, getType(), damageType, getBaseDamage(source), getDamageVariance(), isCrit);
+            return Attack.calculateSpecialAttackDamage(source, target, getType(), damageType, getBaseDamage(source), getDamageVariance(), isCrit);
         }
         @Override
         public Value<Boolean, String> isAvailableFromSpecialCase(GameCharacter source) {
@@ -665,9 +654,9 @@ public class CMSpecialAttack {
             return formatAttackOutcome(source, target,
             		(!source.isCoverableAreaExposed(CoverableArea.MOUTH)
             				?"As [npc.her] clothing is covering [npc.her] mouth, [npc.nameIsFull] unable to do any damage with [npc.her] feral bite..."
-            				:"With a burst of energy, [npc.name] [npc.verb(leap)] forwards, trying to bite [npc2.name]!"
+                            : "With a burst of energy, [npc.name] leap forwards, trying to bite [npc2.name]!"
             					+ " [npc.Her] [npc.mouth] clamps down on [npc2.her] [npc2.arm],"
-										+ " and [npc.she] [npc.verb(manage)] to cause some serious damage with [npc.her] "+(source.getFaceType()==FaceType.HARPY?"sharp beak":"animalistic teeth")+" before [npc2.she] [npc2.verb(pull)] free."
+                            + " and [npc.she] manage to cause some serious damage with [npc.her] " + (source.getFaceType() == FaceType.HARPY ? "sharp beak" : "animalistic teeth") + " before [npc2.she] [npc2.verb(pull)] free."
 	            				+ (source.getFaceType().getTags().contains(BodyPartTag.FACE_VENOMOUS_TEETH)
 	            						?" In the process of being bitten by [npc.namePos] venomous fangs, [npc2.namehasFull] been injected with poison!"
 	            						:(source.getFaceType().getTags().contains(BodyPartTag.FACE_VENOMOUS_TEETH_LUST)
@@ -690,10 +679,7 @@ public class CMSpecialAttack {
         }
         @Override
         public boolean canCrit(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
-            if(target.getHealthPercentage()<0.25f) {
-                return true;
-            }
-            return false;
+            return target.getHealthPercentage() < 0.25f;
         }
     };
 
@@ -724,7 +710,7 @@ public class CMSpecialAttack {
         @Override
         protected int getDamage(int turnIndex, GameCharacter source, GameCharacter target, boolean isCrit) {
             DamageType damageType = getDamageType(turnIndex, source);
-            return (int) Attack.calculateSpecialAttackDamage(source, target, getType(), damageType, getBaseDamage(source), getDamageVariance(), false);
+            return Attack.calculateSpecialAttackDamage(source, target, getType(), damageType, getBaseDamage(source), getDamageVariance(), false);
         }
         @Override
         public Value<Boolean, String> isAvailableFromSpecialCase(GameCharacter source) {
@@ -759,12 +745,12 @@ public class CMSpecialAttack {
 
             return formatAttackOutcome(source, target,
                     (source.isLegMovementHindered()
-                            ?"As [npc.her] clothing is restricting [npc.her] leg movement, [npc.name] [npc.verb(struggle)] to make effective use of [npc.her] talons, dealing minimal damage to [npc2.name]..."
-                            :"[npc.Name] [npc.verb(vault)] in the air, before landing with outstretched legs and powerfully slashing [npc2.name] with [npc.her] talons!")
+                            ? "As [npc.her] clothing is restricting [npc.her] leg movement, [npc.name] struggle to make effective use of [npc.her] talons, dealing minimal damage to [npc2.name]..."
+                            : "[npc.Name] vault in the air, before landing with outstretched legs and powerfully slashing [npc2.name] with [npc.her] talons!")
                             +damageValue.getKey(),
                     "[npc2.Name] took " + getFormattedDamage(damageType, damageValue.getValue(), target, true, maxLust) + " damage!",
                     (isCrit
-                            ?"[npc.Name] immediately [npc.verb(slash)] again after breaking through [npc2.namePos] block!"+critDamageValue.getKey()
+                            ? "[npc.Name] immediately slash again after breaking through [npc2.namePos] block!" + critDamageValue.getKey()
                             :null),
                     "[npc2.Name] took an additional " + getFormattedDamage(damageType, critDamageValue.getValue(), target, true, maxLust) + " damage!");
         }
@@ -777,10 +763,7 @@ public class CMSpecialAttack {
         public boolean canCrit(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
             int damage = getDamage(turnIndex, source, target, false);
             int potentialDamage = getDamageType(turnIndex, source).shieldCheckNoDamage(source, target, damage);
-            if(potentialDamage>0) {
-                return true;
-            }
-            return false;
+            return potentialDamage > 0;
         }
     };
 }

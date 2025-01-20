@@ -52,10 +52,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		[npc.Name] [npc.verb(unscrew)] the cap from the top of the bottle of Bubble Milk, before tilting [npc.her] head back and quickly gulping down the creamy liquid. Despite its name and the appearance of being carbonated, the mellow taste lacks any sort of fizz, and after draining the entire bottle, a soft, pleasant aftertaste lingers in [npc.namePos] mouth.
+		[npc.Name] unscrew the cap from the top of the bottle of Bubble Milk, before tilting [npc.her] head back and quickly gulping down the creamy liquid. Despite its name and the appearance of being carbonated, the mellow taste lacks any sort of fizz, and after draining the entire bottle, a soft, pleasant aftertaste lingers in [npc.namePos] mouth.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		[npc.Name] [npc.verb(unscrew)] the cap from the top of the bottle of Bubble Milk, before bringing it up to [npc2.namePos] [npc2.lips] and making [npc2.herHim] gulp down the creamy liquid. Despite its name and the appearance of being carbonated, the mellow taste lacks any sort of fizz, and after draining the entire bottle, a soft, pleasant aftertaste lingers in [npc2.namePos] mouth.
+		[npc.Name] unscrew the cap from the top of the bottle of Bubble Milk, before bringing it up to [npc2.namePos] [npc2.lips] and making [npc2.herHim] gulp down the creamy liquid. Despite its name and the appearance of being carbonated, the mellow taste lacks any sort of fizz, and after draining the entire bottle, a soft, pleasant aftertaste lingers in [npc2.namePos] mouth.
 		]]></otherUse>
 	</useDescriptions>
 

@@ -64,25 +64,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(place)] the saddle on [npc.her] back, before reaching around and fastening the buckles to keep it in place and then lowering the stirrups.]]>
+            <![CDATA[[npc.Name] place the saddle on [npc.her] back, before reaching around and fastening the buckles to keep it in place and then lowering the stirrups.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(place)] the saddle on [npc2.namePos] back, before fastening the buckles to keep it in place and then lowering the stirrups.]]>
+            <![CDATA[[npc.Name] place the saddle on [npc2.namePos] back, before fastening the buckles to keep it in place and then lowering the stirrups.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(force)] the saddle on [npc2.namePos] back, before fastening the buckles to keep it in place and then lowering the stirrups.]]>
+            <![CDATA[[npc.Name] roughly force the saddle on [npc2.namePos] back, before fastening the buckles to keep it in place and then lowering the stirrups.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(unfasten)] the saddle's straps and [npc.verb(take)] it off.]]>
+            <![CDATA[[npc.Name] unfasten the saddle's straps and take it off.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(unfasten)] the saddle's straps and [npc.verb(take)] it off.]]>
+            <![CDATA[[npc.Name] unfasten the saddle's straps and take it off.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] impatiently [npc.verb(unfasten)] the saddle's straps and [npc.verb(yank)] it off.]]>
+            <![CDATA[[npc.Name] impatiently unfasten the saddle's straps and yank it off.]]>
 		</otherRough>
 	</displacementText>
 

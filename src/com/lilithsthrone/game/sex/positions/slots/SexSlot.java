@@ -1,11 +1,5 @@
 package com.lilithsthrone.game.sex.positions.slots;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.SexActionInteractions;
@@ -16,6 +10,12 @@ import com.lilithsthrone.game.sex.positions.VariableInteractions;
 import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.PositioningMenu;
 import com.lilithsthrone.main.Main;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 /**
  * Slots which characters can occupy in sex positions.
  * 
@@ -25,11 +25,11 @@ import com.lilithsthrone.main.Main;
  */
 public class SexSlot {
 	
-	private String name;
-	private String description;
-	private String orgasmDescription;
-	private boolean standing;
-	private List<SexSlotTag> tags;
+	private final String name;
+	private final String description;
+	private final String orgasmDescription;
+	private final boolean standing;
+	private final List<SexSlotTag> tags;
 	
 	public SexSlot(String name, String description, String orgasmDescription, boolean standing, SexSlotTag... tags) {
 		this.name = name;
@@ -71,7 +71,7 @@ public class SexSlot {
 	 */
 	public String getOrgasmDescription(GameCharacter orgasmingCharacter, GameCharacter targetedCharacter) {
 		if(orgasmingCharacter.equals(targetedCharacter)) {
-			return "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(prepare)] to reach [npc.her] climax.";
+            return "[npc.Name] let out [npc.a_moan+] as [npc.she] prepare to reach [npc.her] climax.";
 		}
 		if(orgasmDescription==null) {
 			return getGenericOrgasmDescription(orgasmingCharacter, targetedCharacter);
@@ -85,10 +85,10 @@ public class SexSlot {
 	private String getGenericOrgasmDescription(GameCharacter orgasmingCharacter, GameCharacter targetedCharacter) {
 		if(orgasmingCharacter.equals(targetedCharacter)) {
 			return UtilText.parse(orgasmingCharacter, targetedCharacter,
-					"[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax.");
+                    "[npc.Name] let out [npc.a_moan+] as [npc.she] reach [npc.her] climax.");
 		} else {
 			return UtilText.parse(orgasmingCharacter, targetedCharacter,
-					"Pressing [npc.herself] against [npc2.name], [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax.");
+                    "Pressing [npc.herself] against [npc2.name], [npc.name] let out [npc.a_moan+] as [npc.she] reach [npc.her] climax.");
 		}
 	}
 
@@ -97,15 +97,15 @@ public class SexSlot {
 	 */
 	public String getGenericEndSexDescription(GameCharacter endingCharacter, GameCharacter targetedCharacter) {
 		if(Main.game.isInSex() && Main.sex.isMasturbation()) {
-			return UtilText.parse(endingCharacter, "Deciding that [npc.sheHas] had enough for now, [npc.name] [npc.verb(put)] an end to [npc.her] masturbation session and [npc.verb(prepare)] to continue on [npc.her] way.");
+            return UtilText.parse(endingCharacter, "Deciding that [npc.sheHas] had enough for now, [npc.name] put an end to [npc.her] masturbation session and prepare to continue on [npc.her] way.");
 		}
 
 		if(targetedCharacter.isAsleep()) {
 			return UtilText.parse(endingCharacter, targetedCharacter,
-					"With a satisfied sigh, [npc.name] [npc.verb(separate)] [npc.herself] from [npc2.name], making sure not to wake [npc2.herHim] up in the process.");
+                    "With a satisfied sigh, [npc.name] separate [npc.herself] from [npc2.name], making sure not to wake [npc2.herHim] up in the process.");
 		}
 		return UtilText.parse(endingCharacter, targetedCharacter,
-				"With a satisfied sigh, [npc.name] [npc.verb(disentangle)] [npc.herself] from [npc2.namePos] clutches, before stating that [npc.sheHas] had enough for now.");
+                "With a satisfied sigh, [npc.name] disentangle [npc.herself] from [npc2.namePos] clutches, before stating that [npc.sheHas] had enough for now.");
 	}
 	
 	
@@ -188,9 +188,9 @@ public class SexSlot {
 		}
 		
 		return false;
-	};
+	}
 
-	// What was this for?
+    // What was this for?
 //	@Override
 //	public boolean equals(Object o) {
 //		if(o instanceof SexSlot){

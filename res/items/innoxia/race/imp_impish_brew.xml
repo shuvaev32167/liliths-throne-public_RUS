@@ -50,10 +50,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		As [npc.name] [npc.verb(unscrew)] the cap from the bottle of Impish Brew, [npc.her] senses are immediately assaulted by the musky, potent smell of the liquid within. Bringing the dirty bottle to [npc.her] [npc.lips], [npc.she] [npc.verb(force)] [npc.herself] to gulp down all of the thick, musky liquid contained within.
+		As [npc.name] unscrew the cap from the bottle of Impish Brew, [npc.her] senses are immediately assaulted by the musky, potent smell of the liquid within. Bringing the dirty bottle to [npc.her] [npc.lips], [npc.she] force [npc.herself] to gulp down all of the thick, musky liquid contained within.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		Unscrewing the cap from the dirty bottle of Impish Brew, [npc.name] [npc.verb(bring)] it up to [npc2.namePos] waiting [npc2.lips]. After letting out an uncomfortable whine, [npc2.she] [npc2.verb(force)] [npc2.herself] to gulp down all of the thick, musky liquid contained within.
+		Unscrewing the cap from the dirty bottle of Impish Brew, [npc.name] bring it up to [npc2.namePos] waiting [npc2.lips]. After letting out an uncomfortable whine, [npc2.she] [npc2.verb(force)] [npc2.herself] to gulp down all of the thick, musky liquid contained within.
 		]]></otherUse>
 	</useDescriptions>
 

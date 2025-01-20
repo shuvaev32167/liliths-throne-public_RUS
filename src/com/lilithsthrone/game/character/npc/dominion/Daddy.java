@@ -1,12 +1,5 @@
 package com.lilithsthrone.game.character.npc.dominion;
 
-import java.time.LocalTime;
-import java.time.Month;
-import java.util.List;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
@@ -16,25 +9,7 @@ import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.types.HornType;
 import com.lilithsthrone.game.character.body.types.TailType;
 import com.lilithsthrone.game.character.body.types.WingType;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.HairLength;
-import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.body.valueEnums.LipSize;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
-import com.lilithsthrone.game.character.body.valueEnums.NippleSize;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.body.valueEnums.TesticleSize;
-import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
@@ -63,6 +38,12 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.GenericPlace;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.time.LocalTime;
+import java.time.Month;
+import java.util.List;
 
 /**
  * @since 0.3.3.10
@@ -78,7 +59,7 @@ public class Daddy extends NPC {
 	}
 	
 	public Daddy(boolean isImported) {
-		super(isImported, new NameTriplet("Desryth"), "Loviennemartu",
+        super(isImported, new NameTriplet("Дезрит"), "Ловиеннамарту",
 				"First encountered as an unwelcome guest being turned away from Lilaya's home, the demon [npc.name] has the lofty goal of winning the love and affection of none other than the elder Lilin, Lyssieth.",
 				57, Month.JANUARY, 17,
 				25, Gender.M_P_MALE, Subspecies.DEMON, RaceStage.GREATER,
@@ -406,14 +387,14 @@ public class Daddy extends NPC {
 	
 	public static String getAvailabilityText() {
 //		return "[daddy.Name] is [style.colourBad(unavailable)] at the moment, as [daddy.sheIs] only at home between the hours of "
-//				+Units.time(LocalTime.of(Daddy.getHourAvailableStart(), 00))+" and "+Units.time(LocalTime.of(Daddy.getHourAvailableEnd(), 00))
+//				+Units.time(LocalTime.of(Daddy.getHourAvailableStart(), 00))+" и "+Units.time(LocalTime.of(Daddy.getHourAvailableEnd(), 00))
 //				+"."
 //				+ (Main.game.getSecondsPassed()<Main.game.getDialogueFlags().daddyResetTimer+(60*60*3)
 //					?"<br/>"
 //						+ "[style.colourBad([daddy.She] will also be unavailable until tomorrow.)]"
 //					:"");
-		
-		return " [daddy.SheIsFull] only at home between the hours of "+Units.time(LocalTime.of(Daddy.getHourAvailableStart(), 00))+" and "+Units.time(LocalTime.of(Daddy.getHourAvailableEnd(), 00))
+
+        return " [daddy.SheIsFull] only at home between the hours of " + Units.time(LocalTime.of(Daddy.getHourAvailableStart(), 00)) + " и " + Units.time(LocalTime.of(Daddy.getHourAvailableEnd(), 00))
 				+(Main.game.getSecondsPassed()<Main.game.getDialogueFlags().getSavedLong(DADDY_RESET_TIMER_ID)+(60*60*3)
 						?". [style.colourBad(Due to recently meeting [daddy.herHim], [daddy.she] will not be available again until tomorrow.)]"
 						:", and as such, [daddy.sheIs] currently "

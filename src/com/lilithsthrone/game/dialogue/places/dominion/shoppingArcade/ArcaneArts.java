@@ -1,9 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.shoppingArcade;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
@@ -25,34 +21,24 @@ import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.sex.InitialSexActionInformation;
-import com.lilithsthrone.game.sex.OrgasmCumTarget;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexPace;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.managers.OrgasmBehaviour;
 import com.lilithsthrone.game.sex.managers.dominion.SMVicky;
 import com.lilithsthrone.game.sex.managers.dominion.SMVickyOverDesk;
 import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotAgainstWall;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotDesk;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotLyingDown;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotSitting;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
+import com.lilithsthrone.game.sex.positions.slots.*;
 import com.lilithsthrone.game.sex.sexActions.SexActionInterface;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerPenis;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisFoot;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
+import com.lilithsthrone.game.sex.sexActions.baseActions.*;
 import com.lilithsthrone.game.sex.sexActions.dominion.VickySpecials;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.82
@@ -63,9 +49,9 @@ public class ArcaneArts {
 	
 	private static AbstractItemType mealItemType;
 	private static int mealResponseIndex = 0;
-	private static List<Value<String, String>> mealResponses;
+	private static final List<Value<String, String>> mealResponses;
 	private static int helpResponseIndex = 0;
-	private static List<Value<String, String>> helpResponses;
+	private static final List<Value<String, String>> helpResponses;
 	
 	private static boolean vickyRefused = false;
 	private static boolean vickyHadSex = false;
@@ -118,7 +104,7 @@ public class ArcaneArts {
 			if(responseTab==0) {
 				if (index == 1) {
 					if(Main.game.isWorkTime()) {
-						return new Response("Enter", "Step inside Arcane Arts.", SHOP_WEAPONS) {
+                        return new Response("Вход", "Step inside Arcane Arts.", SHOP_WEAPONS) {
 							@Override
 							public void effects() {
 								vickyRefused = false;
@@ -126,7 +112,7 @@ public class ArcaneArts {
 							}
 						};
 					} else {
-						return new Response("Enter", "Arcane Arts is currently closed. You'll have to come back later if you want to do some shopping here.", null);
+                        return new Response("Вход", "Arcane Arts is currently closed. You'll have to come back later if you want to do some shopping here.", null);
 					}
 				}
 			}
@@ -134,8 +120,142 @@ public class ArcaneArts {
 			return ShoppingArcadeDialogue.getFastTravelResponses(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode SHOP_WEAPONS = new DialogueNode("Arcane Arts", "-", true) {
+
+    public static final DialogueNode VICKY_PET_OFFER_COCK = new DialogueNode("Магические искусства", "-", true) {
+		@Override
+		public int getSecondsPassed() {
+			return 2*60;
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "VICKY_PET_OFFER_COCK");
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+				return new ResponseSex("Handjob", "Ask Vicky to give you a handjob.",
+						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, null, null,
+						true, false,
+						new SMVicky(
+								isInApartment()
+									?SexPosition.SITTING
+									:SexPosition.AGAINST_WALL,
+								Util.newHashMapOfValues(new Value<>(getVicky(), isInApartment()?SexSlotSitting.SITTING:SexSlotAgainstWall.STANDING_WALL)), // TODO test positions interaction
+								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), isInApartment()?SexSlotSitting.SITTING_TWO:SexSlotAgainstWall.BACK_TO_WALL)),
+								new SexType(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS),
+								new SexType(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS),
+								Util.newArrayListOfValues(CoverableArea.PENIS),
+								null),
+						null,
+						null,
+						getPostSexScene(),
+						UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "VICKY_PET_OFFER_COCK_HANDJOB")) {
+					@Override
+					public List<InitialSexActionInformation> getInitialSexActions() {
+						return Util.newArrayListOfValues(
+								new InitialSexActionInformation(getVicky(), Main.game.getPlayer(), FingerPenis.COCK_MASTURBATING_START, false, true));
+					}
+				};
+			}
+			if(index==2) {
+				return new ResponseSex("Blowjob", "Ask Vicky to give you a blowjob.",
+						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, null, null,
+						true, false,
+						new SMVicky(
+								isInApartment()
+									?(Main.game.getPlayer().isTaur()?SexPosition.STANDING:SexPosition.SITTING)
+									:SexPosition.AGAINST_WALL,
+								Util.newHashMapOfValues(new Value<>(getVicky(), isInApartment()?(Main.game.getPlayer().isTaur()?SexSlotStanding.PERFORMING_ORAL:SexSlotSitting.PERFORMING_ORAL):SexSlotAgainstWall.PERFORMING_ORAL_WALL)),
+								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), isInApartment()?(Main.game.getPlayer().isTaur()?SexSlotStanding.STANDING_DOMINANT:SexSlotSitting.SITTING):SexSlotAgainstWall.BACK_TO_WALL)),
+								new SexType(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS),
+								new SexType(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS),
+								Util.newArrayListOfValues(CoverableArea.PENIS),
+								null),
+						null,
+						null,
+						getPostSexScene(),
+						UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "VICKY_PET_OFFER_COCK_BLOWJOB")) {
+					@Override
+					public List<InitialSexActionInformation> getInitialSexActions() {
+						return Util.newArrayListOfValues(
+								new InitialSexActionInformation(getVicky(), Main.game.getPlayer(), PenisMouth.GIVING_BLOWJOB_START, false, true));
+					}
+				};
+			}
+			if(index==3) {
+				return new ResponseSex("Pussy", "Tell Vicky that you want to fuck her pussy.",
+						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, null, null,
+						true, false,
+						new SMVicky(
+								SexPosition.LYING_DOWN,
+								Util.newHashMapOfValues(new Value<>(getVicky(), SexSlotLyingDown.COWGIRL)),
+								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN)),
+								new SexType(SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
+								new SexType(SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
+								Util.newArrayListOfValues(CoverableArea.PENIS),
+								Util.newArrayListOfValues(CoverableArea.VAGINA)),
+						null,
+						null,
+						getPostSexScene(),
+						UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "VICKY_PET_OFFER_COCK_PUSSY")) {
+					@Override
+					public List<InitialSexActionInformation> getInitialSexActions() {
+						return Util.newArrayListOfValues(
+								new InitialSexActionInformation(getVicky(), Main.game.getPlayer(), PenisVagina.USING_PENIS_START, false, true));
+					}
+				};
+			}
+			if(index==4 && Main.game.isAnalContentEnabled()) {
+				return new ResponseSex("Anal", "Tell Vicky that you want to fuck her ass.",
+						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, null, null,
+						true, false,
+						new SMVicky(
+								SexPosition.LYING_DOWN,
+								Util.newHashMapOfValues(new Value<>(getVicky(), SexSlotLyingDown.COWGIRL)),
+								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN)),
+								new SexType(SexAreaOrifice.ANUS, SexAreaPenetration.PENIS),
+								new SexType(SexAreaOrifice.ANUS, SexAreaPenetration.PENIS),
+								Util.newArrayListOfValues(CoverableArea.PENIS),
+								Util.newArrayListOfValues(CoverableArea.ANUS)),
+						null,
+						null,
+						getPostSexScene(),
+						UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "VICKY_PET_OFFER_COCK_ANAL")) { //TODO virginity loss handling
+					@Override
+					public List<InitialSexActionInformation> getInitialSexActions() {
+						return Util.newArrayListOfValues(
+								new InitialSexActionInformation(getVicky(), Main.game.getPlayer(), PenisAnus.USING_PENIS_START, false, true));
+					}
+				};
+			}
+			if(Main.game.isFootContentEnabled() && (Main.game.isAnalContentEnabled()?index==5:index==4)) {
+				return new ResponseSex("Footjob", "Tell Vicky that you want her to give you a footjob.",
+						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, null, null,
+						true, false,
+						new SMVicky(
+								isInApartment()
+									?SexPosition.SITTING
+									:SexPosition.STANDING,
+								Util.newHashMapOfValues(new Value<>(getVicky(), isInApartment()?SexSlotSitting.SITTING:SexSlotStanding.STANDING_DOMINANT)),
+								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), isInApartment()?SexSlotSitting.PERFORMING_ORAL:SexSlotStanding.PERFORMING_ORAL)),//TODO test sitting position
+								new SexType(SexAreaPenetration.FOOT, SexAreaPenetration.PENIS),
+								new SexType(SexAreaPenetration.FOOT, SexAreaPenetration.PENIS),
+								Util.newArrayListOfValues(CoverableArea.PENIS),
+								Util.newArrayListOfValues(CoverableArea.FEET)),
+						null,
+						null,
+						getPostSexScene(),
+						UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "VICKY_PET_OFFER_COCK_FOOTJOB")) {
+					@Override
+					public List<InitialSexActionInformation> getInitialSexActions() {
+						return Util.newArrayListOfValues(
+								new InitialSexActionInformation(getVicky(), Main.game.getPlayer(), PenisFoot.FOOT_JOB_SINGLE_GIVING_START, false, true));
+					}
+				};
+			}
+			return null;
+		}
+	};    public static final DialogueNode SHOP_WEAPONS = new DialogueNode("Магические искусства", "-", true) {
 		@Override
 		public void applyPreParsingEffects() {
 			if(!vickyRefused
@@ -714,8 +834,8 @@ public class ArcaneArts {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode ARTHURS_PACKAGE = new DialogueNode("Arcane Arts", "-", true, true) {
+
+    public static final DialogueNode ARTHURS_PACKAGE = new DialogueNode("Магические искусства", "-", true, true) {
 
 		@Override
 		public String getContent() {
@@ -811,8 +931,8 @@ public class ArcaneArts {
 			}
 		}
 	};
-	
-	public static final DialogueNode ARTHURS_PACKAGE_BOUGHT = new DialogueNode("Arcane Arts", "-", true, true) {
+
+    public static final DialogueNode ARTHURS_PACKAGE_BOUGHT = new DialogueNode("Магические искусства", "-", true, true) {
 		@Override
 		public String getContent() {
 			return UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "ARTHURS_PACKAGE_BOUGHT");
@@ -826,9 +946,9 @@ public class ArcaneArts {
 			return SHOP_WEAPONS.getResponse(responseTab, index);
 		}
 	};
-	
-	
-	public static final DialogueNode VICKY_POST_SEX_PACKAGE = new DialogueNode("Arcane Arts", "-", true) {
+
+
+    public static final DialogueNode VICKY_POST_SEX_PACKAGE = new DialogueNode("Магические искусства", "-", true) {
 		@Override
 		public void applyPreParsingEffects() {
 			Main.game.getDialogueFlags().setFlag("innoxia_vicky_daily_sex", true);
@@ -846,8 +966,8 @@ public class ArcaneArts {
 			return SHOP_WEAPONS.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode VICKY_POST_SEX_RAPE_PACKAGE = new DialogueNode("Arcane Arts", "-", true) {
+
+    public static final DialogueNode VICKY_POST_SEX_RAPE_PACKAGE = new DialogueNode("Магические искусства", "-", true) {
 		@Override
 		public void applyPreParsingEffects() {
 			Main.game.getDialogueFlags().setFlag("innoxia_vicky_daily_sex", true);
@@ -953,141 +1073,7 @@ public class ArcaneArts {
 	
 	// Vicky dominated player content:
 
-	public static final DialogueNode VICKY_PET_OFFER_COCK = new DialogueNode("Arcane Arts", "-", true) {
-		@Override
-		public int getSecondsPassed() {
-			return 2*60;
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "VICKY_PET_OFFER_COCK");
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new ResponseSex("Handjob", "Ask Vicky to give you a handjob.",
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, null, null,
-						true, false,
-						new SMVicky(
-								isInApartment()
-									?SexPosition.SITTING
-									:SexPosition.AGAINST_WALL,
-								Util.newHashMapOfValues(new Value<>(getVicky(), isInApartment()?SexSlotSitting.SITTING:SexSlotAgainstWall.STANDING_WALL)), // TODO test positions interaction
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), isInApartment()?SexSlotSitting.SITTING_TWO:SexSlotAgainstWall.BACK_TO_WALL)),
-								new SexType(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS),
-								new SexType(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS),
-								Util.newArrayListOfValues(CoverableArea.PENIS),
-								null),
-						null,
-						null,
-						getPostSexScene(),
-						UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "VICKY_PET_OFFER_COCK_HANDJOB")) {
-					@Override
-					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(getVicky(), Main.game.getPlayer(), FingerPenis.COCK_MASTURBATING_START, false, true));
-					}
-				};
-			}
-			if(index==2) {
-				return new ResponseSex("Blowjob", "Ask Vicky to give you a blowjob.",
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, null, null,
-						true, false,
-						new SMVicky(
-								isInApartment()
-									?(Main.game.getPlayer().isTaur()?SexPosition.STANDING:SexPosition.SITTING)
-									:SexPosition.AGAINST_WALL,
-								Util.newHashMapOfValues(new Value<>(getVicky(), isInApartment()?(Main.game.getPlayer().isTaur()?SexSlotStanding.PERFORMING_ORAL:SexSlotSitting.PERFORMING_ORAL):SexSlotAgainstWall.PERFORMING_ORAL_WALL)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), isInApartment()?(Main.game.getPlayer().isTaur()?SexSlotStanding.STANDING_DOMINANT:SexSlotSitting.SITTING):SexSlotAgainstWall.BACK_TO_WALL)),
-								new SexType(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS),
-								new SexType(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS),
-								Util.newArrayListOfValues(CoverableArea.PENIS),
-								null),
-						null,
-						null,
-						getPostSexScene(),
-						UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "VICKY_PET_OFFER_COCK_BLOWJOB")) {
-					@Override
-					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(getVicky(), Main.game.getPlayer(), PenisMouth.GIVING_BLOWJOB_START, false, true));
-					}
-				};
-			}
-			if(index==3) {
-				return new ResponseSex("Pussy", "Tell Vicky that you want to fuck her pussy.",
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, null, null,
-						true, false,
-						new SMVicky(
-								SexPosition.LYING_DOWN,
-								Util.newHashMapOfValues(new Value<>(getVicky(), SexSlotLyingDown.COWGIRL)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN)),
-								new SexType(SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
-								new SexType(SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
-								Util.newArrayListOfValues(CoverableArea.PENIS),
-								Util.newArrayListOfValues(CoverableArea.VAGINA)),
-						null,
-						null,
-						getPostSexScene(),
-						UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "VICKY_PET_OFFER_COCK_PUSSY")) {
-					@Override
-					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(getVicky(), Main.game.getPlayer(), PenisVagina.USING_PENIS_START, false, true));
-					}
-				};
-			}
-			if(index==4 && Main.game.isAnalContentEnabled()) {
-				return new ResponseSex("Anal", "Tell Vicky that you want to fuck her ass.",
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, null, null,
-						true, false,
-						new SMVicky(
-								SexPosition.LYING_DOWN,
-								Util.newHashMapOfValues(new Value<>(getVicky(), SexSlotLyingDown.COWGIRL)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN)),
-								new SexType(SexAreaOrifice.ANUS, SexAreaPenetration.PENIS),
-								new SexType(SexAreaOrifice.ANUS, SexAreaPenetration.PENIS),
-								Util.newArrayListOfValues(CoverableArea.PENIS),
-								Util.newArrayListOfValues(CoverableArea.ANUS)),
-						null,
-						null,
-						getPostSexScene(),
-						UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "VICKY_PET_OFFER_COCK_ANAL")) { //TODO virginity loss handling
-					@Override
-					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(getVicky(), Main.game.getPlayer(), PenisAnus.USING_PENIS_START, false, true));
-					}
-				};
-			}
-			if(Main.game.isFootContentEnabled() && (Main.game.isAnalContentEnabled()?index==5:index==4)) {
-				return new ResponseSex("Footjob", "Tell Vicky that you want her to give you a footjob.",
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, null, null,
-						true, false,
-						new SMVicky(
-								isInApartment()
-									?SexPosition.SITTING
-									:SexPosition.STANDING,
-								Util.newHashMapOfValues(new Value<>(getVicky(), isInApartment()?SexSlotSitting.SITTING:SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), isInApartment()?SexSlotSitting.PERFORMING_ORAL:SexSlotStanding.PERFORMING_ORAL)),//TODO test sitting position
-								new SexType(SexAreaPenetration.FOOT, SexAreaPenetration.PENIS),
-								new SexType(SexAreaPenetration.FOOT, SexAreaPenetration.PENIS),
-								Util.newArrayListOfValues(CoverableArea.PENIS),
-								Util.newArrayListOfValues(CoverableArea.FEET)),
-						null,
-						null,
-						getPostSexScene(),
-						UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "VICKY_PET_OFFER_COCK_FOOTJOB")) {
-					@Override
-					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(getVicky(), Main.game.getPlayer(), PenisFoot.FOOT_JOB_SINGLE_GIVING_START, false, true));
-					}
-				};
-			}
-			return null;
-		}
-	};
+
 	
 	public static final DialogueNode VICKY_PET_OFFER_MEAL = new DialogueNode("", "", true) {
 		@Override

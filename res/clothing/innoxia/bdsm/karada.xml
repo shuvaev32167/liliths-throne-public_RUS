@@ -53,25 +53,25 @@
 	
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(hang)] the enchanted rope around [npc.her] neck, whereupon it instantly starts to snake and slide around [npc.her] body with a mind of its own, forming a tight karada within a matter of seconds.]]>
+            <![CDATA[[npc.Name] hang the enchanted rope around [npc.her] neck, whereupon it instantly starts to snake and slide around [npc.her] body with a mind of its own, forming a tight karada within a matter of seconds.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(hang)] the enchanted rope around [npc2.namePos] neck, whereupon it instantly starts to snake and slide around [npc2.her] body with a mind of its own, forming a tight karada within a matter of seconds.]]>
+            <![CDATA[[npc.Name] hang the enchanted rope around [npc2.namePos] neck, whereupon it instantly starts to snake and slide around [npc2.her] body with a mind of its own, forming a tight karada within a matter of seconds.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(loop)] the enchanted rope around [npc2.namePos] neck, whereupon it instantly starts to snake and slide around [npc2.her] body with a mind of its own, forming a tight karada within a matter of seconds.]]>
+            <![CDATA[[npc.Name] roughly loop the enchanted rope around [npc2.namePos] neck, whereupon it instantly starts to snake and slide around [npc2.her] body with a mind of its own, forming a tight karada within a matter of seconds.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(untie)] [npc.her] karada and [npc.verb(take)] it off.]]>
+            <![CDATA[[npc.Name] untie [npc.her] karada and take it off.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(untie)] [npc2.namePos] karada and [npc.verb(take)] it off.]]>
+            <![CDATA[[npc.Name] untie [npc2.namePos] karada and take it off.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(untie)] [npc2.namePos] karada and [npc.verb(yank)] it off.]]>
+            <![CDATA[[npc.Name] roughly untie [npc2.namePos] karada and yank it off.]]>
 		</otherRough>
 	</displacementText>
 </clothing>

@@ -975,7 +975,7 @@
 	
 	<htmlContent tag="STOCKS_RANDOMS"><![CDATA[
 	<p>
-		You look up to see two figures before you; [npc.name(a)] and [npc2.name(a)]. Obviously knowing one another quite well, [npc.name(the)] turns towards [npc.her] friend and, with a big grin on [npc.her] face, asks, [npc.speech(You want to use [pc.her] mouth then?)]
+		You look up to see two figures before you; [npc.name(a)] и [npc2.name(a)]. Obviously knowing one another quite well, [npc.name(the)] turns towards [npc.her] friend and, with a big grin on [npc.her] face, asks, [npc.speech(You want to use [pc.her] mouth then?)]
 	</p>
 	<p>
 		[npc2.speech(Yeah, you can fuck [pc.herHim], I'll use [pc.her] mouth,)] [npc2.name] replies, grinning down at you as [npc2.she] steps up in front of you.
@@ -1010,7 +1010,7 @@
 	
 	<htmlContent tag="AFTER_STOCKS_RANDOM_SEX"><![CDATA[
 	<p>
-		Having had their fun with you, [npc.name] and [npc2.name] put their clothes back on, and without even a backwards glance, they walk off together, speculating on the sorts of slaves that'll be available for them to fuck tomorrow.
+		Having had their fun with you, [npc.name] и [npc2.name] put their clothes back on, and without even a backwards glance, they walk off together, speculating on the sorts of slaves that'll be available for them to fuck tomorrow.
 	</p>
 	<p>
 		#IF(game.getDialogueFlags().hasFlag(FLAG_seanIntroduced))

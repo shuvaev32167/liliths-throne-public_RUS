@@ -81,10 +81,10 @@
 	This description immediately follows a brief description of the tail type beginning to transform. -->
 	<transformationDescription><![CDATA[
 		#IF(npc.getTailCount()==1)
-			A scaled, salamander-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long. There is a brief pause before the tip violently erupts into flames. Thankfully, the arcane fire is revealed to be comfortably warm to the touch. [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] complete control over [npc.her] new tail.
+			A scaled, salamander-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long. There is a brief pause before the tip violently erupts into flames. Thankfully, the arcane fire is revealed to be comfortably warm to the touch. [npc.She] quickly realise that [npc.she] [npc.has] complete control over [npc.her] new tail.
 			<br/>[npc.Name] now [npc.has] a [style.boldSalamander(flame-tipped salamander tail)], [npc.materialDescriptor] [npc.tailFullDescription(true)].
 		#ELSE
-			[npc.TailCount] scaled, salamander-like tails sprout from just above [npc.her] ass, rapidly growing in size until they're each about [npc.tailLength] long. There is a brief pause before the tips violently erupt into flames. Thankfully, the arcane fire is revealed to be comfortably warm to the touch. [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] complete control over [npc.her] new tails.
+			[npc.TailCount] scaled, salamander-like tails sprout from just above [npc.her] ass, rapidly growing in size until they're each about [npc.tailLength] long. There is a brief pause before the tips violently erupt into flames. Thankfully, the arcane fire is revealed to be comfortably warm to the touch. [npc.She] quickly realise that [npc.she] [npc.has] complete control over [npc.her] new tails.
 			<br/>[npc.Name] now [npc.has] [npc.tailCount] [style.boldSalamander(flame-tipped salamander tails)], [npc.materialDescriptor] [npc.tailFullDescription(true)].
 		#ENDIF
 	]]></transformationDescription>

@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.dominion;
 
-import java.util.List;
-import java.util.Map;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.npc.NPC;
@@ -23,6 +20,9 @@ import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @since 0.3.9.2
@@ -191,7 +191,7 @@ public class SlaveEncountersDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Continue on your way.", Main.game.getDefaultDialogue(false)) {
+                return new Response("Продолжить", "Continue on your way.", Main.game.getDefaultDialogue(false)) {
 					@Override
 					public void effects() {
 						getSlave().returnToHome();
@@ -210,7 +210,7 @@ public class SlaveEncountersDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Continue on your way.", Main.game.getDefaultDialogue(false)) {
+                return new Response("Продолжить", "Continue on your way.", Main.game.getDefaultDialogue(false)) {
 					@Override
 					public void effects() {
 						getSlave().returnToHome();
@@ -296,7 +296,7 @@ public class SlaveEncountersDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Continue on your way.", Main.game.getDefaultDialogue(false)) {
+                return new Response("Продолжить", "Continue on your way.", Main.game.getDefaultDialogue(false)) {
 					@Override
 					public void effects() {
 						getSlave().returnToHome();
@@ -315,7 +315,7 @@ public class SlaveEncountersDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Continue on your way.", Main.game.getDefaultDialogue(false)) {
+                return new Response("Продолжить", "Continue on your way.", Main.game.getDefaultDialogue(false)) {
 					@Override
 					public void effects() {
 						getSlave().returnToHome();
@@ -401,7 +401,7 @@ public class SlaveEncountersDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Continue on your way.", Main.game.getDefaultDialogue(false)) {
+                return new Response("Продолжить", "Continue on your way.", Main.game.getDefaultDialogue(false)) {
 					@Override
 					public void effects() {
 						getSlave().returnToHome();
@@ -420,7 +420,7 @@ public class SlaveEncountersDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Continue on your way.", Main.game.getDefaultDialogue(false)) {
+                return new Response("Продолжить", "Continue on your way.", Main.game.getDefaultDialogue(false)) {
 					@Override
 					public void effects() {
 						getSlave().returnToHome();
@@ -506,7 +506,7 @@ public class SlaveEncountersDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Continue on your way.", Main.game.getDefaultDialogue(false)) {
+                return new Response("Продолжить", "Continue on your way.", Main.game.getDefaultDialogue(false)) {
 					@Override
 					public void effects() {
 						getSlave().returnToHome();
@@ -525,7 +525,7 @@ public class SlaveEncountersDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Continue on your way.", Main.game.getDefaultDialogue(false)) {
+                return new Response("Продолжить", "Continue on your way.", Main.game.getDefaultDialogue(false)) {
 					@Override
 					public void effects() {
 						getSlave().returnToHome();
@@ -584,7 +584,7 @@ public class SlaveEncountersDialogue {
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
 				return new ResponseSex("Join (dom)",
-						UtilText.parse(slave, characterForSex, "Announce your presence and take charge of fucking [npc.name] and [npc2.name]."),
+                        UtilText.parse(slave, characterForSex, "Announce your presence and take charge of fucking [npc.name] и [npc2.name]."),
 						true, false,
 						getSlaveOnSlaveSexManager(Util.newArrayListOfValues(Main.game.getPlayer()), Util.newArrayListOfValues(slave, characterForSex), null),
 						SLAVE_USES_OTHER_SLAVE_ALLEYWAY_POST_SEX,
@@ -639,7 +639,7 @@ public class SlaveEncountersDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Continue on your way...", Main.game.getDefaultDialogue(false)) {
+                return new Response("Продолжить", "Continue on your way...", Main.game.getDefaultDialogue(false)) {
 					@Override
 					public void effects() {
 						SlaveryEventLogEntry event = new SlaveryEventLogEntry(Main.game.getHourOfDay(),
@@ -720,7 +720,7 @@ public class SlaveEncountersDialogue {
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
 				return new ResponseSex("Join (dom)",
-						UtilText.parse(slave, characterForSex, "Announce your presence and take charge of fucking [npc.name] and [npc2.name]."),
+                        UtilText.parse(slave, characterForSex, "Announce your presence and take charge of fucking [npc.name] и [npc2.name]."),
 						true, false,
 						getSlaveOnSlaveSexManager(Util.newArrayListOfValues(Main.game.getPlayer()), Util.newArrayListOfValues(slave, characterForSex), null),
 						SLAVE_USES_OTHER_SLAVE_LILAYA_CORRIDOR_POST_SEX,
@@ -774,7 +774,7 @@ public class SlaveEncountersDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Continue on your way...", Main.game.getDefaultDialogue(false)) {
+                return new Response("Продолжить", "Continue on your way...", Main.game.getDefaultDialogue(false)) {
 					@Override
 					public void effects() {
 						SlaveryEventLogEntry event = new SlaveryEventLogEntry(Main.game.getHourOfDay(),

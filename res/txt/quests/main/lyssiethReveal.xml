@@ -292,7 +292,7 @@
 		[lyssieth.speech(Lilaya! Stop that!)] Lyssieth interrupts, striding forwards as the three startled occupants of the lab spin around to face her. [lyssieth.speech(You can't take your anger out on Arthur like that!)]
 	</p>
 	<p>
-		[lilaya.speech(M-Mommy?!)] Lilaya exclaims, [lilaya.speech(What are you doing here?! And with [pc.name] and [siren.name] as well!)]
+		[lilaya.speech(M-Mommy?!)] Lilaya exclaims, [lilaya.speech(What are you doing here?! And with [pc.name] и [siren.name] as well!)]
 	</p>
 	<p>
 		[siren.speech(Hi sis'!)] [siren.name] calls out, beaming fondly at Lilaya, and getting a warm smile in return.

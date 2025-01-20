@@ -223,7 +223,7 @@
 				<index><![CDATA[2]]></index>
 				<responseTitle><![CDATA[Threesome (oral)]]></responseTitle>
 				<responseTooltip><![CDATA[
-					Have [harpyBimbo.name] and [harpyBimboCompanion.name] service you with their mouths.
+					Have [harpyBimbo.name] и [harpyBimboCompanion.name] service you with their mouths.
 					#IF(!harpyBimboCompanion.isAttractedTo(pc))
 						<br/>[style.italicsBad([harpyBimboCompanion.Name] will not like this!)]
 					#ENDIF
@@ -265,7 +265,7 @@
 				<index><![CDATA[3]]></index>
 				<responseTitle><![CDATA[Threesome (missionary)]]></responseTitle>
 				<responseTooltip><![CDATA[
-					Fuck [harpyBimbo.name] and [harpyBimboCompanion.name] side by side in the missionary position.
+					Fuck [harpyBimbo.name] и [harpyBimboCompanion.name] side by side in the missionary position.
 					#IF(!harpyBimboCompanion.isAttractedTo(pc))
 						<br/>[style.italicsBad([harpyBimboCompanion.Name] will not like this!)]
 					#ENDIF

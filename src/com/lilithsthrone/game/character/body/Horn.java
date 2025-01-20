@@ -89,7 +89,7 @@ public class Horn implements BodyPartInterface {
 		
 		if (type == getType()) {
 			if(type.equals(HornType.NONE)) {
-				return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already [npc.verb(lack)] horns, so nothing happens...)]</p>");
+                return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already lack horns, so nothing happens...)]</p>");
 			} else {
 				return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already [npc.has] the [npc.horns] of [npc.a_hornRace], so nothing happens...)]</p>");
 			}
@@ -105,19 +105,19 @@ public class Horn implements BodyPartInterface {
 		if(this.type.equals(HornType.NONE)) {
 			sb.append(UtilText.parse(owner, 
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out a surprised gasp and [npc.verb(rub)] at [npc.her] forehead as [npc.she] [npc.verb(feel)] it growing hot and sensitive."
+                            + "[npc.Name] let out a surprised gasp and rub at [npc.her] forehead as [npc.she] feel it growing hot and sensitive."
 						+ " After just a moment, [npc.her] [npc.eyes] widen in shock as something starts pushing out from under the [npc.faceSkin] of [npc.her] forehead."));
 		} else {
 			sb.append(UtilText.parse(owner, 
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out a surprised gasp as [npc.she] [npc.verb(feel)] an odd tingling sensation at the base of [npc.her] "+(owner.getTotalHorns()==1?"[npc.horn]":"[npc.horns]")+"."
+                            + "[npc.Name] let out a surprised gasp as [npc.she] feel an odd tingling sensation at the base of [npc.her] " + (owner.getTotalHorns() == 1 ? "[npc.horn]" : "[npc.horns]") + "."
 						+ " Before [npc.she] [npc.has] any time in which to react, "+(owner.getTotalHorns()==1?"it rapidly crumbles away, and within moments it's":"they rapidly crumble away, and within moments they've")+" completely disappeared. "));
 		}
 
 		if(type!=HornType.NONE) {
 			sb.append(UtilText.parse(owner, (owner.getTotalHorns()==1
-					?" A hard nub suddenly pushes out from the middle of [npc.her] forehead, and [npc.she] [npc.verb(gasp)] as [npc.she] [npc.verb(feel)] it quickly grow out into a "
-					:" Hard nubs suddenly push out from the sides of [npc.her] head, and [npc.she] [npc.verb(gasp)] as [npc.she] [npc.verb(feel)] them quickly grow out into ")));
+                    ? " A hard nub suddenly pushes out from the middle of [npc.her] forehead, and [npc.she] gasp as [npc.she] feel it quickly grow out into a "
+                    : " Hard nubs suddenly push out from the sides of [npc.her] head, and [npc.she] gasp as [npc.she] feel them quickly grow out into ")));
 		}
 		
 		this.type = type;
@@ -162,7 +162,7 @@ public class Horn implements BodyPartInterface {
 			return UtilText.parse(owner,
 					"<p>"
 						+ "A tingling feeling spreads over [npc.namePos] [npc.horns], before moving down and concentrating in [npc.her] forehead."
-						+ " [npc.She] can't help but let out a cry as [npc.she] [npc.verb(feel)] some of them [style.boldShrink(crumbling away)] and disappearing back down into [npc.her] [npc.faceSkin].<br/>"
+                            + " [npc.She] can't help but let out a cry as [npc.she] feel some of them [style.boldShrink(crumbling away)] and disappearing back down into [npc.her] [npc.faceSkin].<br/>"
 						+ "After a few moments, [npc.sheIs] left with [style.boldTfGeneric([npc.a_horns])]."
 					+ "</p>");
 			
@@ -170,7 +170,7 @@ public class Horn implements BodyPartInterface {
 			return UtilText.parse(owner,
 					"<p>"
 						+ "A tingling feeling spreads over [npc.namePos] [npc.horns], before moving down and concentrating in [npc.her] forehead."
-						+ " [npc.She] can't help but let out a cry as [npc.she] [npc.verb(feel)] new [npc.horns] [style.boldGrow(pushing up)] and growing out of [npc.her] [npc.faceSkin].<br/>"
+                            + " [npc.She] can't help but let out a cry as [npc.she] feel new [npc.horns] [style.boldGrow(pushing up)] and growing out of [npc.her] [npc.faceSkin].<br/>"
 						+ "After a few moments, [npc.sheIs] left with [style.boldTfGeneric([npc.a_horns])]."
 					+ "</p>");
 		}
@@ -259,7 +259,7 @@ public class Horn implements BodyPartInterface {
 		if(sizeChange < 0) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out a cry as [npc.she] [npc.verb(feel)] a strange tingling sensation running up through [npc.her] [npc.face] and into [npc.her] [npc.horns],"
+                            + "[npc.Name] let out a cry as [npc.she] feel a strange tingling sensation running up through [npc.her] [npc.face] and into [npc.her] [npc.horns],"
 							+ " before "+(getTotalHorns()==1?"it suddenly shrinks":"they suddenly shrink")+" down and [style.boldShrink("+(getTotalHorns()==1?"gets":"get")+" noticeably shorter)].<br/>"
 						+ "[npc.Name] now [npc.has] [style.boldTfGeneric("+(getTotalHorns()==1?"[npc.a_hornSize]":"[npc.hornSize]")+" [npc.horns])]!"
 					+ "</p>");
@@ -267,7 +267,7 @@ public class Horn implements BodyPartInterface {
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out a little cry as [npc.she] [npc.verb(feel)] a warm pulsating sensation running up through [npc.her] [npc.face] and into [npc.her] [npc.horns],"
+                            + "[npc.Name] let out a little cry as [npc.she] feel a warm pulsating sensation running up through [npc.her] [npc.face] and into [npc.her] [npc.horns],"
 							+ " before "+(getTotalHorns()==1?"it suddenly grows":"they suddenly grow")+" out and [style.boldGrow("+(getTotalHorns()==1?"gets":"get")+" noticeably longer)].<br/>"
 						+ "[npc.Name] now [npc.has] [style.boldTfGeneric("+(getTotalHorns()==1?"[npc.a_hornSize]":"[npc.hornSize]")+" [npc.horns])]!"
 					+ "</p>");

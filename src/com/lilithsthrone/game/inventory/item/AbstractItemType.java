@@ -1,20 +1,5 @@
 package com.lilithsthrone.game.inventory.item;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.controller.xmlParsing.XMLLoadException;
 import com.lilithsthrone.controller.xmlParsing.XMLMissingTagException;
@@ -37,6 +22,15 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+
 /**
  * @since 0.1.84
  * @version 0.4.0
@@ -45,27 +39,27 @@ import com.lilithsthrone.utils.colours.PresetColour;
 public abstract class AbstractItemType extends AbstractCoreType {
 	
 	private String determiner;
-	private String name;
-	private String namePlural;
-	private String description;
-	private String useDescriptor;
-	private String authorDescription;
+	private final String name;
+	private final String namePlural;
+	private final String description;
+	private final String useDescriptor;
+	private final String authorDescription;
 
-	private boolean sexUse;
-	private boolean combatUseAllies;
-	private boolean combatUseEnemies;
-	private boolean consumedOnUse;
+	private final boolean sexUse;
+	private final boolean combatUseAllies;
+	private final boolean combatUseEnemies;
+	private final boolean consumedOnUse;
 	
-	private Rarity rarity;
+	private final Rarity rarity;
 	
-	private int value;
+	private final int value;
 	
-	private boolean plural;
-	private boolean mod;
-	private boolean fromExternalFile;
+	private final boolean plural;
+	private final boolean mod;
+	private final boolean fromExternalFile;
 
-	private List<SvgInformation> svgPathInformation;
-	private List<Colour> colourShades;
+	private final List<SvgInformation> svgPathInformation;
+	private final List<Colour> colourShades;
 	
 	protected String SVGString;
 	protected List<String> effectTooltipLines;
@@ -154,9 +148,9 @@ public abstract class AbstractItemType extends AbstractCoreType {
 		}
 		
 		this.effectTooltipLines = new ArrayList<>();
-		
-		this.useDescriptionsSelf = Util.newArrayListOfValues("[npc.Name] [npc.verb(use)] the item.");
-		this.useDescriptionsOther = Util.newArrayListOfValues("[npc.Name] [npc.verb(use)] the item on [npc2.name].");
+
+        this.useDescriptionsSelf = Util.newArrayListOfValues("[npc.Name] use the item.");
+        this.useDescriptionsOther = Util.newArrayListOfValues("[npc.Name] use the item on [npc2.name].");
 		
 		specialEffect = "";
 		
@@ -375,7 +369,7 @@ public abstract class AbstractItemType extends AbstractCoreType {
 						.map(o -> o.getTextContent())
 						.collect(Collectors.toList());
 				if(useDescriptionsSelf.isEmpty()) {
-					this.useDescriptionsSelf = Util.newArrayListOfValues("[npc.Name] [npc.verb(use)] the item.");
+                    this.useDescriptionsSelf = Util.newArrayListOfValues("[npc.Name] use the item.");
 				}
 				
 				this.useDescriptionsOther = itemElement
@@ -384,12 +378,12 @@ public abstract class AbstractItemType extends AbstractCoreType {
 						.map(o -> o.getTextContent())
 						.collect(Collectors.toList());
 				if(useDescriptionsOther.isEmpty()) {
-					this.useDescriptionsOther = Util.newArrayListOfValues("[npc.Name] [npc.verb(use)] the item on [npc2.name].");
+                    this.useDescriptionsOther = Util.newArrayListOfValues("[npc.Name] use the item on [npc2.name].");
 				}
 				
 			} else {
-				this.useDescriptionsSelf = Util.newArrayListOfValues("[npc.Name] [npc.verb(use)] the item.");
-				this.useDescriptionsOther = Util.newArrayListOfValues("[npc.Name] [npc.verb(use)] the item on [npc2.name].");
+                this.useDescriptionsSelf = Util.newArrayListOfValues("[npc.Name] use the item.");
+                this.useDescriptionsOther = Util.newArrayListOfValues("[npc.Name] use the item on [npc2.name].");
 			}
 			
 		}
@@ -406,13 +400,10 @@ public abstract class AbstractItemType extends AbstractCoreType {
 	public boolean equals(Object o) { // I know it doesn't include everything, but this should be enough to check for equality.
 		if(super.equals(o)){
 			if(o instanceof AbstractItemType){
-				if(((AbstractItemType)o).getName(false).equals(getName(false))
-						&& ((AbstractItemType)o).getPathNameInformation().equals(getPathNameInformation())
-						&& ((AbstractItemType)o).getRarity() == getRarity()
-						&& ((AbstractItemType)o).getEffects().equals(getEffects())
-						){
-					return true;
-				}
+                return ((AbstractItemType) o).getName(false).equals(getName(false))
+                        && ((AbstractItemType) o).getPathNameInformation().equals(getPathNameInformation())
+                        && ((AbstractItemType) o).getRarity() == getRarity()
+                        && ((AbstractItemType) o).getEffects().equals(getEffects());
 			}
 		}
 		return false;

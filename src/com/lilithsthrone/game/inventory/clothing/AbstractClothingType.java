@@ -1,26 +1,5 @@
 package com.lilithsthrone.game.inventory.clothing;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Objects;
-import java.util.Set;
-import java.util.StringJoiner;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.controller.xmlParsing.XMLLoadException;
 import com.lilithsthrone.controller.xmlParsing.XMLMissingTagException;
@@ -32,13 +11,7 @@ import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.dialogue.utils.InventoryDialogue;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractCoreType;
-import com.lilithsthrone.game.inventory.AbstractSetBonus;
-import com.lilithsthrone.game.inventory.ColourReplacement;
-import com.lilithsthrone.game.inventory.InventorySlot;
-import com.lilithsthrone.game.inventory.ItemTag;
-import com.lilithsthrone.game.inventory.Rarity;
-import com.lilithsthrone.game.inventory.SetBonus;
+import com.lilithsthrone.game.inventory.*;
 import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
@@ -54,6 +27,18 @@ import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.ColourListPresets;
 import com.lilithsthrone.utils.colours.PresetColour;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 /**
  * @since 0.1.84
  * @version 0.3.9.5
@@ -63,24 +48,24 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 	
 	public static final Colour DEFAULT_COLOUR_VALUE = PresetColour.CLOTHING_BLACK;
 	
-	private String determiner;
-	private String name;
-	private String namePlural;
-	private String description;
+	private final String determiner;
+	private final String name;
+	private final String namePlural;
+	private final String description;
 	private String pathNamePrefix;
-	private String pathName;
-	private Map<InventorySlot, String> pathNameEquipped;
-	private String authorDescription;
+	private final String pathName;
+	private final Map<InventorySlot, String> pathNameEquipped;
+	private final String authorDescription;
 	
-	private boolean appendColourName;
-	private boolean plural;
-	private boolean isMod;
-	private boolean isColourDerivedFromPattern;
-	private int baseValue;
-	private float physicalResistance;
+	private final boolean appendColourName;
+	private final boolean plural;
+	private final boolean isMod;
+	private final boolean isColourDerivedFromPattern;
+	private final int baseValue;
+	private final float physicalResistance;
 	private int femininityMinimum;
 	private int femininityMaximum;
-	private Femininity femininityRestriction;
+	private final Femininity femininityRestriction;
 	private List<InventorySlot> equipSlots;
 	
 	// Penetration variables:
@@ -125,7 +110,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 	private boolean isPatternAvailableInitCompleted;
 	
 	// Stickers:
-	private Map<StickerCategory, List<Sticker>> stickers;
+	private final Map<StickerCategory, List<Sticker>> stickers;
 	
 	// Access and block stuff:
 	// protected due to use in ClothingType methods
@@ -133,15 +118,15 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 	protected Map<InventorySlot, List<InventorySlot>> incompatibleSlotsMap;
 	protected Map<InventorySlot, List<DisplacementType>> displacementTypesAvailableWithoutNONE;
 	
-	private AbstractSetBonus clothingSet;
-	private Rarity rarity;
+	private final AbstractSetBonus clothingSet;
+	private final Rarity rarity;
 	private List<ColourReplacement> colourReplacements;
 	/** Key is the colour index which should copy another colour upon weapon generation. Value is the colour index which should be copied. */
 	public Map<Integer, Integer> copyGenerationColours;
 
 	// Patterns:
-	private float patternChance;
-	private List<Pattern> defaultPatterns;
+	private final float patternChance;
+	private final List<Pattern> defaultPatterns;
 	private List<ColourReplacement> patternColourReplacements;
 
 	// Other:
@@ -1218,8 +1203,8 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 			for (Entry<Class, Set<String>> possibleMatch : possibleEnumValues.entrySet()) {
 				if (exMessage.contains(possibleMatch.getKey().getCanonicalName())) {
 					StringJoiner valueLister = new StringJoiner(",");
-					Arrays.asList(possibleMatch.getValue()).forEach(enumValue -> valueLister.add(enumValue.toString()));
-					System.err.println("Possible values for "+possibleMatch.getKey().getSimpleName()+" are " + valueLister.toString());
+                    Collections.singletonList(possibleMatch.getValue()).forEach(enumValue -> valueLister.add(enumValue.toString()));
+					System.err.println("Possible values for "+possibleMatch.getKey().getSimpleName()+" are " + valueLister);
 				}
 			}
 		}
@@ -1300,19 +1285,16 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 	public boolean equals(Object o) { // I know it doesn't include everything, but this should be enough to check for equality.
 		if(super.equals(o)){
 			if(o instanceof AbstractClothingType){
-				if(((AbstractClothingType)o).getName().equals(getName())
-						&& ((AbstractClothingType)o).getPathName().equals(getPathName())
-						&& ((AbstractClothingType)o).getPhysicalResistance() == getPhysicalResistance()
-						&& ((AbstractClothingType)o).femininityMaximum == femininityMaximum
-						&& ((AbstractClothingType)o).femininityMinimum == femininityMinimum
-						&& ((AbstractClothingType)o).femininityRestriction == femininityRestriction
-						&& ((AbstractClothingType)o).getEquipSlots().equals(getEquipSlots())
-						&& ((AbstractClothingType)o).getEffects().equals(getEffects())
-						&& ((AbstractClothingType)o).getClothingSet() == getClothingSet()
-						&& ((AbstractClothingType)o).getRarity() == getRarity()
-						){
-					return true;
-				}
+                return ((AbstractClothingType) o).getName().equals(getName())
+                        && ((AbstractClothingType) o).getPathName().equals(getPathName())
+                        && ((AbstractClothingType) o).getPhysicalResistance() == getPhysicalResistance()
+                        && ((AbstractClothingType) o).femininityMaximum == femininityMaximum
+                        && ((AbstractClothingType) o).femininityMinimum == femininityMinimum
+                        && ((AbstractClothingType) o).femininityRestriction == femininityRestriction
+                        && ((AbstractClothingType) o).getEquipSlots().equals(getEquipSlots())
+                        && ((AbstractClothingType) o).getEffects().equals(getEffects())
+                        && ((AbstractClothingType) o).getClothingSet() == getClothingSet()
+                        && ((AbstractClothingType) o).getRarity() == getRarity();
 			}
 		}
 		return false;
@@ -1451,7 +1433,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 						&& displacementDescriptions.get(slotToEquipInto).get(DisplacementType.REMOVE_OR_EQUIP).containsKey(DisplacementDescriptionType.REPLACEMENT_SELF)) {
 					return UtilText.parse(clothingOwner, displacementDescriptions.get(slotToEquipInto).get(DisplacementType.REMOVE_OR_EQUIP).get(DisplacementDescriptionType.REPLACEMENT_SELF));
 				}
-				return UtilText.parse(clothingOwner, "[npc.Name] [npc.verb(equip)] the "+clothing.getName()+"."); //TODO
+				return UtilText.parse(clothingOwner, "[npc.Name] equip the " + clothing.getName() + "."); //TODO
 				
 			} else {
 				if(rough) {
@@ -1460,7 +1442,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 							&& displacementDescriptions.get(slotToEquipInto).get(DisplacementType.REMOVE_OR_EQUIP).containsKey(DisplacementDescriptionType.REPLACEMENT_ROUGH)) {
 						return UtilText.parse(clothingEquipper, clothingOwner, displacementDescriptions.get(slotToEquipInto).get(DisplacementType.REMOVE_OR_EQUIP).get(DisplacementDescriptionType.REPLACEMENT_ROUGH));
 					}
-					return UtilText.parse(clothingEquipper, clothingOwner, "[npc.Name] [npc.verb(get)] [npc2.name] to equip the "+clothing.getName()+".");
+					return UtilText.parse(clothingEquipper, clothingOwner, "[npc.Name] get [npc2.name] to equip the " + clothing.getName() + ".");
 					
 				} else {
 					if(displacementDescriptions.get(slotToEquipInto)!=null
@@ -1468,7 +1450,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 							&& displacementDescriptions.get(slotToEquipInto).get(DisplacementType.REMOVE_OR_EQUIP).containsKey(DisplacementDescriptionType.REPLACEMENT)) {
 						return UtilText.parse(clothingEquipper, clothingOwner, displacementDescriptions.get(slotToEquipInto).get(DisplacementType.REMOVE_OR_EQUIP).get(DisplacementDescriptionType.REPLACEMENT));
 					}
-					return UtilText.parse(clothingEquipper, clothingOwner, "[npc.Name] roughly [npc.verb(force)] [npc2.name] to equip the "+clothing.getName()+".");
+					return UtilText.parse(clothingEquipper, clothingOwner, "[npc.Name] roughly force [npc2.name] to equip the " + clothing.getName() + ".");
 				}
 			}
 			
@@ -1577,7 +1559,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 						&& displacementDescriptions.get(slotToUnequipFrom).get(DisplacementType.REMOVE_OR_EQUIP).containsKey(DisplacementDescriptionType.DISPLACEMENT_SELF)) {
 					return UtilText.parse(clothingOwner, displacementDescriptions.get(slotToUnequipFrom).get(DisplacementType.REMOVE_OR_EQUIP).get(DisplacementDescriptionType.DISPLACEMENT_SELF));
 				}
-				return UtilText.parse(clothingOwner, "[npc.Name] [npc.verb(unequip)] [npc.her] "+clothing.getName()+".");
+				return UtilText.parse(clothingOwner, "[npc.Name] unequip [npc.her] " + clothing.getName() + ".");
 				
 			} else {
 				if(rough) {
@@ -1586,7 +1568,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 							&& displacementDescriptions.get(slotToUnequipFrom).get(DisplacementType.REMOVE_OR_EQUIP).containsKey(DisplacementDescriptionType.DISPLACEMENT_ROUGH)) {
 						return UtilText.parse(clothingRemover, clothingOwner, displacementDescriptions.get(slotToUnequipFrom).get(DisplacementType.REMOVE_OR_EQUIP).get(DisplacementDescriptionType.DISPLACEMENT_ROUGH));
 					}
-					return UtilText.parse(clothingRemover, clothingOwner, "[npc.Name] roughly [npc.verb(unequip)] [npc2.namePos] "+clothing.getName()+".");
+					return UtilText.parse(clothingRemover, clothingOwner, "[npc.Name] roughly unequip [npc2.namePos] " + clothing.getName() + ".");
 					
 				} else {
 					if(displacementDescriptions.get(slotToUnequipFrom)!=null
@@ -1594,7 +1576,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 							&& displacementDescriptions.get(slotToUnequipFrom).get(DisplacementType.REMOVE_OR_EQUIP).containsKey(DisplacementDescriptionType.DISPLACEMENT)) {
 						return UtilText.parse(clothingRemover, clothingOwner, displacementDescriptions.get(slotToUnequipFrom).get(DisplacementType.REMOVE_OR_EQUIP).get(DisplacementDescriptionType.DISPLACEMENT));
 					}
-					return UtilText.parse(clothingRemover, clothingOwner, "[npc.Name] [npc.verb(get)] [npc2.name] to unequip [npc2.her] "+clothing.getName()+".");
+					return UtilText.parse(clothingRemover, clothingOwner, "[npc.Name] get [npc2.name] to unequip [npc2.her] " + clothing.getName() + ".");
 				}
 			}
 			
@@ -2399,7 +2381,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 					for(String line : lines) {
 						sb.append(line);
 					}
-					finalSvg += "<div style='width:100%;height:100%;position:absolute;left:0;top:0;'>"+sb.toString()+"</div>";
+					finalSvg += "<div style='width:100%;height:100%;position:absolute;left:0;top:0;'>"+ sb +"</div>";
 				} catch(IOException ex) {
 					System.err.println("Error: getSVGWithHandledStickers() Code 2");
 					ex.printStackTrace();
@@ -2419,7 +2401,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 					for(String line : lines) {
 						sb.append(line);
 					}
-					finalSvg += "<div style='width:100%;height:100%;position:absolute;left:0;top:0;'>"+sb.toString()+"</div>";
+					finalSvg += "<div style='width:100%;height:100%;position:absolute;left:0;top:0;'>"+ sb +"</div>";
 				} catch(IOException ex) {
 					System.err.println("Error: getSVGWithHandledStickers() Code 2");
 					ex.printStackTrace();

@@ -123,7 +123,7 @@
 	</p>
 	<p>
 		#IF(pc.getQuest(QUEST_LINE_MAIN) == QUEST_MAIN_1_E_REPORT_TO_HELENA)
-			You do have business with [helena.name], and you're sure that she'd want to hear about Scarlett as soon as possible, but you'll have to come back once she's awake, [style.colourMinorBad(between [units.time(6)] and [units.time(22)])]...
+			You do have business with [helena.name], and you're sure that she'd want to hear about Scarlett as soon as possible, but you'll have to come back once she's awake, [style.colourMinorBad(between [units.time(6)] и [units.time(22)])]...
 		#ELSEIF(pc.isQuestFailed(QUEST_LINE_ROMANCE_HELENA))
 			There's not much point in waiting around for the nests' residents to wake up, as Helena is so furious with you that she'd never agree to meeting with you...
 		#ELSEIF(pc.isQuestProgressGreaterThan(QUEST_LINE_MAIN, QUEST_MAIN_1_E_REPORT_TO_HELENA))
@@ -246,7 +246,7 @@
 		#ELSE
 			 As you're completely thrown off balance, the harpy has no problem at all in manipulating your body such that your exposed ass is pointing up into the air.
 		#ENDIF
-		 Helena continues to demonstrate her arcane mastery, and you feel your [pc.arms] and [pc.legs] bound by an ethereal force as [helena.she] steps forwards and prepares to personally administer your punishment.
+		 Helena continues to demonstrate her arcane mastery, and you feel your [pc.arms] и [pc.legs] bound by an ethereal force as [helena.she] steps forwards and prepares to personally administer your punishment.
 	</p>
 	<p>
 		[helena.speech(Is this the sort of attention you were looking for, [pc.name]?)] the matriarch rhetorically asks, [helena.speech(I think twenty strikes will do nicely for you!)]
@@ -271,7 +271,7 @@
 		You scrunch your [pc.eyes] shut and do your best to endure your punishment without complaint. Despite your best efforts to stay quiet, however, [helena.namePos] sharp blows occasionally force a little whimper out from between your [pc.lips], much to the amusement of the harpy onlookers.
 	</p>
 	<p>
-		Although Helena had announced that you'd be receiving only twenty strikes, your public spanking seems to continue on forever. Time and again, the matriarch's wing-like hand relentlessly strikes down at your exposed cheeks, but just as you feel as though you can't possibly stand any more, she decides that you've had enough. Stepping back, she releases the arcane bonds which were restraining your [pc.arms] and [pc.legs], and as you reach back to rub at your tender [pc.ass], Aello pushes you away from her and teases, [style.speechFeminineStrong(That'll teach you to annoy our matriarch!)]
+		Although Helena had announced that you'd be receiving only twenty strikes, your public spanking seems to continue on forever. Time and again, the matriarch's wing-like hand relentlessly strikes down at your exposed cheeks, but just as you feel as though you can't possibly stand any more, she decides that you've had enough. Stepping back, she releases the arcane bonds which were restraining your [pc.arms] и [pc.legs], and as you reach back to rub at your tender [pc.ass], Aello pushes you away from her and teases, [style.speechFeminineStrong(That'll teach you to annoy our matriarch!)]
 	</p>
 	<p>
 		With her voice once again taking on a softer tone, Helena looks down at you and says, [helena.speech(I must commend you on your resolve. Those who I punish in this fashion often have a tendency to cause quite the scene.)]
@@ -300,7 +300,7 @@
 		Not at all happy with what Helena's punishment turned out to be, you let out a loud cry as her wing smacks down yet again on your exposed ass. Not giving you a moment's respite, she lifts her wing and delivers a third stinging blow to your [pc.ass+], causing you to squeal once more in pain. Each of her blows draws out a desperate wail from between your [pc.lips], and much to the amusement of the harpy onlookers, you fruitlessly kick and struggle about as Aello firmly holds you in position.
 	</p>
 	<p>
-		Although Helena had announced that you'd be receiving only twenty strikes, your public spanking seems to continue on forever. Time and again, the matriarch's wing-like hand relentlessly strikes down at your exposed cheeks, and although you continue to struggle and shout throughout your whole ordeal, the matriarch only stops once she's decided that you've had enough. Stepping back, she releases the arcane bonds which were restraining your [pc.arms] and [pc.legs], and as you reach back to rub at your tender [pc.ass], Aello pushes you away from her and teases, [style.speechFeminineStrong(That'll teach you to annoy our matriarch!)]
+		Although Helena had announced that you'd be receiving only twenty strikes, your public spanking seems to continue on forever. Time and again, the matriarch's wing-like hand relentlessly strikes down at your exposed cheeks, and although you continue to struggle and shout throughout your whole ordeal, the matriarch only stops once she's decided that you've had enough. Stepping back, she releases the arcane bonds which were restraining your [pc.arms] и [pc.legs], and as you reach back to rub at your tender [pc.ass], Aello pushes you away from her and teases, [style.speechFeminineStrong(That'll teach you to annoy our matriarch!)]
 	</p>
 	<p>
 		With her voice once again taking on a softer tone, Helena looks down at you and says, [helena.speech(What a dreadful racket you made... I cannot recall anyone else ever kicking up as much of a fuss as you just did.)]
@@ -325,7 +325,7 @@
 		Helena clearly approves of her follower's suggestion, as the next blow that lands on your ass is far more powerful than the ones before, and despite your burning arousal, you can't help but let out a whimpering scream. Encouraged by your painful cry, and seemingly oblivious to the fact that you're still enjoying it, each of [helena.name]'s smacks grow harder and harder, drawing out desperate wails and pleasurable moans from between your [pc.lips].
 	</p>
 	<p>
-		Although Helena had announced that you'd be receiving only twenty strikes, your public spanking seems to be over in a flash. Stepping back, she releases the arcane bonds which were restraining your [pc.arms] and [pc.legs], and as you reach back to rub at your tender [pc.ass], Aello pushes you away from her and teases, [style.speechFeminineStrong(That'll teach you to annoy our matriarch!)]
+		Although Helena had announced that you'd be receiving only twenty strikes, your public spanking seems to be over in a flash. Stepping back, she releases the arcane bonds which were restraining your [pc.arms] и [pc.legs], and as you reach back to rub at your tender [pc.ass], Aello pushes you away from her and teases, [style.speechFeminineStrong(That'll teach you to annoy our matriarch!)]
 	</p>
 	]]>
 	</htmlContent>
@@ -475,7 +475,7 @@
 			At that moment, the doors ping and slide open, and you're left to follow in Helena's footsteps as she excitedly skips down the corridor towards the door to her apartment. Just a couple of minutes later, the two of you are entering her bedroom, and after turning to plant yet another dominant, wet kiss on your [pc.lips], Helena pushes you down onto her bed before darting off into her walk-in wardrobe.
 		</p>
 		<p>
-			Thankfully, you aren't kept waiting for very long, as after just a few moments, the beautiful harpy returns. Holding her huge white wings up to conceal her body, she flashes you a sultry smile as she confidently strides forwards to stand before you. Sweeping her wings down to either side of her perfect body, she reveals the fact that she's wearing nothing but a cupless bra and skimpy crotchless thong. With her [helena.nipples+] and [helena.pussy+] fully on display, she teases, [helena.speech(Now, how should I fuck you today?)]
+			Thankfully, you aren't kept waiting for very long, as after just a few moments, the beautiful harpy returns. Holding her huge white wings up to conceal her body, she flashes you a sultry smile as she confidently strides forwards to stand before you. Sweeping her wings down to either side of her perfect body, she reveals the fact that she's wearing nothing but a cupless bra and skimpy crotchless thong. With her [helena.nipples+] и [helena.pussy+] fully on display, she teases, [helena.speech(Now, how should I fuck you today?)]
 		</p>
 	#ELSE
 		<p>
@@ -485,7 +485,7 @@
 			At that moment, the doors ping and slide open, and you're left to follow in Helena's footsteps as she excitedly skips down the corridor towards the door to her apartment. Just a couple of minutes later, the two of you are entering her bedroom, and after turning to plant yet another desperate, wet kiss on your [pc.lips], Helena guides you over to her bed before darting off into her walk-in wardrobe.
 		</p>
 		<p>
-			Thankfully, you aren't kept waiting for very long, as after just a few moments, the beautiful harpy returns. Holding her huge white wings up to conceal her body, she flashes you a sultry smile as she confidently strides forwards to stand before you. Sweeping her wings down to either side of her perfect body, she reveals the fact that she's wearing nothing but a cupless bra and skimpy crotchless thong. With her [helena.nipples+] and [helena.pussy+] fully on display, she teases, [helena.speech(How would you like to fuck me today, [pc.name]?)]
+			Thankfully, you aren't kept waiting for very long, as after just a few moments, the beautiful harpy returns. Holding her huge white wings up to conceal her body, she flashes you a sultry smile as she confidently strides forwards to stand before you. Sweeping her wings down to either side of her perfect body, she reveals the fact that she's wearing nothing but a cupless bra and skimpy crotchless thong. With her [helena.nipples+] и [helena.pussy+] fully on display, she teases, [helena.speech(How would you like to fuck me today, [pc.name]?)]
 		</p>
 	#ENDIF
 	]]>

@@ -1,11 +1,5 @@
 package com.lilithsthrone.game.character.body.abstractTypes;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.w3c.dom.Document;
-
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
@@ -21,6 +15,11 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
+import org.w3c.dom.Document;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.3.7
@@ -675,7 +674,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 			if(positive) {
 				return UtilText.parse(owner,
 						"<p>"
-							+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+								+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] spine."
 							+ " Without any further warning of what's to come, [npc.her]"
 							+(owner.getTailCount()>1
 									?" [npc.tails] suddenly [style.boldGrow(grow thicker)]."
@@ -687,7 +686,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 			} else {
 				return UtilText.parse(owner,
 						"<p>"
-								+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+								+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] spine."
 								+ " Without any further warning of what's to come, [npc.her]"
 								+(owner.getTailCount()>1
 										?" [npc.tails] suddenly [style.boldShrink(shrink down)]."
@@ -701,7 +700,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 			if(positive) {
 				return UtilText.parse(owner,
 						"<p>"
-							+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+								+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] spine."
 							+ " Without any further warning of what's to come, [npc.her]"
 							+(owner.getTailCount()>1
 									?" [npc.tails] suddenly [style.boldGrow(fluff up and grow bigger)]."
@@ -713,7 +712,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 			} else {
 				return UtilText.parse(owner,
 						"<p>"
-								+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+								+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] spine."
 								+ " Without any further warning of what's to come, [npc.her]"
 								+(owner.getTailCount()>1
 										?" [npc.tails] suddenly [style.boldShrink(shrink down)]."
@@ -727,7 +726,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 			if(positive) {
 				return UtilText.parse(owner,
 						"<p>"
-							+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+								+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] spine."
 							+ " Without any further warning of what's to come, [npc.her]"
 							+(owner.getTailCount()>1
 									?" [npc.tails] suddenly [style.boldGrow(fill out and expand in volume)]."
@@ -739,7 +738,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 			} else {
 				return UtilText.parse(owner,
 						"<p>"
-								+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+								+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] spine."
 								+ " Without any further warning of what's to come, [npc.her]"
 								+(owner.getTailCount()>1
 										?" [npc.tails] suddenly [style.boldShrink(shrink down and lose volume)]."
@@ -753,7 +752,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 			if(positive) {
 				return UtilText.parse(owner,
 						"<p>"
-							+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+								+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] spine."
 							+ " Without any further warning of what's to come, [npc.her]"
 							+(owner.getTailCount()>1
 									?" [npc.tails] suddenly [style.boldGrow(fill out and expand in volume)]."
@@ -765,7 +764,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 			} else {
 				return UtilText.parse(owner,
 						"<p>"
-								+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+								+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] spine."
 								+ " Without any further warning of what's to come, [npc.her]"
 								+(owner.getTailCount()>1
 										?" [npc.tails] suddenly [style.boldShrink(shrink down and lose volume)]."
@@ -779,7 +778,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 			if(positive) {
 				return UtilText.parse(owner,
 						"<p>"
-							+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+								+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] spine."
 							+ " Without any further warning of what's to come, [npc.her]"
 							+(owner.getTailCount()>1
 									?" [npc.tails] suddenly [style.boldGrow(grow larger)]."
@@ -791,7 +790,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 			} else {
 				return UtilText.parse(owner,
 						"<p>"
-								+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+								+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] spine."
 								+ " Without any further warning of what's to come, [npc.her]"
 								+(owner.getTailCount()>1
 										?" [npc.tails] suddenly [style.boldShrink(shrink down)]."
@@ -812,7 +811,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 			if(positive) {
 				return UtilText.parse(owner,
 						"<p>"
-							+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+								+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] spine."
 							+ " Without any further warning of what's to come, [npc.her]"
 							+(owner.getTailCount()>1
 									?" [npc.tails] suddenly [style.boldGrow(grow longer)]."
@@ -824,7 +823,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 			} else {
 				return UtilText.parse(owner,
 						"<p>"
-								+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+								+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] spine."
 								+ " Without any further warning of what's to come, [npc.her]"
 								+(owner.getTailCount()>1
 										?" [npc.tails] suddenly [style.boldShrink(shorten)]."
@@ -838,7 +837,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 			if(positive) {
 				return UtilText.parse(owner,
 						"<p>"
-							+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+								+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] spine."
 							+ " Without any further warning of what's to come, [npc.her]"
 							+(owner.getTailCount()>1
 									?" [npc.tails] suddenly [style.boldGrow(fluff up and grow longer)]."
@@ -850,7 +849,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 			} else {
 				return UtilText.parse(owner,
 						"<p>"
-								+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+								+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] spine."
 								+ " Without any further warning of what's to come, [npc.her]"
 								+(owner.getTailCount()>1
 										?" [npc.tails] suddenly [style.boldShrink(shorten)]."
@@ -864,7 +863,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 			if(positive) {
 				return UtilText.parse(owner,
 						"<p>"
-							+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+								+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] spine."
 							+ " Without any further warning of what's to come, [npc.her]"
 							+(owner.getTailCount()>1
 									?" [npc.tails] suddenly [style.boldGrow(grow longer)]."
@@ -876,7 +875,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 			} else {
 				return UtilText.parse(owner,
 						"<p>"
-								+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+								+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] spine."
 								+ " Without any further warning of what's to come, [npc.her]"
 								+(owner.getTailCount()>1
 										?" [npc.tails] suddenly [style.boldShrink(shorten)]."
@@ -890,7 +889,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 			if(positive) {
 				return UtilText.parse(owner,
 						"<p>"
-							+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+								+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] spine."
 							+ " Without any further warning of what's to come, [npc.her]"
 							+(owner.getTailCount()>1
 									?" [npc.tails] suddenly [style.boldGrow(grow longer)]."
@@ -902,7 +901,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 			} else {
 				return UtilText.parse(owner,
 						"<p>"
-								+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+								+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] spine."
 								+ " Without any further warning of what's to come, [npc.her]"
 								+(owner.getTailCount()>1
 										?" [npc.tails] suddenly [style.boldShrink(shorten)]."
@@ -916,7 +915,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 			if(positive) {
 				return UtilText.parse(owner,
 						"<p>"
-							+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+								+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] spine."
 							+ " Without any further warning of what's to come, [npc.her]"
 							+(owner.getTailCount()>1
 									?" [npc.tails] suddenly [style.boldGrow(grow longer)]."
@@ -928,7 +927,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 			} else {
 				return UtilText.parse(owner,
 						"<p>"
-								+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+								+ "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] spine."
 								+ " Without any further warning of what's to come, [npc.her]"
 								+(owner.getTailCount()>1
 										?" [npc.tails] suddenly [style.boldShrink(shorten)]."

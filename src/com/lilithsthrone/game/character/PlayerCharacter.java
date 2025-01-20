@@ -1,39 +1,9 @@
 package com.lilithsthrone.game.character;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.attributes.Attribute;
-import com.lilithsthrone.game.character.body.types.ArmType;
-import com.lilithsthrone.game.character.body.types.AssType;
-import com.lilithsthrone.game.character.body.types.BreastType;
-import com.lilithsthrone.game.character.body.types.EarType;
-import com.lilithsthrone.game.character.body.types.EyeType;
-import com.lilithsthrone.game.character.body.types.FaceType;
-import com.lilithsthrone.game.character.body.types.HairType;
-import com.lilithsthrone.game.character.body.types.HornType;
-import com.lilithsthrone.game.character.body.types.LegType;
-import com.lilithsthrone.game.character.body.types.PenisType;
-import com.lilithsthrone.game.character.body.types.TailType;
-import com.lilithsthrone.game.character.body.types.TorsoType;
-import com.lilithsthrone.game.character.body.types.VaginaType;
-import com.lilithsthrone.game.character.body.types.WingType;
+import com.lilithsthrone.game.character.body.types.*;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.AbstractFetish;
@@ -70,12 +40,7 @@ import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
-import com.lilithsthrone.game.sex.CondomFailure;
-import com.lilithsthrone.game.sex.ImmobilisationType;
-import com.lilithsthrone.game.sex.OrgasmCumTarget;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexPace;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.managers.submission.SMLyssiethDemonTF;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotLyingDown;
 import com.lilithsthrone.game.sex.sexActions.SexActionInterface;
@@ -83,16 +48,19 @@ import com.lilithsthrone.game.sex.sexActions.SexActionOrgasmOverride;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.GenericOrgasms;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.SizedStack;
-import com.lilithsthrone.utils.TreeNode;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Vector2i;
-import com.lilithsthrone.utils.XMLSaving;
+import com.lilithsthrone.utils.*;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -106,7 +74,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 	private int karma;
 
 	private Map<QuestLine, List<Quest>> quests;
-	private Map<QuestLine, Quest> questsFailed;
+	private final Map<QuestLine, Quest> questsFailed;
 
 	private boolean mainQuestUpdated;
 	private boolean sideQuestUpdated;
@@ -118,18 +86,18 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 	
 	//Discoveries:
 	private List<String> charactersEncountered;
-	private Set<AbstractWorldType> worldsVisited;
+	private final Set<AbstractWorldType> worldsVisited;
 	
-	private Set<AbstractSubspecies> racesDiscoveredFromBook;
+	private final Set<AbstractSubspecies> racesDiscoveredFromBook;
 	
-	private Set<AbstractItemType> itemsDiscovered;
-	private Set<AbstractWeaponType> weaponsDiscovered;
-	private Set<AbstractClothingType> clothingDiscovered;
-	private Set<AbstractSubspecies> subspeciesDiscovered;
-	private Set<AbstractSubspecies> subspeciesAdvancedKnowledge;
+	private final Set<AbstractItemType> itemsDiscovered;
+	private final Set<AbstractWeaponType> weaponsDiscovered;
+	private final Set<AbstractClothingType> clothingDiscovered;
+	private final Set<AbstractSubspecies> subspeciesDiscovered;
+	private final Set<AbstractSubspecies> subspeciesAdvancedKnowledge;
 	
 	// Trader buy-back:
-	private SizedStack<ShopTransaction> buybackStack;
+	private final SizedStack<ShopTransaction> buybackStack;
 
 	
 	public PlayerCharacter(NameTriplet nameTriplet, int level, LocalDateTime birthday, Gender gender, AbstractSubspecies startingSubspecies, RaceStage stage, AbstractWorldType startingWorld, AbstractPlaceType startingPlace) {
@@ -322,7 +290,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 		return playerElement;
 	}
 	
-	private static boolean debug = false;
+	private static final boolean debug = false;
 	
 	public static PlayerCharacter loadFromXML(StringBuilder log, Element parentElement, Document doc, CharacterImportSetting... settings) {
 		long time = System.nanoTime();
@@ -1079,7 +1047,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 				Main.game.addEvent(new EventLogEntry("[style.colourMinorGood(New Task)]", quest.getName()), false);
 				return "<p style='text-align:center;'>"
 						+ "<b style='color:" + questLine.getType().getColour().toWebHexString() + ";'>Quest - " + questLine.getName() + "</b><br/>"
-						+ "<b style='color:"+PresetColour.GENERIC_GOOD.toWebHexString()+";'>Task Completed - "+currentQuest.getName()+"</b><br/>"
+						+ "<b style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Задача выполнена - " + currentQuest.getName() + "</b><br/>"
 						+ "<b>New Task - " + quest.getName() + "</b></p>"
 						+ experienceUpdate;
 			}
@@ -1129,11 +1097,8 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 	}
 	
 	public boolean isSubQuestCompleted(Quest subQuest, QuestLine questLine) {
-		if(quests.containsKey(questLine) && quests.get(questLine).contains(subQuest) && getQuest(questLine)!=subQuest) {
-			return true;
-		}
-		return false;
-	}
+        return quests.containsKey(questLine) && quests.get(questLine).contains(subQuest) && getQuest(questLine) != subQuest;
+    }
 
 	public boolean isQuestCompleted(QuestLine questLine) {
 		if(!hasQuest(questLine)) {

@@ -61,49 +61,49 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(put)] on the safety goggles.]]>
+            <![CDATA[[npc.Name] put on the safety goggles.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(strap)] the safety goggles into position so that they're shielding [npc2.namePos] [npc2.eyes].]]>
+            <![CDATA[[npc.Name] strap the safety goggles into position so that they're shielding [npc2.namePos] [npc2.eyes].]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(strap)] the safety goggles into position so that they're shielding [npc2.namePos] [npc2.eyes].]]>
+            <![CDATA[[npc.Name] roughly strap the safety goggles into position so that they're shielding [npc2.namePos] [npc2.eyes].]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(take)] off [npc.her] safety goggles.]]>
+            <![CDATA[[npc.Name] take off [npc.her] safety goggles.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(take)] off [npc2.namePos] safety goggles.]]>
+            <![CDATA[[npc.Name] take off [npc2.namePos] safety goggles.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(grab)] [npc2.namePos] safety goggles and roughly [npc.verb(pull)] them off.]]>
+            <![CDATA[[npc.Name] grab [npc2.namePos] safety goggles and roughly pull them off.]]>
 		</otherRough>
 	</displacementText>
 
 	<replacementText type="PULLS_UP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc.her] safety goggles back down to shield [npc.her] [npc.eyes].]]>
+            <![CDATA[[npc.Name] pull [npc.her] safety goggles back down to shield [npc.her] [npc.eyes].]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc2.namePos] safety goggles back down to shield [npc2.her] [npc2.eyes].]]>
+            <![CDATA[[npc.Name] pull [npc2.namePos] safety goggles back down to shield [npc2.her] [npc2.eyes].]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(pull)] [npc2.namePos] safety goggles back down to shield [npc2.her] [npc2.eyes].]]>
+            <![CDATA[[npc.Name] roughly pull [npc2.namePos] safety goggles back down to shield [npc2.her] [npc2.eyes].]]>
 	  </otherRough>
 	</replacementText>
 
 	<displacementText type="PULLS_UP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc.her] safety goggles up onto [npc.her] forehead.]]>
+            <![CDATA[[npc.Name] pull [npc.her] safety goggles up onto [npc.her] forehead.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc2.namePos] safety goggles up onto [npc2.her] forehead.]]>
+            <![CDATA[[npc.Name] pull [npc2.namePos] safety goggles up onto [npc2.her] forehead.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(grab)] hold [npc2.namePos] safety goggles and roughly [npc.verb(pull)] them up onto [npc2.her] forehead.]]>
+            <![CDATA[[npc.Name] grab hold [npc2.namePos] safety goggles and roughly pull them up onto [npc2.her] forehead.]]>
 		</otherRough>
 	</displacementText>
   

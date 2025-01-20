@@ -41,25 +41,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the gloves onto [npc.her] [npc.hands], before giving [npc.her] [npc.fingers] an experimental wiggle.]]>
+            <![CDATA[[npc.Name] pull the gloves onto [npc.her] [npc.hands], before giving [npc.her] [npc.fingers] an experimental wiggle.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the gloves onto [npc2.namePos] [npc2.hands].]]>
+            <![CDATA[[npc.Name] pull the gloves onto [npc2.namePos] [npc2.hands].]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(force)] the gloves onto [npc2.namePos] [npc2.hands].]]>
+            <![CDATA[[npc.Name] roughly force the gloves onto [npc2.namePos] [npc2.hands].]]>
 	  </otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] off [npc.her] gloves.]]>
+            <![CDATA[[npc.Name] pull off [npc.her] gloves.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] off [npc2.namePos] gloves.]]>
+            <![CDATA[[npc.Name] pull off [npc2.namePos] gloves.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(yank)] off [npc2.namePos] gloves.]]>
+            <![CDATA[[npc.Name] roughly yank off [npc2.namePos] gloves.]]>
 		</otherRough>
 	</displacementText>
 	

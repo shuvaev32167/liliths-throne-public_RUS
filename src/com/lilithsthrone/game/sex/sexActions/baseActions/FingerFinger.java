@@ -45,24 +45,24 @@ public class FingerFinger {
 			switch(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())) {
 				case DOM_GENTLE:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"Wanting some more physical contact with [npc2.name], [npc.name] [npc.verb(reach)] out and gently [npc.verb(take)] hold of [npc2.her] [npc2.hands].",
-							"Letting out [npc.a_moan+], [npc.name] [npc.verb(reach)] out and gently [npc.verb(take)] hold of [npc2.namePos] [npc2.hands]."));
+                            "Wanting some more physical contact with [npc2.name], [npc.name] reach out and gently take hold of [npc2.her] [npc2.hands].",
+                            "Letting out [npc.a_moan+], [npc.name] reach out and gently take hold of [npc2.namePos] [npc2.hands]."));
 					break;
 				case DOM_ROUGH:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"Wanting a greater degree of control over [npc2.namePos] movements, [npc.name] [npc.verb(reach)] out and roughly [npc.verb(grab)] hold of [npc2.her] [npc2.hands].",
-							"Letting out [npc.a_moan+], [npc.name] [npc.verb(reach)] out and roughly [npc.verb(grab)] hold of [npc2.namePos] [npc2.hands]."));
+                            "Wanting a greater degree of control over [npc2.namePos] movements, [npc.name] reach out and roughly grab hold of [npc2.her] [npc2.hands].",
+                            "Letting out [npc.a_moan+], [npc.name] reach out and roughly grab hold of [npc2.namePos] [npc2.hands]."));
 					break;
 				case DOM_NORMAL:
 				case SUB_EAGER:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"Wanting some more physical contact with [npc2.name], [npc.name] [npc.verb(reach)] out and eagerly [npc.verb(take)] hold of [npc2.her] [npc2.hands].",
-							"Letting out [npc.a_moan+], [npc.name] [npc.verb(reach)] out and eagerly [npc.verb(take)] hold of [npc2.namePos] [npc2.hands]."));
+                            "Wanting some more physical contact with [npc2.name], [npc.name] reach out and eagerly take hold of [npc2.her] [npc2.hands].",
+                            "Letting out [npc.a_moan+], [npc.name] reach out and eagerly take hold of [npc2.namePos] [npc2.hands]."));
 					break;
 				case SUB_NORMAL:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"Wanting some more physical contact with [npc2.name], [npc.name] [npc.verb(reach)] out and [npc.verb(take)] hold of [npc2.her] [npc2.hands].",
-							"Letting out [npc.a_moan+], [npc.name] [npc.verb(reach)] out and [npc.verb(take)] hold of [npc2.namePos] [npc2.hands]."));
+                            "Wanting some more physical contact with [npc2.name], [npc.name] reach out and take hold of [npc2.her] [npc2.hands].",
+                            "Letting out [npc.a_moan+], [npc.name] reach out and take hold of [npc2.namePos] [npc2.hands]."));
 					break;
 				case SUB_RESISTING:
 					break;
@@ -165,9 +165,9 @@ public class FingerFinger {
 			UtilText.nodeContentSB.setLength(0);
 			
 			UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-					"Letting out a little [npc.moan], [npc.name] gently [npc.verb(squeeze)] [npc2.namePos] [npc2.hand+].",
-					"[npc.Name] [npc.verb(let)] out a series of soft sighs as [npc.she] gently [npc.verb(wrap)] [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand+].",
-					"Gently wrapping [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand+], [npc.name] [npc.verb(let)] out a little [npc.moan]."));
+                    "Letting out a little [npc.moan], [npc.name] gently squeeze [npc2.namePos] [npc2.hand+].",
+                    "[npc.Name] let out a series of soft sighs as [npc.she] gently wrap [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand+].",
+                    "Gently wrapping [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand+], [npc.name] let out a little [npc.moan]."));
 
 			UtilText.nodeContentSB.append(getTargetedCharacterResponse(this));
 					
@@ -199,9 +199,9 @@ public class FingerFinger {
 			UtilText.nodeContentSB.setLength(0);
 
 			UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-					"Letting out [npc.a_moan+], [npc.name] happily [npc.verb(squeeze)] [npc2.namePos] [npc2.hand+].",
-					"[npc.Name] [npc.verb(let)] out a series of [npc.moans+] as [npc.she] eagerly [npc.verb(wrap)] [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand+].",
-					"Eagerly wrapping [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand+], [npc.name] [npc.verb(let)] out a [npc.moan+]."));
+                    "Letting out [npc.a_moan+], [npc.name] happily squeeze [npc2.namePos] [npc2.hand+].",
+                    "[npc.Name] let out a series of [npc.moans+] as [npc.she] eagerly wrap [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand+].",
+                    "Eagerly wrapping [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand+], [npc.name] let out a [npc.moan+]."));
 
 			UtilText.nodeContentSB.append(getTargetedCharacterResponse(this));
 			
@@ -233,9 +233,9 @@ public class FingerFinger {
 			UtilText.nodeContentSB.setLength(0);
 
 			UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-					"Letting out [npc.a_moan+], [npc.name] forcefully [npc.verb(squeeze)] [npc2.namePos] [npc2.hand+].",
-					"[npc.Name] [npc.verb(let)] out a series of [npc.moans+] as [npc.she] roughly [npc.verb(clench)] [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand+].",
-					"Roughly wrapping [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand+], [npc.name] [npc.verb(let)] out a [npc.moan+]."));
+                    "Letting out [npc.a_moan+], [npc.name] forcefully squeeze [npc2.namePos] [npc2.hand+].",
+                    "[npc.Name] let out a series of [npc.moans+] as [npc.she] roughly clench [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand+].",
+                    "Roughly wrapping [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand+], [npc.name] let out a [npc.moan+]."));
 			
 			UtilText.nodeContentSB.append(getTargetedCharacterResponse(this));
 			
@@ -267,9 +267,9 @@ public class FingerFinger {
 			UtilText.nodeContentSB.setLength(0);
 
 			UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-					"Letting out [npc.a_moan+], [npc.name] [npc.verb(squeeze)] [npc2.namePos] [npc2.hand+].",
-					"[npc.Name] [npc.verb(let)] out a series of [npc.moans+] as [npc.she] [npc.verb(wrap)] [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand+].",
-					"Wrapping [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand+], [npc.name] [npc.verb(let)] out a [npc.moan+]."));
+                    "Letting out [npc.a_moan+], [npc.name] squeeze [npc2.namePos] [npc2.hand+].",
+                    "[npc.Name] let out a series of [npc.moans+] as [npc.she] wrap [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand+].",
+                    "Wrapping [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand+], [npc.name] let out a [npc.moan+]."));
 
 			UtilText.nodeContentSB.append(getTargetedCharacterResponse(this));
 			
@@ -301,9 +301,9 @@ public class FingerFinger {
 			UtilText.nodeContentSB.setLength(0);
 
 			UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-					"Letting out [npc.a_moan+], [npc.name] happily [npc.verb(squeeze)] [npc2.namePos] [npc2.hand+].",
-					"[npc.Name] [npc.verb(let)] out a series of [npc.moans+] as [npc.she] eagerly [npc.verb(wrap)] [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand+].",
-					"Eagerly wrapping [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand+], [npc.name] [npc.verb(let)] out a [npc.moan+]."));
+                    "Letting out [npc.a_moan+], [npc.name] happily squeeze [npc2.namePos] [npc2.hand+].",
+                    "[npc.Name] let out a series of [npc.moans+] as [npc.she] eagerly wrap [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand+].",
+                    "Eagerly wrapping [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand+], [npc.name] let out a [npc.moan+]."));
 
 			UtilText.nodeContentSB.append(getTargetedCharacterResponse(this));
 			
@@ -338,15 +338,15 @@ public class FingerFinger {
 			switch(Main.sex.getSexPace(Main.sex.getCharacterTargetedForSexAction(this))) {
 				case DOM_ROUGH:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"[npc.Name] [npc.verb(try)] to pull [npc.her] [npc.hand] away from [npc2.nameHers], but [npc.she] [npc.verb(fail)] to escape from [npc2.her] rough grip.",
-							"With [npc.a_sob+], [npc.name] [npc.verb(try)] to pull [npc.her] [npc.hand] away from [npc2.nameHers], but [npc.she] [npc.do]n't manage to escape from [npc2.her] rough grip.",
-							"Tears start to well up in [npc.namePos] [npc.eyes] as [npc.she] [npc.verb(fail)] to pull [npc.her] [npc.hand] away from [npc2.nameHers]."));
+                            "[npc.Name] try to pull [npc.her] [npc.hand] away from [npc2.nameHers], but [npc.she] fail to escape from [npc2.her] rough grip.",
+                            "With [npc.a_sob+], [npc.name] try to pull [npc.her] [npc.hand] away from [npc2.nameHers], but [npc.she] [npc.do]n't manage to escape from [npc2.her] rough grip.",
+                            "Tears start to well up in [npc.namePos] [npc.eyes] as [npc.she] fail to pull [npc.her] [npc.hand] away from [npc2.nameHers]."));
 					break;
 				default: 
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"[npc.Name] [npc.verb(try)] to pull [npc.her] [npc.hand] away from [npc2.nameHers], but [npc.she] [npc.verb(fail)] to escape from [npc2.her] grip.",
-							"With [npc.a_sob+], [npc.name] [npc.verb(try)] to pull [npc.her] [npc.hand] away from [npc2.nameHers], but [npc.she] [npc.do]n't manage to escape from [npc2.her] grip.",
-							"Tears start to well up in [npc.namePos] [npc.eyes] as [npc.she] [npc.verb(fail)] to pull [npc.her] [npc.hand] away from [npc2.nameHers]."));
+                            "[npc.Name] try to pull [npc.her] [npc.hand] away from [npc2.nameHers], but [npc.she] fail to escape from [npc2.her] grip.",
+                            "With [npc.a_sob+], [npc.name] try to pull [npc.her] [npc.hand] away from [npc2.nameHers], but [npc.she] [npc.do]n't manage to escape from [npc2.her] grip.",
+                            "Tears start to well up in [npc.namePos] [npc.eyes] as [npc.she] fail to pull [npc.her] [npc.hand] away from [npc2.nameHers]."));
 					break;
 			}
 			
@@ -380,13 +380,13 @@ public class FingerFinger {
 			switch(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())) {
 				case DOM_ROUGH:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"With one last rough squeeze, [npc.name] [npc.verb(release)] [npc.her] grip on [npc2.namePos] [npc2.hand+], putting an end to the hand holding.",
-							"Roughly squeezing [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand] one last time, [npc.name] then [npc.verb(release)] [npc.her] grip, putting an end to the rough hand holding."));
+                            "With one last rough squeeze, [npc.name] release [npc.her] grip on [npc2.namePos] [npc2.hand+], putting an end to the hand holding.",
+                            "Roughly squeezing [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand] one last time, [npc.name] then release [npc.her] grip, putting an end to the rough hand holding."));
 					break;
 				default:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"With one last squeeze, [npc.name] [npc.verb(release)] [npc.her] grip on [npc2.namePos] [npc2.hand+], putting an end to the hand holding.",
-							"Squeezing [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand] one last time, [npc.name] then [npc.verb(release)] [npc.her] grip, putting an end to the hand holding."));
+                            "With one last squeeze, [npc.name] release [npc.her] grip on [npc2.namePos] [npc2.hand+], putting an end to the hand holding.",
+                            "Squeezing [npc.her] [npc.fingers+] around [npc2.namePos] [npc2.hand] one last time, [npc.name] then release [npc.her] grip, putting an end to the hand holding."));
 					break;
 			}
 			
@@ -398,7 +398,7 @@ public class FingerFinger {
 					break;
 				default:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							" [npc2.Name] [npc2.verb(let)] out [npc2.a_moan+] as [npc.name] [npc.verb(pull)] [npc.her] [npc.hand] back, signalling [npc2.her] desire for more attention.",
+                            " [npc2.Name] [npc2.verb(let)] out [npc2.a_moan+] as [npc.name] pull [npc.her] [npc.hand] back, signalling [npc2.her] desire for more attention.",
 							" [npc2.A_moan+] escapes from between [npc2.namePos] [npc2.lips+], betraying [npc2.her] desperate desire for more of [npc.namePos] attention."));
 					break;
 			}

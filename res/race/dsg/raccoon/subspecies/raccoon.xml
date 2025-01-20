@@ -166,7 +166,7 @@
 	
 	<!-- The description which is shown to the player in this subspecies' status effect tooltip. -->
 	<statusEffectDescription><![CDATA[
-		[npc.NamePos] raccoon-like body is very adaptable, and [npc.she] [npc.has] a primal urge to fondle things [npc.she] [npc.verb(want)] to examine.
+		[npc.NamePos] raccoon-like body is very adaptable, and [npc.she] [npc.has] a primal urge to fondle things [npc.she] want to examine.
 	]]></statusEffectDescription>
 	
 	<!-- The core attributes which a character of this subspecies benefits from.

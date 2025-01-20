@@ -47,7 +47,7 @@
 				[##npc.addStatusEffect(SE_dsg_item_fruit_buff, 5400)]
 			#ENDIF
 			<p style='margin-bottom:0; padding-bottom:0;'>
-				[npc.Name] [npc.verb(feel)] vaguely healthier...
+				[npc.Name] feel vaguely healthier...
 			</p>
 		]]></applyEffects>
 		
@@ -59,10 +59,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-			[npc.Name] [npc.verb(find)] the tangerine surprisingly easy to peel and [npc.verb(start)] eating it wedge by wedge. It doesn't take long to consume the whole thing after that...
+			[npc.Name] find the tangerine surprisingly easy to peel and start eating it wedge by wedge. It doesn't take long to consume the whole thing after that...
 		]]></selfUse>
 		<otherUse><![CDATA[
-			[npc.Name] [npc.verb(find)] the tangerine surprisingly easy to peel and [npc.verb(start)] feeding it to [npc2.name] wedge by wedge. It doesn't take long to consume the whole thing after that...
+			[npc.Name] find the tangerine surprisingly easy to peel and start feeding it to [npc2.name] wedge by wedge. It doesn't take long to consume the whole thing after that...
 		]]></otherUse>
 	</useDescriptions>
 

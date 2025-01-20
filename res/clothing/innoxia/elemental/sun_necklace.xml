@@ -62,47 +62,47 @@
 
   <replacementText slot="NECK" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(fasten)] the sun necklace around [npc.her] neck.]]>
+        <![CDATA[[npc.Name] fasten the sun necklace around [npc.her] neck.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(fasten)] the sun necklace around [npc2.namePos] neck.]]>
+        <![CDATA[[npc.Name] fasten the sun necklace around [npc2.namePos] neck.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] firmly [npc.verb(grab)] [npc2.name], before fastening the sun necklace around [npc2.her] neck.]]>
+        <![CDATA[[npc.Name] firmly grab [npc2.name], before fastening the sun necklace around [npc2.her] neck.]]>
     </otherRough>
   </replacementText>
   <displacementText slot="NECK" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(unfasten)] [npc.her] sun necklace, before taking it off from around [npc.her] neck.]]>
+        <![CDATA[[npc.Name] unfasten [npc.her] sun necklace, before taking it off from around [npc.her] neck.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(unfasten)] [npc2.namePos] sun necklace, before taking it off from around [npc2.her] neck.]]>
+        <![CDATA[[npc.Name] unfasten [npc2.namePos] sun necklace, before taking it off from around [npc2.her] neck.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(unfasten)] [npc2.namePos] sun necklace, before yanking it off from around [npc2.her] neck.]]>
+        <![CDATA[[npc.Name] roughly unfasten [npc2.namePos] sun necklace, before yanking it off from around [npc2.her] neck.]]>
     </otherRough>
   </displacementText>
 	
   <replacementText slot="WRIST" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(wrap)] [npc.her] sun necklace around [npc.her] wrist and then [npc.verb(fasten)] it in place.]]>
+        <![CDATA[[npc.Name] wrap [npc.her] sun necklace around [npc.her] wrist and then fasten it in place.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(wrap)] the sun necklace around [npc2.namePos] wrist and then [npc.verb(fasten)] it in place.]]>
+        <![CDATA[[npc.Name] wrap the sun necklace around [npc2.namePos] wrist and then fasten it in place.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(wrap)] the sun necklace around [npc2.namePos] wrist and then tightly [npc.verb(fasten)] it in place.]]>
+        <![CDATA[[npc.Name] roughly wrap the sun necklace around [npc2.namePos] wrist and then tightly fasten it in place.]]>
     </otherRough>
   </replacementText>
   <displacementText slot="WRIST" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(unfasten)] [npc.her] sun necklace, before unwrapping it from around [npc.her] wrist.]]>
+        <![CDATA[[npc.Name] unfasten [npc.her] sun necklace, before unwrapping it from around [npc.her] wrist.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(unfasten)] [npc2.namePos] sun necklace, before unwrapping it from around [npc2.her] wrist.]]>
+        <![CDATA[[npc.Name] unfasten [npc2.namePos] sun necklace, before unwrapping it from around [npc2.her] wrist.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(unfasten)] [npc2.namePos] sun necklace, before snatching it off [npc2.her] wrist.]]>
+        <![CDATA[[npc.Name] roughly unfasten [npc2.namePos] sun necklace, before snatching it off [npc2.her] wrist.]]>
     </otherRough>
   </displacementText>
 </clothing>

@@ -1,14 +1,15 @@
 package com.lilithsthrone.game.character.persona;
 
-import java.time.DayOfWeek;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.effects.AbstractPerk;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
+
+import java.time.DayOfWeek;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @since 0.1.0
@@ -43,11 +44,11 @@ public enum Occupation {
 
 	NPC_SLAVER_ADMIN(Perk.JOB_NPC_SLAVER_ADMIN, "slaver administration overseer", "[npc.NameIsFull] the overseer of the slaver administration.", OccupationTag.HAS_PREREQUISITES),
 
-	NPC_NIGHTCLUB_OWNER(Perk.JOB_NPC_NIGHTCLUB_OWNER, "nightclub owner", "[npc.Name] [npc.verb(own)] and [npc.verb(manage)] a popular nightclub.", OccupationTag.HAS_PREREQUISITES),
-	NPC_BAR_TENDER(Perk.JOB_NPC_BARMAID, "bartender", "[npc.Name] [npc.verb(work)] as a bartender.", OccupationTag.EVENING_SHIFT),
+    NPC_NIGHTCLUB_OWNER(Perk.JOB_NPC_NIGHTCLUB_OWNER, "nightclub owner", "[npc.Name] own и manage a popular nightclub.", OccupationTag.HAS_PREREQUISITES),
+    NPC_BAR_TENDER(Perk.JOB_NPC_BARMAID, "bartender", "[npc.Name] work as a bartender.", OccupationTag.EVENING_SHIFT),
 	NPC_BOUNCER(Perk.JOB_NPC_BOUNCER, "bouncer", "[npc.NameIsFull] a bouncer, in charge of keeping the riff-raff out of nightclubs and bars."),
 
-	NPC_BEAUTICIAN(Perk.JOB_NPC_BEAUTICIAN, "beautician", "[npc.Name] [npc.verb(work)] as a beautician."),
+    NPC_BEAUTICIAN(Perk.JOB_NPC_BEAUTICIAN, "beautician", "[npc.Name] work as a beautician."),
 	
 	NPC_ARCANE_RESEARCHER(Perk.JOB_NPC_ARCANE_RESEARCHER, "arcane researcher", "[npc.Name] spends all of [npc.her] time researching the arcane.", OccupationTag.HAS_PREREQUISITES),
 
@@ -95,7 +96,7 @@ public enum Occupation {
 	
 	NPC_LUNETTE_HERD(Perk.JOB_LUNETTE_HERD, "Daughter of Lunette", "[npc.NameIsFull] one of Lunette's daughters, and inherits [npc.her] mother's love of causing mayhem and havoc.", OccupationTag.HAS_PREREQUISITES),
 
-	NPC_MUSHROOM_FORAGER(Perk.JOB_NPC_MUSHROOM_FORAGER, "mushroom forager", "[npc.Name] [npc.verb(forage)] for and then sells psychedelic mushrooms in the bat caverns beneath Submission.", OccupationTag.HAS_PREREQUISITES),
+    NPC_MUSHROOM_FORAGER(Perk.JOB_NPC_MUSHROOM_FORAGER, "mushroom forager", "[npc.Name] forage for and then sells psychedelic mushrooms in the bat caverns beneath Submission.", OccupationTag.HAS_PREREQUISITES),
 
 	NPC_LUNETTE_RECOGNISED_DAUGHTER(Perk.JOB_LUNETTE_RECOGNISED_DAUGHTER, "recognised daughter of Lunette", "[npc.NameIsFull] a recognised daughter of Lunette herself, and as such is considerably more powerful than a regular demon.", OccupationTag.HAS_PREREQUISITES),
 	
@@ -119,8 +120,8 @@ public enum Occupation {
 	NPC_REBEL_FIGHTER(Perk.JOB_NPC_REBEL_FIGHTER, "rebel fighter", "[npc.NameIsFull] a fighter serving a rebel cause.", OccupationTag.HAS_PREREQUISITES),
 	
 	NPC_PROSTITUTE(Perk.JOB_PROSTITUTE, "prostitute", "[npc.NameIsFull] a prostitute, making a living by selling [npc.her] body.", OccupationTag.LOWLIFE),
-	
-	NPC_STRIPPER(Perk.JOB_MISC, "stripper", "[npc.Name] [npc.verb(work)] as a stripper.", OccupationTag.EVENING_SHIFT) {
+
+    NPC_STRIPPER(Perk.JOB_MISC, "stripper", "[npc.Name] work as a stripper.", OccupationTag.EVENING_SHIFT) {
 		@Override
 		public DayOfWeek getStartDay() {
 			return DayOfWeek.TUESDAY;
@@ -130,21 +131,21 @@ public enum Occupation {
 			return DayOfWeek.SATURDAY;
 		}
 	},
-	
-	NPC_MASSAGE_THERAPIST(Perk.JOB_MISC, "massage therapist", "[npc.Name] [npc.verb(work)] at a spa as a massage therapist."),
-	
-	NPC_WAITRESS(Perk.JOB_MISC, "waitress", "[npc.Name] [npc.verb(work)] as a waitress in a restaurant.") {
+
+    NPC_MASSAGE_THERAPIST(Perk.JOB_MISC, "massage therapist", "[npc.Name] work at a spa as a massage therapist."),
+
+    NPC_WAITRESS(Perk.JOB_MISC, "waitress", "[npc.Name] work as a waitress in a restaurant.") {
 		@Override
 		public boolean isAvailable(GameCharacter character) {
 			return character.isFeminine();
 		}
 	},
-	
-	NPC_MUSICIAN(Perk.JOB_MISC, "musician", "[npc.Name] [npc.verb(work)] as a musician.", OccupationTag.HAS_PREREQUISITES),
+
+    NPC_MUSICIAN(Perk.JOB_MISC, "musician", "[npc.Name] work as a musician.", OccupationTag.HAS_PREREQUISITES),
 	
 	NPC_FITNESS_INSTRUCTOR(Perk.JOB_MISC, "fitness instructor", "-", OccupationTag.HAS_PREREQUISITES),
-	
-	NPC_MUGGER(Perk.JOB_MUGGER, "mugger", "[npc.NameIsFull] a mugger, and [npc.verb(make)] a living by stealing other people's possessions.", OccupationTag.LOWLIFE),
+
+    NPC_MUGGER(Perk.JOB_MUGGER, "mugger", "[npc.NameIsFull] a mugger, and make a living by stealing other people's possessions.", OccupationTag.LOWLIFE),
 
 	NPC_BOUNTY_HUNTER(Perk.JOB_BOUNTY_HUNTER, "bounty hunter", "[npc.NameIsFull] a bounty hunter, who earns a wage by tracking down and capturing wanted criminals.", OccupationTag.HAS_PREREQUISITES),
 	
@@ -243,63 +244,63 @@ public enum Occupation {
 	// Player histories:
 
 	UNEMPLOYED(Perk.JOB_UNEMPLOYED,
-			"unemployed",
-			"You've been out of work for a little while now.",
+			"безработный",
+			"Вы уже некоторое время не работаете.",
 			OccupationTag.PLAYER_ONLY),
 	
 	OFFICE_WORKER(Perk.JOB_OFFICE_WORKER,
-			"office worker",
-			"You work in a local office, handling paperwork, answering phonecalls and emails, and generally doing a little bit of everything.",
+			"офисный работник",
+			"Вы работаете в местном офисе, обрабатываете документы, отвечаете на телефонные звонки и электронные письма и, как правило, делаете все понемногу.",
 			OccupationTag.PLAYER_ONLY),
 	
 	STUDENT(Perk.JOB_STUDENT,
-			"student",
-			"You're a student at the city's university, but you haven't quite decided what to take as your major just yet.",
+			"студент",
+			"Вы студент городского университета, но еще не совсем решили, какую специальность выбрать.",
 			OccupationTag.PLAYER_ONLY),
 
 	MUSICIAN(Perk.JOB_MUSICIAN,
-			"musician",
-			"You're a musician, and as well as being able to play a wide variety of instruments, you are also a very good singer.",
+			"музыкант",
+			"Вы музыкант и не только умеете играть на самых разных инструментах, но и очень хорошо поёте.",
 			OccupationTag.PLAYER_ONLY),
 	
 	TEACHER(Perk.JOB_TEACHER,
-			"teacher",
-			"You're a teacher, and have been working at a local school for a few years.",
+			"учитель",
+			"Вы учитель и работаете в местной школе несколько лет.",
 			OccupationTag.PLAYER_ONLY),
 	
 	WRITER(Perk.JOB_WRITER,
-			"writer",
-			"You're a writer, and have been working on your latest novel for the last few months.",
+			"писатель",
+			"Вы писатель и последние несколько месяцев работаете над своим последним романом.",
 			OccupationTag.PLAYER_ONLY),
 	
 	CHEF(Perk.JOB_CHEF,
-			"chef",
-			"You're the head chef at a local restaurant.",
+			"шеф-повар",
+			"Вы шеф-повар местного ресторана.",
 			OccupationTag.PLAYER_ONLY),
 
 	CONSTRUCTION_WORKER(Perk.JOB_PLAYER_CONSTRUCTION_WORKER,
-			"construction worker",
-			"You're an experienced and highly skilled construction worker.",
+			"строитель",
+			"Вы опытный и высококвалифицированный строитель.",
 			OccupationTag.PLAYER_ONLY),
 	
 	SOLDIER(Perk.JOB_SOLDIER,
-			"soldier",
-			"You're a soldier, and are currently making the most of your leave.",
+			"солдат",
+			"Вы солдат и сейчас максимально используете свой отпуск.",
 			OccupationTag.PLAYER_ONLY),
 
 	ATHLETE(Perk.JOB_ATHLETE,
-			"athlete",
-			"You're an athlete, and are currently training for your next big event.",
+			"спортсмен",
+			"Вы спортсмен и в настоящее время готовитесь к следующему важному событию.",
 			OccupationTag.PLAYER_ONLY),
 
 	ARISTOCRAT(Perk.JOB_ARISTOCRAT,
-			"aristocrat",
-			"You've never had to work a day in your life, thanks to the fact that you're a member of an old, and exceedingly wealthy, aristocratic family.",
+			"аристократ",
+			"Вам ни разу в жизни не приходилось работать, благодаря тому факту, что вы являетесь членом старой и чрезвычайно богатой аристократической семьи.",
 			OccupationTag.PLAYER_ONLY),
 	
 	MAID(Perk.JOB_MAID,
-		"maid",
-		"You're a maid, hired by a wealthy family to keep their mansion clean.",
+			"горничная",
+			"Вы горничная, нанятая богатой семьей для поддержания чистоты в своем особняке.",
 		OccupationTag.PLAYER_ONLY) {
 		@Override
 		public boolean isAvailable(GameCharacter character) {
@@ -308,8 +309,8 @@ public enum Occupation {
 	},
 	
 	BUTLER(Perk.JOB_BUTLER,
-			"butler",
-			"You're a butler, hired by a wealthy family to oversee the maids and deal with any visitors.",
+			"дворецкий",
+			"Вы дворецкий, нанятый богатой семьей, чтобы присматривать за горничными и общаться с посетителями.",
 			OccupationTag.PLAYER_ONLY) {
 		@Override
 		public boolean isAvailable(GameCharacter character) {
@@ -318,8 +319,8 @@ public enum Occupation {
 	},
 	
 	TOURIST(Perk.JOB_TOURIST,
-			"American tourist",
-			"For your vacation this year, you've decided to visit England.",
+			"Американский турист",
+			"Во время отпуска в этом году вы решили посетить Англию.",
 			OccupationTag.PLAYER_ONLY) {
 		@Override
 		public boolean isAvailable(GameCharacter character) {
@@ -334,7 +335,7 @@ public enum Occupation {
 		historiesList = new ArrayList<>();
 
 		for(Occupation history : Occupation.values()) {
-			if(history.isAvailable(character) && (character.isPlayer()?history.isAvailableToPlayer():!history.isAvailableToPlayer())) {
+			if(history.isAvailable(character) && (character.isPlayer() == history.isAvailableToPlayer())) {
 				historiesList.add(history);
 			}
 		}
@@ -360,24 +361,22 @@ public enum Occupation {
 		}
 	}
 
-	private String name;
-	private String description;
-	private AbstractPerk associatedPerk;
-	private List<OccupationTag> occupationTags;
+	private final String name;
+	private final String description;
+	private final AbstractPerk associatedPerk;
+	private final List<OccupationTag> occupationTags;
 
-	private Occupation(AbstractPerk associatedPerk,
-			String name,
-			String description,
-			OccupationTag... occupationTags) {
+	Occupation(AbstractPerk associatedPerk,
+               String name,
+               String description,
+               OccupationTag... occupationTags) {
 		
 		this.associatedPerk = associatedPerk;
 		this.name = name;
 		this.description = description;
 		
 		this.occupationTags = new ArrayList<>();
-		for(OccupationTag tag : occupationTags) {
-			this.occupationTags.add(tag);
-		}
+        Collections.addAll(this.occupationTags, occupationTags);
 	}
 	
 	public boolean isAvailable(GameCharacter character) {

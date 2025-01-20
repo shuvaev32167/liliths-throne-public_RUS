@@ -39,7 +39,7 @@
 			[##npc.incrementHealth(npc.getAttributeValue(ATTRIBUTE_HEALTH_MAXIMUM)/10)]
 			
 			<p style='margin-bottom:0; padding-bottom:0;'>
-				[npc.Name] [npc.verb(start)] to feel a lot more energetic...
+				[npc.Name] start to feel a lot more energetic...
 			</p>
 			[#npc.addPotionEffect(ATTRIBUTE_MAJOR_PHYSIQUE, 2)]
 		]]></applyEffects>
@@ -55,10 +55,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		[npc.Name] [npc.verb(take)] the Chicken Pot Pie out of its tin, before bringing it up to [npc.her] mouth and taking a bite. [npc.She] [npc.verb(find)] that its delicious, nutritious mix of vegetables and meat is easy to chew through, and [npc.she] swiftly [npc.verb(consume)] the entire thing.
+		[npc.Name] take the Chicken Pot Pie out of its tin, before bringing it up to [npc.her] mouth and taking a bite. [npc.She] find that its delicious, nutritious mix of vegetables and meat is easy to chew through, and [npc.she] swiftly consume the entire thing.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		[npc.Name] [npc.verb(take)] the Chicken Pot Pie out of its tin, before bringing it up to [npc2.namePos] mouth and getting [npc2.herHim] to take a bite. [npc2.She] [npc2.verb(find)] that its delicious, nutritious mix of vegetables and meat is easy to chew through, and [npc2.name] swiftly [npc2.verb(consume)] the entire thing.
+		[npc.Name] take the Chicken Pot Pie out of its tin, before bringing it up to [npc2.namePos] mouth and getting [npc2.herHim] to take a bite. [npc2.She] [npc2.verb(find)] that its delicious, nutritious mix of vegetables and meat is easy to chew through, and [npc2.name] swiftly [npc2.verb(consume)] the entire thing.
 		]]></otherUse>
 	</useDescriptions>
 

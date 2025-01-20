@@ -1,23 +1,11 @@
 package com.lilithsthrone.game.character.npc.fields;
 
-import java.time.DayOfWeek;
-import java.time.Month;
-import java.util.List;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
-import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.HairLength;
-import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.body.valueEnums.TesticleSize;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
@@ -40,6 +28,12 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.time.DayOfWeek;
+import java.time.Month;
+import java.util.List;
 
 /**
  * @since 0.4.1
@@ -53,7 +47,7 @@ public class Moreno extends NPC {
 	}
 	
 	public Moreno(boolean isImported) {
-		super(isImported, new NameTriplet("Moreno"), "Caballo",
+        super(isImported, new NameTriplet("Морено"), "Кабальо",
 				"On every day but Wednesday and Saturday, Moreno operates the strength tester game in the centre of Elis's Farmer's Market.",
 				31, Month.AUGUST, 28,
 				25, Gender.M_P_MALE, Subspecies.HORSE_MORPH, RaceStage.GREATER,

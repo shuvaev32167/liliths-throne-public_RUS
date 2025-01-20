@@ -1,14 +1,5 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
@@ -16,6 +7,11 @@ import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
+
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -69,7 +65,7 @@ public class TailType {
 			Util.newArrayListOfValues("spaded"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A demonic, spaded tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] complete control over where it goes, allowing [npc.herHim] to use it like a third limb."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] complete control over where it goes, allowing [npc.herHim] to use it like a third limb."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has]"
 				+ "#IF(npc.isShortStature())"
@@ -80,7 +76,7 @@ public class TailType {
 				+ ", [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ELSE"
 				+ " [npc.TailCount] demonic, spaded tails sprout from just above [npc.her] ass, rapidly growing in size until they're each about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] complete control over where they go, allowing [npc.herHim] to use them like extra limbs."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] complete control over where they go, allowing [npc.herHim] to use them like extra limbs."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tailCount]"
 				+ "#IF(npc.isShortStature())"
@@ -122,7 +118,7 @@ public class TailType {
 			Util.newArrayListOfValues("hair-tufted"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A demonic tail, tipped with a tuft of hair, sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] complete control over where it goes, allowing [npc.herHim] to use it like a third limb."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] complete control over where it goes, allowing [npc.herHim] to use it like a third limb."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has]"
 				+ "#IF(npc.isShortStature())"
@@ -133,7 +129,7 @@ public class TailType {
 				+ ", [npc.materialDescriptor] [npc.tailFullDescription(true)] and tipped with [#npc.getCovering(BODY_COVERING_TYPE_HAIR_DEMON).getFullDescription(npc, true)]."
 			+ "#ELSE"
 				+ " [npc.TailCount] demonic tails, tipped with a tuft of hair, sprout from just above [npc.her] ass, rapidly growing in size until they're each about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] complete control over where they go, allowing [npc.herHim] to use them like extra limbs."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] complete control over where they go, allowing [npc.herHim] to use them like extra limbs."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tailCount]"
 				+ "#IF(npc.isShortStature())"
@@ -176,7 +172,7 @@ public class TailType {
 			Util.newArrayListOfValues("tapered"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A demonic, tapered tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] complete control over where it goes, allowing [npc.herHim] to use it like a third limb."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] complete control over where it goes, allowing [npc.herHim] to use it like a third limb."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has]"
 				+ "#IF(npc.isShortStature())"
@@ -187,7 +183,7 @@ public class TailType {
 				+ ", [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ELSE"
 				+ " [npc.TailCount] demonic, tapered tails sprout from just above [npc.her] ass, rapidly growing in size until they're each about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] complete control over where they go, allowing [npc.herHim] to use them like extra limbs."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] complete control over where they go, allowing [npc.herHim] to use them like extra limbs."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tailCount]"
 				+ "#IF(npc.isShortStature())"
@@ -229,7 +225,7 @@ public class TailType {
 			Util.newArrayListOfValues("loose"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A horse-like tail sprouts from just above [npc.her] ass, rapidly growing in length until it hangs down about [npc.tailLength] behind [npc.herHim]."
-				+ " [npc.She] quickly [npc.verb(discover)] that [npc.her] control over it is limited to swishing it from side to side."
+                    + " [npc.She] quickly discover that [npc.her] control over it is limited to swishing it from side to side."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has]"
 				+ "#IF(npc.isShortStature())"
@@ -240,7 +236,7 @@ public class TailType {
 				+ ", made out of [npc.tailFullDescription(true)]."
 			+ "#ELSE"
 				+ " [npc.TailCount] horse-like tails sprout from just above [npc.her] ass, rapidly growing in length until they hang down about [npc.tailLength] behind [npc.herHim]."
-				+ " [npc.She] quickly [npc.verb(discover)] that [npc.her] control over them is limited to swishing them from side to side."
+                    + " [npc.She] quickly discover that [npc.her] control over them is limited to swishing them from side to side."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tailCount]"
 				+ "#IF(npc.isShortStature())"
@@ -282,8 +278,8 @@ public class TailType {
 			"#IF(npc.getTailCount()==1)"
 				+ " A demonic, tapered tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
 				+ " The end swells out a little into a slightly bulbous, tapered bulge, before a vice-tight, cross-shaped slit forms across its tip."
-				+ " Letting out [npc.a_moan], [npc.name] instinctively [npc.verb(feel)] that this new tail of [npc.hers] can be used as an ovipositor."
-				+ " Turning it this way and that, [npc.she] quickly [npc.verb(discover)] that [npc.she] [npc.has] complete control over where it goes, allowing [npc.herHim] to use it like a third limb."
+                    + " Letting out [npc.a_moan], [npc.name] instinctively feel that this new tail of [npc.hers] can be used as an ovipositor."
+                    + " Turning it this way and that, [npc.she] quickly discover that [npc.she] [npc.has] complete control over where it goes, allowing [npc.herHim] to use it like a third limb."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has]"
 				+ "#IF(npc.isShortStature())"
@@ -295,8 +291,8 @@ public class TailType {
 			+ "#ELSE"
 				+ " [npc.TailCount] demonic, tapered tails sprout from just above [npc.her] ass, rapidly growing in size until they're each about [npc.tailLength] long."
 				+ " The ends of each one swell out a little into slightly bulbous, tapered bulges, before vice-tight, cross-shaped slits form across their tips."
-				+ " Letting out [npc.a_moan], [npc.name] instinctively [npc.verb(feel)] that these new tails of [npc.hers] can be used as ovipositors."
-				+ " Turning them this way and that, [npc.she] quickly [npc.verb(discover)] that [npc.she] [npc.has] complete control over where they go, allowing [npc.herHim] to use them like extra limbs."
+                    + " Letting out [npc.a_moan], [npc.name] instinctively feel that these new tails of [npc.hers] can be used as ovipositors."
+                    + " Turning them this way and that, [npc.she] quickly discover that [npc.she] [npc.has] complete control over where they go, allowing [npc.herHim] to use them like extra limbs."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tailCount]"
 				+ "#IF(npc.isShortStature())"
@@ -342,12 +338,12 @@ public class TailType {
 			Util.newArrayListOfValues(""),
 			"#IF(npc.getTailCount()==1)"
 				+ " A scaly, alligator-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(discover)] that [npc.she] can swish it from side to side with considerable force."
+                    + " [npc.She] quickly discover that [npc.she] can swish it from side to side with considerable force."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] a [style.boldAlligatorMorph(alligator-like tail)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ELSE"
 				+ " [npc.TailCount] scaly, alligator-like tails sprout from just above [npc.her] ass, rapidly growing in size until they're each about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(discover)] that [npc.she] can swish them from side to side with considerable force."
+                    + " [npc.She] quickly discover that [npc.she] can swish them from side to side with considerable force."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tailCount] [style.boldAlligatorMorph(alligator-like tails)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ENDIF",
@@ -383,12 +379,12 @@ public class TailType {
 			Util.newArrayListOfValues("furry"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A small, bat-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] a decent amount of control over it, and can twist it almost anywhere [npc.she] [npc.verb(please)]."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] a decent amount of control over it, and can twist it almost anywhere [npc.she] please."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] a [style.boldBatMorph(bat-like tail)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ELSE"
 				+ " [npc.TailCount] small, bat-like tails sprout from just above [npc.her] ass, rapidly growing in size until they're each about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] a decent amount of control over them, and can twist them almost anywhere [npc.she] [npc.verb(please)]."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] a decent amount of control over them, and can twist them almost anywhere [npc.she] please."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tailCount] [style.boldBatMorph(bat-like tails)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ENDIF",
@@ -423,12 +419,12 @@ public class TailType {
 			Util.newArrayListOfValues("furry"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A furry, cat-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] a decent amount of control over it, and can twist it almost anywhere [npc.she] [npc.verb(please)]."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] a decent amount of control over it, and can twist it almost anywhere [npc.she] please."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] a [style.boldCatMorph(cat-like tail)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ELSE"
 				+ " [npc.TailCount] furry, cat-like tails sprout from just above [npc.her] ass, rapidly growing in size until they're each about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] a decent amount of control over them, and can twist them almost anywhere [npc.she] [npc.verb(please)]."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] a decent amount of control over them, and can twist them almost anywhere [npc.she] please."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tailCount] [style.boldCatMorph(cat-like tails)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ENDIF",
@@ -543,12 +539,12 @@ public class TailType {
 			Util.newArrayListOfValues("hair-tufted"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A cow-like tail sprouts from just above [npc.her] ass, rapidly growing in length until it hangs down about [npc.tailLength] behind [npc.herHim]."
-				+ " [npc.She] quickly [npc.verb(discover)] that [npc.her] control over it is limited to swishing it from side to side."
+                    + " [npc.She] quickly discover that [npc.her] control over it is limited to swishing it from side to side."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] a [style.boldCowMorph(cow-like tail)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ELSE"
 				+ " [npc.TailCount] cow-like tails sprout from just above [npc.her] ass, rapidly growing in length until they hang down about [npc.tailLength] behind [npc.herHim]."
-				+ " [npc.She] quickly [npc.verb(discover)] that [npc.her] control over them is limited to swishing them from side to side."
+                    + " [npc.She] quickly discover that [npc.her] control over them is limited to swishing them from side to side."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tailCount] [style.boldCowMorph(cow-like tails)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ENDIF",
@@ -581,20 +577,20 @@ public class TailType {
 			Util.newArrayListOfValues("furry"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A furry, dog-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] little control over it, and it wags with a mind of its own whenever [npc.she] [npc.verb(get)] excited."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] little control over it, and it wags with a mind of its own whenever [npc.she] get excited."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] a [style.boldDogMorph(dog-like tail)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ELSE"
 				+ " [npc.TailCount] furry, dog-like tails sprout from just above [npc.her] ass, rapidly growing in size until they're each about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] little control over them, and they wags with a mind of their own whenever [npc.she] [npc.verb(get)] excited."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] little control over them, and they wags with a mind of their own whenever [npc.she] get excited."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tailCount] [style.boldDogMorph(dog-like tails)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ENDIF",
 			"Growing out from just above [npc.her] ass, [npc.sheHasFull]"
 				+ "#IF(npc.getTailCount()==1)"
-					+ " a #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] dog tail, which wags uncontrollably when [npc.she] [npc.verb(get)] excited."
+                    + " a #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] dog tail, which wags uncontrollably when [npc.she] get excited."
 				+ "#ELSE"
-					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] dog tails, which wag uncontrollably when [npc.she] [npc.verb(get)] excited."
+                    + " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] dog tails, which wag uncontrollably when [npc.she] get excited."
 				+ "#ENDIF",
 			Util.newArrayListOfValues(
 					BodyPartTag.TAIL_TYPE_FUR,
@@ -619,20 +615,20 @@ public class TailType {
 			Util.newArrayListOfValues("stubby"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A furry, dog-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] little control over it, and it wags with a mind of its own whenever [npc.she] [npc.verb(get)] excited."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] little control over it, and it wags with a mind of its own whenever [npc.she] get excited."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] a [style.boldDogMorph(stubby, dog-like tail)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ELSE"
 				+ " [npc.TailCount] furry, dog-like tails sprout from just above [npc.her] ass, rapidly growing in size until they're each about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] little control over them, and they wags with a mind of their own whenever [npc.she] [npc.verb(get)] excited."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] little control over them, and they wags with a mind of their own whenever [npc.she] get excited."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tailCount] [style.boldDogMorph(stubby, dog-like tails)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ENDIF",
 			"Growing out from just above [npc.her] ass, [npc.sheHasFull]"
 				+ "#IF(npc.getTailCount()==1)"
-					+ " a #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF stubby, [npc.tailColour(true)] dog tail, which wags uncontrollably when [npc.she] [npc.verb(get)] excited."
+                    + " a #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF stubby, [npc.tailColour(true)] dog tail, which wags uncontrollably when [npc.she] get excited."
 				+ "#ELSE"
-					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF stubby, [npc.tailColour(true)] dog tails, which wag uncontrollably when [npc.she] [npc.verb(get)] excited."
+                    + " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF stubby, [npc.tailColour(true)] dog tails, which wag uncontrollably when [npc.she] get excited."
 				+ "#ENDIF",
 			Util.newArrayListOfValues(
 					BodyPartTag.TAIL_TYPE_FUR,
@@ -657,12 +653,12 @@ public class TailType {
 			Util.newArrayListOfValues("furry"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A bushy, fox-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] a decent amount of control over it, and [npc.is] able to wrap its fluffy length around [npc.her] lower body."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] a decent amount of control over it, and [npc.is] able to wrap its fluffy length around [npc.her] lower body."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] a [style.boldFoxMorph(fox-like tail)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ELSE"
 				+ " [npc.TailCount] bushy, fox-like tails sprout from just above [npc.her] ass, rapidly growing in size until they're each about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] a decent amount of control over them, and [npc.is] able to wrap their fluffy lengths around [npc.her] lower body."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] a decent amount of control over them, and [npc.is] able to wrap their fluffy lengths around [npc.her] lower body."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tailCount] [style.boldFoxMorph(fox-like tails)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ENDIF",
@@ -696,13 +692,13 @@ public class TailType {
 			Util.newArrayListOfValues("furry"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A bushy, fox-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] a decent amount of control over it, and [npc.is] able to wrap its fluffy length around [npc.her] lower body."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] a decent amount of control over it, and [npc.is] able to wrap its fluffy length around [npc.her] lower body."
 				+ " [npc.SheIsFull] also very much aware of the fact that it is granting [npc.herHim] [style.italicsArcane(arcane powers)], and that the more tails [npc.sheIsFull] able to earn, the more powerful [npc.she] will become!"
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] an [style.boldArcane(arcane)] [style.boldFoxMorph(fox-like tail)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ELSE"
 				+ " [npc.TailCount] bushy, fox-like tails sprout from just above [npc.her] ass, rapidly growing in size until they're each about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] a decent amount of control over them, and [npc.is] able to wrap their fluffy lengths around [npc.her] lower body."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] a decent amount of control over them, and [npc.is] able to wrap their fluffy lengths around [npc.her] lower body."
 				+ "#IF(npc.getTailCount()==9)"
 					+ " [npc.SheIsFull] also very much aware of the fact that they are granting [npc.herHim] [style.italicsExcellent(immense)] [style.italicsArcane(arcane powers)]!"
 				+ "#ELSE"
@@ -747,12 +743,12 @@ public class TailType {
 			Util.newArrayListOfValues("feathered"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A pretty plume of tail feathers sprouts from just above [npc.her] ass, with each feather quickly growing to be about [npc.tailLength] long."
-				+ " [npc.She] [npc.verb(discover)] that [npc.she] can quickly raise and lower [npc.her] new bird-like tail, which helps [npc.herHim] to keep [npc.her] balance."
+                    + " [npc.She] discover that [npc.she] can quickly raise and lower [npc.her] new bird-like tail, which helps [npc.herHim] to keep [npc.her] balance."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] a [style.boldHarpy(harpy's bird-like tail)], made out of [npc.tailFullDescription(true)]."
 			+ "#ELSE"
 				+ " [npc.TailCount] pretty plumes of tail feathers sprout from just above [npc.her] ass, with each feather quickly growing to be about [npc.tailLength] long."
-				+ " [npc.She] [npc.verb(discover)] that [npc.she] can quickly raise and lower [npc.her] new bird-like tails, which helps [npc.herHim] to keep [npc.her] balance."
+                    + " [npc.She] discover that [npc.she] can quickly raise and lower [npc.her] new bird-like tails, which helps [npc.herHim] to keep [npc.her] balance."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tailCount] [style.boldHarpy(harpy's bird-like tails)], made out of [npc.tailFullDescription(true)]."
 			+ "#ENDIF",
@@ -789,12 +785,12 @@ public class TailType {
 			Util.newArrayListOfValues("loose"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A horse-like tail sprouts from just above [npc.her] ass, rapidly growing in length until it hangs down about [npc.tailLength] behind [npc.herHim]."
-				+ " [npc.She] quickly [npc.verb(discover)] that [npc.her] control over it is limited to swishing it from side to side."
+                    + " [npc.She] quickly discover that [npc.her] control over it is limited to swishing it from side to side."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] a [style.boldHorseMorph(horse-like tail)], made out of [npc.tailFullDescription(true)]."
 			+ "#ELSE"
 				+ " [npc.TailCount] horse-like tails sprout from just above [npc.her] ass, rapidly growing in length until they hang down about [npc.tailLength] behind [npc.herHim]."
-				+ " [npc.She] quickly [npc.verb(discover)] that [npc.her] control over them is limited to swishing them from side to side."
+                    + " [npc.She] quickly discover that [npc.her] control over them is limited to swishing them from side to side."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tailCount] [style.boldHorseMorph(horse-like tails)], made out of [npc.tailFullDescription(true)]."
 			+ "#ENDIF",
@@ -827,12 +823,12 @@ public class TailType {
 			Util.newArrayListOfValues("hair-tipped"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A zebra-like tail sprouts from just above [npc.her] ass, rapidly growing in length until it hangs down about [npc.tailLength] behind [npc.herHim]."
-				+ " [npc.She] quickly [npc.verb(discover)] that [npc.her] control over it is limited to swishing it from side to side."
+                    + " [npc.She] quickly discover that [npc.her] control over it is limited to swishing it from side to side."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] a [style.boldHorseMorph(zebra-like tail)], made out of [npc.tailFullDescription(true)]."
 			+ "#ELSE"
 				+ " [npc.TailCount] zebra-like tails sprout from just above [npc.her] ass, rapidly growing in length until they hang down about [npc.tailLength] behind [npc.herHim]."
-				+ " [npc.She] quickly [npc.verb(discover)] that [npc.her] control over them is limited to swishing them from side to side."
+                    + " [npc.She] quickly discover that [npc.her] control over them is limited to swishing them from side to side."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tailCount] [style.boldHorseMorph(zebra-like tails)], made out of [npc.tailFullDescription(true)]."
 			+ "#ENDIF",
@@ -865,12 +861,12 @@ public class TailType {
 			Util.newArrayListOfValues(""),
 			"#IF(npc.getTailCount()==1)"
 				+ " A thick, rat-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] a decent amount of control over it, and can twist it almost anywhere [npc.she] [npc.verb(please)]."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] a decent amount of control over it, and can twist it almost anywhere [npc.she] please."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] a [style.boldRatMorph(rat-like tail)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ELSE"
 				+ " [npc.TailCount] thick, rat-like tails sprout from just above [npc.her] ass, rapidly growing in size until they're each about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] a decent amount of control over them, and can twist them almost anywhere [npc.she] [npc.verb(please)]."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] a decent amount of control over them, and can twist them almost anywhere [npc.she] please."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tailCount] [style.boldRatMorph(rat-like tails)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ENDIF",
@@ -906,12 +902,12 @@ public class TailType {
 			Util.newArrayListOfValues("fluffy"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A furry, round, rabbit-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] no control over it whatsoever, what with it being no more than a ball of downy fluff."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] no control over it whatsoever, what with it being no more than a ball of downy fluff."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] a [style.boldRabbitMorph(rabbit-like tail)], made out of [npc.tailFullDescription(true)]."
 			+ "#ELSE"
 				+ " [npc.TailCount] furry, round, rabbit-like tails sprout from just above [npc.her] ass, rapidly growing in size until each one is about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] no control over them whatsoever, what with them being no more than balls of downy fluff."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] no control over them whatsoever, what with them being no more than balls of downy fluff."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tailCount] [style.boldRabbitMorph(rabbit-like tails)], made out of [npc.tailFullDescription(true)]."
 			+ "#ENDIF",
@@ -945,12 +941,12 @@ public class TailType {
 			Util.newArrayListOfValues("furry"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A reindeer-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(discover)] that [npc.her] control over it is limited to simply twitching it up and down."
+                    + " [npc.She] quickly discover that [npc.her] control over it is limited to simply twitching it up and down."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] a [style.boldReindeerMorph(reindeer-like tail)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ELSE"
 				+ " [npc.TailCount] reindeer-like tails sprout from just above [npc.her] ass, rapidly growing in size until they're each about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(discover)] that [npc.her] control over them is limited to simply twitching them up and down."
+                    + " [npc.She] quickly discover that [npc.her] control over them is limited to simply twitching them up and down."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tailCount] [style.boldReindeerMorph(reindeer-like tails)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ENDIF",
@@ -983,12 +979,12 @@ public class TailType {
 			Util.newArrayListOfValues("furry"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A furry, squirrel-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's an impressive [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] a reasonable amount of control over it, and can use it to help balance [npc.herHim] out while moving quickly."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] a reasonable amount of control over it, and can use it to help balance [npc.herHim] out while moving quickly."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] a [style.boldSquirrelMorph(squirrel-like tail)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ELSE"
 				+ " [npc.TailCount] furry, squirrel-like tails sprout from just above [npc.her] ass, rapidly growing in size until they're each an impressive [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] a reasonable amount of control over them, and can use them to help balance [npc.herHim] out while moving quickly."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] a reasonable amount of control over them, and can use them to help balance [npc.herHim] out while moving quickly."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tailCount] [style.boldSquirrelMorph(squirrel-like tails)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ENDIF",
@@ -1022,20 +1018,20 @@ public class TailType {
 			Util.newArrayListOfValues("furry"),
 			"#IF(npc.getTailCount()==1)"
 				+ "  A furry, wolf-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] limited control over it, and it takes a lot of effort to stop it from betraying [npc.her] emotions."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] limited control over it, and it takes a lot of effort to stop it from betraying [npc.her] emotions."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] a [style.boldWolfMorph(wolf-like tail)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ELSE"
 				+ " [npc.TailCount] furry, wolf-like tails sprout from just above [npc.her] ass, rapidly growing in size until they're each about [npc.tailLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] limited control over them, and it takes a lot of effort to stop them from betraying [npc.her] emotions."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] limited control over them, and it takes a lot of effort to stop them from betraying [npc.her] emotions."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tailCount] [style.boldWolfMorph(wolf-like tails)], [npc.materialDescriptor] [npc.tailFullDescription(true)]."
 			+ "#ENDIF",
 			"Growing out from just above [npc.her] ass, [npc.sheHasFull]"
 				+ "#IF(npc.getTailCount()==1)"
-					+ " a #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] wolf tail, which swishes from side to side when [npc.she] [npc.verb(get)] excited."
+                    + " a #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] wolf tail, which swishes from side to side when [npc.she] get excited."
 				+ "#ELSE"
-					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] wolf tails, which swish from side to side when [npc.she] [npc.verb(get)] excited."
+                    + " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] wolf tails, which swish from side to side when [npc.she] get excited."
 				+ "#ENDIF",
 			Util.newArrayListOfValues(
 					BodyPartTag.TAIL_SLEEP_HUGGING,
@@ -1044,9 +1040,9 @@ public class TailType {
 	};
 	
 	
-	private static List<AbstractTailType> allTailTypes;
-	private static Map<AbstractTailType, String> tailToIdMap = new HashMap<>();
-	private static Map<String, AbstractTailType> idToTailMap = new HashMap<>();
+	private static final List<AbstractTailType> allTailTypes;
+	private static final Map<AbstractTailType, String> tailToIdMap = new HashMap<>();
+	private static final Map<String, AbstractTailType> idToTailMap = new HashMap<>();
 	
 	static {
 		allTailTypes = new ArrayList<>();
@@ -1138,7 +1134,7 @@ public class TailType {
 		return allTailTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractTailType>> typesMap = new HashMap<>();
+	private static final Map<AbstractRace, List<AbstractTailType>> typesMap = new HashMap<>();
 	
 	public static List<AbstractTailType> getTailTypes(AbstractRace r) {
 		if(typesMap.containsKey(r)) {

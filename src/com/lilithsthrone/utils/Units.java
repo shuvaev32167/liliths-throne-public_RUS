@@ -1,19 +1,21 @@
 package com.lilithsthrone.utils;
 
+import com.lilithsthrone.game.PropertyValue;
+import com.lilithsthrone.main.Main;
+import com.lilithsthrone.utils.translate.russian.Morpher;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-import com.lilithsthrone.game.PropertyValue;
-import com.lilithsthrone.main.Main;
+import static com.lilithsthrone.utils.Constants.RUSSIAN_LOCALE;
 
 /**
  * Collection of utility functions for date, time and number format conversion.
@@ -69,16 +71,12 @@ public final List<String> twelveHourCountries = Arrays.asList("США", "Вел�
     }
 
     /**
-     * Resets the date formatter depending on the system locale (if automatic) or the imperial number flag (if manual).
-     * @param autoLocale Determines if automatic or manual detection is used
+     * Similar to {@link Units#dateTime(TemporalAccessor)}, except that this function only outputs the date.
      */
-    public void updateDateFormat(boolean autoLocale) {
-        Locale.setDefault(autoLocale ? defaultLocale : Locale.ENGLISH);
-        shortDate = (autoLocale ? DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)
-                : DateTimeFormatter.ofPattern(Main.getProperties().hasValue(PropertyValue.internationalDate) ? "dd.MM.yy" : "MM/dd/yy"))
-                .withZone(ZoneId.systemDefault());
-        longDate = DateTimeFormatter.ofPattern("d'%o %m' yyyy")
-                .withZone(ZoneId.systemDefault());
+    public static String date(TemporalAccessor timePoint, DateType type) {
+        if (type == DateType.SHORT)
+            return FORMATTER.shortDate.format(timePoint);
+        return FORMATTER.longDate.format(timePoint);
     }
 
     /**
@@ -91,17 +89,47 @@ public final List<String> twelveHourCountries = Arrays.asList("США", "Вел�
                 .withZone(ZoneId.systemDefault());
     }
 
-    /**
-     * Resets the number formatter depending on the system locale (if automatic), defaulting to English otherwise.
-     * In all cases, output numbers are rounded correctly to the 2nd fraction digit.
-     * @param autoLocale Determines if automatic or manual detection is used
-     */
-    public void updateNumberFormat(boolean autoLocale) {
-        number = NumberFormat.getNumberInstance(autoLocale ? Locale.getDefault() : Locale.ENGLISH);
-        number.setRoundingMode(RoundingMode.HALF_UP);
-        number.setMinimumFractionDigits(MIN_PRECISION);
-        number.setMaximumFractionDigits(MAX_PRECISION);
-//        Platform.runLater(AbstractStatusEffect::updateAttributeModifiers);
+    private static String valueWithUnit(double value, String shortUnit, String unit,
+                                        double wrappedValue, String shortWrappedUnit, String wrappedUnit,
+                                        ValueType vType, UnitType uType, boolean useQuarters) {
+        StringBuilder output = new StringBuilder();
+        boolean wrap = Math.abs(wrappedValue) >= 1 && vType != ValueType.PRECISE;
+        double usedValue = wrap ? wrappedValue : value;
+        if (useQuarters) usedValue = roundTo(usedValue, 0.25);
+
+        if(value>0 && usedValue==0) {
+        	output.append("&lt;");
+        	usedValue = 0.25;
+        }
+
+        // Append value with increased precision if it is wrapped and numeric
+        output.append(value(usedValue, wrap && vType == ValueType.NUMERIC ? ValueType.PRECISE : vType, useQuarters));
+
+        // Append unit
+        switch (uType) {
+            case NONE:
+                break;
+            case SHORT:
+                output
+                //.append(" ")
+                .append(wrap ? shortWrappedUnit : shortUnit);
+                break;
+            case LONG:
+                if (Math.floor(value) == 0 && vType != ValueType.PRECISE) {
+                    output.setLength(0);
+                    return output.append("меньше чем ")
+                            .append(vType == ValueType.TEXT ? "один " : "1 ")
+                            .append(unit).toString();
+                }
+
+                output.append(" ").append(wrap ? wrappedUnit : unit);
+//                if (Math.abs(usedValue) != 1.0) output.append("s");
+                break;
+            case LONG_SINGULAR:
+                output.append(" ").append((wrap ? wrappedUnit : unit));
+        }
+
+        return output.toString();
     }
 
     /**
@@ -185,14 +213,16 @@ public final List<String> twelveHourCountries = Arrays.asList("США", "Вел�
     }
 
     /**
-     * Similar to {@link Units#dateTime(TemporalAccessor)}, except that this function only outputs the date.
+     * Resets the date formatter depending on the system locale (if automatic) or the imperial number flag (if manual).
+     * @param autoLocale Determines if automatic or manual detection is used
      */
-    public static String date(TemporalAccessor timePoint, DateType type) {
-        if (type == DateType.SHORT)
-            return FORMATTER.shortDate.format(timePoint);
-        return FORMATTER.longDate.format(timePoint)
-                .replaceFirst("%o", getOrdinal(timePoint.get(ChronoField.DAY_OF_MONTH)))
-                .replaceFirst("%m", getMonthName(timePoint.get(ChronoField.MONTH_OF_YEAR)));
+    public void updateDateFormat(boolean autoLocale) {
+        Locale.setDefault(autoLocale ? defaultLocale : RUSSIAN_LOCALE);
+        shortDate = (autoLocale ? DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)
+                : DateTimeFormatter.ofPattern(Main.getProperties().hasValue(PropertyValue.internationalDate) ? "dd.MM.yy" : "MM/dd/yy"))
+                .withZone(ZoneId.systemDefault());
+        longDate = DateTimeFormatter.ofPattern("dd MMMM yyyy")
+                .withZone(ZoneId.systemDefault());
     }
 
     /**
@@ -294,7 +324,7 @@ public final List<String> twelveHourCountries = Arrays.asList("США", "Вел�
                     output.setLength(0);
                     return output.append("меньше чем ")
                             .append(vType == ValueType.TEXT ? "один" : "1")
-                            .append(" inch").toString();
+                            .append(" дюйм").toString();
                 }
                 
                 output.append(" ");
@@ -339,7 +369,7 @@ public final List<String> twelveHourCountries = Arrays.asList("США", "Вел�
      */
     public static String sizeAsMetric(double cm, ValueType vType, UnitType uType) {
         double m = cm / 100;
-        return valueWithUnit(cm, "см", "сантиметры"/*+(cm!=1?"s":"")*/, m, "м", "метры"/*+(cm!=100?"s":"")*/, vType, uType, false);
+        return valueWithUnit(cm, "см", Morpher.morphCountableNoun(cm, "сантиметр"), m, "м", Morpher.morphCountableNoun(m, "метр"), vType, uType, false);
     }
 
     /**
@@ -394,7 +424,7 @@ public final List<String> twelveHourCountries = Arrays.asList("США", "Вел�
         double oz = ml / 28.4131;
 
         double gal = oz / 160;
-        return valueWithUnit(oz, "ун", "унция", gal, "гал", "галлон", vType, uType, true);
+        return valueWithUnit(oz, "ун", Morpher.morphCountableNoun(oz, "унция"), gal, "гал", Morpher.morphCountableNoun(gal, "галлон"), vType, uType, true);
     }
 
     /**
@@ -406,7 +436,7 @@ public final List<String> twelveHourCountries = Arrays.asList("США", "Вел�
      */
     public static String fluidAsMetric(double ml, ValueType vType, UnitType uType) {
         double l = ml / 1000;
-        return valueWithUnit(ml, "мЛ", "миллилитры", l, "Л", "Литры", vType, uType, false); // Innoxia's note: I usually prefer the lowercase l for ml and l, but LT's font makes it look bad.
+        return valueWithUnit(ml, "мл", Morpher.morphCountableNoun(ml, "миллилитр"), l, "л", Morpher.morphCountableNoun(l, "литр"), vType, uType, false); // Innoxia's note: I usually prefer the lowercase l for ml and l, but LT's font makes it look bad.
     }
 
     /**
@@ -450,7 +480,7 @@ public final List<String> twelveHourCountries = Arrays.asList("США", "Вел�
         double oz = grams / 28.34952;
 
         double lb = oz / 16;
-        return valueWithUnit(oz, "ун", "унции", lb, "фунт", "фунты", vType, uType, true);
+        return valueWithUnit(oz, "ун", Morpher.morphCountableNoun(oz, "унция"), lb, "фунт", Morpher.morphCountableNoun(lb, "фунт"), vType, uType, true);
     }
 
     /**
@@ -462,7 +492,7 @@ public final List<String> twelveHourCountries = Arrays.asList("США", "Вел�
      */
     public static String weightAsMetric(double grams, ValueType vType, UnitType uType) {
         double kg = grams / 1000;
-        return valueWithUnit(grams, "г", "грамм", kg, "кг", "килограмм", vType, uType, false);
+        return valueWithUnit(grams, "г", Morpher.morphCountableNoun(grams, "грамм"), kg, "кг", Morpher.morphCountableNoun(kg, "килограмм"), vType, uType, false);
     }
 
     private static String value(double value, ValueType vType, boolean useQuarters) {
@@ -478,47 +508,17 @@ public final List<String> twelveHourCountries = Arrays.asList("США", "Вел�
         }
     }
 
-    private static String valueWithUnit(double value, String shortUnit, String unit,
-                                        double wrappedValue, String shortWrappedUnit, String wrappedUnit,
-                                        ValueType vType, UnitType uType, boolean useQuarters) {
-        StringBuilder output = new StringBuilder();
-        boolean wrap = Math.abs(wrappedValue) >= 1 && vType != ValueType.PRECISE;
-        double usedValue = wrap ? wrappedValue : value;
-        if (useQuarters) usedValue = roundTo(usedValue, 0.25);
-        
-        if(value>0 && usedValue==0) {
-        	output.append("&lt;");
-        	usedValue = 0.25;
-        }
-        
-        // Append value with increased precision if it is wrapped and numeric
-        output.append(value(usedValue, wrap && vType == ValueType.NUMERIC ? ValueType.PRECISE : vType, useQuarters));
-
-        // Append unit
-        switch (uType) {
-            case NONE:
-                break;
-            case SHORT:
-                output
-                //.append(" ")
-                .append(wrap ? shortWrappedUnit : shortUnit);
-                break;
-            case LONG:
-                if (Math.floor(value) == 0 && vType != ValueType.PRECISE) {
-                    output.setLength(0);
-                    return output.append("меньше чем ")
-                            .append(vType == ValueType.TEXT ? "один " : "1 ")
-                            .append(unit).toString();
-                }
-
-                output.append(" ").append(wrap ? wrappedUnit : unit);
-                if (Math.abs(usedValue) != 1.0) output.append("s");
-                break;
-            case LONG_SINGULAR:
-                output.append(" ").append((wrap ? wrappedUnit : unit));
-        }
-
-        return output.toString();
+    /**
+     * Resets the number formatter depending on the system locale (if automatic), defaulting to English otherwise.
+     * In all cases, output numbers are rounded correctly to the 2nd fraction digit.
+     * @param autoLocale Determines if automatic or manual detection is used
+     */
+    public void updateNumberFormat(boolean autoLocale) {
+        number = NumberFormat.getNumberInstance(autoLocale ? Locale.getDefault() : RUSSIAN_LOCALE);
+        number.setRoundingMode(RoundingMode.HALF_UP);
+        number.setMinimumFractionDigits(MIN_PRECISION);
+        number.setMaximumFractionDigits(MAX_PRECISION);
+//        Platform.runLater(AbstractStatusEffect::updateAttributeModifiers);
     }
 
     /**

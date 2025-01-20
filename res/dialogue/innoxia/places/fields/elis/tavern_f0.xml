@@ -61,7 +61,7 @@
 			<response>
 				<responseTabIndex><![CDATA[0]]></responseTabIndex>
 				<index><![CDATA[1]]></index>
-				<responseTitle><![CDATA[Your room]]></responseTitle>
+                <responseTitle><![CDATA[Твоя комната]]></responseTitle>
 				<responseTooltip><![CDATA[Follow Meraxis so that she can show you where your room is.]]></responseTooltip>
 				<nextDialogue>innoxia_places_fields_elis_tavern_f0_first_entry_player_room</nextDialogue>
 			</response>
@@ -779,10 +779,10 @@
 		<travelDisabled>false</travelDisabled>
 		<responseTabs>
 			<tab index="0"><![CDATA[
-				Actions
+				Действия
 			]]></tab>
 			<tab index="1"><![CDATA[
-				Fast Travel
+				Б. путешествие
 			]]></tab>
 		</responseTabs>
 		<responses>

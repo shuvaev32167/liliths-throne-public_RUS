@@ -1,20 +1,16 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
+
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -35,9 +31,9 @@ public class FaceType {
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			"Thankfully#IF(!npc.isPlayer())for [npc.herHim]#ENDIF, the transformation only lasts a matter of moments, leaving [npc.herHim] with a normal human face, [npc.materialDescriptor] [npc.faceSkin+].<br/>"
-				+ "[npc.Name] now [npc.has] a [style.boldHuman(human face)], [npc.materialDescriptor] [npc.faceFullDescription]."
+					+ "[npc.Name] now [npc.has] a [style.boldHuman(человеческое лицо)], [npc.materialDescriptor] [npc.faceFullDescription]."
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldHuman(human tongue)].",
-			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], human face, [npc.materialDescriptor] [npc.faceFullDescription(true)].",
+			"У [npc.targetBasedWord(, н)][pc.morphSingleGent([npc.sheHasFull])] [pc.morphGenSinNetr([npc.a_feminineDescriptor(true)])], человеческое лицо, [pc.morphGenSinNetr([npc.materialDescriptor])] [pc.morphSingleInstr([pc.morphGenSinFem([npc.faceFullDescription(true)])])].",
 			Util.newArrayListOfValues()){
 	};
 
@@ -100,7 +96,7 @@ public class FaceType {
 				+ "#ELSE"
 					+ " Just like the rest of [npc.her] body, [npc.her] new face is [npc.materialDescriptor] [npc.faceSkin+]"
 				+ "#ENDIF"
-					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] [npc.verb(try)] to catch [npc.her] breath.<br/>"
+					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] try to catch [npc.her] breath.<br/>"
 				+ "[npc.Name] now [npc.has] an anthropomorphic [style.boldAlligatorMorph(alligator-like face)], [npc.materialDescriptor] [npc.faceFullDescription]."
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldAlligatorMorph(strong, alligator-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, alligator-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a long, flat muzzle.",
@@ -129,7 +125,7 @@ public class FaceType {
 				+ "#ELSE"
 					+ " Just like the rest of [npc.her] body, [npc.her] new face is [npc.materialDescriptor] [npc.faceSkin+]"
 				+ "#ENDIF"
-					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] [npc.verb(try)] to catch [npc.her] breath.<br/>"
+					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] try to catch [npc.her] breath.<br/>"
 				+ "[npc.Name] now [npc.has] an anthropomorphic [style.boldBatMorph(bat-like face)], [npc.materialDescriptor] [npc.faceFullDescription]."
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldBatMorph(thin, bat-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, bat-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a short muzzle.",
@@ -158,7 +154,7 @@ public class FaceType {
 				+ "#ELSE"
 					+ " Just like the rest of [npc.her] body, [npc.her] new face is [npc.materialDescriptor] [npc.faceSkin+]"
 				+ "#ENDIF"
-					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] [npc.verb(try)] to catch [npc.her] breath.<br/>"
+					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] try to catch [npc.her] breath.<br/>"
 				+ "[npc.Name] now [npc.has] an anthropomorphic [style.boldCatMorph(cat-like face)], [npc.materialDescriptor] [npc.faceFullDescription]."
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldCatMorph(flat, cat-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, cat-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a cute little feline muzzle.",
@@ -187,7 +183,7 @@ public class FaceType {
 //				+ "#ELSE"
 //					+ " Just like the rest of [npc.her] body, [npc.her] new face is [npc.materialDescriptor] [npc.faceSkin+]"
 //				+ "#ENDIF"
-//					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] [npc.verb(try)] to catch [npc.her] breath.<br/>"
+//					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] try to catch [npc.her] breath.<br/>"
 //				+ "[npc.Name] now [npc.has] an anthropomorphic [style.boldCatMorph(panther-like face)], [npc.materialDescriptor] [npc.faceFullDescription]."
 //				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldCatMorph(flat, cat-like tongue)].",
 //			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, panther-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a powerful, toothy muzzle, big nose, and strong jawline.",
@@ -216,7 +212,7 @@ public class FaceType {
 				+ "#ELSE"
 					+ " Just like the rest of [npc.her] body, [npc.her] new face is [npc.materialDescriptor] [npc.faceSkin+]"
 				+ "#ENDIF"
-					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] [npc.verb(try)] to catch [npc.her] breath.<br/>"
+					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] try to catch [npc.her] breath.<br/>"
 				+ "[npc.Name] now [npc.has] an anthropomorphic [style.boldCowMorph(cow-like face)], [npc.materialDescriptor] [npc.faceFullDescription]."
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldCowMorph(strong, cow-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, cow-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a bovine muzzle.",
@@ -244,7 +240,7 @@ public class FaceType {
 				+ "#ELSE"
 					+ " Just like the rest of [npc.her] body, [npc.her] new face is [npc.materialDescriptor] [npc.faceSkin+]"
 				+ "#ENDIF"
-					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] [npc.verb(try)] to catch [npc.her] breath.<br/>"
+					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] try to catch [npc.her] breath.<br/>"
 				+ "[npc.Name] now [npc.has] an anthropomorphic [style.boldDogMorph(dog-like face)], [npc.materialDescriptor] [npc.faceFullDescription]."
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldDogMorph(flat, dog-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, dog-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a canine muzzle.",
@@ -273,7 +269,7 @@ public class FaceType {
 				+ "#ELSE"
 					+ " Just like the rest of [npc.her] body, [npc.her] new face is [npc.materialDescriptor] [npc.faceSkin+]"
 				+ "#ENDIF"
-					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] [npc.verb(try)] to catch [npc.her] breath.<br/>"
+					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] try to catch [npc.her] breath.<br/>"
 				+ "[npc.Name] now [npc.has] an anthropomorphic [style.boldFoxMorph(fox-like face)], [npc.materialDescriptor] [npc.faceFullDescription]."
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldFoxMorph(flat, fox-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, fox-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a slender, vulpine muzzle.",
@@ -302,8 +298,8 @@ public class FaceType {
 				+ "#ELSE"
 					+ " Just like the rest of [npc.her] body, [npc.her] new face is [npc.materialDescriptor] [npc.faceSkin+],"
 				+ "#ENDIF"
-					+ " and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] [npc.verb(try)] to catch [npc.her] breath."
-				+ " [npc.She] [npc.verb(find)], much to [npc.her] relief, that [npc.sheIs] able to harden or soften the edges of [npc.her] beak at will,"
+					+ " and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] try to catch [npc.her] breath."
+					+ " [npc.She] find, much to [npc.her] relief, that [npc.sheIs] able to harden or soften the edges of [npc.her] beak at will,"
 					+ " allowing [npc.herHim] to portray facial emotions as well as to wrap [npc.her] beak's edges around anything [npc.she] might want to put in [npc.her] mouth.<br/>"
 				+ "[npc.Name] now [npc.has] an anthropomorphic [style.boldHarpy(bird-like face)], [npc.materialDescriptor] [npc.faceFullDescription]."
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldHarpy(thin, bird-like tongue)].",
@@ -332,7 +328,7 @@ public class FaceType {
 				+ "#ELSE"
 					+ " Just like the rest of [npc.her] body, [npc.her] new face is [npc.materialDescriptor] [npc.faceSkin+]"
 				+ "#ENDIF"
-					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] [npc.verb(try)] to catch [npc.her] breath.<br/>"
+					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] try to catch [npc.her] breath.<br/>"
 				+ "[npc.Name] now [npc.has] an anthropomorphic [style.boldHorseMorph(horse-like face)], [npc.materialDescriptor] [npc.faceFullDescription]."
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldHorseMorph(strong, horse-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, horse-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a long, equine muzzle.",
@@ -360,7 +356,7 @@ public class FaceType {
 				+ "#ELSE"
 					+ " Just like the rest of [npc.her] body, [npc.her] new face is [npc.materialDescriptor] [npc.faceSkin+]"
 				+ "#ENDIF"
-					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] [npc.verb(try)] to catch [npc.her] breath.<br/>"
+					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] try to catch [npc.her] breath.<br/>"
 				+ "[npc.Name] now [npc.has] an anthropomorphic [style.boldRabbitMorph(rabbit-like face)], [npc.materialDescriptor] [npc.faceFullDescription]."
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldRabbitMorph(thin, rabbit-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, rabbit-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a short muzzle.",
@@ -388,7 +384,7 @@ public class FaceType {
 				+ "#ELSE"
 					+ " Just like the rest of [npc.her] body, [npc.her] new face is [npc.materialDescriptor] [npc.faceSkin+]"
 				+ "#ENDIF"
-					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] [npc.verb(try)] to catch [npc.her] breath.<br/>"
+					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] try to catch [npc.her] breath.<br/>"
 				+ "[npc.Name] now [npc.has] an anthropomorphic [style.boldRatMorph(rat-like face)], [npc.materialDescriptor] [npc.faceFullDescription]."
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldRatMorph(thin, rat-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, rat-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a long, rodent muzzle.",
@@ -416,7 +412,7 @@ public class FaceType {
 				+ "#ELSE"
 					+ " Just like the rest of [npc.her] body, [npc.her] new face is [npc.materialDescriptor] [npc.faceSkin+]"
 				+ "#ENDIF"
-					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] [npc.verb(try)] to catch [npc.her] breath.<br/>"
+					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] try to catch [npc.her] breath.<br/>"
 				+ "[npc.Name] now [npc.has] an anthropomorphic [style.boldReindeerMorph(horse-reindeer face)], [npc.materialDescriptor] [npc.faceFullDescription]."
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldReindeerMorph(strong, reindeer-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, reindeer-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a long muzzle.",
@@ -444,7 +440,7 @@ public class FaceType {
 				+ "#ELSE"
 					+ " Just like the rest of [npc.her] body, [npc.her] new face is [npc.materialDescriptor] [npc.faceSkin+]"
 				+ "#ENDIF"
-					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] [npc.verb(try)] to catch [npc.her] breath.<br/>"
+					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] try to catch [npc.her] breath.<br/>"
 				+ "[npc.Name] now [npc.has] an anthropomorphic [style.boldSquirrelMorph(squirrel-like face)], [npc.materialDescriptor] [npc.faceFullDescription]."
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldSquirrelMorph(thin, squirrel-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, squirrel-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a short muzzle.",
@@ -472,11 +468,11 @@ public class FaceType {
 				+ "#ELSE"
 					+ " Just like the rest of [npc.her] body, [npc.her] new face is [npc.materialDescriptor] [npc.faceSkin+]"
 				+ "#ENDIF"
-					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] [npc.verb(try)] to catch [npc.her] breath.<br/>"
+					+ ", and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] try to catch [npc.her] breath.<br/>"
 				+ "[npc.Name] now [npc.has] an anthropomorphic [style.boldWolfMorph(wolf-like face)], [npc.materialDescriptor] [npc.faceFullDescription]."
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldWolfMorph(flat, wolf-like tongue)].",
-			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, wolf-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a long muzzle.",
-			"[npc.SheHasFull] the [npc.feminineDescriptor(true)] face of a feral [npc.legRace], which is [npc.materialDescriptor] [npc.faceFullDescription(true)] and complete with a long muzzle.",
+			"[npc.Her] [pc.morphGenSinNetr([npc.a_feminineDescriptor(true)])], антропоморфное, волкообразное лицо [pc.morphGenSinNetr([npc.materialCompositionDescriptor])] [pc.morphSingleInstr([npc.faceFullDescription(true)])], в комплекте с длинной мордой.",
+			"[npc.SheHasFull] the [npc.feminineDescriptor(true)] face of a feral [npc.legRace], which is [npc.materialDescriptor] [npc.faceFullDescription(true)], в комплекте с длинной мордой.",
 			Util.newArrayListOfValues(
 					BodyPartTag.FACE_MUZZLE,
 					BodyPartTag.FACE_FANGS,
@@ -485,9 +481,9 @@ public class FaceType {
 	};
 	
 
-	private static List<AbstractFaceType> allFaceTypes;
-	private static Map<AbstractFaceType, String> faceToIdMap = new HashMap<>();
-	private static Map<String, AbstractFaceType> idToFaceMap = new HashMap<>();
+	private static final List<AbstractFaceType> allFaceTypes;
+	private static final Map<AbstractFaceType, String> faceToIdMap = new HashMap<>();
+	private static final Map<String, AbstractFaceType> idToFaceMap = new HashMap<>();
 	
 	static {
 		allFaceTypes = new ArrayList<>();
@@ -586,7 +582,7 @@ public class FaceType {
 		return allFaceTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractFaceType>> typesMap = new HashMap<>();
+	private static final Map<AbstractRace, List<AbstractFaceType>> typesMap = new HashMap<>();
 	
 	public static List<AbstractFaceType> getFaceTypes(AbstractRace r) {
 		if(typesMap.containsKey(r)) {

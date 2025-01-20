@@ -93,49 +93,49 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(put)] [npc.her] arms through the trenchcoat's sleeves and [npc.verb(button)] up the front before cinching up the belt.]]>
+            <![CDATA[[npc.Name] put [npc.her] arms through the trenchcoat's sleeves and button up the front before cinching up the belt.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(help)] [npc2.name] [npc2.verb(put)] [npc2.her] arms through the trenchcoat's sleeves and [npc.verb(button)] up the front before cinching up the belt.]]>
+            <![CDATA[[npc.Name] help [npc2.name] [npc2.verb(put)] [npc2.her] arms through the trenchcoat's sleeves and button up the front before cinching up the belt.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(force)] [npc2.namePos] arms through the trenchcoat's sleeves and hastily [npc.verb(button)] up the front before hastily tightening up the belt.]]>
+            <![CDATA[[npc.Name] force [npc2.namePos] arms through the trenchcoat's sleeves and hastily button up the front before hastily tightening up the belt.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(uncinch)] the belt and [npc.verb(unbutton)] the front of [npc.her] trenchcoat and [npc.verb(pull)] [npc.her] arms out of the sleeves.]]>
+            <![CDATA[[npc.Name] uncinch the belt and unbutton the front of [npc.her] trenchcoat and pull [npc.her] arms out of the sleeves.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(uncinch)] the belt and [npc.verb(unbutton)] the front of [npc2.namePos] trenchcoat and [npc.verb(help)] [npc2.her] [npc2.verb(pull)] [npc2.her] arms out of the sleeves.]]>
+            <![CDATA[[npc.Name] uncinch the belt and unbutton the front of [npc2.namePos] trenchcoat and help [npc2.her] [npc2.verb(pull)] [npc2.her] arms out of the sleeves.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(tear)] at the belt before popping open the buttons on the front of [npc2.namePos] trenchcoat and roughly [npc.verb(pull)] [npc2.her] arms out of the sleeves.]]>
+            <![CDATA[[npc.Name] tear at the belt before popping open the buttons on the front of [npc2.namePos] trenchcoat and roughly pull [npc2.her] arms out of the sleeves.]]>
 		</otherRough>
 	</displacementText>
 
 	<replacementText type="UNBUTTONS">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(button)] up the front of [npc.namePos] trenchcoat.]]>
+            <![CDATA[[npc.Name] button up the front of [npc.namePos] trenchcoat.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(button)] up the front of [npc2.namePos] trenchcoat.]]>
+            <![CDATA[[npc.Name] button up the front of [npc2.namePos] trenchcoat.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] hastily [npc.verb(button)] up the front of [npc2.namePos] trenchcoat.]]>
+            <![CDATA[[npc.Name] hastily button up the front of [npc2.namePos] trenchcoat.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="UNBUTTONS">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unbutton)] [npc.her] trenchcoat.]]>
+            <![CDATA[[npc.Name] unbutton [npc.her] trenchcoat.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unbutton)] [npc2.namePos] trenchcoat.]]>
+            <![CDATA[[npc.Name] unbutton [npc2.namePos] trenchcoat.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(pop)] open the buttons on [npc2.namePos] trenchcoat.]]>
+            <![CDATA[[npc.Name] pop open the buttons on [npc2.namePos] trenchcoat.]]>
 		</otherRough>
 	</displacementText>
 	

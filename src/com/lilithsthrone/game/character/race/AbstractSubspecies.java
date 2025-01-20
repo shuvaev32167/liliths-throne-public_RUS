@@ -1,21 +1,5 @@
 package com.lilithsthrone.game.character.race;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.rmi.AccessException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.w3c.dom.Document;
-
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AbstractAttribute;
@@ -49,6 +33,16 @@ import com.lilithsthrone.world.WorldRegion;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.rmi.AccessException;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.4
@@ -140,60 +134,60 @@ public abstract class AbstractSubspecies {
 	public static Map<LegConfiguration, String[]> demonLegConfigurationNames = Util.newHashMapOfValues(
 			new Value<>(LegConfiguration.ARACHNID,
 					new String[] {
-						"demonid",
-						"demonids",
-						"incunid",
-						"succunid",
-						"incunids",
-						"succunids"}),
+							"демонид",
+							"демониды",
+							"инкунид",
+							"суккунид",
+							"инкуниды",
+							"суккуниды"}),
 			new Value<>(LegConfiguration.BIPEDAL,
 					new String[] {
-						"demon",
-						"demons",
-						"incubus",
-						"succubus",
-						"incubi",
-						"succubi"}),
+							"демон",
+							"демоны",
+							"инкуб",
+							"суккуб",
+							"инкубы",
+							"суккубы"}),
 			new Value<>(LegConfiguration.CEPHALOPOD,
 					new String[] {
-						"demopus",
-						"demopuses",
-						"incupus",
-						"succupus",
-						"incupuses",
-						"succupuses"}),
+							"демопус",
+							"демопусы",
+							"инкупус",
+							"суккупус",
+							"инкупусы",
+							"суккупусы"}),
 			new Value<>(LegConfiguration.QUADRUPEDAL,
 					new String[] {
-						"demotaur",
-						"demotaurs",
-						"incutaur",
-						"succutaur",
-						"incutaurs",
-						"succutaurs"}),
+							"демотавр",
+							"демотавры",
+							"инкутавр",
+							"суккутавр",
+							"инкутавры",
+							"суккутавры"}),
 			new Value<>(LegConfiguration.TAIL,
 					new String[] {
-						"demomer",
-						"demomers",
-						"incumer",
-						"succumer",
-						"incumers",
-						"succumers"}),
+							"демомер",
+							"демомеры",
+							"инкумер",
+							"суккумер",
+							"инкумеры",
+							"суккумеры"}),
 			new Value<>(LegConfiguration.TAIL_LONG,
 					new String[] {
-						"demomia",
-						"demomias",
-						"incumia",
-						"succumia",
-						"incumias",
-						"succumias"}),
+							"демомия",
+							"демомы",
+							"инкумия",
+							"суккумия",
+							"инкумы",
+							"суккумии"}),
 			new Value<>(LegConfiguration.AVIAN,
 					new String[] {
-						"demoa",
-						"demoas",
-						"incumoa",
-						"succumoa",
-						"incumoas",
-						"succumoas"}));
+							"демоа",
+							"демоас",
+							"инкумоа",
+							"суккумоа",
+							"инкумоас",
+							"суккумоас"}));
 	
 	static {
 		youkoIconMap = new HashMap<>();
@@ -1648,7 +1642,7 @@ public abstract class AbstractSubspecies {
 					for(String line : lines) {
 						sb.append(line);
 					}
-					SVGStringBackground = "<div style='"+fullDivStyle+"'>"+sb.toString()+"</div>";
+					SVGStringBackground = "<div style='"+fullDivStyle+"'>"+ sb +"</div>";
 					
 				} else {
 					if(!getBackgroundPathName().isEmpty()) {

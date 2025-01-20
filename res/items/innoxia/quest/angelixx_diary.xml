@@ -43,10 +43,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-			[npc.Name] [npc.verb(release)] the diary's elasticated strap, allowing it to be opened. Stopping on a random page to read a paragraph, [npc.she] [npc.verb(see)] that the contents of this diary are far more lewd, and at times sinister, than anyone would expect from its appearance:
+			[npc.Name] release the diary's elasticated strap, allowing it to be opened. Stopping on a random page to read a paragraph, [npc.she] see that the contents of this diary are far more lewd, and at times sinister, than anyone would expect from its appearance:
 		]]></selfUse>
 		<otherUse><![CDATA[
-			[npc.Name] [npc.verb(release)] the diary's elasticated strap, allowing it to be opened, before showing it off to [npc2.name]. Stopping on a random page to read a paragraph, [npc.she] [npc.verb(see)] that the contents of this diary are far more lewd, and at times sinister, than anyone would expect from its appearance:
+			[npc.Name] release the diary's elasticated strap, allowing it to be opened, before showing it off to [npc2.name]. Stopping on a random page to read a paragraph, [npc.she] see that the contents of this diary are far more lewd, and at times sinister, than anyone would expect from its appearance:
 		]]></otherUse>
 	</useDescriptions>
 

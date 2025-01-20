@@ -1,31 +1,42 @@
 package com.lilithsthrone.controller.eventListeners;
 
-import org.w3c.dom.events.Event;
-import org.w3c.dom.events.EventListener;
-
+import com.lilithsthrone.controller.eventListeners.tooltips.ClonedEventListener;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.EnchantmentDialogue;
 import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
 import com.lilithsthrone.main.Main;
+import org.w3c.dom.events.Event;
 
 /**
  * @since 0.1.7
  * @version 0.3.5.1
  * @author Innoxia
  */
-public class EnchantmentEventListener implements EventListener {
+public class EnchantmentEventListener implements ClonedEventListener {
 	private AbstractCoreItem itemToEnchant;
 	private TFModifier primaryModifier, secondaryModifier;
 	private TFPotency potency;
 	private boolean effect;
 	private int effectIndex;
 	private int limit;
+    private final EnchantmentEventListener parent;
+
+    public EnchantmentEventListener() {
+        this.parent = null;
+    }
+
+    public EnchantmentEventListener(EnchantmentEventListener parent) {
+        this.parent = parent;
+    }
 
 	@Override
 	public void handleEvent(Event event) {
-		
+        if (parent != null) {
+            parent.handleEvent(event);
+            return;
+        }
 		if (itemToEnchant != null) {
 			if(itemToEnchant.getEnchantmentEffect()!=null) {
 				EnchantmentDialogue.resetEnchantmentVariables();
@@ -93,6 +104,10 @@ public class EnchantmentEventListener implements EventListener {
 	}
 	
 	public EnchantmentEventListener removeEffect(int effectIndex) {
+        if (parent != null) {
+            parent.removeEffect(effectIndex);
+            return this;
+        }
 		resetVariables();
 		effect = true;
 		this.effectIndex = effectIndex;
@@ -101,6 +116,10 @@ public class EnchantmentEventListener implements EventListener {
 	}
 	
 	public EnchantmentEventListener setLimit(int limit) {
+        if (parent != null) {
+            parent.setLimit(limit);
+            return this;
+        }
 		resetVariables();
 		this.limit = limit;
 
@@ -116,4 +135,9 @@ public class EnchantmentEventListener implements EventListener {
 		potency = null;
 		limit = 0;
 	}
+
+    @Override
+    public ClonedEventListener newInstance() {
+        return new EnchantmentEventListener(this);
+    }
 }

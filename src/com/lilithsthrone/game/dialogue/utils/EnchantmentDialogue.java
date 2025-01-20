@@ -1,24 +1,5 @@
 package com.lilithsthrone.game.dialogue.utils;
 
-import java.io.File;
-import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -36,12 +17,7 @@ import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
-import com.lilithsthrone.game.inventory.enchanting.EnchantingUtils;
-import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
-import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
-import com.lilithsthrone.game.inventory.enchanting.LoadedEnchantment;
-import com.lilithsthrone.game.inventory.enchanting.TFModifier;
-import com.lilithsthrone.game.inventory.enchanting.TFPotency;
+import com.lilithsthrone.game.inventory.enchanting.*;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
@@ -52,6 +28,18 @@ import com.lilithsthrone.rendering.SVGImages;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
+import java.io.StringWriter;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.7
@@ -60,7 +48,7 @@ import com.lilithsthrone.world.places.PlaceType;
  */
 public class EnchantmentDialogue {
 	
-	private static StringBuilder inventorySB = new StringBuilder("");
+	private static final StringBuilder inventorySB = new StringBuilder();
 	
 	private static InventoryInteraction interactionInit;
 	
@@ -68,7 +56,7 @@ public class EnchantmentDialogue {
 	private static AbstractCoreItem previousIngredient = null;
 	
 	private static List<ItemEffect> effects = new ArrayList<>();
-	private static List<ItemEffect> previousEffects = new ArrayList<>();
+	private static final List<ItemEffect> previousEffects = new ArrayList<>();
 	
 	private static InventorySlot tattooSlot;
 	private static GameCharacter tattooBearer;
@@ -312,8 +300,7 @@ public class EnchantmentDialogue {
 			// Effects:
 			inventorySB.append("<div class='container-half-width' style='width:58%; margin:0 1%;'>");
 				inventorySB.append("<b>Effects (</b>"
-									+ (effects.size()>=ingredient.getEnchantmentLimit()?"<b style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>":"<b>")+""
-											+ effects.size()+"/"+ingredient.getEnchantmentLimit()+"</b><b>)</b> | Cost: "
+									+ (effects.size()>=ingredient.getEnchantmentLimit()?"<b style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>":"<b>")+ effects.size()+"/"+ingredient.getEnchantmentLimit()+"</b><b>)</b> | Cost: "
 												+ (ingredient instanceof Tattoo
 														?UtilText.formatAsMoney(EnchantingUtils.getCost(ingredient, effects)*EnchantingUtils.FLAME_COST_MODIFER, "b")
 														:UtilText.formatAsEssences(EnchantingUtils.getCost(ingredient, effects), "b", false))
@@ -577,7 +564,7 @@ public class EnchantmentDialogue {
 
 			// Save/load
 			} else if (index == 2) {
-				return new Response("Save/Load", "Save/Load enchantment recipes.", ENCHANTMENT_SAVE_LOAD) {
+				return new Response("Сохр./Загруз.", "Save/Load enchantment recipes.", ENCHANTMENT_SAVE_LOAD) {
 					@Override
 					public void effects() {
 						Main.mainController.getWebEngine().executeScript("document.getElementById('hiddenPField').innerHTML=document.getElementById('output_name').value;");
@@ -645,7 +632,7 @@ public class EnchantmentDialogue {
 				System.err.println("craftAndApplyFullInventoryEffects() error: Tattoo is not equipped?");
 				tattoo = EnchantingUtils.craftTattoo(ingredient, effects);
 			}
-			Main.game.addEvent(new EventLogEntry("[style.colourExcellent(Tattoo Enchanted)]", Util.capitaliseSentence(((Tattoo)ingredient).getName())), false);
+			Main.game.addEvent(new EventLogEntry("[style.colourExcellent(Tattoo Enchanted)]", Util.capitaliseSentence(ingredient.getName())), false);
 			finaliseCrafting(ingredient, effects, applyCost);
 			return tattoo;
 		}
@@ -739,7 +726,7 @@ public class EnchantmentDialogue {
 			try {
 				String name = Util.getFileIdentifier(f);
 				LoadedEnchantment loadedEnchant = loadEnchant(name);
-				if(ingredient instanceof Tattoo?loadedEnchant.getTattooType()!=null:loadedEnchant.getTattooType()==null) {
+				if((ingredient instanceof Tattoo) == (loadedEnchant.getTattooType() != null)) {
 					loadedEnchantmentsMap.put(name, loadedEnchant);
 				}
 			} catch(Exception ex) {
@@ -903,16 +890,16 @@ public class EnchantmentDialogue {
 			} else {
 				String svgString = "";
 				if(EnchantmentDialogue.getIngredient() instanceof AbstractItem) {
-					svgString = ((AbstractItem)EnchantmentDialogue.getIngredient()).getSVGString();
+					svgString = EnchantmentDialogue.getIngredient().getSVGString();
 					
 				} else if(EnchantmentDialogue.getIngredient() instanceof AbstractClothing) {
-					svgString = ((AbstractClothing)EnchantmentDialogue.getIngredient()).getSVGString();
+					svgString = EnchantmentDialogue.getIngredient().getSVGString();
 					
 				} else if(EnchantmentDialogue.getIngredient() instanceof AbstractWeapon) {
-					svgString = ((AbstractWeapon)EnchantmentDialogue.getIngredient()).getSVGString();
+					svgString = EnchantmentDialogue.getIngredient().getSVGString();
 					
 				} else if(EnchantmentDialogue.getIngredient() instanceof Tattoo) {
-					svgString = ((Tattoo)EnchantmentDialogue.getIngredient()).getSVGString();
+					svgString = EnchantmentDialogue.getIngredient().getSVGString();
 				}
 				
 				return "<div class='container-full-width' style='padding:0; margin:0 0 4px 0;"+(altColour?"background:#222;":"")+"'>"
@@ -1048,7 +1035,7 @@ public class EnchantmentDialogue {
 					// Cast magic:
 					doc.getDocumentElement().normalize();
 					
-					String importedName = ((Element) doc.getElementsByTagName("name").item(0)).getTextContent();
+					String importedName = doc.getElementsByTagName("name").item(0).getTextContent();
 					
 					Element enchantment = (Element) doc.getElementsByTagName("enchantment").item(0);
 					Element itemEffects = (Element) enchantment.getElementsByTagName("itemEffects").item(0);
@@ -1086,12 +1073,8 @@ public class EnchantmentDialogue {
 	public static boolean isLoadEnchantAvailable(String name) {
 		File file = new File("data/enchantments/"+name+".xml");
 
-		if(!file.exists()) {
-			return false;
-		}
-		
-		return true;
-	}
+        return file.exists();
+    }
 
 	public static void deleteEnchant(String name) {
 		File file = new File("data/enchantments/"+name+".xml");

@@ -52,10 +52,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		[npc.Name] [npc.verb(unscrew)] the cap from the bottle of Snake Oil, before tilting [npc.her] head back and bringing it up to [npc.her] waiting [npc.lips]. A scent of peppermint and other assorted herbs rises from the opening, and with a gulp, [npc.name] [npc.verb(start)] downing the liquid, discovering that its taste is more or less what could be expected from the smell. While indeed feeling somewhat refreshed, [npc.name] [npc.sheIs] feeling somewhat let down by the advertising.
+		[npc.Name] unscrew the cap from the bottle of Snake Oil, before tilting [npc.her] head back and bringing it up to [npc.her] waiting [npc.lips]. A scent of peppermint and other assorted herbs rises from the opening, and with a gulp, [npc.name] start downing the liquid, discovering that its taste is more or less what could be expected from the smell. While indeed feeling somewhat refreshed, [npc.name] [npc.sheIs] feeling somewhat let down by the advertising.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		[npc.Name] [npc.verb(unscrew)] the cap from the bottle of Snake Oil, bringing it up to [npc2.her] waiting [npc2.lips]. A scent of peppermint and other assorted herbs rises from the opening, and with a gulp, [npc2.name] [npc2.verb(start)] downing the liquid, discovering that its taste is more or less what could be expected from the smell. While indeed feeling somewhat refreshed, [npc2.name] [npc2.sheIs] feeling somewhat let down by the advertising.
+		[npc.Name] unscrew the cap from the bottle of Snake Oil, bringing it up to [npc2.her] waiting [npc2.lips]. A scent of peppermint and other assorted herbs rises from the opening, and with a gulp, [npc2.name] [npc2.verb(start)] downing the liquid, discovering that its taste is more or less what could be expected from the smell. While indeed feeling somewhat refreshed, [npc2.name] [npc2.sheIs] feeling somewhat let down by the advertising.
 		]]></otherUse>
 	</useDescriptions>
 

@@ -94,49 +94,49 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(put)] on the riot helmet and securely [npc.verb(fasten)] the chinstrap.]]>
+            <![CDATA[[npc.Name] put on the riot helmet and securely fasten the chinstrap.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(put)] the riot helmet on [npc2.namePos] head and securely [npc.verb(fasten)] the chinstrap.]]>
+            <![CDATA[[npc.Name] put the riot helmet on [npc2.namePos] head and securely fasten the chinstrap.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(force)] the riot helmet down on [npc2.namePos] head and practically [npc.verb(gag)] [npc2.her] with the chinstrap.]]>
+            <![CDATA[[npc.Name] force the riot helmet down on [npc2.namePos] head and practically gag [npc2.her] with the chinstrap.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] un[npc.do] the chinstrap on [npc.her] riot helmet and [npc.verb(ease)] it off.]]>
+            <![CDATA[[npc.Name] un[npc.do] the chinstrap on [npc.her] riot helmet and ease it off.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] un[npc.do] the chinstrap on [npc2.namePos] riot helmet and [npc.verb(ease)] it off.]]>
+            <![CDATA[[npc.Name] un[npc.do] the chinstrap on [npc2.namePos] riot helmet and ease it off.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(rip)] open the chinstrap on [npc2.namePos] riot helmet and [npc.verb(yank)] it off [npc2.her] neck.]]>
+            <![CDATA[[npc.Name] rip open the chinstrap on [npc2.namePos] riot helmet and yank it off [npc2.her] neck.]]>
 		</otherRough>
 	</displacementText>
 
 	<replacementText type="PULLS_DOWN">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(lower)] the visor on [npc.her] riot helmet down over [npc.her] [npc.faceD].]]>
+            <![CDATA[[npc.Name] lower the visor on [npc.her] riot helmet down over [npc.her] [npc.faceD].]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(lower)] the visor on [npc2.namePos] riot helmet down over [npc2.her] [npc2.faceD].]]>
+            <![CDATA[[npc.Name] lower the visor on [npc2.namePos] riot helmet down over [npc2.her] [npc2.faceD].]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(slam)] the visor on [npc2.namePos] riot helmet down over [npc2.her] [npc2.faceD].]]>
+            <![CDATA[[npc.Name] slam the visor on [npc2.namePos] riot helmet down over [npc2.her] [npc2.faceD].]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="PULLS_UP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(raise)] the visor on [npc.her] riot helmet, exposing [npc.her] [npc.faceD].]]>
+            <![CDATA[[npc.Name] raise the visor on [npc.her] riot helmet, exposing [npc.her] [npc.faceD].]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(raise)] the visor on [npc2.namePos] riot helmet, exposing [npc2.her] [npc2.faceD].]]>
+            <![CDATA[[npc.Name] raise the visor on [npc2.namePos] riot helmet, exposing [npc2.her] [npc2.faceD].]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(flip)] the visor on [npc2.namePos] riot helmet up, exposing [npc2.her] [npc2.faceD].]]>
+            <![CDATA[[npc.Name] flip the visor on [npc2.namePos] riot helmet up, exposing [npc2.her] [npc2.faceD].]]>
 		</otherRough>
 	</displacementText>
 	

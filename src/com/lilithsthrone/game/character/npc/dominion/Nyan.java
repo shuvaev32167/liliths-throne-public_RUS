@@ -1,45 +1,12 @@
 package com.lilithsthrone.game.character.npc.dominion;
 
-import java.time.DayOfWeek;
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import com.lilithsthrone.rendering.Pattern;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.ClitorisSize;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.body.valueEnums.HairLength;
-import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
-import com.lilithsthrone.game.character.body.valueEnums.LipSize;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
-import com.lilithsthrone.game.character.body.valueEnums.NippleSize;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
 import com.lilithsthrone.game.character.effects.StatusEffect;
@@ -58,11 +25,7 @@ import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.places.dominion.shoppingArcade.ClothingEmporium;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractCoreItem;
-import com.lilithsthrone.game.inventory.CharacterInventory;
-import com.lilithsthrone.game.inventory.InventorySlot;
-import com.lilithsthrone.game.inventory.ItemTag;
-import com.lilithsthrone.game.inventory.Rarity;
+import com.lilithsthrone.game.inventory.*;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
@@ -74,6 +37,7 @@ import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.main.Main;
+import com.lilithsthrone.rendering.Pattern;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
@@ -81,6 +45,17 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Season;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import java.time.DayOfWeek;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -89,23 +64,23 @@ import com.lilithsthrone.world.places.PlaceType;
  */
 public class Nyan extends NPC {
 
-	private List<AbstractClothing> commonFemaleClothing;
-	private List<AbstractClothing> commonFemaleUnderwear;
-	private List<AbstractClothing> commonFemaleAccessories;
-	private List<AbstractClothing> commonMaleClothing;
-	private List<AbstractClothing> commonMaleLingerie;
-	private List<AbstractClothing> commonMaleAccessories;
-	private List<AbstractClothing> commonAndrogynousClothing;
-	private List<AbstractClothing> commonAndrogynousLingerie;
-	private List<AbstractClothing> commonAndrogynousAccessories;
-	private List<AbstractClothing> specials;
+	private final List<AbstractClothing> commonFemaleClothing;
+	private final List<AbstractClothing> commonFemaleUnderwear;
+	private final List<AbstractClothing> commonFemaleAccessories;
+	private final List<AbstractClothing> commonMaleClothing;
+	private final List<AbstractClothing> commonMaleLingerie;
+	private final List<AbstractClothing> commonMaleAccessories;
+	private final List<AbstractClothing> commonAndrogynousClothing;
+	private final List<AbstractClothing> commonAndrogynousLingerie;
+	private final List<AbstractClothing> commonAndrogynousAccessories;
+	private final List<AbstractClothing> specials;
 
 	public Nyan() {
 		this(false);
 	}
 	
 	public Nyan(boolean isImported) {
-		super(isImported, new NameTriplet("Nyan"), "Rey",
+        super(isImported, new NameTriplet("Ньян"), "Рей",
 				"Nyan is the owner of the store 'Nyan's Clothing Emporium', found in Dominion's shopping arcade."
 						+ " She's extremely shy, and gets very nervous when having to talk to people.",
 				21, Month.APRIL, 12,
@@ -572,7 +547,7 @@ public class Nyan extends NPC {
 		if(this.isVisiblyPregnant()) {
 			return "NyanPregnant";
 		}
-		return "Nyan";
+        return "Ньян";
 		//TODO NyanSpecials
 	}
 
@@ -783,7 +758,7 @@ public class Nyan extends NPC {
 							:"");
 			}
 			
-		} else if(gift instanceof AbstractClothing && ((AbstractClothing)gift).getEffects().isEmpty()) {
+		} else if(gift instanceof AbstractClothing && gift.getEffects().isEmpty()) {
 			AbstractClothingType type = ((AbstractClothing)gift).getClothingType();
 			if(type.equals(ClothingType.getClothingTypeFromId("innoxia_hair_rose"))) {
 				text = UtilText.parseFromXMLFile("characters/dominion/nyan", "NYAN_GIFT_SINGLE_ROSE")

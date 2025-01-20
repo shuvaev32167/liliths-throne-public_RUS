@@ -12,10 +12,12 @@
 		<attackDescriptor>crystal strike</attackDescriptor>
 		<attackTooltipDescription>Strike at [npc.name] in melee, using your crystal's power to inflict extra damage!</attackTooltipDescription>
 		
-		<rarity>LEGENDARY</rarity> 
-		
-		<equipText><![CDATA[[npc.Name] [npc.verb(focus)] on the energy in the demonstone. As [npc.she] [npc.does] so, it dissolves and flows into [npc.her] aura, granting [npc.herHim] the ability to perform arcane-imbued unarmed attacks.]]></equipText>
-		<unequipText><![CDATA[[npc.Name] [npc.verb(focus)] on extracting the absorbed arcane energy inside of [npc.her] aura. As [npc.she] [npc.does] so, it reforms back into a clear demonstone.]]></unequipText>
+		<rarity>LEGENDARY</rarity>
+
+        <equipText>
+            <![CDATA[[npc.Name] focus on the energy in the demonstone. As [npc.she] [npc.does] so, it dissolves and flows into [npc.her] aura, granting [npc.herHim] the ability to perform arcane-imbued unarmed attacks.]]></equipText>
+        <unequipText>
+            <![CDATA[[npc.Name] focus on extracting the absorbed arcane energy inside of [npc.her] aura. As [npc.she] [npc.does] so, it reforms back into a clear demonstone.]]></unequipText>
 		
 		<imageName>legendary.svg</imageName> 
 		
@@ -66,23 +68,23 @@
 	<hitDescriptions>
 		<hitText><![CDATA[
 		#IF(npc.isFeral())
-			Darting forwards, [npc.name] [npc.verb(rear)] up [npc.verb(deliver)] a solid kick to [npc2.namePos] torso.
+			Darting forwards, [npc.name] rear up deliver a solid kick to [npc2.namePos] torso.
 		#ELSE
-			Darting forwards, [npc.name] [npc.verb(deliver)] a solid punch to [npc2.namePos] [npc2.arm].
+			Darting forwards, [npc.name] deliver a solid punch to [npc2.namePos] [npc2.arm].
 		#ENDIF
 		]]></hitText>
 		<hitText><![CDATA[
 		#IF(npc.isFeral())
-			Striking out at [npc2.name], [npc.name] [npc.verb(manage)] to land a solid kick on [npc2.her] [npc2.leg]!
+			Striking out at [npc2.name], [npc.name] manage to land a solid kick on [npc2.her] [npc2.leg]!
 		#ELSE
-			Striking out at [npc2.name], [npc.name] [npc.verb(manage)] to land a solid punch on [npc2.her] [npc2.arm]!
+			Striking out at [npc2.name], [npc.name] manage to land a solid punch on [npc2.her] [npc2.arm]!
 		#ENDIF
 		]]></hitText>
 		<hitText><![CDATA[
 		#IF(npc.isFeral())
-			[npc.Name] [npc.verb(strike)] out at [npc2.name] in unarmed combat, and [npc.verb(manage)] to land a solid kick on [npc2.her] torso.
+			[npc.Name] strike out at [npc2.name] in unarmed combat, and manage to land a solid kick on [npc2.her] torso.
 		#ELSE
-			[npc.Name] [npc.verb(strike)] out at [npc2.name] in unarmed combat, and [npc.verb(manage)] to land a solid hit on [npc2.her] torso.
+			[npc.Name] strike out at [npc2.name] in unarmed combat, and manage to land a solid hit on [npc2.her] torso.
 		#ENDIF
 		]]></hitText>
 	</hitDescriptions>
@@ -90,13 +92,13 @@
 	<!-- Descriptions that are used when missing an enemy. One of the missText values will be randomly selected each time the attacker misses their target. Follow the same guidelines as equipText. -->
 	<missDescriptions>
 		<missText><![CDATA[
-		Darting forwards, [npc.name] [npc.verb(try)] to deliver a punch to [npc2.namePos] [npc2.arm], but [npc2.she] [npc2.verb(manage)] to step out of the way in time.
+		Darting forwards, [npc.name] try to deliver a punch to [npc2.namePos] [npc2.arm], but [npc2.she] [npc2.verb(manage)] to step out of the way in time.
 		]]></missText>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(throw)] a punch at [npc2.name], but fails to make contact with any part of [npc2.her] body.
+		[npc.Name] throw a punch at [npc2.name], but fails to make contact with any part of [npc2.her] body.
 		]]></missText>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(strike)] out at [npc2.name] in unarmed combat, but [npc.she] [npc.verb(end)] up missing.
+		[npc.Name] strike out at [npc2.name] in unarmed combat, but [npc.she] end up missing.
 		]]></missText>
 	</missDescriptions>
 	

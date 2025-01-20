@@ -1,10 +1,5 @@
 package com.lilithsthrone.game.dialogue.utils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.effects.PerkManager;
 import com.lilithsthrone.game.character.npc.NPC;
@@ -17,6 +12,11 @@ import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @since 0.1.3
@@ -38,20 +38,20 @@ public class CharactersPresentDialogue {
 		} else {
 			CharactersPresentDialogue.characterViewed = (NPC) characterViewed;
 		}
-		menuTitle = "Characters Present ("+Util.capitaliseSentence(CharactersPresentDialogue.characterViewed.getName(true))+")";
-		menuContent = ((NPC) CharactersPresentDialogue.characterViewed).getCharacterInformationScreen(true);
+        menuTitle = "Присутствующие персонажи (" + Util.capitaliseSentence(CharactersPresentDialogue.characterViewed.getName(true)) + ")";
+		menuContent = CharactersPresentDialogue.characterViewed.getCharacterInformationScreen(true);
 
 		if(Main.game.getPlayer().hasCompanion(CharactersPresentDialogue.characterViewed)) {
 			if(CharactersPresentDialogue.characterViewed.isSlave() && CharactersPresentDialogue.characterViewed.getOwner().isPlayer()) {
-				SlaveDialogue.initDialogue((NPC) CharactersPresentDialogue.characterViewed, true);
+				SlaveDialogue.initDialogue(CharactersPresentDialogue.characterViewed, true);
 			} else {
-				OccupantDialogue.initDialogue((NPC) CharactersPresentDialogue.characterViewed, false, true);
+				OccupantDialogue.initDialogue(CharactersPresentDialogue.characterViewed, false, true);
 			}
 			CompanionManagement.initManagement(MENU, 2, CharactersPresentDialogue.characterViewed);
 		}
 		
 //		Main.game.setActiveNPC(characterViewed);
-		targetedCharacterForSex = (NPC) CharactersPresentDialogue.characterViewed;
+		targetedCharacterForSex = CharactersPresentDialogue.characterViewed;
 
 		if(Main.game.getPlayer().getCompanions().size()>1) {
 			companionCharacter = (NPC) Main.game.getPlayer().getMainCompanion();
@@ -69,7 +69,7 @@ public class CharactersPresentDialogue {
 	
 	private static NPC getTargetedCharacterForSex() {
 		if(!Main.game.getCharactersPresent().contains(targetedCharacterForSex)) {
-			targetedCharacterForSex = (NPC) CharactersPresentDialogue.characterViewed;
+			targetedCharacterForSex = CharactersPresentDialogue.characterViewed;
 			if(Objects.equals(getCompanionCharacter(), targetedCharacterForSex)) {
 				if(Main.game.getPlayer().getCompanions().size()>1) {
 					companionCharacter = (NPC) Main.game.getPlayer().getCompanions().stream().filter((npc) -> !npc.equals(getCharacterViewed())).findFirst().get();
@@ -183,8 +183,8 @@ public class CharactersPresentDialogue {
 						@Override
 						public void effects() {
 							characterViewed = charactersPresent.get(index-1);
-							menuTitle = "Characters Present ("+Util.capitaliseSentence(charactersPresent.get(index - 1).getName(true))+")";
-							menuContent = ((NPC) charactersPresent.get(index - 1)).getCharacterInformationScreen(true);
+                            menuTitle = "Присутствующие персонажи (" + Util.capitaliseSentence(charactersPresent.get(index - 1).getName(true)) + ")";
+							menuContent = charactersPresent.get(index - 1).getCharacterInformationScreen(true);
 						}
 					};
 					
@@ -253,7 +253,7 @@ public class CharactersPresentDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Decide what to do next.", AFTER_SEX) {
+                return new Response("Продолжить", "Decide what to do next.", AFTER_SEX) {
 					@Override
 					public DialogueNode getNextDialogue() {
 						return Main.game.getDefaultDialogue(false);

@@ -28,7 +28,7 @@ public class PixsPlayground {
 		public Response getResponse(int responseTab, int index) {
 			if(responseTab==0) {
 				if (index == 1) {
-					return new Response("Enter",
+                    return new Response("Вход",
 							"Enter the gym.",
 							DialogueManager.getDialogueFromId("innoxia_places_dominion_shopping_arcade_gym_exit_initial_entry")) {
 						@Override

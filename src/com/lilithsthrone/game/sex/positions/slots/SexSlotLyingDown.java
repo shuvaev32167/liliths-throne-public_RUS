@@ -12,7 +12,7 @@ public class SexSlotLyingDown {
 	public static final SexSlot LYING_DOWN = new SexSlot(
 			"Lying on back",
 			"lying on back",
-			"With a buck of [npc.her] [npc.hips], [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax.",
+            "With a buck of [npc.her] [npc.hips], [npc.name] let out [npc.a_moan+] as [npc.she] reach [npc.her] climax.",
 			false,
 			SexSlotTag.LYING_DOWN);
 	public static final SexSlot LYING_DOWN_TWO = new SexSlot(LYING_DOWN) {
@@ -38,7 +38,7 @@ public class SexSlotLyingDown {
 	public static final SexSlot COWGIRL = new SexSlot(
 			"Cowgirl",
 			"cowgirl",
-			"With trembling [npc.legs], [npc.name] [npc.verb(sink)] down into [npc2.namePos] groin, letting out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax.",
+            "With trembling [npc.legs], [npc.name] sink down into [npc2.namePos] groin, letting out [npc.a_moan+] as [npc.she] reach [npc.her] climax.",
 			false,
 			SexSlotTag.COWGIRL);
 	public static final SexSlot COWGIRL_TWO = new SexSlot(COWGIRL) {
@@ -65,7 +65,7 @@ public class SexSlotLyingDown {
 	public static final SexSlot COWGIRL_REVERSE = new SexSlot(
 			"Reverse cowgirl",
 			"reverse cowgirl",
-			"With trembling [npc.legs], [npc.name] [npc.verb(sink)] down into [npc2.namePos] groin, letting out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax.",
+            "With trembling [npc.legs], [npc.name] sink down into [npc2.namePos] groin, letting out [npc.a_moan+] as [npc.she] reach [npc.her] climax.",
 			false,
 			SexSlotTag.COWGIRL_REVERSE);
 	public static final SexSlot COWGIRL_REVERSE_TWO = new SexSlot(COWGIRL_REVERSE) {
@@ -92,28 +92,28 @@ public class SexSlotLyingDown {
 	public static final SexSlot FACE_SITTING = new SexSlot(
 			"Frontal face-sitting",
 			"face-sitting",
-			"With trembling [npc.legs], [npc.name] [npc.verb(sink)] down onto [npc2.namePos] face, letting out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax.",
+            "With trembling [npc.legs], [npc.name] sink down onto [npc2.namePos] face, letting out [npc.a_moan+] as [npc.she] reach [npc.her] climax.",
 			false,
 			SexSlotTag.FACE_SITTING);
 
 	public static final SexSlot FACE_SITTING_TWO = new SexSlot(
 			"Frontal face-sitting",
 			"face-sitting (2nd)",
-			"With trembling [npc.legs], [npc.name] [npc.verb(sink)] down onto [npc2.namePos] face, letting out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax.",
+            "With trembling [npc.legs], [npc.name] sink down onto [npc2.namePos] face, letting out [npc.a_moan+] as [npc.she] reach [npc.her] climax.",
 			false,
 			SexSlotTag.FACE_SITTING);
 
 	public static final SexSlot FACE_SITTING_THREE = new SexSlot(
 			"Frontal face-sitting",
 			"face-sitting (3rd)",
-			"With trembling [npc.legs], [npc.name] [npc.verb(sink)] down onto [npc2.namePos] face, letting out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax.",
+            "With trembling [npc.legs], [npc.name] sink down onto [npc2.namePos] face, letting out [npc.a_moan+] as [npc.she] reach [npc.her] climax.",
 			false,
 			SexSlotTag.FACE_SITTING);
 
 	public static final SexSlot FACE_SITTING_FOUR = new SexSlot(
 			"Frontal face-sitting",
 			"face-sitting (4th)",
-			"With trembling [npc.legs], [npc.name] [npc.verb(sink)] down onto [npc2.namePos] face, letting out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax.",
+            "With trembling [npc.legs], [npc.name] sink down onto [npc2.namePos] face, letting out [npc.a_moan+] as [npc.she] reach [npc.her] climax.",
 			false,
 			SexSlotTag.FACE_SITTING);
 
@@ -123,28 +123,28 @@ public class SexSlotLyingDown {
 	public static final SexSlot FACE_SITTING_REVERSE = new SexSlot(
 			"Reverse face-sitting",
 			"reverse face-sitting",
-			"With trembling [npc.legs], [npc.name] [npc.verb(sink)] down onto [npc2.namePos] face, letting out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax.",
+            "With trembling [npc.legs], [npc.name] sink down onto [npc2.namePos] face, letting out [npc.a_moan+] as [npc.she] reach [npc.her] climax.",
 			false,
 			SexSlotTag.FACE_SITTING_REVERSE);
 
 	public static final SexSlot FACE_SITTING_REVERSE_TWO = new SexSlot(
 			"Reverse face-sitting",
 			"reverse face-sitting (2nd)",
-			"With trembling [npc.legs], [npc.name] [npc.verb(sink)] down onto [npc2.namePos] face, letting out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax.",
+            "With trembling [npc.legs], [npc.name] sink down onto [npc2.namePos] face, letting out [npc.a_moan+] as [npc.she] reach [npc.her] climax.",
 			false,
 			SexSlotTag.FACE_SITTING_REVERSE);
 
 	public static final SexSlot FACE_SITTING_REVERSE_THREE = new SexSlot(
 			"Reverse face-sitting",
 			"reverse face-sitting (3rd)",
-			"With trembling [npc.legs], [npc.name] [npc.verb(sink)] down onto [npc2.namePos] face, letting out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax.",
+            "With trembling [npc.legs], [npc.name] sink down onto [npc2.namePos] face, letting out [npc.a_moan+] as [npc.she] reach [npc.her] climax.",
 			false,
 			SexSlotTag.FACE_SITTING_REVERSE);
 
 	public static final SexSlot FACE_SITTING_REVERSE_FOUR = new SexSlot(
 			"Reverse face-sitting",
 			"reverse face-sitting (4th)",
-			"With trembling [npc.legs], [npc.name] [npc.verb(sink)] down onto [npc2.namePos] face, letting out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax.",
+            "With trembling [npc.legs], [npc.name] sink down onto [npc2.namePos] face, letting out [npc.a_moan+] as [npc.she] reach [npc.her] climax.",
 			false,
 			SexSlotTag.FACE_SITTING_REVERSE);
 	
@@ -152,28 +152,28 @@ public class SexSlotLyingDown {
 	public static final SexSlot LAP_PILLOW = new SexSlot(
 			"Lap pillow",
 			"lap pillow",
-			"Looking down into [npc2.namePos] [npc2.eyes], [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax.",
+            "Looking down into [npc2.namePos] [npc2.eyes], [npc.name] let out [npc.a_moan+] as [npc.she] reach [npc.her] climax.",
 			false,
 			SexSlotTag.LAP_PILLOW);
 
 	public static final SexSlot LAP_PILLOW_TWO = new SexSlot(
 			"Lap pillow",
 			"lap pillow (2nd)",
-			"Looking down into [npc2.namePos] [npc2.eyes], [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax.",
+            "Looking down into [npc2.namePos] [npc2.eyes], [npc.name] let out [npc.a_moan+] as [npc.she] reach [npc.her] climax.",
 			false,
 			SexSlotTag.LAP_PILLOW);
 
 	public static final SexSlot LAP_PILLOW_THREE = new SexSlot(
 			"Lap pillow",
 			"lap pillow (3rd)",
-			"Looking down into [npc2.namePos] [npc2.eyes], [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax.",
+            "Looking down into [npc2.namePos] [npc2.eyes], [npc.name] let out [npc.a_moan+] as [npc.she] reach [npc.her] climax.",
 			false,
 			SexSlotTag.LAP_PILLOW);
 
 	public static final SexSlot LAP_PILLOW_FOUR = new SexSlot(
 			"Lap pillow",
 			"lap pillow (4th)",
-			"Looking down into [npc2.namePos] [npc2.eyes], [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax.",
+            "Looking down into [npc2.namePos] [npc2.eyes], [npc.name] let out [npc.a_moan+] as [npc.she] reach [npc.her] climax.",
 			false,
 			SexSlotTag.LAP_PILLOW);
 	
@@ -183,7 +183,7 @@ public class SexSlotLyingDown {
 	public static final SexSlot SIXTY_NINE = new SexSlot(
 			"Sixty-nine",
 			"sixty-nine",
-			"With trembling [npc.legs], [npc.name] [npc.verb(allow)] [npc.her] crotch to drop down onto [npc2.namePos] face, letting out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax.",
+            "With trembling [npc.legs], [npc.name] allow [npc.her] crotch to drop down onto [npc2.namePos] face, letting out [npc.a_moan+] as [npc.she] reach [npc.her] climax.",
 			false,
 			SexSlotTag.SIXTY_NINE);
 	public static final SexSlot SIXTY_NINE_TWO = new SexSlot(SIXTY_NINE) {
@@ -210,7 +210,7 @@ public class SexSlotLyingDown {
 	public static final SexSlot MISSIONARY = new SexSlot(
 			"Missionary",
 			"between legs",
-			"[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax, and, leaning down on top of [npc2.name], [npc.she] [npc.verb(gaze)] lustfully down into [npc2.her] [npc2.eyes+].",
+            "[npc.Name] let out [npc.a_moan+] as [npc.she] reach [npc.her] climax, and, leaning down on top of [npc2.name], [npc.she] gaze lustfully down into [npc2.her] [npc2.eyes+].",
 			false,
 			SexSlotTag.MISSIONARY);
 	public static final SexSlot MISSIONARY_TWO = new SexSlot(MISSIONARY) {
@@ -235,7 +235,7 @@ public class SexSlotLyingDown {
 	public static final SexSlot MISSIONARY_ORAL = new SexSlot(
 			"Missionary oral",
 			"face between legs",
-			"[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax, and, pressing [npc.her] [npc.face] into [npc2.namePos] groin, [npc.she] [npc.verb(prepare)] to reach [npc1.her] climax.",
+            "[npc.Name] let out [npc.a_moan+] as [npc.she] reach [npc.her] climax, and, pressing [npc.her] [npc.face] into [npc2.namePos] groin, [npc.she] prepare to reach [npc1.her] climax.",
 			false,
 			SexSlotTag.MISSIONARY_ORAL);
 	public static final SexSlot MISSIONARY_ORAL_TWO = new SexSlot(MISSIONARY_ORAL) {
@@ -322,7 +322,7 @@ public class SexSlotLyingDown {
 	public static final SexSlot BESIDE = new SexSlot(
 			"Beside",
 			"beside",
-			"With a buck of [npc.her] [npc.hips], [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(reach)] [npc.her] climax.",
+            "With a buck of [npc.her] [npc.hips], [npc.name] let out [npc.a_moan+] as [npc.she] reach [npc.her] climax.",
 			false,
 			SexSlotTag.LYING_DOWN);
 	public static final SexSlot BESIDE_TWO = new SexSlot(BESIDE) {

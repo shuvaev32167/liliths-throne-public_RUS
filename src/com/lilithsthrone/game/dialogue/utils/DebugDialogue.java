@@ -1,11 +1,5 @@
 package com.lilithsthrone.game.dialogue.utils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -14,11 +8,7 @@ import com.lilithsthrone.game.character.body.BodyPartInterface;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.types.BodyPartType;
-import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringModifier;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.AbstractPerk;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.fetishes.AbstractFetish;
@@ -51,11 +41,7 @@ import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
 import com.lilithsthrone.game.dialogue.responses.ResponseSex;
-import com.lilithsthrone.game.inventory.AbstractSetBonus;
-import com.lilithsthrone.game.inventory.InventorySlot;
-import com.lilithsthrone.game.inventory.ItemTag;
-import com.lilithsthrone.game.inventory.Rarity;
-import com.lilithsthrone.game.inventory.SetBonus;
+import com.lilithsthrone.game.inventory.*;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.AbstractItemType;
@@ -76,6 +62,12 @@ import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @since 0.1.0
@@ -1053,11 +1045,8 @@ public class DebugDialogue {
 			UtilText.nodeContentSB.setLength(0);
 			
 			for(NPC npc : Main.game.getOffspring()) {
-				boolean isBorn = true;
-				if(npc.getMother()!=null && npc.getMother().getPregnantLitter()!=null && npc.getMother().getPregnantLitter().getOffspring().contains(npc.getId())) {
-					isBorn = false;
-				}
-				UtilText.nodeContentSB.append((isBorn?"":"(Not born yet) ")+"<span style='color:"+npc.getFemininity().getColour().toWebHexString()+";'>"+npc.getName(true)+" "+npc.getSurname()+"</span>"
+				boolean isBorn = npc.getMother() == null || npc.getMother().getPregnantLitter() == null || !npc.getMother().getPregnantLitter().getOffspring().contains(npc.getId());
+                UtilText.nodeContentSB.append((isBorn?"":"(Not born yet) ")+"<span style='color:"+npc.getFemininity().getColour().toWebHexString()+";'>"+npc.getName(true)+" "+npc.getSurname()+"</span>"
 						+ " ("+npc.getSubspecies().getName(npc.getBody())+" | "+npc.getHalfDemonSubspecies().getName(npc.getBody())+")"
 						+ " ("+npc.getCovering(npc.getBody().getTorsoType().getBodyCoveringType(npc.getBody())).getPrimaryColour().getName()+")" // Primary covering colour
 						+ " M:"+(npc.getMother()!=null?npc.getMother().getName(true):"Deleted NPC")
@@ -1142,7 +1131,7 @@ public class DebugDialogue {
 		Collections.sort(itemsTotal, (i1, i2) -> i1.getRarity().compareTo(i2.getRarity()));
 		
 	}
-	private static StringBuilder inventorySB = new StringBuilder();
+	private static final StringBuilder inventorySB = new StringBuilder();
 	
 	public static final DialogueNode SPAWN_MENU = new DialogueNode("Spawn Menu", "Access the spawn menu.", false) {
 		@Override
@@ -1625,11 +1614,10 @@ public class DebugDialogue {
 		}
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append("<p>");
-				sb.append("Choose the attacker's race.");
-			sb.append("</p>");
-			return sb.toString();
+            String sb = "<p>" +
+                    "Choose the attacker's race." +
+                    "</p>";
+			return sb;
 		}
 		@Override
 		public String getResponseTabTitle(int index) {
@@ -1702,11 +1690,10 @@ public class DebugDialogue {
 	public static final DialogueNode ATTACKER_SPAWN = new DialogueNode("Spawn Attacker", "", false) {
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append("<p>");
-				sb.append("Choose the attacker's gender.");
-			sb.append("</p>");
-			return sb.toString();
+            String sb = "<p>" +
+                    "Choose the attacker's gender." +
+                    "</p>";
+			return sb;
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
@@ -2127,9 +2114,7 @@ public class DebugDialogue {
 					+"Command tags are <b>only case-sensitive for the first letter</b>. (i.e. command is treated the same as cOMMAND, cOmMaNd, or commanD)<br/>"
 					+ "Arguments are specific to each command, and you'll have to refer to the command documentation to find out what arguments a command takes. (Don't worry, there aren't many that take arguments.)<br/>"
 					+ "e.g.:<br/>"
-					+ "[pc.speech<i style='color:"+PresetColour.CLOTHING_YELLOW.toWebHexString()+";'>(Hello reader!)</i>] outputs "+UtilText.parsePlayerSpeech("Hello reader!")+""
-					+ ""
-					+ "</p>"
+					+ "[pc.speech<i style='color:"+PresetColour.CLOTHING_YELLOW.toWebHexString()+";'>(Hello reader!)</i>] outputs "+UtilText.parsePlayerSpeech("Hello reader!")+ "</p>"
 					
 					+"<p>"
 					+ "<b>Command modifier (a_ an_)</b><br/>"
@@ -2338,7 +2323,7 @@ public class DebugDialogue {
 						+ "</p>");
 			
 			int count=1;
-			for(ParserCommand command : UtilText.commandsList) {
+			for (ParserCommand command : UtilText.COMMANDS_LIST) {
 				UtilText.nodeContentSB.append("<hr/>"
 						+ "<p>"
 						+ "<b style='color:"+PresetColour.TEXT_GREY.toWebHexString()+";'>"+String.format("%03d.", count)+"</b> <i style='color:"+PresetColour.CLOTHING_PINK_LIGHT.toWebHexString()+";'>"+command.getTags().get(0)+"</i>");
@@ -2409,8 +2394,8 @@ public class DebugDialogue {
 			for(BodyPartType bpt : BodyPartType.values()) {
 				UtilText.nodeContentSB.append("<details>"
 						+ "<summary style='cursor:pointer;'><b style='color:"+PresetColour.TEXT_GREY.toWebHexString()+";'>("
-							+String.format("%03d", count)+" - "+String.format("%03d", count+UtilText.commandsMap.get(bpt).size()-1)+")</b> "+Util.capitaliseSentence(bpt.getName())+"</summary>");
-				for(ParserCommand command : UtilText.commandsMap.get(bpt)) {
+						+ String.format("%03d", count) + " - " + String.format("%03d", count + UtilText.COMMANDS_MAP.get(bpt).size() - 1) + ")</b> " + Util.capitaliseSentence(bpt.getName()) + "</summary>");
+				for (ParserCommand command : UtilText.COMMANDS_MAP.get(bpt)) {
 					UtilText.nodeContentSB.append("<p>"
 							+ "<hr/>"
 							+ "<b style='color:"+PresetColour.TEXT_GREY.toWebHexString()+";'>"+String.format("%03d.", count)+"</b> <i style='color:"+PresetColour.CLOTHING_PINK_LIGHT.toWebHexString()+";'>"+command.getTags().get(0)+"</i>");
@@ -2499,9 +2484,9 @@ public class DebugDialogue {
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
 				if(Main.sex.isDom(Main.game.getPlayer())) {
-					return new Response("Continue", "Now that you've put this bitch in [npc.her] place, you can continue with what you were doing...", Main.game.getDefaultDialogue(false));
+                    return new Response("Продолжить", "Now that you've put this bitch in [npc.her] place, you can continue with what you were doing...", Main.game.getDefaultDialogue(false));
 				} else {
-					return new Response("Continue", "Now that you've been put in your place like the bitch you are, you can continue with what you were doing...", Main.game.getDefaultDialogue(false));
+                    return new Response("Продолжить", "Now that you've been put in your place like the bitch you are, you can continue with what you were doing...", Main.game.getDefaultDialogue(false));
 				}
 			}
 			return null;
@@ -2582,14 +2567,14 @@ public class DebugDialogue {
 			if(index==1) {
 				NPC centaur = Main.game.getActiveNPC();
 				if(Main.sex.isDom(Main.game.getPlayer())) {
-					return new Response("Continue", UtilText.parse(centaur, "Now that you've put this [npc.race] in [npc.her] place, you can continue with what you were doing..."), Main.game.getDefaultDialogue(false)) {
+                    return new Response("Продолжить", UtilText.parse(centaur, "Now that you've put this [npc.race] in [npc.her] place, you can continue with what you were doing..."), Main.game.getDefaultDialogue(false)) {
 						@Override
 						public void effects() {
 							Main.game.banishNPC(centaur);
 						}
 					};
 				} else {
-					return new Response("Continue", UtilText.parse(centaur, "Now that you've been put in your place by this [npc.race], you can continue with what you were doing..."), Main.game.getDefaultDialogue(false)) {
+                    return new Response("Продолжить", UtilText.parse(centaur, "Now that you've been put in your place by this [npc.race], you can continue with what you were doing..."), Main.game.getDefaultDialogue(false)) {
 						@Override
 						public void effects() {
 							Main.game.banishNPC(centaur);

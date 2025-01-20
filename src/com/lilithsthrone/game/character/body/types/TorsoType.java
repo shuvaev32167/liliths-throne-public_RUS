@@ -1,20 +1,16 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTorsoType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
+
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.83
@@ -27,7 +23,7 @@ public class TorsoType {
 			Race.HUMAN,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-			"After just a few moments, the transformation comes to an end, and [npc.she] [npc.verb(let)] out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with human skin."
+            "After just a few moments, the transformation comes to an end, and [npc.she] let out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with human skin."
 				+ "<br/>[npc.Name] now [npc.has] [style.boldHuman(human)], [npc.skinFullDescription].",
 			"[npc.Her] torso has [npc.a_femininity(true)] appearance, and is [npc.materialCompositionDescriptor] [npc.skinFullDescription(true)].") {
 	};
@@ -36,7 +32,7 @@ public class TorsoType {
 			Race.DEMON,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-			"After just a few moments, the transformation comes to an end, and [npc.she] [npc.verb(let)] out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with"
+            "After just a few moments, the transformation comes to an end, and [npc.she] let out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with"
 					+ "#IF(npc.isShortStature())"
 						+ " impish"
 					+ "#ELSE"
@@ -58,7 +54,7 @@ public class TorsoType {
 			Race.ANGEL,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-			"After just a few moments, the transformation comes to an end, and [npc.she] [npc.verb(let)] out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with angelic skin."
+            "After just a few moments, the transformation comes to an end, and [npc.she] let out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with angelic skin."
 				+ " It's far smoother than regular human skin, and the colour tones all over [npc.her] body have become perfectly balanced in order to help show off [npc.her] figure."
 				+ "<br/>[npc.Name] now [npc.has] [style.boldAngel(angelic)], [npc.skinFullDescription].",
 			"[npc.Her] torso has [npc.a_femininity(true)] appearance, and is [npc.materialCompositionDescriptor] [npc.skinFullDescription(true)].") {
@@ -68,7 +64,7 @@ public class TorsoType {
 			Race.COW_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-			"After just a few moments, the transformation comes to an end, and [npc.she] [npc.verb(let)] out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with short, cow-like hair."
+            "After just a few moments, the transformation comes to an end, and [npc.she] let out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with short, cow-like hair."
 				+ " [npc.Her] new hair looks very sleek and helps to show off [npc.her] figure, although it's a little coarse to the touch."
 				+ "<br/>[npc.Name] now [npc.has] [style.boldCowMorph(bovine)], [npc.skinFullDescription].",
 			"[npc.Her] torso has [npc.a_femininity(true)] appearance, and is [npc.materialCompositionDescriptor] [npc.skinFullDescription(true)].") {
@@ -78,7 +74,7 @@ public class TorsoType {
 			Race.DOG_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-			"After just a few moments, the transformation comes to an end, and [npc.she] [npc.verb(let)] out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with dog-like fur."
+            "After just a few moments, the transformation comes to an end, and [npc.she] let out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with dog-like fur."
 				+ " [npc.Her] new fur follows the lines of [npc.her] figure and is quite smooth and pleasant to touch."
 				+ "<br/>[npc.Name] now [npc.has] [style.boldDogMorph(canine)], [npc.skinFullDescription].",
 			"[npc.Her] torso has [npc.a_femininity(true)] appearance, and is [npc.materialCompositionDescriptor] [npc.skinFullDescription(true)].") {
@@ -88,7 +84,7 @@ public class TorsoType {
 			Race.WOLF_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-			"After just a few moments, the transformation comes to an end, and [npc.she] [npc.verb(let)] out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with wolf-like fur."
+            "After just a few moments, the transformation comes to an end, and [npc.she] let out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with wolf-like fur."
 				+ " [npc.Her] new fur is a little shaggy around [npc.her] joints and is quite densely packed."
 				+ "<br/>[npc.Name] now [npc.has] [style.boldWolfMorph(lupine)], [npc.skinFullDescription].",
 			"[npc.Her] torso has [npc.a_femininity(true)] appearance, and is [npc.materialCompositionDescriptor] [npc.skinFullDescription(true)].") {
@@ -98,7 +94,7 @@ public class TorsoType {
 			Race.FOX_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-			"After just a few moments, the transformation comes to an end, and [npc.she] [npc.verb(let)] out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with fox-like fur."
+            "After just a few moments, the transformation comes to an end, and [npc.she] let out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with fox-like fur."
 				+ " [npc.Her] new fur is a little shaggy around [npc.her] joints and is quite densely packed."
 				+ "</br>[npc.Name] now [npc.has] [style.boldFoxMorph(vulpine)], [npc.skinFullDescription].",
 			"[npc.Her] torso has [npc.a_femininity(true)] appearance, and is [npc.materialCompositionDescriptor] [npc.skinFullDescription(true)].") {
@@ -108,7 +104,7 @@ public class TorsoType {
 			Race.CAT_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-			"After just a few moments, the transformation comes to an end, and [npc.she] [npc.verb(let)] out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with cat-like fur."
+            "After just a few moments, the transformation comes to an end, and [npc.she] let out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with cat-like fur."
 				+ " [npc.Her] new fur follows the lines of [npc.her] figure and is extremely smooth and soft."
 				+ "<br/>[npc.Name] now [npc.has] [style.boldCatMorph(feline)], [npc.skinFullDescription].",
 			"[npc.Her] torso has [npc.a_femininity(true)] appearance, and is [npc.materialCompositionDescriptor] [npc.skinFullDescription(true)].") {
@@ -118,7 +114,7 @@ public class TorsoType {
 			Race.SQUIRREL_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-			"After just a few moments, the transformation comes to an end, and [npc.she] [npc.verb(let)] out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with squirrel-like fur."
+            "After just a few moments, the transformation comes to an end, and [npc.she] let out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with squirrel-like fur."
 				+ " [npc.Her] new fur follows the lines of [npc.her] figure and is extremely smooth and soft."
 				+ "<br/>[npc.Name] now [npc.has] [style.boldSquirrelMorph(squirrel-like)], [npc.skinFullDescription].",
 			"[npc.Her] torso has [npc.a_femininity(true)] appearance, and is [npc.materialCompositionDescriptor] [npc.skinFullDescription(true)].") {
@@ -128,7 +124,7 @@ public class TorsoType {
 			Race.RAT_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-			"After just a few moments, the transformation comes to an end, and [npc.she] [npc.verb(let)] out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with rat-like fur."
+            "After just a few moments, the transformation comes to an end, and [npc.she] let out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with rat-like fur."
 				+ " [npc.Her] new fur follows the lines of [npc.her] figure and is a little coarse to the touch."
 				+ "<br/>[npc.Name] now [npc.has] [style.boldRatMorph(rat-like)], [npc.skinFullDescription].",
 			"[npc.Her] torso has [npc.a_femininity(true)] appearance, and is [npc.materialCompositionDescriptor] [npc.skinFullDescription(true)].") {
@@ -138,7 +134,7 @@ public class TorsoType {
 			Race.RABBIT_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-			"After just a few moments, the transformation comes to an end, and [npc.she] [npc.verb(let)] out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with rabbit-like fur."
+            "After just a few moments, the transformation comes to an end, and [npc.she] let out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with rabbit-like fur."
 				+ " [npc.Her] new fur follows the lines of [npc.her] figure and is extremely smooth and soft."
 				+ "<br/>[npc.Name] now [npc.has] [style.boldRabbitMorph(rabbit-like)], [npc.skinFullDescription].",
 			"[npc.Her] torso has [npc.a_femininity(true)] appearance, and is [npc.materialCompositionDescriptor] [npc.skinFullDescription(true)].") {
@@ -148,7 +144,7 @@ public class TorsoType {
 			Race.BAT_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-			"After just a few moments, the transformation comes to an end, and [npc.she] [npc.verb(let)] out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with bat-like fur."
+            "After just a few moments, the transformation comes to an end, and [npc.she] let out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with bat-like fur."
 				+ " [npc.Her] new fur follows the lines of [npc.her] figure and is quite smooth and pleasant to touch."
 				+ "<br/>[npc.Name] now [npc.has] [style.boldBatMorph(bat-like)], [npc.skinFullDescription].",
 			"[npc.Her] torso has [npc.a_femininity(true)] appearance, and is [npc.materialCompositionDescriptor] [npc.skinFullDescription(true)].") {
@@ -158,7 +154,7 @@ public class TorsoType {
 			Race.ALLIGATOR_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-			"After just a few moments, the transformation comes to an end, and [npc.she] [npc.verb(let)] out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with tough, overlapping scales."
+            "After just a few moments, the transformation comes to an end, and [npc.she] let out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with tough, overlapping scales."
 				+ " [npc.Her] new scales follow the lines of [npc.her] figure, and, while being quite hard to the touch, are also very smooth when rubbed in the right direction."
 				+ "<br/>[npc.Name] now [npc.has] [style.boldGatorMorph(reptile)], [npc.skinFullDescription].",
 			"[npc.Her] torso has [npc.a_femininity(true)] appearance, and is [npc.materialCompositionDescriptor] [npc.skinFullDescription(true)].") {
@@ -172,7 +168,7 @@ public class TorsoType {
 			Race.HORSE_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-			"After just a few moments, the transformation comes to an end, and [npc.she] [npc.verb(let)] out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with short, horse-like hair."
+            "After just a few moments, the transformation comes to an end, and [npc.she] let out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with short, horse-like hair."
 				+ " [npc.Her] new hair looks very sleek, and helps to show off [npc.her] figure, although it's a little coarse to the touch."
 				+ "<br/>[npc.Name] now [npc.has] [style.boldHorseMorph(equine)], [npc.skinFullDescription].",
 			"[npc.Her] torso has [npc.a_femininity(true)] appearance, and is [npc.materialCompositionDescriptor] [npc.skinFullDescription(true)].") {
@@ -182,7 +178,7 @@ public class TorsoType {
 			Race.REINDEER_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-			"After just a few moments, the transformation comes to an end, and [npc.she] [npc.verb(let)] out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with short, reindeer-like hair."
+            "After just a few moments, the transformation comes to an end, and [npc.she] let out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with short, reindeer-like hair."
 				+ " [npc.Her] new fur looks very sleek, and helps to show off [npc.her] figure, although it's a little coarse to the touch."
 				+ "<br/>[npc.Name] now [npc.has] [style.boldReindeerMorph(reindeer)], [npc.skinFullDescription].",
 			"[npc.Her] torso has [npc.a_femininity(true)] appearance, and is [npc.materialCompositionDescriptor] [npc.skinFullDescription(true)].") {
@@ -192,7 +188,7 @@ public class TorsoType {
 			Race.HARPY,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-			"After just a few moments, the transformation comes to an end, and [npc.she] [npc.verb(let)] out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with beautiful, overlapping feathers."
+            "After just a few moments, the transformation comes to an end, and [npc.she] let out a deep sigh as the itching finally stops, leaving [npc.her] torso covered with beautiful, overlapping feathers."
 				+ " [npc.Her] new feathers follow the lines of [npc.her] figure, and are extremely smooth and soft to the touch."
 				+ "<br/>[npc.Name] now [npc.has] [style.boldHarpy(avian)], [npc.skinFullDescription].",
 			"[npc.Her] torso has [npc.a_femininity(true)] appearance, and is [npc.materialCompositionDescriptor] [npc.skinFullDescription(true)].") {
@@ -203,9 +199,9 @@ public class TorsoType {
 	};
 	
 	
-	private static List<AbstractTorsoType> allTorsoTypes;
-	private static Map<AbstractTorsoType, String> torsoToIdMap = new HashMap<>();
-	private static Map<String, AbstractTorsoType> idToTorsoMap = new HashMap<>();
+	private static final List<AbstractTorsoType> allTorsoTypes;
+	private static final Map<AbstractTorsoType, String> torsoToIdMap = new HashMap<>();
+	private static final Map<String, AbstractTorsoType> idToTorsoMap = new HashMap<>();
 	
 	static {
 		allTorsoTypes = new ArrayList<>();
@@ -305,7 +301,7 @@ public class TorsoType {
 		return allTorsoTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractTorsoType>> typesMap = new HashMap<>();
+	private static final Map<AbstractRace, List<AbstractTorsoType>> typesMap = new HashMap<>();
 	
 	public static List<AbstractTorsoType> getTorsoTypes(AbstractRace r) {
 		if(typesMap.containsKey(r)) {

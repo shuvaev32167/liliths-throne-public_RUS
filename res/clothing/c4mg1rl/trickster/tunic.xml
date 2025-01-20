@@ -82,47 +82,47 @@
 	
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unties)] the sash, before [npc.verb(pull)] [npc.her] tunic off over [npc.her] head.]]>
+            <![CDATA[[npc.Name] unties the sash, before pull [npc.her] tunic off over [npc.her] head.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unties)] the sash, before [npc.verb(pull)] [npc2.namePos] tunic off over [npc2.her] head.]]>
+            <![CDATA[[npc.Name] unties the sash, before pull [npc2.namePos] tunic off over [npc2.her] head.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(unties)] the sash, before roughly [npc.verb(pull)] [npc2.namePos] tunic off over [npc2.her] head.]]>
+            <![CDATA[[npc.Name] unties the sash, before roughly pull [npc2.namePos] tunic off over [npc2.her] head.]]>
 		</otherRough>
 	</displacementText>
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pulls)] the tunic down over [npc.her] head and torso, then [npc.verb(tie)] the sash tightly.]]>
+            <![CDATA[[npc.Name] pulls the tunic down over [npc.her] head and torso, then tie the sash tightly.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pulls)] the tunic down over [npc2.namePos] head and torso, then [npc.verb(ties)] the sash tightly.]]>
+            <![CDATA[[npc.Name] pulls the tunic down over [npc2.namePos] head and torso, then ties the sash tightly.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(pulls)] the tunic down over [npc2.namePos] head and torso, then [npc.verb(ties)] the sash tightly.]]>
+            <![CDATA[[npc.Name] roughly pulls the tunic down over [npc2.namePos] head and torso, then ties the sash tightly.]]>
 		</otherRough>
 	</replacementText>
 
 	
 	<displacementText type="PULLS_UP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] up the skirt of [npc.her] tunic.]]>
+            <![CDATA[[npc.Name] pull up the skirt of [npc.her] tunic.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] up the skirt of [npc2.namePos] tunic.]]>
+            <![CDATA[[npc.Name] pull up the skirt of [npc2.namePos] tunic.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(pull)] up the skirt of [npc2.namePos] tunic.]]>
+            <![CDATA[[npc.Name] roughly pull up the skirt of [npc2.namePos] tunic.]]>
 		</otherRough>
 	</displacementText><replacementText type="PULLS_UP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] down the skirt of [npc.her] tunic.]]>
+            <![CDATA[[npc.Name] pull down the skirt of [npc.her] tunic.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] down the skirt of [npc2.namePos] tunic.]]>
+            <![CDATA[[npc.Name] pull down the skirt of [npc2.namePos] tunic.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(pull)] down the skirt of [npc2.namePos] tunic.]]>
+            <![CDATA[[npc.Name] roughly pull down the skirt of [npc2.namePos] tunic.]]>
 		</otherRough>
 	</replacementText>
 </clothing>

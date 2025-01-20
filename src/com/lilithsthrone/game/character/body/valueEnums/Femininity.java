@@ -1,11 +1,11 @@
 package com.lilithsthrone.game.character.body.valueEnums;
 
-import java.util.List;
-
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import java.util.List;
 
 /**
  * @since 0.1.0
@@ -13,24 +13,24 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @author Innoxia
  */
 public enum Femininity {
-	
-	MASCULINE_STRONG(Util.newArrayListOfValues("очень мужественн(ый,ая)", "мужчина"), 0, 19, PresetColour.MASCULINE_PLUS, PresetColour.MASCULINE_PLUS_NPC),
-	
-	MASCULINE(Util.newArrayListOfValues("мужественный", "мальчик"), 20, 39, PresetColour.MASCULINE, PresetColour.MASCULINE_NPC),
-	
-	ANDROGYNOUS(Util.newArrayListOfValues("неопределенно"), 40, 59, PresetColour.ANDROGYNOUS, PresetColour.ANDROGYNOUS_NPC),
-	
-	FEMININE(Util.newArrayListOfValues("женственная", "девочка"), 60, 79, PresetColour.FEMININE, PresetColour.FEMININE_NPC),
-	
-	FEMININE_STRONG(Util.newArrayListOfValues("очень женственн(ая,ый)", "женщина"), 80, 100, PresetColour.FEMININE_PLUS, PresetColour.FEMININE_PLUS_NPC);
 
-	private List<String> names;
-	private int minimumFemininity;
-	private int maximumFemininity;
-	private Colour colour;
-	private Colour speechColour;
+    MASCULINE_STRONG(Util.newArrayListOfValues("очень мужественный"), 0, 19, PresetColour.MASCULINE_PLUS, PresetColour.MASCULINE_PLUS_NPC),
 
-	private Femininity(List<String> names, int minimumFemininity, int maximumFemininity, Colour colour, Colour speechColour) {
+    MASCULINE(Util.newArrayListOfValues("мужественный"), 20, 39, PresetColour.MASCULINE, PresetColour.MASCULINE_NPC),
+
+	ANDROGYNOUS(Util.newArrayListOfValues("неопределённый"), 40, 59, PresetColour.ANDROGYNOUS, PresetColour.ANDROGYNOUS_NPC),
+
+    FEMININE(Util.newArrayListOfValues("женственная"), 60, 79, PresetColour.FEMININE, PresetColour.FEMININE_NPC),
+
+    FEMININE_STRONG(Util.newArrayListOfValues("очень женственная"), 80, 100, PresetColour.FEMININE_PLUS, PresetColour.FEMININE_PLUS_NPC);
+
+	private final List<String> names;
+	private final int minimumFemininity;
+	private final int maximumFemininity;
+	private final Colour colour;
+	private final Colour speechColour;
+
+	Femininity(List<String> names, int minimumFemininity, int maximumFemininity, Colour colour, Colour speechColour) {
 		this.names = names;
 		this.minimumFemininity = minimumFemininity;
 		this.maximumFemininity = maximumFemininity;

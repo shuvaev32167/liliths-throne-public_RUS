@@ -25,11 +25,7 @@ public class Hair implements BodyPartInterface {
 		this.type = type;
 		this.length = length;
 		this.style = style;
-		
-		neckFluff = false;
-		if((!type.isNeckFluffRequiresGreater() || ownerRaceStage!=RaceStage.GREATER) && Math.random()<type.getNeckFluffChance()) {
-			neckFluff = true;
-		}
+        neckFluff = (!type.isNeckFluffRequiresGreater() || ownerRaceStage != RaceStage.GREATER) && Math.random() < type.getNeckFluffChance();
 	}
 
 	public Hair(Hair hairToCopy) {
@@ -84,7 +80,7 @@ public class Hair implements BodyPartInterface {
 		StringBuilder sb = new StringBuilder();
 		sb.append(
 				"<p>"
-					+ "[npc.NamePos] scalp tingles and itches, and [npc.she] [npc.verb(rub)] the top of [npc.her] head as [npc.she] [npc.verb(feel)] [npc.her] [npc.hair(true)] start to transform. ");
+                        + "[npc.NamePos] scalp tingles and itches, and [npc.she] rub the top of [npc.her] head as [npc.she] feel [npc.her] [npc.hair(true)] start to transform. ");
 
 		// Parse existing content before transformation:
 		String s = UtilText.parse(owner, sb.toString());
@@ -141,7 +137,7 @@ public class Hair implements BodyPartInterface {
 			}
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out an involuntary cry and [npc.verb(rub)] at [npc.her] scalp as [npc.she] [npc.verb(feel)] [npc.her] [npc.hair(true)] [style.boldShrink(getting shorter)].<br/>"
+                            + "[npc.Name] let out an involuntary cry and rub at [npc.her] scalp as [npc.she] feel [npc.her] [npc.hair(true)] [style.boldShrink(getting shorter)].<br/>"
 						+ "[npc.She] now [npc.has] [style.boldTfGeneric(" + hairChangedText + ")]!"
 					+ "</p>"
 					+ styleChange);
@@ -149,7 +145,7 @@ public class Hair implements BodyPartInterface {
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out an involuntary cry and [npc.verb(rub)] at [npc.her] scalp as [npc.she] [npc.verb(feel)] [npc.her] [npc.hair(true)] [style.boldGrow(growing longer)].<br/>"
+                            + "[npc.Name] let out an involuntary cry and rub at [npc.her] scalp as [npc.she] feel [npc.her] [npc.hair(true)] [style.boldGrow(growing longer)].<br/>"
 						+ "[npc.She] now [npc.has] [style.boldTfGeneric([npc.hairLength], "+ Units.size(this.length, Units.UnitType.LONG_SINGULAR) +" [npc.hair(true)])]!"
 					+ "</p>"
 					+ styleChange);
@@ -268,7 +264,7 @@ public class Hair implements BodyPartInterface {
 			if(this.neckFluff) {
 				return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already [npc.has] neck [npc.hair(true)], so nothing happens...)]</p>");
 			} else {
-				return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already [npc.verb(lack)] neck [npc.hair(true)], so nothing happens...)]</p>");
+                return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already lack neck [npc.hair(true)], so nothing happens...)]</p>");
 			}
 		}
 		this.neckFluff = neckFluff;
@@ -279,13 +275,13 @@ public class Hair implements BodyPartInterface {
 		if (neckFluff) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out a gasp as [npc.she] [npc.verb(feel)] a significant amount of [npc.hair(true)] [style.boldGrow(growing out around [npc.her] neck and upper chest)]!"
+                            + "[npc.Name] let out a gasp as [npc.she] feel a significant amount of [npc.hair(true)] [style.boldGrow(growing out around [npc.her] neck and upper chest)]!"
 					+ "</p>");
 			
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out a gasp as [npc.she] [npc.verb(feel)] [npc.her] neck [npc.hair(true)] [style.boldShrink(shrink away and disappear)]."
+                            + "[npc.Name] let out a gasp as [npc.she] feel [npc.her] neck [npc.hair(true)] [style.boldShrink(shrink away and disappear)]."
 					+ "</p>");
 		}
 	}

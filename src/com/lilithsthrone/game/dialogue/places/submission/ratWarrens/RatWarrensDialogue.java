@@ -1,12 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.submission.ratWarrens;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -18,14 +11,7 @@ import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.NPC;
-import com.lilithsthrone.game.character.npc.submission.Axel;
-import com.lilithsthrone.game.character.npc.submission.Claire;
-import com.lilithsthrone.game.character.npc.submission.Murk;
-import com.lilithsthrone.game.character.npc.submission.RatGangMember;
-import com.lilithsthrone.game.character.npc.submission.RatWarrensCaptive;
-import com.lilithsthrone.game.character.npc.submission.Shadow;
-import com.lilithsthrone.game.character.npc.submission.Silence;
-import com.lilithsthrone.game.character.npc.submission.Vengar;
+import com.lilithsthrone.game.character.npc.submission.*;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.character.race.Race;
@@ -39,11 +25,7 @@ import com.lilithsthrone.game.dialogue.places.submission.dicePoker.Dice;
 import com.lilithsthrone.game.dialogue.places.submission.dicePoker.DiceFace;
 import com.lilithsthrone.game.dialogue.places.submission.dicePoker.DicePoker;
 import com.lilithsthrone.game.dialogue.places.submission.dicePoker.DicePokerTable;
-import com.lilithsthrone.game.dialogue.responses.Response;
-import com.lilithsthrone.game.dialogue.responses.ResponseCombat;
-import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
-import com.lilithsthrone.game.dialogue.responses.ResponseSex;
-import com.lilithsthrone.game.dialogue.responses.ResponseTag;
+import com.lilithsthrone.game.dialogue.responses.*;
 import com.lilithsthrone.game.dialogue.utils.InventoryInteraction;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.CharacterInventory;
@@ -51,16 +33,7 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.item.ItemType;
-import com.lilithsthrone.game.sex.GenericSexFlag;
-import com.lilithsthrone.game.sex.InitialSexActionInformation;
-import com.lilithsthrone.game.sex.LubricationType;
-import com.lilithsthrone.game.sex.SexAreaInterface;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexControl;
-import com.lilithsthrone.game.sex.SexPace;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.managers.SexManagerInterface;
 import com.lilithsthrone.game.sex.managers.dominion.SMMilkingStall;
@@ -68,16 +41,8 @@ import com.lilithsthrone.game.sex.managers.submission.SMVengarDominantSex;
 import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
 import com.lilithsthrone.game.sex.managers.universal.SMStanding;
 import com.lilithsthrone.game.sex.positions.SexPosition;
-import com.lilithsthrone.game.sex.positions.slots.SexSlot;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotMilkingStall;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotTag;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
+import com.lilithsthrone.game.sex.positions.slots.*;
+import com.lilithsthrone.game.sex.sexActions.baseActions.*;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
@@ -85,6 +50,8 @@ import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.*;
 
 /**
  * @since 0.3.5.5
@@ -399,8 +366,113 @@ public class RatWarrensDialogue {
 	private static String getCooperationWarning() {
 		return "<br/>[style.italicsSideQuest(You will be locked into the non-violent quest route if you select this option.)]";
 	}
-	
-	public static final DialogueNode RAT_WARREN_INITIAL_ENTRY = new DialogueNode("Entrance", "", true) {
+
+    public static final DialogueNode MILKING_STORAGE = new DialogueNode("Вход", "", true) {
+		@Override
+		public void applyPreParsingEffects() {
+			if(!Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR)
+					&& Main.game.getWorlds().get(WorldType.RAT_WARRENS).getCell(PlaceType.RAT_WARRENS_MILKING_ROOM).isTravelledTo()) {
+				Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
+			}
+		}
+		@Override
+		public boolean isTravelDisabled() {
+			return !Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR)
+					&& !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft);
+		}
+		@Override
+		public int getSecondsPassed() {
+			if(Main.game.getPlayer().isCaptive()) {
+				return 0; // So that the player can't advance days by repeatedly moving back and forth.
+			}
+			return 2*60;
+		}
+		@Override
+		public String getContent() {
+			if(Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR)) {
+				return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_STORAGE_QUEST_COMPLETE");
+			}
+			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft)) {
+				return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_STORAGE_CLEARED", getGuards(true));
+			}
+			if(Main.game.getPlayer().isCaptive()) {
+				return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_STORAGE_CAPTIVE", getGuards(true));
+			}
+			return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_STORAGE", getGuards(true));
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR)) {
+				return null;
+			}
+			if(Main.game.getPlayer().isCaptive()) {
+				if(index==1) {
+					return new Response("Step back", "You can't get very far with the chain restricting your movements...", RatWarrensCaptiveDialogue.CAPTIVE_NIGHT) {
+						@Override
+						public int getSecondsPassed() {
+							return 0; // So that the player can't advance days by repeatedly moving back and forth.
+						}
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensCaptiveInitialNightDescription, false);
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.murkIntroduced, true);
+							Main.game.getPlayer().setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_MILKING_ROOM, false);
+						}
+					};
+				}
+
+			} else if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft)) {
+				if(index==1) {
+					return new Response("Step back", "Do as Murk says and leave.", CORRIDOR) {
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.murkIntroduced, true);
+							Main.game.getPlayer().setNearestLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_CORRIDOR_LEFT, false);
+						}
+					};
+
+				} else if(index==2) {
+					if(Main.game.getHourOfDay()<14 || Main.game.getHourOfDay()>=22) {
+						return new Response("Milkers ("+UtilText.formatAsMoneyUncoloured(500, "span")+")",
+                                "Murk only rents out his milkers between [style.time(14)] и [style.time(22)], so if you wanted to pay them a visit, you'll have to come back between those times.",
+								null);
+					}
+					return new Response("Milkers ("+UtilText.formatAsMoney(500, "span")+")", "Pay Murk 500 flames to gain access to his 'milkers'.", MILKING_ROOM) {
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.murkIntroduced, true);
+							Main.game.getPlayer().setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_MILKING_ROOM);
+							Main.game.getNpc(Murk.class).setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_MILKING_ROOM);
+							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().incrementMoney(-500));
+							Main.game.getNpc(Murk.class).incrementMoney(500);
+							for(GameCharacter milker : getMilkers()) {
+								((RatWarrensCaptive)milker).applyMilkingEquipment(false, Util.newArrayListOfValues(InventorySlot.VAGINA));
+							}
+						}
+					};
+
+				} else if(index==6
+						&& !Main.game.getPlayer().hasQuestInLine(QuestLine.SIDE_VENGAR, Quest.VENGAR_TWO_COOPERATION)) {
+					return new Response("Challenge", "Tell Murk that you're here to fight.<br/>[style.italicsBad(This will undoubtedly result in a significant amount of gang members arriving as backup!)]", ENTRANCE_FIGHT) {
+						@Override
+						public void effects() {
+							Main.game.getPlayer().setNearestLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_CORRIDOR_LEFT, false);
+							Main.game.getNpc(Murk.class).setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_VENGARS_HALL);
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.murkIntroduced, true);
+							spawnGuards(true, 4);
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensHostile, true);
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_STORAGE_CHALLENGE", getGuards(true)));
+						}
+						@Override
+						public boolean isCombatHighlight() {
+							return true;
+						}
+					};
+				}
+			}
+			return null;
+		}
+	};    public static final DialogueNode RAT_WARREN_INITIAL_ENTRY = new DialogueNode("Вход", "", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 5*60;
@@ -466,8 +538,8 @@ public class RatWarrensDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode RAT_WARREN_INITIAL_ENTRY_WHORE = new DialogueNode("Entrance", "", true) {
+
+    public static final DialogueNode RAT_WARREN_INITIAL_ENTRY_WHORE = new DialogueNode("Вход", "", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 2*60;
@@ -638,7 +710,255 @@ public class RatWarrensDialogue {
 		}
 	};
 	
-	public static final DialogueNode GUARD_COMBAT_VICTORY = new DialogueNode("Victory", "", true) {
+	public static final DialogueNode VENGARS_HALL_APPROACH_PERSUADE_KNEEL_SUBMIT = new DialogueNode("", "", true) {
+		@Override
+		public int getSecondsPassed() {
+			return 5*60;
+		}
+		@Override
+		public String getContent() {
+			StringBuilder sb = new StringBuilder();
+			sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_APPROACH_PERSUADE_KNEEL_SUBMIT_START", getGuards(true)));
+
+			if(isAssAccess(Main.game.getPlayer()) || isVaginaAccess(Main.game.getPlayer())) {
+				if(isCompanionDialogue()) {
+					if(Main.game.isVoluntaryNTREnabled() && (isAssAccess(getMainCompanion()) || isVaginaAccess(getMainCompanion()))) {
+						sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_SEX_BOTH", getGuards(true)));
+
+					} else {
+						sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_SEX_COMPANION_WATCHING", getGuards(true)));
+					}
+
+				} else {
+					sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_SEX_SOLO", getGuards(true)));
+				}
+
+			} else {
+				if(isCompanionDialogue()) {
+					if(isAssAccess(getMainCompanion()) || isVaginaAccess(getMainCompanion())) {
+						if(Main.game.isVoluntaryNTREnabled()) {
+							sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_SEX_PLAYER_WATCHING", getGuards(true)));
+						} else {
+							sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_NO_SEX", getGuards(true)));
+						}
+
+					} else {
+						sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_NO_SEX", getGuards(true)));
+					}
+
+				} else {
+					sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_NO_SEX", getGuards(true)));
+				}
+			}
+
+			return sb.toString();
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(!isAssAccess(Main.game.getPlayer()) && !isVaginaAccess(Main.game.getPlayer())) {
+				if(isCompanionDialogue()) {
+					if(!isAssAccess(getMainCompanion()) && !isVaginaAccess(getMainCompanion())) {
+						if(index==1) {
+                            return new Response("Продолжить", "As Vengar is unable to fuck either of you, he's content to simply inform you what he wants you to do for him.", VENGARS_HALL_APPROACH_PERSUADE_FINISH) {
+								@Override
+								public void effects() {
+									Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_NO_SEX_FINISH", getGuards(true)));
+									Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_QUITTING_TALK", getGuards(true)));
+								}
+							};
+						}
+						return null;
+
+					} else {
+						if(!Main.game.isVoluntaryNTREnabled()) {
+							if(index==1) {
+                                return new Response("Продолжить", "As Vengar is unable to fuck you, he's content to simply inform you what he wants you to do for him.", VENGARS_HALL_APPROACH_PERSUADE_FINISH) {
+									@Override
+									public void effects() {
+										Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_NO_SEX_FINISH", getGuards(true)));
+										Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_QUITTING_TALK", getGuards(true)));
+									}
+								};
+							}
+							return null;
+
+						} else {
+							if(index==1) {
+								return new Response("Stand up",
+										UtilText.parse(getMainCompanion(), "Refuse to allow Vengar to fuck [npc.name] in front of everyone, and tell him that you've already done as he asked."),
+										VENGARS_HALL_APPROACH_PERSUADE_FINISH) {
+									@Override
+									public void effects() {
+										Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_SEX_REFUSE_WATCH", getGuards(true)));
+										Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_NO_SEX_FINISH", getGuards(true)));
+										Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_QUITTING_TALK", getGuards(true)));
+									}
+								};
+
+							} else if(index==2) {
+								if(!getMainCompanion().isAttractedTo(Main.game.getNpc(Vengar.class)) && getMainCompanion().isAbleToRefuseSexAsCompanion()) {
+									return new Response("Agree",
+											UtilText.parse(getMainCompanion(), "You can tell that [npc.name] isn't at all interested in having sex with Vengar, and you can't force [npc.herHim] to do so..."),
+											null);
+								}
+								return new ResponseSex(
+										"Agree",
+										UtilText.parse(getMainCompanion(), "Let Vengar fuck [npc.name] while you and everyone else in the hall watches."),
+										true,
+										false,
+										new SMVengarDominantSex(
+												SexPosition.ALL_FOURS,
+												Util.newHashMapOfValues(
+														new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
+												Util.newHashMapOfValues(
+														new Value<>(getMainCompanion(), SexSlotAllFours.ALL_FOURS))),
+										Util.newArrayListOfValues(
+												Main.game.getNpc(Shadow.class),
+												Main.game.getNpc(Silence.class)),
+										Util.newArrayListOfValues(
+												Main.game.getPlayer()),
+										VENGARS_HALL_APPROACH_PERSUADE_AFTER_SEX,
+										UtilText.parseFromXMLFile("places/submission/ratWarrens/core", isVaginaAccess(getMainCompanion())?"VENGARS_HALL_SUB_SEX_WATCH":"VENGARS_HALL_SUB_SEX_WATCH_ANAL", getGuards(true))) {
+									@Override
+									public List<InitialSexActionInformation> getInitialSexActions() {
+										if(isVaginaAccess(getMainCompanion())) {
+											return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), getMainCompanion(), PenisVagina.PENIS_FUCKING_START, false, true));
+
+										} else if(isAssAccess(getMainCompanion())) {
+											return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), getMainCompanion(), PenisAnus.PENIS_FUCKING_START, false, true));
+										}
+										return super.getInitialSexActions();
+									}
+								};
+							}
+						}
+						return null;
+					}
+
+				} else {
+					if(index==1) {
+                        return new Response("Продолжить", "As Vengar is unable to fuck you, he's content to simply inform you what he wants you to do for him.", VENGARS_HALL_APPROACH_PERSUADE_FINISH) {
+							@Override
+							public void effects() {
+								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_NO_SEX_FINISH"));
+								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_QUITTING_TALK"));
+							}
+						};
+					}
+					return null;
+				}
+			}
+
+			if(index==1) {
+				return new Response("Stand up",
+						isCompanionDialogue()
+							?UtilText.parse(getMainCompanion(), "Refuse to allow Vengar to fuck you or [npc.name] in front of everyone, and tell him that you've already done enough.")
+							:"Refuse to allow Vengar to fuck you in front of everyone, and tell him that you've already done as he asked.",
+						VENGARS_HALL_APPROACH_PERSUADE_FINISH) {
+					@Override
+					public void effects() {
+						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_SEX_REFUSED", getGuards(true)));
+						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_QUITTING_TALK", getGuards(true)));
+					}
+				};
+
+			} else if(index==2) {
+				return new ResponseSex(
+						isCompanionDialogue()
+							?"Present yourself (solo)"
+							:"Present yourself",
+						isCompanionDialogue()
+							?UtilText.parse(getMainCompanion(), "Tell [npc.name] to stand back, before shuffling around and raising your ass towards Vengar, presenting yourself to be fucked by him in front of everyone in the hall.")
+							:"Shuffle around and raise your ass towards Vengar, presenting yourself to be fucked by him in front of everyone in the hall.",
+						true,
+						false,
+						new SMVengarDominantSex(
+								SexPosition.ALL_FOURS,
+								Util.newHashMapOfValues(
+										new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
+								Util.newHashMapOfValues(
+										new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
+						Util.newArrayListOfValues(
+								Main.game.getNpc(Shadow.class),
+								Main.game.getNpc(Silence.class)),
+						Util.newArrayListOfValues(
+								getMainCompanion()),
+						VENGARS_HALL_APPROACH_PERSUADE_AFTER_SEX,
+						UtilText.parseFromXMLFile("places/submission/ratWarrens/core", isVaginaAccess(Main.game.getPlayer())?"VENGARS_HALL_SUB_SEX_SOLO_START":"VENGARS_HALL_SUB_SEX_SOLO_START_ANAL", getGuards(true))) {
+					@Override
+					public List<InitialSexActionInformation> getInitialSexActions() {
+						if(isVaginaAccess(Main.game.getPlayer())) {
+							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
+
+						} else if(isAssAccess(Main.game.getPlayer())) {
+							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
+						}
+						return super.getInitialSexActions();
+					}
+				};
+
+			} else if (index == 3 && isCompanionDialogue()) {
+				GameCharacter companion = getMainCompanion();
+
+				if(!getMainCompanion().isAttractedTo(Main.game.getNpc(Vengar.class)) && getMainCompanion().isAbleToRefuseSexAsCompanion()) {
+					return new Response(UtilText.parse(companion, "Present yourselves"),
+							UtilText.parse(getMainCompanion(), "You can tell that [npc.name] isn't at all interested in having sex with Vengar, and you can't force [npc.herHim] to do so..."),
+							null);
+
+				} else {
+					return new Response(
+							UtilText.parse(companion, "Present yourselves"),
+							UtilText.parse(getMainCompanion(), "Tell [npc.name] to join you in shuffling around and raising your asses towards Vengar, presenting yourselves to be fucked by him in front of everyone in the hall."),
+							VENGARS_HALL_APPROACH_PERSUADE_SEX_DOUBLE_CHOICE) {
+						@Override
+						public boolean isSexHighlight() {
+							return true;
+						}
+					};
+				}
+
+			} else if (index == 4 && isCompanionDialogue() && Main.game.isVoluntaryNTREnabled()) {
+				GameCharacter companion = getMainCompanion();
+
+				if(!companion.isAttractedTo(Main.game.getNpc(Vengar.class)) && companion.isAbleToRefuseSexAsCompanion()) {
+					return new Response(UtilText.parse(companion, "Offer [npc.name]"),
+							UtilText.parse(companion, "You can tell that [npc.name] isn't at all interested in having sex with Vengar, and you can't force [npc.herHim] to do so..."),
+							null);
+
+				} else {
+					return new ResponseSex(UtilText.parse(companion, "Offer [npc.name]"),
+							UtilText.parse(getMainCompanion(), "Tell Vengar that while you're not keen on the idea yourself, you'd be happy to let him fuck [npc.name] in front of everyone..."),
+							true,
+							false,
+							new SMVengarDominantSex(
+									SexPosition.ALL_FOURS,
+									Util.newHashMapOfValues(
+											new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
+									Util.newHashMapOfValues(
+											new Value<>(getMainCompanion(), SexSlotAllFours.ALL_FOURS))),
+							Util.newArrayListOfValues(
+									Main.game.getNpc(Shadow.class),
+									Main.game.getNpc(Silence.class)),
+							Util.newArrayListOfValues(
+									Main.game.getPlayer()),
+							VENGARS_HALL_APPROACH_PERSUADE_AFTER_SEX,
+							UtilText.parseFromXMLFile("places/submission/ratWarrens/core", isVaginaAccess(getMainCompanion())?"VENGARS_HALL_SUB_SEX_WATCH":"VENGARS_HALL_SUB_SEX_WATCH_ANAL", getGuards(true))) {
+						@Override
+						public List<InitialSexActionInformation> getInitialSexActions() {
+							if(isVaginaAccess(getMainCompanion())) {
+								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), getMainCompanion(), PenisVagina.PENIS_FUCKING_START, false, true));
+
+							} else if(isAssAccess(getMainCompanion())) {
+								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), getMainCompanion(), PenisAnus.PENIS_FUCKING_START, false, true));
+							}
+							return super.getInitialSexActions();
+						}
+					};
+				}
+			}
+			return null;
+		}
+	};	public static final DialogueNode GUARD_COMBAT_VICTORY = new DialogueNode("Victory", "", true) {
 		@Override
 		public void applyPreParsingEffects() {
 //			if(Main.game.getPlayerCell().getPlace().getPlaceType()==PlaceType.RAT_WARRENS_CHECKPOINT_LEFT
@@ -680,7 +1000,7 @@ public class RatWarrensDialogue {
 		public Response getResponse(int responseTab, int index) {
 			if(getGuards(false).isEmpty()) {
 				if (index == 1) {
-					return new Response("Continue", "As you've enslaved all of the gang members who dared to fight you, there's nothing left to do but continue on your way...", Main.game.getDefaultDialogue(false)) {
+                    return new Response("Продолжить", "As you've enslaved all of the gang members who dared to fight you, there's nothing left to do but continue on your way...", Main.game.getDefaultDialogue(false)) {
 						@Override
 						public void effects() {
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "GUARD_COMBAT_VICTORY_ALL_ENSLAVED"));
@@ -885,8 +1205,30 @@ public class RatWarrensDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode GUARD_COMBAT_VICTORY_AFTER_SEX = new DialogueNode("Step back", "Now that you've had your fun, you step back and wonder what to do with the gang members...", true) {
+	public static final DialogueNode LEXA_VISIT_AFTER_SEX = new DialogueNode("Finished", "Vengar is satisfied, and brings an end to the sex...", true) {
+		@Override
+		public int getSecondsPassed() {
+			return 5*60;
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "LEXA_VISIT_AFTER_SEX", getGuards(true));
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+                return new Response("Продолжить", "You're left alone with [axel.name] back in the Gambling Den's main entrance.", PlaceType.GAMBLING_DEN_ENTRANCE.getDialogue(false)) {
+					@Override
+					public void effects() {
+						Main.game.getPlayer().setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_ENTRANCE, false);
+						Main.game.getNpc(Vengar.class).setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_VENGARS_HALL, false);
+						Main.game.getNpc(Axel.class).setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_ENTRANCE, false);
+					}
+				};
+			}
+			return null;
+		}
+	};	public static final DialogueNode GUARD_COMBAT_VICTORY_AFTER_SEX = new DialogueNode("Step back", "Now that you've had your fun, you step back and wonder what to do with the gang members...", true) {
 
 		@Override
 		public String getContent() {
@@ -912,7 +1254,7 @@ public class RatWarrensDialogue {
 		public Response getResponse(int responseTab, int index) {
 			if(getGuards(false).isEmpty()) {
 				if (index == 1) {
-					return new Response("Continue", "As you've enslaved all of the gang members who dared to fight you, there's nothing left to do but continue on your way...", Main.game.getDefaultDialogue(false)) {
+                    return new Response("Продолжить", "As you've enslaved all of the gang members who dared to fight you, there's nothing left to do but continue on your way...", Main.game.getDefaultDialogue(false)) {
 						@Override
 						public void effects() {
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "GUARD_COMBAT_VICTORY_ALL_ENSLAVED"));
@@ -1313,11 +1655,11 @@ public class RatWarrensDialogue {
 			}
 		}
 	};
-	
-	public static final DialogueNode ENTRANCE_NO_CONTENT = new DialogueNode("Entrance", "", false) {
+
+    public static final DialogueNode ENTRANCE_NO_CONTENT = new DialogueNode("Вход", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -1328,11 +1670,11 @@ public class RatWarrensDialogue {
 			return ENTRANCE.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode ENTRANCE = new DialogueNode("Entrance", "", false) {
+
+    public static final DialogueNode ENTRANCE = new DialogueNode("Вход", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -1404,14 +1746,11 @@ public class RatWarrensDialogue {
 		}
 		@Override
 		public boolean isTravelDisabled() {
-			if((Main.game.getPlayerCell().getPlace().getPlaceType()==PlaceType.RAT_WARRENS_CHECKPOINT_LEFT
-					&& Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft)!=Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedCentre))
-				|| (Main.game.getPlayerCell().getPlace().getPlaceType()==PlaceType.RAT_WARRENS_CHECKPOINT_RIGHT
-					&& Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedRight)!=Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedCentre))) {
-				return true;
-			}
-			return false;
-		}
+            return (Main.game.getPlayerCell().getPlace().getPlaceType() == PlaceType.RAT_WARRENS_CHECKPOINT_LEFT
+                    && Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft) != Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedCentre))
+                    || (Main.game.getPlayerCell().getPlace().getPlaceType() == PlaceType.RAT_WARRENS_CHECKPOINT_RIGHT
+                    && Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedRight) != Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedCentre));
+        }
 		@Override
 		public int getSecondsPassed() {
 			return 2*60;
@@ -1469,7 +1808,7 @@ public class RatWarrensDialogue {
 		}
 	};
 
-	public static final DialogueNode DORMITORY = new DialogueNode("Dormitory", "", false) {
+    public static final DialogueNode DORMITORY = new DialogueNode("Общежитие", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 2*60;
@@ -1511,18 +1850,328 @@ public class RatWarrensDialogue {
 			return null;
 		}
 	};
-
-	public static final DialogueNode DICE_DEN = new DialogueNode("Dice Den", "", false) {
+    public static final DialogueNode MILKING_ROOM = new DialogueNode("Доильная комната", "", false) {
+		@Override
+		public boolean isTravelDisabled() {
+			return !Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR)
+					&& !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft);
+		}
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 2*60;
 		}
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "DICE_DEN", getGuards(true)));
-			sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "DICE_DEN_ENTRY", getGuards(true)));
-			return sb.toString();
+			if(Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR)) {
+				return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_QUEST_COMPLETE");
+			}
+
+			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft)) {
+				return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM", getMilkers());
+			}
+			return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_CLEARED", getMilkers());
+		}
+		@Override
+		public String getResponseTabTitle(int index) {
+			if(Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR)) {
+				return null;
+			}
+			if(isCompanionDialogue()) {
+				switch(index) {
+					case 0:
+						return "You";
+					case 1:
+						return UtilText.parse(getMainCompanion(), "[npc.Name]");
+					case 2:
+						if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft)) {
+							return "Both";
+						}
+						break;
+				}
+			}
+			return null;
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR)) {
+				return null;
+			}
+			List<GameCharacter> milkers = getMilkers();
+			if(responseTab==0) {
+				if(index>=1 && index<=4) {
+					GameCharacter milker = milkers.get(index-1);
+					if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft)) {
+						return new ResponseSex(
+								"Use "+milker.getName(true),
+								UtilText.parse(milker, "Choose to have sex with [npc.name]..."),
+								true,
+								false,
+								new SMMilkingStall(
+										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotMilkingStall.BEHIND_MILKING_STALL)),
+										Util.newHashMapOfValues(new Value<>(milker, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))) {
+									@Override
+									public boolean isAbleToRemoveOthersClothing(GameCharacter character, AbstractClothing clothing){
+										return false;
+									}
+									@Override
+									public boolean isSwapPositionAllowed(GameCharacter character, GameCharacter target) {
+										return false;
+									}
+									@Override
+									public boolean isSlotAvailable(GameCharacter character, SexSlot slot) {
+										if(character instanceof RatWarrensCaptive) {
+											return slot.hasTag(SexSlotTag.LOCKED_IN_STOCKS);
+										} else {
+											return !slot.hasTag(SexSlotTag.LOCKED_IN_STOCKS);
+										}
+									}
+								},
+								Main.game.getPlayer().getParty(),
+								null,
+								AFTER_MILKER_SEX,
+								UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_SEX", Util.newArrayListOfValues(isCompanionDialogue()?getMainCompanion():null, milker))) {
+							@Override
+							public void effects() {
+								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
+							}
+						};
+
+					} else {
+						return new ResponseSex(
+								"Use "+milker.getName(true),
+								UtilText.parse(milker, "Now that you've defeated Murk and the gang members in this area, there's nobody to stop you from having sex with [npc.name]..."),
+								true,
+								false,
+								new SMMilkingStall(
+										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotMilkingStall.BEHIND_MILKING_STALL)),
+										Util.newHashMapOfValues(new Value<>(milker, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))) {
+									@Override
+									public boolean isSwapPositionAllowed(GameCharacter character, GameCharacter target) {
+										return false;
+									}
+									@Override
+									public boolean isSlotAvailable(GameCharacter character, SexSlot slot) {
+										if(character instanceof RatWarrensCaptive) {
+											return slot.hasTag(SexSlotTag.LOCKED_IN_STOCKS);
+										} else {
+											return !slot.hasTag(SexSlotTag.LOCKED_IN_STOCKS);
+										}
+									}
+								},
+								Main.game.getPlayer().getParty(),
+								null,
+								AFTER_MILKER_SEX,
+								UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_SEX_AFTER_CLEARED", Util.newArrayListOfValues(isCompanionDialogue()?getMainCompanion():null, milker))) {
+							@Override
+							public void effects() {
+								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
+							}
+						};
+					}
+				}
+
+			} else if(responseTab==1) {
+				if(index>=1 && index<=4) {
+					GameCharacter milker = milkers.get(index-1);
+
+					if(!getMainCompanion().isAttractedTo(milker) && getMainCompanion().isAbleToRefuseSexAsCompanion()) {
+						return new Response(UtilText.parse(milker, "[npc.Name]"),
+								UtilText.parse(getMainCompanion(), milker,
+										"You can tell that [npc.name] isn't at all interested in having sex with [npc2.name], and you can't force [npc.herHim] to do so..."),
+								null);
+					}
+
+					if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft)) {
+						return new ResponseSex(
+								UtilText.parse(milker, "[npc.Name]"),
+								UtilText.parse(getMainCompanion(), milker, "Tell [npc.name] to fuck [npc2.name] while you and Murk watch..."),
+								true,
+								false,
+								new SMMilkingStall(
+										Util.newHashMapOfValues(new Value<>(getMainCompanion(), SexSlotMilkingStall.BEHIND_MILKING_STALL)),
+										Util.newHashMapOfValues(new Value<>(milker, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))) {
+									@Override
+									public boolean isAbleToRemoveOthersClothing(GameCharacter character, AbstractClothing clothing){
+										return false;
+									}
+									@Override
+									public boolean isSwapPositionAllowed(GameCharacter character, GameCharacter target) {
+										return false;
+									}
+									@Override
+									public boolean isSlotAvailable(GameCharacter character, SexSlot slot) {
+										if(character instanceof RatWarrensCaptive) {
+											return slot.hasTag(SexSlotTag.LOCKED_IN_STOCKS);
+										} else {
+											return !slot.hasTag(SexSlotTag.LOCKED_IN_STOCKS);
+										}
+									}
+								},
+								Util.newArrayListOfValues(Main.game.getPlayer()),
+								null,
+								AFTER_MILKER_SEX,
+								UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_SEX_COMPANION", Util.newArrayListOfValues(isCompanionDialogue()?getMainCompanion():null, milker))) {
+							@Override
+							public void effects() {
+								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
+							}
+						};
+
+					} else {
+						return new ResponseSex(
+								UtilText.parse(milker, "[npc.Name]"),
+								UtilText.parse(getMainCompanion(), milker, "Now that you've defeated Murk and the gang members in this area, there's nobody to stop you from ordering [npc.name] to have sex with [npc2.name] while you watch..."),
+								true,
+								false,
+								new SMMilkingStall(
+										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotMilkingStall.BEHIND_MILKING_STALL)),
+										Util.newHashMapOfValues(new Value<>(milker, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))) {
+									@Override
+									public boolean isSwapPositionAllowed(GameCharacter character, GameCharacter target) {
+										return false;
+									}
+									@Override
+									public boolean isSlotAvailable(GameCharacter character, SexSlot slot) {
+										if(character instanceof RatWarrensCaptive) {
+											return slot.hasTag(SexSlotTag.LOCKED_IN_STOCKS);
+										} else {
+											return !slot.hasTag(SexSlotTag.LOCKED_IN_STOCKS);
+										}
+									}
+								},
+								Util.newArrayListOfValues(Main.game.getPlayer()),
+								null,
+								AFTER_MILKER_SEX,
+								UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_SEX_COMPANION_AFTER_CLEARED", Util.newArrayListOfValues(isCompanionDialogue()?getMainCompanion():null, milker))) {
+							@Override
+							public void effects() {
+								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
+							}
+						};
+					}
+				}
+
+			} else if(responseTab==2) {
+				if(index>=1 && index<=4) {
+					GameCharacter milker = milkers.get(index-1);
+
+					if(!getMainCompanion().isAttractedTo(milker) && getMainCompanion().isAbleToRefuseSexAsCompanion()) {
+						return new Response(UtilText.parse(milker, "Both ([npc.Name])"),
+								UtilText.parse(getMainCompanion(), milker,
+										"You can tell that [npc.name] isn't at all interested in having sex with [npc2.name], and you can't force [npc.herHim] to do so..."),
+								null);
+					}
+
+					return new ResponseSex(
+							UtilText.parse(milker, "Both ([npc.Name])"),
+							UtilText.parse(getMainCompanion(), milker, "Now that you've defeated Murk and the gang members in this area, there's nobody to stop you and [npc.name] from having sex with [npc2.name]..."),
+							true,
+							false,
+							new SMMilkingStall(
+									Util.newHashMapOfValues(
+											new Value<>(Main.game.getPlayer(), SexSlotMilkingStall.BEHIND_MILKING_STALL),
+											new Value<>(getMainCompanion(), SexSlotMilkingStall.RECEIVING_ORAL)),
+									Util.newHashMapOfValues(new Value<>(milker, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))) {
+								@Override
+								public boolean isSwapPositionAllowed(GameCharacter character, GameCharacter target) {
+									return false;
+								}
+								@Override
+								public boolean isSlotAvailable(GameCharacter character, SexSlot slot) {
+									if(character instanceof RatWarrensCaptive) {
+										return slot.hasTag(SexSlotTag.LOCKED_IN_STOCKS);
+									} else {
+										return !slot.hasTag(SexSlotTag.LOCKED_IN_STOCKS);
+									}
+								}
+							},
+							null,
+							null,
+							AFTER_MILKER_SEX,
+							UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_SEX_BOTH_AFTER_CLEARED", Util.newArrayListOfValues(isCompanionDialogue()?getMainCompanion():null, milker))) {
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
+						}
+					};
+				}
+			}
+
+			if(index==5) {
+				if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft)) {
+					if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensMilkersFreeAttempt)) {
+						return new Response(
+								"Free captives",
+								"You've already tried to free the milkers, and discovered that they are entirely unwilling to escape with you...",
+								null);
+					}
+					return new Response(
+							"Free captives",
+							"Now that you've defeated the gang members in this area, there's nobody to stop you from freeing the captive humans...",
+							MILKING_ROOM_FREE_ATTEMPT) {
+						@Override
+						public void effects() {
+							 Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensMilkersFreeAttempt, true);
+						}
+					};
+
+				} else {
+					return new Response(
+							"Milkers",
+							"Ask Murk how he came to acquire these 'milkers'...",
+							MILKING_ROOM_BACKGROUND) {
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensMilkersBackground, true);
+						}
+					};
+				}
+
+			} else if(index==6
+					&& !Main.game.getPlayer().hasQuestInLine(QuestLine.SIDE_VENGAR, Quest.VENGAR_TWO_COOPERATION)
+					&& !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft)) {
+				return new Response("Fight Murk", "Tell Murk that you're here to fight him.<br/>[style.italicsBad(This will undoubtedly result in a significant amount of gang members arriving as backup!)]", ENTRANCE_FIGHT) {
+					@Override
+					public void effects() {
+						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
+						Main.game.getPlayer().setNearestLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_CORRIDOR_LEFT, false);
+						spawnGuards(true, 4);
+						Main.game.getNpc(Murk.class).setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_VENGARS_HALL);
+						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensHostile, true);
+						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_CHALLENGE", getGuards(true)));
+						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_CHALLENGE_CORE", getGuards(true)));
+					}
+					@Override
+					public boolean isCombatHighlight() {
+						return true;
+					}
+				};
+
+			} else if(index==0 && !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft)) {
+				return new Response("Leave", "Decide against having sex with any of the milkers and leave...<br/>[style.italicsBad(You will not get your money back!)]", MILKING_ROOM_BACKED_OUT) {
+					@Override
+					public void effects() {
+						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
+						Main.game.getPlayer().setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_MILKING_STORAGE);
+						Main.game.getNpc(Murk.class).setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_MILKING_STORAGE);
+						for(GameCharacter milker : getMilkers()) {
+							((RatWarrensCaptive)milker).applyMilkingEquipment(true, Util.newArrayListOfValues(InventorySlot.NIPPLE, InventorySlot.VAGINA));
+						}
+					}
+				};
+			}
+			return null;
+		}
+	};    public static final DialogueNode DICE_DEN = new DialogueNode("Логово для костей", "", false) {
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+		@Override
+		public String getContent() {
+            String sb = UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "DICE_DEN", getGuards(true)) +
+                    UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "DICE_DEN_ENTRY", getGuards(true));
+			return sb;
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
@@ -1658,8 +2307,66 @@ public class RatWarrensDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode DICE_DEN_LOOT = new DialogueNode("Dice Den", "", false) {
+    public static final DialogueNode VENGARS_HALL = new DialogueNode("Зал Венгара", "", true) {
+		@Override
+		public int getSecondsPassed() {
+			return 2*60;
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL", getGuards(true));
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+				return new Response("Approach",
+						Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensHostile)
+							?"Approach Vengar and prepare to start fighting him."
+							:(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.vengarIntroduced)
+								?"Approach Vengar and start talking to him."
+								:"Approach Vengar and introduce yourself to him."),
+						VENGARS_HALL_APPROACH) {
+					@Override
+					public void effects() {
+						if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensHostile)) {
+							Main.game.getTextEndStringBuilder().append(Main.game.getNpc(Vengar.class).setAffection(Main.game.getPlayer(), -75));
+							if(!Main.game.getPlayer().hasTraitActivated(Perk.OBSERVANT)) {
+								if(isCompanionDialogue()) {
+									if(!getMainCompanion().hasTraitActivated(Perk.OBSERVANT)) {
+										Main.game.getTextStartStringBuilder().append(getMainCompanion().incrementHealth(-Main.game.getPlayer().getHealth()*0.75f));
+									}
+
+								} else {
+									Main.game.getTextStartStringBuilder().append(Main.game.getPlayer().incrementHealth(-Main.game.getPlayer().getHealth()/2));
+								}
+							}
+						}
+					}
+				};
+			}
+			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.vengarIntroduced)) {
+				if(index==0) {
+					return new Response("Leave", "Decide against approaching Vengar, and instead turn around and exit the hall.", PlaceType.RAT_WARRENS_CORRIDOR_RIGHT.getDialogue(false)) {
+						@Override
+						public void effects() {
+							Main.game.getPlayer().setNearestLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_CORRIDOR_RIGHT, false);
+						}
+					};
+				}
+
+			} else {
+				if(index==2 && Main.game.getPlayer().hasItemType(ItemType.RESONANCE_STONE)) {
+					return new Response("Resonance stone", "Use the resonance stone to signal the SWORD Enforcers to start their raid.", VENGARS_HALL_RESONANCE_STONE) {
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensUsedResonanceStone, true);
+						}
+					};
+				}
+			}
+			return null;
+		}
+	};    public static final DialogueNode DICE_DEN_LOOT = new DialogueNode("Логово для костей", "", false) {
 		@Override
 		public String getContent() {
 			return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "DICE_DEN_LOOT", getGuards(true));
@@ -1670,8 +2377,8 @@ public class RatWarrensDialogue {
 			return DICE_DEN.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode DICE_DEN_RULES = new DialogueNode("Dice Den", "", false) {
+
+    public static final DialogueNode DICE_DEN_RULES = new DialogueNode("Логово для костей", "", false) {
 		
 		@Override
 		public String getContent() {
@@ -1686,8 +2393,8 @@ public class RatWarrensDialogue {
 			return DICE_DEN.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode DICE_DEN_POST_GAMBLING = new DialogueNode("Dice Den", "", false) {
+
+    public static final DialogueNode DICE_DEN_POST_GAMBLING = new DialogueNode("Логово для костей", "", false) {
 		@Override
 		public void applyPreParsingEffects() {
 			Main.game.banishNPC(gambler);
@@ -1696,10 +2403,9 @@ public class RatWarrensDialogue {
 		
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "DICE_DEN", getGuards(true)));
-			sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "DICE_DEN_POST_GAMBLING", getGuards(true)));
-			return sb.toString();
+            String sb = UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "DICE_DEN", getGuards(true)) +
+                    UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "DICE_DEN_POST_GAMBLING", getGuards(true));
+			return sb;
 		}
 		
 		@Override
@@ -1708,7 +2414,7 @@ public class RatWarrensDialogue {
 		}
 	};
 
-	public static final DialogueNode DICE_DEN_RUM = new DialogueNode("Dice Den", "", true) {
+    public static final DialogueNode DICE_DEN_RUM = new DialogueNode("Логово для костей", "", true) {
 		@Override
 		public String getContent() {
 			return "";
@@ -1909,7 +2615,7 @@ public class RatWarrensDialogue {
 		}
 		@Override
 		public String getDescription() {
-			return UtilText.parse((NPC) getGuards(false).get(0), "[npc.Name] has finished...");
+			return UtilText.parse(getGuards(false).get(0), "[npc.Name] has finished...");
 		}
 		@Override
 		public String getContent() {
@@ -1924,427 +2630,9 @@ public class RatWarrensDialogue {
 			return DICE_DEN.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode MILKING_STORAGE = new DialogueNode("Entrance", "", true) {
-		@Override
-		public void applyPreParsingEffects() {
-			if(!Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR)
-					&& Main.game.getWorlds().get(WorldType.RAT_WARRENS).getCell(PlaceType.RAT_WARRENS_MILKING_ROOM).isTravelledTo()) {
-				Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
-			}
-		}
-		@Override
-		public boolean isTravelDisabled() {
-			return !Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR)
-					&& !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft);
-		}
-		@Override
-		public int getSecondsPassed() {
-			if(Main.game.getPlayer().isCaptive()) {
-				return 0; // So that the player can't advance days by repeatedly moving back and forth.
-			}
-			return 2*60;
-		}
-		@Override
-		public String getContent() {
-			if(Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR)) {
-				return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_STORAGE_QUEST_COMPLETE");
-			}
-			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft)) {
-				return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_STORAGE_CLEARED", getGuards(true));
-			}
-			if(Main.game.getPlayer().isCaptive()) {
-				return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_STORAGE_CAPTIVE", getGuards(true));
-			}
-			return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_STORAGE", getGuards(true));
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR)) {
-				return null;
-			}
-			if(Main.game.getPlayer().isCaptive()) {
-				if(index==1) {
-					return new Response("Step back", "You can't get very far with the chain restricting your movements...", RatWarrensCaptiveDialogue.CAPTIVE_NIGHT) {
-						@Override
-						public int getSecondsPassed() {
-							return 0; // So that the player can't advance days by repeatedly moving back and forth.
-						}
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensCaptiveInitialNightDescription, false);
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.murkIntroduced, true);
-							Main.game.getPlayer().setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_MILKING_ROOM, false);
-						}
-					};
-				}
-				
-			} else if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft)) {
-				if(index==1) {
-					return new Response("Step back", "Do as Murk says and leave.", CORRIDOR) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.murkIntroduced, true);
-							Main.game.getPlayer().setNearestLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_CORRIDOR_LEFT, false);
-						}
-					};
-					
-				} else if(index==2) {
-					if(Main.game.getHourOfDay()<14 || Main.game.getHourOfDay()>=22) {
-						return new Response("Milkers ("+UtilText.formatAsMoneyUncoloured(500, "span")+")",
-								"Murk only rents out his milkers between [style.time(14)] and [style.time(22)], so if you wanted to pay them a visit, you'll have to come back between those times.",
-								null);
-					}
-					return new Response("Milkers ("+UtilText.formatAsMoney(500, "span")+")", "Pay Murk 500 flames to gain access to his 'milkers'.", MILKING_ROOM) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.murkIntroduced, true);
-							Main.game.getPlayer().setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_MILKING_ROOM);
-							Main.game.getNpc(Murk.class).setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_MILKING_ROOM);
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().incrementMoney(-500));
-							Main.game.getNpc(Murk.class).incrementMoney(500);
-							for(GameCharacter milker : getMilkers()) {
-								((RatWarrensCaptive)milker).applyMilkingEquipment(false, Util.newArrayListOfValues(InventorySlot.VAGINA));
-							}
-						}
-					};
-					
-				} else if(index==6
-						&& !Main.game.getPlayer().hasQuestInLine(QuestLine.SIDE_VENGAR, Quest.VENGAR_TWO_COOPERATION)) {
-					return new Response("Challenge", "Tell Murk that you're here to fight.<br/>[style.italicsBad(This will undoubtedly result in a significant amount of gang members arriving as backup!)]", ENTRANCE_FIGHT) {
-						@Override
-						public void effects() {
-							Main.game.getPlayer().setNearestLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_CORRIDOR_LEFT, false);
-							Main.game.getNpc(Murk.class).setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_VENGARS_HALL);
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.murkIntroduced, true);
-							spawnGuards(true, 4);
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensHostile, true);
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_STORAGE_CHALLENGE", getGuards(true)));
-						}
-						@Override
-						public boolean isCombatHighlight() {
-							return true;
-						}
-					};
-				}
-			}
-			return null;
-		}
-	};
-	
-	public static final DialogueNode MILKING_ROOM = new DialogueNode("Milking Room", "", false) {
-		@Override
-		public boolean isTravelDisabled() {
-			return !Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR)
-					&& !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft);
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 2*60;
-		}
-		@Override
-		public String getContent() {
-			if(Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR)) {
-				return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_QUEST_COMPLETE");
-			}
-			
-			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft)) {
-				return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM", getMilkers());
-			}
-			return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_CLEARED", getMilkers());
-		}
-		@Override
-		public String getResponseTabTitle(int index) {
-			if(Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR)) {
-				return null;
-			}
-			if(isCompanionDialogue()) {
-				switch(index) {
-					case 0:
-						return "You";
-					case 1:
-						return UtilText.parse(getMainCompanion(), "[npc.Name]");
-					case 2:
-						if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft)) {
-							return "Both";
-						}
-						break;
-				}
-			}
-			return null;
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR)) {
-				return null;
-			}
-			List<GameCharacter> milkers = getMilkers();
-			if(responseTab==0) {
-				if(index>=1 && index<=4) {
-					GameCharacter milker = milkers.get(index-1);
-					if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft)) {
-						return new ResponseSex(
-								"Use "+milker.getName(true),
-								UtilText.parse(milker, "Choose to have sex with [npc.name]..."),
-								true,
-								false,
-								new SMMilkingStall(
-										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotMilkingStall.BEHIND_MILKING_STALL)),
-										Util.newHashMapOfValues(new Value<>(milker, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))) {
-									@Override
-									public boolean isAbleToRemoveOthersClothing(GameCharacter character, AbstractClothing clothing){
-										return false;
-									}
-									@Override
-									public boolean isSwapPositionAllowed(GameCharacter character, GameCharacter target) {
-										return false;
-									}
-									@Override
-									public boolean isSlotAvailable(GameCharacter character, SexSlot slot) {
-										if(character instanceof RatWarrensCaptive) {
-											return slot.hasTag(SexSlotTag.LOCKED_IN_STOCKS);
-										} else {
-											return !slot.hasTag(SexSlotTag.LOCKED_IN_STOCKS);
-										}
-									}
-								},
-								Main.game.getPlayer().getParty(),
-								null,
-								AFTER_MILKER_SEX,
-								UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_SEX", Util.newArrayListOfValues(isCompanionDialogue()?getMainCompanion():null, milker))) {
-							@Override
-							public void effects() {
-								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
-							}
-						};
-						
-					} else {
-						return new ResponseSex(
-								"Use "+milker.getName(true),
-								UtilText.parse(milker, "Now that you've defeated Murk and the gang members in this area, there's nobody to stop you from having sex with [npc.name]..."),
-								true,
-								false,
-								new SMMilkingStall(
-										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotMilkingStall.BEHIND_MILKING_STALL)),
-										Util.newHashMapOfValues(new Value<>(milker, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))) {
-									@Override
-									public boolean isSwapPositionAllowed(GameCharacter character, GameCharacter target) {
-										return false;
-									}
-									@Override
-									public boolean isSlotAvailable(GameCharacter character, SexSlot slot) {
-										if(character instanceof RatWarrensCaptive) {
-											return slot.hasTag(SexSlotTag.LOCKED_IN_STOCKS);
-										} else {
-											return !slot.hasTag(SexSlotTag.LOCKED_IN_STOCKS);
-										}
-									}
-								},
-								Main.game.getPlayer().getParty(),
-								null,
-								AFTER_MILKER_SEX,
-								UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_SEX_AFTER_CLEARED", Util.newArrayListOfValues(isCompanionDialogue()?getMainCompanion():null, milker))) {
-							@Override
-							public void effects() {
-								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
-							}
-						};
-					}
-				}
-				
-			} else if(responseTab==1) {
-				if(index>=1 && index<=4) {
-					GameCharacter milker = milkers.get(index-1);
-					
-					if(!getMainCompanion().isAttractedTo(milker) && getMainCompanion().isAbleToRefuseSexAsCompanion()) {
-						return new Response(UtilText.parse(milker, "[npc.Name]"),
-								UtilText.parse(getMainCompanion(), milker,
-										"You can tell that [npc.name] isn't at all interested in having sex with [npc2.name], and you can't force [npc.herHim] to do so..."),
-								null);
-					}
-					
-					if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft)) {
-						return new ResponseSex(
-								UtilText.parse(milker, "[npc.Name]"),
-								UtilText.parse(getMainCompanion(), milker, "Tell [npc.name] to fuck [npc2.name] while you and Murk watch..."),
-								true,
-								false,
-								new SMMilkingStall(
-										Util.newHashMapOfValues(new Value<>(getMainCompanion(), SexSlotMilkingStall.BEHIND_MILKING_STALL)),
-										Util.newHashMapOfValues(new Value<>(milker, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))) {
-									@Override
-									public boolean isAbleToRemoveOthersClothing(GameCharacter character, AbstractClothing clothing){
-										return false;
-									}
-									@Override
-									public boolean isSwapPositionAllowed(GameCharacter character, GameCharacter target) {
-										return false;
-									}
-									@Override
-									public boolean isSlotAvailable(GameCharacter character, SexSlot slot) {
-										if(character instanceof RatWarrensCaptive) {
-											return slot.hasTag(SexSlotTag.LOCKED_IN_STOCKS);
-										} else {
-											return !slot.hasTag(SexSlotTag.LOCKED_IN_STOCKS);
-										}
-									}
-								},
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								null,
-								AFTER_MILKER_SEX,
-								UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_SEX_COMPANION", Util.newArrayListOfValues(isCompanionDialogue()?getMainCompanion():null, milker))) {
-							@Override
-							public void effects() {
-								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
-							}
-						};
-						
-					} else {
-						return new ResponseSex(
-								UtilText.parse(milker, "[npc.Name]"),
-								UtilText.parse(getMainCompanion(), milker, "Now that you've defeated Murk and the gang members in this area, there's nobody to stop you from ordering [npc.name] to have sex with [npc2.name] while you watch..."),
-								true,
-								false,
-								new SMMilkingStall(
-										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotMilkingStall.BEHIND_MILKING_STALL)),
-										Util.newHashMapOfValues(new Value<>(milker, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))) {
-									@Override
-									public boolean isSwapPositionAllowed(GameCharacter character, GameCharacter target) {
-										return false;
-									}
-									@Override
-									public boolean isSlotAvailable(GameCharacter character, SexSlot slot) {
-										if(character instanceof RatWarrensCaptive) {
-											return slot.hasTag(SexSlotTag.LOCKED_IN_STOCKS);
-										} else {
-											return !slot.hasTag(SexSlotTag.LOCKED_IN_STOCKS);
-										}
-									}
-								},
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								null,
-								AFTER_MILKER_SEX,
-								UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_SEX_COMPANION_AFTER_CLEARED", Util.newArrayListOfValues(isCompanionDialogue()?getMainCompanion():null, milker))) {
-							@Override
-							public void effects() {
-								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
-							}
-						};
-					}
-				}
-				
-			} else if(responseTab==2) {
-				if(index>=1 && index<=4) {
-					GameCharacter milker = milkers.get(index-1);
-					
-					if(!getMainCompanion().isAttractedTo(milker) && getMainCompanion().isAbleToRefuseSexAsCompanion()) {
-						return new Response(UtilText.parse(milker, "Both ([npc.Name])"),
-								UtilText.parse(getMainCompanion(), milker,
-										"You can tell that [npc.name] isn't at all interested in having sex with [npc2.name], and you can't force [npc.herHim] to do so..."),
-								null);
-					}
-					
-					return new ResponseSex(
-							UtilText.parse(milker, "Both ([npc.Name])"),
-							UtilText.parse(getMainCompanion(), milker, "Now that you've defeated Murk and the gang members in this area, there's nobody to stop you and [npc.name] from having sex with [npc2.name]..."),
-							true,
-							false,
-							new SMMilkingStall(
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotMilkingStall.BEHIND_MILKING_STALL),
-											new Value<>(getMainCompanion(), SexSlotMilkingStall.RECEIVING_ORAL)),
-									Util.newHashMapOfValues(new Value<>(milker, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))) {
-								@Override
-								public boolean isSwapPositionAllowed(GameCharacter character, GameCharacter target) {
-									return false;
-								}
-								@Override
-								public boolean isSlotAvailable(GameCharacter character, SexSlot slot) {
-									if(character instanceof RatWarrensCaptive) {
-										return slot.hasTag(SexSlotTag.LOCKED_IN_STOCKS);
-									} else {
-										return !slot.hasTag(SexSlotTag.LOCKED_IN_STOCKS);
-									}
-								}
-							},
-							null,
-							null,
-							AFTER_MILKER_SEX,
-							UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_SEX_BOTH_AFTER_CLEARED", Util.newArrayListOfValues(isCompanionDialogue()?getMainCompanion():null, milker))) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
-						}
-					};
-				}
-			}
-			
-			if(index==5) {
-				if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft)) {
-					if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensMilkersFreeAttempt)) {
-						return new Response(
-								"Free captives",
-								"You've already tried to free the milkers, and discovered that they are entirely unwilling to escape with you...",
-								null);
-					}
-					return new Response(
-							"Free captives",
-							"Now that you've defeated the gang members in this area, there's nobody to stop you from freeing the captive humans...",
-							MILKING_ROOM_FREE_ATTEMPT) {
-						@Override
-						public void effects() {
-							 Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensMilkersFreeAttempt, true);
-						}
-					};
-					
-				} else {
-					return new Response(
-							"Milkers",
-							"Ask Murk how he came to acquire these 'milkers'...",
-							MILKING_ROOM_BACKGROUND) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensMilkersBackground, true);
-						}
-					};
-				}
-				
-			} else if(index==6
-					&& !Main.game.getPlayer().hasQuestInLine(QuestLine.SIDE_VENGAR, Quest.VENGAR_TWO_COOPERATION)
-					&& !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft)) {
-				return new Response("Fight Murk", "Tell Murk that you're here to fight him.<br/>[style.italicsBad(This will undoubtedly result in a significant amount of gang members arriving as backup!)]", ENTRANCE_FIGHT) {
-					@Override
-					public void effects() {
-						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
-						Main.game.getPlayer().setNearestLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_CORRIDOR_LEFT, false);
-						spawnGuards(true, 4);
-						Main.game.getNpc(Murk.class).setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_VENGARS_HALL);
-						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensHostile, true);
-						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_CHALLENGE", getGuards(true)));
-						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_CHALLENGE_CORE", getGuards(true)));
-					}
-					@Override
-					public boolean isCombatHighlight() {
-						return true;
-					}
-				};
-				
-			} else if(index==0 && !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensClearedLeft)) {
-				return new Response("Leave", "Decide against having sex with any of the milkers and leave...<br/>[style.italicsBad(You will not get your money back!)]", MILKING_ROOM_BACKED_OUT) {
-					@Override
-					public void effects() {
-						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
-						Main.game.getPlayer().setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_MILKING_STORAGE);
-						Main.game.getNpc(Murk.class).setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_MILKING_STORAGE);
-						for(GameCharacter milker : getMilkers()) {
-							((RatWarrensCaptive)milker).applyMilkingEquipment(true, Util.newArrayListOfValues(InventorySlot.NIPPLE, InventorySlot.VAGINA));
-						}
-					}
-				};
-			}
-			return null;
-		}
-	};
+
+
+
 
 	public static final DialogueNode MILKING_ROOM_BACKED_OUT = new DialogueNode("", "", true) {
 		@Override
@@ -2374,7 +2662,7 @@ public class RatWarrensDialogue {
 		}
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -2453,66 +2741,7 @@ public class RatWarrensDialogue {
 		}
 	};
 
-	public static final DialogueNode VENGARS_HALL = new DialogueNode("Vengar's Hall", "", true) {
-		@Override
-		public int getSecondsPassed() {
-			return 2*60;
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL", getGuards(true));
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Approach",
-						Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensHostile)
-							?"Approach Vengar and prepare to start fighting him."
-							:(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.vengarIntroduced)
-								?"Approach Vengar and start talking to him."
-								:"Approach Vengar and introduce yourself to him."),
-						VENGARS_HALL_APPROACH) {
-					@Override
-					public void effects() {
-						if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensHostile)) {
-							Main.game.getTextEndStringBuilder().append(Main.game.getNpc(Vengar.class).setAffection(Main.game.getPlayer(), -75));
-							if(!Main.game.getPlayer().hasTraitActivated(Perk.OBSERVANT)) {
-								if(isCompanionDialogue()) {
-									if(!getMainCompanion().hasTraitActivated(Perk.OBSERVANT)) {
-										Main.game.getTextStartStringBuilder().append(getMainCompanion().incrementHealth(-Main.game.getPlayer().getHealth()*0.75f));
-									}
-									
-								} else {
-									Main.game.getTextStartStringBuilder().append(Main.game.getPlayer().incrementHealth(-Main.game.getPlayer().getHealth()/2));
-								}
-							}
-						}
-					}
-				};
-			}
-			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.vengarIntroduced)) {
-				if(index==0) {
-					return new Response("Leave", "Decide against approaching Vengar, and instead turn around and exit the hall.", PlaceType.RAT_WARRENS_CORRIDOR_RIGHT.getDialogue(false)) {
-						@Override
-						public void effects() {
-							Main.game.getPlayer().setNearestLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_CORRIDOR_RIGHT, false);
-						}
-					};
-				}
-				
-			} else {
-				if(index==2 && Main.game.getPlayer().hasItemType(ItemType.RESONANCE_STONE)) {
-					return new Response("Resonance stone", "Use the resonance stone to signal the SWORD Enforcers to start their raid.", VENGARS_HALL_RESONANCE_STONE) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensUsedResonanceStone, true);
-						}
-					};
-				}
-			}
-			return null;
-		}
-	};
+
 
 	public static final DialogueNode VENGARS_HALL_APPROACH = new DialogueNode("", "", true, true) {
 		@Override
@@ -2528,7 +2757,7 @@ public class RatWarrensDialogue {
 			// Repeat encounters (after initial quest is resolved):
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.vengarIntroduced)) {
 				if(index==1) {
-					return new Response("Bedroom",
+                    return new Response("Спальня",
 							"Join Vengar in his private bed-chambers...",
 							VENGARS_BEDROOM) {
 						@Override
@@ -2849,252 +3078,26 @@ public class RatWarrensDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode VENGARS_HALL_APPROACH_PERSUADE_KNEEL_SUBMIT = new DialogueNode("", "", true) {
+	public static final DialogueNode POST_CAPTIVITY_SWORD_RAID = new DialogueNode("", "", true, true) {
+		@Override
+		public void applyPreParsingEffects() {
+			applyRatWarrensRaid();
+			Main.game.getNpc(Claire.class).setLocation(Main.game.getPlayer(), false);
+			Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_VENGAR, Quest.VENGAR_TWO_ENFORCERS));
+			Main.game.getTextEndStringBuilder().append(applyConflictQuestEnd());
+		}
 		@Override
 		public int getSecondsPassed() {
-			return 5*60;
+			return 4*60*60;
 		}
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_APPROACH_PERSUADE_KNEEL_SUBMIT_START", getGuards(true)));
-			
-			if(isAssAccess(Main.game.getPlayer()) || isVaginaAccess(Main.game.getPlayer())) {
-				if(isCompanionDialogue()) {
-					if(Main.game.isVoluntaryNTREnabled() && (isAssAccess(getMainCompanion()) || isVaginaAccess(getMainCompanion()))) {
-						sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_SEX_BOTH", getGuards(true)));
-						
-					} else {
-						sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_SEX_COMPANION_WATCHING", getGuards(true)));
-					}
-					
-				} else {
-					sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_SEX_SOLO", getGuards(true)));
-				}
-				
-			} else {
-				if(isCompanionDialogue()) {
-					if(isAssAccess(getMainCompanion()) || isVaginaAccess(getMainCompanion())) {
-						if(Main.game.isVoluntaryNTREnabled()) {
-							sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_SEX_PLAYER_WATCHING", getGuards(true)));
-						} else {
-							sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_NO_SEX", getGuards(true)));
-						}
-						
-					} else {
-						sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_NO_SEX", getGuards(true)));
-					}
-					
-				} else {
-					sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_NO_SEX", getGuards(true)));
-				}
-			}
-			
-			return sb.toString();
+			return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "POST_CAPTIVITY_SWORD_RAID", getGuards(true));
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if(!isAssAccess(Main.game.getPlayer()) && !isVaginaAccess(Main.game.getPlayer())) {
-				if(isCompanionDialogue()) {
-					if(!isAssAccess(getMainCompanion()) && !isVaginaAccess(getMainCompanion())) {
-						if(index==1) {
-							return new Response("Continue", "As Vengar is unable to fuck either of you, he's content to simply inform you what he wants you to do for him.", VENGARS_HALL_APPROACH_PERSUADE_FINISH) {
-								@Override
-								public void effects() {
-									Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_NO_SEX_FINISH", getGuards(true)));
-									Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_QUITTING_TALK", getGuards(true)));
-								}
-							};
-						}
-						return null;
-						
-					} else {
-						if(!Main.game.isVoluntaryNTREnabled()) {
-							if(index==1) {
-								return new Response("Continue", "As Vengar is unable to fuck you, he's content to simply inform you what he wants you to do for him.", VENGARS_HALL_APPROACH_PERSUADE_FINISH) {
-									@Override
-									public void effects() {
-										Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_NO_SEX_FINISH", getGuards(true)));
-										Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_QUITTING_TALK", getGuards(true)));
-									}
-								};
-							}
-							return null;
-							
-						} else {
-							if(index==1) {
-								return new Response("Stand up",
-										UtilText.parse(getMainCompanion(), "Refuse to allow Vengar to fuck [npc.name] in front of everyone, and tell him that you've already done as he asked."),
-										VENGARS_HALL_APPROACH_PERSUADE_FINISH) {
-									@Override
-									public void effects() {
-										Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_SEX_REFUSE_WATCH", getGuards(true)));
-										Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_NO_SEX_FINISH", getGuards(true)));
-										Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_QUITTING_TALK", getGuards(true)));
-									}
-								};
-								
-							} else if(index==2) {
-								if(!getMainCompanion().isAttractedTo(Main.game.getNpc(Vengar.class)) && getMainCompanion().isAbleToRefuseSexAsCompanion()) {
-									return new Response("Agree",
-											UtilText.parse(getMainCompanion(), "You can tell that [npc.name] isn't at all interested in having sex with Vengar, and you can't force [npc.herHim] to do so..."),
-											null);
-								}
-								return new ResponseSex(
-										"Agree",
-										UtilText.parse(getMainCompanion(), "Let Vengar fuck [npc.name] while you and everyone else in the hall watches."),
-										true,
-										false,
-										new SMVengarDominantSex(
-												SexPosition.ALL_FOURS,
-												Util.newHashMapOfValues(
-														new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
-												Util.newHashMapOfValues(
-														new Value<>(getMainCompanion(), SexSlotAllFours.ALL_FOURS))),
-										Util.newArrayListOfValues(
-												Main.game.getNpc(Shadow.class),
-												Main.game.getNpc(Silence.class)),
-										Util.newArrayListOfValues(
-												Main.game.getPlayer()),
-										VENGARS_HALL_APPROACH_PERSUADE_AFTER_SEX,
-										UtilText.parseFromXMLFile("places/submission/ratWarrens/core", isVaginaAccess(getMainCompanion())?"VENGARS_HALL_SUB_SEX_WATCH":"VENGARS_HALL_SUB_SEX_WATCH_ANAL", getGuards(true))) {
-									@Override
-									public List<InitialSexActionInformation> getInitialSexActions() {
-										if(isVaginaAccess(getMainCompanion())) {
-											return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), getMainCompanion(), PenisVagina.PENIS_FUCKING_START, false, true));
-											
-										} else if(isAssAccess(getMainCompanion())) {
-											return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), getMainCompanion(), PenisAnus.PENIS_FUCKING_START, false, true));
-										}
-										return super.getInitialSexActions();
-									}
-								};
-							}
-						}
-						return null;
-					}
-					
-				} else {
-					if(index==1) {
-						return new Response("Continue", "As Vengar is unable to fuck you, he's content to simply inform you what he wants you to do for him.", VENGARS_HALL_APPROACH_PERSUADE_FINISH) {
-							@Override
-							public void effects() {
-								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_NO_SEX_FINISH"));
-								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_QUITTING_TALK"));
-							}
-						};
-					}
-					return null;
-				}
-			}
-			
 			if(index==1) {
-				return new Response("Stand up",
-						isCompanionDialogue()
-							?UtilText.parse(getMainCompanion(), "Refuse to allow Vengar to fuck you or [npc.name] in front of everyone, and tell him that you've already done enough.")
-							:"Refuse to allow Vengar to fuck you in front of everyone, and tell him that you've already done as he asked.",
-						VENGARS_HALL_APPROACH_PERSUADE_FINISH) {
-					@Override
-					public void effects() {
-						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_SEX_REFUSED", getGuards(true)));
-						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_QUITTING_TALK", getGuards(true)));
-					}
-				};
-				
-			} else if(index==2) {
-				return new ResponseSex(
-						isCompanionDialogue()
-							?"Present yourself (solo)"
-							:"Present yourself",
-						isCompanionDialogue()
-							?UtilText.parse(getMainCompanion(), "Tell [npc.name] to stand back, before shuffling around and raising your ass towards Vengar, presenting yourself to be fucked by him in front of everyone in the hall.")
-							:"Shuffle around and raise your ass towards Vengar, presenting yourself to be fucked by him in front of everyone in the hall.",
-						true,
-						false,
-						new SMVengarDominantSex(
-								SexPosition.ALL_FOURS,
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
-						Util.newArrayListOfValues(
-								Main.game.getNpc(Shadow.class),
-								Main.game.getNpc(Silence.class)),
-						Util.newArrayListOfValues(
-								getMainCompanion()),
-						VENGARS_HALL_APPROACH_PERSUADE_AFTER_SEX,
-						UtilText.parseFromXMLFile("places/submission/ratWarrens/core", isVaginaAccess(Main.game.getPlayer())?"VENGARS_HALL_SUB_SEX_SOLO_START":"VENGARS_HALL_SUB_SEX_SOLO_START_ANAL", getGuards(true))) {
-					@Override
-					public List<InitialSexActionInformation> getInitialSexActions() {
-						if(isVaginaAccess(Main.game.getPlayer())) {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
-							
-						} else if(isAssAccess(Main.game.getPlayer())) {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
-						}
-						return super.getInitialSexActions();
-					}
-				};
-				
-			} else if (index == 3 && isCompanionDialogue()) {
-				GameCharacter companion = getMainCompanion();
-
-				if(!getMainCompanion().isAttractedTo(Main.game.getNpc(Vengar.class)) && getMainCompanion().isAbleToRefuseSexAsCompanion()) {
-					return new Response(UtilText.parse(companion, "Present yourselves"),
-							UtilText.parse(getMainCompanion(), "You can tell that [npc.name] isn't at all interested in having sex with Vengar, and you can't force [npc.herHim] to do so..."),
-							null);
-					
-				} else {
-					return new Response(
-							UtilText.parse(companion, "Present yourselves"),
-							UtilText.parse(getMainCompanion(), "Tell [npc.name] to join you in shuffling around and raising your asses towards Vengar, presenting yourselves to be fucked by him in front of everyone in the hall."),
-							VENGARS_HALL_APPROACH_PERSUADE_SEX_DOUBLE_CHOICE) {
-						@Override
-						public boolean isSexHighlight() {
-							return true;
-						}
-					};
-				}
-				
-			} else if (index == 4 && isCompanionDialogue() && Main.game.isVoluntaryNTREnabled()) {
-				GameCharacter companion = getMainCompanion();
-
-				if(!companion.isAttractedTo(Main.game.getNpc(Vengar.class)) && companion.isAbleToRefuseSexAsCompanion()) {
-					return new Response(UtilText.parse(companion, "Offer [npc.name]"),
-							UtilText.parse(companion, "You can tell that [npc.name] isn't at all interested in having sex with Vengar, and you can't force [npc.herHim] to do so..."),
-							null);
-					
-				} else {
-					return new ResponseSex(UtilText.parse(companion, "Offer [npc.name]"),
-							UtilText.parse(getMainCompanion(), "Tell Vengar that while you're not keen on the idea yourself, you'd be happy to let him fuck [npc.name] in front of everyone..."),
-							true,
-							false,
-							new SMVengarDominantSex(
-									SexPosition.ALL_FOURS,
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
-									Util.newHashMapOfValues(
-											new Value<>(getMainCompanion(), SexSlotAllFours.ALL_FOURS))),
-							Util.newArrayListOfValues(
-									Main.game.getNpc(Shadow.class),
-									Main.game.getNpc(Silence.class)),
-							Util.newArrayListOfValues(
-									Main.game.getPlayer()),
-							VENGARS_HALL_APPROACH_PERSUADE_AFTER_SEX,
-							UtilText.parseFromXMLFile("places/submission/ratWarrens/core", isVaginaAccess(getMainCompanion())?"VENGARS_HALL_SUB_SEX_WATCH":"VENGARS_HALL_SUB_SEX_WATCH_ANAL", getGuards(true))) {
-						@Override
-						public List<InitialSexActionInformation> getInitialSexActions() {
-							if(isVaginaAccess(getMainCompanion())) {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), getMainCompanion(), PenisVagina.PENIS_FUCKING_START, false, true));
-								
-							} else if(isAssAccess(getMainCompanion())) {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), getMainCompanion(), PenisAnus.PENIS_FUCKING_START, false, true));
-							}
-							return super.getInitialSexActions();
-						}
-					};
-				}
+                return new Response("Продолжить", "Continue on your way...", Main.game.getDefaultDialogue(false));
 			}
 			return null;
 		}
@@ -3686,10 +3689,9 @@ public class RatWarrensDialogue {
 		}
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_APPROACH_SEDUCE_NO_SEX", getGuards(true)));
-			sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_QUITTING_TALK", getGuards(true)));
-			return sb.toString();
+            String sb = UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_APPROACH_SEDUCE_NO_SEX", getGuards(true)) +
+                    UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_QUITTING_TALK", getGuards(true));
+			return sb;
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
@@ -3715,10 +3717,9 @@ public class RatWarrensDialogue {
 		}
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_APPROACH_SEDUCE_AFTER_SEX", getGuards(true)));
-			sb.append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_QUITTING_TALK", getGuards(true)));
-			return sb.toString();
+            String sb = UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_APPROACH_SEDUCE_AFTER_SEX", getGuards(true)) +
+                    UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_QUITTING_TALK", getGuards(true));
+			return sb;
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
@@ -3789,7 +3790,7 @@ public class RatWarrensDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new ResponseCombat("Silence",
+                return new ResponseCombat("Сайленс",
 						"It looks like you'll have to deal with both Silence and her newly-summoned elemental!",
 						Main.game.getNpc(Silence.class),
 						Util.newArrayListOfValues(Main.game.getNpc(Silence.class), Main.game.getNpc(Silence.class).getElemental()),
@@ -3817,7 +3818,7 @@ public class RatWarrensDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new ResponseCombat("Shadow",
+                return new ResponseCombat("Тень",
 						"It looks like you'll have to deal with an enraged Shadow!",
 						Main.game.getNpc(Shadow.class),
 						Util.newArrayListOfValues(Main.game.getNpc(Shadow.class)),
@@ -3839,7 +3840,7 @@ public class RatWarrensDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new ResponseCombat("Vengar",
+                return new ResponseCombat("Венгар",
 						"Now that you've dealt with his bodyguards, you're going to need to take on Vengar himself!",
 						Main.game.getNpc(Vengar.class));
 			}
@@ -4267,57 +4268,11 @@ public class RatWarrensDialogue {
 		}
 	};
 	
-	public static final DialogueNode LEXA_VISIT_AFTER_SEX = new DialogueNode("Finished", "Vengar is satisfied, and brings an end to the sex...", true) {
-		@Override
-		public int getSecondsPassed() {
-			return 5*60;
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "LEXA_VISIT_AFTER_SEX", getGuards(true));
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Continue", "You're left alone with [axel.name] back in the Gambling Den's main entrance.", PlaceType.GAMBLING_DEN_ENTRANCE.getDialogue(false)) {
-					@Override
-					public void effects() {
-						Main.game.getPlayer().setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_ENTRANCE, false);
-						Main.game.getNpc(Vengar.class).setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_VENGARS_HALL, false);
-						Main.game.getNpc(Axel.class).setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_ENTRANCE, false);
-					}
-				};
-			}
-			return null;
-		}
-	};
+
 	
 	// After captivity enforcer raid:
 	
-	public static final DialogueNode POST_CAPTIVITY_SWORD_RAID = new DialogueNode("", "", true, true) {
-		@Override
-		public void applyPreParsingEffects() {
-			applyRatWarrensRaid();
-			Main.game.getNpc(Claire.class).setLocation(Main.game.getPlayer(), false);
-			Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_VENGAR, Quest.VENGAR_TWO_ENFORCERS));
-			Main.game.getTextEndStringBuilder().append(applyConflictQuestEnd());
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 4*60*60;
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "POST_CAPTIVITY_SWORD_RAID", getGuards(true));
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Continue", "Continue on your way...", Main.game.getDefaultDialogue(false));
-			}
-			return null;
-		}
-	};
+
 	
 	
 //	public static final DialogueNode POST_DEFEAT_SWORD_RAID = new DialogueNode("", "", true) {

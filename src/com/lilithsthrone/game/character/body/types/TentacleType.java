@@ -1,14 +1,5 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTentacleType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
@@ -16,6 +7,11 @@ import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
+
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.2.8
@@ -69,7 +65,7 @@ public class TentacleType {
 			Util.newArrayListOfValues("rounded"),
 			"#IF(npc.getTentacleCount()==1)"
 				+ " A demonic tentacle sprouts from [npc.her] back, rapidly growing in size until it's about [npc.tentacleLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] complete control over where it goes, allowing [npc.herHim] to use it like a third limb."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] complete control over where it goes, allowing [npc.herHim] to use it like a third limb."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has]"
 				+ "#IF(npc.isShortStature())"
@@ -80,7 +76,7 @@ public class TentacleType {
 				+ ", [npc.materialDescriptor] [npc.tentacleFullDescription(true)]."
 			+ "#ELSE"
 				+ " [npc.TentacleCount] demonic tentacles sprout from [npc.her] back, rapidly growing in size until they're each about [npc.tentacleLength] long."
-				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] complete control over where they go, allowing [npc.herHim] to use them like extra limbs."
+                    + " [npc.She] quickly realise that [npc.she] [npc.has] complete control over where they go, allowing [npc.herHim] to use them like extra limbs."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [npc.tentacleCount]"
 				+ "#IF(npc.isShortStature())"
@@ -129,9 +125,9 @@ public class TentacleType {
 	};
 	
 
-	private static List<AbstractTentacleType> allTentacleTypes;
-	private static Map<AbstractTentacleType, String> tentacleToIdMap = new HashMap<>();
-	private static Map<String, AbstractTentacleType> idToTentacleMap = new HashMap<>();
+	private static final List<AbstractTentacleType> allTentacleTypes;
+	private static final Map<AbstractTentacleType, String> tentacleToIdMap = new HashMap<>();
+	private static final Map<String, AbstractTentacleType> idToTentacleMap = new HashMap<>();
 	
 	static {
 		allTentacleTypes = new ArrayList<>();
@@ -217,7 +213,7 @@ public class TentacleType {
 		return allTentacleTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractTentacleType>> typesMap = new HashMap<>();
+	private static final Map<AbstractRace, List<AbstractTentacleType>> typesMap = new HashMap<>();
 	
 	public static List<AbstractTentacleType> getTentacleTypes(AbstractRace r) {
 		if(typesMap.containsKey(r)) {

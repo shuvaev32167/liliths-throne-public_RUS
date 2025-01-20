@@ -44,25 +44,25 @@
 
 	<replacementText slot="PIERCING_NIPPLE" type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(detach)] the topmost bar from the square nipple rings, before sliding them through [npc.her] nipple piercings and then clipping the U-shaped parts back into place.]]>
+            <![CDATA[[npc.Name] detach the topmost bar from the square nipple rings, before sliding them through [npc.her] nipple piercings and then clipping the U-shaped parts back into place.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(detach)] the topmost bar from the square nipple rings, before sliding them through [npc2.namePos] nipple piercings and then clipping the U-shaped parts back into place.]]>
+            <![CDATA[[npc.Name] detach the topmost bar from the square nipple rings, before sliding them through [npc2.namePos] nipple piercings and then clipping the U-shaped parts back into place.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(detach)] the topmost bar from the square nipple rings, before sliding them through [npc2.namePos] nipple piercings and then clipping the U-shaped parts back into place.]]>
+            <![CDATA[[npc.Name] roughly detach the topmost bar from the square nipple rings, before sliding them through [npc2.namePos] nipple piercings and then clipping the U-shaped parts back into place.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText slot="PIERCING_NIPPLE" type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(unclip)] the U-shaped parts of [npc.her] square nipple rings, before sliding the bars out of [npc.her] nipple piercings and then reassembling the two parts.]]>
+            <![CDATA[[npc.Name] unclip the U-shaped parts of [npc.her] square nipple rings, before sliding the bars out of [npc.her] nipple piercings and then reassembling the two parts.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(unclip)] the U-shaped parts of [npc2.namePos] square nipple rings, before sliding the bars out of [npc2.her] nipple piercings and then reassembling the two parts.]]>
+            <![CDATA[[npc.Name] unclip the U-shaped parts of [npc2.namePos] square nipple rings, before sliding the bars out of [npc2.her] nipple piercings and then reassembling the two parts.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(unclip)] the U-shaped parts of [npc2.namePos] square nipple rings, before yanking the bars out of [npc2.her] nipple piercings and then reassembling the two parts.]]>
+            <![CDATA[[npc.Name] roughly unclip the U-shaped parts of [npc2.namePos] square nipple rings, before yanking the bars out of [npc2.her] nipple piercings and then reassembling the two parts.]]>
 		</otherRough>
 	</displacementText>
   

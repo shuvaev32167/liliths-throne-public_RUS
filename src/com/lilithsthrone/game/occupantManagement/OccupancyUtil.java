@@ -1,29 +1,12 @@
 package com.lilithsthrone.game.occupantManagement;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.character.FluidStored;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.types.PenisType;
 import com.lilithsthrone.game.character.body.types.VaginaType;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.body.valueEnums.LipSize;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.gender.Gender;
@@ -41,19 +24,10 @@ import com.lilithsthrone.game.dialogue.places.dominion.lilayashome.RoomPlayer;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
-import com.lilithsthrone.game.occupantManagement.slave.SlaveJob;
-import com.lilithsthrone.game.occupantManagement.slave.SlaveJobFlag;
-import com.lilithsthrone.game.occupantManagement.slave.SlaveJobSetting;
-import com.lilithsthrone.game.occupantManagement.slave.SlavePermission;
-import com.lilithsthrone.game.occupantManagement.slave.SlavePermissionSetting;
-import com.lilithsthrone.game.occupantManagement.slave.TestSubjectTransformation;
+import com.lilithsthrone.game.occupantManagement.slave.*;
 import com.lilithsthrone.game.occupantManagement.slaveEvent.SlaveEvent;
 import com.lilithsthrone.game.occupantManagement.slaveEvent.SlaveEventTag;
-import com.lilithsthrone.game.sex.GenericSexFlag;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
@@ -65,6 +39,12 @@ import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * A class to handle all occupant-related turn mechanics and persistent variables. Deals with moving slaves to/from jobs and generating events for them. Also sends friendly occupants to/from jobs.
@@ -76,20 +56,20 @@ import com.lilithsthrone.world.places.PlaceUpgrade;
 public class OccupancyUtil implements XMLSaving {
 	
 	/** Maps job to ids of slaves who are currently at that job. */
-	private Map<SlaveJob, List<String>> charactersAtJob;
-	private List<NPC> charactersResting;
+	private final Map<SlaveJob, List<String>> charactersAtJob;
+	private final List<NPC> charactersResting;
 	
 	private int generatedIncome;
 	private int generatedUpkeep;
 	
-	private List<MilkingRoom> milkingRooms;
+	private final List<MilkingRoom> milkingRooms;
 	
 	// Settings:
 	private List<SlavePermissionSetting> enabledByDefaultPermissionSettings;
 	private Map<SlaveJob, List<SlaveJobSetting>> enabledByDefaultJobSettings;
 	
 	// Slave income:
-	private Map<NPC, Integer> dailyIncome;
+	private final Map<NPC, Integer> dailyIncome;
 	
 	public OccupancyUtil() {
 		charactersAtJob = new HashMap<>();
@@ -452,7 +432,7 @@ public class OccupancyUtil implements XMLSaving {
 			} else {
 				if(slave.hasSlavePermissionSetting(SlavePermissionSetting.SEX_MASTURBATE)
 						&& (slave.getLastTimeOrgasmedSeconds()+(60*60*(24+12))<Main.game.getSecondsPassed())) { // Give them a 12-hour period of pent up, so they will have the chance to ambush the player or have sex with other slaves
-					slave.setLastTimeHadSex((day*24*60l) + hour*60l, true);
+					slave.setLastTimeHadSex((day*24* 60L) + hour* 60L, true);
 				}
 			}
 			
@@ -813,7 +793,7 @@ public class OccupancyUtil implements XMLSaving {
 									room.incrementFluidStored(new FluidStored(slave, slave.getCum(), milked), milked);
 									milkingStored.add("[style.colourCum("+ Units.fluid(milked) +")] [npc.cum] stored.");
 								}
-								slave.setLastTimeOrgasmedSeconds((((Main.game.getDayNumber()-1)*24)+hour)*60*60);
+								slave.setLastTimeOrgasmedSeconds((((Main.game.getDayNumber()-1)* 24L)+hour)*60*60);
 							}
 						}
 						if(slave.getClothingInSlot(InventorySlot.VAGINA)!=null
@@ -829,7 +809,7 @@ public class OccupancyUtil implements XMLSaving {
 									room.incrementFluidStored(new FluidStored(slave.getId(), slave.getGirlcum(), milked), milked);
 									milkingStored.add("[style.colourGirlCum("+ Units.fluid(milked) +")] [npc.girlcum] stored.");
 								}
-								slave.setLastTimeOrgasmedSeconds((((Main.game.getDayNumber()-1)*24)+hour)*60*60);
+								slave.setLastTimeOrgasmedSeconds((((Main.game.getDayNumber()-1)* 24L)+hour)*60*60);
 							}
 						}
 						generatedIncome += income;
@@ -994,7 +974,7 @@ public class OccupancyUtil implements XMLSaving {
 												name+" roughly molested [npc.namePos] vulnerable body!",
 												name+" spent some time groping and fondling every part of [npc.namePos] body!")));
 	
-							effects.add("<span style='color:"+PresetColour.GENERIC_SEX.toWebHexString()+";'>Molested:</span> "+effectDescriptions.toString());
+							effects.add("<span style='color:"+PresetColour.GENERIC_SEX.toWebHexString()+";'>Molested:</span> "+ effectDescriptions);
 							effectDescriptions.setLength(0);
 							
 						} else {
@@ -1008,7 +988,7 @@ public class OccupancyUtil implements XMLSaving {
 													name+" fucked [npc.namePos] [npc.asshole+], before filling [npc.herHim] with [npc.cum+]!",
 													name+" filled [npc.namePos] [npc.asshole+] with cum!")));
 		
-									effects.add("[style.colourSex(Received Anal:)] "+effectDescriptions.toString());
+									effects.add("[style.colourSex(Received Anal:)] "+ effectDescriptions);
 									effectDescriptions.setLength(0);
 									slave.calculateGenericSexEffects(false, true, null, subspecies, halfDemonSubspecies, new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.PENIS));
 									break;
@@ -1020,7 +1000,7 @@ public class OccupancyUtil implements XMLSaving {
 													name+" face-fucked [npc.name], before filling [npc.her] stomach with hot cum!",
 													name+" filled [npc.namePos] stomach with cum!")));
 		
-									effects.add("[style.colourSex(Gave Blowjob:)] "+effectDescriptions.toString());
+									effects.add("[style.colourSex(Gave Blowjob:)] "+ effectDescriptions);
 									effectDescriptions.setLength(0);
 	
 									slave.calculateGenericSexEffects(false, true, null, subspecies, halfDemonSubspecies, new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS));
@@ -1033,7 +1013,7 @@ public class OccupancyUtil implements XMLSaving {
 													name+" fucked [npc.namePos] [npc.nipples+], before filling [npc.her] [npc.breasts+] with hot cum!",
 													name+" filled [npc.namePos] [npc.nipples+] with cum!")));
 									
-									effects.add("[style.colourSex(Nipples Fucked:)] "+effectDescriptions.toString());
+									effects.add("[style.colourSex(Nipples Fucked:)] "+ effectDescriptions);
 									effectDescriptions.setLength(0);
 	
 									slave.calculateGenericSexEffects(false, true, null, subspecies, halfDemonSubspecies, new SexType(SexParticipantType.NORMAL, SexAreaOrifice.NIPPLE, SexAreaPenetration.PENIS));
@@ -1050,12 +1030,12 @@ public class OccupancyUtil implements XMLSaving {
 		
 									if(slave.isVisiblyPregnant()) {
 										effectDescriptions.append(UtilText.parse(slave, "but as [npc.sheIs] already pregnant, the only result is a fresh creampie..."));
-										effects.add("[style.colourSex(Pussy Fucked:)] "+effectDescriptions.toString());
+										effects.add("[style.colourSex(Pussy Fucked:)] "+ effectDescriptions);
 										effectDescriptions.setLength(0);
 										
 									} else if(!slave.isImpregnationPhysicallyPossible()) {
 										effectDescriptions.append(UtilText.parse(slave, "but as [npc.sheIs] incapable of being impregnated, the only result is a fresh creampie..."));
-										effects.add("[style.colourSex(Pussy Fucked:)] "+effectDescriptions.toString());
+										effects.add("[style.colourSex(Pussy Fucked:)] "+ effectDescriptions);
 										effectDescriptions.setLength(0);
 										
 									} else if(slave.getSlavePermissionSettings().get(SlavePermission.PREGNANCY).contains(SlavePermissionSetting.PILLS_PROMISCUITY_PILLS)) {
@@ -1066,12 +1046,12 @@ public class OccupancyUtil implements XMLSaving {
 										} else {
 											effectDescriptions.append(UtilText.parse(slave, "but as [npc.sheIs] on [#ITEM_innoxia_pills_sterility.getNamePlural(false)], there's no chance of [npc.herHim] getting pregnant."));
 										}
-										effects.add("[style.colourSex(Pussy Fucked:)] "+effectDescriptions.toString());
+										effects.add("[style.colourSex(Pussy Fucked:)] "+ effectDescriptions);
 										effectDescriptions.setLength(0);
 										
 									} else {
 										effectDescriptions.append(UtilText.parse(slave, "resulting in a risk of pregnancy!"));
-										effects.add("[style.colourDeepPink(Pregnancy Risk:)] "+effectDescriptions.toString());
+										effects.add("[style.colourDeepPink(Pregnancy Risk:)] "+ effectDescriptions);
 										effectDescriptions.setLength(0);
 									}
 									
@@ -1108,12 +1088,9 @@ public class OccupancyUtil implements XMLSaving {
 //						eventGenerated = settingsEnabled.get(Util.random.nextInt(settingsEnabled.size()));
 					}
 					
-					boolean usingRealPartner = true;
-					if(hour!=Main.game.getHourOfDay()) {
-						usingRealPartner = false;
-					}
-					
-					GenericSexualPartner partner = null;
+					boolean usingRealPartner = hour == Main.game.getHourOfDay();
+
+                    GenericSexualPartner partner = null;
 					String partnerName = "";
 					String partnerNameCapitalised = "";
 					String partnerHer = "her";
@@ -1182,7 +1159,7 @@ public class OccupancyUtil implements XMLSaving {
 										partnerNameCapitalised+" molested [npc.namePos] vulnerable body!",
 										partnerNameCapitalised+" spent some time groping and fondling every part of [npc.namePos] body!")));
 
-						effects.add("<span style='color:"+PresetColour.GENERIC_SEX.toWebHexString()+";'>Molested:</span> "+effectDescriptions.toString());
+						effects.add("<span style='color:"+PresetColour.GENERIC_SEX.toWebHexString()+";'>Molested:</span> "+ effectDescriptions);
 						effectDescriptions.setLength(0);
 						
 					} else {
@@ -1194,7 +1171,7 @@ public class OccupancyUtil implements XMLSaving {
 													partnerNameCapitalised+" came deep inside [npc2.namePos] [npc2.asshole+]!",
 													partnerNameCapitalised+" roughly fucked [npc2.namePos] [npc2.asshole+], before filling [npc2.herHim] with [npc.cum+]!",
 													partnerNameCapitalised+" filled [npc2.namePos] [npc2.asshole+] with [npc.her] [npc.cum+]!")));
-									effects.add(UtilText.parse("[style.colourSex(Received Anal:)] "+effectDescriptions.toString()));
+									effects.add(UtilText.parse("[style.colourSex(Received Anal:)] "+ effectDescriptions));
 									effectDescriptions.setLength(0);
 									slave.calculateGenericSexEffects(false, true, partner, new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.PENIS));
 									
@@ -1204,7 +1181,7 @@ public class OccupancyUtil implements XMLSaving {
 													partnerNameCapitalised+" came deep inside [npc.namePos] [npc.asshole+]!",
 													partnerNameCapitalised+" fucked [npc.namePos] [npc.asshole+], before filling [npc.herHim] with [npc.cum+]!",
 													partnerNameCapitalised+" filled [npc.namePos] [npc.asshole+] with cum!")));
-									effects.add("[style.colourSex(Received Anal:)] "+effectDescriptions.toString());
+									effects.add("[style.colourSex(Received Anal:)] "+ effectDescriptions);
 									effectDescriptions.setLength(0);
 									slave.calculateGenericSexEffects(false, true, null, partnerSubspecies, partnerHalfDemonSubspecies, new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.PENIS));
 								}
@@ -1216,7 +1193,7 @@ public class OccupancyUtil implements XMLSaving {
 													"[npc2.Name] came deep inside "+partnerName+"'s [npc.asshole+]!",
 													"[npc2.Name] roughly fucked "+partnerName+"'s [npc.asshole+], before filling [npc.herHim] with [npc2.cum+]!",
 													"[npc2.Name] filled "+partnerName+"'s [npc.asshole+] with [npc2.her] [npc2.cum+]!")));
-									effects.add(UtilText.parse("[style.colourSexDom(Performed Anal:)] "+effectDescriptions.toString()));
+									effects.add(UtilText.parse("[style.colourSexDom(Performed Anal:)] "+ effectDescriptions));
 									effectDescriptions.setLength(0);
 									slave.calculateGenericSexEffects(false, true, partner, new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS));
 									
@@ -1226,7 +1203,7 @@ public class OccupancyUtil implements XMLSaving {
 													"[npc.Name] came deep inside "+partnerName+"'s asshole!",
 													"[npc.Name] roughly fucked "+partnerName+"'s asshole, before filling "+partnerHerHim+" with [npc.cum+]!",
 													"[npc.Name] filled "+partnerName+"'s asshole with [npc.her] [npc.cum+]!")));
-									effects.add("[style.colourSexDom(Performed Anal:)] "+effectDescriptions.toString());
+									effects.add("[style.colourSexDom(Performed Anal:)] "+ effectDescriptions);
 									effectDescriptions.setLength(0);
 									slave.calculateGenericSexEffects(false, true, null, partnerSubspecies, partnerHalfDemonSubspecies, new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS));
 								}
@@ -1240,7 +1217,7 @@ public class OccupancyUtil implements XMLSaving {
 														partnerNameCapitalised+" came deep down [npc2.namePos] throat!",
 														partnerNameCapitalised+" roughly face-fucked [npc2.name], before filling [npc2.her] stomach with [npc.cum+]!",
 														partnerNameCapitalised+" filled [npc2.namePos] stomach with [npc.her] [npc.cum+]!")));
-										effects.add("[style.colourSex(Gave Blowjob:)] "+effectDescriptions.toString());
+										effects.add("[style.colourSex(Gave Blowjob:)] "+ effectDescriptions);
 										effectDescriptions.setLength(0);
 										slave.calculateGenericSexEffects(false, true, partner, new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS));
 										
@@ -1250,7 +1227,7 @@ public class OccupancyUtil implements XMLSaving {
 														partnerNameCapitalised+" got [npc2.name] to eat [npc.herHim] out!",
 														partnerNameCapitalised+" roughly ground [npc.her] pussy down over [npc2.namePos] mouth as [npc2.she] ate [npc.herHim] out!",
 														partnerNameCapitalised+" received cunnilingus from [npc2.namePos]!")));
-										effects.add("[style.colourSex(Performed Cunnilingus:)] "+effectDescriptions.toString());
+										effects.add("[style.colourSex(Performed Cunnilingus:)] "+ effectDescriptions);
 										effectDescriptions.setLength(0);
 										slave.calculateGenericSexEffects(false, true, partner, new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.VAGINA));
 									}
@@ -1262,7 +1239,7 @@ public class OccupancyUtil implements XMLSaving {
 														partnerNameCapitalised+" came deep down [npc.namePos] throat!",
 														partnerNameCapitalised+" face-fucked [npc.name], before filling [npc.her] stomach with hot cum!",
 														partnerNameCapitalised+" filled [npc.namePos] stomach with cum!")));
-										effects.add("[style.colourSex(Gave Blowjob:)] "+effectDescriptions.toString());
+										effects.add("[style.colourSex(Gave Blowjob:)] "+ effectDescriptions);
 										effectDescriptions.setLength(0);
 										slave.calculateGenericSexEffects(false, true, null, partnerSubspecies, partnerHalfDemonSubspecies, new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS));
 										
@@ -1272,7 +1249,7 @@ public class OccupancyUtil implements XMLSaving {
 														partnerNameCapitalised+" got [npc.name] to eat "+partnerHerHim+" out!",
 														partnerNameCapitalised+" roughly ground "+partnerHer+" pussy down over [npc.namePos] mouth as [npc.she] ate "+partnerHerHim+" out!",
 														partnerNameCapitalised+" received cunnilingus from [npc.namePos]!")));
-										effects.add("[style.colourSex(Performed Cunnilingus:)] "+effectDescriptions.toString());
+										effects.add("[style.colourSex(Performed Cunnilingus:)] "+ effectDescriptions);
 										effectDescriptions.setLength(0);
 										slave.calculateGenericSexEffects(false, true, null, partnerSubspecies, partnerHalfDemonSubspecies, new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.VAGINA));
 									}
@@ -1282,13 +1259,13 @@ public class OccupancyUtil implements XMLSaving {
 								boolean slavePenis = slave.hasPenis() && slave.isAbleToAccessCoverableArea(CoverableArea.PENIS, true);
 								boolean slaveVagina = slave.hasVagina() && slave.isAbleToAccessCoverableArea(CoverableArea.VAGINA, true);
 								if(usingRealPartner) {
-									if(slavePenis && (slaveVagina?Math.random()<0.5f:true)) { // If slave has vagina available, 50/50 for oral type
+									if(slavePenis && (!slaveVagina || Math.random() < 0.5f)) { // If slave has vagina available, 50/50 for oral type
 										effectDescriptions.append(UtilText.parse(partner, slave,
 												UtilText.returnStringAtRandom(
 														"[npc2.Name] came deep down "+partnerName+"'s throat!",
 														"[npc2.Name] roughly face-fucked "+partnerName+", before filling [npc.her] stomach with [npc2.cum+]!",
 														"[npc2.Name] filled "+partnerName+"'s stomach with [npc2.her] [npc2.cum+]!")));
-										effects.add(UtilText.parse("[style.colourSexDom(Received Blowjob:)] "+effectDescriptions.toString()));
+										effects.add(UtilText.parse("[style.colourSexDom(Received Blowjob:)] "+ effectDescriptions));
 										effectDescriptions.setLength(0);
 										slave.calculateGenericSexEffects(false, true, partner, new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH));
 										
@@ -1298,19 +1275,19 @@ public class OccupancyUtil implements XMLSaving {
 														"[npc2.Name] got "+partnerName+" to eat [npc2.herHim] out!",
 														"[npc2.Name] roughly ground [npc2.her] pussy down over "+partnerName+"'s mouth as [npc.she] ate [npc2.herHim] out!",
 														"[npc2.Name] received cunnilingus from "+partnerName+"!")));
-										effects.add("[style.colourSexDom(Received Cunnilingus:)] "+effectDescriptions.toString());
+										effects.add("[style.colourSexDom(Received Cunnilingus:)] "+ effectDescriptions);
 										effectDescriptions.setLength(0);
 										slave.calculateGenericSexEffects(false, true, partner, new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE));
 									}
 									
 								} else {
-									if(slavePenis && (slaveVagina?Math.random()<0.5f:true)) { // If slave has vagina available, 50/50 for oral type
+									if(slavePenis && (!slaveVagina || Math.random() < 0.5f)) { // If slave has vagina available, 50/50 for oral type
 										effectDescriptions.append(UtilText.parse(slave,
 												UtilText.returnStringAtRandom(
 														"[npc.Name] came deep down "+partnerName+"'s throat!",
 														"[npc.Name] roughly face-fucked "+partnerName+", before filling "+partnerHer+" stomach with [npc.cum+]!",
 														"[npc.Name] filled "+partnerName+"'s stomach with [npc.her] [npc.cum+]!")));
-										effects.add(UtilText.parse("[style.colourSexDom(Received Blowjob:)] "+effectDescriptions.toString()));
+										effects.add(UtilText.parse("[style.colourSexDom(Received Blowjob:)] "+ effectDescriptions));
 										effectDescriptions.setLength(0);
 										slave.calculateGenericSexEffects(false, true, null, partnerSubspecies, partnerHalfDemonSubspecies, new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH));
 										
@@ -1320,7 +1297,7 @@ public class OccupancyUtil implements XMLSaving {
 														"[npc.Name] got "+partnerName+" to eat [npc.herHim] out!",
 														"[npc.Name] roughly ground [npc.her] pussy down over "+partnerName+"'s mouth as "+partnerShe+" ate [npc.herHim] out!",
 														"[npc.Name] received cunnilingus from "+partnerName+"!")));
-										effects.add("[style.colourSexDom(Received Cunnilingus:)] "+effectDescriptions.toString());
+										effects.add("[style.colourSexDom(Received Cunnilingus:)] "+ effectDescriptions);
 										effectDescriptions.setLength(0);
 										slave.calculateGenericSexEffects(false, true, null, partnerSubspecies, partnerHalfDemonSubspecies, new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE));
 									}
@@ -1335,7 +1312,7 @@ public class OccupancyUtil implements XMLSaving {
 													partnerNameCapitalised+" roughly fucked "+UtilText.parse(slave, "[npc.namePos] [npc.nipples+], before filling [npc.her] [npc.breasts+] with"+UtilText.parse(partner," [npc.cum+]!")),
 													partnerNameCapitalised+" filled "+UtilText.parse(slave, "[npc.namePos] [npc.nipples+]")+UtilText.parse(partner," with [npc.her] [npc.cum+]!"))));
 										
-									effects.add("[style.colourSex(Nipples Fucked:)] "+effectDescriptions.toString());
+									effects.add("[style.colourSex(Nipples Fucked:)] "+ effectDescriptions);
 									effectDescriptions.setLength(0);
 									slave.calculateGenericSexEffects(false, true, partner, new SexType(SexParticipantType.NORMAL, SexAreaOrifice.NIPPLE, SexAreaPenetration.PENIS));
 									
@@ -1346,7 +1323,7 @@ public class OccupancyUtil implements XMLSaving {
 													partnerNameCapitalised+" fucked [npc.namePos] [npc.nipples+], before filling [npc.her] [npc.breasts+] with hot cum!",
 													partnerNameCapitalised+" filled [npc.namePos] [npc.nipples+] with cum!")));
 									
-									effects.add("[style.colourSex(Nipples Fucked:)] "+effectDescriptions.toString());
+									effects.add("[style.colourSex(Nipples Fucked:)] "+ effectDescriptions);
 									effectDescriptions.setLength(0);
 									slave.calculateGenericSexEffects(false, true, null, partnerSubspecies, partnerHalfDemonSubspecies, new SexType(SexParticipantType.NORMAL, SexAreaOrifice.NIPPLE, SexAreaPenetration.PENIS));
 								}
@@ -1358,7 +1335,7 @@ public class OccupancyUtil implements XMLSaving {
 													"[npc2.Name] came deep inside "+partnerName+"'s [npc.nipples+]!",
 													"[npc2.Name] roughly fucked "+partnerName+"'s [npc.nipples+], before filling [npc.her] [npc.breasts+] with [npc2.cum]!",
 													"[npc2.Name] filled "+partnerName+"'s [npc.nipples+] with [npc2.her] [npc2.cum+]!")));
-									effects.add("[style.colourSexDom(Nipple Fuck:)] "+effectDescriptions.toString());
+									effects.add("[style.colourSexDom(Nipple Fuck:)] "+ effectDescriptions);
 									effectDescriptions.setLength(0);
 									slave.calculateGenericSexEffects(false, true, partner, new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.NIPPLE));
 									
@@ -1368,7 +1345,7 @@ public class OccupancyUtil implements XMLSaving {
 													"[npc.Name] came deep inside "+partnerName+"'s nipples!",
 													"[npc.Name] fucked "+partnerName+"'s nipples, before filling "+partnerHer+" breasts with [npc.cum]!",
 													"[npc.Name] filled "+partnerName+"'s nipples with [npc.cum]!")));
-									effects.add("[style.colourSexDom(Nipple Fuck:)] "+effectDescriptions.toString());
+									effects.add("[style.colourSexDom(Nipple Fuck:)] "+ effectDescriptions);
 									effectDescriptions.setLength(0);
 									slave.calculateGenericSexEffects(false, true, null, partnerSubspecies, partnerHalfDemonSubspecies, new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.NIPPLE));
 								}
@@ -1386,12 +1363,12 @@ public class OccupancyUtil implements XMLSaving {
 									
 									if(slave.isVisiblyPregnant()) {
 										effectDescriptions.append(UtilText.parse(slave, "but as [npc.sheIs] already pregnant, the only result is a fresh creampie..."));
-										effects.add("[style.colourSex(Pussy Fucked:)] "+effectDescriptions.toString());
+										effects.add("[style.colourSex(Pussy Fucked:)] "+ effectDescriptions);
 										effectDescriptions.setLength(0);
 										
 									} else if(!slave.isImpregnationPhysicallyPossible()) {
 										effectDescriptions.append(UtilText.parse(slave, "but as [npc.sheIs] incapable of being impregnated, the only result is a fresh creampie..."));
-										effects.add("[style.colourSex(Pussy Fucked:)] "+effectDescriptions.toString());
+										effects.add("[style.colourSex(Pussy Fucked:)] "+ effectDescriptions);
 										effectDescriptions.setLength(0);
 										
 									} else if(slave.getSlavePermissionSettings().get(SlavePermission.PREGNANCY).contains(SlavePermissionSetting.PILLS_PROMISCUITY_PILLS)) {
@@ -1401,12 +1378,12 @@ public class OccupancyUtil implements XMLSaving {
 										} else {
 											effectDescriptions.append(UtilText.parse(slave, "but as [npc.sheIs] on [#ITEM_innoxia_pills_sterility.getNamePlural(false)], there's no chance of [npc.herHim] getting pregnant."));
 										}
-										effects.add("[style.colourSex(Pussy Fucked:)] "+effectDescriptions.toString());
+										effects.add("[style.colourSex(Pussy Fucked:)] "+ effectDescriptions);
 										effectDescriptions.setLength(0);
 										
 									} else {
 										effectDescriptions.append(UtilText.parse(slave, "resulting in a risk of pregnancy!"));
-										effects.add("[style.colourDeepPink(Pregnancy Risk:)] "+effectDescriptions.toString());
+										effects.add("[style.colourDeepPink(Pregnancy Risk:)] "+ effectDescriptions);
 										effectDescriptions.setLength(0);
 									}
 									
@@ -1421,12 +1398,12 @@ public class OccupancyUtil implements XMLSaving {
 		
 									if(slave.isVisiblyPregnant()) {
 										effectDescriptions.append(UtilText.parse(slave, "but as [npc.sheIs] already pregnant, the only result is a fresh creampie..."));
-										effects.add("[style.colourSex(Pussy Creampie:)] "+effectDescriptions.toString());
+										effects.add("[style.colourSex(Pussy Creampie:)] "+ effectDescriptions);
 										effectDescriptions.setLength(0);
 										
 									} else if(!slave.isImpregnationPhysicallyPossible()) {
 										effectDescriptions.append(UtilText.parse(slave, "but as [npc.sheIs] incapable of being impregnated, the only result is a fresh creampie..."));
-										effects.add("[style.colourSex(Pussy Creampie:)] "+effectDescriptions.toString());
+										effects.add("[style.colourSex(Pussy Creampie:)] "+ effectDescriptions);
 										effectDescriptions.setLength(0);
 										
 									} else if(slave.getSlavePermissionSettings().get(SlavePermission.PREGNANCY).contains(SlavePermissionSetting.PILLS_PROMISCUITY_PILLS)) {
@@ -1437,12 +1414,12 @@ public class OccupancyUtil implements XMLSaving {
 										} else {
 											effectDescriptions.append(UtilText.parse(slave, "but as [npc.sheIs] on [#ITEM_innoxia_pills_sterility.getNamePlural(false)], there's no chance of [npc.herHim] getting pregnant."));
 										}
-										effects.add("[style.colourSex(Pussy Creampie:)] "+effectDescriptions.toString());
+										effects.add("[style.colourSex(Pussy Creampie:)] "+ effectDescriptions);
 										effectDescriptions.setLength(0);
 										
 									} else {
 										effectDescriptions.append(UtilText.parse(slave, "resulting in a risk of pregnancy!"));
-										effects.add("[style.colourDeepPink(Pregnancy Risk:)] "+effectDescriptions.toString());
+										effects.add("[style.colourDeepPink(Pregnancy Risk:)] "+ effectDescriptions);
 										effectDescriptions.setLength(0);
 									}
 								}
@@ -1454,7 +1431,7 @@ public class OccupancyUtil implements XMLSaving {
 													"[npc2.Name] came deep inside "+partnerName+"'s [npc.pussy+]!",
 													"[npc2.Name] roughly fucked "+partnerName+"'s [npc.pussy+], before filling [npc.herHim] with [npc2.cum+]!",
 													"[npc2.Name] filled "+partnerName+"'s [npc.pussy+] with [npc2.her] [npc2.cum+]!")));
-									effects.add(UtilText.parse("[style.colourSexDom(Fucked Pussy:)] "+effectDescriptions.toString()));
+									effects.add(UtilText.parse("[style.colourSexDom(Fucked Pussy:)] "+ effectDescriptions));
 									effectDescriptions.setLength(0);
 									slave.calculateGenericSexEffects(false, true, partner, new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA));
 									
@@ -1464,7 +1441,7 @@ public class OccupancyUtil implements XMLSaving {
 													"[npc.Name] came deep inside "+partnerName+"'s pussy!",
 													"[npc.Name] roughly fucked "+partnerName+"'s pussy, before filling "+partnerHerHim+" with [npc.cum+]!",
 													"[npc.Name] filled "+partnerName+"'s pussy with [npc.her] [npc.cum+]!")));
-									effects.add("[style.colourSexDom(Fucked Pussy:)] "+effectDescriptions.toString());
+									effects.add("[style.colourSexDom(Fucked Pussy:)] "+ effectDescriptions);
 									effectDescriptions.setLength(0);
 									slave.calculateGenericSexEffects(false, true, null, partnerSubspecies, partnerHalfDemonSubspecies, new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA));
 								}
@@ -1788,7 +1765,7 @@ public class OccupancyUtil implements XMLSaving {
 		boolean canImpregnate = slave.hasSlavePermissionSetting(SlavePermissionSetting.SEX_IMPREGNATE) && npc.hasSlavePermissionSetting(SlavePermissionSetting.SEX_IMPREGNATED);
 		boolean canBeImpregnated = slave.hasSlavePermissionSetting(SlavePermissionSetting.SEX_IMPREGNATED) && npc.hasSlavePermissionSetting(SlavePermissionSetting.SEX_IMPREGNATE);
 		
-		slave.setLastTimeHadSex((day*24*60l) + hourOfDay*60l, true);
+		slave.setLastTimeHadSex((day*24* 60L) + hourOfDay* 60L, true);
 		
 		slave.generateSexChoices(false, npc);
 		String sexDescription = UtilText.parse(slave, npc, "[npc.Name] spent some time kissing and groping [npc2.name].");
@@ -1993,14 +1970,14 @@ public class OccupancyUtil implements XMLSaving {
 					if(Math.random()<chanceToBond) {
 						if(Math.random()<chanceForPositiveOutcome) {
 							if(slave.getAffection(npc)<100 || npc.getAffection(slave)<100) {
-								descriptions.add(UtilText.parse(slave, npc, "[npc.Name] and [npc2.name] spent some time getting to know one another a little better."));
+								descriptions.add(UtilText.parse(slave, npc, "[npc.Name] и [npc2.name] провели некоторое время, чтобы получше узнать друг друга."));
 								descriptions.add(slave.incrementAffection(npc, 5));
 								descriptions.add(npc.incrementAffection(slave, 5));
 							}
 							
 						} else {
 							if(slave.getAffection(npc)>-100 || npc.getAffection(slave)>-100) {
-								descriptions.add(UtilText.parse(slave, npc,"[npc.Name] and [npc2.name] spent some time arguing with one another."));
+								descriptions.add(UtilText.parse(slave, npc, "[npc.Name] и [npc2.name] провели некоторое время, споря друг с другом."));
 								descriptions.add(slave.incrementAffection(npc, -5));
 								descriptions.add(npc.incrementAffection(slave, -5));
 							}

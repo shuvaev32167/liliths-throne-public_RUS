@@ -68,25 +68,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(put)] on the safety glasses.]]>
+            <![CDATA[[npc.Name] put on the safety glasses.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(push)] the safety glasses onto [npc2.namePos] face.]]>
+            <![CDATA[[npc.Name] push the safety glasses onto [npc2.namePos] face.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(push)] the safety glasses onto [npc2.namePos] face.]]>
+            <![CDATA[[npc.Name] roughly push the safety glasses onto [npc2.namePos] face.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(take)] off [npc.her] safety glasses.]]>
+            <![CDATA[[npc.Name] take off [npc.her] safety glasses.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(take)] off [npc2.namePos] safety glasses.]]>
+            <![CDATA[[npc.Name] take off [npc2.namePos] safety glasses.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(grab)] [npc2.namePos] safety glasses and roughly [npc.verb(pull)] them off.]]>
+            <![CDATA[[npc.Name] grab [npc2.namePos] safety glasses and roughly pull them off.]]>
 		</otherRough>
 	</displacementText>
   

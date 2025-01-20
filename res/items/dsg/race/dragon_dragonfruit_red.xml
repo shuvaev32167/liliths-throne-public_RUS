@@ -36,7 +36,7 @@
 		
 		<applyEffects><![CDATA[
 			<p style='margin-bottom:0; padding-bottom:0;'>
-				[npc.Name] [npc.verb(start)] to feel stronger...
+				[npc.Name] start to feel stronger...
 			</p>
 			[#npc.addPotionEffect(ATTRIBUTE_MAJOR_PHYSIQUE, 1)]
 			[#npc.addPotionEffect(ATTRIBUTE_MAJOR_ARCANE, 9)]
@@ -50,10 +50,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		[npc.Name] [npc.verb(peel)] the fruit and [npc.verb(marvel)] at tender flesh and crunchy seeds inside. Unable to resist the delicious looking fruit, [npc.she] eagerly [npc.verb(start)] wolfing it all down, leaving empty peels behind in moments.
+		[npc.Name] peel the fruit and marvel at tender flesh and crunchy seeds inside. Unable to resist the delicious looking fruit, [npc.she] eagerly start wolfing it all down, leaving empty peels behind in moments.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		[npc.Name] [npc.verb(peel)] the fruit for [npc2.name] and [npc.verb(hold)] it out to [npc2.her], allowing [npc2.herHim] to [npc2.verb(marvel)] at the tender flesh and crunchy seeds inside. Unable to resist the delicious-looking fruit, [npc2.she] [npc2.verb(start)] wolfing it all down, leaving behind empty peels in moments.
+		[npc.Name] peel the fruit for [npc2.name] и hold it out to [npc2.her], allowing [npc2.herHim] to [npc2.verb(marvel)] at the tender flesh and crunchy seeds inside. Unable to resist the delicious-looking fruit, [npc2.she] [npc2.verb(start)] wolfing it all down, leaving behind empty peels in moments.
 		]]></otherUse>
 	</useDescriptions>
 

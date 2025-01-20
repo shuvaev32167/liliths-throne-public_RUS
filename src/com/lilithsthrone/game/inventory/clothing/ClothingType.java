@@ -1,26 +1,12 @@
 package com.lilithsthrone.game.inventory.clothing;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
-
 import com.lilithsthrone.controller.xmlParsing.XMLLoadException;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractSetBonus;
-import com.lilithsthrone.game.inventory.InventorySlot;
-import com.lilithsthrone.game.inventory.ItemTag;
-import com.lilithsthrone.game.inventory.Rarity;
-import com.lilithsthrone.game.inventory.SetBonus;
+import com.lilithsthrone.game.inventory.*;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
@@ -28,6 +14,12 @@ import com.lilithsthrone.game.inventory.enchanting.TFPotency;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.ColourListPresets;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 /**
  * @since 0.1.84
@@ -2453,12 +2445,12 @@ public class ClothingType {
 		@Override
 		public String equipText(GameCharacter clothingOwner, GameCharacter clothingRemover, InventorySlot slotToEquipInto, boolean rough, AbstractClothing clothing, boolean applyEffects) {
 			if(rough) {
-				return UtilText.parse(clothingOwner, clothingRemover, "[npc.Name] roughly [npc.verb(force)] the signet ring onto [npc2.namePos] finger.");
+                return UtilText.parse(clothingOwner, clothingRemover, "[npc.Name] roughly force the signet ring onto [npc2.namePos] finger.");
 			} else {
 				if(clothingOwner.equals(clothingRemover)) {
-					return UtilText.parse(clothingOwner, clothingRemover, "[npc.Name] [npc.verb(slide)] the signet ring onto [npc.her] finger.");
+                    return UtilText.parse(clothingOwner, clothingRemover, "[npc.Name] slide the signet ring onto [npc.her] finger.");
 				} else {
-					return UtilText.parse(clothingOwner, clothingRemover, "[npc.Name] [npc.verb(slide)] the signet ring onto [npc2.namePos] finger.");
+                    return UtilText.parse(clothingOwner, clothingRemover, "[npc.Name] slide the signet ring onto [npc2.namePos] finger.");
 				}
 			}
 		}
@@ -2466,38 +2458,38 @@ public class ClothingType {
 		@Override
 		public String unequipText(GameCharacter clothingOwner, GameCharacter clothingRemover, InventorySlot slotToEquipInto, boolean rough, AbstractClothing clothing, boolean applyEffects) {
 			if(rough) {
-				return UtilText.parse(clothingOwner, clothingRemover, "[npc.Name] roughly [npc.verb(yank)] the signet ring off of [npc2.namePos] finger.");
+                return UtilText.parse(clothingOwner, clothingRemover, "[npc.Name] roughly yank the signet ring off of [npc2.namePos] finger.");
 			} else {
 				if(clothingOwner.equals(clothingRemover)) {
-					return UtilText.parse(clothingOwner, clothingRemover, "[npc.Name] [npc.verb(slide)] the signet ring off [npc.her] finger.");
+                    return UtilText.parse(clothingOwner, clothingRemover, "[npc.Name] slide the signet ring off [npc.her] finger.");
 				} else {
-					return UtilText.parse(clothingOwner, clothingRemover, "[npc.Name] [npc.verb(slide)] the signet ring off [npc2.namePos] finger.");
+                    return UtilText.parse(clothingOwner, clothingRemover, "[npc.Name] slide the signet ring off [npc2.namePos] finger.");
 				}
 			}
 		}
 	};
 	
 	
-	private static List<AbstractClothingType> allClothing;
-	private static List<AbstractClothingType> moddedClothingList;
-	private static Map<AbstractSetBonus, List<AbstractClothingType>> setClothing;
+	private static final List<AbstractClothingType> allClothing;
+	private static final List<AbstractClothingType> moddedClothingList;
+	private static final Map<AbstractSetBonus, List<AbstractClothingType>> setClothing;
 	
-	private static List<InventorySlot> coreClothingSlots;
-	private static List<InventorySlot> lingerieSlots;
+	private static final List<InventorySlot> coreClothingSlots;
+	private static final List<InventorySlot> lingerieSlots;
 	
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMap;
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapFemale;
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapMale;
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapAndrogynous;
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapFemaleIncludingAndrogynous;
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapMaleIncludingAndrogynous;
+	private static final Map<InventorySlot, List<AbstractClothingType>> commonClothingMap;
+	private static final Map<InventorySlot, List<AbstractClothingType>> commonClothingMapFemale;
+	private static final Map<InventorySlot, List<AbstractClothingType>> commonClothingMapMale;
+	private static final Map<InventorySlot, List<AbstractClothingType>> commonClothingMapAndrogynous;
+	private static final Map<InventorySlot, List<AbstractClothingType>> commonClothingMapFemaleIncludingAndrogynous;
+	private static final Map<InventorySlot, List<AbstractClothingType>> commonClothingMapMaleIncludingAndrogynous;
 	
-	private static Map<Occupation, ArrayList<AbstractClothingType>> suitableFeminineClothing = new HashMap<>();
+	private static final Map<Occupation, ArrayList<AbstractClothingType>> suitableFeminineClothing = new HashMap<>();
 	
-	private static Map<AbstractClothingType, String> clothingToIdMap = new HashMap<>();
-	private static Map<String, AbstractClothingType> idToClothingMap = new HashMap<>();
+	private static final Map<AbstractClothingType, String> clothingToIdMap = new HashMap<>();
+	private static final Map<String, AbstractClothingType> idToClothingMap = new HashMap<>();
 	
-	private static Map<String, String> oldIdConversionMap = new HashMap<>();
+	private static final Map<String, String> oldIdConversionMap = new HashMap<>();
 	
 	public static AbstractClothingType getClothingTypeFromId(String id) {
 		return getClothingTypeFromId(id, null);

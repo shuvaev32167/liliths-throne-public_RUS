@@ -9,7 +9,7 @@
 	<tags/>
 	<name><![CDATA[Benevolent Blessing]]></name>
 	<description><![CDATA[
-		By wearing the benevolent set, [npc.nameIs] filled with a sense of peaceful tranquility. [npc.name] [npc.verb(feel)] as though [npc.she] can save the world!
+		By wearing the benevolent set, [npc.nameIs] filled with a sense of peaceful tranquility. [npc.name] feel as though [npc.she] can save the world!
 	]]></description>
 	<imageName>benevolent_set.svg</imageName>
 	<colourPrimary>CLOTHING_RED_DARK</colourPrimary>

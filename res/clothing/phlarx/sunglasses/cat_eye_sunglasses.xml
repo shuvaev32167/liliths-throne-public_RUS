@@ -59,24 +59,24 @@
 	</coreAttributes>
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(remove)] [npc.her] sunglasses.]]>
+            <![CDATA[[npc.Name] remove [npc.her] sunglasses.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(remove)] [npc2.namePos] sunglasses.]]>
+            <![CDATA[[npc.Name] remove [npc2.namePos] sunglasses.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] aggressively [npc.verb(remove)] [npc2.namePos] sunglasses.]]>
+            <![CDATA[[npc.Name] aggressively remove [npc2.namePos] sunglasses.]]>
 		</otherRough>
 	</displacementText>
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(put)] on [npc.her] sunglasses.]]>
+            <![CDATA[[npc.Name] put on [npc.her] sunglasses.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(put)] on [npc2.namePos] sunglasses.]]>
+            <![CDATA[[npc.Name] put on [npc2.namePos] sunglasses.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] aggressively [npc.verb(put)] on [npc2.namePos] sunglasses.]]>
+            <![CDATA[[npc.Name] aggressively put on [npc2.namePos] sunglasses.]]>
 		</otherRough>
 	</replacementText>
 </clothing>

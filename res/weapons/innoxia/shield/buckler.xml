@@ -13,10 +13,11 @@
 		
 		<attackDescriptor>shield-bash</attackDescriptor>
 		<attackTooltipDescription>Bash [npc2.name] with your buckler.</attackTooltipDescription>
-		<rarity>COMMON</rarity> 
-		
-		<equipText><![CDATA[[npc.Name] [npc.verb(take)] hold of [npc.her] buckler, and [npc.verb(prepare)] to use it to defend [npc.herself] in combat.]]></equipText>
-		<unequipText><![CDATA[[npc.Name] [npc.verb(put)] [npc.her] buckler away.]]></unequipText>
+		<rarity>COMMON</rarity>
+
+        <equipText>
+            <![CDATA[[npc.Name] take hold of [npc.her] buckler, and prepare to use it to defend [npc.herself] in combat.]]></equipText>
+        <unequipText><![CDATA[[npc.Name] put [npc.her] buckler away.]]></unequipText>
 		
 		<imageName>buckler.svg</imageName> 
 		<imageEquippedName>buckler.svg</imageEquippedName>
@@ -53,25 +54,25 @@
 
 	<hitDescriptions>
 		<hitText><![CDATA[
-		Swinging [npc.her] buckler, [npc.name] [npc.verb(manage)] to whack [npc2.name] on the [npc2.arm], which causes [npc2.herHim] to let out a surprised yelp!
+		Swinging [npc.her] buckler, [npc.name] manage to whack [npc2.name] on the [npc2.arm], which causes [npc2.herHim] to let out a surprised yelp!
 		]]></hitText>
 		<hitText><![CDATA[
-		Striking out at [npc2.name] with [npc.her] buckler, [npc.name] [npc.verb(manage)] to land a solid hit on [npc2.her] [npc2.arm]!
+		Striking out at [npc2.name] with [npc.her] buckler, [npc.name] manage to land a solid hit on [npc2.her] [npc2.arm]!
 		]]></hitText>
 		<hitText><![CDATA[
-		With a quick step forwards, [npc.name] [npc.verb(lunge)] out at [npc2.name] with [npc.her] buckler, whacking the boss against [npc2.her] shoulder!
+		With a quick step forwards, [npc.name] lunge out at [npc2.name] with [npc.her] buckler, whacking the boss against [npc2.her] shoulder!
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		Thrusting out with [npc.her] buckler, [npc.name] [npc.verb(attempt)] to whack [npc2.name] on the [npc2.arm], but [npc.verb(end)] up missing [npc2.herHim]!
+		Thrusting out with [npc.her] buckler, [npc.name] attempt to whack [npc2.name] on the [npc2.arm], but end up missing [npc2.herHim]!
 		]]></missText>
 		<missText><![CDATA[
-		Striking out at [npc2.name] with [npc.her] buckler, [npc.name] [npc.verb(let)] out a frustrated cry as [npc.she] [npc.verb(miss)] [npc.her] target!
+		Striking out at [npc2.name] with [npc.her] buckler, [npc.name] let out a frustrated cry as [npc.she] miss [npc.her] target!
 		]]></missText>
 		<missText><![CDATA[
-		With a quick step forwards, [npc.name] [npc.verb(lunge)] out at [npc2.name] with [npc.her] buckler, but [npc.she] [npc.verb(miss)] [npc.her] target!
+		With a quick step forwards, [npc.name] lunge out at [npc2.name] with [npc.her] buckler, but [npc.she] miss [npc.her] target!
 		]]></missText>
 	</missDescriptions>
 	

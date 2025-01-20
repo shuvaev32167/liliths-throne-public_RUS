@@ -1,12 +1,5 @@
 package com.lilithsthrone.game.combat;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Stack;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -42,6 +35,9 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
+import java.util.*;
+import java.util.Map.Entry;
+
 /**
  * Call initialiseCombat() before using.
  *
@@ -68,9 +64,9 @@ public class Combat {
 	private boolean attemptedEscape = false;
 	private boolean escaped = false;
 	private boolean playerVictory = false;
-	private StringBuilder postCombatStringBuilder = new StringBuilder();
+	private final StringBuilder postCombatStringBuilder = new StringBuilder();
 	
-	private StringBuilder combatTurnResolutionStringBuilder = new StringBuilder();
+	private final StringBuilder combatTurnResolutionStringBuilder = new StringBuilder();
 
 	private Map<GameCharacter, GameCharacter> preferredTargets;
 	
@@ -200,7 +196,7 @@ public class Combat {
 		if(escapeBlocked) {
 			escapeChance = 0;
 		} else {
-			escapeChance = ((NPC) enemies.get(0)).getEscapeChance();
+			escapeChance = enemies.get(0).getEscapeChance();
 			if (Main.game.getPlayer().hasTrait(Perk.RUNNER, true)) {
 				escapeChance *= 1.5f;
 			} else if (Main.game.getPlayer().hasTrait(Perk.RUNNER_2, true)) {
@@ -706,7 +702,7 @@ public class Combat {
 						}
 					};
 				} else {
-					return new Response("Continue", "Combat continues.", ENEMY_ATTACK){
+                    return new Response("Продолжить", "Combat continues.", ENEMY_ATTACK) {
 						@Override
 						public void effects() {
 							endCombatTurn();//TODO test
@@ -753,18 +749,16 @@ public class Combat {
 						SUBMIT_CONFIRM){
 					@Override
 					public void effects() {
-						StringBuilder sb = new StringBuilder();
-						
-						sb.append(getCharactersTurnDiv(Main.game.getPlayer(), "Submit",
-								Util.newArrayListOfValues(UtilText.parse(enemyLeader,
-									"You kneel in front of [npc.name], lowering your head in submission as you mutter,"
-										+ " [pc.speech(I don't want to fight any more, I submit.)]"))));
 
-						sb.append(getCharactersTurnDiv(enemyLeader, "Victory",
-								Util.newArrayListOfValues(UtilText.parse(enemyLeader,
-									"[npc.Name] lets out a triumphant laugh, before moving forwards to take advantage of your submission..."))));
+                        String sb = getCharactersTurnDiv(Main.game.getPlayer(), "Submit",
+                                Util.newArrayListOfValues(UtilText.parse(enemyLeader,
+                                        "You kneel in front of [npc.name], lowering your head in submission as you mutter,"
+                                                + " [pc.speech(I don't want to fight any more, I submit.)]"))) +
+                                getCharactersTurnDiv(enemyLeader, "Victory",
+                                        Util.newArrayListOfValues(UtilText.parse(enemyLeader,
+                                                "[npc.Name] lets out a triumphant laugh, before moving forwards to take advantage of your submission...")));
 						
-						Main.game.getTextStartStringBuilder().append(sb.toString());
+						Main.game.getTextStartStringBuilder().append(sb);
 					}
 				};
 				
@@ -801,7 +795,7 @@ public class Combat {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new ResponseEffectsOnly("Continue", UtilText.parse(enemyLeader, "You wait for [npc.name] to make a move.")){
+                return new ResponseEffectsOnly("Продолжить", UtilText.parse(enemyLeader, "You wait for [npc.name] to make a move.")) {
 					@Override
 					public void effects() {
 						endCombat(false);
@@ -1326,9 +1320,9 @@ public class Combat {
 		String predictionTooltip = move.getPrediction(selectedMoveIndex, Main.game.getPlayer(), moveTarget, pcEnemies, pcAllies);
 		
 		return new Response(Util.capitaliseSentence(move.getName(selectedMoveIndex, Main.game.getPlayer())),
-			moveStatblock.toString()
+			moveStatblock
 				+ predictionTooltip
-				+ critText.toString(),
+				+ critText,
 			ENEMY_ATTACK){
 			@Override
 			public void effects() {
@@ -1848,7 +1842,7 @@ public class Combat {
 					
 					appliedSe.setLastTimeAppliedEffect(Main.game.getSecondsPassed());
 					if(s.length()!=0) {
-						endTurnStatusEffectText.append("<p><b style='color: " + se.getColour().toWebHexString() + "'>" + Util.capitaliseSentence(se.getName(character)) + ":</b> " + s.toString()+ "</p>");
+						endTurnStatusEffectText.append("<p><b style='color: " + se.getColour().toWebHexString() + "'>" + Util.capitaliseSentence(se.getName(character)) + ":</b> " + s + "</p>");
 					}
 				}
 				

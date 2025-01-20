@@ -1,19 +1,9 @@
 package com.lilithsthrone.game.character.body;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractBreastType;
 import com.lilithsthrone.game.character.body.types.BreastType;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeShape;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.FluidRegeneration;
-import com.lilithsthrone.game.character.body.valueEnums.Lactation;
-import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.body.valueEnums.NippleShape;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
@@ -21,6 +11,9 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.3.1
@@ -112,12 +105,12 @@ public class BreastCrotch implements BodyPartInterface {
 			return UtilText.parse(owner,
 					"<p>"
 						+ "A strange tingling feeling rises up into [npc.namePos] crotch, but as [npc.she] [npc.do]n't have any udders, nothing seems to happen...<br/>"
-						+ "If [npc.she] ever [npc.verb(grow)] any, [npc.name] will now have [style.boldSex("+shape.getDescriptor()+" udders)]!"
+                            + "If [npc.she] ever grow any, [npc.name] will now have [style.boldSex(" + shape.getDescriptor() + " udders)]!"
 					+ "</p>");
 		}
 		return UtilText.parse(owner,
 				"<p>"
-					+ "A strange tingling feeling rises up into [npc.namePos] crotch, and before [npc.she] [npc.verb(know)] what's happening, [npc.her] [npc.crotchBoobs] transform into a new shape...<br/>"
+                        + "A strange tingling feeling rises up into [npc.namePos] crotch, and before [npc.she] know what's happening, [npc.her] [npc.crotchBoobs] transform into a new shape...<br/>"
 					+ "[npc.Name] now [npc.has] [style.boldSex("+shape.getDescriptor()+" [npc.crotchBoobs])]!"
 				+ "</p>");
 	}
@@ -212,7 +205,7 @@ public class BreastCrotch implements BodyPartInterface {
 		
 		if (type == getType()) {
 			if(type.equals(BreastType.NONE)) {
-				return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already [npc.verb(lack)] [npc.crotchBoobs], so nothing happens...)]</p>");
+                return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already lack [npc.crotchBoobs], so nothing happens...)]</p>");
 			}
 			return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already [npc.has] the [npc.crotchBoobs] of [npc.a_breastRace], so nothing happens...)]</p>");
 		}
@@ -222,14 +215,14 @@ public class BreastCrotch implements BodyPartInterface {
 		if(type.equals(BreastType.NONE)) { // Removal:
 			sb.append(
 					"<p>"
-						+ "The area above [npc.namePos] crotch suddenly feels extremely soft and sensitive, and [npc.she] can't help but let out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a transformation start to take place."
+                            + "The area above [npc.namePos] crotch suddenly feels extremely soft and sensitive, and [npc.she] can't help but let out [npc.a_moan+] as [npc.she] feel a transformation start to take place."
 						+" [npc.Her] [npc.crotchBoobs] tingle and soften, and, with [npc.her] nipples and areolae leading the way, they quickly shrink down and disappear back into the [npc.skin] covering [npc.her] lower stomach."
 						+ "<br/>");
 			
 		} else if(this.getType().equals(BreastType.NONE)) { // New addition:
 			sb.append(
 					"<p>"
-						+ "The area above [npc.namePos] crotch suddenly feels extremely soft and sensitive, and [npc.she] can't help but let out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a transformation start to take place."
+                            + "The area above [npc.namePos] crotch suddenly feels extremely soft and sensitive, and [npc.she] can't help but let out [npc.a_moan+] as [npc.she] feel a transformation start to take place."
 						+ " [npc.CrotchBoobsRows] hard little nubs start to grow out of the [npc.skin] covering [npc.her] lower stomach,"
 							+ " and [npc.she] can't help but let out a surprised gasp as they quickly swell out into [npc.crotchBoobsSize] [npc.crotchBoobs]."
 						+ "<br/>");
@@ -238,9 +231,9 @@ public class BreastCrotch implements BodyPartInterface {
 		} else {
 			sb.append(
 					"<p>"
-						+ "The area above [npc.namePos] crotch suddenly feels extremely soft and sensitive, and [npc.she] can't help but let out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a transformation start to take place."
+                            + "The area above [npc.namePos] crotch suddenly feels extremely soft and sensitive, and [npc.she] can't help but let out [npc.a_moan+] as [npc.she] feel a transformation start to take place."
 						+" The nipples and areolae on [npc.her] [npc.crotchBoobs] tingle and harden, causing [npc.herHim] to pant and let out a lewd [npc.moan] as the intense transformation runs its course."
-						+ " While there's no change to their outwards appearance, [npc.she] [npc.verb(feel)] the interior structure of [npc.her] [npc.crotchBoobs] shifting and changing into a new form."
+                            + " While there's no change to their outwards appearance, [npc.she] feel the interior structure of [npc.her] [npc.crotchBoobs] shifting and changing into a new form."
 						+ " After just a moment, the transformation ends, leaving [npc.herHim] with [npc.totalNipples] new nipples."
 						+ "<br/>");
 		}
@@ -303,14 +296,14 @@ public class BreastCrotch implements BodyPartInterface {
 		if (sizeChange > 0) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(feel)] a tingling heat quickly spreading throughout [npc.her] lower torso, and [npc.she] can't help but let out [npc.a_moan+] as [npc.her] [npc.crotchBoobs] swell up and [style.boldGrow(grow larger)].<br/>"
+                            + "[npc.Name] feel a tingling heat quickly spreading throughout [npc.her] lower torso, and [npc.she] can't help but let out [npc.a_moan+] as [npc.her] [npc.crotchBoobs] swell up and [style.boldGrow(grow larger)].<br/>"
 						+ "[npc.Name] now [npc.has] [style.boldSex([npc.crotchBoobsSize] [npc.crotchBoobs])]!"
 					+ "</p>");
 			
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(feel)] a tingling heat quickly spreading throughout [npc.her] lower torso,"
+                            + "[npc.Name] feel a tingling heat quickly spreading throughout [npc.her] lower torso,"
 							+ " and [npc.she] can't help but let out a frustrated [npc.moan] as [npc.her] [npc.crotchBoobs] shrink down and [style.boldShrink(get smaller)].<br/>"
 						+ "[npc.Name] now [npc.has] [style.boldSex([npc.crotchBoobsSize] [npc.crotchBoobs])]!"
 					+ "</p>");
@@ -346,7 +339,7 @@ public class BreastCrotch implements BodyPartInterface {
 		if (lactationChange > 0) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(feel)] a strange bubbling and churning taking place deep within [npc.her] [npc.crotchBoobs], and [npc.a_moan+] drifts out from between [npc.her] [npc.lips] as a few drops of [npc.crotchMilk] suddenly leak"
+                            + "[npc.Name] feel a strange bubbling and churning taking place deep within [npc.her] [npc.crotchBoobs], and [npc.a_moan+] drifts out from between [npc.her] [npc.lips] as a few drops of [npc.crotchMilk] suddenly leak"
 							+ " from [npc.her] [npc.crotchNipples]; clear evidence that [npc.her] [npc.crotchMilk] production has [style.boldGrow(increased)].<br/>"
 						+ "[npc.NameIsFull] now able to produce [style.boldSex(" + lactationDescriptor + " [npc.crotchMilk])]!"
 					+ "</p>");
@@ -354,8 +347,8 @@ public class BreastCrotch implements BodyPartInterface {
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(feel)] a strange sucking sensation deep within [npc.her] [npc.crotchBoobs],"
-							+ " and a frustrated sigh drifts out from between [npc.her] [npc.lips] as [npc.she] [npc.verb(realise)] that [npc.sheIs] feeling [npc.her] [npc.crotchMilk] production [style.boldShrink(drying up)].<br/>"
+                            + "[npc.Name] feel a strange sucking sensation deep within [npc.her] [npc.crotchBoobs],"
+                            + " and a frustrated sigh drifts out from between [npc.her] [npc.lips] as [npc.she] realise that [npc.sheIs] feeling [npc.her] [npc.crotchMilk] production [style.boldShrink(drying up)].<br/>"
 						+ "[npc.NameIsFull] now able to produce [style.boldSex(" + lactationDescriptor + " [npc.crotchMilk])]."
 					+ "</p>");
 			
@@ -432,7 +425,7 @@ public class BreastCrotch implements BodyPartInterface {
 		if (regenerationChange > 0) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(feel)] an alarming bubbling and churning taking place deep within [npc.her] [npc.crotchBoobs], and [npc.a_moan+] drifts out from between [npc.her] [npc.lips] as a few drops of [npc.crotchMilk] suddenly leak"
+                            + "[npc.Name] feel an alarming bubbling and churning taking place deep within [npc.her] [npc.crotchBoobs], and [npc.a_moan+] drifts out from between [npc.her] [npc.lips] as a few drops of [npc.crotchMilk] suddenly leak"
 							+ " from [npc.her] [npc.crotchNipples]; clear evidence that [npc.her] [npc.crotchMilk] regeneration has [style.boldGrow(increased)].<br/>"
 						+ "[npc.NamePos] rate of [npc.crotchMilk] regeneration is now [style.boldSex(" + regenerationDescriptor + ")] ("+Units.fluid(milkRegeneration)+"/day)!"
 					+ "</p>");
@@ -440,7 +433,7 @@ public class BreastCrotch implements BodyPartInterface {
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(feel)] a strange sucking sensation deep within [npc.her] [npc.crotchBoobs],"
+                            + "[npc.Name] feel a strange sucking sensation deep within [npc.her] [npc.crotchBoobs],"
 							+ " and a frustrated sigh drifts out from between [npc.her] [npc.lips] as [npc.she] realises that [npc.sheIs] feeling [npc.her] [npc.crotchMilk] regeneration [style.boldShrink(decreasing)].<br/>"
 						+ "[npc.NamePos] rate of [npc.crotchMilk] regeneration is now [style.boldSex(" + regenerationDescriptor + ")] ("+Units.fluid(milkRegeneration)+"/day)!"
 					+ "</p>");
@@ -481,7 +474,7 @@ public class BreastCrotch implements BodyPartInterface {
 		
 		if (rows < getRows()) {
 			sb.append("<p>"
-							+ "[npc.Name] [npc.verb(let)] out a worried gasp as [npc.she] [npc.verb(feel)] a strange tightening sensation just above [npc.her] groin, and before [npc.sheHasFull] time to react, [npc.her] ");
+                    + "[npc.Name] let out a worried gasp as [npc.she] feel a strange tightening sensation just above [npc.her] groin, and before [npc.sheHasFull] time to react, [npc.her] ");
 			
 			if(this.getShape()==BreastShape.UDDERS) {
 				sb.append((rowsDifference==1
@@ -499,7 +492,7 @@ public class BreastCrotch implements BodyPartInterface {
 			
 		} else if (rows > getRows()) {
 			sb.append("<p>"
-						+ "[npc.Name] [npc.verb(let)] out a surprised gasp as [npc.she] [npc.verb(feel)] a strange swelling sensation just above [npc.her] groin, and before [npc.sheHasFull] time to react, ");
+                    + "[npc.Name] let out a surprised gasp as [npc.she] feel a strange swelling sensation just above [npc.her] groin, and before [npc.sheHasFull] time to react, ");
 			
 			if(this.getShape()==BreastShape.UDDERS) {
 				sb.append((rowsDifference==1
@@ -571,9 +564,9 @@ public class BreastCrotch implements BodyPartInterface {
 		if (nippleCountPerBreast < getNippleCountPerBreast()) {
 				transformation = UtilText.parse(owner,
 						"<p>"
-							+ "[npc.Name] [npc.verb(feel)] a strange tingling sensation running just beneath the surface of the [npc.breastCrotchSkin] that covers [npc.her] [npc.crotchBoobs]."
+                                + "[npc.Name] feel a strange tingling sensation running just beneath the surface of the [npc.breastCrotchSkin] that covers [npc.her] [npc.crotchBoobs]."
 							+ " A shocked gasp bursts from [npc.her] mouth as the force shoots up into [npc.her] [npc.crotchNipples],"
-								+ " and [npc.she] [npc.verb(continue)] [npc.moaning] as some of them [style.boldShrink(shrink)] into the flesh of [npc.her] [npc.crotchBoobs].<br/>"
+                                + " and [npc.she] continue [npc.moaning] as some of them [style.boldShrink(shrink)] into the flesh of [npc.her] [npc.crotchBoobs].<br/>"
 							+ "[npc.Name] now [npc.has] [style.boldSex("+ Util.intToString(nippleCountPerBreast) + " "+ (nippleCountPerBreast > 1 ? "[npc.crotchNipples]" : "[npc.crotchNipple]") + " on each of [npc.her] [npc.crotchBoobs])]!" 
 						+ "</p>");
 			
@@ -581,9 +574,9 @@ public class BreastCrotch implements BodyPartInterface {
 		} else if (nippleCountPerBreast > getNippleCountPerBreast()) {
 				transformation = UtilText.parse(owner,
 						"<p>"
-							+ "[npc.Name] [npc.verb(feel)] a strange tingling sensation running just beneath the surface of the [npc.breastCrotchSkin] that covers [npc.her] [npc.crotchBoobs]."
+                                + "[npc.Name] feel a strange tingling sensation running just beneath the surface of the [npc.breastCrotchSkin] that covers [npc.her] [npc.crotchBoobs]."
 							+ " A shocked gasp bursts from [npc.her] mouth as the force shoots up into [npc.her] [npc.crotchNipples],"
-								+ " and [npc.she] [npc.verb(continue)] [npc.moaning] as [npc.she] feels new ones [style.boldGrow(growing)] out of the flesh of [npc.her] [npc.crotchBoobs].<br/>"
+                                + " and [npc.she] continue [npc.moaning] as [npc.she] feels new ones [style.boldGrow(growing)] out of the flesh of [npc.her] [npc.crotchBoobs].<br/>"
 							+ "[npc.Name] now [npc.has] [style.boldSex("+ Util.intToString(nippleCountPerBreast) + " "+ (nippleCountPerBreast > 1 ? "[npc.crotchNipples]" : "[npc.crotchNipple]") + " on each of [npc.her] [npc.crotchBoobs])]!" 
 						+ "</p>");
 			

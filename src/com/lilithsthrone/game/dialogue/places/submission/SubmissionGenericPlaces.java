@@ -1,20 +1,9 @@
 package com.lilithsthrone.game.dialogue.places.submission;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.NPC;
-import com.lilithsthrone.game.character.npc.submission.Claire;
-import com.lilithsthrone.game.character.npc.submission.DarkSiren;
-import com.lilithsthrone.game.character.npc.submission.Elizabeth;
-import com.lilithsthrone.game.character.npc.submission.FortressAlphaLeader;
-import com.lilithsthrone.game.character.npc.submission.FortressFemalesLeader;
-import com.lilithsthrone.game.character.npc.submission.FortressMalesLeader;
-import com.lilithsthrone.game.character.npc.submission.GamblingDenPatron;
-import com.lilithsthrone.game.character.npc.submission.HazmatRat;
-import com.lilithsthrone.game.character.npc.submission.RatWarrensCaptive;
+import com.lilithsthrone.game.character.npc.submission.*;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
@@ -48,6 +37,9 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @since 0.1.0
  * @version 0.3.5
@@ -61,7 +53,7 @@ public class SubmissionGenericPlaces {
 		}
 	}
 
-	public static final DialogueNode WALKWAYS = new DialogueNode("Walkways", "", false) {
+    public static final DialogueNode WALKWAYS = new DialogueNode("Аллеи", "", false) {
 		
 		@Override
 		public String getAuthor() {
@@ -86,8 +78,8 @@ public class SubmissionGenericPlaces {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode TUNNEL = new DialogueNode("Tunnels", "", false) {
+
+    public static final DialogueNode TUNNEL = new DialogueNode("Туннели", "", false) {
 
 		@Override
 		public String getAuthor() {
@@ -155,7 +147,7 @@ public class SubmissionGenericPlaces {
 		}
 	};
 
-	public static final DialogueNode BAT_CAVERNS = new DialogueNode("Bat Caverns", "", false) {
+    public static final DialogueNode BAT_CAVERNS = new DialogueNode("Пещеры летучих мышей", "", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -170,7 +162,7 @@ public class SubmissionGenericPlaces {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Bat Caverns", "Enter the bat caverns.", PlaceType.BAT_CAVERN_ENTRANCE.getDialogue(false)) {
+                return new Response("Пещеры летучих мышей", "Enter the bat caverns.", PlaceType.BAT_CAVERN_ENTRANCE.getDialogue(false)) {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/submissionPlaces", "BAT_CAVERNS_ENTRY"));
@@ -183,8 +175,51 @@ public class SubmissionGenericPlaces {
 			}
 		}
 	};
-	
-	public static final DialogueNode RAT_WARREN = new DialogueNode("Rat Warrens", "", false) {
+    public static final DialogueNode GAMBLING_DEN = new DialogueNode("Игорный притон", "", false) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 3*60;
+		}
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/submission/submissionPlaces", "GAMBLING_DEN");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 1) {
+                return new Response("Игорный притон", "Enter the Gambling Den.", GamblingDenDialogue.ENTRANCE) {
+					@Override
+					public void effects() {
+						List<NPC> gamblersPresent = Main.game.getCharactersPresent(Main.game.getWorlds().get(WorldType.GAMBLING_DEN).getCell(PlaceType.GAMBLING_DEN_GAMBLING));
+
+						for(NPC npc : gamblersPresent) {
+							if(npc instanceof GamblingDenPatron) {
+								Main.game.banishNPC(npc);
+							}
+						}
+
+						try {
+							Main.game.addNPC(new GamblingDenPatron(Gender.getGenderFromUserPreferences(false, false), DicePokerTable.COPPER, false), false);
+							Main.game.addNPC(new GamblingDenPatron(Gender.getGenderFromUserPreferences(false, false), DicePokerTable.COPPER, false), false);
+							Main.game.addNPC(new GamblingDenPatron(Gender.getGenderFromUserPreferences(false, false), DicePokerTable.SILVER, false), false);
+							Main.game.addNPC(new GamblingDenPatron(Gender.getGenderFromUserPreferences(false, false), DicePokerTable.SILVER, false), false);
+							Main.game.addNPC(new GamblingDenPatron(Gender.getGenderFromUserPreferences(false, false), DicePokerTable.GOLD, false), false);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+
+						Main.game.getPlayer().setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_ENTRANCE);
+					}
+				};
+
+			} else {
+				return null;
+			}
+		}
+	};    public static final DialogueNode RAT_WARREN = new DialogueNode("Крысиные угодья", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 3*60;
@@ -214,8 +249,68 @@ public class SubmissionGenericPlaces {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode RAT_WARREN_KNOCK_ON_DOOR = new DialogueNode("Rat Warrens", "", true) {
+    public static final DialogueNode LILIN_PALACE = new DialogueNode("Дворец Лиссиет", "", false) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+
+		@Override
+		public String getContent() {
+			UtilText.nodeContentSB.setLength(0);
+			UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/submissionPlaces", "LILIN_PALACE"));
+
+			if(Main.game.getPlayer().getQuest(QuestLine.MAIN)==Quest.MAIN_2_D_MEETING_A_LILIN) {
+				if(Main.game.getPlayer().hasCompanions()) {
+					UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/submissionPlaces", "LILIN_PALACE_ELIZABETH_LEADS_COMPANIONS", Main.game.getPlayer().getMainCompanion()));
+				} else {
+					UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/submissionPlaces", "LILIN_PALACE_ELIZABETH_LEADS"));
+				}
+			} else if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_2_D_MEETING_A_LILIN)) {
+				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/submissionPlaces", "LILIN_PALACE_ELIZABETH_ESCORT"));
+			}
+
+			return UtilText.nodeContentSB.toString();
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+				if(Main.game.getPlayer().getQuest(QuestLine.MAIN)==Quest.MAIN_2_D_MEETING_A_LILIN) {
+                    return new Response("Вход",
+							"Enter the palace with Elizabeth, who will then proceed to lead you to the throne room."
+									+ (Main.game.getPlayer().hasCompanions()?"<br/>[style.italicsMinorBad(This will dismiss all of your companions, who will be returned home.)]":""),
+							LyssiethReveal.ENTRANCE_WITH_ELIZABETH) {
+						@Override
+						public void effects() {
+							Main.game.getPlayer().removeAllCompanions(true);
+							Main.game.getPlayer().setLocation(WorldType.LYSSIETH_PALACE, PlaceType.LYSSIETH_PALACE_ENTRANCE);
+							Main.game.getNpc(Elizabeth.class).setLocation(WorldType.LYSSIETH_PALACE, PlaceType.LYSSIETH_PALACE_ENTRANCE);
+							((DarkSiren)Main.game.getNpc(DarkSiren.class)).postDefeatReset();
+						}
+					};
+
+				} else if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_2_D_MEETING_A_LILIN)) {
+                    return new Response("Вход",
+							Main.game.getNpc(Elizabeth.class).getWorldLocation()==WorldType.SUBMISSION
+								?"Tell Elizabeth that you'd like to enter the palace, and have her unlock the doors for you."
+								:"Tell the guard that you'd like to enter the palace, and have her unlock the doors for you.",
+							PlaceType.LYSSIETH_PALACE_ENTRANCE.getDialogue(false)) {
+						@Override
+						public void effects() {
+							Main.game.getPlayer().setLocation(WorldType.LYSSIETH_PALACE, PlaceType.LYSSIETH_PALACE_ENTRANCE);
+							Main.game.getNpc(Elizabeth.class).setLocation(WorldType.SUBMISSION, PlaceType.SUBMISSION_LILIN_PALACE_GATE);
+						}
+					};
+
+				} else {
+                    return new Response("Вход", "The doors are locked...", null);
+				}
+			}
+			return null;
+		}
+	};    public static final DialogueNode RAT_WARREN_KNOCK_ON_DOOR = new DialogueNode("Крысиные угодья", "", true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -232,12 +327,12 @@ public class SubmissionGenericPlaces {
 			boolean freeEntry = Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensEntry) || Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.ratWarrensEntryWhore);
 			if(index == 1) {
 				if(!Main.game.getPlayer().hasQuest(QuestLine.SIDE_VENGAR)) {
-					return new Response("Enter",
+                    return new Response("Вход",
 							"You're not able to gain access to the Rat Warrens without a good reason...",
 							null);
 				} else {
 					if(freeEntry) {
-						return new Response("Enter",
+                        return new Response("Вход",
 								"As the guards have recognised you, you're able to freely enter the Rat Warrens.",
 								RatWarrensDialogue.RAT_WARREN_INITIAL_ENTRY);
 					}
@@ -266,11 +361,79 @@ public class SubmissionGenericPlaces {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode RAT_WARREN_STEP_BACK = new DialogueNode("Rat Warrens", "", false) {
+    public static final DialogueNode SEWER_ENTRANCE = new DialogueNode("КПП энфорсеров", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 3*60;
+		}
+		@Override
+		public boolean isTravelDisabled() {
+			return Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR) && Main.game.getPlayer().isHasSlaverLicense() && !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.milkersClaireDialogue);
+		}
+		@Override
+		public String getContent() {
+			if(Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR) && !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.milkersClaireDialogue)) {
+				return UtilText.parseFromXMLFile("places/submission/submissionPlaces", "SEWER_ENTRANCE_CLAIRE_MILKERS");
+			} else {
+				return UtilText.parseFromXMLFile("places/submission/submissionPlaces", "SEWER_ENTRANCE");
+			}
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR) && Main.game.getPlayer().isHasSlaverLicense() && !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.milkersClaireDialogue)) {
+				if (index == 1) {
+					return new Response("Take milkers", "Tell Claire that you'll take responsibility for the slaves recovered from the Rat Warrens.", SEWER_ENTRANCE_MILKERS_RESOLVED) {
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.milkersClaireDialogue, true);
+							Main.game.appendToTextStartStringBuilder(UtilText.parseFromXMLFile("places/submission/submissionPlaces", "SEWER_ENTRANCE_CLAIRE_MILKERS_ACCEPTED"));
+							if(RatWarrensDialogue.getMilkers().isEmpty()) {
+								RatWarrensDialogue.spawnMilkers();
+							}
+							for(GameCharacter milker : RatWarrensDialogue.getMilkers()) {
+								((RatWarrensCaptive)milker).applyMilkingEquipment(false, Util.newArrayListOfValues(InventorySlot.NIPPLE, InventorySlot.VAGINA));
+								milker.setLocation(WorldType.SLAVER_ALLEY, PlaceType.SLAVER_ALLEY_SLAVERY_ADMINISTRATION, true);
+								Main.game.getPlayer().addSlave((NPC) milker);
+								milker.setObedience(100);
+								milker.setHistory(Occupation.NPC_SLAVE);
+							}
+						}
+					};
+
+				} else if (index == 2) {
+					return new Response("Decline", "Tell Claire that you're not interested in the slaves recovered from the Rat Warrens.", SEWER_ENTRANCE_MILKERS_RESOLVED) {
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.milkersClaireDialogue, true);
+							Main.game.appendToTextStartStringBuilder(UtilText.parseFromXMLFile("places/submission/submissionPlaces", "SEWER_ENTRANCE_CLAIRE_MILKERS_DECLINED"));
+							RatWarrensDialogue.banishMilkers();
+						}
+					};
+				}
+
+			} else {
+				if (index == 1) {
+                    return new Response("Доминион", "Head back up to Dominion.", PlaceType.DOMINION_EXIT_TO_SUBMISSION.getDialogue(false)) {
+						@Override
+						public void effects() {
+							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_EXIT_TO_SUBMISSION, false);
+						}
+					};
+
+				} else if (index == 2) {
+					return new Response("Клэр", "Approach Claire and say hello to her.", CLAIRE);
+
+				} else if (index == 3) {
+					return new Response("Vending machine", "Approach the vending machine that's located just outside of the Enforcer outpost.", VENDING_MACHINE);
+				}
+			}
+
+			return null;
+		}
+	};    public static final DialogueNode RAT_WARREN_STEP_BACK = new DialogueNode("Крысиные угодья", "", false) {
+		@Override
+		public int getSecondsPassed() {
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -282,53 +445,8 @@ public class SubmissionGenericPlaces {
 		}
 	};
 
-	public static final DialogueNode GAMBLING_DEN = new DialogueNode("Gambling Den", "", false) {
 
-		@Override
-		public int getSecondsPassed() {
-			return 3*60;
-		}
-		
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/submissionPlaces", "GAMBLING_DEN");
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Gambling Den", "Enter the Gambling Den.", GamblingDenDialogue.ENTRANCE) {
-					@Override
-					public void effects() {
-						List<NPC> gamblersPresent = Main.game.getCharactersPresent(Main.game.getWorlds().get(WorldType.GAMBLING_DEN).getCell(PlaceType.GAMBLING_DEN_GAMBLING));
-						
-						for(NPC npc : gamblersPresent) {
-							if(npc instanceof GamblingDenPatron) {
-								Main.game.banishNPC(npc);
-							}
-						}
-						
-						try {
-							Main.game.addNPC(new GamblingDenPatron(Gender.getGenderFromUserPreferences(false, false), DicePokerTable.COPPER, false), false);
-							Main.game.addNPC(new GamblingDenPatron(Gender.getGenderFromUserPreferences(false, false), DicePokerTable.COPPER, false), false);
-							Main.game.addNPC(new GamblingDenPatron(Gender.getGenderFromUserPreferences(false, false), DicePokerTable.SILVER, false), false);
-							Main.game.addNPC(new GamblingDenPatron(Gender.getGenderFromUserPreferences(false, false), DicePokerTable.SILVER, false), false);
-							Main.game.addNPC(new GamblingDenPatron(Gender.getGenderFromUserPreferences(false, false), DicePokerTable.GOLD, false), false);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-						
-						Main.game.getPlayer().setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_ENTRANCE);
-					}
-				};
-
-			} else {
-				return null;
-			}
-		}
-	};
-
-	public static final DialogueNode LILIN_PALACE_CAVERN = new DialogueNode("Cavern", "", false) {
+    public static final DialogueNode LILIN_PALACE_CAVERN = new DialogueNode("Пещера", "", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -355,8 +473,8 @@ public class SubmissionGenericPlaces {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode LILIN_PALACE_GATE = new DialogueNode("Lyssieth's Palace Gate", "", true) {
+
+    public static final DialogueNode LILIN_PALACE_GATE = new DialogueNode("Дворцовые ворота Лиссиет", "", true) {
 		@Override
 		public boolean isTravelDisabled() {
 			return !Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_2_C_SIRENS_FALL)
@@ -565,8 +683,8 @@ public class SubmissionGenericPlaces {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode LILIN_PALACE_GATE_GENERIC_TALK = new DialogueNode("Lyssieth's Palace Gate", "", true, true) {
+
+    public static final DialogueNode LILIN_PALACE_GATE_GENERIC_TALK = new DialogueNode("Дворцовые ворота Лиссиет", "", true, true) {
 
 		@Override
 		public boolean isTravelDisabled() {
@@ -588,69 +706,8 @@ public class SubmissionGenericPlaces {
 			return LILIN_PALACE_GATE.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode LILIN_PALACE = new DialogueNode("Lyssieth's Palace", "", false) {
 
-		@Override
-		public int getSecondsPassed() {
-			return 60;
-		}
-		
-		@Override
-		public String getContent() {
-			UtilText.nodeContentSB.setLength(0);
-			UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/submissionPlaces", "LILIN_PALACE"));
-			
-			if(Main.game.getPlayer().getQuest(QuestLine.MAIN)==Quest.MAIN_2_D_MEETING_A_LILIN) {
-				if(Main.game.getPlayer().hasCompanions()) {
-					UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/submissionPlaces", "LILIN_PALACE_ELIZABETH_LEADS_COMPANIONS", Main.game.getPlayer().getMainCompanion()));
-				} else {
-					UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/submissionPlaces", "LILIN_PALACE_ELIZABETH_LEADS"));
-				}
-			} else if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_2_D_MEETING_A_LILIN)) {
-				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/submissionPlaces", "LILIN_PALACE_ELIZABETH_ESCORT"));
-			}
-			
-			return UtilText.nodeContentSB.toString();
-		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				if(Main.game.getPlayer().getQuest(QuestLine.MAIN)==Quest.MAIN_2_D_MEETING_A_LILIN) {
-					return new Response("Enter",
-							"Enter the palace with Elizabeth, who will then proceed to lead you to the throne room."
-									+ (Main.game.getPlayer().hasCompanions()?"<br/>[style.italicsMinorBad(This will dismiss all of your companions, who will be returned home.)]":""),
-							LyssiethReveal.ENTRANCE_WITH_ELIZABETH) {
-						@Override
-						public void effects() {
-							Main.game.getPlayer().removeAllCompanions(true);
-							Main.game.getPlayer().setLocation(WorldType.LYSSIETH_PALACE, PlaceType.LYSSIETH_PALACE_ENTRANCE);
-							Main.game.getNpc(Elizabeth.class).setLocation(WorldType.LYSSIETH_PALACE, PlaceType.LYSSIETH_PALACE_ENTRANCE);
-							((DarkSiren)Main.game.getNpc(DarkSiren.class)).postDefeatReset();
-						}
-					};
-					
-				} else if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_2_D_MEETING_A_LILIN)) {
-					return new Response("Enter",
-							Main.game.getNpc(Elizabeth.class).getWorldLocation()==WorldType.SUBMISSION
-								?"Tell Elizabeth that you'd like to enter the palace, and have her unlock the doors for you."
-								:"Tell the guard that you'd like to enter the palace, and have her unlock the doors for you.",
-							PlaceType.LYSSIETH_PALACE_ENTRANCE.getDialogue(false)) {
-						@Override
-						public void effects() {
-							Main.game.getPlayer().setLocation(WorldType.LYSSIETH_PALACE, PlaceType.LYSSIETH_PALACE_ENTRANCE);
-							Main.game.getNpc(Elizabeth.class).setLocation(WorldType.SUBMISSION, PlaceType.SUBMISSION_LILIN_PALACE_GATE);
-						}
-					};
-					
-				} else {
-					return new Response("Enter", "The doors are locked...", null);
-				}
-			}
-			return null;
-		}
-	};
 	
 	public static final DialogueNode IMP_FORTRESS_ALPHA = new DialogueNode("Crude Fortress", "", false) {
 
@@ -684,7 +741,7 @@ public class SubmissionGenericPlaces {
 					|| Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.impFortressAlphaPacified);
 			
 			if(index==1) {
-				return new Response(canEnter?"Enter":"Approach",
+                return new Response(canEnter ? "Вход" : "Approach",
 						canEnter?"Enter the fortress.":"Approach the guards at the entrance to the fortress.",
 								PlaceType.FORTRESS_ALPHA_ENTRANCE.getDialogue(false)) {
 					@Override
@@ -766,7 +823,7 @@ public class SubmissionGenericPlaces {
 					|| Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.impFortressFemalesPacified);
 			
 			if(index==1) {
-				return new Response(canEnter?"Enter":"Approach",
+                return new Response(canEnter ? "Вход" : "Approach",
 						canEnter?"Enter the fortress.":"Approach the guards at the entrance to the fortress.",
 								PlaceType.FORTRESS_FEMALES_ENTRANCE.getDialogue(false)) {
 					@Override
@@ -848,7 +905,7 @@ public class SubmissionGenericPlaces {
 					|| Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.impFortressMalesPacified);
 			
 			if(index==1) {
-				return new Response(canEnter?"Enter":"Approach",
+                return new Response(canEnter ? "Вход" : "Approach",
 						canEnter?"Enter the fortress.":"Approach the guards at the entrance to the fortress.",
 								PlaceType.FORTRESS_MALES_ENTRANCE.getDialogue(false)) {
 					@Override
@@ -933,7 +990,7 @@ public class SubmissionGenericPlaces {
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
 				if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.impFortressDemonDefeated)) {
-					return new Response("Enter", "Enter the ruins of the Dark Siren's citadel.", PlaceType.FORTRESS_DEMON_ENTRANCE.getDialogue(false)) {
+                    return new Response("Вход", "Enter the ruins of the Dark Siren's citadel.", PlaceType.FORTRESS_DEMON_ENTRANCE.getDialogue(false)) {
 						@Override
 						public void effects() {
 							Main.game.getPlayer().setLocation(WorldType.IMP_FORTRESS_DEMON, PlaceType.FORTRESS_DEMON_ENTRANCE);
@@ -945,7 +1002,7 @@ public class SubmissionGenericPlaces {
 								&& Main.game.getPlayer().hasItemType(ItemType.IMP_FORTRESS_ARCANE_KEY_2)
 								&& Main.game.getPlayer().hasItemType(ItemType.IMP_FORTRESS_ARCANE_KEY_3))
 							|| Main.game.getPlayer().hasClothingType(ClothingType.getClothingTypeFromId("innoxia_neck_key_chain"), true)) {
-					return new Response("Enter", "Enter the citadel.", FORTRESS_DEMON_ENTRANCE_KEY_ENTRY) {
+                    return new Response("Вход", "Enter the citadel.", FORTRESS_DEMON_ENTRANCE_KEY_ENTRY) {
 						@Override
 						public void effects() {
 							Main.game.getPlayer().setLocation(WorldType.IMP_FORTRESS_DEMON, PlaceType.FORTRESS_DEMON_ENTRANCE);
@@ -969,7 +1026,7 @@ public class SubmissionGenericPlaces {
 					};
 					
 				} else {
-					return new Response("Enter", "You don't have the three keys required to open the gates...", null);
+                    return new Response("Вход", "You don't have the three keys required to open the gates...", null);
 				}
 				
 			} else {
@@ -993,76 +1050,7 @@ public class SubmissionGenericPlaces {
 
 	// Entrance and exits:
 
-	public static final DialogueNode SEWER_ENTRANCE = new DialogueNode("Enforcer Checkpoint", "", false) {
-		@Override
-		public int getSecondsPassed() {
-			return 3*60;
-		}
-		@Override
-		public boolean isTravelDisabled() {
-			return Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR) && Main.game.getPlayer().isHasSlaverLicense() && !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.milkersClaireDialogue);
-		}
-		@Override
-		public String getContent() {
-			if(Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR) && !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.milkersClaireDialogue)) {
-				return UtilText.parseFromXMLFile("places/submission/submissionPlaces", "SEWER_ENTRANCE_CLAIRE_MILKERS");
-			} else {
-				return UtilText.parseFromXMLFile("places/submission/submissionPlaces", "SEWER_ENTRANCE");
-			}
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR) && Main.game.getPlayer().isHasSlaverLicense() && !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.milkersClaireDialogue)) {
-				if (index == 1) {
-					return new Response("Take milkers", "Tell Claire that you'll take responsibility for the slaves recovered from the Rat Warrens.", SEWER_ENTRANCE_MILKERS_RESOLVED) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.milkersClaireDialogue, true);
-							Main.game.appendToTextStartStringBuilder(UtilText.parseFromXMLFile("places/submission/submissionPlaces", "SEWER_ENTRANCE_CLAIRE_MILKERS_ACCEPTED"));
-							if(RatWarrensDialogue.getMilkers().isEmpty()) {
-								RatWarrensDialogue.spawnMilkers();
-							}
-							for(GameCharacter milker : RatWarrensDialogue.getMilkers()) {
-								((RatWarrensCaptive)milker).applyMilkingEquipment(false, Util.newArrayListOfValues(InventorySlot.NIPPLE, InventorySlot.VAGINA));
-								milker.setLocation(WorldType.SLAVER_ALLEY, PlaceType.SLAVER_ALLEY_SLAVERY_ADMINISTRATION, true);
-								Main.game.getPlayer().addSlave((NPC) milker);
-								milker.setObedience(100);
-								milker.setHistory(Occupation.NPC_SLAVE);
-							}
-						}
-					};
 
-				} else if (index == 2) {
-					return new Response("Decline", "Tell Claire that you're not interested in the slaves recovered from the Rat Warrens.", SEWER_ENTRANCE_MILKERS_RESOLVED) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.milkersClaireDialogue, true);
-							Main.game.appendToTextStartStringBuilder(UtilText.parseFromXMLFile("places/submission/submissionPlaces", "SEWER_ENTRANCE_CLAIRE_MILKERS_DECLINED"));
-							RatWarrensDialogue.banishMilkers();
-						}
-					};
-				}
-				
-			} else {
-				if (index == 1) {
-					return new Response("Dominion", "Head back up to Dominion.", PlaceType.DOMINION_EXIT_TO_SUBMISSION.getDialogue(false)){
-						@Override
-						public void effects() {
-							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_EXIT_TO_SUBMISSION, false);
-						}
-					};
-
-				} else if (index == 2) {
-					return new Response("Claire", "Approach Claire and say hello to her.", CLAIRE);
-					
-				} else if (index == 3) {
-					return new Response("Vending machine", "Approach the vending machine that's located just outside of the Enforcer outpost.", VENDING_MACHINE);
-				}
-			}
-			
-			return null;
-		}
-	};
 
 	public static final DialogueNode SEWER_ENTRANCE_MILKERS_RESOLVED = new DialogueNode("", "", false, true) {
 		@Override
@@ -1078,8 +1066,8 @@ public class SubmissionGenericPlaces {
 			return SEWER_ENTRANCE.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode CLAIRE = new DialogueNode("Claire", "", true) {
+
+	public static final DialogueNode CLAIRE = new DialogueNode("Клэр", "", true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -1110,9 +1098,9 @@ public class SubmissionGenericPlaces {
 			}
 			
 			if(Main.game.getCurrentDialogueNode()==CLAIRE_INFO_LYSSIETH) {
-				responses.add(new Response("Lyssieth", "You are already asking Claire about Lyssieth.", null));
+                responses.add(new Response("Лиссиет", "You are already asking Claire about Lyssieth.", null));
 			} else {
-				responses.add(new Response("Lyssieth", "Ask Claire about Lyssieth.", CLAIRE_INFO_LYSSIETH) {
+                responses.add(new Response("Лиссиет", "Ask Claire about Lyssieth.", CLAIRE_INFO_LYSSIETH) {
 					@Override
 					public void effects() {
 						applyClaireMeetingEffects();
@@ -1224,7 +1212,7 @@ public class SubmissionGenericPlaces {
 					&& !Main.game.getPlayer().hasQuestInLine(QuestLine.SIDE_VENGAR, Quest.VENGAR_OPTIONAL_CLAIRE)
 					&& !Main.game.getPlayer().hasQuestInLine(QuestLine.SIDE_VENGAR, Quest.VENGAR_THREE_END)
 					&& !Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_VENGAR)) {
-				responses.add(new Response("Vengar", "Ask for Claire's help with dealing with Vengar.", CLAIRE_VENGAR_HELP) {
+				responses.add(new Response("Венгар", "Ask for Claire's help with dealing with Vengar.", CLAIRE_VENGAR_HELP) {
 					@Override
 					public void effects() {
 						applyClaireMeetingEffects();
@@ -1268,7 +1256,7 @@ public class SubmissionGenericPlaces {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Let Claire get back on with her work, and continue on your way.", SEWER_ENTRANCE);
+                return new Response("Продолжить", "Let Claire get back on with her work, and continue on your way.", SEWER_ENTRANCE);
 				
 			} else {
 				return null;
@@ -1524,7 +1512,7 @@ public class SubmissionGenericPlaces {
 		}
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {

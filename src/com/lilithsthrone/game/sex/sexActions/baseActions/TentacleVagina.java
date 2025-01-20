@@ -4,11 +4,7 @@ import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.sex.ArousalIncrease;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexPace;
-import com.lilithsthrone.game.sex.SexParticipantType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
@@ -53,44 +49,44 @@ public class TentacleVagina {
 				case DOM_GENTLE:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 							"Snaking [npc.her] [npc.tentacle+(true)] up to [npc2.namePos] [npc2.pussy+],"
-									+ " [npc.name] [npc.verb(start)] slowly teasing the [npc.tentacleTip+] up and down between [npc2.her] [npc2.labia+], ready to penetrate [npc2.herHim] at any moment.",
+                                    + " [npc.name] start slowly teasing the [npc.tentacleTip+] up and down between [npc2.her] [npc2.labia+], ready to penetrate [npc2.herHim] at any moment.",
 
-							"With a soft [npc.moan], [npc.name] [npc.verb(snake)] [npc.her] [npc.tentacle+(true)] up to [npc2.namePos] [npc2.pussy+], before starting to gently slide the [npc.tentacleTip] up and down between [npc2.her] [npc2.labia+].",
+                            "With a soft [npc.moan], [npc.name] snake [npc.her] [npc.tentacle+(true)] up to [npc2.namePos] [npc2.pussy+], before starting to gently slide the [npc.tentacleTip] up and down between [npc2.her] [npc2.labia+].",
 
 							"Gently sliding the [npc.tentacleTip+] of [npc.her] [npc.tentacle(true)] up and down over [npc2.namePos] [npc2.vagina+],"
-									+ " [npc.name] [npc.verb(let)] out a soft [npc.moan] at the thought of being able to penetrate [npc2.herHim] whenever [npc.she] [npc.verb(feel)] like it."));
+                                    + " [npc.name] let out a soft [npc.moan] at the thought of being able to penetrate [npc2.herHim] whenever [npc.she] feel like it."));
 					break;
 				case DOM_NORMAL:
 				case SUB_EAGER:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 							"Snaking [npc.her] [npc.tentacle+(true)] up to [npc2.namePos] [npc2.pussy+],"
-									+ " [npc.name] [npc.verb(start)] eagerly sliding the [npc.tentacleTip+] up and down between [npc2.her] [npc2.labia+], ready to penetrate [npc2.herHim] at any moment.",
+                                    + " [npc.name] start eagerly sliding the [npc.tentacleTip+] up and down between [npc2.her] [npc2.labia+], ready to penetrate [npc2.herHim] at any moment.",
 
-							"With [npc.a_moan+], [npc.name] [npc.verb(snake)] [npc.her] [npc.tentacle+(true)] up to [npc2.namePos] [npc2.pussy+], before starting to eagerly slide the [npc.tentacleTip] up and down between [npc2.her] [npc2.labia+].",
+                            "With [npc.a_moan+], [npc.name] snake [npc.her] [npc.tentacle+(true)] up to [npc2.namePos] [npc2.pussy+], before starting to eagerly slide the [npc.tentacleTip] up and down between [npc2.her] [npc2.labia+].",
 
 							"Eagerly sliding the [npc.tentacleTip+] of [npc.her] [npc.tentacle(true)] up and down over [npc2.namePos] [npc2.vagina+],"
-									+ " [npc.name] [npc.verb(let)] out [npc.a_moan+] at the thought of being able to penetrate [npc2.herHim] whenever [npc.she] [npc.verb(feel)] like it."));
+                                    + " [npc.name] let out [npc.a_moan+] at the thought of being able to penetrate [npc2.herHim] whenever [npc.she] feel like it."));
 					break;
 				case DOM_ROUGH:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 							"Grinding [npc.her] [npc.tentacle+(true)] up against [npc2.namePos] [npc2.pussy+],"
-									+ " [npc.name] [npc.verb(pull)] back a little before starting to slide the [npc.tentacleTip+] up and down between [npc2.her] [npc2.labia+], ready to start fucking [npc2.herHim] at any moment.",
+                                    + " [npc.name] pull back a little before starting to slide the [npc.tentacleTip+] up and down between [npc2.her] [npc2.labia+], ready to start fucking [npc2.herHim] at any moment.",
 
-							"With [npc.a_moan+], [npc.name] [npc.verb(line)] [npc.her] [npc.tentacle+(true)] up to [npc2.namePos] [npc2.pussy+],"
+                            "With [npc.a_moan+], [npc.name] line [npc.her] [npc.tentacle+(true)] up to [npc2.namePos] [npc2.pussy+],"
 									+ " before starting to roughly [npc2.verb(grind)] the [npc.tentacleTip] up and down between [npc2.her] [npc2.labia+].",
 
 							"Roughly grinding the [npc.tentacleTip+] of [npc.her] [npc.tentacle(true)] up and down over [npc2.namePos] [npc2.vagina+],"
-									+ " [npc.name] [npc.verb(let)] out [npc.a_moan+] at the thought of being able to start fucking [npc2.herHim] whenever [npc.she] [npc.verb(feel)] like it."));
+                                    + " [npc.name] let out [npc.a_moan+] at the thought of being able to start fucking [npc2.herHim] whenever [npc.she] feel like it."));
 					break;
 				case SUB_NORMAL:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 							"Snaking [npc.her] [npc.tentacle+(true)] up to [npc2.namePos] [npc2.pussy+],"
-									+ " [npc.name] [npc.verb(start)] sliding the [npc.tentacleTip+] up and down between [npc2.her] [npc2.labia+], ready to penetrate [npc2.herHim] at any moment.",
+                                    + " [npc.name] start sliding the [npc.tentacleTip+] up and down between [npc2.her] [npc2.labia+], ready to penetrate [npc2.herHim] at any moment.",
 
-							"With [npc.a_moan+], [npc.name] [npc.verb(snake)] [npc.her] [npc.tentacle+(true)] up to [npc2.namePos] [npc2.pussy+], before starting to slide the [npc.tentacleTip] up and down between [npc2.her] [npc2.labia+].",
+                            "With [npc.a_moan+], [npc.name] snake [npc.her] [npc.tentacle+(true)] up to [npc2.namePos] [npc2.pussy+], before starting to slide the [npc.tentacleTip] up and down between [npc2.her] [npc2.labia+].",
 
 							"Sliding the [npc.tentacleTip+] of [npc.her] [npc.tentacle(true)] up and down over [npc2.namePos] [npc2.vagina+],"
-									+ " [npc.name] [npc.verb(let)] out [npc.a_moan+] at the thought of being able to penetrate [npc2.herHim] whenever [npc.she] [npc.verb(feel)] like it."));
+                                    + " [npc.name] let out [npc.a_moan+] at the thought of being able to penetrate [npc2.herHim] whenever [npc.she] feel like it."));
 					break;
 				default:
 					break;
@@ -253,48 +249,48 @@ public class TentacleVagina {
 			switch(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())) {
 				case DOM_GENTLE:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"[npc.Name] [npc.verb(grab)] [npc2.namePos] [npc2.tentacle+(true)], before guiding it up to [npc.her] [npc.pussy+]."
-									+ " Slowly pushing the [npc2.tentacleTip+] up and down between [npc.her] [npc.labia+], [npc.she] [npc.verb(tease)] [npc2.name] with the promise of penetration at any moment.",
+                            "[npc.Name] grab [npc2.namePos] [npc2.tentacle+(true)], before guiding it up to [npc.her] [npc.pussy+]."
+                                    + " Slowly pushing the [npc2.tentacleTip+] up and down between [npc.her] [npc.labia+], [npc.she] tease [npc2.name] with the promise of penetration at any moment.",
 
-							"With a soft [npc.moan], [npc.name] [npc.verb(grab)] [npc2.namePos] [npc2.tentacle+(true)] and [npc.verb(guide)] it up to [npc.her] [npc.pussy+],"
+                            "With a soft [npc.moan], [npc.name] grab [npc2.namePos] [npc2.tentacle+(true)] и guide it up to [npc.her] [npc.pussy+],"
 									+ " before starting to gently slide the [npc2.tentacleTip] up and down between [npc.her] [npc.labia+].",
 
-							"Grabbing [npc2.namePos] [npc2.tentacle+(true)], [npc.name] gently [npc.verb(slide)] the [npc2.tentacleTip+] over [npc.her] [npc.vagina+],"
-									+ " letting out a soft [npc.moan] as [npc.she] [npc.verb(tease)] [npc2.herHim] with the promise of penetration."));
+                            "Grabbing [npc2.namePos] [npc2.tentacle+(true)], [npc.name] gently slide the [npc2.tentacleTip+] over [npc.her] [npc.vagina+],"
+                                    + " letting out a soft [npc.moan] as [npc.she] tease [npc2.herHim] with the promise of penetration."));
 					break;
 				case DOM_NORMAL:
 				case SUB_EAGER:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"[npc.Name] [npc.verb(grab)] [npc2.namePos] [npc2.tentacle+(true)], before guiding it up to [npc.her] [npc.pussy+]."
-									+ " Eagerly pushing the [npc2.tentacleTip+] up and down between [npc.her] [npc.labia+], [npc.she] [npc.verb(tease)] [npc2.name] with the promise of penetration at any moment.",
+                            "[npc.Name] grab [npc2.namePos] [npc2.tentacle+(true)], before guiding it up to [npc.her] [npc.pussy+]."
+                                    + " Eagerly pushing the [npc2.tentacleTip+] up and down between [npc.her] [npc.labia+], [npc.she] tease [npc2.name] with the promise of penetration at any moment.",
 
-							"With [npc.a_moan+], [npc.name] [npc.verb(grab)] [npc2.namePos] [npc2.tentacle+(true)] and [npc.verb(guide)] it up to [npc.her] [npc.pussy+],"
+                            "With [npc.a_moan+], [npc.name] grab [npc2.namePos] [npc2.tentacle+(true)] и guide it up to [npc.her] [npc.pussy+],"
 									+ " before starting to eagerly slide the [npc2.tentacleTip] up and down between [npc.her] [npc.labia+].",
 
-							"Grabbing [npc2.namePos] [npc2.tentacle+(true)], [npc.name] eagerly [npc.verb(slide)] the [npc2.tentacleTip+] over [npc.her] [npc.vagina+],"
-									+ " letting out [npc.a_moan+] as [npc.she] [npc.verb(tease)] [npc2.herHim] with the promise of penetration."));
+                            "Grabbing [npc2.namePos] [npc2.tentacle+(true)], [npc.name] eagerly slide the [npc2.tentacleTip+] over [npc.her] [npc.vagina+],"
+                                    + " letting out [npc.a_moan+] as [npc.she] tease [npc2.herHim] with the promise of penetration."));
 					break;
 				case DOM_ROUGH:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"[npc.Name] [npc.verb(grab)] [npc2.namePos] [npc2.tentacle+(true)], before yanking it up to [npc.her] [npc.pussy+]."
-									+ " Roughly forcing the [npc2.tentacleTip+] up and down between [npc.her] [npc.labia+], [npc.she] [npc.verb(tease)] [npc2.name] with the promise of penetration at any moment.",
+                            "[npc.Name] grab [npc2.namePos] [npc2.tentacle+(true)], before yanking it up to [npc.her] [npc.pussy+]."
+                                    + " Roughly forcing the [npc2.tentacleTip+] up and down between [npc.her] [npc.labia+], [npc.she] tease [npc2.name] with the promise of penetration at any moment.",
 
-							"With [npc.a_moan+], [npc.name] [npc.verb(grab)] [npc2.namePos] [npc2.tentacle+(true)] and yank it up to [npc.her] [npc.pussy+],"
-									+ " before starting to roughly [npc.verb(force)] the [npc2.tentacleTip] up and down between [npc.her] [npc.labia+].",
+                            "With [npc.a_moan+], [npc.name] grab [npc2.namePos] [npc2.tentacle+(true)] and yank it up to [npc.her] [npc.pussy+],"
+                                    + " before starting to roughly force the [npc2.tentacleTip] up and down between [npc.her] [npc.labia+].",
 
-							"Grabbing [npc2.namePos] [npc2.tentacle+(true)], [npc.name] roughly [npc.verb(grind)] the [npc2.tentacleTip+] over [npc.her] [npc.vagina+],"
-									+ " letting out [npc.a_moan+] as [npc.she] [npc.verb(tease)] [npc2.herHim] with the promise of penetration."));
+                            "Grabbing [npc2.namePos] [npc2.tentacle+(true)], [npc.name] roughly grind the [npc2.tentacleTip+] over [npc.her] [npc.vagina+],"
+                                    + " letting out [npc.a_moan+] as [npc.she] tease [npc2.herHim] with the promise of penetration."));
 					break;
 				case SUB_NORMAL:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"[npc.Name] [npc.verb(grab)] [npc2.namePos] [npc2.tentacle+(true)], before guiding it up to [npc.her] [npc.pussy+]."
-									+ " Pushing the [npc2.tentacleTip+] up and down between [npc.her] [npc.labia+], [npc.she] [npc.verb(tease)] [npc2.name] with the promise of penetration at any moment.",
+                            "[npc.Name] grab [npc2.namePos] [npc2.tentacle+(true)], before guiding it up to [npc.her] [npc.pussy+]."
+                                    + " Pushing the [npc2.tentacleTip+] up and down between [npc.her] [npc.labia+], [npc.she] tease [npc2.name] with the promise of penetration at any moment.",
 
-							"With [npc.a_moan+], [npc.name] [npc.verb(grab)] [npc2.namePos] [npc2.tentacle+(true)] and [npc.verb(guide)] it up to [npc.her] [npc.pussy+],"
+                            "With [npc.a_moan+], [npc.name] grab [npc2.namePos] [npc2.tentacle+(true)] и guide it up to [npc.her] [npc.pussy+],"
 									+ " before starting to slide the [npc2.tentacleTip] up and down between [npc.her] [npc.labia+].",
 
-							"Grabbing [npc2.namePos] [npc2.tentacle+(true)], [npc.name] [npc.verb(slide)] the [npc2.tentacleTip+] over [npc.her] [npc.vagina+],"
-									+ " letting out [npc.a_moan+] as [npc.she] [npc.verb(tease)] [npc2.herHim] with the promise of penetration."));
+                            "Grabbing [npc2.namePos] [npc2.tentacle+(true)], [npc.name] slide the [npc2.tentacleTip+] over [npc.her] [npc.vagina+],"
+                                    + " letting out [npc.a_moan+] as [npc.she] tease [npc2.herHim] with the promise of penetration."));
 					break;
 				default:
 					break;
@@ -351,15 +347,15 @@ public class TentacleVagina {
 				if((Main.sex.getCharacterPerformingAction().isVaginaVirgin() || Main.sex.getCharacterPerformingAction().hasHymen()) && Main.sex.getCharacterPerformingAction().hasFetish(Fetish.FETISH_PURE_VIRGIN)) {
 					if(Main.sex.getCharacterPerformingAction().isMute()) {
 						UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-								" Treasuring [npc.her] virginity above all else, [npc.name] then quickly [npc.verb(pull)] [npc.her] [npc.pussy] away from [npc2.namePos] [npc2.tentacle+].",
-								" Not at all ready to lose [npc.her] precious virginity, [npc.name] then quickly [npc.verb(pull)] [npc.her] [npc.pussy] away from [npc2.namePos] [npc2.tentacle+].",
-								" As [npc.she] [npc.verb(treasure)] [npc.her] precious virginity above all else,"
-										+ " [npc.name] [npc.verb(make)] it clear that [npc.she] [npc.do]n't actually want to be penetrated by pulling [npc.her] [npc.pussy] away from [npc2.namePos] [npc2.tentacle+]."));
+                                " Treasuring [npc.her] virginity above all else, [npc.name] then quickly pull [npc.her] [npc.pussy] away from [npc2.namePos] [npc2.tentacle+].",
+                                " Not at all ready to lose [npc.her] precious virginity, [npc.name] then quickly pull [npc.her] [npc.pussy] away from [npc2.namePos] [npc2.tentacle+].",
+                                " As [npc.she] treasure [npc.her] precious virginity above all else,"
+                                        + " [npc.name] make it clear that [npc.she] [npc.do]n't actually want to be penetrated by pulling [npc.her] [npc.pussy] away from [npc2.namePos] [npc2.tentacle+]."));
 							
 					} else {
 						UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-								" As [npc.she] [npc.verb(treasure)] [npc.her] precious virginity above all else, [npc.name] [npc.verb(make)] it very clear that [npc.she] [npc.do]n't want [npc2.name] to actually penetrate [npc.herHim] by [npc.moaning],",
-								" Not at all ready to lose [npc.her] precious virginity, [npc.name] [npc.verb(make)] it very clear that [npc.she] [npc.do]n't want to be penetrated by [npc.moaning],"));
+                                " As [npc.she] treasure [npc.her] precious virginity above all else, [npc.name] make it very clear that [npc.she] [npc.do]n't want [npc2.name] to actually penetrate [npc.herHim] by [npc.moaning],",
+                                " Not at all ready to lose [npc.her] precious virginity, [npc.name] make it very clear that [npc.she] [npc.do]n't want to be penetrated by [npc.moaning],"));
 						if(Main.sex.isDom(Main.sex.getCharacterPerformingAction())) {
 							UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 									" [npc.speech(You like the feel of that? Well, it's all that you're going to get; I'm not losing my virginity like this!)]",
@@ -412,42 +408,42 @@ public class TentacleVagina {
 				case DOM_GENTLE:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 							"Slowly teasing the [npc.tentacleTip+] of [npc.her] [npc.tentacle(true)] between [npc2.namePos] [npc2.labia+],"
-									+ " [npc.name] [npc.verb(let)] out a little [npc.moan] before slowly pushing forwards, sinking [npc.her] [npc.tentacle+(true)] into [npc2.her] [npc2.vagina+].",
+                                    + " [npc.name] let out a little [npc.moan] before slowly pushing forwards, sinking [npc.her] [npc.tentacle+(true)] into [npc2.her] [npc2.vagina+].",
 
-							"[npc.Name] [npc.verb(position)] the [npc.tentacleTip+] of [npc.her] [npc.tentacle(true)] between [npc2.namePos] [npc2.labia+],"
-									+ " and with a slow, steady pressure, [npc.she] gently [npc.verb(sink)] it deep into [npc2.her] [npc2.vagina+]."));
+                            "[npc.Name] position the [npc.tentacleTip+] of [npc.her] [npc.tentacle(true)] between [npc2.namePos] [npc2.labia+],"
+                                    + " and with a slow, steady pressure, [npc.she] gently sink it deep into [npc2.her] [npc2.vagina+]."));
 					break;
 				case DOM_NORMAL:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 							"Eagerly teasing the [npc.tentacleTip+] of [npc.her] [npc.tentacle(true)] between [npc2.namePos] [npc2.labia+],"
-									+ " [npc.name] [npc.verb(let)] out [npc.a_moan+] before thrusting forwards, greedily sinking [npc.her] [npc.tentacle+(true)] into [npc2.her] [npc2.vagina+].",
+                                    + " [npc.name] let out [npc.a_moan+] before thrusting forwards, greedily sinking [npc.her] [npc.tentacle+(true)] into [npc2.her] [npc2.vagina+].",
 
-							"[npc.Name] [npc.verb(position)] the [npc.tentacleTip+] of [npc.her] [npc.tentacle(true)] between [npc2.namePos] [npc2.labia+], "
-									+ "and with a determined thrust, [npc.she] eagerly [npc.verb(sink)] it deep into [npc2.her] [npc2.vagina+]."));
+                            "[npc.Name] position the [npc.tentacleTip+] of [npc.her] [npc.tentacle(true)] between [npc2.namePos] [npc2.labia+], "
+                                    + "and with a determined thrust, [npc.she] eagerly sink it deep into [npc2.her] [npc2.vagina+]."));
 					break;
 				case DOM_ROUGH:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 							"Roughly grinding the [npc.tentacleTip+] of [npc.her] [npc.tentacle(true)] between [npc2.namePos] [npc2.labia+],"
-									+ " [npc.name] [npc.verb(let)] out [npc.a_moan+] before violently slamming forwards, forcing [npc.her] [npc.tentacle+(true)] deep into [npc2.her] [npc2.vagina+].",
+                                    + " [npc.name] let out [npc.a_moan+] before violently slamming forwards, forcing [npc.her] [npc.tentacle+(true)] deep into [npc2.her] [npc2.vagina+].",
 
-							"[npc.Name] [npc.verb(position)] the [npc.tentacleTip+] of [npc.her] [npc.tentacle(true)] between [npc2.namePos] [npc2.labia+],"
-									+ " and with a forceful thrust, [npc.she] roughly [npc.verb(slam)] it deep into [npc2.her] [npc2.vagina+]."));
+                            "[npc.Name] position the [npc.tentacleTip+] of [npc.her] [npc.tentacle(true)] between [npc2.namePos] [npc2.labia+],"
+                                    + " and with a forceful thrust, [npc.she] roughly slam it deep into [npc2.her] [npc2.vagina+]."));
 					break;
 				case SUB_EAGER:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 							"Eagerly teasing the [npc.tentacleTip+] of [npc.her] [npc.tentacle(true)] between [npc2.namePos] [npc2.labia+],"
-									+ " [npc.name] [npc.verb(let)] out [npc.a_moan+] before thrusting forwards, greedily sinking [npc.her] [npc.tentacle+(true)] into [npc2.her] [npc2.vagina+].",
+                                    + " [npc.name] let out [npc.a_moan+] before thrusting forwards, greedily sinking [npc.her] [npc.tentacle+(true)] into [npc2.her] [npc2.vagina+].",
 
-							"[npc.Name] [npc.verb(position)] the [npc.tentacleTip+] of [npc.her] [npc.tentacle(true)] between [npc2.namePos] [npc2.labia+],"
-									+ " and with a determined thrust, [npc.she] eagerly [npc.verb(sink)] it deep into [npc2.her] [npc2.vagina+]."));
+                            "[npc.Name] position the [npc.tentacleTip+] of [npc.her] [npc.tentacle(true)] between [npc2.namePos] [npc2.labia+],"
+                                    + " and with a determined thrust, [npc.she] eagerly sink it deep into [npc2.her] [npc2.vagina+]."));
 					break;
 				case SUB_NORMAL:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 							"Teasing the [npc.tentacleTip+] of [npc.her] [npc.tentacle(true)] between [npc2.namePos] [npc2.labia+],"
-									+ " [npc.name] [npc.verb(let)] out [npc.a_moan+] before thrusting forwards, sinking [npc.her] [npc.tentacle+(true)] into [npc2.her] [npc2.vagina+].",
+                                    + " [npc.name] let out [npc.a_moan+] before thrusting forwards, sinking [npc.her] [npc.tentacle+(true)] into [npc2.her] [npc2.vagina+].",
 
-							"[npc.Name] [npc.verb(position)] the [npc.tentacleTip+] of [npc.her] [npc.tentacle(true)] between [npc2.namePos] [npc2.labia+],"
-									+ " and with a little thrust, [npc.she] [npc.verb(sink)] it deep into [npc2.her] [npc2.vagina+]."));
+                            "[npc.Name] position the [npc.tentacleTip+] of [npc.her] [npc.tentacle(true)] between [npc2.namePos] [npc2.labia+],"
+                                    + " and with a little thrust, [npc.she] sink it deep into [npc2.her] [npc2.vagina+]."));
 					break;
 				default:
 					break;
@@ -525,71 +521,6 @@ public class TentacleVagina {
 		}
 		
 	};
-	
-	private static String getTargetedCharacterResponse(SexAction action) {
-		if(!action.isTargetedCharacterInanimate()) {
-			switch(Main.sex.getSexPace(Main.sex.getCharacterTargetedForSexAction(action))) {
-				case SUB_EAGER:
-				case DOM_NORMAL:
-					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							" [npc2.Name] eagerly [npc2.verb(buck)] [npc2.her] [npc2.hips] in response,"
-									+ " letting out [npc2.a_moan+] as [npc2.she] enthusiastically [npc2.verb(help)] to sink [npc.namePos] [npc.tentacle+(true)] deep into [npc2.her] [npc2.vagina+].",
-		
-							" [npc2.A_moan+] bursts out from between [npc2.namePos] [npc2.lips+],"
-									+ " and, eagerly thrusting [npc2.her] [npc2.hips] back, [npc2.she] [npc2.verb(beg)] for [npc.name] to carry on tentacle-fucking [npc2.herHim].",
-		
-							" [npc2.Moaning] in delight, [npc2.name] eagerly [npc2.verb(thrust)] [npc2.her] [npc2.hips+] back,"
-									+ " eagerly begging for [npc.name] to continue tentacle-fucking [npc2.herHim] as [npc2.her] movements help to sink [npc.her] [npc.tentacle+(true)] deep into [npc2.her] [npc2.vagina+]."));
-					break;
-				case SUB_RESISTING:
-					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							" Desperately trying, and failing, to pull away from [npc.namePos] [npc.tentacle(true)],"
-									+ " [npc2.name] [npc2.verb(let)] out [npc2.a_sob+], tears streaming down [npc2.her] [npc2.face] as [npc2.she] weakly [npc2.verb(beg)] for [npc.name] to pull out of [npc2.her] [npc2.vagina+].",
-		
-							" [npc2.A_sob+] bursts out from between [npc2.namePos] [npc2.lips] as [npc2.she] weakly [npc2.verb(try)] to push [npc.name] away,"
-									+ " tears streaming down [npc2.her] [npc2.face] as [npc2.she] [npc2.verb(plead)] for [npc.herHim] to pull out of [npc2.her] [npc2.vagina+].",
-		
-							" [npc2.Sobbing] in distress, and with tears running down [npc2.her] [npc2.face],"
-									+ " [npc2.name] weakly [npc2.verb(struggle)] against [npc.name], pleading and crying for [npc.herHim] to pull out of [npc2.her] [npc2.vagina+]."));
-					break;
-				case SUB_NORMAL:
-					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							" [npc2.Name] [npc2.verb(buck)] [npc2.her] [npc2.hips] in response,"
-									+ " letting out [npc2.a_moan+] as [npc2.she] [npc2.verb(help)] to sink [npc.namePos] [npc.tentacle+(true)] deep into [npc2.her] [npc2.vagina+].",
-	
-							" [npc2.A_moan+] bursts out from between [npc2.namePos] [npc2.lips+],"
-									+ " and, thrusting [npc2.her] [npc2.hips] back, [npc2.she] [npc2.verb(beg)] for [npc.name] to carry on tentacle-fucking [npc2.herHim].",
-	
-							" [npc2.Moaning] in delight, [npc2.name] eagerly [npc2.verb(push)] [npc2.her] [npc2.hips+] back,"
-									+ " begging for [npc.name] to continue tentacle-fucking [npc2.herHim] as [npc2.her] movements help to sink [npc.her] [npc.tentacle+(true)] deep into [npc2.her] [npc2.vagina+]."));
-					break;
-				case DOM_GENTLE:
-					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							" [npc2.Name] slowly [npc2.verb(buck)] [npc2.her] [npc2.hips] in response,"
-									+ " letting out a soft [npc2.moan] as [npc2.she] [npc2.verb(start)] gently imploring [npc.name] to continue tentacle-fucking [npc2.her] [npc2.vagina+].",
-	
-							" A soft [npc2.moan] drifts out from between [npc2.namePos] [npc2.lips+],"
-									+ " and, slowly bucking [npc2.her] [npc2.hips] back, [npc2.she] [npc2.verb(implore)] [npc.name] to carry on tentacle-fucking [npc2.herHim].",
-	
-							" [npc2.Moaning] in delight, [npc2.name] gently [npc2.verb(push)] [npc2.her] [npc2.hips+] back,"
-									+ " begging for [npc.name] to continue tentacle-fucking [npc2.herHim] as [npc2.her] movements help to sink [npc.her] [npc.tentacle+(true)] deep into [npc2.her] [npc2.vagina+]."));
-					break;
-				case DOM_ROUGH:
-					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							" [npc2.Name] violently [npc2.verb(buck)] [npc2.her] [npc2.hips] in response,"
-									+ " letting out [npc2.a_moan+] as [npc2.she] roughly [npc2.verb(demand)] that [npc.name] [npc.verb(continue)] fucking [npc2.herHim].",
-	
-							" [npc2.A_moan+] bursts out from between [npc2.namePos] [npc2.lips+],"
-									+ " and, roughly slamming [npc2.her] [npc2.hips] back, [npc2.she] [npc2.verb(order)] [npc.name] to carry on tentacle-fucking [npc2.herHim].",
-	
-							" [npc2.Moaning] in delight, [npc2.name] roughly [npc2.verb(slam)] [npc2.her] [npc2.hips+] back,"
-									+ " ordering [npc.name] to continue tentacle-fucking [npc2.herHim] as [npc2.her] movements force [npc.her] [npc.tentacle+(true)] deep into [npc2.her] [npc2.vagina+]."));
-					break;
-			}
-		}
-		return "";
-	}
-	
 	public static final SexAction TENTACLE_FUCKING_DOM_GENTLE = new SexAction(
 			SexActionType.ONGOING,
 			ArousalIncrease.FOUR_HIGH,
@@ -598,7 +529,7 @@ public class TentacleVagina {
 			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TENTACLE, SexAreaOrifice.VAGINA)),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
-		
+
 		@Override
 		public String getActionTitle() {
 			return "Gentle tentacle-fucking";
@@ -613,24 +544,23 @@ public class TentacleVagina {
 		public String getDescription() {
 
 			UtilText.nodeContentSB.setLength(0);
-			
+
 			UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 					"Gently sinking [npc.her] [npc.tentacle+(true)] deep into [npc2.namePos] [npc2.vagina+],"
-							+ " [npc.name] [npc.verb(start)] sliding it in and out, letting out a little [npc.moan] with every thrust as [npc.she] slowly [npc.verb(tentacle-fuck)] [npc2.name].",
+                            + " [npc.name] start sliding it in and out, letting out a little [npc.moan] with every thrust as [npc.she] slowly tentacle-fuck [npc2.name].",
 
 					"Slowly pushing [npc.her] [npc.tentacle+(true)] into [npc2.namePos] [npc2.vagina+],"
-							+ " [npc.name] softly [npc2.verb(thrust)] it in and out, letting out a little [npc.moan] as [npc.she] gently [npc.verb(tentacle-fuck)] [npc2.herHim].",
+                            + " [npc.name] softly [npc2.verb(thrust)] it in and out, letting out a little [npc.moan] as [npc.she] gently tentacle-fuck [npc2.herHim].",
 
 					"Sliding [npc.her] [npc.tentacle+(true)] into [npc2.namePos] [npc2.vagina+],"
-							+ " [npc.name] [npc.verb(let)] out a little [npc.moan] as [npc.she] [npc.verb(start)] to gently pump it in and out, breathing in [npc2.namePos] [npc2.scent] as [npc.she] slowly [npc.verb(tentacle-fuck)] [npc2.herHim]."));
+                            + " [npc.name] let out a little [npc.moan] as [npc.she] start to gently pump it in and out, breathing in [npc2.namePos] [npc2.scent] as [npc.she] slowly tentacle-fuck [npc2.herHim]."));
 
 			UtilText.nodeContentSB.append(getTargetedCharacterResponse(this));
-					
+
 			return UtilText.nodeContentSB.toString();
 		}
-		
+
 	};
-	
 	public static final SexAction TENTACLE_FUCKING_DOM_NORMAL = new SexAction(
 			SexActionType.ONGOING,
 			ArousalIncrease.FOUR_HIGH,
@@ -639,7 +569,7 @@ public class TentacleVagina {
 			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TENTACLE, SexAreaOrifice.VAGINA)),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
-		
+
 		@Override
 		public String getActionTitle() {
 			return "Tentacle-fucking";
@@ -654,24 +584,23 @@ public class TentacleVagina {
 		public String getDescription() {
 
 			UtilText.nodeContentSB.setLength(0);
-			
+
 			UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 					"Eagerly sinking [npc.her] [npc.tentacle+(true)] deep into [npc2.namePos] [npc2.vagina+],"
-							+ " [npc.name] [npc.verb(start)] enthusiastically pumping it in and out, letting out [npc.a_moan+] with every thrust as [npc.she] happily [npc.verb(tentacle-fuck)] [npc2.name].",
+                            + " [npc.name] start enthusiastically pumping it in and out, letting out [npc.a_moan+] with every thrust as [npc.she] happily tentacle-fuck [npc2.name].",
 
 					"Enthusiastically pushing [npc.her] [npc.tentacle+(true)] deep into [npc2.namePos] [npc2.vagina+],"
-							+ " [npc.name] frantically [npc2.verb(start)] thrusting it in and out, letting out [npc.a_moan+] as [npc.she] greedily [npc.verb(tentacle-fuck)] [npc2.herHim].",
+                            + " [npc.name] frantically [npc2.verb(start)] thrusting it in and out, letting out [npc.a_moan+] as [npc.she] greedily tentacle-fuck [npc2.herHim].",
 
 					"Thrusting [npc.her] [npc.tentacle+(true)] deep into [npc2.namePos] [npc2.vagina+],"
-							+ " [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(start)] to eagerly pump it in and out, breathing in [npc2.namePos] [npc2.scent] as [npc.she] desperately [npc.verb(tentacle-fuck)] [npc2.herHim]."));
+                            + " [npc.name] let out [npc.a_moan+] as [npc.she] start to eagerly pump it in and out, breathing in [npc2.namePos] [npc2.scent] as [npc.she] desperately tentacle-fuck [npc2.herHim]."));
 
 			UtilText.nodeContentSB.append(getTargetedCharacterResponse(this));
-			
+
 			return UtilText.nodeContentSB.toString();
 		}
-		
+
 	};
-	
 	public static final SexAction TENTACLE_FUCKING_DOM_ROUGH = new SexAction(
 			SexActionType.ONGOING,
 			ArousalIncrease.FOUR_HIGH,
@@ -690,29 +619,28 @@ public class TentacleVagina {
 		public String getActionDescription() {
 			return "Roughly thrust your [npc.tentacle+(true)] in and out of [npc2.namePos] [npc2.vagina+].";
 		}
-		
+
 		@Override
 		public String getDescription() {
 
 			UtilText.nodeContentSB.setLength(0);
-			
+
 			UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 					"Roughly slamming [npc.her] [npc.tentacle+(true)] deep into [npc2.namePos] [npc2.vagina+],"
-							+ " [npc.name] [npc.verb(start)] roughly pumping it in and out, letting out [npc.a_moan+] with every thrust as [npc.she] brutally [npc.verb(tentacle-fuck)] [npc2.name].",
+                            + " [npc.name] start roughly pumping it in and out, letting out [npc.a_moan+] with every thrust as [npc.she] brutally tentacle-fuck [npc2.name].",
 
 					"Violently thrusting [npc.her] [npc.tentacle+(true)] deep into [npc2.namePos] [npc2.vagina+],"
-							+ " [npc.name] [npc.verb(start)] roughly thrusting it in and out, letting out [npc.a_moan+] as [npc.she] forcefully [npc.verb(tentacle-fuck)] [npc2.herHim].",
+                            + " [npc.name] start roughly thrusting it in and out, letting out [npc.a_moan+] as [npc.she] forcefully tentacle-fuck [npc2.herHim].",
 
 					"Forcefully driving [npc.her] [npc.tentacle+(true)] deep into [npc2.namePos] [npc2.vagina+],"
-							+ " [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(start)] to roughly slam it in and out, breathing in [npc2.namePos] [npc2.scent] as [npc.she] violently [npc.verb(tentacle-fuck)] [npc2.herHim]."));
+                            + " [npc.name] let out [npc.a_moan+] as [npc.she] start to roughly slam it in and out, breathing in [npc2.namePos] [npc2.scent] as [npc.she] violently tentacle-fuck [npc2.herHim]."));
 
 			UtilText.nodeContentSB.append(getTargetedCharacterResponse(this));
-			
+
 			return UtilText.nodeContentSB.toString();
 		}
-		
+
 	};
-	
 	public static final SexAction TENTACLE_FUCKING_SUB_NORMAL = new SexAction(
 			SexActionType.ONGOING,
 			ArousalIncrease.FOUR_HIGH,
@@ -721,7 +649,7 @@ public class TentacleVagina {
 			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TENTACLE, SexAreaOrifice.VAGINA)),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
-		
+
 		@Override
 		public String getActionTitle() {
 			return "Tentacle-fucking";
@@ -736,24 +664,23 @@ public class TentacleVagina {
 		public String getDescription() {
 
 			UtilText.nodeContentSB.setLength(0);
-			
+
 			UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 					"Sinking [npc.her] [npc.tentacle+(true)] deep into [npc2.namePos] [npc2.vagina+],"
-							+ " [npc.name] [npc.verb(start)] pumping it in and out, letting out [npc.a_moan+] with every thrust as [npc.she] happily [npc.verb(tentacle-fuck)] [npc2.name].",
+                            + " [npc.name] start pumping it in and out, letting out [npc.a_moan+] with every thrust as [npc.she] happily tentacle-fuck [npc2.name].",
 
 					"Pushing [npc.her] [npc.tentacle+(true)] deep into [npc2.namePos] [npc2.vagina+],"
-							+ " [npc.name] [npc.verb(start)] thrusting it in and out, letting out [npc.a_moan+] as [npc.she] eagerly [npc.verb(tentacle-fuck)] [npc2.herHim].",
+                            + " [npc.name] start thrusting it in and out, letting out [npc.a_moan+] as [npc.she] eagerly tentacle-fuck [npc2.herHim].",
 
 					"Thrusting [npc.her] [npc.tentacle+(true)] deep into [npc2.namePos] [npc2.vagina+],"
-							+ " [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(start)] to pump it in and out, breathing in [npc2.namePos] [npc2.scent] as [npc.she] [npc.verb(tentacle-fuck)] [npc2.herHim]."));
+                            + " [npc.name] let out [npc.a_moan+] as [npc.she] start to pump it in and out, breathing in [npc2.namePos] [npc2.scent] as [npc.she] tentacle-fuck [npc2.herHim]."));
 
 			UtilText.nodeContentSB.append(getTargetedCharacterResponse(this));
-			
+
 			return UtilText.nodeContentSB.toString();
 		}
-		
+
 	};
-	
 	public static final SexAction TENTACLE_FUCKING_SUB_EAGER = new SexAction(
 			SexActionType.ONGOING,
 			ArousalIncrease.FOUR_HIGH,
@@ -762,7 +689,7 @@ public class TentacleVagina {
 			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TENTACLE, SexAreaOrifice.VAGINA)),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
-		
+
 		@Override
 		public String getActionTitle() {
 			return "Eager tentacle-fucking";
@@ -777,24 +704,23 @@ public class TentacleVagina {
 		public String getDescription() {
 
 			UtilText.nodeContentSB.setLength(0);
-			
+
 			UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 					"Eagerly sinking [npc.her] [npc.tentacle+(true)] deep into [npc2.namePos] [npc2.vagina+],"
-							+ " [npc.name] [npc.verb(start)] enthusiastically pumping it in and out, letting out [npc.a_moan+] with every thrust as [npc.she] happily [npc.verb(tentacle-fuck)] [npc2.name].",
+                            + " [npc.name] start enthusiastically pumping it in and out, letting out [npc.a_moan+] with every thrust as [npc.she] happily tentacle-fuck [npc2.name].",
 
 					"Enthusiastically pushing [npc.her] [npc.tentacle+(true)] deep into [npc2.namePos] [npc2.vagina+],"
-							+ " [npc.name] frantically [npc2.verb(start)] thrusting it in and out, letting out [npc.a_moan+] as [npc.she] greedily [npc.verb(tentacle-fuck)] [npc2.herHim].",
+                            + " [npc.name] frantically [npc2.verb(start)] thrusting it in and out, letting out [npc.a_moan+] as [npc.she] greedily tentacle-fuck [npc2.herHim].",
 
 					"Thrusting [npc.her] [npc.tentacle+(true)] deep into [npc2.namePos] [npc2.vagina+],"
-							+ " [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(start)] to eagerly pump it in and out, breathing in [npc2.namePos] [npc2.scent] as [npc.she] desperately [npc.verb(tentacle-fuck)] [npc2.herHim]."));
+                            + " [npc.name] let out [npc.a_moan+] as [npc.she] start to eagerly pump it in and out, breathing in [npc2.namePos] [npc2.scent] as [npc.she] desperately tentacle-fuck [npc2.herHim]."));
 
 			UtilText.nodeContentSB.append(getTargetedCharacterResponse(this));
-			
+
 			return UtilText.nodeContentSB.toString();
 		}
-		
+
 	};
-	
 	public static final SexAction TENTACLE_FUCKING_SUB_RESIST = new SexAction(
 			SexActionType.ONGOING,
 			ArousalIncrease.TWO_LOW,
@@ -803,7 +729,7 @@ public class TentacleVagina {
 			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TENTACLE, SexAreaOrifice.VAGINA)),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_RESISTING) {
-		
+
 		@Override
 		public String getActionTitle() {
 			return "Resist tentacle-fucking";
@@ -822,41 +748,40 @@ public class TentacleVagina {
 			switch(Main.sex.getSexPace(Main.sex.getCharacterTargetedForSexAction(this))) {
 				case DOM_GENTLE:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"[npc.Name] [npc.verb(try)] to pull [npc.her] [npc.tentacle(true)] out of [npc2.namePos] [npc2.pussy],"
+                            "[npc.Name] try to pull [npc.her] [npc.tentacle(true)] out of [npc2.namePos] [npc2.pussy],"
 									+ " but [npc.her] efforts prove to be in vain as [npc2.name] quickly [npc2.verb(reach)] down and [npc2.verb(take)] a gentle hold of it, before softly forcing it back into [npc2.her] [npc2.vagina+].",
-	
-							"With [npc.a_sob+], [npc.name] [npc.verb(try)] to pull [npc.her] [npc.tentacle(true)] away from [npc2.name], but [npc2.she] quickly [npc2.verb(grab)] it, before gently forcing it back inside [npc2.her] [npc2.vagina+].",
-	
-							"Tears start to well up in [npc.namePos] [npc.eyes], and with [npc.a_sob+], [npc.she] [npc.verb(try)] to pull [npc.her] [npc.tentacle(true)] away from [npc2.namePos] [npc2.pussy+],"
+
+                            "With [npc.a_sob+], [npc.name] try to pull [npc.her] [npc.tentacle(true)] away from [npc2.name], but [npc2.she] quickly [npc2.verb(grab)] it, before gently forcing it back inside [npc2.her] [npc2.vagina+].",
+
+                            "Tears start to well up in [npc.namePos] [npc.eyes], and with [npc.a_sob+], [npc.she] try to pull [npc.her] [npc.tentacle(true)] away from [npc2.namePos] [npc2.pussy+],"
 									+ " but [npc2.name] quickly [npc2.verb(shift)] position, ignoring [npc.her] protests as [npc2.she] gently [npc2.verb(force)] [npc2.her] [npc2.vagina+] down onto [npc.her] [npc.tentacle+(true)]."));
 					break;
 				case DOM_ROUGH:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"[npc.Name] [npc.verb(try)] to pull [npc.her] [npc.tentacle(true)] out of [npc2.namePos] [npc2.pussy],"
+                            "[npc.Name] try to pull [npc.her] [npc.tentacle(true)] out of [npc2.namePos] [npc2.pussy],"
 									+ " but [npc.her] efforts prove to be in vain as [npc2.name] quickly [npc2.verb(reach)] back and [npc2.verb(take)] a rough hold of it, before aggressively forcing it back into [npc2.her] [npc2.vagina+].",
-	
-							"With [npc.a_sob+], [npc.name] [npc.verb(try)] to pull [npc.her] [npc.tentacle(true)] away from [npc2.name], but [npc2.she] quickly [npc2.verb(grab)] it, before roughly forcing it back inside [npc2.her] [npc2.vagina+].",
-	
-							"Tears start to well up in [npc.namePos] [npc.eyes], and with [npc.a_sob+], [npc.she] [npc.verb(try)] to pull [npc.her] [npc.tentacle(true)] away from [npc2.namePos] [npc2.pussy+],"
+
+                            "With [npc.a_sob+], [npc.name] try to pull [npc.her] [npc.tentacle(true)] away from [npc2.name], but [npc2.she] quickly [npc2.verb(grab)] it, before roughly forcing it back inside [npc2.her] [npc2.vagina+].",
+
+                            "Tears start to well up in [npc.namePos] [npc.eyes], and with [npc.a_sob+], [npc.she] try to pull [npc.her] [npc.tentacle(true)] away from [npc2.namePos] [npc2.pussy+],"
 									+ " but [npc2.name] quickly [npc2.verb(shift)] position, ignoring [npc.her] protests as [npc2.she] roughly [npc2.verb(force)] [npc2.her] [npc2.vagina+] down onto [npc.her] [npc.tentacle+(true)]."));
 					break;
 				default: // DOM_NORMAL and in case anything goes wrong:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"[npc.Name] [npc.verb(try)] to pull [npc.her] [npc.tentacle(true)] out of [npc2.namePos] [npc2.pussy],"
+                            "[npc.Name] try to pull [npc.her] [npc.tentacle(true)] out of [npc2.namePos] [npc2.pussy],"
 									+ " but [npc.her] efforts prove to be in vain as [npc2.name] quickly [npc2.verb(reach)] back and [npc2.verb(take)] a firm hold of it, before eagerly forcing it back into [npc2.her] [npc2.vagina+].",
-	
-							"With [npc.a_sob+], [npc.name] [npc.verb(try)] to pull [npc.her] [npc.tentacle(true)] away from [npc2.name], but [npc2.she] quickly [npc2.verb(grab)] it, before eagerly forcing it back inside [npc2.her] [npc2.vagina+].",
-	
-							"Tears start to well up in [npc.namePos] [npc.eyes], and with [npc.a_sob+], [npc.she] [npc.verb(try)] to pull [npc.her] [npc.tentacle(true)] away from [npc2.namePos] [npc2.pussy+],"
+
+                            "With [npc.a_sob+], [npc.name] try to pull [npc.her] [npc.tentacle(true)] away from [npc2.name], but [npc2.she] quickly [npc2.verb(grab)] it, before eagerly forcing it back inside [npc2.her] [npc2.vagina+].",
+
+                            "Tears start to well up in [npc.namePos] [npc.eyes], and with [npc.a_sob+], [npc.she] try to pull [npc.her] [npc.tentacle(true)] away from [npc2.namePos] [npc2.pussy+],"
 									+ " but [npc2.name] quickly [npc2.verb(shift)] position, ignoring [npc.her] protests as [npc2.she] [npc2.verb(force)] [npc2.her] [npc2.vagina+] down onto [npc.her] [npc.tentacle+(true)]."));
 					break;
 			}
-			
+
 			return UtilText.nodeContentSB.toString();
 		}
-		
+
 	};
-	
 	public static final SexAction TENTACLE_FUCKING_STOP = new SexAction(
 			SexActionType.STOP_ONGOING,
 			ArousalIncrease.TWO_LOW,
@@ -864,7 +789,7 @@ public class TentacleVagina {
 			CorruptionLevel.ZERO_PURE,
 			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TENTACLE, SexAreaOrifice.VAGINA)),
 			SexParticipantType.NORMAL) {
-		
+
 		@Override
 		public String getActionTitle() {
 			return "Stop tentacle-fucking";
@@ -878,20 +803,20 @@ public class TentacleVagina {
 		@Override
 		public String getDescription() {
 			UtilText.nodeContentSB.setLength(0);
-			
+
 			switch(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())) {
 				case DOM_ROUGH:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 							"Roughly yanking [npc.her] [npc.tentacle+(true)] out of [npc2.namePos] [npc2.pussy+],"
-									+ " [npc.name] dominantly [npc.verb(slide)] the [npc.tentacleTip+] up and down over [npc2.her] [npc2.labia+] one last time before pulling back.",
+                                    + " [npc.name] dominantly slide the [npc.tentacleTip+] up and down over [npc2.her] [npc2.labia+] one last time before pulling back.",
 
-							"Thrusting deep inside of [npc2.name] one last time, [npc.name] then [npc.verb(yank)] [npc.her] [npc.tentacle+(true)] back out of [npc2.her] [npc2.vagina+], putting an end to the rough tentacle-fucking."));
+                            "Thrusting deep inside of [npc2.name] one last time, [npc.name] then yank [npc.her] [npc.tentacle+(true)] back out of [npc2.her] [npc2.vagina+], putting an end to the rough tentacle-fucking."));
 					break;
 				default:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"Sliding [npc.her] [npc.tentacle(true)] out of [npc2.namePos] [npc2.pussy+], [npc.name] [npc.verb(rub)] the [npc.tentacleTip] up and down over [npc2.her] [npc2.labia+] one last time before pulling back.",
+                            "Sliding [npc.her] [npc.tentacle(true)] out of [npc2.namePos] [npc2.pussy+], [npc.name] rub the [npc.tentacleTip] up and down over [npc2.her] [npc2.labia+] one last time before pulling back.",
 
-							"Pushing deep inside of [npc2.name] one last time, [npc.name] then [npc.verb(slide)] [npc.her] [npc.tentacle+(true)] back out of [npc2.her] [npc2.vagina+], putting an end to the tentacle-fucking."));
+                            "Pushing deep inside of [npc2.name] one last time, [npc.name] then slide [npc.her] [npc.tentacle+(true)] back out of [npc2.her] [npc2.vagina+], putting an end to the tentacle-fucking."));
 					break;
 			}
 
@@ -899,26 +824,23 @@ public class TentacleVagina {
 				switch(Main.sex.getSexPace(Main.sex.getCharacterTargetedForSexAction(this))) {
 					case SUB_RESISTING:
 						UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-								" [npc2.Name] can't [npc2.verb(help)] but [npc2.verb(let)] out [npc2.sob+] as [npc.name] [npc.verb(pull)] out of [npc2.her] [npc2.vagina],"
+                                " [npc2.Name] can't [npc2.verb(help)] but [npc2.verb(let)] out [npc2.sob+] as [npc.name] pull out of [npc2.her] [npc2.vagina],"
 										+ " and [npc2.she] [npc2.verb(continue)] crying and protesting as [npc2.she] [npc2.verb(carry)] on weakly struggling against [npc.herHim].",
-	
+
 								" With [npc2.a_sob+], [npc2.name] [npc2.verb(continue)] to struggle and protest, tears streaming down [npc2.her] [npc2.face] as [npc2.she] [npc2.verb(pull)] [npc2.her] [npc2.vagina+] away from [npc.name]."));
 						break;
 					default:
 						UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-								" [npc2.Name] [npc2.verb(let)] out [npc2.a_moan+] as [npc.name] [npc.verb(pull)] [npc.her] [npc.tentacle+(true)] out of [npc2.her] [npc2.vagina+], eager for more of [npc.her] attention.",
-	
+                                " [npc2.Name] [npc2.verb(let)] out [npc2.a_moan+] as [npc.name] pull [npc.her] [npc.tentacle+(true)] out of [npc2.her] [npc2.vagina+], eager for more of [npc.her] attention.",
+
 								" [npc2.A_moan+] escapes from between [npc2.namePos] [npc2.lips+], betraying [npc2.her] desperate desire for more of [npc.namePos] attention."));
 						break;
 				}
 			}
-			
+
 			return UtilText.nodeContentSB.toString();
 		}
 	};
-	
-	
-	
 	public static final SexAction USING_TENTACLE_START = new SexAction(
 			SexActionType.START_ONGOING,
 			ArousalIncrease.FOUR_HIGH,
@@ -940,48 +862,48 @@ public class TentacleVagina {
 		@Override
 		public String getDescription() {
 			UtilText.nodeContentSB.setLength(0);
-			
+
 			if(Main.sex.getCharacterPerformingAction().isVaginaVirgin()) {
 				if(Main.sex.getCharacterPerformingAction().hasFetish(Fetish.FETISH_PURE_VIRGIN)) {
-					UtilText.nodeContentSB.append("Despite the fact that [npc.she] [npc.verb(prize)] [npc.her] virginity above all else, [npc.name] [npc.verb(decide)] that now's the time to finally lose it. ");
+                    UtilText.nodeContentSB.append("Despite the fact that [npc.she] prize [npc.her] virginity above all else, [npc.name] decide that now's the time to finally lose it. ");
 				} else {
-					UtilText.nodeContentSB.append("Although [npc.sheHas] managed to retain [npc.her] virginity up until this moment, [npc.name] [npc.verb(decide)] that now's the time to finally lose it. ");
+                    UtilText.nodeContentSB.append("Although [npc.sheHas] managed to retain [npc.her] virginity up until this moment, [npc.name] decide that now's the time to finally lose it. ");
 				}
 			}
-			
+
 			switch(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())) {
 				case DOM_GENTLE:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"Grabbing [npc2.namePos] [npc2.tentacle(true)], [npc.name] slowly [npc.verb(guide)] it up to [npc.her] [npc.labia+],"
+                            "Grabbing [npc2.namePos] [npc2.tentacle(true)], [npc.name] slowly guide it up to [npc.her] [npc.labia+],"
 									+ " letting out a little [npc.moan] before gently bucking [npc.her] [npc.hips] and forcing [npc2.herHim] to penetrate [npc.her] [npc.vagina+].",
 
-							"Grabbing [npc2.namePos] [npc2.tentacle(true)], [npc.name] [npc.verb(line)] it up to [npc.her] [npc.vagina+],"
-									+ " before slowly pushing [npc.her] [npc.hips] back and letting out a soft [npc.moan] as [npc.she] [npc.verb(penetrate)] [npc.herself] on [npc2.her] [npc2.tentacle+(true)]."));
+                            "Grabbing [npc2.namePos] [npc2.tentacle(true)], [npc.name] line it up to [npc.her] [npc.vagina+],"
+                                    + " before slowly pushing [npc.her] [npc.hips] back and letting out a soft [npc.moan] as [npc.she] penetrate [npc.herself] on [npc2.her] [npc2.tentacle+(true)]."));
 					break;
 				case DOM_NORMAL:
 				case SUB_EAGER:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"Grabbing [npc2.namePos] [npc2.tentacle(true)], [npc.name] eagerly [npc.verb(guide)] it up to [npc.her] [npc.labia+],"
+                            "Grabbing [npc2.namePos] [npc2.tentacle(true)], [npc.name] eagerly guide it up to [npc.her] [npc.labia+],"
 									+ " letting out [npc.a_moan+] before desperately bucking [npc.her] [npc.hips] and forcing [npc2.herHim] to penetrate [npc.her] [npc.vagina+].",
 
-							"Grabbing [npc2.namePos] [npc2.tentacle(true)], [npc.name] [npc.verb(line)] it up to [npc.her] [npc.vagina+],"
-									+ " before eagerly thrusting [npc.her] [npc.hips] back and letting out [npc.a_moan+] as [npc.she] [npc.verb(penetrate)] [npc.herself] on [npc2.her] [npc2.tentacle+(true)]."));
+                            "Grabbing [npc2.namePos] [npc2.tentacle(true)], [npc.name] line it up to [npc.her] [npc.vagina+],"
+                                    + " before eagerly thrusting [npc.her] [npc.hips] back and letting out [npc.a_moan+] as [npc.she] penetrate [npc.herself] on [npc2.her] [npc2.tentacle+(true)]."));
 					break;
 				case DOM_ROUGH:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 							"Grabbing [npc2.namePos] [npc2.tentacle(true)], [npc.name] roughly yank it up to [npc.her] [npc.labia+],"
 									+ " letting out [npc.a_moan+] before violently slamming [npc.her] [npc.hips] and forcing [npc2.herHim] to penetrate [npc.her] [npc.vagina+].",
 
-							"Grabbing [npc2.namePos] [npc2.tentacle(true)], [npc.name] [npc.verb(line)] it up to [npc.her] [npc.vagina+],"
-									+ " before eagerly slamming [npc.her] [npc.hips] back and letting out [npc.a_moan+] as [npc.she] [npc.verb(penetrate)] [npc.herself] on [npc2.her] [npc2.tentacle+(true)]."));
+                            "Grabbing [npc2.namePos] [npc2.tentacle(true)], [npc.name] line it up to [npc.her] [npc.vagina+],"
+                                    + " before eagerly slamming [npc.her] [npc.hips] back and letting out [npc.a_moan+] as [npc.she] penetrate [npc.herself] on [npc2.her] [npc2.tentacle+(true)]."));
 					break;
 				case SUB_NORMAL:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"Grabbing [npc2.namePos] [npc2.tentacle(true)], [npc.name] [npc.verb(guide)] it up to [npc.her] [npc.labia+],"
+                            "Grabbing [npc2.namePos] [npc2.tentacle(true)], [npc.name] guide it up to [npc.her] [npc.labia+],"
 									+ " letting out [npc.a_moan+] before bucking [npc.her] [npc.hips] and forcing [npc2.herHim] to penetrate [npc.her] [npc.vagina+].",
 
-							"Grabbing [npc2.namePos] [npc2.tentacle(true)], [npc.name] [npc.verb(line)] it up to [npc.her] [npc.vagina+],"
-									+ " before pushing [npc.her] [npc.hips] back and letting out [npc.a_moan+] as [npc.she] [npc.verb(penetrate)] [npc.herself] on [npc2.her] [npc2.tentacle+(true)]."));
+                            "Grabbing [npc2.namePos] [npc2.tentacle(true)], [npc.name] line it up to [npc.her] [npc.vagina+],"
+                                    + " before pushing [npc.her] [npc.hips] back and letting out [npc.a_moan+] as [npc.she] penetrate [npc.herself] on [npc2.her] [npc2.tentacle+(true)]."));
 					break;
 				default:
 					break;
@@ -993,7 +915,7 @@ public class TentacleVagina {
 						UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 								" [npc2.Name] [npc2.verb(let)] out a soft [npc2.moan] as [npc2.she] [npc2.verb(enter)] [npc.herHim],"
 										+ " gently pushing [npc2.her] [npc2.tentacle(true)] forwards as [npc2.she] [npc2.verb(start)] to tentacle-fuck [npc.namePos] [npc.vagina+].",
-	
+
 								" With a soft [npc2.moan], [npc2.name] gently [npc2.verb(thrust)] [npc2.her] [npc2.tentacle(true)] forwards,"
 										+ " sinking it deep into [npc.namePos] [npc.vagina+] as [npc2.she] [npc2.verb(start)] tentacle-fucking [npc.herHim]."));
 						break;
@@ -1002,7 +924,7 @@ public class TentacleVagina {
 						UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 								" [npc2.Name] [npc2.verb(let)] out [npc2.a_moan+] as [npc2.she] [npc2.verb(enter)] [npc.herHim],"
 										+ " eagerly pushing [npc2.her] [npc2.tentacle(true)] forwards as [npc2.she] [npc2.verb(start)] enthusiastically tentacle-fucking [npc.namePos] [npc.vagina+].",
-	
+
 								" With [npc2.a_moan+], [npc2.name] eagerly [npc2.verb(thrust)] [npc2.her] [npc2.tentacle(true)] forwards,"
 										+ " sinking it deep into [npc.namePos] [npc.vagina+] as [npc2.she] [npc2.verb(start)] energetically tentacle-fucking [npc.herHim]."));
 						break;
@@ -1010,86 +932,30 @@ public class TentacleVagina {
 						UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 								" [npc2.Name] [npc2.verb(let)] out [npc2.a_moan+] as [npc2.she] [npc2.verb(enter)] [npc.herHim],"
 										+ " and, seeking to remind [npc.name] who's in charge, [npc2.she] roughly slams [npc2.her] [npc2.tentacle(true)] forwards and [npc2.verb(start)] to ruthlessly tentacle-fuck [npc.her] [npc.vagina+].",
-	
+
 								" With [npc2.a_moan+], [npc2.name] roughly [npc2.verb(slam)] [npc2.her] [npc2.tentacle(true)] forwards,"
 										+ " seeking to remind [npc.name] who's in charge as [npc2.she] [npc2.verb(start)] ruthlessly tentacle-fucking [npc.namePos] [npc.vagina+]."));
 						break;
 					case SUB_NORMAL:
 						UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 								" [npc2.Name] [npc2.verb(let)] out [npc2.a_moan+] as [npc2.she] [npc2.verb(enter)] [npc.herHim], pushing [npc2.her] [npc2.tentacle(true)] forwards as [npc2.she] [npc2.verb(start)] tentacle-fucking [npc.namePos] [npc.vagina+].",
-	
+
 								" With [npc2.a_moan+], [npc2.name] [npc2.verb(thrust)] [npc2.her] [npc2.tentacle(true)] forwards, sinking it deep into [npc.namePos] [npc.vagina+] as [npc2.she] [npc2.verb(start)] tentacle-fucking [npc.herHim]."));
 						break;
 					case SUB_RESISTING:
 						UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-								" [npc2.Name] [npc2.verb(let)] out [npc2.a_sob+] as [npc.name] [npc.verb(force)] [npc2.her] [npc2.tentacle(true)] inside of [npc.herHim],"
+                                " [npc2.Name] [npc2.verb(let)] out [npc2.a_sob+] as [npc.name] force [npc2.her] [npc2.tentacle(true)] inside of [npc.herHim],"
 										+ " and, struggling against [npc.herHim], [npc2.she] desperately [npc2.verb(try)] to pull [npc2.her] [npc2.tentacle+(true)] free from [npc.her] [npc.vagina+].",
-	
-								" With [npc2.a_sob+], [npc2.name] [npc2.verb(struggle)] against [npc.name] as [npc.she] [npc.verb(force)] [npc2.her] [npc2.tentacle(true)] deep into [npc.her] [npc.vagina+]."));
+
+                                " With [npc2.a_sob+], [npc2.name] [npc2.verb(struggle)] against [npc.name] as [npc.she] force [npc2.her] [npc2.tentacle(true)] deep into [npc.her] [npc.vagina+]."));
 						break;
 				}
 			}
-			
+
 			return UtilText.nodeContentSB.toString();
 		}
-		
+
 	};
-	
-	private static String getTargetedCharacterReceivingResponse(SexAction action) {
-		if(!action.isTargetedCharacterInanimate()) {
-			switch(Main.sex.getSexPace(Main.sex.getCharacterTargetedForSexAction(action))) {
-				case SUB_EAGER:
-				case DOM_NORMAL:
-					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							" [npc2.Name] greedily [npc2.verb(thrust)] [npc2.her] [npc2.tentacle+(true)] deep into [npc.namePos] [npc.vagina+],"
-									+ " letting out [npc2.a_moan+] as [npc2.she] enthusiastically [npc2.verb(penetrate)] [npc.her] [npc.pussy+].",
-		
-							" [npc2.A_moan+] bursts out from [npc2.namePos] mouth, before [npc2.she] [npc2.verb(start)] thrusting [npc2.her] [npc2.tentacle+(true)] deep into [npc.namePos] [npc.vagina+].",
-		
-							" [npc2.Moaning] in delight, [npc2.name] eagerly [npc2.verb(drive)] [npc2.her] [npc2.tentacle+(true)] as deep as possible into [npc.namePos] [npc.vagina+]."));
-					break;
-				case SUB_RESISTING:
-					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							" Failing to pull [npc2.her] [npc2.tentacle(true)] away from [npc.namePos] [npc.pussy],"
-									+ " [npc2.name] [npc2.verb(let)] out [npc2.a_sob+] as [npc2.she] weakly [npc2.verb(try)] to struggle free.",
-		
-							" [npc2.A_sob+] bursts out from between [npc2.namePos] [npc2.lips] as [npc2.she] weakly [npc2.verb(try)] to push [npc.name] away,"
-									+ " squirming and protesting as [npc.name] [npc.verb(continue)] to force [npc2.her] [npc2.tentacle+(true)] deep into [npc.her] [npc.vagina+].",
-		
-							" [npc2.Sobbing] in distress, [npc2.name] [npc2.verb(try)], in vain, to pull [npc2.her] [npc2.tentacle(true)] away from [npc.namePos] [npc.vagina+]."));
-					break;
-				case DOM_GENTLE:
-					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							" [npc2.Name] gently [npc2.verb(slide)] [npc2.her] [npc2.tentacle+(true)] deep into [npc.namePos] [npc.vagina+],"
-									+ " letting out a soft [npc2.moan] as [npc2.she] gently [npc2.verb(penetrate)] [npc.her] [npc.pussy+].",
-		
-							" [npc2.A_moan+] drifts out from [npc2.namePos] mouth, before [npc2.she] [npc2.verb(start)] slowly sliding [npc2.her] [npc2.tentacle+(true)] deep into [npc.namePos] [npc.vagina+].",
-	
-							" [npc2.Moaning] in delight, [npc2.name] gently [npc2.verb(slide)] [npc2.her] [npc2.tentacle+(true)] deep into [npc.namePos] [npc.vagina+]."));
-					break;
-				case DOM_ROUGH:
-					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							" [npc2.Name] violently [npc2.verb(thrust)] [npc2.her] [npc2.tentacle+(true)] deep into [npc.namePos] [npc.vagina+],"
-									+ " letting out [npc2.a_moan+] as [npc2.she] roughly [npc2.verb(penetrate)] [npc.her] [npc.pussy+].",
-		
-							" [npc2.A_moan+] drifts out from [npc2.namePos] mouth, before [npc2.she] [npc2.verb(start)] violently thrusting [npc2.her] [npc2.tentacle+(true)] deep into [npc.namePos] [npc.vagina+].",
-	
-							" [npc2.Moaning] in delight, [npc2.name] roughly [npc2.verb(slam)] [npc2.her] [npc2.tentacle+(true)] as deep as possible into [npc.namePos] [npc.vagina+]."));
-					break;
-				case SUB_NORMAL:
-					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							" [npc2.Name] [npc2.verb(thrust)] [npc2.her] [npc2.tentacle+(true)] deep into [npc.namePos] [npc.vagina+],"
-									+ " letting out [npc2.a_moan+] as [npc2.she] [npc2.verb(penetrate)] [npc.her] [npc.pussy+].",
-		
-							" [npc2.A_moan+] bursts out from [npc2.namePos] mouth, before [npc2.she] [npc2.verb(start)] thrusting [npc2.her] [npc2.tentacle+(true)] deep into [npc.namePos] [npc.vagina+].",
-	
-							" [npc2.Moaning] in delight, [npc2.name] [npc2.verb(slide)] [npc2.her] [npc2.tentacle+(true)] deep into [npc.namePos] [npc.vagina+]."));
-					break;
-			}
-		}
-		return "";
-	}
-	
 	public static final SexAction RIDING_TENTACLE_DOM_GENTLE = new SexAction(
 			SexActionType.ONGOING,
 			ArousalIncrease.FOUR_HIGH,
@@ -1098,7 +964,7 @@ public class TentacleVagina {
 			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.TENTACLE)),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
-		
+
 		@Override
 		public String getActionTitle() {
 			return "Gently tentacle-fucked";
@@ -1112,22 +978,21 @@ public class TentacleVagina {
 		@Override
 		public String getDescription() {
 			UtilText.nodeContentSB.setLength(0);
-			
-			UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-					"Gently pushing [npc.her] [npc.hips] back, [npc.name] [npc.verb(let)] out a soft [npc.moan] as [npc.she] [npc.verb(help)] to sink [npc2.namePos] [npc2.tentacle+(true)] deep into [npc.her] [npc.vagina+].",
 
-					"With a soft [npc.moan], [npc.name] gently [npc.verb(start)] pushing [npc.her] [npc.hips] back, forcing [npc2.namePos] [npc2.tentacle+(true)] ever deeper into [npc.her] [npc.vagina+].",
+			UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
+                    "Gently pushing [npc.her] [npc.hips] back, [npc.name] let out a soft [npc.moan] as [npc.she] help to sink [npc2.namePos] [npc2.tentacle+(true)] deep into [npc.her] [npc.vagina+].",
+
+                    "With a soft [npc.moan], [npc.name] gently start pushing [npc.her] [npc.hips] back, forcing [npc2.namePos] [npc2.tentacle+(true)] ever deeper into [npc.her] [npc.vagina+].",
 
 					"Slowly thrusting [npc.her] [npc.hips] back,"
 							+ " a soft [npc.moan] drifts out from between [npc.namePos] [npc.lips+] as [npc.her] movements force [npc2.namePos] [npc2.tentacle+(true)] deep into [npc.her] [npc.vagina+]."));
 
 			UtilText.nodeContentSB.append(getTargetedCharacterReceivingResponse(this));
-			
+
 			return UtilText.nodeContentSB.toString();
 		}
-		
+
 	};
-	
 	public static final SexAction RIDING_TENTACLE_DOM_NORMAL = new SexAction(
 			SexActionType.ONGOING,
 			ArousalIncrease.FOUR_HIGH,
@@ -1136,7 +1001,7 @@ public class TentacleVagina {
 			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.TENTACLE)),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
-		
+
 		@Override
 		public String getActionTitle() {
 			return "Tentacle-fucked";
@@ -1152,20 +1017,19 @@ public class TentacleVagina {
 			UtilText.nodeContentSB.setLength(0);
 
 			UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-					"Eagerly pushing [npc.her] [npc.hips] back, [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(help)] to sink [npc2.namePos] [npc2.tentacle+(true)] deep into [npc.her] [npc.vagina+].",
+                    "Eagerly pushing [npc.her] [npc.hips] back, [npc.name] let out [npc.a_moan+] as [npc.she] help to sink [npc2.namePos] [npc2.tentacle+(true)] deep into [npc.her] [npc.vagina+].",
 
-					"With [npc.a_moan+], [npc.name] enthusiastically [npc.verb(start)] thrusting [npc.her] [npc.hips] back, forcing [npc2.namePos] [npc2.tentacle+(true)] ever deeper into [npc.her] [npc.vagina+].",
+                    "With [npc.a_moan+], [npc.name] enthusiastically start thrusting [npc.her] [npc.hips] back, forcing [npc2.namePos] [npc2.tentacle+(true)] ever deeper into [npc.her] [npc.vagina+].",
 
 					"Energetically thrusting [npc.her] [npc.hips] back,"
 							+ " [npc.a_moan+] bursts out from between [npc.namePos] [npc.lips+] as [npc.her] movements force [npc2.namePos] [npc2.tentacle+(true)] deep into [npc.her] [npc.vagina+]."));
 
 			UtilText.nodeContentSB.append(getTargetedCharacterReceivingResponse(this));
-			
+
 			return UtilText.nodeContentSB.toString();
 		}
-		
+
 	};
-	
 	public static final SexAction RIDING_TENTACLE_DOM_ROUGH = new SexAction(
 			SexActionType.ONGOING,
 			ArousalIncrease.FOUR_HIGH,
@@ -1174,7 +1038,7 @@ public class TentacleVagina {
 			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.TENTACLE)),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
-		
+
 		@Override
 		public String getActionTitle() {
 			return "Roughly tentacle-fucked";
@@ -1190,20 +1054,19 @@ public class TentacleVagina {
 			UtilText.nodeContentSB.setLength(0);
 
 			UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-					"Violently slamming [npc.her] [npc.hips] back, [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(force)] [npc2.namePos] [npc2.tentacle+(true)] deep into [npc.her] [npc.vagina+].",
+                    "Violently slamming [npc.her] [npc.hips] back, [npc.name] let out [npc.a_moan+] as [npc.she] force [npc2.namePos] [npc2.tentacle+(true)] deep into [npc.her] [npc.vagina+].",
 
-					"With [npc.a_moan+], [npc.name] roughly [npc.verb(start)] slamming [npc.her] [npc.hips] back, forcing [npc2.namePos] [npc2.tentacle+(true)] ever deeper into [npc.her] [npc.vagina+].",
+                    "With [npc.a_moan+], [npc.name] roughly start slamming [npc.her] [npc.hips] back, forcing [npc2.namePos] [npc2.tentacle+(true)] ever deeper into [npc.her] [npc.vagina+].",
 
 					"Forcefully thrusting [npc.her] [npc.hips] back,"
 							+ " [npc.a_moan+] bursts out from between [npc.namePos] [npc.lips+] as [npc.her] movements roughly force [npc2.namePos] [npc2.tentacle+(true)] deep into [npc.her] [npc.vagina+]."));
 
 			UtilText.nodeContentSB.append(getTargetedCharacterReceivingResponse(this));
-			
+
 			return UtilText.nodeContentSB.toString();
 		}
 
 	};
-	
 	public static final SexAction RIDING_TENTACLE_SUB_NORMAL = new SexAction(
 			SexActionType.ONGOING,
 			ArousalIncrease.FOUR_HIGH,
@@ -1212,7 +1075,7 @@ public class TentacleVagina {
 			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.TENTACLE)),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
-		
+
 		@Override
 		public String getActionTitle() {
 			return "Tentacle-fucked";
@@ -1228,20 +1091,19 @@ public class TentacleVagina {
 			UtilText.nodeContentSB.setLength(0);
 
 			UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-					"Pushing [npc.her] [npc.hips] back, [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(help)] to sink [npc2.namePos] [npc2.tentacle+(true)] deep into [npc.her] [npc.vagina+].",
+                    "Pushing [npc.her] [npc.hips] back, [npc.name] let out [npc.a_moan+] as [npc.she] help to sink [npc2.namePos] [npc2.tentacle+(true)] deep into [npc.her] [npc.vagina+].",
 
-					"With [npc.a_moan+], [npc.name] [npc.verb(start)] thrusting [npc.her] [npc.hips] back, forcing [npc2.namePos] [npc2.tentacle+(true)] ever deeper into [npc.her] [npc.vagina+].",
+                    "With [npc.a_moan+], [npc.name] start thrusting [npc.her] [npc.hips] back, forcing [npc2.namePos] [npc2.tentacle+(true)] ever deeper into [npc.her] [npc.vagina+].",
 
 					"Thrusting [npc.her] [npc.hips] back,"
 							+ " [npc.a_moan+] bursts out from between [npc.namePos] [npc.lips+] as [npc.her] movements force [npc2.namePos] [npc2.tentacle+(true)] deep into [npc.her] [npc.vagina+]."));
 
 			UtilText.nodeContentSB.append(getTargetedCharacterReceivingResponse(this));
-			
+
 			return UtilText.nodeContentSB.toString();
 		}
-		
+
 	};
-	
 	public static final SexAction RIDING_TENTACLE_SUB_EAGER = new SexAction(
 			SexActionType.ONGOING,
 			ArousalIncrease.FOUR_HIGH,
@@ -1250,7 +1112,7 @@ public class TentacleVagina {
 			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.TENTACLE)),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
-		
+
 		@Override
 		public String getActionTitle() {
 			return "Eagerly tentacle-fucked";
@@ -1266,20 +1128,19 @@ public class TentacleVagina {
 			UtilText.nodeContentSB.setLength(0);
 
 			UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-					"Eagerly pushing [npc.her] [npc.hips] back, [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(help)] to sink [npc2.namePos] [npc2.tentacle+(true)] deep into [npc.her] [npc.vagina+].",
+                    "Eagerly pushing [npc.her] [npc.hips] back, [npc.name] let out [npc.a_moan+] as [npc.she] help to sink [npc2.namePos] [npc2.tentacle+(true)] deep into [npc.her] [npc.vagina+].",
 
-					"With [npc.a_moan+], [npc.name] enthusiastically [npc.verb(start)] thrusting [npc.her] [npc.hips] back, forcing [npc2.namePos] [npc2.tentacle+(true)] ever deeper into [npc.her] [npc.vagina+].",
+                    "With [npc.a_moan+], [npc.name] enthusiastically start thrusting [npc.her] [npc.hips] back, forcing [npc2.namePos] [npc2.tentacle+(true)] ever deeper into [npc.her] [npc.vagina+].",
 
 					"Energetically thrusting [npc.her] [npc.hips] back,"
 							+ " [npc.a_moan+] bursts out from between [npc.namePos] [npc.lips+] as [npc.her] movements force [npc2.namePos] [npc2.tentacle+(true)] deep into [npc.her] [npc.vagina+]."));
 
 			UtilText.nodeContentSB.append(getTargetedCharacterReceivingResponse(this));
-			
+
 			return UtilText.nodeContentSB.toString();
 		}
-		
+
 	};
-	
 	public static final SexAction FUCKED_SUB_RESIST = new SexAction(
 			SexActionType.ONGOING,
 			ArousalIncrease.ZERO_NONE,
@@ -1288,7 +1149,7 @@ public class TentacleVagina {
 			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.TENTACLE)),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_RESISTING) {
-		
+
 		@Override
 		public String getActionTitle() {
 			return "Resist tentacle-fucked";
@@ -1307,10 +1168,10 @@ public class TentacleVagina {
 			switch(Main.sex.getSexPace(Main.sex.getCharacterTargetedForSexAction(this))) {
 				case DOM_GENTLE:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"[npc.Name] [npc.verb(feel)] tears [npc.verb(start)] to well up in [npc.her] [npc.eyes], and, not being able to hold back any longer, [npc.she] suddenly [npc.verb(let)] out [npc.a_sob+],"
+                            "[npc.Name] feel tears start to well up in [npc.her] [npc.eyes], and, not being able to hold back any longer, [npc.she] suddenly let out [npc.a_sob+],"
 									+ " before weakly trying to pull [npc2.namePos] [npc2.tentacle(true)] out of [npc.her] [npc.vagina+].",
 
-							"[npc.A_sob+] bursts out from [npc.namePos] mouth as [npc.she] frantically [npc.verb(try)] to pull [npc.her] [npc.pussy] away from [npc2.namePos] unwanted penetration,"
+                            "[npc.A_sob+] bursts out from [npc.namePos] mouth as [npc.she] frantically try to pull [npc.her] [npc.pussy] away from [npc2.namePos] unwanted penetration,"
 									+ " struggling in desperation as [npc2.her] [npc2.tentacle+(true)] [npc2.verb(continue)] slowly sliding in and out of [npc.her] [npc.vagina+].",
 
 							"Trying desperately to pull [npc.her] [npc.hips] away,"
@@ -1318,10 +1179,10 @@ public class TentacleVagina {
 					break;
 				case DOM_NORMAL:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"[npc.Name] [npc.verb(feel)] tears [npc.verb(start)] to well up in [npc.her] [npc.eyes], and, not being able to hold back any longer, [npc.she] suddenly [npc.verb(let)] out [npc.a_sob+],"
+                            "[npc.Name] feel tears start to well up in [npc.her] [npc.eyes], and, not being able to hold back any longer, [npc.she] suddenly let out [npc.a_sob+],"
 									+ " before weakly trying to pull [npc2.namePos] [npc2.tentacle(true)] out of [npc.her] [npc.vagina+].",
 
-							"[npc.A_sob+] bursts out from [npc.namePos] mouth as [npc.she] frantically [npc.verb(try)] to pull [npc.her] [npc.pussy] away from [npc2.namePos] unwanted penetration,"
+                            "[npc.A_sob+] bursts out from [npc.namePos] mouth as [npc.she] frantically try to pull [npc.her] [npc.pussy] away from [npc2.namePos] unwanted penetration,"
 									+ " struggling in desperation as [npc2.her] [npc2.tentacle+(true)] [npc2.verb(continue)] frantically pumping in and out of [npc.her] [npc.vagina+].",
 
 							"Trying desperately to pull [npc.her] [npc.hips] away,"
@@ -1329,10 +1190,10 @@ public class TentacleVagina {
 					break;
 				case DOM_ROUGH:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"[npc.Name] [npc.verb(feel)] tears [npc.verb(start)] to well up in [npc.her] [npc.eyes], and, not being able to hold back any longer, [npc.she] suddenly [npc.verb(let)] out [npc.a_sob+],"
+                            "[npc.Name] feel tears start to well up in [npc.her] [npc.eyes], and, not being able to hold back any longer, [npc.she] suddenly let out [npc.a_sob+],"
 									+ " before weakly trying to pull [npc2.namePos] [npc2.tentacle(true)] out of [npc.her] [npc.vagina+].",
 
-							"[npc.A_sob+] bursts out from [npc.namePos] mouth as [npc.she] frantically [npc.verb(try)] to pull [npc.her] [npc.pussy] away from [npc2.namePos] unwanted penetration,"
+                            "[npc.A_sob+] bursts out from [npc.namePos] mouth as [npc.she] frantically try to pull [npc.her] [npc.pussy] away from [npc2.namePos] unwanted penetration,"
 									+ " struggling in desperation as [npc2.her] [npc2.tentacle+(true)] [npc2.verb(continue)] roughly slamming in and out of [npc.her] [npc.vagina+].",
 
 							"Trying desperately to pull [npc.her] [npc.hips] away,"
@@ -1341,12 +1202,11 @@ public class TentacleVagina {
 				default:
 					break;
 			}
-			
+
 			return UtilText.nodeContentSB.toString();
 		}
-		
+
 	};
-	
 	public static final SexAction FUCKED_STOP = new SexAction(
 			SexActionType.STOP_ONGOING,
 			ArousalIncrease.TWO_LOW,
@@ -1368,19 +1228,19 @@ public class TentacleVagina {
 		@Override
 		public String getDescription() {
 			UtilText.nodeContentSB.setLength(0);
-			
+
 			switch(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())) {
 				case DOM_ROUGH:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"Yanking [npc2.namePos] [npc2.tentacle(true)] out of [npc.her] [npc.vagina+], [npc.name] [npc.verb(let)] out a menacing growl as [npc.she] [npc.verb(command)] [npc2.name] to stop fucking [npc.herHim].",
+                            "Yanking [npc2.namePos] [npc2.tentacle(true)] out of [npc.her] [npc.vagina+], [npc.name] let out a menacing growl as [npc.she] command [npc2.name] to stop fucking [npc.herHim].",
 
-							"[npc.Name] [npc.verb(lean)] into [npc2.name], inhaling [npc2.her] [npc2.scent] before yanking [npc2.her] [npc2.tentacle(true)] out of [npc.her] [npc.vagina+]."));
+                            "[npc.Name] lean into [npc2.name], inhaling [npc2.her] [npc2.scent] before yanking [npc2.her] [npc2.tentacle(true)] out of [npc.her] [npc.vagina+]."));
 					break;
 				default:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"Sliding [npc2.namePos] [npc2.tentacle(true)] out of [npc.her] [npc.vagina+], [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(tell)] [npc2.name] to stop fucking [npc.herHim].",
+                            "Sliding [npc2.namePos] [npc2.tentacle(true)] out of [npc.her] [npc.vagina+], [npc.name] let out [npc.a_moan+] as [npc.she] tell [npc2.name] to stop fucking [npc.herHim].",
 
-							"[npc.Name] [npc.verb(lean)] into [npc2.name], inhaling [npc2.her] [npc2.scent] before sliding [npc2.her] [npc2.tentacle(true)] out of [npc.her] [npc.vagina+]."));
+                            "[npc.Name] lean into [npc2.name], inhaling [npc2.her] [npc2.scent] before sliding [npc2.her] [npc2.tentacle(true)] out of [npc.her] [npc.vagina+]."));
 					break;
 			}
 
@@ -1389,22 +1249,21 @@ public class TentacleVagina {
 					case SUB_RESISTING:
 						UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
 								" [npc2.Name] [npc2.verb(let)] out a relieved sigh, which soon turns into [npc2.a_sob+] as [npc2.she] [npc2.verb(realise)] that [npc.nameIsFull]n't finished with [npc2.herHim] just yet.",
-	
-								" With [npc2.a_sob+], [npc2.name] [npc2.verb(continue)] to protest and struggle against [npc.name] as [npc.she] [npc.verb(hold)] [npc2.herHim] firmly in place."));
+
+                                " With [npc2.a_sob+], [npc2.name] [npc2.verb(continue)] to protest and struggle against [npc.name] as [npc.she] hold [npc2.herHim] firmly in place."));
 						break;
 					default:
 						UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-								" [npc2.Name] [npc2.verb(let)] out [npc2.a_moan+] as [npc.name] [npc.verb(stop)] [npc2.herHim] from fucking [npc.her] [npc.vagina+].",
-	
+                                " [npc2.Name] [npc2.verb(let)] out [npc2.a_moan+] as [npc.name] stop [npc2.herHim] from fucking [npc.her] [npc.vagina+].",
+
 								" [npc2.A_moan+] escapes from between [npc2.namePos] [npc2.lips+], betraying [npc2.her] desire to continue fucking [npc.namePos] [npc.vagina+]."));
 						break;
 				}
 			}
-			
+
 			return UtilText.nodeContentSB.toString();
 		}
 	};
-	
 	public static final SexAction PUSSY_CONTROL = new SexAction(
 			SexActionType.ONGOING,
 			ArousalIncrease.FOUR_HIGH,
@@ -1412,7 +1271,7 @@ public class TentacleVagina {
 			CorruptionLevel.ZERO_PURE,
 			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.TENTACLE)),
 			SexParticipantType.NORMAL) {
-		
+
 		@Override
 		public String getActionTitle() {
 			return "Pussy control";
@@ -1431,18 +1290,137 @@ public class TentacleVagina {
 		@Override
 		public String getDescription() {
 			return UtilText.returnStringAtRandom(
-					"Letting out [npc.a_moan+], [npc.name] [npc.verb(concentrate)] on squeezing the extra internal muscles within [npc.her] [npc.pussy] down around [npc2.namePos] [npc2.tentacle+(true)].",
+                    "Letting out [npc.a_moan+], [npc.name] concentrate on squeezing the extra internal muscles within [npc.her] [npc.pussy] down around [npc2.namePos] [npc2.tentacle+(true)].",
 
 					(!isTargetedCharacterInanimate()
-						?"[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(focus)] on controlling the extra muscles lining the insides of [npc.her] [npc.pussy]."
-							+ " Gripping and squeezing them down around [npc2.namePos] [npc2.tentacle+(true)], [npc.name] [npc.verb(cause)] [npc2.herHim] to let out an involuntary cry of pleasure."
+                            ? "[npc.Name] let out [npc.a_moan+] as [npc.she] focus on controlling the extra muscles lining the insides of [npc.her] [npc.pussy]."
+                            + " Gripping and squeezing them down around [npc2.namePos] [npc2.tentacle+(true)], [npc.name] cause [npc2.herHim] to let out an involuntary cry of pleasure."
 						:""),
 
-					"[npc.Name] [npc.verb(find)] [npc.her] [npc.moans] falling into a steady rhythm as [npc.she] [npc.verb(concentrate)]"
+                    "[npc.Name] find [npc.her] [npc.moans] falling into a steady rhythm as [npc.she] concentrate"
 							+ " on squeezing the extra muscles within [npc.her] [npc.pussy+] down around [npc2.namePos] [npc2.tentacle+(true)].",
 
-					"With [npc.a_moan+], [npc.name] [npc.verb(focus)] on controlling the extra muscles deep within [npc.her] [npc.pussy],"
-							+ " gripping them down and massaging [npc2.namePos] [npc2.tentacle+(true)] as [npc.she] [npc.verb(squeal)] in pleasure.");
+                    "With [npc.a_moan+], [npc.name] focus on controlling the extra muscles deep within [npc.her] [npc.pussy],"
+                            + " gripping them down and massaging [npc2.namePos] [npc2.tentacle+(true)] as [npc.she] squeal in pleasure.");
 		}
 	};
+	
+	private static String getTargetedCharacterResponse(SexAction action) {
+		if(!action.isTargetedCharacterInanimate()) {
+			switch(Main.sex.getSexPace(Main.sex.getCharacterTargetedForSexAction(action))) {
+				case SUB_EAGER:
+				case DOM_NORMAL:
+					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
+							" [npc2.Name] eagerly [npc2.verb(buck)] [npc2.her] [npc2.hips] in response,"
+									+ " letting out [npc2.a_moan+] as [npc2.she] enthusiastically [npc2.verb(help)] to sink [npc.namePos] [npc.tentacle+(true)] deep into [npc2.her] [npc2.vagina+].",
+
+							" [npc2.A_moan+] bursts out from between [npc2.namePos] [npc2.lips+],"
+									+ " and, eagerly thrusting [npc2.her] [npc2.hips] back, [npc2.she] [npc2.verb(beg)] for [npc.name] to carry on tentacle-fucking [npc2.herHim].",
+
+							" [npc2.Moaning] in delight, [npc2.name] eagerly [npc2.verb(thrust)] [npc2.her] [npc2.hips+] back,"
+									+ " eagerly begging for [npc.name] to continue tentacle-fucking [npc2.herHim] as [npc2.her] movements help to sink [npc.her] [npc.tentacle+(true)] deep into [npc2.her] [npc2.vagina+]."));
+					break;
+				case SUB_RESISTING:
+					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
+							" Desperately trying, and failing, to pull away from [npc.namePos] [npc.tentacle(true)],"
+									+ " [npc2.name] [npc2.verb(let)] out [npc2.a_sob+], tears streaming down [npc2.her] [npc2.face] as [npc2.she] weakly [npc2.verb(beg)] for [npc.name] to pull out of [npc2.her] [npc2.vagina+].",
+
+							" [npc2.A_sob+] bursts out from between [npc2.namePos] [npc2.lips] as [npc2.she] weakly [npc2.verb(try)] to push [npc.name] away,"
+									+ " tears streaming down [npc2.her] [npc2.face] as [npc2.she] [npc2.verb(plead)] for [npc.herHim] to pull out of [npc2.her] [npc2.vagina+].",
+
+							" [npc2.Sobbing] in distress, and with tears running down [npc2.her] [npc2.face],"
+									+ " [npc2.name] weakly [npc2.verb(struggle)] against [npc.name], pleading and crying for [npc.herHim] to pull out of [npc2.her] [npc2.vagina+]."));
+					break;
+				case SUB_NORMAL:
+					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
+							" [npc2.Name] [npc2.verb(buck)] [npc2.her] [npc2.hips] in response,"
+									+ " letting out [npc2.a_moan+] as [npc2.she] [npc2.verb(help)] to sink [npc.namePos] [npc.tentacle+(true)] deep into [npc2.her] [npc2.vagina+].",
+
+							" [npc2.A_moan+] bursts out from between [npc2.namePos] [npc2.lips+],"
+									+ " and, thrusting [npc2.her] [npc2.hips] back, [npc2.she] [npc2.verb(beg)] for [npc.name] to carry on tentacle-fucking [npc2.herHim].",
+
+							" [npc2.Moaning] in delight, [npc2.name] eagerly [npc2.verb(push)] [npc2.her] [npc2.hips+] back,"
+									+ " begging for [npc.name] to continue tentacle-fucking [npc2.herHim] as [npc2.her] movements help to sink [npc.her] [npc.tentacle+(true)] deep into [npc2.her] [npc2.vagina+]."));
+					break;
+				case DOM_GENTLE:
+					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
+							" [npc2.Name] slowly [npc2.verb(buck)] [npc2.her] [npc2.hips] in response,"
+									+ " letting out a soft [npc2.moan] as [npc2.she] [npc2.verb(start)] gently imploring [npc.name] to continue tentacle-fucking [npc2.her] [npc2.vagina+].",
+
+							" A soft [npc2.moan] drifts out from between [npc2.namePos] [npc2.lips+],"
+									+ " and, slowly bucking [npc2.her] [npc2.hips] back, [npc2.she] [npc2.verb(implore)] [npc.name] to carry on tentacle-fucking [npc2.herHim].",
+
+							" [npc2.Moaning] in delight, [npc2.name] gently [npc2.verb(push)] [npc2.her] [npc2.hips+] back,"
+									+ " begging for [npc.name] to continue tentacle-fucking [npc2.herHim] as [npc2.her] movements help to sink [npc.her] [npc.tentacle+(true)] deep into [npc2.her] [npc2.vagina+]."));
+					break;
+				case DOM_ROUGH:
+					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
+							" [npc2.Name] violently [npc2.verb(buck)] [npc2.her] [npc2.hips] in response,"
+                                    + " letting out [npc2.a_moan+] as [npc2.she] roughly [npc2.verb(demand)] that [npc.name] continue fucking [npc2.herHim].",
+
+							" [npc2.A_moan+] bursts out from between [npc2.namePos] [npc2.lips+],"
+									+ " and, roughly slamming [npc2.her] [npc2.hips] back, [npc2.she] [npc2.verb(order)] [npc.name] to carry on tentacle-fucking [npc2.herHim].",
+
+							" [npc2.Moaning] in delight, [npc2.name] roughly [npc2.verb(slam)] [npc2.her] [npc2.hips+] back,"
+									+ " ordering [npc.name] to continue tentacle-fucking [npc2.herHim] as [npc2.her] movements force [npc.her] [npc.tentacle+(true)] deep into [npc2.her] [npc2.vagina+]."));
+					break;
+			}
+		}
+		return "";
+	}
+	
+	private static String getTargetedCharacterReceivingResponse(SexAction action) {
+		if(!action.isTargetedCharacterInanimate()) {
+			switch(Main.sex.getSexPace(Main.sex.getCharacterTargetedForSexAction(action))) {
+				case SUB_EAGER:
+				case DOM_NORMAL:
+					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
+							" [npc2.Name] greedily [npc2.verb(thrust)] [npc2.her] [npc2.tentacle+(true)] deep into [npc.namePos] [npc.vagina+],"
+									+ " letting out [npc2.a_moan+] as [npc2.she] enthusiastically [npc2.verb(penetrate)] [npc.her] [npc.pussy+].",
+
+							" [npc2.A_moan+] bursts out from [npc2.namePos] mouth, before [npc2.she] [npc2.verb(start)] thrusting [npc2.her] [npc2.tentacle+(true)] deep into [npc.namePos] [npc.vagina+].",
+
+							" [npc2.Moaning] in delight, [npc2.name] eagerly [npc2.verb(drive)] [npc2.her] [npc2.tentacle+(true)] as deep as possible into [npc.namePos] [npc.vagina+]."));
+					break;
+				case SUB_RESISTING:
+					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
+							" Failing to pull [npc2.her] [npc2.tentacle(true)] away from [npc.namePos] [npc.pussy],"
+									+ " [npc2.name] [npc2.verb(let)] out [npc2.a_sob+] as [npc2.she] weakly [npc2.verb(try)] to struggle free.",
+
+							" [npc2.A_sob+] bursts out from between [npc2.namePos] [npc2.lips] as [npc2.she] weakly [npc2.verb(try)] to push [npc.name] away,"
+                                    + " squirming and protesting as [npc.name] continue to force [npc2.her] [npc2.tentacle+(true)] deep into [npc.her] [npc.vagina+].",
+
+							" [npc2.Sobbing] in distress, [npc2.name] [npc2.verb(try)], in vain, to pull [npc2.her] [npc2.tentacle(true)] away from [npc.namePos] [npc.vagina+]."));
+					break;
+				case DOM_GENTLE:
+					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
+							" [npc2.Name] gently [npc2.verb(slide)] [npc2.her] [npc2.tentacle+(true)] deep into [npc.namePos] [npc.vagina+],"
+									+ " letting out a soft [npc2.moan] as [npc2.she] gently [npc2.verb(penetrate)] [npc.her] [npc.pussy+].",
+
+							" [npc2.A_moan+] drifts out from [npc2.namePos] mouth, before [npc2.she] [npc2.verb(start)] slowly sliding [npc2.her] [npc2.tentacle+(true)] deep into [npc.namePos] [npc.vagina+].",
+
+							" [npc2.Moaning] in delight, [npc2.name] gently [npc2.verb(slide)] [npc2.her] [npc2.tentacle+(true)] deep into [npc.namePos] [npc.vagina+]."));
+					break;
+				case DOM_ROUGH:
+					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
+							" [npc2.Name] violently [npc2.verb(thrust)] [npc2.her] [npc2.tentacle+(true)] deep into [npc.namePos] [npc.vagina+],"
+									+ " letting out [npc2.a_moan+] as [npc2.she] roughly [npc2.verb(penetrate)] [npc.her] [npc.pussy+].",
+
+							" [npc2.A_moan+] drifts out from [npc2.namePos] mouth, before [npc2.she] [npc2.verb(start)] violently thrusting [npc2.her] [npc2.tentacle+(true)] deep into [npc.namePos] [npc.vagina+].",
+
+							" [npc2.Moaning] in delight, [npc2.name] roughly [npc2.verb(slam)] [npc2.her] [npc2.tentacle+(true)] as deep as possible into [npc.namePos] [npc.vagina+]."));
+					break;
+				case SUB_NORMAL:
+					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
+							" [npc2.Name] [npc2.verb(thrust)] [npc2.her] [npc2.tentacle+(true)] deep into [npc.namePos] [npc.vagina+],"
+									+ " letting out [npc2.a_moan+] as [npc2.she] [npc2.verb(penetrate)] [npc.her] [npc.pussy+].",
+
+							" [npc2.A_moan+] bursts out from [npc2.namePos] mouth, before [npc2.she] [npc2.verb(start)] thrusting [npc2.her] [npc2.tentacle+(true)] deep into [npc.namePos] [npc.vagina+].",
+
+							" [npc2.Moaning] in delight, [npc2.name] [npc2.verb(slide)] [npc2.her] [npc2.tentacle+(true)] deep into [npc.namePos] [npc.vagina+]."));
+					break;
+			}
+		}
+		return "";
+	}
 }

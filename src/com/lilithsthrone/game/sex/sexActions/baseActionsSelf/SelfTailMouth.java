@@ -46,7 +46,7 @@ public class SelfTailMouth {
 
 		@Override
 		public String getDescription() {
-			return "Lifting [npc.her] [npc.tail+] up to [npc.her] mouth, [npc.name] [npc.verb(slide)] [npc.her] [npc.tail+] past [npc.her] [npc.lips+],"
+            return "Lifting [npc.her] [npc.tail+] up to [npc.her] mouth, [npc.name] slide [npc.her] [npc.tail+] past [npc.her] [npc.lips+],"
 					+ " before lewdly sucking on it for a moment in order to get it well lubricated with [npc.her] saliva.";
 		}
 		
@@ -76,7 +76,7 @@ public class SelfTailMouth {
 
 		@Override
 		public String getDescription() {
-			return "Snaking [npc.her] [npc.tail] up to [npc.her] mouth, [npc.name] [npc.verb(slide)] the tip past [npc.her] [npc.lips+] before starting to lewdly suck on it.";
+            return "Snaking [npc.her] [npc.tail] up to [npc.her] mouth, [npc.name] slide the tip past [npc.her] [npc.lips+] before starting to lewdly suck on it.";
 		}
 	};
 	
@@ -100,7 +100,7 @@ public class SelfTailMouth {
 
 		@Override
 		public String getDescription() {
-			return "With a little sigh, [npc.name] [npc.verb(slide)] [npc.her] saliva-coated [npc.tail] out of [npc.her] mouth.";
+            return "With a little sigh, [npc.name] slide [npc.her] saliva-coated [npc.tail] out of [npc.her] mouth.";
 		}
 	};
 }

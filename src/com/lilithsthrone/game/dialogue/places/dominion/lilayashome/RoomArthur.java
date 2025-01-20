@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.lilayashome;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.npc.dominion.Arthur;
 import com.lilithsthrone.game.character.npc.dominion.Lilaya;
 import com.lilithsthrone.game.character.npc.dominion.Rose;
@@ -21,6 +18,9 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @since 0.3.9
  * @version 0.3.9
@@ -31,8 +31,21 @@ public class RoomArthur {
 	private static int getDaysRemainingUntilArcaneLightningUnlocked() {
 		return (int) (14 - (Main.game.getDayNumber() - Main.game.getDialogueFlags().getSavedLong("arthur_globe_day_start")));
 	}
-	
-	public static final DialogueNode ROOM_ARTHUR_INSTALLATION = new DialogueNode("Arthur's Room", "", true) {
+
+    public static final DialogueNode ROOM_ARTHUR_INSTALLATION_AGREE_TO_CONVINCE_LYSSIETH = new DialogueNode("Комната Артура", "", true) {
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/arthursRoom", "ROOM_ARTHUR_INSTALLATION_AGREE_TO_CONVINCE_LYSSIETH");
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index == 1) {
+                return new Response("Продолжить", "Allow Arthur to get on with his experiments.", ROOM_ARTHUR);
+			}
+			return null;
+		}
+	};
+    public static final DialogueNode ROOM_ARTHUR_INSTALLATION = new DialogueNode("Комната Артура", "", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 30*60;
@@ -50,20 +63,6 @@ public class RoomArthur {
 						Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.MAIN, Quest.MAIN_2_A_INTO_THE_DEPTHS));
 					}
 				};
-			}
-			return null;
-		}
-	};
-	
-	public static final DialogueNode ROOM_ARTHUR_INSTALLATION_AGREE_TO_CONVINCE_LYSSIETH = new DialogueNode("Arthur's Room", "", true) {
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/arthursRoom", "ROOM_ARTHUR_INSTALLATION_AGREE_TO_CONVINCE_LYSSIETH");
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index == 1) {
-				return new Response("Continue", "Allow Arthur to get on with his experiments.", ROOM_ARTHUR);
 			}
 			return null;
 		}
@@ -88,10 +87,10 @@ public class RoomArthur {
 				return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
 			}
 			if(index == 1) {
-				return new Response("Lyssieth", "Ask Arthur about Lilaya's mother, Lyssieth.", ROOM_ARTHUR_LYSSIETH);
+                return new Response("Лиссиет", "Ask Arthur about Lilaya's mother, Lyssieth.", ROOM_ARTHUR_LYSSIETH);
 				
 			} else if(index == 2) {
-				return new Response("Lilaya", "Ask Arthur about his past relationship with Lilaya.", ROOM_ARTHUR_LILAYA);
+                return new Response("Лилайя", "Ask Arthur about his past relationship with Lilaya.", ROOM_ARTHUR_LILAYA);
 				
 			}
 			List<Response> additionalResponses = new ArrayList<>();
@@ -202,7 +201,7 @@ public class RoomArthur {
 		public Response getResponse(int responseTab, int index) {
 			if(responseTab==0) {
 				if(index == 1) {
-					return new Response("Lyssieth", "You're already asking Arthur about Lyssieth.", null);
+                    return new Response("Лиссиет", "You're already asking Arthur about Lyssieth.", null);
 					
 				}
 			}
@@ -227,7 +226,7 @@ public class RoomArthur {
 		public Response getResponse(int responseTab, int index) {
 			if(responseTab==0) {
 				if(index == 2) {
-					return new Response("Lilaya", "You're already asking Arthur about Lilaya.", null);
+                    return new Response("Лилайя", "You're already asking Arthur about Lilaya.", null);
 				}
 			}
 			return ROOM_ARTHUR.getResponse(responseTab, index);
@@ -323,7 +322,7 @@ public class RoomArthur {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Let Arthur continue with his other experiments.", LilayaHomeGeneric.CORRIDOR) {
+                return new Response("Продолжить", "Let Arthur continue with his other experiments.", LilayaHomeGeneric.CORRIDOR) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setNearestLocation(Main.game.getPlayer().getWorldLocation(), PlaceType.LILAYA_HOME_CORRIDOR, false);
@@ -377,7 +376,7 @@ public class RoomArthur {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Let Arthur continue with his other experiments.", LilayaHomeGeneric.CORRIDOR) {
+                return new Response("Продолжить", "Let Arthur continue with his other experiments.", LilayaHomeGeneric.CORRIDOR) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setNearestLocation(Main.game.getPlayer().getWorldLocation(), PlaceType.LILAYA_HOME_CORRIDOR, false);
@@ -500,7 +499,7 @@ public class RoomArthur {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Let Arthur continue with his other experiments.", LilayaHomeGeneric.CORRIDOR) {
+                return new Response("Продолжить", "Let Arthur continue with his other experiments.", LilayaHomeGeneric.CORRIDOR) {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/arthursRoom", "ROOM_ARTHUR_ARCANE_LIGHTNING_END_FINAL_LEAVE"));

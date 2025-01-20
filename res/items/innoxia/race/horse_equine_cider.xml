@@ -55,10 +55,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		[npc.Name] [npc.verb(pop)] the cap off the bottle of Equine Cider, before tilting [npc.her] head back and gulping down the golden liquid. Quickly finishing off the entire bottle, [npc.name] [npc.verb(notice)] a faint, musky dryness permeating through the sweet liquid, which lingers for some time as a slightly unpleasant aftertaste.
+		[npc.Name] pop the cap off the bottle of Equine Cider, before tilting [npc.her] head back and gulping down the golden liquid. Quickly finishing off the entire bottle, [npc.name] notice a faint, musky dryness permeating through the sweet liquid, which lingers for some time as a slightly unpleasant aftertaste.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		[npc.Name] [npc.verb(pop)] the cap off the bottle of Equine Cider, before bringing it up to [npc2.namePos] [npc2.lips] and making [npc2.herHim] gulp down the golden liquid. Quickly finishing off the entire bottle, [npc2.name] [npc2.verb(notice)] a faint, musky dryness permeating through the sweet liquid, which lingers for some time as a slightly unpleasant aftertaste.
+		[npc.Name] pop the cap off the bottle of Equine Cider, before bringing it up to [npc2.namePos] [npc2.lips] and making [npc2.herHim] gulp down the golden liquid. Quickly finishing off the entire bottle, [npc2.name] [npc2.verb(notice)] a faint, musky dryness permeating through the sweet liquid, which lingers for some time as a slightly unpleasant aftertaste.
 		]]></otherUse>
 	</useDescriptions>
 

@@ -13,8 +13,8 @@
 		<attackTooltipDescription><![CDATA[Strike at [npc.name] with your riding crop!]]></attackTooltipDescription>
 		<rarity>COMMON</rarity>
 		<weaponSet/>
-		<equipText><![CDATA[[npc.Name] [npc.verb(ready)] [npc.her] riding crop.]]></equipText>
-		<unequipText><![CDATA[[npc.Name] [npc.verb(put)] [npc.her] riding crop away.]]></unequipText>
+        <equipText><![CDATA[[npc.Name] ready [npc.her] riding crop.]]></equipText>
+        <unequipText><![CDATA[[npc.Name] put [npc.her] riding crop away.]]></unequipText>
 		<imageName>riding_crop.svg</imageName> 
 		<imageEquippedName/> 
 		<damage>8</damage> 
@@ -54,22 +54,22 @@
 	
 	<hitDescriptions>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(swat)] at [npc2.namePos] [npc2.arm] with [npc.her] riding crop!
+		[npc.Name] swat at [npc2.namePos] [npc2.arm] with [npc.her] riding crop!
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(swing)] [npc.her] riding crop at [npc2.name] and [npc.verb(manage)] to strike [npc2.her] on the [npc2.arm]!
+		[npc.Name] swing [npc.her] riding crop at [npc2.name] и manage to strike [npc2.her] on the [npc2.arm]!
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(swing)] [npc.her] riding crop at [npc2.name], grinning as [npc.she] [npc.verb(swat)] [npc2.her] torso.
+		[npc.Name] swing [npc.her] riding crop at [npc2.name], grinning as [npc.she] swat [npc2.her] torso.
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(swipe)] [npc.her] riding crop at [npc2.name], but [npc.verb(end)] up missing [npc2.herHim]!
+		[npc.Name] swipe [npc.her] riding crop at [npc2.name], but end up missing [npc2.herHim]!
 		]]></missText>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(swing)] [npc.her] riding crop at [npc2.name], but [npc.she] [npc.verb(miss)] [npc.her] target!
+		[npc.Name] swing [npc.her] riding crop at [npc2.name], but [npc.she] miss [npc.her] target!
 		]]></missText>
 	</missDescriptions>
 	

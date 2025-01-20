@@ -1,41 +1,12 @@
 package com.lilithsthrone.game.inventory.enchanting;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
-import com.lilithsthrone.game.character.body.types.ArmType;
-import com.lilithsthrone.game.character.body.types.AssType;
-import com.lilithsthrone.game.character.body.types.BreastType;
-import com.lilithsthrone.game.character.body.types.EarType;
-import com.lilithsthrone.game.character.body.types.EyeType;
-import com.lilithsthrone.game.character.body.types.FaceType;
-import com.lilithsthrone.game.character.body.types.HairType;
-import com.lilithsthrone.game.character.body.types.HornType;
-import com.lilithsthrone.game.character.body.types.LegType;
-import com.lilithsthrone.game.character.body.types.PenisType;
-import com.lilithsthrone.game.character.body.types.TailType;
-import com.lilithsthrone.game.character.body.types.TorsoType;
-import com.lilithsthrone.game.character.body.types.VaginaType;
-import com.lilithsthrone.game.character.body.types.WingType;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
-import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
-import com.lilithsthrone.game.character.body.valueEnums.CumProduction;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
+import com.lilithsthrone.game.character.body.types.*;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
@@ -48,11 +19,7 @@ import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.pregnancy.Litter;
 import com.lilithsthrone.game.character.pregnancy.PregnancyPossibility;
-import com.lilithsthrone.game.character.race.AbstractRace;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
-import com.lilithsthrone.game.character.race.Race;
-import com.lilithsthrone.game.character.race.RaceStage;
-import com.lilithsthrone.game.character.race.Subspecies;
+import com.lilithsthrone.game.character.race.*;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.BodyChanging;
 import com.lilithsthrone.game.dialogue.utils.MiscDialogue;
@@ -72,6 +39,10 @@ import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.7
@@ -316,13 +287,13 @@ public class ItemEffectType {
 //			target.addStatusEffect(StatusEffect.VIXENS_VIRILITY, 60*24*60);
 //			return UtilText.parse(target,
 //					"<p style='margin-bottom:0; padding-bottom:0;'>"
-//						+ "The little purple pill easily slides down [npc.her] throat, and within moments [npc.she] [npc.verb(feel)] "
+//						+ "The little purple pill easily slides down [npc.her] throat, and within moments [npc.she] feel "
 //						+ ( target.hasVagina()
 //								? "a soothing, warm glow spreading out from [npc.her] ovaries into [npc.her] lower torso."
 //									+ " [npc.Her] mind fogs over with an overwhelming desire to feel potent sperm spurting deep into [npc.her] "+(target.isVisiblyPregnant()?"pussy":"womb")
 //									+", and before [npc.she] can stop it, a horny whimper escapes from between [npc.her] [npc.lips]."
 //									+ (target.hasPenisIgnoreDildo()
-//											?" At the same time, [npc.her] manhood begins to throb with need, and [npc.she] [npc.verb(feel)] "
+//											?" At the same time, [npc.her] manhood begins to throb with need, and [npc.she] feel "
 //											:"") 
 //								:"")
 //						+ (target.hasPenisIgnoreDildo()
@@ -351,7 +322,7 @@ public class ItemEffectType {
 //			target.addStatusEffect(StatusEffect.PROMISCUITY_PILL, 60*24*60);
 //			return UtilText.parse(target,
 //					"<p>"
-//						+ "The little blue pill easily slides down [npc.namePos] throat, and after only a few moments [npc.she] [npc.verb(feel)] a cool throbbing sensation taking root deep within [npc.her] loins."
+//						+ "The little blue pill easily slides down [npc.namePos] throat, and after only a few moments [npc.she] feel a cool throbbing sensation taking root deep within [npc.her] loins."
 //					+ "</p>"
 //					+ "<p style='text-align:center; margin-top:0; padding-top:0;'>"
 //						+ "[style.colourBlueLight([npc.Name] [npc.is] now experiencing <i>'"+StatusEffect.PROMISCUITY_PILL.getName(target)+"'</i> for the next 24 hours!)]"
@@ -453,7 +424,7 @@ public class ItemEffectType {
 			boolean effectsObserved = false;
 			
 			sb.append("<p>");
-			sb.append("[npc.Name] eagerly [npc.verb(gulp)] down the rich, creamy liquid; its delicious taste spurs [npc.herHim] on into quickly draining the entire bottle.");
+            sb.append("[npc.Name] eagerly gulp down the rich, creamy liquid; its delicious taste spurs [npc.herHim] on into quickly draining the entire bottle.");
 
 			Map<SexAreaOrifice, List<AbstractStatusEffect>> incubationEffectMap = Util.newHashMapOfValues(
 					new Value<>(SexAreaOrifice.VAGINA, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_WOMB_1, StatusEffect.INCUBATING_EGGS_WOMB_2, StatusEffect.INCUBATING_EGGS_WOMB_3)),
@@ -508,8 +479,8 @@ public class ItemEffectType {
 					}
 					sb.append("</br>");
 					sb.append("Immediately, [npc.her] belly rapidly swells and grows in size, and [npc.she] can't help but let out a deep [npc.moan] as a rush of energy flows up throughout [npc.her] body."
-								+ " After just a moment, the effects come a halt, and [npc.name] [npc.verb(smile)] happily to [npc.herself] as"
-									+ " [npc.she] [npc.verb(reflect)] on the fact that the expansion of [npc.her] pregnant bump has taken [npc.herHim] into the next stage of [npc.her] pregnancy...");
+                            + " After just a moment, the effects come a halt, and [npc.name] smile happily to [npc.herself] as"
+                            + " [npc.she] reflect on the fact that the expansion of [npc.her] pregnant bump has taken [npc.herHim] into the next stage of [npc.her] pregnancy...");
 				}
 				
 			} else if(target.hasStatusEffect(StatusEffect.PREGNANT_0)) {
@@ -518,7 +489,7 @@ public class ItemEffectType {
 				
 				if(target.isPregnant()) {
 					sb.append("</br>");
-					sb.append("A soothing warmth quickly spreads throughout [npc.her] lower abdomen, and as [npc.she] [npc.verb(let)] out an involuntary gasp,"
+                    sb.append("A soothing warmth quickly spreads throughout [npc.her] lower abdomen, and as [npc.she] let out an involuntary gasp,"
 									+ " [npc.her] belly suddenly swells up into an unmistakably [style.boldMinorGood(pregnant bump)]!");
 					
 				} else {
@@ -619,9 +590,9 @@ public class ItemEffectType {
 			}
 			
 			return "<p style='text-align:center;'>"
-						+"[npc.Name] [npc.verb(let)] out a deep sigh as a cool, soothing sensation starts to wash over [npc.herHim]."
+                    + "[npc.Name] let out a deep sigh as a cool, soothing sensation starts to wash over [npc.herHim]."
 						+ "<i>"
-							+ sb.toString()
+							+ sb
 						+"</i>"
 					+ "</p>";
 		}
@@ -652,8 +623,8 @@ public class ItemEffectType {
 		public String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 			return UtilText.parse(target,
 					"<p>"
-						+ "[npc.Name] immediately [npc.verb(feel)] the positive effects of the aura-boosting supplements added to the Starr Cigarette."
-						+ " As the smoke fills [npc.her] lungs, however, [npc.she] also [npc.verb(feel)] slightly less healthy..."
+                            + "[npc.Name] immediately feel the positive effects of the aura-boosting supplements added to the Starr Cigarette."
+                            + " As the smoke fills [npc.her] lungs, however, [npc.she] also feel slightly less healthy..."
 					+ "</p>");
 		}
 	};
@@ -742,7 +713,7 @@ public class ItemEffectType {
 			StringBuilder sb = new StringBuilder();
 			
 			sb.append("<p style='text-align:center;'>");
-				sb.append("[npc.Name] [npc.verb(feel)] a blissful sense of inner-peace wash over [npc.herHim]...");
+            sb.append("[npc.Name] feel a blissful sense of inner-peace wash over [npc.herHim]...");
 				if(hadAddictions) {
 					sb.append("<br/><i>[npc.SheIsFull] no longer addicted to any substances!</i>");
 				}
@@ -928,7 +899,7 @@ public class ItemEffectType {
 				String purifyingDescription =
 						"<p style='text-align:center;'>"
 								+ "For a moment, it looks as though nothing is going to happen,"
-								+ " but as [npc.name] [npc.verb(swallow)] down the last couple of drops remaining in [npc.her] mouth, a sudden, cascading wave of purifying energy rushes through [npc.herHim]."
+                                + " but as [npc.name] swallow down the last couple of drops remaining in [npc.her] mouth, a sudden, cascading wave of purifying energy rushes through [npc.herHim]."
 							+ " Accompanied by a faint, light-blue flash which seems to radiate from every visible part of [npc.her] body, this energy rises up into [npc.her] head,"
 								+ " where it quickly gets to work purifying [npc.her] thoughts and calming [npc.her] libido..."
 						+"</p>";
@@ -1109,7 +1080,7 @@ public class ItemEffectType {
 //		@Override
 //		public String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 //			return "<p style='text-align:center;'>"
-//						+UtilText.parse(target, "[npc.Name] [npc.verb(start)] to feel a lot healthier...")
+//						+UtilText.parse(target, "[npc.Name] start to feel a lot healthier...")
 //					+ "</p>"
 //					+ target.addPotionEffect(Attribute.MAJOR_PHYSIQUE, 1);
 //		}
@@ -1127,7 +1098,7 @@ public class ItemEffectType {
 //		@Override
 //		public String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 //			return "<p style='text-align:center;'>"
-//						+ UtilText.parse(target, "[npc.Name] [npc.verb(start)] to feel a lot more energetic...")
+//						+ UtilText.parse(target, "[npc.Name] start to feel a lot more energetic...")
 //					+ "</p>"
 //					+ target.addPotionEffect(Attribute.MAJOR_PHYSIQUE, 2);
 //		}
@@ -1145,7 +1116,7 @@ public class ItemEffectType {
 //		@Override
 //		public String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 //			return "<p style='text-align:center;'>"
-//						+ UtilText.parse(target, "[npc.Name] [npc.verb(start)] to feel a lot more energetic...")
+//						+ UtilText.parse(target, "[npc.Name] start to feel a lot more energetic...")
 //					+ "</p>"
 //					+ target.addPotionEffect(Attribute.MAJOR_PHYSIQUE, 2);
 //		}
@@ -1163,7 +1134,7 @@ public class ItemEffectType {
 //		@Override
 //		public String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 //			return "<p style='text-align:center;'>"
-//						+ UtilText.parse(target, "[npc.Name] [npc.verb(start)] to feel a lot more energetic...")
+//						+ UtilText.parse(target, "[npc.Name] start to feel a lot more energetic...")
 //					+ "</p>"
 //					+ target.addPotionEffect(Attribute.MAJOR_PHYSIQUE, 2);
 //		}
@@ -1183,7 +1154,7 @@ public class ItemEffectType {
 //		@Override
 //		public String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 //			return "<p style='text-align:center;'>"
-//						+ UtilText.parse(target, "[npc.Name] [npc.verb(start)] to feel like [npc.she] needs to breed...")
+//						+ UtilText.parse(target, "[npc.Name] start to feel like [npc.she] needs to breed...")
 //					+ "</p>"
 //					+ target.addPotionEffect(Attribute.FERTILITY, 15)
 //					+ target.addPotionEffect(Attribute.VIRILITY, 15)
@@ -1203,7 +1174,7 @@ public class ItemEffectType {
 //		@Override
 //		public String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 //			return "<p style='text-align:center;'>"
-//						+ UtilText.parse(target, "[npc.Name] [npc.verb(start)] to feel [npc.her] arcane power increasing...")
+//						+ UtilText.parse(target, "[npc.Name] start to feel [npc.her] arcane power increasing...")
 //					+ "</p>"
 //					+ target.addPotionEffect(Attribute.MAJOR_ARCANE, 3);
 //		}
@@ -1221,7 +1192,7 @@ public class ItemEffectType {
 //		@Override
 //		public String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 //			return "<p style='text-align:center;'>"
-//						+ UtilText.parse(target, "[npc.Name] [npc.verb(start)] to feel [npc.her] arcane power increasing...")
+//						+ UtilText.parse(target, "[npc.Name] start to feel [npc.her] arcane power increasing...")
 //					+ "</p>"
 //					+ target.addPotionEffect(Attribute.MAJOR_ARCANE, 2);
 //		}
@@ -1239,7 +1210,7 @@ public class ItemEffectType {
 //		@Override
 //		public String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 //			return "<p style='text-align:center;'>"
-//						+ UtilText.parse(target, "[npc.Name] [npc.verb(start)] to feel [npc.her] arcane power increasing...")
+//						+ UtilText.parse(target, "[npc.Name] start to feel [npc.her] arcane power increasing...")
 //					+ "</p>"
 //					+ target.addPotionEffect(Attribute.MAJOR_ARCANE, 2);
 //		}
@@ -1257,7 +1228,7 @@ public class ItemEffectType {
 //		@Override
 //		public String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 //			return "<p style='text-align:center;'>"
-//						+ UtilText.parse(target, "[npc.Name] [npc.verb(start)] to feel a lot stronger...")
+//						+ UtilText.parse(target, "[npc.Name] start to feel a lot stronger...")
 //					+ "</p>"
 //					+ target.addPotionEffect(Attribute.MAJOR_PHYSIQUE, 3);
 //		}
@@ -1275,7 +1246,7 @@ public class ItemEffectType {
 //		@Override
 //		public String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 //			return "<p style='text-align:center;'>"
-//						+ UtilText.parse(target, "[npc.Name] [npc.verb(start)] to feel a lot stronger...")
+//						+ UtilText.parse(target, "[npc.Name] start to feel a lot stronger...")
 //					+ "</p>"
 //					+ target.addPotionEffect(Attribute.MAJOR_PHYSIQUE, 3);
 //		}
@@ -1293,7 +1264,7 @@ public class ItemEffectType {
 //		@Override
 //		public String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 //			return "<p style='text-align:center;'>"
-//						+ UtilText.parse(target, "[npc.Name] [npc.verb(start)] to feel a lot stronger...")
+//						+ UtilText.parse(target, "[npc.Name] start to feel a lot stronger...")
 //					+ "</p>"
 //					+ target.addPotionEffect(Attribute.MAJOR_PHYSIQUE, 3);
 //		}
@@ -1311,7 +1282,7 @@ public class ItemEffectType {
 //		@Override
 //		public String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 //			return "<p style='text-align:center;'>"
-//						+ UtilText.parse(target, "[npc.Name] [npc.verb(start)] to feel a lot stronger...")
+//						+ UtilText.parse(target, "[npc.Name] start to feel a lot stronger...")
 //					+ "</p>"
 //					+ target.addPotionEffect(Attribute.MAJOR_PHYSIQUE, 3);
 //		}
@@ -1329,7 +1300,7 @@ public class ItemEffectType {
 //		@Override
 //		public String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 //			return "<p style='text-align:center;'>"
-//						+ UtilText.parse(target, "[npc.Name] [npc.verb(start)] to feel a lot stronger...")
+//						+ UtilText.parse(target, "[npc.Name] start to feel a lot stronger...")
 //					+ "</p>"
 //					+ target.addPotionEffect(Attribute.MAJOR_PHYSIQUE, 5);
 //		}
@@ -1357,7 +1328,7 @@ public class ItemEffectType {
 //		public String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 //			target.addStatusEffect(StatusEffect.LOLLIPOP_SUCKING, 60*20);
 //			return "<p style='text-align:center;'>"
-//						+ UtilText.parse(target, "[npc.Name] [npc.verb(start)] to feel more feminine...")
+//						+ UtilText.parse(target, "[npc.Name] start to feel more feminine...")
 //					+ "</p>"
 //					+ target.incrementFemininity(3)
 //					+ "<br/>"
@@ -1427,7 +1398,7 @@ public class ItemEffectType {
 			StringBuilder sb = new StringBuilder();
 			
 			sb.append("<p>"
-						+ UtilText.parse(target, "As the lollipop's transformative effects start to make themselves known, [npc.name] [npc.verb(start)] to feel very light-headed...")
+                    + UtilText.parse(target, "As the lollipop's transformative effects start to make themselves known, [npc.name] start to feel very light-headed...")
 					+ "</p>");
 			
 			if(!target.hasFetish(Fetish.FETISH_BIMBO)) {
@@ -1538,7 +1509,7 @@ public class ItemEffectType {
 			StringBuilder sb = new StringBuilder();
 			
 			sb.append("<p>"
-						+ UtilText.parse(target, "As the lollipop's transformative effects start to make themselves known, [npc.name] [npc.verb(start)] to feel very light-headed...")
+                    + UtilText.parse(target, "As the lollipop's transformative effects start to make themselves known, [npc.name] start to feel very light-headed...")
 					+ "</p>");
 			
 			if(!target.hasTrait(Perk.NYMPHOMANIAC, false)) {
@@ -1651,7 +1622,7 @@ public class ItemEffectType {
 			}
 			
 			sb.append("<p>"
-						+ UtilText.parse(target, "As the perfume's transformative effects start to make themselves known, [npc.name] [npc.verb(start)] to feel very light-headed...")
+                    + UtilText.parse(target, "As the perfume's transformative effects start to make themselves known, [npc.name] start to feel very light-headed...")
 					+ "</p>");
 			
 			if(!target.hasFetish(Fetish.FETISH_DOMINANT)) {
@@ -2214,7 +2185,7 @@ public class ItemEffectType {
 				List<TFModifier> mods =  Util.newArrayListOfValues(TFModifier.CLOTHING_SEALING, TFModifier.CLOTHING_SERVITUDE);
 				if(targetItem instanceof AbstractClothing) {
 					 //If this clothing is a 'sex toy' or groin/nipple clothing, then allow vibration and orgasm denial enchantments:
-					if(((AbstractClothing)targetItem).getItemTags().contains(ItemTag.ENABLE_SEX_EQUIP)
+					if(targetItem.getItemTags().contains(ItemTag.ENABLE_SEX_EQUIP)
 							|| !Collections.disjoint(
 									((AbstractClothing)targetItem).getClothingType().getEquipSlots(),
 									Util.newArrayListOfValues(

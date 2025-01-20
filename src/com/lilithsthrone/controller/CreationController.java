@@ -1,100 +1,20 @@
 package com.lilithsthrone.controller;
 
-import java.time.Month;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.w3c.dom.events.EventTarget;
-
 import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInformationEventListener;
 import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInventoryEventListener;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.ObedienceLevel;
-import com.lilithsthrone.game.character.body.Antenna;
-import com.lilithsthrone.game.character.body.Arm;
-import com.lilithsthrone.game.character.body.Breast;
-import com.lilithsthrone.game.character.body.Eye;
-import com.lilithsthrone.game.character.body.Horn;
-import com.lilithsthrone.game.character.body.Tail;
-import com.lilithsthrone.game.character.body.Testicle;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAntennaType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractArmType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAssType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractBreastType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEarType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEyeType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHairType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHornType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractPenisType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTorsoType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractVaginaType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractWingType;
-import com.lilithsthrone.game.character.body.types.AntennaType;
-import com.lilithsthrone.game.character.body.types.ArmType;
-import com.lilithsthrone.game.character.body.types.AssType;
-import com.lilithsthrone.game.character.body.types.BreastType;
-import com.lilithsthrone.game.character.body.types.EarType;
-import com.lilithsthrone.game.character.body.types.EyeType;
-import com.lilithsthrone.game.character.body.types.FaceType;
-import com.lilithsthrone.game.character.body.types.HairType;
-import com.lilithsthrone.game.character.body.types.HornType;
-import com.lilithsthrone.game.character.body.types.LegType;
-import com.lilithsthrone.game.character.body.types.PenisType;
-import com.lilithsthrone.game.character.body.types.TailType;
-import com.lilithsthrone.game.character.body.types.TorsoType;
-import com.lilithsthrone.game.character.body.types.VaginaType;
-import com.lilithsthrone.game.character.body.types.WingType;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.ClitorisSize;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.EyeShape;
-import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
-import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
-import com.lilithsthrone.game.character.body.valueEnums.FootStructure;
-import com.lilithsthrone.game.character.body.valueEnums.GenitalArrangement;
-import com.lilithsthrone.game.character.body.valueEnums.Height;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.body.valueEnums.HornLength;
-import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
-import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.body.valueEnums.LipSize;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
-import com.lilithsthrone.game.character.body.valueEnums.NippleShape;
-import com.lilithsthrone.game.character.body.valueEnums.NippleSize;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeDepth;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
-import com.lilithsthrone.game.character.body.valueEnums.TesticleSize;
-import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
-import com.lilithsthrone.game.character.body.valueEnums.TongueModifier;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
-import com.lilithsthrone.game.character.body.valueEnums.WingSize;
+import com.lilithsthrone.game.character.body.*;
+import com.lilithsthrone.game.character.body.abstractTypes.*;
+import com.lilithsthrone.game.character.body.types.*;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
-import com.lilithsthrone.game.character.markings.AbstractTattooType;
-import com.lilithsthrone.game.character.markings.Tattoo;
-import com.lilithsthrone.game.character.markings.TattooCountType;
-import com.lilithsthrone.game.character.markings.TattooCounter;
-import com.lilithsthrone.game.character.markings.TattooCounterType;
-import com.lilithsthrone.game.character.markings.TattooType;
-import com.lilithsthrone.game.character.markings.TattooWriting;
-import com.lilithsthrone.game.character.markings.TattooWritingStyle;
+import com.lilithsthrone.game.character.markings.*;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
@@ -103,11 +23,7 @@ import com.lilithsthrone.game.dialogue.companions.CompanionManagement;
 import com.lilithsthrone.game.dialogue.places.dominion.shoppingArcade.SuccubisSecrets;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.story.CharacterCreation;
-import com.lilithsthrone.game.dialogue.utils.BodyChanging;
-import com.lilithsthrone.game.dialogue.utils.CharacterModificationUtils;
-import com.lilithsthrone.game.dialogue.utils.CosmeticsDialogue;
-import com.lilithsthrone.game.dialogue.utils.EnchantmentDialogue;
-import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.game.dialogue.utils.*;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
@@ -117,6 +33,11 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
+import org.w3c.dom.events.EventTarget;
+
+import java.time.Month;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * @since 0.4.6.4
@@ -226,7 +147,7 @@ public class CreationController {
 				}, false);
 				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
 						Util.capitaliseSentence(orificeMod.getName()),
-						(orificeMod.isSpecialEffects()?"[style.boldGood(Special Effect:)] ":"")+orificeMod.getDescription()));
+						(orificeMod.isSpecialEffects() ? "[style.boldGood(Специальный эффект:)] " : "") + orificeMod.getDescription()));
 			}
 		}
 	}
@@ -403,9 +324,9 @@ public class CreationController {
 				}, false);
 				if (BodyChanging.getTarget().getBreastRawSizeValue()<=CupSize.getMinimumCupSizeForEggIncubation().getMeasurement() && BodyChanging.getTarget().getIncubationLitter(SexAreaOrifice.NIPPLE) != null) {
 					MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
-							"[style.colourBad(Size Decrease Blocked)]",
+							"[style.colourBad(Уменьшение размера заблокировано)]",
 							UtilText.parse(BodyChanging.getTarget(),
-									"[npc.NamePos] breasts cannot be shrunk any further while eggs are being incubated in them!"),
+									"[npc.targetBasedWord(Твоя, [npc.NamePos])] грудь не может быть уменьшена ещё больше, пока в ней инкубируются яйца!"),
 							32));
 				}
 			}
@@ -417,9 +338,9 @@ public class CreationController {
 				}, false);
 				if (BodyChanging.getTarget().getBreastRawSizeValue()<=CupSize.getMinimumCupSizeForEggIncubation().getMeasurement() && BodyChanging.getTarget().getIncubationLitter(SexAreaOrifice.NIPPLE) != null) {
 					MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
-							"[style.colourBad(Size Decrease Blocked)]",
+							"[style.colourBad(Уменьшение размера заблокировано)]",
 							UtilText.parse(BodyChanging.getTarget(),
-									"[npc.NamePos] breasts cannot be shrunk any further while eggs are being incubated in them!"),
+									"[npc.targetBasedWord(Твоя, [npc.NamePos])] грудь не может быть уменьшена ещё больше, пока в ней инкубируются яйца!"),
 							32));
 				}
 			}
@@ -515,7 +436,7 @@ public class CreationController {
 				}, false);
 				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
 						Util.capitaliseSentence(modifier.getName()),
-						(modifier.isSpecialEffects()?"[style.boldGood(Special Effect:)] ":"")+modifier.getDescription()));
+						(modifier.isSpecialEffects() ? "[style.boldGood(Специальный эффект:)] " : "") + modifier.getDescription()));
 			}
 		}
 	}
@@ -642,7 +563,7 @@ public class CreationController {
 				}, false);
 				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
 						Util.capitaliseSentence(orificeMod.getName()),
-						(orificeMod.isSpecialEffects()?"[style.boldGood(Special Effect:)] ":"")+orificeMod.getDescription()));
+						(orificeMod.isSpecialEffects() ? "[style.boldGood(Специальный эффект:)] " : "") + orificeMod.getDescription()));
 			}
 		}
 	}
@@ -853,9 +774,9 @@ public class CreationController {
 			}, false);
 			if (BodyChanging.getTarget().getBreastRawSizeValue()<=CupSize.getMinimumCupSizeForEggIncubation().getMeasurement() && BodyChanging.getTarget().getIncubationLitter(SexAreaOrifice.NIPPLE) != null) {
 				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
-						"[style.colourBad(Size Decrease Blocked)]",
+						"[style.colourBad(Уменьшение размера заблокировано)]",
 						UtilText.parse(BodyChanging.getTarget(),
-								"[npc.NamePos] breasts cannot be shrunk any further while eggs are being incubated in them!"),
+								"[npc.targetBasedWord(Твоя, [npc.NamePos])] грудь не может быть уменьшена ещё больше, пока в ней инкубируются яйца!"),
 						32));
 			}
 		}
@@ -867,9 +788,9 @@ public class CreationController {
 			}, false);
 			if (BodyChanging.getTarget().getBreastRawSizeValue()<=CupSize.getMinimumCupSizeForEggIncubation().getMeasurement() && BodyChanging.getTarget().getIncubationLitter(SexAreaOrifice.NIPPLE) != null) {
 				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
-						"[style.colourBad(Size Decrease Blocked)]",
+						"[style.colourBad(Уменьшение размера заблокировано)]",
 						UtilText.parse(BodyChanging.getTarget(),
-								"[npc.NamePos] breasts cannot be shrunk any further while eggs are being incubated in them!"),
+								"[npc.targetBasedWord(Твоя, [npc.NamePos])] грудь не может быть уменьшена ещё больше, пока в ней инкубируются яйца!"),
 						32));
 			}
 		}
@@ -964,7 +885,7 @@ public class CreationController {
 				}, false);
 				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
 						Util.capitaliseSentence(modifier.getName()),
-						(modifier.isSpecialEffects()?"[style.boldGood(Special Effect:)] ":"")+modifier.getDescription()));
+						(modifier.isSpecialEffects() ? "[style.boldGood(Специальный эффект:)] " : "") + modifier.getDescription()));
 			}
 		}
 	}
@@ -1091,7 +1012,7 @@ public class CreationController {
 				}, false);
 				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
 						Util.capitaliseSentence(orificeMod.getName()),
-						(orificeMod.isSpecialEffects()?"[style.boldGood(Special Effect:)] ":"")+orificeMod.getDescription()));
+						(orificeMod.isSpecialEffects() ? "[style.boldGood(Специальный эффект:)] " : "") + orificeMod.getDescription()));
 			}
 		}
 	}
@@ -1278,7 +1199,7 @@ public class CreationController {
 				}, false);
 				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
 						Util.capitaliseSentence(orificeMod.getName()),
-						(orificeMod.isSpecialEffects()?"[style.boldGood(Special Effect:)] ":"")+orificeMod.getDescription()));
+						(orificeMod.isSpecialEffects() ? "[style.boldGood(Специальный эффект:)] " : "") + orificeMod.getDescription()));
 			}
 		}
 	}
@@ -1501,7 +1422,7 @@ public class CreationController {
 				}, false);
 				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
 						Util.capitaliseSentence(penMod.getName()),
-						(penMod.isSpecialEffects()?"[style.boldGood(Special Effect:)] ":"")+penMod.getDescription()));
+						(penMod.isSpecialEffects() ? "[style.boldGood(Специальный эффект:)] " : "") + penMod.getDescription()));
 			}
 		}
 	}
@@ -1729,7 +1650,7 @@ public class CreationController {
 				}, false);
 				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
 						Util.capitaliseSentence(modifier.getName()),
-						(modifier.isSpecialEffects()?"[style.boldGood(Special Effect:)] ":"")+modifier.getDescription()));
+						(modifier.isSpecialEffects() ? "[style.boldGood(Специальный эффект:)] " : "") + modifier.getDescription()));
 			}
 		}
 	}
@@ -1832,7 +1753,7 @@ public class CreationController {
 				}, false);
 				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
 						Util.capitaliseSentence(orificeMod.getName()),
-						(orificeMod.isSpecialEffects()?"[style.boldGood(Special Effect:)] ":"")+orificeMod.getDescription()));
+						(orificeMod.isSpecialEffects() ? "[style.boldGood(Специальный эффект:)] " : "") + orificeMod.getDescription()));
 			}
 		}
 	}
@@ -1900,7 +1821,7 @@ public class CreationController {
 				}, false);
 				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
 						Util.capitaliseSentence(orificeMod.getName()),
-						(orificeMod.isSpecialEffects()?"[style.boldGood(Special Effect:)] ":"")+orificeMod.getDescription()));
+						(orificeMod.isSpecialEffects() ? "[style.boldGood(Специальный эффект:)] " : "") + orificeMod.getDescription()));
 			}
 		}
 	}
@@ -2086,13 +2007,13 @@ public class CreationController {
 						|| BodyChanging.getTarget().hasStatusEffect(StatusEffect.PREGNANT_0)
 						|| BodyChanging.getTarget().getIncubationLitter(SexAreaOrifice.VAGINA) != null)) {
 					MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
-							"[style.colourBad(Vagina Removal Blocked)]",
+							"[style.colourBad(Удаление вагины заблокировано)]",
 							UtilText.parse(BodyChanging.getTarget(),
 									BodyChanging.getTarget().getIncubationLitter(SexAreaOrifice.VAGINA) != null
-											?"[npc.NamePos] vagina cannot be removed while eggs are being incubated in [npc.namePos] womb!"
+											? "[npc.targetBasedWord(Твоя, [npc.NamePos])] вагина не может быть удалена, пока яйца инкубируются в матке!"
 											:(BodyChanging.getTarget().hasStatusEffect(StatusEffect.PREGNANT_0)
-											?"[npc.NamePos] vagina cannot be removed while there is a chance that [npc.name] might be pregnant!"
-											:"[npc.NamePos] vagina cannot be removed while [npc.nameIsFull] pregnant!")),
+											? "[npc.targetBasedWord(Твоя, [npc.NamePos])] вагина не может быть удалена, пока есть вероятность того, что [npc.name] может быть [npc.genderBasedWord(беременен, беременна)]!"
+											: "[npc.targetBasedWord(Твоя, [npc.NamePos])] вагина не может быть удалена, пока [npc.nameIsFull] [npc.genderBasedWord(беременен, беременна)]!")),
 							32));
 				}
 			}
@@ -2137,7 +2058,7 @@ public class CreationController {
 				}, false);
 				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
 						Util.capitaliseSentence(modifier.getName()),
-						(modifier.isSpecialEffects()?"[style.boldGood(Special Effect:)] ":"")+modifier.getDescription()));
+						(modifier.isSpecialEffects() ? "[style.boldGood(Специальный эффект:)] " : "") + modifier.getDescription()));
 			}
 		}
 	}
@@ -2218,7 +2139,7 @@ public class CreationController {
 				}, false);
 				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
 						Util.capitaliseSentence(orificeMod.getName()),
-						(orificeMod.isSpecialEffects()?"[style.boldGood(Special Effect:)] ":"")+orificeMod.getDescription()));
+						(orificeMod.isSpecialEffects() ? "[style.boldGood(Специальный эффект:)] " : "") + orificeMod.getDescription()));
 			}
 		}
 	}
@@ -2290,7 +2211,7 @@ public class CreationController {
 				}, false);
 				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
 						Util.capitaliseSentence(penMod.getName()),
-						(penMod.isSpecialEffects()?"[style.boldGood(Special Effect:)] ":"")+penMod.getDescription()));
+						(penMod.isSpecialEffects() ? "[style.boldGood(Специальный эффект:)] " : "") + penMod.getDescription()));
 			}
 		}
 	}
@@ -2401,7 +2322,7 @@ public class CreationController {
 				}, false);
 				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
 						Util.capitaliseSentence(orificeMod.getName()),
-						(orificeMod.isSpecialEffects()?"[style.boldGood(Special Effect:)] ":"")+orificeMod.getDescription()));
+						(orificeMod.isSpecialEffects() ? "[style.boldGood(Специальный эффект:)] " : "") + orificeMod.getDescription()));
 			}
 		}
 	}
@@ -3013,18 +2934,18 @@ public class CreationController {
 					boolean confirm = Main.getProperties().hasValue(PropertyValue.tattooRemovalConfirmations);
 					if (Main.game.isInNewWorld()) {
 						if (Main.game.getPlayer().getMoney()>=100) {
-							sb.append("It will cost "+UtilText.formatAsMoney(100, "span")+" to remove this tattoo!");
+							sb.append("Это обойдется в " + UtilText.formatAsMoney(100, "span") + ", за удаление этой татуировки!");
 						} else {
-							sb.append("You don't have the required "+UtilText.formatAsMoney(100, "span")+" to remove this tattoo!");
+							sb.append("У тебя нет необходимых " + UtilText.formatAsMoney(100, "span") + ", за удаление этой татуировки!");
 							confirm = false;
 						}
 					} else {
-						sb.append("Remove this tattoo.");
+						sb.append("Удалить эту тату.");
 					}
 					if(confirm) {
-						sb.append(" (<i>You will need to click twice to remove it.</i>)");
+						sb.append(" (<i>Чтобы удалить, нужно дважды щёлкнуть мышью.</i>)");
 					}
-					MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Remove tattoo", sb.toString(), 32));
+					MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Удалить тату", sb.toString(), 32));
 					
 				} else {
 					DialogueNode nextDialogue;
@@ -3048,7 +2969,7 @@ public class CreationController {
 							}
 						});
 					}, false);
-					MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Add tattoo", "Click to proceed to the tattoo customisation screen.", 16));
+					MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Добавить тату", "Нажмите, чтобы перейти к экрану настройки татуировок.", 16));
 				}
 			}
 			
@@ -3124,8 +3045,8 @@ public class CreationController {
 				}
 				String description = type.getDescription();
 				if (!type.getSlotAvailability().contains(CharacterModificationUtils.tattooInventorySlot)) {
-					description += "<br/>[style.italicsBad(This tattoo type can't be applied to '"+CharacterModificationUtils.tattooInventorySlot.getTattooSlotName()+"'!)]<br/>"
-							+"Available slots: "+Util.tattooInventorySlotsToStringList(type.getSlotAvailability());
+					description += "<br/>[style.italicsBad(Этот тип татуировки не может быть нанесён на «" + CharacterModificationUtils.tattooInventorySlot.getTattooSlotName() + "»!)]<br/>"
+							+ "Доступные слоты: " + Util.tattooInventorySlotsToStringList(type.getSlotAvailability());
 				}
 				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(Util.capitaliseSentence(type.getName()), description));
 			}
@@ -3273,7 +3194,7 @@ public class CreationController {
 						Util.capitaliseSentence(counterType.getName()),
 						counterType.getDescription()
 						+(!counterType.isRetroactiveApplicationAvailable()
-							?"<br/><i>This counter type cannot be set to 'Start at 0', and instead always displays the current value.</i>"
+								? "<br/><i>Для этого типа счётчика нельзя установить значение 'Начать с 0', вместо этого он всегда отображает текущее значение.</i>"
 							:""));
 				MainController.addEventListener(MainController.document, id, "mouseenter", el, false);
 			}

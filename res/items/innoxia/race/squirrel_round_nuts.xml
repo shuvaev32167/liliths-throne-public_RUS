@@ -39,7 +39,7 @@
 			[##npc.incrementHealth(npc.getAttributeValue(ATTRIBUTE_HEALTH_MAXIMUM)/10)]
 			
 			<p style='margin-bottom:0; padding-bottom:0;'>
-				[npc.Name] [npc.verb(start)] to feel [npc.her] arcane power increasing...
+				[npc.Name] start to feel [npc.her] arcane power increasing...
 			</p>
 			[#npc.addPotionEffect(ATTRIBUTE_MAJOR_ARCANE, 2)]
 		]]></applyEffects>
@@ -54,10 +54,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		[npc.Name] [npc.verb(pull)] at the sides of the bag of Round Nuts to open it. A rich, earthy smell accompanies the sight of the nuts inside, and [npc.she] [npc.verb(find)] [npc.herself] unable to resist the delicious-looking display. [npc.She] quickly [npc.verb(wolf)] down the bag's contents, finding that the nuts are as delicious as they look.
+		[npc.Name] pull at the sides of the bag of Round Nuts to open it. A rich, earthy smell accompanies the sight of the nuts inside, and [npc.she] find [npc.herself] unable to resist the delicious-looking display. [npc.She] quickly wolf down the bag's contents, finding that the nuts are as delicious as they look.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		[npc.Name] [npc.verb(pull)] at the sides of the bag of Round Nuts to open it, before presenting it to [npc2.name]. A rich, earthy smell accompanies the sight of the nuts inside, and [npc2.name] [npc2.verb(find)] [npc2.herself] unable to resist the delicious-looking display. [npc2.She] quickly [npc2.verb(wolf)] down the bag's contents, finding that the nuts are as delicious as they look.
+		[npc.Name] pull at the sides of the bag of Round Nuts to open it, before presenting it to [npc2.name]. A rich, earthy smell accompanies the sight of the nuts inside, and [npc2.name] [npc2.verb(find)] [npc2.herself] unable to resist the delicious-looking display. [npc2.She] quickly [npc2.verb(wolf)] down the bag's contents, finding that the nuts are as delicious as they look.
 		]]></otherUse>
 	</useDescriptions>
 

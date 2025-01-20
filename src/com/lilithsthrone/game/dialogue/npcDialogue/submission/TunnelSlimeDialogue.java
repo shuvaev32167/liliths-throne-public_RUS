@@ -7,11 +7,7 @@ import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.npc.NPCFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.responses.Response;
-import com.lilithsthrone.game.dialogue.responses.ResponseCombat;
-import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
-import com.lilithsthrone.game.dialogue.responses.ResponseSex;
-import com.lilithsthrone.game.dialogue.responses.ResponseTag;
+import com.lilithsthrone.game.dialogue.responses.*;
 import com.lilithsthrone.game.dialogue.utils.BodyChanging;
 import com.lilithsthrone.game.dialogue.utils.InventoryInteraction;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -306,7 +302,7 @@ public class TunnelSlimeDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", AFTER_SLIME_SEX_AS_DOM){
+                return new Response("Продолжить", "Carry on your way.", AFTER_SLIME_SEX_AS_DOM) {
 					@Override
 					public DialogueNode getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);
@@ -343,7 +339,7 @@ public class TunnelSlimeDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", AFTER_SLIME_SEX_AS_SUB){
+                return new Response("Продолжить", "Carry on your way.", AFTER_SLIME_SEX_AS_SUB) {
 					@Override
 					public DialogueNode getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);
@@ -517,7 +513,7 @@ public class TunnelSlimeDialogue {
 				
 			} else {
 				if (index == 1) {
-					return new Response("Continue", "Carry on your way.", AFTER_COMBAT_PLAYER_DEFEAT){
+                    return new Response("Продолжить", "Carry on your way.", AFTER_COMBAT_PLAYER_DEFEAT) {
 						@Override
 						public DialogueNode getNextDialogue() {
 							return Main.game.getDefaultDialogue(false);
@@ -547,7 +543,7 @@ public class TunnelSlimeDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", OFFER_MONEY){
+                return new Response("Продолжить", "Carry on your way.", OFFER_MONEY) {
 					@Override
 					public DialogueNode getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);
@@ -587,7 +583,7 @@ public class TunnelSlimeDialogue {
 			boolean rapePlay = getSlime().isPostCombatRapePlay();
 		
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way...", Main.game.getDefaultDialogue(false)){
+                return new Response("Продолжить", "Carry on your way...", Main.game.getDefaultDialogue(false)) {
 					@Override
 					public void effects() {
 						if(getSlime().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {
@@ -879,7 +875,7 @@ public class TunnelSlimeDialogue {
 				
 			} else {
 				if (index == 1) {
-					return new Response("Continue", "Carry on your way.", AFTER_COMBAT_PLAYER_DEFEAT){
+                    return new Response("Продолжить", "Carry on your way.", AFTER_COMBAT_PLAYER_DEFEAT) {
 						@Override
 						public DialogueNode getNextDialogue() {
 							return Main.game.getDefaultDialogue(false);
@@ -912,7 +908,7 @@ public class TunnelSlimeDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", AFTER_SEX_VICTORY){
+                return new Response("Продолжить", "Carry on your way.", AFTER_SEX_VICTORY) {
 					@Override
 					public DialogueNode getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);

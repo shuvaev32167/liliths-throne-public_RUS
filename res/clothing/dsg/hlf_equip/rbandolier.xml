@@ -53,25 +53,25 @@
 	
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(put)] on the bandolier and securely [npc.verb(tighten)] the strap around [npc.her] shoulder.]]>
+            <![CDATA[[npc.Name] put on the bandolier and securely tighten the strap around [npc.her] shoulder.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(put)] the [npc.verb(wrap)] the bandolier around [npc2.name] and [npc.verb(tighten)] the strap around [npc2.her] shoulder.]]>
+            <![CDATA[[npc.Name] put the wrap the bandolier around [npc2.name] и tighten the strap around [npc2.her] shoulder.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(shove)] the bandolier onto [npc2.name] and [npc.verb(yank)] the strap around [npc2.her] shoulder.]]>
+            <![CDATA[[npc.Name] shove the bandolier onto [npc2.name] и yank the strap around [npc2.her] shoulder.]]>
 		</otherRough>
 	</replacementText>
 	
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(loosen)] the bandolier's strap from [npc.her] shoulder and [npc.verb(take)] it off.]]>
+            <![CDATA[[npc.Name] loosen the bandolier's strap from [npc.her] shoulder and take it off.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(loosen)] the bandolier's strap from [npc2.namePos] shoulder and [npc.verb(take)] it off.]]>
+            <![CDATA[[npc.Name] loosen the bandolier's strap from [npc2.namePos] shoulder and take it off.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(tears)] the bandolier from [npc2.namePos] torso.]]>
+            <![CDATA[[npc.Name] tears the bandolier from [npc2.namePos] torso.]]>
 		</otherRough>
 	</displacementText>
 	

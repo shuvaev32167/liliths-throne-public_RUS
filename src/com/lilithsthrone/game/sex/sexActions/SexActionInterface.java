@@ -1,13 +1,5 @@
 package com.lilithsthrone.game.sex.sexActions;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import com.lilithsthrone.controller.MainController;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -28,22 +20,15 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
-import com.lilithsthrone.game.sex.ArousalIncrease;
-import com.lilithsthrone.game.sex.CondomFailure;
-import com.lilithsthrone.game.sex.ImmobilisationType;
-import com.lilithsthrone.game.sex.LubricationType;
-import com.lilithsthrone.game.sex.SexAreaInterface;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexControl;
-import com.lilithsthrone.game.sex.SexPace;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotGeneric;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -56,21 +41,21 @@ public interface SexActionInterface {
 	 * This is a method to support old sex actions. Do not set the return value of this to anything other than null.
 	 * @return
 	 */
-	public default SexActionLimitation getLimitation() {//TODO remove this
+	default SexActionLimitation getLimitation() {//TODO remove this
 		return null;
 	}
 	
-	public abstract SexActionType getActionType();
+	SexActionType getActionType();
 
-	public default boolean isPositionSwap() {
+	default boolean isPositionSwap() {
 		return false;
 	}
 
-	public default boolean isSadisticAction() {
+	default boolean isSadisticAction() {
 		return false;
 	}
 
-	public default boolean isLovingAction() {
+	default boolean isLovingAction() {
 		return false;
 	}
 
@@ -78,7 +63,7 @@ public interface SexActionInterface {
 	 * Default is false, meaning that only actions of SexPace.SUB_RESISTING are available to resisting characters.
 	 * <br/>Override to return true if this action should be available to resisting characters.
 	 */
-	public default boolean isOverrideAvailableDuringResisting() {
+	default boolean isOverrideAvailableDuringResisting() {
 		return false;
 	}
 	
@@ -89,7 +74,7 @@ public interface SexActionInterface {
 	 * <br/>If any type returns true for isSilence(), then SexActionType.SPEECH and SexActionType.SPEECH_WITH_ALTERNATIVE are banned
 	 * @return
 	 */
-	public default boolean isAvailableDuringImmobilisation(Collection<ImmobilisationType> types) {
+	default boolean isAvailableDuringImmobilisation(Collection<ImmobilisationType> types) {
 		if(this.getActionType()==SexActionType.ONGOING) {
 			if(types.contains(ImmobilisationType.SLEEP) || types.contains(ImmobilisationType.COMMAND)) {
 				return false;
@@ -114,7 +99,7 @@ public interface SexActionInterface {
 	/**
 	 * @return true if the character who's being targeted by this sex action is immobilised of the type 'COMMAND' or 'SLEEP'
 	 */
-	public default boolean isTargetedCharacterInanimate() {
+	default boolean isTargetedCharacterInanimate() {
 		GameCharacter target = Main.sex.getCharacterTargetedForSexAction(this);
 		return target!=null
 				&& Main.game.isInSex()
@@ -125,36 +110,36 @@ public interface SexActionInterface {
 	/**
 	 * @return true if you want this sex action to always be shown in the available list of actions, even if it is unavailable (in which case it will be greyed-out).
 	 */
-	public default boolean isDisplayedAsUnavailable() {
+	default boolean isDisplayedAsUnavailable() {
 		return false;
 	}
 	
-	public abstract String getActionTitle();
+	String getActionTitle();
 
-	public abstract String getActionDescription();
+	String getActionDescription();
 	
-	public abstract String getDescription();
+	String getDescription();
 	
-	public default Colour getHighlightColour() {
+	default Colour getHighlightColour() {
 		return null;
 	}
 	
-	public abstract String getFluidFlavourDescription(GameCharacter performing, GameCharacter receiving);
+	String getFluidFlavourDescription(GameCharacter performing, GameCharacter receiving);
 
-	public CorruptionLevel getCorruptionNeeded();
+	CorruptionLevel getCorruptionNeeded();
 	
 	/**
 	 * Determines if an additional character can join in on the ongoing action.
 	 * Only used as a check in SexActionType.START_ADDITIONAL_ONGOING actions.
 	 */
-	public default Map<String, Boolean> getAdditionalOngoingAvailableMap() {
+	default Map<String, Boolean> getAdditionalOngoingAvailableMap() {
 		if(getActionType()==SexActionType.START_ADDITIONAL_ONGOING) {
 			throw new NullPointerException("getAdditionalOngoingAvailableMap() should not be returning null for a SexAction of type 'SexActionType.START_ADDITIONAL_ONGOING'. (Occurring in SexAction '"+getActionTitle()+"')");
 		}
 		return null;
 	}
 	
-	public default boolean isAdditionalOngoingAvailable() {
+	default boolean isAdditionalOngoingAvailable() {
 		if(getAdditionalOngoingAvailableMap()!=null) {
 			for(Boolean b : getAdditionalOngoingAvailableMap().values()) {
 				if(!b) {
@@ -169,9 +154,9 @@ public interface SexActionInterface {
 	 * The keys are areas that belong to the performing character. The values are areas that belong to the targeted character.
 	 * @return
 	 */
-	public Map<SexAreaInterface, SexAreaInterface> getSexAreaInteractions();
+    Map<SexAreaInterface, SexAreaInterface> getSexAreaInteractions();
 	
-	public default List<SexAreaOrifice> getPerformingCharacterOrifices() {
+	default List<SexAreaOrifice> getPerformingCharacterOrifices() {
 		List<SexAreaOrifice> list = new ArrayList<>();
 		for(SexAreaInterface sArea : getSexAreaInteractions().keySet()) {
 			if(sArea!=null && sArea.isOrifice()) {
@@ -181,7 +166,7 @@ public interface SexActionInterface {
 		return list;
 	}
 	
-	public default List<SexAreaPenetration> getPerformingCharacterPenetrations() {
+	default List<SexAreaPenetration> getPerformingCharacterPenetrations() {
 		List<SexAreaPenetration> list = new ArrayList<>();
 		for(SexAreaInterface sArea : getSexAreaInteractions().keySet()) {
 			if(sArea!=null && sArea.isPenetration()) {
@@ -191,7 +176,7 @@ public interface SexActionInterface {
 		return list;
 	}
 	
-	public default List<SexAreaInterface> getPerformingCharacterAreas() {
+	default List<SexAreaInterface> getPerformingCharacterAreas() {
 		List<SexAreaInterface> list = new ArrayList<>();
 		for(SexAreaInterface sArea : getSexAreaInteractions().keySet()) {
 			if(sArea!=null) {
@@ -201,7 +186,7 @@ public interface SexActionInterface {
 		return list;
 	}
 	
-	public default List<SexAreaOrifice> getTargetedCharacterOrifices() {
+	default List<SexAreaOrifice> getTargetedCharacterOrifices() {
 		List<SexAreaOrifice> list = new ArrayList<>();
 		for(SexAreaInterface sArea : getSexAreaInteractions().values()) {
 			if(sArea!=null && sArea.isOrifice()) {
@@ -211,7 +196,7 @@ public interface SexActionInterface {
 		return list;
 	}
 	
-	public default List<SexAreaPenetration> getTargetedCharacterPenetrations() {
+	default List<SexAreaPenetration> getTargetedCharacterPenetrations() {
 		List<SexAreaPenetration> list = new ArrayList<>();
 		for(SexAreaInterface sArea : getSexAreaInteractions().values()) {
 			if(sArea!=null && sArea.isPenetration()) {
@@ -221,7 +206,7 @@ public interface SexActionInterface {
 		return list;
 	}
 	
-	public default List<SexAreaInterface> getTargetedCharacterAreas() {
+	default List<SexAreaInterface> getTargetedCharacterAreas() {
 		List<SexAreaInterface> list = new ArrayList<>();
 		for(SexAreaInterface sArea : getSexAreaInteractions().values()) {
 			if(sArea!=null) {
@@ -234,37 +219,41 @@ public interface SexActionInterface {
 	/**
 	 * @return true if any character can lose virginity from this action.
 	 */
-	public default boolean isTakesVirginity(boolean includeForeplayOrifices) {
+	default boolean isTakesVirginity(boolean includeForeplayOrifices) {
 		boolean penetrationTakesVirginity = false;
 		boolean orificeHasVirginity = false;
 		for(SexAreaPenetration sArea : this.getPerformingCharacterPenetrations()) {
-			if(sArea.isTakesVirginity()) {
-				penetrationTakesVirginity = true;
-			}
+            if (sArea.isTakesVirginity()) {
+                penetrationTakesVirginity = true;
+                break;
+            }
 		}
 		for(SexAreaOrifice sArea : this.getTargetedCharacterOrifices()) {
-			if(sArea.isInternalOrifice() && (includeForeplayOrifices || sArea!=SexAreaOrifice.MOUTH)) {
-				orificeHasVirginity = true;
-			}
+            if (sArea.isInternalOrifice() && (includeForeplayOrifices || sArea != SexAreaOrifice.MOUTH)) {
+                orificeHasVirginity = true;
+                break;
+            }
 		}
 		if(penetrationTakesVirginity && orificeHasVirginity) {
 			return true;
 		}
 		
 		for(SexAreaPenetration sArea : this.getTargetedCharacterPenetrations()) {
-			if(sArea.isTakesVirginity()) {
-				penetrationTakesVirginity = true;
-			}
+            if (sArea.isTakesVirginity()) {
+                penetrationTakesVirginity = true;
+                break;
+            }
 		}
 		for(SexAreaOrifice sArea : this.getPerformingCharacterOrifices()) {
-			if(sArea.isInternalOrifice() && (includeForeplayOrifices || sArea!=SexAreaOrifice.MOUTH)) {
-				orificeHasVirginity = true;
-			}
+            if (sArea.isInternalOrifice() && (includeForeplayOrifices || sArea != SexAreaOrifice.MOUTH)) {
+                orificeHasVirginity = true;
+                break;
+            }
 		}
 		return penetrationTakesVirginity && orificeHasVirginity;
 	}
 
-	public default boolean isTakesPerformerVirginity(boolean includeForeplayOrifices, GameCharacter performer, GameCharacter target) {
+	default boolean isTakesPerformerVirginity(boolean includeForeplayOrifices, GameCharacter performer, GameCharacter target) {
 		if(!isTakesVirginity(includeForeplayOrifices)) {
 			return false;
 		}
@@ -289,13 +278,10 @@ public interface SexActionInterface {
 		if(performer.isVaginaUrethraVirgin() && this.getPerformingCharacterAreas().contains(SexAreaOrifice.URETHRA_VAGINA)) {
 			return true;
 		}
-		if(performer.isVaginaVirgin() && this.getPerformingCharacterAreas().contains(SexAreaOrifice.VAGINA)) {
-			return true;
-		}
-		return false;
-	}
+        return performer.isVaginaVirgin() && this.getPerformingCharacterAreas().contains(SexAreaOrifice.VAGINA);
+    }
 
-	public default boolean isTakesTargetVirginity(boolean includeForeplayOrifices, GameCharacter performer, GameCharacter target) {
+	default boolean isTakesTargetVirginity(boolean includeForeplayOrifices, GameCharacter performer, GameCharacter target) {
 		if(!isTakesVirginity(includeForeplayOrifices)) {
 			return false;
 		}
@@ -320,42 +306,39 @@ public interface SexActionInterface {
 		if(target.isVaginaUrethraVirgin() && this.getTargetedCharacterAreas().contains(SexAreaOrifice.URETHRA_VAGINA)) {
 			return true;
 		}
-		if(target.isVaginaVirgin() && this.getTargetedCharacterAreas().contains(SexAreaOrifice.VAGINA)) {
-			return true;
-		}
-		return false;
-	}
+        return target.isVaginaVirgin() && this.getTargetedCharacterAreas().contains(SexAreaOrifice.VAGINA);
+    }
 	
-	public abstract SexParticipantType getParticipantType();
+	SexParticipantType getParticipantType();
 	
 	/**
 	 * @return A list of fetishes that affect the character in this sex action.
 	 */
-	public List<AbstractFetish> getFetishes(GameCharacter characterPerformingAction);
+    List<AbstractFetish> getFetishes(GameCharacter characterPerformingAction);
 
 	/**
 	 * @return A list of fetishes that affect the target of 'characterPerformingAction' in this sex action.
 	 */
-	public List<AbstractFetish> getFetishesForTargetedPartner(GameCharacter characterPerformingAction);
+    List<AbstractFetish> getFetishesForTargetedPartner(GameCharacter characterPerformingAction);
 	
 	// Sex-specific:
 	
-	public ArousalIncrease getArousalGainSelf();
+	ArousalIncrease getArousalGainSelf();
 
-	public ArousalIncrease getArousalGainTarget();
+	ArousalIncrease getArousalGainTarget();
 
 	/**
 	 * Effects to be applied before this SexAction's description is parsed. The returned String is appended before anything else (including penetration stops if this action is a SexActionType.START_ONGOING).
 	 * @return A description of the effects. Return an empty String if you don't want anything appended.
 	 */
-	public default String applyPreParsingEffects() {
+	default String applyPreParsingEffects() {
 		return "";
 	}
 		
 	/**
 	 * @return A String to be appended and displayed immediately before the sex action's description.
 	 */
-	public default String preDescriptionBaseEffects() {
+	default String preDescriptionBaseEffects() {
 		StringBuilder stopSB = new StringBuilder();
 		
 		String s = applyPreParsingEffects();
@@ -447,7 +430,7 @@ public interface SexActionInterface {
 		return stopSB.toString();
 	}
 	
-	public default String baseEffects() {
+	default String baseEffects() {
 		if(getActionType()==SexActionType.START_ONGOING || getActionType()==SexActionType.START_ADDITIONAL_ONGOING) {
 			for(Entry<SexAreaInterface, SexAreaInterface> entry : getSexAreaInteractions().entrySet()) {
 				Main.sex.applyOngoingAction(
@@ -517,7 +500,7 @@ public interface SexActionInterface {
 		if(this.isSadisticAction()) {
 			if(!characterTargeted.getFetishDesire(Fetish.FETISH_MASOCHIST).isPositive() && !characterTargeted.hasPerkAnywhereInTree(Perk.DOLL_LUST_1)) {
 				sb.append("<p style='text-align:center'>"
-							+ "[style.colourBad([npc2.Name] [npc2.verb(find)] это садистское действие крайне неприятным!)]"
+                        + "[style.colourBad([npc2.Name] [npc.targetBasedWord(считаешь, считает)] это садистское действие крайне неприятным!)]"
 							+ characterTargeted.incrementLust(-15, false)
 						+"</p>");
 			}
@@ -557,10 +540,10 @@ public interface SexActionInterface {
 		return sb.toString();
 	}
 
-	public default void applyEffects(){
+	default void applyEffects(){
 	}
 	
-	public default String applyEffectsString(){
+	default String applyEffectsString(){
 		return "";
 	}
 
@@ -568,19 +551,19 @@ public interface SexActionInterface {
 	 * These effects are applied after everything else, so it is a safe place to put ongoing action stops or the like.
 	 * @return A String describing these effects, to be appended to the SexAction description at the very end. Return an empty String if not needed.
 	 */
-	public default String applyEndEffects(){
+	default String applyEndEffects(){
 		return "";
 	}
 	
-	public default boolean isQuickSexRequirementsMet(GameCharacter performer) {
+	default boolean isQuickSexRequirementsMet(GameCharacter performer) {
 		return isBaseRequirementsMet();
 	}
 	
-	public default boolean isBaseRequirementsMet() {
+	default boolean isBaseRequirementsMet() {
 		return true;
 	}
 	
-	public default boolean isBasicCoreRequirementsMet() {
+	default boolean isBasicCoreRequirementsMet() {
 		GameCharacter performingCharacter = Main.sex.getCharacterPerformingAction();
 		
 		if(this.isSadisticAction()
@@ -644,7 +627,7 @@ public interface SexActionInterface {
 	/**
 	 * Used for determining how likely an NPC is to use this action.
 	 */
-	public default SexActionPriority getPriority() {
+	default SexActionPriority getPriority() {
 		return SexActionPriority.NORMAL;
 	}
 	
@@ -652,16 +635,16 @@ public interface SexActionInterface {
 	 * Defines if this SexAction switches the pace of sex for the performing character.
 	 * @return null if no switch.
 	 */
-	public SexPace getSexPace();
+    SexPace getSexPace();
 	
-	public default boolean endsSex() {
+	default boolean endsSex() {
 		return false;
 	}
 	
 	/**
 	 * @return true If performer is able to free up orifices in order to perform this action.
 	 */
-	public default boolean isAbleToAccessParts(GameCharacter performer) {
+	default boolean isAbleToAccessParts(GameCharacter performer) {
 		if(!this.isPhysicallyPossible()) {
 			return false;
 		}
@@ -693,9 +676,10 @@ public interface SexActionInterface {
 		for(SexAreaOrifice orifice : this.getTargetedCharacterOrifices()) {
 			if(!orifice.isFree(target)) {
 				for(GameCharacter character : Main.sex.getCharactersHavingOngoingActionWith(target, orifice)) {
-					if(!character.equals(performer) && !character.equals(target)) { // It's someone else they're interacting with:
-						canAccessOthersParts = false;
-					}
+                    if (!character.equals(performer) && !character.equals(target)) { // It's someone else they're interacting with:
+                        canAccessOthersParts = false;
+                        break;
+                    }
 				}
 			}
 			if(!target.isAbleToAccessCoverableArea(orifice.getRelatedCoverableArea(target), true)) {
@@ -705,9 +689,10 @@ public interface SexActionInterface {
 		for(SexAreaPenetration penetration : this.getTargetedCharacterPenetrations()) {
 			if(!penetration.isFree(target)) {
 				for(GameCharacter character : Main.sex.getCharactersHavingOngoingActionWith(target, penetration)) {
-					if(!character.equals(performer) && !character.equals(target)) { // It's someone else they're interacting with:
-						canAccessOthersParts = false;
-					}
+                    if (!character.equals(performer) && !character.equals(target)) { // It's someone else they're interacting with:
+                        canAccessOthersParts = false;
+                        break;
+                    }
 				}
 			}
 			if(!target.isAbleToAccessCoverableArea(penetration.getRelatedCoverableArea(target), true)) {
@@ -718,11 +703,11 @@ public interface SexActionInterface {
 		return canAccessSelfParts && canAccessOthersParts;
 	}
 	
-	public default boolean isAddedToAvailableSexActions() {
+	default boolean isAddedToAvailableSexActions() {
 		return toResponse() != null;
 	}
 	
-	public default boolean isSwitchOngoingActionAvailable() {
+	default boolean isSwitchOngoingActionAvailable() {
 		if(
 				Main.sex.getCharacterPerformingAction().isPlayer() && //TODO test commenting this out to allow NPCs to switch actions
 				Main.sex.getSexControl(Main.sex.getCharacterPerformingAction()).getValue()>=SexControl.ONGOING_PLUS_LIMITED_PENETRATIONS.getValue()) {
@@ -771,7 +756,7 @@ public interface SexActionInterface {
 		}
 	}
 	
-	public default Response toResponse() {
+	default Response toResponse() {
 		if(isBasicCoreRequirementsMet()
 				&& isBaseRequirementsMet()
 				&& isPhysicallyPossible()
@@ -961,9 +946,10 @@ public interface SexActionInterface {
 							} else {
 								boolean virginityTakingPenetration = false;
 								for(SexAreaPenetration pen :this.getPerformingCharacterPenetrations()) {
-									if(pen.isTakesVirginity()) {
-										virginityTakingPenetration = true;
-									}
+                                    if (pen.isTakesVirginity()) {
+                                        virginityTakingPenetration = true;
+                                        break;
+                                    }
 								}
 								canStartPenetration = !virginityTakingPenetration;
 							}
@@ -1300,11 +1286,11 @@ public interface SexActionInterface {
 	/**
 	 * @return A higher number means that this action will be displayed closer to action 1. Default value is 0.
 	 */
-	public default int getActionRenderingPriority() {
+	default int getActionRenderingPriority() {
 		return 0;
 	}
 	
-	public default SexActionCategory getCategory() {
+	default SexActionCategory getCategory() {
 		if(this.getSexAreaInteractions().isEmpty()) {
 			if(getActionType() == SexActionType.POSITIONING
 					|| getActionType() == SexActionType.POSITIONING_MENU) {
@@ -1504,7 +1490,7 @@ public interface SexActionInterface {
 		}
 	}
 	
-	public default Response convertToNullResponse() {
+	default Response convertToNullResponse() {
 		if(!Main.sex.getCharacterPerformingAction().isPlayer()) {
 			return null;
 		}
@@ -1701,7 +1687,7 @@ public interface SexActionInterface {
 		};
 	}
 	
-	public default boolean isBannedFromSexManager() {
+	default boolean isBannedFromSexManager() {
 		for(SexAreaInterface sArea : this.getSexAreaInteractions().keySet()) {
 			if (Main.sex.getInitialSexManager().getAreasBannedMap().get(Main.sex.getCharacterPerformingAction()) != null
 					&& Main.sex.getInitialSexManager().getAreasBannedMap().get(Main.sex.getCharacterPerformingAction()).contains(sArea)) {
@@ -1728,15 +1714,11 @@ public interface SexActionInterface {
 				sexTypesBanned.add(st.getReversedSexType());
 			}
 		}
-		
-		if(sexTypesBanned.contains(this.getAsSexType())) {
-			return true;
-		}
-		
-		return false;
-	}
 
-	static List<SexAreaInterface> prohibitedNonBipedFingerSelfAreas = Util.newArrayListOfValues(
+        return sexTypesBanned.contains(this.getAsSexType());
+    }
+
+	List<SexAreaInterface> prohibitedNonBipedFingerSelfAreas = Util.newArrayListOfValues(
 			SexAreaPenetration.CLIT,
 			SexAreaPenetration.PENIS,
 			SexAreaOrifice.ANUS,
@@ -1757,26 +1739,26 @@ public interface SexActionInterface {
 //							|| (!this.getTargetedCharacterPenetrations().isEmpty() && this.getPerformingCharacterOrifices().stream().anyMatch(orifice -> orifice.isInternalOrifice()))));
 //	}
 	
-	public default boolean isPhysicallyPossible() {
+	default boolean isPhysicallyPossible() {
 		if(this.getParticipantType()==SexParticipantType.SELF) {
 			if(Main.sex.getCharacterPerformingAction().isTaur()) {
-				if(this.getSexAreaInteractions().keySet().contains(SexAreaPenetration.FINGER)) {
+				if(this.getSexAreaInteractions().containsKey(SexAreaPenetration.FINGER)) {
 					if(!Collections.disjoint(prohibitedNonBipedFingerSelfAreas, this.getSexAreaInteractions().values())) {
 						return false;
 					}
 				}
-				if(this.getSexAreaInteractions().keySet().contains(SexAreaPenetration.TAIL)
-						|| this.getSexAreaInteractions().keySet().contains(SexAreaPenetration.CLIT)
-						|| this.getSexAreaInteractions().keySet().contains(SexAreaPenetration.PENIS)) {
+				if(this.getSexAreaInteractions().containsKey(SexAreaPenetration.TAIL)
+						|| this.getSexAreaInteractions().containsKey(SexAreaPenetration.CLIT)
+						|| this.getSexAreaInteractions().containsKey(SexAreaPenetration.PENIS)) {
 					if(!Collections.disjoint(SexActionPresets.upperHalf, this.getSexAreaInteractions().values())) {
 						return false;
 					}
 				}
 			}
 			if(!Main.sex.getCharacterPerformingAction().getLegConfiguration().isBipedalPositionedCrotchBoobs()) {
-				if(this.getSexAreaInteractions().keySet().contains(SexAreaPenetration.FINGER)) {
-					if(this.getSexAreaInteractions().values().contains(SexAreaOrifice.BREAST_CROTCH)
-							|| this.getSexAreaInteractions().values().contains(SexAreaOrifice.NIPPLE_CROTCH)) {
+				if(this.getSexAreaInteractions().containsKey(SexAreaPenetration.FINGER)) {
+					if(this.getSexAreaInteractions().containsValue(SexAreaOrifice.BREAST_CROTCH)
+							|| this.getSexAreaInteractions().containsValue(SexAreaOrifice.NIPPLE_CROTCH)) {
 						return false;
 					}
 				}
@@ -1906,16 +1888,16 @@ public interface SexActionInterface {
 		return true;
 	}
 	
-	public default List<SexAreaInterface> getAreasCummedIn(GameCharacter cumProvider, GameCharacter cumTarget) {
+	default List<SexAreaInterface> getAreasCummedIn(GameCharacter cumProvider, GameCharacter cumTarget) {
 		return null;
 	}
 
-	public default List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
+	default List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
 		return null;
 	}
 
 	// This is in the SexAction Interface, as it might be necessary in some special actions to override this to prevent condom breaks.
-	public default CondomFailure getCondomFailure(GameCharacter condomWearer, GameCharacter cumTarget) {
+	default CondomFailure getCondomFailure(GameCharacter condomWearer, GameCharacter cumTarget) {
 		AbstractClothing condom = condomWearer.getClothingInSlot(InventorySlot.PENIS);
 		if(condom==null || !condom.isCondom(InventorySlot.PENIS)) {
 			return CondomFailure.NONE;
@@ -1983,12 +1965,12 @@ public interface SexActionInterface {
 		return CondomFailure.NONE;
 	}
 	
-	public default List<AbstractFetish> getFetishesFromPenetrationAndOrificeTypes(
-			GameCharacter characterPerformingAction,
-			SexAreaInterface performingArea,
-			GameCharacter characterTarget,
-			SexAreaInterface targetedArea,
-			boolean characterPerformingActionFetishes) {
+	default List<AbstractFetish> getFetishesFromPenetrationAndOrificeTypes(
+            GameCharacter characterPerformingAction,
+            SexAreaInterface performingArea,
+            GameCharacter characterTarget,
+            SexAreaInterface targetedArea,
+            boolean characterPerformingActionFetishes) {
 		
 		SexType type = new SexType(this.getParticipantType(), performingArea, targetedArea);
 		
@@ -2008,7 +1990,7 @@ public interface SexActionInterface {
 	/**
 	 * @return A SexType object which is representative of this SexAction. Will only represent the first area found in both performing and targeted areas, due to SexType limitations.
 	 */
-	public default SexType getAsSexType() {
+	default SexType getAsSexType() {
 		return new SexType(this.getParticipantType(), getPerformingCharacterAreas().isEmpty()?null:getPerformingCharacterAreas().get(0), getTargetedCharacterAreas().isEmpty()?null:getTargetedCharacterAreas().get(0));
 	}
 }

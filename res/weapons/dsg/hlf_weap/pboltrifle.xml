@@ -13,8 +13,10 @@
 		<attackTooltipDescription><![CDATA[Shoot [npc2.name] with your rifle.]]></attackTooltipDescription>
 		<rarity>RARE</rarity>
 		<weaponSet/>
-		<equipText><![CDATA[[npc.Name] [npc.verb(take)] out the rifle, carefully [npc.verb(load)] it, and [npc.verb(crank)] the bolt once before disengaging the safety. The needle on the gauge moves to the green zone as the internal gas reservoir self-pressurizes.]]></equipText>
-		<unequipText><![CDATA[[npc.Name] [npc.verb(open)] the bolt and [npc.verb(check)] to see that the chamber is empty before putting the rifle away.]]></unequipText>
+        <equipText>
+            <![CDATA[[npc.Name] take out the rifle, carefully load it, and crank the bolt once before disengaging the safety. The needle on the gauge moves to the green zone as the internal gas reservoir self-pressurizes.]]></equipText>
+        <unequipText>
+            <![CDATA[[npc.Name] open the bolt and check to see that the chamber is empty before putting the rifle away.]]></unequipText>
 		<imageName>pbboltrifle_uneq.svg</imageName>
 		<imageEquippedName>pbboltrifle.svg</imageEquippedName>
 		<physicalResistance>0</physicalResistance>
@@ -47,13 +49,13 @@
 
 	<hitDescriptions>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(line)] up [npc2.name] in [npc.her] sights and [npc.verb(pull)] the trigger at [npc2.name]. The gelatin capsule bursts on impact with [npc2.namePos] aura, splattering [npc2.herHim] with stinging, burning oil.
+		[npc.Name] line up [npc2.name] in [npc.her] sights and pull the trigger at [npc2.name]. The gelatin capsule bursts on impact with [npc2.namePos] aura, splattering [npc2.herHim] with stinging, burning oil.
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(line)] up [npc2.name] in [npc.her] sights and [npc.verb(pull)] the trigger at [npc2.name]. The capsule misses [npc2.herHim] completely and splatters uselessly in the distance.
+		[npc.Name] line up [npc2.name] in [npc.her] sights and pull the trigger at [npc2.name]. The capsule misses [npc2.herHim] completely and splatters uselessly in the distance.
 		]]></missText>
 	</missDescriptions>
 	

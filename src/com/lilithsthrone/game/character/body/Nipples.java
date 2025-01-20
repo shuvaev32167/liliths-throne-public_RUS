@@ -1,24 +1,19 @@
 package com.lilithsthrone.game.character.body;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractNippleType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeShape;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.NippleShape;
-import com.lilithsthrone.game.character.body.valueEnums.NippleSize;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.1.83
@@ -201,10 +196,10 @@ public class Nipples implements BodyPartInterface {
 		String transformation = "";
 		
 		if(this.nippleSize > boundNippleSize) {
-			transformation = UtilText.parse(owner, "<p>A soothing coolness rises up into [npc.namePos] [npc.nipples], causing [npc.herHim] to let out a surprised gasp as [npc.she] [npc.verb(feel)] them start to [style.boldShrink(shrink)].<br/>");
+            transformation = UtilText.parse(owner, "<p>A soothing coolness rises up into [npc.namePos] [npc.nipples], causing [npc.herHim] to let out a surprised gasp as [npc.she] feel them start to [style.boldShrink(shrink)].<br/>");
 			
 		} else {
-			transformation = UtilText.parse(owner, "<p>A pulsating warmth rises up into [npc.namePos] [npc.nipples], causing [npc.herHim] to let out a surprised gasp as [npc.she] [npc.verb(feel)] them start to [style.boldGrow(grow larger)].<br/>");
+            transformation = UtilText.parse(owner, "<p>A pulsating warmth rises up into [npc.namePos] [npc.nipples], causing [npc.herHim] to let out a surprised gasp as [npc.she] feel them start to [style.boldGrow(grow larger)].<br/>");
 		}
 		
 		this.nippleSize = boundNippleSize;
@@ -232,26 +227,26 @@ public class Nipples implements BodyPartInterface {
 		switch(nippleShape) {
 			case INVERTED:
 				transformation = "<p>"
-									+ "[npc.Name] [npc.verb(let)] out an uncomfortable whine as [npc.her] [npc.nipples] start to grow sore and sensitive."
+                        + "[npc.Name] let out an uncomfortable whine as [npc.her] [npc.nipples] start to grow sore and sensitive."
 									+ " Before [npc.she] [npc.has] a chance to do anything else, [npc.her] nipples suddenly transform into normal-looking ones, before pulling inwards and inverting!<br/>"
 									+ "[npc.NamePos] [npc.nipplesFullDescriptionColour] [npc.nipples] have transformed into [style.boldSex(inverted nipples)]!"
 								+ "</p>";
 				break;
 			case NORMAL:
 				transformation = "<p>"
-									+ "[npc.Name] [npc.verb(let)] out an uncomfortable whine as [npc.her] [npc.nipples] start to grow sore and sensitive, before suddenly transforming into normal-looking nipples.<br/>"
+                        + "[npc.Name] let out an uncomfortable whine as [npc.her] [npc.nipples] start to grow sore and sensitive, before suddenly transforming into normal-looking nipples.<br/>"
 									+ "[npc.NamePos] [npc.nipplesFullDescriptionColour] [npc.nipples] have transformed into [style.boldSex(normal nipples)]!"
 								+ "</p>";
 				break;
 			case LIPS:
 				transformation = "<p>"
-									+ "[npc.Name] [npc.verb(let)] out an uncomfortable whine as [npc.her] [npc.nipples] start to grow sore and sensitive, before suddenly swelling up and transforming into juicy pairs of lips!<br/>"
+                        + "[npc.Name] let out an uncomfortable whine as [npc.her] [npc.nipples] start to grow sore and sensitive, before suddenly swelling up and transforming into juicy pairs of lips!<br/>"
 									+ "[npc.NamePos] [npc.nipplesFullDescriptionColour] [npc.nipples] have transformed into [style.boldSex(lip-like lipples)], which [npc.she] can control just like regular lips!"
 								+ "</p>";
 				break;
 			case VAGINA:
 				transformation = "<p>"
-									+ "[npc.Name] [npc.verb(let)] out an uncomfortable whine as [npc.her] [npc.nipples] start to grow sore and sensitive, before suddenly shifting and transforming into pseudo-pussies!<br/>"
+                        + "[npc.Name] let out an uncomfortable whine as [npc.her] [npc.nipples] start to grow sore and sensitive, before suddenly shifting and transforming into pseudo-pussies!<br/>"
 									+ "[npc.NamePos] [npc.nipplesFullDescriptionColour] [npc.nipples] have transformed into [style.boldSex(vagina-like nipple-cunts)]!"
 								+ "</p>";
 				break;
@@ -284,15 +279,15 @@ public class Nipples implements BodyPartInterface {
 		String transformation = "";
 		switch(areolaeShape) {
 			case NORMAL:
-				transformation = "<p>[npc.NamePos] [npc.nipples] suddenly start to tingle, and [npc.she] [npc.verb(gasp)] as [npc.she] [npc.verb(feel)] [npc.her] areolae shift and transform into regular-looking circles.<br/>"
+                transformation = "<p>[npc.NamePos] [npc.nipples] suddenly start to tingle, and [npc.she] gasp as [npc.she] feel [npc.her] areolae shift and transform into regular-looking circles.<br/>"
 							+ "[npc.NamePos] areolae are now shaped like [style.boldSex(normal circles)]!";
 				break;
 			case HEART:
-				transformation = "<p>[npc.NamePos] [npc.nipples] suddenly start to tingle, and [npc.she] [npc.verb(gasp)] as [npc.she] [npc.verb(feel)] [npc.her] areolae shift and transform into the shape of hearts.<br/>"
+                transformation = "<p>[npc.NamePos] [npc.nipples] suddenly start to tingle, and [npc.she] gasp as [npc.she] feel [npc.her] areolae shift and transform into the shape of hearts.<br/>"
 							+ "[npc.NamePos] areolae are now shaped like [style.boldSex(hearts)]!";
 				break;
 			case STAR:
-				transformation = "<p>[npc.NamePos] [npc.nipples] suddenly start to tingle, and [npc.she] [npc.verb(gasp)] as [npc.she] [npc.verb(feel)] [npc.her] areolae shift and transform into the shape of stars.<br/>"
+                transformation = "<p>[npc.NamePos] [npc.nipples] suddenly start to tingle, and [npc.she] gasp as [npc.she] feel [npc.her] areolae shift and transform into the shape of stars.<br/>"
 							+ "[npc.NamePos] areolae are now shaped like [style.boldSex(stars)]!";
 				break;
 		}
@@ -326,11 +321,11 @@ public class Nipples implements BodyPartInterface {
 		
 		if (this.areolaeSize > boundAreolaeSize) {
 			transformation = UtilText.parse(owner,
-					"<p>[npc.Name] [npc.verb(let)] out a shocked gasp as [npc.she] [npc.verb(feel)] a strange tingling sensation suddenly build up around [npc.her] [npc.nipples], before [npc.her] areolae suddenly [style.boldShrink(shrink)].<br/>");
+                    "<p>[npc.Name] let out a shocked gasp as [npc.she] feel a strange tingling sensation suddenly build up around [npc.her] [npc.nipples], before [npc.her] areolae suddenly [style.boldShrink(shrink)].<br/>");
 			
 		} else {
 			transformation = UtilText.parse(owner,
-					"<p>[npc.Name] [npc.verb(let)] out a shocked gasp as [npc.she] [npc.verb(feel)] a strange tingling sensation suddenly build up around [npc.her] [npc.nipples], before [npc.her] areolae suddenly [style.boldGrow(grow larger)].<br/>");
+                    "<p>[npc.Name] let out a shocked gasp as [npc.she] feel a strange tingling sensation suddenly build up around [npc.her] [npc.nipples], before [npc.her] areolae suddenly [style.boldGrow(grow larger)].<br/>");
 		}
 		
 		this.areolaeSize = boundAreolaeSize;

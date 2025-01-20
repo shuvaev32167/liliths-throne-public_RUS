@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.harpyNests;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.quests.Quest;
@@ -19,14 +16,17 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @since 0.1.0
  * @version 0.3.7.3
  * @author Innoxia
  */
 public class HarpyNestsDialogue {
-	
-	public static final DialogueNode OUTSIDE = new DialogueNode("Harpy Nests", "Harpy Nests", false) {
+
+    public static final DialogueNode OUTSIDE = new DialogueNode("Гнёзда гарпий", "Гнёзда гарпий", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 5*60;
@@ -38,7 +38,7 @@ public class HarpyNestsDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Harpy Nests", "Travel up to the Harpy Nests.", PlaceType.HARPY_NESTS_ENTRANCE_ENFORCER_POST.getDialogue(false)){
+                return new Response("Гнёзда гарпий", "Travel up to the Harpy Nests.", PlaceType.HARPY_NESTS_ENTRANCE_ENFORCER_POST.getDialogue(false)) {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/harpyNests/generic", "OUTSIDE_ENTRY"));
@@ -51,8 +51,62 @@ public class HarpyNestsDialogue {
 			}
 		}
 	};
-	
-	public static final DialogueNode ENTRANCE_ENFORCER_POST = new DialogueNode("Enforcer post", ".", true) {
+
+    public static final DialogueNode WALKWAY = new DialogueNode("Аллея", ".", false) {
+		@Override
+		public int getSecondsPassed() {
+			return 2*60;
+		}
+		@Override
+		public String getContent() {
+			StringBuilder sb = new StringBuilder();
+			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/generic", "WALKWAY"));
+
+			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/generic", "WALKWAY_CORE", new ArrayList<>(Main.game.getNonCompanionCharactersPresent())));
+
+			for(GameCharacter npc : Main.game.getNonCompanionCharactersPresent()) {
+				sb.append(((NPC) npc).getPresentInTileDescription(false));
+			}
+
+			return sb.toString();
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index == 1) {
+				if(Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_HARPY_PACIFICATION)) {
+					return new ResponseEffectsOnly(
+							"Look for trouble",
+							"Although you've pacified the harpy nests, you're sure that you can find a harpy who's looking for a confrontation..."){
+								@Override
+								public int getSecondsPassed() {
+									return 30*60;
+								}
+								@Override
+								public void effects() {
+									DialogueNode dn = Encounter.HARPY_NEST_LOOK_FOR_TROUBLE.getRandomEncounter(true);
+									Main.game.setContent(new Response("", "", dn));
+								}
+							};
+
+				} else {
+					return new ResponseEffectsOnly(
+							"Explore",
+							"Explore the walkways. Although you don't think you're any more or less likely to find anything by doing this, at least you won't have to keep travelling back and forth..."){
+								@Override
+								public int getSecondsPassed() {
+									return 30*60;
+								}
+								@Override
+								public void effects() {
+									DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
+									Main.game.setContent(new Response("", "", dn));
+								}
+							};
+				}
+			}
+			return null;
+		}
+	};    public static final DialogueNode ENTRANCE_ENFORCER_POST = new DialogueNode("Пост энфорсеров", ".", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;
@@ -151,8 +205,29 @@ public class HarpyNestsDialogue {
 			
 		}
 	};
-	
-	public static final DialogueNode ENTRANCE_ENFORCER_POST_ASK_FOR_ACCESS = new DialogueNode("Enforcer post", ".", true) {
+    public static final DialogueNode WALKWAY_BRIDGE = new DialogueNode("Пешеходный мост", "", false) {
+		@Override
+		public int getSecondsPassed() {
+			return 2*60;
+		}
+		@Override
+		public String getContent() {
+			StringBuilder sb = new StringBuilder();
+			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/generic", "WALKWAY_BRIDGE"));
+
+			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/generic", "WALKWAY_CORE", new ArrayList<>(Main.game.getNonCompanionCharactersPresent())));
+
+			for(GameCharacter npc : Main.game.getNonCompanionCharactersPresent()) {
+				sb.append(((NPC) npc).getPresentInTileDescription(false));
+			}
+
+			return sb.toString();
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return WALKWAY.getResponse(responseTab, index);
+		}
+	};    public static final DialogueNode ENTRANCE_ENFORCER_POST_ASK_FOR_ACCESS = new DialogueNode("Пост энфорсеров", ".", true) {
 		@Override
 		public boolean isTravelDisabled() {
 			return !Main.game.getDialogueFlags().values.contains(DialogueFlagValue.hasHarpyNestAccess);
@@ -170,8 +245,8 @@ public class HarpyNestsDialogue {
 			return ENTRANCE_ENFORCER_POST.getResponse(0, index);
 		}
 	};
-	
-	public static final DialogueNode ENTRANCE_ENFORCER_POST_ASK_ABOUT_RIOTS = new DialogueNode("Enforcer post", ".", true) {
+
+    public static final DialogueNode ENTRANCE_ENFORCER_POST_ASK_ABOUT_RIOTS = new DialogueNode("Пост энфорсеров", ".", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 5*60;
@@ -193,8 +268,8 @@ public class HarpyNestsDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode ENTRANCE_ENFORCER_POST_ASK_ABOUT_RIOTS_NEXT = new DialogueNode("Enforcer post", ".", true, true) {
+
+    public static final DialogueNode ENTRANCE_ENFORCER_POST_ASK_ABOUT_RIOTS_NEXT = new DialogueNode("Пост энфорсеров", ".", true, true) {
 		@Override
 		public int getSecondsPassed() {
 			return 5*60;
@@ -216,8 +291,8 @@ public class HarpyNestsDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode ENTRANCE_ENFORCER_POST_COMPLETED_PACIFICATION = new DialogueNode("Enforcer post", ".", false) {
+
+    public static final DialogueNode ENTRANCE_ENFORCER_POST_COMPLETED_PACIFICATION = new DialogueNode("Пост энфорсеров", ".", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 2*60;
@@ -235,9 +310,9 @@ public class HarpyNestsDialogue {
 			return ENTRANCE_ENFORCER_POST.getResponse(0, index);
 		}
 	};
-	
 
-	public static final DialogueNode ENTRANCE_ENFORCER_POST_CANDIS_LOLLIPOPS = new DialogueNode("Enforcer post", ".", false) {
+
+    public static final DialogueNode ENTRANCE_ENFORCER_POST_CANDIS_LOLLIPOPS = new DialogueNode("Пост энфорсеров", ".", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -259,85 +334,9 @@ public class HarpyNestsDialogue {
 			return ENTRANCE_ENFORCER_POST.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode WALKWAY = new DialogueNode("Walkway", ".", false) {
-		@Override
-		public int getSecondsPassed() {
-			return 2*60;
-		}
-		@Override
-		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/generic", "WALKWAY"));
-			
-			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/generic", "WALKWAY_CORE", new ArrayList<>(Main.game.getNonCompanionCharactersPresent())));
-			
-			for(GameCharacter npc : Main.game.getNonCompanionCharactersPresent()) {
-				sb.append(((NPC) npc).getPresentInTileDescription(false));
-			}
-			
-			return sb.toString();
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index == 1) {
-				if(Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_HARPY_PACIFICATION)) {
-					return new ResponseEffectsOnly(
-							"Look for trouble",
-							"Although you've pacified the harpy nests, you're sure that you can find a harpy who's looking for a confrontation..."){
-								@Override
-								public int getSecondsPassed() {
-									return 30*60;
-								}
-								@Override
-								public void effects() {
-									DialogueNode dn = Encounter.HARPY_NEST_LOOK_FOR_TROUBLE.getRandomEncounter(true);
-									Main.game.setContent(new Response("", "", dn));
-								}
-							};
-							
-				} else {
-					return new ResponseEffectsOnly(
-							"Explore",
-							"Explore the walkways. Although you don't think you're any more or less likely to find anything by doing this, at least you won't have to keep travelling back and forth..."){
-								@Override
-								public int getSecondsPassed() {
-									return 30*60;
-								}
-								@Override
-								public void effects() {
-									DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
-									Main.game.setContent(new Response("", "", dn));
-								}
-							};
-				}
-			}
-			return null;
-		}
-	};
-	
-	public static final DialogueNode WALKWAY_BRIDGE = new DialogueNode("Walkway Bridge", "", false) {
-		@Override
-		public int getSecondsPassed() {
-			return 2*60;
-		}
-		@Override
-		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/generic", "WALKWAY_BRIDGE"));
-			
-			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/generic", "WALKWAY_CORE", new ArrayList<>(Main.game.getNonCompanionCharactersPresent())));
-			
-			for(GameCharacter npc : Main.game.getNonCompanionCharactersPresent()) {
-				sb.append(((NPC) npc).getPresentInTileDescription(false));
-			}
-			
-			return sb.toString();
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return WALKWAY.getResponse(responseTab, index);
-		}
-	};
+
+
+
+
 	
 }

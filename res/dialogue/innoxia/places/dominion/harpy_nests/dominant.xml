@@ -249,7 +249,7 @@
 				<index><![CDATA[3]]></index>
 				<responseTitle><![CDATA[Threesome (oral)]]></responseTitle>
 				<responseTooltip><![CDATA[
-					Have [harpyDominant.name] and [harpyDominantCompanion.name] service you with their mouths.
+					Have [harpyDominant.name] и [harpyDominantCompanion.name] service you with their mouths.
 					#IF(!harpyDominantCompanion.isAttractedTo(pc))
 						<br/>[style.italicsBad([harpyDominantCompanion.Name] will not like this!)]
 					#ENDIF
@@ -291,7 +291,7 @@
 				<index><![CDATA[4]]></index>
 				<responseTitle><![CDATA[Threesome (doggy style)]]></responseTitle>
 				<responseTooltip><![CDATA[
-					Fuck [harpyDominant.name] and [harpyDominantCompanion.name] side by side in the doggy style position.
+					Fuck [harpyDominant.name] и [harpyDominantCompanion.name] side by side in the doggy style position.
 					#IF(!harpyDominantCompanion.isAttractedTo(pc))
 						<br/>[style.italicsBad([harpyDominantCompanion.Name] will not like this!)]
 					#ENDIF

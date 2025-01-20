@@ -112,41 +112,41 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(step)] into the tactical trousers and [npc.verb(pull)] them up to [npc.her] waist before buttoning up the front.]]>
+            <![CDATA[[npc.Name] step into the tactical trousers and pull them up to [npc.her] waist before buttoning up the front.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the tactical trousers up around [npc2.namePos] legs up to [npc2.her] waist before buttoning up the front.]]>
+            <![CDATA[[npc.Name] pull the tactical trousers up around [npc2.namePos] legs up to [npc2.her] waist before buttoning up the front.]]>
 		</other>
 		<otherRough>
 		  <![CDATA[[npc.Name] 
 					#IF game.isSillyModeEnabled()
-					#THEN practically [npc.verb(give)] [npc2.namePos] a wedgie as [npc2.her]
+					#THEN practically give [npc2.namePos] a wedgie as [npc2.her]
 					#ENDIF
-					[npc.verb(yank)] the tactical trousers up around [npc2.namePos] legs up to [npc2.her] waist before roughly buttoning up the front.]]>
+					yank the tactical trousers up around [npc2.namePos] legs up to [npc2.her] waist before roughly buttoning up the front.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unbutton)] [npc.her] tactical trousers and [npc.verb(pull)] them down before kicking them from [npc.her] [npc.feet].]]>
+            <![CDATA[[npc.Name] unbutton [npc.her] tactical trousers and pull them down before kicking them from [npc.her] [npc.feet].]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unbutton)] [npc2.name] tactical trousers and [npc.verb(pull)] them down before sliding them from [npc2.her] [npc2.feet].]]>
+            <![CDATA[[npc.Name] unbutton [npc2.name] tactical trousers and pull them down before sliding them from [npc2.her] [npc2.feet].]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] forcibly [npc.verb(unbutton)] [npc2.name] tactical trousers and [npc.verb(yank)] them off.]]>
+            <![CDATA[[npc.Name] forcibly unbutton [npc2.name] tactical trousers and yank them off.]]>
 		</otherRough>
 	</displacementText>	
 
 	<replacementText type="UNZIPS">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(zip)] up the fly of [npc.her] tactical trousers.]]>
+            <![CDATA[[npc.Name] zip up the fly of [npc.her] tactical trousers.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(zip)] up the front of [npc2.namePos] tactical trousers.]]>
+            <![CDATA[[npc.Name] zip up the front of [npc2.namePos] tactical trousers.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(zip)] up the front of [npc2.namePos] tactical trousers
+            <![CDATA[[npc.Name] roughly zip up the front of [npc2.namePos] tactical trousers
 					#IF game.isSillyModeEnabled() && npc2.hasPenis()
 					#THEN without much regard for what might be in the way, resulting in a close call!
 					#ELSE .
@@ -157,37 +157,37 @@
 
 	<displacementText type="UNZIPS">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unzip)] up the fly of [npc.her] tactical trousers.]]>
+            <![CDATA[[npc.Name] unzip up the fly of [npc.her] tactical trousers.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unzip)] up the fly of [npc2.namePos] tactical trousers.]]>
+            <![CDATA[[npc.Name] unzip up the fly of [npc2.namePos] tactical trousers.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] forcibly [npc.verb(unzip)] the fly of [npc2.namePos] tactical trousers.]]>
+            <![CDATA[[npc.Name] forcibly unzip the fly of [npc2.namePos] tactical trousers.]]>
 		</otherRough>
 	</displacementText>
 
 	<replacementText type="PULLS_UP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc.her] tactical trousers up to [npc.her] waist and [npc.verb(button)] up the front.]]>
+            <![CDATA[[npc.Name] pull [npc.her] tactical trousers up to [npc.her] waist and button up the front.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc2.namePos] tactical trousers up to [npc2.her] waist and [npc.verb(button)] up the front.]]>
+            <![CDATA[[npc.Name] pull [npc2.namePos] tactical trousers up to [npc2.her] waist and button up the front.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] forcibly [npc.verb(pull)] [npc2.namePos] tactical trousers up to [npc2.her] waist and roughly [npc.verb(button)] up the front.]]>
+            <![CDATA[[npc.Name] forcibly pull [npc2.namePos] tactical trousers up to [npc2.her] waist and roughly button up the front.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="PULLS_DOWN">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unbutton)] [npc.her] tactical trousers and [npc.verb(pull)] them down.]]>
+            <![CDATA[[npc.Name] unbutton [npc.her] tactical trousers and pull them down.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unbutton)] [npc2.name] tactical trousers and [npc.verb(pull)] them down.]]>
+            <![CDATA[[npc.Name] unbutton [npc2.name] tactical trousers and pull them down.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] forcibly [npc.verb(unbutton)] [npc2.name] tactical trousers and [npc.verb(yank)] down around [npc2.her] legs.]]>
+            <![CDATA[[npc.Name] forcibly unbutton [npc2.name] tactical trousers and yank down around [npc2.her] legs.]]>
 		</otherRough>
 	</displacementText>	
 	

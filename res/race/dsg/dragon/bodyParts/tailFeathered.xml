@@ -81,10 +81,10 @@
 	This description immediately follows a brief description of the tail type beginning to transform. -->
 	<transformationDescription><![CDATA[
 		#IF(npc.getTailCount()==1)
-			A scaly, draconic tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long while a diamond-shaped tuft of [npc.hairColour(true)] feathers sprouts from the tip. [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] limited control over it, but [npc.is] still able to swish it from side to side.
+			A scaly, draconic tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long while a diamond-shaped tuft of [npc.hairColour(true)] feathers sprouts from the tip. [npc.She] quickly realise that [npc.she] [npc.has] limited control over it, but [npc.is] still able to swish it from side to side.
 			<br/>[npc.Name] now [npc.has] a [style.boldDragon(tufted draconic tail)], [npc.materialDescriptor] [npc.tailFullDescription(true)].
 		#ELSE
-			[npc.TailCount] scaly, draconic tails sprout from just above [npc.her] ass, rapidly growing in size until they're each about [npc.tailLength] long. [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] limited control over them, but [npc.is] still able to swish them from side to side.
+			[npc.TailCount] scaly, draconic tails sprout from just above [npc.her] ass, rapidly growing in size until they're each about [npc.tailLength] long. [npc.She] quickly realise that [npc.she] [npc.has] limited control over them, but [npc.is] still able to swish them from side to side.
 			<br/>[npc.Name] now [npc.has] [npc.tailCount] [style.boldDragon(feathered draconic tails)], [npc.materialDescriptor] [npc.tailFullDescription(true)].
 		#ENDIF
 	]]></transformationDescription>

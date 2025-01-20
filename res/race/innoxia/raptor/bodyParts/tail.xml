@@ -43,10 +43,10 @@
 	
 	<transformationDescription><![CDATA[
 		#IF(npc.getTailCount()==1)
-			 A plume of tail feathers sprouts from just above [npc.her] ass, with each feather quickly growing to be about [npc.tailLength] long. [npc.She] [npc.verb(discover)] that [npc.she] can quickly raise and lower [npc.her] new bird-like tail, which helps [npc.herHim] to keep [npc.her] balance.
+			 A plume of tail feathers sprouts from just above [npc.her] ass, with each feather quickly growing to be about [npc.tailLength] long. [npc.She] discover that [npc.she] can quickly raise and lower [npc.her] new bird-like tail, which helps [npc.herHim] to keep [npc.her] balance.
 			<br/>[npc.Name] now [npc.has] a [style.boldRaptor(raptor's bird-like tail)], made out of [npc.tailFullDescription(true)].
 		#ELSE
-			 [npc.TailCount] plumes of tail feathers sprout from just above [npc.her] ass, with each feather quickly growing to be about [npc.tailLength] long. [npc.She] [npc.verb(discover)] that [npc.she] can quickly raise and lower [npc.her] new bird-like tails, which helps [npc.herHim] to keep [npc.her] balance.
+			 [npc.TailCount] plumes of tail feathers sprout from just above [npc.her] ass, with each feather quickly growing to be about [npc.tailLength] long. [npc.She] discover that [npc.she] can quickly raise and lower [npc.her] new bird-like tails, which helps [npc.herHim] to keep [npc.her] balance.
 			<br/>[npc.Name] now [npc.has] [npc.tailCount] [style.boldRaptor(raptor's bird-like tails)], made out of [npc.tailFullDescription(true)].
 		#ENDIF
 	]]></transformationDescription>

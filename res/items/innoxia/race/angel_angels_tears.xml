@@ -55,10 +55,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		Pulling out the stopper from the vial of Angel's Tears, [npc.name] [npc.verb(bring)] it up to [npc.her] waiting [npc.lips]. The faint scent of roses rises up from the opening, and [npc.she] [npc.verb(find)] [npc.herself] letting out a gentle sigh before tilting back [npc.her] head and drinking down all of the cool liquid.
+		Pulling out the stopper from the vial of Angel's Tears, [npc.name] bring it up to [npc.her] waiting [npc.lips]. The faint scent of roses rises up from the opening, and [npc.she] find [npc.herself] letting out a gentle sigh before tilting back [npc.her] head and drinking down all of the cool liquid.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		Pulling out the stopper from the vial of Angel's Tears, [npc.name] [npc.verb(bring)] it up to [npc2.namePos] waiting [npc2.lips]. The faint scent of roses rises up from the opening, and [npc2.name] [npc2.verb(find)] [npc2.herself] letting out a gentle sigh before tilting back [npc2.her] head and drinking down all of the cool liquid.
+		Pulling out the stopper from the vial of Angel's Tears, [npc.name] bring it up to [npc2.namePos] waiting [npc2.lips]. The faint scent of roses rises up from the opening, and [npc2.name] [npc2.verb(find)] [npc2.herself] letting out a gentle sigh before tilting back [npc2.her] head and drinking down all of the cool liquid.
 		]]></otherUse>
 	</useDescriptions>
 

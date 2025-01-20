@@ -1,95 +1,14 @@
 package com.lilithsthrone.game.character.body;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractArmType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAssType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractBreastType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEarType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEyeType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHairType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHornType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractPenisType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTentacleType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTongueType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTorsoType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractVaginaType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractWingType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
-import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
-import com.lilithsthrone.game.character.body.coverings.BodyCoveringSkinToneColorHelper;
-import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.body.coverings.Covering;
+import com.lilithsthrone.game.character.body.abstractTypes.*;
+import com.lilithsthrone.game.character.body.coverings.*;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
-import com.lilithsthrone.game.character.body.types.AntennaType;
-import com.lilithsthrone.game.character.body.types.ArmType;
-import com.lilithsthrone.game.character.body.types.AssType;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
-import com.lilithsthrone.game.character.body.types.BreastType;
-import com.lilithsthrone.game.character.body.types.EarType;
-import com.lilithsthrone.game.character.body.types.EyeType;
-import com.lilithsthrone.game.character.body.types.FaceType;
-import com.lilithsthrone.game.character.body.types.HairType;
-import com.lilithsthrone.game.character.body.types.HornType;
-import com.lilithsthrone.game.character.body.types.LegType;
-import com.lilithsthrone.game.character.body.types.PenisType;
-import com.lilithsthrone.game.character.body.types.TailType;
-import com.lilithsthrone.game.character.body.types.TentacleType;
-import com.lilithsthrone.game.character.body.types.TorsoType;
-import com.lilithsthrone.game.character.body.types.VaginaType;
-import com.lilithsthrone.game.character.body.types.WingType;
-import com.lilithsthrone.game.character.body.valueEnums.AgeCategory;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeShape;
-import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
-import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
-import com.lilithsthrone.game.character.body.valueEnums.BodyShape;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringModifier;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
-import com.lilithsthrone.game.character.body.valueEnums.EyeShape;
-import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
-import com.lilithsthrone.game.character.body.valueEnums.FluidRegeneration;
-import com.lilithsthrone.game.character.body.valueEnums.FluidTypeBase;
-import com.lilithsthrone.game.character.body.valueEnums.FootStructure;
-import com.lilithsthrone.game.character.body.valueEnums.GenitalArrangement;
-import com.lilithsthrone.game.character.body.valueEnums.HairLength;
-import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
-import com.lilithsthrone.game.character.body.valueEnums.Height;
-import com.lilithsthrone.game.character.body.valueEnums.HornLength;
-import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
-import com.lilithsthrone.game.character.body.valueEnums.NippleShape;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeDepth;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
-import com.lilithsthrone.game.character.body.valueEnums.StartingSkinTone;
-import com.lilithsthrone.game.character.body.valueEnums.TesticleSize;
-import com.lilithsthrone.game.character.body.valueEnums.TongueModifier;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
-import com.lilithsthrone.game.character.body.valueEnums.WingSize;
+import com.lilithsthrone.game.character.body.types.*;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -99,14 +18,7 @@ import com.lilithsthrone.game.character.markings.TattooCounterType;
 import com.lilithsthrone.game.character.markings.TattooType;
 import com.lilithsthrone.game.character.pregnancy.Litter;
 import com.lilithsthrone.game.character.pregnancy.PregnancyPossibility;
-import com.lilithsthrone.game.character.race.AbstractRace;
-import com.lilithsthrone.game.character.race.AbstractRacialBody;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
-import com.lilithsthrone.game.character.race.FeralAttributes;
-import com.lilithsthrone.game.character.race.Race;
-import com.lilithsthrone.game.character.race.RaceStage;
-import com.lilithsthrone.game.character.race.RacialBody;
-import com.lilithsthrone.game.character.race.Subspecies;
+import com.lilithsthrone.game.character.race.*;
 import com.lilithsthrone.game.dialogue.utils.CharacterModificationUtils;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
@@ -121,6 +33,13 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @since 0.1.0
@@ -155,13 +74,13 @@ public class Body implements XMLSaving {
 	private Vagina vagina;
 	private Wing wing;
 
-	private OrificeSpinneret spinneret;
+	private final OrificeSpinneret spinneret;
 	
 	private GenitalArrangement genitalArrangement;
 	
 	private boolean feral;
 	
-	private Map<AbstractRace, Integer> raceWeightMap = new ConcurrentHashMap<>();
+	private final Map<AbstractRace, Integer> raceWeightMap = new ConcurrentHashMap<>();
 	private AbstractSubspecies subspecies;
 	/** This keeps track of what this body's subspecies was at the moment of last being saved. it's only used in BodyChanging.java as part of save/load transformation presets. */
 	private AbstractSubspecies loadedSubspecies;
@@ -175,9 +94,9 @@ public class Body implements XMLSaving {
 	private int muscle;
 	private BodyHair pubicHair;
 
-	private Set<AbstractBodyCoveringType> heavyMakeup;
+	private final Set<AbstractBodyCoveringType> heavyMakeup;
 	private Map<AbstractBodyCoveringType, Covering> coverings;
-	private Set<AbstractBodyCoveringType> coveringsDiscovered;
+	private final Set<AbstractBodyCoveringType> coveringsDiscovered;
 
 	private List<BodyPartInterface> allBodyParts;
 	private List<BodyPartInterface> allBodyPartsExtended;
@@ -197,7 +116,7 @@ public class Body implements XMLSaving {
 		private final Leg leg;
 		private final Torso torso;
 		private final BodyMaterial bodyMaterial;
-		private GenitalArrangement genitalArrangement;
+		private final GenitalArrangement genitalArrangement;
 		private final int height;
 		private final int femininity, bodySize, muscle;
 		
@@ -2275,12 +2194,12 @@ public class Body implements XMLSaving {
 						modifiers.add(enumValue);
 					}
 					if(log!=null) {
-						Main.game.getCharacterUtils().appendToImportLog(log, "<br/>"+enumValue.toString()+":true");
+						Main.game.getCharacterUtils().appendToImportLog(log, "<br/>"+ enumValue +":true");
 					}
 				} else if (!attributeValue.isEmpty()) {
 					modifiers.remove(enumValue);
 					if(log!=null) {
-						Main.game.getCharacterUtils().appendToImportLog(log, "<br/>"+enumValue.toString()+":false");
+						Main.game.getCharacterUtils().appendToImportLog(log, "<br/>"+ enumValue +":false");
 					}
 				} else {
 					if(log!=null) {
@@ -2319,55 +2238,55 @@ public class Body implements XMLSaving {
 		StringBuilder sb = new StringBuilder();
 		boolean observant = Main.game.getPlayer().hasTrait(Perk.OBSERVANT, true);
 		// Describe race:
-		sb.append(getHeader("Overview"));
+		sb.append(getHeader("Обзор"));
 		String colouredHeightValue = "<span style='color:"+this.getHeight().getColour().toWebHexString()+";'>[npc.heightValue]</span>";
-		
-		String heightDescription = " Standing at full height, [npc.she] [npc.verb(measure)] "+colouredHeightValue;
+
+		String heightDescription = " [npc.targetBasedWord(Твой, [npc.Her])] рост составляет " + colouredHeightValue;
 		if(owner.isFeral() && !owner.getFeralAttributes().isSizeHeight()) {
 			if(owner.getLegConfiguration()==LegConfiguration.TAIL_LONG) {
 				heightDescription = " [npc.Her] body measures "+colouredHeightValue+", which combined with [npc.her] [npc.tailLength]-long tail, gives [npc.herHim] a total length of "
 						+ "<span style='color:"+Height.getHeightFromInt(owner.getHeightValue()+owner.getLegTailLength(false)).getColour().toWebHexString()+";'>"
 							+ Units.size(owner.getHeightValue()+owner.getLegTailLength(false), Units.ValueType.NUMERIC, Units.UnitType.LONG)
 						+"</span>";
-				
-//				heightDescription = " From head to tail,  [npc.she] [npc.verb(measure)] "
+
+//				heightDescription = " From head to tail,  [npc.she] measure "
 //						+Units.size(owner.getHeightValue()+owner.getLegTailLength(false), Units.ValueType.NUMERIC, Units.UnitType.LONG);
 			} else {
-				heightDescription = " From head to tail,  [npc.she] [npc.verb(measure)] "+colouredHeightValue;
+				heightDescription = " From head to tail, [npc.she] measure " + colouredHeightValue;
 			}
 		}
 		
 		if (owner.isPlayer()) {
-			sb.append("You are [pc.name], "
+			sb.append("Ты [pc.name], "
 							+(owner.getRace()==Race.HUMAN
-								?"<span style='color:"+owner.getFemininity().getColour().toWebHexString()+";'>[pc.a_femininity]</span> [pc.gender(true)] [style.colourHuman(human)]. "
-								:"[pc.a_fullRace(true)] [pc.gender(true)]. ")
+					? "<span style='color:" + owner.getFemininity().getColour().toWebHexString() + ";'>[pc.genderBasedWordAuto([pc.a_femininity])]</span> [style.colourHuman([pc.genderBasedWord(человеческий, человеческая)])] [pc.gender(true)]. "
+					: "[pc.genderBasedWordAuto([pc.a_fullRace(true)])]-[pc.gender(true)]. ")
 						+ owner.getAppearsAsGenderDescription(true)
 						+heightDescription+".");
 		} else {
 			if(owner.isAreaKnownByCharacter(CoverableArea.PENIS, Main.game.getPlayer()) && owner.isAreaKnownByCharacter(CoverableArea.VAGINA, Main.game.getPlayer())) {
-				sb.append("[npc.Name] is "
+				sb.append("[npc.Name] "
 							+(owner.getRace()==Race.HUMAN
-								?"<span style='color:"+owner.getFemininity().getColour().toWebHexString()+";'>[npc.a_femininity]</span> [npc.gender(true)] [style.colourHuman(human)]. "
-								:"[npc.a_fullRace(true)] [npc.gender(true)]. ")
+						? "<span style='color:" + owner.getFemininity().getColour().toWebHexString() + ";'>[npc.genderBasedWordAuto([npc.a_femininity])]</span> [style.colourHuman([npc.genderBasedWord(человеческий, человеческая)])] [npc.gender(true)]. "
+						: "[npc.genderBasedWordAuto([npc.a_fullRace(true)])]-[npc.gender(true)]. ")
 						+ owner.getAppearsAsGenderDescription(true)
 						+ heightDescription);
 			} else {
 				if(observant) {
-					sb.append("Thanks to your observant perk, you can detect that [npc.name] is <span style='color:"+getGender().getColour().toWebHexString()+";'>[npc.a_gender]</span> [npc.raceStage] [npc.race]. "
+					sb.append("Благодаря твоему навыку наблюдательности ты можешь определить, что [npc.name] является <span style='color:" + getGender().getColour().toWebHexString() + ";'>[pc.morphSingleInstr([npc.a_gender])]</span>, [pc.morphSingleInstr([npc.genderBasedWordAuto([npc.raceStage])])] [pc.morphSingleInstr([npc.race])]. "
 							+ owner.getAppearsAsGenderDescription(true)
 							+ heightDescription);
 				} else {
-					sb.append("[npc.Name] is a [npc.a_fullRace(true)]. "
+					sb.append("[npc.Name] [npc.a_fullRace(true)]. "
 								+ owner.getAppearsAsGenderDescription(true)
 								+ heightDescription);
 				}
 			}
 			if(owner.isSizeDifferenceTallerThan(Main.game.getPlayer())) {
 				String descriptor = owner.isFeral() && !owner.getFeralAttributes().isSizeHeight()?"longer":"taller";
-				sb.append(", making [npc.herHim] <span style='color:"+PresetColour.BODY_SIZE_FOUR.toWebHexString()+";'>significantly "+descriptor+"</span> than you.");
+				sb.append(", что делает [npc.herHim] <span style='color:" + PresetColour.BODY_SIZE_FOUR.toWebHexString() + ";'>значительно " + descriptor + "</span> тебя.");
 			} else if(owner.isSizeDifferenceShorterThan(Main.game.getPlayer())) {
-				sb.append(", making [npc.herHim] <span style='color:"+PresetColour.BODY_SIZE_ZERO.toWebHexString()+";'>significantly shorter</span> than you.");
+				sb.append(", что делает [npc.herHim] <span style='color:" + PresetColour.BODY_SIZE_ZERO.toWebHexString() + ";'>значительно короче</span> тебя.");
 			} else {
 				sb.append(".");
 			}
@@ -2443,10 +2362,8 @@ public class Body implements XMLSaving {
 		}
 		
 		if(Main.getProperties().hasValue(PropertyValue.ageContent)) {
-			sb.append(" [npc.She] [npc.verb(appear)] to be "
-					+(owner.getAppearsAsAge()==AgeCategory.SIXTIES_PLUS
-						?""
-						:"in [npc.her] ")+
+			sb.append(" Кажется, что [npc.morphSingleDativ([npc.she])] "
+					+
 					"<span style='color:"+owner.getAppearsAsAge().getColour().toWebHexString()+";'>"+owner.getAppearsAsAge().getName()+"</span>.");
 		}
 		sb.append("</p>");
@@ -2477,7 +2394,7 @@ public class Body implements XMLSaving {
 		
 		// Describe face (ears, eyes & horns):
 		// Femininity:
-		sb.append(getHeader("Face"));
+		sb.append(getHeader("Лицо"));
 		sb.append(face.getType().getBodyDescription(owner));
 		if(owner.getBlusher().getPrimaryColour()!=PresetColour.COVERING_NONE) {
 			sb.append(" [npc.SheIsFull] wearing "+owner.getBlusher().getColourDescriptor(owner, true, false)+" blusher.");
@@ -2486,7 +2403,7 @@ public class Body implements XMLSaving {
 		// Hair:
 		if (hair.getRawLengthValue() == 0) {
 			if(face.isBaldnessNatural() || owner.isFeral()) {
-				sb.append(" [npc.Her] head is [npc.materialDescriptor] [npc.faceFullDescription(true)].");
+				sb.append(" [npc.Her] голова [pc.morphGenSinFem([npc.materialDescriptor])] [pc.morphSingleInstr([npc.faceFullDescription(true)])].");
 			} else {
 				sb.append(" [npc.SheHasFull] no hair on [npc.her] head, revealing the [npc.faceSkin] that covers [npc.her] scalp.");
 			}
@@ -2780,13 +2697,13 @@ public class Body implements XMLSaving {
 				
 				if(Main.game.isPenetrationLimitationsEnabled()) {
 					switch(owner.getFaceDepth()) {
-						default:
-							sb.append(" [npc.Her] throat is <span style='color:"+owner.getFaceDepth().getColour().toWebHexString()+";'>[npc.throatDepth]</span>,");
-							break;
-						case TWO_AVERAGE:
+                        case TWO_AVERAGE:
 							sb.append(" [npc.Her] throat is of an <span style='color:"+owner.getFaceDepth().getColour().toWebHexString()+";'>average depth</span>,");
 							break;
-					}
+                        default:
+                            sb.append(" [npc.Her] throat is <span style='color:"+owner.getFaceDepth().getColour().toWebHexString()+";'>[npc.throatDepth]</span>,");
+                            break;
+                    }
 					if(owner.getBodyMaterial().isOrificesLimitedDepth()) {
 						if(owner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
 							sb.append(" and as [npc.sheIsFull] a "+Fetish.FETISH_SIZE_QUEEN.getName(owner)+", [npc.she] can be pushed to [style.colourMinorGood(comfortably)] accommodate objects of a maximum length of "
@@ -3231,16 +3148,16 @@ public class Body implements XMLSaving {
 				case TENTACLED:
 					break;
 				case DIGITIGRADE:
-					sb.append(" [npc.Her] [npc.legs] and [npc.feet] are [style.colourTFGeneric("+owner.getFootStructure().getName()+")], meaning that [npc.she] naturally [npc.verb(walk)] on [npc.her] toes.");
+					sb.append(" [npc.Her] [npc.legs] и [npc.feet] are [style.colourTFGeneric(" + owner.getFootStructure().getName() + ")], meaning that [npc.she] naturally walk on [npc.her] toes.");
 					break;
 				case PLANTIGRADE:
-					sb.append(" [npc.Her] [npc.legs] and [npc.feet] are [style.colourTFGeneric("+owner.getFootStructure().getName()+")], meaning that [npc.she] naturally [npc.verb(walk)] with [npc.her] feet flat on the ground.");
+					sb.append(" [npc.Her] [npc.legs] и [npc.feet] are [style.colourTFGeneric(" + owner.getFootStructure().getName() + ")], meaning that [npc.she] naturally walk with [npc.her] feet flat on the ground.");
 					break;
 				case UNGULIGRADE:
-					sb.append(" [npc.Her] [npc.legs] and [npc.feet] are [style.colourTFGeneric("+owner.getFootStructure().getName()+")], meaning that [npc.she] naturally [npc.verb(walk)] on [npc.her] hoofs.");
+					sb.append(" [npc.Her] [npc.legs] и [npc.feet] are [style.colourTFGeneric(" + owner.getFootStructure().getName() + ")], meaning that [npc.she] naturally walk on [npc.her] hoofs.");
 					break;
 				case ARACHNOID:
-					sb.append(" [npc.Her] [npc.legs] and [npc.feet] are [style.colourTFGeneric("+owner.getFootStructure().getName()+")], meaning that [npc.she] [npc.verb(walk)] on the ends of [npc.her] segmented arachnoid legs.");
+					sb.append(" [npc.Her] [npc.legs] и [npc.feet] are [style.colourTFGeneric(" + owner.getFootStructure().getName() + ")], meaning that [npc.she] walk on the ends of [npc.her] segmented arachnoid legs.");
 					break;
 			}
 		}
@@ -3392,9 +3309,9 @@ public class Body implements XMLSaving {
 		// Ass & hips:
 		sb.append(getHeader("Ass"));
 		if(!owner.isFeral() && ass.isFeral(owner)) {
-			sb.append("[npc.Her] [npc.hips+] and [npc.assSize] [npc.ass] are [style.colourFeral(part of [npc.her] feral lower body)], and are [npc.materialCompositionDescriptor] [npc.assFullDescription(true)].");
+            sb.append("[npc.Her] [npc.hips+] и [npc.assSize] [npc.ass] are [style.colourFeral(part of [npc.her] feral lower body)], and are [npc.materialCompositionDescriptor] [npc.assFullDescription(true)].");
 		} else {
-			sb.append("[npc.Her] [npc.hips+] and [npc.assSize] [npc.ass] are [npc.materialCompositionDescriptor] [npc.assFullDescription(true)].");
+            sb.append("[npc.Her] [npc.hips+] и [npc.assSize] [npc.ass] are [npc.materialCompositionDescriptor] [npc.assFullDescription(true)].");
 		}
 		
 		if(owner.isAreaKnownByCharacter(CoverableArea.ANUS, Main.game.getPlayer())) {
@@ -3514,7 +3431,7 @@ public class Body implements XMLSaving {
 		}
 		if(tattooSB.length()>0) {
 			sb.append(getHeader("Tattoos"));
-			sb.append(tattooSB.toString());
+			sb.append(tattooSB);
 		}
 		
 		if(!owner.isPlayer()) {
@@ -4256,13 +4173,13 @@ public class Body implements XMLSaving {
 
 		if(Main.game.isPenetrationLimitationsEnabled()) {
 			switch(owner.getAssDepth()) {
-				default:
-					descriptionSB.append(" [npc.Her] ass is <span style='color:"+owner.getAssDepth().getColour().toWebHexString()+";'>[npc.assDepth]</span>,");
-					break;
-				case TWO_AVERAGE:
+                case TWO_AVERAGE:
 					descriptionSB.append(" [npc.Her] ass is of an <span style='color:"+owner.getAssDepth().getColour().toWebHexString()+";'>average depth</span>,");
 					break;
-			}
+                default:
+                    descriptionSB.append(" [npc.Her] ass is <span style='color:"+owner.getAssDepth().getColour().toWebHexString()+";'>[npc.assDepth]</span>,");
+                    break;
+            }
 			if(owner.getBodyMaterial().isOrificesLimitedDepth()) {
 				if(owner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
 					descriptionSB.append(" and as [npc.sheIsFull] a "+Fetish.FETISH_SIZE_QUEEN.getName(owner)+", [npc.she] can be pushed to [style.colourMinorGood(comfortably)] accommodate objects of a maximum length of "
@@ -4471,13 +4388,13 @@ public class Body implements XMLSaving {
 
 					if(Main.game.isPenetrationLimitationsEnabled()) {
 						switch(owner.getNippleDepth()) {
-							default:
-								descriptionSB.append(" [npc.Her] fuckable [npc.nipples] are <span style='color:"+owner.getNippleDepth().getColour().toWebHexString()+";'>[npc.breastDepth]</span>,");
-								break;
-							case TWO_AVERAGE:
+                            case TWO_AVERAGE:
 								descriptionSB.append(" [npc.Her] fuckable [npc.nipples] are of an <span style='color:"+owner.getNippleDepth().getColour().toWebHexString()+";'>average depth</span>,");
 								break;
-						}
+                            default:
+                                descriptionSB.append(" [npc.Her] fuckable [npc.nipples] are <span style='color:"+owner.getNippleDepth().getColour().toWebHexString()+";'>[npc.breastDepth]</span>,");
+                                break;
+                        }
 						if(owner.getBodyMaterial().isOrificesLimitedDepth()) {
 							if(owner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
 								descriptionSB.append(" and as [npc.sheIsFull] a "+Fetish.FETISH_SIZE_QUEEN.getName(owner)+", [npc.she] can be pushed to [style.colourMinorGood(comfortably)] accommodate objects of a maximum length of "
@@ -4717,13 +4634,13 @@ public class Body implements XMLSaving {
 
 					if(Main.game.isPenetrationLimitationsEnabled()) {
 						switch(owner.getNippleCrotchDepth()) {
-							default:
-								descriptionSB.append(" [npc.Her] fuckable [npc.crotchNipples] are <span style='color:"+owner.getNippleCrotchDepth().getColour().toWebHexString()+";'>[npc.crotchBreastDepth]</span>,");
-								break;
-							case TWO_AVERAGE:
+                            case TWO_AVERAGE:
 								descriptionSB.append(" [npc.Her] fuckable [npc.crotchNipples] are of an <span style='color:"+owner.getNippleCrotchDepth().getColour().toWebHexString()+";'>average depth</span>,");
 								break;
-						}
+                            default:
+                                descriptionSB.append(" [npc.Her] fuckable [npc.crotchNipples] are <span style='color:"+owner.getNippleCrotchDepth().getColour().toWebHexString()+";'>[npc.crotchBreastDepth]</span>,");
+                                break;
+                        }
 						if(owner.getBodyMaterial().isOrificesLimitedDepth()) {
 							if(owner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
 								descriptionSB.append(" and as [npc.sheIsFull] a "+Fetish.FETISH_SIZE_QUEEN.getName(owner)+", [npc.she] can be pushed to [style.colourMinorGood(comfortably)] accommodate objects of a maximum length of "
@@ -4974,13 +4891,13 @@ public class Body implements XMLSaving {
 
 			if(Main.game.isPenetrationLimitationsEnabled()) {
 				switch(owner.getUrethraDepth()) {
-					default:
-						descriptionSB.append(" [npc.Her] fuckable urethra is <span style='color:"+owner.getUrethraDepth().getColour().toWebHexString()+";'>[npc.penisUrethraDepth]</span>,");
-						break;
-					case TWO_AVERAGE:
+                    case TWO_AVERAGE:
 						descriptionSB.append(" [npc.Her] fuckable urethra is of an <span style='color:"+owner.getUrethraDepth().getColour().toWebHexString()+";'>average depth</span>,");
 						break;
-				}
+                    default:
+                        descriptionSB.append(" [npc.Her] fuckable urethra is <span style='color:"+owner.getUrethraDepth().getColour().toWebHexString()+";'>[npc.penisUrethraDepth]</span>,");
+                        break;
+                }
 				if(owner.getBodyMaterial().isOrificesLimitedDepth()) {
 					if(owner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
 						descriptionSB.append(" and as [npc.sheIsFull] a "+Fetish.FETISH_SIZE_QUEEN.getName(owner)+", [npc.she] can be pushed to [style.colourMinorGood(comfortably)] accommodate objects of a maximum length of "
@@ -5302,9 +5219,9 @@ public class Body implements XMLSaving {
 		
 		if(owner.isImpregnationPhysicallyPossible()) {
 			if(owner.isVaginaEggLayer()) {
-				descriptionSB.append(" Due to the configuration of [npc.her] reproductive organs, [npc.she] [style.colourEgg([npc.verb(lay)] eggs instead of giving birth to live young)].");
+				descriptionSB.append(" Due to the configuration of [npc.her] reproductive organs, [npc.she] [style.colourEgg(lay eggs instead of giving birth to live young)].");
 			} else {
-				descriptionSB.append(" Due to the configuration of [npc.her] reproductive organs, [npc.she] [style.colourSex([npc.verb(give)] birth to live young)].");
+				descriptionSB.append(" Due to the configuration of [npc.her] reproductive organs, [npc.she] [style.colourSex(give birth to live young)].");
 			}
 		}
 		
@@ -5414,13 +5331,13 @@ public class Body implements XMLSaving {
 
 		if(Main.game.isPenetrationLimitationsEnabled()) {
 			switch(owner.getVaginaDepth()) {
-				default:
-					descriptionSB.append(" [npc.Her] pussy is <span style='color:"+owner.getVaginaDepth().getColour().toWebHexString()+";'>[npc.pussyDepth]</span>,");
-					break;
-				case TWO_AVERAGE:
+                case TWO_AVERAGE:
 					descriptionSB.append(" [npc.Her] pussy is of an <span style='color:"+owner.getVaginaDepth().getColour().toWebHexString()+";'>average depth</span>,");
 					break;
-			}
+                default:
+                    descriptionSB.append(" [npc.Her] pussy is <span style='color:"+owner.getVaginaDepth().getColour().toWebHexString()+";'>[npc.pussyDepth]</span>,");
+                    break;
+            }
 			if(owner.getBodyMaterial().isOrificesLimitedDepth()) {
 				if(owner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
 					descriptionSB.append(" and as [npc.sheIsFull] a "+Fetish.FETISH_SIZE_QUEEN.getName(owner)+", [npc.she] can be pushed to [style.colourMinorGood(comfortably)] accommodate objects of a maximum length of "
@@ -5447,13 +5364,13 @@ public class Body implements XMLSaving {
 				descriptionSB.append(" It's [style.colourWetness(completely dry and never gets wet)], no matter how aroused [npc.she] [npc.is].");
 				break;
 			case ONE_SLIGHTLY_MOIST:
-				descriptionSB.append(" It's [style.colourWetness(slightly moist)], and [npc.she] [npc.verb(need)] a huge amount of stimulation before [npc.she] [npc.verb(get)] wet.");
+				descriptionSB.append(" It's [style.colourWetness(slightly moist)], and [npc.she] need a huge amount of stimulation before [npc.she] get wet.");
 				break;
 			case TWO_MOIST:
-				descriptionSB.append(" It's [style.colourWetness(moist)], but [npc.she] still [npc.verb(need)] a lot of stimulation before [npc.she] [npc.verb(get)] wet.");
+				descriptionSB.append(" It's [style.colourWetness(moist)], but [npc.she] still need a lot of stimulation before [npc.she] get wet.");
 				break;
 			case THREE_WET:
-				descriptionSB.append(" It's of an [style.colourWetness(average wetness)], and [npc.she] only [npc.verb(need)] a small amount of foreplay before [npc.sheIs] wet enough for a pleasurable penetration.");
+				descriptionSB.append(" It's of an [style.colourWetness(average wetness)], and [npc.she] only need a small amount of foreplay before [npc.sheIs] wet enough for a pleasurable penetration.");
 				break;
 			case FOUR_SLIMY:
 				descriptionSB.append(" It's always [style.colourWetness(slimy and wet)], and [npc.sheIs] ready for penetration at a moment's notice.");
@@ -5465,12 +5382,12 @@ public class Body implements XMLSaving {
 				descriptionSB.append(" [npc.Her] pussy is never anything less than [style.colourWetness(sopping wet)], and a trickle of [npc.her] natural lubricant constantly dribbles from [npc.her] slit.");
 				break;
 			case SEVEN_DROOLING:
-				descriptionSB.append(" [npc.Her] pussy is [style.colourWetness(so wet that it audibly squelches with every step [npc.she] [npc.verb(take)])], and a constant stream of juices flow from [npc.her] inviting cunt.");
+				descriptionSB.append(" [npc.Her] pussy is [style.colourWetness(so wet that it audibly squelches with every step [npc.she] take)], and a constant stream of juices flow from [npc.her] inviting cunt.");
 				break;
 		}
 		
 		if(viewedVagina.getOrificeVagina().isSquirter()) {
-			descriptionSB.append(" [npc.She] [npc.is] a [style.colourArcane(squirter)], and [style.colourWetness([npc.verb(produce)] a considerable amount of female ejaculate)] each time [npc.she] [npc.verb(orgasm)].");
+			descriptionSB.append(" [npc.She] [npc.is] a [style.colourArcane(squirter)], and [style.colourWetness(produce a considerable amount of female ejaculate)] each time [npc.she] orgasm.");
 		}
 		
 		// Elasticity & plasticity:
@@ -5556,13 +5473,13 @@ public class Body implements XMLSaving {
 			
 			if(Main.game.isPenetrationLimitationsEnabled()) {
 				switch(owner.getVaginaUrethraDepth()) {
-					default:
-						descriptionSB.append(" [npc.Her] fuckable urethra is <span style='color:"+owner.getVaginaUrethraDepth().getColour().toWebHexString()+";'>[npc.pussyUrethraDepth]</span>,");
-						break;
-					case TWO_AVERAGE:
+                    case TWO_AVERAGE:
 						descriptionSB.append(" [npc.Her] fuckable urethra is of an <span style='color:"+owner.getVaginaUrethraDepth().getColour().toWebHexString()+";'>average depth</span>,");
 						break;
-				}
+                    default:
+                        descriptionSB.append(" [npc.Her] fuckable urethra is <span style='color:"+owner.getVaginaUrethraDepth().getColour().toWebHexString()+";'>[npc.pussyUrethraDepth]</span>,");
+                        break;
+                }
 				if(owner.getBodyMaterial().isOrificesLimitedDepth()) {
 					if(owner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
 						descriptionSB.append(" and as [npc.sheIsFull] a "+Fetish.FETISH_SIZE_QUEEN.getName(owner)+", [npc.she] can be pushed to [style.colourMinorGood(comfortably)] accommodate objects of a maximum length of "
@@ -5706,7 +5623,7 @@ public class Body implements XMLSaving {
 
 	public String getMoundDescription(GameCharacter owner) {
 		return UtilText.parse(owner,
-				"As [npc.she] [npc.verb(possess)] no genitalia, all [npc.she] [npc.has] is a genderless mound."
+				"As [npc.she] possess no genitalia, all [npc.she] [npc.has] is a genderless mound."
 				+ " Despite [npc.her] lack of sexual organs, it's still an incredibly sensitive area, and [npc.she] can be brought to a quasi-orgasm by stimulating it.");
 	}
 	
@@ -5749,13 +5666,13 @@ public class Body implements XMLSaving {
 
 		if(Main.game.isPenetrationLimitationsEnabled()) {
 			switch(owner.getSpinneretDepth()) {
-				default:
-					descriptionSB.append(" It is <span style='color:"+owner.getSpinneretDepth().getColour().toWebHexString()+";'>[npc.spinneretDepth]</span>,");
-					break;
-				case TWO_AVERAGE:
+                case TWO_AVERAGE:
 					descriptionSB.append(" It is of an <span style='color:"+owner.getSpinneretDepth().getColour().toWebHexString()+";'>average depth</span>,");
 					break;
-			}
+                default:
+                    descriptionSB.append(" It is <span style='color:"+owner.getSpinneretDepth().getColour().toWebHexString()+";'>[npc.spinneretDepth]</span>,");
+                    break;
+            }
 			if(owner.getBodyMaterial().isOrificesLimitedDepth()) {
 				if(owner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
 					descriptionSB.append(" and as [npc.sheIsFull] a "+Fetish.FETISH_SIZE_QUEEN.getName(owner)+", [npc.she] can be pushed to [style.colourMinorGood(comfortably)] accommodate objects of a maximum length of "
@@ -5782,13 +5699,13 @@ public class Body implements XMLSaving {
 				descriptionSB.append(" It's [style.colourWetness(completely dry and never gets wet)], no matter how aroused [npc.she] [npc.is].");
 				break;
 			case ONE_SLIGHTLY_MOIST:
-				descriptionSB.append(" It's [style.colourWetness(slightly moist)], and [npc.she] [npc.verb(need)] a huge amount of stimulation before [npc.she] [npc.verb(get)] wet.");
+				descriptionSB.append(" It's [style.colourWetness(slightly moist)], and [npc.she] need a huge amount of stimulation before [npc.she] get wet.");
 				break;
 			case TWO_MOIST:
-				descriptionSB.append(" It's [style.colourWetness(moist)], but [npc.she] still [npc.verb(need)] a lot of stimulation before [npc.she] [npc.verb(get)] wet.");
+				descriptionSB.append(" It's [style.colourWetness(moist)], but [npc.she] still need a lot of stimulation before [npc.she] get wet.");
 				break;
 			case THREE_WET:
-				descriptionSB.append(" It's of an [style.colourWetness(average wetness)], and [npc.she] only [npc.verb(need)] a small amount of foreplay before [npc.sheIs] wet enough for a pleasurable penetration.");
+				descriptionSB.append(" It's of an [style.colourWetness(average wetness)], and [npc.she] only need a small amount of foreplay before [npc.sheIs] wet enough for a pleasurable penetration.");
 				break;
 			case FOUR_SLIMY:
 				descriptionSB.append(" It's always [style.colourWetness(slimy and wet)], and [npc.sheIs] ready for penetration at a moment's notice.");
@@ -5800,7 +5717,7 @@ public class Body implements XMLSaving {
 				descriptionSB.append(" [npc.Her] spinneret is never anything less than [style.colourWetness(sopping wet)], and a trickle of [npc.her] natural lubricant constantly dribbles from it.");
 				break;
 			case SEVEN_DROOLING:
-				descriptionSB.append(" [npc.Her] spinneret is [style.colourWetness(so wet that it audibly squelches with every step [npc.she] [npc.verb(take)])], and a constant stream of juices flow from [npc.her] inviting orifice.");
+				descriptionSB.append(" [npc.Her] spinneret is [style.colourWetness(so wet that it audibly squelches with every step [npc.she] take)], and a constant stream of juices flow from [npc.her] inviting orifice.");
 				break;
 		}
 		
@@ -6776,7 +6693,7 @@ public class Body implements XMLSaving {
 						if(cat.isInfluencedByMaterialType()) {
 							AbstractBodyCoveringType nonFleshCovering = BodyCoveringType.getMaterialBodyCoveringType(mat, cat);
 							CoveringPattern pattern = currentCovering.getPattern();
-							if(!nonFleshCovering.getAllPatterns().keySet().contains(pattern)) {
+							if(!nonFleshCovering.getAllPatterns().containsKey(pattern)) {
 								pattern = nonFleshCovering.getNaturalPatterns().entrySet().iterator().next().getKey();
 							}
 							CoveringModifier modifier = currentCovering.getModifier();

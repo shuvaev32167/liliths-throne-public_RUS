@@ -1,10 +1,9 @@
 package com.lilithsthrone.controller.eventListeners;
 
-import org.w3c.dom.events.Event;
-import org.w3c.dom.events.EventListener;
-
 import com.lilithsthrone.controller.MainController;
+import com.lilithsthrone.controller.eventListeners.tooltips.ClonedEventListener;
 import com.lilithsthrone.main.Main;
+import org.w3c.dom.events.Event;
 
 /**
  * Sets the MainController's content.
@@ -14,7 +13,7 @@ import com.lilithsthrone.main.Main;
  * @author Innoxia
  * Перевод не требуется
  */
-public class SetContentEventListener implements EventListener {
+public class SetContentEventListener implements ClonedEventListener {
 	private int index;
 	private boolean nextPage = false, previousPage = false;
 
@@ -65,5 +64,19 @@ public class SetContentEventListener implements EventListener {
 		previousPage = true;
 
 		return this;
+	}
+
+	public SetContentEventListener() {
+	}
+
+	public SetContentEventListener(int index, boolean nextPage, boolean previousPage) {
+		this.index = index;
+		this.nextPage = nextPage;
+		this.previousPage = previousPage;
+	}
+
+	@Override
+	public ClonedEventListener newInstance() {
+		return new SetContentEventListener(index, nextPage, previousPage);
 	}
 }

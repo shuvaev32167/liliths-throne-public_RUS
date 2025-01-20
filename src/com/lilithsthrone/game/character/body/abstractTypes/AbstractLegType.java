@@ -1,45 +1,13 @@
 package com.lilithsthrone.game.character.body.abstractTypes;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.w3c.dom.Document;
-
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.Ass;
-import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.BreastCrotch;
-import com.lilithsthrone.game.character.body.LegConfigurationAffinity;
-import com.lilithsthrone.game.character.body.Penis;
-import com.lilithsthrone.game.character.body.Tail;
-import com.lilithsthrone.game.character.body.Tentacle;
-import com.lilithsthrone.game.character.body.Vagina;
+import com.lilithsthrone.game.character.body.*;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.body.types.AssType;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
-import com.lilithsthrone.game.character.body.types.BreastType;
-import com.lilithsthrone.game.character.body.types.FootType;
-import com.lilithsthrone.game.character.body.types.LegType;
-import com.lilithsthrone.game.character.body.types.PenisType;
-import com.lilithsthrone.game.character.body.types.TailType;
-import com.lilithsthrone.game.character.body.types.TentacleType;
-import com.lilithsthrone.game.character.body.types.VaginaType;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.FootStructure;
-import com.lilithsthrone.game.character.body.valueEnums.GenitalArrangement;
-import com.lilithsthrone.game.character.body.valueEnums.Height;
-import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
-import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.race.AbstractRace;
-import com.lilithsthrone.game.character.race.AbstractRacialBody;
-import com.lilithsthrone.game.character.race.Race;
-import com.lilithsthrone.game.character.race.RaceStage;
-import com.lilithsthrone.game.character.race.RacialBody;
+import com.lilithsthrone.game.character.body.types.*;
+import com.lilithsthrone.game.character.body.valueEnums.*;
+import com.lilithsthrone.game.character.race.*;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
@@ -49,6 +17,13 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
+import org.w3c.dom.Document;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @since 0.3.1
@@ -562,9 +537,9 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 				}
 			} else {
 				if(legConfiguration.isWingsOnLegConfiguration()) {
-					feralStringBuilder.append("[style.italicsFeral(If [npc.she] [npc.verb(grow)] any wings, they will be located on the sides of [npc.her] "+legConfiguration.getName()+" body!)]");
+                    feralStringBuilder.append("[style.italicsFeral(If [npc.she] grow any wings, they will be located on the sides of [npc.her] " + legConfiguration.getName() + " body!)]");
 				} else {
-					feralStringBuilder.append("[style.italicsFeral(If [npc.she] [npc.verb(grow)] any wings, they will be located on the back of [npc.her] upper body.)]");
+                    feralStringBuilder.append("[style.italicsFeral(If [npc.she] grow any wings, they will be located on the back of [npc.her] upper body.)]");
 				}
 			}
 			if(!legConfiguration.isAbleToGrowTail()) {
@@ -658,11 +633,11 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 				}
 				feralStringBuilder.append(
 						"<p>"
-							+ "Without warning, [npc.name] suddenly [npc.verb(lose)] all of the strength in [npc.her] [npc.legs], and [npc.she] [npc.verb(collapse)] to the ground with a startled cry."
+                                + "Without warning, [npc.name] suddenly lose all of the strength in [npc.her] [npc.legs], and [npc.she] collapse to the ground with a startled cry."
 							+ " Before [npc.sheIs] able to react to this alarming development, [npc.her] lower body starts to rapidly transform..."
 						+ "</p>"
 						+ "<p>"
-							+ "Looking down, [npc.name] [npc.verb(watch)] in disbelief as [npc.her] [npc.legs] split and transform into eight long, segmented legs."
+                                + "Looking down, [npc.name] watch in disbelief as [npc.her] [npc.legs] split and transform into eight long, segmented legs."
 							+ " The changes don't stop there, however, as [npc.her] lower body continues to rapidly morph into that of a huge, eight-legged "+feralRaceName+"."
 							+ " A horny [npc.moan] bursts out of [npc.her] mouth as [npc.her] genitals shift to be on the underside of [npc.her] massive arachnid body,"
 									+ " while [npc.her] anus "+(body.getLeg().getType().hasSpinneret()?"and spinneret are":"is")+" positioned near the tip of [npc.her] abdomen."
@@ -679,11 +654,11 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 				}
 				feralStringBuilder.append(
 						"<p>"
-							+ "Without warning, [npc.name] suddenly [npc.verb(lose)] all of the strength in [npc.her] [npc.legs], and [npc.she] [npc.verb(collapse)] to the ground with a startled cry."
+                                + "Without warning, [npc.name] suddenly lose all of the strength in [npc.her] [npc.legs], and [npc.she] collapse to the ground with a startled cry."
 							+ " Before [npc.sheIs] able to react to this alarming development, [npc.her] lower body starts to rapidly transform..."
 						+ "</p>"
 						+ "<p>"
-							+ "Looking down, [npc.name] [npc.verb(watch)] in disbelief as the entire of [npc.her] lower body rapidly morphs into that of a huge "+feralRaceName+"."
+                                + "Looking down, [npc.name] watch in disbelief as the entire of [npc.her] lower body rapidly morphs into that of a huge " + feralRaceName + "."
 							+ " A horny [npc.moan] bursts out of [npc.her] mouth as [npc.her] genitals and asshole shift to be located within a cloaca that's found on the rear-facing underside of [npc.her] massive avian body."
 							+ " [style.italicsSex(As [npc.her] genitals are only visible from below, [npc.she] [npc.do]n't feel embarrassed to have no clothing covering [npc.her] avian body.)]<br/>"
 							+ "[npc.Name] now [npc.has] the [style.boldTfGeneric(avian body)] of <b style='color:"+raceColorString+";'>"+feralRaceNameWithDeterminer+"</b>, which is covered in [npc.legFullDescription]."
@@ -696,11 +671,11 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 				}
 				feralStringBuilder.append(
 						"<p>"
-							+ "Without warning, [npc.name] suddenly [npc.verb(lose)] all of the strength in [npc.her] [npc.legs], and [npc.she] [npc.verb(collapse)] to the ground with a startled cry."
+                                + "Without warning, [npc.name] suddenly lose all of the strength in [npc.her] [npc.legs], and [npc.she] collapse to the ground with a startled cry."
 							+ " Before [npc.sheIs] able to react to this alarming development, [npc.her] lower body starts to rapidly transform..."
 						+ "</p>"
 						+ "<p>"
-							+ "Looking down, [npc.name] [npc.verb(watch)] in disbelief as [npc.her] [npc.legs] split and transform into eight long, strong tentacles."
+                                + "Looking down, [npc.name] watch in disbelief as [npc.her] [npc.legs] split and transform into eight long, strong tentacles."
 							+ " The changes don't stop there, however, as [npc.her] lower body continues to rapidly morph into that of a huge, eight-legged "+feralRaceName+"."
 							+ " A horny [npc.moan] bursts out of [npc.her] mouth as [npc.her] genitals and asshole shift to sit within a cloaca located in the central underside of [npc.her] new tentacles."
 							+ " [style.italicsSex(As [npc.her] cloaca is only visible from below, [npc.she] [npc.do]n't feel embarrassed to have no clothing covering [npc.her] tentacled body.)]<br/>"
@@ -741,10 +716,10 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 				feralStringBuilder.append(
 						"<p>"
 							+ "[npc.NamePos] lower body transforms back into a bipedal configuration, with [npc.her] genitals shifting back to their normal position between [npc.her] [npc.legs]."
-							+ " Letting out a surprised cry, [npc.name] [npc.verb(bend)] down and [npc.verb(stoop)] over as [npc.her] spine rapidly reshapes itself."
+                                + " Letting out a surprised cry, [npc.name] bend down and stoop over as [npc.her] spine rapidly reshapes itself."
 							+ " The transformation is over within a matter of moments, leaving [npc.name] to naturally use [npc.her] [npc.arms] in place of forelegs so as to support [npc.her] newly-shaped body.<br/>"
 							+ "[npc.Name] now [npc.has] [style.boldTfGeneric(bipedal)] <b style='color:"+raceColorString+";'>"+this.getTransformName()+" legs</b>, which are covered in [npc.legFullDescription],"
-									+ " and [style.boldTfGeneric([npc.verb(use)] [npc.her] [npc.arms] as forelegs)]."
+                                + " and [style.boldTfGeneric(use [npc.her] [npc.arms] as forelegs)]."
 						+ "</p>");
 				break;
 			case QUADRUPEDAL:
@@ -758,7 +733,7 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 				}
 				
 				feralStringBuilder.append(
-						" and [npc.she] [npc.verb(let)] out an alarmed cry as [npc.she] [npc.verb(lose)] [npc.her] balance and [npc.verb(tumble)] to the floor."
+                        " and [npc.she] let out an alarmed cry as [npc.she] lose [npc.her] balance and tumble to the floor."
 							+ " Right before [npc.her] [npc.eyes], [npc.her] lower body shifts and transforms, with [npc.her] limbs pulling back into an intermediary mass of [npc.bodyMaterial],"
 								+ " before almost immediately pushing back out in a quadrupedal configuration."
 						+ "</p>"
@@ -783,7 +758,7 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 				}
 				body.setHeight(newHeight);
 				String colouredHeightValue = "<span style='color:"+body.getHeight().getColour().toWebHexString()+";'>[npc.heightValue]</span>";
-				feralStringBuilder.append("<p>The size of [npc.namePos] new lower body has resulted in [npc.herHim] getting taller, so now when standing at full height [npc.she] [npc.verb(measure)] "+colouredHeightValue+".</p>");
+                feralStringBuilder.append("<p>The size of [npc.namePos] new lower body has resulted in [npc.herHim] getting taller, so now when standing at full height [npc.she] measure " + colouredHeightValue + ".</p>");
 				
 			} else if(body.getLegConfiguration().isTall() && !legConfiguration.isTall()) {
 				int newHeight = (int) (body.getHeightValue()/1.33f);
@@ -796,7 +771,7 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 				newHeight = Math.max(newHeight, Height.NEGATIVE_TWO_MINIMUM.getMinimumValue()); // Do not reduce into tiny size
 				body.setHeight(newHeight);
 				String colouredHeightValue = "<span style='color:"+body.getHeight().getColour().toWebHexString()+";'>[npc.heightValue]</span>";
-				feralStringBuilder.append("<p>The reduced size of [npc.namePos] new lower body has resulted in [npc.herHim] getting shorter, so now when standing at full height [npc.she] [npc.verb(measure)] "+colouredHeightValue+".</p>");
+                feralStringBuilder.append("<p>The reduced size of [npc.namePos] new lower body has resulted in [npc.herHim] getting shorter, so now when standing at full height [npc.she] measure " + colouredHeightValue + ".</p>");
 			}
 		}
 		
@@ -880,7 +855,7 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 		feralStringBuilder.append("</i></p>");
 		
 		if(feral) {
-			feralStringBuilder.append("<p><i>Feeling as though it's only natural, [npc.she] [style.colourGood(no longer [npc.verb(get)] embarrassed)] about having [npc.her] [style.italicsFeral(animalistic genitals"
+            feralStringBuilder.append("<p><i>Feeling as though it's only natural, [npc.she] [style.colourGood(no longer get embarrassed)] about having [npc.her] [style.italicsFeral(animalistic genitals"
 					+(legConfiguration.isBipedalPositionedCrotchBoobs()?(body.getBreastCrotch().getShape()==BreastShape.UDDERS?" or udders":" or crotch-boobs"):"")
 					+ ")] on display!</i></p>");
 		}
@@ -895,14 +870,14 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 		if(landSpeed>0) {
 			feralStringBuilder.append("<p style='text-align:center;'><i>"
 											+ "[npc.Her] new lower body is not as well-adapted to movement on land as a usual biped,"
-												+ " and as a result, [style.colourTerrible([npc.she] [npc.verb(move)] slower than usual)] [style.colourEarth(while on land)]!"
+                    + " and as a result, [style.colourTerrible([npc.she] move slower than usual)] [style.colourEarth(while on land)]!"
 											+ "<br/>"
 											+ "[style.colourTerrible(+"+landSpeed+"%)] travel time while on land!"
 										+ "</i></p>");
 		} else if(landSpeed<0) {
 			feralStringBuilder.append("<p style='text-align:center;'><i>"
 											+ "[npc.Her] new lower body is capable of speeds greater than that attainable by a usual biped,"
-												+ " and as a result, [style.colourExcellent([npc.she] [npc.verb(move)] faster than usual)] [style.colourEarth(while on land)]!"
+                    + " and as a result, [style.colourExcellent([npc.she] move faster than usual)] [style.colourEarth(while on land)]!"
 											+ "<br/>"
 											+ "[style.colourExcellent("+landSpeed+"%)] travel time while on land!"
 										+ "</i></p>");
@@ -912,14 +887,14 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 		if(waterSpeed>0) {
 			feralStringBuilder.append("<p style='text-align:center;'><i>"
 											+ "[npc.SheIsFull] now a lot less capable at moving in water than a usual biped,"
-												+ " and as a result, [style.colourTerrible([npc.she] [npc.verb(move)] slower than usual)] [style.colourWater(while in water)]!"
+                    + " and as a result, [style.colourTerrible([npc.she] move slower than usual)] [style.colourWater(while in water)]!"
 											+ "<br/>"
 											+ "[style.colourTerrible(+"+waterSpeed+"%)] travel time while in water!"
 										+ "</i></p>");
 		} else if(waterSpeed<0) {
 			feralStringBuilder.append("<p style='text-align:center;'><i>"
 											+ "[npc.SheIsFull] now in possession of a body that's well-suited to moving in water,"
-												+ " and as a result, [style.colourExcellent([npc.she] [npc.verb(move)] faster than usual)] [style.colourWater(while in water)]!"
+                    + " and as a result, [style.colourExcellent([npc.she] move faster than usual)] [style.colourWater(while in water)]!"
 											+ "<br/>"
 											+ "[style.colourExcellent("+waterSpeed+"%)] travel time while in water!"
 										+ "</i></p>");
@@ -1052,8 +1027,8 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 				}
 				
 			} else {
-				boolean virgin = body.getVagina().getType()!=VaginaType.NONE?body.getVagina().getOrificeVagina().isVirgin():true;
-				boolean hymen = body.getVagina().getType()!=VaginaType.NONE?body.getVagina().getOrificeVagina().hasHymen():true;
+				boolean virgin = body.getVagina().getType() == VaginaType.NONE || body.getVagina().getOrificeVagina().isVirgin();
+				boolean hymen = body.getVagina().getType() == VaginaType.NONE || body.getVagina().getOrificeVagina().hasHymen();
 				body.setVagina(
 						body.getVagina().getType()!=VaginaType.NONE && body.getVagina().getType()!=VaginaType.ONAHOLE
 							? new Vagina(

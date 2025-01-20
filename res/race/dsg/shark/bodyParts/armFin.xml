@@ -75,7 +75,7 @@
 	<!-- The description which is shown when a character transforms to obtain this arm type.
 	This description immediately follows a brief description of the arm type beginning to transform. -->
 	<transformationDescription><![CDATA[
-		Within a matter of moments, [npc.she] [npc.verb(see)] tough sharkskin growing over [npc.her] hands and up [npc.her] arms, leaving [npc.her] surprisingly normal fingernails. Squat protrusions vaguely resembling the pectoral fins of a shark erupt from [npc.her] forearms. At [npc.her] upper-biceps, [npc.her] sharkskin gradually transitions into the [npc.skin] that's covering the rest of [npc.her] body.
+		Within a matter of moments, [npc.she] see tough sharkskin growing over [npc.her] hands and up [npc.her] arms, leaving [npc.her] surprisingly normal fingernails. Squat protrusions vaguely resembling the pectoral fins of a shark erupt from [npc.her] forearms. At [npc.her] upper-biceps, [npc.her] sharkskin gradually transitions into the [npc.skin] that's covering the rest of [npc.her] body.
 		<br/>As the transformation comes to an end, [npc.nameIsFull] left with anthropomorphic, [style.boldShark(shark-like arms and hands)], which are [npc.materialDescriptor] [npc.armFullDescription].
 	]]></transformationDescription>
 	

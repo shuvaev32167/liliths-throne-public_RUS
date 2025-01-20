@@ -27,10 +27,10 @@
 		<rarity>EPIC</rarity> 
 		
 		<equipText><![CDATA[
-		[npc.Name] [npc.verb(bring)] out the stun gun and pull the sling over [npc.her] shoulder. The arcane-enhanced water sloshes around inside as the built-in tank magically fills itself.
+		[npc.Name] bring out the stun gun and pull the sling over [npc.her] shoulder. The arcane-enhanced water sloshes around inside as the built-in tank magically fills itself.
 		]]></equipText>
-		
-		<unequipText><![CDATA[[npc.Name] [npc.verb(put)] the stun gun away.]]></unequipText>
+
+        <unequipText><![CDATA[[npc.Name] put the stun gun away.]]></unequipText>
 		
 		<imageName>liqstungun_holstered.svg</imageName> 
 		
@@ -89,13 +89,13 @@
 
 	<hitDescriptions>
 		<hitText><![CDATA[
-		Aiming [npc.her] stun gun at [npc2.name], [npc.she] [npc.verb(pull)] the trigger. A jet of water streams towards [npc2.name], followed by a crackling bolt of arcane lightning. [npc2.Name] barely has time to stare with a look of disbelief on [npc2.her] face before succumbing to the effects of the lightning! [npc2.Name] [npc2.verb(shiver)] a bit as the water soaks [npc2.her] [npc2.skinSkin].
+		Aiming [npc.her] stun gun at [npc2.name], [npc.she] pull the trigger. A jet of water streams towards [npc2.name], followed by a crackling bolt of arcane lightning. [npc2.Name] barely has time to stare with a look of disbelief on [npc2.her] face before succumbing to the effects of the lightning! [npc2.Name] [npc2.verb(shiver)] a bit as the water soaks [npc2.her] [npc2.skinSkin].
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		Aiming [npc.her] stun gun at [npc2.name], [npc.she] [npc.verb(pull)] the trigger. A jet of water streams towards [npc2.name], but it goes wide! The water splashes and sparks into a useless puddle on the ground.
+		Aiming [npc.her] stun gun at [npc2.name], [npc.she] pull the trigger. A jet of water streams towards [npc2.name], but it goes wide! The water splashes and sparks into a useless puddle on the ground.
 		]]></missText>
 	</missDescriptions>
 	

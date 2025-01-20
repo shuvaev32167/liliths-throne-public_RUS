@@ -1,13 +1,5 @@
 package com.lilithsthrone.game.character.race;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -29,6 +21,14 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -59,11 +59,11 @@ public class Race {
 	};
 	
 	// HUMAN:
-	public static AbstractRace HUMAN = new AbstractRace("human",
-			"humans",
-			"human",
-			"humans",
-			"human",
+	public static AbstractRace HUMAN = new AbstractRace("человек",
+			"человеки",
+			"человек",
+			"человеки",
+			"человеческий",
 			PresetColour.RACE_HUMAN,
 			Disposition.CIVILIZED,
 			RacialClass.MAMMAL,

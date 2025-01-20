@@ -48,25 +48,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(fasten)] the eye patch around [npc.her] head, before moving it into place to cover [npc.her] [npc.eye].]]>
+            <![CDATA[[npc.Name] fasten the eye patch around [npc.her] head, before moving it into place to cover [npc.her] [npc.eye].]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(fasten)] the eye patch around [npc2.namePos] head, before moving it into place to cover [npc2.her] [npc2.eye].]]>
+            <![CDATA[[npc.Name] fasten the eye patch around [npc2.namePos] head, before moving it into place to cover [npc2.her] [npc2.eye].]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(fasten)] the eye patch around [npc2.namePos] head, before moving it into place to cover [npc2.her] [npc2.eye].]]>
+            <![CDATA[[npc.Name] roughly fasten the eye patch around [npc2.namePos] head, before moving it into place to cover [npc2.her] [npc2.eye].]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(take)] off [npc.her] eye patch.]]>
+            <![CDATA[[npc.Name] take off [npc.her] eye patch.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(take)] off [npc2.namePos] eye patch.]]>
+            <![CDATA[[npc.Name] take off [npc2.namePos] eye patch.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(grab)] [npc2.namePos] eye patch and roughly [npc.verb(pull)] it off.]]>
+            <![CDATA[[npc.Name] grab [npc2.namePos] eye patch and roughly pull it off.]]>
 		</otherRough>
 	</displacementText>
   

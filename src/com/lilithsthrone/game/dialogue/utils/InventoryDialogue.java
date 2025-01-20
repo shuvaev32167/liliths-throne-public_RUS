@@ -1,14 +1,5 @@
 package com.lilithsthrone.game.dialogue.utils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.types.LegType;
@@ -27,16 +18,8 @@ import com.lilithsthrone.game.dialogue.eventLog.EventLogEntryEncyclopediaUnlock;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
 import com.lilithsthrone.game.dialogue.story.CharacterCreation;
-import com.lilithsthrone.game.inventory.ColourReplacement;
-import com.lilithsthrone.game.inventory.InventorySlot;
-import com.lilithsthrone.game.inventory.ItemTag;
-import com.lilithsthrone.game.inventory.Rarity;
-import com.lilithsthrone.game.inventory.ShopTransaction;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.BlockedParts;
-import com.lilithsthrone.game.inventory.clothing.DisplacementType;
-import com.lilithsthrone.game.inventory.clothing.Sticker;
-import com.lilithsthrone.game.inventory.clothing.StickerCategory;
+import com.lilithsthrone.game.inventory.*;
+import com.lilithsthrone.game.inventory.clothing.*;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
@@ -53,6 +36,9 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.utils.comparators.ClothingZLayerComparator;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -185,17 +171,16 @@ public class InventoryDialogue {
 	}
 	
 	private static String getClothingBlockingRemovalText(GameCharacter equipTarget, String equipVerb) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("You can't ");
-		sb.append(equipVerb);
-		sb.append(" the ");
-		sb.append(clothing.getName());
-		sb.append(", as ");
-		sb.append(UtilText.parse(equipTarget, "[npc.namePos] "));
-		sb.append(equipTarget.getBlockingClothing().getName());
-		sb.append((equipTarget.getBlockingClothing().getClothingType().isPlural()?" are":" is"));
-		sb.append(" blocking you from doing so!");
-		return sb.toString();
+        String sb = "You can't " +
+                equipVerb +
+                " the " +
+                clothing.getName() +
+                ", as " +
+                UtilText.parse(equipTarget, "[npc.namePos] ") +
+                equipTarget.getBlockingClothing().getName() +
+                (equipTarget.getBlockingClothing().getClothingType().isPlural() ? " are" : " is") +
+                " blocking you from doing so!";
+		return sb;
 	}
 	
 	private static boolean isWeaponDyeReforgeActionAvailable() {
@@ -212,7 +197,33 @@ public class InventoryDialogue {
 	}
 	
 	
-	/**
+	private static Response getCloseInventoryResponse() {
+		if(interactionType == InventoryInteraction.CHARACTER_CREATION) {
+			return new Response("Назад", "Вернитесь к рассмотрению в зеркале своей внешности.", CharacterCreation.CHOOSE_ADVANCED_APPEARANCE) {
+				@Override
+				public int getSecondsPassed() {
+					return -CharacterCreation.TIME_TO_CLOTHING;
+				}
+				@Override
+				public void effects(){
+					item = null;
+					clothing = null;
+					weapon = null;
+				}
+			};
+
+		} else {
+            return new ResponseEffectsOnly("Закрыть инвентарь", "Закрыть меню инвентаря.") {
+				@Override
+				public void effects(){
+					item = null;
+					clothing = null;
+					weapon = null;
+					Main.mainController.openInventory();
+				}
+			};
+		}
+	}	/**
 	 * The main DialogueNode. From here, the player can gain access to all parts
 	 * of their inventory.
 	 */
@@ -298,14 +309,14 @@ public class InventoryDialogue {
 						return new Response("Replace all", "You cannot do this while fighting someone!", null);
 						
 					} else if (index == 4) {
-						return new Response("Unequip all", "You cannot do this while fighting someone!", null);
+						return new Response("Снять всё", "You cannot do this while fighting someone!", null);
 
 					} else if (index == 5) {
 						return new Response("Equip all", "You cannot do this while fighting someone!", null);
 
 					} else if(index == 6) {
 						if(Main.game.getPlayer().getLocationPlace().isItemsDisappear()) {
-							return new Response("Store all", "You can't do this during combat!", null);
+                            return new Response("Положить all", "You can't do this during combat!", null);
 						}
 						return new Response("Drop all", "You can't do this during combat!", null);
 
@@ -432,10 +443,10 @@ public class InventoryDialogue {
 
 					} else if (index == 4) {
 						if(Main.game.getPlayer().getClothingCurrentlyEquipped().isEmpty()) {
-							return new Response("Unequip all", "You aren't wearing any clothing, so there's nothing to remove!", null);
+							return new Response("Снять всё", "You aren't wearing any clothing, so there's nothing to remove!", null);
 
 						} else {
-							return new Response("Unequip all", "Remove as much of your clothing as possible.", INVENTORY_MENU){
+							return new Response("Снять всё", "Remove as much of your clothing as possible.", INVENTORY_MENU) {
 								@Override
 								public void effects(){
 									Main.game.getTextEndStringBuilder().append(unequipAll(Main.game.getPlayer()));
@@ -460,7 +471,7 @@ public class InventoryDialogue {
 						if(Main.game.getPlayer().getInventorySlotsTaken()==0) {
 							return new Response(
 									!Main.game.getPlayer().getLocationPlace().isItemsDisappear()
-										?"Store all"
+                                            ? "Положить all"
 										:"Drop all",
 									!Main.game.getPlayer().getLocationPlace().isItemsDisappear()
 										?"You have nothing in your inventory to store..."
@@ -469,10 +480,10 @@ public class InventoryDialogue {
 						}
 						return new Response(
 								!Main.game.getPlayer().getLocationPlace().isItemsDisappear()
-									?"Store all"
+                                        ? "Положить all"
 									:"Drop all",
 								!Main.game.getPlayer().getLocationPlace().isItemsDisappear()
-									?"Store everything from your inventory in this location."
+                                        ? "Положить everything from your inventory in this location."
 									:"Drop everything from your inventory onto the ground.",
 										INVENTORY_MENU) {
 							@Override
@@ -588,10 +599,10 @@ public class InventoryDialogue {
 								|| Main.game.getPlayer().isCoverableAreaVisible(CoverableArea.PENIS)
 								|| Main.game.getPlayer().isCoverableAreaVisible(CoverableArea.VAGINA)
 								|| (Main.game.getPlayer().getClothingInSlot(InventorySlot.FOOT)==null && Main.game.getPlayer().getLegType().equals(LegType.HUMAN))) {
-							return new Response("To the stage", "You need to be wearing clothing that covers your body, as well as a pair of shoes.", null);
+							return new Response("На сцену", "На вас должна быть одежда, закрывающая тело, а также пара обуви.", null);
 							
 						} else {
-							return new Response("To the stage", "You're ready to approach the stage now.", CharacterCreation.CHOOSE_BACKGROUND) {
+							return new Response("На сцену", "Вы готовы выйти на сцену прямо сейчас.", CharacterCreation.CHOOSE_BACKGROUND) {
 								@Override
 								public int getSecondsPassed() {
 									return CharacterCreation.TIME_TO_BACKGROUND;
@@ -605,10 +616,10 @@ public class InventoryDialogue {
 						
 					} else if(index == 2){
 						if(Main.game.getPlayer().getClothingCurrentlyEquipped().isEmpty()){
-							return new Response("Unequip all", "You're currently naked, there's nothing to be unequipped.", null);
+							return new Response("Снять всё", "В данный момент вы обнажены, и вам нечего снимать.", null);
 						}
 						else{
-							return new Response("Unequip all", "Remove as much of your clothing as possible.", INVENTORY_MENU){
+							return new Response("Снять всё", "Снимите как можно больше одежды.", INVENTORY_MENU) {
 								@Override
 								public void effects(){
 									Main.game.getTextEndStringBuilder().append(unequipAll(Main.game.getPlayer()));
@@ -688,10 +699,10 @@ public class InventoryDialogue {
 
 					} else if (index == 4) {
 						if(Main.game.getPlayer().getClothingCurrentlyEquipped().isEmpty()) {
-							return new Response("Unequip all", "You aren't wearing any clothing, so there's nothing to remove!", null);
+							return new Response("Снять всё", "You aren't wearing any clothing, so there's nothing to remove!", null);
 
 						} else {
-							return new Response("Unequip all", "Remove as much of your clothing as possible.", INVENTORY_MENU){
+							return new Response("Снять всё", "Remove as much of your clothing as possible.", INVENTORY_MENU) {
 								@Override
 								public void effects(){
 									Main.game.getTextEndStringBuilder().append(unequipAll(Main.game.getPlayer()));
@@ -714,7 +725,7 @@ public class InventoryDialogue {
 
 					} else if(index == 6) {
 						if(Main.game.getPlayer().getLocationPlace().isItemsDisappear()) {
-							return new Response("Store all", "You can't do this while trading with someone...", null);
+                            return new Response("Положить all", "You can't do this while trading with someone...", null);
 						}
 						return new Response("Drop all", "You can't do this while trading with someone...", null);
 
@@ -774,10 +785,10 @@ public class InventoryDialogue {
 
 					} else if (index == 4) {
 						if(Main.game.getPlayer().getClothingCurrentlyEquipped().isEmpty()) {
-							return new Response("Unequip all", "You aren't wearing any clothing, so there's nothing to remove!", null);
+							return new Response("Снять всё", "You aren't wearing any clothing, so there's nothing to remove!", null);
 
 						} else {
-							return new Response("Unequip all", "Remove as much of your clothing as possible.", Main.sex.SEX_DIALOGUE){
+							return new Response("Снять всё", "Remove as much of your clothing as possible.", Main.sex.SEX_DIALOGUE) {
 								@Override
 								public void effects(){
 									responseSB.setLength(0);
@@ -797,7 +808,7 @@ public class InventoryDialogue {
 
 					} else if(index == 6) {
 						if(Main.game.getPlayer().getLocationPlace().isItemsDisappear()) {
-							return new Response("Store all", "You can't do this during sex...", null);
+                            return new Response("Положить all", "You can't do this during sex...", null);
 						}
 						return new Response("Drop all", "You can't do this during sex...", null);
 
@@ -1017,7 +1028,7 @@ public class InventoryDialogue {
 					
 					switch(interactionType) {
 						case SEX:
-							String dropTitle = owner.getLocationPlace().isItemsDisappear()?"Drop ":"Store";
+                            String dropTitle = owner.getLocationPlace().isItemsDisappear() ? "Drop " : "Положить";
 							if(index == 1) {
 								return new Response(dropTitle+"(1)", "You can't drop items while masturbating.", null);
 								
@@ -1025,7 +1036,7 @@ public class InventoryDialogue {
 								return new Response(dropTitle+"(5)", "You can't drop items while masturbating.", null);
 								
 							} else if(index == 3) {
-								return new Response(dropTitle+"(All)", "You can't drop items while masturbating.", null);
+                                return new Response(dropTitle + "(Всё)", "You can't drop items while masturbating.", null);
 								
 							} else if(index == 5) {
 								return new Response("Enchant", "You can't enchant items while masturbating.", null);
@@ -1098,11 +1109,11 @@ public class InventoryDialogue {
 									}
 								} else {
 									if(!item.getItemType().isAbleToBeDropped()) {
-										return new Response("Store (1)", "You cannot drop the " + item.getName() + "!", null);
+                                        return new Response("Положить (1)", "You cannot drop the " + item.getName() + "!", null);
 									} else if(areaFull) {
-										return new Response("Store (1)", "This area is full, so you can't store your " + item.getName() + " here!", null);
+                                        return new Response("Положить (1)", "This area is full, so you can't store your " + item.getName() + " here!", null);
 									} else {
-										return new Response("Store (1)", "Store the " + item.getName() + " in this area.", INVENTORY_MENU){
+                                        return new Response("Положить (1)", "Положить the " + item.getName() + " in this area.", INVENTORY_MENU) {
 											@Override
 											public void effects(){
 												dropItems(owner, item, 1);
@@ -1132,16 +1143,16 @@ public class InventoryDialogue {
 									}
 								} else {
 									if(owner.getItemCount(item) < 5) {
-										return new Response("Store (5)", "You don't have five " + item.getNamePlural() + " to give!", null);
+                                        return new Response("Положить (5)", "You don't have five " + item.getNamePlural() + " to give!", null);
 										
 									} else if(!item.getItemType().isAbleToBeDropped()) {
-										return new Response("Store (5)", "You cannot drop the " + item.getName() + "!", null);
+                                        return new Response("Положить (5)", "You cannot drop the " + item.getName() + "!", null);
 										
 									} else if(areaFull) {
-										return new Response("Store (5)", "This area is full, so you can't store your " + item.getNamePlural() + " here!", null);
+                                        return new Response("Положить (5)", "This area is full, so you can't store your " + item.getNamePlural() + " here!", null);
 										
 									} else {
-										return new Response("Store (5)", "Store five of your " + item.getNamePlural() + " in this area.", INVENTORY_MENU){
+                                        return new Response("Положить (5)", "Положить five of your " + item.getNamePlural() + " in this area.", INVENTORY_MENU) {
 											@Override
 											public void effects(){
 												dropItems(owner, item, 5);
@@ -1153,11 +1164,11 @@ public class InventoryDialogue {
 							} else if(index == 3) {
 								if(owner.getLocationPlace().isItemsDisappear()) {
 									if(!item.getItemType().isAbleToBeDropped()) {
-										return new Response("Drop (All)", "You cannot drop the " + item.getName() + "!", null);
+                                        return new Response("Drop (Всё)", "You cannot drop the " + item.getName() + "!", null);
 									} else if(areaFull) {
-										return new Response("Drop (All)", "This area is full, so you can't drop your " + item.getNamePlural() + " here!", null);
+                                        return new Response("Drop (Всё)", "This area is full, so you can't drop your " + item.getNamePlural() + " here!", null);
 									} else {
-										return new Response("Drop (All)", "Drop all of your " + item.getNamePlural() + ".", INVENTORY_MENU){
+                                        return new Response("Drop (Всё)", "Drop all of your " + item.getNamePlural() + ".", INVENTORY_MENU) {
 											@Override
 											public void effects(){
 												dropItems(owner, item, owner.getItemCount(item));
@@ -1166,11 +1177,11 @@ public class InventoryDialogue {
 									}
 								} else {
 									if(!item.getItemType().isAbleToBeDropped()) {
-										return new Response("Store (All)", "You cannot drop the " + item.getName() + "!", null);
+                                        return new Response("Положить (Всё)", "You cannot drop the " + item.getName() + "!", null);
 									} else if(areaFull) {
-										return new Response("Store (All)", "This area is full, so you can't store your " + item.getNamePlural() + " here!", null);
+                                        return new Response("Положить (Всё)", "This area is full, so you can't store your " + item.getNamePlural() + " here!", null);
 									} else {
-										return new Response("Store (All)", "Store all of your " + item.getNamePlural() + " in this area.", INVENTORY_MENU){
+                                        return new Response("Положить (Всё)", "Положить all of your " + item.getNamePlural() + " in this area.", INVENTORY_MENU) {
 											@Override
 											public void effects(){
 												dropItems(owner, item, owner.getItemCount(item));
@@ -1272,7 +1283,7 @@ public class InventoryDialogue {
 								return new Response("Give (5)", "You can't give someone items while fighting them!", null);
 								
 							} else if(index == 3) {
-								return new Response("Give (All)", "You can't give someone items while fighting them!", null);
+                                return new Response("Give (Всё)", "You can't give someone items while fighting them!", null);
 								
 							} else if(index == 5) {
 								return new Response("Enchant", "You can't enchant items while fighting someone!", null);
@@ -1425,11 +1436,11 @@ public class InventoryDialogue {
 								
 							} else if(index == 3) {
 								if(!item.getItemType().isAbleToBeDropped()) {
-									return new Response("Give (All)", "You cannot give away the " + item.getName() + "!", null);
+                                    return new Response("Give (Всё)", "You cannot give away the " + item.getName() + "!", null);
 								} else if(inventoryFull) {
-									return new Response("Give (All)", UtilText.parse(inventoryNPC, "[npc.NamePos] inventory is already full!"), null);
+                                    return new Response("Give (Всё)", UtilText.parse(inventoryNPC, "[npc.NamePos] inventory is already full!"), null);
 								}
-								return new Response("Give (All)", UtilText.parse(inventoryNPC, "Give [npc.name] all of your " + item.getNamePlural() + "."), INVENTORY_MENU){
+                                return new Response("Give (Всё)", UtilText.parse(inventoryNPC, "Give [npc.name] all of your " + item.getNamePlural() + "."), INVENTORY_MENU) {
 									@Override
 									public void effects(){
 										transferItems(Main.game.getPlayer(), inventoryNPC, item, Main.game.getPlayer().getItemCount(item));
@@ -1651,7 +1662,7 @@ public class InventoryDialogue {
 								return new Response("Give (5)", "You can't give someone items while having sex with them!", null);
 								
 							} else if(index == 3) {
-								return new Response("Give (All)", "You can't give someone items while having sex with them!", null);
+                                return new Response("Give (Всё)", "You can't give someone items while having sex with them!", null);
 								
 							} else if(index == 5) {
 								return new Response("Enchant", "You can't enchant items while having sex with someone!", null);
@@ -1871,11 +1882,11 @@ public class InventoryDialogue {
 								
 							} else if(index == 3) {
 								if(!item.getItemType().isAbleToBeSold()) {
-									return new Response("Sell (All)", "You cannot sell the " + item.getName() + "!", null);
+                                    return new Response("Sell (Всё)", "You cannot sell the " + item.getName() + "!", null);
 									
 								} else if (inventoryNPC.willBuy(item)) {
 									int sellPrice = item.getPrice(inventoryNPC.getBuyModifier());
-									return new Response("Sell (All) (" + UtilText.formatAsMoney(sellPrice*Main.game.getPlayer().getItemCount(item), "span") + ")",
+                                    return new Response("Sell (Всё) (" + UtilText.formatAsMoney(sellPrice * Main.game.getPlayer().getItemCount(item), "span") + ")",
 											"Sell the " + item.getName() + " for " + UtilText.formatAsMoney(sellPrice*Main.game.getPlayer().getItemCount(item)) + ".", INVENTORY_MENU){
 										@Override
 										public void effects(){
@@ -1883,7 +1894,7 @@ public class InventoryDialogue {
 										}
 									};
 								} else {
-									return new Response("Sell (All)", inventoryNPC.getName("The") + " doesn't want to buy these.", null);
+                                    return new Response("Sell (Всё)", inventoryNPC.getName("The") + " doesn't want to buy these.", null);
 								}
 								
 							} else if(index == 5) {
@@ -2000,7 +2011,7 @@ public class InventoryDialogue {
 								return new Response("Take (5)", "You can't pick up items while masturbating.", null);
 								
 							} else if(index == 3) {
-								return new Response("Take (All)", "You can't pick up items while masturbating.", null);
+                                return new Response("Take (Всё)", "You can't pick up items while masturbating.", null);
 								
 							} else if(index == 5) {
 								return new Response("Enchant", "You can't enchant items while masturbating.", null);
@@ -2085,9 +2096,9 @@ public class InventoryDialogue {
 								
 							} else if(index == 3) {
 								if(inventoryFull) {
-									return new Response("Take (All)", "Your inventory is already full!", null);
+                                    return new Response("Take (Всё)", "Your inventory is already full!", null);
 								}
-								return new Response("Take (All)", "Take all of the " + item.getNamePlural() + " from the ground.", INVENTORY_MENU){
+                                return new Response("Take (Всё)", "Take all of the " + item.getNamePlural() + " from the ground.", INVENTORY_MENU) {
 									@Override
 									public void effects(){
 										pickUpItems(Main.game.getPlayer(), item, Main.game.getPlayerCell().getInventory().getItemCount(item));
@@ -2175,7 +2186,7 @@ public class InventoryDialogue {
 								return new Response("Take (5)", "You can't take someone items while fighting them!", null);
 								
 							} else if(index == 3) {
-								return new Response("Take (All)", "You can't take someone items while fighting them!", null);
+                                return new Response("Take (Всё)", "You can't take someone items while fighting them!", null);
 								
 							} else if(index == 5) {
 								return new Response("Enchant", "You can't enchant someone else's items, especially not while fighting them!", null);
@@ -2230,9 +2241,9 @@ public class InventoryDialogue {
 								
 							} else if(index == 3) {
 								if(inventoryFull) {
-									return new Response("Take (All)", "Your inventory is already full!", null);
+                                    return new Response("Take (Всё)", "Your inventory is already full!", null);
 								}
-								return new Response("Take (All)", UtilText.parse(inventoryNPC, "Take all "+Util.intToString(inventoryNPC.getItemCount(item))+" of  [npc.namePos] " + item.getNamePlural() + "."), INVENTORY_MENU){
+                                return new Response("Take (Всё)", UtilText.parse(inventoryNPC, "Take all " + Util.intToString(inventoryNPC.getItemCount(item)) + " of  [npc.namePos] " + item.getNamePlural() + "."), INVENTORY_MENU) {
 									@Override
 									public void effects(){
 										transferItems(inventoryNPC, Main.game.getPlayer(), item, inventoryNPC.getItemCount(item));
@@ -2440,7 +2451,7 @@ public class InventoryDialogue {
 								return new Response("Take (5)", "You can't take someone's items while having sex with them!", null);
 								
 							} else if(index == 3) {
-								return new Response("Take (All)", "You can't take someone's items while having sex with them!", null);
+                                return new Response("Take (Всё)", "You can't take someone's items while having sex with them!", null);
 								
 							} else if(index == 5) {
 								return new Response("Enchant", "You can't enchant someone else's items, especially not while having sex with them!", null);
@@ -2588,7 +2599,7 @@ public class InventoryDialogue {
 								int sellPrice = buyback?Main.game.getPlayer().getBuybackStack().get(buyBackIndex).getPrice():item.getPrice(inventoryNPC.getSellModifier(item));
 								int count = buyback?Main.game.getPlayer().getBuybackStack().get(buyBackIndex).getCount():inventoryNPC.getItemCount(item);
 								if(inventoryFull) {
-									return new Response("Buy (All) ("+UtilText.formatAsMoneyUncoloured(sellPrice*count, "span")+")", "Your inventory is already full!", null);
+                                    return new Response("Buy (Всё) (" + UtilText.formatAsMoneyUncoloured(sellPrice * count, "span") + ")", "Your inventory is already full!", null);
 								}
 								if(Main.game.getPlayer().getMoney() < sellPrice*count) {
 									int affordableCount = Main.game.getPlayer().getMoney() / sellPrice;
@@ -2601,10 +2612,10 @@ public class InventoryDialogue {
 											}
 										};
 									} else {
-										return new Response("Buy (All) ("+UtilText.formatAsMoneyUncoloured(sellPrice*count, "span")+")", "You can't afford to buy this!", null);
+                                        return new Response("Buy (Всё) (" + UtilText.formatAsMoneyUncoloured(sellPrice * count, "span") + ")", "You can't afford to buy this!", null);
 									}
 								}
-								return new Response("Buy (All) (" + UtilText.formatAsMoney(sellPrice*count, "span") + ")",
+                                return new Response("Buy (Всё) (" + UtilText.formatAsMoney(sellPrice * count, "span") + ")",
 										"Buy the " + item.getName() + " for " + UtilText.formatAsMoney(sellPrice*count) + ".", INVENTORY_MENU){
 									@Override
 									public void effects(){
@@ -2685,7 +2696,7 @@ public class InventoryDialogue {
 			return getItemDisplayPanel(weapon.getSVGString(),
 					Util.capitaliseSentence(weapon.getDisplayName(true)),
 					weapon.getDescription(owner)
-					+ sb.toString()
+					+ sb
 					+ (owner!=null && owner.isPlayer()
 							? (inventoryNPC != null && interactionType == InventoryInteraction.TRADING
 									? "<p>" 
@@ -2724,7 +2735,7 @@ public class InventoryDialogue {
 					
 					switch(interactionType) {
 						case SEX:
-							String dropTitle = owner.getLocationPlace().isItemsDisappear()?"Drop ":"Store";
+                            String dropTitle = owner.getLocationPlace().isItemsDisappear() ? "Drop " : "Положить";
 							if(index == 1) {
 								return new Response(dropTitle+"(1)", "You can't drop your weapons while masturbating.", null);
 								
@@ -2732,7 +2743,7 @@ public class InventoryDialogue {
 								return new Response(dropTitle+"(5)", "You can't drop your weapons while masturbating.", null);
 								
 							} else if(index == 3) {
-								return new Response(dropTitle+"(All)", "You can't drop your weapons while masturbating.", null);
+                                return new Response(dropTitle + "(Всё)", "You can't drop your weapons while masturbating.", null);
 								
 							} else if(index == 4) {
 								return new Response("Dye/Reforge", "You can't dye or reforge your weapons while masturbating.", null);
@@ -2772,12 +2783,12 @@ public class InventoryDialogue {
 									}
 								} else {
 									if(!weapon.getWeaponType().isAbleToBeDropped()) {
-										return new Response("Store (1)", "You cannot drop the " + weapon.getName() + "!", null);
+                                        return new Response("Положить (1)", "You cannot drop the " + weapon.getName() + "!", null);
 										
 									} else if(areaFull) {
-										return new Response("Store (1)", "This area is full, so you can't store your " + weapon.getName() + " here!", null);
+                                        return new Response("Положить (1)", "This area is full, so you can't store your " + weapon.getName() + " here!", null);
 									} else {
-										return new Response("Store (1)", "Store the " + weapon.getName() + " in this area.", INVENTORY_MENU){
+                                        return new Response("Положить (1)", "Положить the " + weapon.getName() + " in this area.", INVENTORY_MENU) {
 											@Override
 											public void effects(){
 												dropWeapons(owner, weapon, 1);
@@ -2807,16 +2818,16 @@ public class InventoryDialogue {
 									}
 								} else {
 									if(!weapon.getWeaponType().isAbleToBeDropped()) {
-										return new Response("Store (5)", "You cannot drop the " + weapon.getName() + "!", null);
+                                        return new Response("Положить (5)", "You cannot drop the " + weapon.getName() + "!", null);
 										
 									} else if(owner.getWeaponCount(weapon) < 5) {
-										return new Response("Store (5)", "You don't have five " + weapon.getNamePlural() + " to drop!", null);
+                                        return new Response("Положить (5)", "You don't have five " + weapon.getNamePlural() + " to drop!", null);
 										
 									} else if(areaFull) {
-										return new Response("Store (5)", "This area is full, so you can't store your " + weapon.getNamePlural() + " here!", null);
+                                        return new Response("Положить (5)", "This area is full, so you can't store your " + weapon.getNamePlural() + " here!", null);
 										
 									} else {
-										return new Response("Store (5)", "Store five of your " + weapon.getNamePlural() + " in this area.", INVENTORY_MENU){
+                                        return new Response("Положить (5)", "Положить five of your " + weapon.getNamePlural() + " in this area.", INVENTORY_MENU) {
 											@Override
 											public void effects(){
 												dropWeapons(owner, weapon, 5);
@@ -2827,13 +2838,13 @@ public class InventoryDialogue {
 								
 							} else if(index == 3) {
 								if(!weapon.getWeaponType().isAbleToBeDropped()) {
-									return new Response("Drop (All)", "You cannot drop the " + weapon.getName() + "!", null);
+                                    return new Response("Drop (Всё)", "You cannot drop the " + weapon.getName() + "!", null);
 									
 								} else if(owner.getLocationPlace().isItemsDisappear()) {
 									if(areaFull) {
-										return new Response("Drop (All)", "This area is full, so you can't drop your " + weapon.getNamePlural() + " here!", null);
+                                        return new Response("Drop (Всё)", "This area is full, so you can't drop your " + weapon.getNamePlural() + " here!", null);
 									} else {
-										return new Response("Drop (All)", "Drop all of your " + weapon.getNamePlural() + ".", INVENTORY_MENU){
+                                        return new Response("Drop (Всё)", "Drop all of your " + weapon.getNamePlural() + ".", INVENTORY_MENU) {
 											@Override
 											public void effects(){
 												dropWeapons(owner, weapon, owner.getWeaponCount(weapon));
@@ -2842,12 +2853,12 @@ public class InventoryDialogue {
 									}
 								} else {
 									if(!weapon.getWeaponType().isAbleToBeDropped()) {
-										return new Response("Store (All)", "You cannot drop the " + weapon.getName() + "!", null);
+                                        return new Response("Положить (Всё)", "You cannot drop the " + weapon.getName() + "!", null);
 										
 									} else if(areaFull) {
-										return new Response("Store (All)", "This area is full, so you can't store your " + weapon.getNamePlural() + " here!", null);
+                                        return new Response("Положить (Всё)", "This area is full, so you can't store your " + weapon.getNamePlural() + " here!", null);
 									} else {
-										return new Response("Store (All)", "Store all of your " + weapon.getNamePlural() + " in this area.", INVENTORY_MENU){
+                                        return new Response("Положить (Всё)", "Положить all of your " + weapon.getNamePlural() + " in this area.", INVENTORY_MENU) {
 											@Override
 											public void effects(){
 												dropWeapons(owner, weapon, owner.getWeaponCount(weapon));
@@ -2927,7 +2938,7 @@ public class InventoryDialogue {
 									return new Response("Equip Offhand (Self)",
 											"Equip the " + weapon.getName() + "."
 												+(weapon.getWeaponType().isTwoHanded()
-														?"<br/>[style.italicsGood(Although "+(weapon.getWeaponType().isPlural()?"":"")+")]"
+														? "<br/>[style.italicsGood(Although "+")]"
 														:""),
 											INVENTORY_MENU){
 										@Override
@@ -2962,7 +2973,7 @@ public class InventoryDialogue {
 								return new Response("Give (5)", "You can't give someone weapons while fighting them!", null);
 								
 							} else if(index == 3) {
-								return new Response("Give (All)", "You can't give someone weapons while fighting them!", null);
+                                return new Response("Give (Всё)", "You can't give someone weapons while fighting them!", null);
 								
 							} else if(index == 4) {
 								return new Response("Dye", "You can't dye your weapons while fighting someone!", null);
@@ -3023,12 +3034,12 @@ public class InventoryDialogue {
 								
 							} else if(index == 3) {
 								if(!weapon.getWeaponType().isAbleToBeDropped()) {
-									return new Response("Give (All)", "You cannot give away the " + weapon.getName() + "!", null);
+                                    return new Response("Give (Всё)", "You cannot give away the " + weapon.getName() + "!", null);
 									
 								} else if(inventoryFull) {
-									return new Response("Give (All)", UtilText.parse(inventoryNPC, "[npc.NamePos] inventory is already full!"), null);
+                                    return new Response("Give (Всё)", UtilText.parse(inventoryNPC, "[npc.NamePos] inventory is already full!"), null);
 								}
-								return new Response("Give (All)", UtilText.parse(inventoryNPC, "Give [npc.name] all of your " + weapon.getNamePlural() + "."), INVENTORY_MENU){
+                                return new Response("Give (Всё)", UtilText.parse(inventoryNPC, "Give [npc.name] all of your " + weapon.getNamePlural() + "."), INVENTORY_MENU) {
 									@Override
 									public void effects(){
 										transferWeapons(Main.game.getPlayer(), inventoryNPC, weapon, Main.game.getPlayer().getWeaponCount(weapon));
@@ -3177,7 +3188,7 @@ public class InventoryDialogue {
 								return new Response("Give (5)", "You can't give someone weapons while having sex with them!", null);
 								
 							} else if(index == 3) {
-								return new Response("Give (All)", "You can't give someone weapons while having sex with them!", null);
+                                return new Response("Give (Всё)", "You can't give someone weapons while having sex with them!", null);
 								
 							} else if(index == 4) {
 								return new Response("Dye", "You can't dye your weapons while having sex with someone!", null);
@@ -3241,11 +3252,11 @@ public class InventoryDialogue {
 								
 							} else if(index == 3) {
 								if(!weapon.getWeaponType().isAbleToBeSold()) {
-									return new Response("Sell (All)", "You cannot sell the " + weapon.getName() + "!", null);
+                                    return new Response("Sell (Всё)", "You cannot sell the " + weapon.getName() + "!", null);
 									
 								} else if (inventoryNPC.willBuy(weapon)) {
 									int sellPrice = weapon.getPrice(inventoryNPC.getBuyModifier());
-									return new Response("Sell (All) (" + UtilText.formatAsMoney(sellPrice*Main.game.getPlayer().getWeaponCount(weapon), "span") + ")",
+                                    return new Response("Sell (Всё) (" + UtilText.formatAsMoney(sellPrice * Main.game.getPlayer().getWeaponCount(weapon), "span") + ")",
 											"Sell the " + weapon.getName() + " for " + UtilText.formatAsMoney(sellPrice*Main.game.getPlayer().getWeaponCount(weapon)) + ".", INVENTORY_MENU){
 										@Override
 										public void effects(){
@@ -3253,7 +3264,7 @@ public class InventoryDialogue {
 										}
 									};
 								} else {
-									return new Response("Sell (All)", inventoryNPC.getName("The") + " doesn't want to buy these.", null);
+                                    return new Response("Sell (Всё)", inventoryNPC.getName("The") + " doesn't want to buy these.", null);
 								}
 								
 							} else if (index==4) {
@@ -3372,7 +3383,7 @@ public class InventoryDialogue {
 								return new Response("Take (5)", "You can't pick up weapons while masturbating.", null);
 								
 							} else if(index == 3) {
-								return new Response("Take (All)", "You can't pick up weapons while masturbating.", null);
+                                return new Response("Take (Всё)", "You can't pick up weapons while masturbating.", null);
 								
 							} else if(index == 4) {
 								return new Response("Dye", "You can't dye weapons while masturbating.", null);
@@ -3422,9 +3433,9 @@ public class InventoryDialogue {
 								
 							} else if(index == 3) {
 								if(inventoryFull) {
-									return new Response("Take (All)", "Your inventory is already full!", null);
+                                    return new Response("Take (Всё)", "Your inventory is already full!", null);
 								}
-								return new Response("Take (All)", "Take all of the " + weapon.getNamePlural() + " from the ground.", INVENTORY_MENU){
+                                return new Response("Take (Всё)", "Take all of the " + weapon.getNamePlural() + " from the ground.", INVENTORY_MENU) {
 									@Override
 									public void effects(){
 										pickUpWeapons(Main.game.getPlayer(), weapon, Main.game.getPlayerCell().getInventory().getWeaponCount(weapon));
@@ -3516,7 +3527,7 @@ public class InventoryDialogue {
 								return new Response("Take (5)", "You can't take someone weapons while fighting them!", null);
 								
 							} else if(index == 3) {
-								return new Response("Take (All)", "You can't take someone weapons while fighting them!", null);
+                                return new Response("Take (Всё)", "You can't take someone weapons while fighting them!", null);
 								
 							} else if(index == 4) {
 								return new Response("Dye", "You can't dye someone's weapons while fighting them!", null);
@@ -3574,9 +3585,9 @@ public class InventoryDialogue {
 								
 							} else if(index == 3) {
 								if(inventoryFull) {
-									return new Response("Take (All)", "Your inventory is already full!", null);
+                                    return new Response("Take (Всё)", "Your inventory is already full!", null);
 								}
-								return new Response("Take (All)", UtilText.parse(inventoryNPC, "Take all "+Util.intToString(inventoryNPC.getWeaponCount(weapon))+" of  [npc.namePos] " + weapon.getNamePlural() + "."), INVENTORY_MENU){
+                                return new Response("Take (Всё)", UtilText.parse(inventoryNPC, "Take all " + Util.intToString(inventoryNPC.getWeaponCount(weapon)) + " of  [npc.namePos] " + weapon.getNamePlural() + "."), INVENTORY_MENU) {
 									@Override
 									public void effects(){
 										transferWeapons(inventoryNPC, Main.game.getPlayer(), weapon, inventoryNPC.getWeaponCount(weapon));
@@ -3704,7 +3715,7 @@ public class InventoryDialogue {
 								return new Response("Take (5)", "You can't take someone's weapons while having sex with them!", null);
 								
 							} else if(index == 3) {
-								return new Response("Take (All)", "You can't take someone's weapons while having sex with them!", null);
+                                return new Response("Take (Всё)", "You can't take someone's weapons while having sex with them!", null);
 								
 							} else if(index == 4) {
 								return new Response("Dye", "You can't dye someone's weapons while having sex with them!", null);
@@ -3772,7 +3783,7 @@ public class InventoryDialogue {
 								int sellPrice = buyback?Main.game.getPlayer().getBuybackStack().get(buyBackIndex).getPrice():weapon.getPrice(inventoryNPC.getSellModifier(weapon));
 								int count = buyback?Main.game.getPlayer().getBuybackStack().get(buyBackIndex).getCount():inventoryNPC.getWeaponCount(weapon);
 								if(inventoryFull) {
-									return new Response("Buy (All) ("+UtilText.formatAsMoneyUncoloured(sellPrice*count, "span")+")", "Your inventory is already full!", null);
+                                    return new Response("Buy (Всё) (" + UtilText.formatAsMoneyUncoloured(sellPrice * count, "span") + ")", "Your inventory is already full!", null);
 								}
 								if(Main.game.getPlayer().getMoney() < sellPrice*count) {
 									int affordableCount = Main.game.getPlayer().getMoney() / sellPrice;
@@ -3785,10 +3796,10 @@ public class InventoryDialogue {
 											}
 										};
 									} else {
-										return new Response("Buy (All) ("+UtilText.formatAsMoneyUncoloured(sellPrice*count, "span")+")", "You can't afford to buy this!", null);
+                                        return new Response("Buy (Всё) (" + UtilText.formatAsMoneyUncoloured(sellPrice * count, "span") + ")", "You can't afford to buy this!", null);
 									}
 								}
-								return new Response("Buy (All) (" + UtilText.formatAsMoney(sellPrice*count, "span") + ")",
+                                return new Response("Buy (Всё) (" + UtilText.formatAsMoney(sellPrice * count, "span") + ")",
 										"Buy the " + weapon.getName() + " for " + UtilText.formatAsMoney(sellPrice*count) + ".", INVENTORY_MENU){
 									@Override
 									public void effects(){
@@ -3835,7 +3846,117 @@ public class InventoryDialogue {
 		}
 	};
 	
-	public static final DialogueNode CLOTHING_INVENTORY = new DialogueNode("Clothing", "", true) {
+	private static String getGeneralResponseTabTitle(int index) {
+		if(index==0) {
+			return "Обзор";
+		} else if(index==1) {
+			return "Выбран. предмет";
+		} else {
+			return null;
+		}
+	}		private static Response getJinxRemovalResponse(boolean selfUnseal) {
+		boolean ownsKey = Main.game.getPlayer().getUnlockKeyMap().containsKey(owner.getId()) && Main.game.getPlayer().getUnlockKeyMap().get(owner.getId()).contains(clothing.getSlotEquippedTo());
+		int removalCost = clothing.getJinxRemovalCost(Main.game.getPlayer(), selfUnseal);
+
+		if(interactionType==InventoryInteraction.COMBAT) {
+			return new Response("Unseal"+(ownsKey?"(Use key)":"(<i>"+removalCost+" Essences</i>)"),
+					"You can't unseal clothing in combat!",
+					null);
+		}
+
+		if(interactionType==InventoryInteraction.SEX) {
+			if(!selfUnseal && Main.sex.getInitialSexManager().isHidden(Main.game.getPlayer())) {
+				return new Response("Unseal"+(ownsKey?"(Use key)":"(<i>"+removalCost+" Essences</i>)"),
+						UtilText.parse(owner, "As you're hiding, you can't unseal [npc.namePos] clothing!"),
+						null);
+			}
+			if(!Main.sex.getInitialSexManager().isAbleToRemoveClothingSeals(Main.game.getPlayer())) {
+				return new Response("Unseal"+(ownsKey?"(Use key)":"(<i>"+removalCost+" Essences</i>)"),
+						"You can't unseal clothing in this sex scene!",
+						null);
+			}
+		}
+
+		if(!ownsKey) {
+			if(!Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY)) {
+				return new Response("Unseal", "You don't know how to unseal clothing! Perhaps you should pay Lilaya a visit and ask her about it...", null);
+			}
+			if(Main.game.getPlayer().getClothingCurrentlyEquipped().stream().anyMatch(c -> c.isSelfTransformationInhibiting())) {
+				return new Response("Unseal",
+						"Although you are normally able to unseal clothing, you cannot do so due to an enchantment on one or more pieces of your equipped clothing!"
+						+ "<br/>[style.italicsArcane(Visit Lilaya to get your sealed clothing removed!)]",
+						null);
+			}
+			if(Main.game.getPlayer().getTattoos().values().stream().anyMatch(c -> c.isSelfTransformationInhibiting())) {
+				return new Response("Unseal",
+						"Although you are normally able to unseal clothing, you cannot do so due to an enchantment on one or more of your tattoos!"
+								+ "<br/>[style.italicsArcane(Visit Kate to get the tattoo removed!)]",
+						null);
+			}
+		}
+
+		if(ownsKey || Main.game.getPlayer().getEssenceCount()>=removalCost) {
+			return new Response("Unseal "+(ownsKey?"([style.italicsGood(Use key)])":"([style.italicsArcane("+removalCost+" Essences)])"),
+						ownsKey
+							?"As you own the key which unlocks this piece of clothing, you can remove it without having to spend any arcane essences!"
+							:("Spend "+removalCost+" arcane essences on unsealing this piece of clothing."
+								+ (Main.game.getPlayer().hasFetish(Fetish.FETISH_BONDAGE_VICTIM) && selfUnseal
+									?"<br/>[style.italicsMinorBad(You have to pay 5 times the standard unseal cost due to your '"+Fetish.FETISH_BONDAGE_VICTIM.getName(Main.game.getPlayer())+"' fetish!)]"
+									:"")),
+						interactionType==InventoryInteraction.SEX
+							?Main.sex.SEX_DIALOGUE
+							:INVENTORY_MENU) {
+				@Override
+				public void effects() {
+					String s = "";
+					if(ownsKey) {
+						if(!Main.game.isInSex()) {
+							Main.game.getPlayer().removeFromUnlockKeyMap(owner.getId(), clothing.getSlotEquippedTo());
+						}
+						s = "<p>"
+								+ "Using the key which is in your possession, you unlock the "+clothing.getName()+"!"
+							+ "</p>";
+
+					} else {
+						Main.game.getPlayer().incrementEssenceCount(-removalCost, false);
+						s = UtilText.parse(owner,
+								"<p>"
+									+ "You channel the power of your arcane essences into [npc.namePos] "+clothing.getName()+", and with a bright purple flash, you manage to remove the seal!"
+								+ "</p>"
+								+ "<p style='text-align:center;'>"
+                                        + "Removing the seal has cost you [style.boldBad(" + removalCost + ")] [style.boldArcane(Магические эссенции)]!"
+								+ "</p>");
+					}
+
+					// Have to remove and then re-add the clothing as setting the sealed status affects the clothing's hashCode
+					List<DisplacementType> clothingDisplacementTypes = new ArrayList<>();
+					if(Main.game.isInSex() && Main.sex.getAllParticipants().contains(owner)) {
+						clothingDisplacementTypes.addAll(Main.sex.getClothingPreSexMap().get(owner).get(clothing.getSlotEquippedTo()).get(clothing));
+						Main.sex.getClothingPreSexMap().get(owner).get(clothing.getSlotEquippedTo()).remove(clothing);
+					}
+					clothing.setSealed(false);
+					if(Main.game.isInSex() && Main.sex.getAllParticipants().contains(owner)) {
+						Main.sex.getClothingPreSexMap().get(owner).get(clothing.getSlotEquippedTo()).put(clothing, clothingDisplacementTypes);
+					}
+
+					if(interactionType==InventoryInteraction.SEX) {
+						Main.sex.setUnequipClothingText(clothing, s);
+						Main.mainController.openInventory();
+						Main.sex.endSexTurn(SexActionUtility.CLOTHING_REMOVAL);
+						Main.sex.setSexStarted(true);
+
+					} else {
+						Main.game.getTextEndStringBuilder().append(s);
+					}
+				}
+			};
+
+		} else {
+			return new Response("Unseal (<i>"+removalCost+" Essences</i>)",
+					"You need at least "+removalCost+" arcane essences in order to unseal this piece of clothing!",
+					null);
+		}
+	}public static final DialogueNode CLOTHING_INVENTORY = new DialogueNode("Clothing", "", true) {
 
 		@Override
 		public String getLabel() {
@@ -3914,7 +4035,7 @@ public class InventoryDialogue {
 
 					switch(interactionType) {
 						case SEX:
-							String dropTitle = owner.getLocationPlace().isItemsDisappear()?"Drop ":"Store ";
+                            String dropTitle = owner.getLocationPlace().isItemsDisappear() ? "Drop " : "Положить ";
 							if(index == 1) {
 								return new Response(dropTitle+"(1)", "You can't drop clothing while masturbating.", null);
 								
@@ -3922,7 +4043,7 @@ public class InventoryDialogue {
 								return new Response(dropTitle+"(5)", "You can't drop clothing while masturbating.", null);
 								
 							} else if(index == 3) {
-								return new Response(dropTitle+"(All)", "You can't drop clothing while masturbating.", null);
+                                return new Response(dropTitle + "(Всё)", "You can't drop clothing while masturbating.", null);
 								
 							} else if(index == 4) {
 								return new Response("Dye", "You can't dye your clothing while masturbating.", null);
@@ -3994,12 +4115,12 @@ public class InventoryDialogue {
 									}
 								} else {
 									if(!clothing.getClothingType().isAbleToBeDropped()) {
-										return new Response("Store (1)", "You cannot drop the " + clothing.getName() + "!", null);
+                                        return new Response("Положить (1)", "You cannot drop the " + clothing.getName() + "!", null);
 										
 									} else if(areaFull) {
-										return new Response("Store (1)", "This area is full, so you can't store your " + clothing.getName() + " here!", null);
+                                        return new Response("Положить (1)", "This area is full, so you can't store your " + clothing.getName() + " here!", null);
 									} else {
-										return new Response("Store (1)", "Store the " + clothing.getName() + " in this area.", INVENTORY_MENU){
+                                        return new Response("Положить (1)", "Положить the " + clothing.getName() + " in this area.", INVENTORY_MENU) {
 											@Override
 											public void effects(){
 												dropClothing(owner, clothing, 1);
@@ -4029,16 +4150,16 @@ public class InventoryDialogue {
 									}
 								} else {
 									if(!clothing.getClothingType().isAbleToBeDropped()) {
-										return new Response("Store (5)", "You cannot drop the " + clothing.getName() + "!", null);
+                                        return new Response("Положить (5)", "You cannot drop the " + clothing.getName() + "!", null);
 										
 									} else if(owner.getClothingCount(clothing) < 5) {
-										return new Response("Store (5)", "You don't have five " + clothing.getNamePlural() + " to give!", null);
+                                        return new Response("Положить (5)", "You don't have five " + clothing.getNamePlural() + " to give!", null);
 										
 									} else if(areaFull) {
-										return new Response("Store (5)", "This area is full, so you can't store your " + clothing.getNamePlural() + " here!", null);
+                                        return new Response("Положить (5)", "This area is full, so you can't store your " + clothing.getNamePlural() + " here!", null);
 										
 									} else {
-										return new Response("Store (5)", "Store five of your " + clothing.getNamePlural() + " in this area.", INVENTORY_MENU){
+                                        return new Response("Положить (5)", "Положить five of your " + clothing.getNamePlural() + " in this area.", INVENTORY_MENU) {
 											@Override
 											public void effects(){
 												dropClothing(owner, clothing, 5);
@@ -4050,12 +4171,12 @@ public class InventoryDialogue {
 							} else if(index == 3) {
 								if(owner.getLocationPlace().isItemsDisappear()) {
 									if(!clothing.getClothingType().isAbleToBeDropped()) {
-										return new Response("Drop (All)", "You cannot drop the " + clothing.getName() + "!", null);
+                                        return new Response("Drop (Всё)", "You cannot drop the " + clothing.getName() + "!", null);
 										
 									} else if(areaFull) {
-										return new Response("Drop (All)", "This area is full, so you can't drop your " + clothing.getNamePlural() + " here!", null);
+                                        return new Response("Drop (Всё)", "This area is full, so you can't drop your " + clothing.getNamePlural() + " here!", null);
 									} else {
-										return new Response("Drop (All)", "Drop all of your " + clothing.getNamePlural() + ".", INVENTORY_MENU){
+                                        return new Response("Drop (Всё)", "Drop all of your " + clothing.getNamePlural() + ".", INVENTORY_MENU) {
 											@Override
 											public void effects(){
 												dropClothing(owner, clothing, owner.getClothingCount(clothing));
@@ -4064,12 +4185,12 @@ public class InventoryDialogue {
 									}
 								} else {
 									if(!clothing.getClothingType().isAbleToBeDropped()) {
-										return new Response("Store (All)", "You cannot drop the " + clothing.getName() + "!", null);
+                                        return new Response("Положить (Всё)", "You cannot drop the " + clothing.getName() + "!", null);
 										
 									} else if(areaFull) {
-										return new Response("Store (All)", "This area is full, so you can't store your " + clothing.getNamePlural() + " here!", null);
+                                        return new Response("Положить (Всё)", "This area is full, so you can't store your " + clothing.getNamePlural() + " here!", null);
 									} else {
-										return new Response("Store (All)", "Store all of your " + clothing.getNamePlural() + " in this area.", INVENTORY_MENU){
+                                        return new Response("Положить (Всё)", "Положить all of your " + clothing.getNamePlural() + " in this area.", INVENTORY_MENU) {
 											@Override
 											public void effects(){
 												dropClothing(owner, clothing, owner.getClothingCount(clothing));
@@ -4131,7 +4252,7 @@ public class InventoryDialogue {
 															+ "</p>"
 															+ enchantmentRemovedString
 															+ "<p style='text-align:center;'>"
-																+ "Identifying the "+clothing.getName()+" has cost you [style.boldBad("+Util.intToString(IDENTIFICATION_ESSENCE_PRICE)+")] [style.boldArcane(Arcane Essences)]!"
+                                                                    + "Identifying the " + clothing.getName() + " has cost you [style.boldBad(" + Util.intToString(IDENTIFICATION_ESSENCE_PRICE) + ")] [style.boldArcane(Магические эссенции)]!"
 															+ "</p>");
 													RenderingEngine.setPage(Main.game.getPlayer(), clothing);
 												}
@@ -4185,7 +4306,7 @@ public class InventoryDialogue {
 								return new Response("Give (5)", "You can't give someone clothing while fighting them!", null);
 								
 							} else if(index == 3) {
-								return new Response("Give (All)", "You can't give someone clothing while fighting them!", null);
+                                return new Response("Give (Всё)", "You can't give someone clothing while fighting them!", null);
 								
 							} else if(index == 4) {
 								return new Response("Dye", "You can't dye your clothing while fighting someone!", null);
@@ -4251,12 +4372,12 @@ public class InventoryDialogue {
 								
 							} else if(index == 3) {
 								if(!clothing.getClothingType().isAbleToBeDropped()) {
-									return new Response("Give (All)", "You cannot give away the " + clothing.getName() + "!", null);
+                                    return new Response("Give (Всё)", "You cannot give away the " + clothing.getName() + "!", null);
 									
 								} else if(inventoryFull) {
-									return new Response("Give (All)", UtilText.parse(inventoryNPC, "[npc.NamePos] inventory is already full!"), null);
+                                    return new Response("Give (Всё)", UtilText.parse(inventoryNPC, "[npc.NamePos] inventory is already full!"), null);
 								}
-								return new Response("Give (All)", UtilText.parse(inventoryNPC, "Give [npc.name] all of your " + clothing.getNamePlural() + "."), INVENTORY_MENU){
+                                return new Response("Give (Всё)", UtilText.parse(inventoryNPC, "Give [npc.name] all of your " + clothing.getNamePlural() + "."), INVENTORY_MENU) {
 									@Override
 									public void effects(){
 										transferClothing(Main.game.getPlayer(), inventoryNPC, clothing, Main.game.getPlayer().getClothingCount(clothing));
@@ -4316,7 +4437,7 @@ public class InventoryDialogue {
 															+ "</p>"
 															+ enchantmentRemovedString
 															+ "<p style='text-align:center;'>"
-																+ "Identifying the "+clothing.getName()+" has cost you [style.boldBad("+Util.intToString(IDENTIFICATION_ESSENCE_PRICE)+")] [style.boldArcane(Arcane Essences)]!"
+                                                                    + "Identifying the " + clothing.getName() + " has cost you [style.boldBad(" + Util.intToString(IDENTIFICATION_ESSENCE_PRICE) + ")] [style.boldArcane(Магические эссенции)]!"
 															+ "</p>");
 													RenderingEngine.setPage(Main.game.getPlayer(), clothing);
 												}
@@ -4450,7 +4571,7 @@ public class InventoryDialogue {
 								return new Response("Give (5)", "You can't give someone clothing while having sex with them!", null);
 								
 							} else if(index == 3) {
-								return new Response("Give (All)", "You can't give someone clothing while having sex with them!", null);
+                                return new Response("Give (Всё)", "You can't give someone clothing while having sex with them!", null);
 								
 							} else if(index == 4) {
 								return new Response("Dye", "You can't dye your clothing while having sex with someone!", null);
@@ -4602,11 +4723,11 @@ public class InventoryDialogue {
 								
 							} else if(index == 3) {
 								if(!clothing.getClothingType().isAbleToBeSold()) {
-									return new Response("Sell (All)", "You cannot sell the " + clothing.getName() + "!", null);
+                                    return new Response("Sell (Всё)", "You cannot sell the " + clothing.getName() + "!", null);
 									
 								} else if (inventoryNPC.willBuy(clothing)) {
 									int sellPrice = clothing.getPrice(inventoryNPC.getBuyModifier());
-									return new Response("Sell (All) (" + UtilText.formatAsMoney(sellPrice*Main.game.getPlayer().getClothingCount(clothing), "span") + ")",
+                                    return new Response("Sell (Всё) (" + UtilText.formatAsMoney(sellPrice * Main.game.getPlayer().getClothingCount(clothing), "span") + ")",
 											"Sell the " + clothing.getName() + " for " + UtilText.formatAsMoney(sellPrice*Main.game.getPlayer().getClothingCount(clothing)) + ".", INVENTORY_MENU){
 										@Override
 										public void effects(){
@@ -4614,7 +4735,7 @@ public class InventoryDialogue {
 										}
 									};
 								} else {
-									return new Response("Sell (All)", inventoryNPC.getName("The") + " doesn't want to buy these.", null);
+                                    return new Response("Sell (Всё)", inventoryNPC.getName("The") + " doesn't want to buy these.", null);
 								}
 								
 							} else if (index==4) {
@@ -4670,7 +4791,7 @@ public class InventoryDialogue {
 															+ "</p>"
 															+ enchantmentRemovedString
 															+ "<p style='text-align:center;'>"
-																+ "Identifying the "+clothing.getName()+" has cost you [style.boldBad("+Util.intToString(IDENTIFICATION_ESSENCE_PRICE)+")] [style.boldArcane(Arcane Essences)]!"
+                                                                    + "Identifying the " + clothing.getName() + " has cost you [style.boldBad(" + Util.intToString(IDENTIFICATION_ESSENCE_PRICE) + ")] [style.boldArcane(Магические эссенции)]!"
 															+ "</p>");
 													RenderingEngine.setPage(Main.game.getPlayer(), clothing);
 												}
@@ -4769,10 +4890,10 @@ public class InventoryDialogue {
 										|| Main.game.getPlayer().isCoverableAreaVisible(CoverableArea.PENIS)
 										|| Main.game.getPlayer().isCoverableAreaVisible(CoverableArea.VAGINA)
 										|| (Main.game.getPlayer().getClothingInSlot(InventorySlot.FOOT)==null && Main.game.getPlayer().getLegType().equals(LegType.HUMAN))) {
-									return new Response("To the stage", "You need to be wearing clothing that covers your body, as well as a pair of shoes.", null);
+									return new Response("На сцену", "You need to be wearing clothing that covers your body, as well as a pair of shoes.", null);
 									
 								} else {
-									return new Response("To the stage", "You're ready to approach the stage now.", CharacterCreation.CHOOSE_BACKGROUND) {
+									return new Response("На сцену", "You're ready to approach the stage now.", CharacterCreation.CHOOSE_BACKGROUND) {
 										@Override
 										public void effects() {
 											CharacterCreation.moveNPCIntoPlayerTile();
@@ -4782,10 +4903,10 @@ public class InventoryDialogue {
 								
 							} else if(index == 4) {
 								if(Main.game.getPlayer().getClothingCurrentlyEquipped().isEmpty()){
-									return new Response("Unequip all", "You're currently naked, there's nothing to be unequipped.", null);
+									return new Response("Снять всё", "В данный момент вы обнажены, и вам нечего снимать.", null);
 								}
 								else{
-									return new Response("Unequip all", "Remove as much of your clothing as possible.", INVENTORY_MENU){
+									return new Response("Снять всё", "Снимите как можно больше одежды.", INVENTORY_MENU) {
 										@Override
 										public void effects(){
 											Main.game.getTextEndStringBuilder().append(unequipAll(Main.game.getPlayer()));
@@ -4794,7 +4915,7 @@ public class InventoryDialogue {
 								}
 								
 							} else if(index == 5) {
-								return new Response("Change colour", "Change the colour of this item of clothing.", DYE_CLOTHING_CHARACTER_CREATION) {
+								return new Response("Изменить цвет", "Измените цвет этого предмета одежды.", DYE_CLOTHING_CHARACTER_CREATION) {
 									@Override
 									public void effects() {
 										resetClothingDyeColours();
@@ -4803,7 +4924,7 @@ public class InventoryDialogue {
 							} else if(index >= 6 && index <= 9 && index-6<clothing.getClothingType().getEquipSlots().size()) {
 								InventorySlot slot = clothing.getClothingType().getEquipSlots().get(index-6);
 								if(clothing.isCanBeEquipped(Main.game.getPlayer(), slot)) {
-									return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), "Equip the " + clothing.getName() + ".", INVENTORY_MENU){
+									return new Response("Надеть: " + Util.capitaliseSentence(slot.getName()), "Надеть " + clothing.getName() + ".", INVENTORY_MENU) {
 										@Override
 										public void effects(){
 											equipClothingFromGround(Main.game.getPlayer(), slot, Main.game.getPlayer(), clothing);
@@ -4811,7 +4932,7 @@ public class InventoryDialogue {
 									};
 									
 								} else {
-									return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), clothing.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
+									return new Response("Надеть: " + Util.capitaliseSentence(slot.getName()), clothing.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
 								}
 							
 							} else {
@@ -4826,7 +4947,7 @@ public class InventoryDialogue {
 							return new Response("Take (5)", "You can't pick up clothing while masturbating.", null);
 							
 						} else if(index == 3) {
-							return new Response("Take (All)", "You can't pick up clothing while masturbating.", null);
+                            return new Response("Take (Всё)", "You can't pick up clothing while masturbating.", null);
 							
 						} else if(index == 4) {
 							return new Response("Dye", "You can't dye your clothing while masturbating.", null);
@@ -4908,9 +5029,9 @@ public class InventoryDialogue {
 							
 						} else if(index == 3) {
 							if(inventoryFull) {
-								return new Response("Take (All)", "Your inventory is already full!", null);
+                                return new Response("Take (Всё)", "Your inventory is already full!", null);
 							}
-							return new Response("Take (All)", "Take all of the " + clothing.getNamePlural() + " from the ground.", INVENTORY_MENU){
+                            return new Response("Take (Всё)", "Take all of the " + clothing.getNamePlural() + " from the ground.", INVENTORY_MENU) {
 								@Override
 								public void effects(){
 									pickUpClothing(Main.game.getPlayer(), clothing, Main.game.getPlayerCell().getInventory().getClothingCount(clothing));
@@ -4982,7 +5103,7 @@ public class InventoryDialogue {
 								return new Response("Take (5)", "You can't take someone clothing while fighting them!", null);
 								
 							} else if(index == 3) {
-								return new Response("Take (All)", "You can't take someone clothing while fighting them!", null);
+                                return new Response("Take (Всё)", "You can't take someone clothing while fighting them!", null);
 								
 							} else if(index == 4) {
 								return new Response("Dye", "You can't dye someone's clothing while fighting them!", null);
@@ -5040,9 +5161,9 @@ public class InventoryDialogue {
 								
 							} else if(index == 3) {
 								if(inventoryFull) {
-									return new Response("Take (All)", "Your inventory is already full!", null);
+                                    return new Response("Take (Всё)", "Your inventory is already full!", null);
 								}
-								return new Response("Take (All)", UtilText.parse(inventoryNPC, "Take all "+Util.intToString(inventoryNPC.getClothingCount(clothing))+" of  [npc.namePos] " + clothing.getNamePlural() + "."), INVENTORY_MENU){
+                                return new Response("Take (Всё)", UtilText.parse(inventoryNPC, "Take all " + Util.intToString(inventoryNPC.getClothingCount(clothing)) + " of  [npc.namePos] " + clothing.getNamePlural() + "."), INVENTORY_MENU) {
 									@Override
 									public void effects(){
 										transferClothing(inventoryNPC, Main.game.getPlayer(), clothing, inventoryNPC.getClothingCount(clothing));
@@ -5186,7 +5307,7 @@ public class InventoryDialogue {
 								return new Response("Take (5)", "You can't take someone's clothing while having sex with them!", null);
 								
 							} else if(index == 3) {
-								return new Response("Take (All)", "You can't take someone's clothing while having sex with them!", null);
+                                return new Response("Take (Всё)", "You can't take someone's clothing while having sex with them!", null);
 								
 							} else if(index == 4) {
 								return new Response("Dye", "You can't dye someone's clothing while having sex with them!", null);
@@ -5341,7 +5462,7 @@ public class InventoryDialogue {
 								int sellPrice = buyback?Main.game.getPlayer().getBuybackStack().get(buyBackIndex).getPrice():clothing.getPrice(inventoryNPC.getSellModifier(clothing));
 								int count = buyback?Main.game.getPlayer().getBuybackStack().get(buyBackIndex).getCount():inventoryNPC.getClothingCount(clothing);
 								if(inventoryFull) {
-									return new Response("Buy (All) ("+UtilText.formatAsMoneyUncoloured(sellPrice*count, "span")+")", "Your inventory is already full!", null);
+                                    return new Response("Buy (Всё) (" + UtilText.formatAsMoneyUncoloured(sellPrice * count, "span") + ")", "Your inventory is already full!", null);
 								}
 								if(Main.game.getPlayer().getMoney() < sellPrice*count) {
 									int affordableCount = Main.game.getPlayer().getMoney() / sellPrice;
@@ -5354,10 +5475,10 @@ public class InventoryDialogue {
 											}
 										};
 									} else {
-										return new Response("Buy (All) ("+UtilText.formatAsMoneyUncoloured(sellPrice*count, "span")+")", "You can't afford to buy this!", null);
+                                        return new Response("Buy (Всё) (" + UtilText.formatAsMoneyUncoloured(sellPrice * count, "span") + ")", "You can't afford to buy this!", null);
 									}
 								}
-								return new Response("Buy (All) (" + UtilText.formatAsMoney(sellPrice*count, "span") + ")",
+                                return new Response("Buy (Всё) (" + UtilText.formatAsMoney(sellPrice * count, "span") + ")",
 										"Buy the " + clothing.getName() + " for " + UtilText.formatAsMoney(sellPrice*count) + ".", INVENTORY_MENU){
 									@Override
 									public void effects(){
@@ -5438,7 +5559,7 @@ public class InventoryDialogue {
 			return getItemDisplayPanel(weapon.getSVGEquippedString(owner),
 					Util.capitaliseSentence(weapon.getDisplayName(true)),
 					weapon.getDescription(owner)
-					 	+sb.toString());
+					 	+ sb);
 		}
 
 		public String getResponseTabTitle(int index) {
@@ -5463,7 +5584,7 @@ public class InventoryDialogue {
 								return new Response("Drop", "You can't change weapons while fighting someone!", null);
 								
 							} else {
-								return new Response("Store", "You can't change weapons while fighting someone!", null);
+                                return new Response("Положить", "You can't change weapons while fighting someone!", null);
 							}
 							
 						} else if (index==4) {
@@ -5506,12 +5627,12 @@ public class InventoryDialogue {
 								
 							} else {
 								if(!weapon.getWeaponType().isAbleToBeDropped()) {
-									return new Response("Store", "You cannot drop the " + weapon.getName() + "!", null);
+                                    return new Response("Положить", "You cannot drop the " + weapon.getName() + "!", null);
 									
 								} else if(areaFull) {
-									return new Response("Store", "This area is full, so you can't store your " + weapon.getName() + " here!", null);
+                                    return new Response("Положить", "This area is full, so you can't store your " + weapon.getName() + " here!", null);
 								} else {
-									return new Response("Store", "Store your " + weapon.getName() + " in this area.", INVENTORY_MENU){
+                                    return new Response("Положить", "Положить your " + weapon.getName() + " in this area.", INVENTORY_MENU) {
 										@Override
 										public void effects(){
 											Main.game.getTextEndStringBuilder().append(
@@ -5589,12 +5710,12 @@ public class InventoryDialogue {
 								
 							} else {
 								if(!weapon.getWeaponType().isAbleToBeDropped()) {
-									return new Response("Store", "You cannot drop the " + weapon.getName() + "!", null);
+                                    return new Response("Положить", "You cannot drop the " + weapon.getName() + "!", null);
 									
 								} else if(areaFull) {
-									return new Response("Store", "This area is full, so you can't store your " + weapon.getName() + " here!", null);
+                                    return new Response("Положить", "This area is full, so you can't store your " + weapon.getName() + " here!", null);
 								} else {
-									return new Response("Store", "Store your " + weapon.getName() + " in this area.", Main.sex.SEX_DIALOGUE){
+                                    return new Response("Положить", "Положить your " + weapon.getName() + " in this area.", Main.sex.SEX_DIALOGUE) {
 										@Override
 										public void effects(){
 											Main.sex.setUnequipWeaponText(weapon,
@@ -5695,9 +5816,9 @@ public class InventoryDialogue {
 									return new Response("Drop", UtilText.parse(inventoryNPC, "[npc.Name] cannot drop [npc.her] " + weapon.getName() + "!"), null);
 									
 								} else if(areaFull) {
-									return new Response("Store", UtilText.parse(inventoryNPC, "This area is full, so [npc.name] can't store [npc.her] " + weapon.getName() + " here!"), null);
+                                    return new Response("Положить", UtilText.parse(inventoryNPC, "This area is full, so [npc.name] can't store [npc.her] " + weapon.getName() + " here!"), null);
 								} else {
-									return new Response("Store", UtilText.parse(inventoryNPC, "Get [npc.name] to store [npc.her] " + weapon.getName() + " in this area."), INVENTORY_MENU){
+                                    return new Response("Положить", UtilText.parse(inventoryNPC, "Get [npc.name] to store [npc.her] " + weapon.getName() + " in this area."), INVENTORY_MENU) {
 										@Override
 										public void effects(){
 											Main.game.getTextEndStringBuilder().append(
@@ -5889,7 +6010,7 @@ public class InventoryDialogue {
 								return new Response("Drop", "You cannot drop the " + clothing.getName() + " while fighting someone!", null);
 								
 							} else {
-								return new Response("Store", "You cannot drop the " + clothing.getName() + " while fighting someone!", null);
+                                return new Response("Положить", "You cannot drop the " + clothing.getName() + " while fighting someone!", null);
 							}
 							
 						} else if (index==4) {
@@ -5950,15 +6071,15 @@ public class InventoryDialogue {
 								
 							} else {
 								if(!clothing.getClothingType().isAbleToBeDropped()) {
-									return new Response("Store", "You cannot drop the " + clothing.getName() + "!", null);
+                                    return new Response("Положить", "You cannot drop the " + clothing.getName() + "!", null);
 									
 								} else if(areaFull && !clothing.isDiscardedOnUnequip(slotEquippedTo)) {
-									return new Response("Store", "This area is full, so you can't store "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + " here!", null);
+                                    return new Response("Положить", "This area is full, so you can't store " + (owner.isPlayer() ? "your" : owner.getName("") + "'s") + " " + clothing.getName() + " here!", null);
 								} else {
-									return new Response((clothing.isDiscardedOnUnequip(slotEquippedTo)?"Discard":"Store"),
+                                    return new Response((clothing.isDiscardedOnUnequip(slotEquippedTo) ? "Discard" : "Положить"),
 											(clothing.isDiscardedOnUnequip(slotEquippedTo)
 													?"Take off "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + " and throw it away."
-													:"Store "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + " in this area."),
+                                                    : "Положить " + (owner.isPlayer() ? "your" : owner.getName("") + "'s") + " " + clothing.getName() + " in this area."),
 											INVENTORY_MENU){
 										@Override
 										public void effects(){
@@ -6059,10 +6180,10 @@ public class InventoryDialogue {
 									|| Main.game.getPlayer().isCoverableAreaVisible(CoverableArea.PENIS)
 									|| Main.game.getPlayer().isCoverableAreaVisible(CoverableArea.VAGINA)
 									|| (Main.game.getPlayer().getClothingInSlot(InventorySlot.FOOT)==null && Main.game.getPlayer().getLegType().equals(LegType.HUMAN))) {
-								return new Response("To the stage", "You need to be wearing clothing that covers your body, as well as a pair of shoes.", null);
+								return new Response("На сцену", "You need to be wearing clothing that covers your body, as well as a pair of shoes.", null);
 								
 							} else {
-								return new Response("To the stage", "You're ready to approach the stage now.", CharacterCreation.CHOOSE_BACKGROUND) {
+								return new Response("На сцену", "You're ready to approach the stage now.", CharacterCreation.CHOOSE_BACKGROUND) {
 									@Override
 									public void effects() {
 										CharacterCreation.moveNPCIntoPlayerTile();
@@ -6072,10 +6193,10 @@ public class InventoryDialogue {
 							
 						} else if(index == 4){
 							if(Main.game.getPlayer().getClothingCurrentlyEquipped().isEmpty()){
-								return new Response("Unequip all", "You're currently naked, there's nothing to be unequipped.", null);
+								return new Response("Снять всё", "You're currently naked, there's nothing to be unequipped.", null);
 							}
 							else{
-								return new Response("Unequip all", "Remove as much of your clothing as possible.", INVENTORY_MENU){
+								return new Response("Снять всё", "Remove as much of your clothing as possible.", INVENTORY_MENU) {
 									@Override
 									public void effects(){
 										Main.game.getTextEndStringBuilder().append(unequipAll(Main.game.getPlayer()));
@@ -6141,14 +6262,14 @@ public class InventoryDialogue {
 								
 							} else {
 								if(!clothing.getClothingType().isAbleToBeDropped()) {
-									return new Response("Store", "You cannot drop the " + clothing.getName() + "!", null);
+                                    return new Response("Положить", "You cannot drop the " + clothing.getName() + "!", null);
 									
 								} else if(areaFull && !clothing.isDiscardedOnUnequip(slotEquippedTo)) {
-									return new Response("Store", "This area is full, so you can't store "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + " here!", null);
+                                    return new Response("Положить", "This area is full, so you can't store " + (owner.isPlayer() ? "your" : owner.getName("") + "'s") + " " + clothing.getName() + " here!", null);
 									
 								} else {
 									if (owner.isAbleToUnequip(clothing, false, Main.game.getPlayer())) {
-										return new Response((clothing.isDiscardedOnUnequip(slotEquippedTo)?"Discard":"Store"),
+                                        return new Response((clothing.isDiscardedOnUnequip(slotEquippedTo) ? "Discard" : "Положить"),
 												(clothing.isDiscardedOnUnequip(slotEquippedTo)
 														?"Take off "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + " and throw it away."
 														:"Drop "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + "."),
@@ -6165,7 +6286,7 @@ public class InventoryDialogue {
 											}
 										};
 									} else {
-										return new Response("Store", getClothingBlockingRemovalText(owner, "unequip"), null);
+                                        return new Response("Положить", getClothingBlockingRemovalText(owner, "unequip"), null);
 									}
 								}
 							}
@@ -6332,15 +6453,15 @@ public class InventoryDialogue {
 								
 							} else {
 								if(!clothing.getClothingType().isAbleToBeDropped()) {
-									return new Response("Store", "You cannot drop the " + clothing.getName() + "!", null);
+                                    return new Response("Положить", "You cannot drop the " + clothing.getName() + "!", null);
 									
 								} else if(areaFull && !clothing.isDiscardedOnUnequip(slotEquippedTo)) {
-									return new Response("Store", UtilText.parse(inventoryNPC, "This area is full, so you can't store [npc.namePos] " + clothing.getName() + " here!"), null);
+                                    return new Response("Положить", UtilText.parse(inventoryNPC, "This area is full, so you can't store [npc.namePos] " + clothing.getName() + " here!"), null);
 								} else {
-									return new Response((clothing.isDiscardedOnUnequip(slotEquippedTo)?"Discard":"Store"),
+                                    return new Response((clothing.isDiscardedOnUnequip(slotEquippedTo) ? "Discard" : "Положить"),
 											(clothing.isDiscardedOnUnequip(slotEquippedTo)
 													?UtilText.parse(inventoryNPC, "Take off [npc.namePos] " + clothing.getName() + " and throw it away.")
-													:UtilText.parse(inventoryNPC, "Store [npc.namePos] " + clothing.getName() + " in this area.")),
+                                                    : UtilText.parse(inventoryNPC, "Положить [npc.namePos] " + clothing.getName() + " in this area.")),
 											INVENTORY_MENU){
 										@Override
 										public void effects(){
@@ -6462,7 +6583,7 @@ public class InventoryDialogue {
 											?"Discard"
 												:(Main.game.getPlayer().getLocationPlace().isItemsDisappear()
 													?"Drop"
-													:"Store")),
+                                        : "Положить")),
 										UtilText.parse(inventoryNPC, "As you're hiding, you can't unequip [npc.namePos] clothing!"),
 										null);
 								
@@ -6504,19 +6625,19 @@ public class InventoryDialogue {
 								
 							} else {
 								if(!clothing.getClothingType().isAbleToBeDropped()) {
-									return new Response("Store", "You cannot drop the " + clothing.getName() + "!", null);
+                                    return new Response("Положить", "You cannot drop the " + clothing.getName() + "!", null);
 									
 								} else if(!Main.sex.getSexManager().isAbleToRemoveOthersClothing(Main.game.getPlayer(), clothing)) {
-									return new Response("Store", UtilText.parse(inventoryNPC, "You can't unequip the " + clothing.getName() + " in this sex scene!"), null);
+                                    return new Response("Положить", UtilText.parse(inventoryNPC, "You can't unequip the " + clothing.getName() + " in this sex scene!"), null);
 									
 								} else if(areaFull && !clothing.isDiscardedOnUnequip(slotEquippedTo)) {
-									return new Response("Store", UtilText.parse(inventoryNPC, "This area is full, so you can't store [npc.namePos] " + clothing.getName() + " here!"), null);
+                                    return new Response("Положить", UtilText.parse(inventoryNPC, "This area is full, so you can't store [npc.namePos] " + clothing.getName() + " here!"), null);
 								} else {
 									if (owner.isAbleToUnequip(clothing, false, Main.game.getPlayer())) {
-										return new Response((clothing.isDiscardedOnUnequip(slotEquippedTo)?"Discard":"Store"),
+                                        return new Response((clothing.isDiscardedOnUnequip(slotEquippedTo) ? "Discard" : "Положить"),
 												(clothing.isDiscardedOnUnequip(slotEquippedTo)
 														?UtilText.parse(inventoryNPC, "Take off [npc.namePos] " + clothing.getName() + " and throw it away.")
-														:UtilText.parse(inventoryNPC, "Store [npc.namePos] " + clothing.getName() + " in this area.")),
+                                                        : UtilText.parse(inventoryNPC, "Положить [npc.namePos] " + clothing.getName() + " in this area.")),
 												Main.sex.SEX_DIALOGUE){
 											@Override
 											public void effects(){
@@ -6529,7 +6650,7 @@ public class InventoryDialogue {
 											}
 										};
 									} else {
-										return new Response("Store", getClothingBlockingRemovalText(owner, "unequip"), null);
+                                        return new Response("Положить", getClothingBlockingRemovalText(owner, "unequip"), null);
 									}
 								}
 							}
@@ -6757,7 +6878,7 @@ public class InventoryDialogue {
 				
 				if(stickerFound) {
 					stickerFound = false;
-					inventorySB.append(stickerSB.toString());
+					inventorySB.append(stickerSB);
 					stickerSB = new StringBuilder();
 				}
 			}
@@ -6934,7 +7055,7 @@ public class InventoryDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 0) {
-				return new Response("Back", "Return to the previous menu.", INVENTORY_MENU);
+				return new Response("Назад", "Вернитесь в предыдущее меню.", INVENTORY_MENU);
 
 			} else if (index == 1) {
 				if(dyePreviews.equals(clothing.getColours())
@@ -7231,7 +7352,7 @@ public class InventoryDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 0) {
-				return new Response("Back", "Return to the previous menu.", INVENTORY_MENU);
+				return new Response("Назад", "Вернитесь в предыдущее меню.", INVENTORY_MENU);
 
 			} else if (index == 1) {
 				if(dyePreviews.equals(clothing.getColours())
@@ -7304,7 +7425,7 @@ public class InventoryDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 0) {
-				return new Response("Back", "Return to the previous menu.", CLOTHING_INVENTORY);
+				return new Response("Назад", "Вернитесь в предыдущее меню.", CLOTHING_INVENTORY);
 
 			} else if (index == 1) {
 				if(dyePreviews.equals(clothing.getColours())
@@ -7352,7 +7473,7 @@ public class InventoryDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 0) {
-				return new Response("Back", "Return to the previous menu.", CLOTHING_EQUIPPED);
+				return new Response("Назад", "Вернитесь в предыдущее меню.", CLOTHING_EQUIPPED);
 
 			} else if (index  == 1) {
 				if(dyePreviews.equals(clothing.getColours())
@@ -7396,7 +7517,7 @@ public class InventoryDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 0) {
-				return new Response("Back", "Return to the previous menu.", INVENTORY_MENU);
+				return new Response("Назад", "Вернитесь в предыдущее меню.", INVENTORY_MENU);
 
 			} else if (index == 1) {
 				if (!Main.game.getPlayer().hasItemType(ItemType.DYE_BRUSH)
@@ -8254,7 +8375,7 @@ public class InventoryDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 0) {
-				return new Response("Back", "Return to the previous menu.", INVENTORY_MENU);
+				return new Response("Назад", "Вернитесь в предыдущее меню.", INVENTORY_MENU);
 
 			} else if (index == 1) {
 				if (!Main.game.getPlayer().hasItemType(ItemType.DYE_BRUSH)
@@ -8528,43 +8649,9 @@ public class InventoryDialogue {
 				+ "</p>";
 	}
 	
-	private static String getGeneralResponseTabTitle(int index) {
-		if(index==0) {
-			return "Overview";
-		} else if(index==1) {
-			return "Selected item";
-		} else {
-			return null;
-		}
-	}
+
 	
-	private static Response getCloseInventoryResponse() {
-		if(interactionType == InventoryInteraction.CHARACTER_CREATION) {
-			return new Response("Back", "Return to looking in the mirror at your appearance.", CharacterCreation.CHOOSE_ADVANCED_APPEARANCE){
-				@Override
-				public int getSecondsPassed() {
-					return -CharacterCreation.TIME_TO_CLOTHING;
-				}
-				@Override
-				public void effects(){
-					item = null;
-					clothing = null;
-					weapon = null;
-				}
-			};
-			
-		} else {
-			return new ResponseEffectsOnly("Close Inventory", "Close the Inventory menu."){
-				@Override
-				public void effects(){
-					item = null;
-					clothing = null;
-					weapon = null;
-					Main.mainController.openInventory();
-				}
-			};
-		}
-	}
+
 	
 	private static Response getBuybackResponse() {
 		if (buyback) {
@@ -8627,109 +8714,7 @@ public class InventoryDialogue {
 //		}
 	}
 	
-	private static Response getJinxRemovalResponse(boolean selfUnseal) {
-		boolean ownsKey = Main.game.getPlayer().getUnlockKeyMap().containsKey(owner.getId()) && Main.game.getPlayer().getUnlockKeyMap().get(owner.getId()).contains(clothing.getSlotEquippedTo());
-		int removalCost = clothing.getJinxRemovalCost(Main.game.getPlayer(), selfUnseal);
-		
-		if(interactionType==InventoryInteraction.COMBAT) {
-			return new Response("Unseal"+(ownsKey?"(Use key)":"(<i>"+removalCost+" Essences</i>)"),
-					"You can't unseal clothing in combat!",
-					null);
-		}
 
-		if(interactionType==InventoryInteraction.SEX) {
-			if(!selfUnseal && Main.sex.getInitialSexManager().isHidden(Main.game.getPlayer())) {
-				return new Response("Unseal"+(ownsKey?"(Use key)":"(<i>"+removalCost+" Essences</i>)"),
-						UtilText.parse(owner, "As you're hiding, you can't unseal [npc.namePos] clothing!"),
-						null);
-			}
-			if(!Main.sex.getInitialSexManager().isAbleToRemoveClothingSeals(Main.game.getPlayer())) {
-				return new Response("Unseal"+(ownsKey?"(Use key)":"(<i>"+removalCost+" Essences</i>)"),
-						"You can't unseal clothing in this sex scene!",
-						null);
-			}
-		}
-		
-		if(!ownsKey) {
-			if(!Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY)) {
-				return new Response("Unseal", "You don't know how to unseal clothing! Perhaps you should pay Lilaya a visit and ask her about it...", null);
-			}
-			if(Main.game.getPlayer().getClothingCurrentlyEquipped().stream().anyMatch(c -> c.isSelfTransformationInhibiting())) {
-				return new Response("Unseal",
-						"Although you are normally able to unseal clothing, you cannot do so due to an enchantment on one or more pieces of your equipped clothing!"
-						+ "<br/>[style.italicsArcane(Visit Lilaya to get your sealed clothing removed!)]",
-						null);
-			}
-			if(Main.game.getPlayer().getTattoos().values().stream().anyMatch(c -> c.isSelfTransformationInhibiting())) {
-				return new Response("Unseal",
-						"Although you are normally able to unseal clothing, you cannot do so due to an enchantment on one or more of your tattoos!"
-								+ "<br/>[style.italicsArcane(Visit Kate to get the tattoo removed!)]",
-						null);
-			}
-		}
-		
-		if(ownsKey || Main.game.getPlayer().getEssenceCount()>=removalCost) {
-			return new Response("Unseal "+(ownsKey?"([style.italicsGood(Use key)])":"([style.italicsArcane("+removalCost+" Essences)])"),
-						ownsKey
-							?"As you own the key which unlocks this piece of clothing, you can remove it without having to spend any arcane essences!"
-							:("Spend "+removalCost+" arcane essences on unsealing this piece of clothing."
-								+ (Main.game.getPlayer().hasFetish(Fetish.FETISH_BONDAGE_VICTIM) && selfUnseal
-									?"<br/>[style.italicsMinorBad(You have to pay 5 times the standard unseal cost due to your '"+Fetish.FETISH_BONDAGE_VICTIM.getName(Main.game.getPlayer())+"' fetish!)]"
-									:"")),
-						interactionType==InventoryInteraction.SEX
-							?Main.sex.SEX_DIALOGUE
-							:INVENTORY_MENU) {
-				@Override
-				public void effects() {
-					String s = "";
-					if(ownsKey) {
-						if(!Main.game.isInSex()) {
-							Main.game.getPlayer().removeFromUnlockKeyMap(owner.getId(), clothing.getSlotEquippedTo());
-						}
-						s = "<p>"
-								+ "Using the key which is in your possession, you unlock the "+clothing.getName()+"!"
-							+ "</p>";
-						
-					} else {
-						Main.game.getPlayer().incrementEssenceCount(-removalCost, false);
-						s = UtilText.parse(owner,
-								"<p>"
-									+ "You channel the power of your arcane essences into [npc.namePos] "+clothing.getName()+", and with a bright purple flash, you manage to remove the seal!"
-								+ "</p>"
-								+ "<p style='text-align:center;'>"
-									+ "Removing the seal has cost you [style.boldBad("+removalCost+")] [style.boldArcane(Arcane Essences)]!"
-								+ "</p>");
-					}
-					
-					// Have to remove and then re-add the clothing as setting the sealed status affects the clothing's hashCode
-					List<DisplacementType> clothingDisplacementTypes = new ArrayList<>();
-					if(Main.game.isInSex() && Main.sex.getAllParticipants().contains(owner)) {
-						clothingDisplacementTypes.addAll(Main.sex.getClothingPreSexMap().get(owner).get(clothing.getSlotEquippedTo()).get(clothing));
-						Main.sex.getClothingPreSexMap().get(owner).get(clothing.getSlotEquippedTo()).remove(clothing);
-					}
-					clothing.setSealed(false);
-					if(Main.game.isInSex() && Main.sex.getAllParticipants().contains(owner)) {
-						Main.sex.getClothingPreSexMap().get(owner).get(clothing.getSlotEquippedTo()).put(clothing, clothingDisplacementTypes);
-					}
-					
-					if(interactionType==InventoryInteraction.SEX) {
-						Main.sex.setUnequipClothingText(clothing, s);
-						Main.mainController.openInventory();
-						Main.sex.endSexTurn(SexActionUtility.CLOTHING_REMOVAL);
-						Main.sex.setSexStarted(true);
-						
-					} else {
-						Main.game.getTextEndStringBuilder().append(s);
-					}
-				}
-			};
-			
-		} else {
-			return new Response("Unseal (<i>"+removalCost+" Essences</i>)",
-					"You need at least "+removalCost+" arcane essences in order to unseal this piece of clothing!",
-					null);
-		}
-	}
 	
 	
 	

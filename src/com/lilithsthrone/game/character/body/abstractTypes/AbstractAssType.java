@@ -1,12 +1,5 @@
 package com.lilithsthrone.game.character.body.abstractTypes;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.lilithsthrone.main.Main;
-import org.w3c.dom.Document;
-
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
@@ -18,7 +11,13 @@ import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
+import org.w3c.dom.Document;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.3
@@ -166,7 +165,7 @@ public abstract class AbstractAssType implements BodyPartTypeInterface {
 	@Override
 	public String getNameSingular(GameCharacter gc) {
 		if(names==null || names.isEmpty()) {
-			return UtilText.returnStringAtRandom("ass", "rear end", "butt", "rump");
+            return UtilText.returnStringAtRandom("задница", "корма", "попа", "булка");
 		}
 		return Util.randomItemFrom(names);
 	}
@@ -174,7 +173,7 @@ public abstract class AbstractAssType implements BodyPartTypeInterface {
 	@Override
 	public String getNamePlural(GameCharacter gc) {
 		if(namesPlural==null || namesPlural.isEmpty()) {
-			return UtilText.returnStringAtRandom("asses", "rear ends", "butts", "rumps");
+            return UtilText.returnStringAtRandom("задницы", "кормы", "попы", "булки");
 		}
 		return Util.randomItemFrom(namesPlural);
 	}

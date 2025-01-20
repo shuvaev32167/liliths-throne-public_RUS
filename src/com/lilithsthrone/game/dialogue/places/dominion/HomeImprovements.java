@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.npc.NPC;
@@ -27,6 +24,9 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @since 0.3.7
  * @version 0.3.7
@@ -43,7 +43,7 @@ public class HomeImprovements {
 	public static final DialogueNode OUTSIDE = new DialogueNode("Склад `Сделай сам` Аргуса", ".", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -53,14 +53,14 @@ public class HomeImprovements {
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
 				if(Main.game.isExtendedWorkTime()) {
-					return new Response("Войти", "Зайдите на склад, указанный как открытый для посетителей.", PlaceType.HOME_IMPROVEMENTS_ENTRANCE.getDialogue(false)) {
+                    return new Response("Вход", "Зайдите на склад, указанный как открытый для посетителей.", PlaceType.HOME_IMPROVEMENTS_ENTRANCE.getDialogue(false)) {
 						@Override
 						public void effects() {
 							Main.game.getPlayer().setLocation(WorldType.HOME_IMPROVEMENTS, PlaceType.HOME_IMPROVEMENTS_ENTRANCE, false);
 						}
 					};
 				} else {
-					return new Response("Войти", "Склад сейчас явно закрыт. Вам придется вернуться позже, если вы хотите попасть внутрь...", null);
+                    return new Response("Вход", "Склад сейчас явно закрыт. Вам придется вернуться позже, если вы хотите попасть внутрь...", null);
 				}
 			}
 			return null;
@@ -70,7 +70,7 @@ public class HomeImprovements {
 	public static final DialogueNode ENTRANCE = new DialogueNode("", ".", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -93,7 +93,7 @@ public class HomeImprovements {
 	public static final DialogueNode CORRIDOR = new DialogueNode("", ".", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -120,7 +120,7 @@ public class HomeImprovements {
 	public static final DialogueNode SHELVING_PREMIUM = new DialogueNode("", ".", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -171,7 +171,7 @@ public class HomeImprovements {
 	public static final DialogueNode SHELVING_STANDARD = new DialogueNode("", ".", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -256,7 +256,7 @@ public class HomeImprovements {
 	public static final DialogueNode BUILDING_SUPPLIES = new DialogueNode("", ".", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -271,7 +271,7 @@ public class HomeImprovements {
 	public static final DialogueNode OFFICE = new DialogueNode("", ".", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -286,7 +286,7 @@ public class HomeImprovements {
 	public static final DialogueNode TOILETS = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -394,8 +394,8 @@ public class HomeImprovements {
 			return TOILETS.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode TOILETS_GLORY_HOLE_DOM = new DialogueNode("Toilets", "", true) {
+
+    public static final DialogueNode TOILETS_GLORY_HOLE_DOM = new DialogueNode("Туалеты", "", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 5*60;

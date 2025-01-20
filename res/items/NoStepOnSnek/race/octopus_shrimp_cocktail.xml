@@ -39,7 +39,7 @@
 			[##npc.incrementHealth(npc.getAttributeValue(ATTRIBUTE_HEALTH_MAXIMUM)/10)]
 			
 			<p style='margin-bottom:0; padding-bottom:0;'>
-				[npc.Name] [npc.verb(start)] to feel stronger...
+				[npc.Name] start to feel stronger...
 			</p>
 			[#npc.addPotionEffect(ATTRIBUTE_MAJOR_PHYSIQUE, 2)]
 		]]></applyEffects>
@@ -53,10 +53,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		[npc.Name] [npc.verb(remove)] the clear plastic cover and [npc.verb(grab)] the cocktail glass. Unable to resist the delicious-looking little shellfish inside, [npc.she] eagerly [npc.verb(start)] dipping and snacking and in a matter of moments [npc.has] completely devoured the entire arrangement.
+		[npc.Name] remove the clear plastic cover and grab the cocktail glass. Unable to resist the delicious-looking little shellfish inside, [npc.she] eagerly start dipping and snacking and in a matter of moments [npc.has] completely devoured the entire arrangement.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		[npc.Name] [npc.verb(remove)] the clear plastic cover and [npc.verb(hold)] out the cocktail glass to [npc2.name]. Unable to resist the delicious-looking little shellfish inside, [npc2.she] eagerly [npc2.verb(start)] dipping and snacking and in a matter of moments [npc2.has] completely devoured the entire arrangement.
+		[npc.Name] remove the clear plastic cover and hold out the cocktail glass to [npc2.name]. Unable to resist the delicious-looking little shellfish inside, [npc2.she] eagerly [npc2.verb(start)] dipping and snacking and in a matter of moments [npc2.has] completely devoured the entire arrangement.
 		]]></otherUse>
 	</useDescriptions>
 

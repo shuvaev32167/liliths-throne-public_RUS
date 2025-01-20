@@ -22,11 +22,13 @@
 		
 		<attackTooltipDescription>Shoot [npc2.name] with your pepper grenade launcher.</attackTooltipDescription>
 		
-		<rarity>EPIC</rarity> 
-		
-		<equipText><![CDATA[[npc.Name] [npc.verb(bring)] out the grenade launcher, [npc.verb(slap)] in a fresh magazine, [npc.verb(pull)] the charging handle, and [npc.verb(turn)] the safety off.]]></equipText>
-		
-		<unequipText><![CDATA[[npc.Name] [npc.verb(take)] out the magazine, and [npc.verb(turn)] the safety on, [npc.verb(pull)] the charging handle, and [npc.verb(put)] the grenade launcher away.]]></unequipText>
+		<rarity>EPIC</rarity>
+
+        <equipText>
+            <![CDATA[[npc.Name] bring out the grenade launcher, slap in a fresh magazine, pull the charging handle, and turn the safety off.]]></equipText>
+
+        <unequipText>
+            <![CDATA[[npc.Name] take out the magazine, and turn the safety on, pull the charging handle, and put the grenade launcher away.]]></unequipText>
 		
 		<imageName>pblauncher_nomag.svg</imageName> 
 		
@@ -71,9 +73,9 @@
 	<!-- Descriptions that are used when hitting an enemy. One of the hitText values will be randomly selected each time the attacker hits their target. Follow the same guidelines as equipText. -->
 	<hitDescriptions>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(line)] [npc2.name] up in [npc.her] sights and [npc.verb(pull)] the trigger. The grenade disperses a fine orange mist near [npc2.name] before engulfing [npc2.her] aura in a fiery cloud.
+		[npc.Name] line [npc2.name] up in [npc.her] sights and pull the trigger. The grenade disperses a fine orange mist near [npc2.name] before engulfing [npc2.her] aura in a fiery cloud.
 		#IF game.isSillyModeEnabled()
-			#THEN [npc.speech(That's a spicy meatball!)] [npc.name] [npc.verb(shout)].  
+			#THEN [npc.speech(That's a spicy meatball!)] [npc.name] shout.
 			#ENDIF
 		]]></hitText>
 	</hitDescriptions>
@@ -81,7 +83,7 @@
 	<!-- Descriptions that are used when missing an enemy. One of the missText values will be randomly selected each time the attacker misses their target. Follow the same guidelines as equipText. -->
 	<missDescriptions>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(line)] [npc2.name] up in [npc.her] sights and [npc.verb(pull)] the trigger. The shot goes wide! The grenade explodes well away from [npc2.name].
+		[npc.Name] line [npc2.name] up in [npc.her] sights and pull the trigger. The shot goes wide! The grenade explodes well away from [npc2.name].
 		]]></missText>
 	</missDescriptions>
 	

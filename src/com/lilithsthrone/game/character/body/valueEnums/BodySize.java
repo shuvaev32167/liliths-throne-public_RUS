@@ -12,16 +12,16 @@ import com.lilithsthrone.utils.colours.PresetColour;
 public enum BodySize {
 	ZERO_SKINNY("тощее", 0, 20, PresetColour.BODY_SIZE_ZERO),
 	ONE_SLENDER("худое", 20, 40, PresetColour.BODY_SIZE_ONE),
-	TWO_AVERAGE("Среднее", 40, 60, PresetColour.BODY_SIZE_TWO),
-	THREE_LARGE("Большое", 60, 80, PresetColour.BODY_SIZE_THREE),
-	FOUR_HUGE("Огромное", 80, 100, PresetColour.BODY_SIZE_FOUR);
+    TWO_AVERAGE("среднее", 40, 60, PresetColour.BODY_SIZE_TWO),
+    THREE_LARGE("большое", 60, 80, PresetColour.BODY_SIZE_THREE),
+    FOUR_HUGE("огромное", 80, 100, PresetColour.BODY_SIZE_FOUR);
 
-	private String name;
-	private int minimumBodySize;
-	private int maximumBodySize;
-	private Colour colour;
+	private final String name;
+	private final int minimumBodySize;
+	private final int maximumBodySize;
+	private final Colour colour;
 
-	private BodySize(String name, int minimumBodySize, int maximumBodySize, Colour colour) {
+	BodySize(String name, int minimumBodySize, int maximumBodySize, Colour colour) {
 		this.name = name;
 		this.minimumBodySize = minimumBodySize;
 		this.maximumBodySize = maximumBodySize;

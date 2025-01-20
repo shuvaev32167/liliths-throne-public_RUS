@@ -55,7 +55,7 @@
 		#ELSE
 		 Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],
 		#ENDIF
-		 and as the transformation finishes, [npc.she] experimentally [npc.verb(twitch)] [npc.her] new ferret-like ears back and forth.
+		 and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new ferret-like ears back and forth.
 		<br/>[npc.Name] now [npc.has] [style.boldFerret(rounded, ferret-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].
 	]]></transformationDescription>
 	

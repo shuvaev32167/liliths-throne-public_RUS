@@ -1,15 +1,5 @@
 package com.lilithsthrone.game.inventory.item;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -31,12 +21,7 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
-import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
-import com.lilithsthrone.game.inventory.enchanting.ItemEffectTimer;
-import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
-import com.lilithsthrone.game.inventory.enchanting.TFModifier;
-import com.lilithsthrone.game.inventory.enchanting.TFPotency;
+import com.lilithsthrone.game.inventory.enchanting.*;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.SvgUtil;
 import com.lilithsthrone.utils.Units;
@@ -45,6 +30,16 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.84
@@ -767,9 +762,9 @@ public class ItemType {
 		@Override
 		public String getUseDescription(GameCharacter user, GameCharacter target) {
 			if(user==target) {
-				return UtilText.parse(user, target, "Untying the top of the used condom, [npc.name] [npc.verb(wonder)] how best to use the contents.");
+				return UtilText.parse(user, target, "Untying the top of the used condom, [npc.name] wonder how best to use the contents.");
 			} else {
-				return UtilText.parse(user, target, "Untying the top of the used condom, [npc.name] [npc.verb(wonder)] how best to use the contents on [npc2.name].");
+				return UtilText.parse(user, target, "Untying the top of the used condom, [npc.name] wonder how best to use the contents on [npc2.name].");
 			}
 		}
 		@Override
@@ -2435,15 +2430,15 @@ public class ItemType {
 		return 1000;
 	}
 	
-	private static List<AbstractItemType> dominionAlleywayItems = new ArrayList<>();
-	private static List<AbstractItemType> submissionTunnelItems = new ArrayList<>();
-	private static List<AbstractItemType> batCavernItems = new ArrayList<>();
-	private static List<AbstractItemType> elisAlleywayItems = new ArrayList<>();
+	private static final List<AbstractItemType> dominionAlleywayItems = new ArrayList<>();
+	private static final List<AbstractItemType> submissionTunnelItems = new ArrayList<>();
+	private static final List<AbstractItemType> batCavernItems = new ArrayList<>();
+	private static final List<AbstractItemType> elisAlleywayItems = new ArrayList<>();
 	
-	private static List<AbstractItemType> essences = new ArrayList<>();
-	private static List<AbstractItemType> allItems = new ArrayList<>();
+	private static final List<AbstractItemType> essences = new ArrayList<>();
+	private static final List<AbstractItemType> allItems = new ArrayList<>();
 	private static List<AbstractItemType> moddedItems = new ArrayList<>();
-	private static Map<AbstractSubspecies, String> subspeciesBookId = new HashMap<>();
+	private static final Map<AbstractSubspecies, String> subspeciesBookId = new HashMap<>();
 	
 	/**
 	 * If you're looking for spell books, their id is:<br/>
@@ -2451,7 +2446,7 @@ public class ItemType {
 	 * If you're looking for spell scrolls, their id is:<br/>
 	 * "SPELL_SCROLL_"+spellSchool.toString()
 	 */
-	private static Map<AbstractItemType, String> itemToIdMap = new HashMap<>();
+	private static final Map<AbstractItemType, String> itemToIdMap = new HashMap<>();
 
 	/**
 	 * If you're looking for spell books, their id is:<br/>
@@ -2459,7 +2454,7 @@ public class ItemType {
 	 * If you're looking for spell scrolls, their id is:<br/>
 	 * "SPELL_SCROLL_"+spellSchool.toString()
 	 */
-	private static Map<String, AbstractItemType> idToItemMap = new HashMap<>();
+	private static final Map<String, AbstractItemType> idToItemMap = new HashMap<>();
 	
 
 	public static AbstractItemType getItemTypeFromId(String id) {
@@ -3217,7 +3212,7 @@ public class ItemType {
 		};
 	}
 	
-	private static Map<AbstractSubspecies, String> essenceMap = new HashMap<>();
+	private static final Map<AbstractSubspecies, String> essenceMap = new HashMap<>();
 	
 	private static String getEssenceSvg(AbstractSubspecies subspecies) {
 		if(essenceMap.containsKey(subspecies)) {

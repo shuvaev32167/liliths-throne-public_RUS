@@ -1,48 +1,11 @@
 package com.lilithsthrone.game.dialogue.places.submission.ratWarrens;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.FluidCum;
-import com.lilithsthrone.game.character.body.types.AntennaType;
-import com.lilithsthrone.game.character.body.types.ArmType;
-import com.lilithsthrone.game.character.body.types.AssType;
-import com.lilithsthrone.game.character.body.types.BreastType;
-import com.lilithsthrone.game.character.body.types.EarType;
-import com.lilithsthrone.game.character.body.types.EyeType;
-import com.lilithsthrone.game.character.body.types.FaceType;
-import com.lilithsthrone.game.character.body.types.FluidType;
-import com.lilithsthrone.game.character.body.types.HairType;
-import com.lilithsthrone.game.character.body.types.HornType;
-import com.lilithsthrone.game.character.body.types.LegType;
-import com.lilithsthrone.game.character.body.types.PenisType;
-import com.lilithsthrone.game.character.body.types.TailType;
-import com.lilithsthrone.game.character.body.types.TentacleType;
-import com.lilithsthrone.game.character.body.types.TorsoType;
-import com.lilithsthrone.game.character.body.types.VaginaType;
-import com.lilithsthrone.game.character.body.types.WingType;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
-import com.lilithsthrone.game.character.body.valueEnums.LipSize;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
-import com.lilithsthrone.game.character.body.valueEnums.NippleSize;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
+import com.lilithsthrone.game.character.body.types.*;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -62,42 +25,23 @@ import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseSex;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
-import com.lilithsthrone.game.sex.GenericSexFlag;
-import com.lilithsthrone.game.sex.InitialSexActionInformation;
-import com.lilithsthrone.game.sex.LubricationType;
-import com.lilithsthrone.game.sex.SexAreaInterface;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.managers.submission.SMEatenOut;
 import com.lilithsthrone.game.sex.managers.submission.SMEatingOut;
 import com.lilithsthrone.game.sex.managers.submission.SMShadowSilence;
 import com.lilithsthrone.game.sex.managers.submission.SMVengarDominantSex;
-import com.lilithsthrone.game.sex.managers.universal.SMAgainstWall;
-import com.lilithsthrone.game.sex.managers.universal.SMLyingDown;
-import com.lilithsthrone.game.sex.managers.universal.SMOverDesk;
-import com.lilithsthrone.game.sex.managers.universal.SMSitting;
-import com.lilithsthrone.game.sex.managers.universal.SMStanding;
+import com.lilithsthrone.game.sex.managers.universal.*;
 import com.lilithsthrone.game.sex.positions.SexPosition;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotAgainstWall;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotDesk;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotLyingDown;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotSitting;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
+import com.lilithsthrone.game.sex.positions.slots.*;
+import com.lilithsthrone.game.sex.sexActions.baseActions.*;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.*;
 
 /**
  * @since 0.3.5.5
@@ -214,7 +158,7 @@ public class VengarCaptiveDialogue {
 	}
 	
 	private static String applyTransformation(GameCharacter target) { //TODO returning empty string
-		StringBuilder sb = new StringBuilder();
+        String sb = "";
 		
 		if(target.isAbleToHaveRaceTransformed()) {
 			boolean genitalsSet = false;
@@ -286,7 +230,7 @@ public class VengarCaptiveDialogue {
 		target.setVaginaPlasticity(Math.max(OrificePlasticity.FIVE_YIELDING.getValue(), target.getVaginaPlasticity().getValue()));
 		target.removeGirlcumModifier(FluidModifier.ADDICTIVE);
 		
-		return sb.toString();
+		return sb;
 	}
 	
 	private static void applyTattoo(GameCharacter target, String text) {
@@ -692,7 +636,7 @@ public class VengarCaptiveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue",
+                return new Response("Продолжить",
 						"You're left free to wander between the hall and Vengar's bedroom.",
 						Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime())) {
 					@Override
@@ -756,13 +700,13 @@ public class VengarCaptiveDialogue {
 				};
 				
 			} else if(index==6) {
-				return new Response("Vengar", "Decide to stay close to Vengar for a while.", VENGARS_HALL_CHOOSE_VENGAR);
+                return new Response("Венгар", "Decide to stay close to Vengar for a while.", VENGARS_HALL_CHOOSE_VENGAR);
 				
 			} else if(index==7) {
-				return new Response("Shadow", "Decide to stay close to Shadow for a while.", VENGARS_HALL_CHOOSE_SHADOW);
+                return new Response("Тень", "Decide to stay close to Shadow for a while.", VENGARS_HALL_CHOOSE_SHADOW);
 				
 			} else if(index==8) {
-				return new Response("Silence", "Decide to stay close to Silence for a while.", VENGARS_HALL_CHOOSE_SILENCE);
+				return new Response("Сайленс", "Decide to stay close to Silence for a while.", VENGARS_HALL_CHOOSE_SILENCE);
 				
 			}  else if(index==9 && isCompanionDialogue()) {
 				return new Response(UtilText.parse(getMainCompanion(), "[npc.Name]"), UtilText.parse(getMainCompanion(), "Decide to seek out your companion, [npc.name], and see what [npc.she] is up to."), VENGARS_HALL_CHOOSE_COMPANION) {
@@ -964,7 +908,7 @@ public class VengarCaptiveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Do as Vengar commands and head back down into the hall.", Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime()));
+                return new Response("Продолжить", "Do as Vengar commands and head back down into the hall.", Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime()));
 			}
 			return null;
 		}
@@ -1001,7 +945,7 @@ public class VengarCaptiveDialogue {
 				
 			} else {
 				if(index==1) {
-					return new Response("Continue", "Do as Shadow commands and leave her alone, heading back into the hall instead.", Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime()));
+                    return new Response("Продолжить", "Do as Shadow commands and leave her alone, heading back into the hall instead.", Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime()));
 				}
 			}
 			return null;
@@ -1057,12 +1001,28 @@ public class VengarCaptiveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Do as Shadow commands and head back down into the hall.", Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime()));
+                return new Response("Продолжить", "Do as Shadow commands and head back down into the hall.", Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime()));
 			}
 			return null;
 		}
 	};
-	
+	public static final DialogueNode AFTER_SILENCE_ORAL = new DialogueNode("", "", true) {
+		@Override
+		public int getSecondsPassed() {
+			return 10*60;
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/submission/ratWarrens/vengarCaptive", "AFTER_SILENCE_ORAL");
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+                return new Response("Продолжить", "Silence seems unwilling to do anything else with you at the moment, so you have little option but to head back into the hall.", Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime()));
+			}
+			return null;
+		}
+	};
 	public static final DialogueNode VENGARS_HALL_CHOOSE_SILENCE = new DialogueNode("", "", true) {
 		@Override
 		public int getSecondsPassed() {
@@ -1099,34 +1059,16 @@ public class VengarCaptiveDialogue {
 							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Silence.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 						}
 					};
-				
+
 				} else if(index==2) {
 					return new Response("Leave", "Decide against performing oral on Silence and head back into the hall instead.", Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime()));
-					
+
 				}
-				
+
 			} else {
 				if(index==1) {
-					return new Response("Continue", "As Silence seems unwilling to react to your presence, there's nothing left to do except head back into the hall.", Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime()));
+                    return new Response("Продолжить", "As Silence seems unwilling to react to your presence, there's nothing left to do except head back into the hall.", Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime()));
 				}
-			}
-			return null;
-		}
-	};
-
-	public static final DialogueNode AFTER_SILENCE_ORAL = new DialogueNode("", "", true) {
-		@Override
-		public int getSecondsPassed() {
-			return 10*60;
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/ratWarrens/vengarCaptive", "AFTER_SILENCE_ORAL");
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Continue", "Silence seems unwilling to do anything else with you at the moment, so you have little option but to head back into the hall.", Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime()));
 			}
 			return null;
 		}
@@ -1310,7 +1252,6 @@ public class VengarCaptiveDialogue {
 			return null;
 		}
 	};
-
 	public static final DialogueNode AFTER_COMPANION_FLIRTING_ORAL = new DialogueNode("Finished", "", true) {
 		@Override
 		public String getDescription() {
@@ -1327,7 +1268,7 @@ public class VengarCaptiveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue",
+                return new Response("Продолжить",
 						UtilText.parse(getCharactersPresent(true), "Having had [npc2.her] fun, [npc2.name] leaves you and [npc.name] to get on with other duties in the hall..."),
 						Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime())) {
 					@Override
@@ -1352,7 +1293,7 @@ public class VengarCaptiveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue",
+                return new Response("Продолжить",
 						UtilText.parse(getCharactersPresent(true), "Having had [npc2.her] fun, [npc2.name] leaves you and [npc.name] to get on with other duties in the hall..."),
 						Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime())){
 					@Override
@@ -1382,7 +1323,7 @@ public class VengarCaptiveDialogue {
 			if(getCharactersPresent(true).get(1).hasPenis()) {
 				if(index==1) {
 					return new Response("Leave",
-							UtilText.parse(getCharactersPresent(true), "Decide against getting involved with [npc.name] and [npc2.name]..."),
+                            UtilText.parse(getCharactersPresent(true), "Decide against getting involved with [npc.name] и [npc2.name]..."),
 							Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime()));
 					
 				} else if(index==2) {
@@ -1465,7 +1406,7 @@ public class VengarCaptiveDialogue {
 			} else {
 				if(index==1) {
 					return new Response("Leave",
-							UtilText.parse(getCharactersPresent(true), "Decide against getting involved with [npc.name] and [npc2.name]..."),
+                            UtilText.parse(getCharactersPresent(true), "Decide against getting involved with [npc.name] и [npc2.name]..."),
 							Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime()));
 					
 				} else if(index==2) {
@@ -1617,7 +1558,7 @@ public class VengarCaptiveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue",
+                return new Response("Продолжить",
 						UtilText.parse(getCharactersPresent(true), "Having had [npc2.her] fun, [npc2.name] leaves you and [npc.name] to get on with other duties in the hall..."),
 						Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime())) {
 					@Override
@@ -1787,7 +1728,7 @@ public class VengarCaptiveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue",
+                return new Response("Продолжить",
 						UtilText.parse(getCharactersPresent(true), "Having had their fun, the rats leave you and [npc.name] to get on with other duties in the hall..."),
 						Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime())) {
 					@Override
@@ -1900,7 +1841,7 @@ public class VengarCaptiveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Do as Shadow commands and head back down into the hall.", Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime()));
+                return new Response("Продолжить", "Do as Shadow commands and head back down into the hall.", Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime()));
 			}
 			return null;
 		}
@@ -2143,7 +2084,7 @@ public class VengarCaptiveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue",
+                return new Response("Продолжить",
 						UtilText.parse(getCharactersPresent(true), "Having had his fun, Vengar orders you and [npc.name] to get on with other duties in the hall..."),
 						Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime())) {
 					@Override
@@ -2172,7 +2113,7 @@ public class VengarCaptiveDialogue {
 		public Response getResponse(int responseTab, int index) {
 			if(Main.game.getPlayer().hasStatusEffect(StatusEffect.PREGNANT_3)) {
 				if(index==1) {
-					return new Response("Bedroom",
+                    return new Response("Спальня",
 							"Follow Shadow and Silence into the bedroom.",
 							VENGARS_HALL_DELIVERY_BIRTHING) {
 						@Override
@@ -2186,7 +2127,7 @@ public class VengarCaptiveDialogue {
 					
 			} else {
 				if(index==1) {
-					return new Response("Continue",
+                    return new Response("Продолжить",
 							UtilText.parse(getMainCompanion(), "From the gentle way in which Silence is treating [npc.name], you're able to continue with your duties in the hall without having to worry about [npc.herHim]."),
 							Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime())) {
 						@Override
@@ -2211,7 +2152,7 @@ public class VengarCaptiveDialogue {
 	public static final DialogueNode VENGARS_HALL_DELIVERY_BIRTHING = new DialogueNode("", "", true) {//TODO append offspring.
 		@Override
 		public int getSecondsPassed() {
-			return 1*60*60;
+			return 60 * 60;
 		}
 		@Override
 		public String getContent() {
@@ -2259,7 +2200,7 @@ public class VengarCaptiveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue",
+                return new Response("Продолжить",
 						UtilText.parse(getCharactersPresent(true), "It's time for you to return to your duties in the hall..."),
 						Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime()));
 			}
@@ -2279,7 +2220,7 @@ public class VengarCaptiveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue",
+                return new Response("Продолжить",
 						UtilText.parse(getCharactersPresent(true), "It's time for you to return to your duties in the hall..."),
 						Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime()));
 			}
@@ -2314,7 +2255,7 @@ public class VengarCaptiveDialogue {
 	public static final DialogueNode CORRIDOR = new DialogueNode("Twisting Passageway", "", true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -2373,7 +2314,7 @@ public class VengarCaptiveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Shadow", "Shadow leads you into the private bed-chambers...", VENGARS_HALL_NIGHT_TIME_ESCORTED) {
+                return new Response("Тень", "Shadow leads you into the private bed-chambers...", VENGARS_HALL_NIGHT_TIME_ESCORTED) {
 					@Override
 					public void effects() {
 						Main.game.getNpc(Shadow.class).setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_PRIVATE_BEDCHAMBERS);
@@ -2702,7 +2643,7 @@ public class VengarCaptiveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue",
+                return new Response("Продолжить",
 						UtilText.parse(getCharactersPresent(false), "Having had [npc.her] fun, [npc.name] leaves you to get on with other duties in the hall..."),
 						Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime())) {
 					@Override
@@ -2730,7 +2671,7 @@ public class VengarCaptiveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue",
+                return new Response("Продолжить",
 						getCharactersPresent(false).size()>1
 							?"Having had their fun, the rats leave you to get on with other duties in the hall..."
 							:UtilText.parse(getCharactersPresent(false), "Having had [npc.her] fun, [npc.name] leaves you to get on with other duties in the hall..."),
@@ -2915,7 +2856,7 @@ public class VengarCaptiveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue",
+                return new Response("Продолжить",
 						UtilText.parse(getCharactersPresent(false), "Having had [npc.her] fun, [npc.name] leaves you to get on with other duties in the hall..."),
 						Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime())){
 					@Override
@@ -3056,7 +2997,7 @@ public class VengarCaptiveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue",
+                return new Response("Продолжить",
 						"Having had their fun, the rats leave you to get on with other duties in the hall...",
 						Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime())){
 					@Override
@@ -3103,7 +3044,7 @@ public class VengarCaptiveDialogue {
 	public static final DialogueNode VENGARS_BEDROOM_CLEAN_FINISH = new DialogueNode("", "", true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60*60;
+			return 60 * 60;
 		}
 		@Override
 		public String getContent() {
@@ -3223,7 +3164,7 @@ public class VengarCaptiveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue",
+                return new Response("Продолжить",
 						"Think about what to do in the main hall next.",
 						Main.game.getDefaultDialogue(!Main.game.isExtendedWorkTime()));
 			}
@@ -3351,7 +3292,7 @@ public class VengarCaptiveDialogue {
 			if(isCompanionDialogue()) {
 				if(index==1) {
 					return new ResponseSex(
-							"Shadow",
+                            "Тень",
 							"Express your desire to have the dominant rat-girl eat you out...",
 							true,
 							false,
@@ -3381,7 +3322,7 @@ public class VengarCaptiveDialogue {
 					
 				} else if(index==2) {
 					return new ResponseSex(
-							"Silence",
+							"Сайленс",
 							"Express your desire to eat out the white-furred rat-girl...",
 							true,
 							false,
@@ -3646,7 +3587,7 @@ public class VengarCaptiveDialogue {
 	public static final DialogueNode VENGARS_BEDROOM_NIGHT_TIME_PRETEND = new DialogueNode("", "", true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60*60;
+			return 60 * 60;
 		}
 		@Override
 		public String getContent() {

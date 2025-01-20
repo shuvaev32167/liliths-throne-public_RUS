@@ -12,8 +12,8 @@
 		<attackTooltipDescription>Poke [npc2.name] with your pen.</attackTooltipDescription>
 		<rarity>LEGENDARY</rarity>
 		<weaponSet/>
-		<equipText><![CDATA[[npc.Name] [npc.verb(bring)] out Inky's pen and [npc.verb(get)] ready to use it in combat.]]></equipText>
-		<unequipText><![CDATA[[npc.Name] [npc.verb(put)] Inky's pen away.]]></unequipText>
+        <equipText><![CDATA[[npc.Name] bring out Inky's pen and get ready to use it in combat.]]></equipText>
+        <unequipText><![CDATA[[npc.Name] put Inky's pen away.]]></unequipText>
 		<imageName>inky.svg</imageName> 
 		<imageEquippedName/>
 		<damage>1</damage> 
@@ -52,14 +52,14 @@
 	
 	<hitDescriptions>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(thrust)] [npc.her] pen at [npc2.name], and although it strikes [npc2.her] body, it really doesn't cause much damage... 
+		[npc.Name] thrust [npc.her] pen at [npc2.name], and although it strikes [npc2.her] body, it really doesn't cause much damage...
 		]]></hitText>
 	</hitDescriptions>
 
 	<!-- Descriptions that are used when missing an enemy. One of the missText values will be randomly selected each time the attacker misses their target. Follow the same guidelines as equipText. -->
 	<missDescriptions>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(thrust)] [npc.her] pen at [npc2.name], but [npc.she] [npc.verb(miss)]... 
+		[npc.Name] thrust [npc.her] pen at [npc2.name], but [npc.she] miss...
 		]]></missText>
 	</missDescriptions>
 	

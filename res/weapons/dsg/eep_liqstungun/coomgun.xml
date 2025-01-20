@@ -27,18 +27,18 @@
 		<rarity>EPIC</rarity> 
 		
 		<equipText><![CDATA[
-		[npc.Name] [npc.verb(bring)] out the coom gun
+		[npc.Name] bring out the coom gun
 		#IF npc.getBreastRawStoredMilkValue()>=150 
-			#THEN and discretely [npc.verb(attach)] the cup attachments to [npc.her] [npc.nipplesD]. [npc.She] then [npc.verb(pull)] the sling over [npc.her] shoulder and [npc.verb(let)] out a small moan as the pumps draw [npc.her] [npc.milkD] through the hoses into the built-in tank.
+			#THEN and discretely attach the cup attachments to [npc.her] [npc.nipplesD]. [npc.She] then pull the sling over [npc.her] shoulder and let out a small moan as the pumps draw [npc.her] [npc.milkD] through the hoses into the built-in tank.
 			[#npc.setBreastStoredMilk(npc.getBreastRawStoredMilkValue()-150)]
 		#ELSEIF npc.getPenisRawStoredCumValue()>=150
-			#THEN and discretely [npc.verb(slide)] the cup attachment over [npc.her] [npc.penisD]. [npc.She] then [npc.verb(pull)] the sling over [npc.her] shoulder and [npc.verb(let)] out a small groan as the pumps draw [npc.her] [npc.cumD] into the built-in tank.
+			#THEN and discretely slide the cup attachment over [npc.her] [npc.penisD]. [npc.She] then pull the sling over [npc.her] shoulder and let out a small groan as the pumps draw [npc.her] [npc.cumD] into the built-in tank.
 			[#npc.setPenisStoredCum(npc.getPenisRawStoredCumValue()-150)]
-		#ELSE and [npc.verb(allow)] the built-in tank to magically fill itself with arcane-enhanced water, since [npc.sheHasFull] no special ammunition to put in it, before pulling the sling over [npc.her] shoulder.
+		#ELSE and allow the built-in tank to magically fill itself with arcane-enhanced water, since [npc.sheHasFull] no special ammunition to put in it, before pulling the sling over [npc.her] shoulder.
 		#ENDIF
 		]]></equipText>
-		
-		<unequipText><![CDATA[[npc.Name] [npc.verb(put)] the stun gun away.]]></unequipText>
+
+        <unequipText><![CDATA[[npc.Name] put the stun gun away.]]></unequipText>
 		
 		<imageName>liqstungun_holstered.svg</imageName> 
 		
@@ -70,7 +70,7 @@
 		
 		<onHitEffect><![CDATA[
 		#IF (npc.getBreastRawStoredMilkValue()>=150)
-			A jet of [npc.milkD] streams towards [npc2.name], followed by a crackling bolt of arcane lightning. [npc2.Name] barely has time to stare with a look of disbelief on [npc2.her] face before being hit! </br>[npc2.speech(What the fuck?!!)] [npc2.she] [npc2.verb(splutter)] as [npc2.she] succumbs to the effects of the lightning. [npc.Name] [npc.verb(moan)] as the pumps suck on [npc.her] [npc.nipples] for more special ammunition.
+			A jet of [npc.milkD] streams towards [npc2.name], followed by a crackling bolt of arcane lightning. [npc2.Name] barely has time to stare with a look of disbelief on [npc2.her] face before being hit! </br>[npc2.speech(What the fuck?!!)] [npc2.she] [npc2.verb(splutter)] as [npc2.she] succumbs to the effects of the lightning. [npc.Name] moan as the pumps suck on [npc.her] [npc.nipples] for more special ammunition.
 			
 			[#npc.setBreastStoredMilk(npc.getBreastRawStoredMilkValue()-150)]
 			
@@ -108,11 +108,11 @@
 			#ENDIF
 			
 			#IF (npc.getBreastRawStoredMilkValue()<150)
-				<br/><b>The pumps hiccup a bit on empty air.</b> [npc.Name] [npc.verb(realize)] [npc.sheHasFull] no special ammunition left. The gun automatically switches over to arcane water replenishment until [npc.she] can produce more.
+				<br/><b>The pumps hiccup a bit on empty air.</b> [npc.Name] realize [npc.sheHasFull] no special ammunition left. The gun automatically switches over to arcane water replenishment until [npc.she] can produce more.
 			#ENDIF
 			
 		#ELSEIF (npc.getPenisRawStoredCumValue()>=150)
-			A jet of [npc.cumD] streams towards [npc2.name], followed by a crackling bolt of arcane lightning. [npc2.Name] barely has time to stare with a look of disbelief on [npc2.her] face before being hit! [npc2.speech(What the fuck?!!)] [npc2.she] [npc2.verb(splutter)] as [npc2.she] succumbs to the effects of the lightning. [npc.Name] [npc.verb(groan)] as the pumps suck on [npc.her] [npc.penis] for more special ammunition.
+			A jet of [npc.cumD] streams towards [npc2.name], followed by a crackling bolt of arcane lightning. [npc2.Name] barely has time to stare with a look of disbelief on [npc2.her] face before being hit! [npc2.speech(What the fuck?!!)] [npc2.she] [npc2.verb(splutter)] as [npc2.she] succumbs to the effects of the lightning. [npc.Name] groan as the pumps suck on [npc.her] [npc.penis] for more special ammunition.
 			
 			[#npc.setPenisStoredCum(npc.getPenisRawStoredCumValue()-150)]
 			
@@ -149,23 +149,23 @@
 			#ENDIF
 			
 			#IF (npc.getPenisRawStoredCumValue()<150)
-				<b>The pumps hiccup a bit on empty air.</b> [npc.Name] [npc.verb(realize)] [npc.sheHasFull] no special ammunition left. The gun automatically switches over to arcane water replenishment until [npc.she] can produce more.
+				<b>The pumps hiccup a bit on empty air.</b> [npc.Name] realize [npc.sheHasFull] no special ammunition left. The gun automatically switches over to arcane water replenishment until [npc.she] can produce more.
 			#ENDIF
 			
 		#ELSE
 			A jet of water streams towards [npc2.name], followed by a crackling bolt of arcane lightning. [npc2.Name] barely has time to stare with a look of disbelief on [npc2.her] face before succumbing to the effects of the lightning! [npc2.Name] [npc2.verb(shiver)] a bit as the water soaks into [npc2.her] [npc2.skinSkin]. 
 			
 			#IF (npc.getBreastRawStoredMilkValue()>=150)
-				As if sensing the bounty stored in [npc.namePos] [npc.breastsD], <b>the gun's pumps start pulling [npc.her] [npc.milkD] through the hoses.</b> [npc.Name] [npc.verb(moan)] at the stimulation.
+				As if sensing the bounty stored in [npc.namePos] [npc.breastsD], <b>the gun's pumps start pulling [npc.her] [npc.milkD] through the hoses.</b> [npc.Name] moan at the stimulation.
 			#ELSEIF (npc.getPenisRawStoredCumValue()>=150)
-				As if sensing the bounty stored in [npc.namePos] [npc.ballsD], <b>the gun's pumps start pulling [npc.her] [npc.cumD] through the hoses.</b> [npc.Name] [npc.verb(groan)] at the stimulation.
+				As if sensing the bounty stored in [npc.namePos] [npc.ballsD], <b>the gun's pumps start pulling [npc.her] [npc.cumD] through the hoses.</b> [npc.Name] groan at the stimulation.
 			#ENDIF
 		#ENDIF
 		]]></onHitEffect>
 		
 		<onCriticalHitEffect><![CDATA[
 		#IF (npc.getBreastRawStoredMilkValue()>=150)
-			A jet of [npc.milkD] streams towards [npc2.name], followed by a crackling bolt of arcane lightning. [npc2.Name] barely has time to stare with a look of disbelief on [npc2.her] face before being hit! </br>[npc2.speech(What the fuck?!!)] [npc2.she] [npc2.verb(splutter)] as [npc2.she] succumbs to the effects of the lightning. [npc.Name] [npc.verb(moan)] as the pumps suck on [npc.her] [npc.nipples] for more special ammunition.
+			A jet of [npc.milkD] streams towards [npc2.name], followed by a crackling bolt of arcane lightning. [npc2.Name] barely has time to stare with a look of disbelief on [npc2.her] face before being hit! </br>[npc2.speech(What the fuck?!!)] [npc2.she] [npc2.verb(splutter)] as [npc2.she] succumbs to the effects of the lightning. [npc.Name] moan as the pumps suck on [npc.her] [npc.nipples] for more special ammunition.
 			
 			[#npc.setBreastStoredMilk(npc.getBreastRawStoredMilkValue()-150)]
 			
@@ -181,11 +181,11 @@
 			#ENDIF
 			
 			#IF (npc.getBreastRawStoredMilkValue()<150)
-				<br/><b>The pumps hiccup a bit on empty air.</b> [npc.Name] [npc.verb(realize)] [npc.sheHasFull] no special ammunition left. The gun automatically switches over to arcane water replenishment until [npc.she] can produce more.
+				<br/><b>The pumps hiccup a bit on empty air.</b> [npc.Name] realize [npc.sheHasFull] no special ammunition left. The gun automatically switches over to arcane water replenishment until [npc.she] can produce more.
 			#ENDIF
 			
 		#ELSEIF (npc.getPenisRawStoredCumValue()>=150)
-			A jet of [npc.cumD] streams towards [npc2.name], followed by a crackling bolt of arcane lightning. [npc2.Name] barely has time to stare with a look of disbelief on [npc2.her] face before being hit! [npc2.speech(What the fuck?!!)] [npc2.she] [npc2.verb(splutter)] as [npc2.she] succumbs to the effects of the lightning. [npc.Name] [npc.verb(groan)] as the pumps suck on [npc.her] [npc.penis] for more special ammunition.
+			A jet of [npc.cumD] streams towards [npc2.name], followed by a crackling bolt of arcane lightning. [npc2.Name] barely has time to stare with a look of disbelief on [npc2.her] face before being hit! [npc2.speech(What the fuck?!!)] [npc2.she] [npc2.verb(splutter)] as [npc2.she] succumbs to the effects of the lightning. [npc.Name] groan as the pumps suck on [npc.her] [npc.penis] for more special ammunition.
 			
 			[#npc.setPenisStoredCum(npc.getPenisRawStoredCumValue()-150)]
 			
@@ -226,16 +226,16 @@
 			#ENDIF
 			
 			#IF (npc.getPenisRawStoredCumValue()<150)
-				<br/><b>The pumps hiccup a bit on empty air.</b> [npc.Name] [npc.verb(realize)] [npc.sheHasFull] no special ammunition left. The gun automatically switches over to arcane water replenishment until [npc.she] can produce more.
+				<br/><b>The pumps hiccup a bit on empty air.</b> [npc.Name] realize [npc.sheHasFull] no special ammunition left. The gun automatically switches over to arcane water replenishment until [npc.she] can produce more.
 			#ENDIF
 			
 		#ELSE
 			A jet of water streams towards [npc2.name], followed by a crackling bolt of arcane lightning. [npc2.Name] barely has time to stare with a look of disbelief on [npc2.her] face before succumbing to the effects of the lightning! [npc2.Name] [npc2.verb(shiver)] a bit as the water soaks into [npc2.her] [npc2.skinSkin]. 
 			
 			#IF (npc.getBreastRawStoredMilkValue()>=150)
-				As if sensing the bounty stored in [npc.namePos] [npc.breastsD], <b>the gun's pumps start pulling [npc.her] [npc.milkD] through the hoses.</b> [npc.Name] [npc.verb(moan)] at the stimulation.
+				As if sensing the bounty stored in [npc.namePos] [npc.breastsD], <b>the gun's pumps start pulling [npc.her] [npc.milkD] through the hoses.</b> [npc.Name] moan at the stimulation.
 			#ELSEIF (npc.getPenisRawStoredCumValue()>=150)
-				As if sensing the bounty stored in [npc.namePos] [npc.ballsD], <b>the gun's pumps start pulling [npc.her] [npc.cumD] through the hoses.</b> [npc.Name] [npc.verb(groan)] at the stimulation.
+				As if sensing the bounty stored in [npc.namePos] [npc.ballsD], <b>the gun's pumps start pulling [npc.her] [npc.cumD] through the hoses.</b> [npc.Name] groan at the stimulation.
 			#ENDIF
 		#ENDIF
 		]]></onCriticalHitEffect>
@@ -263,30 +263,30 @@
 
 	<hitDescriptions>
 		<hitText><![CDATA[
-			Aiming [npc.her] stun gun at [npc2.name], [npc.she] [npc.verb(pull)] the trigger.
+			Aiming [npc.her] stun gun at [npc2.name], [npc.she] pull the trigger.
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-			Aiming [npc.her] stun gun at [npc2.name], [npc.she] [npc.verb(pull)] the trigger. 
+			Aiming [npc.her] stun gun at [npc2.name], [npc.she] pull the trigger.
 			#IF (npc.getBreastRawStoredMilkValue()>0)
-				A jet of [npc.milkD] streams towards [npc2.name], but it goes wide! The [npc.milk] splashes and sparks into a useless puddle on the ground. [npc.Name] [npc.verb(moan)] as the pumps suck on [npc.her] [npc.nipples] for more special ammunition.
+				A jet of [npc.milkD] streams towards [npc2.name], but it goes wide! The [npc.milk] splashes and sparks into a useless puddle on the ground. [npc.Name] moan as the pumps suck on [npc.her] [npc.nipples] for more special ammunition.
 				
 				[#npc.setBreastStoredMilk(npc.getBreastRawStoredMilkValue()-150)]
 				
 				#IF (npc.getBreastRawStoredMilkValue()<150)
-					<b>The pumps hiccup a bit on empty air.</b> [npc.Name] [npc.verb(realize)] [npc.sheHasFull] has no special ammunition left. The gun automatically switches over to arcane water replenishment until [npc.she] can produce more.
+					<b>The pumps hiccup a bit on empty air.</b> [npc.Name] realize [npc.sheHasFull] has no special ammunition left. The gun automatically switches over to arcane water replenishment until [npc.she] can produce more.
 				#ENDIF
 				
 			#ELSE
 				#IF (npc.getPenisRawStoredCumValue()>0)
-					A jet of [npc.cumD] streams towards [npc2.name], but it goes wide! The [npc.cum] splashes and sparks into a useless puddle on the ground. [npc.Name] [npc.verb(moan)] as the pumps suck on [npc.her] [npc.penis] for more special ammunition.
+					A jet of [npc.cumD] streams towards [npc2.name], but it goes wide! The [npc.cum] splashes and sparks into a useless puddle on the ground. [npc.Name] moan as the pumps suck on [npc.her] [npc.penis] for more special ammunition.
 					
 					[#npc.setPenisStoredCum(npc.getPenisRawStoredCumValue()-150)]
 					
 					#IF (npc.getPenisRawStoredCumValue()<150)
-						<b>The pumps hiccup a bit on empty air.</b> [npc.Name] [npc.verb(realize)] [npc.sheHasFull] has no special ammunition left. The gun automatically switches over to arcane water replenishment until [npc.she] can produce more.
+						<b>The pumps hiccup a bit on empty air.</b> [npc.Name] realize [npc.sheHasFull] has no special ammunition left. The gun automatically switches over to arcane water replenishment until [npc.she] can produce more.
 					#ENDIF
 					
 				#ELSE

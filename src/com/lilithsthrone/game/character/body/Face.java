@@ -1,23 +1,17 @@
 package com.lilithsthrone.game.character.body;
 
-import java.util.List;
-
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
-import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeDepth;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.main.Main;
+
+import java.util.List;
 
 /**
  * @since 0.1.0
@@ -132,7 +126,7 @@ public class Face implements BodyPartInterface {
 
 		sb.append("<p>");
 		sb.append(
-				 "An intense tingling sensation suddenly sweeps across [npc.namePos] [npc.face], and [npc.she] [npc.verb(scrunch)] up [npc.her] [npc.eyes] as [npc.she] [npc.verb(feel)] it start to transform."
+                "An intense tingling sensation suddenly sweeps across [npc.namePos] [npc.face], and [npc.she] scrunch up [npc.her] [npc.eyes] as [npc.she] feel it start to transform."
 					+ " With an audible crunch, [npc.her] facial bones start to restructure themselves, and although the feeling isn't painful, it's enough of a shock to cause [npc.herHim] to let out an involuntary cry. ");
 		
 		// Parse existing content before transformation:

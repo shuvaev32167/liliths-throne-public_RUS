@@ -22,11 +22,13 @@
 		
 		<attackTooltipDescription>Shoot [npc2.name] with your pepperball rifle.</attackTooltipDescription>
 		
-		<rarity>RARE</rarity> 
-		
-		<equipText><![CDATA[[npc.Name] [npc.verb(bring)] out the rifle, [npc.verb(load)] a drum magazine, [npc.verb(opens)] the gas regulator, and [npc.verb(turns)] on the attached red-dot sight.]]></equipText>
-		
-		<unequipText><![CDATA[[npc.Name] [npc.verb(turn)] off the attached red-dot sight, [npc.verb(close)] the gas regulator, [npc.verb(unload)] the drum magazine, and [npc.verb(put)] the rifle away.]]></unequipText>
+		<rarity>RARE</rarity>
+
+        <equipText>
+            <![CDATA[[npc.Name] bring out the rifle, load a drum magazine, opens the gas regulator, and turns on the attached red-dot sight.]]></equipText>
+
+        <unequipText>
+            <![CDATA[[npc.Name] turn off the attached red-dot sight, close the gas regulator, unload the drum magazine, and put the rifle away.]]></unequipText>
 		
 		<imageName>pbrifle_nomag.svg</imageName> 
 		
@@ -68,38 +70,38 @@
 	<!-- Descriptions that are used when hitting an enemy. One of the hitText values will be randomly selected each time the attacker hits their target. Follow the same guidelines as equipText. -->
 	<hitDescriptions>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(line)] [npc2.name] up in [npc.her] sights and [npc.verb(pull)] the trigger. The round shatters on [npc2.namePos] aura, splashing [npc2.her] [npc2.arm] with bright orange oil.
+		[npc.Name] line [npc2.name] up in [npc.her] sights and pull the trigger. The round shatters on [npc2.namePos] aura, splashing [npc2.her] [npc2.arm] with bright orange oil.
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(line)] [npc2.name] up in [npc.her] sights and [npc.verb(pull)] the trigger. The round shatters on [npc2.namePos] aura, splashing [npc2.her] [npc2.leg] with bright orange oil.
+		[npc.Name] line [npc2.name] up in [npc.her] sights and pull the trigger. The round shatters on [npc2.namePos] aura, splashing [npc2.her] [npc2.leg] with bright orange oil.
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(line)] [npc2.name] up in [npc.her] sights and [npc.verb(pull)] the trigger. The round shatters on [npc2.namePos] aura, splashing [npc2.her] [npc2.face] with bright orange oil.
+		[npc.Name] line [npc2.name] up in [npc.her] sights and pull the trigger. The round shatters on [npc2.namePos] aura, splashing [npc2.her] [npc2.face] with bright orange oil.
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(line)] [npc2.name] up in [npc.her] sights and [npc.verb(pull)] the trigger. The round shatters on [npc2.namePos] aura, splashing [npc2.her] [npc2.arm] with stinging, burning oil.
+		[npc.Name] line [npc2.name] up in [npc.her] sights and pull the trigger. The round shatters on [npc2.namePos] aura, splashing [npc2.her] [npc2.arm] with stinging, burning oil.
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(line)] [npc2.name] up in [npc.her] sights and [npc.verb(pull)] the trigger. The round shatters on [npc2.namePos] aura, splashing [npc2.her] [npc2.leg] with stinging, burning oil.
+		[npc.Name] line [npc2.name] up in [npc.her] sights and pull the trigger. The round shatters on [npc2.namePos] aura, splashing [npc2.her] [npc2.leg] with stinging, burning oil.
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(line)] [npc2.name] up in [npc.her] sights and [npc.verb(pull)] the trigger. The round shatters on [npc2.namePos] aura, splashing [npc2.her] [npc2.face] with stinging, burning oil.
+		[npc.Name] line [npc2.name] up in [npc.her] sights and pull the trigger. The round shatters on [npc2.namePos] aura, splashing [npc2.her] [npc2.face] with stinging, burning oil.
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(line)] [npc2.name] up in [npc.her] sights and [npc.verb(pull)] the trigger. The round shatters on [npc2.namePos] aura, splashing [npc2.her] [npc2.arm] with painful oil that quickly forms a slick on [npc2.her] [npc2.skin].
+		[npc.Name] line [npc2.name] up in [npc.her] sights and pull the trigger. The round shatters on [npc2.namePos] aura, splashing [npc2.her] [npc2.arm] with painful oil that quickly forms a slick on [npc2.her] [npc2.skin].
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(line)] [npc2.name] up in [npc.her] sights and [npc.verb(pull)] the trigger. The round shatters on [npc2.namePos] aura, splashing [npc2.her] [npc2.leg] with painful oil that quickly forms a slick on [npc2.her] [npc2.skin].
+		[npc.Name] line [npc2.name] up in [npc.her] sights and pull the trigger. The round shatters on [npc2.namePos] aura, splashing [npc2.her] [npc2.leg] with painful oil that quickly forms a slick on [npc2.her] [npc2.skin].
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(line)] [npc2.name] up in [npc.her] sights and [npc.verb(pull)] the trigger. The round shatters on [npc2.namePos] aura, splashing [npc2.her] [npc2.face] with painful oil that quickly forms a slick on [npc2.her] [npc2.skin].
+		[npc.Name] line [npc2.name] up in [npc.her] sights and pull the trigger. The round shatters on [npc2.namePos] aura, splashing [npc2.her] [npc2.face] with painful oil that quickly forms a slick on [npc2.her] [npc2.skin].
 		]]></hitText>
 	</hitDescriptions>
 
 	<!-- Descriptions that are used when missing an enemy. One of the missText values will be randomly selected each time the attacker misses their target. Follow the same guidelines as equipText. -->
 	<missDescriptions>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(line)] [npc2.name] up in [npc.her] sights and [npc.verb(pull)] the trigger. The shot goes wide! The capsule shatters uselessly on the ground.
+		[npc.Name] line [npc2.name] up in [npc.her] sights and pull the trigger. The shot goes wide! The capsule shatters uselessly on the ground.
 		]]></missText>
 	</missDescriptions>
 	

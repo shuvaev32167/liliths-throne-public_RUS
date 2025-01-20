@@ -12,7 +12,7 @@
 		<attackTooltipDescription><![CDATA[Loose an ethereal arrow at [npc2.name].]]></attackTooltipDescription>
 		<rarity>LEGENDARY</rarity> 
 		<weaponSet>c4mg1rl_benevolent</weaponSet>
-		<equipText><![CDATA[[npc.Name] [npc.verb(draw)] the Hama Yumi, readying it for combat.]]></equipText>
+        <equipText><![CDATA[[npc.Name] draw the Hama Yumi, readying it for combat.]]></equipText>
 		<unequipText><![CDATA[[npc.Name] puts away [npc.her] yumi.]]></unequipText>
 		<imageName>hama_yumi.svg</imageName> 
 		<imageEquippedName>hama_yumi.svg</imageEquippedName>
@@ -45,10 +45,10 @@
 	</coreAttributes>
 	<hitDescriptions>
 		<hitText><![CDATA[
-		Taking aim with [npc.her] yumi, [npc.name] [npc.verb(manage)] to strike [npc2.name] in the chest; the ethereal arcane arrow passing through [npc2.her] torso to drain [npc2.her] energy!
+		Taking aim with [npc.her] yumi, [npc.name] manage to strike [npc2.name] in the chest; the ethereal arcane arrow passing through [npc2.her] torso to drain [npc2.her] energy!
 		]]></hitText>
 		<hitText><![CDATA[
-		Taking aim with [npc.her] yumi, [npc.name] [npc.verb(manage)] to strike through [npc2.her] [npc2.arm] with the ethereal arrow and drain [npc2.her] energy!
+		Taking aim with [npc.her] yumi, [npc.name] manage to strike through [npc2.her] [npc2.arm] with the ethereal arrow and drain [npc2.her] energy!
 		]]></hitText>
 		<hitText><![CDATA[
 		With a bated breath, [npc.name] looses an ethereal arrow at [npc2.name], sinking into [npc2.her] shoulder and causing [npc2.herHim] to lose some energy!
@@ -59,13 +59,13 @@
 	</hitDescriptions>
 	<missDescriptions>
 		<missText><![CDATA[
-		Taking aim with [npc.her] yumi, [npc.name] [npc.verb(attempt)] to strike [npc2.name] in the chest, but [npc.verb(end)] up missing [npc2.herHim]!
+		Taking aim with [npc.her] yumi, [npc.name] attempt to strike [npc2.name] in the chest, but end up missing [npc2.herHim]!
 		]]></missText>
 		<missText><![CDATA[
-		Taking aim at [npc2.name] with [npc.her] yumi, [npc.name] [npc.verb(let)] out a frustrated cry as [npc.she] [npc.verb(miss)] [npc.her] target!
+		Taking aim at [npc2.name] with [npc.her] yumi, [npc.name] let out a frustrated cry as [npc.she] miss [npc.her] target!
 		]]></missText>
 		<missText><![CDATA[
-		With a bated breath, [npc.name] looses an ethereal arrow at [npc2.name] with [npc.her] yumi, but [npc.she] [npc.verb(miss)] [npc.her] target!
+		With a bated breath, [npc.name] looses an ethereal arrow at [npc2.name] with [npc.her] yumi, but [npc.she] miss [npc.her] target!
 		]]></missText>
 	</missDescriptions>
 	

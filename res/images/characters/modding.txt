@@ -22,7 +22,7 @@ Also, when naming your images, there are certain key words which affect whether 
 	#noudders - This image will only be displayed if udder content is turned off OR the character does not have udders or crotch-boobs.
 
 For example, adding an own image for the unique character Scarlett requires the following:
-1) Go to the "Scarlett" folder and create a folder called "custom" inside it.
+1) Go to the "Скарлетт" folder and create a folder called "custom" inside it.
 2) Put your .png or .jpg images within that folder.
 3) Rename your images so that they all start with "clothed", "partial" or "naked", e.g. clothed1.jpg, clothed2.png and naked1.jpg.
 4) Save and reload to apply the changes.

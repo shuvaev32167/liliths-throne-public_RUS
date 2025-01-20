@@ -18,8 +18,8 @@
 		<attackTooltipDescription><![CDATA[Tickle [npc.name] with your feather duster!]]></attackTooltipDescription>
 		<rarity>EPIC</rarity>
 		<weaponSet>innoxia_maid</weaponSet>
-		<equipText><![CDATA[[npc.Name] [npc.verb(ready)] [npc.her] feather duster.]]></equipText>
-		<unequipText><![CDATA[[npc.Name] [npc.verb(put)] [npc.her] feather duster away.]]></unequipText>
+        <equipText><![CDATA[[npc.Name] ready [npc.her] feather duster.]]></equipText>
+        <unequipText><![CDATA[[npc.Name] put [npc.her] feather duster away.]]></unequipText>
 		<imageName>feather_duster.svg</imageName> 
 		<imageEquippedName/> 
 		<damage>2</damage> 
@@ -54,22 +54,22 @@
 	
 	<hitDescriptions>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(tickle)] [npc2.namePos] [npc2.arm] with [npc.her] feather duster!
+		[npc.Name] tickle [npc2.namePos] [npc2.arm] with [npc.her] feather duster!
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(swipe)] [npc.her] feather duster at [npc2.name] and [npc.verb(manage)] to tickle [npc2.her] [npc2.face].
+		[npc.Name] swipe [npc.her] feather duster at [npc2.name] и manage to tickle [npc2.her] [npc2.face].
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(swing)] [npc.her] feather duster at [npc2.name], grinning as [npc.she] [npc.verb(tickle)] [npc2.her] torso.
+		[npc.Name] swing [npc.her] feather duster at [npc2.name], grinning as [npc.she] tickle [npc2.her] torso.
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(swipe)] [npc.her] feather duster at [npc2.name], but [npc.verb(end)] up missing [npc2.herHim]!
+		[npc.Name] swipe [npc.her] feather duster at [npc2.name], but end up missing [npc2.herHim]!
 		]]></missText>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(swing)] [npc.her] feather duster at [npc2.name], but [npc.she] [npc.verb(miss)] [npc.her] target!
+		[npc.Name] swing [npc.her] feather duster at [npc2.name], but [npc.she] miss [npc.her] target!
 		]]></missText>
 	</missDescriptions>
 	

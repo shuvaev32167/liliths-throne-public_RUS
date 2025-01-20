@@ -1,10 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.slaverAlley;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.dominion.SupplierLeader;
@@ -33,6 +28,11 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * @since 0.4
@@ -141,7 +141,7 @@ public class BountyHunterLodge {
 	public static final DialogueNode ENTRANCE_INITITAL = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -156,7 +156,7 @@ public class BountyHunterLodge {
 	public static final DialogueNode ENTRANCE = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -165,7 +165,7 @@ public class BountyHunterLodge {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Exit", "Step back out into Slaver Alley.", PlaceType.SLAVER_ALLEY_BOUNTY_HUNTERS.getDialogue(false)) {
+                return new Response("Выход", "Step back out into Slaver Alley.", PlaceType.SLAVER_ALLEY_BOUNTY_HUNTERS.getDialogue(false)) {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/bountyHunterLodge", "ENTRANCE_LEAVE"));
@@ -180,7 +180,7 @@ public class BountyHunterLodge {
 	public static final DialogueNode FLOOR = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -321,7 +321,7 @@ public class BountyHunterLodge {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Downstairs", "Head back downstairs to the tavern's ground floor...", STAIRS) {
+				return new Response("Вниз", "Head back downstairs to the tavern's ground floor...", STAIRS) {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/bountyHunterLodge", "DOBERMANNS_AFTER_SEX_DOWNSTAIRS"));
@@ -336,7 +336,7 @@ public class BountyHunterLodge {
 	public static final DialogueNode SEATING = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -345,7 +345,7 @@ public class BountyHunterLodge {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1 && Main.game.getCharactersPresent().contains(Main.game.getNpc(Silence.class))) {
-				return new Response("Silence", "Head over and say something to Silence...<br/>[style.italicsBad(A mini-quest involving Silence and Shadow will be added soon!)]", null);
+                return new Response("Сайленс", "Head over and say something to Silence...<br/>[style.italicsBad(A mini-quest involving Silence and Shadow will be added soon!)]", null);
 			}
 			return null;
 		}
@@ -354,7 +354,7 @@ public class BountyHunterLodge {
 	public static final DialogueNode STAIRS = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -363,7 +363,7 @@ public class BountyHunterLodge {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Upstairs", "Head up the stairs to the tavern's first floor.", UPSTAIRS_STAIRS) {
+				return new Response("Наверх", "Head up the stairs to the tavern's first floor.", UPSTAIRS_STAIRS) {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/bountyHunterLodge", "STAIRS_UPSTAIRS"));
@@ -378,7 +378,7 @@ public class BountyHunterLodge {
 	public static final DialogueNode BOUNTY_BOARD = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -396,7 +396,7 @@ public class BountyHunterLodge {
 	public static final DialogueNode BAR = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -445,7 +445,7 @@ public class BountyHunterLodge {
 	public static final DialogueNode BAR_CONSUME = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -462,7 +462,7 @@ public class BountyHunterLodge {
 	public static final DialogueNode UPSTAIRS_CORRIDOR = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -477,7 +477,7 @@ public class BountyHunterLodge {
 	public static final DialogueNode UPSTAIRS_STAIRS = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -486,7 +486,7 @@ public class BountyHunterLodge {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Downstairs", "Head back down the stairs to the tavern's ground floor.", STAIRS) {
+				return new Response("Вниз", "Head back down the stairs to the tavern's ground floor.", STAIRS) {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/slaverAlley/bountyHunterLodge", "UPSTAIRS_STAIRS_DOWNSTAIRS"));
@@ -501,7 +501,7 @@ public class BountyHunterLodge {
 	public static final DialogueNode UPSTAIRS_ROOM = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -518,7 +518,7 @@ public class BountyHunterLodge {
 	public static final DialogueNode UPSTAIRS_ROOM_ANGELIXX = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -531,13 +531,13 @@ public class BountyHunterLodge {
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
 				if(Main.game.isHourBetween(9, 18)) {
-					return new Response("Angelixx",
+					return new Response("Ангеликс",
 							"Knock on the door to meet with Angelixx."
 							+ "<br/>[style.italicsMinorBad(This content will be added soon!)]",
 							null);
 					
 				} else {
-					return new Response("Angelixx",
+					return new Response("Ангеликс",
 							"Angelixx isn't around at this time..."
 							+ "<br/><i>Return between the hours of [units.time(9)]-[units.time(18)] to meet Angelixx.</i>",
 							null);
@@ -550,7 +550,7 @@ public class BountyHunterLodge {
 	public static final DialogueNode UPSTAIRS_ROOM_SLEIP_NIR = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {

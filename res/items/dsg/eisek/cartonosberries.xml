@@ -47,7 +47,7 @@
 				[##npc.addStatusEffect(SE_dsg_item_fruit_buff, 3600)]
 			#ENDIF
 			<p style='margin-bottom:0; padding-bottom:0;'>
-				[npc.Name] [npc.verb(feel)] vaguely healthier...
+				[npc.Name] feel vaguely healthier...
 			</p>
 		]]></applyEffects>
 		
@@ -59,10 +59,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-			[npc.Name] gingerly [npc.verb(pick)] a strawberry from the carton and [npc.verb(start)] eating it, but soon [npc.verb(start)] stuffing them into [npc.her] mouth. It doesn't take long to empty the carton after that...
+			[npc.Name] gingerly pick a strawberry from the carton and start eating it, but soon start stuffing them into [npc.her] mouth. It doesn't take long to empty the carton after that...
 		]]></selfUse>
 		<otherUse><![CDATA[
-			[npc.Name] gingerly [npc.verb(pick)] a strawberry from the carton for [npc2.name] to eat, but soon [npc2.name] takes the whole carton from [npc.her] and [npc2.verb(start)] stuffing them into [npc.her] mouth. It doesn't take long to empty the carton after that...
+			[npc.Name] gingerly pick a strawberry from the carton for [npc2.name] to eat, but soon [npc2.name] takes the whole carton from [npc.her] и [npc2.verb(start)] stuffing them into [npc.her] mouth. It doesn't take long to empty the carton after that...
 		]]></otherUse>
 	</useDescriptions>
 

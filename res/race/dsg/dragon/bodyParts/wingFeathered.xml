@@ -44,9 +44,9 @@
 	This description immediately follows a brief description of the wing type beginning to transform. -->
 	<transformationDescription><![CDATA[
 		#IF(npc.getLegConfiguration().isWingsOnLegConfiguration())
-			[npc.She] [npc.verb(bite)] [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], feathered wings push out from the sides of [npc.her] [npc.legConfiguration] body.
+			[npc.She] bite [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], feathered wings push out from the sides of [npc.her] [npc.legConfiguration] body.
 		#ELSE
-			[npc.She] [npc.verb(bite)] [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], feathered wings push out from [npc.her] shoulder blades.
+			[npc.She] bite [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], feathered wings push out from [npc.her] shoulder blades.
 		#ENDIF
 		<br/>[npc.Name] now [npc.has] [style.boldDragon(feathered wings)].
 	]]></transformationDescription>

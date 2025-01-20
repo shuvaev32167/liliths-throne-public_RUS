@@ -29,7 +29,7 @@
 		<applyEffects><![CDATA[
 			[##npc.incrementHealth(npc.getAttributeValue(ATTRIBUTE_HEALTH_MAXIMUM)*0.3)]
 			<p style='margin-bottom:0; padding-bottom:0;'>
-				[npc.Name] [npc.verb(start)] to feel as though [npc.she] [npc.has] more energy...
+				[npc.Name] start to feel as though [npc.she] [npc.has] more energy...
 			</p>
 		]]></applyEffects>
 		
@@ -41,10 +41,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-			[npc.Name] [npc.verb(lift)] the doughnut to [npc.her] mouth and [npc.verb(start)] eating it. It only takes a few moments for [npc.name] to completely consume the baked good, after which [npc.she] [npc.verb(let)] out a satisfied hum.
+			[npc.Name] lift the doughnut to [npc.her] mouth and start eating it. It only takes a few moments for [npc.name] to completely consume the baked good, after which [npc.she] let out a satisfied hum.
 		]]></selfUse>
 		<otherUse><![CDATA[
-			[npc.Name] [npc.verb(lift)] the doughnut to [npc2.namePos] mouth and [npc.verb(get)] [npc2.herHim] to start eating it. It only takes a few moments for [npc2.name] to completely consume the baked good, after which [npc2.she] [npc2.verb(let)] out a satisfied hum.
+			[npc.Name] lift the doughnut to [npc2.namePos] mouth and get [npc2.herHim] to start eating it. It only takes a few moments for [npc2.name] to completely consume the baked good, after which [npc2.she] [npc2.verb(let)] out a satisfied hum.
 		]]></otherUse>
 	</useDescriptions>
 

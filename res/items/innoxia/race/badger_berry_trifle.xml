@@ -39,7 +39,7 @@
 			[##npc.incrementHealth(npc.getAttributeValue(ATTRIBUTE_HEALTH_MAXIMUM)/10)]
 			
 			<p style='margin-bottom:0; padding-bottom:0;'>
-				[npc.Name] [npc.verb(start)] to feel a lot healthier...
+				[npc.Name] start to feel a lot healthier...
 			</p>
 			[#npc.addPotionEffect(ATTRIBUTE_MAJOR_PHYSIQUE, 2)]
 		]]></applyEffects>
@@ -54,10 +54,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		[npc.Name] [npc.verb(peel)] off the film lid to the pot of Berry Trifle, before starting to eat the combination of fruit, cream, and custard contained within. The masterful combination of berries makes this treat an absolutely delicious one, and it only takes [npc.herHim] a moment to finish off the entire pot.
+		[npc.Name] peel off the film lid to the pot of Berry Trifle, before starting to eat the combination of fruit, cream, and custard contained within. The masterful combination of berries makes this treat an absolutely delicious one, and it only takes [npc.herHim] a moment to finish off the entire pot.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		[npc.Name] [npc.verb(peel)] off the film lid to the pot of Berry Trifle, before presenting it to [npc2.name] and getting [npc2.herHim] to start eating the combination of fruit, cream, and custard contained within. The masterful combination of berries makes this treat an absolutely delicious one, and it only takes [npc2.name] a moment to finish off the entire pot.
+		[npc.Name] peel off the film lid to the pot of Berry Trifle, before presenting it to [npc2.name] and getting [npc2.herHim] to start eating the combination of fruit, cream, and custard contained within. The masterful combination of berries makes this treat an absolutely delicious one, and it only takes [npc2.name] a moment to finish off the entire pot.
 		]]></otherUse>
 	</useDescriptions>
 

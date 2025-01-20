@@ -95,25 +95,25 @@
 
   <replacementText slot="PIERCING_NIPPLE" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(clip)] the rings into [npc.her] nipple piercings, before allowing the connected chains to dangle free.]]>
+        <![CDATA[[npc.Name] clip the rings into [npc.her] nipple piercings, before allowing the connected chains to dangle free.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(clip)] the rings into [npc2.namePos] nipple piercings, before allowing the connected chains to dangle free.]]>
+        <![CDATA[[npc.Name] clip the rings into [npc2.namePos] nipple piercings, before allowing the connected chains to dangle free.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(clip)] the rings into [npc2.namePos] nipple piercings, before allowing the connected chains to dangle free.]]>
+        <![CDATA[[npc.Name] roughly clip the rings into [npc2.namePos] nipple piercings, before allowing the connected chains to dangle free.]]>
     </otherRough>
   </replacementText>
 
   <displacementText slot="PIERCING_NIPPLE" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(unclip)] [npc.her] rings from out of [npc.her] nipple piercings.]]>
+        <![CDATA[[npc.Name] unclip [npc.her] rings from out of [npc.her] nipple piercings.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(unclip)] [npc2.namePos] rings from out of [npc2.her] nipple piercings.]]>
+        <![CDATA[[npc.Name] unclip [npc2.namePos] rings from out of [npc2.her] nipple piercings.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(unclip)] [npc2.namePos] rings from out of [npc2.her] nipple piercings.]]>
+        <![CDATA[[npc.Name] roughly unclip [npc2.namePos] rings from out of [npc2.her] nipple piercings.]]>
     </otherRough>
   </displacementText>
 	

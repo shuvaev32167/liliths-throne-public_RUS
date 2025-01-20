@@ -41,7 +41,7 @@
 	
 	<!-- The description which is shown when a character transforms to obtain this horn type.
 	This description immediately follows the text:
-		' Hard nubs suddenly push out from the sides of [npc.her] head, and [npc.she] [npc.verb(gasp)] as [npc.she] [npc.verb(feel)] them quickly grow out into '-->
+		' Hard nubs suddenly push out from the sides of [npc.her] head, and [npc.she] gasp as [npc.she] feel them quickly grow out into '-->
 	<transformationDescription><![CDATA[
 		curved [npc.horns].
 		<br/>[npc.Name] now [npc.has] [npc.hornsDeterminer] [style.boldDragon(curved draconic [npc.horns])].

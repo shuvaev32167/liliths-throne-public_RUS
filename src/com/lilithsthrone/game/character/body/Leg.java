@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.character.body;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
 import com.lilithsthrone.game.character.body.valueEnums.FootStructure;
@@ -12,6 +9,9 @@ import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.1.0
@@ -85,24 +85,24 @@ public class Leg implements BodyPartInterface {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("<p>"
-				+ "[npc.Name] [npc.verb(let)] out a shocked gasp as [npc.she] suddenly [npc.verb(feel)] an intense heat shoot down into [npc.her] [npc.legs] and [npc.feet]."
-				+ " Staggering and swaying, [npc.she] almost [npc.verb(lose)] [npc.her] balance as the structure of [npc.her] feet transforms and changes.</br>");
+                + "[npc.Name] let out a shocked gasp as [npc.she] suddenly feel an intense heat shoot down into [npc.her] [npc.legs] и [npc.feet]."
+                + " Staggering and swaying, [npc.she] almost lose [npc.her] balance as the structure of [npc.her] feet transforms and changes.</br>");
 		
 		switch(footStructure) {
 			case NONE:
 				sb.append("After just a moment, [npc.sheIs] left with [style.boldTfGeneric(no [npc.feet])]!");
 				break;
 			case DIGITIGRADE:
-				sb.append("After just a moment, [npc.sheIs] left with [style.boldTfGeneric(digitigrade [npc.feet])], meaning that [npc.she] now [npc.verb(walk)] on [npc.her] toes, with [npc.her] heel being permanently raised.");
+                sb.append("After just a moment, [npc.sheIs] left with [style.boldTfGeneric(digitigrade [npc.feet])], meaning that [npc.she] now walk on [npc.her] toes, with [npc.her] heel being permanently raised.");
 				break;
 			case PLANTIGRADE:
-				sb.append("After just a moment, [npc.sheIs] left with [style.boldTfGeneric(plantigrade [npc.feet])], meaning that [npc.she] now [npc.verb(walk)] with [npc.her] feet flat on the ground.");
+                sb.append("After just a moment, [npc.sheIs] left with [style.boldTfGeneric(plantigrade [npc.feet])], meaning that [npc.she] now walk with [npc.her] feet flat on the ground.");
 				break;
 			case UNGULIGRADE:
-				sb.append("After just a moment, [npc.sheIs] left with [style.boldTfGeneric(unguligrade [npc.feet])], meaning that [npc.she] now [npc.verb(walk)] on [npc.her] [npc.toes], with the rest of [npc.her] foot being permanently raised.");
+                sb.append("After just a moment, [npc.sheIs] left with [style.boldTfGeneric(unguligrade [npc.feet])], meaning that [npc.she] now walk on [npc.her] [npc.toes], with the rest of [npc.her] foot being permanently raised.");
 				break;
 			case ARACHNOID:
-				sb.append("After just a moment, [npc.sheIs] left with [style.boldTfGeneric(arachnoid [npc.feet])], meaning that [npc.she] now [npc.verb(walk)] on the ends of [npc.her] segmented arachnoid legs.");
+                sb.append("After just a moment, [npc.sheIs] left with [style.boldTfGeneric(arachnoid [npc.feet])], meaning that [npc.she] now walk on the ends of [npc.her] segmented arachnoid legs.");
 				break;
 			case TENTACLED:
 				break;
@@ -187,7 +187,7 @@ public class Leg implements BodyPartInterface {
 		
 		sb.append(
 				"<p>"
-					+ "[npc.NamePos] [npc.legs] start to wobble and feel weak, and [npc.she] almost [npc.verb(lose)] [npc.her] balance as they start to transform. ");
+                        + "[npc.NamePos] [npc.legs] start to wobble and feel weak, and [npc.she] almost lose [npc.her] balance as they start to transform. ");
 		
 		// Parse existing content before transformation:
 		String s = UtilText.parse(owner, sb.toString());
@@ -278,7 +278,7 @@ public class Leg implements BodyPartInterface {
 		if(lengthChange>0) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up within [npc.her] [npc.tail+]."
+                            + "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up within [npc.her] [npc.tail+]."
 						+ " Without any further warning of what's to come, [npc.her] [npc.tail] suddenly [style.boldGrow(grows longer)]."
 						+ "<br/>"
 						+ "[npc.She] now [npc.has] [style.boldTfGeneric([npc.a_tailLength] [npc.tail])]"+heightPercentageDescription+"!"
@@ -287,7 +287,7 @@ public class Leg implements BodyPartInterface {
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up within [npc.her] [npc.tail+]."
+                            + "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up within [npc.her] [npc.tail+]."
 						+ " Without any further warning of what's to come, [npc.her] [npc.tail] suddenly [style.boldShrink(shortens)]."
 						+ "<br/>"
 						+ "[npc.She] now [npc.has] [style.boldTfGeneric([npc.a_tailLength] [npc.tail])]"+heightPercentageDescription+"!"

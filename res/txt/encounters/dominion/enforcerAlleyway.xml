@@ -30,9 +30,9 @@
 			#ENDIF
 		#ENDIF
 		#IF(playerEscaped)
-			 Preparing yourself for the worst, you get ready to defend yourself, and sure enough, as you recognise the two Enforcers who step around the corner as [npc.name] and [npc2.name], you realise that you're about to be attacked.
+			 Preparing yourself for the worst, you get ready to defend yourself, and sure enough, as you recognise the two Enforcers who step around the corner as [npc.name] и [npc2.name], you realise that you're about to be attacked.
 		#ELSE
-			 Preparing yourself for the worst, you get ready to defend yourself, but as you recognise the two Enforcers who step around the corner as [npc.name] and [npc2.name], you realise that this encounter might not involve any hostilities.
+			 Preparing yourself for the worst, you get ready to defend yourself, but as you recognise the two Enforcers who step around the corner as [npc.name] и [npc2.name], you realise that this encounter might not involve any hostilities.
 		#ENDIF
 	</p>
 	#IF(playerEscaped)
@@ -664,7 +664,7 @@
 			#ENDIF
 		</p>
 		<p>
-			Having got exactly what it is that you wanted, you break off from your kiss with [npc2.name], before lustfully grinding up against both [npc2.herHim] and [npc2.her] superior. You can't help but grin as the two Enforcers let out a synchronised moan, and you seductively bite your lip as you wonder how you're going to fuck them...
+			Having got exactly what it is that you wanted, you break off from your kiss with [npc2.name], before lustfully grinding up against both [npc2.herHim] и [npc2.her] superior. You can't help but grin as the two Enforcers let out a synchronised moan, and you seductively bite your lip as you wonder how you're going to fuck them...
 		</p>
 	#ELSE
 		<p>
@@ -927,7 +927,7 @@
 		#ENDIF
 	</p>
 	<p>
-		You open your mouth to reply, but just as you do so, the impatient [npc.race] suddenly grabs your [pc.hips+] and [npc.steps] forwards, pushing [npc.her] [npc.cock+] fully into your [pc.pussy+] in the process. The sudden penetration causes you to let out [pc.a_moan+], which is followed by several more as [npc.name] starts thrusting [npc.her] [npc.cock+] in and out of your [pc.pussy+]...
+		You open your mouth to reply, but just as you do so, the impatient [npc.race] suddenly grabs your [pc.hips+] и [npc.steps] forwards, pushing [npc.her] [npc.cock+] fully into your [pc.pussy+] in the process. The sudden penetration causes you to let out [pc.a_moan+], which is followed by several more as [npc.name] starts thrusting [npc.her] [npc.cock+] in and out of your [pc.pussy+]...
 	</p>
 	]]>
 	</htmlContent>
@@ -995,7 +995,7 @@
 		#ENDIF
 	</p>
 	<p>
-		You open your mouth to reply, but just as you do so, the impatient [npc.race] suddenly grabs your [pc.hips+] and [npc.steps] forwards, pushing [npc.her] [npc.cock+] fully into your [pc.ass+] in the process. The sudden penetration causes you to let out [pc.a_moan+], which is followed by several more as [npc.name] starts thrusting [npc.her] [npc.cock+] in and out of your [pc.asshole+]...
+		You open your mouth to reply, but just as you do so, the impatient [npc.race] suddenly grabs your [pc.hips+] и [npc.steps] forwards, pushing [npc.her] [npc.cock+] fully into your [pc.ass+] in the process. The sudden penetration causes you to let out [pc.a_moan+], which is followed by several more as [npc.name] starts thrusting [npc.her] [npc.cock+] in and out of your [pc.asshole+]...
 	</p>
 	]]>
 	</htmlContent>
@@ -1178,12 +1178,12 @@
 	</p>
 	<p>
 		#IF(npc2.hasPenis())
-			Seeing that [npc2.her] partner has already got started, [npc2.name] drops down in front of you, before grabbing the back of your head and quickly forcing [npc2.her] [npc2.cock+] into your mouth. With little option put to orally pleasure the horny [npc2.race], you start bobbing your head up and down on [npc2.her] hot, throbbing shaft, while [npc2.her] partner continues stimulating both your [pc.cock+] and [pc.asshole+]...
+			Seeing that [npc2.her] partner has already got started, [npc2.name] drops down in front of you, before grabbing the back of your head and quickly forcing [npc2.her] [npc2.cock+] into your mouth. With little option put to orally pleasure the horny [npc2.race], you start bobbing your head up and down on [npc2.her] hot, throbbing shaft, while [npc2.her] partner continues stimulating both your [pc.cock+] и [pc.asshole+]...
 		#ELSE
 			Seeing that [npc2.her] partner has already got started, [npc2.name] drops down in front of you, before grabbing the back of your head and forcefully pushing [npc2.her] [npc2.pussy+] forwards against your mouth. With little option put to orally pleasure the horny [npc2.race], you start licking and kissing [npc2.her] hot, wet cunt, while [npc2.her] partner continues
 		#ENDIF
 		#IF(analFingering)
-			 stimulating both your [pc.cock+] and [pc.asshole+]...
+			 stimulating both your [pc.cock+] и [pc.asshole+]...
 		#ELSE
 			 playing with your [pc.cock+]...
 		#ENDIF
@@ -1766,7 +1766,7 @@
 		[npc.speech(Is this some kind of trick?)] [npc.name] distrustfully asks, before narrowing [npc.her] eyes and flashing you a suspicious glare.
 	</p>
 	<p>
-		Assuring the [npc.race] that you're sincere in your regret for having fought back and beaten both [npc.herHim] and [npc2.name], you take things one step further by meekly offering to do anything to show them that you're really sorry.
+		Assuring the [npc.race] that you're sincere in your regret for having fought back and beaten both [npc.herHim] и [npc2.name], you take things one step further by meekly offering to do anything to show them that you're really sorry.
 	</p>
 	<p>
 		#IF(npc.isAttractedTo(pc) && npc2.isAttractedTo(pc))
@@ -2210,7 +2210,7 @@
 	<htmlContent tag="AFTER_DEFEAT_SEX"><![CDATA[
 	<p>
 		#IF(sex.getAllParticipants(false).size()==3)
-			Having had their fun, the two Enforcers step back and leave you panting and [pc.moaning] on the floor. While you catch your breath, [npc.name] and [npc2.name] get their uniforms back in order, before stepping forwards and looming over your collapsed body.
+			Having had their fun, the two Enforcers step back and leave you panting and [pc.moaning] on the floor. While you catch your breath, [npc.name] и [npc2.name] get their uniforms back in order, before stepping forwards and looming over your collapsed body.
 		#ELSE
 			Having had [npc.her] fun, [npc.name] steps back and leaves you panting and [pc.moaning] on the floor. While you catch your breath, the [npc.race] gets [npc.her] uniform back in order, before joining [npc2.name] in stepping forwards and looming over your collapsed body.
 		#ENDIF

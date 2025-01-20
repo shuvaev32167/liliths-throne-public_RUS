@@ -3,11 +3,7 @@ package com.lilithsthrone.game.sex.sexActions.baseActions;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.sex.ArousalIncrease;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexPace;
-import com.lilithsthrone.game.sex.SexParticipantType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
@@ -56,58 +52,58 @@ public class TongueBreastsCrotch {
 			switch(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())) {
 				case DOM_GENTLE:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"[npc.Name] slowly [npc.verb(lean)] in to [npc2.namePos] lower abdomen,"
+                            "[npc.Name] slowly lean in to [npc2.namePos] lower abdomen,"
 									+ " pressing [npc.her] [npc.lips+] against [npc2.her] [npc2.breastSkin+] before starting to plant a series of gentle kisses on [npc2.her] [npc2.crotchBoobs+].",
 
 							"Gently pressing [npc.her] [npc.lips+] against [npc2.namePos] lower abdomen,"
-									+ " [npc.name] [npc.verb(start)] delivering a series of loving kisses to [npc2.her] exposed [npc2.crotchBoobs+].",
+                                    + " [npc.name] start delivering a series of loving kisses to [npc2.her] exposed [npc2.crotchBoobs+].",
 
-							"[npc.Name] [npc.verb(start)] gently kissing [npc2.namePos] exposed [npc2.crotchBoobs],"
-									+ " breathing in [npc2.her] [npc2.scent+] as [npc.she] [npc.verb(press)] [npc.her] [npc.lips+] against [npc2.her] [npc2.crotchBoobsSkin+]."));
+                            "[npc.Name] start gently kissing [npc2.namePos] exposed [npc2.crotchBoobs],"
+                                    + " breathing in [npc2.her] [npc2.scent+] as [npc.she] press [npc.her] [npc.lips+] against [npc2.her] [npc2.crotchBoobsSkin+]."));
 					break;
 				case DOM_NORMAL:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"[npc.Name] eagerly [npc.verb(lean)] in to [npc2.namePos] lower abdomen,"
+                            "[npc.Name] eagerly lean in to [npc2.namePos] lower abdomen,"
 									+ " greedily pressing [npc.her] [npc.lips+] against [npc2.her] [npc2.breastSkin+] before starting to plant a series of passionate kisses on [npc2.her] [npc2.crotchBoobs+].",
 
 							"Greedily pressing [npc.her] [npc.lips+] against [npc2.namePos] lower abdomen,"
-									+ " [npc.name] [npc.verb(start)] delivering a series of enthusiastic kisses to [npc2.her] exposed [npc2.crotchBoobs+].",
+                                    + " [npc.name] start delivering a series of enthusiastic kisses to [npc2.her] exposed [npc2.crotchBoobs+].",
 
-							"[npc.Name] [npc.verb(start)] passionately kissing [npc2.namePos] exposed [npc2.crotchBoobs],"
-									+ " breathing in [npc2.her] [npc2.scent+] as [npc.she] desperately [npc.verb(press)] [npc.her] [npc.lips+] against [npc2.her] [npc2.crotchBoobsSkin+]."));
+                            "[npc.Name] start passionately kissing [npc2.namePos] exposed [npc2.crotchBoobs],"
+                                    + " breathing in [npc2.her] [npc2.scent+] as [npc.she] desperately press [npc.her] [npc.lips+] against [npc2.her] [npc2.crotchBoobsSkin+]."));
 					break;
 				case DOM_ROUGH:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"[npc.Name] greedily [npc.verb(lean)] in to [npc2.namePos] lower abdomen,"
+                            "[npc.Name] greedily lean in to [npc2.namePos] lower abdomen,"
 									+ " roughly pressing [npc.her] [npc.lips+] against [npc2.her] [npc2.breastSkin+] before starting to plant a series of forceful kisses on [npc2.her] [npc2.crotchBoobs+].",
 
 							"Greedily pressing [npc.her] [npc.lips+] against [npc2.namePos] lower abdomen,"
-									+ " [npc.name] [npc.verb(start)] delivering a series of rough kisses to [npc2.her] exposed [npc2.crotchBoobs+].",
+                                    + " [npc.name] start delivering a series of rough kisses to [npc2.her] exposed [npc2.crotchBoobs+].",
 
-							"[npc.Name] [npc.verb(start)] roughly kissing [npc2.namePos] exposed [npc2.crotchBoobs],"
-									+ " breathing in [npc2.her] [npc2.scent+] as [npc.she] forcefully [npc.verb(press)] [npc.her] [npc.lips+] against [npc2.her] [npc2.crotchBoobsSkin+]."));
+                            "[npc.Name] start roughly kissing [npc2.namePos] exposed [npc2.crotchBoobs],"
+                                    + " breathing in [npc2.her] [npc2.scent+] as [npc.she] forcefully press [npc.her] [npc.lips+] against [npc2.her] [npc2.crotchBoobsSkin+]."));
 					break;
 				case SUB_EAGER:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"[npc.Name] eagerly [npc.verb(lean)] in to [npc2.namePos] lower abdomen,"
+                            "[npc.Name] eagerly lean in to [npc2.namePos] lower abdomen,"
 									+ " greedily pressing [npc.her] [npc.lips+] against [npc2.her] [npc2.breastSkin+] before starting to plant a series of passionate kisses on [npc2.her] [npc2.crotchBoobs+].",
 
 							"Greedily pressing [npc.her] [npc.lips+] against [npc2.namePos] lower abdomen,"
-									+ " [npc.name] [npc.verb(start)] delivering a series of enthusiastic kisses to [npc2.her] exposed [npc2.crotchBoobs+].",
+                                    + " [npc.name] start delivering a series of enthusiastic kisses to [npc2.her] exposed [npc2.crotchBoobs+].",
 
-							"[npc.Name] [npc.verb(start)] passionately kissing [npc2.namePos] exposed [npc2.crotchBoobs],"
-									+ " breathing in [npc2.her] [npc2.scent+] as [npc.she] desperately [npc.verb(press)] [npc.her] [npc.lips+] against [npc2.her] [npc2.crotchBoobsSkin+]."));
+                            "[npc.Name] start passionately kissing [npc2.namePos] exposed [npc2.crotchBoobs],"
+                                    + " breathing in [npc2.her] [npc2.scent+] as [npc.she] desperately press [npc.her] [npc.lips+] against [npc2.her] [npc2.crotchBoobsSkin+]."));
 					break;
 				case SUB_NORMAL:
 					UtilText.nodeContentSB.append(UtilText.returnStringAtRandom(
-							"[npc.Name] [npc.verb(lean)] in to [npc2.namePos] lower abdomen,"
+                            "[npc.Name] lean in to [npc2.namePos] lower abdomen,"
 									+ " pressing [npc.her] [npc.lips+] against [npc2.her] [npc2.breastSkin+] before starting to plant a series of kisses on [npc2.her] [npc2.crotchBoobs+].",
 
 							"Pressing [npc.her] [npc.lips+] against [npc2.namePos] lower abdomen,"
-									+ " [npc.name] [npc.verb(start)] delivering a series of kisses to [npc2.her] exposed [npc2.crotchBoobs+].",
+                                    + " [npc.name] start delivering a series of kisses to [npc2.her] exposed [npc2.crotchBoobs+].",
 
-							"[npc.Name] [npc.verb(start)] kissing [npc2.namePos] exposed [npc2.crotchBoobs],"
-									+ " breathing in [npc2.her] [npc2.scent+] as [npc.she] [npc.verb(press)] [npc.her] [npc.lips+] against [npc2.her] [npc2.crotchBoobsSkin+]."));
+                            "[npc.Name] start kissing [npc2.namePos] exposed [npc2.crotchBoobs],"
+                                    + " breathing in [npc2.her] [npc2.scent+] as [npc.she] press [npc.her] [npc.lips+] against [npc2.her] [npc2.crotchBoobsSkin+]."));
 					break;
 				default:
 					break;

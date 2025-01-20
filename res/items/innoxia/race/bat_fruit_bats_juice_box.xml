@@ -51,10 +51,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		Tearing the attached straw from the front of the Fruit Bat's Juice Box, [npc.name] [npc.verb(use)] it to pierce the foil circle on the top, before wrapping [npc.her] [npc.lips] around it and quickly drinking all of the tropical-fruits-flavoured liquid contained within.
+		Tearing the attached straw from the front of the Fruit Bat's Juice Box, [npc.name] use it to pierce the foil circle on the top, before wrapping [npc.her] [npc.lips] around it and quickly drinking all of the tropical-fruits-flavoured liquid contained within.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		Tearing the attached straw from the front of the Fruit Bat's Juice Box, [npc.name] [npc.verb(use)] it to pierce the foil circle on the top, before getting [npc2.name] to wrap [npc2.her] [npc2.lips] around it and drink all of the tropical-fruits-flavoured liquid contained within.
+		Tearing the attached straw from the front of the Fruit Bat's Juice Box, [npc.name] use it to pierce the foil circle on the top, before getting [npc2.name] to wrap [npc2.her] [npc2.lips] around it and drink all of the tropical-fruits-flavoured liquid contained within.
 		]]></otherUse>
 	</useDescriptions>
 

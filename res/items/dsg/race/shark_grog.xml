@@ -55,10 +55,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		After first removing the cork, [npc.name] [npc.verb(bring)] the bottle of Grog up to [npc.her] [npc.mouth]. A very potent smell of molasses and cinnamon rises from the opening, and as [npc.she] [npc.verb(tilt)] [npc.her] head back and [npc.verb(start)] drinking the smooth liquid, [npc.she] [npc.verb(gain)] the strangest urge to go on a long sea voyage.
+		After first removing the cork, [npc.name] bring the bottle of Grog up to [npc.her] [npc.mouth]. A very potent smell of molasses and cinnamon rises from the opening, and as [npc.she] tilt [npc.her] head back and start drinking the smooth liquid, [npc.she] gain the strangest urge to go on a long sea voyage.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		After first removing the cork, [npc.name] [npc.verb(bring)] the bottle of Grog up to [npc2.namePos] waiting [npc2.lips]. A very potent smell of molasses and cinnamon rises from the opening, and as [npc2.she] [npc2.verb(tilt)] [npc2.her] head back and [npc2.verb(start)] drinking the smooth liquid, [npc2.she] [npc2.verb(gain)] the strangest urge to go on a long sea voyage.
+		After first removing the cork, [npc.name] bring the bottle of Grog up to [npc2.namePos] waiting [npc2.lips]. A very potent smell of molasses and cinnamon rises from the opening, and as [npc2.she] [npc2.verb(tilt)] [npc2.her] head back and [npc2.verb(start)] drinking the smooth liquid, [npc2.she] [npc2.verb(gain)] the strangest urge to go on a long sea voyage.
 		]]></otherUse>
 	</useDescriptions>
 

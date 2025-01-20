@@ -1,12 +1,5 @@
 package com.lilithsthrone.game.character.fetishes;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -18,6 +11,13 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map.Entry;
+
 /**
  * @since 0.4.4.2
  * @version 0.4.4.2
@@ -25,21 +25,21 @@ import com.lilithsthrone.utils.colours.PresetColour;
  */
 public abstract class AbstractFetish {
 
-	private int renderingPriority;
+	private final int renderingPriority;
 	protected String name;
 	protected String shortDescriptor;
-	private int experienceGainFromSexAction;
-	private HashMap<AbstractAttribute, Integer> attributeModifiers;
+	private final int experienceGainFromSexAction;
+	private final HashMap<AbstractAttribute, Integer> attributeModifiers;
 
-	private String pathName;
+	private final String pathName;
 	private String SVGString;
-	private List<Colour> colourShades;
+	private final List<Colour> colourShades;
 
-	private List<String> extraEffects;
+	private final List<String> extraEffects;
 
-	private List<String> modifiersList;
+	private final List<String> modifiersList;
 	
-	private List<AbstractFetish> fetishesForAutomaticUnlock;
+	private final List<AbstractFetish> fetishesForAutomaticUnlock;
 
 	protected static List<String> perkRequirementsList = new ArrayList<>();
 	
@@ -160,15 +160,15 @@ public abstract class AbstractFetish {
 	protected static String getGenericFetishDesireDescription(GameCharacter target, FetishDesire desire, String descriptor) {
 		switch(desire) {
 			case ZERO_HATE:
-				return UtilText.parse(target, "Вы неанавидите "+descriptor+".");
+				return UtilText.parse(target, "Ты ненавидишь " + descriptor + ".");
 			case ONE_DISLIKE:
-				return UtilText.parse(target, "Вы не любите "+descriptor+".");
+				return UtilText.parse(target, "Ты не любишь " + descriptor + ".");
 			case TWO_NEUTRAL:
-				return UtilText.parse(target, "Вы безразличны к "+descriptor+".");
+				return UtilText.parse(target, "Ты безразличны к " + descriptor + ".");
 			case THREE_LIKE:
-				return UtilText.parse(target, "Вам нравится "+descriptor+".");
+				return UtilText.parse(target, "Тебе нравится " + descriptor + ".");
 			case FOUR_LOVE:
-				return UtilText.parse(target, "Вы любите "+descriptor+".");
+				return UtilText.parse(target, "ты любишь " + descriptor + ".");
 		}
 		return "";
 	}

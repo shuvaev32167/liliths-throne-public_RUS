@@ -50,25 +50,25 @@
 	
 	<replacementText slot="HAND" type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(pull)] on gloves on over [npc.her] [npc.hands].]]>
+            <![CDATA[[npc.Name] pull on gloves on over [npc.her] [npc.hands].]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(pull)] the gloves on over [npc2.namePos] [npc2.hands].]]>
+            <![CDATA[[npc.Name] pull the gloves on over [npc2.namePos] [npc2.hands].]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(pull)] the gloves on over [npc2.namePos] [npc2.hands].]]>
+            <![CDATA[[npc.Name] roughly pull the gloves on over [npc2.namePos] [npc2.hands].]]>
 		</otherRough>
 	</replacementText>
 	
 	<displacementText slot="HAND" type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(pull)] the glove off of [npc.her] [npc.hands].]]>
+            <![CDATA[[npc.Name] pull the glove off of [npc.her] [npc.hands].]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(pull)] the glove off of [npc2.namePos] [npc2.hands].]]>
+            <![CDATA[[npc.Name] pull the glove off of [npc2.namePos] [npc2.hands].]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(rip)] the gloves from [npc2.namePos] [npc2.hands].]]>
+            <![CDATA[[npc.Name] rip the gloves from [npc2.namePos] [npc2.hands].]]>
 		</otherRough>
 	</displacementText>
 	

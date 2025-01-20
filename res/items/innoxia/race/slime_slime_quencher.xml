@@ -53,10 +53,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		[npc.Name] [npc.verb(pop)] the cap off of the bottle of Slime Quencher and [npc.verb(start)] drinking the liquid contained within. The recognisable taste of a sugary energy drink fills [npc.namePos] mouth, and [npc.she] greedily [npc.verb(gulp)] down the all of the glowing beverage in a matter of seconds.
+		[npc.Name] pop the cap off of the bottle of Slime Quencher and start drinking the liquid contained within. The recognisable taste of a sugary energy drink fills [npc.namePos] mouth, and [npc.she] greedily gulp down the all of the glowing beverage in a matter of seconds.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		[npc.Name] [npc.verb(pop)] the cap off of the bottle of Slime Quencher and [npc.verb(get)] [npc2.name] to drink the liquid contained within. The recognisable taste of a sugary energy drink fills [npc2.namePos] mouth, and [npc2.she] greedily [npc2.verb(gulp)] down the all of the glowing beverage in a matter of seconds.
+		[npc.Name] pop the cap off of the bottle of Slime Quencher and get [npc2.name] to drink the liquid contained within. The recognisable taste of a sugary energy drink fills [npc2.namePos] mouth, and [npc2.she] greedily [npc2.verb(gulp)] down the all of the glowing beverage in a matter of seconds.
 		]]></otherUse>
 	</useDescriptions>
 

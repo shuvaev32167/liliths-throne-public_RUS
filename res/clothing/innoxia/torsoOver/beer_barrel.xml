@@ -111,24 +111,24 @@
 	
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(climb)] into the beer barrel.]]>
+            <![CDATA[[npc.Name] climb into the beer barrel.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(push)] [npc2.name] into the beer barrel.]]>
+            <![CDATA[[npc.Name] push [npc2.name] into the beer barrel.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(push)] [npc2.name] into the beer barrel.]]>
+            <![CDATA[[npc.Name] roughly push [npc2.name] into the beer barrel.]]>
 		</otherRough>
 	</replacementText>
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(climb)] out of the beer barrel.]]>
+            <![CDATA[[npc.Name] climb out of the beer barrel.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc2.name] out of the beer barrel.]]>
+            <![CDATA[[npc.Name] pull [npc2.name] out of the beer barrel.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(pull)] [npc2.name] out of the beer barrel.]]>
+            <![CDATA[[npc.Name] roughly pull [npc2.name] out of the beer barrel.]]>
 		</otherRough>
 	</displacementText>
 </clothing>

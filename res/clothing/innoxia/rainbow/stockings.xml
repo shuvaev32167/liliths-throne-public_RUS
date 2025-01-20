@@ -87,25 +87,25 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(pull)] on the rainbow stockings before pulling them all the way up to [npc.her] mid-thigh.]]>
+        <![CDATA[[npc.Name] pull on the rainbow stockings before pulling them all the way up to [npc.her] mid-thigh.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(pull)] the rainbow stockings onto [npc2.namePos] [npc2.feet], before pulling them all the way up to [npc2.her] mid-thigh.]]>
+        <![CDATA[[npc.Name] pull the rainbow stockings onto [npc2.namePos] [npc2.feet], before pulling them all the way up to [npc2.her] mid-thigh.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(pull)] the rainbow stockings onto [npc2.namePos] [npc2.feet], before pulling them all the way up to [npc2.her] mid-thigh.]]>
+        <![CDATA[[npc.Name] roughly pull the rainbow stockings onto [npc2.namePos] [npc2.feet], before pulling them all the way up to [npc2.her] mid-thigh.]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(pull)] off [npc.her] rainbow stockings.]]>
+        <![CDATA[[npc.Name] pull off [npc.her] rainbow stockings.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(pull)] off [npc2.namePos] rainbow stockings.]]>
+        <![CDATA[[npc.Name] pull off [npc2.namePos] rainbow stockings.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(pull)] off [npc2.namePos] rainbow stockings.]]>
+        <![CDATA[[npc.Name] roughly pull off [npc2.namePos] rainbow stockings.]]>
     </otherRough>
   </displacementText>
 	

@@ -45,8 +45,8 @@ public class RebelBase {
 				}
 			}
 			return null;
-		};
-	};
+		}
+    };
 	
 	public static final DialogueNode REBEL_BASE_COLLAPSE = new DialogueNode("Uh oh...", "", true) {
 		@Override
@@ -79,8 +79,8 @@ public class RebelBase {
 				};
 			}
 			return null;
-		};
-	};
+		}
+    };
 	
 	public static final DialogueNode REBEL_BASE_ESCAPE = new DialogueNode("", "", false, true) {
 		@Override
@@ -98,8 +98,8 @@ public class RebelBase {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			return PlaceType.BAT_CAVERN_DARK.getDialogue(false).getResponse(responseTab, index);
-		};
-	};
+		}
+    };
 	
 	public static final DialogueNode REBEL_BASE_CORRIDOR = new DialogueNode("Artificial Cave", "", false) {
 		@Override
@@ -117,10 +117,10 @@ public class RebelBase {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			return null;
-		};
-	};
-	
-	public static final DialogueNode REBEL_BASE_SLEEPING_AREA = new DialogueNode("Abandoned Sleeping Area", "", false) {
+		}
+    };
+
+    public static final DialogueNode REBEL_BASE_SLEEPING_AREA_SEARCHED = new DialogueNode("Заброшенный спальный район", "", false) {
 		@Override
 		public String getAuthor() {
 			return "DSG";
@@ -131,33 +131,21 @@ public class RebelBase {
 		}
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/rebelBase", "SLEEPING_AREA");
+			return UtilText.parseFromXMLFile("places/submission/rebelBase", "SLEEPING_AREA_SEARCHED");
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Open footlockers", "Open the footlockers.", REBEL_BASE_SLEEPING_AREA_SEARCHED){
-					@Override
-					public void effects() {
-							Main.game.getTextEndStringBuilder().append(UtilText.parseFromXMLFile("places/submission/rebelBase", "SLEEPING_AREA_CACHE_OPEN"));
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rbooniehat", false), 2, false, true));
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rtunic", false), 2, false, true));
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rtrousers", false), 2, false, true));
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_vcboots", false), 2, false, true));
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rbrassard", false), 5, false, true));
-							Main.game.getPlayerCell().getPlace().setPlaceType(PlaceType.REBEL_BASE_SLEEPING_AREA_SEARCHED);
-							Main.game.getPlayerCell().getPlace().setName(PlaceType.REBEL_BASE_SLEEPING_AREA_SEARCHED.getName());
-					}
-				};
-				
+				return new Response("Open footlockers", "You already opened the footlockers.", null);
+
 			} else if (index ==2) {
 				return new Response("Read journal", "See what the journal contains.", REBEL_BASE_SLEEPING_AREA_JOURNAL_OPEN);
-				
+
 			} else {
 				return null;
 			}
-		};
-	};
+		}
+    };
 		
 	public static final DialogueNode REBEL_BASE_SLEEPING_AREA_JOURNAL_OPEN = new DialogueNode("Crumbling Journal", "", true) {
 		@Override
@@ -198,10 +186,9 @@ public class RebelBase {
 			} else {
 				return null;
 			}
-		};
-	};
-	
-	public static final DialogueNode REBEL_BASE_SLEEPING_AREA_SEARCHED = new DialogueNode("Abandoned Sleeping Area", "", false) {
+		}
+    };
+    public static final DialogueNode REBEL_BASE_SLEEPING_AREA = new DialogueNode("Заброшенный спальный район", "", false) {
 		@Override
 		public String getAuthor() {
 			return "DSG";
@@ -212,23 +199,74 @@ public class RebelBase {
 		}
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/rebelBase", "SLEEPING_AREA_SEARCHED");
+			return UtilText.parseFromXMLFile("places/submission/rebelBase", "SLEEPING_AREA");
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Open footlockers", "You already opened the footlockers.", null);
-				
+				return new Response("Open footlockers", "Open the footlockers.", REBEL_BASE_SLEEPING_AREA_SEARCHED){
+					@Override
+					public void effects() {
+							Main.game.getTextEndStringBuilder().append(UtilText.parseFromXMLFile("places/submission/rebelBase", "SLEEPING_AREA_CACHE_OPEN"));
+							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rbooniehat", false), 2, false, true));
+							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rtunic", false), 2, false, true));
+							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rtrousers", false), 2, false, true));
+							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_vcboots", false), 2, false, true));
+							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rbrassard", false), 5, false, true));
+							Main.game.getPlayerCell().getPlace().setPlaceType(PlaceType.REBEL_BASE_SLEEPING_AREA_SEARCHED);
+							Main.game.getPlayerCell().getPlace().setName(PlaceType.REBEL_BASE_SLEEPING_AREA_SEARCHED.getName());
+					}
+				};
+
 			} else if (index ==2) {
 				return new Response("Read journal", "See what the journal contains.", REBEL_BASE_SLEEPING_AREA_JOURNAL_OPEN);
-				
+
 			} else {
 				return null;
 			}
-		};
-	};
-		
-	public static final DialogueNode REBEL_BASE_COMMON_AREA = new DialogueNode("Abandoned Common Area", "", false) {
+		}
+    };
+    public static final DialogueNode REBEL_BASE_COMMON_AREA_SEARCHED = new DialogueNode("Заброшенная общая зона", "", false) {
+		@Override
+		public String getAuthor() {
+			return "DSG";
+		}
+		@Override
+		public int getSecondsPassed() {
+			return 30;
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/submission/rebelBase", "COMMON_AREA_SEARCHED");
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 1) {
+				return new Response("Open cabinet", "You've already opened the cabinet.", null);
+			} else {
+				return null;
+			}
+		}
+    };
+    public static final DialogueNode COMMON_AREA_CACHE_OPEN = new DialogueNode("Заброшенная общая зона", "", false) {
+		@Override
+		public String getAuthor() {
+			return "DSG";
+		}
+		@Override
+		public int getSecondsPassed() {
+			return 2*60;
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/submission/rebelBase", "COMMON_AREA_CACHE_OPEN");
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return REBEL_BASE_COMMON_AREA_SEARCHED.getResponse(responseTab, index);
+		}
+    };
+    public static final DialogueNode REBEL_BASE_COMMON_AREA = new DialogueNode("Заброшенная общая зона", "", false) {
 		@Override
 		public String getAuthor() {
 			return "DSG";
@@ -254,54 +292,12 @@ public class RebelBase {
 							Main.game.getPlayerCell().getPlace().setName(PlaceType.REBEL_BASE_COMMON_AREA_SEARCHED.getName());
 					}
 				};
-				
+
 			} else {
 				return null;
 			}
-		};
-	};
-	
-	public static final DialogueNode COMMON_AREA_CACHE_OPEN = new DialogueNode("Abandoned Common Area", "", false) {
-		@Override
-		public String getAuthor() {
-			return "DSG";
 		}
-		@Override
-		public int getSecondsPassed() {
-			return 2*60;
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/rebelBase", "COMMON_AREA_CACHE_OPEN");
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return REBEL_BASE_COMMON_AREA_SEARCHED.getResponse(responseTab, index);
-		};
-	};
-		
-	public static final DialogueNode REBEL_BASE_COMMON_AREA_SEARCHED = new DialogueNode("Abandoned Common Area", "", false) {
-		@Override
-		public String getAuthor() {
-			return "DSG";
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 30;
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/rebelBase", "COMMON_AREA_SEARCHED");
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Open cabinet", "You've already opened the cabinet.", null);
-			} else {
-				return null;
-			}
-		};
-	};
+    };
 		
 	public static final DialogueNode REBEL_BASE_ARMORY = new DialogueNode("Partly Caved-in Room", "", false) {
 		@Override
@@ -337,10 +333,9 @@ public class RebelBase {
 			} else {
 				return null;
 			}
-		};
-	};
-	
-	public static final DialogueNode ARMORY_CACHE_OPEN = new DialogueNode("Abandoned Common Area", "", false) {
+		}
+    };
+    public static final DialogueNode ARMORY_CACHE_OPEN = new DialogueNode("Заброшенная общая зона", "", false) {
 		@Override
 		public String getAuthor() {
 			return "DSG";
@@ -356,8 +351,8 @@ public class RebelBase {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			return REBEL_BASE_ARMORY_SEARCHED.getResponse(responseTab, index);
-		};
-	};
+		}
+    };
 	
 	public static final DialogueNode REBEL_BASE_ARMORY_SEARCHED = new DialogueNode("Partly Caved-in Room", "", false) {
 		@Override
@@ -379,8 +374,8 @@ public class RebelBase {
 			} else {
 				return null;
 			}
-		};
-	};
+		}
+    };
 	
 	public static final DialogueNode REBEL_BASE_CAVED_IN_ROOM = new DialogueNode("Caved-in Room", "", false) {
 		@Override
@@ -398,6 +393,6 @@ public class RebelBase {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			return null;
-		};
-	};
+		}
+    };
 }

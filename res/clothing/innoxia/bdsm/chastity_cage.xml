@@ -66,10 +66,10 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(lock)] the chastity cage in place around [npc.her] cock.]]>
+        <![CDATA[[npc.Name] lock the chastity cage in place around [npc.her] cock.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(lock)] the chastity cage in place around [npc2.namePos] cock.]]>
+        <![CDATA[[npc.Name] lock the chastity cage in place around [npc2.namePos] cock.]]>
     </other>
     <otherRough>
       <![CDATA[[npc.Name] roughly squeezes [npc2.namePos] cock before locking it inside the chastity cage.]]>
@@ -78,13 +78,13 @@
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(unlock)] and [npc.verb(remove)] the chastity cage that was imprisoning [npc.her] cock.]]>
+        <![CDATA[[npc.Name] unlock и remove the chastity cage that was imprisoning [npc.her] cock.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(unlock)] and [npc.verb(remove)] the chastity cage that was imprisoning [npc2.namePos] cock.]]>
+        <![CDATA[[npc.Name] unlock и remove the chastity cage that was imprisoning [npc2.namePos] cock.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] impatiently [npc.verb(unlock)] and [npc.verb(pull)] off the chastity cage that was imprisoning [npc2.namePos] cock.]]>
+        <![CDATA[[npc.Name] impatiently unlock и pull off the chastity cage that was imprisoning [npc2.namePos] cock.]]>
     </otherRough>
   </displacementText>
 

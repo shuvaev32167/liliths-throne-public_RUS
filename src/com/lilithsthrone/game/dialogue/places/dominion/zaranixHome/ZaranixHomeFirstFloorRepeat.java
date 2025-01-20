@@ -1,7 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.zaranixHome;
 
-import java.util.List;
-
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -24,6 +22,8 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
+import java.util.List;
+
 /**
  * @since 0.2.2
  * @version 0.2.3
@@ -31,7 +31,33 @@ import com.lilithsthrone.world.places.PlaceType;
  */
 public class ZaranixHomeFirstFloorRepeat {
 
-	public static final DialogueNode STAIRS = new DialogueNode("", "", false) {
+	public static final DialogueNode KELLY_DECLINE = new DialogueNode("", "", false, true) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/zaranixHome/firstFloorRepeat", "KELLY_SEX_DECLINED");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(Main.game.getPlayer().getLocationPlace().getPlaceType().equals(PlaceType.ZARANIX_FF_STAIRS)) {
+				if(index==1) {
+                    return new Response("Вниз", "Head downstairs to the ground floor of Zaranix's house.", PlaceType.ZARANIX_GF_STAIRS.getDialogue(false)) {
+						@Override
+						public void effects() {
+							Main.game.getPlayer().setLocation(WorldType.ZARANIX_HOUSE_GROUND_FLOOR, PlaceType.ZARANIX_GF_STAIRS, false);
+						}
+					};
+				}
+			}
+			return null;
+		}
+	};	public static final DialogueNode STAIRS = new DialogueNode("", "", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -40,7 +66,7 @@ public class ZaranixHomeFirstFloorRepeat {
 
 		@Override
 		public String getLabel() {
-			return "Staircase";
+            return "Лестница";
 		}
 
 		@Override
@@ -70,10 +96,10 @@ public class ZaranixHomeFirstFloorRepeat {
 			if(Main.game.getCharactersPresent().contains(Main.game.getNpc(ZaranixMaidKelly.class))) {
 				if (index == 1) {
 					if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.kellyRepeatEncountered)) {
-						return new Response("Downstairs", "You need to respond to Kelly first!", null);
+                        return new Response("Вниз", "You need to respond to Kelly first!", null);
 						
 					} else {
-						return new Response("Downstairs", "Head downstairs to the ground floor of Zaranix's house.", PlaceType.ZARANIX_GF_STAIRS.getDialogue(false)) {
+                        return new Response("Вниз", "Head downstairs to the ground floor of Zaranix's house.", PlaceType.ZARANIX_GF_STAIRS.getDialogue(false)) {
 							@Override
 							public void effects() {
 								Main.game.getPlayer().setLocation(WorldType.ZARANIX_HOUSE_GROUND_FLOOR, PlaceType.ZARANIX_GF_STAIRS, false);
@@ -142,7 +168,7 @@ public class ZaranixHomeFirstFloorRepeat {
 				}
 			} else {
 				if(index == 1) {
-					return new Response("Downstairs", "Head downstairs to the ground floor of Zaranix's house.", PlaceType.ZARANIX_GF_STAIRS.getDialogue(false)) {
+                    return new Response("Вниз", "Head downstairs to the ground floor of Zaranix's house.", PlaceType.ZARANIX_GF_STAIRS.getDialogue(false)) {
 						@Override
 						public void effects() {
 							Main.game.getPlayer().setLocation(WorldType.ZARANIX_HOUSE_GROUND_FLOOR, PlaceType.ZARANIX_GF_STAIRS, false);
@@ -164,7 +190,7 @@ public class ZaranixHomeFirstFloorRepeat {
 
 		@Override
 		public String getLabel() {
-			return "Corridor";
+            return "Коридор";
 		}
 
 		@Override
@@ -251,35 +277,6 @@ public class ZaranixHomeFirstFloorRepeat {
 			}
 		}
 	};
-	
-	public static final DialogueNode KELLY_DECLINE = new DialogueNode("", "", false, true) {
-
-		@Override
-		public int getSecondsPassed() {
-			return 60;
-		}
-
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/zaranixHome/firstFloorRepeat", "KELLY_SEX_DECLINED");
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(Main.game.getPlayer().getLocationPlace().getPlaceType().equals(PlaceType.ZARANIX_FF_STAIRS)) {
-				if(index==1) {
-					return new Response("Downstairs", "Head downstairs to the ground floor of Zaranix's house.", PlaceType.ZARANIX_GF_STAIRS.getDialogue(false)) {
-						@Override
-						public void effects() {
-							Main.game.getPlayer().setLocation(WorldType.ZARANIX_HOUSE_GROUND_FLOOR, PlaceType.ZARANIX_GF_STAIRS, false);
-						}
-					};
-				}
-			}
-			return null;
-		}
-	};
-	
 	public static final DialogueNode AFTER_KELLY_SEX = new DialogueNode("", "Kelly lets out a deep sigh as she steps back.", false) {
 
 		@Override
@@ -296,7 +293,7 @@ public class ZaranixHomeFirstFloorRepeat {
 			} else {
 				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/dominion/zaranixHome/firstFloorRepeat", "AFTER_KELLY_SEX"));
 			}
-			
+
 			return UtilText.nodeContentSB.toString();
 		}
 
@@ -304,7 +301,7 @@ public class ZaranixHomeFirstFloorRepeat {
 		public Response getResponse(int responseTab, int index) {
 			if(Main.game.getPlayer().getLocationPlace().getPlaceType().equals(PlaceType.ZARANIX_FF_STAIRS)) {
 				if(index==1) {
-					return new Response("Downstairs", "Head downstairs to the ground floor of Zaranix's house.", PlaceType.ZARANIX_GF_STAIRS.getDialogue(false)) {
+                    return new Response("Вниз", "Head downstairs to the ground floor of Zaranix's house.", PlaceType.ZARANIX_GF_STAIRS.getDialogue(false)) {
 						@Override
 						public void effects() {
 							Main.game.getPlayer().setLocation(WorldType.ZARANIX_HOUSE_GROUND_FLOOR, PlaceType.ZARANIX_GF_STAIRS, false);
@@ -316,6 +313,8 @@ public class ZaranixHomeFirstFloorRepeat {
 		}
 	};
 	
+
+	
 	public static final DialogueNode ROOM = new DialogueNode("", "", false) {
 
 		@Override
@@ -325,7 +324,7 @@ public class ZaranixHomeFirstFloorRepeat {
 
 		@Override
 		public String getLabel() {
-			return "Room";
+            return "Комната";
 		}
 
 		@Override
@@ -348,7 +347,7 @@ public class ZaranixHomeFirstFloorRepeat {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Enter", "Knock on Zaranix's door and step inside.", ZARANIX_ROOM_ENTER);
+                return new Response("Вход", "Knock on Zaranix's door and step inside.", ZARANIX_ROOM_ENTER);
 			} else {
 				return null;
 			}
@@ -364,7 +363,7 @@ public class ZaranixHomeFirstFloorRepeat {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Enter", "Knock on Zaranix's door and step inside.", ZARANIX_ROOM_ENTER);
+                return new Response("Вход", "Knock on Zaranix's door and step inside.", ZARANIX_ROOM_ENTER);
 			} else {
 				return null;
 			}
@@ -546,7 +545,7 @@ public class ZaranixHomeFirstFloorRepeat {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Continue on your way through Zaranix's mansion...", CORRIDOR) {
+                return new Response("Продолжить", "Continue on your way through Zaranix's mansion...", CORRIDOR) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setNearestLocation(WorldType.ZARANIX_HOUSE_FIRST_FLOOR, PlaceType.ZARANIX_FF_CORRIDOR);

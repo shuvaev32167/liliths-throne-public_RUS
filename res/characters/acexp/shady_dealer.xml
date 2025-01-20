@@ -3,8 +3,8 @@
   <character>
     <!--If you want to edit any of these values, just be warned that it might break the game...-->
     <core>
-      <name nameAndrogynous="Kiera" nameFeminine="Cara" nameMasculine="Carlos"/>
-      <surname value="Little"/>
+      <name nameAndrogynous="Кира" nameFeminine="Кара" nameMasculine="Карлос"/>
+      <surname value="Литтл"/>
       <genericName value="shady dealer"/>
       <description value="This shady dealer is someone you met in the back alleys of Dominion."/>
       <playerKnowsName value="false"/>

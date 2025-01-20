@@ -158,7 +158,7 @@
 			#ENDIF
 		#ELSE
 			#IF(sex.isDom(pc))
-				Having had your fun, you tell [el.name] that you've finished with [el.herHim] and [pc.step] back, leaving [el.herHim] to [el.moan], [el.speech(~Ooh!~ That felt good... We should do this again some time...)]
+				Having had your fun, you tell [el.name] that you've finished with [el.herHim] и [pc.step] back, leaving [el.herHim] to [el.moan], [el.speech(~Ooh!~ That felt good... We should do this again some time...)]
 			#ELSE
 				Having had [el.her] fun, [el.name] [el.steps] back and [el.moans], [el.speech(~Mmm!~ That felt good... We should do this again some time!)]
 			#ENDIF

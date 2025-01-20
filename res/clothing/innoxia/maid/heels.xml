@@ -50,25 +50,25 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-		<![CDATA[[npc.Name] [npc.verb(slip)] [npc.her] [npc.feet] into the heels and [npc.verb(buckle)] up the straps.]]>
+        <![CDATA[[npc.Name] slip [npc.her] [npc.feet] into the heels and buckle up the straps.]]>
     </self>
     <other>
-		<![CDATA[[npc.Name] [npc.verb(slip)] [npc2.namePos] [npc2.feet] into the heels and [npc.verb(buckle)] up the straps.]]>
+        <![CDATA[[npc.Name] slip [npc2.namePos] [npc2.feet] into the heels and buckle up the straps.]]>
     </other>
     <otherRough>
-		<![CDATA[[npc.Name] roughly [npc.verb(push)] [npc2.namePos] [npc2.feet] into the heels and impatiently [npc.verb(buckle)] up the straps.]]>
+        <![CDATA[[npc.Name] roughly push [npc2.namePos] [npc2.feet] into the heels and impatiently buckle up the straps.]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-		<![CDATA[[npc.Name] [npc.verb(unbuckle)] [npc.her] heels and [npc.verb(slip)] them off.]]>
+        <![CDATA[[npc.Name] unbuckle [npc.her] heels and slip them off.]]>
     </self>
     <other>
-		<![CDATA[[npc.Name] [npc.verb(unbuckle)] [npc2.namePos] heels and [npc.verb(slip)] them off.]]>
+        <![CDATA[[npc.Name] unbuckle [npc2.namePos] heels and slip them off.]]>
     </other>
     <otherRough>
-		<![CDATA[[npc.Name] roughly [npc.verb(unbuckle)] [npc2.namePos] heels and [npc.verb(slip)] them off.]]>
+        <![CDATA[[npc.Name] roughly unbuckle [npc2.namePos] heels and slip them off.]]>
     </otherRough>
   </displacementText>
 	

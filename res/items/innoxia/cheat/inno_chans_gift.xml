@@ -57,10 +57,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		Opening the bottle of Inno-chan's gift, [npc.name] [npc.verb(tilt)] [npc.her] head back and [npc.verb(bring)] it up to [npc.her] waiting [npc.lips]. The heady fragrance of rich red wine wafts from the neck of the newly opened bottle, which is soon joined by a rich, sweet taste that lingers on [npc.namePos] [npc.tongue] well after [npc.sheHas] had [npc.her] fill.
+		Opening the bottle of Inno-chan's gift, [npc.name] tilt [npc.her] head back and bring it up to [npc.her] waiting [npc.lips]. The heady fragrance of rich red wine wafts from the neck of the newly opened bottle, which is soon joined by a rich, sweet taste that lingers on [npc.namePos] [npc.tongue] well after [npc.sheHas] had [npc.her] fill.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		Opening the bottle of Inno-chan's gift, [npc.name] [npc.verb(bring)] it up to [npc2.namePos] waiting [npc2.lips]. The heady fragrance of rich red wine wafts from the neck of the newly opened bottle, which is soon joined by a rich, sweet taste that lingers on [npc2.namePos] [npc2.tongue] well after [npc2.sheHas] had [npc2.her] fill.
+		Opening the bottle of Inno-chan's gift, [npc.name] bring it up to [npc2.namePos] waiting [npc2.lips]. The heady fragrance of rich red wine wafts from the neck of the newly opened bottle, which is soon joined by a rich, sweet taste that lingers on [npc2.namePos] [npc2.tongue] well after [npc2.sheHas] had [npc2.her] fill.
 		]]></otherUse>
 	</useDescriptions>
 

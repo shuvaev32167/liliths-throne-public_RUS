@@ -47,37 +47,10 @@ public class NyanDateFinalRepeat {
 		}
 	}
 
-	public static final DialogueNode SOLO_DATE_START = new DialogueNode("", "", true) {
-		@Override
-		public void applyPreParsingEffects() {
-			doubleDate = false;
-			dateBill = 0;
-			getNyan().wearDress();
-			((Nyan)getNyan()).wearCoat(true, true);
-			travelTo(WorldType.NYANS_APARTMENT, PlaceType.NYAN_APARTMENT_ENTRANCE);
-			Main.game.getDialogueFlags().setFlag(DialogueFlagValue.nyanWeekendDated, true);
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 10*60;
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/nyansApartment/finalRepeatDate", "SOLO_DATE_START");
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Restaurant", "Accompany Nyan to the restaurant.", SOLO_DATE_RESTAURANT_1_ARRIVED);
-			}
-			return null;
-		}
-	};
-
 	public static final DialogueNode SOLO_DATE_RESTAURANT_1_ARRIVED = new DialogueNode("", "", true) {
 		@Override
 		public void applyPreParsingEffects() {
-			((Nyan)getNyan()).wearCoat(false, false);
+            getNyan().wearCoat(false, false);
 			travelTo(WorldType.SHOPPING_ARCADE, PlaceType.SHOPPING_ARCADE_RESTAURANT);
 		}
 		@Override
@@ -101,7 +74,7 @@ public class NyanDateFinalRepeat {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/nyansApartment/finalRepeatDate", "SOLO_DATE_RESTAURANT_2_VULPINE"));
 					}
 				};
-				
+
 			} else if(index==2) {
 				int cost = 600;
 				return new Response("Alicorn's Finest ("+UtilText.formatAsMoney(cost, "span")+")", "Order one of the more expensive wines on the menu.", SOLO_DATE_RESTAURANT_2_WINE_ORDER) {
@@ -114,7 +87,7 @@ public class NyanDateFinalRepeat {
 						Main.game.getTextStartStringBuilder().append(ClothingEmporium.incrementAffection(getNyan(), 1, 60, 100));
 					}
 				};
-				
+
 			} else if(index==3) {
 				int cost = 950;
 				return new Response("Youko's Reserve ("+UtilText.formatAsMoney(cost, "span")+")", "Order the most expensive wine on the menu.", SOLO_DATE_RESTAURANT_2_WINE_ORDER) {
@@ -127,6 +100,32 @@ public class NyanDateFinalRepeat {
 						Main.game.getTextStartStringBuilder().append(ClothingEmporium.incrementAffection(getNyan(), 2, 60, 100));
 					}
 				};
+			}
+			return null;
+		}
+	};
+	public static final DialogueNode SOLO_DATE_START = new DialogueNode("", "", true) {
+		@Override
+		public void applyPreParsingEffects() {
+			doubleDate = false;
+			dateBill = 0;
+			getNyan().wearDress();
+            getNyan().wearCoat(true, true);
+			travelTo(WorldType.NYANS_APARTMENT, PlaceType.NYAN_APARTMENT_ENTRANCE);
+			Main.game.getDialogueFlags().setFlag(DialogueFlagValue.nyanWeekendDated, true);
+		}
+		@Override
+		public int getSecondsPassed() {
+			return 10*60;
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/nyansApartment/finalRepeatDate", "SOLO_DATE_START");
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+				return new Response("Restaurant", "Accompany Nyan to the restaurant.", SOLO_DATE_RESTAURANT_1_ARRIVED);
 			}
 			return null;
 		}
@@ -206,12 +205,11 @@ public class NyanDateFinalRepeat {
 			return null;
 		}
 	};
-	
 	public static final DialogueNode SOLO_DATE_END_RETURN = new DialogueNode("", "", true, true) {
 		@Override
 		public void applyPreParsingEffects() {
 			travelTo(WorldType.NYANS_APARTMENT, PlaceType.NYAN_APARTMENT_ENTRANCE);
-			((Nyan)getNyan()).wearCoat(false, true);
+            getNyan().wearCoat(false, true);
 			AbstractClothing shoes = getNyan().getClothingInSlot(InventorySlot.FOOT);
 			if(shoes!=null) {
 				getNyan().unequipClothingIntoVoid(shoes, true, getNyan());
@@ -266,7 +264,7 @@ public class NyanDateFinalRepeat {
 			dateBill = 0;
 			getNyanMum().equipClothing();
 			getNyan().wearDress();
-			((Nyan)getNyan()).wearCoat(true, true);
+            getNyan().wearCoat(true, true);
 			travelTo(WorldType.NYANS_APARTMENT, PlaceType.NYAN_APARTMENT_ENTRANCE);
 			Main.game.getDialogueFlags().setFlag(DialogueFlagValue.nyanWeekendDated, true);
 		}
@@ -375,7 +373,7 @@ public class NyanDateFinalRepeat {
 		@Override
 		public void applyPreParsingEffects() {
 			travelTo(WorldType.NYANS_APARTMENT, PlaceType.NYAN_APARTMENT_ENTRANCE);
-			((Nyan)getNyan()).wearCoat(false, true);
+            getNyan().wearCoat(false, true);
 			AbstractClothing shoes = getNyan().getClothingInSlot(InventorySlot.FOOT);
 			if(shoes!=null) {
 				getNyan().unequipClothingIntoVoid(shoes, true, getNyan());
@@ -398,7 +396,7 @@ public class NyanDateFinalRepeat {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Lounge", "Do as [nyanmum.name] says and wait in the lounge...", POST_DOUBLE_DATE_APARTMENT_LOUNGE) {
+				return new Response("Гостиная", "Do as [nyanmum.name] says and wait in the lounge...", POST_DOUBLE_DATE_APARTMENT_LOUNGE) {
 					@Override
 					public void effects() {
 						kinky = false;
@@ -436,7 +434,7 @@ public class NyanDateFinalRepeat {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Bedroom", "Head into [nyanmum.namePos] bedroom...", POST_DOUBLE_DATE_APARTMENT_BEDROOM);
+                return new Response("Спальня", "Head into [nyanmum.namePos] bedroom...", POST_DOUBLE_DATE_APARTMENT_BEDROOM);
 			}
 			return null;
 		}

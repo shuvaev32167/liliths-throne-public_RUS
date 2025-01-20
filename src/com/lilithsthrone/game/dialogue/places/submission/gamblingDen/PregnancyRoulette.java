@@ -1,12 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.submission.gamblingDen;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.CoverableArea;
@@ -28,11 +21,7 @@ import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseSex;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.item.ItemType;
-import com.lilithsthrone.game.sex.InitialSexActionInformation;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.managers.submission.SMBreedingStall;
 import com.lilithsthrone.game.sex.managers.universal.SMAllFours;
 import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
@@ -52,6 +41,8 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
+import java.util.*;
+
 /**
  * @since 0.2.6
  * @version 0.3.9.4
@@ -59,7 +50,7 @@ import com.lilithsthrone.world.places.PlaceType;
  */
 public class PregnancyRoulette {
 
-	private static List<GenericSexualPartner> breeders = new ArrayList<>();
+	private static final List<GenericSexualPartner> breeders = new ArrayList<>();
 	private static int breederIndex = 0;
 	private static int roll = 1;
 	private static GenericSexualPartner mother;
@@ -103,315 +94,37 @@ public class PregnancyRoulette {
 		}
 	}
 	
-	public static final DialogueNode PREGNANCY_ROULETTE = new DialogueNode("Pregnancy Roulette Counter", "", false) {
-		
+	public static final DialogueNode MURK = new DialogueNode("", "", true) {
 		@Override
-		public boolean isTravelDisabled() {
-			return !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.eponaIntroduced)
-					|| (Main.game.getNpc(Epona.class).isVisiblyPregnant() && !Main.game.getNpc(Epona.class).isCharacterReactedToPregnancy(Main.game.getPlayer()));
+		public int getSecondsPassed() {
+			return 5*60;
 		}
-		
 		@Override
 		public String getContent() {
-			UtilText.nodeContentSB.setLength(0);
-			
-			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.eponaIntroduced)) {
-				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE"));
-				
-				boolean preg = Main.game.getPlayer().hasFetish(Fetish.FETISH_PREGNANCY);
-				boolean impreg = Main.game.getPlayer().hasFetish(Fetish.FETISH_IMPREGNATION);
-				if(preg) {
-					if(impreg) {
-						UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_BOTH_FETISH"));
-					} else {
-						UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_PREGNANCY_FETISH"));
-					}
-					
-				} else if(impreg) {
-					UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_IMPREGNATION_FETISH"));
-					
-				} else {
-					UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_NO_FETISH"));
-				}
-				
-				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_END"));
-				
-			} else if(Main.game.getNpc(Epona.class).isVisiblyPregnant() && !Main.game.getNpc(Epona.class).isCharacterReactedToPregnancy(Main.game.getPlayer())) {
-				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_EPONA_IMPREGNATED"));
-				
-			} else {
-				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_REPEAT"));
-				if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.playedPregnancyRouletteAsBreeder) || Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.playedPregnancyRouletteAsMother)) {
-					UtilText.nodeContentSB.append(
-							"<p>"
-								+ "Returning her greeting, you walk up to the counter, where the happy horse-girl asks, [epona.speech(You interested in having another go at pregnancy roulette?");
-					
-					if(Main.game.getDialogueFlags().eponaStamps>=6) {
-						UtilText.nodeContentSB.append(" Or perhaps you want to cash in your stamps and take me for a ride!)]"
-								+ "</p>");
-					} else {
-						UtilText.nodeContentSB.append(" You've got "+Util.intToString(6-Main.game.getDialogueFlags().eponaStamps)+" stamps to go until you get to take me for a ride!)]"
-								+ "</p>");
-					}
-				}  else {
-					UtilText.nodeContentSB.append(
-							"<p>"
-								+ "Returning her greeting, you walk up to the counter, where the happy horse-girl asks, [epona.speech(You interested in having a go at pregnancy roulette? Gotta start collecting those stamps!)]"
-							+ "</p>");
-				}
+			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.eponaMurkOwnerIntroduced)) {
+				return UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "MURK_REPEAT");
 			}
-			
-			return UtilText.nodeContentSB.toString();
+			return UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "MURK");
 		}
-
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.eponaIntroduced)) {
-				if(index==1) {
-					return new Response("Continue", "Now that Epona has told you about the game of pregnancy roulette, you wonder what you should do next...", PREGNANCY_ROULETTE_GREETING_UTIL) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.eponaIntroduced, true);
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_GREETING_UTIL_END"));
-						}
-					};
-				} else {
-					return null;
-				}
-				
-			} else if(Main.game.getNpc(Epona.class).isVisiblyPregnant() && !Main.game.getNpc(Epona.class).isCharacterReactedToPregnancy(Main.game.getPlayer())) {
-				if(index==1) {
-					return new Response("Continue", "You're happy to see how delighted Epona is to be the mother of your children.", PREGNANCY_ROULETTE_GREETING_UTIL) {
-						@Override
-						public void effects() {
-							Main.game.getNpc(Epona.class).setCharacterReactedToPregnancy(Main.game.getPlayer(), true);
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_GREETING_UTIL_PREG_END"));
-						}
-					};
-				} else {
-					return null;
-				}
-				
-			} else {
-				if(index == 1) {
-					return new Response("Rules", "Ask Epona about the rules for pregnancy roulette.", PREGNANCY_ROULETTE_RULES);
-					
-				} else if(index==2) {
-					if(Main.game.getPlayer().isPregnant()) {
-						return new Response("Male Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You are already pregnant, so you can't sign up to be the mother!", null);
-						
-					} else if(Main.game.getPlayer().hasIncubationLitter(SexAreaOrifice.VAGINA)) {
-						return new Response("Male Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "Your womb is full of eggs, so you can't sign up to be the mother!", null);
-						
-					} else if(Main.game.getPlayer().getTotalFluidInArea(SexAreaOrifice.VAGINA)>0) {
-						return new Response("Male Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You can't sign up for pregnancy roulette if your pussy already is full of cum!", null);
-						
-					} else if(!Main.game.getPlayer().hasVagina()) {
-						return new Response("Male Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You don't have a vagina, so you can't sign up to be the mother!", null);
-						
-					} else if(!Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.VAGINA, true)) {
-						return new Response("Male Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You aren't able to gain access to your vagina, so you can't sign up to be the mother!", null);
-						
-					} else if(Main.game.getPlayer().getMoney()<10000) {
-						return new Response("Male Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You don't have enough money, so you can't sign up to be the mother!", null);
-						
-					} else {
-						return new Response("Male Bred ("+UtilText.formatAsMoney(10000, "span")+")", "Sign up as the mother for pregnancy roulette, asking to bred by the males.", PREGNANCY_ROULETTE_MOTHER_PRE_SELECTION) {
-							@Override
-							public Colour getHighlightColour() {
-								return PresetColour.GENERIC_SEX;
-							}
-							@Override
-							public void effects() {
-								Main.game.getTextStartStringBuilder().append(Main.game.getPlayer().incrementMoney(-10000));
-								Main.game.getDialogueFlags().eponaStamps+=1;
-								
-								Main.game.getPlayer().setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_PREGNANCY);
-								Main.game.getNpc(Epona.class).setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_PREGNANCY);
-								
-								breeders.clear();
-								breederIndex=0;
-								selectedBreeder=null;
-								
-								for(int i=0; i<6; i++) {
-									GenericSexualPartner partner = new GenericSexualPartner(Gender.M_P_MALE, Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocation(), false, ((s) -> s.getRace()==Race.HARPY));
-									initBreeder(partner);
-									breeders.add(partner);
-								}
-							}
-						};
+			if(index==1) {
+                return new Response("Вход", "Enter the room which [murk.name] is being kept in...", MURK_ALONE) {
+					@Override
+					public void effects() {
+						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.eponaMurkOwnerIntroduced, true);
 					}
-					
-				} else if(index==3) {
-					if(Main.game.getPlayer().isPregnant()) {
-						return new Response("Futa Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You are already pregnant, so you can't sign up to be the mother!", null);
-						
-					} else if(Main.game.getPlayer().hasIncubationLitter(SexAreaOrifice.VAGINA)) {
-						return new Response("Futa Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "Your womb is full of eggs, so you can't sign up to be the mother!", null);
-						
-					} else if(Main.game.getPlayer().getTotalFluidInArea(SexAreaOrifice.VAGINA)>0) {
-						return new Response("Futa Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You can't sign up for pregnancy roulette if your pussy already is full of cum!", null);
-						
-					} else if(!Main.game.getPlayer().hasVagina()) {
-						return new Response("Futa Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You don't have a vagina, so you can't sign up to be the mother!", null);
-						
-					} else if(!Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.VAGINA, true)) {
-						return new Response("Futa Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You aren't able to gain access to your vagina, so you can't sign up to be the mother!", null);
-						
-					} else if(Main.game.getPlayer().getMoney()<10000) {
-						return new Response("Futa Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You don't have enough money, so you can't sign up to be the mother!", null);
-						
-					} else {
-						return new Response("Futa Bred ("+UtilText.formatAsMoney(10000, "span")+")", "Sign up as the mother for pregnancy roulette, asking to bred by the futas.", PREGNANCY_ROULETTE_MOTHER_PRE_SELECTION) {
-							@Override
-							public Colour getHighlightColour() {
-								return PresetColour.GENERIC_SEX;
-							}
-							@Override
-							public void effects() {
-								Main.game.getTextStartStringBuilder().append(Main.game.getPlayer().incrementMoney(-10000));
-								Main.game.getDialogueFlags().eponaStamps+=1;
-								
-								Main.game.getPlayer().setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_FUTA_PREGNANCY);
-								Main.game.getNpc(Epona.class).setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_FUTA_PREGNANCY);
-								
-								breeders.clear();
-								breederIndex=0;
-								selectedBreeder=null;
-								
-								for(int i=0; i<6; i++) {
-									GenericSexualPartner partner = new GenericSexualPartner(Gender.F_P_V_B_FUTANARI, Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocation(), false);
-									initBreeder(partner);
-									breeders.add(partner);
-								}
-							}
-						};
+				};
+
+			} else if(index==0) {
+				return new Response("Leave", "Have second thoughts about visiting [murk.name] and instead turn around and leave...", MURK_BACK) {
+					@Override
+					public void effects() {
+						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.eponaMurkOwnerIntroduced, true);
 					}
-					
-				} else if(index==4) {
-					if(!Main.game.getPlayer().hasPenisIgnoreDildo()) {
-						return new Response("Breeder ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You don't have a penis, so you can't sign up to be one of the breeders!", null);
-						
-					} else if(!Main.game.getPlayer().isAbleToOrgasm()) {
-						return new Response("Breeder ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You are unable to orgasm, so you can't sign up to be one of the breeders!", null);
-						
-					} else if(!Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.PENIS, true)) {
-						return new Response("Breeder ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You aren't able to gain access to your penis, so you can't sign up to be one of the breeders!", null);
-						
-					} else if(Main.game.getPlayer().getMoney()<10000) {
-						return new Response("Breeder ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You don't have enough money, so you can't sign up to be one of the breeders!", null);
-						
-					} else {
-						return new Response("Breeder ("+UtilText.formatAsMoney(10000, "span")+")", "Sign up as one of the breeders for pregnancy roulette.", PREGNANCY_ROULETTE_BREEDER) {
-							@Override
-							public Colour getHighlightColour() {
-								return PresetColour.GENERIC_SEX;
-							}
-							@Override
-							public void effects() {
-								Main.game.getTextStartStringBuilder().append(Main.game.getPlayer().incrementMoney(-10000));
-								Main.game.getDialogueFlags().eponaStamps+=1;
-								
-								// Skew the dice roll in the player's favour (lowest number goes first):
-								Dice d = new Dice(Util.newHashMapOfValues(
-										new Value<>(DiceFace.ONE, 4f),
-										new Value<>(DiceFace.TWO, 3f),
-										new Value<>(DiceFace.THREE, 2f),
-										new Value<>(DiceFace.FOUR, 1f),
-										new Value<>(DiceFace.FIVE, 0.5f),
-										new Value<>(DiceFace.SIX, 0.25f)));
-								d.roll();
-								roll = d.getFace().getValue();
-								
-								breeders.clear();
-								breederIndex=0;
-								selectedBreeder=null;
-								
-								if(Main.game.getPlayer().isFeminine()) {
-									Main.game.getPlayer().setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_FUTA_PREGNANCY);
-									Main.game.getNpc(Epona.class).setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_FUTA_PREGNANCY);
-									for(int i=0; i<5; i++) {
-										GenericSexualPartner partner = new GenericSexualPartner(Gender.F_P_V_B_FUTANARI, Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocation(), false);
-										initBreeder(partner);
-										breeders.add(partner);
-									}
-									
-								} else {
-									Main.game.getPlayer().setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_PREGNANCY);
-									Main.game.getNpc(Epona.class).setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_PREGNANCY);
-									for(int i=0; i<5; i++) {
-										GenericSexualPartner partner = new GenericSexualPartner(Gender.M_P_MALE, Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocation(), false);
-										initBreeder(partner);
-										breeders.add(partner);
-									}
-								}
-								
-								initMother();
-							}
-						};
-					}
-					
-				} else if(index==6) {
-					if(Main.game.getDialogueFlags().eponaStamps<6) {
-						return new Response("Ride Epona", "You haven't collected enough stamps to take Epona for a ride! You have "+Util.intToString(Main.game.getDialogueFlags().eponaStamps)+", and you need at least six.", null);
-						
-					} else {
-						return new ResponseSex("Ride Epona", "Tell Epona that you want to cash in your stamps and take her for a ride. (Have sex as the dominant partner.)",
-								null, null, null, null, null, null,
-								true, true,
-								new SMGeneric(
-										Util.newArrayListOfValues(Main.game.getPlayer()),
-										Util.newArrayListOfValues(Main.game.getNpc(Epona.class)),
-										null,
-										null) {
-									@Override
-									public boolean isPublicSex() {
-										return false;
-									}
-								},
-								EPONA_POST_SEX,
-								UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "EPONA_START_SEX_AS_SUB")) {
-							@Override
-							public void effects() {
-								Main.game.getDialogueFlags().eponaStamps-=6;
-							}
-						};
-					}
-					
-				} else if(index==7) {
-					if(Main.game.getDialogueFlags().eponaStamps<6) {
-						return new Response("Epona Rides", "You haven't collected enough stamps to get Epona to take you for a ride! You have "+Util.intToString(Main.game.getDialogueFlags().eponaStamps)+", and you need at least six.", null);
-						
-					} else {
-						return new ResponseSex("Epona Rides", "Tell Epona that you want to cash in your stamps and have her take you for a ride. (Have sex as the submissive partner.)",
-								null, null, null, null, null, null,
-								true, true,
-								new SMGeneric(
-										Util.newArrayListOfValues(Main.game.getNpc(Epona.class)),
-										Util.newArrayListOfValues(Main.game.getPlayer()),
-										null,
-										null) {
-									@Override
-									public boolean isPublicSex() {
-										return false;
-									}
-								},
-								EPONA_POST_SEX,
-								UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "EPONA_START_SEX_AS_DOM")) {
-							@Override
-							public void effects() {
-								Main.game.getDialogueFlags().eponaStamps-=6;
-							}
-						};
-					}
-					
-				} else if(index==11 && Main.game.getNpc(Murk.class).isSlave()) {
-					return new Response("[murk.Name]", "Ask Epona if you can see [murk.name].", MURK);
-					
-				} else {
-					return null;
-				}
+				};
 			}
+			return null;
 		}
 	};
 	
@@ -461,14 +174,13 @@ public class PregnancyRoulette {
 	};
 	
 	private static String getBreederPanel(NPC breeder) {
-		StringBuilder sb = new StringBuilder();
+
+        String sb = "<div class='container-half-width'>"
+                + "[npc.Name] - [npc.FullRace(true)]<br/>"
+                + "[npc.CockGirth], [npc.penisValue], [npc.cockColour(true)] [npc.cockRace] [npc.cock], with [npc.ballSize] balls."
+                + "</div>";
 		
-		sb.append("<div class='container-half-width'>"
-				+ "[npc.Name] - [npc.FullRace(true)]<br/>"
-				+ "[npc.CockGirth], [npc.penisValue], [npc.cockColour(true)] [npc.cockRace] [npc.cock], with [npc.ballSize] balls."
-				+ "</div>");
-		
-		return UtilText.parse(breeder, sb.toString());
+		return UtilText.parse(breeder, sb);
 	}
 	
 	public static final DialogueNode PREGNANCY_ROULETTE_MOTHER_PRE_SELECTION = new DialogueNode("", "", true) {
@@ -1018,38 +730,315 @@ public class PregnancyRoulette {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode MURK = new DialogueNode("", "", true) {
+	public static final DialogueNode PREGNANCY_ROULETTE = new DialogueNode("Pregnancy Roulette Counter", "", false) {
+
 		@Override
-		public int getSecondsPassed() {
-			return 5*60;
+		public boolean isTravelDisabled() {
+			return !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.eponaIntroduced)
+					|| (Main.game.getNpc(Epona.class).isVisiblyPregnant() && !Main.game.getNpc(Epona.class).isCharacterReactedToPregnancy(Main.game.getPlayer()));
 		}
+
 		@Override
 		public String getContent() {
-			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.eponaMurkOwnerIntroduced)) {
-				return UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "MURK_REPEAT");
+			UtilText.nodeContentSB.setLength(0);
+
+			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.eponaIntroduced)) {
+				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE"));
+
+				boolean preg = Main.game.getPlayer().hasFetish(Fetish.FETISH_PREGNANCY);
+				boolean impreg = Main.game.getPlayer().hasFetish(Fetish.FETISH_IMPREGNATION);
+				if(preg) {
+					if(impreg) {
+						UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_BOTH_FETISH"));
+					} else {
+						UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_PREGNANCY_FETISH"));
+					}
+
+				} else if(impreg) {
+					UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_IMPREGNATION_FETISH"));
+
+				} else {
+					UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_NO_FETISH"));
+				}
+
+				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_END"));
+
+			} else if(Main.game.getNpc(Epona.class).isVisiblyPregnant() && !Main.game.getNpc(Epona.class).isCharacterReactedToPregnancy(Main.game.getPlayer())) {
+				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_EPONA_IMPREGNATED"));
+
+			} else {
+				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_REPEAT"));
+				if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.playedPregnancyRouletteAsBreeder) || Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.playedPregnancyRouletteAsMother)) {
+					UtilText.nodeContentSB.append(
+							"<p>"
+								+ "Returning her greeting, you walk up to the counter, where the happy horse-girl asks, [epona.speech(You interested in having another go at pregnancy roulette?");
+
+					if(Main.game.getDialogueFlags().eponaStamps>=6) {
+						UtilText.nodeContentSB.append(" Or perhaps you want to cash in your stamps and take me for a ride!)]"
+								+ "</p>");
+					} else {
+						UtilText.nodeContentSB.append(" You've got "+Util.intToString(6-Main.game.getDialogueFlags().eponaStamps)+" stamps to go until you get to take me for a ride!)]"
+								+ "</p>");
+					}
+				}  else {
+					UtilText.nodeContentSB.append(
+							"<p>"
+								+ "Returning her greeting, you walk up to the counter, where the happy horse-girl asks, [epona.speech(You interested in having a go at pregnancy roulette? Gotta start collecting those stamps!)]"
+							+ "</p>");
+				}
 			}
-			return UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "MURK");
+
+			return UtilText.nodeContentSB.toString();
 		}
+
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Enter", "Enter the room which [murk.name] is being kept in...", MURK_ALONE) {
-					@Override
-					public void effects() {
-						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.eponaMurkOwnerIntroduced, true);
+			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.eponaIntroduced)) {
+				if(index==1) {
+                    return new Response("Продолжить", "Now that Epona has told you about the game of pregnancy roulette, you wonder what you should do next...", PREGNANCY_ROULETTE_GREETING_UTIL) {
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.eponaIntroduced, true);
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_GREETING_UTIL_END"));
+						}
+					};
+				} else {
+					return null;
+				}
+
+			} else if(Main.game.getNpc(Epona.class).isVisiblyPregnant() && !Main.game.getNpc(Epona.class).isCharacterReactedToPregnancy(Main.game.getPlayer())) {
+				if(index==1) {
+                    return new Response("Продолжить", "You're happy to see how delighted Epona is to be the mother of your children.", PREGNANCY_ROULETTE_GREETING_UTIL) {
+						@Override
+						public void effects() {
+							Main.game.getNpc(Epona.class).setCharacterReactedToPregnancy(Main.game.getPlayer(), true);
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_GREETING_UTIL_PREG_END"));
+						}
+					};
+				} else {
+					return null;
+				}
+
+			} else {
+				if(index == 1) {
+					return new Response("Rules", "Ask Epona about the rules for pregnancy roulette.", PREGNANCY_ROULETTE_RULES);
+
+				} else if(index==2) {
+					if(Main.game.getPlayer().isPregnant()) {
+						return new Response("Male Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You are already pregnant, so you can't sign up to be the mother!", null);
+
+					} else if(Main.game.getPlayer().hasIncubationLitter(SexAreaOrifice.VAGINA)) {
+						return new Response("Male Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "Your womb is full of eggs, so you can't sign up to be the mother!", null);
+
+					} else if(Main.game.getPlayer().getTotalFluidInArea(SexAreaOrifice.VAGINA)>0) {
+						return new Response("Male Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You can't sign up for pregnancy roulette if your pussy already is full of cum!", null);
+
+					} else if(!Main.game.getPlayer().hasVagina()) {
+						return new Response("Male Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You don't have a vagina, so you can't sign up to be the mother!", null);
+
+					} else if(!Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.VAGINA, true)) {
+						return new Response("Male Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You aren't able to gain access to your vagina, so you can't sign up to be the mother!", null);
+
+					} else if(Main.game.getPlayer().getMoney()<10000) {
+						return new Response("Male Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You don't have enough money, so you can't sign up to be the mother!", null);
+
+					} else {
+						return new Response("Male Bred ("+UtilText.formatAsMoney(10000, "span")+")", "Sign up as the mother for pregnancy roulette, asking to bred by the males.", PREGNANCY_ROULETTE_MOTHER_PRE_SELECTION) {
+							@Override
+							public Colour getHighlightColour() {
+								return PresetColour.GENERIC_SEX;
+							}
+							@Override
+							public void effects() {
+								Main.game.getTextStartStringBuilder().append(Main.game.getPlayer().incrementMoney(-10000));
+								Main.game.getDialogueFlags().eponaStamps+=1;
+
+								Main.game.getPlayer().setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_PREGNANCY);
+								Main.game.getNpc(Epona.class).setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_PREGNANCY);
+
+								breeders.clear();
+								breederIndex=0;
+								selectedBreeder=null;
+
+								for(int i=0; i<6; i++) {
+									GenericSexualPartner partner = new GenericSexualPartner(Gender.M_P_MALE, Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocation(), false, ((s) -> s.getRace()==Race.HARPY));
+									initBreeder(partner);
+									breeders.add(partner);
+								}
+							}
+						};
 					}
-				};
-				
-			} else if(index==0) {
-				return new Response("Leave", "Have second thoughts about visiting [murk.name] and instead turn around and leave...", MURK_BACK) {
-					@Override
-					public void effects() {
-						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.eponaMurkOwnerIntroduced, true);
+
+				} else if(index==3) {
+					if(Main.game.getPlayer().isPregnant()) {
+						return new Response("Futa Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You are already pregnant, so you can't sign up to be the mother!", null);
+
+					} else if(Main.game.getPlayer().hasIncubationLitter(SexAreaOrifice.VAGINA)) {
+						return new Response("Futa Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "Your womb is full of eggs, so you can't sign up to be the mother!", null);
+
+					} else if(Main.game.getPlayer().getTotalFluidInArea(SexAreaOrifice.VAGINA)>0) {
+						return new Response("Futa Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You can't sign up for pregnancy roulette if your pussy already is full of cum!", null);
+
+					} else if(!Main.game.getPlayer().hasVagina()) {
+						return new Response("Futa Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You don't have a vagina, so you can't sign up to be the mother!", null);
+
+					} else if(!Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.VAGINA, true)) {
+						return new Response("Futa Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You aren't able to gain access to your vagina, so you can't sign up to be the mother!", null);
+
+					} else if(Main.game.getPlayer().getMoney()<10000) {
+						return new Response("Futa Bred ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You don't have enough money, so you can't sign up to be the mother!", null);
+
+					} else {
+						return new Response("Futa Bred ("+UtilText.formatAsMoney(10000, "span")+")", "Sign up as the mother for pregnancy roulette, asking to bred by the futas.", PREGNANCY_ROULETTE_MOTHER_PRE_SELECTION) {
+							@Override
+							public Colour getHighlightColour() {
+								return PresetColour.GENERIC_SEX;
+							}
+							@Override
+							public void effects() {
+								Main.game.getTextStartStringBuilder().append(Main.game.getPlayer().incrementMoney(-10000));
+								Main.game.getDialogueFlags().eponaStamps+=1;
+
+								Main.game.getPlayer().setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_FUTA_PREGNANCY);
+								Main.game.getNpc(Epona.class).setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_FUTA_PREGNANCY);
+
+								breeders.clear();
+								breederIndex=0;
+								selectedBreeder=null;
+
+								for(int i=0; i<6; i++) {
+									GenericSexualPartner partner = new GenericSexualPartner(Gender.F_P_V_B_FUTANARI, Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocation(), false);
+									initBreeder(partner);
+									breeders.add(partner);
+								}
+							}
+						};
 					}
-				};
+
+				} else if(index==4) {
+					if(!Main.game.getPlayer().hasPenisIgnoreDildo()) {
+						return new Response("Breeder ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You don't have a penis, so you can't sign up to be one of the breeders!", null);
+
+					} else if(!Main.game.getPlayer().isAbleToOrgasm()) {
+						return new Response("Breeder ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You are unable to orgasm, so you can't sign up to be one of the breeders!", null);
+
+					} else if(!Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.PENIS, true)) {
+						return new Response("Breeder ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You aren't able to gain access to your penis, so you can't sign up to be one of the breeders!", null);
+
+					} else if(Main.game.getPlayer().getMoney()<10000) {
+						return new Response("Breeder ("+UtilText.formatAsMoneyUncoloured(10000, "span")+")", "You don't have enough money, so you can't sign up to be one of the breeders!", null);
+
+					} else {
+						return new Response("Breeder ("+UtilText.formatAsMoney(10000, "span")+")", "Sign up as one of the breeders for pregnancy roulette.", PREGNANCY_ROULETTE_BREEDER) {
+							@Override
+							public Colour getHighlightColour() {
+								return PresetColour.GENERIC_SEX;
+							}
+							@Override
+							public void effects() {
+								Main.game.getTextStartStringBuilder().append(Main.game.getPlayer().incrementMoney(-10000));
+								Main.game.getDialogueFlags().eponaStamps+=1;
+
+								// Skew the dice roll in the player's favour (lowest number goes first):
+								Dice d = new Dice(Util.newHashMapOfValues(
+										new Value<>(DiceFace.ONE, 4f),
+										new Value<>(DiceFace.TWO, 3f),
+										new Value<>(DiceFace.THREE, 2f),
+										new Value<>(DiceFace.FOUR, 1f),
+										new Value<>(DiceFace.FIVE, 0.5f),
+										new Value<>(DiceFace.SIX, 0.25f)));
+								d.roll();
+								roll = d.getFace().getValue();
+
+								breeders.clear();
+								breederIndex=0;
+								selectedBreeder=null;
+
+								if(Main.game.getPlayer().isFeminine()) {
+									Main.game.getPlayer().setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_FUTA_PREGNANCY);
+									Main.game.getNpc(Epona.class).setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_FUTA_PREGNANCY);
+									for(int i=0; i<5; i++) {
+										GenericSexualPartner partner = new GenericSexualPartner(Gender.F_P_V_B_FUTANARI, Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocation(), false);
+										initBreeder(partner);
+										breeders.add(partner);
+									}
+
+								} else {
+									Main.game.getPlayer().setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_PREGNANCY);
+									Main.game.getNpc(Epona.class).setLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_PREGNANCY);
+									for(int i=0; i<5; i++) {
+										GenericSexualPartner partner = new GenericSexualPartner(Gender.M_P_MALE, Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocation(), false);
+										initBreeder(partner);
+										breeders.add(partner);
+									}
+								}
+
+								initMother();
+							}
+						};
+					}
+
+				} else if(index==6) {
+					if(Main.game.getDialogueFlags().eponaStamps<6) {
+						return new Response("Ride Epona", "You haven't collected enough stamps to take Epona for a ride! You have "+Util.intToString(Main.game.getDialogueFlags().eponaStamps)+", and you need at least six.", null);
+
+					} else {
+						return new ResponseSex("Ride Epona", "Tell Epona that you want to cash in your stamps and take her for a ride. (Have sex as the dominant partner.)",
+								null, null, null, null, null, null,
+								true, true,
+								new SMGeneric(
+										Util.newArrayListOfValues(Main.game.getPlayer()),
+										Util.newArrayListOfValues(Main.game.getNpc(Epona.class)),
+										null,
+										null) {
+									@Override
+									public boolean isPublicSex() {
+										return false;
+									}
+								},
+								EPONA_POST_SEX,
+								UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "EPONA_START_SEX_AS_SUB")) {
+							@Override
+							public void effects() {
+								Main.game.getDialogueFlags().eponaStamps-=6;
+							}
+						};
+					}
+
+				} else if(index==7) {
+					if(Main.game.getDialogueFlags().eponaStamps<6) {
+						return new Response("Epona Rides", "You haven't collected enough stamps to get Epona to take you for a ride! You have "+Util.intToString(Main.game.getDialogueFlags().eponaStamps)+", and you need at least six.", null);
+
+					} else {
+						return new ResponseSex("Epona Rides", "Tell Epona that you want to cash in your stamps and have her take you for a ride. (Have sex as the submissive partner.)",
+								null, null, null, null, null, null,
+								true, true,
+								new SMGeneric(
+										Util.newArrayListOfValues(Main.game.getNpc(Epona.class)),
+										Util.newArrayListOfValues(Main.game.getPlayer()),
+										null,
+										null) {
+									@Override
+									public boolean isPublicSex() {
+										return false;
+									}
+								},
+								EPONA_POST_SEX,
+								UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "EPONA_START_SEX_AS_DOM")) {
+							@Override
+							public void effects() {
+								Main.game.getDialogueFlags().eponaStamps-=6;
+							}
+						};
+					}
+
+				} else if(index==11 && Main.game.getNpc(Murk.class).isSlave()) {
+					return new Response("[murk.Name]", "Ask Epona if you can see [murk.name].", MURK);
+
+				} else {
+					return null;
+				}
 			}
-			return null;
 		}
 	};
 

@@ -10,7 +10,7 @@
 	</p>
 	#IF(!game.isExtendedWorkTime())
 		<p>
-			Due to the unsociable hour, you're certain that Amber will not come to answer the door if you were to knock it. It might be best to return at a more reasonable time, such as between [style.colourMinorBad([units.time(6)] and [units.time(22)])]...
+			Due to the unsociable hour, you're certain that Amber will not come to answer the door if you were to knock it. It might be best to return at a more reasonable time, such as between [style.colourMinorBad([units.time(6)] и [units.time(22)])]...
 		</p>
 	#ENDIF
 	]]>

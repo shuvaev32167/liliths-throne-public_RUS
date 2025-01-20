@@ -1,18 +1,5 @@
 package com.lilithsthrone.game.dialogue.utils;
 
-import java.awt.Toolkit;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Properties;
-
 import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInformationEventListener;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
@@ -23,11 +10,7 @@ import com.lilithsthrone.game.character.body.valueEnums.Lactation;
 import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishPreference;
-import com.lilithsthrone.game.character.gender.AndrogynousIdentification;
-import com.lilithsthrone.game.character.gender.Gender;
-import com.lilithsthrone.game.character.gender.GenderNames;
-import com.lilithsthrone.game.character.gender.GenderPronoun;
-import com.lilithsthrone.game.character.gender.PronounType;
+import com.lilithsthrone.game.character.gender.*;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.persona.SexualOrientationPreference;
@@ -40,12 +23,7 @@ import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
 import com.lilithsthrone.game.dialogue.story.CharacterCreation;
-import com.lilithsthrone.game.settings.ContentPreferenceValue;
-import com.lilithsthrone.game.settings.DifficultyLevel;
-import com.lilithsthrone.game.settings.ForcedFetishTendency;
-import com.lilithsthrone.game.settings.ForcedTFTendency;
-import com.lilithsthrone.game.settings.KeyCodeWithModifiers;
-import com.lilithsthrone.game.settings.KeyboardAction;
+import com.lilithsthrone.game.settings.*;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.Artist;
 import com.lilithsthrone.rendering.ArtistWebsite;
@@ -56,6 +34,15 @@ import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import java.awt.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -101,12 +88,12 @@ public class OptionsDialogue {
 							:"")
 					+ (Main.game.isStarted() || Main.getProperties().name.isEmpty()
 							?""
-							:"<h4 style='text-align:center;'>Last save:</h4>"
+					: "<h4 style='text-align:center;'>Последнее сохранение:</h4>"
 								+ "<h5 style='color:" + Main.getProperties().nameColour + ";text-align:center;'>" + Main.getProperties().name + "</h5>"
-								+ "<p style='text-align:center;'><b>Level " + Main.getProperties().level + " " + Util.capitaliseSentence(Main.getProperties().race) + "</b></p>"
+					+ "<p style='text-align:center;'><b>Уровень " + Main.getProperties().level + " " + Util.capitaliseSentence(Main.getProperties().race) + "</b></p>"
 								+ "<p style='text-align:center;'>" + UtilText.formatAsMoney(Main.getProperties().money, "b") + "</p>"
 								+ "<div style='text-align:center; display:block; margin:auto;'>" + UtilText.formatAsEssences(Main.getProperties().arcaneEssences, "b", false) + "</div>"
-								+ "<p style='text-align:center;'>Quest: " + Util.capitaliseSentence(Main.getProperties().quest) + "</p>");
+					+ "<p style='text-align:center;'>Квест: " + Util.capitaliseSentence(Main.getProperties().quest) + "</p>");
 		}
 		
 		@Override
@@ -159,7 +146,7 @@ public class OptionsDialogue {
 				 }
 				
 			} else if (index == 2) {
-				return new Response("Сохранить/Загрузить", "Открывает окно сохранить/загрузить", SAVE_LOAD){
+				 return new Response("Сохранения", "Открывает окно сохранений", SAVE_LOAD) {
 					@Override
 					public void effects() {
 						loadConfirmationName = ""; overwriteConfirmationName = ""; deleteConfirmationName = "";
@@ -284,12 +271,11 @@ public class OptionsDialogue {
 	};
 	
 	private static String getJavaVersionInformation() {
-		StringBuilder sb = new StringBuilder();
-		
-		sb.append("<p style='text-align:center;'>"
-					+ "Ваша версия Java: "+System.getProperty("java.version"));
+
+        String sb = "<p style='text-align:center;'>"
+                + "Ваша версия Java: " + System.getProperty("java.version") +
 //				+" | ");
-		
+
 //		String[] version = System.getProperty("java.version").split("\\.");
 //		if(version[0]!=null) {
 //			if(Integer.valueOf(version[0])<9) {
@@ -301,14 +287,14 @@ public class OptionsDialogue {
 //		if(version.length>=2) {
 //			if(Integer.valueOf(version[1])<8) {
 //				sb.append("<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>You have an old version of java!</span> This game needs at least v1.8.0_131 to work correctly!");
-//				
+//
 //			} else {
 //				if(version.length==3){
 //					String[] versionMinor = version[2].split("_");
 //					if(versionMinor.length>=2)
 //						if(Integer.valueOf(versionMinor[1])<131) {
 //							sb.append("<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>You have an old version of java!</span> This game needs at least v1.8.0_131 to work correctly!");
-//							
+//
 //						} else {
 //							sb.append("<span style='color:"+PresetColour.GENERIC_GOOD.toWebHexString()+";'>Your java is up to date!</span>");
 //						}
@@ -317,10 +303,10 @@ public class OptionsDialogue {
 //				}
 //			}
 //		}
+
+                "</p>";
 		
-		sb.append("</p>");
-		
-		return sb.toString();
+		return sb;
 	}
 
 	public static String loadConfirmationName = "";
@@ -356,7 +342,7 @@ public class OptionsDialogue {
 							+ "Имя"
 						+ "</div>"
 						+ "<div class='container-full-width' style='width:calc(25% - 16px); text-align:center; background:transparent;'>"
-							+ "Сохранить | Загрузить | Удалить"
+							+ "Сохр.|Загр.|Удал."
 						+ "</div>"
 					+ "</div>");
 
@@ -455,13 +441,13 @@ public class OptionsDialogue {
 					+ "</p>"
 					+ "<div class='container-full-width' style='padding:0; margin:0;'>"
 						+ "<div class='container-quarter-width' style='text-align:center;'>"
-							+ "Time"
+					+ "Время"
 						+ "</div>"
 						+ "<div class='container-half-width' style='width:calc(55% - 16px); text-align:center; background:transparent;'>"
-							+ "Name"
+					+ "Имя"
 						+ "</div>"
 						+ "<div class='container-quarter-width' style='width:calc(20% - 16px); text-align:center; background:transparent;'>"
-							+ "Functions"
+					+ "Функции"
 						+ "</div>"
 					+ "</div>");
 			
@@ -969,7 +955,7 @@ public class OptionsDialogue {
 							+ "<tr>"
 							+ "<th>Части тела</th>"
 								+ "<th style='color:"+PresetColour.MASCULINE.toWebHexString()+";'>Мужественный</th>"
-								+ "<th style='color:"+PresetColour.ANDROGYNOUS.toWebHexString()+";'>Неопределенный</th>"
+					+ "<th style='color:" + PresetColour.ANDROGYNOUS.toWebHexString() + ";'>Неопределённый</th>"
 								+ "<th style='color:"+PresetColour.FEMININE.toWebHexString()+";'>Женственная</th>"
 							+ "</tr>");
 			
@@ -1835,30 +1821,26 @@ public class OptionsDialogue {
 	};
 
 	private static String getSpawnRateDiv(String id, Colour colour, String valueDisplay, int value, int minimum, int maximum) {
-		StringBuilder contentSB = new StringBuilder();
 
-		contentSB.append("<div class='container-full-width' style='padding:0; margin:2px 0;'>");
+        String contentSB = "<div class='container-full-width' style='padding:0; margin:2px 0;'>" +
+                "<div id='" + id + "_INCREASE_LARGE' class='normal-button" + (value == maximum ? " disabled" : "") + "' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
+                + (value == maximum ? "[style.boldDisabled(+)]" : "[style.boldGood(+)]")
+                + "</div>"
+                + "<div id='" + id + "_INCREASE' class='normal-button" + (value == maximum ? " disabled" : "") + "' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
+                + (value == maximum ? "[style.boldDisabled(+)]" : "[style.boldMinorGood(+)]")
+                + "</div>"
+                + "<div class='container-full-width' style='text-align:center; width:40%; float:right; margin:0;'>"
+                + "<b>" + valueDisplay + "</b>"
+                + "</div>"
+                + "<div id='" + id + "_DECREASE' class='normal-button" + (value == minimum ? " disabled" : "") + "' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
+                + (value == minimum ? "[style.boldDisabled(-)]" : "[style.boldMinorBad(-)]")
+                + "</div>"
+                + "<div id='" + id + "_DECREASE_LARGE' class='normal-button" + (value == minimum ? " disabled" : "") + "' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
+                + (value == minimum ? "[style.boldDisabled(-)]" : "[style.boldBad(-)]")
+                + "</div>" +
+                "</div>";
 		
-			contentSB.append(
-					"<div id='"+id+"_INCREASE_LARGE' class='normal-button"+(value==maximum?" disabled":"")+"' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
-							+ (value==maximum?"[style.boldDisabled(+)]":"[style.boldGood(+)]")
-					+ "</div>"
-					+ "<div id='"+id+"_INCREASE' class='normal-button"+(value==maximum?" disabled":"")+"' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
-							+ (value==maximum?"[style.boldDisabled(+)]":"[style.boldMinorGood(+)]")
-					+ "</div>"
-					+ "<div class='container-full-width' style='text-align:center; width:40%; float:right; margin:0;'>"
-						+ "<b>"+valueDisplay+"</b>"
-					+ "</div>"
-					+ "<div id='"+id+"_DECREASE' class='normal-button"+(value==minimum?" disabled":"")+"' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
-						+ (value==minimum?"[style.boldDisabled(-)]":"[style.boldMinorBad(-)]")
-					+ "</div>"
-					+ "<div id='"+id+"_DECREASE_LARGE' class='normal-button"+(value==minimum?" disabled":"")+"' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
-					+ (value==minimum?"[style.boldDisabled(-)]":"[style.boldBad(-)]")
-				+ "</div>");
-		
-		contentSB.append("</div>");
-		
-		return contentSB.toString();
+		return contentSB;
 	}
 	
 	private static String getEntryBackgroundColour(boolean alternative) {
@@ -2016,17 +1998,15 @@ public class OptionsDialogue {
 	 * To be followed by two closing div elements.
 	 */
 	private static String getCustomContentPreferenceDivStart(Colour colour, String title, String description) {
-		StringBuilder contentSB = new StringBuilder();
+
+        String contentSB = "<div class='container-full-width' style='padding:0; margin:2px 0;'>"
+                + "<div class='container-half-width' style='width:calc(55% - 16px);'>"
+                + "<b style='text-align:center; color:" + colour.toWebHexString() + ";'>" + title + "</b><b>:</b> "
+                + description
+                + "</div>"
+                + "<div class='container-half-width' style='width:calc(45% - 16px);'>";
 		
-		contentSB.append(
-				"<div class='container-full-width' style='padding:0; margin:2px 0;'>"
-					+ "<div class='container-half-width' style='width:calc(55% - 16px);'>"
-						+ "<b style='text-align:center; color:"+colour.toWebHexString()+";'>"+title+"</b><b>:</b> "
-						+ description
-					+ "</div>"
-					+ "<div class='container-half-width' style='width:calc(45% - 16px);'>");
-		
-		return contentSB.toString();
+		return contentSB;
 	}
 	
 	private static String getContentPreferenceDiv(String id, Colour colour, String title, String description, boolean enabled) {
@@ -2073,49 +2053,41 @@ public class OptionsDialogue {
 			int value, int minimum, int maximum,
 			String valueDisplayUdders,
 			int valueUdders, int minimumUdders, int maximumUdders) {
-		
-		StringBuilder contentSB = new StringBuilder();
 
-		contentSB.append(
-				"<div class='container-full-width' style='padding:0; margin:2px 0;'>"
-					+ "<div class='container-half-width' style='width:calc(55% - 16px);'>"
-						+ "<b style='text-align:center; color:"+colour.toWebHexString()+";'>"+ title+"</b><b>:</b> "
-						+ description
-					+ "</div>"
-					+ "<div class='container-half-width' style='width:calc(45% - 16px);'>");
+        String contentSB = "<div class='container-full-width' style='padding:0; margin:2px 0;'>"
+                + "<div class='container-half-width' style='width:calc(55% - 16px);'>"
+                + "<b style='text-align:center; color:" + colour.toWebHexString() + ";'>" + title + "</b><b>:</b> "
+                + description
+                + "</div>"
+                + "<div class='container-half-width' style='width:calc(45% - 16px);'>" +
+                "<div class='container-full-width' style='width:100%; margin:0; padding:0; text-align:right;'>"
+                + "Breasts: "
+                + "<div id='" + id + "_ON' class='normal-button" + (value == maximum ? " disabled" : "") + "' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
+                + (value == maximum ? "[style.boldDisabled(+)]" : "[style.boldGood(+)]")
+                + "</div>"
+                + "<div class='container-full-width' style='text-align:center; width:calc(30%); float:right; margin:0;'>"
+                + "<b>" + valueDisplay + "</b>"
+                + "</div>"
+                + "<div id='" + id + "_OFF' class='normal-button" + (value == minimum ? " disabled" : "") + "' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
+                + (value == minimum ? "[style.boldDisabled(-)]" : "[style.boldBad(-)]")
+                + "</div>"
+                + "</div>" +
+                "<div class='container-full-width' style='width:100%; margin:0; padding:0; text-align:right;'>"
+                + "Udders: "
+                + "<div id='" + id + "_UDDERS_ON' class='normal-button" + (valueUdders == maximumUdders ? " disabled" : "") + "' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
+                + (valueUdders == maximumUdders ? "[style.boldDisabled(+)]" : "[style.boldGood(+)]")
+                + "</div>"
+                + "<div class='container-full-width' style='text-align:center; width:calc(30%); float:right; margin:0;'>"
+                + "<b>" + valueDisplayUdders + "</b>"
+                + "</div>"
+                + "<div id='" + id + "_UDDERS_OFF' class='normal-button" + (valueUdders == minimumUdders ? " disabled" : "") + "' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
+                + (valueUdders == minimumUdders ? "[style.boldDisabled(-)]" : "[style.boldBad(-)]")
+                + "</div>"
+                + "</div>" +
+                "</div>"
+                + "</div>";
 		
-		contentSB.append(
-				"<div class='container-full-width' style='width:100%; margin:0; padding:0; text-align:right;'>"
-					+ "Breasts: "
-					+ "<div id='"+id+"_ON' class='normal-button"+(value==maximum?" disabled":"")+"' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
-							+ (value==maximum?"[style.boldDisabled(+)]":"[style.boldGood(+)]")
-					+ "</div>"
-					+ "<div class='container-full-width' style='text-align:center; width:calc(30%); float:right; margin:0;'>"
-						+ "<b>"+valueDisplay+"</b>"
-					+ "</div>"
-					+ "<div id='"+id+"_OFF' class='normal-button"+(value==minimum?" disabled":"")+"' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
-						+ (value==minimum?"[style.boldDisabled(-)]":"[style.boldBad(-)]")
-					+ "</div>"
-				+ "</div>");
-		
-		contentSB.append(
-				"<div class='container-full-width' style='width:100%; margin:0; padding:0; text-align:right;'>"
-					+ "Udders: "
-					+ "<div id='"+id+"_UDDERS_ON' class='normal-button"+(valueUdders==maximumUdders?" disabled":"")+"' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
-							+ (valueUdders==maximumUdders?"[style.boldDisabled(+)]":"[style.boldGood(+)]")
-					+ "</div>"
-					+ "<div class='container-full-width' style='text-align:center; width:calc(30%); float:right; margin:0;'>"
-						+ "<b>"+valueDisplayUdders+"</b>"
-					+ "</div>"
-					+ "<div id='"+id+"_UDDERS_OFF' class='normal-button"+(valueUdders==minimumUdders?" disabled":"")+"' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
-						+ (valueUdders==minimumUdders?"[style.boldDisabled(-)]":"[style.boldBad(-)]")
-					+ "</div>"
-				+ "</div>");
-		
-		contentSB.append("</div>"
-				+"</div>");
-		
-		return contentSB.toString();
+		return contentSB;
 	}
 
 	private static String getSkinColourContentPreferenceVariableDiv(
@@ -2162,31 +2134,26 @@ public class OptionsDialogue {
 	}
 	
 	private static String getContentPreferenceVariableDiv(String id, Colour colour, String title, String description, String valueDisplay, int value, int minimum, int maximum) {
-		StringBuilder contentSB = new StringBuilder();
 
-		contentSB.append(
-				"<div class='container-full-width' style='padding:0; margin:2px 0;'>"
-					+ "<div class='container-half-width' style='width:calc(55% - 16px);'>"
-						+ "<b style='text-align:center; color:"+colour.toWebHexString()+";'>"+ title+"</b><b>:</b> "
-						+ description
-					+ "</div>"
-					+ "<div class='container-half-width' style='width:calc(45% - 16px);'>");
+        String contentSB = "<div class='container-full-width' style='padding:0; margin:2px 0;'>"
+                + "<div class='container-half-width' style='width:calc(55% - 16px);'>"
+                + "<b style='text-align:center; color:" + colour.toWebHexString() + ";'>" + title + "</b><b>:</b> "
+                + description
+                + "</div>"
+                + "<div class='container-half-width' style='width:calc(45% - 16px);'>" +
+                "<div id='" + id + "_ON' class='normal-button" + (value == maximum ? " disabled" : "") + "' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
+                + (value == maximum ? "[style.boldDisabled(+)]" : "[style.boldGood(+)]")
+                + "</div>"
+                + "<div class='container-full-width' style='text-align:center; width:calc(30%); float:right; margin:0;'>"
+                + "<b>" + valueDisplay + "</b>"
+                + "</div>"
+                + "<div id='" + id + "_OFF' class='normal-button" + (value == minimum ? " disabled" : "") + "' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
+                + (value == minimum ? "[style.boldDisabled(-)]" : "[style.boldBad(-)]")
+                + "</div>" +
+                "</div>"
+                + "</div>";
 		
-		contentSB.append(
-				"<div id='"+id+"_ON' class='normal-button"+(value==maximum?" disabled":"")+"' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
-						+ (value==maximum?"[style.boldDisabled(+)]":"[style.boldGood(+)]")
-				+ "</div>"
-				+ "<div class='container-full-width' style='text-align:center; width:calc(30%); float:right; margin:0;'>"
-					+ "<b>"+valueDisplay+"</b>"
-				+ "</div>"
-				+ "<div id='"+id+"_OFF' class='normal-button"+(value==minimum?" disabled":"")+"' style='width:10%; margin:0 2.5%; text-align:center; float:right;'>"
-					+ (value==minimum?"[style.boldDisabled(-)]":"[style.boldBad(-)]")
-				+ "</div>");
-		
-		contentSB.append("</div>"
-				+"</div>");
-		
-		return contentSB.toString();
+		return contentSB;
 	}
 	
 	
@@ -2566,7 +2533,7 @@ public class OptionsDialogue {
 					PresetColour.BASE_PINK_DEEP,
 					"Продолжительность беременности",
 					"Это максимальный срок, в течение которого беременность длится от зачатия до рождения.",
-					Main.getProperties().pregnancyDuration+" недель"+(Main.getProperties().pregnancyDuration == 1?"":""),
+					Main.getProperties().pregnancyDuration+" недель",
 					Main.getProperties().pregnancyDuration,
 					1,
 					40));
@@ -2982,11 +2949,11 @@ public class OptionsDialogue {
 					"Устанавливает <b>средний</b> размер роста чашечки который будет получать персонаж от каждой беременности. Настоящий рост груди будет в пределах "+Util.intToString(Main.getProperties().pregnancyBreastGrowthVariance)+" размера этого значения.",
 					Main.getProperties().pregnancyBreastGrowth == 0
 							?"[style.boldDisabled(Выключено)]"
-							:Main.getProperties().pregnancyBreastGrowth+" чашка"+(Main.getProperties().pregnancyBreastGrowth != 1?"":""),
+							: Main.getProperties().pregnancyBreastGrowth+" чашка",
 					Main.getProperties().pregnancyBreastGrowth, 0, 10,
 					Main.getProperties().pregnancyUdderGrowth == 0
 							?"[style.boldDisabled(Выключено)]"
-							:Main.getProperties().pregnancyUdderGrowth+" чашка"+(Main.getProperties().pregnancyUdderGrowth != 1?"":""),
+							: Main.getProperties().pregnancyUdderGrowth+" чашка",
 					Main.getProperties().pregnancyUdderGrowth, 0, 10));
 			
 			UtilText.nodeContentSB.append(getBreastsContentPreferenceVariableDiv(

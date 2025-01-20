@@ -115,49 +115,49 @@
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] off [npc.her] jacket.]]>
+            <![CDATA[[npc.Name] pull off [npc.her] jacket.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] off [npc2.namePos] jacket.]]>
+            <![CDATA[[npc.Name] pull off [npc2.namePos] jacket.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] practically [npc.verb(rip)] off [npc2.namePos] jacket.]]>
+            <![CDATA[[npc.Name] practically rip off [npc2.namePos] jacket.]]>
 		</otherRough>
 	</displacementText>
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] on [npc.her] jacket.]]>
+            <![CDATA[[npc.Name] pull on [npc.her] jacket.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(guide)] [npc2.namePos] [npc2.arms] through the jacket's sleeves and [npc.verb(pull)] the rest of it over [npc2.her] shoulders.]]>
+            <![CDATA[[npc.Name] guide [npc2.namePos] [npc2.arms] through the jacket's sleeves and pull the rest of it over [npc2.her] shoulders.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[CDATA[[npc.Name] [npc.verb(force)] [npc2.namePos] [npc2.arms] through the jacket's sleeves and [npc.verb(yank)] the rest of it over [npc2.her] shoulders.]]>
+            <![CDATA[CDATA[[npc.Name] force [npc2.namePos] [npc2.arms] through the jacket's sleeves and yank the rest of it over [npc2.her] shoulders.]]>
 		</otherRough>
 	</replacementText>
 
 	<replacementText type="UNZIPS">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(zip)] up [npc.her] jacket.]]>
+            <![CDATA[[npc.Name] zip up [npc.her] jacket.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(zip)] up [npc2.namePos] jacket.]]>
+            <![CDATA[[npc.Name] zip up [npc2.namePos] jacket.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(zip)] up [npc2.namePos] jacket.]]>
+            <![CDATA[[npc.Name] roughly zip up [npc2.namePos] jacket.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="PULLS_UP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unzip)] [npc.her] jacket.]]>
+            <![CDATA[[npc.Name] unzip [npc.her] jacket.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unzip)] [npc2.namePos] jacket.]]>
+            <![CDATA[[npc.Name] unzip [npc2.namePos] jacket.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(pop)] the zipper on [npc2.namePos] jacket open.]]>
+            <![CDATA[[npc.Name] pop the zipper on [npc2.namePos] jacket open.]]>
 		</otherRough>
 	</displacementText>
 	

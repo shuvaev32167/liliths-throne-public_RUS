@@ -117,24 +117,24 @@
 	
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(climb)] into the vending machine.]]>
+            <![CDATA[[npc.Name] climb into the vending machine.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(push)] [npc2.name] into the vending machine.]]>
+            <![CDATA[[npc.Name] push [npc2.name] into the vending machine.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(push)] [npc2.name] into the vending machine.]]>
+            <![CDATA[[npc.Name] roughly push [npc2.name] into the vending machine.]]>
 		</otherRough>
 	</replacementText>
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(climb)] out of the vending machine.]]>
+            <![CDATA[[npc.Name] climb out of the vending machine.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc2.name] out of the vending machine.]]>
+            <![CDATA[[npc.Name] pull [npc2.name] out of the vending machine.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(pull)] [npc2.name] out of the vending machine.]]>
+            <![CDATA[[npc.Name] roughly pull [npc2.name] out of the vending machine.]]>
 		</otherRough>
 	</displacementText>
 </clothing>

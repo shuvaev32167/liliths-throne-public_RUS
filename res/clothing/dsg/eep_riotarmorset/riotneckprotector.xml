@@ -65,25 +65,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(strap)] the neck protector around [npc.her] neck.]]>
+            <![CDATA[[npc.Name] strap the neck protector around [npc.her] neck.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(strap)] the neck protector around [npc2.namePos] neck.]]>
+            <![CDATA[[npc.Name] strap the neck protector around [npc2.namePos] neck.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] hastily [npc.verb(strap)] the neck protector around [npc2.namePos] neck.]]>
+            <![CDATA[[npc.Name] hastily strap the neck protector around [npc2.namePos] neck.]]>
 		</otherRough>
   </replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(take)] [npc.her] neck protector off.]]>
+            <![CDATA[[npc.Name] take [npc.her] neck protector off.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(take)] [npc2.namePos] neck protector off.]]>
+            <![CDATA[[npc.Name] take [npc2.namePos] neck protector off.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(pull)] [npc2.namePos] neck protector off [npc2.her] neck.]]>
+            <![CDATA[[npc.Name] pull [npc2.namePos] neck protector off [npc2.her] neck.]]>
 		</otherRough>
 	</displacementText>
 	

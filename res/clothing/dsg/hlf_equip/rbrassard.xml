@@ -49,25 +49,25 @@
 	
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the brassard around [npc.her] arm.]]>
+            <![CDATA[[npc.Name] pull the brassard around [npc.her] arm.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the brassard around [npc2.namePos] arm.]]>
+            <![CDATA[[npc.Name] pull the brassard around [npc2.namePos] arm.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(pull)] the brassard up around [npc2.namePos] arm.]]>
+            <![CDATA[[npc.Name] roughly pull the brassard up around [npc2.namePos] arm.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the brassard off of [npc.her] arm.]]>
+            <![CDATA[[npc.Name] pull the brassard off of [npc.her] arm.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the brassard off of [npc2.namePos] arm.]]>
+            <![CDATA[[npc.Name] pull the brassard off of [npc2.namePos] arm.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(yank)] the brassard off of [npc2.namePos] arm.]]>
+            <![CDATA[[npc.Name] yank the brassard off of [npc2.namePos] arm.]]>
 		</otherRough>
 	</displacementText>
 	

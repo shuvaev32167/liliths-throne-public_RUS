@@ -1,11 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.helenaHotel;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -24,35 +18,14 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.item.ItemType;
-import com.lilithsthrone.game.sex.InitialSexActionInformation;
-import com.lilithsthrone.game.sex.LubricationType;
-import com.lilithsthrone.game.sex.SexAreaInterface;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexControl;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.managers.OrgasmBehaviour;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.managers.SexManagerInterface;
 import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
-import com.lilithsthrone.game.sex.positions.slots.SexSlot;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotLyingDown;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotSitting;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
-import com.lilithsthrone.game.sex.sexActions.baseActions.ClitClit;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisBreasts;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisFoot;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueNipple;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
+import com.lilithsthrone.game.sex.positions.slots.*;
+import com.lilithsthrone.game.sex.sexActions.baseActions.*;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
@@ -60,6 +33,8 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.*;
 
 /**
  * @since 0.3.7
@@ -466,8 +441,8 @@ public class HelenaHotel {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode DATE_TRAVEL = new DialogueNode("The Golden Feather Hotel", "", true) {
+
+	public static final DialogueNode DATE_TRAVEL = new DialogueNode("Отель «Золотое перо»", "", true) {
 		@Override
 		public void applyPreParsingEffects() {
 			// Set place 2 tiles left of harpy nests as Helena's hotel:
@@ -926,7 +901,7 @@ public class HelenaHotel {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Helena", "Talk about Helena and ask her what she's got planned for the weekend.", DATE_RESTAURANT_END) {
+                return new Response("Елена", "Talk about Helena and ask her what she's got planned for the weekend.", DATE_RESTAURANT_END) {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_RESTAURANT_PLAYER_TOPIC_HELENA"));
@@ -1016,9 +991,7 @@ public class HelenaHotel {
 		}
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_RESTAURANT_END"));
-			return sb.toString();
+            return UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_RESTAURANT_END");
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
@@ -1067,94 +1040,52 @@ public class HelenaHotel {
 			return DATE_RESTAURANT_END.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode DATE_RESTAURANT_END_HOME = new DialogueNode("", "", true) {
-		@Override
-		public void applyPreParsingEffects() {
-			Main.game.getTextEndStringBuilder().append(incrementHelenaAffection(10));
-		}
+	public static final DialogueNode DATE_APARTMENT_KISS = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 30*60;
+			if(firstKissScene) {
+				return 30*60;
+			}
+			return 5*60;
 		}
 		@Override
 		public String getContent() {
-			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.helenaDateRomanticSetup)) {
-				return UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_RESTAURANT_END_HOME_ROMANCE");
+			if(firstKissScene) {
+				return UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_APARTMENT_KISS_FIRST");
+
 			} else {
-				return UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_RESTAURANT_END_HOME");
+				return UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_APARTMENT_KISS");
 			}
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.helenaDateRomanticSetup)) {
+			if(firstKissScene) {
 				if(index==1) {
-					return new Response("Bedroom",
-							Main.game.getNpc(Helena.class).hasFetish(Fetish.FETISH_DOMINANT)
-								?"Helena leads you down the hallway to her bedroom."
-								:"Lead Helena down the hallway to her bedroom.",
-							DATE_APARTMENT_BEDROOM) {
+					return new Response("Leave",
+							"Completely overwhelmed with what's just happened, Helena has run off and needs time in which to recover. Perhaps the next time you take her on a date, she'll be willing to take things further with you...",
+							DATE_APARTMENT_LEAVE) {
 						@Override
 						public void effects() {
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_APARTMENT_ROMANTIC_SCENE_BEDROOM"));
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_APARTMENT_KISS_FIRST_LEAVE"));
 						}
 					};
 				}
-				
-			} else if(Main.game.getNpc(Helena.class).hasFetish(Fetish.FETISH_DOMINANT)) {
-				if(index==1) {
-					return new Response("Bedroom", "Helena isn't taking no for an answer as she pulls you along towards her bedroom...", DATE_APARTMENT_BEDROOM) {
-						@Override
-						public void effects() {
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_APARTMENT_BEDROOM_HELENA_DOM"));
-						}
-					};
-				}
-				
+
 			} else {
-				if(index==1) {
-					return new Response("Goodbye", "Say goodbye to Helena and head back out into Dominion.", DATE_APARTMENT_LEAVE) {
+				if(index==0) {
+					return new Response("Leave", "Tell Helena that you need to be going now.", DATE_APARTMENT_LEAVE) {
 						@Override
 						public void effects() {
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_RESTAURANT_END_HOME_GOODBYE"));
-							if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.helenaDateSexLifeTalk)) {
-								Main.game.getTextEndStringBuilder().append(incrementHelenaAffection(-1));
-							}
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_APARTMENT_KISS_LEAVE"));
+							Main.game.getTextEndStringBuilder().append(incrementHelenaAffection(-5));
 						}
 					};
-					
-				} else if(index==2) {
-					return new Response("Parting kiss", "Kiss Helena on the cheek and say goodbye.", DATE_APARTMENT_LEAVE) {
+
+				} else if(index==1) {
+					return new Response("Спальня", "Go to Helena's bedroom with her.", DATE_APARTMENT_BEDROOM) {
 						@Override
 						public void effects() {
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_RESTAURANT_END_HOME_GOODBYE_KISS"));
-							if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.helenaDateSexLifeTalk)) {
-								Main.game.getTextEndStringBuilder().append(incrementHelenaAffection(5));
-							}
-						}
-					};
-					
-				} else if(index==3) {
-					if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.helenaDateSexLifeTalk)) {
-						return new Response("Inside",
-								"You think that Helena would invite you inside if you were first able to get her to openly talk to you about her sex life..."
-										+ "<br/>[style.italicsMinorBad(Next time you go on a date with Helena, if her affection towards you is 70 or more, you should ask her about her sex life to unlock this action.)]",
-								null);
-					}
-					return new Response("Inside", "Accept Helena's invitation to come inside.", DATE_APARTMENT_START) {
-						@Override
-						public void effects() {
-							Main.game.getPlayer().setLocation(WorldType.HELENAS_APARTMENT, PlaceType.HELENA_APARTMENT_LOUNGE);
-							Main.game.getNpc(Helena.class).setLocation(Main.game.getPlayer(), false);
-							Main.game.getTextEndStringBuilder().append(incrementHelenaAffection(10));
-						}
-					};
-					
-				} else if(index==4 && ((Helena)Main.game.getNpc(Helena.class)).isSlutty()) {
-					return new Response("Bedroom", "Take Helena straight into her bedroom to give her the fucking she's so obviously craving.", DATE_APARTMENT_BEDROOM) {
-						@Override
-						public void effects() {
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_RESTAURANT_END_HOME_BEDROOM"));
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_APARTMENT_KISS_BEDROOM"));
 						}
 					};
 				}
@@ -1162,7 +1093,6 @@ public class HelenaHotel {
 			return null;
 		}
 	};
-	
 	public static final DialogueNode DATE_APARTMENT_START = new DialogueNode("", "", true, true) {
 		@Override
 		public void applyPreParsingEffects() {
@@ -1229,10 +1159,10 @@ public class HelenaHotel {
 			}
 			
 			if(!Main.game.getNpc(Helena.class).getFetishDesire(Fetish.FETISH_ORAL_RECEIVING).isPositive()) {
-				responses.add(new Response("Bedroom", "Helena isn't quite ready for this yet. Perhaps if you were to take her first kiss, she'd be willing to take things into the bedroom the next time you're here.", null));
+				responses.add(new Response("Спальня", "Helena isn't quite ready for this yet. Perhaps if you were to take her first kiss, she'd be willing to take things into the bedroom the next time you're here.", null));
 				
 			} else {
-				responses.add(new Response("Bedroom",
+				responses.add(new Response("Спальня",
 						((Helena) Main.game.getNpc(Helena.class)).isSlutty()
 							?"Give Helena what she so desperately wants and suggest that the two of you head to her bedroom."
 							:"Ask Helena if she'd like to head into her bedroom with you.",
@@ -1273,7 +1203,7 @@ public class HelenaHotel {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Continue on out into the streets of Dominion.", PlaceType.DOMINION_HELENA_HOTEL.getDialogue(false));
+                return new Response("Продолжить", "Continue on out into the streets of Dominion.", PlaceType.DOMINION_HELENA_HOTEL.getDialogue(false));
 			}
 			return null;
 		}
@@ -1293,53 +1223,93 @@ public class HelenaHotel {
 			return DATE_APARTMENT_START.getResponse(responseTab, index);
 		}
 	};
-
-	public static final DialogueNode DATE_APARTMENT_KISS = new DialogueNode("", "", true, true) {
+	public static final DialogueNode DATE_RESTAURANT_END_HOME = new DialogueNode("", "", true) {
+		@Override
+		public void applyPreParsingEffects() {
+			Main.game.getTextEndStringBuilder().append(incrementHelenaAffection(10));
+		}
 		@Override
 		public int getSecondsPassed() {
-			if(firstKissScene) {
-				return 30*60;
-			}
-			return 5*60;
+			return 30*60;
 		}
 		@Override
 		public String getContent() {
-			if(firstKissScene) {
-				return UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_APARTMENT_KISS_FIRST");
-				
+			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.helenaDateRomanticSetup)) {
+				return UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_RESTAURANT_END_HOME_ROMANCE");
 			} else {
-				return UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_APARTMENT_KISS");
+				return UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_RESTAURANT_END_HOME");
 			}
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if(firstKissScene) {
+			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.helenaDateRomanticSetup)) {
 				if(index==1) {
-					return new Response("Leave",
-							"Completely overwhelmed with what's just happened, Helena has run off and needs time in which to recover. Perhaps the next time you take her on a date, she'll be willing to take things further with you...",
-							DATE_APARTMENT_LEAVE) {
+					return new Response("Спальня",
+							Main.game.getNpc(Helena.class).hasFetish(Fetish.FETISH_DOMINANT)
+								?"Helena leads you down the hallway to her bedroom."
+								:"Lead Helena down the hallway to her bedroom.",
+							DATE_APARTMENT_BEDROOM) {
 						@Override
 						public void effects() {
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_APARTMENT_KISS_FIRST_LEAVE"));
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_APARTMENT_ROMANTIC_SCENE_BEDROOM"));
 						}
 					};
 				}
-				
-			} else {
-				if(index==0) {
-					return new Response("Leave", "Tell Helena that you need to be going now.", DATE_APARTMENT_LEAVE) {
+
+			} else if(Main.game.getNpc(Helena.class).hasFetish(Fetish.FETISH_DOMINANT)) {
+				if(index==1) {
+					return new Response("Спальня", "Helena isn't taking no for an answer as she pulls you along towards her bedroom...", DATE_APARTMENT_BEDROOM) {
 						@Override
 						public void effects() {
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_APARTMENT_KISS_LEAVE"));
-							Main.game.getTextEndStringBuilder().append(incrementHelenaAffection(-5));
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_APARTMENT_BEDROOM_HELENA_DOM"));
 						}
 					};
-					
-				} else if(index==1) {
-					return new Response("Bedroom", "Go to Helena's bedroom with her.", DATE_APARTMENT_BEDROOM) {
+				}
+
+			} else {
+				if(index==1) {
+					return new Response("Goodbye", "Say goodbye to Helena and head back out into Dominion.", DATE_APARTMENT_LEAVE) {
 						@Override
 						public void effects() {
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_APARTMENT_KISS_BEDROOM"));
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_RESTAURANT_END_HOME_GOODBYE"));
+							if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.helenaDateSexLifeTalk)) {
+								Main.game.getTextEndStringBuilder().append(incrementHelenaAffection(-1));
+							}
+						}
+					};
+
+				} else if(index==2) {
+					return new Response("Parting kiss", "Kiss Helena on the cheek and say goodbye.", DATE_APARTMENT_LEAVE) {
+						@Override
+						public void effects() {
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_RESTAURANT_END_HOME_GOODBYE_KISS"));
+							if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.helenaDateSexLifeTalk)) {
+								Main.game.getTextEndStringBuilder().append(incrementHelenaAffection(5));
+							}
+						}
+					};
+
+				} else if(index==3) {
+					if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.helenaDateSexLifeTalk)) {
+						return new Response("Inside",
+								"You think that Helena would invite you inside if you were first able to get her to openly talk to you about her sex life..."
+										+ "<br/>[style.italicsMinorBad(Next time you go on a date with Helena, if her affection towards you is 70 or more, you should ask her about her sex life to unlock this action.)]",
+								null);
+					}
+					return new Response("Inside", "Accept Helena's invitation to come inside.", DATE_APARTMENT_START) {
+						@Override
+						public void effects() {
+							Main.game.getPlayer().setLocation(WorldType.HELENAS_APARTMENT, PlaceType.HELENA_APARTMENT_LOUNGE);
+							Main.game.getNpc(Helena.class).setLocation(Main.game.getPlayer(), false);
+							Main.game.getTextEndStringBuilder().append(incrementHelenaAffection(10));
+						}
+					};
+
+				} else if(index==4 && ((Helena)Main.game.getNpc(Helena.class)).isSlutty()) {
+					return new Response("Спальня", "Take Helena straight into her bedroom to give her the fucking she's so obviously craving.", DATE_APARTMENT_BEDROOM) {
+						@Override
+						public void effects() {
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_RESTAURANT_END_HOME_BEDROOM"));
 						}
 					};
 				}

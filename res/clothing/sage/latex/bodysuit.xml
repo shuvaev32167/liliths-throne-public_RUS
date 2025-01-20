@@ -110,24 +110,24 @@
 	
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] on [npc.her] bodysuit, before buckling it up.]]>
+            <![CDATA[[npc.Name] pull on [npc.her] bodysuit, before buckling it up.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(guide)] [npc2.name] into the bodysuit, before buckling [npc2.herHim] up.]]>
+            <![CDATA[[npc.Name] guide [npc2.name] into the bodysuit, before buckling [npc2.herHim] up.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(force)] [npc2.name] into the bodysuit, before impatiently buckling [npc2.herHim] up.]]>
+            <![CDATA[[npc.Name] roughly force [npc2.name] into the bodysuit, before impatiently buckling [npc2.herHim] up.]]>
 		</otherRough>
 	</replacementText>
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unbuckle)] [npc.her] bodysuit, before pulling it off.]]>
+            <![CDATA[[npc.Name] unbuckle [npc.her] bodysuit, before pulling it off.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unbuckle)] [npc2.namePos] bodysuit, before pulling it off.]]>
+            <![CDATA[[npc.Name] unbuckle [npc2.namePos] bodysuit, before pulling it off.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(unbuckle)] [npc2.namePos] bodysuit, before impatiently pulling it off.]]>
+            <![CDATA[[npc.Name] roughly unbuckle [npc2.namePos] bodysuit, before impatiently pulling it off.]]>
 		</otherRough>
 	</displacementText>
 	

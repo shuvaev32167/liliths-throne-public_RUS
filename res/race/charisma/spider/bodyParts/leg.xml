@@ -40,7 +40,7 @@
 		<descriptor>spider-like</descriptor>
 	</toeDescriptorsFeminine>
 	<transformationDescription><![CDATA[
-		A layer of spider-like chitin quickly grows over [npc.her] legs as they shift into a new form. As [npc.her] new chitin spreads down to the ends of [npc.her] toes, it splits around the joints leaving an almost doll or gauntlet-like appearance to them, leaving [npc.him] with plantigrade, spider-like feet. As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new chitin plates sharply transition into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.
+		A layer of spider-like chitin quickly grows over [npc.her] legs as they shift into a new form. As [npc.her] new chitin spreads down to the ends of [npc.her] toes, it splits around the joints leaving an almost doll or gauntlet-like appearance to them, leaving [npc.him] with plantigrade, spider-like feet. As the transformation ends, [npc.she] see that [npc.her] new chitin plates sharply transition into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.
 		<br/>[npc.Name] now [npc.has] plantigrade, [style.boldSpider(spider-like legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].
 	]]></transformationDescription>
 	<bodyDescription><![CDATA[

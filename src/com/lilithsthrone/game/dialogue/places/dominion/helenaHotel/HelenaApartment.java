@@ -17,7 +17,7 @@ public class HelenaApartment {
 	public static final DialogueNode PLACE_HALLWAY = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+            return 60;
 		}
 		@Override
 		public String getContent() {
@@ -32,7 +32,7 @@ public class HelenaApartment {
 	public static final DialogueNode PLACE_BALCONY = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+            return 60;
 		}
 		@Override
 		public String getContent() {
@@ -47,7 +47,7 @@ public class HelenaApartment {
 	public static final DialogueNode PLACE_ENTRANCE_HALL = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+            return 60;
 		}
 		@Override
 		public String getContent() {
@@ -56,7 +56,7 @@ public class HelenaApartment {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Dominion", "Exit Helena's apartment and travel down into Dominion.", PlaceType.DOMINION_HELENA_HOTEL.getDialogue(false)) {
+                return new Response("Доминион", "Exit Helena's apartment and travel down into Dominion.", PlaceType.DOMINION_HELENA_HOTEL.getDialogue(false)) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_HELENA_HOTEL);
@@ -78,7 +78,7 @@ public class HelenaApartment {
 	public static final DialogueNode PLACE_HELENA_BEDROOM = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+            return 60;
 		}
 		@Override
 		public String getContent() {
@@ -93,7 +93,7 @@ public class HelenaApartment {
 	public static final DialogueNode PLACE_SCARLETT_BEDROOM = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+            return 60;
 		}
 		@Override
 		public String getContent() {
@@ -108,7 +108,7 @@ public class HelenaApartment {
 	public static final DialogueNode PLACE_BEDROOM = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+            return 60;
 		}
 		@Override
 		public String getContent() {
@@ -123,7 +123,7 @@ public class HelenaApartment {
 	public static final DialogueNode PLACE_BATHROOM = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+            return 60;
 		}
 		@Override
 		public String getContent() {
@@ -138,7 +138,7 @@ public class HelenaApartment {
 	public static final DialogueNode PLACE_OFFICE = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+            return 60;
 		}
 		@Override
 		public String getContent() {
@@ -153,7 +153,7 @@ public class HelenaApartment {
 	public static final DialogueNode PLACE_KITCHEN = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+            return 60;
 		}
 		@Override
 		public String getContent() {
@@ -168,7 +168,7 @@ public class HelenaApartment {
 	public static final DialogueNode PLACE_DINING_ROOM = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+            return 60;
 		}
 		@Override
 		public String getContent() {
@@ -183,7 +183,7 @@ public class HelenaApartment {
 	public static final DialogueNode PLACE_LOUNGE = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+            return 60;
 		}
 		@Override
 		public String getContent() {
@@ -198,7 +198,7 @@ public class HelenaApartment {
 	public static final DialogueNode PLACE_HOT_TUB = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+            return 60;
 		}
 		@Override
 		public String getContent() {

@@ -157,7 +157,7 @@ public class RebelBaseInsaneSurvivorDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "There's no sign of the stranger anywhere. Might as well carry on your way...", Main.game.getDefaultDialogue(false));
+                return new Response("Продолжить", "There's no sign of the stranger anywhere. Might as well carry on your way...", Main.game.getDefaultDialogue(false));
 			}
 			return null;
 		}	   
@@ -186,7 +186,7 @@ public class RebelBaseInsaneSurvivorDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "There's no sign of the stranger anywhere. Might as well carry on your way...", Main.game.getDefaultDialogue(false));
+                return new Response("Продолжить", "There's no sign of the stranger anywhere. Might as well carry on your way...", Main.game.getDefaultDialogue(false));
 			}
 			return null;
 		}  

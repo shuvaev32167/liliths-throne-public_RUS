@@ -80,25 +80,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(put)] on the combat helmet and securely [npc.verb(fasten)] the chinstrap.]]>
+            <![CDATA[[npc.Name] put on the combat helmet and securely fasten the chinstrap.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(put)] the combat helmet on [npc2.namePos] head and securely [npc.verb(fasten)] the chinstrap.]]>
+            <![CDATA[[npc.Name] put the combat helmet on [npc2.namePos] head and securely fasten the chinstrap.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(force)] the combat helmet down on [npc2.namePos] head and practically [npc.verb(gag)] [npc2.her] with the chinstrap.]]>
+            <![CDATA[[npc.Name] force the combat helmet down on [npc2.namePos] head and practically gag [npc2.her] with the chinstrap.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] un[npc.do] the chinstrap on [npc.her] combat helmet and [npc.verb(ease)] it off.]]>
+            <![CDATA[[npc.Name] un[npc.do] the chinstrap on [npc.her] combat helmet and ease it off.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] un[npc.do] the chinstrap on [npc2.namePos] combat helmet and [npc.verb(ease)] it off.]]>
+            <![CDATA[[npc.Name] un[npc.do] the chinstrap on [npc2.namePos] combat helmet and ease it off.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(rip)] open the chinstrap on [npc2.namePos] combat helmet and [npc.verb(yank)] it off [npc2.her] head.]]>
+            <![CDATA[[npc.Name] rip open the chinstrap on [npc2.namePos] combat helmet and yank it off [npc2.her] head.]]>
 		</otherRough>
 	</displacementText>
 	

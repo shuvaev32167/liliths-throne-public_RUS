@@ -1,7 +1,5 @@
 package com.lilithsthrone.game.combat.moves;
 
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.StatusEffect;
@@ -12,6 +10,8 @@ import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import java.util.List;
 
 /**
  * @since 0.3.7.8
@@ -83,7 +83,7 @@ public class CMWeaponSpecials {
     		}
             
         	attackDesc.append(UtilText.parse(source,
-        			"Pushing the fire selector on [npc.her] "+weaponName+" up into fully automatic, [npc.name] [npc.verb(take)] aim and [npc.verb(pull)] the trigger, unleashing a deafening, deadly hail of bullets at "
+                    "Pushing the fire selector on [npc.her] " + weaponName + " up into fully automatic, [npc.name] take aim and pull the trigger, unleashing a deafening, deadly hail of bullets at "
         				+(enemies.size()==1?UtilText.parse(target, "[npc.name]"):"[npc.her] enemies")+"!"));
             for(int i=0; i<enemies.size(); i++) {
             	GameCharacter enemy = enemies.get(i);
@@ -170,7 +170,7 @@ public class CMWeaponSpecials {
     		}
     		
         	attackDesc.append(UtilText.parse(source,
-        			"Flicking the fire selector on [npc.her] "+weaponName+" into fully automatic, [npc.name] [npc.verb(take)] aim and [npc.verb(pull)] the trigger, unleashing a deafening, deadly hail of bullets at "
+                    "Flicking the fire selector on [npc.her] " + weaponName + " into fully automatic, [npc.name] take aim and pull the trigger, unleashing a deafening, deadly hail of bullets at "
         				+(enemies.size()==1?UtilText.parse(target, "[npc.name]"):"[npc.her] enemies")+"!"));
             for(int i=0; i<enemies.size(); i++) {
             	GameCharacter enemy = enemies.get(i);
@@ -256,7 +256,7 @@ public class CMWeaponSpecials {
     		}
             
         	attackDesc.append(UtilText.parse(source,
-        			"Pushing the fire selector on [npc.her] "+weaponName+" into fully automatic, [npc.name] [npc.verb(take)] aim and [npc.verb(pull)] the trigger, unleashing a deafening, deadly hail of bullets at "
+                    "Pushing the fire selector on [npc.her] " + weaponName + " into fully automatic, [npc.name] take aim and pull the trigger, unleashing a deafening, deadly hail of bullets at "
         				+(enemies.size()==1?UtilText.parse(target, "[npc.name]"):"[npc.her] enemies")+"!"));
             for(int i=0; i<enemies.size(); i++) {
             	GameCharacter enemy = enemies.get(i);
@@ -309,7 +309,7 @@ public class CMWeaponSpecials {
         public String perform(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
             
             return formatAttackOutcome(source, target,
-            		"Twisting the cap of [npc.her] pen three times, [npc.name] [npc.verb(pull)] it off to reveal something very special."
+                    "Twisting the cap of [npc.her] pen three times, [npc.name] pull it off to reveal something very special."
             				+ " Dripping off the exposed nib, a blob of purple liquid rapidly swells and forms into a small, octopus-like creature."
             				+ " This arcane being, known only as Inky, levitates up into the air, and with hearts in is eyes, it looks at [npc2.name] and makes a happy little moaning noise."
             				+ "<br/><br/>"
@@ -318,7 +318,7 @@ public class CMWeaponSpecials {
             				+ " Each time [npc2.she] [npc2.verb(try)] to grab the small octopus, [npc2.her] [npc.hands] simply slip through its liquid body, which elicits cute, gurgling laughter from the horny creature."
             				+ "<br/><br/>"
             				+ "Although Inky's tentacles are both extremely distracting and arousing, there's nothing [npc2.name] can do to stop it,"
-            					+ " and so [npc2.she] [npc2.verb(try)] to ignore it as [npc2.she] [npc.verb(wait)] for its arcane power to run out...",
+                            + " and so [npc2.she] [npc2.verb(try)] to ignore it as [npc2.she] wait for its arcane power to run out...",
             		"Inky is now giving [npc2.name] its intimate attention!",
             		null,
                 	null);

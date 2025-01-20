@@ -1,17 +1,5 @@
 package com.lilithsthrone.game.character.npc.dominion;
 
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
@@ -20,27 +8,7 @@ import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.ClitorisSize;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
-import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
-import com.lilithsthrone.game.character.body.valueEnums.LipSize;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
-import com.lilithsthrone.game.character.body.valueEnums.NippleSize;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.TesticleSize;
-import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
@@ -75,11 +43,7 @@ import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexPace;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotDesk;
@@ -89,6 +53,13 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import java.time.Month;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -97,11 +68,11 @@ import com.lilithsthrone.world.places.PlaceType;
  */
 public class Vicky extends NPC {
 
-	private Map<AbstractWeapon, Integer> weaponsForSale;
-	private Map<AbstractItem, Integer> itemsForSale;
-	private Map<AbstractClothing, Integer> clothingForSale;
+	private final Map<AbstractWeapon, Integer> weaponsForSale;
+	private final Map<AbstractItem, Integer> itemsForSale;
+	private final Map<AbstractClothing, Integer> clothingForSale;
 	
-	private AbstractItemType[] availableIngredients = new AbstractItemType[] {
+	private final AbstractItemType[] availableIngredients = new AbstractItemType[] {
 			ItemType.getItemTypeFromId("innoxia_race_cat_kittys_reward"),
 			ItemType.getItemTypeFromId("innoxia_race_dog_canine_crunch"),
 			ItemType.getItemTypeFromId("innoxia_race_harpy_bubblegum_lollipop"),
@@ -113,7 +84,7 @@ public class Vicky extends NPC {
 			ItemType.getItemTypeFromId("innoxia_race_reindeer_sugar_cookie"),
 			ItemType.getItemTypeFromId("innoxia_race_human_bread_roll")};
 	
-	private static List<AbstractItemType> availableSpellBooks = new ArrayList<>();
+	private static final List<AbstractItemType> availableSpellBooks = new ArrayList<>();
 	
 	static {
 		for(Spell s : Spell.values()) {
@@ -179,7 +150,7 @@ public class Vicky extends NPC {
 	}
 	
 	public Vicky(boolean isImported) {
-		super(isImported, new NameTriplet("Vicky"), "Haugen",
+        super(isImported, new NameTriplet("Вики"), "Хауген",
 				"Vicky is the owner of the shop 'Arcane Arts'. Her manner of staring at anyone who enters her shop is quite unsettling, and you feel as though she's ready to pounce on you at any moment...",
 				37, Month.MAY, 26,
 				10, Gender.F_P_V_B_FUTANARI,
@@ -638,13 +609,11 @@ public class Vicky extends NPC {
 		}
 		
 		if(item instanceof AbstractItem) {
-			if(((AbstractItem)item).getItemType().getItemTags().contains(ItemTag.ESSENCE)
-					|| ((AbstractItem)item).getItemType().getItemTags().contains(ItemTag.SPELL_BOOK)
-					|| ((AbstractItem)item).getItemType().getItemTags().contains(ItemTag.SPELL_SCROLL)
-					|| ((AbstractItem)item).getItemType()==ItemType.POTION
-					|| ((AbstractItem)item).getItemType()==ItemType.ELIXIR) {
-				return true;
-			}
+            return ((AbstractItem) item).getItemType().getItemTags().contains(ItemTag.ESSENCE)
+                    || ((AbstractItem) item).getItemType().getItemTags().contains(ItemTag.SPELL_BOOK)
+                    || ((AbstractItem) item).getItemType().getItemTags().contains(ItemTag.SPELL_SCROLL)
+                    || ((AbstractItem) item).getItemType() == ItemType.POTION
+                    || ((AbstractItem) item).getItemType() == ItemType.ELIXIR;
 		}
 		
 		return false;

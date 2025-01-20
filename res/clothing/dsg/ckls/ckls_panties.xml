@@ -70,49 +70,49 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(pull)] the panties up to [npc.her] groin and [npc.verb(tie)] it up on either side of [npc.her] waist.]]>
+        <![CDATA[[npc.Name] pull the panties up to [npc.her] groin and tie it up on either side of [npc.her] waist.]]>
     </self>
     <other>
-	  <![CDATA[[npc.Name] [npc.verb(pull)] the panties up to [npc2.namePos] groin and [npc.verb(tie)] it up on either side of [npc2.her] waist.]]>
+        <![CDATA[[npc.Name] pull the panties up to [npc2.namePos] groin and tie it up on either side of [npc2.her] waist.]]>
     </other>
     <otherRough>
-	  <![CDATA[[npc.Name] [npc.verb(pull)] the panties up to [npc2.namePos] groin so hard it practically gives [npc2.herHim] a wedgie and [npc.verb(tie)] it up on either side of [npc2.namePos] waist as tightly as possible.]]>
+        <![CDATA[[npc.Name] pull the panties up to [npc2.namePos] groin so hard it practically gives [npc2.herHim] a wedgie and tie it up on either side of [npc2.namePos] waist as tightly as possible.]]>
     </otherRough>
   </replacementText>
   
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(untie)] [npc.her] panties and [npc.verb(let)] them fall from [npc.her] waist.]]>
+        <![CDATA[[npc.Name] untie [npc.her] panties and let them fall from [npc.her] waist.]]>
     </self>
     <other>
-	  <![CDATA[[npc.Name] [npc.verb(untie)] [npc2.namePos] panties and [npc.verb(let)] them fall from [npc2.her] waist.]]>
+        <![CDATA[[npc.Name] untie [npc2.namePos] panties and let them fall from [npc2.her] waist.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(rip)] off [npc2.namePos] panties.]]>
+        <![CDATA[[npc.Name] rip off [npc2.namePos] panties.]]>
     </otherRough>
   </displacementText>
 	
   <replacementText type="SHIFTS_ASIDE">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(shift)] [npc.her] panties back into place, covering [npc.her] groin.]]>
+        <![CDATA[[npc.Name] shift [npc.her] panties back into place, covering [npc.her] groin.]]>
     </self>
     <other>
-	  <![CDATA[[npc.Name] [npc.verb(shift)] [npc2.namePos] panties back into place, covering [npc2.her] groin.]]>
+        <![CDATA[[npc.Name] shift [npc2.namePos] panties back into place, covering [npc2.her] groin.]]>
     </other>
     <otherRough>
-	  <![CDATA[[npc.Name] [npc.verb(snap)] [npc2.namePos] panties back into place, covering [npc2.her] groin.]]>
+        <![CDATA[[npc.Name] snap [npc2.namePos] panties back into place, covering [npc2.her] groin.]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="SHIFTS_ASIDE">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(shift)] [npc.her] panties aside, exposing [npc.her] groin.]]>
+        <![CDATA[[npc.Name] shift [npc.her] panties aside, exposing [npc.her] groin.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(shift)] [npc2.namePos] panties aside, exposing [npc2.her] groin.]]>
+        <![CDATA[[npc.Name] shift [npc2.namePos] panties aside, exposing [npc2.her] groin.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(yank)] [npc2.namePos] panties aside, exposing [npc2.her] groin.]]>
+        <![CDATA[[npc.Name] yank [npc2.namePos] panties aside, exposing [npc2.her] groin.]]>
     </otherRough>
   </displacementText>
 	

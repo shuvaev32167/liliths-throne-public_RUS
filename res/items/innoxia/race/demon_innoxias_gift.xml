@@ -61,10 +61,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		The moment [npc.name] [npc.verb(pull)] the stopper out from the bottle of Innoxia's Gift, [npc.sheIs] filled with a desperate need to drink the bubbling pink liquid contained within. Instantly, [npc.she] [npc.verb(bring)] the bottle to [npc.her] [npc.lips] and [npc.verb(gulp)] it all down, suppressing [npc.her] gag reflex as [npc.her] senses are overwhelmed by how sickeningly sweet it is.
+		The moment [npc.name] pull the stopper out from the bottle of Innoxia's Gift, [npc.sheIs] filled with a desperate need to drink the bubbling pink liquid contained within. Instantly, [npc.she] bring the bottle to [npc.her] [npc.lips] и gulp it all down, suppressing [npc.her] gag reflex as [npc.her] senses are overwhelmed by how sickeningly sweet it is.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		Pulling out the stopper from the bottle of Innoxia's Gift, [npc.name] [npc.verb(bring)] it up to [npc2.namePos] waiting [npc2.lips]. Instantly, [npc2.she] [npc2.verb(gulp)] it all down, suppressing [npc2.her] gag reflex as [npc2.her] senses are overwhelmed by how sickeningly sweet it is.
+		Pulling out the stopper from the bottle of Innoxia's Gift, [npc.name] bring it up to [npc2.namePos] waiting [npc2.lips]. Instantly, [npc2.she] [npc2.verb(gulp)] it all down, suppressing [npc2.her] gag reflex as [npc2.her] senses are overwhelmed by how sickeningly sweet it is.
 		]]></otherUse>
 	</useDescriptions>
 

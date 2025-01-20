@@ -54,10 +54,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		Pulling out the stopper from the bottle of Swamp Water, [npc.name] [npc.verb(take)] a large swig of the extremely-alcoholic moonshine. The intense, musky taste proves to be extremely delicious, and [npc.name] can't help but greedily gulp down the entire bottle, leaving a strange, tangy aftertaste lingering on [npc.her] [npc.tongue+].
+		Pulling out the stopper from the bottle of Swamp Water, [npc.name] take a large swig of the extremely-alcoholic moonshine. The intense, musky taste proves to be extremely delicious, and [npc.name] can't help but greedily gulp down the entire bottle, leaving a strange, tangy aftertaste lingering on [npc.her] [npc.tongue+].
 		]]></selfUse>
 		<otherUse><![CDATA[
-		Pulling out the stopper from the bottle of Swamp Water, [npc.name] [npc.verb(bring)] the extremely-alcoholic moonshine up to [npc2.namePos] waiting [npc2.lips] and [npc.verb(get)] [npc2.herHim] to drink it. The intense, musky taste proves to be extremely delicious, and [npc2.name] can't help but greedily gulp down the entire bottle, leaving a strange, tangy aftertaste lingering on [npc2.her] [npc2.tongue+].
+		Pulling out the stopper from the bottle of Swamp Water, [npc.name] bring the extremely-alcoholic moonshine up to [npc2.namePos] waiting [npc2.lips] и get [npc2.herHim] to drink it. The intense, musky taste proves to be extremely delicious, and [npc2.name] can't help but greedily gulp down the entire bottle, leaving a strange, tangy aftertaste lingering on [npc2.her] [npc2.tongue+].
 		]]></otherUse>
 	</useDescriptions>
 

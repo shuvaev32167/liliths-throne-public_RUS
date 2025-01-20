@@ -53,10 +53,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		After first opening the can, [npc.name] [npc.verb(bring)] the can of Berry Soda up to [npc.her] [npc.mouth]. A surprisingly authentic smell of nondescript berries rises from the opening, and as [npc.she] [npc.verb(tilt)] [npc.her] head back and [npc.verb(start)] drinking the fizzy liquid, [npc.she] [npc.verb(feel)] much more refreshed.
+		After first opening the can, [npc.name] bring the can of Berry Soda up to [npc.her] [npc.mouth]. A surprisingly authentic smell of nondescript berries rises from the opening, and as [npc.she] tilt [npc.her] head back and start drinking the fizzy liquid, [npc.she] feel much more refreshed.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		After first removing the cork, [npc.name] [npc.verb(bring)] the bottle of Grog up to [npc2.namePos] waiting [npc2.lips]. A surprisingly authentic smell of nondescript berries rises from the opening, and as [npc2.she] [npc2.verb(tilt)] [npc2.her] head back and [npc2.verb(start)] drinking the fizzy liquid, [npc.she] [npc.verb(feel)] much more refreshed.
+		After first removing the cork, [npc.name] bring the bottle of Grog up to [npc2.namePos] waiting [npc2.lips]. A surprisingly authentic smell of nondescript berries rises from the opening, and as [npc2.she] [npc2.verb(tilt)] [npc2.her] head back and [npc2.verb(start)] drinking the fizzy liquid, [npc.she] feel much more refreshed.
 		]]></otherUse>
 	</useDescriptions>
 

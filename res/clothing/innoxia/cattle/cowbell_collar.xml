@@ -47,24 +47,24 @@
 
   <replacementText slot="NECK" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(put)] on the cowbell collar, before fastening the clasp at the back of [npc.her] neck in order to hold it in place.]]>
+        <![CDATA[[npc.Name] put on the cowbell collar, before fastening the clasp at the back of [npc.her] neck in order to hold it in place.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(wrap)] the cowbell collar around [npc2.namePos] neck, before fastening the clasp at the back to make sure that it stays in place.]]>
+        <![CDATA[[npc.Name] wrap the cowbell collar around [npc2.namePos] neck, before fastening the clasp at the back to make sure that it stays in place.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] firmly [npc.verb(grab)] [npc2.name], before roughly fastening the cowbell collar around [npc2.her] neck.]]>
+        <![CDATA[[npc.Name] firmly grab [npc2.name], before roughly fastening the cowbell collar around [npc2.her] neck.]]>
     </otherRough>
   </replacementText>
   <displacementText slot="NECK" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(unfasten)] [npc.her] cowbell collar, before taking it off from around [npc.her] neck.]]>
+        <![CDATA[[npc.Name] unfasten [npc.her] cowbell collar, before taking it off from around [npc.her] neck.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(unfasten)] [npc2.namePos] cowbell collar, before taking it off from around [npc2.her] neck.]]>
+        <![CDATA[[npc.Name] unfasten [npc2.namePos] cowbell collar, before taking it off from around [npc2.her] neck.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(unfasten)] [npc2.namePos] cowbell collar, before yanking it off from around [npc2.her] neck.]]>
+        <![CDATA[[npc.Name] roughly unfasten [npc2.namePos] cowbell collar, before yanking it off from around [npc2.her] neck.]]>
     </otherRough>
   </displacementText>
 	

@@ -20,11 +20,12 @@
 		
 		<attackTooltipDescription>Punch [npc2.name] with your knuckle dusters.</attackTooltipDescription>
 		
-		<rarity>COMMON</rarity> 
-		
-		<equipText><![CDATA[[npc.Name] [npc.verb(fit)] [npc.her] knuckle dusters onto [npc.her] fist, so that they're ready to use in combat.]]></equipText>
-		
-		<unequipText><![CDATA[[npc.Name] [npc.verb(take)] off [npc.her] knuckle dusters, before putting them away.]]></unequipText>
+		<rarity>COMMON</rarity>
+
+        <equipText>
+            <![CDATA[[npc.Name] fit [npc.her] knuckle dusters onto [npc.her] fist, so that they're ready to use in combat.]]></equipText>
+
+        <unequipText><![CDATA[[npc.Name] take off [npc.her] knuckle dusters, before putting them away.]]></unequipText>
 		
 		<imageName>knuckle_dusters.svg</imageName> 
 		
@@ -67,26 +68,26 @@
 	<!-- Descriptions that are used when hitting an enemy. One of the hitText values will be randomly selected each time the attacker hits their target. Follow the same guidelines as equipText. -->
 	<hitDescriptions>
 		<hitText><![CDATA[
-		Swinging [npc.her] knuckle-duster-clad fist, [npc.name] [npc.verb(manage)] to land a solid punch on [npc2.namePos] [npc2.arm].
+		Swinging [npc.her] knuckle-duster-clad fist, [npc.name] manage to land a solid punch on [npc2.namePos] [npc2.arm].
 		]]></hitText>
 		<hitText><![CDATA[
-		Striking out at [npc2.name] with [npc.her] knuckle dusters, [npc.name] [npc.verb(manage)] to land a solid hit on [npc2.her] [npc2.arm]!
+		Striking out at [npc2.name] with [npc.her] knuckle dusters, [npc.name] manage to land a solid hit on [npc2.her] [npc2.arm]!
 		]]></hitText>
 		<hitText><![CDATA[
-		With a quick step forwards, [npc.name] [npc.verb(jab)] out at [npc2.name] with [npc.her] fist, whacking [npc.her] knuckle dusters against [npc2.her] shoulder!
+		With a quick step forwards, [npc.name] jab out at [npc2.name] with [npc.her] fist, whacking [npc.her] knuckle dusters against [npc2.her] shoulder!
 		]]></hitText>
 	</hitDescriptions>
 
 	<!-- Descriptions that are used when missing an enemy. One of the missText values will be randomly selected each time the attacker misses their target. Follow the same guidelines as equipText. -->
 	<missDescriptions>
 		<missText><![CDATA[
-		Swinging [npc.her] knuckle-duster-clad fist, [npc.name] [npc.verb(attempt)] to punch [npc2.name] on the [npc2.arm], but [npc.verb(end)] up missing [npc2.herHim]!
+		Swinging [npc.her] knuckle-duster-clad fist, [npc.name] attempt to punch [npc2.name] on the [npc2.arm], but end up missing [npc2.herHim]!
 		]]></missText>
 		<missText><![CDATA[
-		Striking out at [npc2.name] with [npc.her] knuckle dusters, [npc.name] [npc.verb(let)] out a frustrated cry as [npc.she] [npc.verb(miss)] [npc.her] target!
+		Striking out at [npc2.name] with [npc.her] knuckle dusters, [npc.name] let out a frustrated cry as [npc.she] miss [npc.her] target!
 		]]></missText>
 		<missText><![CDATA[
-		With a quick step forwards, [npc.name] [npc.verb(jab)] out at [npc2.name] with [npc.her] fist, but [npc.she] [npc.verb(miss)] [npc.her] target!
+		With a quick step forwards, [npc.name] jab out at [npc2.name] with [npc.her] fist, but [npc.she] miss [npc.her] target!
 		]]></missText>
 	</missDescriptions>
 	

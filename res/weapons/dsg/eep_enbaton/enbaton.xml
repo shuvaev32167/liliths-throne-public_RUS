@@ -21,11 +21,12 @@
 		
 		<attackTooltipDescription>Hit [npc2.name] with your baton.</attackTooltipDescription>
 		
-		<rarity>UNCOMMON</rarity> 
-		
-		<equipText><![CDATA[[npc.Name] [npc.verb(swing)] the baton out, letting the weight of the tip extend the shaft to full length.]]></equipText>
-		
-		<unequipText><![CDATA[[npc.Name] [npc.verb(push)] the end of the baton into the handle and [npc.verb(put)] it away.]]></unequipText>
+		<rarity>UNCOMMON</rarity>
+
+        <equipText>
+            <![CDATA[[npc.Name] swing the baton out, letting the weight of the tip extend the shaft to full length.]]></equipText>
+
+        <unequipText><![CDATA[[npc.Name] push the end of the baton into the handle and put it away.]]></unequipText>
 		
 		<imageName>enbaton_inv.svg</imageName> 
 		
@@ -70,25 +71,25 @@
 	
 	<hitDescriptions>
 		<hitText><![CDATA[
-		Swinging out with [npc.her] baton, [npc.name] [npc.verb(manage)] to hit [npc2.name] square in the chest. There is a loud cracking sound as the shaft connects with the aura above [npc2.her] torso to drain [npc2.her] energy!
+		Swinging out with [npc.her] baton, [npc.name] manage to hit [npc2.name] square in the chest. There is a loud cracking sound as the shaft connects with the aura above [npc2.her] torso to drain [npc2.her] energy!
 		]]></hitText>
 		<hitText><![CDATA[
-		With a quick step forwards, [npc.name] [npc.verb(lunge)] out at [npc2.name] with [npc.her] baton, bashing into the aura around [npc2.her] shoulder with the shaft and causing [npc2.herHim] to lose some energy!
+		With a quick step forwards, [npc.name] lunge out at [npc2.name] with [npc.her] baton, bashing into the aura around [npc2.her] shoulder with the shaft and causing [npc2.herHim] to lose some energy!
 		]]></hitText>
 		<hitText><![CDATA[
-		Swinging out with [npc.her] baton, [npc.name] [npc.verb(manage)] to hit [npc2.name] across the head! There is a loud cracking sound as the shaft connects with the aura above [npc2.her] head to drain [npc2.her] energy!
+		Swinging out with [npc.her] baton, [npc.name] manage to hit [npc2.name] across the head! There is a loud cracking sound as the shaft connects with the aura above [npc2.her] head to drain [npc2.her] energy!
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		Thrusting out with [npc.her] baton, [npc.name] [npc.verb(attempt)] to hit [npc2.name] in the chest, but [npc.verb(end)] up missing [npc2.herHim]!
+		Thrusting out with [npc.her] baton, [npc.name] attempt to hit [npc2.name] in the chest, but end up missing [npc2.herHim]!
 		]]></missText>
 		<missText><![CDATA[
-		With a quick step forwards, [npc.name] [npc.verb(lunge)] out at [npc2.name] with [npc.her] baton, but [npc.she] [npc.verb(miss)] [npc.her] target!
+		With a quick step forwards, [npc.name] lunge out at [npc2.name] with [npc.her] baton, but [npc.she] miss [npc.her] target!
 		]]></missText>
 		<missText><![CDATA[
-		Thrusting out with [npc.her] baton, [npc.name] [npc.verb(attempt)] to hit [npc2.name] across the head, but [npc.verb(end)] up missing [npc2.herHim]!
+		Thrusting out with [npc.her] baton, [npc.name] attempt to hit [npc2.name] across the head, but end up missing [npc2.herHim]!
 		]]></missText>
 	</missDescriptions>
 	

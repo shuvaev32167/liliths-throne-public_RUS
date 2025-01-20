@@ -1,51 +1,13 @@
 package com.lilithsthrone.game.character.npc.fields;
 
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
-import com.lilithsthrone.game.character.body.types.HornType;
-import com.lilithsthrone.game.character.body.types.LegType;
-import com.lilithsthrone.game.character.body.types.PenisType;
-import com.lilithsthrone.game.character.body.types.TailType;
-import com.lilithsthrone.game.character.body.types.VaginaType;
-import com.lilithsthrone.game.character.body.types.WingType;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
-import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.ClitorisSize;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
-import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
-import com.lilithsthrone.game.character.body.valueEnums.HairLength;
-import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
-import com.lilithsthrone.game.character.body.valueEnums.LipSize;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
-import com.lilithsthrone.game.character.body.valueEnums.NippleSize;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
-import com.lilithsthrone.game.character.body.valueEnums.TesticleSize;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
+import com.lilithsthrone.game.character.body.types.*;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
@@ -83,6 +45,13 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @since 0.4.4
@@ -96,7 +65,7 @@ public class Oglix extends NPC {
 	}
 	
 	public Oglix(boolean isImported) {
-		super(isImported, new NameTriplet("Oglix"), "Lunettemartu",
+        super(isImported, new NameTriplet("Огликс"), "Лунеттамарту",
 				"The owner of the tavern, 'The Crossed Blades', Oglix's green skin, bulging muscles, and considerable height almost make her look more like some kind of fantasy orc than a succubus."
 						+ " Her size, strength, and considerable arcane abilities make her respected and feared by even the toughest of thugs to be found in Elis.",
 				48, Month.AUGUST, 9,
@@ -300,7 +269,7 @@ public class Oglix extends NPC {
 		if(this.isVisiblyPregnant()) {
 			return "OglixPregnant";
 		}
-		return "Oglix";
+        return "Огликс";
 	}
 	
 	@Override
@@ -549,7 +518,7 @@ public class Oglix extends NPC {
 		return Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_OGLIX_BEER_BARRELS) && getBeerBitches().size()<5;
 	}
 
-	private String[] beerBitchNames = new String[] {"beer-slut", "beer-cunt", "beer-whore", "beer-tits"};
+	private final String[] beerBitchNames = new String[] {"beer-slut", "beer-cunt", "beer-whore", "beer-tits"};
 	
 	public void addBeerBitch(NPC bitch) {
 		bitch.setLocation(WorldType.getWorldTypeFromId("innoxia_fields_elis_tavern_alley"),

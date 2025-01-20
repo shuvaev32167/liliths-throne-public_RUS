@@ -1,15 +1,5 @@
 package com.lilithsthrone.game.dialogue.companions;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import java.time.format.TextStyle;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
-import java.util.stream.Collectors;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.ObedienceLevel;
@@ -27,11 +17,7 @@ import com.lilithsthrone.rendering.SVGImages;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.utils.comparators.SlaveFemininityComparator;
-import com.lilithsthrone.utils.comparators.SlaveNameComparator;
-import com.lilithsthrone.utils.comparators.SlaveRaceComparator;
-import com.lilithsthrone.utils.comparators.SlaveRoomComparator;
-import com.lilithsthrone.utils.comparators.SlaveValueComparator;
+import com.lilithsthrone.utils.comparators.*;
 import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
@@ -39,6 +25,17 @@ import com.lilithsthrone.world.places.AbstractPlaceUpgrade;
 import com.lilithsthrone.world.places.GenericPlace;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
+
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.time.format.TextStyle;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.lilithsthrone.utils.Constants.RUSSIAN_LOCALE;
 
 /**
  * @since 0.1.8?
@@ -48,11 +45,11 @@ import com.lilithsthrone.world.places.PlaceUpgrade;
 public class OccupantManagementDialogue {
 	
 	private static DialogueNode dialogueToExitTo = null;
-	private static StringBuilder miscDialogueSB = new StringBuilder();
+	private static final StringBuilder miscDialogueSB = new StringBuilder();
 	private static int dayNumber = 1;
-	private static DecimalFormat decimalFormat = new DecimalFormat("#0.00");
-	private static List<SlaveEventType> eventTypeFilterExclusions = new ArrayList<>();
-	private static List<String> slaveIdFilterExclusions = new ArrayList<>();
+	private static final DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+	private static final List<SlaveEventType> eventTypeFilterExclusions = new ArrayList<>();
+	private static final List<String> slaveIdFilterExclusions = new ArrayList<>();
 	private static OccupantSortingMethod sortingMethod = OccupantSortingMethod.NONE;
 	private static boolean reverseSortSlaves = false;
 	
@@ -271,7 +268,7 @@ public class OccupantManagementDialogue {
 							?"Today"
 							:(i==1
 								?"Yesterday"
-								:Main.game.getDateNow().minusDays(i).getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH)))
+						: Main.game.getDateNow().minusDays(i).getDayOfWeek().getDisplayName(TextStyle.FULL, RUSSIAN_LOCALE)))
 						+ "</div>");
 			}
 			
@@ -342,7 +339,7 @@ public class OccupantManagementDialogue {
 		@Override
 		public String getResponseTabTitle(int index) {
 			if(index==0) {
-				return "Room";
+                return "Комната";
 			} else if(index==1) {
 				return "Filter (type)";
 			} else if(index==2) {
@@ -536,7 +533,7 @@ public class OccupantManagementDialogue {
 						+ "<b style='color:"+PresetColour.CURRENCY_GOLD.toWebHexString()+";'>Upkeep</b>"
 					+"</div>"
 					+ "<div style='float:left; width:10%; font-weight:bold; margin:0; padding:0;'>"
-						+ "Actions"
+                + "Действия"
 					+"</div>"
 				+ "</div>";
 	}
@@ -877,7 +874,7 @@ public class OccupantManagementDialogue {
 						+ "<span style='color:"+PresetColour.CURRENCY_GOLD.toWebHexString()+";'>Cost</span>"
 					+"</div>"
 					+ "<div style='float:left; width:10%; font-weight:bold; margin:0; padding:0;'>"
-						+ "Actions"
+                + "Действия"
 					+"</div>"
 				+ "</div>";
 	}
@@ -1006,7 +1003,7 @@ public class OccupantManagementDialogue {
 		return miscDialogueSB.toString();
 	}
 	
-	private static StringBuilder purchaseAvailability = new StringBuilder();
+	private static final StringBuilder purchaseAvailability = new StringBuilder();
 	public static String getPurchaseAvailabilityTooltipText(Cell cell, AbstractPlaceUpgrade upgrade) {
 		GenericPlace place = cell.getPlace();
 		boolean owned = place.getPlaceUpgrades().contains(upgrade);
@@ -1277,7 +1274,7 @@ public class OccupantManagementDialogue {
 					+ "<b style='color:"+PresetColour.CURRENCY_GOLD.toWebHexString()+";'>Value</b>"
 				+"</div>"
 				+ "<div style='float:left; width:15%; font-weight:bold; margin:0; padding:0;'>"
-					+ "Actions"
+                + "Действия"
 				+"</div>"
 			+ "</div>";
 	}
@@ -1300,7 +1297,7 @@ public class OccupantManagementDialogue {
 					+ "<b style='color:"+PresetColour.CURRENCY_GOLD.toWebHexString()+";'>Value</b>"
 				+"</div>"
 				+ "<div style='float:left; width:15%; font-weight:bold; margin:0; padding:0;'>"
-					+ "Actions"
+                + "Действия"
 				+"</div>"
 			+ "</div>";
 	}

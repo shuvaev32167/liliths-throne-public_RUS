@@ -69,7 +69,7 @@ public class Torso implements BodyPartInterface {
 		
 		sb.append(
 				"<p>"
-					+ "[npc.NamePos] entire torso starts to itch and grow hot, and [npc.she] [npc.verb(start)] frantically scratching all over as [npc.her] [npc.skin] starts to transform. ");
+                        + "[npc.NamePos] entire torso starts to itch and grow hot, and [npc.she] start frantically scratching all over as [npc.her] [npc.skin] starts to transform. ");
 		
 
 		// Parse existing content before transformation:

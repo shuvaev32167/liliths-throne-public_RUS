@@ -62,25 +62,25 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(stick)] the anal-only pastie over [npc.her] [npc.pussy+].]]>
+        <![CDATA[[npc.Name] stick the anal-only pastie over [npc.her] [npc.pussy+].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(stick)] the anal-only pastie over [npc2.namePos] [npc2.pussy+].]]>
+        <![CDATA[[npc.Name] stick the anal-only pastie over [npc2.namePos] [npc2.pussy+].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(stick)] the anal-only pastie over [npc2.namePos] [npc2.pussy+].]]>
+        <![CDATA[[npc.Name] roughly stick the anal-only pastie over [npc2.namePos] [npc2.pussy+].]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] carefully [npc.verb(peel)] off the anal-only pastie that was covering [npc.her] [npc.pussy+].]]>
+        <![CDATA[[npc.Name] carefully peel off the anal-only pastie that was covering [npc.her] [npc.pussy+].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] carefully [npc.verb(peel)] off the anal-only pastie that was covering [npc2.namePos] [npc2.pussy+].]]>
+        <![CDATA[[npc.Name] carefully peel off the anal-only pastie that was covering [npc2.namePos] [npc2.pussy+].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] quickly [npc.verb(rip)] off the anal-only pastie that was covering [npc2.namePos] [npc2.pussy+], causing [npc2.herHim] to let out a startled yell.]]>
+        <![CDATA[[npc.Name] quickly rip off the anal-only pastie that was covering [npc2.namePos] [npc2.pussy+], causing [npc2.herHim] to let out a startled yell.]]>
     </otherRough>
   </displacementText>
 

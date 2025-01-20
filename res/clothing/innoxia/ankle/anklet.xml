@@ -41,25 +41,25 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(fasten)] the anklet around [npc.her] ankle.]]>
+        <![CDATA[[npc.Name] fasten the anklet around [npc.her] ankle.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(fasten)] the anklet around [npc2.namePos] ankle.]]>
+        <![CDATA[[npc.Name] fasten the anklet around [npc2.namePos] ankle.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(fasten)] the anklet around [npc2.namePos] ankle.]]>
+        <![CDATA[[npc.Name] roughly fasten the anklet around [npc2.namePos] ankle.]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(unfasten)] [npc.her] anklet, before taking it off.]]>
+        <![CDATA[[npc.Name] unfasten [npc.her] anklet, before taking it off.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(unfasten)] [npc2.namePos] anklet, before taking it off.]]>
+        <![CDATA[[npc.Name] unfasten [npc2.namePos] anklet, before taking it off.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] quickly [npc.verb(unfasten)] [npc2.namePos] anklet, before roughly snatching it off.]]>
+        <![CDATA[[npc.Name] quickly unfasten [npc2.namePos] anklet, before roughly snatching it off.]]>
     </otherRough>
   </displacementText>
 	

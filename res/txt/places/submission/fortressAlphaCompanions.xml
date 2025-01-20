@@ -151,7 +151,7 @@
 		Not wanting to suck [npc2.namePos] cock right now, you quickly blurt out, [pc.speech(Ah, sorry, [npc2.name], I was just checking everything was ok. I've got to go now!)]
 	</p>
 	<p>
-		Ignoring the vulgar curses that are shouted at you in response, you quickly turn your back on [npc2.name] and [npc2.her] gang, and make haste as you exit the keep...
+		Ignoring the vulgar curses that are shouted at you in response, you quickly turn your back on [npc2.name] и [npc2.her] gang, and make haste as you exit the keep...
 	</p>
 	]]>
 	</htmlContent>
@@ -174,7 +174,7 @@
 	
 	<htmlContent tag="KEEP_PACIFIED_REPEAT_SEX_IMPS"><![CDATA[
 	<p>
-		Obediently doing as you're told, you hurry over to where [npc2.name] and [npc2.her] imps are sitting, before dropping down onto your hands and knees in front of them. Smirking down at you, the [npc2.race] raises [npc2.her] voice so that [npc2.she] can be heard over the chorus of mocking laughter coming from [npc2.her] imp guards, and commands, [npc2.speech(What a loyal #IFpc.isFeminine()#THENbitch#ELSEdog#ENDIF you are. I wonder, do you do other tricks on command as well? Go on, slut, present yourself for my girls.)]
+		Obediently doing as you're told, you hurry over to where [npc2.name] и [npc2.her] imps are sitting, before dropping down onto your hands and knees in front of them. Smirking down at you, the [npc2.race] raises [npc2.her] voice so that [npc2.she] can be heard over the chorus of mocking laughter coming from [npc2.her] imp guards, and commands, [npc2.speech(What a loyal #IFpc.isFeminine()#THENbitch#ELSEdog#ENDIF you are. I wonder, do you do other tricks on command as well? Go on, slut, present yourself for my girls.)]
 	</p>
 	<p>
 		Wanting to please [npc2.name], you once more do as you're commanded, and, shuffling around to present your [pc.ass+] to the imps, you drop your shoulders and raise your [pc.hips+], before whining, [pc.speech(Please, fuck me!)]
@@ -313,7 +313,7 @@
 	
 	<htmlContent tag="KEEP_ENTRY_OFFER_SEX_DOUBLE_ORAL"><![CDATA[
 	<p>
-		The sight of this furious [npc2.race] and [npc2.her] imp guards storming towards you is too much for you to handle, and you hold up your [pc.hands] as you cry out, [pc.speech(W-Wait! There's no need for violence!)]
+		The sight of this furious [npc2.race] и [npc2.her] imp guards storming towards you is too much for you to handle, and you hold up your [pc.hands] as you cry out, [pc.speech(W-Wait! There's no need for violence!)]
 	</p>
 	<p>
 		Turning your head to look at your companion, you command, [pc.speech(Come on, [npc.name]. I'm going to need your help here.)]
@@ -349,7 +349,7 @@
 	
 	<htmlContent tag="KEEP_ENTRY_OFFER_SEX_ORAL_COMPANION_IMPS"><![CDATA[
 	<p>
-		The sight of this furious [npc2.race] and [npc2.her] imp guards storming towards you is too much for you to handle, and you hold up your [pc.hands] as you cry out, [pc.speech(W-Wait! There's no need for violence!)]
+		The sight of this furious [npc2.race] и [npc2.her] imp guards storming towards you is too much for you to handle, and you hold up your [pc.hands] as you cry out, [pc.speech(W-Wait! There's no need for violence!)]
 	</p>
 	<p>
 		Turning your head to look at your companion, you command, [pc.speech(Come on, [npc.name]. I'm going to need your help here.)]
@@ -393,7 +393,7 @@
 	
 	<htmlContent tag="KEEP_ENTRY_OFFER_SEX_IMPS_COMPANION_ORAL"><![CDATA[
 	<p>
-		The sight of this furious [npc2.race] and [npc2.her] imp guards storming towards you is too much for you to handle, and you hold up your [pc.hands] as you mumble through the clothing blocking your mouth, [pc.speech(W-Wait! There's no need for violence!)]
+		The sight of this furious [npc2.race] и [npc2.her] imp guards storming towards you is too much for you to handle, and you hold up your [pc.hands] as you mumble through the clothing blocking your mouth, [pc.speech(W-Wait! There's no need for violence!)]
 	</p>
 	<p>
 		Turning your head to look at your companion, you command, [pc.speech(Come on, [npc.name]. I'm going to need your help here.)]
@@ -432,7 +432,7 @@
 	
 	<htmlContent tag="KEEP_ENTRY_OFFER_SEX_DOUBLE_IMPS"><![CDATA[
 	<p>
-		The sight of this furious [npc2.race] and [npc2.her] imp guards storming towards you is too much for you to handle, and you hold up your [pc.hands] as you mumble through the clothing blocking your mouth, [pc.speech(W-Wait! There's no need for violence!)]
+		The sight of this furious [npc2.race] и [npc2.her] imp guards storming towards you is too much for you to handle, and you hold up your [pc.hands] as you mumble through the clothing blocking your mouth, [pc.speech(W-Wait! There's no need for violence!)]
 	</p>
 	<p>
 		Turning your head to look at your companion, you command, [pc.speech(Come on, [npc.name]. I'm going to need your help here.)]
@@ -932,7 +932,7 @@
 	
 	<htmlContent tag="KEEP_AFTER_COMBAT_VICTORY_KEY"><![CDATA[
 	<p>
-		You let out a relieved sigh as [npc2.name] and [npc2.her] guards slump down onto the floor before you, defeated. Stepping forwards, you look down at the [npc2.race] and ask, [pc.speech(Why do you do this? Getting all those imps to attack people in Submission, I mean.)]
+		You let out a relieved sigh as [npc2.name] и [npc2.her] guards slump down onto the floor before you, defeated. Stepping forwards, you look down at the [npc2.race] and ask, [pc.speech(Why do you do this? Getting all those imps to attack people in Submission, I mean.)]
 	</p>
 	<p>
 		[npc2.speech(She told us to...)] [npc2.name] pants [npc2.speech(Our leader, the Dark Siren... She said we need to assert dominance... You've probably already seen it, seeing as you're here... That citadel in the middle of Submission's tunnels. That's where she is...)]
@@ -948,7 +948,7 @@
 	
 	<htmlContent tag="KEEP_AFTER_COMBAT_VICTORY"><![CDATA[
 	<p>
-		You let out a relieved sigh as [npc2.name] and [npc2.her] guards slump down onto the floor before you, defeated. Stepping forwards, you look down at the [npc2.race] and ask, [pc.speech(Why did you come back? I told you to stay away from here!)]
+		You let out a relieved sigh as [npc2.name] и [npc2.her] guards slump down onto the floor before you, defeated. Stepping forwards, you look down at the [npc2.race] and ask, [pc.speech(Why did you come back? I told you to stay away from here!)]
 	</p>
 	<p>
 		[npc2.speech(The Dark Siren... )] [npc2.name] pants. [npc2.speech(She said I had to...)]
@@ -964,7 +964,7 @@
 	
 	<htmlContent tag="KEEP_AFTER_COMBAT_VICTORY_DS_DEFEATED"><![CDATA[
 	<p>
-		You let out a relieved sigh as [npc2.name] and [npc2.her] guards slump down onto the floor before you, defeated. Stepping forwards, you look down at the [npc2.race] and ask, [pc.speech(Why did you come back? I told you to stay away from here!)]
+		You let out a relieved sigh as [npc2.name] и [npc2.her] guards slump down onto the floor before you, defeated. Stepping forwards, you look down at the [npc2.race] and ask, [pc.speech(Why did you come back? I told you to stay away from here!)]
 	</p>
 	<p>
 		[npc2.speech(The Dark Siren will return... )] [npc2.name] pants. [npc2.speech(So I need to carry out her last orders...)]
@@ -980,7 +980,7 @@
 	
 	<htmlContent tag="KEEP_AFTER_COMBAT_VICTORY_SCARE_OFF"><![CDATA[
 	<p>
-		Having dealt with [npc2.name], and not wanting to go any further, you stand before [npc2.herHim] and [npc2.her] imps and declare, [pc.speech(Go on then, get out of here, all of you! And don't come back!)]
+		Having dealt with [npc2.name], and not wanting to go any further, you stand before [npc2.herHim] и [npc2.her] imps and declare, [pc.speech(Go on then, get out of here, all of you! And don't come back!)]
 	</p>
 	<p>
 		[npc2.speech(W-We won't!)] [npc2.name] stutters as [npc2.she] stands up. Not even giving you another backwards glance, [npc2.she] runs off down the length of the hallway, with [npc2.her] imp guards close behind. Dashing out through the open doors, the gang disappear off into Submission, leaving you alone in the now-empty keep.
@@ -993,7 +993,7 @@
 	
 	<htmlContent tag="KEEP_COMBAT_VICTORY_SEX"><![CDATA[
 	<p>
-		Wanting to have a little fun with [npc2.name] and [npc2.her] imps before you let them go, you tell [npc.name] to stand back and watch before reaching down and starting to move them into position. As you do this, the [npc2.race] lets out a surprisingly erotic moan, before thrusting [npc2.her] [npc2.hips] towards you. [npc2.speech(Oh yeah, come on then, suck my cock!)]
+		Wanting to have a little fun with [npc2.name] и [npc2.her] imps before you let them go, you tell [npc.name] to stand back and watch before reaching down and starting to move them into position. As you do this, the [npc2.race] lets out a surprisingly erotic moan, before thrusting [npc2.her] [npc2.hips] towards you. [npc2.speech(Oh yeah, come on then, suck my cock!)]
 	</p>
 	<p>
 		[pc.speech(I'll do whatever I feel like,)] you respond, giving [npc2.her] [npc2.ass] a quick smack to remind [npc2.herHim] who's in charge.
@@ -1006,7 +1006,7 @@
 	
 	<htmlContent tag="KEEP_COMBAT_VICTORY_SEX_GENTLE"><![CDATA[
 	<p>
-		Wanting to have a little fun with [npc2.name] and [npc2.her] imps before you let them go, you tell [npc.name] to stand back and watch before reaching down and starting to gently move them into position. As you do this, the [npc2.race] lets out a surprisingly erotic moan, before thrusting [npc2.her] [npc2.hips] towards you. [npc2.speech(Oh yeah, come on then, suck my cock!)]
+		Wanting to have a little fun with [npc2.name] и [npc2.her] imps before you let them go, you tell [npc.name] to stand back and watch before reaching down and starting to gently move them into position. As you do this, the [npc2.race] lets out a surprisingly erotic moan, before thrusting [npc2.her] [npc2.hips] towards you. [npc2.speech(Oh yeah, come on then, suck my cock!)]
 	</p>
 	<p>
 		[pc.speech(I'll do as I please,)] you respond, giving [npc2.her] [npc2.ass] a soft smack to remind [npc2.herHim] who's in charge.
@@ -1019,7 +1019,7 @@
 	
 	<htmlContent tag="KEEP_COMBAT_VICTORY_SEX_ROUGH"><![CDATA[
 	<p>
-		Wanting to have a little fun with [npc2.name] and [npc2.her] imps before you let them go, you tell [npc.name] to stand back and watch before reaching down and starting to roughly force them into position. As you do this, the [npc2.race] lets out a surprisingly erotic moan, before thrusting [npc2.her] [npc2.hips] towards you. [npc2.speech(Oh yeah, come on then, suck my cock!)]
+		Wanting to have a little fun with [npc2.name] и [npc2.her] imps before you let them go, you tell [npc.name] to stand back and watch before reaching down and starting to roughly force them into position. As you do this, the [npc2.race] lets out a surprisingly erotic moan, before thrusting [npc2.her] [npc2.hips] towards you. [npc2.speech(Oh yeah, come on then, suck my cock!)]
 	</p>
 	<p>
 		[pc.speech(Don't you <i>dare</i> try and tell me what to do!)] you angrily respond, giving [npc2.her] [npc2.ass] a sharp slap to remind [npc2.herHim] who's in charge.
@@ -1032,7 +1032,7 @@
 	
 	<htmlContent tag="KEEP_COMBAT_VICTORY_GROUP_SEX"><![CDATA[
 	<p>
-		Wanting to have a little fun with [npc2.name] and [npc2.her] imps before you let them go, you tell [npc.name] to join you as you reach down and start to move them into position. As you do this, the [npc2.race] lets out a surprisingly erotic moan, before thrusting [npc2.her] [npc2.hips] towards you. [npc2.speech(Oh yeah, come on then, suck my cock!)]
+		Wanting to have a little fun with [npc2.name] и [npc2.her] imps before you let them go, you tell [npc.name] to join you as you reach down and start to move them into position. As you do this, the [npc2.race] lets out a surprisingly erotic moan, before thrusting [npc2.her] [npc2.hips] towards you. [npc2.speech(Oh yeah, come on then, suck my cock!)]
 	</p>
 	<p>
 		[pc.speech(I'll do whatever I feel like,)] you respond, giving [npc2.her] [npc2.ass] a quick smack to remind [npc2.herHim] who's in charge.
@@ -1045,7 +1045,7 @@
 	
 	<htmlContent tag="KEEP_COMBAT_VICTORY_SEX_SUBMIT"><![CDATA[
 	<p>
-		Feeling sorry for [npc2.name] and [npc2.her] imps, you tell [npc.name] to stand back before bending down next to the [npc2.race] and asking, [pc.speech(Are you ok? Sorry, I think I went a little too far...)]
+		Feeling sorry for [npc2.name] и [npc2.her] imps, you tell [npc.name] to stand back before bending down next to the [npc2.race] and asking, [pc.speech(Are you ok? Sorry, I think I went a little too far...)]
 	</p>
 	<p>
 		[npc2.NamePos] worried expression quickly shifts into a devious grin as [npc2.she] realises that you're going to be easy to take advantage of. Grabbing hold of your wrists, [npc2.she] snaps, [npc2.speech(No, I'm not ok! Now help me up already!)]
@@ -1073,7 +1073,7 @@
 	
 	<htmlContent tag="KEEP_COMBAT_VICTORY_SEX_SUBMIT_IMPS"><![CDATA[
 	<p>
-		Feeling sorry for [npc2.name] and [npc2.her] imps, you tell [npc.name] to stand back before bending down next to the [npc2.race] and asking, [pc.speech(Are you ok? Sorry, I think I went a little too far...)]
+		Feeling sorry for [npc2.name] и [npc2.her] imps, you tell [npc.name] to stand back before bending down next to the [npc2.race] and asking, [pc.speech(Are you ok? Sorry, I think I went a little too far...)]
 	</p>
 	<p>
 		[npc2.NamePos] worried expression quickly shifts into a devious grin as [npc2.she] realises that you're going to be easy to take advantage of. Grabbing hold of your wrists, [npc2.she] snaps, [npc2.speech(No, I'm not ok! Now help me up already!)]
@@ -1098,7 +1098,7 @@
 	
 	<htmlContent tag="KEEP_COMBAT_VICTORY_GROUP_SEX_SUBMISSION_APOLOGY"><![CDATA[
 	<p>
-		Feeling sorry for [npc2.name] and [npc2.her] imps, you bend down next to [npc2.herHim] and ask, [pc.speech(Are you ok? Sorry, I think my friend and I went a little too far, didn't we, [npc.name]?)]
+		Feeling sorry for [npc2.name] и [npc2.her] imps, you bend down next to [npc2.herHim] and ask, [pc.speech(Are you ok? Sorry, I think my friend and I went a little too far, didn't we, [npc.name]?)]
 	</p>
 	<p>
 		#IFnpc.isAttractedTo(npc2) || !game.isNonConEnabled()
@@ -1210,7 +1210,7 @@
 	
 	<htmlContent tag="KEEP_COMBAT_VICTORY_GIVE_TO_COMPANION"><![CDATA[
 	<p>
-		Wanting [npc.name] to have some fun with [npc2.name] and [npc2.her] imps before you let them go, you tell [npc.herHim] to fuck them in front of you. [npc2.Name] lets out a surprisingly erotic moan as [npc2.she] hears this, before thrusting [npc2.her] [npc2.hips] towards your companion. [npc2.speech(Oh yeah, come on then, suck my cock!)]
+		Wanting [npc.name] to have some fun with [npc2.name] и [npc2.her] imps before you let them go, you tell [npc.herHim] to fuck them in front of you. [npc2.Name] lets out a surprisingly erotic moan as [npc2.she] hears this, before thrusting [npc2.her] [npc2.hips] towards your companion. [npc2.speech(Oh yeah, come on then, suck my cock!)]
 	</p>
 	<p>
 		[npc.speech(I'll do whatever I feel like,)] [npc.name] responds, giving [npc2.her] [npc2.ass] a quick smack to remind [npc2.herHim] who's in charge.
@@ -1595,7 +1595,7 @@
 	
 	<htmlContent tag="KEEP_AFTER_SEX_VICTORY"><![CDATA[
 	<p>
-		[npc2.Name] and [npc2.her] imps collapse to the floor, utterly exhausted. Quickly getting your things in order, you can't help but smile as you hear the [npc2.race] panting, [npc2.speech(Oh... Fuck...)]
+		[npc2.Name] и [npc2.her] imps collapse to the floor, utterly exhausted. Quickly getting your things in order, you can't help but smile as you hear the [npc2.race] panting, [npc2.speech(Oh... Fuck...)]
 	</p>	
 	<p>
 		Grinning down at the worn out gang, you wonder if you should tell them to get out of here right away, or perhaps you could first take this opportunity to confiscate their belongs...

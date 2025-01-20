@@ -85,7 +85,8 @@
 		<fingerActionsAvailable>false</fingerActionsAvailable>
 		<hairPresent>false</hairPresent>
 	</feralAttributes>
-	<statusEffectDescription><![CDATA[[npc.NamePos] arctic wolf-like body is both strong and highly resistant to the cold. [npc.She] also often [npc.verb(get)] powerful urges to try and dominate people [npc.she] [npc.verb(meet)].]]></statusEffectDescription>
+    <statusEffectDescription>
+        <![CDATA[[npc.NamePos] arctic wolf-like body is both strong and highly resistant to the cold. [npc.She] also often get powerful urges to try and dominate people [npc.she] meet.]]></statusEffectDescription>
 	<statusEffectAttributeModifiers>
 		<attribute value="15">MAJOR_PHYSIQUE</attribute>
 		<attribute value="10">RESISTANCE_ICE</attribute>

@@ -45,25 +45,25 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(pull)] the leg warmers on to cover [npc.her] lower [npc.legs(true)].]]>
+        <![CDATA[[npc.Name] pull the leg warmers on to cover [npc.her] lower [npc.legs(true)].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(pull)] the leg warmers onto [npc2.namePos] lower [npc2.legs(true)].]]>
+        <![CDATA[[npc.Name] pull the leg warmers onto [npc2.namePos] lower [npc2.legs(true)].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(pull)] the leg warmers onto [npc2.namePos] lower [npc2.legs(true)].]]>
+        <![CDATA[[npc.Name] roughly pull the leg warmers onto [npc2.namePos] lower [npc2.legs(true)].]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(pull)] off [npc.her] leg warmers.]]>
+        <![CDATA[[npc.Name] pull off [npc.her] leg warmers.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(pull)] off [npc2.namePos] leg warmers.]]>
+        <![CDATA[[npc.Name] pull off [npc2.namePos] leg warmers.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(pull)] off [npc2.namePos] leg warmers.]]>
+        <![CDATA[[npc.Name] roughly pull off [npc2.namePos] leg warmers.]]>
     </otherRough>
   </displacementText>
 	

@@ -1,24 +1,9 @@
 package com.lilithsthrone.rendering;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.ArousalLevel;
-import com.lilithsthrone.game.character.attributes.Attribute;
-import com.lilithsthrone.game.character.attributes.CorruptionLevel;
-import com.lilithsthrone.game.character.attributes.IntelligenceLevel;
-import com.lilithsthrone.game.character.attributes.LustLevel;
-import com.lilithsthrone.game.character.attributes.PhysiqueLevel;
+import com.lilithsthrone.game.character.attributes.*;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
 import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
@@ -36,18 +21,8 @@ import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.eventLog.EventLogEntry;
-import com.lilithsthrone.game.dialogue.utils.CharactersPresentDialogue;
-import com.lilithsthrone.game.dialogue.utils.DebugDialogue;
-import com.lilithsthrone.game.dialogue.utils.InventoryDialogue;
-import com.lilithsthrone.game.dialogue.utils.InventoryInteraction;
-import com.lilithsthrone.game.dialogue.utils.MapTravelType;
-import com.lilithsthrone.game.dialogue.utils.PhoneDialogue;
-import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractCoreItem;
-import com.lilithsthrone.game.inventory.CharacterInventory;
-import com.lilithsthrone.game.inventory.InventorySlot;
-import com.lilithsthrone.game.inventory.Rarity;
-import com.lilithsthrone.game.inventory.ShopTransaction;
+import com.lilithsthrone.game.dialogue.utils.*;
+import com.lilithsthrone.game.inventory.*;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
@@ -60,11 +35,7 @@ import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotGeneric;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Pathing;
-import com.lilithsthrone.utils.SizedStack;
-import com.lilithsthrone.utils.Units;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Vector2i;
+import com.lilithsthrone.utils.*;
 import com.lilithsthrone.utils.colours.BaseColour;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
@@ -78,6 +49,10 @@ import com.lilithsthrone.world.places.AbstractGlobalPlaceType;
 import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.population.Population;
+
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -116,552 +91,27 @@ public enum RenderingEngine {
 
 	public static InventorySlot[] secondaryInventorySlots = {InventorySlot.SOCK, InventorySlot.FOOT, InventorySlot.ANUS, InventorySlot.PENIS, InventorySlot.VAGINA};
 	
-	private static InventorySlot[] piercingSlots = {
+	private static final InventorySlot[] piercingSlots = {
 			InventorySlot.PIERCING_EAR,		InventorySlot.PIERCING_NOSE,
 			InventorySlot.PIERCING_LIP,		InventorySlot.PIERCING_TONGUE,
 			InventorySlot.PIERCING_NIPPLE,	InventorySlot.PIERCING_STOMACH,
 			InventorySlot.PIERCING_PENIS,	InventorySlot.PIERCING_VAGINA };
-	
-	
-	private RenderingEngine() {
-	}
 
-	private StringBuilder inventorySB = new StringBuilder(), equippedPanelSB = new StringBuilder();
+
+	private static final StringBuilder pageSB = new StringBuilder();
+
+	private final StringBuilder inventorySB = new StringBuilder();
+    private final StringBuilder equippedPanelSB = new StringBuilder();
 	
 	public String getInventoryPanel(GameCharacter charactersInventoryToRender, boolean buyback) {
 		return "<div class='container-full-width' style='background:"+PresetColour.BACKGROUND_DARK.toWebHexString()+"'>"
 					+ getInventoryDiv(Main.game.getPlayer(), false) + getInventoryDiv(charactersInventoryToRender, buyback)
 				+"</div>";
 	}
-	
-	private String getInventoryEquippedPanel(GameCharacter charactersInventoryToRender) {
-		equippedPanelSB.setLength(0);
-		
-		if(charactersInventoryToRender == null) {
-			equippedPanelSB.append("<div class='inventory-equipped'>");
-
-			for (InventorySlot invSlot : mainInventorySlots) {
-				equippedPanelSB.append("<div class='inventory-item-slot' style='background-color:"+PresetColour.BACKGROUND.toWebHexString()+";' id='" + invSlot.toString() + "Slot'></div>");
-			}
-
-			String weaponStyle = "width:46%; margin:2%; background-color:"+PresetColour.BACKGROUND.toWebHexString()+";";
-			String piercingStyle = "width:40%; margin:5%; background-color:"+PresetColour.BACKGROUND.toWebHexString()+";";
-			
-			equippedPanelSB.append("</div>"
-					+ "<div class='inventory-equipped accessories'>");
-			
-			equippedPanelSB.append("<div class='inventory-item-slot' style='"+weaponStyle+"' id='" + InventorySlot.WEAPON_MAIN_1.toString() + "Slot'></div>");
-			
-			equippedPanelSB.append("<div class='inventory-item-slot' style='"+weaponStyle+"' id='" + InventorySlot.WEAPON_OFFHAND_1.toString() + "Slot'></div>");
-			
-			for (InventorySlot invSlot : piercingSlots) {
-				equippedPanelSB.append("<div class='inventory-item-slot' style='"+piercingStyle+"'  id='" + invSlot.toString() + "Slot'></div>");
-			}
-			equippedPanelSB.append("</div>");
-			
-
-			equippedPanelSB.append("<div class='inventory-equipped' style='width:100%;'>");
-			
-			for (InventorySlot invSlot : secondaryInventorySlots) {
-				equippedPanelSB.append("<div class='inventory-item-slot secondary' style='background-color:"+PresetColour.BACKGROUND.toWebHexString()+";' id='" + invSlot.toString() + "Slot'></div>");
-			}
-			
-			equippedPanelSB.append("<div class='inventory-item-slot secondary' style='background-color:"+PresetColour.BACKGROUND.toWebHexString()+";'>"
-										+ "<div class='inventory-icon-content'>"
-											+SVGImages.SVG_IMAGE_PROVIDER.getTattooSwitchClothing(charactersInventoryToRender)
-										+"</div>"
-									+ "<div class='overlay-inventory disabled'></div></div>");
-
-			equippedPanelSB.append("</div>");
-			
-			return equippedPanelSB.toString();
-		}
-		
-		
-		Set<InventorySlot> blockedSlots = new HashSet<>();
-		
-		for (AbstractClothing c : charactersInventoryToRender.getClothingCurrentlyEquipped()) {
-			if (c.getIncompatibleSlots(charactersInventoryToRender, c.getSlotEquippedTo()) != null) {
-				for (InventorySlot is : c.getIncompatibleSlots(charactersInventoryToRender, c.getSlotEquippedTo())) {
-					blockedSlots.add(is);
-				}
-			}
-		}
-		
-		// EQUIPPED:
-		equippedPanelSB.append("<div class='inventory-equipped'>");
-		
-		Map<InventorySlot, List<AbstractClothing>> concealedSlots = charactersInventoryToRender.getInventorySlotsConcealed(Main.game.getPlayer());
-		
-		for (InventorySlot invSlot : mainInventorySlots) {
-			appendEquippedClothingSlot(charactersInventoryToRender, invSlot, blockedSlots, concealedSlots, false);
-		}
-
-		equippedPanelSB.append("</div>");
-		
-		// Render weapons & piercings:
-		equippedPanelSB.append("<div class='inventory-equipped accessories'>");
-		
-		String weaponStyle = "width:46%; margin:2%;";
-		String weaponStyleNoEssences = "width:46%; margin:2%; border:2px solid "+PresetColour.GENERIC_BAD.toWebHexString()+";";
-		String piercingStyle = "width:40%; margin:5%;";
-		if(charactersInventoryToRender.getArmRows()>1) {
-			weaponStyle = "width:31%; margin:1%;";
-			weaponStyleNoEssences = "width:31%; margin:1%; border:1% solid "+PresetColour.GENERIC_BAD.toWebHexString()+";";
-			piercingStyle = "width:35%; margin:5.5% 7.5%;";
-		}
-		
-		int essenceCount = charactersInventoryToRender.getEssenceCount();
-		
-		// Main weapon:
-		AbstractWeapon weaponInSlot = charactersInventoryToRender.getMainWeapon(0);
-		if (weaponInSlot != null) {
-			String weaponCount = getThrownWeaponCountDiv(weaponInSlot.getWeaponType(), charactersInventoryToRender.getWeaponCount(weaponInSlot));
-			equippedPanelSB.append(
-					"<div class='inventory-item-slot" + getClassRarityIdentifier(weaponInSlot.getRarity()) + "' style='"+(essenceCount<weaponInSlot.getWeaponType().getArcaneCost()?weaponStyleNoEssences:weaponStyle)+"'>"
-						+ "<div class='inventory-icon-content'>"+weaponInSlot.getSVGEquippedString(charactersInventoryToRender)+"</div>"
-						+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_MAIN_1.toString() + "Slot'>"+weaponCount+"</div>"
-					+ "</div>");
-			
-		} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_1)!=null) {
-			AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_1);
-			String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
-			equippedPanelSB.append(
-					"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
-						+ "<div class='inventory-icon-content' style='opacity:0.5;'>"+depletedWeapon.getSVGEquippedImageDesaturated(charactersInventoryToRender)+"</div>"
-						+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_MAIN_1.toString() + "Slot'>"+weaponCount+"</div>"
-					+ "</div>");
-			
-		} else {
-			equippedPanelSB.append(getEmptyWeaponDiv(charactersInventoryToRender, false, InventorySlot.WEAPON_MAIN_1, weaponStyle));
-		}
-		
-		// Multiple arms:
-		if(charactersInventoryToRender.getArmRows()>1) {
-			// Weapon in second slot:
-			weaponInSlot = charactersInventoryToRender.getMainWeapon(1);
-			if (weaponInSlot != null) {
-				String weaponCount = getThrownWeaponCountDiv(weaponInSlot.getWeaponType(), charactersInventoryToRender.getWeaponCount(weaponInSlot));
-				equippedPanelSB.append(
-						"<div class='inventory-item-slot" + getClassRarityIdentifier(weaponInSlot.getRarity()) + "' style='"+(essenceCount<weaponInSlot.getWeaponType().getArcaneCost()?weaponStyleNoEssences:weaponStyle)+"'>"
-							+ "<div class='inventory-icon-content'>"+weaponInSlot.getSVGEquippedString(charactersInventoryToRender)+"</div>"
-							+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_MAIN_2.toString() + "Slot'>"+weaponCount+"</div>"
-						+ "</div>");
-				
-			} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_2)!=null) {
-				AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_2);
-				String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
-				equippedPanelSB.append(
-						"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
-							+ "<div class='inventory-icon-content' style='opacity:0.5;'>"+depletedWeapon.getSVGEquippedImageDesaturated(charactersInventoryToRender)+"</div>"
-							+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_MAIN_2.toString() + "Slot'>"+weaponCount+"</div>"
-						+ "</div>");
-				
-			} else {
-				equippedPanelSB.append(getEmptyWeaponDiv(charactersInventoryToRender, false, InventorySlot.WEAPON_MAIN_2, weaponStyle));
-			}
-
-			// Weapon in third slot:
-			weaponInSlot = charactersInventoryToRender.getMainWeapon(2);
-			if (weaponInSlot != null) {
-				String weaponCount = getThrownWeaponCountDiv(weaponInSlot.getWeaponType(), charactersInventoryToRender.getWeaponCount(weaponInSlot));
-				equippedPanelSB.append(
-						"<div class='inventory-item-slot" + getClassRarityIdentifier(weaponInSlot.getRarity()) + "' style='"+(essenceCount<weaponInSlot.getWeaponType().getArcaneCost()?weaponStyleNoEssences:weaponStyle)+"'>"
-							+ "<div class='inventory-icon-content'>"+weaponInSlot.getSVGEquippedString(charactersInventoryToRender)+"</div>"
-							+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_MAIN_3.toString() + "Slot'>"+weaponCount+"</div>"
-						+ "</div>");
-				
-			} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_3)!=null) {
-				AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_3);
-				String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
-				equippedPanelSB.append(
-						"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
-							+ "<div class='inventory-icon-content' style='opacity:0.5;'>"+depletedWeapon.getSVGEquippedImageDesaturated(charactersInventoryToRender)+"</div>"
-							+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_MAIN_3.toString() + "Slot'>"+weaponCount+"</div>"
-						+ "</div>");
-				
-			} else if (charactersInventoryToRender.getArmRows()==2) {
-				equippedPanelSB.append(getEmptyWeaponDiv(charactersInventoryToRender, true, InventorySlot.WEAPON_MAIN_3, weaponStyle));
-				
-			} else {
-				equippedPanelSB.append(getEmptyWeaponDiv(charactersInventoryToRender, false, InventorySlot.WEAPON_MAIN_3, weaponStyle));
-			}
-		}
-		
-		// Offhand weapon:
-		weaponInSlot = charactersInventoryToRender.getOffhandWeapon(0);
-		if (weaponInSlot != null) {
-			String weaponCount = getThrownWeaponCountDiv(weaponInSlot.getWeaponType(), charactersInventoryToRender.getWeaponCount(weaponInSlot));
-			equippedPanelSB.append("<div class='inventory-item-slot" + getClassRarityIdentifier(weaponInSlot.getRarity()) + "' style='"+(essenceCount<weaponInSlot.getWeaponType().getArcaneCost()?weaponStyleNoEssences:weaponStyle)+"'>"
-						+ "<div class='inventory-icon-content'>"+weaponInSlot.getSVGEquippedString(charactersInventoryToRender)+"</div>"
-						+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_OFFHAND_1.toString() + "Slot'>"+weaponCount+"</div>"
-					+ "</div>");
-			
-		} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_1)!=null) {
-			AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_1);
-			String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
-			equippedPanelSB.append(
-					"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
-						+ "<div class='inventory-icon-content' style='opacity:0.5;'>"+depletedWeapon.getSVGEquippedImageDesaturated(charactersInventoryToRender)+"</div>"
-						+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_OFFHAND_1.toString() + "Slot'>"+weaponCount+"</div>"
-					+ "</div>");
-			
-		} else if (charactersInventoryToRender.getMainWeapon(0) != null && charactersInventoryToRender.getMainWeapon(0).getWeaponType().isTwoHanded()) {
-			equippedPanelSB.append(getEmptyWeaponDiv(charactersInventoryToRender, true, InventorySlot.WEAPON_OFFHAND_1, weaponStyle));
-			
-		} else {
-			equippedPanelSB.append(getEmptyWeaponDiv(charactersInventoryToRender, false, InventorySlot.WEAPON_OFFHAND_1, weaponStyle));
-		}
-		
-		// Multiple arms:
-		if(charactersInventoryToRender.getArmRows()>1) {
-			// Weapon in second slot:
-			weaponInSlot = charactersInventoryToRender.getOffhandWeapon(1);
-			if (weaponInSlot != null) {
-				String weaponCount = getThrownWeaponCountDiv(weaponInSlot.getWeaponType(), charactersInventoryToRender.getWeaponCount(weaponInSlot));
-				equippedPanelSB.append("<div class='inventory-item-slot" + getClassRarityIdentifier(weaponInSlot.getRarity()) + "' style='"+(essenceCount<weaponInSlot.getWeaponType().getArcaneCost()?weaponStyleNoEssences:weaponStyle)+"'>"
-							+ "<div class='inventory-icon-content'>"+weaponInSlot.getSVGEquippedString(charactersInventoryToRender)+"</div>"
-							+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_OFFHAND_2.toString() + "Slot'>"+weaponCount+"</div>"
-						+ "</div>");
-				
-			} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_2)!=null) {
-				AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_2);
-				String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
-				equippedPanelSB.append(
-						"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
-							+ "<div class='inventory-icon-content' style='opacity:0.5;'>"+depletedWeapon.getSVGEquippedImageDesaturated(charactersInventoryToRender)+"</div>"
-							+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_OFFHAND_2.toString() + "Slot'>"+weaponCount+"</div>"
-						+ "</div>");
-				
-			} else if (charactersInventoryToRender.getMainWeapon(1) != null && charactersInventoryToRender.getMainWeapon(1).getWeaponType().isTwoHanded()) {
-				equippedPanelSB.append(getEmptyWeaponDiv(charactersInventoryToRender, true, InventorySlot.WEAPON_OFFHAND_2, weaponStyle));
-				
-			} else {
-				equippedPanelSB.append(getEmptyWeaponDiv(charactersInventoryToRender, false, InventorySlot.WEAPON_OFFHAND_2, weaponStyle));
-			}
-			
-			// Weapon in third slot:
-			weaponInSlot = charactersInventoryToRender.getOffhandWeapon(2);
-			if (weaponInSlot != null) {
-				String weaponCount = getThrownWeaponCountDiv(weaponInSlot.getWeaponType(), charactersInventoryToRender.getWeaponCount(weaponInSlot));
-				equippedPanelSB.append("<div class='inventory-item-slot" + getClassRarityIdentifier(weaponInSlot.getRarity()) + "' style='"+(essenceCount<weaponInSlot.getWeaponType().getArcaneCost()?weaponStyleNoEssences:weaponStyle)+"'>"
-							+ "<div class='inventory-icon-content'>"+weaponInSlot.getSVGEquippedString(charactersInventoryToRender)+"</div>"
-							+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_OFFHAND_3.toString() + "Slot'>"+weaponCount+"</div>"
-						+ "</div>");
-				
-			} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_3)!=null) {
-				AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_3);
-				String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
-				equippedPanelSB.append(
-						"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
-							+ "<div class='inventory-icon-content' style='opacity:0.5;'>"+depletedWeapon.getSVGEquippedImageDesaturated(charactersInventoryToRender)+"</div>"
-							+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_OFFHAND_3.toString() + "Slot'>"+weaponCount+"</div>"
-						+ "</div>");
-				
-			} else if (charactersInventoryToRender.getArmRows()==2 || (charactersInventoryToRender.getMainWeapon(2) != null && charactersInventoryToRender.getMainWeapon(2).getWeaponType().isTwoHanded())) {
-				equippedPanelSB.append(getEmptyWeaponDiv(charactersInventoryToRender, true, InventorySlot.WEAPON_OFFHAND_3, weaponStyle));
-				
-			} else {
-				equippedPanelSB.append(getEmptyWeaponDiv(charactersInventoryToRender, false, InventorySlot.WEAPON_OFFHAND_3, weaponStyle));
-			}
-		}
-		
-		
-		//piercingSlots
-		for (InventorySlot invSlot : piercingSlots) {
-			
-			AbstractClothing clothing = charactersInventoryToRender.getClothingInSlot(invSlot);
-			
-			if(!charactersInventoryToRender.isPlayer() && concealedSlots.keySet().contains(invSlot)) {
-				equippedPanelSB.append("<div class='inventory-item-slot concealed' style='"+piercingStyle+"' id='" + invSlot.toString() + "Slot'>"
-						+ "<div class='concealedIcon'>"+SVGImages.SVG_IMAGE_PROVIDER.getConcealedIcon()+"</div>"
-					+ "</div>");
-				
-			} else {
-				if (clothing != null) {
-					// add to content:
-					equippedPanelSB.append(
-							"<div class='inventory-item-slot " + getClassRarityIdentifier(clothing.getRarity()) + "'"
-								+ (clothing.isSealed()
-										? "style='"+piercingStyle+" border-width:2px; border-color:" + PresetColour.SEALED.toWebHexString() + "; border-style:solid;'"
-										: "style='"+piercingStyle+"'")
-								+ ">");
-						
-						equippedPanelSB.append("<div class='inventory-icon-content'>"+clothing.getSVGEquippedString(charactersInventoryToRender)+"</div>");
-						
-						equippedPanelSB.append((!clothing.getDisplacedList().isEmpty() ? "<div class='displacedIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getDisplacedIcon() + "</div>" : ""));
-						equippedPanelSB.append((clothing.isDirty() ? "<div class='cummedIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getDirtyIcon() + "</div>" : ""));
-						equippedPanelSB.append((clothing.getClothingType().getFemininityMaximum() < charactersInventoryToRender.getFemininityValue() ? "<div class='femininityIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getMasculineWarningIcon() + "</div>" : ""));
-						equippedPanelSB.append((clothing.getClothingType().getFemininityMinimum() > charactersInventoryToRender.getFemininityValue() ? "<div class='femininityIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getFeminineWarningIcon() + "</div>" : ""));
-						
-						// Only append the most important of these effects:
-						if(charactersInventoryToRender.getSexToyOrificeStretching().containsValue(clothing)) {
-							equippedPanelSB.append("<div class='stretchIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getCombinationStretching() + "</div>");
-						} else if(charactersInventoryToRender.getSexToyOrificeTooDeep().containsValue(clothing)) {
-							equippedPanelSB.append("<div class='stretchIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getCombinationDepthMaximum() + "</div>");
-						} else if(charactersInventoryToRender.getSexToyOrificePreventingStretchRecovery().containsValue(clothing)) {
-							equippedPanelSB.append("<div class='stretchIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getCombinationStretchRecoveryPrevented() + "</div>");
-						}
-						
-						equippedPanelSB.append("<div class='overlay-inventory' id='" + invSlot.toString() + "Slot'>" + "</div>");
-					
-					equippedPanelSB.append("</div>");
-					
-
-					
-				} else {
-					// add to content:
-					if (blockedSlots.contains(invSlot)) {
-						equippedPanelSB.append("<div class='inventory-item-slot disabled' style='"+piercingStyle+"' id='" + invSlot.toString() + "Slot'>" + "</div>");
-						
-					} else {
-						boolean bypassesPiercing = !charactersInventoryToRender.getBody().getBodyMaterial().isRequiresPiercing();
-						
-						switch(invSlot){
-							case PIERCING_VAGINA:
-								if(!charactersInventoryToRender.hasVagina() || (!bypassesPiercing && !charactersInventoryToRender.isPiercedVagina())) {
-									equippedPanelSB.append("<div class='inventory-item-slot disabled' style='"+piercingStyle+"' id='" + invSlot.toString() + "Slot'>" + "</div>");
-								} else {
-									equippedPanelSB.append("<div class='inventory-item-slot' style='"+piercingStyle+"' id='" + invSlot.toString() + "Slot'></div>");
-								}
-								break;
-							case PIERCING_EAR:
-								if(!bypassesPiercing && !charactersInventoryToRender.isPiercedEar()) {
-									equippedPanelSB.append("<div class='inventory-item-slot disabled' style='"+piercingStyle+"' id='" + invSlot.toString() + "Slot'>" + "</div>");
-								} else {
-									equippedPanelSB.append("<div class='inventory-item-slot' style='"+piercingStyle+"' id='" + invSlot.toString() + "Slot'></div>");
-								}
-								break;
-							case PIERCING_LIP:
-								if(!bypassesPiercing && !charactersInventoryToRender.isPiercedLip()) {
-									equippedPanelSB.append("<div class='inventory-item-slot disabled' style='"+piercingStyle+"' id='" + invSlot.toString() + "Slot'>" + "</div>");
-								} else {
-									equippedPanelSB.append("<div class='inventory-item-slot' style='"+piercingStyle+"' id='" + invSlot.toString() + "Slot'></div>");
-								}
-								break;
-							case PIERCING_NIPPLE:
-								if(!bypassesPiercing && !charactersInventoryToRender.isPiercedNipple()) {
-									equippedPanelSB.append("<div class='inventory-item-slot disabled' style='"+piercingStyle+"' id='" + invSlot.toString() + "Slot'>" + "</div>");
-								} else {
-									equippedPanelSB.append("<div class='inventory-item-slot' style='"+piercingStyle+"' id='" + invSlot.toString() + "Slot'></div>");
-								}
-								break;
-							case PIERCING_NOSE:
-								if(!bypassesPiercing && !charactersInventoryToRender.isPiercedNose()) {
-									equippedPanelSB.append("<div class='inventory-item-slot disabled' style='"+piercingStyle+"' id='" + invSlot.toString() + "Slot'>" + "</div>");
-								} else {
-									equippedPanelSB.append("<div class='inventory-item-slot' style='"+piercingStyle+"' id='" + invSlot.toString() + "Slot'></div>");
-								}
-								break;
-							case PIERCING_PENIS:
-								if(!charactersInventoryToRender.hasPenis() || (!bypassesPiercing && !charactersInventoryToRender.isPiercedPenis())) {
-									equippedPanelSB.append("<div class='inventory-item-slot disabled' style='"+piercingStyle+"' id='" + invSlot.toString() + "Slot'>" + "</div>");
-								} else {
-									equippedPanelSB.append("<div class='inventory-item-slot' style='"+piercingStyle+"' id='" + invSlot.toString() + "Slot'></div>");
-								}
-								break;
-							case PIERCING_STOMACH:
-								if(!bypassesPiercing && !charactersInventoryToRender.isPiercedNavel()) {
-									equippedPanelSB.append("<div class='inventory-item-slot disabled' style='"+piercingStyle+"' id='" + invSlot.toString() + "Slot'>" + "</div>");
-								} else {
-									equippedPanelSB.append("<div class='inventory-item-slot' style='"+piercingStyle+"' id='" + invSlot.toString() + "Slot'></div>");
-								}
-								break;
-							case PIERCING_TONGUE:
-								if(!bypassesPiercing && !charactersInventoryToRender.isPiercedTongue()) {
-									equippedPanelSB.append("<div class='inventory-item-slot disabled' style='"+piercingStyle+"' id='" + invSlot.toString() + "Slot'>" + "</div>");
-								} else {
-									equippedPanelSB.append("<div class='inventory-item-slot' style='"+piercingStyle+"' id='" + invSlot.toString() + "Slot'></div>");
-								}
-								break;
-							default:
-								break;
-						}
-					}
-				}
-			}
-		}
-		equippedPanelSB.append("</div>");
-		
-		
-		equippedPanelSB.append("<div class='inventory-equipped' style='width:100%;'>");
-		
-		for (InventorySlot invSlot : secondaryInventorySlots) {
-			appendEquippedClothingSlot(charactersInventoryToRender, invSlot, blockedSlots, concealedSlots, true);
-		}
-		
-		equippedPanelSB.append("<div class='inventory-item-slot secondary "+getClassRarityIdentifier(Rarity.COMMON)+"'>");
-		if(charactersInventoryToRender.isPlayer()) {
-			equippedPanelSB.append("<div class='inventory-icon-content'>"
-										+(this.isRenderingTattoosLeft()
-											?SVGImages.SVG_IMAGE_PROVIDER.getTattooSwitchTattoo()
-											:SVGImages.SVG_IMAGE_PROVIDER.getTattooSwitchClothing(charactersInventoryToRender))
-									+"</div>"
-									+ "<div class='overlay-inventory' id='TATTOO_SWITCH_LEFT'></div>");
-			
-		} else {
-			equippedPanelSB.append("<div class='inventory-icon-content"+getClassRarityIdentifier(Rarity.COMMON)+"'>"
-										+(this.isRenderingTattoosRight()
-												?SVGImages.SVG_IMAGE_PROVIDER.getTattooSwitchTattoo()
-												:SVGImages.SVG_IMAGE_PROVIDER.getTattooSwitchClothing(charactersInventoryToRender))
-									+"</div>"
-									+ "<div class='overlay-inventory' id='TATTOO_SWITCH_RIGHT'></div>");
-		}
-		equippedPanelSB.append("</div>");
-
-		equippedPanelSB.append("</div>");
-		
-		return equippedPanelSB.toString();
-	}
-	
-	private static String getEmptyWeaponDiv(GameCharacter charactersInventoryToRender, boolean disabled, InventorySlot slot, String weaponStyle) {
-		BodyPartClothingBlock block = slot.getBodyPartClothingBlock(charactersInventoryToRender);
-		
-		if(!disabled && block!=null) {
-			return "<div class='inventory-item-slot "+(block.getRace()!=null?"disabled-light":"disabled")+"' style='"+weaponStyle+"'>"
-						+ (block.getRace()!=null
-								?"<div class='raceBlockIcon'>" + AbstractSubspecies.getMainSubspeciesOfRace(block.getRace()).getSVGStringDesaturated(charactersInventoryToRender, PresetColour.BASE_BLACK) + "</div>"
-								:"")
-						+ "<div class='overlay-inventory' id='" + slot.toString() + "Slot' style='cursor:default;'></div>"
-					+ "</div>";
-			
-		} else {
-			return "<div class='inventory-item-slot"+(disabled?" disabled":"")+"' "+(disabled?"id='" + slot.toString() + "Slot'":"")+" style='"+weaponStyle+"'>"
-							+ (!disabled
-								?"<div class='inventory-icon-content' style='width:75%; margin:12.5%;'>"+SVGImages.SVG_IMAGE_PROVIDER.getFist()+"</div>"
-									+ "<div class='overlay-inventory' id='" + slot.toString() + "Slot' style='cursor:default;'></div>"
-								:"")
-						+ "</div>";
-		}
-	}
-	
-	private void appendEquippedClothingSlot(GameCharacter charactersInventoryToRender, InventorySlot invSlot, Set<InventorySlot> blockedSlots, Map<InventorySlot, List<AbstractClothing>> concealedSlots, boolean isSecondary) {
-		String inventorySlotId = "inventory-item-slot";
-		if(isSecondary) {
-			inventorySlotId = "inventory-item-slot secondary";
-		}
-		
-		if(!charactersInventoryToRender.isPlayer() && concealedSlots.keySet().contains(invSlot)) {
-			equippedPanelSB.append("<div class='"+inventorySlotId+" concealed' id='" + invSlot.toString() + "Slot'>"
-					+ "<div class='concealedIcon'>"+SVGImages.SVG_IMAGE_PROVIDER.getConcealedIcon()+"</div>"
-				+ "</div>");
-			
-		} else {
-			if(((charactersInventoryToRender.isPlayer() && !this.isRenderingTattoosLeft()) || (!charactersInventoryToRender.isPlayer() && !this.isRenderingTattoosRight()))
-					&& !invSlot.isJewellery()) {
-				AbstractClothing clothing = charactersInventoryToRender.getClothingInSlot(invSlot);
-
-				BodyPartClothingBlock block = invSlot.getBodyPartClothingBlock(charactersInventoryToRender);
-				if (clothing != null) {
-					equippedPanelSB.append("<div class='"+inventorySlotId+getClassRarityIdentifier(clothing.getRarity())+"'"+(clothing.isSealed()?"style='border-width:2px; border-color:"+PresetColour.SEALED.toWebHexString()+"; border-style:solid;'":"")+">");
-
-						equippedPanelSB.append(
-								(block!=null && block.getRace()!=null
-									?"<div class='raceBlockIcon'>" + AbstractSubspecies.getMainSubspeciesOfRace(block.getRace()).getSVGStringDesaturated(charactersInventoryToRender, PresetColour.BASE_BLACK) + "</div>"
-									:""));
-						
-						equippedPanelSB.append("<div class='inventory-icon-content'>"+clothing.getSVGEquippedString(charactersInventoryToRender)+"</div>");
-	
-						equippedPanelSB.append((!clothing.getDisplacedList().isEmpty() ? "<div class='displacedIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getDisplacedIcon() + "</div>" : ""));
-						equippedPanelSB.append((clothing.isDirty() ? "<div class='cummedIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getDirtyIcon() + "</div>" : ""));
-						equippedPanelSB.append((clothing.getClothingType().getFemininityMaximum() < charactersInventoryToRender.getFemininityValue() ? "<div class='femininityIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getMasculineWarningIcon() + "</div>" : ""));
-						equippedPanelSB.append((clothing.getClothingType().getFemininityMinimum() > charactersInventoryToRender.getFemininityValue() ? "<div class='femininityIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getFeminineWarningIcon() + "</div>" : ""));
-						
-						// Only append the most important of these effects:
-						if(charactersInventoryToRender.getSexToyOrificeStretching().containsValue(clothing)) {
-							equippedPanelSB.append("<div class='stretchIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getCombinationStretching() + "</div>");
-						} else if(charactersInventoryToRender.getSexToyOrificeTooDeep().containsValue(clothing)) {
-							equippedPanelSB.append("<div class='stretchIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getCombinationDepthMaximum() + "</div>");
-						} else if(charactersInventoryToRender.getSexToyOrificePreventingStretchRecovery().containsValue(clothing)) {
-							equippedPanelSB.append("<div class='stretchIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getCombinationStretchRecoveryPrevented() + "</div>");
-						}
-									
-						equippedPanelSB.append("<div class='overlay-inventory' id='" + invSlot.toString() + "Slot'>" + "</div>");
-					equippedPanelSB.append("</div>");
-					
-				} else {
-					// add to content:
-					if (blockedSlots.contains(invSlot)) {
-						equippedPanelSB.append("<div class='"+inventorySlotId+" disabled'>"
-													+ (charactersInventoryToRender.isDirtySlot(invSlot) ? "<div class='cummedIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getDirtyIcon() + "</div>" : "")
-													+ "<div class='overlay' id='" + invSlot.toString() + "Slot'></div>"
-												+ "</div>");
-						
-					} else if (block != null) {
-						equippedPanelSB.append(
-								"<div class='"+inventorySlotId+" disabled'>"
-									+ (charactersInventoryToRender.isDirtySlot(invSlot) ? "<div class='cummedIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getDirtyIcon() + "</div>" : "")
-									+ "<div class='overlay' id='" + invSlot.toString() + "Slot'></div>"
-									+ (block.getRace()!=null
-											?"<div class='raceBlockIcon'>" + AbstractSubspecies.getMainSubspeciesOfRace(block.getRace()).getSVGStringDesaturated(charactersInventoryToRender, PresetColour.BASE_BLACK) + "</div>"
-											:"")
-								+ "</div>");
-						
-					} else {
-						boolean disabled = !invSlot.isPhysicallyAvailable(charactersInventoryToRender);
-						
-						equippedPanelSB.append("<div class='"+inventorySlotId+""+(disabled?" disabled":"")+"' id='" + invSlot.toString() + "Slot'>"
-								+ (charactersInventoryToRender.isDirtySlot(invSlot) ? "<div class='cummedIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getDirtyIcon() + "</div>" : "")
-								+ "</div>");
-					}
-				}
-				
-			} else { // Tattoos:
-				boolean disabled = !invSlot.isPhysicallyAvailable(charactersInventoryToRender) && invSlot!=InventorySlot.HAIR; // Exception for hair as this slot corresponds to the 'ears' slot for tattoos
-				
-				if(disabled) {
-					equippedPanelSB.append("<div class='"+inventorySlotId+" disabled' id='" + invSlot.toString() + "Slot'></div>");
-					
-				} else {
-					Tattoo tattoo = charactersInventoryToRender.getTattooInSlot(invSlot);
-					inventorySlotId = "inventory-item-slot dark";
-					if(isSecondary) {
-						inventorySlotId = "inventory-item-slot secondary dark";
-					}
-					
-					//TODO Attempted to make tattoo background the same as skin colour, but skin colours are defined mainly for ease of reasing as text, and look bad as blocks of colour
-					// So if this was to be implemented, new colour values for all skin colours would be needed (to serve as block colours)
-					//String style = "style='background-image:-webkit-radial-gradient("+charactersInventoryToRender.getCovering(charactersInventoryToRender.getTorsoCovering()).getPrimaryColour().toWebHexString()+" 60%, #33333300 75%);'";
-					//String backgroundColour = "background-image:-webkit-radial-gradient("+charactersInventoryToRender.getCovering(charactersInventoryToRender.getTorsoCovering()).getPrimaryColour().toWebHexString()+" 75%, #33333300 85%);";
-					// background-color:"+charactersInventoryToRender.getCovering(charactersInventoryToRender.getTorsoCovering()).getPrimaryColour().toWebHexString()+"
-					//String style = "style='"+backgroundColour+" -webkit-box-shadow: inset 0 0 3px 2px #333333;'";
-					
-					String style = "";
-					
-					if(tattoo != null) {
-						equippedPanelSB.append("<div class='"+inventorySlotId + getClassRarityIdentifier(tattoo.getRarity()) +"' "+style+">");
-						equippedPanelSB.append("<div class='inventory-icon-content'>"+tattoo.getSVGImage(charactersInventoryToRender)+"</div>");
-						if(charactersInventoryToRender.getScarInSlot(invSlot)!=null) {
-							equippedPanelSB.append("<div class='scarIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getScarIcon() + "</div>");
-						}
-						equippedPanelSB.append(lipstickMarkingsString(charactersInventoryToRender, invSlot));
-						equippedPanelSB.append("<div class='overlay-inventory no-pointer' id='" + invSlot.toString() + "Slot'></div>");
-						equippedPanelSB.append("</div>");
-						
-					} else {
-						if(blockedSlots.contains(invSlot)) {
-							equippedPanelSB.append("<div class='"+inventorySlotId+" disabled'>");
-							if(charactersInventoryToRender.getScarInSlot(invSlot)!=null) {
-								equippedPanelSB.append("<div class='scarIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getScarIcon() + "</div>");
-							}
-							equippedPanelSB.append(lipstickMarkingsString(charactersInventoryToRender, invSlot));
-							equippedPanelSB.append("<div class='overlay' id='" + invSlot.toString() + "Slot'></div>");
-							equippedPanelSB.append("</div>");
-							
-						} else {
-							equippedPanelSB.append("<div class='"+inventorySlotId+"' id='" + invSlot.toString() + "Slot' "+style+">");
-							if(charactersInventoryToRender.getScarInSlot(invSlot)!=null) {
-								equippedPanelSB.append("<div class='scarIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getScarIcon() + "</div>");
-							}
-							equippedPanelSB.append(lipstickMarkingsString(charactersInventoryToRender, invSlot));
-							equippedPanelSB.append("</div>");
-						}
-					}
-				}
-				
-			}
-		}
-	}
+	private static final StringBuilder itemSB = new StringBuilder();
+	// DecimalFormat decimalFormatter = new DecimalFormat("#,###");
+	private final StringBuilder uiAttributeSB = new StringBuilder();
+	private final StringBuilder mapSB = new StringBuilder();
 	
 	private static String lipstickMarkingsString(GameCharacter character, InventorySlot slot) {
 		SizedStack<Covering> lipstickMarkings = character.getLipstickMarkingsInSlot(slot);
@@ -677,197 +127,7 @@ public enum RenderingEngine {
 		return sb.toString();
 	}
 	
-	private String getInventoryDiv(GameCharacter charactersInventoryToRender, boolean buyback) {
-		inventorySB.setLength(0);
-		
-		String idModifier = charactersInventoryToRender==null?"FLOOR_":(charactersInventoryToRender.isPlayer()?"PLAYER_":"NPC_"+charactersInventoryToRender.getId()+"_");
-		
-		inventorySB.append("<div class='inventory-container'>");
-		
-		if(charactersInventoryToRender != null) {
-			inventorySB.append(
-					"<p style='width:100%; text-align:center; padding:0; margin:0;'>"
-					+ "<b style='color:"+Femininity.valueOf(charactersInventoryToRender.getFemininityValue()).getColour().toWebHexString()+";'>"
-						+(charactersInventoryToRender.isPlayer()
-							?"Your</b> <b>Inventory | Page "+(pageLeft+1)+"</b>"
-							:(UtilText.parse(charactersInventoryToRender, "[npc.NamePos]"))+"</b> <b>Inventory | "+(buyback?"[style.colourCurrency(Buyback)]":"Page "+(pageRight+1))+"</b>")
-					+"</p>");
-			
-		} else {
-			inventorySB.append(
-					"<p style='width:100%; text-align:center; padding:0; margin:0;'>"
-						+(InventoryDialogue.getNPCInventoryInteraction() ==  InventoryInteraction.CHARACTER_CREATION
-								?"<b style='color:"+PresetColour.BASE_TAN.toWebHexString()+";'>Your wardrobe</b>"
-								:"<b style='color:"+PresetColour.BASE_TAN.toWebHexString()+";'>In this Area</b>")
-						+"<b> | Page "+(pageRight+1)+"</b>"
-					+"</p>");
-		}
-		
-		// Buttons:
-		int totalUniques = 0;
-		String pageIdMod = "";
-		int currentPage = 0;
-		boolean renderQuestTab = true;
-		boolean hasQuestItems = false;
-		if(charactersInventoryToRender == null) {
-			hasQuestItems = Main.game.getPlayerCell().getInventory().isAnyQuestItemPresent();
-			totalUniques = Main.game.getPlayerCell().getInventory().getUniqueItemCount() - Main.game.getPlayerCell().getInventory().getUniqueQuestItemCount()
-					+ Main.game.getPlayerCell().getInventory().getUniqueClothingCount() - Main.game.getPlayerCell().getInventory().getUniqueQuestClothingCount()
-					+ Main.game.getPlayerCell().getInventory().getUniqueWeaponCount() - Main.game.getPlayerCell().getInventory().getUniqueQuestWeaponCount();
-			pageIdMod = "INV_PAGE_RIGHT_";
-			// Reset page index if the number of items is too low to be displayed on that index:
-			if(pageRight!=5) { // So long as current page is not uniques
-				while(totalUniques<=pageRight*ITEMS_PER_PAGE && pageRight>0) {
-					pageRight--;
-				}
-			}
-			currentPage = pageRight;
-			
-		} else {
-//			renderQuestTab = charactersInventoryToRender.isPlayer();
-			hasQuestItems = charactersInventoryToRender.isCarryingQuestItems();
-			totalUniques = charactersInventoryToRender.getUniqueItemCount() - charactersInventoryToRender.getUniqueQuestItemCount()
-					+ charactersInventoryToRender.getUniqueClothingCount() - charactersInventoryToRender.getUniqueQuestClothingCount()
-					+ charactersInventoryToRender.getUniqueWeaponCount() - charactersInventoryToRender.getUniqueQuestWeaponCount();
-			pageIdMod = (charactersInventoryToRender.isPlayer()?"INV_PAGE_LEFT_":"INV_PAGE_RIGHT_");
-			// Reset page index if the number of items is too low to be displayed on that index:
-			if(charactersInventoryToRender.isPlayer()?pageLeft!=5:pageRight!=5) { // So long as current page is not uniques
-				if(charactersInventoryToRender.isPlayer()) {
-					while(totalUniques<=pageLeft*ITEMS_PER_PAGE && pageLeft>0) {
-						pageLeft--;
-					}
-				} else {
-					while(totalUniques<=pageRight*ITEMS_PER_PAGE && pageRight>0) {
-						pageRight--;
-					}
-				}
-			}
-			currentPage = (charactersInventoryToRender.isPlayer()?pageLeft:pageRight);
-		}
-		
-		inventorySB.append(
-				"<div class='container-full-width' style='width:15%; margin:0; text-align:center;'>"
-					+ "<div class='square-button max"+(currentPage==0?" selected":"")+"'>"
-							+ "<div style='width:80%;height:80%;position:absolute;left:0; bottom:0;'>"+SVGImages.SVG_IMAGE_PROVIDER.getInventoryIcon()+"</div>"
-							+ "<div style='width:50%;height:50%;position:absolute;right:4px; top:0;'>"+(currentPage==0?SVGImages.SVG_IMAGE_PROVIDER.getCounterOne():SVGImages.SVG_IMAGE_PROVIDER.getCounterOneDisabled())+"</div>"
-//							+ (!buyback
-//									?
-											+ "<div class='overlay' "+(currentPage==0?"":"id='"+pageIdMod+"0'")+"></div>"
-//									:"<div class='overlay disabled'></div>")
-					+ "</div>"
-					+ "<div class='square-button max"+(currentPage==1?" selected":"")+"'>"
-							+ "<div style='width:80%;height:80%;position:absolute;left:0; bottom:0;'>"
-								+(totalUniques>1*ITEMS_PER_PAGE && !buyback?SVGImages.SVG_IMAGE_PROVIDER.getInventoryIcon():SVGImages.SVG_IMAGE_PROVIDER.getInventoryIconDisabled())
-							+"</div>"
-							+ "<div style='width:50%;height:50%;position:absolute;right:4px; top:0;'>"+(currentPage==1?SVGImages.SVG_IMAGE_PROVIDER.getCounterTwo():SVGImages.SVG_IMAGE_PROVIDER.getCounterTwoDisabled())+"</div>"
-							+ (totalUniques>1*ITEMS_PER_PAGE && !buyback
-									?"<div class='overlay' "+(currentPage==1?"":"id='"+pageIdMod+"1'")+"></div>"
-									:"<div class='overlay disabled'></div>")
-					+ "</div>"
-					+ "<div class='square-button max"+(currentPage==2?" selected":"")+"'>"
-							+ "<div style='width:80%;height:80%;position:absolute;left:0; bottom:0;'>"
-								+(totalUniques>2*ITEMS_PER_PAGE && !buyback?SVGImages.SVG_IMAGE_PROVIDER.getInventoryIcon():SVGImages.SVG_IMAGE_PROVIDER.getInventoryIconDisabled())
-							+"</div>"
-							+ "<div style='width:50%;height:50%;position:absolute;right:4px; top:0;'>"+(currentPage==2?SVGImages.SVG_IMAGE_PROVIDER.getCounterThree():SVGImages.SVG_IMAGE_PROVIDER.getCounterThreeDisabled())+"</div>"
-							+ (totalUniques>2*ITEMS_PER_PAGE && !buyback
-									?"<div class='overlay' "+(currentPage==2?"":"id='"+pageIdMod+"2'")+"></div>"
-									:"<div class='overlay disabled'></div>")
-					+ "</div>"
-					+ "<div class='square-button max"+(currentPage==3?" selected":"")+"'>"
-							+ "<div style='width:80%;height:80%;position:absolute;left:0; bottom:0;'>"
-								+(totalUniques>3*ITEMS_PER_PAGE && !buyback?SVGImages.SVG_IMAGE_PROVIDER.getInventoryIcon():SVGImages.SVG_IMAGE_PROVIDER.getInventoryIconDisabled())
-							+"</div>"
-							+ "<div style='width:50%;height:50%;position:absolute;right:4px; top:0;'>"+(currentPage==3?SVGImages.SVG_IMAGE_PROVIDER.getCounterFour():SVGImages.SVG_IMAGE_PROVIDER.getCounterFourDisabled())+"</div>"
-							+ (totalUniques>3*ITEMS_PER_PAGE && !buyback
-									?"<div class='overlay' "+(currentPage==3?"":"id='"+pageIdMod+"3'")+"></div>"
-									:"<div class='overlay disabled'></div>")
-					+ "</div>"
-					+ "<div class='square-button max"+(currentPage==4?" selected":"")+"'>"
-							+ "<div style='width:80%;height:80%;position:absolute;left:0; bottom:0;'>"
-								+(totalUniques>4*ITEMS_PER_PAGE && !buyback?SVGImages.SVG_IMAGE_PROVIDER.getInventoryIcon():SVGImages.SVG_IMAGE_PROVIDER.getInventoryIconDisabled())
-							+"</div>"
-							+ "<div style='width:50%;height:50%;position:absolute;right:4px; top:0;'>"+(currentPage==4?SVGImages.SVG_IMAGE_PROVIDER.getCounterFive():SVGImages.SVG_IMAGE_PROVIDER.getCounterFiveDisabled())+"</div>"
-							+ (totalUniques>4*ITEMS_PER_PAGE && !buyback
-									?"<div class='overlay' "+(currentPage==4?"":"id='"+pageIdMod+"4'")+"></div>"
-									:"<div class='overlay disabled'></div>")
-					+ "</div>"
-					+ (renderQuestTab
-							?"<div class='square-button max"+(currentPage==5?" selected":"")+"'>"
-								+ "<div style='width:100%;height:100%;position:absolute;left:0; bottom:0;'>"+(hasQuestItems?SVGImages.SVG_IMAGE_PROVIDER.getQuestInventoryIcon():SVGImages.SVG_IMAGE_PROVIDER.getQuestInventoryIconDisabled())+"</div>"
-								+ (hasQuestItems && !buyback
-									?"<div class='overlay' id='"+pageIdMod+"5'></div>"
-									:"<div class='overlay disabled' id='"+pageIdMod+"5'></div>")
-							+ "</div>"
-							:"")
-				+ "</div>");
-		
-		inventorySB.append("<div class='container-full-width' style='width:85%; margin:0;'>");
-		if(buyback) {
-			for (int i = Main.game.getPlayer().getBuybackStack().size() - 1; i >= 0; i--) {
-				ShopTransaction itemBuyback = Main.game.getPlayer().getBuybackStack().get(i);
-				
-				if (itemBuyback != null) {
-					// Clothing:
-					if (itemBuyback.getAbstractItemSold() instanceof AbstractClothing) {
-						inventorySB.append(getBuybackItemPanel(itemBuyback, "CLOTHING_" + i));
-
-					// Weapon:
-					} else if (itemBuyback.getAbstractItemSold() instanceof AbstractWeapon) {
-						inventorySB.append(getBuybackItemPanel(itemBuyback, "WEAPON_" + i));
-						
-					// Item:
-					} else {
-						inventorySB.append(getBuybackItemPanel(itemBuyback, "ITEM_" + i));
-					}
-				}
-			}
-			
-			// Fill space:
-			for (int i = ITEMS_PER_PAGE; i > Main.game.getPlayer().getBuybackStack().size(); i--) {
-				inventorySB.append("<div class='inventory-item-slot'></div>");
-			}
-			
-		} else {
-			inventorySB.append(getInventoryIconsForPage(currentPage, charactersInventoryToRender, idModifier));
-		}
-		inventorySB.append("</div>");
-
-		String style = "box-sizing:border-box; float:left; background-color:"+PresetColour.BACKGROUND_ALT.toWebHexString()+"; border-radius:5px; padding:0 2px 0 2px; margin:0 1%; text-align:center;";
-		String buttonStyle = "width:5.25%; border:0; text-align:center; padding:0; margin:0 0.75%; float:left;";
-		String styleWidth = "calc(38.5% - 4px)";
-		String styleWidthDouble = "calc(77% - 4px)";
-		boolean transferDisabled = InventoryDialogue.getNPCInventoryInteraction()!=InventoryInteraction.FULL_MANAGEMENT;
-		if(charactersInventoryToRender!=null) {
-			// 85% is the encompassing width
-			// Changed to 100% in 0.4.2 | Old values: width:26.3%; width:33.416%;
-			if(charactersInventoryToRender.isPlayer()) {
-				inventorySB.append(
-						"<div style='"+style+" width:"+styleWidth+";'>"+ UtilText.formatAsEssences(charactersInventoryToRender.getEssenceCount(), "b", true) +"</div>"
-						+ "<div style='"+style+" width:"+styleWidth+";'>"+ UtilText.formatAsMoney(charactersInventoryToRender.getMoney(), "b") +"</div>"
-						+ "<div class='normal-button"+(transferDisabled?" disabled":"")+"' id='"+idModifier+"MONEY_TRANSFER_SMALL' style='"+buttonStyle+"'>[style."+(transferDisabled?"colourDisabled":"colourMinorGood")+"(&gt;)]</div>"
-						+ "<div class='normal-button"+(transferDisabled?" disabled":"")+"' id='"+idModifier+"MONEY_TRANSFER_AVERAGE' style='"+buttonStyle+"'>[style."+(transferDisabled?"colourDisabled":"colourGood")+"(&gt;)]</div>"
-						+ "<div class='normal-button"+(transferDisabled?" disabled":"")+"' id='"+idModifier+"MONEY_TRANSFER_BIG' style='"+buttonStyle+"'>[style."+(transferDisabled?"colourDisabled":"colourExcellent")+"(&gt;)]</div>");
-				
-			} else {
-				inventorySB.append(
-						"<div class='normal-button"+(transferDisabled?" disabled":"")+"' id='"+idModifier+"MONEY_TRANSFER_BIG' style='"+buttonStyle+"'>[style."+(transferDisabled?"colourDisabled":"colourExcellent")+"(&lt;)]</div>"
-						+ "<div class='normal-button"+(transferDisabled?" disabled":"")+"' id='"+idModifier+"MONEY_TRANSFER_AVERAGE' style='"+buttonStyle+"'>[style."+(transferDisabled?"colourDisabled":"colourGood")+"(&lt;)]</div>"
-						+ "<div class='normal-button"+(transferDisabled?" disabled":"")+"' id='"+idModifier+"MONEY_TRANSFER_SMALL' style='"+buttonStyle+"'>[style."+(transferDisabled?"colourDisabled":"colourMinorGood")+"(&lt;)]</div>"
-						+ "<div style='"+style+" width:"+styleWidth+";'>"+ (transferDisabled?UtilText.formatAsMoney("[style.colourUnknown(Unknown)]", "b"):UtilText.formatAsMoney(charactersInventoryToRender.getMoney(), "b")) +"</div>"
-						+ "<div style='"+style+" width:"+styleWidth+";'>"+ UtilText.formatAsEssences(charactersInventoryToRender.getEssenceCount(), "b", true) +"</div>");
-			}
-			
-		} else {
-			inventorySB.append(
-					"<div class='normal-button"+(transferDisabled?" disabled":"")+"' id='"+idModifier+"MONEY_TRANSFER_BIG' style='"+buttonStyle+" margin:0 0.75% 0 2%;'>[style."+(transferDisabled?"colourDisabled":"colourExcellent")+"(&lt;)]</div>"
-					+ "<div class='normal-button"+(transferDisabled?" disabled":"")+"' id='"+idModifier+"MONEY_TRANSFER_AVERAGE' style='"+buttonStyle+"'>[style."+(transferDisabled?"colourDisabled":"colourGood")+"(&lt;)]</div>"
-					+ "<div class='normal-button"+(transferDisabled?" disabled":"")+"' id='"+idModifier+"MONEY_TRANSFER_SMALL' style='"+buttonStyle+"'>[style."+(transferDisabled?"colourDisabled":"colourMinorGood")+"(&lt;)]</div>"
-					+ "<div style='"+style+" width:"+styleWidthDouble+";'>"+ UtilText.formatAsMoney(Main.game.getPlayerCell().getInventory().getMoney(), "b") +"</div>");
-		}
-		
-		inventorySB.append("</div>");
-		
-		return inventorySB.toString();
+	RenderingEngine() {
 	}
 	
 	public String getGiftDiv(GameCharacter receiver) {
@@ -916,7 +176,26 @@ public enum RenderingEngine {
 		return inventorySB.toString();
 	}
 
-	private static StringBuilder pageSB = new StringBuilder();
+	private static String getEmptyWeaponDiv(GameCharacter charactersInventoryToRender, boolean disabled, InventorySlot slot, String weaponStyle) {
+		BodyPartClothingBlock block = slot.getBodyPartClothingBlock(charactersInventoryToRender);
+
+		if(!disabled && block!=null) {
+			return "<div class='inventory-item-slot "+(block.getRace()!=null?"disabled-light":"disabled")+"' style='"+weaponStyle+"'>"
+						+ (block.getRace()!=null
+								?"<div class='raceBlockIcon'>" + AbstractSubspecies.getMainSubspeciesOfRace(block.getRace()).getSVGStringDesaturated(charactersInventoryToRender, PresetColour.BASE_BLACK) + "</div>"
+								:"")
+					+ "<div class='overlay-inventory' id='" + slot + "Slot' style='cursor:default;'></div>"
+					+ "</div>";
+
+		} else {
+			return "<div class='inventory-item-slot" + (disabled ? " disabled" : "") + "' " + (disabled ? "id='" + slot + "Slot'" : "") + " style='" + weaponStyle + "'>"
+							+ (!disabled
+								?"<div class='inventory-icon-content' style='width:75%; margin:12.5%;'>"+SVGImages.SVG_IMAGE_PROVIDER.getFist()+"</div>"
+					+ "<div class='overlay-inventory' id='" + slot + "Slot' style='cursor:default;'></div>"
+								:"")
+						+ "</div>";
+		}
+	}
 	private static String getInventoryIconsForPage(int page, GameCharacter charactersInventoryToRender, String idModifier) {
 		int uniqueItemCount = 0;
 		pageSB.setLength(0);
@@ -1039,8 +318,7 @@ public enum RenderingEngine {
 		
 		return pageSB.toString();
 	}
-	
-	private static StringBuilder itemSB = new StringBuilder();
+
 	private static String getInventoryItemDiv(GameCharacter charactersInventoryToRender, AbstractCoreItem item, int count, String idPrefix) {
 		itemSB.setLength(0);
 		boolean known = true;
@@ -1060,18 +338,15 @@ public enum RenderingEngine {
 			NPC npc = InventoryDialogue.getInventoryNPC();
 			if(charactersInventoryToRender.isPlayer()) {
 				boolean isAbleToBeSold = true;
-				
-				if(item instanceof AbstractItem) {
-					AbstractItem abItem = (AbstractItem)item;
-					isAbleToBeSold = abItem.getItemType().isAbleToBeSold();
-				} else if(item instanceof AbstractWeapon) {
-					AbstractWeapon abItem = (AbstractWeapon)item;
-					isAbleToBeSold = abItem.getWeaponType().isAbleToBeSold();
-				} else if(item instanceof AbstractClothing) {
-					AbstractClothing abItem = (AbstractClothing)item;
-					isAbleToBeSold = abItem.getClothingType().isAbleToBeSold();
+
+				if (item instanceof AbstractItem abItem) {
+                    isAbleToBeSold = abItem.getItemType().isAbleToBeSold();
+				} else if (item instanceof AbstractWeapon abItem) {
+                    isAbleToBeSold = abItem.getWeaponType().isAbleToBeSold();
+				} else if (item instanceof AbstractClothing abItem) {
+                    isAbleToBeSold = abItem.getClothingType().isAbleToBeSold();
 				}
-				
+
 				if (npc.willBuy(item) && isAbleToBeSold) {
 					last_layer = getItemPriceDiv(item.getPrice(npc.getBuyModifier()));
 				} else {
@@ -1080,22 +355,20 @@ public enum RenderingEngine {
 			} else {
 				last_layer = getItemPriceDiv(item.getPrice(npc.getSellModifier(item)));
 			}
-			
+
 		} else {
 			boolean nonPlayerInv = charactersInventoryToRender!=null && !charactersInventoryToRender.isPlayer();
 			boolean isTraderInv = nonPlayerInv && ((NPC) charactersInventoryToRender).isTrader();
 
-			if (item instanceof AbstractItem) {
-				AbstractItem abItem = (AbstractItem)item;
-				if ((nonPlayerInv && InventoryDialogue.getNPCInventoryInteraction()!=InventoryInteraction.FULL_MANAGEMENT)
+			if (item instanceof AbstractItem abItem) {
+                if ((nonPlayerInv && InventoryDialogue.getNPCInventoryInteraction() != InventoryInteraction.FULL_MANAGEMENT)
 						|| (Main.game.isInSex() && (isTraderInv || !abItem.isAbleToBeUsedInSex() || !Main.sex.isItemUseAvailable()))
 						|| (Main.game.isInCombat() && ((!abItem.isAbleToBeUsedInCombatAllies() && !abItem.isAbleToBeUsedInCombatEnemies()) || Main.game.getPlayer().isStunned() || Main.combat.isCombatantDefeated(Main.game.getPlayer())))) {
 					overlay += " disabled";
 				}
-				
-			} else if (item instanceof AbstractClothing) {
-				AbstractClothing clothing = (AbstractClothing)item;
-				if (Main.game.isInCombat()
+
+			} else if (item instanceof AbstractClothing clothing) {
+                if (Main.game.isInCombat()
 						|| (Main.game.isInSex()
 								&& (isTraderInv
 										|| !clothing.isAbleToBeEquippedDuringSexInAnySlot().getKey()
@@ -1103,7 +376,7 @@ public enum RenderingEngine {
 												&& (InventoryDialogue.getInventoryNPC()==null || !Main.sex.getInitialSexManager().isAbleToEquipSexClothing(Main.game.getPlayer(), InventoryDialogue.getInventoryNPC(), clothing)))))) {
 					overlay += " disabled";
 				}
-				
+
 			} else if (item instanceof AbstractWeapon
 					&& (Main.game.isInCombat() || Main.game.isInSex())) {
 				overlay += " disabled";
@@ -1112,7 +385,7 @@ public enum RenderingEngine {
 		itemSB.append(overlay+"' id='" + idPrefix + item.hashCode() + "'>"+getItemCountDiv(count)+last_layer+"</div></div>");
 		return itemSB.toString();
 	}
-	
+
 	private static String getInventoryItemDiv(CharacterInventory inventory, AbstractCoreItem item, int count, String idPrefix) {
 		itemSB.setLength(0);
 		boolean known = true;
@@ -1128,25 +401,50 @@ public enum RenderingEngine {
 		String overlay = "<div class='overlay";
 		String last_layer = "";
 
-		if (item instanceof AbstractItem) {
-			AbstractItem abItem = (AbstractItem)item;
-			if ((Main.game.isInSex() && !abItem.isAbleToBeUsedInSex())
+		if (item instanceof AbstractItem abItem) {
+            if ((Main.game.isInSex() && !abItem.isAbleToBeUsedInSex())
 					|| (Main.game.isInCombat() && ((!abItem.isAbleToBeUsedInCombatAllies() && !abItem.isAbleToBeUsedInCombatEnemies()) || Main.game.getPlayer().isStunned() || Main.combat.isCombatantDefeated(Main.game.getPlayer())))) {
 				overlay += " disabled";
 			}
-			
-		} else if (item instanceof AbstractClothing) {
-			AbstractClothing clothing = (AbstractClothing)item;
-			if (Main.game.isInCombat() || (Main.game.isInSex() && !clothing.isAbleToBeEquippedDuringSexInAnySlot().getKey())) {
+
+		} else if (item instanceof AbstractClothing clothing) {
+            if (Main.game.isInCombat() || (Main.game.isInSex() && !clothing.isAbleToBeEquippedDuringSexInAnySlot().getKey())) {
 				overlay += " disabled";
 			}
-			
+
 		} else if (item instanceof AbstractWeapon && (Main.game.isInCombat() || Main.game.isInSex())) {
 			overlay += " disabled";
 		}
-			
+
 		itemSB.append(overlay+"' id='" + idPrefix + item.hashCode() + "'>"+getItemCountDiv(count)+last_layer+"</div></div>");
 		return itemSB.toString();
+	}
+	
+	public static GameCharacter getCharacterToRender() {
+		if(Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.CHARACTERS_PRESENT || Main.game.getCurrentDialogueNode() == PhoneDialogue.CONTACTS_CHARACTER) {
+			return CharactersPresentDialogue.characterViewed;
+		}
+
+		if(Main.game.isInSex()) {
+			if(Main.sex.isMasturbation() && Main.sex.getTotalParticipantCount(true)==1) {
+				return null;
+			}
+			return Main.sex.getTargetedPartner(Main.game.getPlayer());
+		}
+
+		if(Main.game.isInCombat()) {
+			return Main.combat.getTargetedCombatant();
+		}
+
+		if(InventoryDialogue.getInventoryNPC()!=null && Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.INVENTORY) {
+			return InventoryDialogue.getInventoryNPC();
+		}
+
+		if(Main.game.getDialogueFlags().getManagementCompanion()!=null) {
+			return Main.game.getDialogueFlags().getManagementCompanion();
+		}
+
+		return Main.game.getActiveNPC();
 	}
 
 	private static void appendDivsForGiftsToInventory(StringBuilder stringBuilder, Map<AbstractCoreItem, Integer> map, String idPrefix) {
@@ -1200,8 +498,385 @@ public enum RenderingEngine {
 				+ "</div>";
 	}
 
-	// DecimalFormat decimalFormatter = new DecimalFormat("#,###");
-	private StringBuilder uiAttributeSB = new StringBuilder();
+	private String getInventoryEquippedPanel(GameCharacter charactersInventoryToRender) {
+		equippedPanelSB.setLength(0);
+
+		if(charactersInventoryToRender == null) {
+			equippedPanelSB.append("<div class='inventory-equipped'>");
+
+			for (InventorySlot invSlot : mainInventorySlots) {
+				equippedPanelSB.append("<div class='inventory-item-slot' style='background-color:"+PresetColour.BACKGROUND.toWebHexString()+";' id='" + invSlot.toString() + "Slot'></div>");
+			}
+
+			String weaponStyle = "width:46%; margin:2%; background-color:"+PresetColour.BACKGROUND.toWebHexString()+";";
+			String piercingStyle = "width:40%; margin:5%; background-color:"+PresetColour.BACKGROUND.toWebHexString()+";";
+
+			equippedPanelSB.append("</div>"
+					+ "<div class='inventory-equipped accessories'>");
+
+			equippedPanelSB.append("<div class='inventory-item-slot' style='" + weaponStyle + "' id='" + InventorySlot.WEAPON_MAIN_1 + "Slot'></div>");
+
+			equippedPanelSB.append("<div class='inventory-item-slot' style='" + weaponStyle + "' id='" + InventorySlot.WEAPON_OFFHAND_1 + "Slot'></div>");
+
+			for (InventorySlot invSlot : piercingSlots) {
+				equippedPanelSB.append("<div class='inventory-item-slot' style='" + piercingStyle + "'  id='" + invSlot + "Slot'></div>");
+			}
+			equippedPanelSB.append("</div>");
+
+
+			equippedPanelSB.append("<div class='inventory-equipped' style='width:100%;'>");
+
+			for (InventorySlot invSlot : secondaryInventorySlots) {
+				equippedPanelSB.append("<div class='inventory-item-slot secondary' style='background-color:"+PresetColour.BACKGROUND.toWebHexString()+";' id='" + invSlot.toString() + "Slot'></div>");
+			}
+
+			equippedPanelSB.append("<div class='inventory-item-slot secondary' style='background-color:"+PresetColour.BACKGROUND.toWebHexString()+";'>"
+										+ "<div class='inventory-icon-content'>"
+											+SVGImages.SVG_IMAGE_PROVIDER.getTattooSwitchClothing(charactersInventoryToRender)
+										+"</div>"
+									+ "<div class='overlay-inventory disabled'></div></div>");
+
+			equippedPanelSB.append("</div>");
+
+			return equippedPanelSB.toString();
+		}
+
+
+		Set<InventorySlot> blockedSlots = new HashSet<>();
+
+		for (AbstractClothing c : charactersInventoryToRender.getClothingCurrentlyEquipped()) {
+			if (c.getIncompatibleSlots(charactersInventoryToRender, c.getSlotEquippedTo()) != null) {
+				for (InventorySlot is : c.getIncompatibleSlots(charactersInventoryToRender, c.getSlotEquippedTo())) {
+					blockedSlots.add(is);
+				}
+			}
+		}
+
+		// EQUIPPED:
+		equippedPanelSB.append("<div class='inventory-equipped'>");
+
+		Map<InventorySlot, List<AbstractClothing>> concealedSlots = charactersInventoryToRender.getInventorySlotsConcealed(Main.game.getPlayer());
+
+		for (InventorySlot invSlot : mainInventorySlots) {
+			appendEquippedClothingSlot(charactersInventoryToRender, invSlot, blockedSlots, concealedSlots, false);
+		}
+
+		equippedPanelSB.append("</div>");
+
+		// Render weapons & piercings:
+		equippedPanelSB.append("<div class='inventory-equipped accessories'>");
+
+		String weaponStyle = "width:46%; margin:2%;";
+		String weaponStyleNoEssences = "width:46%; margin:2%; border:2px solid "+PresetColour.GENERIC_BAD.toWebHexString()+";";
+		String piercingStyle = "width:40%; margin:5%;";
+		if(charactersInventoryToRender.getArmRows()>1) {
+			weaponStyle = "width:31%; margin:1%;";
+			weaponStyleNoEssences = "width:31%; margin:1%; border:1% solid "+PresetColour.GENERIC_BAD.toWebHexString()+";";
+			piercingStyle = "width:35%; margin:5.5% 7.5%;";
+		}
+
+		int essenceCount = charactersInventoryToRender.getEssenceCount();
+
+		// Main weapon:
+		AbstractWeapon weaponInSlot = charactersInventoryToRender.getMainWeapon(0);
+		if (weaponInSlot != null) {
+			String weaponCount = getThrownWeaponCountDiv(weaponInSlot.getWeaponType(), charactersInventoryToRender.getWeaponCount(weaponInSlot));
+			equippedPanelSB.append(
+					"<div class='inventory-item-slot" + getClassRarityIdentifier(weaponInSlot.getRarity()) + "' style='"+(essenceCount<weaponInSlot.getWeaponType().getArcaneCost()?weaponStyleNoEssences:weaponStyle)+"'>"
+						+ "<div class='inventory-icon-content'>"+weaponInSlot.getSVGEquippedString(charactersInventoryToRender)+"</div>"
+							+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_MAIN_1 + "Slot'>" + weaponCount + "</div>"
+					+ "</div>");
+
+		} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_1)!=null) {
+			AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_1);
+			String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
+			equippedPanelSB.append(
+					"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
+						+ "<div class='inventory-icon-content' style='opacity:0.5;'>"+depletedWeapon.getSVGEquippedImageDesaturated(charactersInventoryToRender)+"</div>"
+							+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_MAIN_1 + "Slot'>" + weaponCount + "</div>"
+					+ "</div>");
+
+		} else {
+			equippedPanelSB.append(getEmptyWeaponDiv(charactersInventoryToRender, false, InventorySlot.WEAPON_MAIN_1, weaponStyle));
+		}
+
+		// Multiple arms:
+		if(charactersInventoryToRender.getArmRows()>1) {
+			// Weapon in second slot:
+			weaponInSlot = charactersInventoryToRender.getMainWeapon(1);
+			if (weaponInSlot != null) {
+				String weaponCount = getThrownWeaponCountDiv(weaponInSlot.getWeaponType(), charactersInventoryToRender.getWeaponCount(weaponInSlot));
+				equippedPanelSB.append(
+						"<div class='inventory-item-slot" + getClassRarityIdentifier(weaponInSlot.getRarity()) + "' style='"+(essenceCount<weaponInSlot.getWeaponType().getArcaneCost()?weaponStyleNoEssences:weaponStyle)+"'>"
+							+ "<div class='inventory-icon-content'>"+weaponInSlot.getSVGEquippedString(charactersInventoryToRender)+"</div>"
+								+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_MAIN_2 + "Slot'>" + weaponCount + "</div>"
+						+ "</div>");
+
+			} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_2)!=null) {
+				AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_2);
+				String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
+				equippedPanelSB.append(
+						"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
+							+ "<div class='inventory-icon-content' style='opacity:0.5;'>"+depletedWeapon.getSVGEquippedImageDesaturated(charactersInventoryToRender)+"</div>"
+								+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_MAIN_2 + "Slot'>" + weaponCount + "</div>"
+						+ "</div>");
+
+			} else {
+				equippedPanelSB.append(getEmptyWeaponDiv(charactersInventoryToRender, false, InventorySlot.WEAPON_MAIN_2, weaponStyle));
+			}
+
+			// Weapon in third slot:
+			weaponInSlot = charactersInventoryToRender.getMainWeapon(2);
+			if (weaponInSlot != null) {
+				String weaponCount = getThrownWeaponCountDiv(weaponInSlot.getWeaponType(), charactersInventoryToRender.getWeaponCount(weaponInSlot));
+				equippedPanelSB.append(
+						"<div class='inventory-item-slot" + getClassRarityIdentifier(weaponInSlot.getRarity()) + "' style='"+(essenceCount<weaponInSlot.getWeaponType().getArcaneCost()?weaponStyleNoEssences:weaponStyle)+"'>"
+							+ "<div class='inventory-icon-content'>"+weaponInSlot.getSVGEquippedString(charactersInventoryToRender)+"</div>"
+								+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_MAIN_3 + "Slot'>" + weaponCount + "</div>"
+						+ "</div>");
+
+			} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_3)!=null) {
+				AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_3);
+				String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
+				equippedPanelSB.append(
+						"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
+							+ "<div class='inventory-icon-content' style='opacity:0.5;'>"+depletedWeapon.getSVGEquippedImageDesaturated(charactersInventoryToRender)+"</div>"
+								+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_MAIN_3 + "Slot'>" + weaponCount + "</div>"
+						+ "</div>");
+
+			} else if (charactersInventoryToRender.getArmRows()==2) {
+				equippedPanelSB.append(getEmptyWeaponDiv(charactersInventoryToRender, true, InventorySlot.WEAPON_MAIN_3, weaponStyle));
+
+			} else {
+				equippedPanelSB.append(getEmptyWeaponDiv(charactersInventoryToRender, false, InventorySlot.WEAPON_MAIN_3, weaponStyle));
+			}
+		}
+
+		// Offhand weapon:
+		weaponInSlot = charactersInventoryToRender.getOffhandWeapon(0);
+		if (weaponInSlot != null) {
+			String weaponCount = getThrownWeaponCountDiv(weaponInSlot.getWeaponType(), charactersInventoryToRender.getWeaponCount(weaponInSlot));
+			equippedPanelSB.append("<div class='inventory-item-slot" + getClassRarityIdentifier(weaponInSlot.getRarity()) + "' style='"+(essenceCount<weaponInSlot.getWeaponType().getArcaneCost()?weaponStyleNoEssences:weaponStyle)+"'>"
+						+ "<div class='inventory-icon-content'>"+weaponInSlot.getSVGEquippedString(charactersInventoryToRender)+"</div>"
+					+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_OFFHAND_1 + "Slot'>" + weaponCount + "</div>"
+					+ "</div>");
+
+		} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_1)!=null) {
+			AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_1);
+			String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
+			equippedPanelSB.append(
+					"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
+						+ "<div class='inventory-icon-content' style='opacity:0.5;'>"+depletedWeapon.getSVGEquippedImageDesaturated(charactersInventoryToRender)+"</div>"
+							+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_OFFHAND_1 + "Slot'>" + weaponCount + "</div>"
+					+ "</div>");
+
+		} else if (charactersInventoryToRender.getMainWeapon(0) != null && charactersInventoryToRender.getMainWeapon(0).getWeaponType().isTwoHanded()) {
+			equippedPanelSB.append(getEmptyWeaponDiv(charactersInventoryToRender, true, InventorySlot.WEAPON_OFFHAND_1, weaponStyle));
+
+		} else {
+			equippedPanelSB.append(getEmptyWeaponDiv(charactersInventoryToRender, false, InventorySlot.WEAPON_OFFHAND_1, weaponStyle));
+		}
+
+		// Multiple arms:
+		if(charactersInventoryToRender.getArmRows()>1) {
+			// Weapon in second slot:
+			weaponInSlot = charactersInventoryToRender.getOffhandWeapon(1);
+			if (weaponInSlot != null) {
+				String weaponCount = getThrownWeaponCountDiv(weaponInSlot.getWeaponType(), charactersInventoryToRender.getWeaponCount(weaponInSlot));
+				equippedPanelSB.append("<div class='inventory-item-slot" + getClassRarityIdentifier(weaponInSlot.getRarity()) + "' style='"+(essenceCount<weaponInSlot.getWeaponType().getArcaneCost()?weaponStyleNoEssences:weaponStyle)+"'>"
+							+ "<div class='inventory-icon-content'>"+weaponInSlot.getSVGEquippedString(charactersInventoryToRender)+"</div>"
+						+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_OFFHAND_2 + "Slot'>" + weaponCount + "</div>"
+						+ "</div>");
+
+			} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_2)!=null) {
+				AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_2);
+				String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
+				equippedPanelSB.append(
+						"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
+							+ "<div class='inventory-icon-content' style='opacity:0.5;'>"+depletedWeapon.getSVGEquippedImageDesaturated(charactersInventoryToRender)+"</div>"
+								+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_OFFHAND_2 + "Slot'>" + weaponCount + "</div>"
+						+ "</div>");
+
+			} else if (charactersInventoryToRender.getMainWeapon(1) != null && charactersInventoryToRender.getMainWeapon(1).getWeaponType().isTwoHanded()) {
+				equippedPanelSB.append(getEmptyWeaponDiv(charactersInventoryToRender, true, InventorySlot.WEAPON_OFFHAND_2, weaponStyle));
+
+			} else {
+				equippedPanelSB.append(getEmptyWeaponDiv(charactersInventoryToRender, false, InventorySlot.WEAPON_OFFHAND_2, weaponStyle));
+			}
+
+			// Weapon in third slot:
+			weaponInSlot = charactersInventoryToRender.getOffhandWeapon(2);
+			if (weaponInSlot != null) {
+				String weaponCount = getThrownWeaponCountDiv(weaponInSlot.getWeaponType(), charactersInventoryToRender.getWeaponCount(weaponInSlot));
+				equippedPanelSB.append("<div class='inventory-item-slot" + getClassRarityIdentifier(weaponInSlot.getRarity()) + "' style='"+(essenceCount<weaponInSlot.getWeaponType().getArcaneCost()?weaponStyleNoEssences:weaponStyle)+"'>"
+							+ "<div class='inventory-icon-content'>"+weaponInSlot.getSVGEquippedString(charactersInventoryToRender)+"</div>"
+						+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_OFFHAND_3 + "Slot'>" + weaponCount + "</div>"
+						+ "</div>");
+
+			} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_3)!=null) {
+				AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_3);
+				String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
+				equippedPanelSB.append(
+						"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
+							+ "<div class='inventory-icon-content' style='opacity:0.5;'>"+depletedWeapon.getSVGEquippedImageDesaturated(charactersInventoryToRender)+"</div>"
+								+ "<div class='overlay-inventory' id='" + InventorySlot.WEAPON_OFFHAND_3 + "Slot'>" + weaponCount + "</div>"
+						+ "</div>");
+
+			} else if (charactersInventoryToRender.getArmRows()==2 || (charactersInventoryToRender.getMainWeapon(2) != null && charactersInventoryToRender.getMainWeapon(2).getWeaponType().isTwoHanded())) {
+				equippedPanelSB.append(getEmptyWeaponDiv(charactersInventoryToRender, true, InventorySlot.WEAPON_OFFHAND_3, weaponStyle));
+
+			} else {
+				equippedPanelSB.append(getEmptyWeaponDiv(charactersInventoryToRender, false, InventorySlot.WEAPON_OFFHAND_3, weaponStyle));
+			}
+		}
+
+
+		//piercingSlots
+		for (InventorySlot invSlot : piercingSlots) {
+
+			AbstractClothing clothing = charactersInventoryToRender.getClothingInSlot(invSlot);
+
+			if (!charactersInventoryToRender.isPlayer() && concealedSlots.containsKey(invSlot)) {
+				equippedPanelSB.append("<div class='inventory-item-slot concealed' style='" + piercingStyle + "' id='" + invSlot + "Slot'>"
+						+ "<div class='concealedIcon'>"+SVGImages.SVG_IMAGE_PROVIDER.getConcealedIcon()+"</div>"
+					+ "</div>");
+
+			} else {
+				if (clothing != null) {
+					// add to content:
+					equippedPanelSB.append(
+							"<div class='inventory-item-slot " + getClassRarityIdentifier(clothing.getRarity()) + "'"
+								+ (clothing.isSealed()
+										? "style='"+piercingStyle+" border-width:2px; border-color:" + PresetColour.SEALED.toWebHexString() + "; border-style:solid;'"
+										: "style='"+piercingStyle+"'")
+								+ ">");
+
+						equippedPanelSB.append("<div class='inventory-icon-content'>"+clothing.getSVGEquippedString(charactersInventoryToRender)+"</div>");
+
+						equippedPanelSB.append((!clothing.getDisplacedList().isEmpty() ? "<div class='displacedIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getDisplacedIcon() + "</div>" : ""));
+						equippedPanelSB.append((clothing.isDirty() ? "<div class='cummedIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getDirtyIcon() + "</div>" : ""));
+						equippedPanelSB.append((clothing.getClothingType().getFemininityMaximum() < charactersInventoryToRender.getFemininityValue() ? "<div class='femininityIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getMasculineWarningIcon() + "</div>" : ""));
+						equippedPanelSB.append((clothing.getClothingType().getFemininityMinimum() > charactersInventoryToRender.getFemininityValue() ? "<div class='femininityIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getFeminineWarningIcon() + "</div>" : ""));
+
+						// Only append the most important of these effects:
+						if(charactersInventoryToRender.getSexToyOrificeStretching().containsValue(clothing)) {
+							equippedPanelSB.append("<div class='stretchIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getCombinationStretching() + "</div>");
+						} else if(charactersInventoryToRender.getSexToyOrificeTooDeep().containsValue(clothing)) {
+							equippedPanelSB.append("<div class='stretchIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getCombinationDepthMaximum() + "</div>");
+						} else if(charactersInventoryToRender.getSexToyOrificePreventingStretchRecovery().containsValue(clothing)) {
+							equippedPanelSB.append("<div class='stretchIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getCombinationStretchRecoveryPrevented() + "</div>");
+						}
+
+					equippedPanelSB.append("<div class='overlay-inventory' id='" + invSlot + "Slot'>" + "</div>");
+
+					equippedPanelSB.append("</div>");
+
+
+
+				} else {
+					// add to content:
+					if (blockedSlots.contains(invSlot)) {
+						equippedPanelSB.append("<div class='inventory-item-slot disabled' style='" + piercingStyle + "' id='" + invSlot + "Slot'>" + "</div>");
+
+					} else {
+						boolean bypassesPiercing = !charactersInventoryToRender.getBody().getBodyMaterial().isRequiresPiercing();
+
+						switch(invSlot){
+							case PIERCING_VAGINA:
+								if(!charactersInventoryToRender.hasVagina() || (!bypassesPiercing && !charactersInventoryToRender.isPiercedVagina())) {
+									equippedPanelSB.append("<div class='inventory-item-slot disabled' style='" + piercingStyle + "' id='" + invSlot + "Slot'>" + "</div>");
+								} else {
+									equippedPanelSB.append("<div class='inventory-item-slot' style='" + piercingStyle + "' id='" + invSlot + "Slot'></div>");
+								}
+								break;
+							case PIERCING_EAR:
+								if(!bypassesPiercing && !charactersInventoryToRender.isPiercedEar()) {
+									equippedPanelSB.append("<div class='inventory-item-slot disabled' style='" + piercingStyle + "' id='" + invSlot + "Slot'>" + "</div>");
+								} else {
+									equippedPanelSB.append("<div class='inventory-item-slot' style='" + piercingStyle + "' id='" + invSlot + "Slot'></div>");
+								}
+								break;
+							case PIERCING_LIP:
+								if(!bypassesPiercing && !charactersInventoryToRender.isPiercedLip()) {
+									equippedPanelSB.append("<div class='inventory-item-slot disabled' style='" + piercingStyle + "' id='" + invSlot + "Slot'>" + "</div>");
+								} else {
+									equippedPanelSB.append("<div class='inventory-item-slot' style='" + piercingStyle + "' id='" + invSlot + "Slot'></div>");
+								}
+								break;
+							case PIERCING_NIPPLE:
+								if(!bypassesPiercing && !charactersInventoryToRender.isPiercedNipple()) {
+									equippedPanelSB.append("<div class='inventory-item-slot disabled' style='" + piercingStyle + "' id='" + invSlot + "Slot'>" + "</div>");
+								} else {
+									equippedPanelSB.append("<div class='inventory-item-slot' style='" + piercingStyle + "' id='" + invSlot + "Slot'></div>");
+								}
+								break;
+							case PIERCING_NOSE:
+								if(!bypassesPiercing && !charactersInventoryToRender.isPiercedNose()) {
+									equippedPanelSB.append("<div class='inventory-item-slot disabled' style='" + piercingStyle + "' id='" + invSlot + "Slot'>" + "</div>");
+								} else {
+									equippedPanelSB.append("<div class='inventory-item-slot' style='" + piercingStyle + "' id='" + invSlot + "Slot'></div>");
+								}
+								break;
+							case PIERCING_PENIS:
+								if(!charactersInventoryToRender.hasPenis() || (!bypassesPiercing && !charactersInventoryToRender.isPiercedPenis())) {
+									equippedPanelSB.append("<div class='inventory-item-slot disabled' style='" + piercingStyle + "' id='" + invSlot + "Slot'>" + "</div>");
+								} else {
+									equippedPanelSB.append("<div class='inventory-item-slot' style='" + piercingStyle + "' id='" + invSlot + "Slot'></div>");
+								}
+								break;
+							case PIERCING_STOMACH:
+								if(!bypassesPiercing && !charactersInventoryToRender.isPiercedNavel()) {
+									equippedPanelSB.append("<div class='inventory-item-slot disabled' style='" + piercingStyle + "' id='" + invSlot + "Slot'>" + "</div>");
+								} else {
+									equippedPanelSB.append("<div class='inventory-item-slot' style='" + piercingStyle + "' id='" + invSlot + "Slot'></div>");
+								}
+								break;
+							case PIERCING_TONGUE:
+								if(!bypassesPiercing && !charactersInventoryToRender.isPiercedTongue()) {
+									equippedPanelSB.append("<div class='inventory-item-slot disabled' style='" + piercingStyle + "' id='" + invSlot + "Slot'>" + "</div>");
+								} else {
+									equippedPanelSB.append("<div class='inventory-item-slot' style='" + piercingStyle + "' id='" + invSlot + "Slot'></div>");
+								}
+								break;
+							default:
+								break;
+						}
+					}
+				}
+			}
+		}
+		equippedPanelSB.append("</div>");
+
+
+		equippedPanelSB.append("<div class='inventory-equipped' style='width:100%;'>");
+
+		for (InventorySlot invSlot : secondaryInventorySlots) {
+			appendEquippedClothingSlot(charactersInventoryToRender, invSlot, blockedSlots, concealedSlots, true);
+		}
+
+		equippedPanelSB.append("<div class='inventory-item-slot secondary "+getClassRarityIdentifier(Rarity.COMMON)+"'>");
+		if(charactersInventoryToRender.isPlayer()) {
+			equippedPanelSB.append("<div class='inventory-icon-content'>"
+										+(this.isRenderingTattoosLeft()
+											?SVGImages.SVG_IMAGE_PROVIDER.getTattooSwitchTattoo()
+											:SVGImages.SVG_IMAGE_PROVIDER.getTattooSwitchClothing(charactersInventoryToRender))
+									+"</div>"
+									+ "<div class='overlay-inventory' id='TATTOO_SWITCH_LEFT'></div>");
+
+		} else {
+			equippedPanelSB.append("<div class='inventory-icon-content"+getClassRarityIdentifier(Rarity.COMMON)+"'>"
+										+(this.isRenderingTattoosRight()
+												?SVGImages.SVG_IMAGE_PROVIDER.getTattooSwitchTattoo()
+												:SVGImages.SVG_IMAGE_PROVIDER.getTattooSwitchClothing(charactersInventoryToRender))
+									+"</div>"
+									+ "<div class='overlay-inventory' id='TATTOO_SWITCH_RIGHT'></div>");
+		}
+		equippedPanelSB.append("</div>");
+
+		equippedPanelSB.append("</div>");
+
+		return equippedPanelSB.toString();
+	}
 
 	private DialogueNode renderedDialogueNode = null;
 	
@@ -1210,7 +885,7 @@ public enum RenderingEngine {
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.badEnd)) {
 				return "<div class='full-width-container'>"
 							+ "<p class='character-name' style='color:"+ PresetColour.GENERIC_BAD_END.toWebHexString() + ";'>"
-								+ "Bad End"
+						+ "Плохая концовка"
 							+ "</p>"
 						+ "</div>"
 						+ "<div class='full-width-container' style='margin:0;padding:0;'>"
@@ -1229,16 +904,16 @@ public enum RenderingEngine {
 				String mainTitle = "";
 				if(place.isLand()) {
 					if(place.isWater()) {
-						mainTitle = "[style.colourTan(Land)] &amp; [style.colourBlueLight(Water)]";
+						mainTitle = "[style.colourTan(Земля)] &amp; [style.colourBlueLight(Вода)]";
 					} else {
-						mainTitle = "[style.colourTan(Land)]";
+						mainTitle = "[style.colourTan(Земля)]";
 					}
 					
 				} else {
-					mainTitle = "[style.colourBlueLight(Water)]";
+					mainTitle = "[style.colourBlueLight(Вода)]";
 				}
 
-				String placeTitle = place.isDangerous()?"[style.colourBad(Dangerous)]":"[style.colourGood(Safe)]";
+				String placeTitle = place.isDangerous() ? "[style.colourBad(Опасно)]" : "[style.colourGood(Безопасно)]";
 				
 				return "<div class='full-width-container'>"
 							+ "<p class='character-name'>"
@@ -1412,7 +1087,7 @@ public enum RenderingEngine {
 					
 					uiAttributeSB.append((Main.getProperties().hasValue(PropertyValue.calendarDisplay)
 													? Main.game.getDisplayDate(false)
-													:"Day "+Main.game.getDayNumber()));
+                            : "День " + Main.game.getDayNumber()));
 
 					// Day-of-week indicator:
 					uiAttributeSB.append("<div class='full-width-container' style='text-align:center; float:left; margin:0; padding:0; width:100%;'>");
@@ -1509,31 +1184,132 @@ public enum RenderingEngine {
 		Main.mainController.setAttributePanelContent(uiAttributeSB.toString());
 	}
 	
-	public static GameCharacter getCharacterToRender() {
-		if(Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.CHARACTERS_PRESENT || Main.game.getCurrentDialogueNode() == PhoneDialogue.CONTACTS_CHARACTER) {
-			return (NPC) CharactersPresentDialogue.characterViewed;
+	private void appendEquippedClothingSlot(GameCharacter charactersInventoryToRender, InventorySlot invSlot, Set<InventorySlot> blockedSlots, Map<InventorySlot, List<AbstractClothing>> concealedSlots, boolean isSecondary) {
+		String inventorySlotId = "inventory-item-slot";
+		if(isSecondary) {
+			inventorySlotId = "inventory-item-slot secondary";
 		}
-		
-		if(Main.game.isInSex()) {
-			if(Main.sex.isMasturbation() && Main.sex.getTotalParticipantCount(true)==1) {
-				return null;
+
+		if (!charactersInventoryToRender.isPlayer() && concealedSlots.containsKey(invSlot)) {
+			equippedPanelSB.append("<div class='"+inventorySlotId+" concealed' id='" + invSlot.toString() + "Slot'>"
+					+ "<div class='concealedIcon'>"+SVGImages.SVG_IMAGE_PROVIDER.getConcealedIcon()+"</div>"
+				+ "</div>");
+
+		} else {
+			if(((charactersInventoryToRender.isPlayer() && !this.isRenderingTattoosLeft()) || (!charactersInventoryToRender.isPlayer() && !this.isRenderingTattoosRight()))
+					&& !invSlot.isJewellery()) {
+				AbstractClothing clothing = charactersInventoryToRender.getClothingInSlot(invSlot);
+
+				BodyPartClothingBlock block = invSlot.getBodyPartClothingBlock(charactersInventoryToRender);
+				if (clothing != null) {
+					equippedPanelSB.append("<div class='"+inventorySlotId+getClassRarityIdentifier(clothing.getRarity())+"'"+(clothing.isSealed()?"style='border-width:2px; border-color:"+PresetColour.SEALED.toWebHexString()+"; border-style:solid;'":"")+">");
+
+						equippedPanelSB.append(
+								(block!=null && block.getRace()!=null
+									?"<div class='raceBlockIcon'>" + AbstractSubspecies.getMainSubspeciesOfRace(block.getRace()).getSVGStringDesaturated(charactersInventoryToRender, PresetColour.BASE_BLACK) + "</div>"
+									:""));
+
+						equippedPanelSB.append("<div class='inventory-icon-content'>"+clothing.getSVGEquippedString(charactersInventoryToRender)+"</div>");
+
+						equippedPanelSB.append((!clothing.getDisplacedList().isEmpty() ? "<div class='displacedIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getDisplacedIcon() + "</div>" : ""));
+						equippedPanelSB.append((clothing.isDirty() ? "<div class='cummedIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getDirtyIcon() + "</div>" : ""));
+						equippedPanelSB.append((clothing.getClothingType().getFemininityMaximum() < charactersInventoryToRender.getFemininityValue() ? "<div class='femininityIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getMasculineWarningIcon() + "</div>" : ""));
+						equippedPanelSB.append((clothing.getClothingType().getFemininityMinimum() > charactersInventoryToRender.getFemininityValue() ? "<div class='femininityIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getFeminineWarningIcon() + "</div>" : ""));
+
+						// Only append the most important of these effects:
+						if(charactersInventoryToRender.getSexToyOrificeStretching().containsValue(clothing)) {
+							equippedPanelSB.append("<div class='stretchIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getCombinationStretching() + "</div>");
+						} else if(charactersInventoryToRender.getSexToyOrificeTooDeep().containsValue(clothing)) {
+							equippedPanelSB.append("<div class='stretchIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getCombinationDepthMaximum() + "</div>");
+						} else if(charactersInventoryToRender.getSexToyOrificePreventingStretchRecovery().containsValue(clothing)) {
+							equippedPanelSB.append("<div class='stretchIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getCombinationStretchRecoveryPrevented() + "</div>");
+						}
+
+					equippedPanelSB.append("<div class='overlay-inventory' id='" + invSlot + "Slot'>" + "</div>");
+					equippedPanelSB.append("</div>");
+
+				} else {
+					// add to content:
+					if (blockedSlots.contains(invSlot)) {
+						equippedPanelSB.append("<div class='"+inventorySlotId+" disabled'>"
+													+ (charactersInventoryToRender.isDirtySlot(invSlot) ? "<div class='cummedIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getDirtyIcon() + "</div>" : "")
+								+ "<div class='overlay' id='" + invSlot + "Slot'></div>"
+												+ "</div>");
+
+					} else if (block != null) {
+						equippedPanelSB.append(
+								"<div class='"+inventorySlotId+" disabled'>"
+									+ (charactersInventoryToRender.isDirtySlot(invSlot) ? "<div class='cummedIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getDirtyIcon() + "</div>" : "")
+										+ "<div class='overlay' id='" + invSlot + "Slot'></div>"
+									+ (block.getRace()!=null
+											?"<div class='raceBlockIcon'>" + AbstractSubspecies.getMainSubspeciesOfRace(block.getRace()).getSVGStringDesaturated(charactersInventoryToRender, PresetColour.BASE_BLACK) + "</div>"
+											:"")
+								+ "</div>");
+
+					} else {
+						boolean disabled = !invSlot.isPhysicallyAvailable(charactersInventoryToRender);
+
+						equippedPanelSB.append("<div class='"+inventorySlotId+(disabled?" disabled":"")+"' id='" + invSlot + "Slot'>"
+								+ (charactersInventoryToRender.isDirtySlot(invSlot) ? "<div class='cummedIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getDirtyIcon() + "</div>" : "")
+								+ "</div>");
+					}
+				}
+
+			} else { // Tattoos:
+				boolean disabled = !invSlot.isPhysicallyAvailable(charactersInventoryToRender) && invSlot!=InventorySlot.HAIR; // Exception for hair as this slot corresponds to the 'ears' slot for tattoos
+
+				if(disabled) {
+					equippedPanelSB.append("<div class='" + inventorySlotId + " disabled' id='" + invSlot + "Slot'></div>");
+
+				} else {
+					Tattoo tattoo = charactersInventoryToRender.getTattooInSlot(invSlot);
+					inventorySlotId = "inventory-item-slot dark";
+					if(isSecondary) {
+						inventorySlotId = "inventory-item-slot secondary dark";
+					}
+
+					//TODO Attempted to make tattoo background the same as skin colour, but skin colours are defined mainly for ease of reasing as text, and look bad as blocks of colour
+					// So if this was to be implemented, new colour values for all skin colours would be needed (to serve as block colours)
+					//String style = "style='background-image:-webkit-radial-gradient("+charactersInventoryToRender.getCovering(charactersInventoryToRender.getTorsoCovering()).getPrimaryColour().toWebHexString()+" 60%, #33333300 75%);'";
+					//String backgroundColour = "background-image:-webkit-radial-gradient("+charactersInventoryToRender.getCovering(charactersInventoryToRender.getTorsoCovering()).getPrimaryColour().toWebHexString()+" 75%, #33333300 85%);";
+					// background-color:"+charactersInventoryToRender.getCovering(charactersInventoryToRender.getTorsoCovering()).getPrimaryColour().toWebHexString()+"
+					//String style = "style='"+backgroundColour+" -webkit-box-shadow: inset 0 0 3px 2px #333333;'";
+
+					String style = "";
+
+					if(tattoo != null) {
+						equippedPanelSB.append("<div class='"+inventorySlotId + getClassRarityIdentifier(tattoo.getRarity()) +"' "+style+">");
+						equippedPanelSB.append("<div class='inventory-icon-content'>"+tattoo.getSVGImage(charactersInventoryToRender)+"</div>");
+						if(charactersInventoryToRender.getScarInSlot(invSlot)!=null) {
+							equippedPanelSB.append("<div class='scarIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getScarIcon() + "</div>");
+						}
+						equippedPanelSB.append(lipstickMarkingsString(charactersInventoryToRender, invSlot));
+						equippedPanelSB.append("<div class='overlay-inventory no-pointer' id='" + invSlot + "Slot'></div>");
+						equippedPanelSB.append("</div>");
+
+					} else {
+						if(blockedSlots.contains(invSlot)) {
+							equippedPanelSB.append("<div class='"+inventorySlotId+" disabled'>");
+							if(charactersInventoryToRender.getScarInSlot(invSlot)!=null) {
+								equippedPanelSB.append("<div class='scarIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getScarIcon() + "</div>");
+							}
+							equippedPanelSB.append(lipstickMarkingsString(charactersInventoryToRender, invSlot));
+							equippedPanelSB.append("<div class='overlay' id='" + invSlot + "Slot'></div>");
+							equippedPanelSB.append("</div>");
+
+						} else {
+							equippedPanelSB.append("<div class='" + inventorySlotId + "' id='" + invSlot + "Slot' " + style + ">");
+							if(charactersInventoryToRender.getScarInSlot(invSlot)!=null) {
+								equippedPanelSB.append("<div class='scarIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getScarIcon() + "</div>");
+							}
+							equippedPanelSB.append(lipstickMarkingsString(charactersInventoryToRender, invSlot));
+							equippedPanelSB.append("</div>");
+						}
+					}
+				}
+
 			}
-			return Main.sex.getTargetedPartner(Main.game.getPlayer());
 		}
-		
-		if(Main.game.isInCombat()) {
-			return Main.combat.getTargetedCombatant();
-		}
-		
-		if(InventoryDialogue.getInventoryNPC()!=null && Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.INVENTORY) {
-			return InventoryDialogue.getInventoryNPC();
-		}
-		
-		if(Main.game.getDialogueFlags().getManagementCompanion()!=null) {
-			return Main.game.getDialogueFlags().getManagementCompanion();
-		}
-		
-		return Main.game.getActiveNPC();
 	}
 	
 	public static String getEntryBackgroundColour(boolean alternative) {
@@ -1669,7 +1445,7 @@ public enum RenderingEngine {
 			
 			// Characters Present:
 			uiAttributeSB.append("<div class='attribute-container effects'>"
-								+ "<p style='text-align:center;padding:0;margin:0;'><b>Characters Present</b></p>");
+					+ "<p style='text-align:center;padding:0;margin:0;'><b>Присутствующие персонажи</b></p>");
 			List <NPC> charactersPresent = Main.game.getCharactersPresent();
 			for(GameCharacter c : Main.game.getCharactersPresent()) {
 				if(c.isElementalSummoned() && !c.getElemental().isActive()) {
@@ -1683,7 +1459,7 @@ public enum RenderingEngine {
 				}
 			}
 			if(charactersPresent.isEmpty() && (place.getPopulation()==null || place.getPopulation().isEmpty() || subspeciesSet.isEmpty())) {
-				uiAttributeSB.append("<p style='text-align:center;padding:0;margin:0;'><span style='color:"+PresetColour.TEXT_GREY.toWebHexString()+";'>None...</span></p>");
+				uiAttributeSB.append("<p style='text-align:center;padding:0;margin:0;'><span style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'>Никого...</span></p>");
 				
 			} else {
 				int count = 0;
@@ -1750,7 +1526,7 @@ public enum RenderingEngine {
 			
 			// Items Present:
 			uiAttributeSB.append("<div class='attribute-container effects'>"
-								+ "<p style='text-align:center;padding:0;margin:0;'><b>Items Present</b></p>");
+					+ "<p style='text-align:center;padding:0;margin:0;'><b>Присутствующие предметы</b></p>");
 			
 			int count = 0;
 			if(Main.game.isInNewWorld()) {
@@ -1813,7 +1589,7 @@ public enum RenderingEngine {
 				}
 			}
 			if(count==0) {
-				uiAttributeSB.append("<p style='text-align:center;padding:0;margin:0;'><span style='color:"+PresetColour.TEXT_GREY.toWebHexString()+";'>None...</span></p>");
+				uiAttributeSB.append("<p style='text-align:center;padding:0;margin:0;'><span style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'>Ничего...</span></p>");
 			}
 			uiAttributeSB.append(
 					"</div>");
@@ -1823,7 +1599,7 @@ public enum RenderingEngine {
 			uiAttributeSB.append(
 					"</div>"
 						+ "<div class='event-log'>"
-							+ "<p style='text-align:center;padding:0;margin:0;'><b>Event Log</b></p>"
+							+ "<p style='text-align:center;padding:0;margin:0;'><b>Журнал событий</b></p>"
 							+ "<div class='event-log-inner' id='event-log-inner-id'>");
 			
 			if(Main.game.getEventLog().isEmpty()) {
@@ -1859,7 +1635,198 @@ public enum RenderingEngine {
 		Main.mainController.setRightPanelContent(uiAttributeSB.toString());
 	}
 
-	private StringBuilder mapSB = new StringBuilder();
+	private String getInventoryDiv(GameCharacter charactersInventoryToRender, boolean buyback) {
+		inventorySB.setLength(0);
+
+		String idModifier = charactersInventoryToRender==null?"FLOOR_":(charactersInventoryToRender.isPlayer()?"PLAYER_":"NPC_"+charactersInventoryToRender.getId()+"_");
+
+		inventorySB.append("<div class='inventory-container'>");
+
+		if(charactersInventoryToRender != null) {
+			inventorySB.append(
+					"<p style='width:100%; text-align:center; padding:0; margin:0;'>"
+					+ "<b style='color:"+Femininity.valueOf(charactersInventoryToRender.getFemininityValue()).getColour().toWebHexString()+";'>"
+						+(charactersInventoryToRender.isPlayer()
+							?"Your</b> <b>Inventory | Page "+(pageLeft+1)+"</b>"
+							:(UtilText.parse(charactersInventoryToRender, "[npc.NamePos]"))+"</b> <b>Inventory | "+(buyback?"[style.colourCurrency(Buyback)]":"Page "+(pageRight+1))+"</b>")
+					+"</p>");
+
+		} else {
+			inventorySB.append(
+					"<p style='width:100%; text-align:center; padding:0; margin:0;'>"
+						+(InventoryDialogue.getNPCInventoryInteraction() ==  InventoryInteraction.CHARACTER_CREATION
+								?"<b style='color:"+PresetColour.BASE_TAN.toWebHexString()+";'>Your wardrobe</b>"
+								:"<b style='color:"+PresetColour.BASE_TAN.toWebHexString()+";'>In this Area</b>")
+						+"<b> | Page "+(pageRight+1)+"</b>"
+					+"</p>");
+		}
+
+		// Buttons:
+		int totalUniques = 0;
+		String pageIdMod = "";
+		int currentPage = 0;
+		boolean renderQuestTab = true;
+		boolean hasQuestItems = false;
+		if(charactersInventoryToRender == null) {
+			hasQuestItems = Main.game.getPlayerCell().getInventory().isAnyQuestItemPresent();
+			totalUniques = Main.game.getPlayerCell().getInventory().getUniqueItemCount() - Main.game.getPlayerCell().getInventory().getUniqueQuestItemCount()
+					+ Main.game.getPlayerCell().getInventory().getUniqueClothingCount() - Main.game.getPlayerCell().getInventory().getUniqueQuestClothingCount()
+					+ Main.game.getPlayerCell().getInventory().getUniqueWeaponCount() - Main.game.getPlayerCell().getInventory().getUniqueQuestWeaponCount();
+			pageIdMod = "INV_PAGE_RIGHT_";
+			// Reset page index if the number of items is too low to be displayed on that index:
+			if(pageRight!=5) { // So long as current page is not uniques
+				while(totalUniques<=pageRight*ITEMS_PER_PAGE && pageRight>0) {
+					pageRight--;
+				}
+			}
+			currentPage = pageRight;
+
+		} else {
+//			renderQuestTab = charactersInventoryToRender.isPlayer();
+			hasQuestItems = charactersInventoryToRender.isCarryingQuestItems();
+			totalUniques = charactersInventoryToRender.getUniqueItemCount() - charactersInventoryToRender.getUniqueQuestItemCount()
+					+ charactersInventoryToRender.getUniqueClothingCount() - charactersInventoryToRender.getUniqueQuestClothingCount()
+					+ charactersInventoryToRender.getUniqueWeaponCount() - charactersInventoryToRender.getUniqueQuestWeaponCount();
+			pageIdMod = (charactersInventoryToRender.isPlayer()?"INV_PAGE_LEFT_":"INV_PAGE_RIGHT_");
+			// Reset page index if the number of items is too low to be displayed on that index:
+			if(charactersInventoryToRender.isPlayer()?pageLeft!=5:pageRight!=5) { // So long as current page is not uniques
+				if(charactersInventoryToRender.isPlayer()) {
+					while(totalUniques<=pageLeft*ITEMS_PER_PAGE && pageLeft>0) {
+						pageLeft--;
+					}
+				} else {
+					while(totalUniques<=pageRight*ITEMS_PER_PAGE && pageRight>0) {
+						pageRight--;
+					}
+				}
+			}
+			currentPage = (charactersInventoryToRender.isPlayer()?pageLeft:pageRight);
+		}
+
+		inventorySB.append(
+				"<div class='container-full-width' style='width:15%; margin:0; text-align:center;'>"
+					+ "<div class='square-button max"+(currentPage==0?" selected":"")+"'>"
+							+ "<div style='width:80%;height:80%;position:absolute;left:0; bottom:0;'>"+SVGImages.SVG_IMAGE_PROVIDER.getInventoryIcon()+"</div>"
+							+ "<div style='width:50%;height:50%;position:absolute;right:4px; top:0;'>"+(currentPage==0?SVGImages.SVG_IMAGE_PROVIDER.getCounterOne():SVGImages.SVG_IMAGE_PROVIDER.getCounterOneDisabled())+"</div>"
+//							+ (!buyback
+//									?
+											+ "<div class='overlay' "+(currentPage==0?"":"id='"+pageIdMod+"0'")+"></div>"
+//									:"<div class='overlay disabled'></div>")
+					+ "</div>"
+					+ "<div class='square-button max"+(currentPage==1?" selected":"")+"'>"
+							+ "<div style='width:80%;height:80%;position:absolute;left:0; bottom:0;'>"
+						+ (totalUniques > ITEMS_PER_PAGE && !buyback ? SVGImages.SVG_IMAGE_PROVIDER.getInventoryIcon() : SVGImages.SVG_IMAGE_PROVIDER.getInventoryIconDisabled())
+							+"</div>"
+							+ "<div style='width:50%;height:50%;position:absolute;right:4px; top:0;'>"+(currentPage==1?SVGImages.SVG_IMAGE_PROVIDER.getCounterTwo():SVGImages.SVG_IMAGE_PROVIDER.getCounterTwoDisabled())+"</div>"
+						+ (totalUniques > ITEMS_PER_PAGE && !buyback
+									?"<div class='overlay' "+(currentPage==1?"":"id='"+pageIdMod+"1'")+"></div>"
+									:"<div class='overlay disabled'></div>")
+					+ "</div>"
+					+ "<div class='square-button max"+(currentPage==2?" selected":"")+"'>"
+							+ "<div style='width:80%;height:80%;position:absolute;left:0; bottom:0;'>"
+								+(totalUniques>2*ITEMS_PER_PAGE && !buyback?SVGImages.SVG_IMAGE_PROVIDER.getInventoryIcon():SVGImages.SVG_IMAGE_PROVIDER.getInventoryIconDisabled())
+							+"</div>"
+							+ "<div style='width:50%;height:50%;position:absolute;right:4px; top:0;'>"+(currentPage==2?SVGImages.SVG_IMAGE_PROVIDER.getCounterThree():SVGImages.SVG_IMAGE_PROVIDER.getCounterThreeDisabled())+"</div>"
+							+ (totalUniques>2*ITEMS_PER_PAGE && !buyback
+									?"<div class='overlay' "+(currentPage==2?"":"id='"+pageIdMod+"2'")+"></div>"
+									:"<div class='overlay disabled'></div>")
+					+ "</div>"
+					+ "<div class='square-button max"+(currentPage==3?" selected":"")+"'>"
+							+ "<div style='width:80%;height:80%;position:absolute;left:0; bottom:0;'>"
+								+(totalUniques>3*ITEMS_PER_PAGE && !buyback?SVGImages.SVG_IMAGE_PROVIDER.getInventoryIcon():SVGImages.SVG_IMAGE_PROVIDER.getInventoryIconDisabled())
+							+"</div>"
+							+ "<div style='width:50%;height:50%;position:absolute;right:4px; top:0;'>"+(currentPage==3?SVGImages.SVG_IMAGE_PROVIDER.getCounterFour():SVGImages.SVG_IMAGE_PROVIDER.getCounterFourDisabled())+"</div>"
+							+ (totalUniques>3*ITEMS_PER_PAGE && !buyback
+									?"<div class='overlay' "+(currentPage==3?"":"id='"+pageIdMod+"3'")+"></div>"
+									:"<div class='overlay disabled'></div>")
+					+ "</div>"
+					+ "<div class='square-button max"+(currentPage==4?" selected":"")+"'>"
+							+ "<div style='width:80%;height:80%;position:absolute;left:0; bottom:0;'>"
+								+(totalUniques>4*ITEMS_PER_PAGE && !buyback?SVGImages.SVG_IMAGE_PROVIDER.getInventoryIcon():SVGImages.SVG_IMAGE_PROVIDER.getInventoryIconDisabled())
+							+"</div>"
+							+ "<div style='width:50%;height:50%;position:absolute;right:4px; top:0;'>"+(currentPage==4?SVGImages.SVG_IMAGE_PROVIDER.getCounterFive():SVGImages.SVG_IMAGE_PROVIDER.getCounterFiveDisabled())+"</div>"
+							+ (totalUniques>4*ITEMS_PER_PAGE && !buyback
+									?"<div class='overlay' "+(currentPage==4?"":"id='"+pageIdMod+"4'")+"></div>"
+									:"<div class='overlay disabled'></div>")
+					+ "</div>"
+					+ (renderQuestTab
+							?"<div class='square-button max"+(currentPage==5?" selected":"")+"'>"
+								+ "<div style='width:100%;height:100%;position:absolute;left:0; bottom:0;'>"+(hasQuestItems?SVGImages.SVG_IMAGE_PROVIDER.getQuestInventoryIcon():SVGImages.SVG_IMAGE_PROVIDER.getQuestInventoryIconDisabled())+"</div>"
+								+ (hasQuestItems && !buyback
+									?"<div class='overlay' id='"+pageIdMod+"5'></div>"
+									:"<div class='overlay disabled' id='"+pageIdMod+"5'></div>")
+							+ "</div>"
+							:"")
+				+ "</div>");
+
+		inventorySB.append("<div class='container-full-width' style='width:85%; margin:0;'>");
+		if(buyback) {
+			for (int i = Main.game.getPlayer().getBuybackStack().size() - 1; i >= 0; i--) {
+				ShopTransaction itemBuyback = Main.game.getPlayer().getBuybackStack().get(i);
+
+				if (itemBuyback != null) {
+					// Clothing:
+					if (itemBuyback.getAbstractItemSold() instanceof AbstractClothing) {
+						inventorySB.append(getBuybackItemPanel(itemBuyback, "CLOTHING_" + i));
+
+					// Weapon:
+					} else if (itemBuyback.getAbstractItemSold() instanceof AbstractWeapon) {
+						inventorySB.append(getBuybackItemPanel(itemBuyback, "WEAPON_" + i));
+
+					// Item:
+					} else {
+						inventorySB.append(getBuybackItemPanel(itemBuyback, "ITEM_" + i));
+					}
+				}
+			}
+
+			// Fill space:
+			for (int i = ITEMS_PER_PAGE; i > Main.game.getPlayer().getBuybackStack().size(); i--) {
+				inventorySB.append("<div class='inventory-item-slot'></div>");
+			}
+
+		} else {
+			inventorySB.append(getInventoryIconsForPage(currentPage, charactersInventoryToRender, idModifier));
+		}
+		inventorySB.append("</div>");
+
+		String style = "box-sizing:border-box; float:left; background-color:"+PresetColour.BACKGROUND_ALT.toWebHexString()+"; border-radius:5px; padding:0 2px 0 2px; margin:0 1%; text-align:center;";
+		String buttonStyle = "width:5.25%; border:0; text-align:center; padding:0; margin:0 0.75%; float:left;";
+		String styleWidth = "calc(38.5% - 4px)";
+		String styleWidthDouble = "calc(77% - 4px)";
+		boolean transferDisabled = InventoryDialogue.getNPCInventoryInteraction()!=InventoryInteraction.FULL_MANAGEMENT;
+		if(charactersInventoryToRender!=null) {
+			// 85% is the encompassing width
+			// Changed to 100% in 0.4.2 | Old values: width:26.3%; width:33.416%;
+			if(charactersInventoryToRender.isPlayer()) {
+				inventorySB.append(
+						"<div style='"+style+" width:"+styleWidth+";'>"+ UtilText.formatAsEssences(charactersInventoryToRender.getEssenceCount(), "b", true) +"</div>"
+						+ "<div style='"+style+" width:"+styleWidth+";'>"+ UtilText.formatAsMoney(charactersInventoryToRender.getMoney(), "b") +"</div>"
+						+ "<div class='normal-button"+(transferDisabled?" disabled":"")+"' id='"+idModifier+"MONEY_TRANSFER_SMALL' style='"+buttonStyle+"'>[style."+(transferDisabled?"colourDisabled":"colourMinorGood")+"(&gt;)]</div>"
+						+ "<div class='normal-button"+(transferDisabled?" disabled":"")+"' id='"+idModifier+"MONEY_TRANSFER_AVERAGE' style='"+buttonStyle+"'>[style."+(transferDisabled?"colourDisabled":"colourGood")+"(&gt;)]</div>"
+						+ "<div class='normal-button"+(transferDisabled?" disabled":"")+"' id='"+idModifier+"MONEY_TRANSFER_BIG' style='"+buttonStyle+"'>[style."+(transferDisabled?"colourDisabled":"colourExcellent")+"(&gt;)]</div>");
+
+			} else {
+				inventorySB.append(
+						"<div class='normal-button"+(transferDisabled?" disabled":"")+"' id='"+idModifier+"MONEY_TRANSFER_BIG' style='"+buttonStyle+"'>[style."+(transferDisabled?"colourDisabled":"colourExcellent")+"(&lt;)]</div>"
+						+ "<div class='normal-button"+(transferDisabled?" disabled":"")+"' id='"+idModifier+"MONEY_TRANSFER_AVERAGE' style='"+buttonStyle+"'>[style."+(transferDisabled?"colourDisabled":"colourGood")+"(&lt;)]</div>"
+						+ "<div class='normal-button"+(transferDisabled?" disabled":"")+"' id='"+idModifier+"MONEY_TRANSFER_SMALL' style='"+buttonStyle+"'>[style."+(transferDisabled?"colourDisabled":"colourMinorGood")+"(&lt;)]</div>"
+						+ "<div style='"+style+" width:"+styleWidth+";'>"+ (transferDisabled?UtilText.formatAsMoney("[style.colourUnknown(Unknown)]", "b"):UtilText.formatAsMoney(charactersInventoryToRender.getMoney(), "b")) +"</div>"
+						+ "<div style='"+style+" width:"+styleWidth+";'>"+ UtilText.formatAsEssences(charactersInventoryToRender.getEssenceCount(), "b", true) +"</div>");
+			}
+
+		} else {
+			inventorySB.append(
+					"<div class='normal-button"+(transferDisabled?" disabled":"")+"' id='"+idModifier+"MONEY_TRANSFER_BIG' style='"+buttonStyle+" margin:0 0.75% 0 2%;'>[style."+(transferDisabled?"colourDisabled":"colourExcellent")+"(&lt;)]</div>"
+					+ "<div class='normal-button"+(transferDisabled?" disabled":"")+"' id='"+idModifier+"MONEY_TRANSFER_AVERAGE' style='"+buttonStyle+"'>[style."+(transferDisabled?"colourDisabled":"colourGood")+"(&lt;)]</div>"
+					+ "<div class='normal-button"+(transferDisabled?" disabled":"")+"' id='"+idModifier+"MONEY_TRANSFER_SMALL' style='"+buttonStyle+"'>[style."+(transferDisabled?"colourDisabled":"colourMinorGood")+"(&lt;)]</div>"
+					+ "<div style='"+style+" width:"+styleWidthDouble+";'>"+ UtilText.formatAsMoney(Main.game.getPlayerCell().getInventory().getMoney(), "b") +"</div>");
+		}
+
+		inventorySB.append("</div>");
+
+		return inventorySB.toString();
+	}
 	
 	private Colour getPlayerIconColour(boolean isDangerous) {
 		if(isDangerous) {
@@ -1950,8 +1917,7 @@ public enum RenderingEngine {
 //					}
 					
 					mapSB.append(
-							"<div class='map-icon' style='width:"+(width-0.5)+"%; margin:0.25%; "+border+" "+generateBackgroundStyle(placeType, dangerousTile, discovered, 1.0)+""
-										+(canTeleportToTile?"cursor:pointer;":"")+"' id='MAP_NODE_" + i + "_" + j + "'>"
+							"<div class='map-icon' style='width:" + (width - 0.5) + "%; margin:0.25%; " + border + " " + generateBackgroundStyle(placeType, dangerousTile, discovered, 1.0) + (canTeleportToTile ? "cursor:pointer;" : "") + "' id='MAP_NODE_" + i + "_" + j + "'>"
 								+(playerOnTile?"<div class='overlay map-player' style='background-color:"+BaseColour.AQUA.toWebHexString()+";'></div>":"")
 								+(showPathing && endPath && !playerOnTile?"<div class='overlay map-player' style='background-color:"+(dangerousTile?BaseColour.ORANGE:BaseColour.YELLOW).toWebHexString()+";'></div>":"")
 								+(showPathing && path && !endPath && !playerOnTile
@@ -1986,17 +1952,17 @@ public enum RenderingEngine {
 			
 			for(MapTravelType type : MapTravelType.values()) {
 				if(!type.isAvailable(null, Main.game.getPlayer())) {
-					mapSB.append("<div id='"+type.toString()+"' class='cosmetics-button disabled' style='"+buttonStyle+"'>"
+					mapSB.append("<div id='" + type + "' class='cosmetics-button disabled' style='" + buttonStyle + "'>"
 							+Util.capitaliseSentence(type.getName())
 						+ "</div>");
 					
 				} else if(Pathing.getMapTravelType()==type){
-					mapSB.append("<div id='"+type.toString()+"' class='cosmetics-button active' style='"+buttonStyle+"'>"
+					mapSB.append("<div id='" + type + "' class='cosmetics-button active' style='" + buttonStyle + "'>"
 							+ "<span style='color:"+type.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(type.getName())+"</span>"
 						+ "</div>");
 					
 				} else {
-					mapSB.append("<div id='"+type.toString()+"' class='cosmetics-button' style='"+buttonStyle+"'>"
+					mapSB.append("<div id='" + type + "' class='cosmetics-button' style='" + buttonStyle + "'>"
 							+ "<span style='color:"+type.getColour().getShades()[0]+";'>"+Util.capitaliseSentence(type.getName())+"</span>"
 						+ "</div>");
 				}
@@ -2667,7 +2633,7 @@ public enum RenderingEngine {
 													?character.getName(true)
 													:UtilText.parse(character, "[npc.Name]")))
 								+"</b>"
-								+ " - Level "+ character.getLevel()
+                        + " - Уровень " + character.getLevel()
 							+"</div>"
 							+ "<div class='full-width-container' style='text-align:center;padding:0;margin:0;background:"+PresetColour.BACKGROUND_ALT.toWebHexString()+"; border-radius: 2px;'>"
 								+ (character.getLevel() != GameCharacter.LEVEL_CAP

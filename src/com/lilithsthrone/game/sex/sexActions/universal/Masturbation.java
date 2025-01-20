@@ -44,10 +44,10 @@ public class Masturbation {
 		@Override
 		public String getDescription() {
 			if(!Main.sex.getCharacterPerformingAction().isTaur()) {
-				return "Deciding that it would be better to continue masturbating while standing upright, [npc.name] [npc.verb(push)] [npc.herself] up onto [npc.her] [npc.feet],"
+                return "Deciding that it would be better to continue masturbating while standing upright, [npc.name] push [npc.herself] up onto [npc.her] [npc.feet],"
 						+ " before dropping [npc.her] [npc.hands] down between [npc.her] [npc.legs] and preparing to continue where [npc.she] left off...";
 			} else {
-				return "Deciding that it would be better to continue masturbating while standing upright, [npc.name] [npc.verb(push)] [npc.herself] up onto [npc.her] [npc.feet],"
+                return "Deciding that it would be better to continue masturbating while standing upright, [npc.name] push [npc.herself] up onto [npc.her] [npc.feet],"
 						+ " before looking back over [npc.her] shoulder at [npc.her] feral [npc.legRace]'s body and letting out a frustrated whine...";
 			}
 		}
@@ -89,7 +89,7 @@ public class Masturbation {
 		}
 		@Override
 		public String getDescription() {
-			return "Deciding that it would be better to continue masturbating in a seated position, [npc.name] [npc.verb(find)] a suitable surface nearby,"
+            return "Deciding that it would be better to continue masturbating in a seated position, [npc.name] find a suitable surface nearby,"
 					+ " before sitting down and moving [npc.her] [npc.hands] between [npc.her] [npc.legs]...";
 		}
 		@Override
@@ -131,10 +131,10 @@ public class Masturbation {
 		@Override
 		public String getDescription() {
 			if(!Main.sex.getCharacterPerformingAction().isTaur()) {
-				return "Deciding that it would be better to continue masturbating while kneeling down on the ground, [npc.name] [npc.verb(drop)] down into such a position,"
+                return "Deciding that it would be better to continue masturbating while kneeling down on the ground, [npc.name] drop down into such a position,"
 						+ " before sliding [npc.her] [npc.hands] down between [npc.her] [npc.legs] and preparing to continue where [npc.she] left off...";
 			} else {
-				return "Deciding that it would be better to continue masturbating while kneeling down on the ground, [npc.name] [npc.verb(drop)] down into such a position,"
+                return "Deciding that it would be better to continue masturbating while kneeling down on the ground, [npc.name] drop down into such a position,"
 						+ " before looking back over [npc.her] shoulder at [npc.her] feral [npc.legRace]'s body and letting out a frustrated whine...";
 			}
 		}

@@ -80,47 +80,47 @@
 
   <replacementText slot="WRIST" type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(wrap)] the leather bracelets around [npc.her] wrists, before fastening the straps in place.]]>
+            <![CDATA[[npc.Name] wrap the leather bracelets around [npc.her] wrists, before fastening the straps in place.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(wrap)] the leather bracelets around [npc2.namePos] wrists, before fastening the straps in place.]]>
+            <![CDATA[[npc.Name] wrap the leather bracelets around [npc2.namePos] wrists, before fastening the straps in place.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(force)] the leather bracelets around [npc2.namePos] wrists, before firmly fastening the straps in place.]]>
+            <![CDATA[[npc.Name] roughly force the leather bracelets around [npc2.namePos] wrists, before firmly fastening the straps in place.]]>
 	  </otherRough>
 	</replacementText>
 	<displacementText slot="WRIST" type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unfasten)] the leather bracelets from around [npc.her] wrists, before taking them off.]]>
+            <![CDATA[[npc.Name] unfasten the leather bracelets from around [npc.her] wrists, before taking them off.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unfasten)] the leather bracelets from around [npc2.namePos] wrists, before taking them off.]]>
+            <![CDATA[[npc.Name] unfasten the leather bracelets from around [npc2.namePos] wrists, before taking them off.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(unfasten)] the leather bracelets from around [npc2.namePos] wrists, before yanking them off.]]>
+            <![CDATA[[npc.Name] roughly unfasten the leather bracelets from around [npc2.namePos] wrists, before yanking them off.]]>
 		</otherRough>
 	</displacementText>
 
   <replacementText slot="ANKLE" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(wrap)] the leather bracelets around [npc.her] ankles, before fastening the straps in place.]]>
+        <![CDATA[[npc.Name] wrap the leather bracelets around [npc.her] ankles, before fastening the straps in place.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(wrap)] the leather bracelets around [npc2.namePos] ankles, before fastening the straps in place.]]>
+        <![CDATA[[npc.Name] wrap the leather bracelets around [npc2.namePos] ankles, before fastening the straps in place.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(force)] the leather bracelets around [npc2.namePos] ankles, before firmly fastening the straps in place.]]>
+        <![CDATA[[npc.Name] roughly force the leather bracelets around [npc2.namePos] ankles, before firmly fastening the straps in place.]]>
     </otherRough>
   </replacementText>
   <displacementText slot="ANKLE" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(unfasten)] the leather bracelets from around [npc.her] ankles, before taking them off.]]>
+        <![CDATA[[npc.Name] unfasten the leather bracelets from around [npc.her] ankles, before taking them off.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(unfasten)] the leather bracelets from around [npc2.namePos] ankles, before taking them off.]]>
+        <![CDATA[[npc.Name] unfasten the leather bracelets from around [npc2.namePos] ankles, before taking them off.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(unfasten)] the leather bracelets from around [npc2.namePos] ankles, before yanking them off.]]>
+        <![CDATA[[npc.Name] roughly unfasten the leather bracelets from around [npc2.namePos] ankles, before yanking them off.]]>
     </otherRough>
   </displacementText>
 	

@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.lilayashome;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.companions.CompanionManagement;
@@ -12,6 +9,9 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.world.places.AbstractPlaceUpgrade;
 import com.lilithsthrone.world.places.PlaceUpgrade;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.4.7.1
@@ -70,26 +70,26 @@ public class LilayaSlaveLoungeDialogue {
 				
 			} else if (index == 1) {
 				if(Main.game.getPlayer().isAbleToAccessRoomManagement()) {
-					return new Response("Manage room", "Enter the management screen for this particular room.", OccupantManagementDialogue.ROOM_UPGRADES) {
+                    return new Response("Управление комнатой", "Enter the management screen for this particular room.", OccupantManagementDialogue.ROOM_UPGRADES) {
 						@Override
 						public void effects() {
 							OccupantManagementDialogue.cellToInspect = Main.game.getPlayerCell();
 						}
 					};
 				} else {
-					return new Response("Manage room", "You need a slaver license or permission from Lilaya to house your friends or dolls in order to access this menu!",  null);
+                    return new Response("Управление комнатой", "Чтобы получить доступ к этому меню, нужна лицензия рабовладельца или разрешение от Лилайи на размещение своих друзей или кукол!", null);
 				}
 				
 			}  else if (index == 2) {
 				if(Main.game.getPlayer().isAbleToAccessRoomManagement()) {
-					return new Response("Manage people", "Enter the management screen for your slaves and friendly occupants.", OccupantManagementDialogue.getSlaveryRoomListDialogue(null, null)) {
+                    return new Response("Управление людьми", "Enter the management screen for your slaves and friendly occupants.", OccupantManagementDialogue.getSlaveryRoomListDialogue(null, null)) {
 						@Override
 						public void effects() {
 							CompanionManagement.initManagement(Main.game.getDefaultDialogue(), 0, null);
 						}
 					};
 				} else {
-					return new Response("Manage people", "You need a slaver license or permission from Lilaya to house your friends or dolls in order to access this menu!",  null);
+                    return new Response("Управление людьми", "Чтобы получить доступ к этому меню, нужна лицензия рабовладельца или разрешение от Лилайи на размещение своих друзей или кукол!", null);
 				}
 				
 			}

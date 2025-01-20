@@ -205,7 +205,7 @@
 				<availabilityConditional><![CDATA[[#flags.hasFlag(FLAG_innoxia_pix_had_tour) && game.getCharactersPresent().contains(pix)]]]></availabilityConditional>
 				<responseTabIndex><![CDATA[0]]></responseTabIndex>
 				<index><![CDATA[7]]></index>
-				<responseTitle><![CDATA[Hannah]]></responseTitle>
+                <responseTitle><![CDATA[Ханна]]></responseTitle>
 				<responseTooltip><![CDATA[
 					#IF(flags.hasFlag(FLAG_innoxia_pix_talk_boxing))
 						You're already asking Pix about Hannah!
@@ -1085,7 +1085,7 @@
 				<availabilityConditional><![CDATA[[#game.getCharactersPresent().contains(hannah) && !flags.hasFlag(FLAG_innoxia_hannah_introduced)]]]></availabilityConditional>
 				<responseTabIndex><![CDATA[0]]></responseTabIndex>
 				<index><![CDATA[1]]></index>
-				<responseTitle><![CDATA[Hannah]]></responseTitle>
+                <responseTitle><![CDATA[Ханна]]></responseTitle>
 				<responseTooltip><![CDATA[
 					#IF(!pc.hasItemType(ITEM_innoxia_quest_gym_membership_card))
 						As you're not a member of the gym, you can't get lessons from Hannah, and so it'd be best not to bother her...
@@ -1110,7 +1110,7 @@
 				<availabilityConditional><![CDATA[[#game.getCharactersPresent().contains(hannah) && flags.hasFlag(FLAG_innoxia_hannah_introduced)]]]></availabilityConditional>
 				<responseTabIndex><![CDATA[0]]></responseTabIndex>
 				<index><![CDATA[1]]></index>
-				<responseTitle><![CDATA[Hannah]]></responseTitle>
+                <responseTitle><![CDATA[Ханна]]></responseTitle>
 				<responseTooltip><![CDATA[Head over to where Hannah is training and say hello.]]></responseTooltip>
 				<nextDialogue><![CDATA[innoxia_places_dominion_shopping_arcade_gym_boxing_hannah]]></nextDialogue>
 				<effects><![CDATA[

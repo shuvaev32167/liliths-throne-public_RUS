@@ -32,7 +32,7 @@
 		#ELSE
 			 Just like the rest of [npc.her] body, [npc.her] new face is [npc.materialDescriptor] [npc.faceSkin+], 
 		#ENDIF
-		and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] [npc.verb(try)] to catch [npc.her] breath.
+		and as the transformation finally comes to an end, [npc.sheIs] left panting and sighing as [npc.she] try to catch [npc.her] breath.
 		<br/>[npc.Name] now [npc.has] an anthropomorphic [style.boldSnake(snake-like face)], which is [npc.materialDescriptor] [npc.faceFullDescription]. On the back and sides of [npc.her] elongated neck, [npc.she] [npc.has] a cobra-like hood, while in [npc.her] [npc.mouth], [npc.she] [npc.has] a [style.boldSnake(flat, snake-like tongue)].
 	]]></transformationDescription>
 	<bodyDescription><![CDATA[

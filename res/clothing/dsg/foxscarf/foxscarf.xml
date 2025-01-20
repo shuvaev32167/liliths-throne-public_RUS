@@ -121,26 +121,26 @@
 	<!-- 'displacementText' is used for removal and displacement. -->
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(take)] off [npc.her] scarf.]]>
+            <![CDATA[[npc.Name] take off [npc.her] scarf.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(take)] off [npc2.namePos] scarf.]]>
+            <![CDATA[[npc.Name] take off [npc2.namePos] scarf.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(tear)] [npc2.namePos] scarf away.]]>
+            <![CDATA[[npc.Name] tear [npc2.namePos] scarf away.]]>
 		</otherRough>
 	</displacementText>
 
 	<!-- 'replacementText' is used for equipping and replacements. -->	
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(wrap)] the scarf around [npc.her] neck.]]>
+            <![CDATA[[npc.Name] wrap the scarf around [npc.her] neck.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(wrap)] the scarf around [npc2.her] neck.]]>
+            <![CDATA[[npc.Name] wrap the scarf around [npc2.her] neck.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] nearly [npc.verb(gag)] [npc2.name] with the scarf as [npc.name] roughly [npc.verb(gag)] it around [npc2.namePos] neck.]]>
+            <![CDATA[[npc.Name] nearly gag [npc2.name] with the scarf as [npc.name] roughly gag it around [npc2.namePos] neck.]]>
 		</otherRough>
   </replacementText>
 

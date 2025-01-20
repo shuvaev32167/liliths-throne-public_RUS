@@ -21,11 +21,11 @@
 		
 		<attackTooltipDescription>Hit [npc2.name] with your cardboard sword.</attackTooltipDescription>
 		
-		<rarity>UNCOMMON</rarity> 
-		
-		<equipText><![CDATA[[npc.Name] [npc.verb(draw)] [npc.her] cardboard sword.]]></equipText>
-		
-		<unequipText><![CDATA[[npc.Name] [npc.verb(put)] [npc.her] cardboard sword away.]]></unequipText>
+		<rarity>UNCOMMON</rarity>
+
+        <equipText><![CDATA[[npc.Name] draw [npc.her] cardboard sword.]]></equipText>
+
+        <unequipText><![CDATA[[npc.Name] put [npc.her] cardboard sword away.]]></unequipText>
 		
 		<imageName>cbsword.svg</imageName> 
 		
@@ -68,13 +68,13 @@
 	
 	<hitDescriptions>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(swing)] [npc.her] sword at [npc2.name]! The edge of the mighty cardboardium blade makes contact with [npc2.namePos] aura, draining a miniscule amount of energy.
+		[npc.Name] swing [npc.her] sword at [npc2.name]! The edge of the mighty cardboardium blade makes contact with [npc2.namePos] aura, draining a miniscule amount of energy.
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(swing)] [npc.her] sword at [npc2.name] but an errant current of air causes [npc.her] to miss...
+		[npc.Name] swing [npc.her] sword at [npc2.name] but an errant current of air causes [npc.her] to miss...
 		]]></missText>
 	</missDescriptions>
 	

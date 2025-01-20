@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.submission.gamblingDen;
 
-import java.util.List;
-import java.util.Map;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
@@ -28,11 +25,7 @@ import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
-import com.lilithsthrone.game.sex.InitialSexActionInformation;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.managers.submission.SMRoxyPussyLicker;
 import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotLyingDown;
@@ -44,6 +37,9 @@ import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @since 0.2.6
@@ -58,20 +54,6 @@ public class RoxysShop {
 		Addiction ratGCumAdd = Main.game.getPlayer().getAddiction(FluidType.GIRL_CUM_RAT_MORPH);
 		return ratGCumAdd!=null && ratGCumAdd.getProviderIDs().contains(Main.game.getNpc(Roxy.class).getId());
 	}
-	
-	public static final DialogueNode TRADER_EXTERIOR = new DialogueNode("Roxy's Fun Box", "", false) {
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/gamblingDen/roxysShop", "TRADER_EXTERIOR");
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Enter", "[pc.Step] inside 'Roxy's Fun Box' and take a look around...", TRADER);
-			}
-			return null;
-		}
-	};
 	
 	public static final DialogueNode TRADER = new DialogueNode("Roxy's Fun Box", "", true) {
 		@Override
@@ -92,18 +74,18 @@ public class RoxysShop {
 				}
 				sb.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/roxysShop", "TRADER_VENGAR_INTRO_END"));
 				return sb.toString();
-				
+
 			} else if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.roxyIntroduced)) {
 				if(isAddictedToRoxy()) {
 					return UtilText.parseFromXMLFile("places/submission/gamblingDen/roxysShop", "TRADER_REPEAT_ADDICT");
-					
+
 				} else if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.roxyAddicted)) {
 					return UtilText.parseFromXMLFile("places/submission/gamblingDen/roxysShop", "TRADER_REPEAT_BEATEN_ADDICTION");
-					
+
 				} else {
 					return UtilText.parseFromXMLFile("places/submission/gamblingDen/roxysShop", "TRADER_REPEAT");
 				}
-				
+
 			} else {
 				return UtilText.parseFromXMLFile("places/submission/gamblingDen/roxysShop", "TRADER");
 			}
@@ -111,14 +93,14 @@ public class RoxysShop {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==0) {
-				return new Response("Exit", "Head out of Roxy's shop...", PlaceType.GAMBLING_DEN_CORRIDOR.getDialogue(false)){
+                return new Response("Выход", "Head out of Roxy's shop...", PlaceType.GAMBLING_DEN_CORRIDOR.getDialogue(false)) {
 					@Override
 					public void effects() {
 						Main.game.getDialogueFlags().values.add(DialogueFlagValue.roxyIntroduced);
 						Main.game.getPlayer().setNearestLocation(WorldType.GAMBLING_DEN, PlaceType.GAMBLING_DEN_CORRIDOR, false);
 					}
 				};
-				
+
 			} else if (index == 1) {
 				if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.roxyIntroduced)) {
 					return new Response("Refuse", "Tell Roxy that you're only interested in having a look around her shop.", TRADER_REPLY_NO){
@@ -127,7 +109,7 @@ public class RoxysShop {
 							Main.game.getDialogueFlags().values.add(DialogueFlagValue.roxyIntroduced);
 						}
 					};
-					
+
 				} else {
 					return new ResponseTrade("Trade", "Trade with Roxy.", Main.game.getNpc(Roxy.class)){
 						@Override
@@ -136,19 +118,19 @@ public class RoxysShop {
 						}
 					};
 				}
-				
+
 			} else if (index == 2) {
 				if(isAddictedToRoxy()) { // Repeat oral:
 					if(!Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.MOUTH, true)) {
 						return new Response("Get fix ("+UtilText.formatAsMoneyUncoloured(1000, "span")+")",
 								"You can only service Roxy if you're able to gain access to your mouth!",
 								null);
-						
+
 					} else if(Main.game.getPlayer().getMoney()<1000) {
 						return new Response("Get fix ("+UtilText.formatAsMoneyUncoloured(1000, "span")+")",
 								"You don't have the one thousand flames that Roxy is asking for!",
 								null);
-						
+
 					} else {
 						return new ResponseSex("Get fix ("+UtilText.formatAsMoney(1000, "span")+")",
 								"Desperate to get another fix of her addictive girl cum, you agree to <b>pay Roxy 1000 flames</b> to get her to sit on your face for an hour.",
@@ -172,7 +154,7 @@ public class RoxysShop {
 							}
 						};
 					}
-					
+
 				} else { // Perform oral:
 					if(Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.MOUTH, true)) {
 						return new ResponseSex("Lick for item", "Agree to let Roxy sit on your face and eat her out until she cums in exchange for a random item from her shop.",
@@ -194,16 +176,16 @@ public class RoxysShop {
 								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Roxy.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 							}
 						};
-						
+
 					} else {
 						return new Response("Lick for item", "You can only service Roxy if you're able to gain access to your mouth!", null);
 					}
 				}
-				
+
 			} else if(index==3 && Main.game.getNpc(Vengar.class).isSlave()) {
-				return new Response("Vengar", "Ask Roxy if you can talk to Vengar.", VENGAR);
-				
-				
+                return new Response("Венгар", "Ask Roxy if you can talk to Vengar.", VENGAR);
+
+
 			} else if(index==4
 //					&& Main.game.getDialogueFlags().values.contains(DialogueFlagValue.axelExplainedVengar)
 					&& Main.game.getPlayer().hasQuest(QuestLine.SIDE_REBEL_BASE_FIREBOMBS)
@@ -216,7 +198,7 @@ public class RoxysShop {
 							public void effects() {
 								Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_REBEL_BASE_FIREBOMBS, Quest.REBEL_BASE_FIREBOMBS_FINISH));
 								Main.game.getDialogueFlags().setSavedLong(REBEL_BASE_ROXY_TIMER, Main.game.getMinutesPassed());
-								
+
 								// Shuffle at least one instance of the arcane firebomb into the player's inventory if they've got one equipped but none in their inventory
 								if (!Main.game.getPlayer().hasWeaponType(WeaponType.getWeaponTypeFromId("dsg_hlf_weap_pbomb"), false)) {
 									int armRow = 0;
@@ -238,11 +220,11 @@ public class RoxysShop {
 										}
 									}
 								}
-								
+
 								Main.game.getPlayer().removeWeapon(Main.game.getItemGen().generateWeapon(WeaponType.getWeaponTypeFromId("dsg_hlf_weap_pbomb")));
 							}
 						};
-						
+
 					} else {
 						return new Response("Firebombs",
 								"As you don't have any firebombs on you, you're going to have to try describing them to Roxy in the hopes that she can find someone to replicate them."
@@ -254,7 +236,7 @@ public class RoxysShop {
 							}
 						};
 					}
-					
+
 				} else if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_REBEL_BASE_FIREBOMBS, Quest.REBEL_BASE_FIREBOMBS_START)) {
 					if((Main.game.getMinutesPassed() - Main.game.getDialogueFlags().getSavedLong(REBEL_BASE_ROXY_TIMER)) < 2880) { // Roxy needs 2 days to get firebombs
 						return new Response("Firebombs", "Roxy hasn't had enough time to get more firebombs yet.", null);
@@ -263,7 +245,20 @@ public class RoxysShop {
 					}
 				}
 			}
-			
+
+			return null;
+		}
+	};
+	public static final DialogueNode TRADER_EXTERIOR = new DialogueNode("Roxy's Fun Box", "", false) {
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/submission/gamblingDen/roxysShop", "TRADER_EXTERIOR");
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+                return new Response("Вход", "[pc.Step] inside 'Roxy's Fun Box' and take a look around...", TRADER);
+			}
 			return null;
 		}
 	};
@@ -416,8 +411,8 @@ public class RoxysShop {
 	};
 	
 	
-	private static int VENGAR_SUB_SEX_COST = 1000;
-	private static int VENGAR_SUB_DOM_COST = 1500;
+	private static final int VENGAR_SUB_SEX_COST = 1000;
+	private static final int VENGAR_SUB_DOM_COST = 1500;
 	
 	public static final DialogueNode VENGAR = new DialogueNode("", "", true) {
 		@Override
@@ -525,7 +520,7 @@ public class RoxysShop {
 				}
 				return new Response("Sissify",
 						"Tell Roxy that Vengar would behave a lot better if she were to turn him into a sissy."
-						+ "<br/>Will consume: [style.italicsArcane(100 essences)] and [style.italicsMinorGood(one [#ITEM_FETISH_UNREFINED.getName(false)])].",
+                                + "<br/>Will consume: [style.italicsArcane(100 essences)] и [style.italicsMinorGood(one [#ITEM_FETISH_UNREFINED.getName(false)])].",
 						VENGAR_SISSIFY) {
 					@Override
 					public void effects() {

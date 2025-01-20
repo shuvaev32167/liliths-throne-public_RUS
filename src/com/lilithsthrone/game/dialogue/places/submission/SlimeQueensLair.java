@@ -50,8 +50,8 @@ public class SlimeQueensLair {
 		Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slimeRoyalGuardDefeated, false);
 		Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slimeRoyalGuardDefeatReacted, false);
 	}
-	
-	public static final DialogueNode ENTRANCE = new DialogueNode("Entrance Hall", "", false) {
+
+	public static final DialogueNode ENTRANCE = new DialogueNode("Прихожая", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -92,7 +92,34 @@ public class SlimeQueensLair {
 		}
 	};
 
-	public static final DialogueNode GUARD_POST = new DialogueNode("Guard Post", "", true) {
+    public static final DialogueNode STAIRCASE_UP = new DialogueNode("Винтовая лестница", "", false) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 2*60;
+		}
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "STAIRCASE_UP");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 1) {
+                return new ResponseEffectsOnly("Наверх", "Travel up the spiral staircase to the first floor.") {
+					@Override
+					public void effects() {
+						Main.game.getPlayer().setLocation(WorldType.SLIME_QUEENS_LAIR_FIRST_FLOOR, PlaceType.SLIME_QUEENS_LAIR_STAIRS_DOWN);
+						Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+					}
+				};
+
+			} else {
+				return null;
+			}
+		}
+	};    public static final DialogueNode GUARD_POST = new DialogueNode("Пост стражи", "", true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -137,11 +164,11 @@ public class SlimeQueensLair {
 			if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_FIVE_CONVINCE)
 					|| Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.slimeGuardsBluffed)) {
 				if(index==1) {
-					return new Response("Talk", UtilText.parse(Main.game.getNpc(SlimeGuardFire.class), Main.game.getNpc(SlimeGuardIce.class), "Ask [npc1.name] and [npc2.name] about how they came to be guarding the Slime Queen."), GUARD_POST_TALK);
+                    return new Response("Talk", UtilText.parse(Main.game.getNpc(SlimeGuardFire.class), Main.game.getNpc(SlimeGuardIce.class), "Ask [npc1.name] и [npc2.name] about how they came to be guarding the Slime Queen."), GUARD_POST_TALK);
 						
 				} else if(!Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_FIVE_CONVINCE) && index==2){
 					return new ResponseCombat("Fight",
-							"Decide to drop the act and attack [slimeFire.name] and [slimeIce.name]!",
+                            "Decide to drop the act and attack [slimeFire.name] и [slimeIce.name]!",
 							Main.game.getNpc(SlimeGuardFire.class),
 							Util.newArrayListOfValues(Main.game.getNpc(SlimeGuardFire.class), Main.game.getNpc(SlimeGuardIce.class)),
 							Util.newHashMapOfValues(
@@ -152,7 +179,7 @@ public class SlimeQueensLair {
 					
 				} else if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_FIVE_CONVINCE)?index==2:index==3) {
 					return new ResponseSex("Side-by-side",
-							"Push [slimeFire.name] and [slimeIce.name] down onto all fours, side-by-side, and get ready to fuck them.",
+                            "Push [slimeFire.name] и [slimeIce.name] down onto all fours, side-by-side, and get ready to fuck them.",
 							null, null, null, null, null, null,
 							true, false,
 							new SMAllFours(
@@ -170,7 +197,7 @@ public class SlimeQueensLair {
 				
 				} else if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_FIVE_CONVINCE)?index==3:index==4) {
 					return new ResponseSex("Get Spitroasted",
-							"Let [slimeFire.name] and [slimeIce.name] spitroast you.",
+                            "Let [slimeFire.name] и [slimeIce.name] spitroast you.",
 							Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
 							true, true,
 							new SMAllFours(
@@ -192,7 +219,7 @@ public class SlimeQueensLair {
 			} else if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.slimeGuardsDefeated)) {
 				if(index==1) {
 					return new ResponseSex("Side-by-side",
-							"Push [slimeFire.name] and [slimeIce.name] down onto all fours, side-by-side, and get ready to fuck them.",
+                            "Push [slimeFire.name] и [slimeIce.name] down onto all fours, side-by-side, and get ready to fuck them.",
 							null, null, null, null, null, null,
 							true, false,
 							new SMAllFours(
@@ -210,7 +237,7 @@ public class SlimeQueensLair {
 				
 				} else if(index==2) {
 					return new ResponseSex("Get Spitroasted",
-							"Let [slimeFire.name] and [slimeIce.name] spitroast you.",
+                            "Let [slimeFire.name] и [slimeIce.name] spitroast you.",
 							Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
 							true, true,
 							new SMAllFours(
@@ -293,8 +320,34 @@ public class SlimeQueensLair {
 			}
 		}
 	};
-	
-	public static final DialogueNode GUARD_POST_SLIME_BLUFF = new DialogueNode("Guard Post", "", false, true) {
+    public static final DialogueNode STAIRCASE_DOWN = new DialogueNode("Винтовая лестница", "", false) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 2*60;
+		}
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "STAIRCASE_DOWN");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 1) {
+                return new ResponseEffectsOnly("Вниз", "Travel down the spiral staircase to the ground floor.") {
+					@Override
+					public void effects() {
+						Main.game.getPlayer().setLocation(WorldType.SLIME_QUEENS_LAIR_GROUND_FLOOR, PlaceType.SLIME_QUEENS_LAIR_STAIRS_UP);
+						Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+					}
+				};
+
+			} else {
+				return null;
+			}
+		}
+	};    public static final DialogueNode GUARD_POST_SLIME_BLUFF = new DialogueNode("Пост стражи", "", false, true) {
 		
 		@Override
 		public String getContent() {
@@ -307,8 +360,23 @@ public class SlimeQueensLair {
 			return GUARD_POST.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode GUARD_POST_BUTLER_BLUFF = new DialogueNode("Guard Post", "", false, true) {
+    public static final DialogueNode STORAGE_VATS = new DialogueNode("Дистиллятор", "", false) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 20;
+		}
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "STORAGE_VATS");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return null;
+		}
+	};    public static final DialogueNode GUARD_POST_BUTLER_BLUFF = new DialogueNode("Пост стражи", "", false, true) {
 		
 		@Override
 		public String getContent() {
@@ -321,8 +389,58 @@ public class SlimeQueensLair {
 			return GUARD_POST.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode GUARD_POST_MAID_BLUFF = new DialogueNode("Guard Post", "", false, true) {
+    public static final DialogueNode ROYAL_GUARD_POST_ADMIRE_SEDUCE = new DialogueNode("Пост королевской стражи", "", true, true) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "ROYAL_GUARD_POST_ADMIRE_SEDUCE");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+				return new ResponseCombat("Fight",
+						"Now that you've worn [slimeRoyalGuard.name] out, [slimeRoyalGuard.he] should be easier to beat!",
+						Main.game.getNpc(SlimeRoyalGuard.class),
+						Util.newHashMapOfValues(
+								new Value<>(Main.game.getPlayer(), "[pc.speech(Ok, I'll fight you...)] you sigh, preparing for combat."),
+								new Value<>(Main.game.getNpc(SlimeRoyalGuard.class), "[slimeRoyalGuard.speech(E-Excellent!)] [slimeRoyalGuard.name] replies, already flustered and turned on from your teasing.")));
+
+			} else if(index==2) {
+				return new ResponseSex("Submissive sex",
+						UtilText.parse(Main.game.getNpc(SlimeRoyalGuard.class), "Push [slimeRoyalGuard.name] over the edge and tire him out through sex."),
+						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
+						true, true,
+						new SMGeneric(
+								Util.newArrayListOfValues(Main.game.getNpc(SlimeRoyalGuard.class)),
+								Util.newArrayListOfValues(Main.game.getPlayer()),
+						null,
+						null) {
+							@Override
+							public boolean isPlayerAbleToStopSex() {
+								return false;
+							}
+						},
+						AFTER_SLIME_ROYAL_GUARD_SEX_SEDUCTION,
+						UtilText.parseFromXMLFile("places/submission/slimeQueensLair",
+						"ROYAL_GUARD_SEX_SEDUCTION")) {
+					@Override
+					public void effects() {
+						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slimeRoyalGuardDefeated, true);
+					}
+				};
+
+
+			} else {
+				return null;
+			}
+		}
+	};    public static final DialogueNode GUARD_POST_MAID_BLUFF = new DialogueNode("Пост стражи", "", false, true) {
 		
 		@Override
 		public String getContent() {
@@ -335,8 +453,21 @@ public class SlimeQueensLair {
 			return GUARD_POST.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode GUARD_POST_TALK = new DialogueNode("Guard Post", "", false, true) {
+    public static final DialogueNode SLIME_QUEEN_LEAVE = new DialogueNode("Палата с кроватью", "", false, true) {
+		@Override
+		public void applyPreParsingEffects() {
+			Main.game.getPlayer().setNearestLocation(WorldType.SLIME_QUEENS_LAIR_FIRST_FLOOR, PlaceType.SLIME_QUEENS_LAIR_CORRIDOR, false);
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_LEAVE");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return null;
+		}
+	};    public static final DialogueNode GUARD_POST_TALK = new DialogueNode("Пост стражи", "", false, true) {
 		
 		@Override
 		public String getContent() {
@@ -385,7 +516,7 @@ public class SlimeQueensLair {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "", SLIME_GUARDS_COMBAT_PLAYER_VICTORY_CONTINUE);
+                return new Response("Продолжить", "", SLIME_GUARDS_COMBAT_PLAYER_VICTORY_CONTINUE);
 			} else if(index==2 || index==3) {
 				return GUARD_POST.getResponse(responseTab, index-1);
 			}
@@ -417,7 +548,7 @@ public class SlimeQueensLair {
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
 				return new ResponseSex("Spitroasted",
-						"[slimeFire.name] and [slimeIce.name] move to have some fun with you...",
+                        "[slimeFire.name] и [slimeIce.name] move to have some fun with you...",
 						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
 						false, false,
 						new SMAllFours(
@@ -462,69 +593,58 @@ public class SlimeQueensLair {
 			}
 		}
 	};
-	
-	
-	
-	
-	public static final DialogueNode STAIRCASE_UP = new DialogueNode("Spiral Staircase", "", false) {
-		
+    public static final DialogueNode SLIME_QUEEN_BATH = new DialogueNode("Палата с кроватью", "", true, true) {
 		@Override
-		public int getSecondsPassed() {
-			return 2*60;
+		public void applyPreParsingEffects() {
+			Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().applyWash(true, false, StatusEffect.CLEANED_BATH, 240+30));
 		}
-		
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "STAIRCASE_UP");
+			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_BATH");
 		}
-
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new ResponseEffectsOnly("Upstairs", "Travel up the spiral staircase to the first floor."){
-					@Override
-					public void effects() {
-						Main.game.getPlayer().setLocation(WorldType.SLIME_QUEENS_LAIR_FIRST_FLOOR, PlaceType.SLIME_QUEENS_LAIR_STAIRS_DOWN);
-						Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
-					}
-				};
+			if(index==1) {
+				return new Response("Leave", "Decline [slimeQueen.namePos] provocative moans and take your leave.", SLIME_QUEEN_LEAVE);
+
+			} else if(index==2) {
+				return new ResponseSex("'Rape'",
+						UtilText.parse(Main.game.getNpc(SlimeQueen.class), "Play along with [slimeQueen.namePos] fantasies and force yourself on her."),
+						null, null, null, null, null, null,
+						true, false,
+						new SMBath(SexPosition.ALL_FOURS,
+								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.BEHIND)),
+								Util.newHashMapOfValues(
+										new Value<>(Main.game.getNpc(SlimeQueen.class), SexSlotAllFours.ALL_FOURS))) {
+							@Override
+							public boolean isRapePlayBannedAtStart(GameCharacter character) {
+								return false;
+							}
+						},
+						null,
+						null,
+						AFTER_SLIME_QUEEN_SEX_BATH,
+						UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_BATH_SEX_START"));
 
 			} else {
 				return null;
 			}
 		}
 	};
-	
-	public static final DialogueNode STAIRCASE_DOWN = new DialogueNode("Spiral Staircase", "", false) {
-		
-		@Override
-		public int getSecondsPassed() {
-			return 2*60;
-		}
-		
+    public static final DialogueNode SLIME_QUEEN_BATH_TRANSFORM = new DialogueNode("Палата с кроватью", "", true, true) {
+
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "STAIRCASE_DOWN");
+			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_BATH_TRANSFORM");
 		}
 
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new ResponseEffectsOnly("Downstairs", "Travel down the spiral staircase to the ground floor."){
-					@Override
-					public void effects() {
-						Main.game.getPlayer().setLocation(WorldType.SLIME_QUEENS_LAIR_GROUND_FLOOR, PlaceType.SLIME_QUEENS_LAIR_STAIRS_UP);
-						Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
-					}
-				};
-
-			} else {
-				return null;
-			}
+			return SLIME_QUEEN_BATH.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode CORRIDOR = new DialogueNode("Corridor", "", false) {
+
+    public static final DialogueNode CORRIDOR = new DialogueNode("Коридор", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -541,8 +661,8 @@ public class SlimeQueensLair {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode ROOM = new DialogueNode("Bedroom", "", false) {
+
+	public static final DialogueNode ROOM = new DialogueNode("Спальня", "", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -559,26 +679,80 @@ public class SlimeQueensLair {
 			return null;
 		}
 	};
+    public static final DialogueNode SLIME_QUEEN_CONVINCE = new DialogueNode("Палата с кроватью", "", true, true) {
 
-	public static final DialogueNode STORAGE_VATS = new DialogueNode("Distillery", "", false) {
-		
-		@Override
-		public int getSecondsPassed() {
-			return 20;
-		}
-		
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "STORAGE_VATS");
+			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_CONVINCE");
 		}
 
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			return null;
+			if(index==1) {
+				return new Response("Leave", "Ignore [slimeQueen.namePos] provocative moans and take your leave.", SLIME_QUEEN_LEAVE);
+
+			} else if(index==2) {
+				return new ResponseSex("'Rape'",
+						UtilText.parse(Main.game.getNpc(SlimeQueen.class), "Play along with [slimeQueen.namePos] fantasies and force yourself on her."),
+						null, null, null, null, null, null,
+						true, false,
+						new SMLyingDown(
+								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.MISSIONARY)),
+								Util.newHashMapOfValues(
+										new Value<>(Main.game.getNpc(SlimeQueen.class), SexSlotLyingDown.LYING_DOWN))) {
+							@Override
+							public boolean isRapePlayBannedAtStart(GameCharacter character) {
+								return false;
+							}
+						},
+						null,
+						null,
+						AFTER_SLIME_QUEEN_SEX, UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_SEX_START"));
+
+			} else if(index==3) {
+				if(Main.game.getPlayer().getBodyMaterial()==BodyMaterial.SLIME) {
+					return new Response("Slime Bath",
+							"Have a bath with [slimeQueen.Name]."
+									+ "<br/>[style.italicsExcellent(This will clean <b>all</b> fluids out of all your orifices.)]"
+									+ "<br/>[style.italicsGood(This will clean <b>only</b> your currently equipped clothing.)]",
+							SLIME_QUEEN_BATH);
+
+				} else {
+					return new Response("Slime Bath",
+							"Have a bath with [slimeQueen.name]."
+								+ "<br/>[style.boldTerrible(Warning:)] [style.boldSlime(This will transform you into a slime!)]"
+								+ "<br/>[style.italicsExcellent(This will clean <b>all</b> fluids out of all your orifices.)]"
+								+ "<br/>[style.italicsGood(This will clean <b>only</b> your currently equipped clothing.)]",
+							SLIME_QUEEN_BATH_TRANSFORM) {
+						@Override
+						public Colour getHighlightColour() {
+							return PresetColour.TRANSFORMATION_GENERIC;
+						}
+						@Override
+						public void effects() {
+							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setBodyMaterial(BodyMaterial.SLIME));
+							Main.game.getTextEndStringBuilder().append(UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_BATH_TRANSFORM_END"));
+						}
+					};
+				}
+
+			} else {
+				return null;
+			}
 		}
 	};
+    public static final DialogueNode SLIME_QUEEN_FORCE = new DialogueNode("Палата с кроватью", "", true, true) {
 
-	public static final DialogueNode ROYAL_GUARD_POST = new DialogueNode("Royal Guard Post", "", true) {
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_FORCE");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return SLIME_QUEEN_CONVINCE.getResponse(responseTab, index);
+		}
+	};    public static final DialogueNode ROYAL_GUARD_POST = new DialogueNode("Пост королевской стражи", "", true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -644,7 +818,7 @@ public class SlimeQueensLair {
 					};
 					
 				} else if(!defeatReacted && index==1) {
-					return new Response("Continue",
+                    return new Response("Продолжить",
 							"Continue on your way through the tower.",
 							CORRIDOR) {
 						@Override
@@ -701,8 +875,18 @@ public class SlimeQueensLair {
 			}
 		}
 	};
-	
-	public static final DialogueNode ROYAL_GUARD_POST_TALK = new DialogueNode("Royal Guard Post", "", false, true) {
+    public static final DialogueNode SLIME_QUEEN_SUBMIT = new DialogueNode("Палата с кроватью", "", true, true) {
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_SUBMIT");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return SLIME_QUEEN_CONVINCE.getResponse(responseTab, index);
+		}
+	};    public static final DialogueNode ROYAL_GUARD_POST_TALK = new DialogueNode("Пост королевской стражи", "", false, true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -719,8 +903,93 @@ public class SlimeQueensLair {
 			return ROYAL_GUARD_POST.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode ROYAL_GUARD_POST_ADMIRE = new DialogueNode("Royal Guard Post", "", true, true) {
+    public static final DialogueNode BED_CHAMBER = new DialogueNode("Палата с кроватью", "", true) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+
+//		@Override
+//		public boolean isTravelDisabled() {
+//			return !Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_FIVE_CONVINCE);
+//		}
+
+		@Override
+		public String getContent() {
+			if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_FIVE_CONVINCE)) {
+				return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "BED_CHAMBER_PACIFIED");
+
+			} else {
+				return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "BED_CHAMBER");
+			}
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_FIVE_CONVINCE)) {
+				return SLIME_QUEEN_CONVINCE.getResponse(responseTab, index);
+
+			} else {
+				if(index==1) {
+					return new Response("Convince", "Convince [slimeQueen.name] to stop encouraging other slimes to go around transforming people in Submission's tunnels.", SLIME_QUEEN_CONVINCE) {
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slimeQueenConvinced, true);
+
+							AbstractClothing crown = Main.game.getNpc(SlimeQueen.class).getClothingInSlot(InventorySlot.HEAD);
+							if(crown!=null) {
+								Main.game.getNpc(SlimeQueen.class).unequipClothingIntoVoid(crown, true, Main.game.getNpc(SlimeQueen.class));
+							}
+							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("innoxia_head_slime_queens_tiara", false), true));
+
+							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_FIVE_CONVINCE));
+							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_SIX_CONVINCE));
+						}
+					};
+
+				} else if(index==2) {
+					return new Response("Force", "If she really wants to be treated roughly, then that's what [slimeQueen.namePos] going to get. Push her down on her bed and force her to give up her plans.", SLIME_QUEEN_FORCE,
+							Util.newArrayListOfValues(Fetish.FETISH_SADIST), Fetish.FETISH_SADIST.getAssociatedCorruptionLevel(), null, null, null) {
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slimeQueenForced, true);
+
+							AbstractClothing crown = Main.game.getNpc(SlimeQueen.class).getClothingInSlot(InventorySlot.HEAD);
+							if(crown!=null) {
+								Main.game.getNpc(SlimeQueen.class).unequipClothingIntoVoid(crown, true, Main.game.getNpc(SlimeQueen.class));
+							}
+							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("innoxia_head_slime_queens_tiara", false), true));
+
+							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_FIVE_FORCE));
+							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_SIX_FORCE));
+						}
+					};
+
+				} else if(index==3) {
+					return new Response("Help", "Instead of stopping her, offer Catherine your assistance instead. <b>This will greatly increase the number of slime encounters in Submission.</b>", SLIME_QUEEN_SUBMIT,
+							Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null) {
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slimeQueenHelped, true);
+
+							AbstractClothing crown = Main.game.getNpc(SlimeQueen.class).getClothingInSlot(InventorySlot.HEAD);
+							if(crown!=null) {
+								Main.game.getNpc(SlimeQueen.class).unequipClothingIntoVoid(crown, true, Main.game.getNpc(SlimeQueen.class));
+							}
+							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("innoxia_head_slime_queens_tiara", false), true));
+
+							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_FIVE_SUBMIT));
+							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_SIX_SUBMIT));
+						}
+					};
+
+				} else {
+					return null;
+				}
+			}
+		}
+	};    public static final DialogueNode ROYAL_GUARD_POST_ADMIRE = new DialogueNode("Пост королевской стражи", "", true, true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -776,8 +1045,18 @@ public class SlimeQueensLair {
 			}
 		}
 	};
-	
-	public static final DialogueNode ROYAL_GUARD_POST_ADMIRE_INSTRUCT = new DialogueNode("Royal Guard Post", "", true, true) {
+    public static final DialogueNode SLIME_QUEEN_TALK = new DialogueNode("Палата с кроватью", "", false, true) {
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_TALK");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return BED_CHAMBER.getResponse(responseTab, index);
+		}
+	};    public static final DialogueNode ROYAL_GUARD_POST_ADMIRE_INSTRUCT = new DialogueNode("Пост королевской стражи", "", true, true) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -817,8 +1096,8 @@ public class SlimeQueensLair {
 			}
 		}
 	};
-	
-	public static final DialogueNode ROYAL_GUARD_POST_ADMIRE_INSTRUCT_OVERPOWER = new DialogueNode("Royal Guard Post", "", false, true) {
+
+    public static final DialogueNode ROYAL_GUARD_POST_ADMIRE_INSTRUCT_OVERPOWER = new DialogueNode("Пост королевской стражи", "", false, true) {
 
 		@Override
 		public boolean isTravelDisabled() {
@@ -840,60 +1119,9 @@ public class SlimeQueensLair {
 			return ROYAL_GUARD_POST.getResponse(responseTab, index);
 		}
 	};
-	
 
-	public static final DialogueNode ROYAL_GUARD_POST_ADMIRE_SEDUCE = new DialogueNode("Royal Guard Post", "", true, true) {
-		
-		@Override
-		public int getSecondsPassed() {
-			return 60;
-		}
-		
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "ROYAL_GUARD_POST_ADMIRE_SEDUCE");
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new ResponseCombat("Fight",
-						"Now that you've worn [slimeRoyalGuard.name] out, [slimeRoyalGuard.he] should be easier to beat!",
-						Main.game.getNpc(SlimeRoyalGuard.class),
-						Util.newHashMapOfValues(
-								new Value<>(Main.game.getPlayer(), "[pc.speech(Ok, I'll fight you...)] you sigh, preparing for combat."),
-								new Value<>(Main.game.getNpc(SlimeRoyalGuard.class), "[slimeRoyalGuard.speech(E-Excellent!)] [slimeRoyalGuard.name] replies, already flustered and turned on from your teasing.")));
-				
-			} else if(index==2) {
-				return new ResponseSex("Submissive sex",
-						UtilText.parse(Main.game.getNpc(SlimeRoyalGuard.class), "Push [slimeRoyalGuard.name] over the edge and tire him out through sex."),
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
-						true, true,
-						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(SlimeRoyalGuard.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-						null,
-						null) {
-							@Override
-							public boolean isPlayerAbleToStopSex() {
-								return false;
-							}
-						},
-						AFTER_SLIME_ROYAL_GUARD_SEX_SEDUCTION,
-						UtilText.parseFromXMLFile("places/submission/slimeQueensLair",
-						"ROYAL_GUARD_SEX_SEDUCTION")) {
-					@Override
-					public void effects() {
-						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slimeRoyalGuardDefeated, true);
-					}
-				};
-					
-				
-			} else {
-				return null;
-			}
-		}
-	};
+
+
 
 	public static final DialogueNode AFTER_SLIME_ROYAL_GUARD_SEX_AS_DOM = new DialogueNode("Finished", "", false) {
 		
@@ -1083,264 +1311,22 @@ public class SlimeQueensLair {
 			return ROYAL_GUARD_POST.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode BED_CHAMBER = new DialogueNode("Bed Chamber", "", true) {
-		
-		@Override
-		public int getSecondsPassed() {
-			return 60;
-		}
-		
-//		@Override
-//		public boolean isTravelDisabled() {
-//			return !Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_FIVE_CONVINCE);
-//		}
-		
-		@Override
-		public String getContent() {
-			if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_FIVE_CONVINCE)) {
-				return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "BED_CHAMBER_PACIFIED");
-				
-			} else {
-				return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "BED_CHAMBER");
-			}
-		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_FIVE_CONVINCE)) {
-				return SLIME_QUEEN_CONVINCE.getResponse(responseTab, index);
-				
-			} else {
-				if(index==1) {
-					return new Response("Convince", "Convince [slimeQueen.name] to stop encouraging other slimes to go around transforming people in Submission's tunnels.", SLIME_QUEEN_CONVINCE) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slimeQueenConvinced, true);
-							
-							AbstractClothing crown = Main.game.getNpc(SlimeQueen.class).getClothingInSlot(InventorySlot.HEAD);
-							if(crown!=null) {
-								Main.game.getNpc(SlimeQueen.class).unequipClothingIntoVoid(crown, true, Main.game.getNpc(SlimeQueen.class));
-							}
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("innoxia_head_slime_queens_tiara", false), true));
-							
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_FIVE_CONVINCE));
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_SIX_CONVINCE));
-						}
-					};
-					
-				} else if(index==2) {
-					return new Response("Force", "If she really wants to be treated roughly, then that's what [slimeQueen.namePos] going to get. Push her down on her bed and force her to give up her plans.", SLIME_QUEEN_FORCE,
-							Util.newArrayListOfValues(Fetish.FETISH_SADIST), Fetish.FETISH_SADIST.getAssociatedCorruptionLevel(), null, null, null) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slimeQueenForced, true);
 
-							AbstractClothing crown = Main.game.getNpc(SlimeQueen.class).getClothingInSlot(InventorySlot.HEAD);
-							if(crown!=null) {
-								Main.game.getNpc(SlimeQueen.class).unequipClothingIntoVoid(crown, true, Main.game.getNpc(SlimeQueen.class));
-							}
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("innoxia_head_slime_queens_tiara", false), true));
-							
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_FIVE_FORCE));
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_SIX_FORCE));
-						}
-					};
-					
-				} else if(index==3) {
-					return new Response("Help", "Instead of stopping her, offer Catherine your assistance instead. <b>This will greatly increase the number of slime encounters in Submission.</b>", SLIME_QUEEN_SUBMIT,
-							Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slimeQueenHelped, true);
 
-							AbstractClothing crown = Main.game.getNpc(SlimeQueen.class).getClothingInSlot(InventorySlot.HEAD);
-							if(crown!=null) {
-								Main.game.getNpc(SlimeQueen.class).unequipClothingIntoVoid(crown, true, Main.game.getNpc(SlimeQueen.class));
-							}
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("innoxia_head_slime_queens_tiara", false), true));
-							
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_FIVE_SUBMIT));
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_SIX_SUBMIT));
-						}
-					};
-					
-				} else {
-					return null;
-				}
-			}
-		}
-	};
-	
-	public static final DialogueNode SLIME_QUEEN_CONVINCE = new DialogueNode("Bed Chamber", "", true, true) {
-		
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_CONVINCE");
-		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Leave", "Ignore [slimeQueen.namePos] provocative moans and take your leave.", SLIME_QUEEN_LEAVE);
-				
-			} else if(index==2) {
-				return new ResponseSex("'Rape'",
-						UtilText.parse(Main.game.getNpc(SlimeQueen.class), "Play along with [slimeQueen.namePos] fantasies and force yourself on her."),
-						null, null, null, null, null, null,
-						true, false,
-						new SMLyingDown(
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.MISSIONARY)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(SlimeQueen.class), SexSlotLyingDown.LYING_DOWN))) {
-							@Override
-							public boolean isRapePlayBannedAtStart(GameCharacter character) {
-								return false;
-							}
-						},
-						null,
-						null,
-						AFTER_SLIME_QUEEN_SEX, UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_SEX_START"));
-				
-			} else if(index==3) {
-				if(Main.game.getPlayer().getBodyMaterial()==BodyMaterial.SLIME) {
-					return new Response("Slime Bath",
-							"Have a bath with [slimeQueen.Name]."
-									+ "<br/>[style.italicsExcellent(This will clean <b>all</b> fluids out of all your orifices.)]"
-									+ "<br/>[style.italicsGood(This will clean <b>only</b> your currently equipped clothing.)]",
-							SLIME_QUEEN_BATH);
-					
-				} else {
-					return new Response("Slime Bath",
-							"Have a bath with [slimeQueen.name]."
-								+ "<br/>[style.boldTerrible(Warning:)] [style.boldSlime(This will transform you into a slime!)]"
-								+ "<br/>[style.italicsExcellent(This will clean <b>all</b> fluids out of all your orifices.)]"
-								+ "<br/>[style.italicsGood(This will clean <b>only</b> your currently equipped clothing.)]",
-							SLIME_QUEEN_BATH_TRANSFORM) {
-						@Override
-						public Colour getHighlightColour() {
-							return PresetColour.TRANSFORMATION_GENERIC;
-						}
-						@Override
-						public void effects() {
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setBodyMaterial(BodyMaterial.SLIME));
-							Main.game.getTextEndStringBuilder().append(UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_BATH_TRANSFORM_END"));
-						}
-					};
-				}
-				
-			} else {
-				return null;
-			}
-		}
-	};
 
-	public static final DialogueNode SLIME_QUEEN_FORCE = new DialogueNode("Bed Chamber", "", true, true) {
-		
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_FORCE");
-		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SLIME_QUEEN_CONVINCE.getResponse(responseTab, index);
-		}
-	};
 
-	public static final DialogueNode SLIME_QUEEN_SUBMIT = new DialogueNode("Bed Chamber", "", true, true) {
-		
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_SUBMIT");
-		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SLIME_QUEEN_CONVINCE.getResponse(responseTab, index);
-		}
-	};
-	
-	public static final DialogueNode SLIME_QUEEN_BATH = new DialogueNode("Bed Chamber", "", true, true) {
-		@Override
-		public void applyPreParsingEffects() {
-			Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().applyWash(true, false, StatusEffect.CLEANED_BATH, 240+30));
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_BATH");
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Leave", "Decline [slimeQueen.namePos] provocative moans and take your leave.", SLIME_QUEEN_LEAVE);
-				
-			} else if(index==2) {
-				return new ResponseSex("'Rape'",
-						UtilText.parse(Main.game.getNpc(SlimeQueen.class), "Play along with [slimeQueen.namePos] fantasies and force yourself on her."),
-						null, null, null, null, null, null,
-						true, false,
-						new SMBath(SexPosition.ALL_FOURS,
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(SlimeQueen.class), SexSlotAllFours.ALL_FOURS))) {
-							@Override
-							public boolean isRapePlayBannedAtStart(GameCharacter character) {
-								return false;
-							}
-						},
-						null,
-						null,
-						AFTER_SLIME_QUEEN_SEX_BATH,
-						UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_BATH_SEX_START"));
-				
-			} else {
-				return null;
-			}
-		}
-	};
-	
-	public static final DialogueNode SLIME_QUEEN_BATH_TRANSFORM = new DialogueNode("Bed Chamber", "", true, true) {
-		
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_BATH_TRANSFORM");
-		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SLIME_QUEEN_BATH.getResponse(responseTab, index);
-		}
-	};
-	
-	public static final DialogueNode SLIME_QUEEN_LEAVE = new DialogueNode("Bed Chamber", "", false, true) {
-		@Override
-		public void applyPreParsingEffects() {
-			Main.game.getPlayer().setNearestLocation(WorldType.SLIME_QUEENS_LAIR_FIRST_FLOOR, PlaceType.SLIME_QUEENS_LAIR_CORRIDOR, false);
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_LEAVE");
-		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return null;
-		}
-	};
-	
-	public static final DialogueNode SLIME_QUEEN_TALK = new DialogueNode("Bed Chamber", "", false, true) {
-		
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_TALK");
-		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return BED_CHAMBER.getResponse(responseTab, index);
-		}
-	};
+
+
+
+
+
 	
 	
 	public static final DialogueNode AFTER_SLIME_QUEEN_SEX_BATH = new DialogueNode("Finished", "", true) {

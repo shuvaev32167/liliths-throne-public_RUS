@@ -42,25 +42,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the fishnet gloves onto [npc.her] [npc.hands] and up to [npc.her] elbows.]]>
+            <![CDATA[[npc.Name] pull the fishnet gloves onto [npc.her] [npc.hands] and up to [npc.her] elbows.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the fishnet gloves onto [npc2.namePos] [npc2.hands] and up to [npc.her] elbows.]]>
+            <![CDATA[[npc.Name] pull the fishnet gloves onto [npc2.namePos] [npc2.hands] and up to [npc.her] elbows.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(force)] the fishnet gloves onto [npc2.namePos] [npc2.hands] and up to [npc.her] elbows.]]>
+            <![CDATA[[npc.Name] roughly force the fishnet gloves onto [npc2.namePos] [npc2.hands] and up to [npc.her] elbows.]]>
 	  </otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] off [npc.her] fishnet gloves.]]>
+            <![CDATA[[npc.Name] pull off [npc.her] fishnet gloves.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] off [npc2.namePos] fishnet gloves.]]>
+            <![CDATA[[npc.Name] pull off [npc2.namePos] fishnet gloves.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(yank)] off [npc2.namePos] fishnet gloves.]]>
+            <![CDATA[[npc.Name] roughly yank off [npc2.namePos] fishnet gloves.]]>
 		</otherRough>
 	</displacementText>
 	

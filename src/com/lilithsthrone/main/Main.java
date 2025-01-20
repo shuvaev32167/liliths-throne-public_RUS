@@ -1,24 +1,5 @@
 package com.lilithsthrone.main;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerFactory;
-
 import com.lilithsthrone.controller.MainController;
 import com.lilithsthrone.controller.TooltipUpdateThread;
 import com.lilithsthrone.game.Game;
@@ -46,10 +27,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Generation;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
-
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -61,6 +39,16 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerFactory;
+import java.io.*;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @since 0.1.0
@@ -74,7 +62,7 @@ public class Main extends Application {
 	public static Combat combat;
 
 	public static TransformerFactory transformerFactory = TransformerFactory.newInstance();
-	private static DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+	private static final DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 	private static DocumentBuilder docBuilder;
 
 	public static MainController mainController;
@@ -138,15 +126,603 @@ public class Main extends Application {
 
 	// World generation:
 	public static Generation gen;
+	private static void loadMainStage(FXMLLoader loader) {
+		try {
+			if (mainScene == null) {
+				Pane pane = loader.load();
+				mainController = loader.getController();
+
+				mainScene = new Scene(pane);
+				if (getProperties().hasValue(PropertyValue.lightTheme))
+					mainScene.getStylesheets().add("/com/lilithsthrone/res/css/stylesheet_light.css");
+				else
+					mainScene.getStylesheets().add("/com/lilithsthrone/res/css/stylesheet.css");
+			}
+
+			primaryStage.setScene(mainScene);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Starts a completely new game. Runs a new World Generation.
+	 */
+	public static void startNewGame(DialogueNode startingDialogueNode) {
+
+		game = new Game();
+
+		// Generate world:
+		if (gen != null && gen.isRunning()) {
+			gen.cancel();
+		}
+
+		gen = new Generation();
+
+		gen.setOnSucceeded(new EventHandler<>() {
+			@Override
+			public void handle(WorkerStateEvent t) {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/lilithsthrone/res/fxml/main.fxml"));
+				loadMainStage(loader);
+
+				game.setPlayer(new PlayerCharacter(new NameTriplet("Player"), 1, null, Gender.M_P_MALE, Subspecies.HUMAN, RaceStage.HUMAN, WorldType.MUSEUM, PlaceType.MUSEUM_ENTRANCE));
+
+				game.initNewGame(startingDialogueNode);
+
+				game.endTurn(0);
+
+				OptionsDialogue.startingNewGame = false;
+				//Main.mainController.processNewDialogue();
+			}
+		});
+		new Thread(gen).start();
+	}
+
+	protected static void CheckForDataDirectory() {
+		File dir = new File("data/");
+		if(!dir.exists()) {
+			
+			Alert a = new Alert(AlertType.ERROR,
+					"Не найдена папка 'data' ("+dir.getAbsolutePath()+"). Сохранение и регистрация ошибок отключены."
+							+ "\nУбедитесь, что вы извлекли игру из zip-файла и что файл имеет права на запись."
+							+ "\n(Пожалуйста, прочитайте раздел 'MISSING FOLDERS' в файле README.txt.)"
+							+ "\nПродолжить?",
+					ButtonType.YES, ButtonType.NO);
+			System.err.println("Не найдена папка 'data' ("+dir.getAbsolutePath()+").");
+			a.showAndWait().ifPresent(response -> {
+			     if (response == ButtonType.NO) {
+			         System.exit(1);
+			     }
+			 });
+		}
+	}
+	
+	protected static void CheckForResFolder() {
+		File dir = new File("res/");
+		if(!dir.exists()) {
+			Alert a = new Alert(AlertType.WARNING,
+					"Не найдена папка 'res' ("+dir.getAbsolutePath()+"). Это ПРИВЕДЕТ к ошибкам и появлению участков с отсутствующим текстом."
+							+ "\nУбедитесь, что вы извлекли игру из zip-файла и что файл имеет права на запись."
+							+ "\nЕсли вы используете командную строку или пакетный/скриптовый файл для запуска игры, попробуйте запустить ее в папке с игрой, чтобы избежать этой ошибки."
+							+ "\n(Пожалуйста, прочитайте раздел 'MISSING FOLDERS' в файле README.txt.)"
+							+ "\nПродолжить?",
+					ButtonType.YES, ButtonType.NO);
+			System.err.println("Unable to find the 'res' folder ("+dir.getAbsolutePath()+").");
+			a.showAndWait().ifPresent(response -> {
+				if(response == ButtonType.NO) {
+					System.exit(1);
+				}
+			});
+		}
+	}
+
+	/**
+	 * Пытается загрузить резервные шрифты, чтобы убедиться, что они будут доступны позже. Размер не имеет значения, поскольку
+	 * WebEngine будет перезагружать другие размеры по мере необходимости. Файлы, на которые ссылаются, должны сохраняться до закрытия приложения.
+	 *
+	 * Не вызывайте Font.getFamilies() до этого, так как дополнительные шрифты должны быть загружены до того, как список будет кэширован.
+	 */
+	protected void loadFonts() {
+		// Load fallback for Calibri
+		if (Font.loadFont(toUri("res/fonts/Carlito/Carlito-Regular.ttf"), 11) != null) {
+			// Load variants
+			Font.loadFont(toUri("res/fonts/Carlito/Carlito-Bold.ttf"), 11);
+			Font.loadFont(toUri("res/fonts/Carlito/Carlito-BoldItalic.ttf"), 11);
+			Font.loadFont(toUri("res/fonts/Carlito/Carlito-Italic.ttf"), 11);
+		} else {
+			System.err.println("Carlito шрифт не может быть загружен.");
+		}
+
+		// Load fallback for Verdana
+		if (Font.loadFont(toUri("res/fonts/DejaVu Sans/DejaVuSans.ttf"), 12) != null) {
+			// Load variants
+			Font.loadFont(toUri("res/fonts/DejaVu Sans/DejaVuSans-Bold.ttf"), 12);
+			Font.loadFont(toUri("res/fonts/DejaVu Sans/DejaVuSans-BoldOblique.ttf"), 12);
+			Font.loadFont(toUri("res/fonts/DejaVu Sans/DejaVuSans-ExtraLight.ttf"), 12);
+			Font.loadFont(toUri("res/fonts/DejaVu Sans/DejaVuSans-Oblique.ttf"), 12);
+		} else {
+			System.err.println("DejaVu Sans шрифт не может быть загружен.");
+		}
+	}
+
+	/**
+	 * Creates a URI string with spaces. The given path can be absolute or relative to the current working directory.
+	 * @param path The path to convert
+	 * @return A string containing a URI
+	 */
+	public static String toUri(String path) {
+		return Paths.get(path).toUri().toString().replaceAll("%20", " ");
+	}
+
+	public static DocumentBuilder getDocBuilder() {
+		if (docBuilder == null) {
+			try {
+				docBuilder = docFactory.newDocumentBuilder();
+			} catch (ParserConfigurationException e) {
+				e.printStackTrace();
+			}
+		}
+		return docBuilder;
+	}
+
+	public static String getPatchNotes() {
+		if (!patchNotes.isEmpty()) {
+			return patchNotes;
+		}
+
+		String prefaceText = "";
+		StringBuilder patchNotesText = new StringBuilder();
+
+		File patchNotesFolder = new File("res/patchNotes");
+		if (!patchNotesFolder.exists() || !patchNotesFolder.isDirectory()) {
+			System.err.println("Folder 'res/patchNotes' could not be loaded!");
+			return "";
+		}
+
+		File[] fileList = patchNotesFolder.listFiles((dir, name) -> name.endsWith(".html"));
+		Arrays.sort(fileList, Collections.reverseOrder());
+
+		for (File file : fileList) {
+			Matcher matcher = Pattern.compile("^\\d{8}-(preface|patchnotes)-", Pattern.CASE_INSENSITIVE).matcher(file.getName());
+			if (!matcher.find()) {
+				continue;
+			}
+
+			try (FileInputStream fis = new FileInputStream(file)) {
+				String contentHTML = Util.inputStreamToString(fis);
+				switch (matcher.group(1).toLowerCase()) {
+					case "preface":
+						if (prefaceText.isEmpty()) {
+							prefaceText = contentHTML;
+						}
+						break;
+
+					case "patchnotes":
+						patchNotesText.append("<br />\n<div class=\"list\">\n").append(contentHTML).append("</div>\n");
+						break;
+				}
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+		patchNotes = prefaceText + patchNotesText;
+
+		return patchNotes;
+	}
+
+	public static void main(String[] args) {
+		
+		// Create folders:
+		File dir = new File("data/");
+		dir.mkdir();
+		dir = new File("data/saves");
+		dir.mkdir();
+		dir = new File("data/characters");
+		dir.mkdir();
+		
+		
+		// Open error log
+		if(!DEBUG) {
+			System.out.println("Printing to error.log");
+			try {
+				PrintStream stream = new PrintStream("data/error.log");
+				System.setErr(stream);
+				System.err.println("Game Version: "+VERSION_NUMBER+" ("+System.getProperty("build.type", "jar")+")");
+				System.err.println("Java: "+System.getProperty("java.version")+" ("+System.getProperty("java.vendor")+")");
+				System.err.println("OS: "+System.getProperty("os.name")+" ("+System.getProperty("os.arch")+")");
+				if (new File("res/mods").exists()) {
+					System.err.print("Присутствуют папки с модами: ");
+					int i=0;
+					for(File f : new File("res/mods").listFiles()) {
+						if(f.isDirectory()) {
+							if(i>0) {
+								System.err.print(", ");
+							}
+							System.err.print(f.getName());
+						}
+						i++;
+					}
+					System.err.println();
+				}
+				
+				
+//				System.err.println("OS: "+System.getProperty("os.name"));
+				
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		// Load properties:
+		if (new File("data/properties.xml").exists()) {
+			try {
+				properties = new Properties();
+				properties.loadPropertiesFromXML();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		} else {
+			properties = new Properties();
+			properties.savePropertiesAsXML();
+		}
+
+		launch(args);
+	}
+	
+	public static void refreshTitle() {
+		primaryStage.setTitle(getTitle());
+	}
+	
+	public static boolean isVersionOlderThan(String versionToCheck, String versionToCheckAgainst) {
+		String[] v1 = versionToCheck.split("\\.");
+		String[] v2 = versionToCheckAgainst.split("\\.");
+		
+		try {
+			int maxLength = (v1.length > v2.length) ? v1.length : v2.length;
+			for (int i = 0; i < maxLength; i++) {
+				int v1i;
+				int v2i;
+				
+				if(v1[1].charAt(0)=='1') { // Versions prior to 0.2.x used an old system of the format: 0.1.10.1 being a lower version than 0.1.9.1:
+					v1i = (i < v1.length) ? Integer.valueOf((v1[i]+"00").substring(0, 3)) : 0;
+					v2i = (i < v2.length) ? Integer.valueOf((v2[i]+"00").substring(0, 3)) : 0;
+					
+				} else { // Versions of 0.2.x and higher use a new system of the format: 0.2.10.1 being a higher version than 0.2.9.1:
+					v1i = (i < v1.length) ? Integer.valueOf(v1[i]) : 0;
+					v2i = (i < v2.length) ? Integer.valueOf(v2[i]) : 0;
+				}
+				
+				if (v1i < v2i) {
+					return true;
+				} else if (v1i > v2i) {
+					return false;
+				} 
+			}
+			
+		} catch(Exception ex) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public static String getTitle() {
+		displayingTurnTimer = game != null && game.isDebugMode() && game.isStarted();
+
+		return GAME_NAME
+				+ " " + VERSION_NUMBER
+				+ " " + VERSION_DESCRIPTION
+				+ (DEBUG?" (Debug Mode)":"")
+				+ (displayingTurnTimer
+				? " " + Math.round((game.endTurnTimeTaken / 1000000000d) * 1000) / 1000f + "s"
+					:"");
+	}
+
+	public static boolean isQuickSaveAvailable() {
+		return game.isStarted()
+				&& !game.isInCombat()
+				&& !game.isInSex()
+				&& game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.NORMAL
+				&& game.isInNeutralDialogue();
+	}
+
+	public static boolean isDisplayingTurnTimer() {
+		return displayingTurnTimer;
+	}
+
+	public static int getFontSize() {
+		return properties.fontSize;
+	}
+
+	public static void setFontSize(int size) {
+		properties.fontSize = size;
+		properties.savePropertiesAsXML();
+	}
+	
+	public static String getQuickSaveUnavailabilityDescription() {
+		if (!game.isInNewWorld()) {
+			return "Вы не можете сохранить игру во время создания персонажа или пролога!";
+
+		} else if (game.isInCombat()) {
+			return "Вы не можете сохранить игру во время боя!";
+
+		} else if (game.isInSex()) {
+			return "Вы не можете сохранить игру во время секс сцены!";
+
+		} else if (game.getCurrentDialogueNode().getDialogueNodeType() != DialogueNodeType.NORMAL) {
+			return "Вы не сможете сохранить игру, пока не окажетесь в нейтральной зоне!";
+
+		} else if (!game.isStarted() || !game.isInNeutralDialogue()) {
+			return "Вы не сможете сохранить игру, пока не окажетесь в нейтральной зоне!";
+		}
+
+		return "";
+	}
+	
+	public static String getQuickSaveName() {
+		String name;
+		if (!game.isStarted()) {
+			name = "QuickSave_intro";
+		} else {
+			name = "QuickSave_" + game.getPlayer().getName(false);
+		}
+		return checkFileName(name);
+	}
+	
+	public static void quickSaveGame() {
+		if(isQuickSaveAvailable()){
+			getProperties().lastQuickSaveName = getQuickSaveName();
+			saveGame(getQuickSaveName(), true, false);
+			quickSaved = true;
+		} else {
+			game.flashMessage(PresetColour.GENERIC_BAD, getQuickSaveUnavailabilityDescription());
+		}
+	}
+	
+	public static void quickLoadGame() {
+		String name = "";
+		if(quickSaved) {
+			name = checkFileName(properties.lastQuickSaveName);
+		} else {
+			name = checkFileName(getQuickSaveName());
+		}
+
+		if(name.isEmpty()) {
+			return;
+		}
+		loadGame(name);
+	}
+
+	public static boolean isSaveGameAvailable() {
+		return game.isStarted()
+				&& ((!game.getSavedDialogueNode().isTravelDisabled() && MapTravelType.WALK_SAFE.isAvailable(game.getPlayerCell(), game.getPlayer()))
+				|| game.getSavedDialogueNode().equals(game.getDefaultDialogue(false)));
+	}
+
+	public static void saveGame(String name, boolean allowOverwrite, boolean isAutoSave) {
+		name = checkFileName(name);
+		if(name.isEmpty()) {
+			return;
+		}
+
+		Game.exportGame(name, allowOverwrite, isAutoSave);
+
+		try {
+			properties.lastSaveLocation = name;//"data/saves/"+name+".lts";
+			properties.nameColour = Femininity.valueOf(game.getPlayer().getFemininityValue()).getColour().toWebHexString();
+			properties.name = game.getPlayer().getName(false);
+			properties.level = game.getPlayer().getLevel();
+			properties.money = game.getPlayer().getMoney();
+			properties.arcaneEssences = game.getPlayer().getEssenceCount();
+			if (game.getPlayer().isFeminine()) {
+				properties.race = game.getPlayer().getSubspecies().getSingularFemaleName(game.getPlayer().getBody());
+			} else {
+				properties.race = game.getPlayer().getSubspecies().getSingularMaleName(game.getPlayer().getBody());
+			}
+			properties.quest = game.getPlayer().getQuest(QuestLine.MAIN).getName();
+
+			properties.savePropertiesAsXML();
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	public static String checkFileName(String name) {
+		name = name.replace(" ", "_").replaceAll("[^\\wа-яА-ЯёЁ]+", "");
+		if (name.length()==0) {
+			game.flashMessage(PresetColour.GENERIC_BAD, "Name too short!");
+			return "";
+		}
+		if (name.length() > 64) {
+			game.flashMessage(PresetColour.GENERIC_BAD, "Name too long!");
+			return "";
+		}
+		return name;
+	}
+
+	public static void deleteGame(String name) {
+		File file = new File("data/saves/"+name+".xml");
+
+		if (file.exists()) {
+			try {
+				file.delete();
+				game.setContent(new Response("", "", game.getCurrentDialogueNode()));
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+
+		} else {
+			game.flashMessage(PresetColour.GENERIC_BAD, "File not found...");
+		}
+	}
+
+	public static boolean isLoadGameAvailable(String name) {
+		File file = new File("data/saves/"+name+".xml");
+
+		return file.exists();
+	}
+	
+	public static void loadGame(String name) {
+		if (isLoadGameAvailable(name)) {
+			Game.importGame(name);
+			MainController.updateUIButtons();
+		}
+	}
+
+	public static void loadGame(File f) {
+		Game.importGame(f);
+		MainController.updateUIButtons();
+	}
+	
+	public static void deleteExportedGame(String name) {
+		File file = new File("data/saves/"+name+".xml");
+
+		if (file.exists()) {
+			try {
+				file.delete();
+				game.setContent(new Response("", "", game.getCurrentDialogueNode()));
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+
+		} else {
+			game.flashMessage(PresetColour.GENERIC_BAD, "File not found...");
+		}
+	}
+
+	public static void deleteExportedCharacter(String name) {
+		File file = new File("data/characters/"+name+".xml");
+
+		if (file.exists()) {
+			try {
+				file.delete();
+				game.setContent(new Response("", "", game.getCurrentDialogueNode()));
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+
+		} else {
+			game.flashMessage(PresetColour.GENERIC_BAD, "File not found...");
+		}
+	}
+
+	public static void importCharacter(File file) {
+		if (file != null) {
+			try {
+				game.setPlayer(game.getCharacterUtils().startLoadingCharacterFromXML());
+				game.setPlayer(game.getCharacterUtils().loadCharacterFromXML(file, game.getPlayer(),
+						CharacterImportSetting.NEW_GAME_IMPORT,
+						CharacterImportSetting.NO_PREGNANCY,
+						CharacterImportSetting.NO_COMPANIONS,
+						CharacterImportSetting.NO_ELEMENTAL,
+						CharacterImportSetting.CLEAR_SLAVERY,
+						CharacterImportSetting.CLEAR_KEY_ITEMS,
+						CharacterImportSetting.CLEAR_COMBAT_HISTORY,
+						CharacterImportSetting.CLEAR_SEX_HISTORY,
+						CharacterImportSetting.REMOVE_RACE_CONCEALED,
+						CharacterImportSetting.CLEAR_FAMILY_ID));
+
+				game.getPlayer().getSlavesOwned().clear();
+				game.getPlayer().endPregnancy(false);
+
+				game.setRenderAttributesSection(true);
+				game.clearTextStartStringBuilder();
+				game.clearTextEndStringBuilder();
+				getProperties().setValue(PropertyValue.newWeaponDiscovered, false);
+				getProperties().setValue(PropertyValue.newClothingDiscovered, false);
+				getProperties().setValue(PropertyValue.newItemDiscovered, false);
+				game.getPlayer().calculateStatusEffects(0);
+
+				game.initNewGame(CharacterCreation.START_GAME_WITH_IMPORT);
+
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * @param sortAlphabetically Pass in true if you want the files sorted alphabetically, false if you want them sorted by date modified.
+	 * @return A list of xml files from the 'data/saves' folder.
+	 */
+	public static List<File> getSavedGames(boolean sortAlphabetically) {
+		List<File> filesList = new ArrayList<>();
+		
+		File dir = new File("data/saves");
+		if (dir.isDirectory()) {
+			File[] directoryListing = dir.listFiles((path, name) -> name.endsWith(".xml"));
+			if (directoryListing != null) {
+				filesList.addAll(Arrays.asList(directoryListing));
+			}
+		}
+		
+		if(sortAlphabetically) {
+			filesList.sort(Comparator.comparing(File::getName));
+		} else {
+			filesList.sort(Comparator.comparingLong(File::lastModified).reversed());
+		}
+		
+		return filesList;
+	}
+	
+	public static List<File> getCharactersForImport() {
+		List<File> filesList = new ArrayList<>();
+		
+		File dir = new File("data/characters");
+		if (dir.isDirectory()) {
+			File[] directoryListing = dir.listFiles((path, name) -> name.endsWith(".xml"));
+			if (directoryListing != null) {
+				filesList.addAll(Arrays.asList(directoryListing));
+			}
+		}
+
+		filesList.sort(Comparator.comparingLong(File::lastModified).reversed());
+		
+		return filesList;
+	}
+	
+	public static List<File> getSlavesForImport() {
+		List<File> filesList = new ArrayList<>();
+		
+		File dir = new File("data/characters");
+		if (dir.isDirectory()) {
+			File[] directoryListing = dir.listFiles((path, name) -> name.endsWith(".xml"));
+			if (directoryListing != null) {
+				filesList.addAll(Arrays.asList(directoryListing));
+			}
+		}
+		
+		filesList.sort(Comparator.comparingLong(File::lastModified).reversed());
+		
+		return filesList;
+	}
+	
+	public static List<File> getGamesForImport() {
+		List<File> filesList = new ArrayList<>();
+		
+		File dir = new File("data/saves");
+		if (dir.isDirectory()) {
+			File[] directoryListing = dir.listFiles((path, name) -> name.endsWith(".xml"));
+			if (directoryListing != null) {
+				filesList.addAll(Arrays.asList(directoryListing));
+			}
+		}
+
+		filesList.sort(Comparator.comparingLong(File::lastModified).reversed());
+		
+		return filesList;
+	}
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
 		CheckForDataDirectory();
 		CheckForResFolder();
-		
+
 		credits.add(new CreditsSlot("Anonymous", "", 99, 99, 99, 99));
-		
-		
+
+
 		credits.add(new CreditsSlot("Kyle S P", "", 0, 0, 0, 0, Subspecies.DEMON));
 		credits.add(new CreditsSlot("Paradoxiso", "", 0, 0, 0, 0, Subspecies.DEMON));
 		credits.add(new CreditsSlot("luka_fateburn", "", 0, 0, 0, 0, Subspecies.DEMON));
@@ -197,7 +773,7 @@ public class Main extends Application {
 		credits.add(new CreditsSlot("The Colonel", "", 0, 0, 0, 0, Subspecies.DEMON));
 		credits.add(new CreditsSlot("Melone", "", 0, 0, 0, 0, Subspecies.DEMON));
 
-		
+
 		credits.add(new CreditsSlot("Adhana Konker", "", 0, 0, 3, 0));
 		credits.add(new CreditsSlot("Akira", "", 0, 0, 0, 2));
 		credits.add(new CreditsSlot("Aleskah", "", 0, 0, 0, 1));
@@ -460,20 +1036,17 @@ public class Main extends Application {
 		credits.add(new CreditsSlot("Zakarin", "", 0, 0, 0, 14, Subspecies.DEMON));
 		credits.add(new CreditsSlot("Zaya", "", 0, 0, 5, 0));
 		credits.add(new CreditsSlot("Zero_One", "", 0, 0, 4, 0));
-		
-		
-		
+
+
+
 		credits.sort(Comparator.comparing((CreditsSlot a) -> a.getName().toLowerCase()));
-		
-		
+
+
 		Main.primaryStage = primaryStage;
-		
-		Main.primaryStage.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
-				if(t) {
-					TooltipUpdateThread.cancelThreads = true;
-				}
+
+		Main.primaryStage.focusedProperty().addListener((ov, t, t1) -> {
+			if (t) {
+				TooltipUpdateThread.cancelThreads = true;
 			}
 		});
 
@@ -484,634 +1057,20 @@ public class Main extends Application {
 		refreshTitle();
 
 		loadFonts();
-		
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/lilithsthrone/res/fxml/main.fxml"));
+		loadMainStage(loader);
 
-		Pane pane = loader.load();
-
-		mainScene = new Scene(pane);
-
-		if (properties.hasValue(PropertyValue.lightTheme)) {
-			mainScene.getStylesheets().add("/com/lilithsthrone/res/css/stylesheet_light.css");
-		} else {
-			mainScene.getStylesheets().add("/com/lilithsthrone/res/css/stylesheet.css");
-		}
-
-		mainController = loader.getController();
-		Main.primaryStage.setScene(mainScene);
 		Main.primaryStage.show();
-		Main.game = new Game();
-		Main.sex = new Sex();
-		Main.combat = new Combat();
-		
+		game = new Game();
+		sex = new Sex();
+		combat = new Combat();
+
 		loader = new FXMLLoader(getClass().getResource("/com/lilithsthrone/res/fxml/main.fxml"));
-		try {
-			if (Main.mainScene == null) {
-				pane = loader.load();
-				Main.mainController = loader.getController();
+		loadMainStage(loader);
 
-				Main.mainScene = new Scene(pane);
-				if (Main.getProperties().hasValue(PropertyValue.lightTheme))
-					Main.mainScene.getStylesheets().add("/com/lilithsthrone/res/css/stylesheet_light.css");
-				else
-					Main.mainScene.getStylesheets().add("/com/lilithsthrone/res/css/stylesheet.css");
-			}
+		game.setContent(new Response("", "", OptionsDialogue.MENU));
 
-			Main.primaryStage.setScene(Main.mainScene);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		Main.game.setContent(new Response("", "", OptionsDialogue.MENU));
-		
-	}
-	
-	protected static void CheckForDataDirectory() {
-		File dir = new File("data/");
-		if(!dir.exists()) {
-			
-			Alert a = new Alert(AlertType.ERROR,
-					"Не найдена папка 'data' ("+dir.getAbsolutePath()+"). Сохранение и регистрация ошибок отключены."
-							+ "\nУбедитесь, что вы извлекли игру из zip-файла и что файл имеет права на запись."
-							+ "\n(Пожалуйста, прочитайте раздел 'MISSING FOLDERS' в файле README.txt.)"
-							+ "\nПродолжить?",
-					ButtonType.YES, ButtonType.NO);
-			System.err.println("Не найдена папка 'data' ("+dir.getAbsolutePath()+").");
-			a.showAndWait().ifPresent(response -> {
-			     if (response == ButtonType.NO) {
-			         System.exit(1);
-			     }
-			 });
-		}
-	}
-	
-	protected static void CheckForResFolder() {
-		File dir = new File("res/");
-		if(!dir.exists()) {
-			Alert a = new Alert(AlertType.WARNING,
-					"Не найдена папка 'res' ("+dir.getAbsolutePath()+"). Это ПРИВЕДЕТ к ошибкам и появлению участков с отсутствующим текстом."
-							+ "\nУбедитесь, что вы извлекли игру из zip-файла и что файл имеет права на запись."
-							+ "\nЕсли вы используете командную строку или пакетный/скриптовый файл для запуска игры, попробуйте запустить ее в папке с игрой, чтобы избежать этой ошибки."
-							+ "\n(Пожалуйста, прочитайте раздел 'MISSING FOLDERS' в файле README.txt.)"
-							+ "\nПродолжить?",
-					ButtonType.YES, ButtonType.NO);
-			System.err.println("Unable to find the 'res' folder ("+dir.getAbsolutePath()+").");
-			a.showAndWait().ifPresent(response -> {
-				if(response == ButtonType.NO) {
-					System.exit(1);
-				}
-			});
-		}
-	}
-
-	/**
-	 * Пытается загрузить резервные шрифты, чтобы убедиться, что они будут доступны позже. Размер не имеет значения, поскольку
-	 * WebEngine будет перезагружать другие размеры по мере необходимости. Файлы, на которые ссылаются, должны сохраняться до закрытия приложения.
-	 *
-	 * Не вызывайте Font.getFamilies() до этого, так как дополнительные шрифты должны быть загружены до того, как список будет кэширован.
-	 */
-	protected void loadFonts() {
-		// Load fallback for Calibri
-		if (Font.loadFont(toUri("res/fonts/Carlito/Carlito-Regular.ttf"), 11) != null) {
-			// Load variants
-			Font.loadFont(toUri("res/fonts/Carlito/Carlito-Bold.ttf"), 11);
-			Font.loadFont(toUri("res/fonts/Carlito/Carlito-BoldItalic.ttf"), 11);
-			Font.loadFont(toUri("res/fonts/Carlito/Carlito-Italic.ttf"), 11);
-		} else {
-			System.err.println("Carlito шрифт не может быть загружен.");
-		}
-
-		// Load fallback for Verdana
-		if (Font.loadFont(toUri("res/fonts/DejaVu Sans/DejaVuSans.ttf"), 12) != null) {
-			// Load variants
-			Font.loadFont(toUri("res/fonts/DejaVu Sans/DejaVuSans-Bold.ttf"), 12);
-			Font.loadFont(toUri("res/fonts/DejaVu Sans/DejaVuSans-BoldOblique.ttf"), 12);
-			Font.loadFont(toUri("res/fonts/DejaVu Sans/DejaVuSans-ExtraLight.ttf"), 12);
-			Font.loadFont(toUri("res/fonts/DejaVu Sans/DejaVuSans-Oblique.ttf"), 12);
-		} else {
-			System.err.println("DejaVu Sans шрифт не может быть загружен.");
-		}
-	}
-
-	/**
-	 * Creates a URI string with spaces. The given path can be absolute or relative to the current working directory.
-	 * @param path The path to convert
-	 * @return A string containing a URI
-	 */
-	public static String toUri(String path) {
-		return Paths.get(path).toUri().toString().replaceAll("%20", " ");
-	}
-
-	public static DocumentBuilder getDocBuilder() {
-		if (docBuilder == null) {
-			try {
-				docBuilder = docFactory.newDocumentBuilder();
-			} catch (ParserConfigurationException e) {
-				e.printStackTrace();
-			}
-		}
-		return docBuilder;
-	}
-
-	public static String getPatchNotes() {
-		if (!patchNotes.isEmpty()) {
-			return patchNotes;
-		}
-
-		String prefaceText = "";
-		StringBuilder patchNotesText = new StringBuilder();
-
-		File patchNotesFolder = new File("res/patchNotes");
-		if (!patchNotesFolder.exists() || !patchNotesFolder.isDirectory()) {
-			System.err.println("Folder 'res/patchNotes' could not be loaded!");
-			return "";
-		}
-
-		File[] fileList = patchNotesFolder.listFiles((dir, name) -> name.endsWith(".html"));
-		Arrays.sort(fileList, Collections.reverseOrder());
-
-		for (File file : fileList) {
-			Matcher matcher = Pattern.compile("^\\d{8}-(preface|patchnotes)-", Pattern.CASE_INSENSITIVE).matcher(file.getName());
-			if (!matcher.find()) {
-				continue;
-			}
-
-			try (FileInputStream fis = new FileInputStream(file)) {
-				String contentHTML = Util.inputStreamToString(fis);
-				switch (matcher.group(1).toLowerCase()) {
-					case "preface":
-						if (prefaceText.isEmpty()) {
-							prefaceText = contentHTML;
-						}
-						break;
-
-					case "patchnotes":
-						patchNotesText.append("<br />\n<div class=\"list\">\n").append(contentHTML).append("</div>\n");
-						break;
-				}
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
-		}
-		patchNotes = prefaceText + patchNotesText;
-
-		return patchNotes;
-	}
-
-	public static void main(String[] args) {
-		
-		// Create folders:
-		File dir = new File("data/");
-		dir.mkdir();
-		dir = new File("data/saves");
-		dir.mkdir();
-		dir = new File("data/characters");
-		dir.mkdir();
-		
-		
-		// Open error log
-		if(!DEBUG) {
-			System.out.println("Printing to error.log");
-			try {
-				PrintStream stream = new PrintStream("data/error.log");
-				System.setErr(stream);
-				System.err.println("Game Version: "+VERSION_NUMBER+" ("+System.getProperty("build.type", "jar")+")");
-				System.err.println("Java: "+System.getProperty("java.version")+" ("+System.getProperty("java.vendor")+")");
-				System.err.println("OS: "+System.getProperty("os.name")+" ("+System.getProperty("os.arch")+")");
-				if (new File("res/mods").exists()) {
-					System.err.print("Присутствуют папки с модами: ");
-					int i=0;
-					for(File f : new File("res/mods").listFiles()) {
-						if(f.isDirectory()) {
-							if(i>0) {
-								System.err.print(", ");
-							}
-							System.err.print(f.getName());
-						}
-						i++;
-					}
-					System.err.println();
-				}
-				
-				
-//				System.err.println("OS: "+System.getProperty("os.name"));
-				
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-		}
-		// Load properties:
-		if (new File("data/properties.xml").exists()) {
-			try {
-				properties = new Properties();
-				properties.loadPropertiesFromXML();
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		} else {
-			properties = new Properties();
-			properties.savePropertiesAsXML();
-		}
-
-		launch(args);
-	}
-	
-	/**
-	 * Starts a completely new game. Runs a new World Generation.
-	 */
-	public static void startNewGame(DialogueNode startingDialogueNode) {
-		
-		Main.game = new Game();
-		
-		// Generate world:
-		if (!(gen == null)) {
-			if (gen.isRunning()) {
-				gen.cancel();
-			}
-		}
-		
-		gen = new Generation();
-
-		gen.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-			@Override
-			public void handle(WorkerStateEvent t) {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/lilithsthrone/res/fxml/main.fxml"));
-				Pane pane;
-				try {
-					if (Main.mainScene == null) {
-						pane = loader.load();
-						Main.mainController = loader.getController();
-
-						Main.mainScene = new Scene(pane);
-						if (Main.getProperties().hasValue(PropertyValue.lightTheme))
-							Main.mainScene.getStylesheets().add("/com/lilithsthrone/res/css/stylesheet_light.css");
-						else
-							Main.mainScene.getStylesheets().add("/com/lilithsthrone/res/css/stylesheet.css");
-					}
-
-					Main.primaryStage.setScene(Main.mainScene);
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
-				Main.game.setPlayer(new PlayerCharacter(new NameTriplet("Player"), 1, null, Gender.M_P_MALE, Subspecies.HUMAN, RaceStage.HUMAN, WorldType.MUSEUM, PlaceType.MUSEUM_ENTRANCE));
-
-				Main.game.initNewGame(startingDialogueNode);
-
-				Main.game.endTurn(0);
-				
-				OptionsDialogue.startingNewGame = false;
-				//Main.mainController.processNewDialogue();
-			}
-		});
-		new Thread(gen).start();
-	}
-	
-	public static boolean isVersionOlderThan(String versionToCheck, String versionToCheckAgainst) {
-		String[] v1 = versionToCheck.split("\\.");
-		String[] v2 = versionToCheckAgainst.split("\\.");
-		
-		try {
-			int maxLength = (v1.length > v2.length) ? v1.length : v2.length;
-			for (int i = 0; i < maxLength; i++) {
-				int v1i;
-				int v2i;
-				
-				if(v1[1].charAt(0)=='1') { // Versions prior to 0.2.x used an old system of the format: 0.1.10.1 being a lower version than 0.1.9.1:
-					v1i = (i < v1.length) ? Integer.valueOf((v1[i]+"00").substring(0, 3)) : 0;
-					v2i = (i < v2.length) ? Integer.valueOf((v2[i]+"00").substring(0, 3)) : 0;
-					
-				} else { // Versions of 0.2.x and higher use a new system of the format: 0.2.10.1 being a higher version than 0.2.9.1:
-					v1i = (i < v1.length) ? Integer.valueOf(v1[i]) : 0;
-					v2i = (i < v2.length) ? Integer.valueOf(v2[i]) : 0;
-				}
-				
-				if (v1i < v2i) {
-					return true;
-				} else if (v1i > v2i) {
-					return false;
-				} 
-			}
-			
-		} catch(Exception ex) {
-			return true;
-		}
-		
-		return false;
-	}
-	
-	public static void refreshTitle() {
-		Main.primaryStage.setTitle(getTitle());
-	}
-
-	public static String getTitle() {
-		displayingTurnTimer = Main.game!=null && Main.game.isDebugMode() && Main.game.isStarted();
-
-		return GAME_NAME
-				+ " " + VERSION_NUMBER
-				+ " " + VERSION_DESCRIPTION
-				+ (DEBUG?" (Debug Mode)":"")
-				+ (displayingTurnTimer
-					?" "+Math.round((Main.game.endTurnTimeTaken/1000000000d)*1000)/1000f+"s"
-					:"");
-	}
-
-	public static boolean isDisplayingTurnTimer() {
-		return displayingTurnTimer;
-	}
-
-	public static int getFontSize() {
-		return properties.fontSize;
-	}
-
-	public static void setFontSize(int size) {
-		properties.fontSize = size;
-		properties.savePropertiesAsXML();
-	}
-	
-	public static boolean isQuickSaveAvailable() {
-		return Main.game.isStarted()
-				&& !Main.game.isInCombat()
-				&& !Main.game.isInSex()
-				&& Main.game.getCurrentDialogueNode().getDialogueNodeType()==DialogueNodeType.NORMAL
-				&& Main.game.isInNeutralDialogue();
-	}
-	
-	public static String getQuickSaveUnavailabilityDescription() {
-		if (!Main.game.isInNewWorld()) {
-			return "Вы не можете сохранить игру во время создания персонажа или пролога!";
-			
-		} else if (Main.game.isInCombat()) {
-			return "Вы не можете сохранить игру во время боя!";
-			
-		} else if (Main.game.isInSex()) {
-			return "Вы не можете сохранить игру во время секс сцены!";
-			
-		} else if (Main.game.getCurrentDialogueNode().getDialogueNodeType()!=DialogueNodeType.NORMAL) {
-			return "Вы не сможете сохранить игру, пока не окажетесь в нейтральной зоне!";
-			
-		} else if (!Main.game.isStarted() || !Main.game.isInNeutralDialogue()) {
-			return "Вы не сможете сохранить игру, пока не окажетесь в нейтральной зоне!";
-		}
-		
-		return "";
-	}
-	
-	public static String getQuickSaveName() {
-		String name;
-		if(!Main.game.isStarted()) {
-			name = "QuickSave_intro";
-		} else {
-			name = "QuickSave_"+Main.game.getPlayer().getName(false);
-		}
-		return Main.checkFileName(name);
-	}
-	
-	public static void quickSaveGame() {
-		if(isQuickSaveAvailable()){
-			Main.getProperties().lastQuickSaveName = getQuickSaveName();
-			saveGame(getQuickSaveName(), true, false);
-			quickSaved = true;
-		} else {
-			Main.game.flashMessage(PresetColour.GENERIC_BAD, getQuickSaveUnavailabilityDescription());
-		}
-	}
-
-	public static void quickLoadGame() {
-		String name = "";
-		if(quickSaved) {
-			name = Main.checkFileName(Main.properties.lastQuickSaveName);
-		} else {
-			name = Main.checkFileName(getQuickSaveName());
-		}
-
-		if(name.isEmpty()) {
-			return;
-		}
-		loadGame(name);
-	}
-
-	public static boolean isSaveGameAvailable() {
-		return Main.game.isStarted()
-				&& ((!Main.game.getSavedDialogueNode().isTravelDisabled() && MapTravelType.WALK_SAFE.isAvailable(Main.game.getPlayerCell(), Main.game.getPlayer()))
-						|| Main.game.getSavedDialogueNode().equals(Main.game.getDefaultDialogue(false)));
-	}
-	
-	public static void saveGame(String name, boolean allowOverwrite, boolean isAutoSave) {
-		name = Main.checkFileName(name);
-		if(name.isEmpty()) {
-			return;
-		}
-		
-		Game.exportGame(name, allowOverwrite, isAutoSave);
-
-		try {
-			properties.lastSaveLocation = name;//"data/saves/"+name+".lts";
-			properties.nameColour = Femininity.valueOf(game.getPlayer().getFemininityValue()).getColour().toWebHexString();
-			properties.name = game.getPlayer().getName(false);
-			properties.level = game.getPlayer().getLevel();
-			properties.money = game.getPlayer().getMoney();
-			properties.arcaneEssences = game.getPlayer().getEssenceCount();
-			if (game.getPlayer().isFeminine()) {
-				properties.race = game.getPlayer().getSubspecies().getSingularFemaleName(game.getPlayer().getBody());
-			} else {
-				properties.race = game.getPlayer().getSubspecies().getSingularMaleName(game.getPlayer().getBody());
-			}
-			properties.quest = game.getPlayer().getQuest(QuestLine.MAIN).getName();
-
-			properties.savePropertiesAsXML();
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-
-	public static String checkFileName(String name) {
-		name = name.replace(" ", "_").replaceAll("[^\\w]+", "");
-		if (name.length()==0) {
-			Main.game.flashMessage(PresetColour.GENERIC_BAD, "Name too short!");
-			return "";
-		}
-		if (name.length() > 64) {
-			Main.game.flashMessage(PresetColour.GENERIC_BAD, "Name too long!");
-			return "";
-		}
-		return name;
-	}
-
-	public static boolean isLoadGameAvailable(String name) {
-		File file = new File("data/saves/"+name+".xml");
-
-		return file.exists();
-	}
-	
-	public static void loadGame(String name) {
-		if (isLoadGameAvailable(name)) {
-			Game.importGame(name);
-			MainController.updateUIButtons();
-		}
-	}
-
-	public static void loadGame(File f) {
-		Game.importGame(f);
-		MainController.updateUIButtons();
-	}
-	
-	public static void deleteGame(String name) {
-		File file = new File("data/saves/"+name+".xml");
-
-		if (file.exists()) {
-			try {
-				file.delete();
-				Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-
-		} else {
-			Main.game.flashMessage(PresetColour.GENERIC_BAD, "File not found...");
-		}
-	}
-
-	public static void deleteExportedGame(String name) {
-		File file = new File("data/saves/"+name+".xml");
-
-		if (file.exists()) {
-			try {
-				file.delete();
-				Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-
-		} else {
-			Main.game.flashMessage(PresetColour.GENERIC_BAD, "File not found...");
-		}
-	}
-
-	public static void deleteExportedCharacter(String name) {
-		File file = new File("data/characters/"+name+".xml");
-
-		if (file.exists()) {
-			try {
-				file.delete();
-				Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-			
-		} else {
-			Main.game.flashMessage(PresetColour.GENERIC_BAD, "File not found...");
-		}
-	}
-	
-	/**
-	 * @param sortAlphabetically Pass in true if you want the files sorted alphabetically, false if you want them sorted by date modified.
-	 * @return A list of xml files from the 'data/saves' folder.
-	 */
-	public static List<File> getSavedGames(boolean sortAlphabetically) {
-		List<File> filesList = new ArrayList<>();
-		
-		File dir = new File("data/saves");
-		if (dir.isDirectory()) {
-			File[] directoryListing = dir.listFiles((path, name) -> name.endsWith(".xml"));
-			if (directoryListing != null) {
-				filesList.addAll(Arrays.asList(directoryListing));
-			}
-		}
-		
-		if(sortAlphabetically) {
-			filesList.sort(Comparator.comparing(File::getName));
-		} else {
-			filesList.sort(Comparator.comparingLong(File::lastModified).reversed());
-		}
-		
-		return filesList;
-	}
-	
-	public static List<File> getCharactersForImport() {
-		List<File> filesList = new ArrayList<>();
-		
-		File dir = new File("data/characters");
-		if (dir.isDirectory()) {
-			File[] directoryListing = dir.listFiles((path, name) -> name.endsWith(".xml"));
-			if (directoryListing != null) {
-				filesList.addAll(Arrays.asList(directoryListing));
-			}
-		}
-
-		filesList.sort(Comparator.comparingLong(File::lastModified).reversed());
-		
-		return filesList;
-	}
-	
-	public static List<File> getSlavesForImport() {
-		List<File> filesList = new ArrayList<>();
-		
-		File dir = new File("data/characters");
-		if (dir.isDirectory()) {
-			File[] directoryListing = dir.listFiles((path, name) -> name.endsWith(".xml"));
-			if (directoryListing != null) {
-				filesList.addAll(Arrays.asList(directoryListing));
-			}
-		}
-		
-		filesList.sort(Comparator.comparingLong(File::lastModified).reversed());
-		
-		return filesList;
-	}
-	
-	public static List<File> getGamesForImport() {
-		List<File> filesList = new ArrayList<>();
-		
-		File dir = new File("data/saves");
-		if (dir.isDirectory()) {
-			File[] directoryListing = dir.listFiles((path, name) -> name.endsWith(".xml"));
-			if (directoryListing != null) {
-				filesList.addAll(Arrays.asList(directoryListing));
-			}
-		}
-
-		filesList.sort(Comparator.comparingLong(File::lastModified).reversed());
-		
-		return filesList;
-	}
-	
-	public static void importCharacter(File file) {
-		if (file != null) {
-			try {
-				Main.game.setPlayer(Main.game.getCharacterUtils().startLoadingCharacterFromXML());
-				Main.game.setPlayer(Main.game.getCharacterUtils().loadCharacterFromXML(file, Main.game.getPlayer(),
-						CharacterImportSetting.NEW_GAME_IMPORT,
-						CharacterImportSetting.NO_PREGNANCY,
-						CharacterImportSetting.NO_COMPANIONS,
-						CharacterImportSetting.NO_ELEMENTAL,
-						CharacterImportSetting.CLEAR_SLAVERY,
-						CharacterImportSetting.CLEAR_KEY_ITEMS,
-						CharacterImportSetting.CLEAR_COMBAT_HISTORY,
-						CharacterImportSetting.CLEAR_SEX_HISTORY,
-						CharacterImportSetting.REMOVE_RACE_CONCEALED,
-						CharacterImportSetting.CLEAR_FAMILY_ID));
-				
-				Main.game.getPlayer().getSlavesOwned().clear();
-				Main.game.getPlayer().endPregnancy(false);
-				
-				Main.game.setRenderAttributesSection(true);
-				Main.game.clearTextStartStringBuilder();
-				Main.game.clearTextEndStringBuilder();
-				Main.getProperties().setValue(PropertyValue.newWeaponDiscovered, false);
-				Main.getProperties().setValue(PropertyValue.newClothingDiscovered, false);
-				Main.getProperties().setValue(PropertyValue.newItemDiscovered, false);
-				Main.game.getPlayer().calculateStatusEffects(0);
-
-				Main.game.initNewGame(CharacterCreation.START_GAME_WITH_IMPORT);
-				
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		}
 	}
 
 	public static Properties getProperties() {

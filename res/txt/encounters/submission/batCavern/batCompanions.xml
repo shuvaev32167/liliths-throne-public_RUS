@@ -895,7 +895,7 @@
 	
 	<htmlContent tag="AFTER_SEX_PEACEFUL_OFFERED_COMPANION"><![CDATA[
 	<p>
-		Both [npc.name] and [npc2.name] let out happy sighs as the two of them step back from one another. Looking into [npc2.namePos] [npc2.eyes], the [npc.race] smiles and says, [npc.speech(That was great... Thanks [npc2.name], I really needed that.)]
+		Both [npc.name] и [npc2.name] let out happy sighs as the two of them step back from one another. Looking into [npc2.namePos] [npc2.eyes], the [npc.race] smiles and says, [npc.speech(That was great... Thanks [npc2.name], I really needed that.)]
 	</p>
 	<p>
 		The two of them set about gathering their things, and, after saying goodbye to one another, you and [npc2.name] set off on your journey once again...

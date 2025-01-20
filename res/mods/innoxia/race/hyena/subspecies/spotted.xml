@@ -140,9 +140,9 @@
 			<name><![CDATA[spotted hyena-morph]]></name>
 			<namePlural><![CDATA[spotted hyena-morphs]]></namePlural>
 			<singularMaleName><![CDATA[spotted hyena-boy]]></singularMaleName>
-			<singularFemaleName><![CDATA[spotted hyena-girl]]></singularFemaleName>
+            <singularFemaleName><![CDATA[пятнистая гиенодевушка]]></singularFemaleName>
 			<pluralMaleName><![CDATA[spotted hyena-boys]]></pluralMaleName>
-			<pluralFemaleName><![CDATA[spotted hyena-girls]]></pluralFemaleName>
+            <pluralFemaleName><![CDATA[пятнистая гиенодевушкаs]]></pluralFemaleName>
 		</namesDefault>
 		<names legConfiguration="QUADRUPEDAL"> <!-- This is the usual naming pattern for quadrupeds, even if the names do get a little unwieldy at times... -->
 			<name><![CDATA[spotted hyenataur]]></name>

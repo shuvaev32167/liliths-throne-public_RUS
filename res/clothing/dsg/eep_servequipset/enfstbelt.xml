@@ -66,25 +66,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(tighten)] the stable belt around [npc.her] waist and [npc.verb(snap)] the buckle together.]]>
+            <![CDATA[[npc.Name] tighten the stable belt around [npc.her] waist and snap the buckle together.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(tighten)] the stable belt around [npc2.namePos] waist and [npc.verb(snap)] the buckle together.]]>
+            <![CDATA[[npc.Name] tighten the stable belt around [npc2.namePos] waist and snap the buckle together.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(tighten)] the stable belt around [npc2.namePos] waist as much as possible and forcibly [npc.verb(snap)] the buckle together.]]>
+            <![CDATA[[npc.Name] tighten the stable belt around [npc2.namePos] waist as much as possible and forcibly snap the buckle together.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unbuckle)] [npc.her] stable belt.]]>
+            <![CDATA[[npc.Name] unbuckle [npc.her] stable belt.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unbuckle)] [npc2.namePos] stable belt.]]>
+            <![CDATA[[npc.Name] unbuckle [npc2.namePos] stable belt.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(rip)] the stable belt off [npc2.namePos] waist.]]>
+            <![CDATA[[npc.Name] rip the stable belt off [npc2.namePos] waist.]]>
 		</otherRough>
 	</displacementText>
 	

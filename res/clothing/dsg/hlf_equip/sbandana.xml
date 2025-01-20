@@ -60,49 +60,49 @@
 	
 	<resplacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(tie)] the bandana around [npc.her] head and [npc.verb(adjust)] it so that the skull design is over [npc.her] nose and mouth.]]>
+            <![CDATA[[npc.Name] tie the bandana around [npc.her] head and adjust it so that the skull design is over [npc.her] nose and mouth.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(tie)] the bandana around [npc2.namePos] head and [npc.verb(adjust)] it so that the skull design is over [npc2.her] nose and mouth.]]>
+            <![CDATA[[npc.Name] tie the bandana around [npc2.namePos] head and adjust it so that the skull design is over [npc2.her] nose and mouth.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(tie)] the bandana around [npc2.namePos] head.]]>
+            <![CDATA[[npc.Name] roughly tie the bandana around [npc2.namePos] head.]]>
 		</otherRough>
 	</resplacementText>
 	
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(untie)] the bandana from around [npc.her] head.]]>
+            <![CDATA[[npc.Name] untie the bandana from around [npc.her] head.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(untie)] the bandana from around [npc2.namePos] head.]]>
+            <![CDATA[[npc.Name] untie the bandana from around [npc2.namePos] head.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(tears)] the bandana from around [npc2.namePos] head.]]>
+            <![CDATA[[npc.Name] tears the bandana from around [npc2.namePos] head.]]>
 		</otherRough>
 	</displacementText>
 	
 	<displacementText type="PULLS_DOWN">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc.her] bandana down.]]>
+            <![CDATA[[npc.Name] pull [npc.her] bandana down.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc2.namePos] bandana down.]]>
+            <![CDATA[[npc.Name] pull [npc2.namePos] bandana down.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(yank)] [npc2.namePos] bandana down.]]>
+            <![CDATA[[npc.Name] yank [npc2.namePos] bandana down.]]>
 		</otherRough>
 	</displacementText>
 	
 	<replacementText type="PULLS_UP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] up [npc.her] bandana.]]>
+            <![CDATA[[npc.Name] pull up [npc.her] bandana.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] up [npc2.namePos] bandana.]]>
+            <![CDATA[[npc.Name] pull up [npc2.namePos] bandana.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] forcefully [npc.verb(pull)] up [npc2.namePos] bandana.]]>
+            <![CDATA[[npc.Name] forcefully pull up [npc2.namePos] bandana.]]>
 		</otherRough>
 	</replacementText>
 	

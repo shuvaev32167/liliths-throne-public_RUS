@@ -194,13 +194,13 @@
 	
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(slide)] the vest over [npc.her] head and [npc.verb(tighten)] the cummerbund on either side of [npc.her] torso.]]>
+            <![CDATA[[npc.Name] slide the vest over [npc.her] head and tighten the cummerbund on either side of [npc.her] torso.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(slide)] the vest over [npc2.namePos] head and [npc.verb(tighten)] the cummerbund on either side of [npc2.her] torso.]]>
+            <![CDATA[[npc.Name] slide the vest over [npc2.namePos] head and tighten the cummerbund on either side of [npc2.her] torso.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(shove)] the vest over [npc2.namePos] head and [npc.verb(tighten)] the cummerbund on either side of [npc2.her] torso as much as possible.]]>
+            <![CDATA[[npc.Name] shove the vest over [npc2.namePos] head and tighten the cummerbund on either side of [npc2.her] torso as much as possible.]]>
 		</otherRough>
 	</replacementText>
 	
@@ -213,7 +213,7 @@
 		  <![CDATA[[npc.Name] un[npc.do] the cummerbund on either side of [npc2.namePos] vest and slide [npc2.her] head through the neck hole.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(rip)] open the cummerbund on either side of [npc2.namePos] vest and [npc.verb(yank)] the rest over [npc2.her] head.]]>
+            <![CDATA[[npc.Name] rip open the cummerbund on either side of [npc2.namePos] vest and yank the rest over [npc2.her] head.]]>
 		</otherRough>
 	</displacementText>
 	

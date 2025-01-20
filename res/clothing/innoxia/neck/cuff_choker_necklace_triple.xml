@@ -45,24 +45,24 @@
 
   <replacementText slot="NECK" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] securely [npc.verb(slot)] the three cuff choker necklaces around [npc.her] neck.]]>
+        <![CDATA[[npc.Name] securely slot the three cuff choker necklaces around [npc.her] neck.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] securely [npc.verb(slot)] the three cuff choker necklaces around [npc2.namePos] neck.]]>
+        <![CDATA[[npc.Name] securely slot the three cuff choker necklaces around [npc2.namePos] neck.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] firmly [npc.verb(grab)] [npc2.name], before forcing the three cuff choker necklaces around [npc2.her] neck.]]>
+        <![CDATA[[npc.Name] firmly grab [npc2.name], before forcing the three cuff choker necklaces around [npc2.her] neck.]]>
     </otherRough>
   </replacementText>
   <displacementText slot="NECK" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(slide)] [npc.her] three cuff choker necklaces off from around [npc.her] neck.]]>
+        <![CDATA[[npc.Name] slide [npc.her] three cuff choker necklaces off from around [npc.her] neck.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(slide)] [npc2.namePos] three cuff choker necklaces off from around [npc2.her] neck.]]>
+        <![CDATA[[npc.Name] slide [npc2.namePos] three cuff choker necklaces off from around [npc2.her] neck.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(pull)] [npc2.namePos] three cuff choker necklaces off from around [npc2.her] neck.]]>
+        <![CDATA[[npc.Name] roughly pull [npc2.namePos] three cuff choker necklaces off from around [npc2.her] neck.]]>
     </otherRough>
   </displacementText>
 	

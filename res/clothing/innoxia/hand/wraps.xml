@@ -42,25 +42,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(wrap)] the strip of thick cotton around [npc.her] [npc.arms].]]>
+            <![CDATA[[npc.Name] wrap the strip of thick cotton around [npc.her] [npc.arms].]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(wrap)] the strip of thick cotton around [npc2.namePos] [npc2.arms].]]>
+            <![CDATA[[npc.Name] wrap the strip of thick cotton around [npc2.namePos] [npc2.arms].]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(wrap)] the strip of thick cotton around [npc2.namePos] [npc2.arms].]]>
+            <![CDATA[[npc.Name] roughly wrap the strip of thick cotton around [npc2.namePos] [npc2.arms].]]>
 	  </otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unwrap)] the strip of thick cotton from around [npc.her] [npc.arms].]]>
+            <![CDATA[[npc.Name] unwrap the strip of thick cotton from around [npc.her] [npc.arms].]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unwrap)] the strip of thick cotton from around [npc2.namePos] [npc2.arms].]]>
+            <![CDATA[[npc.Name] unwrap the strip of thick cotton from around [npc2.namePos] [npc2.arms].]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(unwrap)] the strip of thick cotton from around [npc2.namePos] [npc2.arms].]]>
+            <![CDATA[[npc.Name] roughly unwrap the strip of thick cotton from around [npc2.namePos] [npc2.arms].]]>
 		</otherRough>
 	</displacementText>
 	

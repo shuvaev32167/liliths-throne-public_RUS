@@ -17,11 +17,11 @@
 		
 		<rarity>EPIC</rarity> 
 		
-		<weaponSet>LYSSIETH_GUARD</weaponSet> 
-		
-		<equipText><![CDATA[[npc.Name] [npc.verb(draw)] [npc.her] arcane revolver, ready to use it in combat.]]></equipText>
-		
-		<unequipText><![CDATA[[npc.Name] [npc.verb(holster)] [npc.her] arcane revolver.]]></unequipText>
+		<weaponSet>LYSSIETH_GUARD</weaponSet>
+
+        <equipText><![CDATA[[npc.Name] draw [npc.her] arcane revolver, ready to use it in combat.]]></equipText>
+
+        <unequipText><![CDATA[[npc.Name] holster [npc.her] arcane revolver.]]></unequipText>
 		
 		<imageName>revolver.svg</imageName> 
 		
@@ -63,26 +63,26 @@
 	<!-- Descriptions that are used when hitting an enemy. One of the hitText values will be randomly selected each time the attacker hits their target. Follow the same guidelines as equipText. -->
 	<hitDescriptions>
 		<hitText><![CDATA[
-		Aiming and firing [npc.her] arcane revolver, [npc.name] [npc.verb(manage)] to hit [npc2.name] with a powerful arcane bullet!
+		Aiming and firing [npc.her] arcane revolver, [npc.name] manage to hit [npc2.name] with a powerful arcane bullet!
 		]]></hitText>
 		<hitText><![CDATA[
-		Taking aim at [npc2.name] with [npc.her] arcane revolver, [npc.name] [npc.verb(pull)] the trigger, unleashing a powerful blast of arcane energy that slams into [npc2.namePos] torso!
+		Taking aim at [npc2.name] with [npc.her] arcane revolver, [npc.name] pull the trigger, unleashing a powerful blast of arcane energy that slams into [npc2.namePos] torso!
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(aim)] at [npc2.name] with [npc.her] arcane revolver, and, pulling the trigger, [npc.she] [npc.verb(manage)] to hit [npc2.herHim] right in the chest!
+		[npc.Name] aim at [npc2.name] with [npc.her] arcane revolver, and, pulling the trigger, [npc.she] manage to hit [npc2.herHim] right in the chest!
 		]]></hitText>
 	</hitDescriptions>
 
 	<!-- Descriptions that are used when missing an enemy. One of the missText values will be randomly selected each time the attacker misses their target. Follow the same guidelines as equipText. -->
 	<missDescriptions>
 		<missText><![CDATA[
-		Aiming and firing [npc.her] arcane revolver, [npc.name] [npc.verb(miss)] [npc2.name]!
+		Aiming and firing [npc.her] arcane revolver, [npc.name] miss [npc2.name]!
 		]]></missText>
 		<missText><![CDATA[
-		Taking aim at [npc2.name] with [npc.her] arcane revolver, [npc.name] [npc.verb(pull)] the trigger, letting out a frustrated cry as [npc.she] [npc.verb(miss)] [npc.her] target!
+		Taking aim at [npc2.name] with [npc.her] arcane revolver, [npc.name] pull the trigger, letting out a frustrated cry as [npc.she] miss [npc.her] target!
 		]]></missText>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(aim)] at [npc2.name] with [npc.her] arcane revolver and [npc.verb(pull)] the trigger, but [npc.she] [npc.verb(end)] up missing [npc.her] target!
+		[npc.Name] aim at [npc2.name] with [npc.her] arcane revolver and pull the trigger, but [npc.she] end up missing [npc.her] target!
 		]]></missText>
 	</missDescriptions>
 	

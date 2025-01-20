@@ -1,10 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.warehouseDistrict;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
@@ -40,41 +35,24 @@ import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.ItemType;
-import com.lilithsthrone.game.sex.InitialSexActionInformation;
-import com.lilithsthrone.game.sex.LubricationType;
-import com.lilithsthrone.game.sex.SexAreaInterface;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexPace;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
 import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
-import com.lilithsthrone.game.sex.positions.slots.SexSlot;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotDesk;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotLyingDown;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotSitting;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
-import com.lilithsthrone.game.sex.sexActions.baseActions.ClitMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerPenis;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FootMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisFeet;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisNipple;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
+import com.lilithsthrone.game.sex.positions.slots.*;
+import com.lilithsthrone.game.sex.sexActions.baseActions.*;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @since 0.1.99
@@ -423,9 +401,22 @@ public class KaysWarehouse {
 			}
 		};
 	}
-	
-	
-	public static final DialogueNode INITIAL_ENTRY = new DialogueNode("Reception Area", "", false) {
+
+
+	public static final DialogueNode STORAGE_AREA_SEARCHING = new DialogueNode("Кладовая", "", false) {
+		@Override
+		public int getSecondsPassed() {
+			return 5*60;
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/kaysTextiles", "STORAGE_AREA_SEARCHING");
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return STORAGE_AREA.getResponse(responseTab, index);
+		}
+	};	public static final DialogueNode INITIAL_ENTRY = new DialogueNode("Приёмная", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;
@@ -442,7 +433,7 @@ public class KaysWarehouse {
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
 				if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.supplierDepotDoorUnlocked)) {
-					return new Response("Exit", "Decide to leave the warehouse for now.", PlaceType.DOMINION_WAREHOUSES.getDialogue(false)) {
+                    return new Response("Выход", "Decide to leave the warehouse for now.", PlaceType.DOMINION_WAREHOUSES.getDialogue(false)) {
 						@Override
 						public void effects() {
 							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_WAREHOUSES, false);
@@ -461,8 +452,20 @@ public class KaysWarehouse {
 			return null;
 		}
 	};
-
-	public static final DialogueNode RECEPTIONIST_UNLOCKING = new DialogueNode("Reception Area", "", false) {
+	public static final DialogueNode WEAVING_MACHINES = new DialogueNode("Ткацкие станки", "", false) {
+		@Override
+		public int getSecondsPassed() {
+			return 2*60;
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/kaysTextiles", "WEAVING_MACHINES");
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return null;
+		}
+	};	public static final DialogueNode RECEPTIONIST_UNLOCKING = new DialogueNode("Приёмная", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 2*60;
@@ -476,8 +479,8 @@ public class KaysWarehouse {
 			return INITIAL_ENTRY.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode RECEPTION = new DialogueNode("Reception Area", "", false) {
+
+	public static final DialogueNode RECEPTION = new DialogueNode("Приёмная", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;
@@ -497,8 +500,8 @@ public class KaysWarehouse {
 		public Response getResponse(int responseTab, int index) {
 			return INITIAL_ENTRY.getResponse(responseTab, index);}
 	};
-	
-	public static final DialogueNode CORRIDOR = new DialogueNode("Corridor", "", false) {
+
+	public static final DialogueNode CORRIDOR = new DialogueNode("Коридор", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 30;
@@ -553,36 +556,10 @@ public class KaysWarehouse {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode STORAGE_AREA_SEARCHING = new DialogueNode("Storage Room", "", false) {
-		@Override
-		public int getSecondsPassed() {
-			return 5*60;
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/kaysTextiles", "STORAGE_AREA_SEARCHING");
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return STORAGE_AREA.getResponse(responseTab, index);
-		}
-	};
-	
-	public static final DialogueNode WEAVING_MACHINES = new DialogueNode("Weaving Machines", "", false) {
-		@Override
-		public int getSecondsPassed() {
-			return 2*60;
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/kaysTextiles", "WEAVING_MACHINES");
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return null;
-		}
-	};
+
+
+
+
 
 	public static final DialogueNode OVERSEER_STATION = new DialogueNode("Overseer's Station", "", true) {
 		@Override
@@ -606,7 +583,7 @@ public class KaysWarehouse {
 					};
 					
 				} else {
-					return new Response("Upstairs", "Head up the stairs and enter the overseer's station.", DOBERMANNS) {
+					return new Response("Наверх", "Head up the stairs and enter the overseer's station.", DOBERMANNS) {
 						@Override
 						public void effects() {
 							if(Main.game.getPlayer().getQuest(QuestLine.RELATIONSHIP_NYAN_HELP)==Quest.RELATIONSHIP_NYAN_2_STOCK_ISSUES_AGREED_TO_HELP) {
@@ -2044,7 +2021,7 @@ public class KaysWarehouse {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Tell Kay to get changed into 'her' new set of clothing...", KAY_OFFICE_DOMINATE_CLOTHING);
+                return new Response("Продолжить", "Tell Kay to get changed into 'her' new set of clothing...", KAY_OFFICE_DOMINATE_CLOTHING);
 				
 			}
 			return null;
@@ -2085,7 +2062,7 @@ public class KaysWarehouse {
 		public Response getResponse(int responseTab, int index) {
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.kayFeminised)) {
 				if(index==1) {
-					return new Response("Kay", "Keep calling the cute cat-girl by her surname and tell her that she looks very pretty.", KAY_OFFICE_DOMINATE_UTIL_EMPTY) {
+					return new Response("Кей", "Продолжай называть милую кошечку по фамилии и говорите ей, что она выглядит очень красиво.", KAY_OFFICE_DOMINATE_UTIL_EMPTY) {
 						@Override
 						public void effects() {
 							Main.game.getNpc(Kay.class).setName(new NameTriplet("Jack", "Jack", "Jackie"));
@@ -2096,13 +2073,13 @@ public class KaysWarehouse {
 					};
 					
 				} else if(index==2) {
-					return new Response("Jackie",
+					return new Response("Джеки",
 							"Tell the cute [kay.race] that she looks very pretty, and that the name of 'Jackie' is more suitable for [kay.herHim] when [kay.she] looks like this."
 							+ "<br/>[style.colourFeminine(Kay will be renamed to 'Jackie' until (if ever) you tell [kay.herHim] to start wearing masculine clothing again.)]",
 							KAY_OFFICE_DOMINATE_UTIL_EMPTY) {
 						@Override
 						public void effects() {
-							Main.game.getNpc(Kay.class).setName(new NameTriplet("Jackie", "Jackie", "Jackie"));
+							Main.game.getNpc(Kay.class).setName(new NameTriplet("Джеки", "Джеки", "Джеки"));
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/kaysTextiles", "KAY_OFFICE_DOMINATE_CLOTHING_NAME_START"));
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/kaysTextiles", "KAY_OFFICE_DOMINATE_CLOTHING_NAME_MID"));
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/kaysTextiles", "KAY_OFFICE_DOMINATE_CLOTHING_NAME_JACKIE"));
@@ -2112,13 +2089,13 @@ public class KaysWarehouse {
 					};
 					
 				} else if(index==3) {
-					return new Response("Kaytie",
+					return new Response("Кейти",
 							"Tell the cute [kay.race] that she looks very pretty, and that the name of 'Kaytie' is more suitable for [kay.herHim] when [kay.she] looks like this."
 							+ "<br/>[style.colourFeminine(Kay will be renamed to 'Kaytie' until (if ever) you tell [kay.herHim] to start wearing masculine clothing again.)]",
 							KAY_OFFICE_DOMINATE_UTIL_EMPTY) {
 						@Override
 						public void effects() {
-							Main.game.getNpc(Kay.class).setName(new NameTriplet("Kaytie", "Kaytie", "Kaytie"));
+							Main.game.getNpc(Kay.class).setName(new NameTriplet("Кейти", "Кейти", "Кейти"));
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/kaysTextiles", "KAY_OFFICE_DOMINATE_CLOTHING_NAME_START"));
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/kaysTextiles", "KAY_OFFICE_DOMINATE_CLOTHING_NAME_MID"));
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/kaysTextiles", "KAY_OFFICE_DOMINATE_CLOTHING_NAME_KAYTIE"));
@@ -2128,13 +2105,13 @@ public class KaysWarehouse {
 					};
 					
 				} else if(index==4) {
-					return new Response("Mikayla",
+					return new Response("Микайла",
 							"Tell the cute [kay.race] that she looks very pretty, and that the name of 'Mikayla' is more suitable for [kay.herHim] when [kay.she] looks like this."
 							+ "<br/>[style.colourFeminine(Kay will be renamed to 'Mikayla' until (if ever) you tell [kay.herHim] to start wearing masculine clothing again.)]",
 							KAY_OFFICE_DOMINATE_UTIL_EMPTY) {
 						@Override
 						public void effects() {
-							Main.game.getNpc(Kay.class).setName(new NameTriplet("Mikayla", "Mikayla", "Mikayla"));
+							Main.game.getNpc(Kay.class).setName(new NameTriplet("Микайла", "Микайла", "Микайла"));
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/kaysTextiles", "KAY_OFFICE_DOMINATE_CLOTHING_NAME_START"));
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/kaysTextiles", "KAY_OFFICE_DOMINATE_CLOTHING_NAME_MID"));
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/kaysTextiles", "KAY_OFFICE_DOMINATE_CLOTHING_NAME_MIKAYLA"));
@@ -2159,31 +2136,29 @@ public class KaysWarehouse {
 		}
 		@Override
 		public String getHeaderContent() {
-			StringBuilder sb = new StringBuilder();
 
-			sb.append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/kaysTextiles", "KAY_OFFICE_DOMINATE_MAKEUP"));
-					
-			sb.append(CharacterModificationUtils.getSelfDivHairStyles("Hair Style", UtilText.parse(BodyChanging.getTarget(), "Change [npc.namePos] hair style."))
-					
-					+CharacterModificationUtils.getKatesDivCoveringsNew(
-							false, Race.NONE, BodyCoveringType.MAKEUP_BLUSHER, "Blusher", "Blusher (also called rouge) is used to colour the cheeks so as to provide a more youthful appearance, and to emphasise the cheekbones.", true, true)
-					
-					+CharacterModificationUtils.getKatesDivCoveringsNew(
-							false, Race.NONE, BodyCoveringType.MAKEUP_LIPSTICK, "Lipstick", "Lipstick is used to provide colour, texture, and protection to the wearer's lips.", true, true)
-					
-					+CharacterModificationUtils.getKatesDivCoveringsNew(
-							false, Race.NONE, BodyCoveringType.MAKEUP_EYE_LINER, "Eyeliner", "Eyeliner is applied around the contours of the eyes to help to define shape or highlight different features.", true, true)
-					
-					+CharacterModificationUtils.getKatesDivCoveringsNew(
-							false, Race.NONE, BodyCoveringType.MAKEUP_EYE_SHADOW, "Eye shadow", "Eye shadow is used to make the wearer's eyes stand out or look more attractive.", true, true)
-					
-					+CharacterModificationUtils.getKatesDivCoveringsNew(
-							false, Race.NONE, BodyCoveringType.MAKEUP_NAIL_POLISH_HANDS, "Nail polish", "Nail polish is used to colour and protect the nails on your [pc.hands].", true, true)
-					
-					+CharacterModificationUtils.getKatesDivCoveringsNew(
-							false, Race.NONE, BodyCoveringType.MAKEUP_NAIL_POLISH_FEET, "Toenail polish", "Toenail polish is used to colour and protect the nails on your [pc.feet].", true, true));
+            String sb = UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/kaysTextiles", "KAY_OFFICE_DOMINATE_MAKEUP") +
+                    CharacterModificationUtils.getSelfDivHairStyles("Hair Style", UtilText.parse(BodyChanging.getTarget(), "Change [npc.namePos] hair style."))
+
+                    + CharacterModificationUtils.getKatesDivCoveringsNew(
+                    false, Race.NONE, BodyCoveringType.MAKEUP_BLUSHER, "Blusher", "Blusher (also called rouge) is used to colour the cheeks so as to provide a more youthful appearance, and to emphasise the cheekbones.", true, true)
+
+                    + CharacterModificationUtils.getKatesDivCoveringsNew(
+                    false, Race.NONE, BodyCoveringType.MAKEUP_LIPSTICK, "Lipstick", "Lipstick is used to provide colour, texture, and protection to the wearer's lips.", true, true)
+
+                    + CharacterModificationUtils.getKatesDivCoveringsNew(
+                    false, Race.NONE, BodyCoveringType.MAKEUP_EYE_LINER, "Eyeliner", "Eyeliner is applied around the contours of the eyes to help to define shape or highlight different features.", true, true)
+
+                    + CharacterModificationUtils.getKatesDivCoveringsNew(
+                    false, Race.NONE, BodyCoveringType.MAKEUP_EYE_SHADOW, "Eye shadow", "Eye shadow is used to make the wearer's eyes stand out or look more attractive.", true, true)
+
+                    + CharacterModificationUtils.getKatesDivCoveringsNew(
+                    false, Race.NONE, BodyCoveringType.MAKEUP_NAIL_POLISH_HANDS, "Nail polish", "Nail polish is used to colour and protect the nails on your [pc.hands].", true, true)
+
+                    + CharacterModificationUtils.getKatesDivCoveringsNew(
+                    false, Race.NONE, BodyCoveringType.MAKEUP_NAIL_POLISH_FEET, "Toenail polish", "Toenail polish is used to colour and protect the nails on your [pc.feet].", true, true);
 			
-			return sb.toString();
+			return sb;
 		}
 		@Override
 		public String getContent() {
@@ -2201,7 +2176,7 @@ public class KaysWarehouse {
 	public static final DialogueNode KAY_OFFICE_DOMINATE_MAKEUP_END = new DialogueNode("", "", true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -2290,7 +2265,7 @@ public class KaysWarehouse {
 	public static final DialogueNode KAY_OFFICE_DOMINATE_NAMING_END = new DialogueNode("", "", true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {

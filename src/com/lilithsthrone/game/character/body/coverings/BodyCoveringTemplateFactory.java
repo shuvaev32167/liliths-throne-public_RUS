@@ -1,15 +1,15 @@
 package com.lilithsthrone.game.character.body.coverings;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.lilithsthrone.game.character.body.valueEnums.CoveringModifier;
 import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @since 0.2.8
@@ -21,8 +21,8 @@ public class BodyCoveringTemplateFactory {
 	public static BodyCoveringTemplate createSkin(Map<CoveringPattern, Integer> coverPatterns, List<Colour> naturalPrimaryColors, List<Colour> naturalSecondaryColours, List<Colour> dyeColours) {
 		return new BodyCoveringTemplate("a layer of",
 				false,
-				"skin",
-				"skin",
+				"кожи",
+				"кожа",
 				Util.newArrayListOfValues(CoveringModifier.SMOOTH),
 				null,
 				coverPatterns,
@@ -44,8 +44,8 @@ public class BodyCoveringTemplateFactory {
 	public static BodyCoveringTemplate createSlime(CoveringPattern basePattern, Map<CoveringPattern, Integer> coverPatterns) {
 		return new BodyCoveringTemplate("a layer of",
 				false,
-				"slime",
-				"slime",
+				"слизи",
+				"слизь",
 				Util.newArrayListOfValues(CoveringModifier.GOOEY),
 				null,
 				Util.newHashMapOfValues(new Value<>(basePattern, 1)),
@@ -57,7 +57,7 @@ public class BodyCoveringTemplateFactory {
 	}
 
 	public static BodyCoveringTemplate createSilicone(CoveringPattern basePattern, Map<CoveringPattern, Integer> coverPatterns, boolean orificeCovering) {
-		return createSilicone("a layer of", "silicone", basePattern, coverPatterns, orificeCovering);
+		return createSilicone("a layer of", "силикон", basePattern, coverPatterns, orificeCovering);
 	}
 	
 	public static BodyCoveringTemplate createSilicone(String determiner, String name, CoveringPattern basePattern, Map<CoveringPattern, Integer> coverPatterns, boolean orificeCovering) {
@@ -86,11 +86,11 @@ public class BodyCoveringTemplateFactory {
 	}
 	
 	public static BodyCoveringTemplate createFurSkin(List<CoveringModifier> modifiers, Map<CoveringPattern, Integer> patterns) {
-		return createFur("a layer of", "fur", modifiers, null, patterns);
+		return createFur("a layer of", "мех", modifiers, null, patterns);
 	}
 
 	public static BodyCoveringTemplate createFurSkin(List<CoveringModifier> modifiers, List<CoveringModifier> extraModifiers, Map<CoveringPattern, Integer> patterns) {
-		return createFur("a layer of", "fur", modifiers, extraModifiers, patterns);
+		return createFur("a layer of", "мех", modifiers, extraModifiers, patterns);
 	}
 	
 	private static BodyCoveringTemplate createFur(String determiner, String name, List<CoveringModifier> modifiers, List<CoveringModifier> extraModifiers, Map<CoveringPattern, Integer> patterns) {
@@ -128,15 +128,15 @@ public class BodyCoveringTemplateFactory {
 	}
 	
 	public static BodyCoveringTemplate createHeadHair(CoveringModifier modifier) {
-		return createHairWithoutPatterns("a head of", "hair", modifier);
+		return createHairWithoutPatterns("a head of", "волосы", modifier);
 	}
 	
 	public static BodyCoveringTemplate createFurHeadHair(CoveringModifier modifier) {
-		return createHairWithoutPatterns("a layer of", "hair", modifier);
+		return createHairWithoutPatterns("a layer of", "волосы", modifier);
 	}
 	
 	public static BodyCoveringTemplate createBodyHair(CoveringModifier modifier) {
-		return createHairWithoutPatterns("a layer of", "hair", modifier);
+		return createHairWithoutPatterns("a layer of", "волосы", modifier);
 	}
 	
 	public static BodyCoveringTemplate createElemental(String name, CoveringModifier modifier, CoveringPattern pattern, List<Colour> naturalColours) {
@@ -157,8 +157,8 @@ public class BodyCoveringTemplateFactory {
 	public static BodyCoveringTemplate createOrificeSkin(CoveringPattern pattern) {
 		return new BodyCoveringTemplate("a layer of",
 				false,
-				"skin",
-				"skin",
+				"кожи",
+				"кожа",
 				Util.newArrayListOfValues(CoveringModifier.SMOOTH),
 				null,
 				pattern==null
@@ -174,8 +174,8 @@ public class BodyCoveringTemplateFactory {
 	public static BodyCoveringTemplate createPenisSkin() {
 		return new BodyCoveringTemplate("a layer of",
 				false,
-				"skin",
-				"skin",
+				"кожи",
+				"кожа",
 				Util.newArrayListOfValues(CoveringModifier.SMOOTH),
 				null,
 				Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 10)),
@@ -203,8 +203,8 @@ public class BodyCoveringTemplateFactory {
 		}
 		return new BodyCoveringTemplate("a pair of",
 				true,
-				"eyes",
-				"eye",
+				"глаза",
+				"глаз",
 				Util.newArrayListOfValues(CoveringModifier.EYE),
 				null,
 				natural,

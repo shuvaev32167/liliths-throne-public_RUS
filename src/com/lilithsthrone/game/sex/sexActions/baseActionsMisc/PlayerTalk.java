@@ -1,7 +1,5 @@
 package com.lilithsthrone.game.sex.sexActions.baseActionsMisc;
 
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
@@ -10,17 +8,14 @@ import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.sex.ArousalIncrease;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexPace;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotTag;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
+
+import java.util.List;
 
 /**
  * @since 0.1.79
@@ -103,20 +98,20 @@ public class PlayerTalk {
 						return UtilText.returnStringAtRandom(
 								"As [npc.namePos] mouth is blocked, all [npc.she] can do in place of talking dirty to [npc2.name] is let out a series of horny, muffled [npc.moans].",
 								"With [npc.her] mouth being currently blocked, [npc.nameIsFull] only able to make a series of muffled, lewd [npc.moans] to let [npc2.name] know that [npc.sheIs] enjoying [npc.herself].",
-								"Wanting to let [npc2.name] know that [npc.sheIs] enjoying [npc.herself], but having [npc.her] mouth blocked, [npc.name] [npc.verb(make)] do with letting out a series of incredibly lewd, muffled [npc.moans].",
+                                "Wanting to let [npc2.name] know that [npc.sheIs] enjoying [npc.herself], but having [npc.her] mouth blocked, [npc.name] make do with letting out a series of incredibly lewd, muffled [npc.moans].",
 								"Although [npc.her] mouth is blocked, [npc.nameIsFull] still able to let out a series of horny, muffled [npc.moans], letting [npc2.name] know that [npc.sheIs] enjoying [npc.herself].");
 					case DOM_ROUGH:
 						return UtilText.returnStringAtRandom(
 								"As [npc.namePos] mouth is blocked, all [npc.she] can do in place of talking rough to [npc2.name] is let out a series of aggressive, muffled growls.",
 								"With [npc.her] mouth being currently blocked, [npc.nameIsFull] only able to make a series of muffled, rough growls to let [npc2.name] know that [npc.sheIs] still firmly in charge.",
-								"Wanting to let [npc2.name] know that [npc.sheIs] still in charge, but having [npc.her] mouth blocked, [npc.name] [npc.verb(make)] do with letting out a series of menacing, muffled growls.",
+                                "Wanting to let [npc2.name] know that [npc.sheIs] still in charge, but having [npc.her] mouth blocked, [npc.name] make do with letting out a series of menacing, muffled growls.",
 								"Although [npc.her] mouth is blocked, [npc.nameIsFull] still able to let out a series of deep, muffled growls, letting [npc2.name] know that [npc.sheIs] still in charge.");
 					case SUB_RESISTING:
 						return UtilText.returnStringAtRandom(
 								"As [npc.namePos] mouth is blocked, all [npc.she] can do in place of begging for mercy is to let out a series of pathetic whines and muffled cries.",
-								"With [npc.her] mouth being currently blocked, [npc.nameIsFull] only able to make a series of muffled sobs and distressed whines to let [npc2.name] know that [npc.she] [npc.verb(want)] to be let go.",
-								"Wanting to let [npc2.name] know that [npc.she] desires to be released, but having [npc.her] mouth blocked, [npc.name] [npc.verb(make)] do with letting out a series of distressed sobs and muffled cries.",
-								"Although [npc.her] mouth is blocked, [npc.nameIsFull] still able to let out a series of distressed whines and muffled sobs, letting [npc2.name] know that [npc.she] [npc.verb(want)] this to stop.");
+                                "With [npc.her] mouth being currently blocked, [npc.nameIsFull] only able to make a series of muffled sobs and distressed whines to let [npc2.name] know that [npc.she] want to be let go.",
+                                "Wanting to let [npc2.name] know that [npc.she] desires to be released, but having [npc.her] mouth blocked, [npc.name] make do with letting out a series of distressed sobs and muffled cries.",
+                                "Although [npc.her] mouth is blocked, [npc.nameIsFull] still able to let out a series of distressed whines and muffled sobs, letting [npc2.name] know that [npc.she] want this to stop.");
 				}
 			}
 			
@@ -453,8 +448,8 @@ public class PlayerTalk {
 			if(Main.sex.getCharacterPerformingAction().isSpeechMuffled()) {
 				UtilText.nodeContentSB.append(
 						UtilText.returnStringAtRandom(
-								"As [npc.namePos] mouth is blocked, [npc.she] [npc.verb(resort)] to thrusting [npc.her] [npc.hips] out at [npc2.name] in an attempt to get [npc2.herHim] to use [npc.her] [npc.pussy+].",
-								"With [npc.her] mouth being blocked, [npc.name] [npc.verb(fall)] back on simply making a suggestive move with [npc.her] [npc.hips] in order to entice [npc2.name] into using [npc.her] [npc.pussy+].")
+                                "As [npc.namePos] mouth is blocked, [npc.she] resort to thrusting [npc.her] [npc.hips] out at [npc2.name] in an attempt to get [npc2.herHim] to use [npc.her] [npc.pussy+].",
+                                "With [npc.her] mouth being blocked, [npc.name] fall back on simply making a suggestive move with [npc.her] [npc.hips] in order to entice [npc2.name] into using [npc.her] [npc.pussy+].")
 						+"<br/><br/>");
 			} else {
 				UtilText.nodeContentSB.append("Putting on the most pleading expression you can muster, you cry out to [npc2.name], "
@@ -475,7 +470,7 @@ public class PlayerTalk {
 		@Override
 		public void applyEffects() {
 			if(!((NPC)Main.sex.getCharacterTargetedForSexAction(this)).getSexBehaviourDeniesRequests(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.VAGINA))) {
-				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.VAGINA)));
+				Main.sex.getCharacterTargetedForSexAction(this).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.VAGINA)));
 				
 			} else if(!Main.sex.isDom(Main.game.getPlayer())) {
 				Main.sex.addRequestsBlocked(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.VAGINA));
@@ -522,8 +517,8 @@ public class PlayerTalk {
 			if(Main.sex.getCharacterPerformingAction().isSpeechMuffled()) {
 				UtilText.nodeContentSB.append(
 						UtilText.returnStringAtRandom(
-								"As [npc.namePos] mouth is blocked, [npc.she] [npc.verb(resort)] to trying to move closer to [npc2.namePos] [npc2.pussy+] in an attempt to show [npc2.herHim] that that's what [npc.sheIs] interested in.",
-								"With [npc.her] mouth being blocked, [npc.name] [npc.verb(fall)] back on simply moving closer to [npc2.namePos] [npc2.pussy+] as [npc.she] [npc.verb(try)] to indicate that that's what [npc.she] [npc.verb(want)].")
+                                "As [npc.namePos] mouth is blocked, [npc.she] resort to trying to move closer to [npc2.namePos] [npc2.pussy+] in an attempt to show [npc2.herHim] that that's what [npc.sheIs] interested in.",
+                                "With [npc.her] mouth being blocked, [npc.name] fall back on simply moving closer to [npc2.namePos] [npc2.pussy+] as [npc.she] try to indicate that that's what [npc.she] want.")
 						+"<br/><br/>");
 			} else {
 				UtilText.nodeContentSB.append("Putting on the most pleading expression you can muster, you cry out to [npc2.name], "
@@ -544,7 +539,7 @@ public class PlayerTalk {
 		@Override
 		public void applyEffects() {
 			if(!((NPC)Main.sex.getCharacterTargetedForSexAction(this)).getSexBehaviourDeniesRequests(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, null))) {
-				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, null)));
+				Main.sex.getCharacterTargetedForSexAction(this).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, null)));
 				
 			} else if(!Main.sex.isDom(Main.game.getPlayer())) {
 				Main.sex.addRequestsBlocked(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, null));
@@ -588,8 +583,8 @@ public class PlayerTalk {
 			if(Main.sex.getCharacterPerformingAction().isSpeechMuffled()) {
 				UtilText.nodeContentSB.append(
 						UtilText.returnStringAtRandom(
-								"As [npc.namePos] mouth is blocked, [npc.she] [npc.verb(resort)] to thrusting [npc.her] [npc.hips] back at [npc2.name] in an attempt to get [npc2.herHim] to use [npc.her] [npc.ass+].",
-								"With [npc.her] mouth being blocked, [npc.name] [npc.verb(fall)] back on simply making a suggestive backwards move with [npc.her] [npc.hips] in order to entice [npc2.name] into using [npc.her] [npc.ass+].")
+                                "As [npc.namePos] mouth is blocked, [npc.she] resort to thrusting [npc.her] [npc.hips] back at [npc2.name] in an attempt to get [npc2.herHim] to use [npc.her] [npc.ass+].",
+                                "With [npc.her] mouth being blocked, [npc.name] fall back on simply making a suggestive backwards move with [npc.her] [npc.hips] in order to entice [npc2.name] into using [npc.her] [npc.ass+].")
 						+"<br/><br/>");
 			} else {
 				UtilText.nodeContentSB.append("Putting on the most pleading expression you can muster, you cry out to [npc2.name], "
@@ -610,7 +605,7 @@ public class PlayerTalk {
 		@Override
 		public void applyEffects() {
 			if(!((NPC)Main.sex.getCharacterTargetedForSexAction(this)).getSexBehaviourDeniesRequests(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.ANUS))) {
-				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.ANUS)));
+				Main.sex.getCharacterTargetedForSexAction(this).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.ANUS)));
 				
 			} else if(!Main.sex.isDom(Main.game.getPlayer())) {
 				Main.sex.addRequestsBlocked(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.ANUS));
@@ -670,8 +665,8 @@ public class PlayerTalk {
 			if(Main.sex.getCharacterPerformingAction().isSpeechMuffled()) {
 				UtilText.nodeContentSB.append(
 						UtilText.returnStringAtRandom(
-								"As [npc.namePos] mouth is blocked, [npc.she] [npc.verb(resort)] to trying to move closer to [npc2.namePos] [npc2.ass+] in an attempt to show [npc2.herHim] that that's what [npc.sheIs] interested in.",
-								"With [npc.her] mouth being blocked, [npc.name] [npc.verb(fall)] back on simply moving closer to [npc2.namePos] [npc2.ass+] as [npc.she] [npc.verb(try)] to indicate that that's what [npc.she] [npc.verb(want)].")
+                                "As [npc.namePos] mouth is blocked, [npc.she] resort to trying to move closer to [npc2.namePos] [npc2.ass+] in an attempt to show [npc2.herHim] that that's what [npc.sheIs] interested in.",
+                                "With [npc.her] mouth being blocked, [npc.name] fall back on simply moving closer to [npc2.namePos] [npc2.ass+] as [npc.she] try to indicate that that's what [npc.she] want.")
 						+"<br/><br/>");
 			} else {
 				UtilText.nodeContentSB.append("Putting on the most pleading expression you can muster, you cry out to [npc2.name], "
@@ -692,7 +687,7 @@ public class PlayerTalk {
 		@Override
 		public void applyEffects() {
 			if(!((NPC)Main.sex.getCharacterTargetedForSexAction(this)).getSexBehaviourDeniesRequests(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, null))) {
-				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, null)));
+				Main.sex.getCharacterTargetedForSexAction(this).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, null)));
 				
 			} else if(!Main.sex.isDom(Main.game.getPlayer())) {
 				Main.sex.addRequestsBlocked(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, null));
@@ -757,7 +752,7 @@ public class PlayerTalk {
 		@Override
 		public void applyEffects() {
 			if(!((NPC)Main.sex.getCharacterTargetedForSexAction(this)).getSexBehaviourDeniesRequests(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.MOUTH))) {
-				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(
+				Main.sex.getCharacterTargetedForSexAction(this).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(
 						new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.MOUTH),
 						new SexType(SexParticipantType.NORMAL, null, SexAreaPenetration.TONGUE)));
 				
@@ -814,8 +809,8 @@ public class PlayerTalk {
 			if(Main.sex.getCharacterPerformingAction().isSpeechMuffled()) {
 				UtilText.nodeContentSB.append(
 						UtilText.returnStringAtRandom(
-								"As [npc.namePos] mouth is blocked, [npc.she] [npc.verb(resort)] to trying to move closer to [npc2.namePos] [npc2.face] in an attempt to show [npc2.herHim] that [npc.sheIs] interested in using [npc2.her] mouth.",
-								"With [npc.her] mouth being blocked, [npc.name] [npc.verb(fall)] back on simply moving closer to [npc2.namePos] [npc2.face] as [npc.she] [npc.verb(try)] to indicate that [npc.sheIs] [npc.verb(want)] to use [npc2.her] mouth.")
+                                "As [npc.namePos] mouth is blocked, [npc.she] resort to trying to move closer to [npc2.namePos] [npc2.face] in an attempt to show [npc2.herHim] that [npc.sheIs] interested in using [npc2.her] mouth.",
+                                "With [npc.her] mouth being blocked, [npc.name] fall back on simply moving closer to [npc2.namePos] [npc2.face] as [npc.she] try to indicate that [npc.sheIs] want to use [npc2.her] mouth.")
 						+"<br/><br/>");
 			} else {
 				UtilText.nodeContentSB.append("Putting on the most pleading expression you can muster, you cry out to [npc2.name], "
@@ -836,7 +831,7 @@ public class PlayerTalk {
 		@Override
 		public void applyEffects() {
 			if(!((NPC)Main.sex.getCharacterTargetedForSexAction(this)).getSexBehaviourDeniesRequests(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, null))) {
-				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(
+				Main.sex.getCharacterTargetedForSexAction(this).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(
 						new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, null),
 						new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, null)));
 				
@@ -893,8 +888,8 @@ public class PlayerTalk {
 			if(Main.sex.getCharacterPerformingAction().isSpeechMuffled()) {
 				UtilText.nodeContentSB.append(
 						UtilText.returnStringAtRandom(
-								"As [npc.namePos] mouth is blocked, [npc.she] [npc.verb(resort)] to thrusting [npc.her] chest out at [npc2.name] in an attempt to get [npc2.herHim] to use [npc.her] [npc.nipples+].",
-								"With [npc.her] mouth being blocked, [npc.name] [npc.verb(fall)] back on simply making a suggestive move with [npc.her] [npc.chest] in order to entice [npc2.name] into using [npc.her] [npc.nipples+].")
+                                "As [npc.namePos] mouth is blocked, [npc.she] resort to thrusting [npc.her] chest out at [npc2.name] in an attempt to get [npc2.herHim] to use [npc.her] [npc.nipples+].",
+                                "With [npc.her] mouth being blocked, [npc.name] fall back on simply making a suggestive move with [npc.her] [npc.chest] in order to entice [npc2.name] into using [npc.her] [npc.nipples+].")
 						+"<br/><br/>");
 			} else {
 				UtilText.nodeContentSB.append("Putting on the most pleading expression you can muster, you cry out to [npc2.name], "
@@ -915,7 +910,7 @@ public class PlayerTalk {
 		@Override
 		public void applyEffects() {
 			if(!((NPC)Main.sex.getCharacterTargetedForSexAction(this)).getSexBehaviourDeniesRequests(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.NIPPLE))) {
-				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.NIPPLE)));
+				Main.sex.getCharacterTargetedForSexAction(this).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.NIPPLE)));
 				
 			} else if(!Main.sex.isDom(Main.game.getPlayer())) {
 				Main.sex.addRequestsBlocked(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.NIPPLE));
@@ -972,8 +967,8 @@ public class PlayerTalk {
 			if(Main.sex.getCharacterPerformingAction().isSpeechMuffled()) {
 				UtilText.nodeContentSB.append(
 						UtilText.returnStringAtRandom(
-								"As [npc.namePos] mouth is blocked, [npc.she] [npc.verb(resort)] to thrusting [npc.her] chest out at [npc2.name] in an attempt to get [npc2.herHim] to use [npc.her] [npc.breasts+].",
-								"With [npc.her] mouth being blocked, [npc.name] [npc.verb(fall)] back on simply making a suggestive move with [npc.her] [npc.chest] in order to entice [npc2.name] into using [npc.her] [npc.breasts+].")
+                                "As [npc.namePos] mouth is blocked, [npc.she] resort to thrusting [npc.her] chest out at [npc2.name] in an attempt to get [npc2.herHim] to use [npc.her] [npc.breasts+].",
+                                "With [npc.her] mouth being blocked, [npc.name] fall back on simply making a suggestive move with [npc.her] [npc.chest] in order to entice [npc2.name] into using [npc.her] [npc.breasts+].")
 						+"<br/><br/>");
 			} else {
 				UtilText.nodeContentSB.append("Putting on the most pleading expression you can muster, you cry out to [npc2.name], "
@@ -994,7 +989,7 @@ public class PlayerTalk {
 		@Override
 		public void applyEffects() {
 			if(!((NPC)Main.sex.getCharacterTargetedForSexAction(this)).getSexBehaviourDeniesRequests(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.BREAST))) {
-				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.BREAST)));
+				Main.sex.getCharacterTargetedForSexAction(this).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.BREAST)));
 				
 			} else if(!Main.sex.isDom(Main.game.getPlayer())) {
 				Main.sex.addRequestsBlocked(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.BREAST));
@@ -1051,8 +1046,8 @@ public class PlayerTalk {
 			if(Main.sex.getCharacterPerformingAction().isSpeechMuffled()) {
 				UtilText.nodeContentSB.append(
 						UtilText.returnStringAtRandom(
-								"As [npc.namePos] mouth is blocked, [npc.she] [npc.verb(resort)] to thrusting [npc.her] chest out at [npc2.name] in an attempt to get [npc2.herHim] to use it.",
-								"With [npc.her] mouth being blocked, [npc.name] [npc.verb(fall)] back on simply making a suggestive move with [npc.her] [npc.chest] in order to entice [npc2.name] into using it.")
+                                "As [npc.namePos] mouth is blocked, [npc.she] resort to thrusting [npc.her] chest out at [npc2.name] in an attempt to get [npc2.herHim] to use it.",
+                                "With [npc.her] mouth being blocked, [npc.name] fall back on simply making a suggestive move with [npc.her] [npc.chest] in order to entice [npc2.name] into using it.")
 						+"<br/><br/>");
 			} else {
 				UtilText.nodeContentSB.append("Putting on the most pleading expression you can muster, you cry out to [npc2.name], "
@@ -1073,7 +1068,7 @@ public class PlayerTalk {
 		@Override
 		public void applyEffects() {
 			if(!((NPC)Main.sex.getCharacterTargetedForSexAction(this)).getSexBehaviourDeniesRequests(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.BREAST))) {
-				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.BREAST)));
+				Main.sex.getCharacterTargetedForSexAction(this).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.BREAST)));
 				
 			} else if(!Main.sex.isDom(Main.game.getPlayer())) {
 				Main.sex.addRequestsBlocked(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.BREAST));

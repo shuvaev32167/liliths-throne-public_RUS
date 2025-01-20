@@ -49,8 +49,8 @@ public class StocksSex {
 
 		@Override
 		public String getDescription() {
-			return "Deciding that [npc.she] [npc.verb(want)] to fuck [npc2.name] while [npc2.sheIs] locked in the stocks,"
-						+ " [npc.name] #IF(npc.isPlayer())[npc.step]#ELSE[npc.steps]#ENDIF up behind [npc2.herHim] and [npc.verb(start)] grinding [npc.her] groin up against [npc2.her] [npc2.ass+]."
+            return "Deciding that [npc.she] want to fuck [npc2.name] while [npc2.sheIs] locked in the stocks,"
+                    + " [npc.name] #IF(npc.isPlayer())[npc.step]#ELSE[npc.steps]#ENDIF up behind [npc2.herHim] и start grinding [npc.her] groin up against [npc2.her] [npc2.ass+]."
 					+ " Taking hold of [npc2.her] [npc2.hips+], [npc.she] [npc.moanVerb], "
 					+ "[npc.speech(Be a good [npc2.girl] and hold still while I fuck you!)]";
 		}
@@ -95,9 +95,9 @@ public class StocksSex {
 
 		@Override
 		public String getDescription() {
-			return "Wanting to get fucked by [npc2.name], [npc.name] [npc.verb(drop)] down onto all fours and [npc.verb(crawl)] forwards beneath [npc2.her] stocks."
-					+ " Shuffling around to get into a comfortable position, [npc.she] [npc.verb(lift)] [npc.her] [npc.hips+] and [npc.verb(push)] [npc.her] [npc.ass+] back against [npc2.her] groin."
-					+ " With an excited [npc.moan], [npc.name] [npc.verb(call)] out,"
+            return "Wanting to get fucked by [npc2.name], [npc.name] drop down onto all fours and crawl forwards beneath [npc2.her] stocks."
+                    + " Shuffling around to get into a comfortable position, [npc.she] lift [npc.her] [npc.hips+] и push [npc.her] [npc.ass+] back against [npc2.her] groin."
+                    + " With an excited [npc.moan], [npc.name] call out,"
 					+ " [npc.speech(Lucky you! I'm going to let you fuck me!)]";
 		}
 
@@ -141,7 +141,7 @@ public class StocksSex {
 
 		@Override
 		public String getDescription() {
-			return "Deciding that [npc.she] [npc.verb(want)] to perform oral on [npc2.name], [npc.name] [npc.verb(kneel)]down behind [npc2.herHim]."
+            return "Deciding that [npc.she] want to perform oral on [npc2.name], [npc.name] kneeldown behind [npc2.herHim]."
 					+ " Bringing [npc.her] mouth up to [npc2.her] groin, [npc.she] [npc.moanVerb],"
 					+ " [npc.speech(You're going to love this!)]";
 		}
@@ -186,7 +186,7 @@ public class StocksSex {
 
 		@Override
 		public String getDescription() {
-			return "Deciding that [npc.she] [npc.verb(want)] to use [npc2.namePos] mouth, [npc.name] #IF(npc.isPlayer())[npc.step]#ELSE[npc.steps]#ENDIF back, before moving around in front of [npc2.her] [npc2.face]."
+            return "Deciding that [npc.she] want to use [npc2.namePos] mouth, [npc.name] #IF(npc.isPlayer())[npc.step]#ELSE[npc.steps]#ENDIF back, before moving around in front of [npc2.her] [npc2.face]."
 					+ " Bringing [npc.her] groin up to [npc2.her] mouth, [npc.she] [npc.moanVerb],"
 					+ " [npc.speech(You're going to love this!)]";
 		}

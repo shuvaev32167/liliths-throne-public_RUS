@@ -53,10 +53,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		After first popping off the cap, [npc.name] [npc.verb(bring)] the glass bottle of Porcine Pop up to [npc.her] [npc.mouth]. Tilting [npc.her] head back, [npc.she] [npc.verb(start)] drinking the cool, fizzy cola, and despite its overwhelmingly sweet taste, [npc.she] [npc.verb(manage)] to quickly finish the entire bottle.
+		After first popping off the cap, [npc.name] bring the glass bottle of Porcine Pop up to [npc.her] [npc.mouth]. Tilting [npc.her] head back, [npc.she] start drinking the cool, fizzy cola, and despite its overwhelmingly sweet taste, [npc.she] manage to quickly finish the entire bottle.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		After first popping off the cap, [npc.name] [npc.verb(bring)] the glass bottle of Porcine Pop up to [npc2.namePos] waiting [npc2.lips]. Tilting [npc2.her] head back, [npc2.she] [npc2.verb(start)] drinking the cool, fizzy cola, and despite its overwhelmingly sweet taste, [npc2.she] [npc2.verb(manage)] to quickly finish the entire bottle.
+		After first popping off the cap, [npc.name] bring the glass bottle of Porcine Pop up to [npc2.namePos] waiting [npc2.lips]. Tilting [npc2.her] head back, [npc2.she] [npc2.verb(start)] drinking the cool, fizzy cola, and despite its overwhelmingly sweet taste, [npc2.she] [npc2.verb(manage)] to quickly finish the entire bottle.
 		]]></otherUse>
 	</useDescriptions>
 

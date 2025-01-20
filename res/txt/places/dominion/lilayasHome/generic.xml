@@ -5,98 +5,98 @@
 	
 	<htmlContent tag="OUTSIDE"><![CDATA[
 	<p>
-		Positioned near the very centre of Dominion, Lilaya's home would be more aptly described as a palace, rather than a town-house. While the surrounding buildings are of an impressive size, you reckon that you could fit at least two or three of them into the plot which your [lilaya.relation(pc)]'s dwelling occupies.
+		Дом Лилайи, расположенный в самом центре Доминиона, правильнее было бы назвать дворцом, а не городским домом. Хотя окружающие здания впечатляют своими размерами, кажется, что на участке, который занимает жилище [lilaya.morphSingleGent([lilaya.relation(pc)])], можно уместить по крайней мере два или три из них.
 	</p>
 	<p>
-		With your demonic [lilaya.relation(pc)] happily treating you as one of her blood-relatives, you've been given full permission to come and go from here as you please. If you wanted to enter the house right now, all you'd need to do is knock on the front door, and you can be sure that Lilaya's cat-girl maid, Rose, will respond in mere moments.
+		Поскольку твоя демоническая [lilaya.relation(pc)] с радостью отнеслась к тебе как к одному из своих кровных родственников, ты [pc.genderBasedWord(получил, получила)] полное разрешение приходить и уходить отсюда по своему усмотрению. Если бы ты захотел войти в дом прямо сейчас, достаточно было бы просто постучать в парадную дверь, и можешь быть уверен, что кошкодевушка-горничная Лилайи, Роза, откликнется через несколько мгновений.
 	</p>
 	]]>
 	</htmlContent>
 	
 	<htmlContent tag="OUTSIDE_DADDY_PACKAGE"><![CDATA[
 	<p>
-		You knock on the front door, and after only a brief moment, it swings open.
+		Ты стучишь во входную дверь, и через мгновение она распахивается.
 	</p>
 	<p>
-		[rose.speech(Welcome back, [pc.name],)] Rose says, curtsying to you as she steps back in order to grant you access to Lilaya's house, [rose.speech(While you were out, a package arrived for you.)]
+		[rose.speech(С возвращением, [pc.name])], говорит Роза, делая реверанс, отступая назад, чтобы предоставить тебе доступ в дом Лилайи, [rose.speech(Пока вас не было, вам пришла посылка)].
 	</p>
 	<p>
-		As you forwards into the impressive entrance hall, the cat-girl maid retrieves a small box, wrapped in brown packaging paper, from off of the top of a nearby table. Smiling at you one last time, Rose hands the package to you, before excusing herself and quickly hurrying off
+		Когда ты входишь во внушительный вестибюль, кошкодевушка горничная берёт со столика небольшую коробку, завёрнутую в коричневую упаковочную бумагу. Улыбнувшись тебе в очередной раз, Роза вручает пакет, а затем извиняется и быстро спешит прочь.
 		#IF(game.isExtendedWorkTime())
-			 in the direction of your [lilaya.relation(pc)]'s laboratory.
+			 в направлении лаборатории твоей [lilaya.morphSingleGent([lilaya.relation(pc)])].
 		#ELSE
-			 upstairs to go back to sleep.
+			 наверх, чтобы снова заснуть.
 		#ENDIF
 	</p>
 	<p>
-		Opening the package, you discover that it contains a spell book and several scrolls, along with a small note which reads;
+		Открыв пакет, ты обнаруживаешь в нём книгу заклинаний и несколько свитков, а также небольшую записку с надписью:
 	</p>
 	<p style='text-align:center;'><i>
-		Hi [pc.name],<br/>
-		Here are the scrolls and spell book which I promised to send to you. Hope this letter finds you well, and look forwards to seeing you again soon!<br/>
-		Love,<br/>
+		Привет, [pc.name],<br/>
+		Здесь свитки и книга заклинаний, которые я обещал отправить. Надеюсь, это письмо застанет тебя в добром здравии, и с нетерпением жду скорой встречи!<br/>
+		С любовью,<br/>
 		[daddy.Dad]
 	</i></p>
 	<p>
-		Smiling to yourself as you finish reading the note, you put the contents of the package into your inventory, before discarding the now-empty box and packaging into a nearby waste-paper bin.
+		Улыбнувшись прочитанной записке, помещаешь содержимое посылки в инвентарь, а затем выбрасываешь пустую коробку и упаковку в ближайшую урну.
 	</p>
 	]]>
 	</htmlContent>
 	
 	<htmlContent tag="OUTSIDE_DADDY_PACKAGE_SECURITY"><![CDATA[
 	<p>
-		You knock on the front door, and after only a brief moment, it swings open to reveal the familiar figure of your slave, [npc.name].
+		Ты стучишь во входную дверь, и через мгновение она распахивается, открывая знакомую фигуру твоего раба, [npc.morphSingleNameGene([npc.name])].
 	</p>
 	<p>
 		#IF(npc.isMute())
-			As [npc.sheIs] mute, the [npc.race] simply nods and 
+			Поскольку [npc.sheIs] [npc.genderBasedWord(немой, немая)], [npc.race] просто кивает и 
 			#IF(npc.isFeminine())
-				 curtsies
+				 делает реверанс
 			#ELSE
-				 bows
+				 кланяется
 			#ENDIF
-			 to you as [npc.she] [npc.steps] back in order to grant you access to Lilaya's house.
+			 тебе и затем [npc.steps] обратно, чтобы предоставить тебе доступ в дом Лилайи.
 		#ELSE
-			[npc.speech(Welcome back, [pc.name],)] the [npc.race] says,
+			[npc.speech(С возвращением, [pc.name])], говорит [npc.race] и
 			#IF(npc.isFeminine())
-				 curtsying
+				 делает реверанс
 			#ELSE
-				 bowing
+				 кланяется
 			#ENDIF
-			  to you as [npc.she] [npc.steps] back in order to grant you access to Lilaya's house. [npc.speech(While you were out, a package arrived for you.)]
+			 тебе и затем [npc.steps] обратно, чтобы предоставить тебе доступ в дом Лилайи. [npc.speech(Пока вас не было, вам пришла посылка.)].
 		#ENDIF
 	</p>
 	<p>
-		As you forwards into the impressive entrance hall, the security guard retrieves a small box, wrapped in brown packaging paper, from off of the top of a nearby table. Handing you this package, the [npc.race] moves back into position beside the front door.
+		Когда ты проходишь по внушительному вестибюлю, охранник берёт с соседнего стола небольшую коробку, завёрнутую в коричневую упаковочную бумагу. Вручив тебе посылку, [npc.race] возвращается на место рядом с входной дверью.
 	</p>
 	<p>
-		Opening the package, you discover that it contains a spell book and several scrolls, along with a small note which reads;
+		Открыв пакет, ты обнаруживаешь в нём книгу заклинаний и несколько свитков, а также небольшую записку с надписью:
 	</p>
 	<p style='text-align:center;'><i>
-		Hi [pc.name],<br/>
-		Here are the scrolls and spell book which I promised to send to you. Hope this letter finds you well, and look forwards to seeing you again soon!<br/>
-		Love,<br/>
+		Привет, [pc.name],<br/>
+		Здесь свитки и книга заклинаний, которые я обещал отправить. Надеюсь, это письмо застанет тебя в добром здравии, и с нетерпением жду скорой встречи!<br/>
+		С любовью,<br/>
 		[daddy.Dad]
 	</i></p>
 	<p>
-		Smiling to yourself as you finish reading the note, you put the contents of the package into your inventory, before discarding the now-empty box and packaging into a nearby waste-paper bin. Looking ahead, you wonder whether to proceed into Lilaya's home, or to say something else to [npc.name] first...
+		Улыбнувшись прочитанной записке, помещаешь содержимое посылки в инвентарь, а затем выбрасываешь пустую коробку и упаковку в ближайшую урну. Looking ahead, you wonder whether to proceed into Lilaya's home, or to say something else to [npc.name] first...
 	</p>
 	]]>
 	</htmlContent>
 	
 	<htmlContent tag="OUTSIDE_KNOCK_ON_DOOR"><![CDATA[
 	<p>
-		You knock on the front door, and after only a brief moment, it swings open.
+		Ты стучишь во входную дверь, и через мгновение она распахивается.
 	</p>
 	<p>
-		[rose.speech(Welcome back, [pc.name],)] Rose says, curtsying to you as she steps back in order to grant you access to Lilaya's house.
+		[rose.speech(С возвращением, [pc.name])], говорит Роза, делая реверанс, отступая назад, чтобы предоставить тебе доступ в дом Лилайи.
 	</p>
 	<p>
-		Moving forwards into the impressive entrance hall, you greet the cat-girl maid as she closes the door behind you. Turning to smile at you one last time, Rose then excuses herself, before quickly hurrying off 
+		Пройдя вперед, во впечатляющий вестибюль, ты приветствуешь кошкодевушку-горничную, когда она закрывает за тобой дверь. Повернувшись, чтобы улыбнуться напоследок, Роза извиняется и быстро спешит прочь,
 		#IF(game.isExtendedWorkTime())
-			 in the direction of your [lilaya.relation(pc)]'s laboratory.
+			 в направлении лаборатории твоей [lilaya.morphSingleGent([lilaya.relation(pc)])].
 		#ELSE
-			 upstairs to go back to sleep.
+			 наверх, чтобы снова заснуть.
 		#ENDIF
 	</p>
 	]]>
@@ -104,27 +104,27 @@
 	
 	<htmlContent tag="OUTSIDE_KNOCK_ON_DOOR_SECURITY"><![CDATA[
 	<p>
-		You knock on the front door, and after only a brief moment, it swings open to reveal the familiar figure of your slave, [npc.name].
+		Ты стучишь во входную дверь, и через мгновение она распахивается, открывая знакомую фигуру твоего раба, [npc.morphSingleNameGene([npc.name])].
 	</p>
 	<p>
 		#IF(npc.isMute())
-			As [npc.sheIs] mute, the [npc.race] simply nods and 
+			Поскольку [npc.sheIs] [npc.genderBasedWord(немой, немая)], [npc.race] просто кивает и 
 			#IF(npc.isFeminine())
-				 curtsies
+				 делает реверанс
 			#ELSE
-				 bows
+				 кланяется
 			#ENDIF
-			 to you as [npc.she] [npc.steps] back in order to grant you access to Lilaya's house.
+			 тебе и затем [npc.steps] обратно, чтобы предоставить тебе доступ в дом Лилайи.
 		#ELSE
-			[npc.speech(Welcome back, [pc.name],)] the [npc.race] says,
+			[npc.speech(С возвращением, [pc.name])], говорит [npc.race] и
 			#IF(npc.isFeminine())
-				 curtsying
+				 делает реверанс
 			#ELSE
-				 bowing
+				 кланяется
 			#ENDIF
-			  to you as [npc.she] [npc.steps] back in order to grant you access to Lilaya's house.
+			 тебе и затем [npc.steps] обратно, чтобы предоставить тебе доступ в дом Лилайи.
 		#ENDIF
-		 Moving forwards into the impressive entrance hall, you greet the security guard as [npc.she] closes the door behind you.
+		 Пройдя вперед, во впечатляющий вестибюль, ты приветствуешь охранника, пока [npc.she] закрывает за тобой дверь.
 	</p>
 	]]>
 	</htmlContent>
@@ -134,13 +134,13 @@
 	
 	<htmlContent tag="CORRIDOR"><![CDATA[
 	<p>
-		Immaculately-clean red carpet runs down the centre of the wide corridor which you're currently [pc.walking] down, while the walls are decorated in a pale, light-blue wallpaper that sports a series of delicate white floral patterns. Fine landscape paintings and portraits of beautiful demons are hung up on the walls at regular intervals, while all manner of antique curiosities are perched upon the many wooden cabinets which line the sides of these hallways.
+		По центру широкого коридора, по которому сейчас [pc.walking], проложен безупречно чистый красный ковер, а стены отделаны бледными светло-голубыми обоями с нежным белым цветочным узором. На стенах через равные промежутки развешаны изящные пейзажи и портреты прекрасных демонов, а на многочисленных деревянных шкафах, которые стоят по бокам коридора, разложены всевозможные антикварные диковинки.
 	</p>
 	<p>
 		#IF(game.isDayTime())
-			Large glass windows flood the corridor with an impressive amount of natural daylight, and you notice that Rose seems to be taking care to leave some of them open every now and again, making sure that the air in the house always feels fresh.
+			Большие стеклянные окна заливают коридор внушительным количеством естественного дневного света, и ты замечаешь, что Роза, похоже, не забывает время от времени оставлять некоторые из них открытыми, чтобы воздух в доме всегда был свежим.
 		#ELSE
-			As it's currently night time, heavy fabric curtains have been drawn over the corridor's large glass windows, leaving the area to be illuminated by the many arcane-powered wall-lights.
+			Поскольку сейчас ночь, на большие стеклянные окна коридора набросили плотные тканевые шторы, оставив пространство освещенным множеством настенных светильников, работающих от магии.
 		#ENDIF
 	</p>
 	]]>
@@ -151,24 +151,24 @@
 	
 	<htmlContent tag="ROOM_ROSE"><![CDATA[
 	<p>
-		Evidence of Rose's close relationship with Lilaya is apparent as you approach the cat-girl's room. Hanging on the door, there's a little home-made sign bearing her name, and underneath, in flowing handwriting which you recognise as Lilaya's, a little message reads: <i>'My loving Mistress'</i>
+		Свидетельство тесной связи Розы с Лилайей становится очевидным, когда ты подходишь к комнате кошкодевушки. На двери висит самодельная табличка с её именем, а под ней, изящным почерком, который ты определяешь как почерк Лилайи, написано короткое сообщение: <i>'Моей любимой Госпоже'</i>.
 	</p>
 	#IF(game.isExtendedWorkTime())
 		<p>
-			The door appears to be locked at the moment, and there's no sound of anyone stirring within. Rose seems to only allow herself some rest when she's sure that nobody else is around who might need her, so she's probably off in another part of the house at the moment.
+			Дверь сейчас, похоже, заперта, и внутри не слышно никаких звуков движения. Роза, кажется, позволяет себе отдохнуть только тогда, когда она уверена, что рядом нет никого, кто мог бы нуждаться в её помощи, так что сейчас она, вероятно, находится в другой части дома.
 		</p>
 		<p>
-			You notice that there's a little bell set into the wall beside her door, and you wonder if you should try ringing it to get Rose to come up to her room.
+			Ты замечаешь, что рядом с дверью в стену встроен маленький звонок, и задумываешь, не стоит ли позвонить в него, чтобы позвать Розу подняться в свою комнату.
 		</p>
 	#ELSE
 		<p>
-			The door appears to be locked at the moment, and you can hear the faint sound of movement coming from within. Considering what time it currently is, you assume that the cat-girl maid must be sleeping in there.
+			Дверь, похоже, заперта, и изнутри доносится слабый звук движения. Учитывая, который сейчас час, можно предположить, что горничная-кошка, должно быть, спит.
 		</p>
 		<p>
-			You notice that there's a little bell set into the wall beside her door, and, sure enough, a little sign has been hung beneath it, which reads: [style.italicsBad(Please do not disturb.)]
+			На стене рядом с дверью висит маленький колокольчик, а под ним - небольшая табличка с надписью: [style.italicsBad(Просьба не беспокоить.)].
 		</p>
 		<p>
-			It looks like you'll have to return during daylight hours if you wanted to talk to Rose about anything...
+			Похоже, придётся вернуться в светлое время суток, если захочешь поговорить с Розой о чём-нибудь...
 		</p>
 	#ENDIF
 	]]>
@@ -347,27 +347,27 @@
 	#ENDIF
 	]]>
 	</htmlContent>
-	
-    <htmlContent tag="DUNGEON_OPENS_FOUNTAIN"><![CDATA[
-   	<p>
-        Deciding that you'd like to head down into Lilaya's dungeon, you [pc.step] forwards and press the button that's been disguised as part of the fountain's stonework. A rumbling sound of grinding stone immediately breaks out to your side, and you turn to watch as a nearby slab slides open to reveal the secret, spiral staircase which leads down into the darkness of Lilaya's dungeon. As you begin to move forwards, the wall-mounted arcane torches burst into flame, casting staircase in a dancing, flickering light.
+
+	<htmlContent tag="DUNGEON_OPENS_FOUNTAIN"><![CDATA[
+	<p>
+		Deciding that you'd like to head down into Lilaya's dungeon, you [pc.step] forwards and press the button that's been disguised as part of the fountain's stonework. A rumbling sound of grinding stone immediately breaks out to your side, and you turn to watch as a nearby slab slides open to reveal the secret, spiral staircase which leads down into the darkness of Lilaya's dungeon. As you begin to move forwards, the wall-mounted arcane torches burst into flame, casting staircase in a dancing, flickering light.
 	</p>
 	]]>
-    </htmlContent>
+	</htmlContent>
 	
 	
 	<!-- ENTRANCE_HALL -->
 	
 	<htmlContent tag="ENTRANCE_HALL"><![CDATA[
 	<p>
-		Lilaya's house is by far the most impressive building you've ever been in. The entrance hall that you find yourself standing in is alone far larger than your old flat, and is extravagantly decorated in a style befitting a royal palace. Fine paintings and marble busts line the walls, and a huge crystal chandelier hangs from the double-height ceiling, casting its warm light over a grand, red-carpeted staircase that leads to the upper floor.
+		Дом Лилайи - самое впечатляющее здание, в котором тебе доводилось бывать. Прихожая, в которой ты находишься, намного больше, чем твоя прежняя квартира, и очень роскошно оформлена в стиле, подобающем королевскому дворцу. Стены украшают изящные картины и мраморные бюсты, а с потолка двойной высоты свисает огромная хрустальная люстра, заливающая теплым светом парадную лестницу с красным ковром, которая ведет на верхний этаж.
 	</p>
 	<p>
-		From previous explorations, you know that the rest of the house is furnished in much the same manner. You tried to count all the rooms once, but gave up after reaching well over one hundred. Despite its grand appearance and impressive size, the only member of staff you've ever seen is Lilaya's slave; the cat-girl maid called Rose. Lilaya herself spends almost every waking moment working in her lab, resulting in the house being eerily quiet for most of the time.
+		Из предыдущих исследований ты знаешь, что остальная часть дома обставлена примерно так же. Однажды ты [pc.genderBasedWord(попытался, попыталась)] сосчитать все комнаты, но [pc.genderBasedWord(сдался, сдалась)], когда их оказалось больше сотни. Несмотря на величественный вид и внушительные размеры дома, единственным работником, которого ты когда-либо видел, была рабыня Лилайи - кошкодевушка-горничная по имени Роза. Сама Лилайя почти всё свободное время проводит за работой в своей лаборатории, поэтому в доме почти всё время царит жуткая тишина.
 	</p>
 	#IF(pc.getQuest(QUEST_LINE_SIDE_DOLL_FACTORY)==QUEST_DOLL_FACTORY_6)
 		<p style='text-align:center;'>
-			[style.italicsMinorBad(There's no message for you from Fiammetta yet. You're sure to hear from her soon, however...)]
+			[style.italicsMinorBad(Для тебя пока нет сообщений от Фьямметты. Однако скоро она обязательно сообщит...)]
 		</p>
 	#ENDIF
 	]]>
@@ -378,13 +378,13 @@
 	
 	<htmlContent tag="STAIRCASE_UP"><![CDATA[
 	<p>
-		The grand, red-carpeted staircase is one of the first things you see when entering Lilaya's home. Half-way up the shallow steps, there's a secondary landing area, which is home to a couple of antique-looking cabinets and well looked after house plants. Branching off from the sides of this landing, two slightly-narrower staircases wrap around and lead up to the floor above.
+		Большая лестница с красным ковром - одно из первых, что можно увидеть, войдя в дом Лилайи. На полпути вверх по неглубоким ступеням находится вторая площадка, на которой стоит пара антикварных шкафов и ухоженные домашние растения. С боков от неё отходят две более узкие лестницы, которые ведут на этаж выше.
 	</p>
 	<p>
-		A huge portrait of two women hangs on the wall of the landing area, overlooking the entire entrance hall. You immediately recognise the half-demon sitting in the chair as Lilaya, and you can only assume that the gorgeous figure standing behind her is her Lilin mother, Lyssieth. Although Lilin can change their appearance at will, Lyssieth has chosen to appear as a beautiful half-demon in her mid-forties, and you wonder if she did this to make Lilaya feel more comfortable, or whether that's simply the form she prefers to take.
+		На стене холла висит огромный портрет двух женщин, возвышающийся над всей прихожей. В сидящей в кресле полудемоне ты сразу узнаёшь Лилайю, а в великолепной фигуре, стоящей позади неё, - её мать Лилин, Лиссиет. Хотя Лилин могут менять облик по своему желанию, Лиссиет выбрала облик прекрасного полудемона лет сорока, и ты задаешься вопросом, сделала ли она это, чтобы Лилайя чувствовала себя более комфортно, или же это просто та форма, которую она предпочитает принимать.
 	</p>
 	<p>
-		Remarking one last time upon how beautiful the mother-daughter pair are, you continue on your way...
+		В последний раз отметив, как прекрасна пара матери и дочери, ты продолжаешь свой путь...
 	</p>
 	]]>
 	</htmlContent>
@@ -394,7 +394,7 @@
 	
 	<htmlContent tag="STAIRCASE_UP_SECONDARY"><![CDATA[
 	<p>
-		In this particular section of the corridor, there's a large recess set into the wall which is home to a series of carpeted stairs. While not as grand as the one positioned in front of the mansion's main entrance, this wide, sweeping staircase is nevertheless far more impressive than any you'd find in a regular house, and you wonder whether you should make use of it to travel up to the first floor...
+		В этой части коридора в стене есть большое углубление, в котором находится ряд лестниц с ковровым покрытием. Хотя эта широкая лестница не столь величественна, как та, что расположена перед главным входом в особняк, тем не менее она гораздо более впечатляюща, чем обычная, и ты задумываешься, стоит ли воспользоваться ею, чтобы подняться на второй этаж...
 	</p>
 	]]>
 	</htmlContent>
@@ -404,10 +404,10 @@
 	
 	<htmlContent tag="STAIRCASE_DOWN"><![CDATA[
 	<p>
-		Standing at the top of the grand, red-carpeted staircase, you find yourself looking down at the huge portrait of Lilaya and her mother. Although you didn't notice it from the ground floor, you seem to detect a hint of annoyance in Lyssieth's eyes, giving you the impression that she's trying her best to hide her resentment towards either the artist, or someone who must have been close by.
+		Стоя на вершине парадной лестницы с красным ковром, ты смотришь вниз на огромный портрет Лилайи и её матери. Хотя с первого этажа ты этого не [pc.genderBasedWord(заметил, заметила)], в глазах Лиссиет появился намек на раздражение: кажется, она изо всех сил старается скрыть свою неприязнь либо к художнику, либо к кому-то, кто, должно быть, находился рядом.
 	</p>
 	<p>
-		Wondering if you'll ever get to ask Lilaya, or perhaps even Lyssieth herself, about the circumstances under which this portrait was painted, you look away and continue on your way...
+		Подумав, удастся ли тебе когда-нибудь расспросить Лилайю, а может, и саму Лиссиет об обстоятельствах, при которых был написан этот портрет, ты отводишь взгляд и продолжаешь свой путь...
 	</p>
 	]]>
 	</htmlContent>
@@ -417,7 +417,7 @@
 	
 	<htmlContent tag="STAIRCASE_DOWN_SECONDARY"><![CDATA[
 	<p>
-		In this particular section of the corridor, there's a large recess set into the wall which is home to a series of carpeted stairs. While not as grand as the one positioned in front of the mansion's main entrance, this wide, sweeping staircase is nevertheless far more impressive than any you'd find in a regular house, and you wonder whether you should make use of it to travel down to the ground floor...
+		В этой части коридора в стене есть большое углубление, в котором находится ряд лестниц с ковровым покрытием. Хотя эта широкая лестница не столь величественна, как та, что расположена перед главным входом в особняк, тем не менее она гораздо более впечатляюща, чем обычная, и ты задумываешься, стоит ли воспользоваться ею, чтобы спуститься на первый этаж...
 	</p>
 	]]>
 	</htmlContent>

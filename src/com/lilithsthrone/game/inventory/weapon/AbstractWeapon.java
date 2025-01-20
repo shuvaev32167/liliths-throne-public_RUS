@@ -1,19 +1,5 @@
 package com.lilithsthrone.game.inventory.weapon;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -26,23 +12,22 @@ import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.combat.spells.SpellSchool;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractCoreItem;
-import com.lilithsthrone.game.inventory.AbstractCoreType;
-import com.lilithsthrone.game.inventory.InventorySlot;
-import com.lilithsthrone.game.inventory.ItemTag;
-import com.lilithsthrone.game.inventory.Rarity;
+import com.lilithsthrone.game.inventory.*;
 import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
-import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
-import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
-import com.lilithsthrone.game.inventory.enchanting.TFModifier;
-import com.lilithsthrone.game.inventory.enchanting.TFPotency;
+import com.lilithsthrone.game.inventory.enchanting.*;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 /**
  * @since 0.1.0
@@ -51,7 +36,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
  */
 public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSaving {
 	
-	private AbstractWeaponType weaponType;
+	private final AbstractWeaponType weaponType;
 	
 	protected List<ItemEffect> effects;
 	
@@ -198,15 +183,12 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 	public boolean equals(Object o) {
 		if(super.equals(o)){
 			if(o instanceof AbstractWeapon){
-				if(((AbstractWeapon)o).getWeaponType().equals(getWeaponType())
-						&& ((AbstractWeapon)o).getColours().equals(getColours())
-						&& ((AbstractWeapon)o).getDamageType()==this.getDamageType()
-						&& ((AbstractWeapon)o).getCoreEnchantment()==this.getCoreEnchantment()
-						&& ((AbstractWeapon)o).getSpells().equals(this.getSpells())
-						&& ((AbstractWeapon)o).getEffects().equals(this.getEffects())
-						){
-					return true;
-				}
+                return ((AbstractWeapon) o).getWeaponType().equals(getWeaponType())
+                        && ((AbstractWeapon) o).getColours().equals(getColours())
+                        && ((AbstractWeapon) o).getDamageType() == this.getDamageType()
+                        && ((AbstractWeapon) o).getCoreEnchantment() == this.getCoreEnchantment()
+                        && ((AbstractWeapon) o).getSpells().equals(this.getSpells())
+                        && ((AbstractWeapon) o).getEffects().equals(this.getEffects());
 			}
 		}
 		return false;
@@ -489,7 +471,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 			for (Spell s : spells) {
 				if (i != 0) {
 					if (i + 1 == spells.size())
-						descriptionSB.append(" and ");
+                        descriptionSB.append(" и ");
 					else
 						descriptionSB.append(", ");
 				}

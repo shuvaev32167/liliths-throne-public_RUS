@@ -53,10 +53,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		[npc.Name] [npc.verb(unscrew)] the cap from the bottle of Ink Vodka, before tilting [npc.her] head back and bringing it up to [npc.her] waiting [npc.lips]. With a gulp, [npc.name] [npc.verb(start)] downing the liquid, discovering that despite its novelty colouration, it's almost completely tasteless.
+		[npc.Name] unscrew the cap from the bottle of Ink Vodka, before tilting [npc.her] head back and bringing it up to [npc.her] waiting [npc.lips]. With a gulp, [npc.name] start downing the liquid, discovering that despite its novelty colouration, it's almost completely tasteless.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		[npc.Name] [npc.verb(unscrew)] the cap from the bottle of Ink Vodka, before bringing it up to [npc2.namePos] waiting [npc2.lips]. With a gulp, [npc2.name] [npc2.verb(start)] downing the liquid, discovering that despite its novelty colouration, it's almost completely tasteless.
+		[npc.Name] unscrew the cap from the bottle of Ink Vodka, before bringing it up to [npc2.namePos] waiting [npc2.lips]. With a gulp, [npc2.name] [npc2.verb(start)] downing the liquid, discovering that despite its novelty colouration, it's almost completely tasteless.
 		]]></otherUse>
 	</useDescriptions>
 

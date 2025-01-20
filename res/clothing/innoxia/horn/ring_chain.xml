@@ -80,25 +80,25 @@
 
 	<replacementText slot="PIERCING_NIPPLE" type="REMOVE_OR_EQUIP">
 	<self>
-		<![CDATA[[npc.Name] [npc.verb(slide)] the rings onto [npc.her] [npc.horns], before allowing the connected chains to dangle free.]]>
+        <![CDATA[[npc.Name] slide the rings onto [npc.her] [npc.horns], before allowing the connected chains to dangle free.]]>
 	</self>
 	<other>
-		<![CDATA[[npc.Name] [npc.verb(slide)] the rings onto [npc2.namePos] [npc2.horns], before allowing the connected chains to dangle free.]]>
+        <![CDATA[[npc.Name] slide the rings onto [npc2.namePos] [npc2.horns], before allowing the connected chains to dangle free.]]>
 	</other>
 	<otherRough>
-		<![CDATA[[npc.Name] roughly [npc.verb(slide)] the rings onto [npc2.namePos] [npc2.horns], before allowing the connected chains to dangle free.]]>
+        <![CDATA[[npc.Name] roughly slide the rings onto [npc2.namePos] [npc2.horns], before allowing the connected chains to dangle free.]]>
 	</otherRough>
 	</replacementText>
 
 	<displacementText slot="PIERCING_NIPPLE" type="REMOVE_OR_EQUIP">
 	<self>
-		<![CDATA[[npc.Name] [npc.verb(slide)] [npc.her] rings from off of [npc.her] [npc.horns].]]>
+        <![CDATA[[npc.Name] slide [npc.her] rings from off of [npc.her] [npc.horns].]]>
 	</self>
 	<other>
-		<![CDATA[[npc.Name] [npc.verb(slide)] [npc2.namePos] rings from off of [npc2.her] [npc2.horns].]]>
+        <![CDATA[[npc.Name] slide [npc2.namePos] rings from off of [npc2.her] [npc2.horns].]]>
 	</other>
 	<otherRough>
-		<![CDATA[[npc.Name] roughly [npc.verb(slide)] [npc2.namePos] rings from off of [npc2.her] [npc2.horns].]]>
+        <![CDATA[[npc.Name] roughly slide [npc2.namePos] rings from off of [npc2.her] [npc2.horns].]]>
 	</otherRough>
 	</displacementText>
 	

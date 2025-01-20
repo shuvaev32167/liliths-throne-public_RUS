@@ -70,25 +70,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(put)] on the poncho.]]>
+            <![CDATA[[npc.Name] put on the poncho.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(put)] the poncho onto [npc2.name].]]>
+            <![CDATA[[npc.Name] put the poncho onto [npc2.name].]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(put)] the poncho onto [npc2.name].]]>
+            <![CDATA[[npc.Name] roughly put the poncho onto [npc2.name].]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(pull)] off [npc.her] poncho.]]>
+            <![CDATA[[npc.Name] pull off [npc.her] poncho.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(pull)] off [npc2.namePos] poncho.]]>
+            <![CDATA[[npc.Name] pull off [npc2.namePos] poncho.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(pull)] off [npc2.namePos] poncho.]]>
+            <![CDATA[[npc.Name] roughly pull off [npc2.namePos] poncho.]]>
 		</otherRough>
 	</displacementText>
 	

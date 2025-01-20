@@ -92,49 +92,49 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(buckle)] the riot belt up around [npc.her] waist and [npc.verb(adjust)] the thigh panels and codpiece until they're comfortable.]]>
+            <![CDATA[[npc.Name] buckle the riot belt up around [npc.her] waist and adjust the thigh panels and codpiece until they're comfortable.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(buckle)] the riot belt up around [npc2.namePos] waist and [npc.verb(help)] [npc2.her] [npc2.verb(adjust)] the thigh panels and codpiece until they're comfortable.]]>
+            <![CDATA[[npc.Name] buckle the riot belt up around [npc2.namePos] waist and help [npc2.her] [npc2.verb(adjust)] the thigh panels and codpiece until they're comfortable.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(force)] the riot belt around [npc2.namePos] waist and hastily [npc.verb(tighten)] the straps.]]>
+            <![CDATA[[npc.Name] force the riot belt around [npc2.namePos] waist and hastily tighten the straps.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(loosen)] the straps on [npc.her] riot belt before unbuckling it.]]>
+            <![CDATA[[npc.Name] loosen the straps on [npc.her] riot belt before unbuckling it.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(loosen)] the straps on [npc2.namePos] riot belt before unbuckling it.]]>
+            <![CDATA[[npc.Name] loosen the straps on [npc2.namePos] riot belt before unbuckling it.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(tear)] at the straps on [npc2.namePos] riot belt before unbuckling it and tossing them aside.]]>
+            <![CDATA[[npc.Name] tear at the straps on [npc2.namePos] riot belt before unbuckling it and tossing them aside.]]>
 		</otherRough>
 	</displacementText>
 
 	<replacementText type="PULLS_DOWN">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(lower)] the codpiece on [npc.her] riot belt back down and [npc.verb(tighten)] the adjustment straps.]]>
+            <![CDATA[[npc.Name] lower the codpiece on [npc.her] riot belt back down and tighten the adjustment straps.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(lower)] the codpiece on [npc.her] riot belt back down and [npc.verb(tighten)] the adjustment straps.]]>
+            <![CDATA[[npc.Name] lower the codpiece on [npc.her] riot belt back down and tighten the adjustment straps.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(flip)] the codpiece on [npc.her] riot belt back down and roughly [npc.verb(tighten)] the adjustment straps.]]>
+            <![CDATA[[npc.Name] flip the codpiece on [npc.her] riot belt back down and roughly tighten the adjustment straps.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="PULLS_UP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(loosen)] the codpiece on [npc.her] riot belt before lifting it up.]]>
+            <![CDATA[[npc.Name] loosen the codpiece on [npc.her] riot belt before lifting it up.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(loosen)] the codpiece on [npc2.namePos] riot belt before lifting it up.]]>
+            <![CDATA[[npc.Name] loosen the codpiece on [npc2.namePos] riot belt before lifting it up.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(tug)] at the codpiece on [npc2.namePos] riot belt until it's loose enough before flipping it up.]]>
+            <![CDATA[[npc.Name] tug at the codpiece on [npc2.namePos] riot belt until it's loose enough before flipping it up.]]>
 		</otherRough>
 	</displacementText>
 	

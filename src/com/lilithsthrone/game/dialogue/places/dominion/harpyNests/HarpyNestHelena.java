@@ -1,10 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.harpyNests;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
@@ -24,13 +19,7 @@ import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseSex;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.sex.GenericSexFlag;
-import com.lilithsthrone.game.sex.InitialSexActionInformation;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexControl;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.managers.OrgasmBehaviour;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.managers.SexManagerInterface;
@@ -38,19 +27,8 @@ import com.lilithsthrone.game.sex.managers.universal.SMAllFours;
 import com.lilithsthrone.game.sex.managers.universal.SMStanding;
 import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
-import com.lilithsthrone.game.sex.positions.slots.SexSlot;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotLyingDown;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotSitting;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
-import com.lilithsthrone.game.sex.sexActions.baseActions.ClitClit;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerPenis;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisFeet;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
+import com.lilithsthrone.game.sex.positions.slots.*;
+import com.lilithsthrone.game.sex.sexActions.baseActions.*;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
@@ -58,6 +36,11 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Weather;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @since 0.1.83
@@ -177,8 +160,34 @@ public class HarpyNestHelena {
 			}
 		}
 	}
-	
-	public static final DialogueNode HELENAS_NEST_EXTERIOR = new DialogueNode("Helena's nest", "", false) {
+
+    public static final DialogueNode HELENAS_NEST_MAIN_QUEST_TAKE_FLIGHT = new DialogueNode("Гнездо Елены", "", true, true) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 60*5;
+		}
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_MAIN_QUEST_TAKE_FLIGHT");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+                return new Response("Магазин Скарлетт", "You arrive at Scarlett's Shop.", PlaceType.SLAVER_ALLEY_SCARLETTS_SHOP.getDialogue(false)) {
+					@Override
+					public void effects() {
+						Main.game.getPlayer().setLocation(WorldType.SLAVER_ALLEY, PlaceType.SLAVER_ALLEY_SCARLETTS_SHOP, false);
+					}
+				};
+
+			} else {
+				return null;
+			}
+		}
+	};    public static final DialogueNode HELENAS_NEST_EXTERIOR = new DialogueNode("Гнездо Елены", "", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -200,7 +209,7 @@ public class HarpyNestHelena {
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
 				if(Main.game.getCurrentWeather() == Weather.MAGIC_STORM) {
-					return new Response("Helena",
+                    return new Response("Елена",
 							"Helena's flock is taking shelter in the buildings below her nest. You'll have to come back after the arcane storm has passed.",
 							null);
 					
@@ -213,42 +222,42 @@ public class HarpyNestHelena {
 					
 				} else {
 					if(Main.game.getPlayer().getQuest(QuestLine.MAIN) == Quest.MAIN_1_E_REPORT_TO_HELENA) {
-						return new Response("Helena", "Walk over to the tall platform to meet with Helena.", HELENAS_NEST_MAIN_QUEST);
+                        return new Response("Елена", "Walk over to the tall platform to meet with Helena.", HELENAS_NEST_MAIN_QUEST);
 						
 					} else if(Main.game.getPlayer().isQuestCompleted(QuestLine.ROMANCE_HELENA) && Main.game.getCharactersPresent().contains(Main.game.getNpc(Helena.class))) {
-						return new Response("Helena", "Walk over to the tall platform to meet with Helena.", HELENAS_NEST);
+                        return new Response("Елена", "Walk over to the tall platform to meet with Helena.", HELENAS_NEST);
 						
 					}  else if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_1_E_REPORT_TO_HELENA)) {
-						return new Response("Helena", "Helena has flown off to Slaver Alley! You'll have to find her there.", null);
+                        return new Response("Елена", "Helena has flown off to Slaver Alley! You'll have to find her there.", null);
 						
 					} else {
-						return new Response("Helena", "You have no reason to talk to Helena.", null);
+                        return new Response("Елена", "You have no reason to talk to Helena.", null);
 					}
 				}
 				
 			} else if(index==2) {
 				if(Main.game.getNonCompanionCharactersPresent().contains(Main.game.getNpc(Scarlett.class))) {
 					if(Main.game.getCurrentWeather() == Weather.MAGIC_STORM) {
-						return new Response("Scarlett",
+                        return new Response("Скарлетт",
 								"As there's an arcane storm currently raging overhead, Scarlett and the rest of the nest's inhabitants are sheltering in the buildings below her nest."
 										+ " You'll have to come back once the storm has passed if you want to speak with her.",
 								null);
 						
 					} else if(!Main.game.isExtendedWorkTime()) {
-						return new Response("Scarlett",
+                        return new Response("Скарлетт",
 								"Both Scarlett and the rest of Helena's flock are sleeping in the buildings below her nest. You'll have to come back during the day if you want to speak with her.",
 								null);
 						
 					} else {
 						if(Main.game.getPlayer().isQuestCompleted(QuestLine.ROMANCE_HELENA)) {
-							return new Response("Scarlett", "Head over to where Scarlett is surrounded by a crowd of harpies and say hello.", HELENAS_NEST_MEETING_SCARLETT);
+                            return new Response("Скарлетт", "Head over to where Scarlett is surrounded by a crowd of harpies and say hello.", HELENAS_NEST_MEETING_SCARLETT);
 						}
-						return new Response("Scarlett", "Head over to where Scarlett is sitting and say hello.", HELENAS_NEST_MEETING_SCARLETT);
+                        return new Response("Скарлетт", "Head over to where Scarlett is sitting and say hello.", HELENAS_NEST_MEETING_SCARLETT);
 					}
 				}
 				
 			} else if(index==5 && Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.helenaDateFirstDateComplete)) {
-				return new Response("Dominion", "Use the elevator to travel down through 'The Golden Feather' and out into Dominion.", HelenaHotel.HOTEL_TRAVEL_TO_DOMINION) {
+                return new Response("Доминион", "Use the elevator to travel down through 'The Golden Feather' and out into Dominion.", HelenaHotel.HOTEL_TRAVEL_TO_DOMINION) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_HELENA_HOTEL);
@@ -259,8 +268,8 @@ public class HarpyNestHelena {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode HELENAS_NEST_MAIN_QUEST = new DialogueNode("Helena's nest", "", true) {
+
+    public static final DialogueNode HELENAS_NEST_MAIN_QUEST = new DialogueNode("Гнездо Елены", "", true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -282,8 +291,8 @@ public class HarpyNestHelena {
 			}
 		}
 	};
-	
-	public static final DialogueNode HELENAS_NEST_MAIN_QUEST_SCARLETT = new DialogueNode("Helena's nest", "", true, true) {
+
+    public static final DialogueNode HELENAS_NEST_MAIN_QUEST_SCARLETT = new DialogueNode("Гнездо Елены", "", true, true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -324,8 +333,8 @@ public class HarpyNestHelena {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode HELENAS_NEST_MAIN_QUEST_NO_PUNISHMENT = new DialogueNode("Helena's nest", "", true, true) {
+
+    public static final DialogueNode HELENAS_NEST_MAIN_QUEST_NO_PUNISHMENT = new DialogueNode("Гнездо Елены", "", true, true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -359,8 +368,8 @@ public class HarpyNestHelena {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT = new DialogueNode("Helena's nest", "", true, true) {
+
+    public static final DialogueNode HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT = new DialogueNode("Гнездо Елены", "", true, true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -413,8 +422,8 @@ public class HarpyNestHelena {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT_ENDURE = new DialogueNode("Helena's nest", "", true, true) {
+
+    public static final DialogueNode HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT_ENDURE = new DialogueNode("Гнездо Елены", "", true, true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -423,10 +432,9 @@ public class HarpyNestHelena {
 
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT_ENDURE"));
-			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT_END"));
-			return sb.toString();
+            String sb = UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT_ENDURE") +
+                    UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT_END");
+			return sb;
 		}
 
 		@Override
@@ -451,8 +459,8 @@ public class HarpyNestHelena {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT_STRUGGLE = new DialogueNode("Helena's nest", "", true, true) {
+
+    public static final DialogueNode HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT_STRUGGLE = new DialogueNode("Гнездо Елены", "", true, true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -461,10 +469,9 @@ public class HarpyNestHelena {
 
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT_STRUGGLE"));
-			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT_END"));
-			return sb.toString();
+            String sb = UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT_STRUGGLE") +
+                    UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT_END");
+			return sb;
 		}
 
 		@Override
@@ -489,8 +496,8 @@ public class HarpyNestHelena {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT_ENJOY = new DialogueNode("Helena's nest", "", true, true) {
+
+    public static final DialogueNode HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT_ENJOY = new DialogueNode("Гнездо Елены", "", true, true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -499,10 +506,9 @@ public class HarpyNestHelena {
 
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT_ENJOY"));
-			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT_END"));
-			return sb.toString();
+            String sb = UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT_ENJOY") +
+                    UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT_END");
+			return sb;
 		}
 
 		@Override
@@ -533,34 +539,8 @@ public class HarpyNestHelena {
 			
 		}
 	};
-	
-	public static final DialogueNode HELENAS_NEST_MAIN_QUEST_TAKE_FLIGHT = new DialogueNode("Helena's nest", "", true, true) {
 
-		@Override
-		public int getSecondsPassed() {
-			return 60*5;
-		}
-		
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_MAIN_QUEST_TAKE_FLIGHT");
-		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Scarlett's Shop", "You arrive at Scarlett's Shop.", PlaceType.SLAVER_ALLEY_SCARLETTS_SHOP.getDialogue(false)) {
-					@Override
-					public void effects() {
-						Main.game.getPlayer().setLocation(WorldType.SLAVER_ALLEY, PlaceType.SLAVER_ALLEY_SCARLETTS_SHOP, false);
-					}
-				};
-				
-			} else {
-				return null;
-			}
-		}
-	};
 	
 	
 	// Meeting with Helena after completing her romance quest:
@@ -641,7 +621,7 @@ public class HarpyNestHelena {
 		}
 	};
 
-	public static final DialogueNode HELENAS_NEST_APARTMENT_BEDROOM = new DialogueNode("Helena's Bedroom", "", true, true) {
+    public static final DialogueNode HELENAS_NEST_APARTMENT_BEDROOM = new DialogueNode("Спальня Елены", "", true, true) {
 		@Override
 		public void applyPreParsingEffects() {
 			Main.game.getPlayer().setLocation(WorldType.HELENAS_APARTMENT, PlaceType.HELENA_APARTMENT_HELENA_BEDROOM);
@@ -916,7 +896,7 @@ public class HarpyNestHelena {
 			}
 			
 			if(Main.game.getPlayer().getQuest(QuestLine.ROMANCE_HELENA)==Quest.ROMANCE_HELENA_4_SCARLETTS_RETURN) {
-				responses.add(new Response("Helena", "Tell Scarlett that Helena is requesting her presence back at her shop in Slaver Alley.", HELENAS_NEST_MEETING_SCARLETT_TO_SHOP) {
+                responses.add(new Response("Елена", "Tell Scarlett that Helena is requesting her presence back at her shop in Slaver Alley.", HELENAS_NEST_MEETING_SCARLETT_TO_SHOP) {
 					@Override
 					public void effects() {
 						Main.game.getNpc(Scarlett.class).setHomeLocation(WorldType.HELENAS_APARTMENT, PlaceType.HELENA_APARTMENT_SCARLETT_BEDROOM);
@@ -1793,7 +1773,7 @@ public class HarpyNestHelena {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Continue on over to the exit of Helena's nest...", HELENAS_NEST_EXTERIOR);
+                return new Response("Продолжить", "Continue on over to the exit of Helena's nest...", HELENAS_NEST_EXTERIOR);
 			}
 			return null;
 		}

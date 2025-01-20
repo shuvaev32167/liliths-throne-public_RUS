@@ -55,25 +55,25 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(clip)] a rose piercing into [npc.her] nose.]]>
+        <![CDATA[[npc.Name] clip a rose piercing into [npc.her] nose.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(clip)] a rose piercing into [npc2.namePos] nose.]]>
+        <![CDATA[[npc.Name] clip a rose piercing into [npc2.namePos] nose.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(force)] a rose piercing into [npc2.namePos] nose.]]>
+        <![CDATA[[npc.Name] force a rose piercing into [npc2.namePos] nose.]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(remove)] a rose piercing from [npc.her] nose.]]>
+        <![CDATA[[npc.Name] remove a rose piercing from [npc.her] nose.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(remove)] a rose piercing from [npc2.namePos] nose.]]>
+        <![CDATA[[npc.Name] remove a rose piercing from [npc2.namePos] nose.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(tug)] a rose piercing out from [npc2.namePos] nose.]]>
+        <![CDATA[[npc.Name] tug a rose piercing out from [npc2.namePos] nose.]]>
     </otherRough>
   </displacementText>
   

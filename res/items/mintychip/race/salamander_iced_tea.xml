@@ -49,10 +49,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		After unscrewing the cap, [npc.name] [npc.verb(bring)] the bottle of iced tea up to [npc.her] [npc.mouth]. [npc.She] [npc.is] pleased to find that the label wasn't lying about the drink being refreshing and swiftly [npc.verb(drink)] the minty beverage.
+		After unscrewing the cap, [npc.name] bring the bottle of iced tea up to [npc.her] [npc.mouth]. [npc.She] [npc.is] pleased to find that the label wasn't lying about the drink being refreshing and swiftly drink the minty beverage.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		After unscrewing the cap, [npc.name] [npc.verb(bring)] the bottle of iced tea up to [npc2.namePos] waiting [npc2.lips]. [npc2.name] [npc2.is] pleased to find that the label wasn't lying about the drink being refreshing and swiftly [npc2.verb(drink)] the minty beverage.
+		After unscrewing the cap, [npc.name] bring the bottle of iced tea up to [npc2.namePos] waiting [npc2.lips]. [npc2.name] [npc2.is] pleased to find that the label wasn't lying about the drink being refreshing and swiftly [npc2.verb(drink)] the minty beverage.
 		]]></otherUse>
 	</useDescriptions>
 </item>

@@ -1,19 +1,14 @@
 package com.lilithsthrone.game.character.body;
 
+import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.body.types.OrificeInterface;
+import com.lilithsthrone.game.character.body.valueEnums.*;
+import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.main.Main;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.types.OrificeInterface;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeDepth;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
-import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.main.Main;
 
 /**
  * @since 0.1.?
@@ -87,15 +82,15 @@ public class OrificeAnus implements OrificeInterface {
 		if (wetnessChange > 0) {
 			return UtilText.parse(owner,
 						"<p>"
-							+ "[npc.NamePos] [npc.eyes] widen as [npc.she] [npc.verb(feel)] moisture beading around [npc.her] asshole,"
-								+ " and [npc.she] can't help but let out a deep [npc.moan] as [npc.she] [npc.verb(realise)] that [npc.her] rear entrance is lubricating itself and [style.boldGrow(getting wetter)].<br/>"
+                                + "[npc.NamePos] [npc.eyes] widen as [npc.she] feel moisture beading around [npc.her] asshole,"
+                                + " and [npc.she] can't help but let out a deep [npc.moan] as [npc.she] realise that [npc.her] rear entrance is lubricating itself and [style.boldGrow(getting wetter)].<br/>"
 							+ "The transformation quickly passes, leaving [npc.herHim] with [style.boldSex(" + UtilText.generateSingularDeterminer(wetnessDescriptor) + " " + wetnessDescriptor + " asshole)]!"
 						+ "</p>");
 			
 		} else {
 			return UtilText.parse(owner,
 						"<p>"
-							+ "[npc.Name] [npc.verb(shift)] about uncomfortably and [npc.verb(let)] out a frustrated groan as [npc.she] [npc.verb(feel)] [npc.her] rear entrance [style.boldShrink(drying up)].<br/>"
+                                + "[npc.Name] shift about uncomfortably and let out a frustrated groan as [npc.she] feel [npc.her] rear entrance [style.boldShrink(drying up)].<br/>"
 							+ "The transformation quickly passes, leaving [npc.herHim] with [style.boldSex(" + UtilText.generateSingularDeterminer(wetnessDescriptor) + " " + wetnessDescriptor + " asshole)]!"
 						+ "</p>");
 		}
@@ -132,16 +127,16 @@ public class OrificeAnus implements OrificeInterface {
 		if (capacityChange > 0) {
 			return UtilText.parse(owner, 
 					"<p>"
-						+ "An involuntary, shocked gasp escapes from [npc.namePos] mouth as [npc.she] [npc.verb(feel)] [npc.her] asshole dilate and stretch."
-						+ " Within moments, the feeling has passed, and [npc.she] very quickly [npc.verb(realise)] that [npc.her] asshole's internal [style.boldGrow(capacity has increased)].<br/>"
+                            + "An involuntary, shocked gasp escapes from [npc.namePos] mouth as [npc.she] feel [npc.her] asshole dilate and stretch."
+                            + " Within moments, the feeling has passed, and [npc.she] very quickly realise that [npc.her] asshole's internal [style.boldGrow(capacity has increased)].<br/>"
 						+ "[npc.Name] now [npc.has] [style.boldSex(" + UtilText.generateSingularDeterminer(capacityDescriptor) + " " + capacityDescriptor + " asshole)]!"
 					+ "</p>");
 			
 		} else {
 			return UtilText.parse(owner, 
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out a cry as [npc.she] [npc.verb(feel)] [npc.her] asshole uncontrollably tighten and clench."
-						+ " Within moments, the feeling has passed, and [npc.she] very quickly [npc.verb(realise)] that [npc.her] asshole's internal [style.boldShrink(capacity has decreased)].<br/>"
+                            + "[npc.Name] let out a cry as [npc.she] feel [npc.her] asshole uncontrollably tighten and clench."
+                            + " Within moments, the feeling has passed, and [npc.she] very quickly realise that [npc.her] asshole's internal [style.boldShrink(capacity has decreased)].<br/>"
 						+ "[npc.Name] now [npc.has] [style.boldSex(" + UtilText.generateSingularDeterminer(capacityDescriptor) + " " + capacityDescriptor + " asshole)]!"
 					+ "</p>");
 		}
@@ -204,7 +199,7 @@ public class OrificeAnus implements OrificeInterface {
 		if(depthChange > 0) {
 			return UtilText.parse(owner, 
 					"<p>"
-						+ "[npc.Name] can't help but let out a surprised gasp as [npc.she] [npc.verb(feel)] an alarming pressure pulsating up deep into [npc.her] ass."
+                            + "[npc.Name] can't help but let out a surprised gasp as [npc.she] feel an alarming pressure pulsating up deep into [npc.her] ass."
 						+ " Before [npc.her] gasp can turn into a distressed cry, the pressure suddenly fades away, leaving [npc.herHim] instinctively knowing that [npc.her] asshole [style.boldGrow(has deepened)].<br/>"
 						+ "[npc.Name] now [npc.has] [style.boldSex(" + UtilText.generateSingularDeterminer(depthDescriptor) + " " + depthDescriptor + " asshole)]!"
 					+ "</p>");
@@ -212,7 +207,7 @@ public class OrificeAnus implements OrificeInterface {
 		} else {
 			return UtilText.parse(owner, 
 					"<p>"
-						+ "[npc.Name] can't help but let out a surprised gasp as [npc.she] [npc.verb(feel)] an alarming tightening sensation moving its way down from the depths of [npc.her] ass."
+                            + "[npc.Name] can't help but let out a surprised gasp as [npc.she] feel an alarming tightening sensation moving its way down from the depths of [npc.her] ass."
 						+ " Before [npc.her] gasp can turn into a distressed cry, the feeling suddenly fades away, leaving [npc.herHim] instinctively knowing that [npc.her] asshole [style.boldShrink(has become shallower)].<br/>"
 						+ "[npc.Name] now [npc.has] [style.boldSex(" + UtilText.generateSingularDeterminer(depthDescriptor) + " " + depthDescriptor + " asshole)]!"
 					+ "</p>");
@@ -242,16 +237,16 @@ public class OrificeAnus implements OrificeInterface {
 		if (elasticityChange > 0) {
 			return UtilText.parse(owner, 
 					"<p>"
-						+ "[npc.Name] can't help but let out a surprised gasp as [npc.she] [npc.verb(feel)] a strange slackening sensation pulsating deep within [npc.her] ass."
-						+ " Just as quickly as it started, the feeling passes, and [npc.she] very quickly [npc.verb(realise)] that [npc.her] asshole's [style.boldGrow(elasticity has increased)].<br/>"
+                            + "[npc.Name] can't help but let out a surprised gasp as [npc.she] feel a strange slackening sensation pulsating deep within [npc.her] ass."
+                            + " Just as quickly as it started, the feeling passes, and [npc.she] very quickly realise that [npc.her] asshole's [style.boldGrow(elasticity has increased)].<br/>"
 						+ "[npc.Name] now [npc.has] [style.boldSex(" + UtilText.generateSingularDeterminer(elasticityDescriptor) + " " + elasticityDescriptor + " asshole)]!"
 					+ "</p>");
 			
 		} else {
 			return UtilText.parse(owner, 
 					"<p>"
-						+ "[npc.Name] can't help but let out a surprised gasp as [npc.she] [npc.verb(feel)] a strange clenching sensation pulsating deep within [npc.her] ass."
-						+ " Just as quickly as it started, the feeling passes, and [npc.she] very quickly [npc.verb(realise)] that [npc.her] asshole's [style.boldShrink(elasticity has decreased)].<br/>"
+                            + "[npc.Name] can't help but let out a surprised gasp as [npc.she] feel a strange clenching sensation pulsating deep within [npc.her] ass."
+                            + " Just as quickly as it started, the feeling passes, and [npc.she] very quickly realise that [npc.her] asshole's [style.boldShrink(elasticity has decreased)].<br/>"
 						+ "[npc.Name] now [npc.has] [style.boldSex(" + UtilText.generateSingularDeterminer(elasticityDescriptor) + " " + elasticityDescriptor + " asshole)]!"
 					+ "</p>");
 		}
@@ -280,7 +275,7 @@ public class OrificeAnus implements OrificeInterface {
 		if (plasticityChange > 0) {
 			return UtilText.parse(owner, 
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out a shocked gasp as [npc.she] suddenly [npc.verb(feel)] a strange hardening sensation pulsating deep within [npc.her] ass."
+                            + "[npc.Name] let out a shocked gasp as [npc.she] suddenly feel a strange hardening sensation pulsating deep within [npc.her] ass."
 						+ " Before [npc.she] [npc.has] any time to panic, the feeling quickly fades away, leaving [npc.herHim] instinctively knowing that [npc.her] asshole's [style.boldGrow(plasticity has increased)].<br/>"
 						+ "[npc.Name] now [npc.has] [style.boldSex(" + UtilText.generateSingularDeterminer(plasticityDescriptor) + " " + plasticityDescriptor + " asshole)]!"
 					+ "</p>");
@@ -288,7 +283,7 @@ public class OrificeAnus implements OrificeInterface {
 		} else {
 			return UtilText.parse(owner, 
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out a shocked gasp as [npc.she] suddenly [npc.verb(feel)] a strange softening sensation pulsating deep within [npc.her] ass."
+                            + "[npc.Name] let out a shocked gasp as [npc.she] suddenly feel a strange softening sensation pulsating deep within [npc.her] ass."
 						+ " Before [npc.she] [npc.has] any time to panic, the feeling quickly fades away, leaving [npc.herHim] instinctively knowing that [npc.her] asshole's [style.boldShrink(plasticity has decreased)].<br/>"
 						+ "[npc.Name] now [npc.has] [style.boldSex(" + UtilText.generateSingularDeterminer(plasticityDescriptor) + " " + plasticityDescriptor + " asshole)]!"
 					+ "</p>");
@@ -327,7 +322,7 @@ public class OrificeAnus implements OrificeInterface {
 				return UtilText.parse(owner,
 						"<p>"
 							+ "[npc.Name] can't help but let out [npc.a_moan+] as an intense pressure swells up deep within [npc.her] ass, but before [npc.sheHasFull] any chance to react, the feeling quickly dissipates."
-							+ " With an experimental clench, [npc.she] [npc.verb(discover)] that the inner walls of [npc.her] asshole are now lined with [style.boldGrow(extra muscles)],"
+                                + " With an experimental clench, [npc.she] discover that the inner walls of [npc.her] asshole are now lined with [style.boldGrow(extra muscles)],"
 								+ " which [npc.she] can use to expertly grip and squeeze down on any penetrating object.<br/>"
 							+ "[style.boldSex([npc.NamePos] asshole is now lined with an intricate series of muscles!)]"
 						+ "</p>");
@@ -336,7 +331,7 @@ public class OrificeAnus implements OrificeInterface {
 				return UtilText.parse(owner,
 						"<p>"
 						+ "[npc.Name] can't help but let out [npc.a_moan+] as an intense pressure swells up deep within [npc.her] ass, but before [npc.sheHasFull] any chance to react, the feeling quickly dissipates."
-						+ " Shifting around a little, [npc.she] [npc.verb(discover)] that the inside of [npc.her] asshole is now lined with [style.boldGrow(fleshy, highly-sensitive ribs)],"
+                                + " Shifting around a little, [npc.she] discover that the inside of [npc.her] asshole is now lined with [style.boldGrow(fleshy, highly-sensitive ribs)],"
 							+ " which provide extreme pleasure when stimulated.<br/>"
 						+ "[style.boldSex([npc.NamePos] asshole is now lined with fleshy, pleasure-inducing ribs!)]"
 					+ "</p>");
@@ -345,14 +340,14 @@ public class OrificeAnus implements OrificeInterface {
 				return UtilText.parse(owner,
 						"<p>"
 							+ "[npc.Name] can't help but let out [npc.a_moan+] as an intense pressure swells up deep within [npc.her] ass, but before [npc.sheHasFull] any chance to react, the feeling quickly dissipates."
-							+ " With an experimental clench, [npc.she] [npc.verb(discover)] that the inside of [npc.her] asshole is now lined with [style.boldGrow(little wriggling tentacles)], over which [npc.sheHasFull] limited control.<br/>"
+                                + " With an experimental clench, [npc.she] discover that the inside of [npc.her] asshole is now lined with [style.boldGrow(little wriggling tentacles)], over which [npc.sheHasFull] limited control.<br/>"
 							+ "[style.boldSex(The inside of [npc.namePos] asshole is now filled with small tentacles, which wriggle and caress any intruding object with a mind of their own!)]"
 						+ "</p>");
 					
 			case PUFFY:
 				return UtilText.parse(owner,
 						"<p>"
-							+ "[npc.Name] can't help but let out a cry as [npc.she] [npc.verb(feel)] a tingling sensation running over [npc.her] [npc.ass],"
+                                + "[npc.Name] can't help but let out a cry as [npc.she] feel a tingling sensation running over [npc.her] [npc.ass],"
 								+ " before the rim of [npc.her] [npc.asshole] [style.boldGrow(puffs up)] into a doughnut-like ring.<br/>"
 							+ "[style.boldSex(The rim of [npc.namePos] asshole is now swollen and puffy!)]"
 						+ "</p>");
@@ -379,7 +374,7 @@ public class OrificeAnus implements OrificeInterface {
 				return UtilText.parse(owner,
 						"<p>"
 							+ "[npc.Name] can't help but let out a startled cry as an intense pressure swells up deep within [npc.her] ass, but before [npc.sheHasFull] any chance to react, the feeling quickly dissipates."
-							+ " With an experimental clench, [npc.she] [npc.verb(discover)] that the interior of [npc.her] asshole has [style.boldShrink(lost its extra muscles)].<br/>"
+                                + " With an experimental clench, [npc.she] discover that the interior of [npc.her] asshole has [style.boldShrink(lost its extra muscles)].<br/>"
 							+ "[style.boldSex([npc.NamePos] asshole is no longer lined with an intricate series of muscles!)]"
 						+ "</p>");
 					
@@ -387,7 +382,7 @@ public class OrificeAnus implements OrificeInterface {
 				return UtilText.parse(owner,
 						"<p>"
 						+ "[npc.Name] can't help but let out a startled cry as an intense pressure swells up deep within [npc.her] ass, but before [npc.sheHasFull] any chance to react, the feeling quickly dissipates."
-						+ " Shifting around a little, [npc.she] [npc.verb(discover)] that the [style.boldShrink(fleshy, highly-sensitive ribs)] that once lined the walls of [npc.her] asshole [style.boldShrink(have vanished)].<br/>"
+                                + " Shifting around a little, [npc.she] discover that the [style.boldShrink(fleshy, highly-sensitive ribs)] that once lined the walls of [npc.her] asshole [style.boldShrink(have vanished)].<br/>"
 						+ "[style.boldSex([npc.NamePos] asshole is no longer lined with fleshy, pleasure-inducing ribs!)]"
 					+ "</p>");
 					
@@ -395,14 +390,14 @@ public class OrificeAnus implements OrificeInterface {
 				return UtilText.parse(owner,
 						"<p>"
 							+ "[npc.Name] can't help but let out a startled cry as an intense pressure swells up deep within [npc.her] ass, but before [npc.sheHasFull] any chance to react, the feeling quickly dissipates."
-							+ " With an experimental clench, [npc.she] [npc.verb(discover)] that the [style.boldShrink(wriggling tentacles)] within [npc.her] asshole [style.boldShrink(have all disappeared)].<br/>"
+                                + " With an experimental clench, [npc.she] discover that the [style.boldShrink(wriggling tentacles)] within [npc.her] asshole [style.boldShrink(have all disappeared)].<br/>"
 							+ "[style.boldSex(The inside of [npc.namePos] asshole is no longer filled with tentacles!)]"
 						+ "</p>");
 					
 			case PUFFY:
 				return UtilText.parse(owner,
 						"<p>"
-							+ "[npc.Name] can't help but let out a cry as [npc.she] [npc.verb(feel)] a tingling sensation running over [npc.her] [npc.ass],"
+                                + "[npc.Name] can't help but let out a cry as [npc.she] feel a tingling sensation running over [npc.her] [npc.ass],"
 								+ " before the puffy rim of [npc.her] [npc.asshole] [style.boldShrink(deflates)] into a more normal-looking shape.<br/>"
 							+ "[style.boldSex(The rim of [npc.namePos] asshole is no longer swollen and puffy!)]"
 						+ "</p>");

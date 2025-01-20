@@ -1,10 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.lilayashome;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
@@ -22,12 +17,7 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
-import com.lilithsthrone.game.sex.InitialSexActionInformation;
-import com.lilithsthrone.game.sex.SexAreaInterface;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.managers.universal.SMAllFours;
 import com.lilithsthrone.game.sex.managers.universal.SMLyingDown;
 import com.lilithsthrone.game.sex.managers.universal.SMMasturbation;
@@ -46,6 +36,11 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * @since 0.2.5
  * @version 0.4.4.1
@@ -54,8 +49,35 @@ import com.lilithsthrone.world.places.PlaceType;
 public class LilayasRoom {
 	
 	public static AbstractClothing lilayasPanties;
-	
-	public static final DialogueNode ROOM_LILAYA = new DialogueNode("Lilaya's Room", ".", false) {
+
+    public static final DialogueNode FLEE = new DialogueNode("Комната Лилайи", ".", true) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayasRoom", "FLEE");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 1) {
+				return new ResponseEffectsOnly("Твоя комната", "Continue on down the corridor to your room.") {
+					@Override
+					public void effects() {
+						Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_PLAYER);
+						Main.game.setContent(new Response("", "", Main.game.getPlayerCell().getDialogue(false)));
+					}
+				};
+
+			} else {
+				return null;
+			}
+		}
+	};    public static final DialogueNode ROOM_LILAYA = new DialogueNode("Комната Лилайи", ".", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -79,17 +101,92 @@ public class LilayasRoom {
 			}
 			if (index == 1) {
 				if(!Main.game.isExtendedWorkTime()) {
-					return new Response("Lilaya's Room", "The door is firmly shut and locked at the moment...", null);
+                    return new Response("Комната Лилайи", "The door is firmly shut and locked at the moment...", null);
 				}
-				return new Response("Lilaya's Room", "Have a look around Lilaya's room.", ROOM_LILAYA_INSIDE);
+                return new Response("Комната Лилайи", "Have a look around Lilaya's room.", ROOM_LILAYA_INSIDE);
 
 			}  else {
 				return null;
 			}
 		}
 	};
-	
-	public static final DialogueNode ROOM_LILAYA_INSIDE = new DialogueNode("Lilaya's Room", ".", true) {
+    public static final DialogueNode BEG = new DialogueNode("Комната Лилайи", ".", true, true) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayasRoom", "BEG");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+				return new ResponseSex("Submit", "Let Rose push you back on to the bed and fuck you.",
+						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+						null, CorruptionLevel.THREE_DIRTY, null, null, null,
+						true, false,
+						new SMLyingDown(
+								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Rose.class), SexSlotLyingDown.MISSIONARY)),
+								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN))) {
+							@Override
+							public boolean isPositionChangingAllowed(GameCharacter character) {
+								return false;
+							}
+							@Override
+							public boolean isAbleToRemoveSelfClothing(GameCharacter character) {
+								return !character.isPlayer();
+							}
+							@Override
+							public  boolean isAbleToRemoveOthersClothing(GameCharacter character, AbstractClothing clothing) {
+								return !character.isPlayer();
+							}
+							@Override
+							public Map<GameCharacter, List<SexAreaInterface>> getAreasBannedMap() {
+								return Util.newHashMapOfValues(
+										new Value<>(
+												Main.game.getNpc(Rose.class),
+												Util.newArrayListOfValues(
+														SexAreaOrifice.VAGINA,
+														SexAreaOrifice.ANUS,
+														SexAreaOrifice.MOUTH)));
+							}
+						},
+						null,
+						null,
+						AFTER_ROSE_AS_DOM,
+						UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayasRoom", "ROSE_AS_DOM")){
+					@Override
+					public void effects() {
+						Main.game.getTextEndStringBuilder().append(Main.game.getNpc(Rose.class).incrementAffection(Main.game.getPlayer(), 15));
+						if(Main.game.getNpc(Rose.class).getClothingInSlot(InventorySlot.GROIN)!=null) {
+							Main.game.getNpc(Rose.class).unequipClothingIntoVoid(Main.game.getNpc(Rose.class).getClothingInSlot(InventorySlot.GROIN), true, Main.game.getNpc(Rose.class));
+						}
+						Main.game.getNpc(Rose.class).displaceClothingForAccess(CoverableArea.PENIS, null);
+						Main.game.getNpc(Rose.class).equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_bdsm_penis_strapon", PresetColour.CLOTHING_PURPLE_DARK, false), true, Main.game.getNpc(Rose.class));
+					}
+				};
+
+			} else if (index == 2) {
+				return new ResponseEffectsOnly("Refuse", "Refuse Rose's offer and rush off back to your room.") {
+					@Override
+					public void effects() {
+						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.roseToldOnYou, true);
+						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayasRoom", "BEG_FLEE"));
+						Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_PLAYER);
+						Main.game.getNpc(Rose.class).setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LAB);
+						Main.game.setContent(new Response("", "", Main.game.getPlayerCell().getDialogue(false)));
+					}
+				};
+
+			} else {
+				return null;
+			}
+		}
+	};    public static final DialogueNode ROOM_LILAYA_INSIDE = new DialogueNode("Комната Лилайи", ".", true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -127,8 +224,45 @@ public class LilayasRoom {
 			}
 		}
 	};
-	
-	public static final DialogueNode PANTIES = new DialogueNode("Lilaya's Room", ".", true) {
+    public static final DialogueNode APOLOGY = new DialogueNode("Комната Лилайи", ".", true, true) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 60;
+		}
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayasRoom", "APOLOGY");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+				return new Response("Beg", "Beg Rose not to tell Lilaya.", BEG) {
+					@Override
+					public void effects() {
+						Main.game.getTextEndStringBuilder().append(Main.game.getNpc(Rose.class).incrementAffection(Main.game.getPlayer(), 15));
+					}
+				};
+
+			} else if (index == 2) {
+				return new ResponseEffectsOnly("Leave", "Tell Rose not to let Lilaya know, and rush off back to your room.") {
+					@Override
+					public void effects() {
+						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.roseToldOnYou, true);
+						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayasRoom", "APOLOGY_FLEE"));
+						Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_PLAYER);
+						Main.game.getNpc(Rose.class).setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LAB);
+						Main.game.setContent(new Response("", "", Main.game.getPlayerCell().getDialogue(false)));
+					}
+				};
+
+			} else {
+				return null;
+			}
+		}
+	};    public static final DialogueNode PANTIES = new DialogueNode("Комната Лилайи", ".", true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -198,60 +332,7 @@ public class LilayasRoom {
 			}
 		}
 	};
-	
-	public static final DialogueNode HIDE = new DialogueNode("Lilaya's Room", ".", true) {
-
-		@Override
-		public int getSecondsPassed() {
-			return 60;
-		}
-
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayasRoom", "HIDE");
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Leave", "Now that Rose has left, you can safely step back out into the corridor.", ROOM_LILAYA);
-
-			} else {
-				return null;
-			}
-		}
-	};
-	
-	public static final DialogueNode FLEE = new DialogueNode("Lilaya's Room", ".", true) {
-
-		@Override
-		public int getSecondsPassed() {
-			return 60;
-		}
-
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayasRoom", "FLEE");
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new ResponseEffectsOnly("Your room", "Continue on down the corridor to your room.") {
-					@Override
-					public void effects() {
-						Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_PLAYER);
-						Main.game.setContent(new Response("", "", Main.game.getPlayerCell().getDialogue(false)));
-					}
-				};
-
-			} else {
-				return null;
-			}
-		}
-	};
-	
-	public static final DialogueNode CAUGHT = new DialogueNode("Lilaya's Room", ".", true) {
+    public static final DialogueNode CAUGHT = new DialogueNode("Комната Лилайи", ".", true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -272,7 +353,7 @@ public class LilayasRoom {
 						Main.game.getTextEndStringBuilder().append(Main.game.getNpc(Rose.class).incrementAffection(Main.game.getPlayer(), 10));
 					}
 				};
-					
+
 			} else if(index==2) {
 				return new Response("Threaten", "Threaten Rose and tell her that she'll be sorry if she tells Lilaya about this.", THREATEN) {
 					@Override
@@ -297,9 +378,7 @@ public class LilayasRoom {
 				return null;
 			}
 		}
-	};
-	
-	public static final DialogueNode APOLOGY = new DialogueNode("Lilaya's Room", ".", true, true) {
+	};    public static final DialogueNode HIDE = new DialogueNode("Комната Лилайи", ".", true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -308,114 +387,27 @@ public class LilayasRoom {
 
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayasRoom", "APOLOGY");
+			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayasRoom", "HIDE");
 		}
 
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Beg", "Beg Rose not to tell Lilaya.", BEG) {
-					@Override
-					public void effects() {
-						Main.game.getTextEndStringBuilder().append(Main.game.getNpc(Rose.class).incrementAffection(Main.game.getPlayer(), 15));
-					}
-				};
-					
-			} else if (index == 2) {
-				return new ResponseEffectsOnly("Leave", "Tell Rose not to let Lilaya know, and rush off back to your room.") {
-					@Override
-					public void effects() {
-						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.roseToldOnYou, true);
-						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayasRoom", "APOLOGY_FLEE"));
-						Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_PLAYER);
-						Main.game.getNpc(Rose.class).setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LAB);
-						Main.game.setContent(new Response("", "", Main.game.getPlayerCell().getDialogue(false)));
-					}
-				};
+			if (index == 1) {
+				return new Response("Leave", "Now that Rose has left, you can safely step back out into the corridor.", ROOM_LILAYA);
 
 			} else {
 				return null;
 			}
 		}
 	};
-	
-	public static final DialogueNode BEG = new DialogueNode("Lilaya's Room", ".", true, true) {
 
-		@Override
-		public int getSecondsPassed() {
-			return 60;
-		}
 
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayasRoom", "BEG");
-		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new ResponseSex("Submit", "Let Rose push you back on to the bed and fuck you.",
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
-						null, CorruptionLevel.THREE_DIRTY, null, null, null,
-						true, false,
-						new SMLyingDown(
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Rose.class), SexSlotLyingDown.MISSIONARY)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN))) {
-							@Override
-							public boolean isPositionChangingAllowed(GameCharacter character) {
-								return false;
-							}
-							@Override
-							public boolean isAbleToRemoveSelfClothing(GameCharacter character) {
-								return !character.isPlayer();
-							}
-							@Override
-							public  boolean isAbleToRemoveOthersClothing(GameCharacter character, AbstractClothing clothing) {
-								return !character.isPlayer();
-							}
-							@Override
-							public Map<GameCharacter, List<SexAreaInterface>> getAreasBannedMap() {
-								return Util.newHashMapOfValues(
-										new Value<>(
-												Main.game.getNpc(Rose.class),
-												Util.newArrayListOfValues(
-														SexAreaOrifice.VAGINA,
-														SexAreaOrifice.ANUS,
-														SexAreaOrifice.MOUTH)));
-							}
-						},
-						null,
-						null,
-						AFTER_ROSE_AS_DOM,
-						UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayasRoom", "ROSE_AS_DOM")){
-					@Override
-					public void effects() {
-						Main.game.getTextEndStringBuilder().append(Main.game.getNpc(Rose.class).incrementAffection(Main.game.getPlayer(), 15));
-						if(Main.game.getNpc(Rose.class).getClothingInSlot(InventorySlot.GROIN)!=null) {
-							Main.game.getNpc(Rose.class).unequipClothingIntoVoid(Main.game.getNpc(Rose.class).getClothingInSlot(InventorySlot.GROIN), true, Main.game.getNpc(Rose.class));
-						}
-						Main.game.getNpc(Rose.class).displaceClothingForAccess(CoverableArea.PENIS, null);
-						Main.game.getNpc(Rose.class).equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_bdsm_penis_strapon", PresetColour.CLOTHING_PURPLE_DARK, false), true, Main.game.getNpc(Rose.class));
-					}
-				};
-					
-			} else if (index == 2) {
-				return new ResponseEffectsOnly("Refuse", "Refuse Rose's offer and rush off back to your room.") {
-					@Override
-					public void effects() {
-						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.roseToldOnYou, true);
-						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayasRoom", "BEG_FLEE"));
-						Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_PLAYER);
-						Main.game.getNpc(Rose.class).setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LAB);
-						Main.game.setContent(new Response("", "", Main.game.getPlayerCell().getDialogue(false)));
-					}
-				};
 
-			} else {
-				return null;
-			}
-		}
-	};
+
+
+
+
 	
 	public static final DialogueNode AFTER_ROSE_AS_DOM = new DialogueNode("Finished", "Feeling as though she's 'punished' you enough, Rose brings an end to the sex.", true) {
 

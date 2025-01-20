@@ -216,7 +216,7 @@
 	
     <htmlContent tag="DOMINANT_SEX_START_ORAL"><![CDATA[
     <p>
-        Eager to put [harpyDominant.name] and [harpyDominantCompanion.name] in their place in front of their nest's inner-circle, you reach down and grab the dominant matriarch's wings. Pulling her to her feet, you [pc.step] forwards and plant a deep kiss on her [harpyDominant.lips+], drawing a series of lustful moans from the surrounding harpies as you do so.
+        Eager to put [harpyDominant.name] и [harpyDominantCompanion.name] in their place in front of their nest's inner-circle, you reach down and grab the dominant matriarch's wings. Pulling her to her feet, you [pc.step] forwards and plant a deep kiss on her [harpyDominant.lips+], drawing a series of lustful moans from the surrounding harpies as you do so.
     </p>
 	#IF(!harpyDominantCompanion.isAttractedTo(pc))
 		<p>
@@ -250,7 +250,7 @@
 
     <htmlContent tag="DOMINANT_SEX_START_DOGGY"><![CDATA[
     <p>
-        Eager to put [harpyDominant.name] and [harpyDominantCompanion.name] in their place in front of their nest's inner-circle, you grab hold of both of them and push them down onto their hands and knees before you. As you drop down behind them, [harpyDominant.name] passionately moans, [harpyDominant.speech(Come on, give the two of us a real good fuck! Use me and [harpyDominantCompanion.name] as much as you want!)]
+        Eager to put [harpyDominant.name] и [harpyDominantCompanion.name] in their place in front of their nest's inner-circle, you grab hold of both of them and push them down onto their hands and knees before you. As you drop down behind them, [harpyDominant.name] passionately moans, [harpyDominant.speech(Come on, give the two of us a real good fuck! Use me and [harpyDominantCompanion.name] as much as you want!)]
     </p>
 	#IF(!harpyDominantCompanion.isAttractedTo(pc))
 		<p>
@@ -333,7 +333,7 @@
 		[harpyDominant.speech(Good girl, [harpyDominantCompanion.name]!)] you hear her respond. [harpyDominant.speech(I think it's time to teach this insolent little [pc.race] a lesson!)]
 	</p>
 	<p>
-		As [harpyDominantCompanion.name] continues holding you down, [harpyDominant.name] calls out for the rest of the surrounding harpies to help. Rushing to obey their mistress, several of the red-and-black harpies dash forwards and help to pin your [pc.arms] and [pc.legs] to the floor.
+		As [harpyDominantCompanion.name] continues holding you down, [harpyDominant.name] calls out for the rest of the surrounding harpies to help. Rushing to obey their mistress, several of the red-and-black harpies dash forwards and help to pin your [pc.arms] и [pc.legs] to the floor.
 	</p>
 	<p>
 		[harpyDominant.speech(That's right, hold [pc.herHim] still!)] [harpyDominant.name] calls out, stepping down from her podium before strutting over to you. [harpyDominant.speech(Fucking bitch! I know just what you need! Coming into <i>my</i> nest, then trying to act all tough?! You just want to be one of my bitches, don't you?!)]
@@ -410,7 +410,7 @@
 	
     <htmlContent tag="COMBAT_LOST_TF_END"><![CDATA[
 	<p>
-		As the perfume's transformative effects come to an end, the harpies' grip on your [pc.arms] and [pc.legs] loosens. Blinking slowly a few times, you let out an exhausted moan, [pc.speech(~Ahh!~ You bitch...)]
+		As the perfume's transformative effects come to an end, the harpies' grip on your [pc.arms] и [pc.legs] loosens. Blinking slowly a few times, you let out an exhausted moan, [pc.speech(~Ahh!~ You bitch...)]
 	</p>
 	<p>
 		The flock of harpies bursts out into laughter, and the ones who were holding you down finally release you before backing off. Scrambling to your knees, you find yourself looking up at [harpyDominant.Name] as she continues towering over you.
@@ -457,7 +457,7 @@
 	
     <htmlContent tag="COMBAT_LOST_BAD_END_TF_END"><![CDATA[
 	<p>
-		As the perfume's transformative effects come to an end, the harpies' grip on your [pc.arms] and [pc.legs] loosens. Blinking slowly a few times, you let out an exhausted moan, [pc.speech(~Ahh!~ You bitch...)]
+		As the perfume's transformative effects come to an end, the harpies' grip on your [pc.arms] и [pc.legs] loosens. Blinking slowly a few times, you let out an exhausted moan, [pc.speech(~Ahh!~ You bitch...)]
 	</p>
 	<p>
 		The flock of harpies bursts out into laughter, and the ones who were holding you down finally release you before backing off. Scrambling to your knees, you find yourself looking up at [harpyDominant.Name] as she continues towering over you. With an evil smirk on her face, she demands, [harpyDominant.speech(Apologise to me, you worthless slut! Grovel before me and tell me that you'll serve me!)]

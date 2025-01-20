@@ -11,13 +11,16 @@ public enum GenderPronoun {
 	YOUNG_NOUN("Молодое Существительное", "Девочка", "Мальчик", "Человек"),
 	
 	SECOND_PERSON("Второе лицо", "она", "он", "они"),
-	THIRD_PERSON("Третье лицо", "ее", "его", "их"),
-	POSSESSIVE_BEFORE_NOUN("Местоимение перед существительным", "ее", "его", "их"),
-	POSSESSIVE_ALONE("Нетральная принадлежность", "ее", "его", "их");
+    THIRD_PERSON("Третье лицо", "её", "его", "их"),
+    POSSESSIVE_BEFORE_NOUN("Местоимение перед существительным", "её", "его", "их"),
+    POSSESSIVE_ALONE("Нетральная принадлежность", "её", "его", "их");
 	
-	private String name, feminine, masculine, neutral;
+	private final String name;
+    private final String feminine;
+    private final String masculine;
+    private String neutral;
 	
-	private GenderPronoun(String name, String feminine, String masculine, String neutral){
+	GenderPronoun(String name, String feminine, String masculine, String neutral){
 		this.name = name;
 		this.feminine = feminine;
 		this.masculine = masculine;

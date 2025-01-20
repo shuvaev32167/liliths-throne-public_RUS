@@ -183,7 +183,7 @@
 	
 	<!-- The description which is shown to the player in this subspecies' status effect tooltip. -->
 	<statusEffectDescription><![CDATA[
-		[npc.NamePos] panda-like body is strong, and [npc.she] [npc.verb(exude)] a sense of single-minded calm.
+		[npc.NamePos] panda-like body is strong, and [npc.she] exude a sense of single-minded calm.
 	]]></statusEffectDescription>
 	
 	<!-- The core attributes which a character of this subspecies benefits from.

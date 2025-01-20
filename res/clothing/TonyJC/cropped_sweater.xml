@@ -75,49 +75,49 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(guide)] [npc.her] [npc.arms] through the sweater's sleeves as [npc.she] [npc.verb(pull)] it down over [npc.her] head.]]>
+        <![CDATA[[npc.Name] guide [npc.her] [npc.arms] through the sweater's sleeves as [npc.she] pull it down over [npc.her] head.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(guide)] [npc2.namePos] [npc2.arms] through the sweater's sleeves as [npc.she] [npc.verb(pull)] it down over [npc2.her] head.]]>
+        <![CDATA[[npc.Name] guide [npc2.namePos] [npc2.arms] through the sweater's sleeves as [npc.she] pull it down over [npc2.her] head.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(force)] [npc2.namePos] [npc2.arms] through the sweater's sleeves as [npc.she] [npc.verb(pull)] it down over [npc2.her] head.]]>
+        <![CDATA[[npc.Name] roughly force [npc2.namePos] [npc2.arms] through the sweater's sleeves as [npc.she] pull it down over [npc2.her] head.]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(pull)] off [npc.her] cropped sweater, revealing [npc.her] torso.]]>
+        <![CDATA[[npc.Name] pull off [npc.her] cropped sweater, revealing [npc.her] torso.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(pull)] off [npc2.namePos] sweater, revealing the chest under.]]>
+        <![CDATA[[npc.Name] pull off [npc2.namePos] sweater, revealing the chest under.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(snag)] off [npc2.namePos] sweater, revealing the chest under.]]>
+        <![CDATA[[npc.Name] roughly snag off [npc2.namePos] sweater, revealing the chest under.]]>
     </otherRough>
   </displacementText>
 	
   <replacementText type="PULLS_UP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(pull)] [npc.her] sweater back down, covering [npc.her] torso.]]>
+        <![CDATA[[npc.Name] pull [npc.her] sweater back down, covering [npc.her] torso.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(pull)] [npc2.namePos] sweater back down, covering [npc2.her]  chest under.]]>
+        <![CDATA[[npc.Name] pull [npc2.namePos] sweater back down, covering [npc2.her]  chest under.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(yank)] [npc2.namePos] sweater back down, covering [npc2.her]  chest under.]]>
+        <![CDATA[[npc.Name] roughly yank [npc2.namePos] sweater back down, covering [npc2.her]  chest under.]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="PULLS_UP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(pull)] [npc.her] sweater up to just below [npc.her] chin, fully exposing [npc.her] torso.]]>
+        <![CDATA[[npc.Name] pull [npc.her] sweater up to just below [npc.her] chin, fully exposing [npc.her] torso.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(pull)] [npc2.namePos] sweater up to just below [npc2.her] chin, fully exposing [npc2.her] chest under.]]>
+        <![CDATA[[npc.Name] pull [npc2.namePos] sweater up to just below [npc2.her] chin, fully exposing [npc2.her] chest under.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(pull)] [npc2.namePos] sweater up to just below [npc2.her] chin, fully exposing [npc2.her] chest under.]]>
+        <![CDATA[[npc.Name] roughly pull [npc2.namePos] sweater up to just below [npc2.her] chin, fully exposing [npc2.her] chest under.]]>
     </otherRough>
   </displacementText>
   

@@ -1,22 +1,7 @@
 package com.lilithsthrone.game.character.body.valueEnums;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.Anus;
-import com.lilithsthrone.game.character.body.Ass;
-import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.BodyPartInterface;
-import com.lilithsthrone.game.character.body.BreastCrotch;
-import com.lilithsthrone.game.character.body.Clitoris;
-import com.lilithsthrone.game.character.body.Leg;
-import com.lilithsthrone.game.character.body.Penis;
-import com.lilithsthrone.game.character.body.Tail;
-import com.lilithsthrone.game.character.body.Tentacle;
-import com.lilithsthrone.game.character.body.Testicle;
-import com.lilithsthrone.game.character.body.Vagina;
+import com.lilithsthrone.game.character.body.*;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
 import com.lilithsthrone.game.character.body.types.LegType;
 import com.lilithsthrone.game.character.body.types.WingType;
@@ -26,6 +11,10 @@ import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @since 0.3.1
@@ -268,8 +257,11 @@ public enum LegConfiguration {
 			return "ползает";
 		}
 		@Override
-		public String getMovementVerbPresentParticiple() {
-			return "ползание";
+		public String getMovementVerbPresentParticiple(boolean isPlayer) {
+			if (isPlayer) {
+				return "извиваешься";
+			}
+			return "извивается";
 		}
 		@Override
 		public String getMovementVerbPastParticiple() {
@@ -613,8 +605,11 @@ public enum LegConfiguration {
 			return "ползает";
 		}
 		@Override
-		public String getMovementVerbPresentParticiple() {
-			return "ползание";
+		public String getMovementVerbPresentParticiple(boolean isPlayer) {
+			if (isPlayer) {
+				return "ползёшь";
+			}
+			return "ползёт";
 		}
 		@Override
 		public String getMovementVerbPastParticiple() {
@@ -798,41 +793,41 @@ public enum LegConfiguration {
 		}
 	};
 
-	private String name;
-	private int landSpeedModifier;
-	private int waterSpeedModifier;
-	private boolean bipedalPositionedGenitals;
-	private boolean bipedalPositionedCrotchBoobs;
-	private boolean largeGenitals;
-	private boolean tall;
+	private final String name;
+	private final int landSpeedModifier;
+	private final int waterSpeedModifier;
+	private final boolean bipedalPositionedGenitals;
+	private final boolean bipedalPositionedCrotchBoobs;
+	private final boolean largeGenitals;
+	private final boolean tall;
 	
-	private WingSize minimumWingSizeForFlight;
-	private boolean wingsOnLegConfiguration;
+	private final WingSize minimumWingSizeForFlight;
+	private final boolean wingsOnLegConfiguration;
 	
-	private int numberOfLegs;
+	private final int numberOfLegs;
 	
-	private String genericDescription;
-	private String crotchBoobLocationDescription;
+	private final String genericDescription;
+	private final String crotchBoobLocationDescription;
 
-	private TFModifier tfModifier;
+	private final TFModifier tfModifier;
 
-	private String subspeciesStatusEffectBackgroundPath;
+	private final String subspeciesStatusEffectBackgroundPath;
 	
-	private LegConfiguration(
-			String name,
-			int landSpeedModifier,
-			int waterSpeedModifier,
-			boolean bipedalPositionedGenitals,
-			boolean bipedalPositionedCrotchBoobs,
-			boolean largeGenitals,
-			boolean tall,
-			WingSize minimumWingSizeForFlight,
-			boolean wingsOnLegConfiguration,
-			int numberOfLegs,
-			String genericDescription,
-			String crotchBoobLocationDescription,
-			TFModifier tfModifier,
-			String subspeciesStatusEffectBackgroundPath) {
+	LegConfiguration(
+            String name,
+            int landSpeedModifier,
+            int waterSpeedModifier,
+            boolean bipedalPositionedGenitals,
+            boolean bipedalPositionedCrotchBoobs,
+            boolean largeGenitals,
+            boolean tall,
+            WingSize minimumWingSizeForFlight,
+            boolean wingsOnLegConfiguration,
+            int numberOfLegs,
+            String genericDescription,
+            String crotchBoobLocationDescription,
+            TFModifier tfModifier,
+            String subspeciesStatusEffectBackgroundPath) {
 		
 		this.name = name;
 		
@@ -893,8 +888,11 @@ public enum LegConfiguration {
 		return "ходит";
 	}
 
-	public String getMovementVerbPresentParticiple() {
-		return "идет";
+	public String getMovementVerbPresentParticiple(boolean isPlayer) {
+		if (isPlayer) {
+			return "идёшь";
+		}
+		return "идёт";
 	}
 
 	public String getMovementVerbPastParticiple() {

@@ -22,11 +22,12 @@
 		
 		<rarity>COMMON</rarity> 
 		
-		<weaponSet/> 
-		
-		<equipText><![CDATA[[npc.Name] [npc.verb(position)] [npc.her] morning star at [npc.her] hip, so that [npc.she] may draw it at a moment's notice.]]></equipText>
-		
-		<unequipText><![CDATA[[npc.Name] [npc.verb(put)] [npc.her] morning star away.]]></unequipText>
+		<weaponSet/>
+
+        <equipText>
+            <![CDATA[[npc.Name] position [npc.her] morning star at [npc.her] hip, so that [npc.she] may draw it at a moment's notice.]]></equipText>
+
+        <unequipText><![CDATA[[npc.Name] put [npc.her] morning star away.]]></unequipText>
 		
 		<imageName>morning_star.svg</imageName> 
 		
@@ -71,25 +72,25 @@
 	
 	<hitDescriptions>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(swing)] [npc.her] morning star at [npc2.name], grinning as the ethereal arcane ball travels through [npc2.her] body!
+		[npc.Name] swing [npc.her] morning star at [npc2.name], grinning as the ethereal arcane ball travels through [npc2.her] body!
 		]]></hitText>
 		<hitText><![CDATA[
-		Lunging out at [npc2.name] with [npc.her] morning star, [npc.name] [npc.verb(grin)] as [npc.she] [npc.verb(see)] the ethereal ball travel straight through [npc2.her] body!
+		Lunging out at [npc2.name] with [npc.her] morning star, [npc.name] grin as [npc.she] see the ethereal ball travel straight through [npc2.her] body!
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(swing)] at [npc2.name] with [npc.her] morning star, causing [npc2.herHim] to stagger back as the ethereal ball passes right through [npc2.her] chest!
+		[npc.Name] swing at [npc2.name] with [npc.her] morning star, causing [npc2.herHim] to stagger back as the ethereal ball passes right through [npc2.her] chest!
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(swing)] [npc.her] morning star at [npc2.name], but [npc.verb(end)] up missing [npc2.herHim]!
+		[npc.Name] swing [npc.her] morning star at [npc2.name], but end up missing [npc2.herHim]!
 		]]></missText>
 		<missText><![CDATA[
-		Lunging out at [npc2.name] with [npc.her] morning star, [npc.name] [npc.verb(let)] out a frustrated cry as [npc.she] [npc.verb(miss)] [npc.her] target!
+		Lunging out at [npc2.name] with [npc.her] morning star, [npc.name] let out a frustrated cry as [npc.she] miss [npc.her] target!
 		]]></missText>
 		<missText><![CDATA[
-		With a quick step forwards, [npc.name] [npc.verb(swing)] at [npc2.name] with [npc.her] morning star, but [npc.she] [npc.verb(miss)] [npc.her] target!
+		With a quick step forwards, [npc.name] swing at [npc2.name] with [npc.her] morning star, but [npc.she] miss [npc.her] target!
 		]]></missText>
 	</missDescriptions>
 	

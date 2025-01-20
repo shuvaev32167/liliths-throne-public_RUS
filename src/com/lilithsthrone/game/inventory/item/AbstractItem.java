@@ -1,16 +1,5 @@
 package com.lilithsthrone.game.inventory.item;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.Map.Entry;
-import java.util.stream.Stream;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
@@ -28,6 +17,16 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.PresetColour;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.stream.Stream;
 
 /**
  * @since 0.1.0
@@ -232,7 +231,7 @@ public abstract class AbstractItem extends AbstractCoreItem implements XMLSaving
 			if(intoxicationLevel>0 && target.getRace()==Race.getRaceFromId("charisma_spider")) {
 				sb.append(UtilText.parse(target,
 						"<p style='text-align:center;'>"
-							+ "Due to [npc.her] spider physiology, the caffeine in the "+this.getName()+" acts in a similar manner to alcohol, and as a result [npc.she] [npc.verb(feel)] [npc.herself] getting [style.boldAlcohol(drunk)]..."
+                                + "Due to [npc.her] spider physiology, the caffeine in the " + this.getName() + " acts in a similar manner to alcohol, and as a result [npc.she] feel [npc.herself] getting [style.boldAlcohol(drunk)]..."
 						+ "</p>"));
 				sb.append(target.incrementAlcoholLevel(intoxicationLevel/100f));
 				break;

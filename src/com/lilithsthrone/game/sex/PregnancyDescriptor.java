@@ -271,9 +271,9 @@ public enum PregnancyDescriptor {
 			if(!cumInPussy) {
 				sb.append("Letting out a gasp,");
 				if(characterBeingImpregnated.hasStatusEffect(StatusEffect.PREGNANT_0)) {
-					sb.append(" [npc.name] [npc.verb(realise)] that [style.boldSex(if [npc.she] [npc.is]n't already pregnant, there's a small chance [npc.she] [npc.is] now)]!");
+                    sb.append(" [npc.name] realise that [style.boldSex(if [npc.she] [npc.is]n't already pregnant, there's a small chance [npc.she] [npc.is] now)]!");
 				} else {
-					sb.append(" [npc.name] [npc.verb(realise)] that [style.boldSex(there's a small chance [npc.she]'ll get pregnant from this)]!");
+                    sb.append(" [npc.name] realise that [style.boldSex(there's a small chance [npc.she]'ll get pregnant from this)]!");
 				}
 				
 			} else if(characterBeingImpregnated.isPlayer()){
@@ -315,9 +315,9 @@ public enum PregnancyDescriptor {
 					}
 				}
 				if(characterBeingImpregnated.hasStatusEffect(StatusEffect.PREGNANT_0)) {
-					sb.append(" [npc.name] [npc.verb(realise)] that [style.boldSex(if [npc.she] isn't already pregnant, there's a small chance [npc.she] is now)]!");
+                    sb.append(" [npc.name] realise that [style.boldSex(if [npc.she] isn't already pregnant, there's a small chance [npc.she] is now)]!");
 				} else {
-					sb.append(" [npc.name] [npc.verb(realise)] that [style.boldSex(there's a small chance [npc.she]'ll get pregnant)]!");
+                    sb.append(" [npc.name] realise that [style.boldSex(there's a small chance [npc.she]'ll get pregnant)]!");
 				}
 			}
 			sb.append("</p>");
@@ -343,9 +343,9 @@ public enum PregnancyDescriptor {
 			if(!cumInPussy) {
 				sb.append("Letting out a gasp,");
 				if(characterBeingImpregnated.hasStatusEffect(StatusEffect.PREGNANT_0)) {
-					sb.append(" [npc.name] [npc.verb(realise)] that [style.boldSex(if [npc.she] [npc.is]n't already pregnant, there's a chance [npc.she] [npc.is] now)]!");
+                    sb.append(" [npc.name] realise that [style.boldSex(if [npc.she] [npc.is]n't already pregnant, there's a chance [npc.she] [npc.is] now)]!");
 				} else {
-					sb.append(" [npc.name] [npc.verb(realise)] that [style.boldSex(there's a chance [npc.she]'ll get pregnant from this)]!");
+                    sb.append(" [npc.name] realise that [style.boldSex(there's a chance [npc.she]'ll get pregnant from this)]!");
 				}
 				
 			} else if(characterBeingImpregnated.isPlayer()){
@@ -387,9 +387,9 @@ public enum PregnancyDescriptor {
 					}
 				}
 				if(characterBeingImpregnated.hasStatusEffect(StatusEffect.PREGNANT_0)) {
-					sb.append(" [npc.name] [npc.verb(realise)] that [style.boldSex(if [npc.she] isn't already pregnant, there's a chance [npc.she] is now)]!");
+                    sb.append(" [npc.name] realise that [style.boldSex(if [npc.she] isn't already pregnant, there's a chance [npc.she] is now)]!");
 				} else {
-					sb.append(" [npc.name] [npc.verb(realise)] that [style.boldSex(there's a chance [npc.she]'ll get pregnant)]!");
+                    sb.append(" [npc.name] realise that [style.boldSex(there's a chance [npc.she]'ll get pregnant)]!");
 				}
 			}
 			sb.append("</p>");
@@ -415,9 +415,9 @@ public enum PregnancyDescriptor {
 			if(!cumInPussy) {
 				sb.append("Letting out a gasp,");
 				if(characterBeingImpregnated.hasStatusEffect(StatusEffect.PREGNANT_0)) {
-					sb.append(" [npc.name] [npc.verb(realise)] that [style.boldSex(if [npc.she] [npc.is]n't already pregnant, there's a high chance [npc.she] [npc.is] now)]!");
+                    sb.append(" [npc.name] realise that [style.boldSex(if [npc.she] [npc.is]n't already pregnant, there's a high chance [npc.she] [npc.is] now)]!");
 				} else {
-					sb.append(" [npc.name] [npc.verb(realise)] that [style.boldSex(there's a high chance [npc.she]'ll get pregnant from this)]!");
+                    sb.append(" [npc.name] realise that [style.boldSex(there's a high chance [npc.she]'ll get pregnant from this)]!");
 				}
 				
 			} else if(characterBeingImpregnated.isPlayer()){
@@ -459,9 +459,9 @@ public enum PregnancyDescriptor {
 					}
 				}
 				if(characterBeingImpregnated.hasStatusEffect(StatusEffect.PREGNANT_0)) {
-					sb.append(" [npc.name] [npc.verb(realise)] that [style.boldSex(if [npc.she] isn't already pregnant, there's a high chance [npc.she] is now)]!");
+                    sb.append(" [npc.name] realise that [style.boldSex(if [npc.she] isn't already pregnant, there's a high chance [npc.she] is now)]!");
 				} else {
-					sb.append(" [npc.name] [npc.verb(realise)] that [style.boldSex(there's a high chance [npc.she]'ll get pregnant)]!");
+                    sb.append(" [npc.name] realise that [style.boldSex(there's a high chance [npc.she]'ll get pregnant)]!");
 				}
 			}
 			sb.append("</p>");
@@ -487,9 +487,9 @@ public enum PregnancyDescriptor {
 			if(!cumInPussy) {
 				sb.append("Letting out a gasp,");
 				if(characterBeingImpregnated.hasStatusEffect(StatusEffect.PREGNANT_0)) {
-					sb.append(" [npc.name] [npc.verb(realise)] that [style.boldSex(if [npc.she] [npc.is]n't already pregnant, [npc.she] certainly [npc.is] now)]!");
+                    sb.append(" [npc.name] realise that [style.boldSex(if [npc.she] [npc.is]n't already pregnant, [npc.she] certainly [npc.is] now)]!");
 				} else {
-					sb.append(" [npc.name] [npc.verb(realise)] that [style.boldSex(it's a certainty that [npc.sheHas] been impregnated from this)]!");
+                    sb.append(" [npc.name] realise that [style.boldSex(it's a certainty that [npc.sheHas] been impregnated from this)]!");
 				}
 				
 			} else if(characterBeingImpregnated.isPlayer()){
@@ -531,9 +531,9 @@ public enum PregnancyDescriptor {
 					}
 				}
 				if(characterBeingImpregnated.hasStatusEffect(StatusEffect.PREGNANT_0)) {
-					sb.append(" [npc.name] [npc.verb(realise)] that [style.boldSex(if [npc.she] isn't already pregnant, [npc.she] certainly is now)]!");
+                    sb.append(" [npc.name] realise that [style.boldSex(if [npc.she] isn't already pregnant, [npc.she] certainly is now)]!");
 				} else {
-					sb.append(" [npc.name] [npc.verb(realise)] that [style.boldSex(it's a certainty that [npc.sheHas] been impregnated)]!");
+                    sb.append(" [npc.name] realise that [style.boldSex(it's a certainty that [npc.sheHas] been impregnated)]!");
 				}
 			}
 			sb.append("</p>");

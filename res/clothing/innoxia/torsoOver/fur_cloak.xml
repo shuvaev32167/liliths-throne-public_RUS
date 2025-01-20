@@ -239,47 +239,47 @@
 
 	<replacementText slot="NECK" type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(drape)] the cloak over [npc.her] shoulders, before tying the cord around [npc.her] neck.]]>
+            <![CDATA[[npc.Name] drape the cloak over [npc.her] shoulders, before tying the cord around [npc.her] neck.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(drape)] the cloak over [npc2.namePos] shoulders, before tying the cord around [npc2.her] neck.]]>
+            <![CDATA[[npc.Name] drape the cloak over [npc2.namePos] shoulders, before tying the cord around [npc2.her] neck.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(drape)] the cloak over [npc2.namePos] shoulders, before firmly tying the cord around [npc2.her] neck.]]>
+            <![CDATA[[npc.Name] roughly drape the cloak over [npc2.namePos] shoulders, before firmly tying the cord around [npc2.her] neck.]]>
 		</otherRough>
 	</replacementText>
 	<displacementText slot="NECK" type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(untie)] the cord around [npc.her] neck, before taking off [npc.her] cloak.]]>
+            <![CDATA[[npc.Name] untie the cord around [npc.her] neck, before taking off [npc.her] cloak.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(untie)] the cord around [npc2.namePos] neck, before taking off [npc2.her] cloak.]]>
+            <![CDATA[[npc.Name] untie the cord around [npc2.namePos] neck, before taking off [npc2.her] cloak.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(untie)] the cord around [npc2.namePos] neck, before pulling off [npc2.her] cloak.]]>
+            <![CDATA[[npc.Name] roughly untie the cord around [npc2.namePos] neck, before pulling off [npc2.her] cloak.]]>
 		</otherRough>
 	</displacementText>
 
 	<replacementText slot="TORSO_OVER" type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(drape)] the cloak over [npc.her] shoulders, before tying the cord around [npc.her] neck.]]>
+            <![CDATA[[npc.Name] drape the cloak over [npc.her] shoulders, before tying the cord around [npc.her] neck.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(drape)] the cloak over [npc2.namePos] shoulders, before tying the cord around [npc2.her] neck.]]>
+            <![CDATA[[npc.Name] drape the cloak over [npc2.namePos] shoulders, before tying the cord around [npc2.her] neck.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(drape)] the cloak over [npc2.namePos] shoulders, before firmly tying the cord around [npc2.her] neck.]]>
+            <![CDATA[[npc.Name] roughly drape the cloak over [npc2.namePos] shoulders, before firmly tying the cord around [npc2.her] neck.]]>
 		</otherRough>
 	</replacementText>
 	<displacementText slot="TORSO_OVER" type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(untie)] the cord around [npc.her] neck, before taking off [npc.her] cloak.]]>
+            <![CDATA[[npc.Name] untie the cord around [npc.her] neck, before taking off [npc.her] cloak.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(untie)] the cord around [npc2.namePos] neck, before taking off [npc2.her] cloak.]]>
+            <![CDATA[[npc.Name] untie the cord around [npc2.namePos] neck, before taking off [npc2.her] cloak.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(untie)] the cord around [npc2.namePos] neck, before pulling off [npc2.her] cloak.]]>
+            <![CDATA[[npc.Name] roughly untie the cord around [npc2.namePos] neck, before pulling off [npc2.her] cloak.]]>
 		</otherRough>
 	</displacementText>
 

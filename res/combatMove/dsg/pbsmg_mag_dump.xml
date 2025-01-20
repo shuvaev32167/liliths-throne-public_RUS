@@ -178,7 +178,7 @@
 		NOTE: The damage is automatically applied to the target, so you don't need to handle parsing of that. -->
 		<execute><![CDATA[
 			#IF(hits>0)
-				Holding down the trigger, [npc.name] [npc.verb(manage)] to get [style.colorArcane([#~~(hits)])] hits on [npc2.name]!
+				Holding down the trigger, [npc.name] manage to get [style.colorArcane([#~~(hits)])] hits on [npc2.name]!
 			#ELSE
 				Unfortunately, [npc.name] didn't manage to land a single shot on [npc2.name]!
 			#ENDIF

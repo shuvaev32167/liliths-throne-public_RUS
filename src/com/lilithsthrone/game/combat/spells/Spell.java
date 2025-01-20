@@ -1,23 +1,9 @@
 package com.lilithsthrone.game.combat.spells;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
-import com.lilithsthrone.game.character.effects.EffectBenefit;
-import com.lilithsthrone.game.character.effects.Perk;
-import com.lilithsthrone.game.character.effects.StatusEffect;
-import com.lilithsthrone.game.character.effects.TreeEntry;
+import com.lilithsthrone.game.character.effects.*;
 import com.lilithsthrone.game.combat.Attack;
 import com.lilithsthrone.game.combat.CombatBehaviour;
 import com.lilithsthrone.game.combat.DamageType;
@@ -39,6 +25,11 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -376,7 +367,7 @@ public enum Spell {
 				return new Value<>(false, UtilText.parse(owner, "Во время боя заклинания можно произносить только в качестве боевого движения!"));
 				
 			} else if(!Main.game.isSavedDialogueNeutral()
-					&& (Main.game.getCurrentDialogueNode()!=SpellManagement.CHARACTER_SPELLS_FIRE?false:SpellManagement.getDialogueReturn().getDialogueNodeType()!=DialogueNodeType.OCCUPANT_MANAGEMENT)) {
+					&& (Main.game.getCurrentDialogueNode() == SpellManagement.CHARACTER_SPELLS_FIRE && SpellManagement.getDialogueReturn().getDialogueNodeType() != DialogueNodeType.OCCUPANT_MANAGEMENT)) {
 				return new Value<>(false, "Заклинания можно произносить только в нейтральной сцене!");
 				
 			} else if(owner.getMana()<this.getModifiedCost(owner) && !owner.isSpellSchoolSpecialAbilityUnlocked(SpellSchool.FIRE)) {
@@ -670,7 +661,7 @@ public enum Spell {
 				return new Value<>(false, UtilText.parse(owner, "Во время боя заклинания можно произносить только как боевое движение!"));
 				
 			} else if(!Main.game.isSavedDialogueNeutral()
-					&& (Main.game.getCurrentDialogueNode()!=SpellManagement.CHARACTER_SPELLS_WATER?false:SpellManagement.getDialogueReturn().getDialogueNodeType()!=DialogueNodeType.OCCUPANT_MANAGEMENT)) {
+					&& (Main.game.getCurrentDialogueNode() == SpellManagement.CHARACTER_SPELLS_WATER && SpellManagement.getDialogueReturn().getDialogueNodeType() != DialogueNodeType.OCCUPANT_MANAGEMENT)) {
 				return new Value<>(false, "Заклинания можно произносить только в нейтральной сцене!");
 				
 			} else if(owner.getMana()<this.getModifiedCost(owner)) {
@@ -729,7 +720,7 @@ public enum Spell {
 					
 //					descriptionSB.append("<br/>"
 //											+ UtilText.parse(target, "One of the small orbs circles around to heal [npc.name] for a second time, restoring a total of "
-//																		+(int)(target.getAttributeValue(Attribute.HEALTH_MAXIMUM)*0.5f)+" "+Attribute.HEALTH_MAXIMUM.getColouredName("b")+" and "
+//																		+(int)(target.getAttributeValue(Attribute.HEALTH_MAXIMUM)*0.5f)+" "+Attribute.HEALTH_MAXIMUM.getColouredName("b")+" и "
 //																		+(int)(target.getAttributeValue(Attribute.MANA_MAXIMUM)*0.3f)+" "+Attribute.MANA_MAXIMUM.getColouredName("b")+"!"));
 //					descriptionSB.append(applyDamage(caster, target, -target.getAttributeValue(Attribute.HEALTH_MAXIMUM)*0.5f));
 //					target.incrementMana(target.getAttributeValue(Attribute.MANA_MAXIMUM)*0.3f);
@@ -838,7 +829,7 @@ public enum Spell {
 				return new Value<>(false, UtilText.parse(owner, "Во время боя заклинания можно произносить только как боевое движение!"));
 				
 			} else if(!Main.game.isSavedDialogueNeutral()
-					&& (Main.game.getCurrentDialogueNode()!=SpellManagement.CHARACTER_SPELLS_WATER?false:SpellManagement.getDialogueReturn().getDialogueNodeType()!=DialogueNodeType.OCCUPANT_MANAGEMENT)) {
+					&& (Main.game.getCurrentDialogueNode() == SpellManagement.CHARACTER_SPELLS_WATER && SpellManagement.getDialogueReturn().getDialogueNodeType() != DialogueNodeType.OCCUPANT_MANAGEMENT)) {
 				return new Value<>(false, "Заклинания можно произносить только в нейтральной сцене!");
 				
 			} else if(owner.getMana()<this.getModifiedCost(owner)) {
@@ -1186,7 +1177,7 @@ public enum Spell {
 				return new Value<>(false, UtilText.parse(owner, "Во время боя заклинания можно произносить только как боевое движение!"));
 				
 			} else if(!Main.game.isSavedDialogueNeutral()
-					&& (Main.game.getCurrentDialogueNode()!=SpellManagement.CHARACTER_SPELLS_AIR?false:SpellManagement.getDialogueReturn().getDialogueNodeType()!=DialogueNodeType.OCCUPANT_MANAGEMENT)) {
+					&& (Main.game.getCurrentDialogueNode() == SpellManagement.CHARACTER_SPELLS_AIR && SpellManagement.getDialogueReturn().getDialogueNodeType() != DialogueNodeType.OCCUPANT_MANAGEMENT)) {
 				return new Value<>(false, "Заклинания можно произносить только в нейтральной сцене!");
 				
 			} else if(owner.getMana()<this.getModifiedCost(owner)) {
@@ -1535,7 +1526,7 @@ public enum Spell {
 				return new Value<>(false, UtilText.parse(owner, "Во время боя заклинания можно произносить только как боевое движение!"));
 				
 			} else if(!Main.game.isSavedDialogueNeutral()
-					&& (Main.game.getCurrentDialogueNode()!=SpellManagement.CHARACTER_SPELLS_EARTH?false:SpellManagement.getDialogueReturn().getDialogueNodeType()!=DialogueNodeType.OCCUPANT_MANAGEMENT)) {
+					&& (Main.game.getCurrentDialogueNode() == SpellManagement.CHARACTER_SPELLS_EARTH && SpellManagement.getDialogueReturn().getDialogueNodeType() != DialogueNodeType.OCCUPANT_MANAGEMENT)) {
 				return new Value<>(false, "Заклинания можно произносить только в нейтральной сцене!");
 				
 			} else if(owner.getMana()<this.getModifiedCost(owner)) {
@@ -1672,7 +1663,7 @@ public enum Spell {
 											"Вы направляете свою магическую энергию на проецирование возбуждающего видения в сознание [npc.namePos].",
 											"",
 											"[npc.Name] направляет [npc.her] магическую энергию на проецирование возбуждающего видения в ваш разум!",
-											"[npc.Name] направляет [npc.her] арканную энергию на проецирование возбуждающего видения в сознание [npc2.namePos]!"));
+                    "[npc.Name] направляет [npc.her] магическую энергию на проецирование возбуждающего видения в сознание [npc2.namePos]!"));
 			
 			descriptionSB.append(getDamageDescription(caster, target, damage, isHit, isCritical));
 			
@@ -1752,9 +1743,9 @@ public enum Spell {
 													"Владея всеми измерениями, я разрушаю границы пространства и времени! Сами небеса услышат мой голос и придут в отчаяние!"),
 											"Вы направляете свою колдовскую энергию на то, чтобы ваши мысли могли проецироваться в сознание других людей!",
 											"Вы направляете свою магическую энергию на то, чтобы мысли [npc.namePos] могли проецироваться в сознание других!",
-											"[npc.Name] направляет [npc.her] арканную энергию на то, чтобы [npc.her] мысли проецировались в чужие умы!",
-											"[npc.Name] направляет [npc.her] арканную энергию на то, чтобы ваши мысли проецировались в сознание других людей!",
-											"[npc1.Name] концентрирует [npc1.her] арканную энергию, чтобы позволить [npc2.namePos] мыслям проецироваться в сознание других!"));
+                    "[npc.Name] направляет [npc.her] магическую энергию на то, чтобы [npc.her] мысли проецировались в чужие умы!",
+                    "[npc.Name] направляет [npc.her] магическую энергию на то, чтобы ваши мысли проецировались в сознание других людей!",
+                    "[npc1.Name] концентрирует [npc1.her] магическую энергию, чтобы позволить [npc2.namePos] мыслям проецироваться в сознание других!"));
 
 			descriptionSB.append(getDamageDescription(caster, target, 0, isHit, isCritical));
 			
@@ -1831,7 +1822,7 @@ public enum Spell {
 											"Взмахнув рукой вверх, вы вызываете магическое облако над головой [npc.namePos]!",
 											"",
 											"Взмахнув [npc.her] [npc.arm] вверх, [npc.name] вызывает магическое облако над вашей головой!",
-											"Взмахнув [npc1.her] [npc1.arm] вверх, [npc1.name] вызывает арканное облако над головой [npc2.namePos]!"));
+                    "Взмахнув [npc1.her] [npc1.arm] вверх, [npc1.name] вызывает магическое облако над головой [npc2.namePos]!"));
 
 			descriptionSB.append(getDamageDescription(caster, target, 0, isHit, isCritical));
 			
@@ -1909,7 +1900,7 @@ public enum Spell {
 											"Вытянув [pc.hand] вперед, вы вызываете взрыв очищающей магической энергии на [npc.name]!",
 											"Вытянув [npc.her] [npc.hand] вперед, [npc.name] вызывает взрыв очищающей магической энергии на [npc.herself]!",
 											"Вытянув [npc.her] [npc.hand] вперед, [npc.name] вызывает на вас взрыв очищающей магической энергии!",
-											"Вытянув [npc.her] [npc.hand] вперед, [npc.name] вызывает взрыв очищающей арканной энергии на [npc2.name]!")
+                            "Вытянув [npc.her] [npc.hand] вперед, [npc.name] вызывает взрыв очищающей магической энергии на [npc2.name]!")
 								);
 
 			descriptionSB.append(UtilText.parse(this.getPreferredTarget(caster, enemies, allies),
@@ -1921,7 +1912,7 @@ public enum Spell {
 				List<AbstractStatusEffect> effectsToRemove = new ArrayList<>();
 				// Remove status effects from ally:
 				for(AbstractStatusEffect se : target.getStatusEffects()) {
-					if(se.isCombatEffect() && ((se.getBeneficialStatus()==EffectBenefit.BENEFICIAL && !caster.hasSpellUpgrade(SpellUpgrade.CLEANSE_1)) || se.getBeneficialStatus()!=EffectBenefit.BENEFICIAL)) {
+					if(se.isCombatEffect() && (se.getBeneficialStatus() != EffectBenefit.BENEFICIAL || !caster.hasSpellUpgrade(SpellUpgrade.CLEANSE_1))) {
 						effectsToRemove.add(se);
 					}
 				}
@@ -2319,8 +2310,8 @@ public enum Spell {
 											"",
 											"Черпая огромную силу из своей магической ауры, вы проецируете слова самой Лилит в разум [npc.name], приказывая [npc.herHim] подчиниться.",
 											"",
-											"Черпая огромную силу из [npc.her] арканной ауры, [npc.name] проецирует слова самой Лилит в ваш разум, приказывая вам подчиниться!",
-											"Черпая огромную силу из арканной ауры [npc1.her], [npc1.name] проецирует слова самой Лилит в разум [npc2.namePos], приказывая [npc2.herHim] подчиниться!"));
+                    "Черпая огромную силу из [npc.her] магической ауры, [npc.name] проецирует слова самой Лилит в ваш разум, приказывая вам подчиниться!",
+                    "Черпая огромную силу из магической ауры [npc1.her], [npc1.name] проецирует слова самой Лилит в разум [npc2.namePos], приказывая [npc2.herHim] подчиниться!"));
 			
 			// If attack hits, apply damage and effects:
 			if (isHit) {
@@ -2406,7 +2397,7 @@ public enum Spell {
 				return new Value<>(false, UtilText.parse(owner, "Во время боя заклинания можно произносить только как боевое движение!"));
 				
 			} else if(!Main.game.isSavedDialogueNeutral()
-					&& (Main.game.getCurrentDialogueNode()!=SpellManagement.CHARACTER_SPELLS_ARCANE?false:SpellManagement.getDialogueReturn().getDialogueNodeType()!=DialogueNodeType.OCCUPANT_MANAGEMENT)) {
+					&& (Main.game.getCurrentDialogueNode() == SpellManagement.CHARACTER_SPELLS_ARCANE && SpellManagement.getDialogueReturn().getDialogueNodeType() != DialogueNodeType.OCCUPANT_MANAGEMENT)) {
 				return new Value<>(false, "Заклинания можно произносить только в нейтральной сцене!");
 				
 			} else if(owner.getMana()<this.getModifiedCost(owner)) {
@@ -2448,7 +2439,7 @@ public enum Spell {
 											"[npc.speech(Пусть магическая сила станет моей, а сила внутри меня высвободится! Сам дух магии, ваш [npc.master] призывает! Повинуйся и будь призван, [npc2.name]!)] "))
 										:"")
 								+ (caster.isPlayer()
-									?"Вспышкой фиолетовой магической молнии вы привязываете своего элементаля, [npc2.name], к школе Аркана!"
+                                        ? "Вспышкой фиолетовой магической молнии вы привязываете своего элементаля, [npc2.name], к школе чистой магии!"
 									:"Вспышкой фиолетовой магической молнии [npc1.name] привязывает [npc1.her] элементаля, [npc2.name], к школе чистой магии!")));
 				
 			} else {
@@ -2522,7 +2513,7 @@ public enum Spell {
 										"",
 										"Сконцентрировавшись на магической силе, заключенной в палке вашей метлы, вы вызываете мощную печать, которая задерживает [npc.name] на месте!",
 										"",
-										"Сконцентрировавшись на арканной силе, заключенной в палке [npc.her] метлы, [npc.name] вызывает мощную печать, которая заманивает вас в ловушку!",
+                    "Сконцентрировавшись на магической силе, заключенной в палке [npc.her] метлы, [npc.name] вызывает мощную печать, которая заманивает вас в ловушку!",
 										"Сконцентрировавшись на магической силе, заключенной в палке метлы [npc1.her], [npc1.name] создает мощную печать, которая задерживает [npc2.name] на месте!"));
 
 			descriptionSB.append(getDamageDescription(caster, target, 0, isHit, isCritical));
@@ -2635,7 +2626,7 @@ public enum Spell {
 										"",
 										"Сконцентрировав огромную магическую силу в своей косе, вы вонзаетесь в землю под [npc.namePos] [npc.feet], раскалывая землю и вызывая ядовитые испарения!",
 										"",
-										"Концентрируясь на огромной арканной силе, заключенной в [npc.her] косе, [npc.name] вонзает ее в землю под вашими [pc.feet], раскалывая землю и вызывая ядовитые испарения!",
+                    "Концентрируясь на огромной магической силе, заключенной в [npc.her] косе, [npc.name] вонзает ее в землю под вашими [pc.feet], раскалывая землю и вызывая ядовитые испарения!",
 										"Концентрируясь на огромной магической силе, заключенной в [npc.her] косе, [npc.name] вонзает ее в землю под [npc2.namePos] [npc2.feet], раскалывая землю и вызывая ядовитые испарения!"));
 
 			descriptionSB.append(getDamageDescription(caster, target, damage, isHit, isCritical));
@@ -2667,7 +2658,7 @@ public enum Spell {
 			false,
 			"Разряд молнии",
 			"arcane_lightning_sphere_discharge",
-			"Почерпнув небольшое количество ауры от своего владельца, шар арканной молнии может выпустить вспышку пробуждающей магической молнии, поражающей всех, [style.colorBad(включая заклинателя)] кто находится в непосредственной близости от него.",
+            "Почерпнув небольшое количество ауры от своего владельца, шар магической молнии может выпустить вспышку пробуждающей магической молнии, поражающей всех, [style.colorBad(включая заклинателя)] кто находится в непосредственной близости от него.",
 			10,
 			DamageVariance.MEDIUM,
 			50,
@@ -2803,11 +2794,11 @@ public enum Spell {
 			descriptionSB.append(getCastDescription(caster, target,
 											Util.newArrayListOfValues(
 													"Запечатанная на бесчисленные тысячелетия, эта безграничная космическая сила теперь будет высвобождена! Станьте свидетелем магического водоворота, который я вызову, а затем покоритесь своей судьбе в качестве моей похотливой марионетки!"),
-										"Направляя свою ауру в магический шар молний, вы заставляете его высвободить свою силу в виде всемогущего разряда молнии!",
-										"Направляя свою ауру в магический шар молний, вы заставляете его высвободить свою силу в виде всемогущего разряда молнии!",
-										"Направляя [npc.her] ауру в шар арканной молнии, [npc.name] высвобождает его силу в виде всемогущего разряда молнии!",
-										"Направляя [npc.her] ауру в шар арканной молнии, [npc.name] высвобождает его силу в виде всемогущего разряда молнии!",
-										"Направляя [npc.her] ауру в шар арканной молнии, [npc.name] высвобождает его силу в виде всемогущего разряда молнии!"));
+                    "Направляя свою ауру в шар магической молний, вы заставляете его высвободить свою силу в виде всемогущего разряда молнии!",
+                    "Направляя свою ауру в шар магической молний, вы заставляете его высвободить свою силу в виде всемогущего разряда молнии!",
+                    "Направляя [npc.her] ауру в шар магической молнии, [npc.name] высвобождает его силу в виде всемогущего разряда молнии!",
+                    "Направляя [npc.her] ауру в шар магической молнии, [npc.name] высвобождает его силу в виде всемогущего разряда молнии!",
+                    "Направляя [npc.her] ауру в шар магической молнии, [npc.name] высвобождает его силу в виде всемогущего разряда молнии!"));
 			
 			// If attack hits, apply damage. Status effect always applies.:
 			if (isHit) {
@@ -2998,7 +2989,7 @@ public enum Spell {
 		}
 	};
 	
-	private static Map<SpellSchool, List<Spell>> spellsFromSchoolMap = new HashMap<>();
+	private static final Map<SpellSchool, List<Spell>> spellsFromSchoolMap = new HashMap<>();
 	
 	static {
 		for(SpellSchool school : SpellSchool.values()) {
@@ -3014,7 +3005,7 @@ public enum Spell {
 	}
 	
 	
-	private static StringBuilder descriptionSB = new StringBuilder();
+	private static final StringBuilder descriptionSB = new StringBuilder();
 	
 	protected static Map<Integer, List<TreeEntry<SpellSchool, SpellUpgrade>>> spellStealUpgradeTree;
 	protected static Map<Integer, List<TreeEntry<SpellSchool, SpellUpgrade>>> soothingWatersUpgradeTree;
@@ -3052,45 +3043,45 @@ public enum Spell {
 	}
 	
 	
-	private boolean forbiddenSpell;
-	private SpellSchool spellSchool;
-	private SpellType type;
+	private final boolean forbiddenSpell;
+	private final SpellSchool spellSchool;
+	private final SpellType type;
 	protected DamageType damageType;
-	private boolean beneficial;
+	private final boolean beneficial;
 	
-	private String name;
-	private String description;
+	private final String name;
+	private final String description;
 	
 	protected int damage;
 	protected int spellCost;
 	protected DamageVariance damageVariance;
-	private Map<AbstractStatusEffect, Integer> statusEffects;
+	private final Map<AbstractStatusEffect, Integer> statusEffects;
 	
-	private List<SpellUpgrade> upgradeList;
-	private Map<Integer, List<TreeEntry<SpellSchool, SpellUpgrade>>> spellUpgradeTree;
+	private final List<SpellUpgrade> upgradeList;
+	private final Map<Integer, List<TreeEntry<SpellSchool, SpellUpgrade>>> spellUpgradeTree;
 	
-	private HashMap<AbstractAttribute, Integer> attributeModifiers;
-	private List<String> extraEffects;
-	private List<String> modifiersList;
+	private final HashMap<AbstractAttribute, Integer> attributeModifiers;
+	private final List<String> extraEffects;
+	private final List<String> modifiersList;
 
-	private String pathName;
+	private final String pathName;
 	private String SVGString;
 
-	private Spell(boolean forbiddenSpell,
-			SpellSchool spellSchool,
-			SpellType type,
-			DamageType damageType,
-			boolean beneficial,
-			String name,
-			String pathName,
-			String description,
-			int damage,
-			DamageVariance damageVariance,
-			int spellCost,
-			Map<AbstractStatusEffect, Integer> statusEffects,
-			List<SpellUpgrade> upgradeList,
-			HashMap<AbstractAttribute, Integer> attributeModifiers,
-			List<String> extraEffects) {
+	Spell(boolean forbiddenSpell,
+          SpellSchool spellSchool,
+          SpellType type,
+          DamageType damageType,
+          boolean beneficial,
+          String name,
+          String pathName,
+          String description,
+          int damage,
+          DamageVariance damageVariance,
+          int spellCost,
+          Map<AbstractStatusEffect, Integer> statusEffects,
+          List<SpellUpgrade> upgradeList,
+          HashMap<AbstractAttribute, Integer> attributeModifiers,
+          List<String> extraEffects) {
 		
 		this.forbiddenSpell = forbiddenSpell;
 		
@@ -3342,7 +3333,7 @@ public enum Spell {
 					}
 				}
 			}
-			if(damageCostDescriptionSB.toString().toString().equals("<br/>")) {
+			if(damageCostDescriptionSB.toString().equals("<br/>")) {
 				return "";
 			}
 		
@@ -3468,10 +3459,10 @@ public enum Spell {
 	
 	private static final int ROWS = 3;
 	
-	private static StringBuilder treeSB = new StringBuilder();
-	private static StringBuilder spellSB = new StringBuilder();
-	private static StringBuilder lineSB = new StringBuilder();
-	private static StringBuilder entrySB = new StringBuilder();
+	private static final StringBuilder treeSB = new StringBuilder();
+	private static final StringBuilder spellSB = new StringBuilder();
+	private static final StringBuilder lineSB = new StringBuilder();
+	private static final StringBuilder entrySB = new StringBuilder();
 	
 
 	public static String getSpellMiscTreeDisplay(GameCharacter character, GameCharacter target) {

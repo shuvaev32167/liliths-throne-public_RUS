@@ -1,14 +1,5 @@
 package com.lilithsthrone.game.character.persona;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.w3c.dom.Document;
-
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.race.AbstractRace;
@@ -17,6 +8,14 @@ import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
+import org.w3c.dom.Document;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -26,7 +25,7 @@ import com.lilithsthrone.utils.Util;
 public class Name {
 	// Some help from behindthename.com's name lists to find unusual forms and/or same-letter names.
 	// Name etymologies / explanations omitted to comply with their terms of use about redistributing their article contents.
-	private static List<NameTriplet> human = (Util.newArrayListOfValues(
+	private static final List<NameTriplet> human = (Util.newArrayListOfValues(
 					new NameTriplet("Александр", "Алекс", "Александрия"),
 					new NameTriplet("Алексий", "Алекс", "Алексия"),
 					new NameTriplet("Алекс", "Алекс", "Алекс"),
@@ -177,7 +176,7 @@ new NameTriplet("Нодар", "Нодо", "Нодари"),
 new NameTriplet("Торник", "Торно", "Торника")
 	));
 	
-	private static List<NameTriplet> equine = (Util.newArrayListOfValues(
+	private static final List<NameTriplet> equine = (Util.newArrayListOfValues(
 					new NameTriplet("Аква", "Аква", "Аква"),
 					
 					new NameTriplet("Брэмбл", "Брэмбл", "Брэмбл"),
@@ -207,7 +206,7 @@ new NameTriplet("Торник", "Торно", "Торника")
 					new NameTriplet("Вайлдлайт", "Вайлдлайт", "Вайлдлайт")));
 	
 	// Similar to equine names
-	private static List<NameTriplet> reindeer = (Util.newArrayListOfValues(
+	private static final List<NameTriplet> reindeer = (Util.newArrayListOfValues(
 			
 			new NameTriplet("Дэшер", "Дэшер", "Дэшер"),
 			new NameTriplet("Дэнсер", "Дэнсер", "Дэнсер"),
@@ -249,7 +248,7 @@ new NameTriplet("Торник", "Торно", "Торника")
 	// No offence if your name is on here... x_x
 	// Significantly modified with help from behindthename.com. (No more infinite Carls!)
 	// Code from later on edited a bit to throw some of these names onto other NPCs.
-	private static List<NameTriplet> prostitute = (Util.newArrayListOfValues(
+	private static final List<NameTriplet> prostitute = (Util.newArrayListOfValues(
 					new NameTriplet("Арло", "Арден", "Арлин"),
 					new NameTriplet("Амброуз", "Эмбер", "Эмбер"),
 					new NameTriplet("Август", "Обри", "Осень"),
@@ -659,16 +658,16 @@ new NameTriplet("Торник", "Торно", "Торника")
 "Юи", "Юкимори", "Юкитомо", "Юкияма",
 "Юкидзомэ", "Юми", "Юума", "Дзабацу"};
 	
-	private static String[] lilinNames = new String[] {
+	private static final String[] lilinNames = new String[] {
 			"Лавиния",
 			"Ласиэль",
-			"Лисиэт",
+			"Лиссиет",
 			"Лианна",
 			"Лилиша",
 			"Линикси",
 			"Лилория"};
 	
-	private static Map<String, List<NameTriplet>> racialNames = new HashMap<>();
+	private static final Map<String, List<NameTriplet>> racialNames = new HashMap<>();
 	
 	static {
 		for(AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {

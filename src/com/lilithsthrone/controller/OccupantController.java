@@ -1,11 +1,5 @@
 package com.lilithsthrone.controller;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.w3c.dom.events.EventTarget;
-
 import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInformationEventListener;
 import com.lilithsthrone.game.character.FluidStored;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -22,11 +16,7 @@ import com.lilithsthrone.game.dialogue.utils.BodyChanging;
 import com.lilithsthrone.game.dialogue.utils.InventoryInteraction;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.occupantManagement.MilkingRoom;
-import com.lilithsthrone.game.occupantManagement.slave.SlaveJob;
-import com.lilithsthrone.game.occupantManagement.slave.SlaveJobHours;
-import com.lilithsthrone.game.occupantManagement.slave.SlaveJobSetting;
-import com.lilithsthrone.game.occupantManagement.slave.SlavePermission;
-import com.lilithsthrone.game.occupantManagement.slave.SlavePermissionSetting;
+import com.lilithsthrone.game.occupantManagement.slave.*;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
@@ -37,6 +27,11 @@ import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.AbstractPlaceUpgrade;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
+import org.w3c.dom.events.EventTarget;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * @since 0.4.6.4
@@ -47,9 +42,9 @@ public class OccupantController {
 	public static void initRoomManagerListeners() {
 		for (Cell c : OccupantManagementDialogue.getImportantCells()) {
 			if (MainController.document.getElementById(c.getId()+"_PRESENT_DISABLED") != null) {
-				MainController.addTooltipListeners(c.getId()+"_PRESENT_DISABLED", new TooltipInformationEventListener().setInformation("Manage Room", "You are not able to manage this room!"));
+                MainController.addTooltipListeners(c.getId() + "_PRESENT_DISABLED", new TooltipInformationEventListener().setInformation("Управление комнатой", "You are not able to manage this room!"));
 			} else if (MainController.document.getElementById(c.getId()+"_DISABLED") != null) {
-				MainController.addTooltipListeners(c.getId()+"_DISABLED", new TooltipInformationEventListener().setInformation("Manage Room", "You are not able to manage this room!"));
+                MainController.addTooltipListeners(c.getId() + "_DISABLED", new TooltipInformationEventListener().setInformation("Управление комнатой", "You are not able to manage this room!"));
 			} else if (MainController.document.getElementById(c.getId()+"_PRESENT") != null) {
 				((EventTarget) MainController.document.getElementById(c.getId()+"_PRESENT")).addEventListener("click", e->{
 					Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()) {
@@ -64,7 +59,7 @@ public class OccupantController {
 						}
 					});
 				}, false);
-				MainController.addTooltipListeners(c.getId()+"_PRESENT", new TooltipInformationEventListener().setInformation("Manage Room", "Open this room's management screen."));
+                MainController.addTooltipListeners(c.getId() + "_PRESENT", new TooltipInformationEventListener().setInformation("Управление комнатой", "Open this room's management screen."));
 			} else if (MainController.document.getElementById(c.getId()) != null) {
 				((EventTarget) MainController.document.getElementById(c.getId())).addEventListener("click", e->{
 					Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()) {
@@ -79,7 +74,7 @@ public class OccupantController {
 						}
 					});
 				}, false);
-				MainController.addTooltipListeners(c.getId(), new TooltipInformationEventListener().setInformation("Manage Room", "Open this room's management screen."));
+                MainController.addTooltipListeners(c.getId(), new TooltipInformationEventListener().setInformation("Управление комнатой", "Open this room's management screen."));
 			}
 		}
 	}
@@ -111,15 +106,15 @@ public class OccupantController {
 							});
 				}, false);
 				MainController.addTooltipListeners(id,
-						new TooltipInformationEventListener().setInformation("Purchase Modification",
-								"This will cost: "+UtilText.formatAsMoney(placeUpgrade.getInstallCost())
+						new TooltipInformationEventListener().setInformation("Купить модификацию",
+								"Это будет стоить:" + UtilText.formatAsMoney(placeUpgrade.getInstallCost())
 										+"<br/>"+OccupantManagementDialogue.getPurchaseAvailabilityTooltipText(OccupantManagementDialogue.cellToInspect, placeUpgrade)));
 			}
 			id = PlaceUpgrade.getIdFromPlaceUpgrade(placeUpgrade)+"_BUY_DISABLED";
 			if (MainController.document.getElementById(id) != null) {
 				MainController.addTooltipListeners(id,
-						new TooltipInformationEventListener().setInformation("Purchase Modification",
-								"This will cost: "+UtilText.formatAsMoney(placeUpgrade.getInstallCost())
+						new TooltipInformationEventListener().setInformation("Купить модификацию",
+								"Это будет стоить:" + UtilText.formatAsMoney(placeUpgrade.getInstallCost())
 										+"<br/>"+OccupantManagementDialogue.getPurchaseAvailabilityTooltipText(OccupantManagementDialogue.cellToInspect, placeUpgrade)));
 			}
 			id = PlaceUpgrade.getIdFromPlaceUpgrade(placeUpgrade)+"_SELL";
@@ -134,17 +129,17 @@ public class OccupantController {
 					});
 				}, false);
 				MainController.addTooltipListeners(id,
-						new TooltipInformationEventListener().setInformation("Remove Modification",
-								"This will cost: "+UtilText.formatAsMoney(placeUpgrade.getRemovalCost())
+						new TooltipInformationEventListener().setInformation("Удалить модификацию",
+								"Это будет стоить:" + UtilText.formatAsMoney(placeUpgrade.getRemovalCost())
 										+"<br/>"+OccupantManagementDialogue.getPurchaseAvailabilityTooltipText(OccupantManagementDialogue.cellToInspect, placeUpgrade)));
 			}
 			id = PlaceUpgrade.getIdFromPlaceUpgrade(placeUpgrade)+"_SELL_DISABLED";
 			if (MainController.document.getElementById(id) != null) {
 				MainController.addTooltipListeners(id,
-						new TooltipInformationEventListener().setInformation("Remove Modification",
+						new TooltipInformationEventListener().setInformation("Удалить модификацию",
 								(!placeUpgrade.getRemovalAvailability(OccupantManagementDialogue.cellToInspect).getKey()
 										?placeUpgrade.getRemovalAvailability(OccupantManagementDialogue.cellToInspect).getValue()
-										:"This will cost: "+UtilText.formatAsMoney(placeUpgrade.getRemovalCost())
+										: "Это будет стоить:" + UtilText.formatAsMoney(placeUpgrade.getRemovalCost())
 										+"<br/>"+OccupantManagementDialogue.getPurchaseAvailabilityTooltipText(OccupantManagementDialogue.cellToInspect, placeUpgrade))));
 			}
 		}
@@ -160,7 +155,7 @@ public class OccupantController {
 								|| Main.mainController.getWebEngine().getDocument().getElementById("hiddenFieldName").getTextContent().length()>32;
 					}
 					if (!unsuitableName) {
-						Main.game.setContent(new Response("Rename Room", "Rename this room to whatever you've entered in the text box.", Main.game.getCurrentDialogueNode()) {
+						Main.game.setContent(new Response("Переименовать комнату", "Переименовать эту комнату так, как указано в текстовом поле.", Main.game.getCurrentDialogueNode()) {
 							@Override
 							public void effects() {
 								OccupantManagementDialogue.cellToInspect.getPlace().setName(Main.mainController.getWebEngine().getDocument().getElementById("hiddenFieldName").getTextContent());
@@ -307,11 +302,11 @@ public class OccupantController {
 						
 					}, false);
 				}
-				String verb = "Drink";
+				String verb = "Выпить";
 				String description;
 				
 				if (MilkingRoom.getTargetedCharacter().isPlayer()) {
-					description = "Drink "+Units.fluid(milkAmount)+" of the "+fluidName+".";
+					description = "Выпить " + Units.fluid(milkAmount) + " of the " + fluidName + ".";
 					if (area.getKey() != CoverableArea.MOUTH) {
 						verb = "Pump";
 						description = "Pump "+Units.fluid(milkAmount)+" of the "+fluidName+" into your "+area.getKey().getName()+".";
@@ -358,7 +353,7 @@ public class OccupantController {
 				int finalI = i; // Lambda requirement
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
 					OccupantManagementDialogue.setDayNumber(Main.game.getDayNumber()-finalI);
-					Main.game.setContent(new Response("Rename", "", Main.game.getCurrentDialogueNode()));
+					Main.game.setContent(new Response("Переименовать", "", Main.game.getCurrentDialogueNode()));
 				}, false);
 			}
 		}

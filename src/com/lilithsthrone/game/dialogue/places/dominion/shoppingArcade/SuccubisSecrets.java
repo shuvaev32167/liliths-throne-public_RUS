@@ -1,32 +1,8 @@
 package com.lilithsthrone.game.dialogue.places.dominion.shoppingArcade;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.Antenna;
-import com.lilithsthrone.game.character.body.Arm;
-import com.lilithsthrone.game.character.body.Ass;
-import com.lilithsthrone.game.character.body.BodyPartInterface;
-import com.lilithsthrone.game.character.body.Breast;
-import com.lilithsthrone.game.character.body.BreastCrotch;
-import com.lilithsthrone.game.character.body.CoverableArea;
-import com.lilithsthrone.game.character.body.Eye;
-import com.lilithsthrone.game.character.body.Face;
-import com.lilithsthrone.game.character.body.Hair;
-import com.lilithsthrone.game.character.body.Horn;
-import com.lilithsthrone.game.character.body.Penis;
-import com.lilithsthrone.game.character.body.Tail;
-import com.lilithsthrone.game.character.body.Tentacle;
-import com.lilithsthrone.game.character.body.Torso;
-import com.lilithsthrone.game.character.body.Vagina;
-import com.lilithsthrone.game.character.body.Wing;
+import com.lilithsthrone.game.character.body.*;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
@@ -62,6 +38,9 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.66
@@ -116,22 +95,19 @@ public class SuccubisSecrets {
 					name = "vagina";
 				}
 				
-				boolean addBpi = true;
+				boolean addBpi = (!(bp instanceof Antenna) || target.hasAntennae())
+                        && (!(bp instanceof Arm) || target.hasArms())
+                        && (!(bp instanceof Breast) || target.hasNipples())
+                        && (!(bp instanceof BreastCrotch) || target.hasBreastsCrotch())
+                        && (!(bp instanceof Hair) || target.hasHair())
+                        && (!(bp instanceof Horn) || target.hasHorns())
+                        && (!(bp instanceof Penis) || target.hasPenisIgnoreDildo())
+                        && (!(bp instanceof Tail) || target.hasTail())
+                        && (!(bp instanceof Tentacle) || target.hasTentacle())
+                        && (!(bp instanceof Vagina) || target.hasVagina())
+                        && (!(bp instanceof Wing) || target.hasWings());
 				// Check for parts not owned:
-				if((bp instanceof Antenna && !target.hasAntennae())
-						|| (bp instanceof Arm && !target.hasArms())
-						|| (bp instanceof Breast && !target.hasNipples())
-						|| (bp instanceof BreastCrotch && !target.hasBreastsCrotch())
-						|| (bp instanceof Hair && !target.hasHair())
-						|| (bp instanceof Horn && !target.hasHorns())
-						|| (bp instanceof Penis && !target.hasPenisIgnoreDildo())
-						|| (bp instanceof Tail && !target.hasTail())
-						|| (bp instanceof Tentacle && !target.hasTentacle())
-						|| (bp instanceof Vagina && !target.hasVagina())
-						|| (bp instanceof Wing && !target.hasWings())) {
-					addBpi = false;
-				}
-				AbstractRace race = bp.getType().getRace();
+                AbstractRace race = bp.getType().getRace();
 				if(addBpi) {
 					AbstractBodyCoveringType coveringType = bp.getBodyCoveringType(target);
 					if(bp instanceof Ass) {
@@ -323,10 +299,10 @@ public class SuccubisSecrets {
 			if(responseTab==0) {
 				if (index == 1) {
 					if(!Main.game.isExtendedWorkTime()) {
-						return new Response("Enter", "'Succubi's Secrets' is currently closed, so you'll have to come back during opening hours if you wanted to take a look inside.", null);
+                        return new Response("Вход", "'Succubi's Secrets' is currently closed, so you'll have to come back during opening hours if you wanted to take a look inside.", null);
 						
 					} else if(Main.game.getDialogueFlags().values.contains(DialogueFlagValue.kateIntroduced)) {
-						return new Response("Enter", "Step inside Succubi's Secrets.", SHOP_BEAUTY_SALON_ENTER) {
+                        return new Response("Вход", "Step inside Succubi's Secrets.", SHOP_BEAUTY_SALON_ENTER) {
 							@Override
 							public void effects() {
 								BodyChanging.setTarget(Main.game.getPlayer());
@@ -334,7 +310,7 @@ public class SuccubisSecrets {
 						};
 						
 					} else {
-						return new Response("Enter", "Step inside Succubi's Secrets.", SHOP_BEAUTY_SALON) {
+                        return new Response("Вход", "Step inside Succubi's Secrets.", SHOP_BEAUTY_SALON) {
 							@Override
 							public void effects() {
 								BodyChanging.setTarget(Main.game.getPlayer());
@@ -346,8 +322,8 @@ public class SuccubisSecrets {
 			return ShoppingArcadeDialogue.getFastTravelResponses(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode SHOP_BEAUTY_SALON = new DialogueNode("Succubi's Secrets", "-", true) {
+
+    public static final DialogueNode SHOP_BEAUTY_SALON = new DialogueNode("Секреты суккубов", "-", true) {
 
 		@Override
 		public String getContent() {
@@ -373,7 +349,7 @@ public class SuccubisSecrets {
 			return null;
 		}
 	};
-	public static final DialogueNode SHOP_BEAUTY_SALON_WAKE = new DialogueNode("Succubi's Secrets", "-", true, true) {
+    public static final DialogueNode SHOP_BEAUTY_SALON_WAKE = new DialogueNode("Секреты суккубов", "-", true, true) {
 		@Override
 		public void applyPreParsingEffects() {
 			getKate().wakeUp();
@@ -407,8 +383,8 @@ public class SuccubisSecrets {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode SHOP_BEAUTY_SALON_WATCH = new DialogueNode("Succubi's Secrets", "-", true, true) {
+
+    public static final DialogueNode SHOP_BEAUTY_SALON_WATCH = new DialogueNode("Секреты суккубов", "-", true, true) {
 		@Override
 		public void applyPreParsingEffects() {
 			getKate().wakeUp();
@@ -442,8 +418,8 @@ public class SuccubisSecrets {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode SHOP_BEAUTY_SALON_NO_THANKS = new DialogueNode("Succubi's Secrets", "-", true, true) {
+
+    public static final DialogueNode SHOP_BEAUTY_SALON_NO_THANKS = new DialogueNode("Секреты суккубов", "-", true, true) {
 
 		@Override
 		public String getContent() {
@@ -463,8 +439,8 @@ public class SuccubisSecrets {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode SHOP_BEAUTY_SALON_ENTER = new DialogueNode("Succubi's Secrets", "-", true) {
+
+    public static final DialogueNode SHOP_BEAUTY_SALON_ENTER = new DialogueNode("Секреты суккубов", "-", true) {
 		@Override
 		public void applyPreParsingEffects() {
 			getKate().wakeUp();
@@ -486,8 +462,8 @@ public class SuccubisSecrets {
 			return getMainResponse(index);
 		}
 	};
-	
-	public static final DialogueNode SHOP_BEAUTY_SALON_MAIN = new DialogueNode("Succubi's Secrets", "-", true) {
+
+    public static final DialogueNode SHOP_BEAUTY_SALON_MAIN = new DialogueNode("Секреты суккубов", "-", true) {
 
 		@Override
 		public String getContent() {
@@ -628,8 +604,8 @@ public class SuccubisSecrets {
 		
 		return null;
 	}
-	
-	public static final DialogueNode SHOP_BEAUTY_SALON_CANDI_PERFUME = new DialogueNode("Succubi's Secrets", "-", true) {
+
+    public static final DialogueNode SHOP_BEAUTY_SALON_CANDI_PERFUME = new DialogueNode("Секреты суккубов", "-", true) {
 
 		@Override
 		public String getContent() {
@@ -699,8 +675,8 @@ public class SuccubisSecrets {
 			return true;
 		}
 	};
-	
-	public static final DialogueNode SHOP_BEAUTY_SALON_HAIR = new DialogueNode("Succubi's Secrets", "-", true) {
+
+    public static final DialogueNode SHOP_BEAUTY_SALON_HAIR = new DialogueNode("Секреты суккубов", "-", true) {
 
 		@Override
 		public String getHeaderContent() {
@@ -736,8 +712,8 @@ public class SuccubisSecrets {
 			return true;
 		}
 	};
-	
-	public static final DialogueNode SHOP_BEAUTY_SALON_SKIN_COLOUR = new DialogueNode("Succubi's Secrets", "-", true) {
+
+    public static final DialogueNode SHOP_BEAUTY_SALON_SKIN_COLOUR = new DialogueNode("Секреты суккубов", "-", true) {
 
 		@Override
 		public String getHeaderContent() {
@@ -783,8 +759,8 @@ public class SuccubisSecrets {
 			return true;
 		}
 	};
-	
-	public static final DialogueNode SHOP_BEAUTY_SALON_EYES = new DialogueNode("Succubi's Secrets", "-", true) {
+
+    public static final DialogueNode SHOP_BEAUTY_SALON_EYES = new DialogueNode("Секреты суккубов", "-", true) {
 
 		@Override
 		public String getHeaderContent() {
@@ -831,8 +807,8 @@ public class SuccubisSecrets {
 			return true;
 		}
 	};
-	
-	public static final DialogueNode SHOP_BEAUTY_SALON_PIERCINGS = new DialogueNode("Succubi's Secrets", "-", true) {
+
+    public static final DialogueNode SHOP_BEAUTY_SALON_PIERCINGS = new DialogueNode("Секреты суккубов", "-", true) {
 
 		@Override
 		public String getHeaderContent() {
@@ -934,8 +910,8 @@ public class SuccubisSecrets {
 			return true;
 		}
 	};
-	
-	public static final DialogueNode SHOP_BEAUTY_SALON_TATTOOS = new DialogueNode("Succubi's Secrets", "-", true) {
+
+    public static final DialogueNode SHOP_BEAUTY_SALON_TATTOOS = new DialogueNode("Секреты суккубов", "-", true) {
 		@Override
 		public String getContent() {
 			UtilText.nodeContentSB.setLength(0);
@@ -982,8 +958,8 @@ public class SuccubisSecrets {
 			return true;
 		}
 	};
-	
-	public static final DialogueNode SHOP_BEAUTY_SALON_TATTOOS_ADD = new DialogueNode("Succubi's Secrets", "-", true) {
+
+    public static final DialogueNode SHOP_BEAUTY_SALON_TATTOOS_ADD = new DialogueNode("Секреты суккубов", "-", true) {
 
 		@Override
 		public String getLabel() {
@@ -1026,7 +1002,7 @@ public class SuccubisSecrets {
 				}
 			
 			} else if(index==2) {
-				return new Response("Save/Load", "Save/Load tattoo presets.", CosmeticsDialogue.TATTOO_SAVE_LOAD) {
+				return new Response("Сохр./Загруз.", "Save/Load tattoo presets.", CosmeticsDialogue.TATTOO_SAVE_LOAD) {
 					@Override
 					public void effects() {
 						CosmeticsDialogue.initTattooSaveLoadDialogue(SHOP_BEAUTY_SALON_TATTOOS_ADD);

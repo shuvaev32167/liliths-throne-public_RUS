@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.sex.sexActions.universal;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.npc.NPC;
@@ -20,6 +17,9 @@ import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.GenericPositioning;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @since 0.2.8
@@ -89,7 +89,7 @@ public class ChairSex {
 			null,
 			SexParticipantType.NORMAL) {
 		
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.STANDING,
 				Util.newArrayListOfValues(
 						SexSlotStanding.STANDING_DOMINANT,
@@ -116,7 +116,7 @@ public class ChairSex {
 		}
 		@Override
 		public String getDescription() {
-			return "Deciding that [npc.she] [npc.verb(want)] to switch into a different position, [npc.name] [npc.verb(get)] [npc2.name] to stand up with [npc.herHim]."
+            return "Deciding that [npc.she] want to switch into a different position, [npc.name] get [npc2.name] to stand up with [npc.herHim]."
 					+ " Now face-to-face with [npc.her] partner, [npc.name] [npc.moansVerb], "
 					+ "[npc.speech(Let's try something else...)]";
 		}
@@ -134,7 +134,7 @@ public class ChairSex {
 			null,
 			SexParticipantType.NORMAL) {
 		
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.SITTING,
 				Util.newArrayListOfValues(SexSlotSitting.PERFORMING_ORAL),
 				Util.newArrayListOfValues(SexSlotSitting.SITTING));
@@ -154,7 +154,7 @@ public class ChairSex {
 		}
 		@Override
 		public String getDescription() {
-			return "Deciding that [npc.she] [npc.verb(want)] to perform oral on [npc2.name], [npc.name] [npc.verb(kneel)] down in front of [npc2.herHim]."
+            return "Deciding that [npc.she] want to perform oral on [npc2.name], [npc.name] kneel down in front of [npc2.herHim]."
 					+ " Bringing [npc.her] mouth up to [npc2.namePos] groin, [npc.she] [npc.moansVerb], "
 					+ "[npc.speech(You just sit back and enjoy this!)]";
 		}
@@ -177,7 +177,7 @@ public class ChairSex {
 			null,
 			SexParticipantType.NORMAL) {
 
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.SITTING,
 				Util.newArrayListOfValues(SexSlotSitting.PERFORMING_ORAL),
 				Util.newArrayListOfValues(SexSlotSitting.SITTING));
@@ -213,7 +213,7 @@ public class ChairSex {
 			null,
 			SexParticipantType.NORMAL) {
 		
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.SITTING,
 				Util.newArrayListOfValues(SexSlotSitting.SITTING),
 				Util.newArrayListOfValues(SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL));
@@ -233,7 +233,7 @@ public class ChairSex {
 		}
 		@Override
 		public String getDescription() {
-			return "Deciding that [npc.she] [npc.verb(want)] to perform oral on [npc2.name], [npc.name] [npc.verb(sit)] down, before getting [npc2.name] to turn around and back up so that [npc2.her] animalistic genitals are in front of [npc.her] [npc.face]."
+            return "Deciding that [npc.she] want to perform oral on [npc2.name], [npc.name] sit down, before getting [npc2.name] to turn around and back up so that [npc2.her] animalistic genitals are in front of [npc.her] [npc.face]."
 					+ " Bringing [npc.her] mouth up to [npc2.namePos] groin, [npc.she] [npc.moansVerb], "
 					+ "[npc.speech(I can't wait to get a taste of you!)]";
 		}
@@ -256,7 +256,7 @@ public class ChairSex {
 			null,
 			SexParticipantType.NORMAL) {
 
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.SITTING,
 				Util.newArrayListOfValues(SexSlotSitting.SITTING),
 				Util.newArrayListOfValues(SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL));
@@ -293,7 +293,7 @@ public class ChairSex {
 			null,
 			SexParticipantType.NORMAL) {
 
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.SITTING,
 				Util.newArrayListOfValues(SexSlotSitting.SITTING),
 				Util.newArrayListOfValues(SexSlotSitting.PERFORMING_ORAL));
@@ -313,7 +313,7 @@ public class ChairSex {
 		}
 		@Override
 		public String getDescription() {
-			return "Deciding that [npc.she] [npc.verb(want)] to get some oral sex, [npc.name] [npc.verb(get)] [npc2.name] to kneel down in front of [npc.herHim]."
+            return "Deciding that [npc.she] want to get some oral sex, [npc.name] get [npc2.name] to kneel down in front of [npc.herHim]."
 					+ " Looking down into [npc2.her] [npc2.eyes], [npc.name] [npc.moansVerb], "
 					+ "[npc.speech(Time to put your mouth to use!)]";
 		}
@@ -336,7 +336,7 @@ public class ChairSex {
 			null,
 			SexParticipantType.NORMAL) {
 
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.SITTING,
 				Util.newArrayListOfValues(SexSlotSitting.SITTING),
 				Util.newArrayListOfValues(SexSlotSitting.PERFORMING_ORAL));
@@ -372,7 +372,7 @@ public class ChairSex {
 			null,
 			SexParticipantType.NORMAL) {
 
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.SITTING,
 				Util.newArrayListOfValues(SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL),
 				Util.newArrayListOfValues(SexSlotSitting.SITTING));
@@ -392,7 +392,7 @@ public class ChairSex {
 		}
 		@Override
 		public String getDescription() {
-			return "Deciding that [npc.she] [npc.verb(want)] to get some oral sex, [npc.name] [npc.verb(stand)] up [npc.verb(turn)] around, before stepping back and presenting [npc.her] animalistic genitals to [npc2.name]."
+            return "Deciding that [npc.she] want to get some oral sex, [npc.name] stand up turn around, before stepping back and presenting [npc.her] animalistic genitals to [npc2.name]."
 					+ " Looking back down over [npc.her] shoulder, [npc.name] [npc.moansVerb], "
 					+ "[npc.speech(Time to put your mouth to use!)]";
 		}
@@ -415,7 +415,7 @@ public class ChairSex {
 			null,
 			SexParticipantType.NORMAL) {
 
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.SITTING,
 				Util.newArrayListOfValues(SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL),
 				Util.newArrayListOfValues(SexSlotSitting.SITTING));
@@ -435,7 +435,7 @@ public class ChairSex {
 		}
 		@Override
 		public String getDescription() {
-			return "[npc.Name] [npc.verb(try)] to stand up and turn around in order to present [npc.her] animalistic genitals to [npc2.namePos] mouth."
+            return "[npc.Name] try to stand up and turn around in order to present [npc.her] animalistic genitals to [npc2.namePos] mouth."
 					+ " As [npc.she] [npc.does] this, [npc.she] [npc.moans], [npc.speech(Please, I want you to use your mouth...)]";
 		}
 		@Override
@@ -452,7 +452,7 @@ public class ChairSex {
 			null,
 			SexParticipantType.NORMAL) {
 
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.SITTING,
 				Util.newArrayListOfValues(SexSlotSitting.SITTING),
 				Util.newArrayListOfValues(SexSlotSitting.SITTING_IN_LAP));
@@ -472,7 +472,7 @@ public class ChairSex {
 		}
 		@Override
 		public String getDescription() {
-			return "[npc.Name] [npc.verb(decide)] to switch positions, and, getting [npc2.name] to stand up, [npc.she] [npc.verb(sit)] down, before pulling [npc2.herHim] down onto [npc.her] lap."
+            return "[npc.Name] decide to switch positions, and, getting [npc2.name] to stand up, [npc.she] sit down, before pulling [npc2.herHim] down onto [npc.her] lap."
 					+ " Looking up into [npc2.her] [npc2.eyes], [npc.she] [npc.moansVerb], "
 					+ "[npc.speech(Good [npc2.girl]!)]";
 		}
@@ -495,7 +495,7 @@ public class ChairSex {
 			null,
 			SexParticipantType.NORMAL) {
 
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.SITTING,
 				Util.newArrayListOfValues(SexSlotSitting.SITTING),
 				Util.newArrayListOfValues(SexSlotSitting.SITTING_IN_LAP));
@@ -531,7 +531,7 @@ public class ChairSex {
 			null,
 			SexParticipantType.NORMAL) {
 
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.SITTING,
 				Util.newArrayListOfValues(SexSlotSitting.SITTING_IN_LAP),
 				Util.newArrayListOfValues(SexSlotSitting.SITTING));
@@ -555,11 +555,11 @@ public class ChairSex {
 		@Override
 		public String getDescription() {
 			if(!Main.sex.getCharacterPerformingAction().isTaur()) {
-				return "[npc.Name] [npc.verb(decide)] to switch positions, and, getting [npc2.name] to sit down, [npc.she] [npc.verb(sit)] down on [npc2.her] lap."
+                return "[npc.Name] decide to switch positions, and, getting [npc2.name] to sit down, [npc.she] sit down on [npc2.her] lap."
 						+ " Looking down into [npc2.her] [npc2.eyes], [npc.she] [npc.moansVerb], "
 						+ "[npc.speech(Good [npc2.girl]!)]";
 			} else {
-				return "[npc.Name] [npc.verb(decide)] to switch positions, and, getting [npc2.name] to sit down, [npc.she] [npc.verb(stand)] up, [npc.verb(turn)] around, and [npc.verb(lower)] [npc.her] animalistic rear end down into [npc2.namePos] lap."
+                return "[npc.Name] decide to switch positions, and, getting [npc2.name] to sit down, [npc.she] stand up, turn around, and lower [npc.her] animalistic rear end down into [npc2.namePos] lap."
 						+ " Looking back down over [npc.her] shoulder, [npc.name] then [npc.moansVerb], "
 						+ "[npc.speech(Time to give you a ride!)]";
 			}
@@ -583,7 +583,7 @@ public class ChairSex {
 			null,
 			SexParticipantType.NORMAL) {
 
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.SITTING,
 				Util.newArrayListOfValues(SexSlotSitting.SITTING_IN_LAP),
 				Util.newArrayListOfValues(SexSlotSitting.SITTING));
@@ -618,7 +618,7 @@ public class ChairSex {
 			null,
 			SexParticipantType.NORMAL) {
 
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.SITTING,
 				Util.newArrayListOfValues(SexSlotSitting.SITTING_BETWEEN_LEGS),
 				Util.newArrayListOfValues(SexSlotSitting.SITTING));
@@ -639,7 +639,7 @@ public class ChairSex {
 		}
 		@Override
 		public String getDescription() {
-			return "[npc.Name] [npc.verb(decide)] to switch positions, and, with [npc2.name] sitting down, [npc.she] [npc.verb(move)] to "
+            return "[npc.Name] decide to switch positions, and, with [npc2.name] sitting down, [npc.she] move to "
 						+(SexSlotSitting.SITTING_BETWEEN_LEGS.isStanding(Main.sex.getCharacterPerformingAction())?"stand":"kneel")+" between [npc2.her] [npc2.legs]."
 					+ " Looking down into [npc2.her] [npc2.eyes], [npc.she] [npc.moansVerb], "
 					+ "[npc.speech(Time to give you a good fuck!)]";
@@ -663,7 +663,7 @@ public class ChairSex {
 			null,
 			SexParticipantType.NORMAL) {
 
-		private PositioningData data = new PositioningData(
+		private final PositioningData data = new PositioningData(
 				SexPosition.SITTING,
 				Util.newArrayListOfValues(SexSlotSitting.SITTING_BETWEEN_LEGS),
 				Util.newArrayListOfValues(SexSlotSitting.SITTING));
@@ -735,15 +735,15 @@ public class ChairSex {
 				if(isHappy) {
 					switch(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())) {
 						case DOM_ROUGH:
-							return "Roughly pushing [npc2.name] down, [npc.name] [npc.verb(straddle)] [npc2.her] lap, leaning forwards to glare into [npc2.her] eyes as [npc.she] [npc.moansVerb],"
+                            return "Roughly pushing [npc2.name] down, [npc.name] straddle [npc2.her] lap, leaning forwards to glare into [npc2.her] eyes as [npc.she] [npc.moansVerb],"
 									+ " [npc.speech(Alright, slut, I'll take you for a ride!)]";
 						default:
-							return "Pushing [npc2.name] down, [npc.name] [npc.steps] forwards and [npc.verb(straddle)] [npc2.her] lap, leaning forwards to gaze into [npc2.her] eyes as [npc.she] [npc.moansVerb],"
+                            return "Pushing [npc2.name] down, [npc.name] [npc.steps] forwards and straddle [npc2.her] lap, leaning forwards to gaze into [npc2.her] eyes as [npc.she] [npc.moansVerb],"
 									+ " [npc.speech(Sure, I'll take you for a ride...)]";
 					}
 					
 				} else {
-					return "Reaching down to grab [npc2.name] by the [npc2.arm], [npc.name] [npc.verb(pull)] [npc2.herHim] back into [npc2.her] old position as [npc.she] angrily scolds [npc2.herHim], "
+                    return "Reaching down to grab [npc2.name] by the [npc2.arm], [npc.name] pull [npc2.herHim] back into [npc2.her] old position as [npc.she] angrily scolds [npc2.herHim], "
 							+ "[npc.speech(What do you think you're doing?! Don't you <i>dare</i> try that again!)]";
 				}
 				
@@ -752,17 +752,17 @@ public class ChairSex {
 					if(isHappy) {
 						switch(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())) {
 							case DOM_ROUGH:
-								return "Sitting down, [npc.name] [npc.verb(grab)] hold of [npc2.namePos] [npc2.arm], and with a sharp tug,"
-											+ " [npc.she] [npc.verb(pull)] [npc2.herHim] down so that [npc2.sheIs] straddling [npc.her] lap. Leaning forwards to glare into [npc2.her] eyes, [npc.name] [npc.moansVerb],"
+                                return "Sitting down, [npc.name] grab hold of [npc2.namePos] [npc2.arm], and with a sharp tug,"
+                                        + " [npc.she] pull [npc2.herHim] down so that [npc2.sheIs] straddling [npc.her] lap. Leaning forwards to glare into [npc2.her] eyes, [npc.name] [npc.moansVerb],"
 										+ " [npc.speech(Alright, slut, you'd better make this good!)]";
 							default:
-								return "Sitting down, [npc.name] [npc.verb(take)] hold of [npc2.namePos] [npc2.arm], and with a firm tug,"
-											+ " [npc.she] [npc.verb(pull)] [npc2.herHim] down so that [npc2.sheIs] straddling [npc.her] lap. Leaning forwards to gaze into [npc2.her] eyes, [npc.name] [npc.moansVerb],"
+                                return "Sitting down, [npc.name] take hold of [npc2.namePos] [npc2.arm], and with a firm tug,"
+                                        + " [npc.she] pull [npc2.herHim] down so that [npc2.sheIs] straddling [npc.her] lap. Leaning forwards to gaze into [npc2.her] eyes, [npc.name] [npc.moansVerb],"
 										+ " [npc.speech(Good [npc2.girl]...)]";
 						}
 						
 					} else {
-						return "Reaching down to grab [npc2.name] by the [npc2.arm], [npc.name] [npc.verb(pull)] [npc2.herHim] back into [npc2.her] old position as [npc.she] angrily scolds [npc2.herHim], "
+                        return "Reaching down to grab [npc2.name] by the [npc2.arm], [npc.name] pull [npc2.herHim] back into [npc2.her] old position as [npc.she] angrily scolds [npc2.herHim], "
 								+ "[npc.speech(What do you think you're doing?! Don't you <i>dare</i> try that again!)]";
 					}
 					
@@ -780,7 +780,7 @@ public class ChairSex {
 						}
 						
 					} else {
-						return "Reaching down to grab [npc2.name] by the [npc2.arm], [npc.name] [npc.verb(pull)] [npc2.herHim] back into [npc2.her] old position as [npc.she] angrily scolds [npc2.herHim], "
+                        return "Reaching down to grab [npc2.name] by the [npc2.arm], [npc.name] pull [npc2.herHim] back into [npc2.her] old position as [npc.she] angrily scolds [npc2.herHim], "
 								+ "[npc.speech(What do you think you're doing?! Don't you <i>dare</i> try that again!)]";
 					}
 					
@@ -790,7 +790,7 @@ public class ChairSex {
 							case DOM_ROUGH:
 								if(Main.sex.getCharacterPerformingAction().hasLegs()) {
 									return "Letting [npc2.name] finish [npc2.her] manoeuvre, [npc.name] sits down, before lifting [npc.her] [npc.legs], wrapping them around [npc2.namePos] lower back, and roughly forcing [npc2.herHim] forwards."
-											+ " Glaring up at [npc2.herHim], [npc.name] then spreads [npc.her] [npc.legs] and [npc.moansVerb],"
+                                            + " Glaring up at [npc2.herHim], [npc.name] then spreads [npc.her] [npc.legs] и [npc.moansVerb],"
 											+ " [npc.speech(Alright, slut, you'd better make this good!)]";
 								} else {
 									return "Letting [npc2.name] finish [npc2.her] manoeuvre, [npc.name] sits down, before presenting [npc.her] groin to [npc2.name]."
@@ -800,7 +800,7 @@ public class ChairSex {
 							default:
 								if(Main.sex.getCharacterPerformingAction().hasLegs()) {
 									return "Letting [npc2.name] finish [npc2.her] manoeuvre, [npc.name] sits down, before lifting [npc.her] [npc.legs], wrapping them around [npc2.namePos] lower back, and forcing [npc2.herHim] forwards."
-											+ " Smiling up at [npc2.herHim], [npc.name] then spreads [npc.her] [npc.legs] and [npc.moansVerb],"
+                                            + " Smiling up at [npc2.herHim], [npc.name] then spreads [npc.her] [npc.legs] и [npc.moansVerb],"
 											+ " [npc.speech(Come on then, fuck me!)]";
 								} else {
 									return "Letting [npc2.name] finish [npc2.her] manoeuvre, [npc.name] sits down, before presenting [npc.her] groin to [npc2.name]."
@@ -810,7 +810,7 @@ public class ChairSex {
 						}
 						
 					} else {
-						return "Reaching down to grab [npc2.name] by the [npc2.arm], [npc.name] [npc.verb(pull)] [npc2.herHim] back into [npc2.her] old position as [npc.she] angrily scolds [npc2.herHim], "
+                        return "Reaching down to grab [npc2.name] by the [npc2.arm], [npc.name] pull [npc2.herHim] back into [npc2.her] old position as [npc.she] angrily scolds [npc2.herHim], "
 								+ "[npc.speech(What do you think you're doing?! Don't you <i>dare</i> try that again!)]";
 					}
 					
@@ -818,17 +818,17 @@ public class ChairSex {
 					if(isHappy) {
 						switch(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())) {
 							case DOM_ROUGH:
-								return "Sitting down, [npc.name] [npc.verb(grab)] hold of [npc2.namePos] [npc2.arm], and with a sharp tug, [npc.she] [npc.verb(pull)] [npc2.herHim] down onto [npc2.her] knees before [npc.herHim]."
+                                return "Sitting down, [npc.name] grab hold of [npc2.namePos] [npc2.arm], and with a sharp tug, [npc.she] pull [npc2.herHim] down onto [npc2.her] knees before [npc.herHim]."
 										+ " Leaning forwards to glare down into [npc2.her] eyes, [npc.name] [npc.moansVerb],"
 										+ " [npc.speech(Alright, slut, put that mouth of yours to use!)]";
 							default:
-								return "Sitting down, [npc.name] [npc.verb(take)] hold of [npc2.namePos] [npc2.arm], and with a firm tug, [npc.she] [npc.verb(pull)] [npc2.herHim] down onto [npc2.her] knees before [npc.herHim]."
+                                return "Sitting down, [npc.name] take hold of [npc2.namePos] [npc2.arm], and with a firm tug, [npc.she] pull [npc2.herHim] down onto [npc2.her] knees before [npc.herHim]."
 										+ " Leaning forwards to gaze into [npc2.her] eyes, [npc.name] [npc.moansVerb],"
 										+ " [npc.speech(Good [npc2.girl]. Let's put your mouth to use...)]";
 						}
 						
 					} else {
-						return "Reaching down to grab [npc2.name] by the [npc2.arm], [npc.name] [npc.verb(pull)] [npc2.herHim] back into [npc2.her] old position as [npc.she] angrily scolds [npc2.herHim], "
+                        return "Reaching down to grab [npc2.name] by the [npc2.arm], [npc.name] pull [npc2.herHim] back into [npc2.her] old position as [npc.she] angrily scolds [npc2.herHim], "
 								+ "[npc.speech(What do you think you're doing?! Don't you <i>dare</i> try that again!)]";
 					}
 				}
@@ -845,7 +845,7 @@ public class ChairSex {
 					}
 					
 				} else {
-					return "Reaching down to grab [npc2.name] by the [npc2.arm], [npc.name] [npc.verb(pull)] [npc2.herHim] back into [npc2.her] old position as [npc.she] angrily scolds [npc2.herHim], "
+                    return "Reaching down to grab [npc2.name] by the [npc2.arm], [npc.name] pull [npc2.herHim] back into [npc2.her] old position as [npc.she] angrily scolds [npc2.herHim], "
 							+ "[npc.speech(What do you think you're doing?! Don't you <i>dare</i> try that again!)]";
 				}
 			}

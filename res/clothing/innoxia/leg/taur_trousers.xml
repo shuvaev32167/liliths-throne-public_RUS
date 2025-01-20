@@ -87,13 +87,13 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(pull)] the unzipped taur-trousers down over [npc.her] head, before allowing the weak telekinetic enchantment to zip them up beneath [npc.her] [npc.legRace]'s body.]]>
+        <![CDATA[[npc.Name] pull the unzipped taur-trousers down over [npc.her] head, before allowing the weak telekinetic enchantment to zip them up beneath [npc.her] [npc.legRace]'s body.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(pull)] the unzipped taur-trousers down over [npc2.namePos] head, before zipping them up beneath [npc2.her] [npc2.legRace]'s body.]]>
+        <![CDATA[[npc.Name] pull the unzipped taur-trousers down over [npc2.namePos] head, before zipping them up beneath [npc2.her] [npc2.legRace]'s body.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(force)] the unzipped taur-trousers down over [npc2.namePos] head, before roughly zipping them up beneath [npc2.her] [npc2.legRace]'s body.]]>
+        <![CDATA[[npc.Name] force the unzipped taur-trousers down over [npc2.namePos] head, before roughly zipping them up beneath [npc2.her] [npc2.legRace]'s body.]]>
     </otherRough>
   </replacementText>
 
@@ -102,10 +102,10 @@
       <![CDATA[[npc.Name] focuses [npc.her] thoughts on unzipping [npc.her] taur-trousers, and, sure enough, the weak telekinetic enchantment sets to work, soon allowing [npc.herHim] to take them off by pulling them up and over [npc.her] head.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(unzip)] [npc2.namePos] taur-trousers, before pulling them up and over [npc2.her] head.]]>
+        <![CDATA[[npc.Name] unzip [npc2.namePos] taur-trousers, before pulling them up and over [npc2.her] head.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(unzip)] [npc2.namePos] taur-trousers, before yanking them up and over [npc2.her] head.]]>
+        <![CDATA[[npc.Name] unzip [npc2.namePos] taur-trousers, before yanking them up and over [npc2.her] head.]]>
     </otherRough>
   </displacementText>
 	

@@ -1,14 +1,12 @@
 package com.lilithsthrone.controller.eventListeners;
 
-import com.lilithsthrone.game.dialogue.utils.EnchantmentDialogue;
-import org.w3c.dom.events.Event;
-import org.w3c.dom.events.EventListener;
-
 import com.lilithsthrone.controller.TooltipUpdateThread;
+import com.lilithsthrone.controller.eventListeners.tooltips.ClonedEventListener;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.responses.Response;
+import com.lilithsthrone.game.dialogue.utils.EnchantmentDialogue;
 import com.lilithsthrone.game.dialogue.utils.InventoryDialogue;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
@@ -16,6 +14,7 @@ import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.RenderingEngine;
+import org.w3c.dom.events.Event;
 
 /**
  * @since 0.1.0
@@ -23,7 +22,7 @@ import com.lilithsthrone.rendering.RenderingEngine;
  * @author Innoxia
  * Перевод не требуется
  */
-public class InventorySelectedItemEventListener implements EventListener {
+public class InventorySelectedItemEventListener implements ClonedEventListener {
 	private AbstractItem item;
 	
 	private AbstractClothing clothing;
@@ -37,9 +36,22 @@ public class InventorySelectedItemEventListener implements EventListener {
 	private GameCharacter owner;
 	
 	private int buyBackIndex;
+    private final InventorySelectedItemEventListener parent;
+
+    private InventorySelectedItemEventListener(InventorySelectedItemEventListener parent) {
+        this.parent = parent;
+    }
+
+    public InventorySelectedItemEventListener() {
+        parent = null;
+    }
 
 	@Override
 	public void handleEvent(Event event) {
+        if (parent != null) {
+            parent.handleEvent(event);
+            return;
+        }
 
 //		if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.CHARACTERS_PRESENT
 //				|| Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.PHONE
@@ -129,9 +141,17 @@ public class InventorySelectedItemEventListener implements EventListener {
 	}
 
 	public InventorySelectedItemEventListener setItemInventory(AbstractItem item, GameCharacter owner) {
+        if (parent != null) {
+            parent.setItemInventory(item, owner);
+            return this;
+        }
 		return setItemInventory(item, owner, 0);
 	}
 	public InventorySelectedItemEventListener setItemInventory(AbstractItem item, GameCharacter owner, int buyBackIndex) {
+        if (parent != null) {
+            parent.setItemInventory(item, owner, buyBackIndex);
+            return this;
+        }
 		resetVariables();
 		this.item = item;
 		this.buyBackIndex=buyBackIndex;
@@ -140,9 +160,17 @@ public class InventorySelectedItemEventListener implements EventListener {
 	}
 
 	public InventorySelectedItemEventListener setClothingInventory(AbstractClothing clothing, GameCharacter owner) {
+        if (parent != null) {
+            parent.setClothingInventory(clothing, owner);
+            return this;
+        }
 		return setClothingInventory(clothing, owner, 0);
 	}
 	public InventorySelectedItemEventListener setClothingInventory(AbstractClothing clothing, GameCharacter owner, int buyBackIndex) {
+        if (parent != null) {
+            parent.setClothingInventory(clothing, owner, buyBackIndex);
+            return this;
+        }
 		resetVariables();
 		this.clothing = clothing;
 		this.buyBackIndex=buyBackIndex;
@@ -151,9 +179,17 @@ public class InventorySelectedItemEventListener implements EventListener {
 	}
 
 	public InventorySelectedItemEventListener setWeaponInventory(AbstractWeapon weapon, GameCharacter owner) {
+        if (parent != null) {
+            parent.setWeaponInventory(weapon, owner);
+            return this;
+        }
 		return setWeaponInventory(weapon, owner, 0);
 	}
 	public InventorySelectedItemEventListener setWeaponInventory(AbstractWeapon weapon, GameCharacter owner, int buyBackIndex) {
+        if (parent != null) {
+            parent.setWeaponInventory(weapon, owner, buyBackIndex);
+            return this;
+        }
 		resetVariables();
 		this.weapon = weapon;
 		this.buyBackIndex=buyBackIndex;
@@ -162,6 +198,10 @@ public class InventorySelectedItemEventListener implements EventListener {
 	}
 	
 	public InventorySelectedItemEventListener setWeaponEquipped(GameCharacter owner, InventorySlot invSlot) {
+        if (parent != null) {
+            parent.setWeaponEquipped(owner, invSlot);
+            return this;
+        }
 		resetVariables();
 		setOwner(owner);
 		weaponSlot = invSlot;
@@ -188,6 +228,10 @@ public class InventorySelectedItemEventListener implements EventListener {
 	}
 
 	public InventorySelectedItemEventListener setClothingEquipped(GameCharacter owner, InventorySlot invSlot) {
+        if (parent != null) {
+            parent.setClothingEquipped(owner, invSlot);
+            return this;
+        }
 		resetVariables();
 		
 		setOwner(owner);
@@ -215,4 +259,9 @@ public class InventorySelectedItemEventListener implements EventListener {
 		owner = null;
 		buyBackIndex = 0;
 	}
+
+    @Override
+    public ClonedEventListener newInstance() {
+        return new InventorySelectedItemEventListener(this);
+    }
 }

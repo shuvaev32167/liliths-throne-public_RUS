@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.lilayashome;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -44,6 +41,9 @@ import com.lilithsthrone.world.places.GenericPlace;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @since 0.1.75
  * @version 0.3.9
@@ -65,8 +65,8 @@ public class Lab {
 		arthurRoomCell.setTravelledTo(true);
 		return arthurRoomCell;
 	}
-	
-	public static final DialogueNode LAB = new DialogueNode("Lilaya's Laboratory", "", false) {
+
+    public static final DialogueNode LAB = new DialogueNode("Лаборатория Лилайи", "", false) {
 		@Override
 		public String getContent() {
 			if(Main.game.getNpc(Lilaya.class).getLocationPlaceType()==PlaceType.LILAYA_HOME_LAB) {
@@ -98,18 +98,18 @@ public class Lab {
 			if(index==1) {
 				if(Main.game.getNpc(Lilaya.class).getBaseFetishDesire(Fetish.FETISH_PREGNANCY).isNegative()) {
 					if(Main.game.getNpc(Lilaya.class).hasStatusEffect(StatusEffect.PREGNANT_0)) {
-						return new Response("Enter", "The door to Lilaya's laboratory is firmly shut. You'd better come back later.", null);
+                        return new Response("Вход", "The door to Lilaya's laboratory is firmly shut. You'd better come back later.", null);
 						
 					} else if((Main.game.getNpc(Lilaya.class).isPregnant() && Main.game.getNpc(Lilaya.class).isCharacterReactedToPregnancy(Main.game.getPlayer()))) {
-						return new Response("Enter", "The door to Lilaya's laboratory is firmly shut. You're not going to be able to get back in until her pregnancy is resolved.", null);
+                        return new Response("Вход", "The door to Lilaya's laboratory is firmly shut. You're not going to be able to get back in until her pregnancy is resolved.", null);
 					}
 				}
 				
 				if(Main.game.getNpc(Lilaya.class).getLocationPlaceType()!=PlaceType.LILAYA_HOME_LAB) {
-					return new Response("Enter", "The door to Lilaya's laboratory is firmly shut, and, considering the hour, she's probably sleeping upstairs.", null);
+                    return new Response("Вход", "The door to Lilaya's laboratory is firmly shut, and, considering the hour, she's probably sleeping upstairs.", null);
 				}
-				
-				return new Response("Enter", "Step through the door and enter Lilaya's laboratory.", LAB_ENTRY) {
+
+                return new Response("Вход", "Step through the door and enter Lilaya's laboratory.", LAB_ENTRY) {
 					@Override
 					public void effects() {
 						if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.roseToldOnYou)
@@ -138,11 +138,7 @@ public class Lab {
 		Main.game.getDialogueFlags().setFlag(DialogueFlagValue.roseToldOnYou, false);
 		if(Main.game.getNpc(Lilaya.class).getFetishDesire(Fetish.FETISH_PREGNANCY).isNegative()) {
 			Main.game.getDialogueFlags().setFlag(DialogueFlagValue.waitingOnLilayaPregnancyResults, false);
-			if(Main.game.getNpc(Lilaya.class).isPregnant()) {
-				Main.game.getDialogueFlags().setFlag(DialogueFlagValue.waitingOnLilayaBirthNews, true);
-			} else {
-				Main.game.getDialogueFlags().setFlag(DialogueFlagValue.waitingOnLilayaBirthNews, false);
-			}
+            Main.game.getDialogueFlags().setFlag(DialogueFlagValue.waitingOnLilayaBirthNews, Main.game.getNpc(Lilaya.class).isPregnant());
 		} else {
 			Main.game.getDialogueFlags().setFlag(DialogueFlagValue.waitingOnLilayaPregnancyResults, false);
 			Main.game.getDialogueFlags().setFlag(DialogueFlagValue.waitingOnLilayaBirthNews, false);
@@ -463,8 +459,19 @@ public class Lab {
 		
 		return generatedResponses;
 	}
-	
-	public static final DialogueNode LAB_ENTRY = new DialogueNode("Lilaya's Laboratory", "", true) {
+
+	public static final DialogueNode LAB_EXIT_THROWN_OUT = new DialogueNode("Лаборатория Лилайи", "", false) {
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/lab", "LAB_EXIT_THROWN_OUT");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return null;
+		}
+	};	public static final DialogueNode LAB_ENTRY = new DialogueNode("Лаборатория Лилайи", "", true) {
 
 		@Override
 		public String getContent() {
@@ -747,7 +754,7 @@ public class Lab {
 					};
 					
 				} else {
-					return new Response("Continue", "Leave the lab and let Lilaya carry on with her work.", Lab.LAB_EXIT) {
+                    return new Response("Продолжить", "Leave the lab and let Lilaya carry on with her work.", Lab.LAB_EXIT) {
 						@Override
 						public void effects() {
 							Main.game.getNpc(Rose.class).setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LAB, false);
@@ -764,8 +771,33 @@ public class Lab {
 			}
 		}
 	};
-	
-	public static final DialogueNode LAB_EXIT = new DialogueNode("Lilaya's Laboratory", "", true) {
+	public static final DialogueNode LAB_ARTHURS_TALE = new DialogueNode("Лаборатория Лилайи", "", true, true) {
+		@Override
+		public int getSecondsPassed() {
+			return 30*60;
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/lab", "LAB_ARTHURS_TALE");
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index == 1) {
+				return new ResponseEffectsOnly("Clear storeroom", "Head on over to the lab's storeroom and help Rose clear it out so that Arthur can use it as a bedroom.") {
+					@Override
+					public void effects() {
+						Cell arthurRoomCell = addArthurRoom();
+
+						Main.game.getPlayer().setLocation(arthurRoomCell);
+						Main.game.getNpc(Arthur.class).setLocation(arthurRoomCell, true);
+
+						Main.game.setContent(new Response("", "", PlaceUpgrade.LILAYA_ARTHUR_ROOM.getInstallationDialogue(arthurRoomCell)));
+					}
+				};
+			}
+			return null;
+		}
+	};	public static final DialogueNode LAB_EXIT = new DialogueNode("Лаборатория Лилайи", "", true) {
 		
 		@Override
 		public String getContent() {
@@ -777,19 +809,8 @@ public class Lab {
 			return LAB_ENTRY.getResponse(0, index);
 		}
 	};
-	
-	public static final DialogueNode LAB_EXIT_THROWN_OUT = new DialogueNode("Lilaya's Laboratory", "", false) {
-		
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/lab", "LAB_EXIT_THROWN_OUT");
-		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return null;
-		}
-	};
+
 	
 	public static final DialogueNode LAB_DEMON_TF_AGREE = new DialogueNode("", "", true, true) {
 		
@@ -831,9 +852,9 @@ public class Lab {
 			return LAB_ENTRY.getResponse(responseTab, index);
 		}
 	};
-	
-	
-	public static final DialogueNode LILAYA_PRESENT = new DialogueNode("Lilaya's Laboratory", "", true) {
+
+
+	public static final DialogueNode LILAYA_PRESENT = new DialogueNode("Лаборатория Лилайи", "", true) {
 		
 		@Override
 		public String getContent() {
@@ -1114,8 +1135,8 @@ public class Lab {
 			}
 		}
 	};
-	
-	public static final DialogueNode ESSENCE_EXTRACTION = new DialogueNode("Lilaya's Lab", "-", true, false) {
+
+	public static final DialogueNode ESSENCE_EXTRACTION = new DialogueNode("Лаба Лилайи", "-", true, false) {
 		
 		@Override
 		public String getContent() {
@@ -1261,8 +1282,8 @@ public class Lab {
 			}
 		}
 	};
-	
-	public static final DialogueNode ESSENCE_EXTRACTION_BOTTLED = new DialogueNode("Lilaya's Lab", "-", true, false) {
+
+	public static final DialogueNode ESSENCE_EXTRACTION_BOTTLED = new DialogueNode("Лаба Лилайи", "-", true, false) {
 		
 		@Override
 		public String getContent() {
@@ -1274,9 +1295,9 @@ public class Lab {
 			return ESSENCE_EXTRACTION.getResponse(0, index);
 		}
 	};
-	
-	
-	public static final DialogueNode LILAYA_CURRENT_DATE_TALK = new DialogueNode("Lilaya's Lab", "-", true, false) {
+
+
+	public static final DialogueNode LILAYA_CURRENT_DATE_TALK = new DialogueNode("Лаба Лилайи", "-", true, false) {
 		
 		@Override
 		public String getContent() {
@@ -1584,7 +1605,7 @@ public class Lab {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "You've now got Lilaya's permission to invite friends back home!", LAB_EXIT);
+                return new Response("Продолжить", "You've now got Lilaya's permission to invite friends back home!", LAB_EXIT);
 			}
 			return null;
 		}
@@ -1598,7 +1619,7 @@ public class Lab {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "You've now got Lilaya's permission to store dolls in her mansion!", LAB_EXIT);
+                return new Response("Продолжить", "You've now got Lilaya's permission to store dolls in her mansion!", LAB_EXIT);
 			}
 			return null;
 		}
@@ -1633,38 +1654,12 @@ public class Lab {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Now that you've got Lilaya's letter of recommendation, you should head back to Slaver Alley and talk to [finch.name].", LAB_EXIT);
+                return new Response("Продолжить", "Now that you've got Lilaya's letter of recommendation, you should head back to Slaver Alley and talk to [finch.name].", LAB_EXIT);
 			}
 			return null;
 		}
 	};
 
-	public static final DialogueNode LAB_ARTHURS_TALE = new DialogueNode("Lilaya's Laboratory", "", true, true) {
-		@Override
-		public int getSecondsPassed() {
-			return 30*60;
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/lab", "LAB_ARTHURS_TALE");
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index == 1) {
-				return new ResponseEffectsOnly("Clear storeroom", "Head on over to the lab's storeroom and help Rose clear it out so that Arthur can use it as a bedroom.") {
-					@Override
-					public void effects() {
-						Cell arthurRoomCell = addArthurRoom();
-						
-						Main.game.getPlayer().setLocation(arthurRoomCell);
-						Main.game.getNpc(Arthur.class).setLocation(arthurRoomCell, true);
-						
-						Main.game.setContent(new Response("", "", PlaceUpgrade.LILAYA_ARTHUR_ROOM.getInstallationDialogue(arthurRoomCell)));
-					}
-				};
-			}
-			return null;
-		}
-	};
+
 	
 }

@@ -10,13 +10,13 @@ import com.lilithsthrone.utils.colours.PresetColour;
  */
 public enum PronounType {
 	FEMININE("женский", PresetColour.FEMININE),
-	NEUTRAL("неопределенный", PresetColour.ANDROGYNOUS),
+	NEUTRAL("неопределённый", PresetColour.ANDROGYNOUS),
 	MASCULINE("мужской", PresetColour.MASCULINE);
 	
-	private String name;
-	private Colour colour;
+	private final String name;
+	private final Colour colour;
 	
-	private PronounType(String name, Colour colour) {
+	PronounType(String name, Colour colour) {
 		this.name = name;
 		this.colour = colour;
 	}

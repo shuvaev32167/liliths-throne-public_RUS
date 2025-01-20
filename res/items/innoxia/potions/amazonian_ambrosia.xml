@@ -30,7 +30,7 @@
 		
 		<applyEffects><![CDATA[
 			<p style='margin-bottom:0; padding-bottom:0;'>
-				As the rich wed wine begins to circulate through [npc.her] system, [npc.name] [npc.verb(feel)] [npc.her] body subtly changing...
+				As the rich wed wine begins to circulate through [npc.her] system, [npc.name] feel [npc.her] body subtly changing...
 			</p>
 			[#npc.incrementFemininity(5)]
 			[#npc.incrementMuscle(3)]
@@ -46,10 +46,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-			Opening the amphora of Amazonian Ambrosia, [npc.name] [npc.verb(tilt)] [npc.her] head back and [npc.verb(bring)] it up to [npc.her] waiting [npc.lips]. The rich, red wine contained within has a strong, heady fragrance, which seduces [npc.name] into quickly taking a deep draught. Discovering that the wine's taste is every bit as excellent as its smell, [npc.she] quickly drinks every last drop.
+			Opening the amphora of Amazonian Ambrosia, [npc.name] tilt [npc.her] head back and bring it up to [npc.her] waiting [npc.lips]. The rich, red wine contained within has a strong, heady fragrance, which seduces [npc.name] into quickly taking a deep draught. Discovering that the wine's taste is every bit as excellent as its smell, [npc.she] quickly drinks every last drop.
 		]]></selfUse>
 		<otherUse><![CDATA[
-			Opening the amphora of Amazonian Ambrosia, [npc.name] [npc.verb(bring)] it up to [npc2.namePos] waiting [npc2.lips]. The rich, red wine contained within has a strong, heady fragrance, which seduces [npc2.name] into quickly taking a deep draught. Discovering that the wine's taste is every bit as excellent as its smell, [npc2.she] quickly drinks every last drop.
+			Opening the amphora of Amazonian Ambrosia, [npc.name] bring it up to [npc2.namePos] waiting [npc2.lips]. The rich, red wine contained within has a strong, heady fragrance, which seduces [npc2.name] into quickly taking a deep draught. Discovering that the wine's taste is every bit as excellent as its smell, [npc2.she] quickly drinks every last drop.
 		]]></otherUse>
 	</useDescriptions>
 

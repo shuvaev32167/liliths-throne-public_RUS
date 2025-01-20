@@ -133,7 +133,7 @@
 		Not wanting to have sex right now, you quickly blurt out, [pc.speech(Ah, sorry, [npc.name], I was just checking everything was ok. I've got to go now!)]
 	</p>
 	<p>
-		Ignoring the booming admonishment that's shouted after you in response, you quickly turn your back on [npc.name] and [npc.her] imps, and make haste as you exit [npc.her] dojo...
+		Ignoring the booming admonishment that's shouted after you in response, you quickly turn your back on [npc.name] и [npc.her] imps, and make haste as you exit [npc.her] dojo...
 	</p>
 	]]>
 	</htmlContent>
@@ -441,7 +441,7 @@
 	
 	<htmlContent tag="KEEP_AFTER_COMBAT_VICTORY_KEY"><![CDATA[
 	<p>
-		You let out a relieved sigh as [npc.name] and [npc.her] guards slump down onto the floor before you, defeated. Stepping forwards, you look down at the [npc.race] and ask, [pc.speech(Why do you do this? Getting all those imps to attack people in Submission, I mean.)]
+		You let out a relieved sigh as [npc.name] и [npc.her] guards slump down onto the floor before you, defeated. Stepping forwards, you look down at the [npc.race] and ask, [pc.speech(Why do you do this? Getting all those imps to attack people in Submission, I mean.)]
 	</p>
 	<p>
 		[npc.speech(She told us to...)] [npc.name] pants. [npc.speech(Our leader, the Dark Siren... She said we need to assert dominance... You've probably already seen it, seeing as you're here... That citadel in the middle of Submission's tunnels. That's where she is...)]
@@ -457,7 +457,7 @@
 	
 	<htmlContent tag="KEEP_AFTER_COMBAT_VICTORY"><![CDATA[
 	<p>
-		You let out a relieved sigh as [npc.name] and [npc.her] guards slump down onto the floor before you, defeated. Stepping forwards, you look down at the [npc.race] and ask, [pc.speech(Why did you come back? I told you to stay away from here!)]
+		You let out a relieved sigh as [npc.name] и [npc.her] guards slump down onto the floor before you, defeated. Stepping forwards, you look down at the [npc.race] and ask, [pc.speech(Why did you come back? I told you to stay away from here!)]
 	</p>
 	<p>
 		[npc.speech(The Dark Siren... )] [npc.name] pants. [npc.speech(She said I had to...)]
@@ -473,7 +473,7 @@
 	
 	<htmlContent tag="KEEP_AFTER_COMBAT_VICTORY_DS_DEFEATED"><![CDATA[
 	<p>
-		You let out a relieved sigh as [npc.name] and [npc.her] guards slump down onto the floor before you, defeated. Stepping forwards, you look down at the [npc.race] and ask, [pc.speech(Why did you come back? I told you to stay away from here!)]
+		You let out a relieved sigh as [npc.name] и [npc.her] guards slump down onto the floor before you, defeated. Stepping forwards, you look down at the [npc.race] and ask, [pc.speech(Why did you come back? I told you to stay away from here!)]
 	</p>
 	<p>
 		[npc.speech(The Dark Siren will return... )] [npc.name] pants. [npc.speech(So I need to carry out her last orders...)]
@@ -489,7 +489,7 @@
 	
 	<htmlContent tag="KEEP_AFTER_COMBAT_VICTORY_SCARE_OFF"><![CDATA[
 	<p>
-		Having dealt with [npc.name], and not wanting to go any further, you stand before [npc.herHim] and [npc.her] imps and declare, [pc.speech(Go on then, get out of here, all of you! And don't come back!)]
+		Having dealt with [npc.name], and not wanting to go any further, you stand before [npc.herHim] и [npc.her] imps and declare, [pc.speech(Go on then, get out of here, all of you! And don't come back!)]
 	</p>
 	<p>
 		[npc.speech(W-We won't!)] [npc.name] stutters as [npc.she] stands up. Not even giving you another backwards glance, [npc.she] runs off down the length of the dojo, with [npc.her] imp guards close behind. Dashing out through the open doors, the gang disappear off into Submission, leaving you alone in the now-empty room.
@@ -502,7 +502,7 @@
 	
 	<htmlContent tag="KEEP_COMBAT_VICTORY_SEX"><![CDATA[
 	<p>
-		Wanting to have a little fun with [npc.name] and [npc.her] imps before you let them go, you reach down and start moving them into position. As you do this, the [npc.race] lets out a surprisingly erotic groan, before thrusting [npc.her] [npc.hips] towards you. [npc.speech(Come on then, ride my cock!)]
+		Wanting to have a little fun with [npc.name] и [npc.her] imps before you let them go, you reach down and start moving them into position. As you do this, the [npc.race] lets out a surprisingly erotic groan, before thrusting [npc.her] [npc.hips] towards you. [npc.speech(Come on then, ride my cock!)]
 	</p>
 	<p>
 		[pc.speech(I'll do whatever I feel like,)] you respond, giving [npc.her] [npc.ass] a quick smack to remind [npc.herHim] who's in charge.
@@ -515,7 +515,7 @@
 	
 	<htmlContent tag="KEEP_COMBAT_VICTORY_SEX_GENTLE"><![CDATA[
 	<p>
-		Wanting to have a little fun with [npc.name] and [npc.her] imps before you let them go, you reach down and start gently moving them into position. As you do this, the [npc.race] lets out a surprisingly erotic groan, before thrusting [npc.her] [npc.hips] towards you. [npc.speech(Come on then, ride my cock!)]
+		Wanting to have a little fun with [npc.name] и [npc.her] imps before you let them go, you reach down and start gently moving them into position. As you do this, the [npc.race] lets out a surprisingly erotic groan, before thrusting [npc.her] [npc.hips] towards you. [npc.speech(Come on then, ride my cock!)]
 	</p>
 	<p>
 		[pc.speech(I'll do as I please,)] you respond, giving [npc.her] [npc.ass] a soft smack to remind [npc.herHim] who's in charge.
@@ -528,7 +528,7 @@
 	
 	<htmlContent tag="KEEP_COMBAT_VICTORY_SEX_ROUGH"><![CDATA[
 	<p>
-		Wanting to have a little fun with [npc.name] and [npc.her] imps before you let them go, you reach down and start roughly forcing them into position. As you do this, the [npc.race] lets out a surprisingly erotic groan, before thrusting [npc.her] [npc.hips] towards you. [npc.speech(Come on then, ride my cock!)]
+		Wanting to have a little fun with [npc.name] и [npc.her] imps before you let them go, you reach down and start roughly forcing them into position. As you do this, the [npc.race] lets out a surprisingly erotic groan, before thrusting [npc.her] [npc.hips] towards you. [npc.speech(Come on then, ride my cock!)]
 	</p>
 	<p>
 		[pc.speech(Don't you <i>dare</i> try and tell me what to do!)] you angrily respond, giving [npc.her] [npc.ass] a sharp slap to remind [npc.herHim] who's in charge.
@@ -541,7 +541,7 @@
 	
 	<htmlContent tag="KEEP_COMBAT_VICTORY_SEX_SUBMIT"><![CDATA[
 	<p>
-		Feeling sorry for [npc.name] and [npc.her] imps, you bend down next to [npc.herHim] and ask, [pc.speech(Are you ok? Sorry, I think I went a little too far...)]
+		Feeling sorry for [npc.name] и [npc.her] imps, you bend down next to [npc.herHim] and ask, [pc.speech(Are you ok? Sorry, I think I went a little too far...)]
 	</p>
 	<p>
 		[npc.NamePos] defeated expression quickly shifts into a hungry grin as [npc.she] realises that you're going to be easy to take advantage of. Grabbing hold of your wrists, [npc.she] booms, [npc.speech(No, I'm not ok! Now help me up!)]
@@ -569,7 +569,7 @@
 	
 	<htmlContent tag="KEEP_COMBAT_VICTORY_SEX_SUBMIT_IMPS"><![CDATA[
 	<p>
-		Feeling sorry for [npc.name] and [npc.her] imps, you bend down next to [npc.herHim] and ask, [pc.speech(Are you ok? Sorry, I think I went a little too far...)]
+		Feeling sorry for [npc.name] и [npc.her] imps, you bend down next to [npc.herHim] and ask, [pc.speech(Are you ok? Sorry, I think I went a little too far...)]
 	</p>
 	<p>
 		[npc.NamePos] defeated expression quickly shifts into a hungry grin as [npc.she] realises that you're going to be easy to take advantage of. Grabbing hold of your wrists, [npc.she] booms, [npc.speech(No, I'm not ok! Now help me up!)]
@@ -721,7 +721,7 @@
 	
 	<htmlContent tag="KEEP_AFTER_SEX_VICTORY"><![CDATA[
 	<p>
-		[npc.Name] and [npc.her] imps collapse to the floor, utterly exhausted. Quickly getting your things in order, you can't help but smile as you hear the [npc.race] panting, [npc.speech(Oh... Fuck...)]
+		[npc.Name] и [npc.her] imps collapse to the floor, utterly exhausted. Quickly getting your things in order, you can't help but smile as you hear the [npc.race] panting, [npc.speech(Oh... Fuck...)]
 	</p>	
 	<p>
 		Grinning down at the worn out gang, you wonder if you should tell them to get out of here right away, or perhaps you could first take this opportunity to confiscate their belongs...

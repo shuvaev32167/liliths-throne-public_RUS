@@ -58,25 +58,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(place)] the bra over [npc.her] chest before tying up the strings at [npc.her] back.]]>
+            <![CDATA[[npc.Name] place the bra over [npc.her] chest before tying up the strings at [npc.her] back.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(place)] the bra over [npc2.namePos] chest before tying up the strings at [npc2.her] back.]]>
+            <![CDATA[[npc.Name] place the bra over [npc2.namePos] chest before tying up the strings at [npc2.her] back.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(place)] the bra over [npc2.namePos] chest before roughly tying up the strings at [npc2.her] back.]]>
+            <![CDATA[[npc.Name] place the bra over [npc2.namePos] chest before roughly tying up the strings at [npc2.her] back.]]>
 	  </otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(untie)] the strings of [npc.her] bra and [npc.verb(take)] it off.]]>
+            <![CDATA[[npc.Name] untie the strings of [npc.her] bra and take it off.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(untie)] the strings of [npc2.namePos] bra and [npc.verb(take)] it off.]]>
+            <![CDATA[[npc.Name] untie the strings of [npc2.namePos] bra and take it off.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(untie)] the strings of [npc2.namePos] bra and [npc.verb(pull)] it off.]]>
+            <![CDATA[[npc.Name] roughly untie the strings of [npc2.namePos] bra and pull it off.]]>
 		</otherRough>
 	</displacementText>
 	

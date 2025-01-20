@@ -48,24 +48,24 @@
 	</coreAttributes>
 	<replacementText slot="HAND" type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(pull)] the mitsugake on to cover [npc.her] [npc.hand] before wrapping and securing the wrist strap.]]>
+            <![CDATA[[npc.Name] pull the mitsugake on to cover [npc.her] [npc.hand] before wrapping and securing the wrist strap.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(pull)] the mitsugake onto [npc2.namePos] [npc2.hand] before wrapping and securing the wrist strap.]]>
+            <![CDATA[[npc.Name] pull the mitsugake onto [npc2.namePos] [npc2.hand] before wrapping and securing the wrist strap.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(pull)] the mitsugake onto [npc2.namePos] [npc2.hand] before wrapping and securing the wrist strap.]]>
+            <![CDATA[[npc.Name] roughly pull the mitsugake onto [npc2.namePos] [npc2.hand] before wrapping and securing the wrist strap.]]>
 		</otherRough>
 	</replacementText>
 	<displacementText slot="HAND" type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(pull)] the mitsugake off of [npc.her] [npc.hand] after unwrapping the wrist strap.]]>
+            <![CDATA[[npc.Name] pull the mitsugake off of [npc.her] [npc.hand] after unwrapping the wrist strap.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(pull)] the mitsugake off of [npc2.namePos] [npc2.hand] after unwrapping the wrist strap.]]>
+            <![CDATA[[npc.Name] pull the mitsugake off of [npc2.namePos] [npc2.hand] after unwrapping the wrist strap.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(pull)] the mitsugake off of [npc2.namePos] [npc2.hand] after unwrapping the wrist strap.]]>
+            <![CDATA[[npc.Name] roughly pull the mitsugake off of [npc2.namePos] [npc2.hand] after unwrapping the wrist strap.]]>
 		</otherRough>
 	</displacementText>
 	

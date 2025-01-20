@@ -1,20 +1,16 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractArmType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
+
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * Contains static instances of AbstractArmType.
@@ -99,9 +95,9 @@ public class ArmType {
 			Util.newArrayListOfValues("bovine"),
 			Util.newArrayListOfValues("feminine", "bovine"),
 			"Within a matter of moments, a layer of [npc.armFullDescription] has quickly grown over them, and, looking down,"
-					+ " [npc.she] [npc.verb(see)] [npc.her] new hair growing over the backs of [npc.her] hands as tough, hoof-like nails push out in place of regular, human-like ones."
+					+ " [npc.she] see [npc.her] new hair growing over the backs of [npc.her] hands as tough, hoof-like nails push out in place of regular, human-like ones."
 				+ " Despite their appearance, [npc.sheIsFull] relieved to discover that [npc.her] hands have lost none of their dexterity."
-				+ " As the transformation comes to an end, [npc.she] [npc.verb(see)] that at [npc.her] upper-biceps, [npc.her] hair smoothly transitions into the [npc.skin] that's covering the rest of [npc.her] body.<br/>"
+					+ " As the transformation comes to an end, [npc.she] see that at [npc.her] upper-biceps, [npc.her] hair smoothly transitions into the [npc.skin] that's covering the rest of [npc.her] body.<br/>"
 				+ "[npc.NameIsFull] left with anthropomorphic, [style.boldCowMorph(cow-like arms and hands)], which are [npc.materialDescriptor] [npc.armFullDescription].",
 			"[npc.She] [npc.has] [npc.armRows] arms, which are [npc.materialCompositionDescriptor] [npc.armFullDescription(true)]."
 				+ " [npc.Her] hands, while human in shape, have tough little hoof-like nails.") {
@@ -122,7 +118,7 @@ public class ArmType {
 			Util.newArrayListOfValues("padded", "canine"),
 			Util.newArrayListOfValues("soft", "feminine", "padded", "canine"),
 			"Within a matter of moments, a layer of [npc.armFullDescription] has quickly grown over them, and, looking down,"
-					+ " [npc.she] [npc.verb(see)] [npc.her] new fur growing over the backs of [npc.her] hands as blunt, dog-like claws push out to replace [npc.her] fingernails."
+					+ " [npc.she] see [npc.her] new fur growing over the backs of [npc.her] hands as blunt, dog-like claws push out to replace [npc.her] fingernails."
 				+ " [npc.Her] palms rapidly transform to be [npc.materialDescriptor] little leathery pads, and at [npc.her] upper-biceps, [npc.her] fur smoothly transitions into the [npc.skin] that's covering the rest of [npc.her] body.<br/>"
 				+ "As the transformation comes to an end, [npc.nameIsFull] left with anthropomorphic, [style.boldDogMorph(dog-like arms and hands)], which are [npc.materialDescriptor] [npc.armFullDescription].",
 			"[npc.She] [npc.has] [npc.armRows] arms, which are [npc.materialCompositionDescriptor] [npc.armFullDescription(true)]."
@@ -144,7 +140,7 @@ public class ArmType {
 			Util.newArrayListOfValues("padded", "wolf-like"),
 			Util.newArrayListOfValues("soft", "feminine", "padded", "wolf-like"),
 			"Within a matter of moments, a layer of [npc.armFullDescription] has quickly grown over them, and, looking down,"
-					+ " [npc.she] [npc.verb(see)] [npc.her] new fur growing over the backs of [npc.her] hands as sharp claws push out to replace [npc.her] fingernails."
+					+ " [npc.she] see [npc.her] new fur growing over the backs of [npc.her] hands as sharp claws push out to replace [npc.her] fingernails."
 				+ " [npc.Her] palms rapidly transform to be [npc.materialDescriptor] tough leathery pads, and at [npc.her] upper-biceps, [npc.her] fur smoothly transitions into the [npc.skin] that's covering the rest of [npc.her] body.<br/>"
 				+ "As the transformation comes to an end, [npc.nameIsFull] left with anthropomorphic, [style.boldWolfMorph(wolf-like arms and hands)], which are [npc.materialDescriptor] [npc.armFullDescription].",
 			"[npc.She] [npc.has] [npc.armRows] arms, which are [npc.materialCompositionDescriptor] [npc.armFullDescription(true)]."
@@ -166,7 +162,7 @@ public class ArmType {
 			Util.newArrayListOfValues("padded", "fox-like"),
 			Util.newArrayListOfValues("soft", "feminine", "padded", "fox-like"),
 			"Within a matter of moments, a layer of [npc.armFullDescription] has quickly grown over them, and, looking down,"
-					+ " [npc.she] [npc.verb(see)] [npc.her] new fur growing over the backs of [npc.her] hands as sharp claws push out to replace [npc.her] fingernails."
+					+ " [npc.she] see [npc.her] new fur growing over the backs of [npc.her] hands as sharp claws push out to replace [npc.her] fingernails."
 				+ " [npc.Her] palms rapidly transform to be [npc.materialDescriptor] little pads, and at [npc.her] upper-biceps, [npc.her] fur smoothly transitions into the [npc.skin] that's covering the rest of [npc.her] body.</br>"
 				+ "As the transformation comes to an end, [npc.nameIsFull] left with anthropomorphic, [style.boldFoxMorph(fox-like arms and hands)], which are [npc.materialDescriptor] [npc.armFullDescription].",
 			"[npc.She] [npc.has] [npc.armRows] arms, which are [npc.materialCompositionDescriptor] [npc.armFullDescription(true)]."
@@ -188,7 +184,7 @@ public class ArmType {
 			Util.newArrayListOfValues("soft", "delicate", "padded", "feline"),
 			Util.newArrayListOfValues("soft", "feminine", "padded", "feline"),
 			"Within a matter of moments, a layer of [npc.armFullDescription] has quickly grown over them, and, looking down,"
-					+ " [npc.she] [npc.verb(see)] [npc.her] fur growing over the backs of [npc.her] hands as sharp, retractable claws push out to replace [npc.her] fingernails."
+					+ " [npc.she] see [npc.her] fur growing over the backs of [npc.her] hands as sharp, retractable claws push out to replace [npc.her] fingernails."
 				+ " [npc.Her] palms rapidly transform to be [npc.materialDescriptor] little pink pads, and at [npc.her] upper-biceps, [npc.her] fur smoothly transitions into the [npc.skin] that's covering the rest of [npc.her] body.<br/>"
 				+ "As the transformation comes to an end, [npc.nameIsFull] left with anthropomorphic, [style.boldCatMorph(cat-like arms and hands)], which are [npc.materialDescriptor] [npc.armFullDescription].",
 			"[npc.She] [npc.has] [npc.armRows] arms, which are [npc.materialCompositionDescriptor] [npc.armFullDescription(true)]."
@@ -210,9 +206,9 @@ public class ArmType {
 			Util.newArrayListOfValues("equine"),
 			Util.newArrayListOfValues("feminine", "equine"),
 			"Within a matter of moments, a layer of [npc.armFullDescription] has quickly grown over them, and, looking down,"
-					+ " [npc.she] [npc.verb(see)] [npc.her] new hair growing over the backs of [npc.her] hands as tough, hoof-like nails push out in place of regular, human-like ones."
+					+ " [npc.she] see [npc.her] new hair growing over the backs of [npc.her] hands as tough, hoof-like nails push out in place of regular, human-like ones."
 				+ " Despite their appearance, [npc.sheIs] relieved to discover that [npc.her] hands have lost none of their dexterity."
-				+ " As the transformation comes to an end, [npc.she] [npc.verb(see)] that at [npc.her] upper-biceps, [npc.her] hair smoothly transitions into the [npc.skin] that's covering the rest of [npc.her] body.<br/>"
+					+ " As the transformation comes to an end, [npc.she] see that at [npc.her] upper-biceps, [npc.her] hair smoothly transitions into the [npc.skin] that's covering the rest of [npc.her] body.<br/>"
 				+ "[npc.NameIsFull] left with anthropomorphic, [style.boldHorseMorph(horse-like arms and hands)], which are [npc.materialDescriptor] [npc.armFullDescription].",
 			"[npc.She] [npc.has] [npc.armRows] arms, which are [npc.materialCompositionDescriptor] [npc.armFullDescription(true)]."
 				+ " [npc.Her] hands, while human in shape, have tough little hoof-like nails.") {
@@ -233,9 +229,9 @@ public class ArmType {
 			Util.newArrayListOfValues("reindeer"),
 			Util.newArrayListOfValues("feminine", "reindeer"),
 			"Within a matter of moments, a layer of [npc.armFullDescription] has quickly grown over them, and, looking down,"
-					+ " [npc.she] [npc.verb(see)] [npc.her] new fur growing over the backs of [npc.her] hands as tough, hoof-like nails push out in place of regular, human-like ones."
+					+ " [npc.she] see [npc.her] new fur growing over the backs of [npc.her] hands as tough, hoof-like nails push out in place of regular, human-like ones."
 				+ " Despite their appearance, [npc.sheIs] relieved to discover that [npc.her] hands have lost none of their dexterity."
-				+ " As the transformation comes to an end, [npc.she] [npc.verb(see)] that at [npc.her] upper-biceps, [npc.her] fur smoothly transitions into the [npc.skin] that's covering the rest of [npc.her] body.<br/>"
+					+ " As the transformation comes to an end, [npc.she] see that at [npc.her] upper-biceps, [npc.her] fur smoothly transitions into the [npc.skin] that's covering the rest of [npc.her] body.<br/>"
 				+ "[npc.NameIsFull] left with anthropomorphic, [style.boldReindeerMorph(reindeer-like arms and hands)], which are [npc.materialDescriptor] [npc.armFullDescription].",
 			"[npc.She] [npc.has] [npc.armRows] arms, which are [npc.materialCompositionDescriptor] [npc.armFullDescription(true)]."
 				+ " [npc.Her] hands, while human in shape, have tough little hoof-like nails.") {
@@ -256,7 +252,7 @@ public class ArmType {
 			Util.newArrayListOfValues("scaled"),
 			Util.newArrayListOfValues("feminine", "scaled"),
 			"Within a matter of moments, a layer of [npc.armFullDescription] has quickly grown over them, and, looking down,"
-				+ " [npc.she] [npc.verb(see)] [npc.her] new scales growing over the backs of [npc.her] hands as sharp claws push out to replace [npc.her] fingernails."
+					+ " [npc.she] see [npc.her] new scales growing over the backs of [npc.her] hands as sharp claws push out to replace [npc.her] fingernails."
 				+ " [npc.Her] palms rapidly transform to be [npc.materialDescriptor] little scales, and at [npc.her] upper-biceps, [npc.her] scales smoothly transitions into the [npc.skin] that's covering the rest of [npc.her] body.<br/>"
 				+ "As the transformation comes to an end, [npc.nameIsFull] left with anthropomorphic, [style.boldGatorMorph(alligator-like arms and hands)], which are [npc.materialDescriptor] [npc.armFullDescription].",
 			"[npc.She] [npc.has] [npc.armRows] arms, which are [npc.materialCompositionDescriptor] [npc.armFullDescription(true)]."
@@ -278,7 +274,7 @@ public class ArmType {
 			Util.newArrayListOfValues("soft", "clawed", "rodent"),
 			Util.newArrayListOfValues("soft", "feminine", "clawed", "rodent"),
 			"Within a matter of moments, a layer of [npc.armFullDescription] has quickly grown over them, and, looking down,"
-					+ " [npc.she] [npc.verb(see)] [npc.her] new fur growing over the backs of [npc.her] hands as sharp little claws push out to replace [npc.her] fingernails."
+					+ " [npc.she] see [npc.her] new fur growing over the backs of [npc.her] hands as sharp little claws push out to replace [npc.her] fingernails."
 				+ " [npc.Her] palms rapidly transform to be [npc.materialDescriptor] little pink pads, and at [npc.her] upper-biceps, [npc.her] fur smoothly transitions into the [npc.skin] that's covering the rest of [npc.her] body.<br/>"
 				+ "As the transformation comes to an end, [npc.nameIsFull] left with anthropomorphic, [style.boldSquirrelMorph(squirrel-like arms and hands)], which are [npc.materialDescriptor] [npc.armFullDescription].",
 			"[npc.She] [npc.has] [npc.armRows] arms, which are [npc.materialCompositionDescriptor] [npc.armFullDescription(true)]."
@@ -300,7 +296,7 @@ public class ArmType {
 			Util.newArrayListOfValues("soft", "rat-like", "claw-like", "furry", "rodent"),
 			Util.newArrayListOfValues("soft", "feminine", "rat-like", "claw-like", "furry", "rodent"),
 			"Within a matter of moments, a layer of [npc.armFullDescription] has quickly grown over them, and, looking down,"
-					+ " [npc.she] [npc.verb(see)] [npc.her] fur growing over the backs of [npc.her] hands as sharp little claws push out to replace [npc.her] fingernails."
+					+ " [npc.she] see [npc.her] fur growing over the backs of [npc.her] hands as sharp little claws push out to replace [npc.her] fingernails."
 				+ " [npc.Her] palms rapidly transform to be [npc.materialDescriptor] little pink pads, and at [npc.her] upper-biceps, [npc.her] new fur smoothly transitions into the [npc.skin] that's covering the rest of [npc.her] body.<br/>"
 				+ "As the transformation comes to an end, [npc.nameIsFull] left with anthropomorphic, [style.boldRatMorph(rat-like arms and hands)], which are [npc.materialDescriptor] [npc.armFullDescription].",
 			"[npc.She] [npc.has] [npc.armRows] arms, which are [npc.materialCompositionDescriptor] [npc.armFullDescription(true)]."
@@ -322,7 +318,7 @@ public class ArmType {
 			Util.newArrayListOfValues("rabbit-like", "paw-like", "furry"),
 			Util.newArrayListOfValues("soft", "feminine", "rabbit-like", "paw-like", "furry"),
 			"Within a matter of moments, a layer of [npc.armFullDescription] has quickly grown over them, and, looking down,"
-					+ " [npc.she] [npc.verb(see)] [npc.her] new fur growing over the backs of [npc.her] hands as blunt, rabbit-like claws push out to replace [npc.her] fingernails."
+					+ " [npc.she] see [npc.her] new fur growing over the backs of [npc.her] hands as blunt, rabbit-like claws push out to replace [npc.her] fingernails."
 				+ " [npc.Her] palms rapidly transform to be [npc.materialDescriptor] soft little pads, and at [npc.her] upper-biceps, [npc.her] new fur smoothly transitions into the [npc.skin] that's covering the rest of [npc.her] body.<br/>"
 				+ "As the transformation comes to an end, [npc.nameIsFull] left with anthropomorphic, [style.boldRabbitMorph(rabbit-like arms and paw-like hands)], which are [npc.materialDescriptor] [npc.armFullDescription].",
 			"[npc.She] [npc.has] [npc.armRows] arms, which are [npc.materialCompositionDescriptor] [npc.armFullDescription(true)]."
@@ -344,8 +340,8 @@ public class ArmType {
 			Util.newArrayListOfValues("bat-like"),
 			Util.newArrayListOfValues("soft", "feminine", "bat-like"),
 			"Within a matter of moments, a layer of [npc.armFullDescription] has quickly grown over them, and, staring at [npc.her] hands in shock,"
-					+ " [npc.name] [npc.verb(watch)] [npc.her] fingers narrowing down and growing longer and longer as a tough membrane of skin starts to grow between them."
-				+ " [npc.She] [npc.verb(cry)] out in alarm as [npc.she] [npc.verb(feel)] [npc.her] bones growing and snapping into a new form, and within moments,"
+					+ " [npc.name] watch [npc.her] fingers narrowing down and growing longer and longer as a tough membrane of skin starts to grow between them."
+					+ " [npc.She] cry out in alarm as [npc.she] feel [npc.her] bones growing and snapping into a new form, and within moments,"
 					+ " [npc.her] hands and arms have completely transformed into huge, bat-like wings."
 				+ " Where [npc.her] hands once were, two of [npc.her] fingers have shrunk down into the middle-joint of [npc.her] new appendages,"
 					+ " leaving [npc.herHim] with two small forefingers and an opposable thumb, each of which ends in a little claw."
@@ -380,8 +376,8 @@ public class ArmType {
 			"fingers",
 			Util.newArrayListOfValues("feathered"),
 			Util.newArrayListOfValues("feminine", "feathered"),
-			"Within a matter of moments, a thick layer of [npc.armFullDescription] quickly sprouts out all over them, and, looking down, [npc.she] [npc.verb(see)] [npc.her] new feathers growing over the backs of [npc.her] hands as well."
-				+ " Just as [npc.she] thinks that the transformation has finished, [npc.she] [npc.verb(cry)] out in shock as [npc.her] bones grow and snap into a new form."
+			"Within a matter of moments, a thick layer of [npc.armFullDescription] quickly sprouts out all over them, and, looking down, [npc.she] see [npc.her] new feathers growing over the backs of [npc.her] hands as well."
+					+ " Just as [npc.she] thinks that the transformation has finished, [npc.she] cry out in shock as [npc.her] bones grow and snap into a new form."
 				+ " Thankfully, the transformation is quickly over, leaving [npc.herHim] with a pair of huge, feathered wings in place of arms."
 				+ " Where [npc.her] hands once were, two of [npc.her] fingers have shrunk down into the middle-joint of [npc.her] appendages, leaving [npc.herHim] with two feathered forefingers and an opposable thumb,"
 					+ " each of which ends in a blunt claw."
@@ -403,9 +399,9 @@ public class ArmType {
 	};
 	
 	
-	private static List<AbstractArmType> allArmTypes;
-	private static Map<AbstractArmType, String> armToIdMap = new HashMap<>();
-	private static Map<String, AbstractArmType> idToArmMap = new HashMap<>();
+	private static final List<AbstractArmType> allArmTypes;
+	private static final Map<AbstractArmType, String> armToIdMap = new HashMap<>();
+	private static final Map<String, AbstractArmType> idToArmMap = new HashMap<>();
 	
 	static {
 		allArmTypes = new ArrayList<>();
@@ -498,7 +494,7 @@ public class ArmType {
 		return allArmTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractArmType>> typesMap = new HashMap<>();
+	private static final Map<AbstractRace, List<AbstractArmType>> typesMap = new HashMap<>();
 	
 	public static List<AbstractArmType> getArmTypes(AbstractRace r) {
 		if(typesMap.containsKey(r)) {

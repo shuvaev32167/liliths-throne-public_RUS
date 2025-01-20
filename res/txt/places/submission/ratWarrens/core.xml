@@ -506,7 +506,7 @@
 				Feeling more than a little turned on by the sight of this last defeated rat before you, you can't help but let out a horny [pc.moan] as you advance on [npc.herHim] with lewd thoughts in your mind. Turning back to address your [com.companion], you order, [pc.speech(You just stand back and keep watch, [com.name]. I wouldn't want any surprises to interrupt my fun!)]
 			</p>
 			<p>
-				Nodding in confirmation, [com.name] steps back and watches as you step up to [npc.name] and [pc.moan], [pc.speech(You're hoping to get fucked, huh? I think I can help you with that...)]
+				Nodding in confirmation, [com.name] steps back and watches as you step up to [npc.name] и [pc.moan], [pc.speech(You're hoping to get fucked, huh? I think I can help you with that...)]
 			</p>
 			<p>
 				Letting out an excited [npc.moan] of [npc.her] own, the defeated [npc.race] submissively shuffles closer to you and starts begging to be fucked...
@@ -525,7 +525,7 @@
 				Feeling more than a little turned on by the sight of the defeated rats before you, you can't help but let out a horny [pc.moan] as you advance on them with lewd thoughts in your mind. Turning back to address your [com.companion], you say, [pc.speech(You just stand back and keep watch, [com.name]. I wouldn't want any surprises to interrupt my fun!)]
 			</p>
 			<p>
-				Nodding in confirmation, [com.name] steps back and watches as you step up to [npc.name] and [pc.moan], [pc.speech(You're hoping to get fucked, huh? I think I can help you with that...)]
+				Nodding in confirmation, [com.name] steps back and watches as you step up to [npc.name] и [pc.moan], [pc.speech(You're hoping to get fucked, huh? I think I can help you with that...)]
 			</p>
 			<p>
 				Letting out excited moans of their own, the defeated gang members submissively shuffle closer to you and each start begging to be the one who's fucked first...
@@ -549,7 +549,7 @@
 				Feeling more than a little turned on by the sight of this last defeated rat before you, you can't help but let out a horny [pc.moan] as you advance on [npc.herHim] with lewd thoughts in your mind. Turning back to address your [com.companion], you order, [pc.speech(You just stand back and keep watch, [com.name]. I wouldn't want any surprises to interrupt my fun!)]
 			</p>
 			<p>
-				Nodding in confirmation, [com.name] steps back and watches as you step up to [npc.name] and [pc.moan], [pc.speech(You want some nice gentle fun, hmm? I think I can help you with that...)]
+				Nodding in confirmation, [com.name] steps back and watches as you step up to [npc.name] и [pc.moan], [pc.speech(You want some nice gentle fun, hmm? I think I can help you with that...)]
 			</p>
 			<p>
 				Letting out an excited [npc.moan] of [npc.her] own, the defeated [npc.race] submissively shuffles closer to you and starts begging to be fucked...
@@ -568,7 +568,7 @@
 				Feeling more than a little turned on by the sight of the defeated rats before you, you can't help but let out a horny [pc.moan] as you advance on them with lewd thoughts in your mind. Turning back to address your [com.companion], you say, [pc.speech(You just stand back and keep watch, [com.name]. I wouldn't want any surprises to interrupt my fun!)]
 			</p>
 			<p>
-				Nodding in confirmation, [com.name] steps back and watches as you step up to [npc.name] and [pc.moan], [pc.speech(You want some nice gentle fun, hmm? I think I can help you with that...)]
+				Nodding in confirmation, [com.name] steps back and watches as you step up to [npc.name] и [pc.moan], [pc.speech(You want some nice gentle fun, hmm? I think I can help you with that...)]
 			</p>
 			<p>
 				Letting out excited moans of their own, the defeated gang members submissively shuffle closer to you and each start begging to be the one who's fucked first...
@@ -1068,7 +1068,7 @@
 		#ELSE
 			[murk.speechNoEffects(Ya like the look o' yer new home?)]
 		#ENDIF
-		 Murk asks you in a mocking tone. Not waiting for an answer, he motions [npc.name] to push you down onto one of the vacant frames' benches, and once that's done, he uses the leather straps to tightly restrain your [pc.arms] and [pc.legs]. The immobilised position you find yourself in leaves your mouth and naked rear-end completely exposed to the room, which allows Murk to walk up behind you and deliver a stinging slap to your [pc.ass+].
+		 Murk asks you in a mocking tone. Not waiting for an answer, he motions [npc.name] to push you down onto one of the vacant frames' benches, and once that's done, he uses the leather straps to tightly restrain your [pc.arms] и [pc.legs]. The immobilised position you find yourself in leaves your mouth and naked rear-end completely exposed to the room, which allows Murk to walk up behind you and deliver a stinging slap to your [pc.ass+].
 	</p>
 	<p>
 		Ignoring the yelp that you let out in response to this, the chubby rat-boy steps back and grunts to [npc.name], [murk.speechNoEffects(So go on, gets ta usin' [pc.her] mouth already. The sooner yer done with [pc.herHim], the sooner I can get on with startin' [pc.her] trainin'!)]
@@ -3544,7 +3544,7 @@
 	<p>
 		You're sure that the diminutive cat-girl must have some kind of instinctive attraction to your presence, for no sooner has she entered the hall than she immediately recognises you and starts making her way towards you. As the little Enforcer rushes across the hall, her huge breasts ponderously bounce up and down, causing more than a few of the rats' heads to turn and stare. Quickly covering the distance between the two of you, she pants out to the German-shepherd-boy,
 		#IF(pc.hasCompanions())
-			 [claire.speech(Sir, I know this [pc.race]. Permission to take [pc.herHim] and [pc.her] companion in for questioning?)]
+			 [claire.speech(Sir, I know this [pc.race]. Permission to take [pc.herHim] и [pc.her] companion in for questioning?)]
 		#ELSE
 			 [claire.speech(Sir, I know this [pc.race]. Permission to take [pc.herHim] in for questioning?)]
 		#ENDIF
@@ -3972,7 +3972,7 @@
 		#ELSE
 			[murk.speechNoEffects(Ya like the look o' yer new home?)]
 		#ENDIF
-		 Murk asks you in a mocking tone. Not waiting for an answer, he motions Vengar to push you down onto one of the vacant frames' benches, and once that's done, he uses the leather straps to tightly restrain your [pc.arms] and [pc.legs]. The immobilised position you find yourself in leaves your mouth and naked rear-end completely exposed to the room, which allows Murk to walk up behind you and deliver a stinging slap to your [pc.ass+].
+		 Murk asks you in a mocking tone. Not waiting for an answer, he motions Vengar to push you down onto one of the vacant frames' benches, and once that's done, he uses the leather straps to tightly restrain your [pc.arms] и [pc.legs]. The immobilised position you find yourself in leaves your mouth and naked rear-end completely exposed to the room, which allows Murk to walk up behind you and deliver a stinging slap to your [pc.ass+].
 	</p>
 	<p>
 		Ignoring the yelp that you let out in response to this, the chubby rat-boy steps back and grunts to Vengar, [murk.speechNoEffects(Alright, boss, [pc.sheIs] ready ta 'ave [pc.her] face fucked now!)]

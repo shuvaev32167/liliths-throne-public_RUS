@@ -53,7 +53,7 @@
 	</toeDescriptorsFeminine>
 	
 	<transformationDescription><![CDATA[
-		A layer of fluffy, deer-like fur quickly grows over [npc.her] legs as they shift into a new form. As [npc.her] new fur spreads down to the ends of [npc.her] toes, they suddenly push together, and [npc.she] [npc.verb(let)] out a cry as a thick, hoof-like nail grows in their place, before quickly transforming to turn [npc.her] feet into deer-like hoofs. As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.
+		A layer of fluffy, deer-like fur quickly grows over [npc.her] legs as they shift into a new form. As [npc.her] new fur spreads down to the ends of [npc.her] toes, they suddenly push together, and [npc.she] let out a cry as a thick, hoof-like nail grows in their place, before quickly transforming to turn [npc.her] feet into deer-like hoofs. As the transformation ends, [npc.she] see that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.
 		<br/>[npc.Name] now [npc.has] anthropomorphic, [style.boldGoat(deer-like legs and hoofed feet)], which are [npc.materialDescriptor] [npc.legFullDescription].
 	]]></transformationDescription>
 	

@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.lilayashome;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.PlayerCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -23,6 +20,9 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -350,44 +350,9 @@ public class LilayaBirthing {
 			}
 		}
 	};
-	
-	public static final DialogueNode LILAYA_ASSISTS_BIRTHING_KNOCK_OUT = new DialogueNode("Your room", "", true, true) {
-		
-		@Override
-		public int getSecondsPassed() {
-			return 240*60;
-		}
 
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayaBirthing", "LILAYA_ASSISTS_BIRTHING_KNOCK_OUT");
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Pass out", "The drink Lilaya gave you goes straight to your head, and you collapse back onto the bed as you lose consciousness.", LILAYA_ASSISTS_BIRTHING_FINISHED){
-					@Override
-					public void effects() {
-						if (Main.game.getPlayer().getQuest(QuestLine.SIDE_FIRST_TIME_PREGNANCY) == Quest.SIDE_PREGNANCY_LILAYA_THE_MIDWIFE) {
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_FIRST_TIME_PREGNANCY, Quest.SIDE_UTIL_COMPLETE));
-						}
-						
-						Main.game.getPlayer().setMana(Main.game.getPlayer().getAttributeValue(Attribute.MANA_MAXIMUM));
-
-						Main.game.getNpc(Lilaya.class).setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LAB, false);
-						Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_PLAYER, false);
-					}
-				};
-
-			} else {
-				return null;
-			}
-		}
-	};
-	
 	public static final DialogueNode LILAYA_ASSISTS_EGG_LAYING = new DialogueNode("", "", true) {
-		
+
 		@Override
 		public int getSecondsPassed() {
 			return 10*60;
@@ -395,7 +360,7 @@ public class LilayaBirthing {
 
 		@Override
 		public String getLabel() {
-			return "Your room";
+			return "Твоя комната";
 		}
 
 		@Override
@@ -421,6 +386,65 @@ public class LilayaBirthing {
 						}
 					}
 				};
+
+			} else {
+				return null;
+			}
+		}
+	};
+	public static final DialogueNode LILAYA_ASSISTS_BIRTHING_FINISHED = new DialogueNode("Твоя комната", "", true, true) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 2*60;
+		}
+
+		@Override
+		public String getContent() {
+			UtilText.nodeContentSB.setLength(0);
+
+			UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayaBirthing", "LILAYA_ASSISTS_BIRTHING_FINISHED"));
+
+			UtilText.nodeContentSB.append(
+					"<p style='text-align:center;'>"
+					+ "In the picture you see:");
+
+			for(String id : Main.game.getPlayer().getLastLitterBirthed().getOffspring()) {
+				try {
+					if(id.contains("NPCOffspring")) { // If the offspring is from the pre-offspring seed PR, handle them in the old way:
+						GameCharacter offspring = Main.game.getNPCById(id);
+						String descriptor = getOffspringDescriptor(offspring);
+						UtilText.nodeContentSB.append("<br/>"
+								+ Util.capitaliseSentence(UtilText.generateSingularDeterminer(descriptor))+" "+descriptor
+								+ " <i style='color:"+offspring.getGender().getColour().toWebHexString()+";'>"+offspring.getGender().getName()+"</i>"
+								+ (offspring.isFeral() ? " <i style='color:"+RaceStage.FERAL.getColour().toWebHexString()+";'>"+RaceStage.FERAL.getName()+"</i>" : "")
+								+ " <i style='color:"+offspring.getSubspecies().getColour(offspring).toWebHexString()+";'>"+UtilText.parse(offspring,"[npc.race]")+"</i>");
+
+					} else {
+						OffspringSeed offspring = Main.game.getOffspringSeedById(id);
+						String descriptor = getOffspringDescriptor(offspring);
+						UtilText.nodeContentSB.append("<br/>"
+								+ Util.capitaliseSentence(UtilText.generateSingularDeterminer(descriptor))+" "+descriptor
+								+ (offspring.isFeral() ? " <i style='color:"+RaceStage.FERAL.getColour().toWebHexString()+";'>"+RaceStage.FERAL.getName()+"</i>" : "")
+								+ " <i style='color:"+offspring.getSubspecies().getColour(null).toWebHexString()+";'>"+offspring.getSubspecies().getName(offspring.getBody())+"</i>"
+								+ " <i style='color:"+offspring.getGender().getColour().toWebHexString()+";'>"+offspring.getGenderName()+"</i>");
+					}
+				} catch(Exception ex) {
+				}
+			}
+
+			UtilText.nodeContentSB.append("</p>"
+					+ "<p>"
+					+ "After taking a minute to get your emotions under control, you put the picture away for safe-keeping, and think about what to do next."
+					+ "</p>");
+
+			return UtilText.nodeContentSB.toString();
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 1) {
+				return new Response("Get up", "Get out of bed, ready for a new day.", RoomPlayer.ROOM);
 
 			} else {
 				return null;
@@ -528,60 +552,34 @@ public class LilayaBirthing {
 			}
 		}
 	};
-	
-	public static final DialogueNode LILAYA_ASSISTS_BIRTHING_FINISHED = new DialogueNode("Your room", "", true, true) {
-		
+	public static final DialogueNode LILAYA_ASSISTS_BIRTHING_KNOCK_OUT = new DialogueNode("Твоя комната", "", true, true) {
+
 		@Override
 		public int getSecondsPassed() {
-			return 2*60;
+			return 240*60;
 		}
 
 		@Override
 		public String getContent() {
-			UtilText.nodeContentSB.setLength(0);
-			
-			UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayaBirthing", "LILAYA_ASSISTS_BIRTHING_FINISHED"));
-			
-			UtilText.nodeContentSB.append(
-					"<p style='text-align:center;'>"
-					+ "In the picture you see:");
-			
-			for(String id : Main.game.getPlayer().getLastLitterBirthed().getOffspring()) {
-				try {
-					if(id.contains("NPCOffspring")) { // If the offspring is from the pre-offspring seed PR, handle them in the old way:
-						GameCharacter offspring = Main.game.getNPCById(id);
-						String descriptor = getOffspringDescriptor(offspring);
-						UtilText.nodeContentSB.append("<br/>"
-								+ Util.capitaliseSentence(UtilText.generateSingularDeterminer(descriptor))+" "+descriptor
-								+ " <i style='color:"+offspring.getGender().getColour().toWebHexString()+";'>"+offspring.getGender().getName()+"</i>"
-								+ (offspring.isFeral() ? " <i style='color:"+RaceStage.FERAL.getColour().toWebHexString()+";'>"+RaceStage.FERAL.getName()+"</i>" : "")
-								+ " <i style='color:"+offspring.getSubspecies().getColour(offspring).toWebHexString()+";'>"+UtilText.parse(offspring,"[npc.race]")+"</i>");
-						
-					} else {
-						OffspringSeed offspring = Main.game.getOffspringSeedById(id);
-						String descriptor = getOffspringDescriptor(offspring);
-						UtilText.nodeContentSB.append("<br/>"
-								+ Util.capitaliseSentence(UtilText.generateSingularDeterminer(descriptor))+" "+descriptor
-								+ (offspring.isFeral() ? " <i style='color:"+RaceStage.FERAL.getColour().toWebHexString()+";'>"+RaceStage.FERAL.getName()+"</i>" : "")
-								+ " <i style='color:"+offspring.getSubspecies().getColour(null).toWebHexString()+";'>"+offspring.getSubspecies().getName(offspring.getBody())+"</i>"
-								+ " <i style='color:"+offspring.getGender().getColour().toWebHexString()+";'>"+offspring.getGenderName()+"</i>");
-					}
-				} catch(Exception ex) {
-				}
-			}
-			
-			UtilText.nodeContentSB.append("</p>"
-					+ "<p>"
-					+ "After taking a minute to get your emotions under control, you put the picture away for safe-keeping, and think about what to do next."
-					+ "</p>");
-
-			return UtilText.nodeContentSB.toString();
+			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayaBirthing", "LILAYA_ASSISTS_BIRTHING_KNOCK_OUT");
 		}
 
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Get up", "Get out of bed, ready for a new day.", RoomPlayer.ROOM);
+				return new Response("Pass out", "The drink Lilaya gave you goes straight to your head, and you collapse back onto the bed as you lose consciousness.", LILAYA_ASSISTS_BIRTHING_FINISHED){
+					@Override
+					public void effects() {
+						if (Main.game.getPlayer().getQuest(QuestLine.SIDE_FIRST_TIME_PREGNANCY) == Quest.SIDE_PREGNANCY_LILAYA_THE_MIDWIFE) {
+							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_FIRST_TIME_PREGNANCY, Quest.SIDE_UTIL_COMPLETE));
+						}
+
+						Main.game.getPlayer().setMana(Main.game.getPlayer().getAttributeValue(Attribute.MANA_MAXIMUM));
+
+						Main.game.getNpc(Lilaya.class).setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LAB, false);
+						Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_PLAYER, false);
+					}
+				};
 
 			} else {
 				return null;
@@ -960,7 +958,7 @@ public class LilayaBirthing {
 //		}
 //	};
 //
-//	public static final DialogueNode LILAYA_ASSISTS_INCUBATION_FINISHED = new DialogueNode("Your room", "", true, true) {
+//	public static final DialogueNode LILAYA_ASSISTS_INCUBATION_FINISHED = new DialogueNode("Твоя комната", "", true, true) {
 //		@Override
 //		public int getSecondsPassed() {
 //			return 2*60;

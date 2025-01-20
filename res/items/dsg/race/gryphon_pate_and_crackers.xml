@@ -41,7 +41,7 @@
 			[##npc.incrementMana(npc.getAttributeValue(ATTRIBUTE_MANA_MAXIMUM)/5)]
 			
 			<p style='margin-bottom:0; padding-bottom:0;'>
-				[npc.Name] [npc.verb(start)] to feel stronger and more alert...
+				[npc.Name] start to feel stronger and more alert...
 			</p>
 			[#npc.addPotionEffect(ATTRIBUTE_MAJOR_PHYSIQUE, 1)]
 			[#npc.addPotionEffect(ATTRIBUTE_MAJOR_ARCANE, 1)]
@@ -57,21 +57,21 @@
 	<useDescriptions>
 		<selfUse><![CDATA[
 		#IF(game.isSillyModeEnabled())
-		 [npc.speech(Okay, let's get this out of the packaging,)] [npc.name] [npc.verb(say)] to an unseen audience before unpacking the crackers and opening the tin. The tin makes a slight hiss as air rushes in. [npc.speech(Nice hiss,)] [npc.she] [npc.verb(comment)].
+		 [npc.speech(Okay, let's get this out of the packaging,)] [npc.name] say to an unseen audience before unpacking the crackers and opening the tin. The tin makes a slight hiss as air rushes in. [npc.speech(Nice hiss,)] [npc.she] comment.
 		#ELSE
-		 [npc.Name] [npc.verb(unpack)] the crackers and [npc.verb(open)] the tin.
+		 [npc.Name] unpack the crackers and open the tin.
 		#ENDIF 
-		 [npc.She] [npc.verb(breathe)] in the hearty scent of crackers just out of the oven and freshly cooked meat. Unable to resist the delicious looking meal, [npc.she] quickly [npc.verb(devour)] it all, leaving only an empty tin and torn wax paper behind.
+		 [npc.She] breathe in the hearty scent of crackers just out of the oven and freshly cooked meat. Unable to resist the delicious looking meal, [npc.she] quickly devour it all, leaving only an empty tin and torn wax paper behind.
 		]]></selfUse>
 		<otherUse><![CDATA[
 		#IF(game.isSillyModeEnabled())
 		 [npc.speech(Okay, let's get this out of the packaging.)] [npc.Name] says before unpacking
 		#ELSE
-		 [npc.Name] [npc.verb(unpack)]
+		 [npc.Name] unpack
 		#END IF
-		 the crackers and [npc.verb(open)] the tin
+		 the crackers and open the tin
 		#IF(game.isSillyModeEnabled())
-		. The tin makes a slight hiss as air rushes in. [npc.speech(Nice hiss.)] [npc.she] [npc.verb(say)] while laying out
+		. The tin makes a slight hiss as air rushes in. [npc.speech(Nice hiss.)] [npc.she] say while laying out
 		#ELSE
 		, laying out
 		#ENDIF

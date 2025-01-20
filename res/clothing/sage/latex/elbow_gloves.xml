@@ -46,25 +46,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(slide)] the latex elbow-length gloves over [npc.her] [npc.hands], before pulling them up the length of [npc.her] [npc.arms].]]>
+            <![CDATA[[npc.Name] slide the latex elbow-length gloves over [npc.her] [npc.hands], before pulling them up the length of [npc.her] [npc.arms].]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(slide)] the latex elbow-length gloves over [npc2.namePos] [npc2.hands], before pulling them up length of [npc2.her] [npc2.arms].]]>
+            <![CDATA[[npc.Name] slide the latex elbow-length gloves over [npc2.namePos] [npc2.hands], before pulling them up length of [npc2.her] [npc2.arms].]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(forces)] the latex elbow-length gloves onto [npc2.namePos] [npc2.hands], before yanking them up the length of [npc2.her] [npc2.arms].]]>
+            <![CDATA[[npc.Name] roughly forces the latex elbow-length gloves onto [npc2.namePos] [npc2.hands], before yanking them up the length of [npc2.her] [npc2.arms].]]>
 	  </otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(slide)] the latex elbow-length gloves down [npc.her] [npc.arms], before pulling them free from [npc.her] [npc.hands].]]>
+            <![CDATA[[npc.Name] slide the latex elbow-length gloves down [npc.her] [npc.arms], before pulling them free from [npc.her] [npc.hands].]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(slide)] the latex elbow-length gloves down [npc2.namePos] [npc2.arms], before pulling them free from [npc2.her] [npc2.hands].]]>
+            <![CDATA[[npc.Name] slide the latex elbow-length gloves down [npc2.namePos] [npc2.arms], before pulling them free from [npc2.her] [npc2.hands].]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(yank)] the latex elbow-length gloves down [npc2.namePos] [npc2.arms], before roughly pulling them free from [npc2.her] [npc2.hands].]]>
+            <![CDATA[[npc.Name] yank the latex elbow-length gloves down [npc2.namePos] [npc2.arms], before roughly pulling them free from [npc2.her] [npc2.hands].]]>
 		</otherRough>
 	</displacementText>
 	

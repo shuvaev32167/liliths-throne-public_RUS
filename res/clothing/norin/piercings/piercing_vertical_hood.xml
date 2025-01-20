@@ -53,25 +53,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(slide)] the vertical hood piercing into [npc.her] vaginal piercing.]]>
+            <![CDATA[[npc.Name] slide the vertical hood piercing into [npc.her] vaginal piercing.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(slide)] the vertical hood piercing into [npc2.namePos] vaginal piercing.]]>
+            <![CDATA[[npc.Name] slide the vertical hood piercing into [npc2.namePos] vaginal piercing.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(slide)] the vertical hood piercing into [npc2.namePos] vaginal piercing.]]>
+            <![CDATA[[npc.Name] roughly slide the vertical hood piercing into [npc2.namePos] vaginal piercing.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(slide)] [npc.her] vertical hood piercing out of [npc.her] vaginal piercing.]]>
+            <![CDATA[[npc.Name] slide [npc.her] vertical hood piercing out of [npc.her] vaginal piercing.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(slide)] [npc2.namePos] vertical hood piercing out of [npc2.her] vaginal piercing.]]>
+            <![CDATA[[npc.Name] slide [npc2.namePos] vertical hood piercing out of [npc2.her] vaginal piercing.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(pull)] [npc2.namePos] vertical hood piercing out of [npc2.her] vaginal piercing.]]>
+            <![CDATA[[npc.Name] roughly pull [npc2.namePos] vertical hood piercing out of [npc2.her] vaginal piercing.]]>
 		</otherRough>
 	</displacementText>
 </clothing>

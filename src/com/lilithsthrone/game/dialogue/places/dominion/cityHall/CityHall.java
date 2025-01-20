@@ -1,11 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.cityHall;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
@@ -21,6 +15,12 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * @since 0.1.0
@@ -50,7 +50,29 @@ public class CityHall {
 		Main.game.setActiveNPC(lodger);
 	}
 	
-	public static final DialogueNode OUTSIDE = new DialogueNode("City Hall", "-", false) {
+	public static final DialogueNode LODGER_DENIED = new DialogueNode("", "", false) {
+		@Override
+		public void applyPreParsingEffects() {
+			Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/cityHall/generic", "LODGER_DENIED"));
+			Main.game.banishNPC(lodger);
+		}
+		@Override
+		public int getSecondsPassed() {
+			return 2*60;
+		}
+		@Override
+		public String getContent() {
+			return "";
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 1) {
+                return new Response("Продолжить", "Having left [npc.name] to get settled into [npc.her] new room, you continue with your plans for the day...", Main.game.getDefaultDialogue(false));
+			}
+			return null;
+		}
+    };
+    public static final DialogueNode OUTSIDE = new DialogueNode("Ратуша", "-", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -66,7 +88,7 @@ public class CityHall {
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
 				if(Main.game.getHourOfDay()>=9 && Main.game.getHourOfDay()<=16) {
-					return new Response("Enter", "Dominion's city hall is currently open to the public, so you could head inside if you wanted to.", CITY_HALL_FOYER) {
+                    return new Response("Вход", "Dominion's city hall is currently open to the public, so you could head inside if you wanted to.", CITY_HALL_FOYER) {
 						@Override
 						public void effects() {
 							Main.game.getPlayer().setLocation(WorldType.CITY_HALL, PlaceType.CITY_HALL_ENTRANCE, false);
@@ -76,15 +98,30 @@ public class CityHall {
 					};
 					
 				} else {
-					return new Response("Enter", "Dominion's city hall is currently closed to the public, so if you had any business to conduct, you'll have to return between the hours of nine in the morning, and four in the afternoon.", null);
+                    return new Response("Вход", "Dominion's city hall is currently closed to the public, so if you had any business to conduct, you'll have to return between the hours of nine in the morning, and four in the afternoon.", null);
 				}
 				
 			}
 			return null;
 		}
 	};
-	
-	public static final DialogueNode CITY_HALL_FOYER = new DialogueNode("Foyer", "-", false) {
+	public static final DialogueNode LODGER_GIVEN_ROOM = new DialogueNode("", "", true) {
+		@Override
+		public int getSecondsPassed() {
+			return 15*60;
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/cityHall/generic", "LODGER_GIVEN_ROOM");
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 1) {
+                return new Response("Продолжить", "Having left [npc.name] to get settled into [npc.her] new room, you continue with your plans for the day...", Main.game.getDefaultDialogue(false));
+			}
+			return null;
+		}
+	};	public static final DialogueNode CITY_HALL_FOYER = new DialogueNode("Foyer", "-", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -99,7 +136,7 @@ public class CityHall {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Exit", "Head out through the revolving glass doors back into Dominion.", OUTSIDE) {
+                return new Response("Выход", "Head out through the revolving glass doors back into Dominion.", OUTSIDE) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_CITY_HALL, false);
@@ -187,8 +224,8 @@ public class CityHall {
 			}
 		}
 	};
-	
-	public static final DialogueNode CITY_HALL_CORRIDOR = new DialogueNode("Corridor", "-", false) {
+
+    public static final DialogueNode CITY_HALL_CORRIDOR = new DialogueNode("Коридор", "-", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -398,46 +435,9 @@ public class CityHall {
 		}
 	};
 
-	public static final DialogueNode LODGER_DENIED = new DialogueNode("", "", false) {
-		@Override
-		public void applyPreParsingEffects() {
-			Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/cityHall/generic", "LODGER_DENIED"));
-			Main.game.banishNPC(lodger);
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 2*60;
-		}
-		@Override
-		public String getContent() {
-			return "";
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Continue", "Having left [npc.name] to get settled into [npc.her] new room, you continue with your plans for the day...", Main.game.getDefaultDialogue(false));
-			}
-			return null;
-		}
-	};
+
 	
-	public static final DialogueNode LODGER_GIVEN_ROOM = new DialogueNode("", "", true) {
-		@Override
-		public int getSecondsPassed() {
-			return 15*60;
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/cityHall/generic", "LODGER_GIVEN_ROOM");
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Continue", "Having left [npc.name] to get settled into [npc.her] new room, you continue with your plans for the day...", Main.game.getDefaultDialogue(false));
-			}
-			return null;
-		}
-	};
+
 	
 	public static final DialogueNode CITY_HALL_OFFICE = new DialogueNode("Private Office", "-", false) {
 
@@ -456,8 +456,8 @@ public class CityHall {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode CITY_HALL_STAIRS = new DialogueNode("Staircase", "-", false) {
+
+    public static final DialogueNode CITY_HALL_STAIRS = new DialogueNode("Лестница", "-", false) {
 
 		@Override
 		public int getSecondsPassed() {

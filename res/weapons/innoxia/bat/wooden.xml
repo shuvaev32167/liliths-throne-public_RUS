@@ -16,11 +16,12 @@
 		
 		<rarity>COMMON</rarity> 
 		
-		<weaponSet/> 
-		
-		<equipText><![CDATA[[npc.Name] [npc.verb(ready)] [npc.her] wooden bat in anticipation of using it as a weapon.]]></equipText>
-		
-		<unequipText><![CDATA[[npc.Name] [npc.verb(put)] away [npc.her] wooden bat.]]></unequipText>
+		<weaponSet/>
+
+        <equipText>
+            <![CDATA[[npc.Name] ready [npc.her] wooden bat in anticipation of using it as a weapon.]]></equipText>
+
+        <unequipText><![CDATA[[npc.Name] put away [npc.her] wooden bat.]]></unequipText>
 		
 		<imageName>wooden.svg</imageName> 
 		
@@ -64,25 +65,25 @@
 	
 	<hitDescriptions>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(swing)] [npc.her] wooden bat at [npc2.name], grinning as it connects with [npc2.her] body!
+		[npc.Name] swing [npc.her] wooden bat at [npc2.name], grinning as it connects with [npc2.her] body!
 		]]></hitText>
 		<hitText><![CDATA[
-		Striking out at [npc2.name] with [npc.her] wooden bat, [npc.name] [npc.verb(grin)] as it strikes [npc2.herHim] on the [npc2.arm]!
+		Striking out at [npc2.name] with [npc.her] wooden bat, [npc.name] grin as it strikes [npc2.herHim] on the [npc2.arm]!
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(swipe)] at [npc2.name] with [npc.her] wooden bat, causing [npc2.herHim] to stagger back as [npc2.she] [npc2.verb(get)] whacked in the [npc2.arm]!
+		[npc.Name] swipe at [npc2.name] with [npc.her] wooden bat, causing [npc2.herHim] to stagger back as [npc2.she] [npc2.verb(get)] whacked in the [npc2.arm]!
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(swing)] [npc.her] wooden bat at [npc2.name], but [npc.verb(end)] up missing [npc2.herHim]!
+		[npc.Name] swing [npc.her] wooden bat at [npc2.name], but end up missing [npc2.herHim]!
 		]]></missText>
 		<missText><![CDATA[
-		Striking out at [npc2.name] with [npc.her] wooden bat, [npc.name] [npc.verb(let)] out a frustrated cry as [npc.she] [npc.verb(miss)] [npc.her] target!
+		Striking out at [npc2.name] with [npc.her] wooden bat, [npc.name] let out a frustrated cry as [npc.she] miss [npc.her] target!
 		]]></missText>
 		<missText><![CDATA[
-		With a quick step forwards, [npc.name] [npc.verb(swipe)] at [npc2.name] with [npc.her] wooden bat, but [npc.she] [npc.verb(miss)] [npc.her] target!
+		With a quick step forwards, [npc.name] swipe at [npc2.name] with [npc.her] wooden bat, but [npc.she] miss [npc.her] target!
 		]]></missText>
 	</missDescriptions>
 	

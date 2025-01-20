@@ -7,11 +7,7 @@ import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.npcDialogue.QuickTransformations;
-import com.lilithsthrone.game.dialogue.responses.Response;
-import com.lilithsthrone.game.dialogue.responses.ResponseCombat;
-import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
-import com.lilithsthrone.game.dialogue.responses.ResponseSex;
-import com.lilithsthrone.game.dialogue.responses.ResponseTag;
+import com.lilithsthrone.game.dialogue.responses.*;
 import com.lilithsthrone.game.dialogue.utils.BodyChanging;
 import com.lilithsthrone.game.dialogue.utils.InventoryInteraction;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -149,7 +145,47 @@ public class StormStreetAttackerDialogue {
 		}
 	};
 	
-	public static final DialogueNode AFTER_COMBAT_VICTORY = new DialogueNode("Victory", "", true) {
+	public static final DialogueNode AFTER_SEX_VICTORY = new DialogueNode("Step back", "", true) {
+		@Override
+		public String getDescription(){
+			return "Now that you've had your fun, you can step back and leave [npc.name] to recover.";
+		}
+		@Override
+		public String getContent() {
+			if(Main.sex.getNumberOfOrgasms(getMugger()) >= getMugger().getOrgasmsBeforeSatisfied()) {
+				return UtilText.parseFromXMLFile("encounters/dominion/stormStreetAttack", "AFTER_SEX_VICTORY", getMugger());
+			} else {
+				return UtilText.parseFromXMLFile("encounters/dominion/stormStreetAttack", "AFTER_SEX_VICTORY_NO_ORGASM", getMugger());
+			}
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 1) {
+                return new Response("Продолжить",
+						"Leave [npc.name] behind and continue on your way."
+								+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]",
+						Main.game.getDefaultDialogue(false)){
+					@Override
+					public Colour getHighlightColour() {
+						return PresetColour.GENERIC_NPC_REMOVAL;
+					}
+					@Override
+					public void effects() {
+						Main.game.banishNPC(getMugger());
+					}
+				};
+
+			} else if (index == 6) {
+				return new ResponseEffectsOnly("Inventory", "There's nothing stopping you from helping yourself to [npc.namePos] clothing and items..."){
+					@Override
+					public void effects() {
+						Main.mainController.openInventory(getMugger(), InventoryInteraction.FULL_MANAGEMENT);
+					}
+				};
+			}
+			return null;
+		}
+	};	public static final DialogueNode AFTER_COMBAT_VICTORY = new DialogueNode("Victory", "", true) {
 		@Override
 		public String getDescription() {
 			return "You have defeated [npc.name]!";
@@ -166,7 +202,7 @@ public class StormStreetAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue",
+                return new Response("Продолжить",
 						"Leave [npc.name] behind and continue on your way..."
 								+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]",
 						Main.game.getDefaultDialogue(false)){
@@ -509,49 +545,6 @@ public class StormStreetAttackerDialogue {
 			}
 		}
 	};
-	
-	public static final DialogueNode AFTER_SEX_VICTORY = new DialogueNode("Step back", "", true) {
-		@Override
-		public String getDescription(){
-			return "Now that you've had your fun, you can step back and leave [npc.name] to recover.";
-		}
-		@Override
-		public String getContent() {
-			if(Main.sex.getNumberOfOrgasms(getMugger()) >= getMugger().getOrgasmsBeforeSatisfied()) {
-				return UtilText.parseFromXMLFile("encounters/dominion/stormStreetAttack", "AFTER_SEX_VICTORY", getMugger());
-			} else {
-				return UtilText.parseFromXMLFile("encounters/dominion/stormStreetAttack", "AFTER_SEX_VICTORY_NO_ORGASM", getMugger());
-			}
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Continue",
-						"Leave [npc.name] behind and continue on your way."
-								+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]",
-						Main.game.getDefaultDialogue(false)){
-					@Override
-					public Colour getHighlightColour() {
-						return PresetColour.GENERIC_NPC_REMOVAL;
-					}
-					@Override
-					public void effects() {
-						Main.game.banishNPC(getMugger());
-					}
-				};
-				
-			} else if (index == 6) {
-				return new ResponseEffectsOnly("Inventory", "There's nothing stopping you from helping yourself to [npc.namePos] clothing and items..."){
-					@Override
-					public void effects() {
-						Main.mainController.openInventory(getMugger(), InventoryInteraction.FULL_MANAGEMENT);
-					}
-				};
-			}
-			return null;
-		}
-	};
-	
 	public static final DialogueNode AFTER_SEX_DEFEAT = new DialogueNode("Collapse", "", true) {
 		@Override
 		public int getSecondsPassed() {
@@ -568,7 +561,7 @@ public class StormStreetAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue",
+                return new Response("Продолжить",
 						"Continue on your way."
 								+ "<br/>[style.italicsBad(This will permanently remove [npc.name] from the game!)]",
 						Main.game.getDefaultDialogue(false)) {
@@ -585,4 +578,6 @@ public class StormStreetAttackerDialogue {
 			return null;
 		}
 	};
+	
+
 }

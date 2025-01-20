@@ -1,11 +1,5 @@
 package com.lilithsthrone.game.dialogue.companions;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.controller.MainController;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -30,26 +24,14 @@ import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.places.dominion.shoppingArcade.SuccubisSecrets;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
-import com.lilithsthrone.game.dialogue.utils.BodyChanging;
-import com.lilithsthrone.game.dialogue.utils.CharacterModificationUtils;
-import com.lilithsthrone.game.dialogue.utils.CharactersPresentDialogue;
-import com.lilithsthrone.game.dialogue.utils.CombatMovesSetup;
-import com.lilithsthrone.game.dialogue.utils.CosmeticsDialogue;
-import com.lilithsthrone.game.dialogue.utils.InventoryInteraction;
-import com.lilithsthrone.game.dialogue.utils.SpellManagement;
-import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.game.dialogue.utils.*;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectTimer;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.occupantManagement.OccupancyUtil;
-import com.lilithsthrone.game.occupantManagement.slave.SlaveJob;
-import com.lilithsthrone.game.occupantManagement.slave.SlaveJobFlag;
-import com.lilithsthrone.game.occupantManagement.slave.SlaveJobHours;
-import com.lilithsthrone.game.occupantManagement.slave.SlaveJobSetting;
-import com.lilithsthrone.game.occupantManagement.slave.SlavePermission;
-import com.lilithsthrone.game.occupantManagement.slave.SlavePermissionSetting;
+import com.lilithsthrone.game.occupantManagement.slave.*;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.SVGImages;
 import com.lilithsthrone.utils.Util;
@@ -60,6 +42,12 @@ import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map.Entry;
+
 /**
  * @since 0.3.5.1
  * @version 0.3.5.1
@@ -67,7 +55,7 @@ import com.lilithsthrone.world.places.PlaceType;
  */
 public class CompanionManagement {
 
-	private static DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+	private static final DecimalFormat decimalFormat = new DecimalFormat("#0.00");
 	
 	private static DialogueNode coreNode;
 	private static int defaultResponseTab;
@@ -283,7 +271,7 @@ public class CompanionManagement {
 					return new ResponseEffectsOnly("Inventory", UtilText.parse(characterSelected(), "Manage [npc.namePos] inventory.")) {
 						@Override
 						public void effects() {
-							Main.mainController.openInventory((NPC) characterSelected(), InventoryInteraction.FULL_MANAGEMENT);
+							Main.mainController.openInventory(characterSelected(), InventoryInteraction.FULL_MANAGEMENT);
 						}
 					};
 				}
@@ -1112,8 +1100,8 @@ public class CompanionManagement {
 					boolean settingActive = character.hasSlaveJobSetting(job, setting);
 					
 					String id = settingActive
-							?job.toString()+setting.toString()+"_REMOVE"
-							:job.toString()+setting.toString()+"_ADD";
+							?job.toString()+ setting +"_REMOVE"
+							:job.toString()+ setting +"_ADD";
 			
 					UtilText.nodeContentSB.append(
 							"<div id='"+id+"' class='normal-button"+(settingActive?" selected":"")+"' style='width:23%; margin:1%; text-align:center;"
@@ -1137,8 +1125,8 @@ public class CompanionManagement {
 						boolean settingActive = character.hasSlaveJobSetting(job, setting);
 						
 						String id = settingActive
-								?setting.toString()+"_DISABLED"
-								:setting.toString()+"_TOGGLE_ADD";
+								? setting +"_DISABLED"
+								: setting +"_TOGGLE_ADD";
 				
 						UtilText.nodeContentSB.append(
 								"<div id='"+id+"' class='normal-button"+(settingActive?" selected":"")+"' style='width:23%; margin:1%; text-align:center;"
@@ -1682,8 +1670,8 @@ public class CompanionManagement {
 			}
 		}
 	};
-	
-	public static final DialogueNode SLAVE_MANAGEMENT_TATTOOS = new DialogueNode("Succubi's Secrets", "-", true) {
+
+	public static final DialogueNode SLAVE_MANAGEMENT_TATTOOS = new DialogueNode("Секреты суккубов", "-", true) {
 
 		@Override
 		public String getContent() {
@@ -1727,8 +1715,8 @@ public class CompanionManagement {
 			return true;
 		}
 	};
-	
-	public static final DialogueNode SLAVE_MANAGEMENT_TATTOOS_ADD = new DialogueNode("Succubi's Secrets", "-", true) {
+
+	public static final DialogueNode SLAVE_MANAGEMENT_TATTOOS_ADD = new DialogueNode("Секреты суккубов", "-", true) {
 
 		@Override
 		public String getLabel() {
@@ -1770,7 +1758,7 @@ public class CompanionManagement {
 				}
 			
 			} else if(index==2) {
-				return new Response("Save/Load", "Save/Load tattoo presets.", CosmeticsDialogue.TATTOO_SAVE_LOAD) {
+                return new Response("Сохр./Загруз.", "Save/Load tattoo presets.", CosmeticsDialogue.TATTOO_SAVE_LOAD) {
 					@Override
 					public void effects() {
 						CosmeticsDialogue.initTattooSaveLoadDialogue(SLAVE_MANAGEMENT_TATTOOS_ADD);
@@ -2005,7 +1993,7 @@ public class CompanionManagement {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue",
+                return new Response("Продолжить",
 						"With Scarlett having run off, there's nothing more for you to do except continue with your day...",
 						Main.game.getDefaultDialogue(false));
 			}
@@ -2014,7 +2002,43 @@ public class CompanionManagement {
 	};
 	
 	private static boolean freedSlaveDeleted;
+	public static final DialogueNode SET_SLAVE_FREE_GUEST_ROOM = new DialogueNode("", "", true) {
+		@Override
+		public int getSecondsPassed() {
+			return 5*60;
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("characters/enslavement", "SET_SLAVE_FREE_GUEST_ROOM", characterSelected());
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 1) {
+                return new Response("Продолжить", UtilText.parse(characterSelected(), "Having left [npc.name] to get settled into [npc.her] new room, you continue with your plans for the day..."), Main.game.getDefaultDialogue(false)) {
+					@Override
+					public void effects() {
+						Main.game.getDialogueFlags().setManagementCompanion(null);
+					}
+				};
+			}
+			return null;
+		}
+	};
 	
+	public static final DialogueNode SET_SLAVE_FREE_END_NO_CONTENT = new DialogueNode("", "", false) {
+		@Override
+		public int getSecondsPassed() {
+			return 5*60;
+		}
+		@Override
+		public String getContent() {
+			return "";
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
+		}
+	};
 	public static final DialogueNode SET_SLAVE_FREE = new DialogueNode("", "", true) {
 		@Override
 		public void applyPreParsingEffects() {
@@ -2025,14 +2049,14 @@ public class CompanionManagement {
 				freedSlaveDeleted = true;
 				if(!characterSelected().isAffectionHighEnoughToInviteHome()) {
 					Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("characters/enslavement", "SET_SLAVE_FREE_DISLIKE", characterSelected()));
-					
+
 				} else if(!Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ACCOMMODATION) || !OccupancyUtil.isFreeRoomAvailableForOccupant()) {
 					Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("characters/enslavement", "SET_SLAVE_FREE_NO_GUEST", characterSelected()));
-					
+
 				}
 				Main.game.banishNPC(characterSelected());
 				Main.game.getDialogueFlags().setManagementCompanion(null);
-				
+
 			} else {
 				freedSlaveDeleted = false;
 				characterSelected().getPetNameMap().remove(Main.game.getPlayer().getId());// Reset pet name
@@ -2052,7 +2076,7 @@ public class CompanionManagement {
 		public Response getResponse(int responseTab, int index) {
 			if(freedSlaveDeleted) {
 				if(index == 1) {
-					return new Response("Continue",
+                    return new Response("Продолжить",
 							"Now that your slave has been freed and left your life for good, there's little else for you to do except continue with your other plans for the day...",
 							Main.game.getDefaultDialogue(false)) {
 						@Override
@@ -2074,7 +2098,7 @@ public class CompanionManagement {
 							Main.game.getTextEndStringBuilder().append(characterSelected().incrementAffection(Main.game.getPlayer(), 25));
 						}
 					};
-					
+
 				} else if(index == 2) {
 					return new Response("Goodbye",
 							UtilText.parse(characterSelected(), "Say goodbye to [npc.name]...<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]"),
@@ -2090,10 +2114,10 @@ public class CompanionManagement {
 							Main.game.getDialogueFlags().setManagementCompanion(null);
 						}
 					};
-					
+
 				} else if(index == 3) {
 					return new Response("Throw out",
-							UtilText.parse(characterSelected(), "Call for Rose to unceremoniously throw [npc.name] out of the mansion...<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]"),
+                            UtilText.parse(characterSelected(), "Призвать Розу to unceremoniously throw [npc.name] out of the mansion...<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]"),
 							SET_SLAVE_FREE_END_NO_CONTENT) {
 						@Override
 						public Colour getHighlightColour() {
@@ -2107,45 +2131,7 @@ public class CompanionManagement {
 						}
 					};
 				}
-				
-			}
-			return null;
-		}
-	};
-	
-	public static final DialogueNode SET_SLAVE_FREE_END_NO_CONTENT = new DialogueNode("", "", false) {
-		@Override
-		public int getSecondsPassed() {
-			return 5*60;
-		}
-		@Override
-		public String getContent() {
-			return "";
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
-		}
-	};
-	
-	public static final DialogueNode SET_SLAVE_FREE_GUEST_ROOM = new DialogueNode("", "", true) {
-		@Override
-		public int getSecondsPassed() {
-			return 5*60;
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("characters/enslavement", "SET_SLAVE_FREE_GUEST_ROOM", characterSelected());
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Continue", UtilText.parse(characterSelected(), "Having left [npc.name] to get settled into [npc.her] new room, you continue with your plans for the day..."), Main.game.getDefaultDialogue(false)) {
-					@Override
-					public void effects() {
-						Main.game.getDialogueFlags().setManagementCompanion(null);
-					}
-				};
+
 			}
 			return null;
 		}

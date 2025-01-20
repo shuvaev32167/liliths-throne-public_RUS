@@ -75,7 +75,7 @@ public class Wing implements BodyPartInterface {
 		
 		if (type == getType()) {
 			if(type == WingType.NONE) {
-				return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already [npc.verb(lack)] wings, so nothing happens...)]</p>");
+                return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already lack wings, so nothing happens...)]</p>");
 				
 			} else if(type.getRace()!=Race.NONE) {
 				return UtilText.parse(owner, "<p style='text-align:center;'>[style.colourDisabled([npc.Name] already [npc.has] the [npc.wings] of [npc.a_wingRace], so nothing happens...)]</p>");
@@ -90,12 +90,12 @@ public class Wing implements BodyPartInterface {
 		if(type != WingType.NONE) {
 			sb.append(
 					"<p>"
-						+ "[npc.Name] [npc.verb(try)] to look behind [npc.herHim] as [npc.she] [npc.verb(feel)] a strange bubbling sensation rising up in [npc.her] back, before something starts pushing out from under [npc.her] [npc.skin].");
+                            + "[npc.Name] try to look behind [npc.herHim] as [npc.she] feel a strange bubbling sensation rising up in [npc.her] back, before something starts pushing out from under [npc.her] [npc.skin].");
 			
 		} else {
 			sb.append(
 					"<p>"
-						+ "[npc.NamePos] [npc.wings] suddenly start to twitch and flap with a mind of their own, and [npc.she] [npc.verb(let)] out a gasp as [npc.she] [npc.verb(feel)] them start to transform.");
+                            + "[npc.NamePos] [npc.wings] suddenly start to twitch and flap with a mind of their own, and [npc.she] let out a gasp as [npc.she] feel them start to transform.");
 		}
 		
 		sb.append(" "+type.getTransformationDescription(owner));
@@ -161,11 +161,11 @@ public class Wing implements BodyPartInterface {
 		
 		if(this.size > effectiveSize) {
 			sb.append(
-					UtilText.parse(owner, "<p>[npc.Name] [npc.verb(let)] out an alarmed cry as [npc.she] [npc.verb(feel)] a soothing coolness rise up into [npc.her] [npc.wings+], before they suddenly [style.boldShrink(shrink)].<br/>"));
+                    UtilText.parse(owner, "<p>[npc.Name] let out an alarmed cry as [npc.she] feel a soothing coolness rise up into [npc.her] [npc.wings+], before they suddenly [style.boldShrink(shrink)].<br/>"));
 			
 		} else {
 			sb.append(
-					UtilText.parse(owner, "<p>[npc.Name] [npc.verb(let)] out an alarmed gasp as [npc.she] [npc.verb(feel)] a pulsating warmth rise up into [npc.her] [npc.wings+], before they suddenly [style.boldGrow(grow larger)].<br/>"));
+                    UtilText.parse(owner, "<p>[npc.Name] let out an alarmed gasp as [npc.she] feel a pulsating warmth rise up into [npc.her] [npc.wings+], before they suddenly [style.boldGrow(grow larger)].<br/>"));
 		}
 		
 		this.size = effectiveSize;

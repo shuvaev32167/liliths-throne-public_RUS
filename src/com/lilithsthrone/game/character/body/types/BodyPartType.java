@@ -12,7 +12,7 @@ public enum BodyPartType {
 	// Limbs/body:
 	ARM("arms"),
 	LEG("legs"),
-	SKIN("skin"),
+    SKIN("кожа"),
 	TAIL("tail"),
 	TENTACLE("tentacle"),
 	WING("wings"),
@@ -38,7 +38,7 @@ public enum BodyPartType {
 	FACE("face"),
 	MOUTH("mouth"),
 	TONGUE("tongue"),
-	HAIR("hair"),
+    HAIR("волосы"),
 	HORN("horns"),
 	
 	// Penis:
@@ -55,8 +55,8 @@ public enum BodyPartType {
 
 	SPINNERET("spinneret");
 	
-	private String name;
-	private BodyPartType(String name){
+	private final String name;
+	BodyPartType(String name){
 		this.name=name;
 	}
 	public String getName() {

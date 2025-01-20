@@ -1,12 +1,5 @@
 package com.lilithsthrone.game.character.npc.dominion;
 
-import java.time.Month;
-import java.util.List;
-import java.util.Map.Entry;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
@@ -36,6 +29,12 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.time.Month;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.99
@@ -44,7 +43,7 @@ import com.lilithsthrone.world.places.PlaceType;
  */
 public class Ashley extends NPC {
 
-	private AbstractItemType[] itemsForSale = new AbstractItemType[] {
+	private final AbstractItemType[] itemsForSale = new AbstractItemType[] {
 			ItemType.GIFT_CHOCOLATES,
 			ItemType.GIFT_PERFUME,
 			ItemType.GIFT_ROSE_BOUQUET,
@@ -55,7 +54,7 @@ public class Ashley extends NPC {
 	}
 	
 	public Ashley(boolean isImported) {
-		super(isImported, new NameTriplet("Ashley"), "Minett", //TODO
+        super(isImported, new NameTriplet("Эшли"), "Минетт", //TODO
 				"Ashley is the owner of the shop 'Dream Lover', and is seemingly also its only working staff."
 						+ " They are very stand-offish and loathe helping out their customers, to the point where they'd rather stare at the walls instead of offering any help.",
 				200, Month.AUGUST, 14,//TODO
@@ -227,17 +226,17 @@ public class Ashley extends NPC {
 					+ "<h4>Appearance</h4>"
 				+ "<p>"
 					+ (Main.game.getPlayer().hasTraitActivated(Perk.OBSERVANT)
-							?"Despite the fact that you're highly observant, there's no giveaway whatsoever which would hint as to what Ashley's gender is."
-							:"You have no idea what Ashley's gender is.")
-					+ " Standing at full height, they measure 6'1\" (186cm)."
+                ? "Несмотря на то, что ты очень [pc.genderBasedWord(наблюдателен, наблюдательна)], нет ни одной подсказки, которая бы намекнула на пол Эшли."
+                : "Ты понятия не имеешь, какого пола Эшли.")
+                + " Рост составляет 6 футов 1 дюйм (186 см)."
 				+ "</p>"
 				+ "<p>"
-					+ "The hood of their cloak is pulled up, completely obscuring their facial features."
-					+ " All that you can make out from the darkness of the hood is the sheen of a pair of deep blue eyes."
+                + "Капюшон его плаща поднят, полностью скрывая черты лица."
+                + " Из темноты капюшона можно различить лишь блеск пары тёмно-синих глаз."
 				+ "</p>"
 				+ "<p>"
-					+ "Ashley's cloak covers the entirety of their body, leaving you completely unable to see any part of their body."
-					+ " You have no idea what race they are, much less the state of their breasts and genitals."
+                + "Плащ Эшли полностью закрывает его тело, и поэтому невозможно увидеть ни одной части его тела."
+                + " Неизвестно, какой он расы, и уж тем более не известно, в каком состоянии его грудь и гениталии."
 				+ "</p>");
 		
 		return infoScreenSB.toString();

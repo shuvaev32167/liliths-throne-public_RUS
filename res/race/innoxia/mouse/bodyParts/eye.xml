@@ -22,8 +22,8 @@
 	<descriptorsFeminine/>
 	
 	<transformationDescription><![CDATA[
-		By the time [npc.she] hesitantly [npc.verb(open)] them again, they've changed into mouse-like eyes, with large irises and pupils.
-		<br/>[npc.Name] now [npc.has] [style.boldMouse(mouse-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] and [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].
+		By the time [npc.she] hesitantly open them again, they've changed into mouse-like eyes, with large irises and pupils.
+		<br/>[npc.Name] now [npc.has] [style.boldMouse(mouse-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].
 	]]></transformationDescription>
 	
 	<bodyDescription><![CDATA[

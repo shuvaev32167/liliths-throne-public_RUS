@@ -1,12 +1,5 @@
 package com.lilithsthrone.game.character.npc.dominion;
 
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
@@ -19,29 +12,7 @@ import com.lilithsthrone.game.character.body.types.HornType;
 import com.lilithsthrone.game.character.body.types.LegType;
 import com.lilithsthrone.game.character.body.types.TailType;
 import com.lilithsthrone.game.character.body.types.WingType;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
-import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.ClitorisSize;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.HairLength;
-import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
-import com.lilithsthrone.game.character.body.valueEnums.LipSize;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
-import com.lilithsthrone.game.character.body.valueEnums.NippleSize;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.body.valueEnums.TesticleSize;
-import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
@@ -68,11 +39,7 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexPace;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.managers.dominion.zaranix.SMAmberDoggyFucked;
 import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
 import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
@@ -92,6 +59,12 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.1.95
@@ -105,7 +78,7 @@ public class Amber extends NPC {
 	}
 	
 	public Amber(boolean isImported) {
-		super(isImported, new NameTriplet("Amber"), "Lireceamartu",
+		super(isImported, new NameTriplet("Эмбер"), "Лиресиямарту",
 				"The highest-ranking of Zaranix's maids, Amber is clearly outraged by the fact that you're wandering around her master's house unsupervised.",
 				117, Month.OCTOBER, 17,
 				15,
@@ -308,7 +281,7 @@ public class Amber extends NPC {
 			return "Fiery Maid";
 			
 		} else {
-			return "Amber";
+			return "Эмбер";
 		}
 	}
 	
@@ -403,6 +376,51 @@ public class Amber extends NPC {
 		}
 	}
 	
+	public static final DialogueNode AFTER_SEX_VICTORY = new DialogueNode("Продолжить", "", true) {
+
+		@Override
+		public String getContent() {
+			UtilText.nodeContentSB.setLength(0);
+			if(Main.sex.getNumberOfOrgasms(Main.game.getNpc(Amber.class)) >= Main.game.getNpc(Amber.class).getOrgasmsBeforeSatisfied()) {
+				UtilText.nodeContentSB.append(
+						"<p>"
+							+ "Amber lets out a deeply satisfied sigh, before sinking to the floor in total exhaustion."
+							+ " Despite her fatigue, you see one of her hands slip down between her legs, and, quite clearly still overwhelmed by lust, she starts masturbating in front of you."
+							+ " She's obviously not going to pose much of a threat like this, so you turn your attention back towards the task at hand; that of finding Zaranix and rescuing Arthur."
+						+ "</p>");
+
+			} else {
+				UtilText.nodeContentSB.append(
+						"<p>"
+							+ "Amber lets out a desperate whine, before sinking to the floor and pressing both of her hands to her groin."
+							+ " Having not been satisfied, she's quite clearly still overcome by her intense lust, and starts frantically masturbating right there on the floor."
+							+ " She's obviously not going to pose much of a threat like this, so you turn your attention back towards the task at hand; that of finding Zaranix and rescuing Arthur."
+						+ "</p>");
+			}
+
+			UtilText.nodeContentSB.append(
+					"<p>"
+							+ "Conscious of the fact that there are other maids to look out for, you prepare to set off further into the house..."
+					+ "</p>");
+
+			return UtilText.nodeContentSB.toString();
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+				return new Response("Продолжить", "Continue exploring Zaranix's house.", Main.game.getPlayerCell().getDialogue(false)) {
+					@Override
+					public DialogueNode getNextDialogue() {
+						return Main.game.getPlayerCell().getDialogue(false);
+					}
+				};
+
+			} else {
+				return null;
+			}
+		}
+	};
 	public static final DialogueNode AFTER_COMBAT_VICTORY = new DialogueNode("Victory", "", true) {
 
 		@Override
@@ -428,13 +446,13 @@ public class Amber extends NPC {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Continue exploring Zaranix's house.", PlaceType.ZARANIX_GF_ENTRANCE.getDialogue(false)) {
+				return new Response("Продолжить", "Continue exploring Zaranix's house.", PlaceType.ZARANIX_GF_ENTRANCE.getDialogue(false)) {
 					@Override
 					public DialogueNode getNextDialogue() {
 						return Main.game.getPlayerCell().getDialogue(false);
 					}
 				};
-				
+
 			} if(index==2) {
 				return new ResponseSex("Use Amber",
 						"Have some fun with this fiery maid.",
@@ -455,7 +473,7 @@ public class Amber extends NPC {
 							+ "She pushes herself off from the wall, wrapping her arms around your back and desperately pressing her [amber.lips+] against yours."
 							+ " You reciprocate the gesture, and after spending a few moments of sliding your tongues into one another's mouths, you pull back, grinning..."
 						+ "</p>");
-				
+
 			} else if(index==3) {
 				return new ResponseSex("Submit",
 						"Amber's fiery personality is seriously turning you on. You can't bring yourself to take the dominant role, but you <i>do</i> want to have sex with her. Perhaps if you submitted, she'd be willing to fuck you?",
@@ -480,7 +498,7 @@ public class Amber extends NPC {
 							+ "You reciprocate the gesture, but only spend a few moments sliding your tongues into one another's mouths before Amber pulls back, moaning,"
 							+ " [amber.speech(Good bitch! Fuck... I'm so fucking horny! I <i>need</i> you!)]"
 						+ "</p>");
-				
+
 			} else if (index == 4) {
 				return new Response("Transformations",
 						"Get Amber to use [amber.her] demonic powers to transform [amber.herself]...",
@@ -491,53 +509,7 @@ public class Amber extends NPC {
 						BodyChanging.setTarget(Main.game.getNpc(Amber.class));
 					}
 				};
-				
-			} else {
-				return null;
-			}
-		}
-	};
-	
-	public static final DialogueNode AFTER_SEX_VICTORY = new DialogueNode("Continue", "", true) {
 
-		@Override
-		public String getContent() {
-			UtilText.nodeContentSB.setLength(0);
-			if(Main.sex.getNumberOfOrgasms(Main.game.getNpc(Amber.class)) >= Main.game.getNpc(Amber.class).getOrgasmsBeforeSatisfied()) {
-				UtilText.nodeContentSB.append(
-						"<p>"
-							+ "Amber lets out a deeply satisfied sigh, before sinking to the floor in total exhaustion."
-							+ " Despite her fatigue, you see one of her hands slip down between her legs, and, quite clearly still overwhelmed by lust, she starts masturbating in front of you."
-							+ " She's obviously not going to pose much of a threat like this, so you turn your attention back towards the task at hand; that of finding Zaranix and rescuing Arthur."
-						+ "</p>");
-				
-			} else {
-				UtilText.nodeContentSB.append(
-						"<p>"
-							+ "Amber lets out a desperate whine, before sinking to the floor and pressing both of her hands to her groin."
-							+ " Having not been satisfied, she's quite clearly still overcome by her intense lust, and starts frantically masturbating right there on the floor."
-							+ " She's obviously not going to pose much of a threat like this, so you turn your attention back towards the task at hand; that of finding Zaranix and rescuing Arthur."
-						+ "</p>");
-			}
-			
-			UtilText.nodeContentSB.append(
-					"<p>"
-							+ "Conscious of the fact that there are other maids to look out for, you prepare to set off further into the house..."
-					+ "</p>");
-			
-			return UtilText.nodeContentSB.toString();
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Continue", "Continue exploring Zaranix's house.", Main.game.getPlayerCell().getDialogue(false)) {
-					@Override
-					public DialogueNode getNextDialogue() {
-						return Main.game.getPlayerCell().getDialogue(false);
-					}
-				};
-				
 			} else {
 				return null;
 			}
@@ -644,20 +616,18 @@ public class Amber extends NPC {
 
 	@Override
 	public String getLevelDrainDescription(GameCharacter target) {
-		StringBuilder sb = new StringBuilder();
+
+        String sb = UtilText.returnStringAtRandom(
+                "Letting out a mocking laugh, Amber roughly grabs hold of you and growls, ",
+                "Amber's glowing eyes open wide, and with a cruel laugh, she reveals, ",
+                "Letting out a cruel, mocking laugh, Amber greedily absorbs your energy and taunts, "
+        ) +
+                UtilText.returnStringAtRandom(
+                        "[npc.speech(I'm going to drain all of your power! You'll be nothing but my worthless pet by the time I'm done with you!)]",
+                        "[npc.speech(You pathetic bitch! All of your power will be mine!)]",
+                        "[npc.speech(What a pathetic bitch you are to be having your power drained away like this!)]");
 		
-		sb.append(UtilText.returnStringAtRandom(
-				"Letting out a mocking laugh, Amber roughly grabs hold of you and growls, ",
-				"Amber's glowing eyes open wide, and with a cruel laugh, she reveals, ",
-				"Letting out a cruel, mocking laugh, Amber greedily absorbs your energy and taunts, "
-				));
-		
-		sb.append(UtilText.returnStringAtRandom(
-				"[npc.speech(I'm going to drain all of your power! You'll be nothing but my worthless pet by the time I'm done with you!)]",
-				"[npc.speech(You pathetic bitch! All of your power will be mine!)]",
-				"[npc.speech(What a pathetic bitch you are to be having your power drained away like this!)]"));
-		
-		return UtilText.parse(this, target, sb.toString());
+		return UtilText.parse(this, target, sb);
 	}
 	
 	@Override

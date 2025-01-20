@@ -48,25 +48,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(press)] the cups of the strapless bra to [npc.her] chest, before reaching around to [npc.her] back and fastening it in place.]]>
+            <![CDATA[[npc.Name] press the cups of the strapless bra to [npc.her] chest, before reaching around to [npc.her] back and fastening it in place.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(press)] the cups of the strapless bra to [npc2.namePos] chest, before reaching around to [npc2.her] back and fastening it in place.]]>
+            <![CDATA[[npc.Name] press the cups of the strapless bra to [npc2.namePos] chest, before reaching around to [npc2.her] back and fastening it in place.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(press)] the cups of the strapless bra to [npc2.namePos] chest, before reaching around to [npc2.her] back and fastening it in place.]]>
+            <![CDATA[[npc.Name] roughly press the cups of the strapless bra to [npc2.namePos] chest, before reaching around to [npc2.her] back and fastening it in place.]]>
 	  </otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unfasten)] [npc.her] strapless bra and [npc.verb(take)] it off.]]>
+            <![CDATA[[npc.Name] unfasten [npc.her] strapless bra and take it off.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unfasten)] [npc2.namePos] strapless bra and [npc.verb(take)] it off.]]>
+            <![CDATA[[npc.Name] unfasten [npc2.namePos] strapless bra and take it off.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(unfasten)] [npc2.namePos] strapless bra and [npc.verb(take)] it off.]]>
+            <![CDATA[[npc.Name] roughly unfasten [npc2.namePos] strapless bra and take it off.]]>
 		</otherRough>
 	</displacementText>
 	

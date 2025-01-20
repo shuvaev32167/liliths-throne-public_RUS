@@ -15,7 +15,7 @@
 		<descriptor><![CDATA[spider-like]]></descriptor>
 	</descriptorsFeminine>
 	<transformationDescription><![CDATA[
-		By the time [npc.she] hesitantly [npc.verb(open)] them again, they've changed and quadrupled into spider-like eyes, with the two largest located where [npc.her] former eyes were in the centre of [npc.her] face.
+		By the time [npc.she] hesitantly open them again, they've changed and quadrupled into spider-like eyes, with the two largest located where [npc.her] former eyes were in the centre of [npc.her] face.
 		<br/>[npc.Name] now [npc.has] [style.boldSpider(spider-like eyes)] of a solid [npc.irisColour(true)] colour.
 	]]></transformationDescription>
 	<bodyDescription><![CDATA[

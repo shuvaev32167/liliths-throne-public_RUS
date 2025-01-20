@@ -1,7 +1,5 @@
 package com.lilithsthrone.controller;
 
-import org.w3c.dom.events.EventTarget;
-
 import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInformationEventListener;
 import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInventoryEventListener;
 import com.lilithsthrone.game.character.markings.AbstractTattooType;
@@ -21,6 +19,7 @@ import com.lilithsthrone.game.inventory.outfit.OutfitType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.main.Main;
+import org.w3c.dom.events.EventTarget;
 
 /**
  * @since 0.4.6.4
@@ -155,11 +154,11 @@ public class DebugController {
 
 				MainController.addEventListener(MainController.document, id, "mousemove", MainController.moveTooltipListener, false);
 				MainController.addEventListener(MainController.document, id, "mouseleave", MainController.hideTooltipListener, false);
-				TooltipInformationEventListener el =  new TooltipInformationEventListener().setInformation("Apply Outfit",
-						"Click to apply this outfit to the Dress-up doll."
-						+ " The outfit's femininity, outfit type, and conditional statement are all ignored for this purpose."
-						+ " The doll's leg configuration will change if needed."
-						+ " Click this multiple times to see many variations.");
+				TooltipInformationEventListener el = new TooltipInformationEventListener().setInformation("Применить наряд",
+						"Нажмите, чтобы применить этот наряд к нарядной кукле."
+								+ " Женственность наряда, тип наряда и условный знак не учитываются."
+								+ " При необходимости конфигурация ног куклы будет меняться."
+								+ " Нажмите несколько раз, чтобы увидеть множество вариантов.");
 				MainController.addEventListener(MainController.document, id, "mouseenter", el, false);
 			}
 		}

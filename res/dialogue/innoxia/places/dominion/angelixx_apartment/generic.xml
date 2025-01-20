@@ -1184,7 +1184,8 @@
 			[#game.banishNPC(stranger2)]
 		]]></preParsingEffects>
         <title><![CDATA[Finished]]></title>
-        <tooltip><![CDATA[[stranger1.Name] and [stranger2.name] have have their fun and bring an end to the sex...]]></tooltip>
+        <tooltip>
+            <![CDATA[[stranger1.Name] и [stranger2.name] have have their fun and bring an end to the sex...]]></tooltip>
 		<content/>
 		<secondsPassed minutes="true"><![CDATA[2]]></secondsPassed>
 		<continuesDialogue>false</continuesDialogue>

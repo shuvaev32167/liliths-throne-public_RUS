@@ -51,10 +51,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		After first unscrewing the cap, [npc.name] [npc.verb(bring)] the bottle of coffee up to [npc.her] [npc.mouth]. A strong smell of espresso assaults [npc.her] nostrils, and as [npc.she] [npc.verb(tilt)] [npc.her] head back and [npc.verb(start)] drinking the cool liquid, [npc.she] [npc.verb(feel)] a surge of alertness.
+		After first unscrewing the cap, [npc.name] bring the bottle of coffee up to [npc.her] [npc.mouth]. A strong smell of espresso assaults [npc.her] nostrils, and as [npc.she] tilt [npc.her] head back and start drinking the cool liquid, [npc.she] feel a surge of alertness.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		After first unscrewing the cap, [npc.name] [npc.verb(bring)] the bottle of coffee up to [npc2.namePos] waiting [npc2.lips]. A strong smell of espresso assaults [npc2.her] nostrils, and as [npc2.she] [npc2.verb(tilt)] [npc2.her] head back and [npc2.verb(start)] drinking the cool liquid, [npc2.she] [npc2.verb(feel)] a surge of alertness.
+		After first unscrewing the cap, [npc.name] bring the bottle of coffee up to [npc2.namePos] waiting [npc2.lips]. A strong smell of espresso assaults [npc2.her] nostrils, and as [npc2.she] [npc2.verb(tilt)] [npc2.her] head back and [npc2.verb(start)] drinking the cool liquid, [npc2.she] [npc2.verb(feel)] a surge of alertness.
 		]]></otherUse>
 	</useDescriptions>
 

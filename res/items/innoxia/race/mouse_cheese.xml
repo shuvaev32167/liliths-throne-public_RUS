@@ -39,7 +39,7 @@
 			[##npc.incrementHealth(npc.getAttributeValue(ATTRIBUTE_HEALTH_MAXIMUM)/10)]
 			
 			<p style='margin-bottom:0; padding-bottom:0;'>
-				[npc.Name] [npc.verb(start)] to feel [npc.her] arcane power increasing...
+				[npc.Name] start to feel [npc.her] arcane power increasing...
 			</p>
 			[#npc.addPotionEffect(ATTRIBUTE_MAJOR_ARCANE, 3)]
 		]]></applyEffects>
@@ -55,10 +55,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-			Tearing off the plastic wrapper, [npc.name] [npc.verb(take)] a big bite out of the wedge of Harvest Mouse's cheese. Happy to discover that it has a mild, delicious taste, [npc.she] quickly [npc.verb(finish)] it off, after which [npc2.she] [npc2.verb(let)] out a satisfied sigh.
+			Tearing off the plastic wrapper, [npc.name] take a big bite out of the wedge of Harvest Mouse's cheese. Happy to discover that it has a mild, delicious taste, [npc.she] quickly finish it off, after which [npc2.she] [npc2.verb(let)] out a satisfied sigh.
 		]]></selfUse>
 		<otherUse><![CDATA[
-			Tearing off the plastic wrapper, [npc.name] [npc.verb(make)] [npc2.name] take a big bite out of the wedge of Harvest Mouse's cheese. Happy to discover that it has a mild, delicious taste, [npc2.name] quickly [npc2.verb(finish)] it off, after which [npc2.she] [npc2.verb(let)] out a satisfied sigh.
+			Tearing off the plastic wrapper, [npc.name] make [npc2.name] take a big bite out of the wedge of Harvest Mouse's cheese. Happy to discover that it has a mild, delicious taste, [npc2.name] quickly [npc2.verb(finish)] it off, after which [npc2.she] [npc2.verb(let)] out a satisfied sigh.
 		]]></otherUse>
 	</useDescriptions>
 

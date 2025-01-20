@@ -3257,7 +3257,7 @@
 		Doing as you're told, you hold yourself still for the succubus, who
 		#IF(pc.getClothingInSlot(IS_NECK)!=null)
 			#IF(pc.getClothingInSlot(IS_PIERCING_NOSE)!=null)
-				 hastily unequips your [pc.slotClothing(NECK, false)] and [pc.slotClothing(PIERCING_NOSE, false)], and then
+				 hastily unequips your [pc.slotClothing(NECK, false)] и [pc.slotClothing(PIERCING_NOSE, false)], and then
 			#ELSE
 				 hastily unequips your [pc.slotClothing(NECK, false)], and then
 			#ENDIF
@@ -3279,7 +3279,7 @@
 	
 	<htmlContent tag="BARN_WORK_REWARD_CLOTHING_END"><![CDATA[
 	<p>
-		[style.speechFeminine(There we go, all done,)] the succubus says as she looks over your new [pc.slotClothing(NECK, true)] and [pc.slotClothing(PIERCING_NOSE, true)]. Letting out another weary sigh, she mutters, [style.speechFeminine(I wish Evelyx would give me some more time off. I could do with growing myself a nice, fat cock and fucking you for a while... Oh well...)]
+		[style.speechFeminine(There we go, all done,)] the succubus says as she looks over your new [pc.slotClothing(NECK, true)] и [pc.slotClothing(PIERCING_NOSE, true)]. Letting out another weary sigh, she mutters, [style.speechFeminine(I wish Evelyx would give me some more time off. I could do with growing myself a nice, fat cock and fucking you for a while... Oh well...)]
 	</p>
 	<p>
 		With that, the succubus turns around on the spot and swiftly departs, leaving you lying in your milking stall wondering what to do next...

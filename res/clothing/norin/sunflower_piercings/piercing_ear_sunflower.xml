@@ -46,25 +46,25 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(slide)] a pair of sunflower earrings into [npc.her] [npc.ears].]]>
+        <![CDATA[[npc.Name] slide a pair of sunflower earrings into [npc.her] [npc.ears].]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(slide)] a pair of sunflower earrings into [npc2.namePos] [npc2.ears].]]>
+        <![CDATA[[npc.Name] slide a pair of sunflower earrings into [npc2.namePos] [npc2.ears].]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(slide)] a pair of sunflower earrings into [npc2.namePos] [npc2.ears].]]>
+        <![CDATA[[npc.Name] roughly slide a pair of sunflower earrings into [npc2.namePos] [npc2.ears].]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(unclip)] [npc.her] sunflower earrings and [npc.verb(take)] them out.]]>
+        <![CDATA[[npc.Name] unclip [npc.her] sunflower earrings and take them out.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(unclip)] [npc2.namePos] sunflower earrings and [npc.verb(take)] them out.]]>
+        <![CDATA[[npc.Name] unclip [npc2.namePos] sunflower earrings and take them out.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(unclip)] [npc2.namePos] sunflower earrings and roughly [npc.verb(pull)] them out.]]>
+        <![CDATA[[npc.Name] unclip [npc2.namePos] sunflower earrings and roughly pull them out.]]>
     </otherRough>
   </displacementText>
 	

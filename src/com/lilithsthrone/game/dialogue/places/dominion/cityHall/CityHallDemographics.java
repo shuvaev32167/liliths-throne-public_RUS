@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.cityHall;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.npc.NPC;
@@ -35,6 +32,9 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.3.2
@@ -317,7 +317,7 @@ public class CityHallDemographics {
 				
 			} else {
 				if (index == 1) {
-					return new Response("Vanessa",
+					return new Response("Ванесса",
 							"Tell the elderly fox-girl that you'd be happy to call her 'Vanessa', before getting to work on cataloguing papers."
 									+ "<br/><i>(You can later switch between calling her 'Vanessa' and 'Ms. Cunningham' at any time.)</i>",
 							OFFER_HELP_FINISH) {
@@ -338,7 +338,7 @@ public class CityHallDemographics {
 					};	
 					
 				} else if(index==2) {
-					return new Response("Ms. Cunningham",
+					return new Response("Ms. Каннингем",
 							"Tell the elderly fox-girl that you prefer to call her 'Ms. Cunningham', before getting to work on cataloguing papers."
 									+ "<br/><i>(You can later switch between calling her 'Vanessa' and 'Ms. Cunningham' at any time.)</i>",
 							OFFER_HELP_FINISH) {
@@ -925,13 +925,9 @@ public class CityHallDemographics {
 		}
 		Main.mainController.getWebEngine().executeScript("document.getElementById('hiddenFieldSurname').innerHTML=document.getElementById('surnameInput').value;");
 		if(Main.mainController.getWebEngine().getDocument()!=null) {
-			if (Main.mainController.getWebEngine().getDocument().getElementById("hiddenFieldSurname").getTextContent().length()>=1
-					&& (Main.mainController.getWebEngine().getDocument().getElementById("hiddenFieldSurname").getTextContent().length() > 32
-							|| !Main.mainController.getWebEngine().getDocument().getElementById("hiddenFieldSurname").getTextContent().matches("[^\\[\\]\\.]+"))) {
-				unsuitableSurname = true;
-			} else {
-				unsuitableSurname = false;
-			}
+            unsuitableSurname = Main.mainController.getWebEngine().getDocument().getElementById("hiddenFieldSurname").getTextContent().length() >= 1
+                    && (Main.mainController.getWebEngine().getDocument().getElementById("hiddenFieldSurname").getTextContent().length() > 32
+                    || !Main.mainController.getWebEngine().getDocument().getElementById("hiddenFieldSurname").getTextContent().matches("[^\\[\\]\\.]+"));
 		}
 		
 		if(applyOffspringSurnames && Main.mainController.getWebEngine().getDocument().getElementById("hiddenFieldSurname").getTextContent().length()<1) {

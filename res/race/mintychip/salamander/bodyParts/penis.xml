@@ -74,7 +74,7 @@
 	<!-- The description which is shown when a character transforms to obtain this penis type.
 	This description immediately follows a brief description of the penis type beginning to transform. -->
 	<transformationDescription><![CDATA[
-		Letting out an involuntary moan, [npc.name] [npc.verb(feel)] [npc.her] penis shifting into a new form, and [npc.sheIs] hit by a wave of overwhelming arousal as a thick knot suddenly presses out at the base of [npc.her] shaft. As [npc.she] [npc.verb(pant)] and [npc.verb(gasp)] for air, the tip of [npc.her] cock narrows down as it tapers into its new form.
+		Letting out an involuntary moan, [npc.name] feel [npc.her] penis shifting into a new form, and [npc.sheIs] hit by a wave of overwhelming arousal as a thick knot suddenly presses out at the base of [npc.her] shaft. As [npc.she] pant и gasp for air, the tip of [npc.her] cock narrows down as it tapers into its new form.
 		<br/>[npc.She] now [npc.has] a [style.boldSalamander(salamander-like penis)], [npc.materialDescriptor] [npc.penisFullDescription(true)].
 		<br/>[npc.She] [npc.has] [style.boldSalamander([npc.ballsCount]#IF(npc.isInternalTesticles()) internal#ENDIF balls)], [npc.materialDescriptor] [npc.ballsFullDescription(true)], which produce [npc.cumColour(true)] [style.boldSalamander(salamander cum)].
 	]]></transformationDescription>

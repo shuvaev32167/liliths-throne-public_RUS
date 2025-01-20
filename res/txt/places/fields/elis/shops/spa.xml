@@ -569,7 +569,7 @@
 	<p>
 		Finding yourself quickly getting aroused at the sight of Daphne's commitment to acting like a dumb sheep, you [pc.step] forwards and prepare to fuck her. Turning her head back once more to watch your approach, Daphne spreads her legs a little and pushes her ass even further up into the air, and as she presents you with her
 		#IF(game.isAnalContentEnabled())
-			 [daphne.pussy+] and [daphne.asshole+],
+			 [daphne.pussy+] и [daphne.asshole+],
 		#ELSE
 			 [daphne.pussy+],
 		#ENDIF

@@ -1,10 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.lilayashome;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
@@ -26,6 +21,11 @@ import com.lilithsthrone.world.WorldRegion;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * @since 0.1.78
  * @version 0.4.3.4
@@ -40,8 +40,8 @@ public class Library {
 		JUNGLE,
 		MOUNTAIN,
 		SEA,
-		DESERT;
-	}
+		DESERT
+    }
 	
 	private static Set<AbstractSubspecies> getAisleSubspecies(LibraryAisle aisle) {
 		Set<AbstractSubspecies> aisleSubspecies = new HashSet<>();
@@ -84,210 +84,26 @@ public class Library {
 		return aisleSubspecies;
 	}
 	
-	public static final DialogueNode LIBRARY = new DialogueNode("", "", false) {
+	public static final DialogueNode DUNGEON_TRIGGER = new DialogueNode("", "", true) {
 		@Override
 		public String getContent() {
-			UtilText.nodeContentSB.setLength(0);
-			List<NPC> charactersPresent = Main.game.getNonCompanionCharactersPresent();
-
-			UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/library", "LIBRARY"));
-			
-			if(!charactersPresent.isEmpty()) {
-				for(NPC slave : charactersPresent) {
-					UtilText.nodeContentSB.append(LilayaHomeGeneric.getSlavePresentDescription(slave,
-							"is not even bothering to pretend that [npc.sheIs] working.",
-							"appears to be half-heartedly rearranging some books.",
-							"is currently dusting the shelves and making sure that everything is in order.",
-							"is currently reorganising one of the shelves.",
-							"is dutifully making a catalogue of all the books available in the library."));
-				}
-			}
-			
-			return UtilText.nodeContentSB.toString();
+			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/library", "DUNGEON_TRIGGER");
 		}
-		
-		@Override
-		public String getResponseTabTitle(int index) {
-			if(index==0) {
-				return "Library";
-				
-			} else if(index==1) {
-				return "Fast Travel";
-				
-			} else if(index==2) {
-				return "Spells";
-				
-			} else if(index==3) {
-				return "Races";
-			}
-			
-			return null;
-		}
-		
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if(responseTab==0) {
-				List<NPC> charactersPresent = Main.game.getNonCompanionCharactersPresent();
-				
-				if (index == 1) {
-					if(Main.game.getCurrentDialogueNode()==ARCANE_AROUSAL) {
-						return new Response("Arcane Arousal", "You are already reading this book!", null);
+			if(index==1) {
+                return new Response("Подземелье Лилайи",
+						"Head down the spiral staircase to Lilaya's dungeon.",
+						DialogueManager.getDialogueFromId("acexp_dominion_lilaya_dungeon_stairsUp")) {
+					@Override
+					public void effects() {
+						Main.game.appendToTextStartStringBuilder(UtilText.parseFromXMLFile("acexp/dominion/lilaya_dungeon", "DUNGEON_ENTRY"));
+						Main.game.getPlayer().setLocation(WorldType.getWorldTypeFromId("acexp_dungeon"), PlaceType.getPlaceTypeFromId("acexp_dungeon_stairs"), false);
 					}
-					return new Response("Arcane Arousal", "A leather-bound tome that seems to offer an insight into how the arcane works.", ARCANE_AROUSAL) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.readBook1, true);
-						}
-					};
-
-				} else if (index == 2) {
-					if(Main.game.getCurrentDialogueNode()==LILITHS_DYNASTY) {
-						return new Response("Lilith's Dynasty", "You are already reading this book!", null);
-					}
-					return new Response("Lilith's Dynasty", "A hardback book that might give some clues as to who exactly Lilith is.", LILITHS_DYNASTY) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.readBook2, true);
-						}
-					};
-
-				} else if (index == 3) {
-					if(Main.game.getCurrentDialogueNode()==DOMINION_HISTORY) {
-						return new Response("Dominion's History", "You are already reading this book!", null);
-					}
-					return new Response("Dominion's History", "A paperback book describing the events that led to the creation of the city you currently find yourself in.", DOMINION_HISTORY) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.readBook3, true);
-						}
-					};
-
-				} else if (index == 4) {
-					if(Main.game.getCurrentDialogueNode()==PREGNANCY_INFO) {
-						return new Response("Knocked Up", "You are already reading this book!", null);
-					}
-					return new Response("Knocked Up", "A small paperback book which contains all the information you'd ever need concerning pregnancies in this world.", PREGNANCY_INFO) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.readBook4, true);
-						}
-					};
-
-				} else if(index==5) {
-					if(Main.game.getCurrentDialogueNode()==FERAL_HISTORY) {
-						return new Response("The History of Ferals", "You are already reading this book!", null);
-					}
-					return new Response("The History of Ferals", "A hardback book detailing the history of feral transformations in the society of Lilith's Realm.", FERAL_HISTORY) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.readBook5, true);
-						}
-					};
-					
-				} else if (index == 6) {
-					if(Main.game.getCurrentDialogueNode()==DOMINION_MAP) {
-						return new Response("City Map", "You are already viewing the map of Dominion!", null);
-					}
-					return new Response("City Map", "A large, framed map of Dominion hangs on one wall. Take a picture of it.", DOMINION_MAP) {
-						@Override
-						public void effects() {
-							Cell[][] grid = Main.game.getWorlds().get(WorldType.DOMINION).getGrid();
-							for(int i=0; i<grid.length; i++) {
-								for(int j=0; j<grid[0].length; j++) {
-									grid[i][j].setDiscovered(true);
-								}
-							}
-						}
-					};
-	
-				} else if (index == 7 && Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_SLAVERY, Quest.SIDE_SLAVER_NEED_RECOMMENDATION)) {
-					if(Main.game.getCurrentDialogueNode()==SLAVERY_HISTORY) {
-						return new Response("People as Property", "You are already reading this book!", null);
-					}
-					return new Response("People as Property", "A thick, hardback book detailing the history and legality of slavery in Lilith's Realm.", SLAVERY_HISTORY) {
-						@Override
-						public void effects() {
-							Main.game.appendToTextStartStringBuilder(UtilText.parseFromXMLFile("places/dominion/lilayasHome/library", "SLAVERY_HISTORY"));
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.readBookSlavery, true);
-						}
-					};
-	
-				} else if (index == 8 && Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.readBookSlavery)) {
-					if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.getDialogueFlagValueFromId("acexp_dungeon_found"))) {
-						return new Response("Lilaya's dungeon",
-								"Pull the thick book bearing the title 'Lilaya's Dirty Secrets' to open the secret passage down to Lilaya's dungeon.",
-								DialogueManager.getDialogueFromId("acexp_dominion_lilaya_dungeon_stairsUp")) {
-							@Override
-							public void effects() {
-								Main.game.appendToTextStartStringBuilder(UtilText.parseFromXMLFile("places/dominion/lilayasHome/library", "DUNGEON_OPENS"));
-								Main.game.appendToTextStartStringBuilder(UtilText.parseFromXMLFile("acexp/dominion/lilaya_dungeon", "DUNGEON_ENTRY"));
-								Main.game.getPlayer().setLocation(WorldType.getWorldTypeFromId("acexp_dungeon"), PlaceType.getPlaceTypeFromId("acexp_dungeon_stairs"), false);
-							}
-						};
-						
-					} else {
-						return new Response("'Lilaya's Dirty Secrets'", "A thick book bearing the title 'Lilaya's Dirty Secrets' has caught your eye...", DUNGEON_TRIGGER) {
-							@Override
-							public void effects() {
-								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.getDialogueFlagValueFromId("acexp_dungeon_found"), true);
-							}
-						};
-					}
-	
-				} else if(index>=9 && index-9<charactersPresent.size()) {
-					NPC slave = charactersPresent.get(index-9);
-					return LilayaHomeGeneric.interactWithNPC(slave);
-				}
-				
-			} else if(responseTab==1) {
-				return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
-			
-			} else if(responseTab==2) {
-				List<Spell> spells = Main.game.getPlayer().getSpells();
-				Spell spell = null;
-				
-				if (index == 0) {
-					if(spells.size()>=15) {
-						spell = spells.get(14);
-					} else {
-						return null;
-					}
-
-				} else if (index < 15 && index-1 < spells.size()) {
-					spell = spells.get(index-1);
-					
-				} else if (index >= 15 && index < spells.size()) {
-					spell = spells.get(index);
-				}
-				
-				if(spell!=null) {
-					return getSpellResponse(spell);
-				}
-				
-			} else if(responseTab==3) {
-				if (index == 1) {
-					return new Response("Ancient Ones", "A section of the library dedicated to books concerning demonic and angelic races.", ELDER_RACES);
-
-				} else if (index == 2) {
-					return new Response("Races of Dominion", "A section of the library dedicated to books concerning the predominant races within the city.", DOMINION_RACES);
-
-				} else if (index == 3) {
-					return new Response("Foloi Fields", "A section of the library dedicated to books about the area known as the Foloi Fields.", FIELDS_BOOKS);
-
-				} else if (index == 4) {
-					return new Response("Mountains", "A section of the library dedicated to books on the area known as the Mountains of the Moon.", MOUNTAIN_BOOKS);
-
-				} else if (index == 5) {
-					return new Response("Endless Sea", "A section of the library dedicated to books on the area known as the Endless Sea.", SEA_BOOKS);
-
-				} else if (index == 6) {
-					return new Response("The Jungle", "A section of the library dedicated to books on the area known as the Jungle.", JUNGLE_BOOKS);
-
-				} else if (index == 7) {
-					return new Response("The Desert", "A section of the library dedicated to books about the desert to the south of Lilith's Realm.", DESERT_BOOKS);
-				}
+				};
+			} else if(index==2) {
+				return new Response("Maybe later", "Decide against heading down to Lilaya's dungeon for now...", DUNGEON_TRIGGER_BACK);
 			}
-			
 			return null;
 		}
 	};
@@ -396,10 +212,9 @@ public class Library {
 	public static final DialogueNode DOMINION_MAP = new DialogueNode("", "", false) {
 		@Override
 		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/library", "DOMINION_MAP"));
-			sb.append(RenderingEngine.ENGINE.getFullMap(WorldType.DOMINION, false, false));
-			return sb.toString();
+            String sb = UtilText.parseFromXMLFile("places/dominion/lilayasHome/library", "DOMINION_MAP") +
+                    RenderingEngine.ENGINE.getFullMap(WorldType.DOMINION, false, false);
+			return sb;
 		}
 		@Override
 		public String getResponseTabTitle(int index) {
@@ -425,27 +240,210 @@ public class Library {
 			return LIBRARY.getResponse(responseTab, index);
 		}
 	};
-
-	public static final DialogueNode DUNGEON_TRIGGER = new DialogueNode("", "", true) {
+	public static final DialogueNode LIBRARY = new DialogueNode("", "", false) {
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/library", "DUNGEON_TRIGGER");
+			UtilText.nodeContentSB.setLength(0);
+			List<NPC> charactersPresent = Main.game.getNonCompanionCharactersPresent();
+
+			UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/library", "LIBRARY"));
+
+			if(!charactersPresent.isEmpty()) {
+				for(NPC slave : charactersPresent) {
+					UtilText.nodeContentSB.append(LilayaHomeGeneric.getSlavePresentDescription(slave,
+							"is not even bothering to pretend that [npc.sheIs] working.",
+							"appears to be half-heartedly rearranging some books.",
+							"is currently dusting the shelves and making sure that everything is in order.",
+							"is currently reorganising one of the shelves.",
+							"is dutifully making a catalogue of all the books available in the library."));
+				}
+			}
+
+			return UtilText.nodeContentSB.toString();
 		}
+
+		@Override
+		public String getResponseTabTitle(int index) {
+			if(index==0) {
+                return "Библиотека";
+
+			} else if(index==1) {
+				return "Б. путешествие";
+
+			} else if(index==2) {
+                return "Заклинания";
+
+			} else if(index==3) {
+                return "Расы";
+			}
+
+			return null;
+		}
+
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Lilaya's dungeon",
-						"Head down the spiral staircase to Lilaya's dungeon.",
-						DialogueManager.getDialogueFromId("acexp_dominion_lilaya_dungeon_stairsUp")) {
-					@Override
-					public void effects() {
-						Main.game.appendToTextStartStringBuilder(UtilText.parseFromXMLFile("acexp/dominion/lilaya_dungeon", "DUNGEON_ENTRY"));
-						Main.game.getPlayer().setLocation(WorldType.getWorldTypeFromId("acexp_dungeon"), PlaceType.getPlaceTypeFromId("acexp_dungeon_stairs"), false);
+			if(responseTab==0) {
+				List<NPC> charactersPresent = Main.game.getNonCompanionCharactersPresent();
+
+				if (index == 1) {
+					if(Main.game.getCurrentDialogueNode()==ARCANE_AROUSAL) {
+						return new Response("Arcane Arousal", "You are already reading this book!", null);
 					}
-				};
-			} else if(index==2) {
-				return new Response("Maybe later", "Decide against heading down to Lilaya's dungeon for now...", DUNGEON_TRIGGER_BACK);
+					return new Response("Arcane Arousal", "A leather-bound tome that seems to offer an insight into how the arcane works.", ARCANE_AROUSAL) {
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.readBook1, true);
+						}
+					};
+
+				} else if (index == 2) {
+					if(Main.game.getCurrentDialogueNode()==LILITHS_DYNASTY) {
+						return new Response("Lilith's Dynasty", "You are already reading this book!", null);
+					}
+					return new Response("Lilith's Dynasty", "A hardback book that might give some clues as to who exactly Lilith is.", LILITHS_DYNASTY) {
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.readBook2, true);
+						}
+					};
+
+				} else if (index == 3) {
+					if(Main.game.getCurrentDialogueNode()==DOMINION_HISTORY) {
+						return new Response("Dominion's History", "You are already reading this book!", null);
+					}
+					return new Response("Dominion's History", "A paperback book describing the events that led to the creation of the city you currently find yourself in.", DOMINION_HISTORY) {
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.readBook3, true);
+						}
+					};
+
+				} else if (index == 4) {
+					if(Main.game.getCurrentDialogueNode()==PREGNANCY_INFO) {
+						return new Response("Knocked Up", "You are already reading this book!", null);
+					}
+					return new Response("Knocked Up", "A small paperback book which contains all the information you'd ever need concerning pregnancies in this world.", PREGNANCY_INFO) {
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.readBook4, true);
+						}
+					};
+
+				} else if(index==5) {
+					if(Main.game.getCurrentDialogueNode()==FERAL_HISTORY) {
+						return new Response("The History of Ferals", "You are already reading this book!", null);
+					}
+					return new Response("The History of Ferals", "A hardback book detailing the history of feral transformations in the society of Lilith's Realm.", FERAL_HISTORY) {
+						@Override
+						public void effects() {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.readBook5, true);
+						}
+					};
+
+				} else if (index == 6) {
+					if(Main.game.getCurrentDialogueNode()==DOMINION_MAP) {
+						return new Response("City Map", "You are already viewing the map of Dominion!", null);
+					}
+					return new Response("City Map", "A large, framed map of Dominion hangs on one wall. Take a picture of it.", DOMINION_MAP) {
+						@Override
+						public void effects() {
+							Cell[][] grid = Main.game.getWorlds().get(WorldType.DOMINION).getGrid();
+							for(int i=0; i<grid.length; i++) {
+								for(int j=0; j<grid[0].length; j++) {
+									grid[i][j].setDiscovered(true);
+								}
+							}
+						}
+					};
+
+				} else if (index == 7 && Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_SLAVERY, Quest.SIDE_SLAVER_NEED_RECOMMENDATION)) {
+					if(Main.game.getCurrentDialogueNode()==SLAVERY_HISTORY) {
+						return new Response("People as Property", "You are already reading this book!", null);
+					}
+					return new Response("People as Property", "A thick, hardback book detailing the history and legality of slavery in Lilith's Realm.", SLAVERY_HISTORY) {
+						@Override
+						public void effects() {
+							Main.game.appendToTextStartStringBuilder(UtilText.parseFromXMLFile("places/dominion/lilayasHome/library", "SLAVERY_HISTORY"));
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.readBookSlavery, true);
+						}
+					};
+
+				} else if (index == 8 && Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.readBookSlavery)) {
+					if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.getDialogueFlagValueFromId("acexp_dungeon_found"))) {
+                        return new Response("Подземелье Лилайи",
+								"Pull the thick book bearing the title 'Lilaya's Dirty Secrets' to open the secret passage down to Lilaya's dungeon.",
+								DialogueManager.getDialogueFromId("acexp_dominion_lilaya_dungeon_stairsUp")) {
+							@Override
+							public void effects() {
+								Main.game.appendToTextStartStringBuilder(UtilText.parseFromXMLFile("places/dominion/lilayasHome/library", "DUNGEON_OPENS"));
+								Main.game.appendToTextStartStringBuilder(UtilText.parseFromXMLFile("acexp/dominion/lilaya_dungeon", "DUNGEON_ENTRY"));
+								Main.game.getPlayer().setLocation(WorldType.getWorldTypeFromId("acexp_dungeon"), PlaceType.getPlaceTypeFromId("acexp_dungeon_stairs"), false);
+							}
+						};
+
+					} else {
+						return new Response("'Lilaya's Dirty Secrets'", "A thick book bearing the title 'Lilaya's Dirty Secrets' has caught your eye...", DUNGEON_TRIGGER) {
+							@Override
+							public void effects() {
+								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.getDialogueFlagValueFromId("acexp_dungeon_found"), true);
+							}
+						};
+					}
+
+				} else if(index>=9 && index-9<charactersPresent.size()) {
+					NPC slave = charactersPresent.get(index-9);
+					return LilayaHomeGeneric.interactWithNPC(slave);
+				}
+
+			} else if(responseTab==1) {
+				return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
+
+			} else if(responseTab==2) {
+				List<Spell> spells = Main.game.getPlayer().getSpells();
+				Spell spell = null;
+
+				if (index == 0) {
+					if(spells.size()>=15) {
+						spell = spells.get(14);
+					} else {
+						return null;
+					}
+
+				} else if (index < 15 && index-1 < spells.size()) {
+					spell = spells.get(index-1);
+
+				} else if (index >= 15 && index < spells.size()) {
+					spell = spells.get(index);
+				}
+
+				if(spell!=null) {
+					return getSpellResponse(spell);
+				}
+
+			} else if(responseTab==3) {
+				if (index == 1) {
+					return new Response("Ancient Ones", "A section of the library dedicated to books concerning demonic and angelic races.", ELDER_RACES);
+
+				} else if (index == 2) {
+					return new Response("Races of Dominion", "A section of the library dedicated to books concerning the predominant races within the city.", DOMINION_RACES);
+
+				} else if (index == 3) {
+                    return new Response("Фолойские поля", "A section of the library dedicated to books about the area known as the Foloi Fields.", FIELDS_BOOKS);
+
+				} else if (index == 4) {
+					return new Response("Mountains", "A section of the library dedicated to books on the area known as the Mountains of the Moon.", MOUNTAIN_BOOKS);
+
+				} else if (index == 5) {
+					return new Response("Endless Sea", "A section of the library dedicated to books on the area known as the Endless Sea.", SEA_BOOKS);
+
+				} else if (index == 6) {
+					return new Response("The Jungle", "A section of the library dedicated to books on the area known as the Jungle.", JUNGLE_BOOKS);
+
+				} else if (index == 7) {
+					return new Response("The Desert", "A section of the library dedicated to books about the desert to the south of Lilith's Realm.", DESERT_BOOKS);
+				}
 			}
+
 			return null;
 		}
 	};

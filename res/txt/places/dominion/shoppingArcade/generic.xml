@@ -111,7 +111,7 @@
 			#ELSE
 				 the mysterious Enforcer
 			#ENDIF
-			 told you to meet him, he said that he'd only be here between the hours of [style.colourMinorBad([units.time(13)] and [units.time(14)])], so you'll have to come back then... 
+			 told you to meet him, he said that he'd only be here between the hours of [style.colourMinorBad([units.time(13)] и [units.time(14)])], so you'll have to come back then...
 		#ENDIF
 	</i></p>
 	]]>

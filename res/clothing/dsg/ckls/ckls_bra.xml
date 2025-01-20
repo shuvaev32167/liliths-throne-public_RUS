@@ -67,49 +67,49 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(slip)] the bra over [npc.her] head and down onto [npc.her] torso before tying up the shoulder straps over each of [npc.her] shoulders.]]>
+        <![CDATA[[npc.Name] slip the bra over [npc.her] head and down onto [npc.her] torso before tying up the shoulder straps over each of [npc.her] shoulders.]]>
     </self>
     <other>
-	  <![CDATA[[npc.Name] [npc.verb(slip)] the bra over [npc2.namePos] head and down onto [npc2.her] torso before tying up the shoulder straps over each of [npc2.her] shoulders.]]>
+        <![CDATA[[npc.Name] slip the bra over [npc2.namePos] head and down onto [npc2.her] torso before tying up the shoulder straps over each of [npc2.her] shoulders.]]>
     </other>
     <otherRough>
-	  <![CDATA[[npc.Name] [npc.verb(shove)] the bra over [npc2.namePos] head and down onto [npc.her] torso before hastily tying up the shoulder straps over each of [npc2.her] shoulders.]]>
+        <![CDATA[[npc.Name] shove the bra over [npc2.namePos] head and down onto [npc.her] torso before hastily tying up the shoulder straps over each of [npc2.her] shoulders.]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="REMOVE_OR_EQUIP">
     <self>
-	  <![CDATA[[npc.Name] [npc.verb(untie)] the shoulder straps on [npc.her] bra before pulling it up over [npc.her] head.]]>
+        <![CDATA[[npc.Name] untie the shoulder straps on [npc.her] bra before pulling it up over [npc.her] head.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(untie)] the shoulder straps on [npc2.namePos] bra before pulling it up over [npc2.her] head.]]>
+        <![CDATA[[npc.Name] untie the shoulder straps on [npc2.namePos] bra before pulling it up over [npc2.her] head.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] [npc.verb(rip)] off [npc2.namePos] bra.]]>
+        <![CDATA[[npc.Name] rip off [npc2.namePos] bra.]]>
     </otherRough>
   </displacementText>
 	
   <replacementText type="PULLS_UP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(pull)] [npc.her] bra back down, covering [npc.her] torso.]]>
+        <![CDATA[[npc.Name] pull [npc.her] bra back down, covering [npc.her] torso.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(pull)] [npc2.namePos] bra back down, covering [npc2.her] torso.]]>
+        <![CDATA[[npc.Name] pull [npc2.namePos] bra back down, covering [npc2.her] torso.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(yank)] [npc2.namePos] bra back down, covering [npc2.her] torso.]]>
+        <![CDATA[[npc.Name] roughly yank [npc2.namePos] bra back down, covering [npc2.her] torso.]]>
     </otherRough>
   </replacementText>
 
   <displacementText type="PULLS_UP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(pull)] [npc.her] bra up to just below [npc.her] chin, fully exposing [npc.her] torso.]]>
+        <![CDATA[[npc.Name] pull [npc.her] bra up to just below [npc.her] chin, fully exposing [npc.her] torso.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(pull)] [npc2.namePos] bra up to just below [npc2.her] chin, fully exposing [npc2.her] torso.]]>
+        <![CDATA[[npc.Name] pull [npc2.namePos] bra up to just below [npc2.her] chin, fully exposing [npc2.her] torso.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(pull)] [npc2.namePos] bra to just below [npc2.her] chin, fully exposing [npc2.her] torso.]]>
+        <![CDATA[[npc.Name] roughly pull [npc2.namePos] bra to just below [npc2.her] chin, fully exposing [npc2.her] torso.]]>
     </otherRough>
   </displacementText>
 	

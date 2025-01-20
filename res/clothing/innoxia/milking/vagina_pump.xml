@@ -70,21 +70,21 @@
 	
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(push)] the dildo into [npc.her] [npc.pussy+], before turning up the dial on the milking machine and letting the now-pressurised shield suck itself into place over [npc.her] [npc.labia+].
+            <![CDATA[[npc.Name] push the dildo into [npc.her] [npc.pussy+], before turning up the dial on the milking machine and letting the now-pressurised shield suck itself into place over [npc.her] [npc.labia+].
 			#IF(npc.getTotalFluidInArea(ORIFICE_VAGINA)>0)
 				<br/>[style.italicsCum(The pussy-pump quickly sucks out all of [npc.namePos] creampie!)]
 			#ENDIF
 			]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(push)] the dildo into [npc2.namePos] [npc2.pussy+], before turning up the dial on the milking machine and letting the now-pressurised shield suck itself into place over [npc2.her] [npc2.labia+].
+            <![CDATA[[npc.Name] push the dildo into [npc2.namePos] [npc2.pussy+], before turning up the dial on the milking machine and letting the now-pressurised shield suck itself into place over [npc2.her] [npc2.labia+].
 			#IF(npc2.getTotalFluidInArea(ORIFICE_VAGINA)>0)
 				<br/>[style.italicsCum(The pussy-pump quickly sucks out all of [npc2.namePos] creampie!)]
 			#ENDIF
 			]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] firmly [npc.verb(hold)] [npc2.name] still as [npc.she] roughly [npc.verb(force)] the dildo into [npc2.her] [npc2.pussy+], before cranking up the dial on the milking machine and letting the now-pressurised shield suck itself into place over [npc2.her] [npc2.labia+].
+            <![CDATA[[npc.Name] firmly hold [npc2.name] still as [npc.she] roughly force the dildo into [npc2.her] [npc2.pussy+], before cranking up the dial on the milking machine and letting the now-pressurised shield suck itself into place over [npc2.her] [npc2.labia+].
 			#IF(npc2.getTotalFluidInArea(ORIFICE_VAGINA)>0)
 				<br/>[style.italicsCum(The pussy-pump quickly sucks out all of [npc2.namePos] creampie!)]
 			#ENDIF
@@ -94,13 +94,13 @@
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(turn)] down the dial on the milking machine, before sliding the dildo out of [npc.her] [npc.pussy+].]]>
+            <![CDATA[[npc.Name] turn down the dial on the milking machine, before sliding the dildo out of [npc.her] [npc.pussy+].]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(turn)] down the dial on the milking machine, before sliding the dildo out of [npc2.namePos] [npc2.pussy+].]]>
+            <![CDATA[[npc.Name] turn down the dial on the milking machine, before sliding the dildo out of [npc2.namePos] [npc2.pussy+].]]>
 		</other>
 		<otherRough>
-			<![CDATA[With no regard for [npc2.her] comfort, [npc.name] roughly [npc.verb(pull)] the still-pressurised pump off of [npc2.namePos] [npc2.labia+] and [npc.verb(yank)] the vibrating dildo out of [npc2.her] [npc2.pussy+].]]>
+            <![CDATA[With no regard for [npc2.her] comfort, [npc.name] roughly pull the still-pressurised pump off of [npc2.namePos] [npc2.labia+] и yank the vibrating dildo out of [npc2.her] [npc2.pussy+].]]>
 		</otherRough>
 	</displacementText>
 	

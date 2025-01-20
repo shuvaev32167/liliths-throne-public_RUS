@@ -88,7 +88,7 @@
 	
 	<performMove>
 		<execute><![CDATA[
-			[npc.Name] [npc.verb(lurch)] forwards and [npc.verb(coil)] [npc.her] strong tentacles around [npc2.name]!
+			[npc.Name] lurch forwards and coil [npc.her] strong tentacles around [npc2.name]!
 			#IF(npc2.hasStatusEffect(SE_TENTACLE_RESTRAIN_3))
 				[##npc2.setHealth(0)]
 				<br/>[style.italicsTerrible([npc2.NameIsFull] now totally constricted by [npc.namePos] tentacles, and as such [npc2.is] completely defeated!)]

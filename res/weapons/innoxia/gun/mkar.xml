@@ -12,9 +12,10 @@
 		<attackTooltipDescription>Use your MKAR to fire a single bullet at your target.</attackTooltipDescription>
 		
 		<rarity>LEGENDARY</rarity> 
-		<weaponSet/> 
-		<equipText><![CDATA[[npc.Name] [npc.verb(take)] out [npc.her] MKAR, inserts a magazine, and pulls the charging handle, putting it into a state where it's ready to be used in combat.]]></equipText>
-		<unequipText><![CDATA[[npc.Name] [npc.verb(put)] [npc.her] MKAR away.]]></unequipText>
+		<weaponSet/>
+        <equipText>
+            <![CDATA[[npc.Name] take out [npc.her] MKAR, inserts a magazine, and pulls the charging handle, putting it into a state where it's ready to be used in combat.]]></equipText>
+        <unequipText><![CDATA[[npc.Name] put [npc.her] MKAR away.]]></unequipText>
 		<imageName>mkar.svg</imageName>
 		<imageEquippedName>mkar_semi_auto.svg</imageEquippedName> 
 		
@@ -63,13 +64,13 @@
 
 	<hitDescriptions>
 		<hitText><![CDATA[
-		Taking aim with [npc.her] MKAR, [npc.name] [npc.verb(pull)] the trigger and [npc.verb(fire)] a bullet at [npc2.name], hitting [npc2.herHim] directly in the chest!<br/>Thankfully, there seems to be some kind of arcane force preventing [npc2.name] from being seriously wounded or killed...
+		Taking aim with [npc.her] MKAR, [npc.name] pull the trigger and fire a bullet at [npc2.name], hitting [npc2.herHim] directly in the chest!<br/>Thankfully, there seems to be some kind of arcane force preventing [npc2.name] from being seriously wounded or killed...
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		Taking aim with [npc.her] MKAR, [npc.name] [npc.verb(pull)] the trigger and fires a bullet at [npc2.name], but [npc.verb(end)] up missing [npc2.herHim]!
+		Taking aim with [npc.her] MKAR, [npc.name] pull the trigger and fires a bullet at [npc2.name], but end up missing [npc2.herHim]!
 		]]></missText>
 	</missDescriptions>
 	

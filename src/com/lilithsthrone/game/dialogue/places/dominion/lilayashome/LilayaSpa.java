@@ -1,13 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.lilayashome;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevelBasic;
 import com.lilithsthrone.game.character.attributes.ObedienceLevelBasic;
@@ -37,11 +29,7 @@ import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.managers.universal.SMBath;
 import com.lilithsthrone.game.sex.managers.universal.SMShower;
 import com.lilithsthrone.game.sex.positions.SexPosition;
-import com.lilithsthrone.game.sex.positions.slots.SexSlot;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotLyingDown;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotSitting;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
+import com.lilithsthrone.game.sex.positions.slots.*;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
@@ -53,6 +41,9 @@ import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @since 0.3.9
@@ -124,7 +115,7 @@ public class LilayaSpa {
 	
 	// Reception slave dialogues:
 	
-	private static Map<SlavePermissionSetting, List<String>> receptionGreetings = Util.newHashMapOfValues(
+	private static final Map<SlavePermissionSetting, List<String>> receptionGreetings = Util.newHashMapOfValues(
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_PROFESSIONAL,
 					Util.newArrayListOfValues(
@@ -171,7 +162,7 @@ public class LilayaSpa {
 						+ "#ENDIF",
 						"Flashing you a loving smile, [npc.name] eagerly asks,")));
 
-	private static Map<SlavePermissionSetting, List<String>> receptionGreetingsMute = Util.newHashMapOfValues(
+	private static final Map<SlavePermissionSetting, List<String>> receptionGreetingsMute = Util.newHashMapOfValues(
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_PROFESSIONAL,
 					Util.newArrayListOfValues(
@@ -218,7 +209,7 @@ public class LilayaSpa {
 						+ "#ENDIF",
 						"Flashing you a loving smile, [npc.name] happily waits to see if [npc.she]'ll be able to help you with anything.")));
 
-	private static Map<SlavePermissionSetting, List<String>> receptionSpeech = Util.newHashMapOfValues(
+	private static final Map<SlavePermissionSetting, List<String>> receptionSpeech = Util.newHashMapOfValues(
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_PROFESSIONAL,
 					Util.newArrayListOfValues(
@@ -254,17 +245,17 @@ public class LilayaSpa {
 						"What can I do for you, [pc.name]?!",
 						"Hi, [pc.name], what can I do for you today?!")));
 	
-	private static List<String> receptionRudeGreetings = Util.newArrayListOfValues(
+	private static final List<String> receptionRudeGreetings = Util.newArrayListOfValues(
 			"Glaring angrily at you, [npc.name] disobediently scowls, ",
 			"With [npc.her] [npc.eyes+] full of resentment, [npc.name] glares at you and snaps,",
 			"Clearly not at all happy with being forced to work in the spa, [npc.name] angrily growls,");
 
-	private static List<String> receptionRudeGreetingsMute = Util.newArrayListOfValues(
+	private static final List<String> receptionRudeGreetingsMute = Util.newArrayListOfValues(
 			"Glaring angrily at you, [npc.name] lets out a disobedient scowl, making it quite clear that [npc.sheHasFull] no interest in helping you with anything...",
 			"With [npc.her] [npc.eyes+] full of resentment, [npc.name] glares at you and lets out a disobedient growl.",
 			"Clearly not at all happy with being forced to work in the spa, [npc.name] angrily growls at you, before crossing [npc.her] [npc.arms] and refusing to offer you any assistance.");
 	
-	private static List<String> receptionRudeSpeech = Util.newArrayListOfValues(
+	private static final List<String> receptionRudeSpeech = Util.newArrayListOfValues(
 			"What the fuck do you want now, <i>[pc.name]</i>?",
 			"Just hurry the fuck up and get out of here.",
 			"How about you turn around and fuck off?");
@@ -272,7 +263,7 @@ public class LilayaSpa {
 	
 	// Shower slave dialogues:
 	
-	private static Map<SlavePermissionSetting, List<String>> showerGreetings = Util.newHashMapOfValues(
+	private static final Map<SlavePermissionSetting, List<String>> showerGreetings = Util.newHashMapOfValues(
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_PROFESSIONAL,
 					Util.newArrayListOfValues(
@@ -315,7 +306,7 @@ public class LilayaSpa {
 						+ "#ENDIF",
 						"Happily humming to [npc.herself] as [npc.she] rubs soap over your body, [npc.name] says,")));
 
-	private static Map<SlavePermissionSetting, List<String>> showerGreetingsMute = Util.newHashMapOfValues(
+	private static final Map<SlavePermissionSetting, List<String>> showerGreetingsMute = Util.newHashMapOfValues(
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_PROFESSIONAL,
 					Util.newArrayListOfValues(
@@ -358,7 +349,7 @@ public class LilayaSpa {
 						+ "#ENDIF",
 						"After happily rubbing soap all over your body, [npc.name] leans in against you and lets out a contented sigh.")));
 
-	private static Map<SlavePermissionSetting, List<String>> showerSpeech = Util.newHashMapOfValues(
+	private static final Map<SlavePermissionSetting, List<String>> showerSpeech = Util.newHashMapOfValues(
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_PROFESSIONAL,
 					Util.newArrayListOfValues(
@@ -389,17 +380,17 @@ public class LilayaSpa {
 						"I hope this is to your liking, [pc.name]...",
 						"Is this how you like it, [pc.name]?")));
 	
-	private static List<String> showerRudeGreetings = Util.newArrayListOfValues(
+	private static final List<String> showerRudeGreetings = Util.newArrayListOfValues(
 			"[npc.Name] angrily scowls as [npc.she] reluctantly helps you to clean yourself,",
 			"Glaring angrily at you as [npc.she] half-heartedly helps to wash your body, [npc.name] growls,",
 			"Resenting the fact that [npc.sheHasFull] to help you clean yourself, [npc.name] angrily sneers,");
 
-	private static List<String> showerRudeGreetingsMute = Util.newArrayListOfValues(
+	private static final List<String> showerRudeGreetingsMute = Util.newArrayListOfValues(
 			"[npc.Name] angrily scowls as [npc.she] reluctantly helps you to clean yourself...",
 			"Glaring angrily at you the entire time, [npc.name] half-heartedly helps to wash your body...",
 			"Resenting the fact that [npc.sheHasFull] to help you clean yourself, [npc.name] angrily glares at you...");
 	
-	private static List<String> showerRudeSpeech = Util.newArrayListOfValues(
+	private static final List<String> showerRudeSpeech = Util.newArrayListOfValues(
 			"Just fucking hurry up so I can get out of here...",
 			"I hate this so much...",
 			"Why the fuck do I have to do this?");
@@ -407,7 +398,7 @@ public class LilayaSpa {
 	
 	// Bathing slave dialogues:
 	
-	private static Map<SlavePermissionSetting, List<String>> bathingGreetings = Util.newHashMapOfValues(
+	private static final Map<SlavePermissionSetting, List<String>> bathingGreetings = Util.newHashMapOfValues(
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_PROFESSIONAL,
 					Util.newArrayListOfValues(
@@ -442,7 +433,7 @@ public class LilayaSpa {
 						"[npc.Name] blushes a little as [npc.she] sinks down into the warm water and sighs,",
 						"Happily humming to [npc.herself] as [npc.she] slides down into the warm water, [npc.name] sighs,")));
 
-	private static Map<SlavePermissionSetting, List<String>> bathingGreetingsMute = Util.newHashMapOfValues(
+	private static final Map<SlavePermissionSetting, List<String>> bathingGreetingsMute = Util.newHashMapOfValues(
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_PROFESSIONAL,
 					Util.newArrayListOfValues(
@@ -473,7 +464,7 @@ public class LilayaSpa {
 						"[npc.Name] blushes a little as [npc.she] sinks down into the warm water and smiles at you.",
 						"[npc.Name] happily hums to [npc.herself] as [npc.she] slides down into the warm water and flashes you a loving smile.")));
 
-	private static Map<SlavePermissionSetting, List<String>> bathingSpeech = Util.newHashMapOfValues(
+	private static final Map<SlavePermissionSetting, List<String>> bathingSpeech = Util.newHashMapOfValues(
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_PROFESSIONAL,
 					Util.newArrayListOfValues(
@@ -504,17 +495,17 @@ public class LilayaSpa {
 						"This feels great... Thank you so much for letting me be with you, [pc.name]...",
 						"Thank you for sharing this with me, [pc.name]...")));
 	
-	private static List<String> bathingRudeGreetings = Util.newArrayListOfValues(
+	private static final List<String> bathingRudeGreetings = Util.newArrayListOfValues(
 			"[npc.Name] angrily scowls as [npc.she] reluctantly joins you in the pool,",
 			"Glaring angrily at you as [npc.she] splashes down into the pool's warm water, [npc.name] scowls,",
 			"Resenting the fact that [npc.sheHasFull] to join you in the pool, [npc.name] angrily sneers,");
 
-	private static List<String> bathingRudeGreetingsMute = Util.newArrayListOfValues(
+	private static final List<String> bathingRudeGreetingsMute = Util.newArrayListOfValues(
 			"[npc.Name] angrily scowls as [npc.she] reluctantly joins you in the pool...",
 			"Glaring angrily at you, [npc.name] reluctantly splashes down into the pool's warm water...",
 			"Resenting the fact that [npc.sheHasFull] to join you in the pool, [npc.name] angrily glares at you...");
 	
-	private static List<String> bathingRudeSpeech = Util.newArrayListOfValues(
+	private static final List<String> bathingRudeSpeech = Util.newArrayListOfValues(
 			"The spa's nice, but it's much better when you're not here...",
 			"Hurry up and leave so that I can enjoy this by myself again...",
 			"Just hurry up and get out of here...");
@@ -980,7 +971,7 @@ public class LilayaSpa {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Follow in Lilaya's footsteps and head on out into the corridor...", SPA_INSTALLATION_END) {
+                return new Response("Продолжить", "Follow in Lilaya's footsteps and head on out into the corridor...", SPA_INSTALLATION_END) {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "SPA_INSTALLATION_COMMIT_LEAVE"));
@@ -1019,7 +1010,7 @@ public class LilayaSpa {
 		}
 	};
 
-	public static final DialogueNode SPA_CONSTRUCTION = new DialogueNode("Building site", "", false) {
+	public static final DialogueNode SPA_CONSTRUCTION = new DialogueNode("Строительная площадка", "", false) {
 		@Override
 		public void applyPreParsingEffects() {
 			// This is a backup check to finish construction if somehow the building site has not been converted to the spa:
@@ -1060,12 +1051,11 @@ public class LilayaSpa {
 				return UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "SPA_RECEPTION_CONSTRUCTION");
 				
 			} else {
-				StringBuilder sb = new StringBuilder();
-				sb.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "SPA_RECEPTION", getSlaves()));
-				sb.append(getReceptionSlavesDescription(getSlaves()));
-				sb.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "SPA_RECEPTION_END"));
-				sb.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "SPA_RECEPTION_CLOTHING_CLEAN"));
-				return sb.toString();
+                String sb = UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "SPA_RECEPTION", getSlaves()) +
+                        getReceptionSlavesDescription(getSlaves()) +
+                        UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "SPA_RECEPTION_END") +
+                        UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "SPA_RECEPTION_CLOTHING_CLEAN");
+				return sb;
 			}
 		}
 		@Override
@@ -1085,26 +1075,26 @@ public class LilayaSpa {
 				
 			} else if(index == 1) {
 				if(Main.game.getPlayer().isAbleToAccessRoomManagement()) {
-					return new Response("Manage room", "Enter the management screen for this particular room.", OccupantManagementDialogue.ROOM_UPGRADES) {
+                    return new Response("Управление комнатой", "Enter the management screen for this particular room.", OccupantManagementDialogue.ROOM_UPGRADES) {
 						@Override
 						public void effects() {
 							OccupantManagementDialogue.cellToInspect = Main.game.getPlayerCell();
 						}
 					};
 				} else {
-					return new Response("Manage room", "You need a slaver license or permission from Lilaya to house your friends or dolls in order to access this menu!",  null);
+                    return new Response("Управление комнатой", "Чтобы получить доступ к этому меню, нужна лицензия рабовладельца или разрешение от Лилайи на размещение своих друзей или кукол!", null);
 				}
 				
 			} else if(index == 2) {
 				if(Main.game.getPlayer().isAbleToAccessRoomManagement()) {
-					return new Response("Manage people", "Enter the management screen for your slaves and friendly occupants.", OccupantManagementDialogue.getSlaveryRoomListDialogue(null, null)) {
+                    return new Response("Управление людьми", "Enter the management screen for your slaves and friendly occupants.", OccupantManagementDialogue.getSlaveryRoomListDialogue(null, null)) {
 						@Override
 						public void effects() {
 							CompanionManagement.initManagement(Main.game.getDefaultDialogue(), 0, null);
 						}
 					};
 				} else {
-					return new Response("Manage people", "You need a slaver license or permission from Lilaya to house your friends or dolls in order to access this menu!",  null);
+                    return new Response("Управление людьми", "Чтобы получить доступ к этому меню, нужна лицензия рабовладельца или разрешение от Лилайи на размещение своих друзей или кукол!", null);
 				}
 				
 			} else if(index==3) {
@@ -1342,7 +1332,7 @@ public class LilayaSpa {
 			if(index==0) {
 				return "Pools";
 			} else if(index==1) {
-				return "Bar";
+                return "Бар";
 			}
 			return null;
 		}
@@ -1527,7 +1517,7 @@ public class LilayaSpa {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Decide what to do next...", SPA_CORE);
+                return new Response("Продолжить", "Decide what to do next...", SPA_CORE);
 			}
 			return null;
 		}
@@ -1614,7 +1604,7 @@ public class LilayaSpa {
 							?UtilText.parse(slavesSexNoNulls, "Have dominant sex with [npc.name].")
 							:(slavesSexNoNulls.size()==2
 								?UtilText.parse(slavesSexNoNulls, "Have dominant sex with [npc.name] while [npc2.name] sits beside you.")
-								:UtilText.parse(slavesSexNoNulls, "Have dominant sex with [npc.name] while [npc2.name] and [npc3.name] sit beside you.")))
+                                : UtilText.parse(slavesSexNoNulls, "Have dominant sex with [npc.name] while [npc2.name] и [npc3.name] sit beside you.")))
 						+(notAttractedList.isEmpty()
 							?""
 							:(notAttractedList.size()==1
@@ -1895,7 +1885,46 @@ public class LilayaSpa {
 			return null;
 		}
 	};
-
+	public static final DialogueNode AFTER_MASSAGE_SEX = new DialogueNode("Finished", "", true) {
+		@Override
+		public String getDescription() {
+			return UtilText.parse(massageSlave, "Having had [npc.her] fun, [npc.name] reminds you that you have other things you need to be getting on with...");
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "AFTER_MASSAGE_SEX", massageSlave);
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+                return new Response("Продолжить", "Now that you've had an unexpectedly fun massage, you wonder what to do next...", SPA_CORE) {
+					@Override
+					public void effects() {
+						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "AFTER_MASSAGE_SEX_FINISHED", massageSlave));
+					}
+				};
+			}
+			return null;
+		}
+	};
+	public static final DialogueNode REFUSE_SLAVE_SEX = new DialogueNode("", "", true) {
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "REFUSE_SLAVE_SEX", massageSlave);
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+                return new Response("Продолжить", "Now that you've told your slave to back off, you wonder what to do next...", SPA_CORE) {
+					@Override
+					public void effects() {
+						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "REFUSE_SLAVE_SEX_FINISHED", massageSlave));
+					}
+				};
+			}
+			return null;
+		}
+	};
 	public static final DialogueNode SPA_MASSAGE = new DialogueNode("", "", true) {
 		@Override
 		public void applyPreParsingEffects() {
@@ -1929,31 +1958,31 @@ public class LilayaSpa {
 							null,
 							null,
 							AFTER_MASSAGE_SEX,
-							UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "SPA_MASSAGE_FUCKED", massageSlave));	
-					
+							UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "SPA_MASSAGE_FUCKED", massageSlave));
+
 				} else if(index==2) {
 					if(massageSlave.isWillingToRape(Main.game.getPlayer()) && massageSlave.hasSlavePermissionSetting(SlavePermissionSetting.SEX_RAPIST)) {
 						return new Response("Refuse",
 								UtilText.parse(massageSlave, "As you've given [npc.herHim] permission to rape, [npc.nameIsFull] not going to take no for an answer!"),
 								null);
-						
+
 					} else {
 						return new Response("Refuse",
 								UtilText.parse(massageSlave, "You really aren't in the mood right now, so firmly tell [npc.name] to stop."),
 								REFUSE_SLAVE_SEX);
-						
+
 					}
 				}
-				
+
 			} else {
 				if(index==1) {
-					return new Response("Continue", "Now that you've had a nice relaxing massage, you wonder what to do next...", SPA_CORE) {
+                    return new Response("Продолжить", "Now that you've had a nice relaxing massage, you wonder what to do next...", SPA_CORE) {
 						@Override
 						public void effects() {
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "SPA_MASSAGE_FINISHED", massageSlave));
 						}
 					};
-					
+
 				} else if(index==2) {
 					if(!Main.game.isNonConEnabled() && !massageSlave.isAttractedTo(Main.game.getPlayer())) {
 						return new Response("Sex", UtilText.parse(massageSlave, "[npc.Name] is not attracted to you, and so [npc.she] isn't willing to let you have sex with [npc.herHim]..."), null);
@@ -1975,7 +2004,7 @@ public class LilayaSpa {
 							null,
 							AFTER_MASSAGE_SEX,
 							UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "SPA_MASSAGE_SEX_AS_DOM", massageSlave));
-					
+
 				} else if(index==3) {
 					if(!massageSlave.isAttractedTo(Main.game.getPlayer())) {
 						return new Response("Submissive sex", UtilText.parse(massageSlave, "As [npc.name] is not attracted to you, [npc.she] is not willing to take the dominant role in having sex with you..."), null);
@@ -1994,48 +2023,6 @@ public class LilayaSpa {
 							AFTER_MASSAGE_SEX,
 							UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "SPA_MASSAGE_SEX_AS_SUB", massageSlave));
 				}
-			}
-			return null;
-		}
-	};
-
-	public static final DialogueNode AFTER_MASSAGE_SEX = new DialogueNode("Finished", "", true) {
-		@Override
-		public String getDescription() {
-			return UtilText.parse(massageSlave, "Having had [npc.her] fun, [npc.name] reminds you that you have other things you need to be getting on with...");
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "AFTER_MASSAGE_SEX", massageSlave);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Continue", "Now that you've had an unexpectedly fun massage, you wonder what to do next...", SPA_CORE) {
-					@Override
-					public void effects() {
-						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "AFTER_MASSAGE_SEX_FINISHED", massageSlave));
-					}
-				};
-			}
-			return null;
-		}
-	};
-
-	public static final DialogueNode REFUSE_SLAVE_SEX = new DialogueNode("", "", true) {
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "REFUSE_SLAVE_SEX", massageSlave);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Continue", "Now that you've told your slave to back off, you wonder what to do next...", SPA_CORE) {
-					@Override
-					public void effects() {
-						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "REFUSE_SLAVE_SEX_FINISHED", massageSlave));
-					}
-				};
 			}
 			return null;
 		}
@@ -2356,7 +2343,6 @@ public class LilayaSpa {
 			return null;
 		}
 	};
-
 	public static final DialogueNode SPA_GUEST_CORE_BATHING_AFTER_SEX = new DialogueNode("Finished", "", true) {
 		@Override
 		public void applyPreParsingEffects() {
@@ -2374,7 +2360,7 @@ public class LilayaSpa {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Finish with your bathing session and get out of the pool.", SPA_GUEST_CORE) {
+                return new Response("Продолжить", "Finish with your bathing session and get out of the pool.", SPA_GUEST_CORE) {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "SPA_GUEST_CORE_BATHING_AFTER_SEX_END", guest));
@@ -2384,7 +2370,28 @@ public class LilayaSpa {
 			return null;
 		}
 	};
-
+	public static final DialogueNode SPA_GUEST_CORE_MASSAGE_AFTER_SEX = new DialogueNode("Finished", "", true) {
+		@Override
+		public String getDescription() {
+			return UtilText.parse(guest, "Having had [npc.her] fun, [npc.name] asks if you'd like to do something else...");
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "SPA_GUEST_CORE_MASSAGE_AFTER_SEX", guest);
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+                return new Response("Продолжить", "Now that you've had an unexpectedly fun massage, you wonder what to do next...", SPA_GUEST_CORE) {
+					@Override
+					public void effects() {
+						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "SPA_GUEST_CORE_MASSAGE_AFTER_SEX_FINISHED", guest));
+					}
+				};
+			}
+			return null;
+		}
+	};
 	public static final DialogueNode SPA_GUEST_CORE_MASSAGE_GIVE = new DialogueNode("", "", true) {
 		@Override
 		public void applyPreParsingEffects() {
@@ -2401,13 +2408,13 @@ public class LilayaSpa {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", UtilText.parse(guest, "Now that you've given [npc.name] a nice relaxing massage, you wonder what to do next..."), SPA_GUEST_CORE) {
+                return new Response("Продолжить", UtilText.parse(guest, "Now that you've given [npc.name] a nice relaxing massage, you wonder what to do next..."), SPA_GUEST_CORE) {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "SPA_GUEST_CORE_MASSAGE_GIVE_END", guest));
 					}
 				};
-				
+
 			} else if(index==2) {
 				if(!guest.isAttractedTo(Main.game.getPlayer())) {
 					return new Response(UtilText.parse(guest, "Fuck [npc.herHim]"),
@@ -2435,7 +2442,6 @@ public class LilayaSpa {
 			return null;
 		}
 	};
-
 	public static final DialogueNode SPA_GUEST_CORE_MASSAGE_RECEIVE = new DialogueNode("", "", true) {
 		@Override
 		public void applyPreParsingEffects() {
@@ -2452,13 +2458,13 @@ public class LilayaSpa {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Now that you've had a nice relaxing massage, you wonder what to do next...", SPA_CORE) {
+                return new Response("Продолжить", "Now that you've had a nice relaxing massage, you wonder what to do next...", SPA_CORE) {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "SPA_GUEST_CORE_MASSAGE_RECEIVE_END", massageSlave));
 					}
 				};
-				
+
 			}
 			if(index==2) {
 				if(!guest.isAttractedTo(Main.game.getPlayer())) {
@@ -2487,30 +2493,6 @@ public class LilayaSpa {
 			return null;
 		}
 	};
-
-	public static final DialogueNode SPA_GUEST_CORE_MASSAGE_AFTER_SEX = new DialogueNode("Finished", "", true) {
-		@Override
-		public String getDescription() {
-			return UtilText.parse(guest, "Having had [npc.her] fun, [npc.name] asks if you'd like to do something else...");
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "SPA_GUEST_CORE_MASSAGE_AFTER_SEX", guest);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Continue", "Now that you've had an unexpectedly fun massage, you wonder what to do next...", SPA_GUEST_CORE) {
-					@Override
-					public void effects() {
-						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "SPA_GUEST_CORE_MASSAGE_AFTER_SEX_FINISHED", guest));
-					}
-				};
-			}
-			return null;
-		}
-	};
-	
 	public static final DialogueNode SPA_GUEST_END = new DialogueNode("", "", true) {
 		@Override
 		public void applyPreParsingEffects() {
@@ -2537,7 +2519,7 @@ public class LilayaSpa {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Now that you've had an unexpectedly fun massage, you wonder what to do next...", PlaceType.LILAYA_HOME_CORRIDOR.getDialogue(false));
+                return new Response("Продолжить", "Now that you've had an unexpectedly fun massage, you wonder what to do next...", PlaceType.LILAYA_HOME_CORRIDOR.getDialogue(false));
 			}
 			return null;
 		}

@@ -1,10 +1,8 @@
 package com.lilithsthrone.controller.eventListeners.tooltips;
 
-import org.w3c.dom.events.Event;
-import org.w3c.dom.events.EventListener;
-import org.w3c.dom.events.MouseEvent;
-
 import com.lilithsthrone.main.Main;
+import org.w3c.dom.events.Event;
+import org.w3c.dom.events.MouseEvent;
 
 /**
  * @since 0.1.0
@@ -12,7 +10,7 @@ import com.lilithsthrone.main.Main;
  * @author Innoxia
  * Перевод не нужен
  */
-public class TooltipMoveEventListener implements EventListener {
+public class TooltipMoveEventListener implements ClonedEventListener {
 	@Override
 	public void handleEvent(Event event) {
 //		boolean tooWide = false;
@@ -43,5 +41,9 @@ public class TooltipMoveEventListener implements EventListener {
 		
 		Main.mainController.getTooltip().setAnchorY(yPosition);
 		
+	}
+
+	public TooltipMoveEventListener newInstance() {
+		return new TooltipMoveEventListener();
 	}
 }

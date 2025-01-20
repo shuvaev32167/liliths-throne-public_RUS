@@ -105,7 +105,7 @@ public class LyssiethReveal {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Enter", "You ready yourself for meeting Lyssieth, and follow Elizabeth through the open doors.",
+                return new Response("Вход", "You ready yourself for meeting Lyssieth, and follow Elizabeth through the open doors.",
 						FORWARDS_3) {
 					@Override
 					public void effects() {
@@ -288,7 +288,7 @@ public class LyssiethReveal {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Arthur", "Hear Arthur's theory.", LAB_ARTHUR_THEORY);
+                return new Response("Артур", "Hear Arthur's theory.", LAB_ARTHUR_THEORY);
 			}
 			return null;
 		}
@@ -330,7 +330,7 @@ public class LyssiethReveal {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Lilaya", "While [siren.name] and Arthur seem to be taking this news well, Lilaya looks incredibly distressed, and it appears as though she has something to say.", LAB_LILAYA_ANGERY);
+                return new Response("Лилайя", "While [siren.name] and Arthur seem to be taking this news well, Lilaya looks incredibly distressed, and it appears as though she has something to say.", LAB_LILAYA_ANGERY);
 			}
 			return null;
 		}
@@ -443,9 +443,9 @@ public class LyssiethReveal {
 						|| !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.lyssiethQuestionAsked3)
 						|| !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.lyssiethQuestionAsked4)
 						|| !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.lyssiethQuestionAsked5)) {
-					return new Response("Continue", "You need to ask Lyssieth about the spell before continuing.", null);
+                    return new Response("Продолжить", "You need to ask Lyssieth about the spell before continuing.", null);
 				} else {
-					return new Response("Continue", "Lyssieth has no more time for questions.", LAB_QUESTION_END);
+                    return new Response("Продолжить", "Lyssieth has no more time for questions.", LAB_QUESTION_END);
 				}
 			}
 			
@@ -687,7 +687,7 @@ public class LyssiethReveal {
 	
 //	private static void setPlayerAsLyssieth() {
 //		PlayerCharacter player = new PlayerCharacter(
-//				new NameTriplet("Lyssieth"),
+//				new NameTriplet("Лиссиет"),
 //				1000,
 //				null,
 //				Gender.F_V_B_FEMALE,
@@ -695,7 +695,7 @@ public class LyssiethReveal {
 //				RaceStage.GREATER,
 //				WorldType.LYSSIETH_PALACE,
 //				PlaceType.LYSSIETH_PALACE_OFFICE);
-//		player.setSurname("Lilithmartuilani");
+//		player.setSurname("Лилитмартуилани");
 //		player.setDescription("One of the seven elder Lilin, you are one of the most powerful beings in existence.");
 //		player.setSubspeciesOverride(Subspecies.ELDER_LILIN);
 //		player.getBody().calculateRace(player);

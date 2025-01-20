@@ -1,12 +1,5 @@
 package com.lilithsthrone.controller;
 
-import java.io.File;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.w3c.dom.events.EventTarget;
-
 import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInformationEventListener;
 import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInventoryEventListener;
 import com.lilithsthrone.game.Game;
@@ -19,14 +12,7 @@ import com.lilithsthrone.game.dialogue.companions.CompanionManagement;
 import com.lilithsthrone.game.dialogue.places.dominion.cityHall.CityHall;
 import com.lilithsthrone.game.dialogue.places.dominion.slaverAlley.SlaverAlleyDialogue;
 import com.lilithsthrone.game.dialogue.responses.Response;
-import com.lilithsthrone.game.dialogue.utils.BodyChanging;
-import com.lilithsthrone.game.dialogue.utils.CharacterModificationUtils;
-import com.lilithsthrone.game.dialogue.utils.CharactersPresentDialogue;
-import com.lilithsthrone.game.dialogue.utils.CosmeticsDialogue;
-import com.lilithsthrone.game.dialogue.utils.EnchantmentDialogue;
-import com.lilithsthrone.game.dialogue.utils.OptionsDialogue;
-import com.lilithsthrone.game.dialogue.utils.PhoneDialogue;
-import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.game.dialogue.utils.*;
 import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.LoadedEnchantment;
@@ -34,8 +20,13 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.Artwork;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.PresetColour;
-
 import javafx.stage.FileChooser;
+import org.w3c.dom.events.EventTarget;
+
+import java.io.File;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * @since 0.4.6.4
@@ -58,8 +49,8 @@ public class FileController {
 			((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
 				// Create file chooser for .jpg and .png images in the most recently used directory
 				FileChooser chooser = new FileChooser();
-				chooser.setTitle("Add Images");
-				chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images", "*.jpg", "*.png", "*.gif"));
+				chooser.setTitle("Добавить изображения");
+				chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Изображения", "*.jpg", "*.png", "*.gif"));
 				if (lastOpened != null) {
 					chooser.setInitialDirectory(lastOpened);
 				}
@@ -77,11 +68,11 @@ public class FileController {
 				}
 			}, false);
 			MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
-					"Add custom artwork",
-					"Browse your own images and add them to the character."
-							+" Please note that GIF animation files are limited to a <b>maximum of 10MB</b> in size, and if over 1MB, <b>may</b> cause [style.italicsBad(significant lag)], depending on your system."
-							+ "<br/>Custom images for the currently played game are located in folder: <b>'data/images/"+Main.game.getId()+"'</b>"
-							+ "<br/>This character's ID is <b>'"+character.getId()+"'</b>",
+					"Добавить пользовательские иллюстрации",
+					"Выберите свои собственные изображения и добавьте их к персонажу."
+							+ "Обратите внимание, что анимационные файлы GIF ограничены по размеру <b>максимум 10 МБ</b> по размеру, а если больше 1 МБ, <b>может</b> вызвать [style.italicsBad(значительное торможение)], от вашей системы."
+							+ "<br/>Пользовательские изображения для текущей игры находятся в папке: <b>'data/images/" + Main.game.getId() + "'</b>"
+							+ "<br/>ID этого персонажа <b>'" + character.getId() + "'</b>",
 					130));
 		}
 		
@@ -98,16 +89,16 @@ public class FileController {
 					}, false);
 					
 					String description;
-					if (artwork.getArtist().getName().equals("Custom")) {
-						description = "You added this yourself.";
+					if (artwork.getArtist().getName().equals("Пользовательский")) {
+						description = "Вы сами добавили это.";
 					} else if (artwork.getArtist().getWebsites().isEmpty()) {
-						description = "This artist has no associated websites!";
+						description = "У этого художника нет связанных с ним сайтов!";
 					} else {
-						description = "Click to open <b style='color:"+artwork.getArtist().getColour().toWebHexString()+";'>"+artwork.getArtist().getWebsites().get(0).getName()+"</b>"
-								+" ("+artwork.getArtist().getWebsites().get(0).getURL()+") <b>externally</b> in your default browser!";
+						description = "Нажмите, чтобы открыть <b style='color:" + artwork.getArtist().getColour().toWebHexString() + ";'>" + artwork.getArtist().getWebsites().get(0).getName() + "</b>"
+								+ " (" + artwork.getArtist().getWebsites().get(0).getURL() + ") в вашем браузере <b>по умолчанию</b>!";
 					}
 					MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
-							"Artwork by <b style='color:"+artwork.getArtist().getColour().toWebHexString()+";'>"+artwork.getArtist().getName()+"</b>",
+							"Работа - <b style='color:" + artwork.getArtist().getColour().toWebHexString() + ";'>" + artwork.getArtist().getName() + "</b>",
 							description));
 				}
 				
@@ -169,9 +160,9 @@ public class FileController {
 						Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
 					}, false);
 					MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
-							"Remove custom artwork",
-							"Removes the current image from this character."
-									+"<br/>[style.italicsBad(Please note that this will delete the image from the game's folder!)]"));
+							"Удалить пользовательские иллюстрации",
+							"Удаляет текущее изображение с этого персонажа."
+									+ "<br/>[style.italicsBad(Обратите внимание, что при этом изображение будет удалено из папки игры!)]"));
 				}
 			} catch (Exception ex) {
 				System.err.println("MainController Artwork handling error.");
@@ -195,19 +186,19 @@ public class FileController {
 						OptionsDialogue.overwriteConfirmationName = f.getName();
 						OptionsDialogue.loadConfirmationName = "";
 						OptionsDialogue.deleteConfirmationName = "";
-						Main.game.setContent(new Response("Save/Load", "Open the save/load game window.", OptionsDialogue.SAVE_LOAD));
+						Main.game.setContent(new Response("Сохр./Загруз.", "Открыть окно сохранения/загрузки.", OptionsDialogue.SAVE_LOAD));
 					}
 				}, false);
-				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Overwrite", ""));
+				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Перезапись", ""));
 			} else {
 				id = "OVERWRITE_"+fileIdentifier+"_DISABLED";
 				if (MainController.document.getElementById(id) != null) {
 					MainController.addEventListener(MainController.document, id, "mousemove", MainController.moveTooltipListener, false);
 					MainController.addEventListener(MainController.document, id, "mouseleave", MainController.hideTooltipListener, false);
-					TooltipInformationEventListener el2 = new TooltipInformationEventListener().setInformation("Overwrite (Disabled)",
+					TooltipInformationEventListener el2 = new TooltipInformationEventListener().setInformation("Перезаписать (отключено)",
 							(!Main.game.isStarted()
-									?"You need to have started a game before you can overwrite a save!"
-									:"You cannot overwrite save files unless you are in a tile's default scene!"));
+									? "Чтобы перезаписать сохранение, нужно начать игру!"
+									: "Вы не можете перезаписывать файлы сохранений, если только находитесь в плитке сцены по умолчанию!"));
 					MainController.addEventListener(MainController.document, id, "mouseenter", el2, false);
 				}
 			}
@@ -221,10 +212,10 @@ public class FileController {
 						OptionsDialogue.overwriteConfirmationName = "";
 						OptionsDialogue.loadConfirmationName = f.getName();
 						OptionsDialogue.deleteConfirmationName = "";
-						Main.game.setContent(new Response("Save/Load", "Open the save/load game window.", OptionsDialogue.SAVE_LOAD));
+						Main.game.setContent(new Response("Сохр./Загруз.", "Открыть окно сохранения/загрузки.", OptionsDialogue.SAVE_LOAD));
 					}
 				}, false);
-				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Load", ""));
+                MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Загрузка", ""));
 			}
 			id = "DELETE_"+fileIdentifier;
 			if (MainController.document.getElementById(id) != null) {
@@ -237,11 +228,11 @@ public class FileController {
 						OptionsDialogue.overwriteConfirmationName = "";
 						OptionsDialogue.loadConfirmationName = "";
 						OptionsDialogue.deleteConfirmationName = f.getName();
-						Main.game.setContent(new Response("Save/Load", "Open the save/load game window.", OptionsDialogue.SAVE_LOAD));
+						Main.game.setContent(new Response("Сохр./Загруз.", "Открыть окно сохранения/загрузки.", OptionsDialogue.SAVE_LOAD));
 					}
 					
 				}, false);
-				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Delete", ""));
+				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Удалить", ""));
 			}
 		}
 		id = "NEW_SAVE";
@@ -250,14 +241,14 @@ public class FileController {
 				Main.mainController.getWebEngine().executeScript("document.getElementById('hiddenPField').innerHTML=document.getElementById('new_save_name').value;");
 				Main.saveGame(Main.mainController.getWebEngine().getDocument().getElementById("hiddenPField").getTextContent(), false, false);
 			}, false);
-			MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Save", ""));
+			MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Сохранить", ""));
 		} else {
 			id = "NEW_SAVE_DISABLED";
 			if (MainController.document.getElementById(id) != null) {
-				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Save (Disabled)",
+				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Сохранить (отключено)",
 						(!Main.game.isStarted()
-								?"You need to have started a game before you can save!"
-								:"You cannot save the game unless you are in a tile's default scene!")));
+								? "Прежде чем сохраняться, нужно начать игру!"
+								: "Вы не сможете сохранить игру, если не находитесь в плитке сцены по умолчанию!")));
 			}
 		}
 	}
@@ -277,10 +268,10 @@ public class FileController {
 						OptionsDialogue.overwriteConfirmationName = "";
 						OptionsDialogue.loadConfirmationName = "";
 						OptionsDialogue.deleteConfirmationName = f.getName();
-						Main.game.setContent(new Response("Import/Export", "Open the Import/Export window.", OptionsDialogue.IMPORT_EXPORT));
+						Main.game.setContent(new Response("Импорт/Экспорт", "Открыть окно Импорт/Экспорт.", OptionsDialogue.IMPORT_EXPORT));
 					}
 				}, false);
-				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Delete", ""));
+				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Удалить", ""));
 			}
 		}
 		if (MainController.document.getElementById("NEW_SAVE") != null) {
@@ -311,9 +302,9 @@ public class FileController {
 					try {
 						Game.importCharacterAsSlave(fileName);
 						MainController.updateUI();
-						Main.game.flashMessage(PresetColour.GENERIC_GOOD, "Imported Character!");
+						Main.game.flashMessage(PresetColour.GENERIC_GOOD, "Персонаж импортирован!");
 					} catch (Exception ex) {
-						Main.game.flashMessage(PresetColour.GENERIC_BAD, "Import Failed!");
+						Main.game.flashMessage(PresetColour.GENERIC_BAD, "Ошибка импорта!");
 					}
 				}, false);
 			}
@@ -330,12 +321,12 @@ public class FileController {
 						Main.game.setContent(new Response("", "", SlaverAlleyDialogue.AUCTION_BIDDING));
 					}, false);
 					MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
-							UtilText.parse(npc, "Bid on [npc.name]"),
-							UtilText.parse(npc, "Start bidding on [npc.name]. There's a chance that the bidding might exceed [npc.her] value, so make sure you have enough money first!")));
+							UtilText.parse(npc, "Торговаться за [npc.morphSingleNameGene([npc.name])]"),
+							UtilText.parse(npc, "Начать торги за [npc.morphSingleNameGene([npc.name])]. Есть вероятность, что торги могут превысить [npc.her] стоимость, поэтому сначала убедитесь, что у вас достаточно денег!")));
 				} else {
 					MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
-							UtilText.parse(npc, "Bid on [npc.name]"),
-							UtilText.parse(npc, "You don't have a slaver license, so you're unable to big on any slaves!")));
+							UtilText.parse(npc, "Торговаться за [npc.morphSingleNameGene([npc.name])]"),
+							UtilText.parse(npc, "У тебя нет лицензии рабовладельца, поэтому ты не можешь набирать рабов!")));
 				}
 			}
 		}
@@ -351,9 +342,9 @@ public class FileController {
 					try {
 						Game.importCharacterAsLodger(fileName);
 						MainController.updateUI();
-						Main.game.flashMessage(PresetColour.GENERIC_GOOD, "Imported Character!");
+						Main.game.flashMessage(PresetColour.GENERIC_GOOD, "Персонаж импортирован!");
 					} catch (Exception ex) {
-						Main.game.flashMessage(PresetColour.GENERIC_BAD, "Import Failed!");
+						Main.game.flashMessage(PresetColour.GENERIC_BAD, "Ошибка импорта!");
 					}
 				}, false);
 			}
@@ -369,8 +360,8 @@ public class FileController {
 					Main.game.setContent(new Response("", "", CityHall.CITY_HALL_APPROACH_LODGER));
 				}, false);
 				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
-						UtilText.parse(npc, "Find [npc.name]"),
-						UtilText.parse(npc, "Look around the waiting area and see if you can find [npc.name]...")));
+						UtilText.parse(npc, "Найти [npc.morphSingleNameGene([npc.name])]"),
+						UtilText.parse(npc, "Осмотреться в зоне ожидания и попробовать найти [npc.morphSingleNameGene([npc.name])]...")));
 			}
 		}
 	}
@@ -385,9 +376,9 @@ public class FileController {
 						Game.importCharacterAsClubber(fileName);
 						MainController.updateUI();
 						Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue()));
-						Main.game.flashMessage(PresetColour.GENERIC_GOOD, "Imported Character!");
+						Main.game.flashMessage(PresetColour.GENERIC_GOOD, "Персонаж импортирован!");
 					} catch (Exception ex) {
-						Main.game.flashMessage(PresetColour.GENERIC_BAD, "Import Failed!");
+						Main.game.flashMessage(PresetColour.GENERIC_BAD, "Ошибка импорта!");
 					}
 				}, false);
 			}
@@ -410,10 +401,10 @@ public class FileController {
 						EnchantmentDialogue.overwriteConfirmationName = f.getName();
 						EnchantmentDialogue.loadConfirmationName = "";
 						EnchantmentDialogue.deleteConfirmationName = "";
-						Main.game.setContent(new Response("Save/Load", "Open the save/load enchantment window.", EnchantmentDialogue.ENCHANTMENT_SAVE_LOAD));
+						Main.game.setContent(new Response("Сохр./Загруз.", "Открыть окно сохранения/загрузки зачарований", EnchantmentDialogue.ENCHANTMENT_SAVE_LOAD));
 					}
 				}, false);
-				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Overwrite", ""));
+				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Перезапись", ""));
 			}
 			id = "LOAD_"+fileIdentifier;
 			if (MainController.document.getElementById(id) != null) {
@@ -430,15 +421,15 @@ public class FileController {
 							EnchantmentDialogue.addEffect(ie);
 						}
 						EnchantmentDialogue.setOutputName(lEnch.getName());
-						Main.game.setContent(new Response("Save/Load", "Open the save/load enchantment window.", EnchantmentDialogue.ENCHANTMENT_MENU));
+						Main.game.setContent(new Response("Сохр./Загруз.", "Открыть окно сохранения/загрузки зачарований", EnchantmentDialogue.ENCHANTMENT_MENU));
 					} else {
 						EnchantmentDialogue.overwriteConfirmationName = "";
 						EnchantmentDialogue.loadConfirmationName = f.getName();
 						EnchantmentDialogue.deleteConfirmationName = "";
-						Main.game.setContent(new Response("Save/Load", "Open the save/load enchantment window.", EnchantmentDialogue.ENCHANTMENT_SAVE_LOAD));
+						Main.game.setContent(new Response("Сохр./Загруз.", "Открыть окно сохранения/загрузки зачарований", EnchantmentDialogue.ENCHANTMENT_SAVE_LOAD));
 					}
 				}, false);
-				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Load", ""));
+                MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Загрузка", ""));
 			}
 			id = "DELETE_"+fileIdentifier;
 			if (MainController.document.getElementById(id) != null) {
@@ -447,15 +438,15 @@ public class FileController {
 						EnchantmentDialogue.deleteConfirmationName = "";
 						EnchantmentDialogue.deleteEnchant(fileName);
 						EnchantmentDialogue.initSaveLoadMenu();
-						Main.game.setContent(new Response("Save/Load", ".", EnchantmentDialogue.ENCHANTMENT_SAVE_LOAD));
+						Main.game.setContent(new Response("Сохр./Загруз.", ".", EnchantmentDialogue.ENCHANTMENT_SAVE_LOAD));
 					} else {
 						EnchantmentDialogue.overwriteConfirmationName = "";
 						EnchantmentDialogue.loadConfirmationName = "";
 						EnchantmentDialogue.deleteConfirmationName = f.getName();
-						Main.game.setContent(new Response("Save/Load", ".", EnchantmentDialogue.ENCHANTMENT_SAVE_LOAD));
+						Main.game.setContent(new Response("Сохр./Загруз.", ".", EnchantmentDialogue.ENCHANTMENT_SAVE_LOAD));
 					}
 				}, false);
-				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Delete", ""));
+				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Удалить", ""));
 			}
 		}
 		
@@ -465,7 +456,7 @@ public class FileController {
 				Main.mainController.getWebEngine().executeScript("document.getElementById('hiddenPField').innerHTML=document.getElementById('new_save_name').value;");
 				EnchantmentDialogue.saveEnchant(Main.mainController.getWebEngine().getDocument().getElementById("hiddenPField").getTextContent(), false, EnchantmentDialogue.ENCHANTMENT_SAVE_LOAD);
 			}, false);
-			MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Save", ""));
+			MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Сохранить", ""));
 		}
 		for (Map.Entry<String, LoadedEnchantment> entry : EnchantmentDialogue.getLoadedEnchantmentsMap().entrySet()) {
 			id = "LOADED_ENCHANTMENT_"+entry.getKey();
@@ -495,10 +486,10 @@ public class FileController {
 						CosmeticsDialogue.overwriteConfirmationName = f.getName();
 						CosmeticsDialogue.loadConfirmationName = "";
 						CosmeticsDialogue.deleteConfirmationName = "";
-						Main.game.setContent(new Response("Save/Load", "Open the save/load tattoo window.", CosmeticsDialogue.TATTOO_SAVE_LOAD));
+						Main.game.setContent(new Response("Сохр./Загруз.", "Открыть окно сохранения/загрузки татуировки", CosmeticsDialogue.TATTOO_SAVE_LOAD));
 					}
 				}, false);
-				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Overwrite", ""));
+				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Перезапись", ""));
 			}
 			id = "LOAD_"+fileIdentifier;
 			if (MainController.document.getElementById(id) != null) {
@@ -507,16 +498,16 @@ public class FileController {
 						CosmeticsDialogue.loadConfirmationName = "";
 						Tattoo loadedTattoo = CosmeticsDialogue.loadTattoo(fileName);
 						CharacterModificationUtils.tattoo = loadedTattoo;
-						
-						Main.game.setContent(new Response("Save/Load", "Open the save/load tattoo window.", CosmeticsDialogue.getReturnToNodeFromTattooSaveLoad()));
+
+						Main.game.setContent(new Response("Сохр./Загруз.", "Открыть окно сохранения/загрузки татуировки", CosmeticsDialogue.getReturnToNodeFromTattooSaveLoad()));
 					} else {
 						CosmeticsDialogue.overwriteConfirmationName = "";
 						CosmeticsDialogue.loadConfirmationName = f.getName();
 						CosmeticsDialogue.deleteConfirmationName = "";
-						Main.game.setContent(new Response("Save/Load", "Open the save/load tattoo window.", CosmeticsDialogue.TATTOO_SAVE_LOAD));
+						Main.game.setContent(new Response("Сохр./Загруз.", "Открыть окно сохранения/загрузки татуировки", CosmeticsDialogue.TATTOO_SAVE_LOAD));
 					}
 				}, false);
-				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Load", ""));
+                MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Загрузка", ""));
 			}
 			id = "DELETE_"+fileIdentifier;
 			if (MainController.document.getElementById(id) != null) {
@@ -525,15 +516,15 @@ public class FileController {
 						CosmeticsDialogue.deleteConfirmationName = "";
 						CosmeticsDialogue.deleteTattoo(fileName);
 						CosmeticsDialogue.initSaveLoadMenu();
-						Main.game.setContent(new Response("Save/Load", ".", CosmeticsDialogue.TATTOO_SAVE_LOAD));
+						Main.game.setContent(new Response("Сохр./Загруз.", ".", CosmeticsDialogue.TATTOO_SAVE_LOAD));
 					} else {
 						CosmeticsDialogue.overwriteConfirmationName = "";
 						CosmeticsDialogue.loadConfirmationName = "";
 						CosmeticsDialogue.deleteConfirmationName = f.getName();
-						Main.game.setContent(new Response("Save/Load", ".", CosmeticsDialogue.TATTOO_SAVE_LOAD));
+						Main.game.setContent(new Response("Сохр./Загруз.", ".", CosmeticsDialogue.TATTOO_SAVE_LOAD));
 					}
 				}, false);
-				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Delete", ""));
+				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Удалить", ""));
 			}
 		}
 		
@@ -543,7 +534,7 @@ public class FileController {
 				Main.mainController.getWebEngine().executeScript("document.getElementById('hiddenPField').innerHTML=document.getElementById('new_save_name').value;");
 				CosmeticsDialogue.saveTattoo(Main.mainController.getWebEngine().getDocument().getElementById("hiddenPField").getTextContent(), false, CosmeticsDialogue.TATTOO_SAVE_LOAD);
 			}, false);
-			MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Save", ""));
+			MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Сохранить", ""));
 		}
 		for (Entry<String, Tattoo> entry : CosmeticsDialogue.getLoadedTattoosMap().entrySet()) {
 			id = "LOADED_TATTOO_"+entry.getKey();
@@ -573,10 +564,10 @@ public class FileController {
 						BodyChanging.overwriteConfirmationName = f.getName();
 						BodyChanging.loadConfirmationName = "";
 						BodyChanging.deleteConfirmationName = "";
-						Main.game.setContent(new Response("Save/Load", "Open the save/load transformation window.", BodyChanging.BODY_CHANGING_SAVE_LOAD));
+						Main.game.setContent(new Response("Сохр./Загруз.", "Открыть окно сохранения/загрузки трансформации", BodyChanging.BODY_CHANGING_SAVE_LOAD));
 					}
 				}, false);
-				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Overwrite", ""));
+				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Перезапись", ""));
 			}
 			id = "LOAD_"+fileIdentifier;
 			if (MainController.document.getElementById(id) != null) {
@@ -586,16 +577,16 @@ public class FileController {
 						if (!Main.getProperties().hasValue(PropertyValue.overwriteWarning) || BodyChanging.loadConfirmationName.equals(f.getName())) {
 							BodyChanging.loadConfirmationName = "";
 							BodyChanging.applyLoadedBody(loadedBody);
-							Main.game.setContent(new Response("Save/Load", "Open the save/load transformation window.", BodyChanging.BODY_CHANGING_CORE));
+							Main.game.setContent(new Response("Сохр./Загруз.", "Открыть окно сохранения/загрузки трансформации", BodyChanging.BODY_CHANGING_CORE));
 						} else {
 							BodyChanging.overwriteConfirmationName = "";
 							BodyChanging.loadConfirmationName = f.getName();
 							BodyChanging.deleteConfirmationName = "";
-							Main.game.setContent(new Response("Save/Load", "Open the save/load transformation window.", BodyChanging.BODY_CHANGING_SAVE_LOAD));
+							Main.game.setContent(new Response("Сохр./Загруз.", "Открыть окно сохранения/загрузки трансформации", BodyChanging.BODY_CHANGING_SAVE_LOAD));
 						}
 					}
 				}, false);
-				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Load",
+                MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Загрузка",
 						BodyChanging.isPresetTransformationAvailable(BodyChanging.loadBody(fileName))
 								?""
 								:BodyChanging.getPresetTransformationUnavailabilityText(BodyChanging.loadBody(fileName))));
@@ -607,15 +598,15 @@ public class FileController {
 						BodyChanging.deleteConfirmationName = "";
 						BodyChanging.deleteBody(fileName);
 						BodyChanging.initSaveLoadMenu();
-						Main.game.setContent(new Response("Save/Load", ".", BodyChanging.BODY_CHANGING_SAVE_LOAD));
+						Main.game.setContent(new Response("Сохр./Загруз.", ".", BodyChanging.BODY_CHANGING_SAVE_LOAD));
 					} else {
 						BodyChanging.overwriteConfirmationName = "";
 						BodyChanging.loadConfirmationName = "";
 						BodyChanging.deleteConfirmationName = f.getName();
-						Main.game.setContent(new Response("Save/Load", ".", BodyChanging.BODY_CHANGING_SAVE_LOAD));
+						Main.game.setContent(new Response("Сохр./Загруз.", ".", BodyChanging.BODY_CHANGING_SAVE_LOAD));
 					}
 				}, false);
-				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Delete", ""));
+				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Удалить", ""));
 			}
 		}
 		id = "NEW_SAVE";
@@ -624,7 +615,7 @@ public class FileController {
 				Main.mainController.getWebEngine().executeScript("document.getElementById('hiddenPField').innerHTML=document.getElementById('new_save_name').value;");
 				BodyChanging.saveBody(Main.mainController.getWebEngine().getDocument().getElementById("hiddenPField").getTextContent(), false);
 			}, false);
-			MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Save", ""));
+			MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Сохранить", ""));
 		}
 		for (Map.Entry<String, Util.Value<String, Body>> entry : BodyChanging.getPresetTransformationsMap().entrySet()) {
 			id = "LOADED_BODY_"+entry.getKey();

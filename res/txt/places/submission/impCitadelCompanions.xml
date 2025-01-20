@@ -1580,7 +1580,7 @@
 	
 	<htmlContent tag="KEEP_DEMONS_DEFEATED"><![CDATA[
 	<p>
-		[impMalesLeader.speech(Mistress, w-we've failed you!)] [impMalesLeader.name] cries out, before collapsing to the floor beside [impAlphaLeader.name] and [impFemalesLeader.name].
+		[impMalesLeader.speech(Mistress, w-we've failed you!)] [impMalesLeader.name] cries out, before collapsing to the floor beside [impAlphaLeader.name] и [impFemalesLeader.name].
 	</p>
 	<p>
 		Looking over at the siren's throne, you see [siren.name] stepping down from the raised dais as she laughs, [siren.speech(Fools! Now you both shall witness my vast astronomical powers! The very fabric of space and time bends to my will!)]
@@ -1673,7 +1673,7 @@
 		As [siren.name] suddenly vanishes mid-sentence, the arcane spell which she just unleashed takes effect, and a loud, piercing screech echoes out around the huge throne room. You, [npc.name], and the three demon lieutenants all cover your ears, flinching as the reverberating wail causes the ground to rumble and shake. Thankfully, this loud noise quickly fades away, but as it does, the huge stone slabs beneath your feet start to crack and break apart. From these fissures in the floor, arcane poison starts to spew forth, and, as you start to step back towards the exit, the resonating vibrations from this powerful spell cause a huge chunk of rock to suddenly split from the ceiling, which then falls to crash directly onto the siren's vacated throne.
 	</p>
 	<p>
-		[impMalesLeader.speech(Get out of here!)] [impMalesLeader.name] shouts, grabbing [impAlphaLeader.name] and [impFemalesLeader.name] by the arms and running towards the exit.
+		[impMalesLeader.speech(Get out of here!)] [impMalesLeader.name] shouts, grabbing [impAlphaLeader.name] и [impFemalesLeader.name] by the arms and running towards the exit.
 	</p>
 	<p>
 		The siren's spell appears to have inadvertently caused the entire underground citadel to start to collapse, and, as you and your companion hurry to follow the three demons, yet more chunks of the ceiling start to break apart and fall to the floor with resounding crashes.
@@ -1811,7 +1811,7 @@
 		With the very last of her aura's power drained by the spell she's just unleashed, the siren weakly collapses down onto the floor in front of you and your companion. Before you're able to take any further action, a loud, piercing screech suddenly echoes out around the huge throne room. You, [npc.name], and the three demon lieutenants all cover your ears, flinching as the reverberating wail causes the ground to rumble and shake. Thankfully, this loud noise quickly fades away, but as it does, the huge stone slabs beneath your feet start to crack and break apart. From these fissures in the floor, arcane poison starts to spew forth, and, as you leap out of the way of this, the resonating vibrations from [siren.namePos] powerful spell cause a huge chunk of rock to suddenly split from the ceiling, which then falls to crash directly onto the siren's vacated throne.
 	</p>
 	<p>
-		[impMalesLeader.speech(We have to get out of here!)] [impMalesLeader.name] shouts, grabbing [impAlphaLeader.name] and [impFemalesLeader.name] by the arms and pushing them towards the exit. [impMalesLeader.speech(Run!)]
+		[impMalesLeader.speech(We have to get out of here!)] [impMalesLeader.name] shouts, grabbing [impAlphaLeader.name] и [impFemalesLeader.name] by the arms and pushing them towards the exit. [impMalesLeader.speech(Run!)]
 	</p>
 	<p>
 		The siren's spell appears to have inadvertently caused the entire underground citadel to start to collapse, and, as the three demons move to make their escape, yet more chunks of the ceiling start to break apart and fall to the floor with resounding crashes.

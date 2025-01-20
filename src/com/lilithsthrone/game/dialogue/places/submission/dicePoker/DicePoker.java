@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.submission.dicePoker;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.npc.submission.GamblingDenPatron;
 import com.lilithsthrone.game.dialogue.DialogueNode;
@@ -16,6 +13,9 @@ import com.lilithsthrone.rendering.SVGImages;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.PresetColour;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @since 0.2.6
  * @version 0.3.5.5
@@ -28,10 +28,10 @@ public class DicePoker {
 	private static int moneyPool;
 	private static DicePokerTable table;
 	private static NPC gambler;
-	private static List<Dice> playerDice = new ArrayList<>();
+	private static final List<Dice> playerDice = new ArrayList<>();
 	private static List<Dice> gamblerDice = new ArrayList<>();
-	private static List<Dice> diceToReroll = new ArrayList<>();
-	private static String[] progressDescriptions = new String[] {"Roll", "Betting", "Re-roll", "Payment"};
+	private static final List<Dice> diceToReroll = new ArrayList<>();
+	private static final String[] progressDescriptions = new String[] {"Roll", "Betting", "Re-roll", "Payment"};
 	public static int progress = 0;
 	private static String responseContent;
 	private static String buyInDescription;
@@ -214,10 +214,23 @@ public class DicePoker {
 		diceToReroll.addAll(rerollDice);
 	}
 	
+    public static final DialogueNode GAMBLING_RULES = new DialogueNode("Столы для покера с костями", "", true) {
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/submission/gamblingDen/main", "GAMBLING_RULES");
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==0) {
+				return new Response("Back", "Finish reading the rules and [pc.step] back from the sign.", Main.game.getDefaultDialogue());
+			}
+			return null;
+		}
+	};
 	/**
 	 * For use in external dialogue files.
 	 */
-	public static final DialogueNode GAMBLING = new DialogueNode("Dice Poker Tables", "", false) {
+    public static final DialogueNode GAMBLING = new DialogueNode("Столы для покера с костями", "", false) {
 		@Override
 		public String getContent() {
 			return "";
@@ -225,22 +238,22 @@ public class DicePoker {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			List<NPC> gamblers = Main.game.getNonCompanionCharactersPresent();
-			
+
 			if(index==0) {
 				return null;
-				
+
 			} else if(index==gamblers.size()+1){
 				return new Response("Rules", "Take a look at a nearby sign which displays the rules of dice poker.", GAMBLING_RULES);
-				
+
 			} else {
 				try {
 					gamblers.sort((g1, g2) -> ((GamblingDenPatron) g1).getTable().compareTo(((GamblingDenPatron) g2).getTable()));
 				} catch(Exception ex) {
 				}
-				
+
 				if(index-1<gamblers.size()) {
 					NPC gambler = gamblers.get(index-1);
-					DicePokerTable table = 
+					DicePokerTable table =
 							(gambler instanceof GamblingDenPatron && ((GamblingDenPatron) gambler).getTable()!=null)
 								?((GamblingDenPatron) gambler).getTable()
 								:DicePokerTable.COPPER;
@@ -256,32 +269,18 @@ public class DicePoker {
 								Main.game.setContent(new Response("", "", DicePoker.initDicePoker(gambler, table, Main.game.getDefaultDialogue(), "misc/dicePoker")));
 							}
 						};
-						
+
 					} else {
 						return new Response(gambler.getName(true)+" ("+UtilText.formatAsMoneyUncoloured(buyIn, "span")+")",
 								"The buy-in amount is "+UtilText.formatAsMoney(table.getInitialBet(), "span")
 								+", but you'll also need "+UtilText.formatAsMoney(table.getRaiseAmount(), "span")+" for any raises. As a result, you don't have enough money to play at this table!",
 								null);
 					}
-					
+
 				} else {
 					return null;
 				}
 			}
-		}
-	};
-
-	public static final DialogueNode GAMBLING_RULES = new DialogueNode("Dice Poker Tables", "", true) {
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/gamblingDen/main", "GAMBLING_RULES");
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==0) {
-				return new Response("Back", "Finish reading the rules and [pc.step] back from the sign.", Main.game.getDefaultDialogue());
-			}
-			return null;
 		}
 	};
 	
@@ -506,7 +505,7 @@ public class DicePoker {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Step away from the table.", endingNode) {
+                return new Response("Продолжить", "Step away from the table.", endingNode) {
 					@Override
 					public void effects() {
 						progress = 0;
@@ -527,7 +526,7 @@ public class DicePoker {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Step away from the table.", endingNode) {
+                return new Response("Продолжить", "Step away from the table.", endingNode) {
 					@Override
 					public void effects() {
 						progress = 0;
@@ -618,7 +617,7 @@ public class DicePoker {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Step away from the table.", endingNode) {
+                return new Response("Продолжить", "Step away from the table.", endingNode) {
 					@Override
 					public void effects() {
 						progress = 0;

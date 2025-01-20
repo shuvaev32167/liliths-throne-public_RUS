@@ -1,14 +1,5 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractHairType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
@@ -16,6 +7,11 @@ import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
+
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.83
@@ -26,14 +22,14 @@ public class HairType {
 
 	public static AbstractHairType HUMAN = new AbstractHairType(BodyCoveringType.HAIR_HUMAN,
 			Race.HUMAN,
-			"human",
-			"hair",
-			"hairs",
+			"человеческие",
+			"волосы",
+			"волосы",
 			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues("soft", "feminine"),
-			"The transformation only lasts a matter of moments, leaving [npc.herHim] with human-like hair.<br/>"
-					+ "[npc.Name] now [npc.has] [npc.hairColour], [style.boldHuman(human hair)].",
-			"[npc.SheHasFull] [npc.hairDeterminer] [npc.hairLength], [npc.hairColour(true)], human hair",
+			Util.newArrayListOfValues("мягкие", "женственные"),
+			"Превращение длится всего несколько мгновений, после чего у [npc.herHim] остаются волосы, похожие на человеческие.<br/>"
+					+ "[npc.Name] теперь [npc.has] [npc.hairColour], [style.boldHuman(человеческие волосы)].",
+			"[npc.SheHasFull] [npc.hairDeterminer] [npc.hairLength], [npc.hairColour(true)], человеческие волосы",
 			Util.newArrayListOfValues(BodyPartTag.HAIR_HANDLES_IN_SEX)) {
 	};
 
@@ -277,9 +273,9 @@ public class HairType {
 		}
 	};
 
-	private static List<AbstractHairType> allHairTypes;
-	private static Map<AbstractHairType, String> hairToIdMap = new HashMap<>();
-	private static Map<String, AbstractHairType> idToHairMap = new HashMap<>();
+	private static final List<AbstractHairType> allHairTypes;
+	private static final Map<AbstractHairType, String> hairToIdMap = new HashMap<>();
+	private static final Map<String, AbstractHairType> idToHairMap = new HashMap<>();
 	
 	static {
 		allHairTypes = new ArrayList<>();
@@ -370,7 +366,7 @@ public class HairType {
 		return allHairTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractHairType>> typesMap = new HashMap<>();
+	private static final Map<AbstractRace, List<AbstractHairType>> typesMap = new HashMap<>();
 	
 	public static List<AbstractHairType> getHairTypes(AbstractRace r) {
 		if(typesMap.containsKey(r)) {

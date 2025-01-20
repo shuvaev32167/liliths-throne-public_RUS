@@ -1,7 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.enforcerHQ;
 
-import java.util.stream.Collectors;
-
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
@@ -36,6 +34,8 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
+import java.util.stream.Collectors;
+
 /**
  * @since 0.1.0
  * @version 0.4.6.3
@@ -54,9 +54,9 @@ public class BraxOffice {
 		if(applyPlayerLocationChange) {
 			Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_ENFORCER_HQ, false);
 		}
-	};
-	
-	public static void givePlayerEnforcerUniform(StringBuilder sb, int outfitFem) {
+	}
+
+    public static void givePlayerEnforcerUniform(StringBuilder sb, int outfitFem) {
 		if(sb==null) {
 			sb = new StringBuilder();
 		}
@@ -123,9 +123,9 @@ public class BraxOffice {
 			tfPotion.getEffects().stream().map(x -> x.getEffect()).collect(Collectors.toList()));
 		potion.setName("Brax's Surprise");
 		sb.append(Main.game.getPlayer().addItem(potion, false));
-	};
-	
-	public static final DialogueNode INTERIOR_BRAX = new DialogueNode("[brax.namePos] Office", "-", true) {
+	}
+
+    public static final DialogueNode INTERIOR_BRAX = new DialogueNode("[brax.namePos] Office", "-", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 2*60;
@@ -431,8 +431,8 @@ public class BraxOffice {
 			else {
 				return null;
 			}
-		};
-	};
+		}
+    };
 	
 	
 	//----------- BRAX COMBAT/SEX -----------
@@ -586,8 +586,8 @@ public class BraxOffice {
 			}
 		}
 	};
-	
-	public static final DialogueNode AFTER_DEFEAT_TRANSFORMATION_REFUSED = new DialogueNode("Brax's Office", "In Brax's Office after being forced to drink the potion.", true, true) {
+
+    public static final DialogueNode AFTER_DEFEAT_TRANSFORMATION_REFUSED = new DialogueNode("Офис Бракса", "In Brax's Office after being forced to drink the potion.", true, true) {
 
 		@Override
 		public String getContent() {
@@ -611,8 +611,8 @@ public class BraxOffice {
 			}
 		}
 	};
-	
-	public static final DialogueNode AFTER_DEFEAT_TRANSFORMATION = new DialogueNode("Brax's Office", "In Brax's Office after being forced to drink the potion.", true, true) {
+
+    public static final DialogueNode AFTER_DEFEAT_TRANSFORMATION = new DialogueNode("Офис Бракса", "In Brax's Office after being forced to drink the potion.", true, true) {
 
 		@Override
 		public String getContent() {

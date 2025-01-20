@@ -17,9 +17,9 @@
 		<attackDescriptionPrefix>throw ball of yarn at</attackDescriptionPrefix>
 		<attackTooltipDescription>Throw the ball of yarn at [npc2.name].</attackTooltipDescription>
 		<rarity>COMMON</rarity>
-		
-		<equipText><![CDATA[[npc.Name] [npc.verb(take)] hold of [npc.her] ball of yarn and [npc.verb(prepare)] to throw it.]]></equipText>
-		<unequipText><![CDATA[[npc.Name] [npc.verb(put)] [npc.her] ball of yarn away.]]></unequipText>
+
+        <equipText><![CDATA[[npc.Name] take hold of [npc.her] ball of yarn and prepare to throw it.]]></equipText>
+        <unequipText><![CDATA[[npc.Name] put [npc.her] ball of yarn away.]]></unequipText>
 		
 		<imageName>yarn.svg</imageName> 
 		<imageEquippedName/>
@@ -72,25 +72,25 @@
 
 	<hitDescriptions>
 		<hitText><![CDATA[
-		Hurling [npc.her] ball of yarn at [npc2.name], [npc.name] [npc.verb(manage)] to hit [npc2.herHim] square in the chest!
+		Hurling [npc.her] ball of yarn at [npc2.name], [npc.name] manage to hit [npc2.herHim] square in the chest!
 		]]></hitText>
 		<hitText><![CDATA[
-		Throwing [npc.her] ball of yarn at [npc2.name], [npc.name] [npc.verb(manage)] to strike [npc2.herHim] on the [npc.arm(true)]!
+		Throwing [npc.her] ball of yarn at [npc2.name], [npc.name] manage to strike [npc2.herHim] on the [npc.arm(true)]!
 		]]></hitText>
 		<hitText><![CDATA[
-		With a quick step forwards, [npc.name] [npc.verb(launch)] [npc.her] ball of yarn at [npc2.name] and [npc.verb(succeed)] in hitting [npc2.herHim]!
+		With a quick step forwards, [npc.name] launch [npc.her] ball of yarn at [npc2.name] и succeed in hitting [npc2.herHim]!
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		Hurling [npc.her] ball of yarn at [npc2.name], [npc.name] [npc.verb(end)] up missing [npc2.herHim]!
+		Hurling [npc.her] ball of yarn at [npc2.name], [npc.name] end up missing [npc2.herHim]!
 		]]></missText>
 		<missText><![CDATA[
-		Throwing [npc.her] ball of yarn at [npc2.name], [npc.name] [npc.verb(let)] out a frustrated cry as [npc.she] [npc.verb(miss)] [npc.her] target!
+		Throwing [npc.her] ball of yarn at [npc2.name], [npc.name] let out a frustrated cry as [npc.she] miss [npc.her] target!
 		]]></missText>
 		<missText><![CDATA[
-		With a quick step forwards, [npc.name] [npc.verb(launch)] [npc.her] ball of yarn at [npc2.name], but [npc.she] [npc.verb(miss)] [npc.her] target!
+		With a quick step forwards, [npc.name] launch [npc.her] ball of yarn at [npc2.name], but [npc.she] miss [npc.her] target!
 		]]></missText>
 	</missDescriptions>
 	

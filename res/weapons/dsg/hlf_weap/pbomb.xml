@@ -18,8 +18,10 @@
 		<attackTooltipDescription><![CDATA[Throw your arcane firebomb at [npc2.name].]]></attackTooltipDescription>
 		<rarity>UNCOMMON</rarity>
 		<weaponSet/>
-		<equipText><![CDATA[[npc.Name] [npc.verb(grab)] the arcane firebomb. The rag stuffed down the bottle's neck immediately ignites but the arcane flames don't seem to be consuming it.]]></equipText>
-		<unequipText><![CDATA[[npc.Name] [npc.verb(put)] the arcane firebomb away. The rag immediately extinguishes itself.]]></unequipText>
+        <equipText>
+            <![CDATA[[npc.Name] grab the arcane firebomb. The rag stuffed down the bottle's neck immediately ignites but the arcane flames don't seem to be consuming it.]]></equipText>
+        <unequipText>
+            <![CDATA[[npc.Name] put the arcane firebomb away. The rag immediately extinguishes itself.]]></unequipText>
 		<imageName>pbomb_uneq.svg</imageName>
 		<imageEquippedName>pbomb.svg</imageEquippedName>
 		<physicalResistance>0</physicalResistance>
@@ -61,13 +63,13 @@
 
 	<hitDescriptions>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(throw)] the firebomb at [npc2.name]. The bottle shatters on impact with [npc2.namePos] aura, engulfing [npc2.herHim] in fire!
+		[npc.Name] throw the firebomb at [npc2.name]. The bottle shatters on impact with [npc2.namePos] aura, engulfing [npc2.herHim] in fire!
 		]]></hitText>
 	</hitDescriptions>
 
 	<missDescriptions>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(throw)] the firebomb at [npc2.name]. The bottle misses [npc2.herHim] completely and shatters in the distance, creating an impressive but useless fireball.
+		[npc.Name] throw the firebomb at [npc2.name]. The bottle misses [npc2.herHim] completely and shatters in the distance, creating an impressive but useless fireball.
 		]]></missText>
 	</missDescriptions>
 	

@@ -1,16 +1,5 @@
 package com.lilithsthrone.game.character.npc.fields;
 
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
@@ -18,37 +7,8 @@ import com.lilithsthrone.game.character.FluidStored;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
-import com.lilithsthrone.game.character.body.types.HornType;
-import com.lilithsthrone.game.character.body.types.LegType;
-import com.lilithsthrone.game.character.body.types.PenisType;
-import com.lilithsthrone.game.character.body.types.TailType;
-import com.lilithsthrone.game.character.body.types.WingType;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.ClitorisSize;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringModifier;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.HairLength;
-import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.body.valueEnums.HornLength;
-import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
-import com.lilithsthrone.game.character.body.valueEnums.LipSize;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
-import com.lilithsthrone.game.character.body.valueEnums.NippleSize;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
-import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
-import com.lilithsthrone.game.character.body.valueEnums.WingSize;
+import com.lilithsthrone.game.character.body.types.*;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
@@ -59,12 +19,7 @@ import com.lilithsthrone.game.character.markings.Tattoo;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.npc.dominion.Saellatrix;
 import com.lilithsthrone.game.character.npc.misc.GenericSexualPartner;
-import com.lilithsthrone.game.character.persona.Name;
-import com.lilithsthrone.game.character.persona.NameTriplet;
-import com.lilithsthrone.game.character.persona.Occupation;
-import com.lilithsthrone.game.character.persona.PersonalityCategory;
-import com.lilithsthrone.game.character.persona.PersonalityTrait;
-import com.lilithsthrone.game.character.persona.SexualOrientation;
+import com.lilithsthrone.game.character.persona.*;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.character.race.RaceStage;
@@ -90,6 +45,12 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.time.Month;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @since 0.4.9
@@ -104,7 +65,7 @@ public class Angelixx extends NPC {
 	
 	public Angelixx(boolean isImported) {
 		super(isImported,
-				new NameTriplet("Angelixx"), "Loviennemartuilani",
+                new NameTriplet("Ангеликс"), "Ловиеннамартуилани",
 				"Although she appears as a young, innocent succubus, Angelixx is an extremely powerful and dangerous pawn of her mother, the elder lilin Lovienne.",
 				52, Month.MAY, 17,
 				30, Gender.F_V_B_FEMALE, Subspecies.DEMON, RaceStage.GREATER,
@@ -510,7 +471,7 @@ public class Angelixx extends NPC {
 		}
 	}
 	
-	private static List<String> diaryEntries = Util.newArrayListOfValues(
+	private static final List<String> diaryEntries = Util.newArrayListOfValues(
 		"A cat-girl pushed me out of the way today and called me a 'silly little girl'."
 			+ " Luckily my boys were nearby, and so I had them take her down an alley and double-team her."
 			+ " I ordered them to cum all over her and then asked her who the silly one was now."
@@ -566,7 +527,7 @@ public class Angelixx extends NPC {
 		);
 
 	private static Set<Integer> viewedDiaryIndexes = new HashSet<>();
-	private static Colour[] diaryPageColour = new Colour[] {PresetColour.BASE_BLUE_LIGHT, PresetColour.BASE_ORANGE_LIGHT, PresetColour.BASE_RED_LIGHT, PresetColour.BASE_GREEN_LIME, PresetColour.BASE_PINK_LIGHT};
+	private static final Colour[] diaryPageColour = new Colour[] {PresetColour.BASE_BLUE_LIGHT, PresetColour.BASE_ORANGE_LIGHT, PresetColour.BASE_RED_LIGHT, PresetColour.BASE_GREEN_LIME, PresetColour.BASE_PINK_LIGHT};
 	
 	/**
 	 * Does not repeat entries until all are seen, then restarts.

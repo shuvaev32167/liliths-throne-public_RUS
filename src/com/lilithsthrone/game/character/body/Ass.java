@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.character.body;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractAssType;
 import com.lilithsthrone.game.character.body.valueEnums.AssSize;
@@ -10,6 +7,9 @@ import com.lilithsthrone.game.character.body.valueEnums.HipSize;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.1.0
@@ -102,8 +102,8 @@ public class Ass implements BodyPartInterface {
 		
 		sb.append(
 				"<p>"
-				+ "[npc.NamePos] [npc.verb(feel)] [npc.her] [npc.ass] suddenly softening and becoming very sensitive, and [npc.she] [npc.verb(let)] out [npc.a_moan+] as the intense feeling moves down into [npc.her] [npc.asshole]."
-				+ " Panting and sighing, [npc.she] [npc.verb(continue)] letting out the occasional involuntary [npc.moan] as [npc.she] [npc.verb(feel)] [npc.her] entire rear-end transform.<br/>");
+                        + "[npc.NamePos] feel [npc.her] [npc.ass] suddenly softening and becoming very sensitive, and [npc.she] let out [npc.a_moan+] as the intense feeling moves down into [npc.her] [npc.asshole]."
+                        + " Panting and sighing, [npc.she] continue letting out the occasional involuntary [npc.moan] as [npc.she] feel [npc.her] entire rear-end transform.<br/>");
 		
 		// Parse existing content before transformation:
 		String s = UtilText.parse(owner, sb.toString());
@@ -206,14 +206,14 @@ public class Ass implements BodyPartInterface {
 		if (sizeChange > 0) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(inhale)] sharply in surprise as [npc.she] [npc.verb(feel)] [npc.her] hips reshape themselves, pushing out and [style.boldGrow(growing wider)].<br/>"
+                            + "[npc.Name] inhale sharply in surprise as [npc.she] feel [npc.her] hips reshape themselves, pushing out and [style.boldGrow(growing wider)].<br/>"
 						+ "[npc.She] now [npc.has] " + styledSizeDescriptor + "!"
 					+ "</p>");
 				
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(inhale)] sharply in surprise as [npc.she] [npc.verb(feel)] [npc.her] hips collapse inwards and reshape themselves as they get [style.boldShrink(narrower)].<br/>"
+                            + "[npc.Name] inhale sharply in surprise as [npc.she] feel [npc.her] hips collapse inwards and reshape themselves as they get [style.boldShrink(narrower)].<br/>"
 						+ "[npc.She] now [npc.has] " + styledSizeDescriptor + "!"
 					+ "</p>");
 		}

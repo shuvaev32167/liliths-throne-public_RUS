@@ -1,10 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.npc.dominion.Natalya;
@@ -16,14 +11,7 @@ import com.lilithsthrone.game.dialogue.responses.ResponseSex;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.item.ItemType;
-import com.lilithsthrone.game.sex.InitialSexActionInformation;
-import com.lilithsthrone.game.sex.OrgasmCumTarget;
-import com.lilithsthrone.game.sex.SexAreaInterface;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexControl;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.managers.OrgasmBehaviour;
 import com.lilithsthrone.game.sex.managers.dominion.SMDominionExpress;
 import com.lilithsthrone.game.sex.managers.universal.SMStanding;
@@ -35,14 +23,56 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * @since 0.4.7.1
  * @version 0.4.7.1
  * @author Innoxia
  */
 public class DominionPark {
-	
-	public static final DialogueNode PARK = new DialogueNode("Park", ".", false) {
+
+    public static final DialogueNode PARK_ROSE_GARDEN = new DialogueNode("Парк", ".", false, true) {
+		@Override
+		public String getAuthor() {
+			return "Innoxia";
+		}
+		@Override
+		public int getSecondsPassed() {
+			return 30;
+		}
+		@Override
+		public String getContent() {
+			return "<p>"
+					+ "You find your attention drawn towards a small rose garden that's positioned near the park's entrance."
+					+ " Walking over towards it, you see that someone's placed a little sign just in front of the border, which reads:"
+				+ "</p>"
+				+ "<p style='text-align:center;'>"
+					+ "<i>"
+						+ "<b>William's Rose Garden</b><br/>"
+						+ "Please feel free to help yourself to these roses!"
+						+ " I hope you or your partner gets as much happiness out of them as I do from growing them.<br/>"
+						+ "- William"
+					+ "</i>"
+				+ "</p>"
+				+ "<p>"
+					+ "You look around, but don't see anyone nearby who could be this 'William' character."
+					+ " Focusing your attention back to his rose garden, you decide to do as his sign says, and after [pc.stepping] forwards, you pluck a single rose from the nearest bush."
+				+ "</p>";
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index==1) {
+				return new Response("Rose Garden", "You've already taken a rose from the garden.", null);
+			} else {
+				return null;
+			}
+		}
+	};
+    public static final DialogueNode PARK = new DialogueNode("Парк", ".", false) {
 		@Override
 		public String getAuthor() {
 			return "Kumiko";
@@ -76,44 +106,6 @@ public class DominionPark {
 						Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("innoxia_hair_rose", false), false));
 					}
 				};
-			} else {
-				return null;
-			}
-		}
-	};
-	
-	public static final DialogueNode PARK_ROSE_GARDEN = new DialogueNode("Park", ".", false, true) {
-		@Override
-		public String getAuthor() {
-			return "Innoxia";
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 30;
-		}
-		@Override
-		public String getContent() {
-			return "<p>"
-					+ "You find your attention drawn towards a small rose garden that's positioned near the park's entrance."
-					+ " Walking over towards it, you see that someone's placed a little sign just in front of the border, which reads:"
-				+ "</p>"
-				+ "<p style='text-align:center;'>"
-					+ "<i>"
-						+ "<b>William's Rose Garden</b><br/>"
-						+ "Please feel free to help yourself to these roses!"
-						+ " I hope you or your partner gets as much happiness out of them as I do from growing them.<br/>"
-						+ "- William"
-					+ "</i>"
-				+ "</p>"
-				+ "<p>"
-					+ "You look around, but don't see anyone nearby who could be this 'William' character."
-					+ " Focusing your attention back to his rose garden, you decide to do as his sign says, and after [pc.stepping] forwards, you pluck a single rose from the nearest bush."
-				+ "</p>";
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
-				return new Response("Rose Garden", "You've already taken a rose from the garden.", null);
 			} else {
 				return null;
 			}
@@ -500,7 +492,7 @@ public class DominionPark {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Now that Mistress Natalya has left, all there is for you to do is continue on your way through the park...", PARK) {
+                return new Response("Продолжить", "Now that Mistress Natalya has left, all there is for you to do is continue on your way through the park...", PARK) {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/park/natalya_encounter", "NATALYA_ENCOUNTER_END_PARK"));
@@ -571,7 +563,7 @@ public class DominionPark {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Now that Mistress Natalya has left, all there is for you to do is continue on your way through the park...", PARK);
+                return new Response("Продолжить", "Now that Mistress Natalya has left, all there is for you to do is continue on your way through the park...", PARK);
 			}
 			return null;
 		}

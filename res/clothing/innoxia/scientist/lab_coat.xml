@@ -88,25 +88,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(pull)] on the lab coat.]]>
+            <![CDATA[[npc.Name] pull on the lab coat.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(guide)] [npc2.namePos] [npc2.arms] through the lab coat's sleeves and [npc.verb(pull)] it onto [npc2.herHim].]]>
+            <![CDATA[[npc.Name] guide [npc2.namePos] [npc2.arms] through the lab coat's sleeves and pull it onto [npc2.herHim].]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] roughly [npc.verb(push)] [npc2.namePos] [npc2.arms] through the lab coat's sleeves and [npc.verb(pull)] it onto [npc2.herHim].]]>
+            <![CDATA[[npc.Name] roughly push [npc2.namePos] [npc2.arms] through the lab coat's sleeves and pull it onto [npc2.herHim].]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-			<![CDATA[[npc.Name] [npc.verb(take)] off [npc.her] lab coat.]]>
+            <![CDATA[[npc.Name] take off [npc.her] lab coat.]]>
 		</self>
 		<other>
-			<![CDATA[[npc.Name] [npc.verb(take)] off [npc2.namePos] lab coat.]]>
+            <![CDATA[[npc.Name] take off [npc2.namePos] lab coat.]]>
 		</other>
 		<otherRough>
-			<![CDATA[[npc.Name] [npc.verb(grab)] [npc2.namePos] lab coat and roughly [npc.verb(pull)] it off.]]>
+            <![CDATA[[npc.Name] grab [npc2.namePos] lab coat and roughly pull it off.]]>
 		</otherRough>
 	</displacementText>
 	

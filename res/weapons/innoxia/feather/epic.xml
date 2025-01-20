@@ -12,8 +12,10 @@
 		<attackTooltipDescription>Use your feather's power to shoot a bolt of energy at [npc2.name].</attackTooltipDescription>
 		<rarity>EPIC</rarity>
 		<weaponSet/>
-		<equipText><![CDATA[[npc.Name] [npc.verb(focus)] on the energy in the arcane feather. As [npc.she] [npc.does] so, it dissolves and flows into [npc.her] aura, granting [npc.herHim] the ability to perform arcane-imbued attacks at range.]]></equipText>
-		<unequipText><![CDATA[[npc.Name] [npc.verb(focus)] on extracting the absorbed arcane energy inside of [npc.her] aura. As [npc.she] [npc.does] so, it reforms back into an arcane feather.]]></unequipText>
+        <equipText>
+            <![CDATA[[npc.Name] focus on the energy in the arcane feather. As [npc.she] [npc.does] so, it dissolves and flows into [npc.her] aura, granting [npc.herHim] the ability to perform arcane-imbued attacks at range.]]></equipText>
+        <unequipText>
+            <![CDATA[[npc.Name] focus on extracting the absorbed arcane energy inside of [npc.her] aura. As [npc.she] [npc.does] so, it reforms back into an arcane feather.]]></unequipText>
 		
 		<imageName>epic.svg</imageName> 
 		<imageEquippedName/>
@@ -77,9 +79,9 @@
 		]]></hitText>
 		<hitText><![CDATA[
 		#IF(npc.isFeral())
-			[npc.Name] [npc.verb(make)] an aggressive movement towards [npc2.name], causing a bolt of arcane energy to fly out and hit [npc2.herHim] right in the chest!
+			[npc.Name] make an aggressive movement towards [npc2.name], causing a bolt of arcane energy to fly out and hit [npc2.herHim] right in the chest!
 		#ELSE
-			[npc.Name] [npc.verb(thrust)] [npc.her] [npc.arm] at [npc2.name], causing a bolt of arcane energy to fly out and hit [npc2.herHim] right in the chest!
+			[npc.Name] thrust [npc.her] [npc.arm] at [npc2.name], causing a bolt of arcane energy to fly out and hit [npc2.herHim] right in the chest!
 		#ENDIF
 		]]></hitText>
 	</hitDescriptions>
@@ -92,7 +94,7 @@
 		Making a quick forwards thrust with [npc.her] [npc.arm], a bolt of arcane energy shoots out of [npc.namePos] [npc.hand] to narrowly miss [npc2.name]!
 		]]></missText>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(thrust)] [npc.her] [npc.arm] at [npc2.name], causing a bolt of arcane energy to fly out and narrowly miss [npc2.herHim]!
+		[npc.Name] thrust [npc.her] [npc.arm] at [npc2.name], causing a bolt of arcane energy to fly out and narrowly miss [npc2.herHim]!
 		]]></missText>
 	</missDescriptions>
 	

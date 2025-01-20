@@ -363,7 +363,7 @@
 			#ENDIF
 		</p>
 		<p>
-			[#playerPositioning] [pc.speech(That's a good [npc.girl]! Now it's time to show you what this [pc.mother] and [pc.her] [npc2.daughter] can do!)]
+			[#playerPositioning] [pc.speech(That's a good [npc.girl]! Now it's time to show you what this [pc.mother] и [pc.her] [npc2.daughter] can do!)]
 		</p>
 		<p>
 			With an enthusiastic [npc.moan], [npc.name] prepares to be used by the two of you...
@@ -471,7 +471,7 @@
 			#ENDIF
 		</p>
 		<p>
-			[#playerPositioning] [pc.speech(That's a good [npc.girl]! Now it's time to show you what this [pc.mother] and [pc.her] [npc2.daughter] can do!)]
+			[#playerPositioning] [pc.speech(That's a good [npc.girl]! Now it's time to show you what this [pc.mother] и [pc.her] [npc2.daughter] can do!)]
 		</p>
 		<p>
 			With an enthusiastic [npc.moan], [npc.name] prepares to be used by the two of you...
@@ -483,7 +483,7 @@
 	<htmlContent tag="SEX_SIDE_BY_SIDE_START"><![CDATA[
 	#IF(npc.isRelatedTo(pc) && npc2.isRelatedTo(pc))
 		<p>
-			[pc.speech(You know, I was thinking that this would be the perfect opportunity to remind the two of you who's the head of this family...)] you tease, turning to face both [npc.name] and [npc2.name], before glaring dominantly at the two of them.
+			[pc.speech(You know, I was thinking that this would be the perfect opportunity to remind the two of you who's the head of this family...)] you tease, turning to face both [npc.name] и [npc2.name], before glaring dominantly at the two of them.
 		</p>
 		<p>
 			Sensing what it is that you want, both
@@ -667,7 +667,7 @@
 		</p>
 	#ELSEIF(npc.isRelatedTo(pc))
 		<p>
-			[pc.speech(You know, I was thinking that you could join my [npc.relation(pc)] and I in sharing some quality family bonding time together...)] you tease, addressing [npc2.name] as you turn to face both [npc2.herHim] and [npc.name], before biting your [pc.lip] and putting on your most submissive, seductive look.
+			[pc.speech(You know, I was thinking that you could join my [npc.relation(pc)] and I in sharing some quality family bonding time together...)] you tease, addressing [npc2.name] as you turn to face both [npc2.herHim] и [npc.name], before biting your [pc.lip] and putting on your most submissive, seductive look.
 		</p>
 		<p>
 			[npc2.speech(Oh, feeling horny in our presence, are you, [pc.name]?)] [npc2.name] coyly asks, gazing lustfully into your [pc.eyes] as [npc2.she] steps forwards and places one [npc2.hand] on your [pc.ass+], before giving it a firm squeeze.
@@ -700,7 +700,7 @@
 		</p>
 	#ELSE
 		<p>
-			[pc.speech(You know, I was thinking that you could join my [npc2.relation(pc)] and I in sharing some quality family bonding time together...)] you tease, addressing [npc.name] as you turn to face both [npc.herHim] and [npc2.name], before biting your [pc.lip] and putting on your most submissive, seductive look.
+			[pc.speech(You know, I was thinking that you could join my [npc2.relation(pc)] and I in sharing some quality family bonding time together...)] you tease, addressing [npc.name] as you turn to face both [npc.herHim] и [npc2.name], before biting your [pc.lip] and putting on your most submissive, seductive look.
 		</p>
 		<p>
 			[npc2.speech(Oh, feeling horny in our presence, are you, [pc.name]?)] [npc2.name] coyly asks, gazing lustfully into your [pc.eyes] as [npc2.she] steps forwards and places one [npc2.hand] on your [pc.ass+], before giving it a firm squeeze.
@@ -1089,7 +1089,7 @@
 		[npc2.speech(Yeah, that really was great,)] [npc2.name] replies. [npc2.speech(We really should do this again some time, right, [pc.name]?)]
 	</p>
 	<p>
-		[pc.speech(We'll see,)] you tease, smiling and letting out a small laugh as [npc.name] and [npc2.name] whine in unison.
+		[pc.speech(We'll see,)] you tease, smiling and letting out a small laugh as [npc.name] и [npc2.name] whine in unison.
 	</p>
 	]]>
 	</htmlContent>
@@ -1468,7 +1468,7 @@
 	
 	<htmlContent tag="SEX_APARTMENT_SPITROASTED_START"><![CDATA[
 	<p>
-		[pc.speech(You know, I was thinking that the three of us could have some fun together...)] you tease, turning to face both [npc.name] and [npc2.name], before biting your [pc.lip] and putting on your most submissive, seductive look.
+		[pc.speech(You know, I was thinking that the three of us could have some fun together...)] you tease, turning to face both [npc.name] и [npc2.name], before biting your [pc.lip] and putting on your most submissive, seductive look.
 	</p>
 	<p>
 		[npc.speech(Oh, what did you have in mind?)] [npc.name] replies, smiling deviously as [npc.she] steps forwards and places one [npc.hand] on your [pc.ass].
@@ -1490,10 +1490,10 @@
 	
 	<htmlContent tag="SEX_APARTMENT_SIDE_BY_SIDE_START"><![CDATA[
 	<p>
-		[pc.speech(You know, I was thinking that I could have some fun with the two of you at once...)] you tease, turning to face both [npc.name] and [npc2.name], before glaring dominantly at the two of them.
+		[pc.speech(You know, I was thinking that I could have some fun with the two of you at once...)] you tease, turning to face both [npc.name] и [npc2.name], before glaring dominantly at the two of them.
 	</p>
 	<p>
-		Sensing what it is that you want, both [npc.name] and [npc2.name] step towards each other, casting submissive glances at you before turning and dropping down onto all fours. Letting out a delighted [pc.moan], you step towards the two of them as they present their rear ends for your use.
+		Sensing what it is that you want, both [npc.name] и [npc2.name] step towards each other, casting submissive glances at you before turning and dropping down onto all fours. Letting out a delighted [pc.moan], you step towards the two of them as they present their rear ends for your use.
 	</p>
 	<p>
 		[npc.speech(Come and take us!)] [npc.name] [npc.moans], looking back over [npc.her] shoulder and seductively biting [npc.her] [npc.lip]. 
@@ -1572,7 +1572,7 @@
 	
 	<htmlContent tag="OCCUPANT_APARTMENT_SLEEP_OVER_WAKE_UP"><![CDATA[
 	<p>
-		Some time later, you wake up, and, rubbing the sleep out of your [pc.eyes], sit up on the sofa. Looking around, you immediately spot [npc.name] pouring [npc.herself] a drink behind the kitchen counter. Stretching your [pc.arms] and [pc.legs], you call out, [pc.speech(Hi, [npc.name]!)]
+		Some time later, you wake up, and, rubbing the sleep out of your [pc.eyes], sit up on the sofa. Looking around, you immediately spot [npc.name] pouring [npc.herself] a drink behind the kitchen counter. Stretching your [pc.arms] и [pc.legs], you call out, [pc.speech(Hi, [npc.name]!)]
 	</p>
 	<p>
 		[npc.speech(Hello, sleepy-head!)] [npc.name] replies. [npc.speech(Would you like a drink? I was just getting myself one.)]
@@ -1594,7 +1594,7 @@
 		[npc2.speech(Yeah, that really was great,)] [npc2.name] replies. [npc2.speech(We really should do this again some time, right, [pc.name]?)]
 	</p>
 	<p>
-		[pc.speech(We'll see,)] you tease, smiling and letting out a small laugh as [npc.name] and [npc2.name] whine in unison.
+		[pc.speech(We'll see,)] you tease, smiling and letting out a small laugh as [npc.name] и [npc2.name] whine in unison.
 	</p>
 	]]>
 	</htmlContent>

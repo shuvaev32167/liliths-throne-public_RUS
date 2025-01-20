@@ -1168,7 +1168,7 @@
 	
 	<htmlContent tag="AFTER_SEX_PEACEFUL_OFFERED_COMPANION"><![CDATA[
 	<p>
-		Both [npc.name] and [com.name] let out happy sighs as the two of them step back from one another. Looking into [com.namePos] [com.eyes], the [npc.race] smiles and says, [npc.speech(That was great... Thanks [com.name], I really needed that.)]
+		Both [npc.name] и [com.name] let out happy sighs as the two of them step back from one another. Looking into [com.namePos] [com.eyes], the [npc.race] smiles and says, [npc.speech(That was great... Thanks [com.name], I really needed that.)]
 	</p>
 	<p>
 		The two of them set about gathering their things, and, after saying goodbye to one another, you and [com.name] set off on your journey once again...
@@ -2515,7 +2515,7 @@
 		#ENDIF
 	</p>
 	<p>
-		Turning a corner in the alleyway, you leave the noises of [npc.name] and [victim.name] behind you as you continue on your way...
+		Turning a corner in the alleyway, you leave the noises of [npc.name] и [victim.name] behind you as you continue on your way...
 	</p>
 	]]>
 	</htmlContent>
@@ -2774,7 +2774,7 @@
 	</p>
 	<p>
 		#IF(friend.hasFetish(FETISH_IMPREGNATION) && !pc.isPregnant() && !pc.isTaur())
-				[friend.speech(I'm going to knock you up, [pc.name],)] the [friend.race] teases, before impatiently grabbing your [pc.legs+] and pushing them apart and back towards your head. Shuffling forwards and positioning [friend.herself] over the top of you, [friend.name] locks you into the mating press position, before lifting [friend.her] hips and sliding the [friend.cockHead+] of [friend.her] cock up and down over your [pc.labia+]. Looking down into your [pc.eyes+], [friend.she] licks [friend.her] [friend.lips] and [friend.moansVerb], [friend.speech(Here I come, [pc.name]. Now moan for me like the whore you are!)]
+				[friend.speech(I'm going to knock you up, [pc.name],)] the [friend.race] teases, before impatiently grabbing your [pc.legs+] and pushing them apart and back towards your head. Shuffling forwards and positioning [friend.herself] over the top of you, [friend.name] locks you into the mating press position, before lifting [friend.her] hips and sliding the [friend.cockHead+] of [friend.her] cock up and down over your [pc.labia+]. Looking down into your [pc.eyes+], [friend.she] licks [friend.her] [friend.lips] и [friend.moansVerb], [friend.speech(Here I come, [pc.name]. Now moan for me like the whore you are!)]
 			</p>
 			<p>
 				Before you can answer, the [friend.race] impatiently thrusts [friend.her] [friend.cock+] deep into your [pc.pussy+]. The sudden penetration causes you to let out an involuntary [pc.moan], and you can't help but pant and whine as [friend.name] starts to rhythmically pound your [pc.pussy+]...
@@ -2999,7 +2999,7 @@
 	</p>
 	<p>
 		#IF(npc.isMute())
-			Gesturing back towards the window of the bistro, [npc.she] implies through [npc.hand(true)] signals that [npc.she] was watching you the whole time. Flashing you another smirk, [npc.she] dismisses you with a wave of [npc.her] [npc.hand(true)] and [npc.walks] off down the alleyway, leaving you with little else to do but continue on your way...
+			Gesturing back towards the window of the bistro, [npc.she] implies through [npc.hand(true)] signals that [npc.she] was watching you the whole time. Flashing you another smirk, [npc.she] dismisses you with a wave of [npc.her] [npc.hand(true)] и [npc.walks] off down the alleyway, leaving you with little else to do but continue on your way...
 		#ELSE
 				[npc.speech(Couldn't resist getting fucked by that [stranger.race], huh, [pc.name]?)] [npc.she] asks, [npc.speech(Me and the other people inside were watching the two of you through the windows. You're a dirty, horny whore, aren't you?)]
 			</p>

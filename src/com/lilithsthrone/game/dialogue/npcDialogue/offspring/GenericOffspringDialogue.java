@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.offspring;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -15,11 +12,7 @@ import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.places.dominion.lilayashome.LilayaHomeGeneric;
-import com.lilithsthrone.game.dialogue.responses.Response;
-import com.lilithsthrone.game.dialogue.responses.ResponseCombat;
-import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
-import com.lilithsthrone.game.dialogue.responses.ResponseSex;
-import com.lilithsthrone.game.dialogue.responses.ResponseTag;
+import com.lilithsthrone.game.dialogue.responses.*;
 import com.lilithsthrone.game.dialogue.utils.InventoryInteraction;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.item.ItemType;
@@ -33,6 +26,9 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.1.8?
@@ -330,7 +326,7 @@ public class GenericOffspringDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Give [npc.name] some time to think, and continue on your way.", OFFSPRING_ENCOUNTER_APOLOGY) {
+                return new Response("Продолжить", "Give [npc.name] some time to think, and continue on your way.", OFFSPRING_ENCOUNTER_APOLOGY) {
 					@Override
 					public DialogueNode getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);
@@ -769,7 +765,7 @@ public class GenericOffspringDialogue {
 							+ "<p style='float:left; padding:0; margin:0; height:32px; line-height:32px;'>[npc.Name] will call you: </p>"
 							+ "<form style='float:left; padding:auto 0 auto 0;'><input type='text' id='offspringPetNameInput' value='"+ UtilText.parseForHTMLDisplay(offspring().getPetName(Main.game.getPlayer()))+ "'></form>"
 							+ " <div class='SM-button' id='"+offspring().getId()+"_PET_NAME' style='float:left; width:auto; height:28px;'>"
-								+ "Rename"
+							+ "Переименовать"
 							+ "</div>"
 						+ "</div>"
 						+ "<p>"
@@ -1241,7 +1237,7 @@ public class GenericOffspringDialogue {
 				
 			} else {
 				if (index == 1) {
-					return new Response("Continue", "You're left to continue on your way...", AFTER_COMBAT_DEFEAT){
+                    return new Response("Продолжить", "You're left to continue on your way...", AFTER_COMBAT_DEFEAT) {
 						@Override
 						public DialogueNode getNextDialogue(){
 							return Main.game.getDefaultDialogue(false);
@@ -1275,7 +1271,7 @@ public class GenericOffspringDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", AFTER_SEX_CONSENSUAL){
+                return new Response("Продолжить", "Carry on your way.", AFTER_SEX_CONSENSUAL) {
 					@Override
 					public DialogueNode getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);
@@ -1307,7 +1303,7 @@ public class GenericOffspringDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", AFTER_SEX_VICTORY){
+                return new Response("Продолжить", "Carry on your way.", AFTER_SEX_VICTORY) {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile(getTextFilePath(), "AFTER_SEX_VICTORY_LEAVING", offspring()));
@@ -1375,7 +1371,7 @@ public class GenericOffspringDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", AFTER_SEX_VICTORY){
+                return new Response("Продолжить", "Carry on your way.", AFTER_SEX_VICTORY) {
 					@Override
 					public DialogueNode getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);

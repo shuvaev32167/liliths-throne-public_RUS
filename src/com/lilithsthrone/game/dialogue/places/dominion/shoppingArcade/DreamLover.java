@@ -15,37 +15,6 @@ import com.lilithsthrone.main.Main;
  */
 public class DreamLover {
 
-	public static final DialogueNode EXTERIOR = new DialogueNode("Dream Lover (Exterior)", "-", false) {
-
-		@Override
-		public String getAuthor() {
-			return "Kumiko";
-		}
-		
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/shoppingArcade/dreamLover", "EXTERIOR");
-		}
-
-		@Override
-		public String getResponseTabTitle(int index) {
-			return ShoppingArcadeDialogue.getCoreResponseTab(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==0) {
-				if (index == 1) {
-					if(!Main.game.isExtendedWorkTime()) {
-						return new Response("Enter", "Step inside 'Dream Lover'.", EXTERIOR_CLOSED);
-					}
-					return new Response("Enter", "Step inside 'Dream Lover'.", ENTRY);
-				}
-			}
-			return ShoppingArcadeDialogue.getFastTravelResponses(responseTab, index);
-		}
-	};
-
 	public static final DialogueNode EXTERIOR_CLOSED = new DialogueNode("Dream Lover (Exterior)", "-", false, true) {
 
 		@Override
@@ -57,19 +26,49 @@ public class DreamLover {
 		public String getResponseTabTitle(int index) {
 			return ShoppingArcadeDialogue.getCoreResponseTab(index);
 		}
-		
+
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(responseTab==0) {
 				if (index == 1) {
-					return new Response("Enter", "'Dream Lover' is currently closed, so you'll have to back at another time if you wanted to do any shopping here.", null);
+                    return new Response("Вход", "'Dream Lover' is currently closed, so you'll have to back at another time if you wanted to do any shopping here.", null);
 				}
 			}
 			return ShoppingArcadeDialogue.getFastTravelResponses(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode ENTRY = new DialogueNode("Dream Lover", "-", true) {
+	public static final DialogueNode EXTERIOR = new DialogueNode("Dream Lover (Exterior)", "-", false) {
+
+		@Override
+		public String getAuthor() {
+			return "Kumiko";
+		}
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/shoppingArcade/dreamLover", "EXTERIOR");
+		}
+
+		@Override
+		public String getResponseTabTitle(int index) {
+			return ShoppingArcadeDialogue.getCoreResponseTab(index);
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(responseTab==0) {
+				if (index == 1) {
+					if(!Main.game.isExtendedWorkTime()) {
+                        return new Response("Вход", "Step inside 'Dream Lover'.", EXTERIOR_CLOSED);
+					}
+                    return new Response("Вход", "Step inside 'Dream Lover'.", ENTRY);
+				}
+			}
+			return ShoppingArcadeDialogue.getFastTravelResponses(responseTab, index);
+		}
+	};
+
+    public static final DialogueNode ENTRY = new DialogueNode("Возлюбленная мечта", "-", true) {
 
 		@Override
 		public String getAuthor() {
@@ -139,8 +138,8 @@ public class DreamLover {
 			}
 		}
 	};
-	
-	public static final DialogueNode EXPLORE_SHELVES = new DialogueNode("Dream Lover", "-", true, true) {
+
+    public static final DialogueNode EXPLORE_SHELVES = new DialogueNode("Возлюбленная мечта", "-", true, true) {
 
 		@Override
 		public String getAuthor() {
@@ -178,8 +177,8 @@ public class DreamLover {
 			}
 		}
 	};
-	
-	public static final DialogueNode CONFRONT_ASHLEY = new DialogueNode("Dream Lover", "-", true, true) {
+
+    public static final DialogueNode CONFRONT_ASHLEY = new DialogueNode("Возлюбленная мечта", "-", true, true) {
 
 		@Override
 		public String getAuthor() {
@@ -196,8 +195,8 @@ public class DreamLover {
 			return ENTRY.getResponse(responseTab, index);
 		}
 	};
-	
-	public static final DialogueNode IGNORE_ASHLEY = new DialogueNode("Dream Lover", "-", true, true) {
+
+    public static final DialogueNode IGNORE_ASHLEY = new DialogueNode("Возлюбленная мечта", "-", true, true) {
 
 		@Override
 		public String getAuthor() {

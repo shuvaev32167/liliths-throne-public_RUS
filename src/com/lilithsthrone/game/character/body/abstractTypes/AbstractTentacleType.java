@@ -1,12 +1,5 @@
 package com.lilithsthrone.game.character.body.abstractTypes;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.lilithsthrone.main.Main;
-import org.w3c.dom.Document;
-
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
@@ -20,7 +13,13 @@ import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
+import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
+import org.w3c.dom.Document;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.3.8.9
@@ -440,7 +439,7 @@ public abstract class AbstractTentacleType implements BodyPartTypeInterface {
 		if(positive) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] [npc.tentacles]."
+                            + "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] [npc.tentacles]."
 						+ " Without any further warning of what's to come, [npc.her]"
 						+(owner.getTentacleCount()>1
 								?" [npc.tentacles] suddenly [style.boldGrow(grow thicker)]."
@@ -452,7 +451,7 @@ public abstract class AbstractTentacleType implements BodyPartTypeInterface {
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-							+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] [npc.tentacles]."
+                            + "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the base of [npc.her] [npc.tentacles]."
 							+ " Without any further warning of what's to come, [npc.her]"
 							+(owner.getTentacleCount()>1
 									?" [npc.tentacles] suddenly [style.boldShrink(shrink down)]."
@@ -468,7 +467,7 @@ public abstract class AbstractTentacleType implements BodyPartTypeInterface {
 		if(positive) {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the [npc.tentacleTip] of each of [npc.her] [npc.tentacles]."
+                            + "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the [npc.tentacleTip] of each of [npc.her] [npc.tentacles]."
 						+ " Without any further warning of what's to come, [npc.her] [npc.tentacles] suddenly [style.boldGrow(grow longer)]."
 						+ "<br/>"
 						+ "[npc.She] now [npc.has] [style.boldTfGeneric([npc.tentacleLength] [npc.tentacles])]"+heightPercentageDescription+"!"
@@ -477,7 +476,7 @@ public abstract class AbstractTentacleType implements BodyPartTypeInterface {
 		} else {
 			return UtilText.parse(owner,
 					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the [npc.tentacleTip] of each of [npc.her] [npc.tentacles]."
+                            + "[npc.Name] let out [npc.a_moan+] as [npc.she] feel a deep throbbing sensation building up at the [npc.tentacleTip] of each of [npc.her] [npc.tentacles]."
 						+ " Without any further warning of what's to come, [npc.her] [npc.tentacles] suddenly [style.boldShrink(shorten)]."
 						+ "<br/>"
 						+ "[npc.She] now [npc.has] [style.boldTfGeneric([npc.tentacleLength] [npc.tentacles])]"+heightPercentageDescription+"!"

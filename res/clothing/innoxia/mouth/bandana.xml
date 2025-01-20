@@ -101,115 +101,115 @@
 
   <replacementText slot="MOUTH" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(position)] the bandana over [npc.her] [npc.face], before reaching back and tying the ends together.]]>
+        <![CDATA[[npc.Name] position the bandana over [npc.her] [npc.face], before reaching back and tying the ends together.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(position)] the bandana over [npc2.namePos] [npc2.face], before reaching back and tying the ends together.]]>
+        <![CDATA[[npc.Name] position the bandana over [npc2.namePos] [npc2.face], before reaching back and tying the ends together.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(push)] the bandana over [npc2.namePos] [npc2.face], before reaching back and tying the ends together.]]>
+        <![CDATA[[npc.Name] roughly push the bandana over [npc2.namePos] [npc2.face], before reaching back and tying the ends together.]]>
     </otherRough>
   </replacementText>
   <displacementText slot="MOUTH" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(untie)] the ends of [npc.her] bandana and [npc.verb(take)] it off.]]>
+        <![CDATA[[npc.Name] untie the ends of [npc.her] bandana and take it off.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(untie)] the ends of [npc2.namePos] bandana and [npc.verb(take)] it off.]]>
+        <![CDATA[[npc.Name] untie the ends of [npc2.namePos] bandana and take it off.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(untie)] the ends of [npc.her] bandana and [npc.verb(take)] it off.]]>
+        <![CDATA[[npc.Name] roughly untie the ends of [npc.her] bandana and take it off.]]>
     </otherRough>
   </displacementText>
   <replacementText slot="MOUTH" type="PULLS_DOWN">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(pull)] down [npc.her] bandana so that it's no longer covering [npc.her] mouth.]]>
+        <![CDATA[[npc.Name] pull down [npc.her] bandana so that it's no longer covering [npc.her] mouth.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(pull)] down [npc2.namePos] bandana so that it's no longer covering [npc2.her] mouth]]>
+        <![CDATA[[npc.Name] pull down [npc2.namePos] bandana so that it's no longer covering [npc2.her] mouth]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(pull)] down [npc2.namePos] bandana so that it's no longer covering [npc2.her] mouth]]>
+        <![CDATA[[npc.Name] roughly pull down [npc2.namePos] bandana so that it's no longer covering [npc2.her] mouth]]>
     </otherRough>
   </replacementText>
   <displacementText slot="MOUTH" type="PULLS_DOWN">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(pull)] up [npc.her] bandana so that it's once again covering [npc.her] mouth.]]>
+        <![CDATA[[npc.Name] pull up [npc.her] bandana so that it's once again covering [npc.her] mouth.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(pull)] up [npc2.namePos] bandana so that it's once again covering [npc2.her] mouth]]>
+        <![CDATA[[npc.Name] pull up [npc2.namePos] bandana so that it's once again covering [npc2.her] mouth]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(pull)] up [npc2.namePos] bandana so that it's once again covering [npc2.her] mouth]]>
+        <![CDATA[[npc.Name] roughly pull up [npc2.namePos] bandana so that it's once again covering [npc2.her] mouth]]>
     </otherRough>
   </displacementText>
   
   <replacementText slot="HEAD" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(position)] the bandana over the top of [npc.her] head, before reaching back and tying the ends together.]]>
+        <![CDATA[[npc.Name] position the bandana over the top of [npc.her] head, before reaching back and tying the ends together.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(position)] the bandana over the top of [npc2.namePos] head, before reaching back and tying the ends together.]]>
+        <![CDATA[[npc.Name] position the bandana over the top of [npc2.namePos] head, before reaching back and tying the ends together.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(push)] the bandana over the top of [npc2.namePos] head, before reaching back and tying the ends together.]]>
+        <![CDATA[[npc.Name] roughly push the bandana over the top of [npc2.namePos] head, before reaching back and tying the ends together.]]>
     </otherRough>
   </replacementText>
   <displacementText slot="HEAD" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(untie)] the ends of [npc.her] bandana and [npc.verb(take)] it off.]]>
+        <![CDATA[[npc.Name] untie the ends of [npc.her] bandana and take it off.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(untie)] the ends of [npc2.namePos] bandana and [npc.verb(take)] it off.]]>
+        <![CDATA[[npc.Name] untie the ends of [npc2.namePos] bandana and take it off.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(untie)] the ends of [npc.her] bandana and [npc.verb(take)] it off.]]>
+        <![CDATA[[npc.Name] roughly untie the ends of [npc.her] bandana and take it off.]]>
     </otherRough>
   </displacementText>
   
   <replacementText slot="HAIR" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(position)] the bandana over the top of [npc.her] head, before reaching back and tying the ends together.]]>
+        <![CDATA[[npc.Name] position the bandana over the top of [npc.her] head, before reaching back and tying the ends together.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(position)] the bandana over the top of [npc2.namePos] head, before reaching back and tying the ends together.]]>
+        <![CDATA[[npc.Name] position the bandana over the top of [npc2.namePos] head, before reaching back and tying the ends together.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(push)] the bandana over the top of [npc2.namePos] head, before reaching back and tying the ends together.]]>
+        <![CDATA[[npc.Name] roughly push the bandana over the top of [npc2.namePos] head, before reaching back and tying the ends together.]]>
     </otherRough>
   </replacementText>
   <displacementText slot="HAIR" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(untie)] the ends of [npc.her] bandana and [npc.verb(take)] it off.]]>
+        <![CDATA[[npc.Name] untie the ends of [npc.her] bandana and take it off.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(untie)] the ends of [npc2.namePos] bandana and [npc.verb(take)] it off.]]>
+        <![CDATA[[npc.Name] untie the ends of [npc2.namePos] bandana and take it off.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(untie)] the ends of [npc.her] bandana and [npc.verb(take)] it off.]]>
+        <![CDATA[[npc.Name] roughly untie the ends of [npc.her] bandana and take it off.]]>
     </otherRough>
   </displacementText>
   
   <replacementText slot="NECK" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(wrap)] the bandana loosely around [npc.her] neck, before reaching back and tying the ends together.]]>
+        <![CDATA[[npc.Name] wrap the bandana loosely around [npc.her] neck, before reaching back and tying the ends together.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(wrap)] the bandana loosely around [npc2.namePos] neck, before reaching back and tying the ends together.]]>
+        <![CDATA[[npc.Name] wrap the bandana loosely around [npc2.namePos] neck, before reaching back and tying the ends together.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(tie)] the bandana around [npc2.namePos] neck.]]>
+        <![CDATA[[npc.Name] roughly tie the bandana around [npc2.namePos] neck.]]>
     </otherRough>
   </replacementText>
   <displacementText slot="NECK" type="REMOVE_OR_EQUIP">
     <self>
-      <![CDATA[[npc.Name] [npc.verb(untie)] the ends of [npc.her] bandana and [npc.verb(take)] it off.]]>
+        <![CDATA[[npc.Name] untie the ends of [npc.her] bandana and take it off.]]>
     </self>
     <other>
-      <![CDATA[[npc.Name] [npc.verb(untie)] the ends of [npc2.namePos] bandana and [npc.verb(take)] it off.]]>
+        <![CDATA[[npc.Name] untie the ends of [npc2.namePos] bandana and take it off.]]>
     </other>
     <otherRough>
-      <![CDATA[[npc.Name] roughly [npc.verb(untie)] the ends of [npc.her] bandana and [npc.verb(take)] it off.]]>
+        <![CDATA[[npc.Name] roughly untie the ends of [npc.her] bandana and take it off.]]>
     </otherRough>
   </displacementText>
   

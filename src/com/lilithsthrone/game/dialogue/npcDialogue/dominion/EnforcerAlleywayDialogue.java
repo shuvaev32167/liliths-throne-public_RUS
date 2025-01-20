@@ -1,13 +1,5 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.dominion;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -25,11 +17,7 @@ import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.responses.Response;
-import com.lilithsthrone.game.dialogue.responses.ResponseCombat;
-import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
-import com.lilithsthrone.game.dialogue.responses.ResponseSex;
-import com.lilithsthrone.game.dialogue.responses.ResponseTag;
+import com.lilithsthrone.game.dialogue.responses.*;
 import com.lilithsthrone.game.dialogue.utils.BodyChanging;
 import com.lilithsthrone.game.dialogue.utils.InventoryInteraction;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -40,11 +28,7 @@ import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.sex.InitialSexActionInformation;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
 import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
@@ -53,13 +37,7 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotAgainstWall;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotGeneric;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerPenis;
-import com.lilithsthrone.game.sex.sexActions.baseActions.FingerVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisAnus;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisMouth;
-import com.lilithsthrone.game.sex.sexActions.baseActions.PenisVagina;
-import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
+import com.lilithsthrone.game.sex.sexActions.baseActions.*;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
@@ -67,6 +45,9 @@ import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.3.8.3
@@ -322,20 +303,16 @@ public class EnforcerAlleywayDialogue {
 				uniformPassable = 0;
 			}
 		}
-		
-		if((uniformPassable 
-				+ impersonatingBrax 
-				+ impersonatingCandi 
-				+ impersonatingClaire 
-				+ impersonatingElle 
-				+ impersonatingWes 
-				+ impersonatingNysa 
-				+ impersonatingSean) >= 0) {
-			return true;
-		}
-		
-		return false;
-	}
+
+        return (uniformPassable
+                + impersonatingBrax
+                + impersonatingCandi
+                + impersonatingClaire
+                + impersonatingElle
+                + impersonatingWes
+                + impersonatingNysa
+                + impersonatingSean) >= 0;
+    }
 	
 	public static boolean isDemonRevealed() {
 		return ((NPC)getEnforcerLeader()).hasFlag(NPCFlagValue.knowsPlayerDemon);
@@ -831,7 +808,7 @@ public class EnforcerAlleywayDialogue {
 				}
 				
 			} else {
-				boolean foughtBefore = ((NPC)getEnforcerLeader()).getFoughtPlayerCount()>0;
+				boolean foughtBefore = getEnforcerLeader().getFoughtPlayerCount()>0;
 				boolean wantsToSearch = !isThinksPlayerEnforcer()
 						&& (Main.game.getPlayer().getRace()==Race.HUMAN || !Main.game.isDayTime())
 						&& !isDemonRevealed()
@@ -1484,7 +1461,7 @@ public class EnforcerAlleywayDialogue {
 				return new Response(
 						Main.game.getPlayer().isHasSlaverLicense()
 							?"Decline"
-							:"Continue",
+                                : "Продолжить",
 						UtilText.parse(getCriminalInTile(),
 							Main.game.getPlayer().isHasSlaverLicense()
 								?"Tell the Enforcers that you're not interested in gaining [npc.name] as your slave, leaving them to enslave [npc.herHim] by themselves."
@@ -1583,7 +1560,7 @@ public class EnforcerAlleywayDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "As the Enforcers have left to file a report on this incident, you're free to continue on your way...", Main.game.getDefaultDialogue(false));
+                return new Response("Продолжить", "As the Enforcers have left to file a report on this incident, you're free to continue on your way...", Main.game.getDefaultDialogue(false));
 			}
 			return null;
 		}
@@ -1725,7 +1702,7 @@ public class EnforcerAlleywayDialogue {
 								"You're not really sure what to do now... Perhaps it would be best to let the Enforcers choose what to do next?"
 								+ UtilText.parse(getEnforcers(),
 									(getEnforcerLeader().isAttractedTo(Main.game.getPlayer()) && getEnforcerSubordinate().isAttractedTo(Main.game.getPlayer())
-										?"<br/>[style.italicsSex(This will result in both [npc.name] and [npc2.name] dominantly fucking you!)]"
+                                            ? "<br/>[style.italicsSex(This will result in both [npc.name] и [npc2.name] dominantly fucking you!)]"
 										:(getEnforcerLeader().isAttractedTo(Main.game.getPlayer())
 											?"<br/>[style.italicsSex(This will result in just [npc.name] dominantly fucking you!)]"
 											:"<br/>[style.italicsSex(This will result in just [npc2.name] dominantly fucking you!)]"))),
@@ -1796,210 +1773,6 @@ public class EnforcerAlleywayDialogue {
 			return null;
 		}
 	};
-
-	public static final DialogueNode AFTER_COMBAT_DEFEAT = new DialogueNode("", "", true) {
-		@Override
-		public void applyPreParsingEffects() {
-			searched = true;
-			isLeaderSearching = false;
-			playerSexType = getWantedSexType(isLeaderSearching?getEnforcerLeader():getEnforcerSubordinate(), Main.game.getPlayer());
-			enforcerWantsPlayerSex = (isLeaderSearching?getEnforcerLeader():getEnforcerSubordinate()).isAttractedTo(Main.game.getPlayer());
-			
-			// Equipped contraband:
-			for(AbstractClothing c : new ArrayList<>(Main.game.getPlayer().getClothingCurrentlyEquipped())) {
-				if(contrabandCheck(c.getItemTags())) {
-					Main.game.getPlayer().forceUnequipClothingIntoVoid(getEnforcerLeader(), c);
-					getEnforcerLeader().addClothing(c, false);
-					clothingConfiscated.put(c, 1);
-				}
-			}
-			for(int i=0; i<3; i++) {
-				AbstractWeapon w = Main.game.getPlayer().getMainWeapon(i);
-				if(w!=null && contrabandCheck(w.getItemTags())) {
-					Main.game.getPlayer().unequipMainWeaponIntoVoid(i, false);
-					getEnforcerLeader().addWeapon(w, false);
-					weaponsConfiscated.putIfAbsent(w, 0);
-					weaponsConfiscated.put(w, weaponsConfiscated.get(w)+1);
-				}
-				w = Main.game.getPlayer().getOffhandWeapon(i);
-				if(w!=null && contrabandCheck(w.getItemTags())) {
-					Main.game.getPlayer().unequipOffhandWeaponIntoVoid(i, false);
-					getEnforcerLeader().addWeapon(w, false);
-					weaponsConfiscated.putIfAbsent(w, 0);
-					weaponsConfiscated.put(w, weaponsConfiscated.get(w)+1);
-				}
-			}
-			
-			// Contraband in inventory:
-			for(Entry<AbstractWeapon, Integer> entry : new HashMap<>(Main.game.getPlayer().getAllWeaponsInInventory()).entrySet()) {
-				AbstractWeapon weapon = entry.getKey();
-				int count = entry.getValue();
-				if(contrabandCheck(weapon.getItemTags())) {
-					Main.game.getPlayer().removeWeapon(weapon, count);
-					getEnforcerLeader().addWeapon(weapon, count, false, false);
-					weaponsConfiscated.putIfAbsent(weapon, 0);
-					weaponsConfiscated.put(weapon, weaponsConfiscated.get(weapon)+count);
-				}
-			}
-			for(Entry<AbstractClothing, Integer> entry : new HashMap<>(Main.game.getPlayer().getAllClothingInInventory()).entrySet()) {
-				AbstractClothing clothing = entry.getKey();
-				int count = entry.getValue();
-				if(contrabandCheck(clothing.getItemTags())) {
-					Main.game.getPlayer().removeClothing(clothing, count);
-					getEnforcerLeader().addClothing(clothing, count, false, false);
-					clothingConfiscated.putIfAbsent(clothing, 0);
-					clothingConfiscated.put(clothing, clothingConfiscated.get(clothing)+count);
-				}
-			}
-			for(Entry<AbstractItem, Integer> entry : new HashMap<>(Main.game.getPlayer().getAllItemsInInventory()).entrySet()) {
-				AbstractItem item = entry.getKey();
-				int count = entry.getValue();
-				if(contrabandCheck(item.getItemTags())) {
-					Main.game.getPlayer().removeItem(item, count);
-					getEnforcerLeader().addItem(item, count, false, false);
-					itemsConfiscated.putIfAbsent(item, 0);
-					itemsConfiscated.put(item, itemsConfiscated.get(item)+count);
-				}
-			}
-			
-			contrabandFound = !weaponsConfiscated.isEmpty() || !clothingConfiscated.isEmpty() || !itemsConfiscated.isEmpty();
-		}
-		@Override
-		public String getContent() {
-//			return UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_COMBAT_DEFEAT", getEnforcers());
-
-			StringBuilder sb = new StringBuilder();
-			
-			if(contrabandFound) {
-				List<String> confiscationList = new ArrayList<>();
-	
-				for(Entry<AbstractWeapon, Integer> entry : weaponsConfiscated.entrySet()) {
-					confiscationList.add("<b>"+entry.getValue()+"x "+entry.getKey().getDisplayName(true)+"</b>");
-				}
-				for(Entry<AbstractClothing, Integer> entry : clothingConfiscated.entrySet()) {
-					confiscationList.add("<b>"+entry.getValue()+"x "+entry.getKey().getDisplayName(true)+"</b>");
-				}
-				for(Entry<AbstractItem, Integer> entry : itemsConfiscated.entrySet()) {
-					confiscationList.add("<b>"+entry.getValue()+"x "+entry.getKey().getDisplayName(true)+"</b>");
-				}
-				
-				UtilText.addSpecialParsingString(Util.stringsToStringList(confiscationList, false), true);
-			}
-			
-			sb.append(UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_COMBAT_DEFEAT_SEARCHED", getEnforcers()));
-			
-			if(heavyContrabandFound || contrabandFound) {
-				sb.append(UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_COMBAT_DEFEAT_SEARCHED_CONTRABAND", getEnforcers()));
-				
-			} else {
-				sb.append(UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_COMBAT_DEFEAT_SEARCHED_NO_CONTRABAND", getEnforcers()));
-			}
-			
-			sb.append(UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_COMBAT_DEFEAT_END", getEnforcers()));
-			
-			return sb.toString();
-		
-			
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			List<GameCharacter> enforcersWantingSex = Util.newArrayListOfValues(
-					getEnforcerLeader().isAttractedTo(Main.game.getPlayer())
-						?getEnforcerLeader()
-						:null,
-					getEnforcerSubordinate().isAttractedTo(Main.game.getPlayer())
-						?getEnforcerSubordinate()
-						:null);
-			List<GameCharacter> enforcersSpectating = new ArrayList<>(getEnforcers());
-			enforcersSpectating.removeIf(e -> enforcersWantingSex.contains(e));
-			
-			if(!enforcersWantingSex.isEmpty()) {
-				if (index == 1) {
-					return new ResponseSex("Sex",
-							UtilText.parse(enforcersWantingSex,
-									enforcersWantingSex.get(0).isWillingToRape()
-										?(enforcersWantingSex.size()==2
-											?"[npc.Name] and [npc2.name] force themselves on you..."
-											:"[npc.Name] forces [npc.herself] on you...")
-										:(enforcersWantingSex.size()==2
-											?"Surrender yourself to [npc.name] and [npc2.name] and let them fuck you."
-											:"Surrender yourself to [npc.name] and let [npc.herHim] fuck you.")),
-							false, false,
-							new SMGeneric(
-									enforcersWantingSex,
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									enforcersSpectating,
-									null),
-							AFTER_DEFEAT_SEX,
-							UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "START_DEFEATED_SEX", getEnforcers()));
-					
-				} else if (index == 2) {
-					return new ResponseSex("Eager Sex",
-							UtilText.parse(enforcersWantingSex,
-								enforcersWantingSex.get(0).isWillingToRape()
-									?(enforcersWantingSex.size()==2
-										?"Eagerly encourage [npc.name] and [npc2.name] to force themselves on you..."
-										:"Eagerly encourage [npc.name] to force [npc.herself] on you...")
-									:(enforcersWantingSex.size()==2
-										?"Eagerly surrender yourself to [npc.name] and [npc2.name] and let them fuck you."
-										:"Eagerly surrender yourself to [npc.name] and let [npc.herHim] fuck you.")),
-							false, false,
-							new SMGeneric(
-									enforcersWantingSex,
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									enforcersSpectating,
-									null,
-									ResponseTag.START_PACE_PLAYER_SUB_EAGER),
-							AFTER_DEFEAT_SEX,
-							UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "START_DEFEATED_SEX_EAGER", getEnforcers()));
-					
-				} else if (index == 3 && Main.game.isNonConEnabled() && enforcersWantingSex.get(0).isWillingToRape()) {
-					return new ResponseSex("Resist Sex",
-							UtilText.parse(enforcersWantingSex,
-								(enforcersWantingSex.size()==2
-										?"Try and resist as [npc.name] and [npc2.name] to force themselves on you..."
-										:"Try and resist as [npc.name] forces [npc.herself] on you...")),
-							false, false,
-							new SMGeneric(
-									enforcersWantingSex,
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									enforcersSpectating,
-									null,
-									ResponseTag.START_PACE_PLAYER_SUB_RESISTING),
-							AFTER_DEFEAT_SEX,
-							UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "START_DEFEATED_SEX_RESIST", getEnforcers()));
-					
-				} else if (index == 4 && !enforcersWantingSex.get(0).isWillingToRape()) {
-					return new Response("Refuse",
-							UtilText.parse(enforcersWantingSex, 
-								(enforcersWantingSex.size()==2
-									?"Refuse to have sex with [npc.name] and [npc2.name]."
-									:"Refuse to have sex with [npc.name].")),
-							AFTER_COMBAT_DEFEAT_SEX_REFUSED);
-				}
-				
-			} else {
-				if(((NPC)getEnforcerLeader()).hasFlag(NPCFlagValue.knowsPlayerDemon)
-						|| getEnforcerLeader().getFoughtPlayerCount()>1) { // If demon, or know that Lilaya will bail you out, they leave you behind.
-					if (index == 1) {
-						return new Response("Continue", "Now that the Enforcers have left, you can recover and continue on your way...", Main.game.getDefaultDialogue(false)) {
-							@Override
-							public void effects() {
-								banishEnforcers(false);
-							}
-						};
-					}
-					
-				} else {
-					if (index == 1) {
-						return new Response("Dragged off", "The Enforcers drag you off to the cells...", AFTER_DEFEAT_CELLS);
-					}
-				}
-			}
-			return null;
-		}
-	};
-
 	public static final DialogueNode AFTER_COMBAT_DEFEAT_SEX_REFUSED = new DialogueNode("", "", true, true) {
 		@Override
 		public String getContent() {
@@ -2010,14 +1783,57 @@ public class EnforcerAlleywayDialogue {
 			if(((NPC)getEnforcerLeader()).hasFlag(NPCFlagValue.knowsPlayerDemon)
 					|| getEnforcerLeader().getFoughtPlayerCount()>1) { // If demon, or know that Lilaya will bail you out, they leave you behind.
 				if (index == 1) {
-					return new Response("Continue", "Now that the Enforcers have left, you can recover and continue on your way...", Main.game.getDefaultDialogue(false)) {
+                    return new Response("Продолжить", "Now that the Enforcers have left, you can recover and continue on your way...", Main.game.getDefaultDialogue(false)) {
 						@Override
 						public void effects() {
 							banishEnforcers(false);
 						}
 					};
 				}
-				
+
+			} else {
+				if (index == 1) {
+					return new Response("Dragged off", "The Enforcers drag you off to the cells...", AFTER_DEFEAT_CELLS);
+				}
+			}
+			return null;
+		}
+	};
+	public static final DialogueNode AFTER_DEFEAT_SEX = new DialogueNode("Collapse", "", true) {
+		@Override
+		public int getSecondsPassed() {
+			return 5*60;
+		}
+		@Override
+		public String getDescription(){
+			return "You're completely worn out from [npc.namePos] dominant treatment, and need a while to recover.";
+		}
+		@Override
+		public String getContent() {
+			StringBuilder sb = new StringBuilder();
+			if(Main.sex.getAllParticipants(false).contains(getEnforcerLeader())) {
+				sb.append(UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_DEFEAT_SEX", getEnforcers()));
+			} else {
+				sb.append(UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_DEFEAT_SEX", Util.newArrayListOfValues(getEnforcerSubordinate(), getEnforcerLeader())));
+			}
+
+			sb.append(UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_DEFEAT_SEX_CONTINUE", getEnforcers()));
+
+			return sb.toString();
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(((NPC)getEnforcerLeader()).hasFlag(NPCFlagValue.knowsPlayerDemon)
+					|| getEnforcerLeader().getFoughtPlayerCount()>1) { // If demon, or know that Lilaya will bail you out, they leave you behind.
+				if (index == 1) {
+                    return new Response("Продолжить", "Now that the Enforcers have left, you can recover and continue on your way...", Main.game.getDefaultDialogue(false)) {
+						@Override
+						public void effects() {
+							banishEnforcers(false);
+						}
+					};
+				}
+
 			} else {
 				if (index == 1) {
 					return new Response("Dragged off", "The Enforcers drag you off to the cells...", AFTER_DEFEAT_CELLS);
@@ -2087,45 +1903,203 @@ public class EnforcerAlleywayDialogue {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode AFTER_DEFEAT_SEX = new DialogueNode("Collapse", "", true) {
+	public static final DialogueNode AFTER_COMBAT_DEFEAT = new DialogueNode("", "", true) {
 		@Override
-		public int getSecondsPassed() {
-			return 5*60;
-		}
-		@Override
-		public String getDescription(){
-			return "You're completely worn out from [npc.namePos] dominant treatment, and need a while to recover.";
+		public void applyPreParsingEffects() {
+			searched = true;
+			isLeaderSearching = false;
+			playerSexType = getWantedSexType(isLeaderSearching?getEnforcerLeader():getEnforcerSubordinate(), Main.game.getPlayer());
+			enforcerWantsPlayerSex = (isLeaderSearching?getEnforcerLeader():getEnforcerSubordinate()).isAttractedTo(Main.game.getPlayer());
+
+			// Equipped contraband:
+			for(AbstractClothing c : new ArrayList<>(Main.game.getPlayer().getClothingCurrentlyEquipped())) {
+				if(contrabandCheck(c.getItemTags())) {
+					Main.game.getPlayer().forceUnequipClothingIntoVoid(getEnforcerLeader(), c);
+					getEnforcerLeader().addClothing(c, false);
+					clothingConfiscated.put(c, 1);
+				}
+			}
+			for(int i=0; i<3; i++) {
+				AbstractWeapon w = Main.game.getPlayer().getMainWeapon(i);
+				if(w!=null && contrabandCheck(w.getItemTags())) {
+					Main.game.getPlayer().unequipMainWeaponIntoVoid(i, false);
+					getEnforcerLeader().addWeapon(w, false);
+					weaponsConfiscated.putIfAbsent(w, 0);
+					weaponsConfiscated.put(w, weaponsConfiscated.get(w)+1);
+				}
+				w = Main.game.getPlayer().getOffhandWeapon(i);
+				if(w!=null && contrabandCheck(w.getItemTags())) {
+					Main.game.getPlayer().unequipOffhandWeaponIntoVoid(i, false);
+					getEnforcerLeader().addWeapon(w, false);
+					weaponsConfiscated.putIfAbsent(w, 0);
+					weaponsConfiscated.put(w, weaponsConfiscated.get(w)+1);
+				}
+			}
+
+			// Contraband in inventory:
+			for(Entry<AbstractWeapon, Integer> entry : new HashMap<>(Main.game.getPlayer().getAllWeaponsInInventory()).entrySet()) {
+				AbstractWeapon weapon = entry.getKey();
+				int count = entry.getValue();
+				if(contrabandCheck(weapon.getItemTags())) {
+					Main.game.getPlayer().removeWeapon(weapon, count);
+					getEnforcerLeader().addWeapon(weapon, count, false, false);
+					weaponsConfiscated.putIfAbsent(weapon, 0);
+					weaponsConfiscated.put(weapon, weaponsConfiscated.get(weapon)+count);
+				}
+			}
+			for(Entry<AbstractClothing, Integer> entry : new HashMap<>(Main.game.getPlayer().getAllClothingInInventory()).entrySet()) {
+				AbstractClothing clothing = entry.getKey();
+				int count = entry.getValue();
+				if(contrabandCheck(clothing.getItemTags())) {
+					Main.game.getPlayer().removeClothing(clothing, count);
+					getEnforcerLeader().addClothing(clothing, count, false, false);
+					clothingConfiscated.putIfAbsent(clothing, 0);
+					clothingConfiscated.put(clothing, clothingConfiscated.get(clothing)+count);
+				}
+			}
+			for(Entry<AbstractItem, Integer> entry : new HashMap<>(Main.game.getPlayer().getAllItemsInInventory()).entrySet()) {
+				AbstractItem item = entry.getKey();
+				int count = entry.getValue();
+				if(contrabandCheck(item.getItemTags())) {
+					Main.game.getPlayer().removeItem(item, count);
+					getEnforcerLeader().addItem(item, count, false, false);
+					itemsConfiscated.putIfAbsent(item, 0);
+					itemsConfiscated.put(item, itemsConfiscated.get(item)+count);
+				}
+			}
+
+			contrabandFound = !weaponsConfiscated.isEmpty() || !clothingConfiscated.isEmpty() || !itemsConfiscated.isEmpty();
 		}
 		@Override
 		public String getContent() {
+//			return UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_COMBAT_DEFEAT", getEnforcers());
+
 			StringBuilder sb = new StringBuilder();
-			if(Main.sex.getAllParticipants(false).contains(getEnforcerLeader())) {
-				sb.append(UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_DEFEAT_SEX", getEnforcers()));
-			} else {
-				sb.append(UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_DEFEAT_SEX", Util.newArrayListOfValues(getEnforcerSubordinate(), getEnforcerLeader())));
+
+			if(contrabandFound) {
+				List<String> confiscationList = new ArrayList<>();
+
+				for(Entry<AbstractWeapon, Integer> entry : weaponsConfiscated.entrySet()) {
+					confiscationList.add("<b>"+entry.getValue()+"x "+entry.getKey().getDisplayName(true)+"</b>");
+				}
+				for(Entry<AbstractClothing, Integer> entry : clothingConfiscated.entrySet()) {
+					confiscationList.add("<b>"+entry.getValue()+"x "+entry.getKey().getDisplayName(true)+"</b>");
+				}
+				for(Entry<AbstractItem, Integer> entry : itemsConfiscated.entrySet()) {
+					confiscationList.add("<b>"+entry.getValue()+"x "+entry.getKey().getDisplayName(true)+"</b>");
+				}
+
+				UtilText.addSpecialParsingString(Util.stringsToStringList(confiscationList, false), true);
 			}
-			
-			sb.append(UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_DEFEAT_SEX_CONTINUE", getEnforcers()));
-			
+
+			sb.append(UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_COMBAT_DEFEAT_SEARCHED", getEnforcers()));
+
+			if(heavyContrabandFound || contrabandFound) {
+				sb.append(UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_COMBAT_DEFEAT_SEARCHED_CONTRABAND", getEnforcers()));
+
+			} else {
+				sb.append(UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_COMBAT_DEFEAT_SEARCHED_NO_CONTRABAND", getEnforcers()));
+			}
+
+			sb.append(UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_COMBAT_DEFEAT_END", getEnforcers()));
+
 			return sb.toString();
+
+
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if(((NPC)getEnforcerLeader()).hasFlag(NPCFlagValue.knowsPlayerDemon)
-					|| getEnforcerLeader().getFoughtPlayerCount()>1) { // If demon, or know that Lilaya will bail you out, they leave you behind.
+			List<GameCharacter> enforcersWantingSex = Util.newArrayListOfValues(
+					getEnforcerLeader().isAttractedTo(Main.game.getPlayer())
+						?getEnforcerLeader()
+						:null,
+					getEnforcerSubordinate().isAttractedTo(Main.game.getPlayer())
+						?getEnforcerSubordinate()
+						:null);
+			List<GameCharacter> enforcersSpectating = new ArrayList<>(getEnforcers());
+			enforcersSpectating.removeIf(e -> enforcersWantingSex.contains(e));
+
+			if(!enforcersWantingSex.isEmpty()) {
 				if (index == 1) {
-					return new Response("Continue", "Now that the Enforcers have left, you can recover and continue on your way...", Main.game.getDefaultDialogue(false)) {
-						@Override
-						public void effects() {
-							banishEnforcers(false);
-						}
-					};
+					return new ResponseSex("Sex",
+							UtilText.parse(enforcersWantingSex,
+									enforcersWantingSex.get(0).isWillingToRape()
+										?(enforcersWantingSex.size()==2
+                                            ? "[npc.Name] и [npc2.name] force themselves on you..."
+											:"[npc.Name] forces [npc.herself] on you...")
+										:(enforcersWantingSex.size()==2
+                                            ? "Surrender yourself to [npc.name] и [npc2.name] and let them fuck you."
+											:"Surrender yourself to [npc.name] and let [npc.herHim] fuck you.")),
+							false, false,
+							new SMGeneric(
+									enforcersWantingSex,
+									Util.newArrayListOfValues(Main.game.getPlayer()),
+									enforcersSpectating,
+									null),
+							AFTER_DEFEAT_SEX,
+							UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "START_DEFEATED_SEX", getEnforcers()));
+
+				} else if (index == 2) {
+					return new ResponseSex("Eager Sex",
+							UtilText.parse(enforcersWantingSex,
+								enforcersWantingSex.get(0).isWillingToRape()
+									?(enforcersWantingSex.size()==2
+                                        ? "Eagerly encourage [npc.name] и [npc2.name] to force themselves on you..."
+										:"Eagerly encourage [npc.name] to force [npc.herself] on you...")
+									:(enforcersWantingSex.size()==2
+                                        ? "Eagerly surrender yourself to [npc.name] и [npc2.name] and let them fuck you."
+										:"Eagerly surrender yourself to [npc.name] and let [npc.herHim] fuck you.")),
+							false, false,
+							new SMGeneric(
+									enforcersWantingSex,
+									Util.newArrayListOfValues(Main.game.getPlayer()),
+									enforcersSpectating,
+									null,
+									ResponseTag.START_PACE_PLAYER_SUB_EAGER),
+							AFTER_DEFEAT_SEX,
+							UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "START_DEFEATED_SEX_EAGER", getEnforcers()));
+
+				} else if (index == 3 && Main.game.isNonConEnabled() && enforcersWantingSex.get(0).isWillingToRape()) {
+					return new ResponseSex("Resist Sex",
+							UtilText.parse(enforcersWantingSex,
+								(enforcersWantingSex.size()==2
+                                        ? "Try and resist as [npc.name] и [npc2.name] to force themselves on you..."
+										:"Try and resist as [npc.name] forces [npc.herself] on you...")),
+							false, false,
+							new SMGeneric(
+									enforcersWantingSex,
+									Util.newArrayListOfValues(Main.game.getPlayer()),
+									enforcersSpectating,
+									null,
+									ResponseTag.START_PACE_PLAYER_SUB_RESISTING),
+							AFTER_DEFEAT_SEX,
+							UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "START_DEFEATED_SEX_RESIST", getEnforcers()));
+
+				} else if (index == 4 && !enforcersWantingSex.get(0).isWillingToRape()) {
+					return new Response("Refuse",
+							UtilText.parse(enforcersWantingSex,
+								(enforcersWantingSex.size()==2
+                                        ? "Refuse to have sex with [npc.name] и [npc2.name]."
+									:"Refuse to have sex with [npc.name].")),
+							AFTER_COMBAT_DEFEAT_SEX_REFUSED);
 				}
-				
+
 			} else {
-				if (index == 1) {
-					return new Response("Dragged off", "The Enforcers drag you off to the cells...", AFTER_DEFEAT_CELLS);
+				if(((NPC)getEnforcerLeader()).hasFlag(NPCFlagValue.knowsPlayerDemon)
+						|| getEnforcerLeader().getFoughtPlayerCount()>1) { // If demon, or know that Lilaya will bail you out, they leave you behind.
+					if (index == 1) {
+                        return new Response("Продолжить", "Now that the Enforcers have left, you can recover and continue on your way...", Main.game.getDefaultDialogue(false)) {
+							@Override
+							public void effects() {
+								banishEnforcers(false);
+							}
+						};
+					}
+
+				} else {
+					if (index == 1) {
+						return new Response("Dragged off", "The Enforcers drag you off to the cells...", AFTER_DEFEAT_CELLS);
+					}
 				}
 			}
 			return null;

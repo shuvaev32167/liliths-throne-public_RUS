@@ -63,24 +63,24 @@
 
   <replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(place)] the handcuffs around [npc.her] wrists.]]>
+            <![CDATA[[npc.Name] place the handcuffs around [npc.her] wrists.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(place)] the handcuffs around [npc2.namePos] wrists.]]>
+            <![CDATA[[npc.Name] place the handcuffs around [npc2.namePos] wrists.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(force)] the handcuffs around [npc2.namePos] wrists.]]>
+            <![CDATA[[npc.Name] roughly force the handcuffs around [npc2.namePos] wrists.]]>
 	  </otherRough>
 	</replacementText>
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(unfasten)] the handcuffs from around [npc.her] wrists.]]>
+            <![CDATA[[npc.Name] unfasten the handcuffs from around [npc.her] wrists.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(unfasten)] the handcuffs from around [npc2.namePos] wrists.]]>
+            <![CDATA[[npc.Name] unfasten the handcuffs from around [npc2.namePos] wrists.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] roughly [npc.verb(unfasten)] the handcuffs from around [npc2.namePos] wrists.]]>
+            <![CDATA[[npc.Name] roughly unfasten the handcuffs from around [npc2.namePos] wrists.]]>
 		</otherRough>
 	</displacementText>
 	

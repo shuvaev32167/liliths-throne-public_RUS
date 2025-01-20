@@ -1,9 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.nyansApartment;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.effects.StatusEffect;
@@ -20,11 +16,7 @@ import com.lilithsthrone.game.dialogue.responses.ResponseSex;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.sex.InitialSexActionInformation;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
-import com.lilithsthrone.game.sex.SexParticipantType;
-import com.lilithsthrone.game.sex.SexType;
+import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.managers.dominion.nyan.SMNyanSex;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotLyingDown;
@@ -41,6 +33,10 @@ import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @since 0.4
@@ -85,7 +81,7 @@ public class NyanFirstDate {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Lounge", "Follow Nyan through into her lounge.", DATE_START_LOUNGE);
+                return new Response("Гостиная", "Follow Nyan through into her lounge.", DATE_START_LOUNGE);
 			}
 			return null;
 		}
@@ -108,7 +104,7 @@ public class NyanFirstDate {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Nyan", "Nyan makes her return...", DATE_START_LOUNGE_NYAN_DRESS);
+                return new Response("Ньян", "Nyan makes her return...", DATE_START_LOUNGE_NYAN_DRESS);
 			}
 			return null;
 		}
@@ -439,7 +435,7 @@ public class NyanFirstDate {
 		@Override
 		public void applyPreParsingEffects() {
 			travelTo(WorldType.DOMINION, PlaceType.DOMINION_NYAN_APARTMENT);
-			((Nyan)getNyan()).wearCoat(true, false);
+			getNyan().wearCoat(true, false);
 			Main.game.getPlayer().applyFoodConsumed(10);
 			Main.game.getPlayer().applyDrinkConsumed(10);
 			getNyan().applyFoodConsumed(10);
@@ -467,7 +463,7 @@ public class NyanFirstDate {
 		public void applyPreParsingEffects() {
 			getNyanMum().setLocation(WorldType.NYANS_APARTMENT, PlaceType.NYAN_APARTMENT_LOUNGE);
 			travelTo(WorldType.NYANS_APARTMENT, PlaceType.NYAN_APARTMENT_ENTRANCE);
-			((Nyan)getNyan()).wearCoat(false, true);
+			getNyan().wearCoat(false, true);
 			AbstractClothing shoes = getNyan().getClothingInSlot(InventorySlot.FOOT);
 			if(shoes!=null) {
 				getNyan().unequipClothingIntoVoid(shoes, true, getNyan());
@@ -484,7 +480,7 @@ public class NyanFirstDate {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Lounge", "Enter the lounge...", POST_DATE_APARTMENT_LOUNGE);
+                return new Response("Гостиная", "Enter the lounge...", POST_DATE_APARTMENT_LOUNGE);
 			}
 			return null;
 		}
@@ -608,7 +604,7 @@ public class NyanFirstDate {
 	public static final DialogueNode POST_DATE_APARTMENT_INTERVIEW_2_FOOD = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -656,7 +652,7 @@ public class NyanFirstDate {
 	public static final DialogueNode POST_DATE_APARTMENT_INTERVIEW_3_HISTORY = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -704,7 +700,7 @@ public class NyanFirstDate {
 	public static final DialogueNode POST_DATE_APARTMENT_INTERVIEW_4_STORE = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -752,7 +748,7 @@ public class NyanFirstDate {
 	public static final DialogueNode POST_DATE_APARTMENT_INTERVIEW_5_FLOWER = new DialogueNode("", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
-			return 1*60;
+			return 60;
 		}
 		@Override
 		public String getContent() {
@@ -979,7 +975,7 @@ public class NyanFirstDate {
 				};
 				
 			} else if(index==2) {
-				return new ResponseSex("Fingering", "Gently push Nyan down on her bed and finger her while kissing her.",
+				return new ResponseSex("Ласкание пальцами", "Gently push Nyan down on her bed and finger her while kissing her.",
 						true, true,
 						new SMNyanSex(
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN_TWO)),
@@ -1291,7 +1287,7 @@ public class NyanFirstDate {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Kitchen", "Head into the kitchen to find Nyan.", POST_DATE_APARTMENT_BEDROOM_MORNING);
+                return new Response("Кухня", "Head into the kitchen to find Nyan.", POST_DATE_APARTMENT_BEDROOM_MORNING);
 			}
 			return null;
 		}

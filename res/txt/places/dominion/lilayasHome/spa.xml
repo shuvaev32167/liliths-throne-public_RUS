@@ -172,7 +172,7 @@
 		#IF([#SPECIAL_PARSE_0]==1)
 			Deciding to make the most of the fact that you're alone with [npc.name], you dominantly take hold of [npc.herHim], and with the shower's warm water flowing over your bodies, you prepare to fuck [npc.herHim]...
 		#ELSE
-			Deciding to make the most of the fact that you're alone with [npc.name] and [npc2.name], you dominantly take hold of them, and with the shower's warm water flowing over your bodies, you prepare to fuck the two of them...
+			Deciding to make the most of the fact that you're alone with [npc.name] и [npc2.name], you dominantly take hold of them, and with the shower's warm water flowing over your bodies, you prepare to fuck the two of them...
 		#ENDIF
 	</p>
 	]]>
@@ -183,7 +183,7 @@
 		#IF([#SPECIAL_PARSE_0]==1)
 			Deciding to make the most of the fact that you're alone with [npc.name], you submissively grind your body up against [npc.hers], and with the shower's warm water flowing over your bodies, you ask [npc.herHim] to fuck you...
 		#ELSE
-			Deciding to make the most of the fact that you're alone with [npc.name] and [npc2.name], you submissively grind your body up against them, and with the shower's warm water flowing over your bodies, you ask the two of them to fuck you...
+			Deciding to make the most of the fact that you're alone with [npc.name] и [npc2.name], you submissively grind your body up against them, and with the shower's warm water flowing over your bodies, you ask the two of them to fuck you...
 		#ENDIF
 	</p>
 	]]>
@@ -207,9 +207,9 @@
 	#ELSE
 		<p>
 			#IF(sex.isDom(pc))
-				Having had your fun with [npc.name] and [npc2.name], you turn off the shower and tell them that you've no further need of their assistance. Letting out a pair of deep [npc.moans], the two of them quickly dry themselves off and get dressed, before returning to stand behind the reception's counter.
+				Having had your fun with [npc.name] и [npc2.name], you turn off the shower and tell them that you've no further need of their assistance. Letting out a pair of deep [npc.moans], the two of them quickly dry themselves off and get dressed, before returning to stand behind the reception's counter.
 			#ELSE
-				Now that [npc.name] and [npc2.name] have had their fun with you, they turn off the shower and tell you that you don't seem to require any further assistance. With that, the two of them quickly dry themselves off and get dressed, before returning to stand behind the reception's counter.
+				Now that [npc.name] и [npc2.name] have had their fun with you, they turn off the shower and tell you that you don't seem to require any further assistance. With that, the two of them quickly dry themselves off and get dressed, before returning to stand behind the reception's counter.
 			#ENDIF
 		</p>
 		<p>
@@ -236,7 +236,7 @@
 		</p>
 	#ELSE
 		<p>
-			Having had [npc.name] and [npc2.name] assist you in cleaning yourself, you turn off the shower and [pc.step] back out into the changing room. After getting your slaves to use one of the fluffy towels to quickly dry you off, you tell them to return to their post behind the reception's desk.
+			Having had [npc.name] и [npc2.name] assist you in cleaning yourself, you turn off the shower and [pc.step] back out into the changing room. After getting your slaves to use one of the fluffy towels to quickly dry you off, you tell them to return to their post behind the reception's desk.
 		</p>
 		<p>
 			Now that you've had a shower, you feel impatient to enter the spa proper...
@@ -338,7 +338,7 @@
 		#IF([#SPECIAL_PARSE_0]==1)
 			Wanting to take this opportunity to have a little fun with [npc.name], you take hold of [npc.herHim] and pull [npc.herHim] into your lap, before preparing to have sex with [npc.herHim]...
 		#ELSEIF([#SPECIAL_PARSE_0]==2)
-			Wanting to take this opportunity to have a little fun with your slaves, you dominantly take hold of [npc.name] and pull [npc.herHim] into your lap, before preparing to have sex with [npc.herHim] and [npc2.name]...
+			Wanting to take this opportunity to have a little fun with your slaves, you dominantly take hold of [npc.name] and pull [npc.herHim] into your lap, before preparing to have sex with [npc.herHim] и [npc2.name]...
 		#ELSE
 			Wanting to take this opportunity to have a little fun with your slaves, you dominantly take hold of [npc.name] and pull [npc.herHim] into your lap, before preparing to have sex with [npc.herHim], [npc2.name], and [npc3.name]...
 		#ENDIF
@@ -351,7 +351,7 @@
 		#IF([#SPECIAL_PARSE_0]==1)
 			Wanting to take this opportunity to have a little fun with [npc.name], you submissively encourage [npc.herHim] to slide into your lap, before preparing to let [npc.herHim] fuck you...
 		#ELSEIF([#SPECIAL_PARSE_0]==2)
-			Wanting to take this opportunity to have a little fun with your slaves, you submissively encourage [npc.name] to slide into your lap, before preparing to let [npc.herHim] and [npc2.name] fuck you...
+			Wanting to take this opportunity to have a little fun with your slaves, you submissively encourage [npc.name] to slide into your lap, before preparing to let [npc.herHim] и [npc2.name] fuck you...
 		#ELSE
 			Wanting to take this opportunity to have a little fun with your slaves, you submissively encourage [npc.name] to slide into your lap, before preparing to let [npc.herHim], [npc2.name], and [npc3.name] fuck you...
 		#ENDIF
@@ -367,7 +367,7 @@
 		#IF([#SPECIAL_PARSE_0]==1)
 			Having had your fun with [npc.name], you sink down into the pool and let out a deeply satisfied sigh. As your slave similarly returns to relaxing in the warm water, you wonder what to do next...
 		#ELSEIF([#SPECIAL_PARSE_0]==2)
-			Having had your fun with your slaves, you sink down into the pool and let out a deeply satisfied sigh. As [npc.name] and [npc2.name] similarly return to relaxing in the warm water, you wonder what to do next...
+			Having had your fun with your slaves, you sink down into the pool and let out a deeply satisfied sigh. As [npc.name] и [npc2.name] similarly return to relaxing in the warm water, you wonder what to do next...
 		#ELSE
 			Having had your fun with your slaves, you sink down into the pool and let out a deeply satisfied sigh. As [npc.name], [npc2.name], and [npc3.name] similarly return to relaxing in the warm water, you wonder what to do next...
 		#ENDIF
@@ -996,7 +996,7 @@
 	<p>
 		Taking this opportunity to get a good look at [npc.name],
 		#IF(npc.getClothingInSlot(IS_CHEST)!=null && npc.getClothingInSlot(IS_CHEST).getClothingType()==CT_innoxia_chest_swimsuit)
-			 you cast your gaze over [npc.her] body, noting to yourself how the tight material of [npc.her] swimsuit hugs [npc.her] [npc.hips+] and [npc.breasts+]. Running [npc.her] [npc.hands] down over [npc.her] body to smooth out a few wrinkles in [npc.her] swimwear, [npc.name] turns and shows off [npc.her] [npc.ass+] as [npc.she]
+			 you cast your gaze over [npc.her] body, noting to yourself how the tight material of [npc.her] swimsuit hugs [npc.her] [npc.hips+] и [npc.breasts+]. Running [npc.her] [npc.hands] down over [npc.her] body to smooth out a few wrinkles in [npc.her] swimwear, [npc.name] turns and shows off [npc.her] [npc.ass+] as [npc.she]
 		#ELSEIF(npc.getClothingInSlot(IS_GROIN)!=null)
 			#IF(npc.getClothingInSlot(IS_GROIN).getClothingType()==CT_innoxia_groin_micro_bikini)
 				 you cast your gaze over [npc.her] body, noting to yourself how the tiny scraps of material which constitute [npc.her] micro bikini struggle to conceal [npc.her]
@@ -1004,10 +1004,10 @@
 					#IF(npc.hasPenis())
 						 [npc.nipples+], [npc.cock+], and [npc.pussy+].
 					#ELSE
-						 [npc.nipples+] and [npc.pussy+].
+						 [npc.nipples+] и [npc.pussy+].
 					#ENDIF
 				#ELSEIF(npc.hasPenis())
-					 [npc.nipples+] and [npc.cock+].
+					 [npc.nipples+] и [npc.cock+].
 				#ELSE
 					 [npc.nipples+] and smooth, doll-like groin.
 				#ENDIF
@@ -1030,10 +1030,10 @@
 				#IF(npc.hasPenis())
 					 [npc.breasts+], [npc.cock+], and [npc.pussy+].
 				#ELSE
-					 [npc.breasts+] and [npc.pussy+].
+					 [npc.breasts+] и [npc.pussy+].
 				#ENDIF
 			#ELSEIF(npc.hasPenis())
-				 [npc.breasts+] and [npc.cock+].
+				 [npc.breasts+] и [npc.cock+].
 			#ELSE
 				 [npc.breasts+] and smooth, doll-like groin.
 			#ENDIF

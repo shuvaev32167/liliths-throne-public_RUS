@@ -48,10 +48,10 @@
 
 	<useDescriptions>
 		<selfUse><![CDATA[
-		Spraying a little squirt of the Harpy Perfume onto [npc.her] neck, [npc.name] [npc.verb(take)] in a deep breath of its intoxicating feminine scent. Curiously, after just one spray the bottle of perfume is completely emptied, and as [npc.name] [npc.verb(throw)] it away, [npc.she] [npc.verb(feel)] a bubbly wave of excitement running through [npc.herHim], and without thinking, [npc.she] [npc.verb(let)] out a very girly giggle.
+		Spraying a little squirt of the Harpy Perfume onto [npc.her] neck, [npc.name] take in a deep breath of its intoxicating feminine scent. Curiously, after just one spray the bottle of perfume is completely emptied, and as [npc.name] throw it away, [npc.she] feel a bubbly wave of excitement running through [npc.herHim], and without thinking, [npc.she] let out a very girly giggle.
 		]]></selfUse>
 		<otherUse><![CDATA[
-		[npc.Name] [npc.verb(spray)] a little squirt of the Harpy Perfume onto [npc2.namePos] neck, and [npc.verb(watch)] as [npc2.she] [npc2.verb(take)] in a deep breath of its intoxicating feminine scent. Curiously, after just one spray the bottle of perfume is completely emptied, and as [npc.name] [npc.verb(throw)] it away, [npc2.name] [npc2.verb(feel)] a bubbly wave of excitement running through [npc2.herHim], and without thinking, [npc2.she] [npc2.verb(let)] out a very girly giggle.
+		[npc.Name] spray a little squirt of the Harpy Perfume onto [npc2.namePos] neck, and watch as [npc2.she] [npc2.verb(take)] in a deep breath of its intoxicating feminine scent. Curiously, after just one spray the bottle of perfume is completely emptied, and as [npc.name] throw it away, [npc2.name] [npc2.verb(feel)] a bubbly wave of excitement running through [npc2.herHim], and without thinking, [npc2.she] [npc2.verb(let)] out a very girly giggle.
 		]]></otherUse>
 	</useDescriptions>
 

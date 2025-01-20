@@ -1,18 +1,5 @@
 package com.lilithsthrone.game.dialogue.utils;
 
-import java.time.Month;
-import java.time.format.TextStyle;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-
 import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInformationEventListener;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
@@ -20,106 +7,19 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.ObedienceLevel;
-import com.lilithsthrone.game.character.body.Antenna;
-import com.lilithsthrone.game.character.body.Arm;
-import com.lilithsthrone.game.character.body.Breast;
-import com.lilithsthrone.game.character.body.BreastCrotch;
-import com.lilithsthrone.game.character.body.Eye;
-import com.lilithsthrone.game.character.body.Horn;
-import com.lilithsthrone.game.character.body.Leg;
-import com.lilithsthrone.game.character.body.Tail;
-import com.lilithsthrone.game.character.body.Tentacle;
-import com.lilithsthrone.game.character.body.Testicle;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAntennaType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractArmType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAssType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractBreastType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEarType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEyeType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHairType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHornType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractPenisType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTorsoType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractVaginaType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractWingType;
+import com.lilithsthrone.game.character.body.*;
+import com.lilithsthrone.game.character.body.abstractTypes.*;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
-import com.lilithsthrone.game.character.body.types.AntennaType;
-import com.lilithsthrone.game.character.body.types.ArmType;
-import com.lilithsthrone.game.character.body.types.AssType;
-import com.lilithsthrone.game.character.body.types.BreastType;
-import com.lilithsthrone.game.character.body.types.EarType;
-import com.lilithsthrone.game.character.body.types.EyeType;
-import com.lilithsthrone.game.character.body.types.FaceType;
-import com.lilithsthrone.game.character.body.types.HairType;
-import com.lilithsthrone.game.character.body.types.HornType;
-import com.lilithsthrone.game.character.body.types.LegType;
-import com.lilithsthrone.game.character.body.types.PenisType;
-import com.lilithsthrone.game.character.body.types.TailType;
-import com.lilithsthrone.game.character.body.types.TorsoType;
-import com.lilithsthrone.game.character.body.types.VaginaType;
-import com.lilithsthrone.game.character.body.types.WingType;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
-import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.ClitorisSize;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringModifier;
-import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
-import com.lilithsthrone.game.character.body.valueEnums.CumProduction;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.EyeShape;
-import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
-import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
-import com.lilithsthrone.game.character.body.valueEnums.FluidRegeneration;
-import com.lilithsthrone.game.character.body.valueEnums.FootStructure;
-import com.lilithsthrone.game.character.body.valueEnums.GenitalArrangement;
-import com.lilithsthrone.game.character.body.valueEnums.HairLength;
-import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
-import com.lilithsthrone.game.character.body.valueEnums.Height;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.body.valueEnums.HornLength;
-import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
-import com.lilithsthrone.game.character.body.valueEnums.Lactation;
-import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.body.valueEnums.LipSize;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
-import com.lilithsthrone.game.character.body.valueEnums.NippleShape;
-import com.lilithsthrone.game.character.body.valueEnums.NippleSize;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeDepth;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
-import com.lilithsthrone.game.character.body.valueEnums.PenisLength;
-import com.lilithsthrone.game.character.body.valueEnums.PiercingType;
-import com.lilithsthrone.game.character.body.valueEnums.TesticleSize;
-import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
-import com.lilithsthrone.game.character.body.valueEnums.TongueModifier;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
-import com.lilithsthrone.game.character.body.valueEnums.WingSize;
+import com.lilithsthrone.game.character.body.types.*;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
-import com.lilithsthrone.game.character.markings.AbstractTattooType;
-import com.lilithsthrone.game.character.markings.Tattoo;
-import com.lilithsthrone.game.character.markings.TattooCountType;
-import com.lilithsthrone.game.character.markings.TattooCounter;
-import com.lilithsthrone.game.character.markings.TattooCounterType;
-import com.lilithsthrone.game.character.markings.TattooType;
-import com.lilithsthrone.game.character.markings.TattooWriting;
-import com.lilithsthrone.game.character.markings.TattooWritingStyle;
+import com.lilithsthrone.game.character.markings.*;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.race.AbstractRace;
@@ -141,6 +41,13 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
+import java.time.Month;
+import java.time.format.TextStyle;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+
+import static com.lilithsthrone.utils.Constants.RUSSIAN_LOCALE;
+
 /**
  * @since 0.1.7?
  * @version 0.3.9.1
@@ -148,7 +55,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
  */
 public class CharacterModificationUtils {
 
-	private static StringBuilder contentSB = new StringBuilder();
+	private static final StringBuilder contentSB = new StringBuilder();
 
 	public static final int FLUID_INCREMENT_SMALL = 5;
 	public static final int FLUID_INCREMENT_AVERAGE = 50;
@@ -178,22 +85,22 @@ public class CharacterModificationUtils {
 		contentSB.setLength(0);
 		
 		contentSB.append("<div class='cosmetics-inner-container full'>");
-			contentSB.append("<p style='text-align:center; margin:0; padding:0;'><b>Start Date</b></p>");
+		contentSB.append("<p style='text-align:center; margin:0; padding:0;'><b>Дата начала</b></p>");
 			contentSB.append("<p style='text-align:center;'>"
-								+ "Select the month in which the game starts."
+					+ "Выберите месяц, в котором начнется игра."
 							+ "</p>");
 	
 			for(Month month : Month.values()) {
 				if(Main.game.getStartingDate().getMonth() == month) {
 					contentSB.append(
 							"<div class='cosmetics-button active'>"
-								+ "<span style='color:"+PresetColour.GENERIC_MINOR_GOOD.toWebHexString()+";'>"+Util.capitaliseSentence(month.getDisplayName(TextStyle.FULL, Locale.ENGLISH))+"</span>"
+									+ "<span style='color:" + PresetColour.GENERIC_MINOR_GOOD.toWebHexString() + ";'>" + Util.capitaliseSentence(month.getDisplayName(TextStyle.FULL_STANDALONE, RUSSIAN_LOCALE)) + "</span>"
 							+ "</div>");
 					
 				} else {
 					contentSB.append(
 							"<div id='STARTING_MONTH_"+month+"' class='cosmetics-button'>"
-								+ "<span style='color:"+PresetColour.GENERIC_MINOR_GOOD.getShades()[0]+";'>"+Util.capitaliseSentence(month.getDisplayName(TextStyle.FULL, Locale.ENGLISH))+"</span>"
+									+ "<span style='color:" + PresetColour.GENERIC_MINOR_GOOD.getShades()[0] + ";'>" + Util.capitaliseSentence(month.getDisplayName(TextStyle.FULL_STANDALONE, RUSSIAN_LOCALE)) + "</span>"
 							+ "</div>");
 				}
 			}
@@ -209,29 +116,29 @@ public class CharacterModificationUtils {
 		contentSB.setLength(0);
 		
 		contentSB.append("<div class='container-half-width' style='text-align:center;'>");
-			contentSB.append("<p style='text-align:center; margin:0; padding:0;'><b>Gender</b></p>");
+		contentSB.append("<p style='text-align:center; margin:0; padding:0;'><b>Пол</b></p>");
 		
 			if(BodyChanging.getTarget().isPlayer()) {
 				contentSB.append("<p style='text-align:center;'>"
-								+ "Your gender is used to determine what genitals you start the game with."
+						+ "Пол используется для определения того, с какими гениталиями вы начинаете игру."
 							+ "</p>");
 			}
 			
 			if(BodyChanging.getTarget().getGender().getGenderName().isHasVagina()) {
 				contentSB.append(
 						"<div id='CHOOSE_GENDER_MALE' class='cosmetics-button'>"
-							+ "<span style='color:"+PresetColour.MASCULINE.getShades()[0]+";'>Male</span>"
+								+ "<span style='color:" + PresetColour.MASCULINE.getShades()[0] + ";'>Мужской</span>"
 						+ "</div>"
 						+ "<div class='cosmetics-button active'>"
-							+ "[style.boldFeminine(Female)]"
+								+ "[style.boldFeminine(Женский)]"
 						+ "</div>");
 			} else {
 				contentSB.append(
 						"<div class='cosmetics-button active'>"
-							+ "[style.colourMasculine(Male)]"
+								+ "[style.colourMasculine(Мужской)]"
 						+ "</div>"
 						+ "<div id='CHOOSE_GENDER_FEMALE' class='cosmetics-button'>"
-							+ "<span style='color:"+PresetColour.FEMININE.getShades()[0]+";'>Female</span>"
+								+ "<span style='color:" + PresetColour.FEMININE.getShades()[0] + ";'>Женский</span>"
 						+ "</div>");
 			}
 		
@@ -244,11 +151,11 @@ public class CharacterModificationUtils {
 		contentSB.setLength(0);
 
 		contentSB.append("<div class='container-half-width' style='text-align:center;'>");
-			contentSB.append("<p style='text-align:center; margin:0; padding:0;'><b>Femininity</b></p>");
+		contentSB.append("<p style='text-align:center; margin:0; padding:0;'><b>Женственность</b></p>");
 		
 			if(BodyChanging.getTarget().isPlayer()) {
 				contentSB.append("<p style='text-align:center;'>"
-									+ "Femininity is a measure of how masculine or feminine your face and body are."
+						+ "Женственность — это мера того, насколько мужественно или женственно ваше лицо и тело."
 								+ "</p>");
 			}
 			
@@ -256,34 +163,34 @@ public class CharacterModificationUtils {
 				if(BodyChanging.getTarget().getFemininity()==Femininity.ANDROGYNOUS) {
 					contentSB.append(
 							"<div class='cosmetics-button active'>"
-								+ "[style.colourAndrogynous(Androgynous)]"
+									+ "[style.colourAndrogynous(Гермафродит)]"
 							+ "</div>");
 				} else {
 					contentSB.append(
 							"<div id='CHOOSE_FEM_ANDROGYNOUS' class='cosmetics-button'>"
-								+ "<span style='color:"+PresetColour.ANDROGYNOUS.getShades()[0]+";'>Androgynous</span>"
+									+ "<span style='color:" + PresetColour.ANDROGYNOUS.getShades()[0] + ";'>Гермафродит</span>"
 							+ "</div>");
 				}
 				if(BodyChanging.getTarget().getFemininity()==Femininity.FEMININE) {
 					contentSB.append(
 							"<div class='cosmetics-button active'>"
-								+ "[style.colourFeminine(Feminine)]"
+									+ "[style.colourFeminine(Женственно)]"
 							+ "</div>");
 				} else {
 					contentSB.append(
 							"<div id='CHOOSE_FEM_FEMININE' class='cosmetics-button'>"
-								+ "<span style='color:"+PresetColour.FEMININE.getShades()[0]+";'>Feminine</span>"
+									+ "<span style='color:" + PresetColour.FEMININE.getShades()[0] + ";'>Женственно</span>"
 							+ "</div>");
 				}
 				if(BodyChanging.getTarget().getFemininity()==Femininity.FEMININE_STRONG) {
 					contentSB.append(
 							"<div class='cosmetics-button active'>"
-								+ "[style.colourFeminineStrong(Very Feminine)]"
+									+ "[style.colourFeminineStrong(Очень женственно)]"
 							+ "</div>");
 				} else {
 					contentSB.append(
 							"<div id='CHOOSE_FEM_FEMININE_STRONG' class='cosmetics-button'>"
-								+ "<span style='color:"+PresetColour.FEMININE_PLUS.getShades()[0]+";'>Very Feminine</span>"
+									+ "<span style='color:" + PresetColour.FEMININE_PLUS.getShades()[0] + ";'>Очень женственно</span>"
 							+ "</div>");
 				}
 				
@@ -291,34 +198,34 @@ public class CharacterModificationUtils {
 				if(BodyChanging.getTarget().getFemininity()==Femininity.ANDROGYNOUS) {
 					contentSB.append(
 							"<div class='cosmetics-button active'>"
-								+ "[style.colourAndrogynous(Androgynous)]"
+									+ "[style.colourAndrogynous(Гермафродит)]"
 							+ "</div>");
 				} else {
 					contentSB.append(
 							"<div id='CHOOSE_FEM_ANDROGYNOUS' class='cosmetics-button'>"
-								+ "<span style='color:"+PresetColour.ANDROGYNOUS.getShades()[0]+";'>Androgynous</span>"
+									+ "<span style='color:" + PresetColour.ANDROGYNOUS.getShades()[0] + ";'>Гермафродит</span>"
 							+ "</div>");
 				}
 				if(BodyChanging.getTarget().getFemininity()==Femininity.MASCULINE) {
 					contentSB.append(
 							"<div class='cosmetics-button active'>"
-								+ "[style.colourMasculine(Masculine)]"
+									+ "[style.colourMasculine(Мужественно)]"
 							+ "</div>");
 				} else {
 					contentSB.append(
 							"<div id='CHOOSE_FEM_MASCULINE' class='cosmetics-button'>"
-								+ "<span style='color:"+PresetColour.MASCULINE.getShades()[0]+";'>Masculine</span>"
+									+ "<span style='color:" + PresetColour.MASCULINE.getShades()[0] + ";'>Мужественно</span>"
 							+ "</div>");
 				}
 				if(BodyChanging.getTarget().getFemininity()==Femininity.MASCULINE_STRONG) {
 					contentSB.append(
 							"<div class='cosmetics-button active'>"
-								+ "[style.colourMasculineStrong(Very Masculine)]"
+									+ "[style.colourMasculineStrong(Очень мужественно)]"
 							+ "</div>");
 				} else {
 					contentSB.append(
 							"<div id='CHOOSE_FEM_MASCULINE_STRONG' class='cosmetics-button'>"
-								+ "<span style='color:"+PresetColour.MASCULINE_PLUS.getShades()[0]+";'>Very Masculine</span>"
+									+ "<span style='color:" + PresetColour.MASCULINE_PLUS.getShades()[0] + ";'>Очень мужественно</span>"
 							+ "</div>");
 				}
 			}
@@ -332,13 +239,13 @@ public class CharacterModificationUtils {
 		contentSB.setLength(0);
 		
 		contentSB.append("<div class='container-full-width' style='text-align:center;'>");
-		
-				contentSB.append("<p style='text-align:center; margin:0; padding:0;'><b>Personality</b></p>");
+
+		contentSB.append("<p style='text-align:center; margin:0; padding:0;'><b>Личность</b></p>");
 				
 				if(BodyChanging.getTarget().isPlayer()) {
 					contentSB.append("<p style='text-align:center;'>"
-									+ "Your personality will have a minor influence in some situations."
-									+ " It will not lock out any options during the game, and is more for roleplaying purposes."
+							+ "В некоторых ситуациях ваша личность будет иметь незначительное влияние."
+							+ " Она не блокирует какие-либо опции во время игры и предназначен больше для ролевых целей."
 								+ "</p>");
 				}
 				
@@ -448,27 +355,27 @@ public class CharacterModificationUtils {
 		contentSB.setLength(0);
 
 		contentSB.append("<div class='container-full-width'>");
-			contentSB.append("<p style='text-align:center; margin:0; padding:0;'><b>Birthday</b></p>");
+		contentSB.append("<p style='text-align:center; margin:0; padding:0;'><b>День рождения</b></p>");
 			
 			if(BodyChanging.getTarget().isPlayer()) {
 				contentSB.append("<p style='text-align:center;'>"
-									+ "You were born on the "
-										+Units.date(BodyChanging.getTarget().getBirthday(), Units.DateType.LONG)+", making you "+Util.intToString(BodyChanging.getTarget().getAgeValue())+" years old."
+						+ "Вы родились "
+						+ Units.date(BodyChanging.getTarget().getBirthday(), Units.DateType.LONG) + ", так что тебе " + Util.intToString(BodyChanging.getTarget().getAgeValue())
 								+ "</p>");
 			}
 			
 			contentSB.append("<div class='container-full-width' style='margin:0;padding;0;width:100%;'>");
 			
 				contentSB.append("<div class='container-full-width' style='width:calc(33.3% - 16px);'>");
-					contentSB.append(applyDateWrapper("Day", "BIRTH_DAY", "", "", String.valueOf(BodyChanging.getTarget().getBirthday().getDayOfMonth()), false, false));
+		contentSB.append(applyDateWrapper("Число", "BIRTH_DAY", "", "", String.valueOf(BodyChanging.getTarget().getBirthday().getDayOfMonth()), false, false));
 				contentSB.append("</div>");
 
 				contentSB.append("<div class='container-full-width' style='width:calc(33.3% - 16px);'>");
-					contentSB.append(applyDateWrapper("Month", "BIRTH_MONTH", "", "", BodyChanging.getTarget().getBirthday().getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH), false, false));
+		contentSB.append(applyDateWrapper("Месяц", "BIRTH_MONTH", "", "", Util.capitaliseSentence(BodyChanging.getTarget().getBirthday().getMonth().getDisplayName(TextStyle.FULL_STANDALONE, RUSSIAN_LOCALE)), false, false));
 				contentSB.append("</div>");
 
 				contentSB.append("<div class='container-full-width' style='width:calc(33.3% - 16px);'>");
-					contentSB.append(applyDateWrapper("Age", "AGE", "", "",
+		contentSB.append(applyDateWrapper("Возраст", "AGE", "", "",
 							String.valueOf(BodyChanging.getTarget().getAgeValue()),
 							BodyChanging.getTarget().getAgeValue()<=18,
 							BodyChanging.getTarget().isPlayer()
@@ -531,12 +438,12 @@ public class CharacterModificationUtils {
 		} else {
 			contentSB.append("<div class='container-half-width' style='text-align:center;'>");
 		}
-			contentSB.append("<p style='text-align:center; margin:0; padding:0;'><b>Sexual Orientation</b></p>");
+		contentSB.append("<p style='text-align:center; margin:0; padding:0;'><b>Сексуальная ориентация</b></p>");
 			
 			if(BodyChanging.getTarget().isPlayer()) {
 				contentSB.append("<p style='text-align:center;'>"
-								+ "Sexual orientation is determined by your attraction towards femininity or masculinity."
-								+ "<br/><i>Hover over the orientation icon in your character's status effects panel to see the effects.</i>"
+						+ "Сексуальная ориентация определяется вашим влечением к женственности или мужественности."
+						+ "<br/><i>Наведите указатель мыши на значок ориентации на панели эффектов статуса вашего персонажа, чтобы увидеть эффекты.</i>"
 							+ "</p>");
 			}
 			
@@ -612,7 +519,7 @@ public class CharacterModificationUtils {
 	public static int[] normalSexExperienceValues = new int[] {0, 1, 25, 100, 250};
 	public static float[] sexExperienceCorruption = new float[] {0, 0.5f, 1, 2.5f, 5};
 	
-	private static Colour[] sexColours = new Colour[] {PresetColour.GENERIC_EXCELLENT, PresetColour.BASE_PINK_LIGHT, PresetColour.BASE_PINK_SALMON, PresetColour.BASE_PINK, PresetColour.BASE_PINK_DEEP};
+	private static final Colour[] sexColours = new Colour[] {PresetColour.GENERIC_EXCELLENT, PresetColour.BASE_PINK_LIGHT, PresetColour.BASE_PINK_SALMON, PresetColour.BASE_PINK, PresetColour.BASE_PINK_DEEP};
 	public static String[] feminineNames = new String[] {"Virgin", "Inexperienced", "Experienced", "Expert", "Slut"};
 	public static String[] masculineNames = new String[] {"Virgin", "Inexperienced", "Experienced", "Expert", "Stud"};
 	
@@ -738,22 +645,14 @@ public class CharacterModificationUtils {
 //		System.out.println(BodyChanging.getTarget().getNameIgnoresPlayerKnowledge()+": "+type+" | "+BodyChanging.getTarget().getVirginityLossDescription(type));
 		
 		if(type.getPerformingSexArea()==SexAreaPenetration.PENIS) {
-			if(count==0 || type.getTargetedSexArea().isPenetration() || (type.getTargetedSexArea().isOrifice() && !((SexAreaOrifice)type.getTargetedSexArea()).isInternalOrifice())) {
-				BodyChanging.getTarget().setPenisVirgin(true);
-			} else {
-				BodyChanging.getTarget().setPenisVirgin(false);
-			}
+            BodyChanging.getTarget().setPenisVirgin(count == 0 || type.getTargetedSexArea().isPenetration() || (type.getTargetedSexArea().isOrifice() && !((SexAreaOrifice) type.getTargetedSexArea()).isInternalOrifice()));
 		}
 		
 		if(type.getTargetedSexArea()==SexAreaPenetration.PENIS) {
 			if(type.getPerformingSexArea().isOrifice()) {
 				switch((SexAreaOrifice)type.getPerformingSexArea()) {
 					case ANUS:
-						if(count==0) {
-							BodyChanging.getTarget().setAssVirgin(true);
-						} else {
-							BodyChanging.getTarget().setAssVirgin(false);
-						}
+                        BodyChanging.getTarget().setAssVirgin(count == 0);
 						break;
 					case ARMPITS:
 						break;
@@ -764,11 +663,7 @@ public class CharacterModificationUtils {
 					case BREAST_CROTCH:
 						break;
 					case MOUTH:
-						if(count==0) {
-							BodyChanging.getTarget().setFaceVirgin(true);
-						} else {
-							BodyChanging.getTarget().setFaceVirgin(false);
-						}
+                        BodyChanging.getTarget().setFaceVirgin(count == 0);
 						break;
 					case NIPPLE:
 						break;
@@ -781,18 +676,10 @@ public class CharacterModificationUtils {
 					case URETHRA_VAGINA:
 						break;
 					case VAGINA:
-						if(count==0) {
-							BodyChanging.getTarget().setVaginaVirgin(true);
-						} else {
-							BodyChanging.getTarget().setVaginaVirgin(false);
-						}
+                        BodyChanging.getTarget().setVaginaVirgin(count == 0);
 						break;
 					case SPINNERET:
-						if(count==0) {
-							BodyChanging.getTarget().setSpinneretVirgin(true);
-						} else {
-							BodyChanging.getTarget().setSpinneretVirgin(false);
-						}
+                        BodyChanging.getTarget().setSpinneretVirgin(count == 0);
 						break;
 				}
 			}
@@ -983,7 +870,7 @@ public class CharacterModificationUtils {
 		return applyFullVariableWrapper(
 				"Age Appearance",
 				UtilText.parse(BodyChanging.getTarget(),
-						"Change how old [npc.name] [npc.verb(appear)] to be. [npc.She] [npc.is] limited to looking as young as 18, or up to "
+                        "Change how old [npc.name] appear to be. [npc.She] [npc.is] limited to looking as young as 18, or up to "
 						+ Util.intToString(BodyChanging.getTarget().getAgeDifferenceUpperLimit())
 						+ " years older than [npc.her] real age."
 						+ "<br/><i>This is purely a cosmetic change, and doesn't affect any in-game choices.</i>"),
@@ -1006,12 +893,12 @@ public class CharacterModificationUtils {
 	}
 	
 	public static String getHeightChoiceDiv(boolean fullWidth) {
-		return applyFullVariableWrapperSizes("Height",
-				UtilText.parse(BodyChanging.getTarget(), "Change how tall [npc.name] [npc.is]."
-						+ "<br/><i>This affects some minor descriptions and is also used for determining if a sex scene is categorised as 'size-difference' or not.</i>"
+		return applyFullVariableWrapperSizes("Рост",
+				UtilText.parse(BodyChanging.getTarget(), "Изменить рост [npc.name] [npc.is]."
+						+ "<br/><i>Это влияет на некоторые второстепенные описания, а также используется для определения того, относится ли сексуальная сцена к категории «разница в размерах» или нет.</i>"
 						+ (!Main.game.isInNewWorld()
-							?"<br/>[style.italicsMinorBad(Height is limited to [units.sizes("+Height.getMaximumHeightForCharacterCreation()+")]"
-									+ " during character creation, but can be raised to [units.sizes("+Height.SEVEN_COLOSSAL.getMaximumValue()+")] later on.)]"
+						? "<br/>[style.italicsMinorBad(Рост ограничен [units.sizes(" + Height.getMaximumHeightForCharacterCreation() + ")]"
+						+ " во время создания персонажа, но может быть повышен до [units.sizes(" + Height.SEVEN_COLOSSAL.getMaximumValue() + ")] позже.)]"
 							:"")),
 				"HEIGHT",
 				BodyChanging.getTarget().getHeightValue(),
@@ -1226,7 +1113,7 @@ public class CharacterModificationUtils {
 						!BodyChanging.getTarget().hasTail()
 							?"As [npc.name] [npc.do] not have a tail, [npc.she] cannot change how many [npc.she] [npc.has]!"
 							:((BodyChanging.getTarget().isYouko()
-								?"As [npc.nameIsFull] a youko, [npc.she] can change the number of tails [npc.she] [npc.verb(appear)] to have!"
+                                ? "As [npc.nameIsFull] a youko, [npc.she] can change the number of tails [npc.she] appear to have!"
 								:"Change how many [npc.tails] [npc.name] [npc.has].")
 							+ "<br/><i>The number of tails is taken into consideration when checking to see if there's a tail available for penetrative actions during sex.</i>")),
 				"TAIL_COUNT",
@@ -1753,9 +1640,9 @@ public class CharacterModificationUtils {
 			}
 		}
 
-		return applyWrapper("Hair Length",
-				UtilText.parse(BodyChanging.getTarget(), "Change the length of [npc.namePos] [npc.hair(true)]."
-						+ "<br/><i>Hair of a sufficient length (marked by an asterisk) can be pulled in some sex actions.</i>"),
+		return applyWrapper("Длина волос",
+				UtilText.parse(BodyChanging.getTarget(), "Изменить длину [npc.namePos] [npc.hair(true)]."
+						+ "<br/><i>Волосы достаточной длины (отмечены звездочкой) можно дергать при некоторых сексуальных действиях.</i>"),
 				"HAIR_LENGTH",
 				contentSB.toString(),
 				true);
@@ -1815,10 +1702,10 @@ public class CharacterModificationUtils {
 			}
 		}
 
-		return applyWrapper("Hair Style",
+		return applyWrapper("Прическа",
 				description
-					+ "<br/><i>'"+Util.capitaliseSentence(HairStyle.TWIN_TAILS.getName(BodyChanging.getTarget()))+"' and '"+Util.capitaliseSentence(HairStyle.TWIN_BRAIDS.getName(BodyChanging.getTarget()))+"'"
-							+ " can be used as handles in some sex actions.</i>",
+						+ "<br/><i>'" + Util.capitaliseSentence(HairStyle.TWIN_TAILS.getName(BodyChanging.getTarget())) + "' и '" + Util.capitaliseSentence(HairStyle.TWIN_BRAIDS.getName(BodyChanging.getTarget())) + "'"
+						+ " могут использоваться как ручки в некоторых сексуальных действиях.</i>",
 				"HAIR_STYLE",
 				contentSB.toString(),
 				false);
@@ -2307,11 +2194,11 @@ public class CharacterModificationUtils {
 			}
 		}
 
-		return applyWrapper("Lip Size",
-				UtilText.parse(BodyChanging.getTarget(), "Change the size of [npc.namePos] lips."
+		return applyWrapper("Размер губ",
+				UtilText.parse(BodyChanging.getTarget(), "Измените размер [npc.namePos] губ."
 						+ (Main.game.isLipLispEnabled()
-								?"<br/><i>While mostly a cosmetic transformation, very large lip sizes (marked by an asterisk) will also cause [npc.name] to speak with a lisp.</i>"
-								:"<br/><i>This is a purely cosmetic transformation, as 'Lip lisps' content is turned off.</i>")),
+						? "<br/><i>Хотя это в основном косметическое преобразование, очень большие губы (отмечены звездочкой) также заставят [npc.name] говорить шепеляво.</i>"
+						: "<br/><i>Это чисто косметическая трансформация, поскольку контент «Губы шепелявит» отключен.</i>")),
 				"LIP_SIZE",
 				contentSB.toString(),
 				false);
@@ -2577,9 +2464,9 @@ public class CharacterModificationUtils {
 			}
 		}
 
-		return applyWrapper("Ass Size",
-				UtilText.parse(BodyChanging.getTarget(), "Change the size of [npc.namePos] ass."
-						+ "<br/><i>This is a purely cosmetic change.</i>"),
+		return applyWrapper("Размер задницы",
+				UtilText.parse(BodyChanging.getTarget(), "Изменить размер [npc.namePos] задницы."
+						+ "<br/><i>Это чисто косметическое изменение.</i>"),
 				"ASS_SIZE",
 				contentSB.toString(),
 				true);
@@ -3262,14 +3149,14 @@ public class CharacterModificationUtils {
 	}
 	
 	public static String getSelfTransformLactationDiv() {
-		String title = "Lactation";
-		String description = UtilText.parse(BodyChanging.getTarget(), "Change the maximum amount of milk [npc.name] can store in [npc.her] [npc.breasts]."
-				+"<br/><i>Once drained, [npc.namePos] breasts fill with milk up to this value at a rate determined by [npc.her] milk regeneration value.</i>");
+		String title = "Лактация";
+		String description = UtilText.parse(BodyChanging.getTarget(), "Измените максимальное количество молока, которое [npc.name] может хранить в [npc.her] [npc.breasts]."
+				+ "<br/><i>После опорожнения грудь [npc.namePos] наполняется молоком до этого значения со скоростью, определяемой значением [npc.her] регенерации молока.</i>");
 		String id = "MILK_PRODUCTION";
 		if (!Main.game.isLactationContentEnabled()) {
 			return applyWrapper(title, description, id,
 					"<div class='cosmetics-button disabled'>"
-							+Util.capitaliseSentence("Lactation Disabled")
+							+ Util.capitaliseSentence("Лактация отключена")
 							+"</div>", true);
 		} else {
 			return applyVariableWrapperFluids(title,
@@ -3951,8 +3838,8 @@ public class CharacterModificationUtils {
 		
 
 		return applyWrapper("Squirter",
-				UtilText.parse(BodyChanging.getTarget(), "Set whether [npc.namePos] vagina squirts fluids when [npc.she] [npc.verb(orgasm)]."
-						+ "<br/><i>If [npc.nameIsFull] a squirter, then when [npc.she] [npc.verb(orgasm)] [npc.she] will dirty clothes [npc.she] [npc.verb(squirt)] on."
+                UtilText.parse(BodyChanging.getTarget(), "Set whether [npc.namePos] vagina squirts fluids when [npc.she] orgasm."
+                        + "<br/><i>If [npc.nameIsFull] a squirter, then when [npc.she] orgasm [npc.she] will dirty clothes [npc.she] squirt on."
 							+ " Also, if someone is eating [npc.herHim] out, they will ingest [npc.her] fluids.</i>"),
 				"VAGINA_SQUIRTER",
 				contentSB.toString(),
@@ -4688,9 +4575,9 @@ public class CharacterModificationUtils {
 	}
 	
 	public static String getSelfTransformCumProductionDiv() {
-		return applyVariableWrapperFluids("Cum Storage",
-				UtilText.parse(BodyChanging.getTarget(), "Change [npc.namePos] maximum cum storage."
-						+ "<br/><i>Once drained, [npc.namePos] balls fill with cum up to this value at a rate determined by [npc.her] cum regeneration value.</i>"),
+		return applyVariableWrapperFluids("Хранение спермы",
+				UtilText.parse(BodyChanging.getTarget(), "Измените [npc.namePos] максимальное хранилище спермы."
+						+ "<br/><i>После истощения [npc.namePos] шары наполняются спермой до этого значения со скоростью, определяемой значением [npc.her] регенерации спермы.</i>"),
 				"CUM_PRODUCTION",
 				Util.capitaliseSentence(BodyChanging.getTarget().getPenisCumStorage().getName())
 					+"<br/>("+Units.fluid(BodyChanging.getTarget().getPenisRawCumStorageValue(), ValueType.PRECISE)+")",
@@ -4704,7 +4591,7 @@ public class CharacterModificationUtils {
 	
 	public static String getSelfTransformCumRegenerationDiv() {
 		return applyVariableWrapperFluids("Cum Regeneration",
-				UtilText.parse(BodyChanging.getTarget(), "Alter the rate at which [npc.name] [npc.verb(produce)] cum."
+                UtilText.parse(BodyChanging.getTarget(), "Alter the rate at which [npc.name] produce cum."
 						+ "<br/><i>Once drained, [npc.namePos] balls fill with cum up to their maximum storage value at this rate.</i>"),
 				"CUM_REGENERATION",
 				Units.fluid(BodyChanging.getTarget().getPenisRawCumProductionRegenerationValue(), ValueType.PRECISE)+"/day"
@@ -4938,9 +4825,9 @@ public class CharacterModificationUtils {
 			}
 		}
 
-		return applyWrapper("Body Size",
-				UtilText.parse(BodyChanging.getTarget(), "Change [npc.namePos] body size."
-						+ "<br/><i>This determines how much body fat [npc.namePos] [npc.has], and is a purely cosmetic transformation.</i>"),
+		return applyWrapper("Размер тела",
+				UtilText.parse(BodyChanging.getTarget(), "Изменить [npc.namePos] размер тела."
+						+ "<br/><i>Это определяет количество жира в [npc.namePos] организме и является чисто косметическим преобразованием.</i>"),
 				"BODY_SIZE",
 				contentSB.toString(),
 				true);
@@ -4964,9 +4851,9 @@ public class CharacterModificationUtils {
 			}
 		}
 
-		return applyWrapper("Muscle Definition",
-				UtilText.parse(BodyChanging.getTarget(), "Change [npc.namePos] muscle definition."+(!Main.game.isInNewWorld()?" This does not affect the physique attribute of your character.":"")
-							+ "<br/><i>This determines how much muscle [npc.namePos] [npc.has], and is a purely cosmetic transformation.</i>"),
+		return applyWrapper("Определение мышц",
+				UtilText.parse(BodyChanging.getTarget(), "Изменить [npc.namePos] определение мышц." + (!Main.game.isInNewWorld() ? " Это не влияет на атрибут телосложения вашего персонажа." : "")
+						+ "<br/><i>Это определяет, сколько мускулов у [npc.namePos], и является чисто косметическим преобразованием.</i>"),
 				"MUSCLE",
 				contentSB.toString(),
 				true);
@@ -4979,10 +4866,10 @@ public class CharacterModificationUtils {
 				"<div class='container-full-width'>"
 					+"<div class='cosmetics-inner-container left'>"
 						+ "<h5 style='text-align:center;'>"
-							+"Lip Size"
+						+ "Размер губ"
 						+"</h5>"
 						+ "<p style='text-align:center;'>"
-							+ "Choose how large your lips are."
+						+ "Выберите размер своих губ."
 						+ "</p>"
 						+ "</div>"
 						+ "<div class='cosmetics-inner-container right'>");
@@ -5016,10 +4903,10 @@ public class CharacterModificationUtils {
 				"<div class='container-full-width'>"
 					+ "<div class='cosmetics-inner-container left'>"
 						+ "<h5 style='text-align:center;'>"
-							+"Puffy Lips"
+						+ "Пухлые губы"
 						+"</h5>"
 						+ "<p style='text-align:center;'>"
-							+ "Choose whether your lips are extra puffy or not."
+						+ "Выберите, будут ли ваши губы очень пухлыми или нет."
 						+ "</p>"
 					+ "</div>"
 					+ "<div class='cosmetics-inner-container right'>");
@@ -5027,18 +4914,18 @@ public class CharacterModificationUtils {
 		if(BodyChanging.getTarget().hasFaceOrificeModifier(OrificeModifier.PUFFY)) {
 			contentSB.append(
 					"<div id='LIP_PUFFY_OFF' class='cosmetics-button'>"
-							+ "<span style='color:"+PresetColour.GENERIC_GOOD.getShades()[0]+";'>Normal</span>"
+							+ "<span style='color:" + PresetColour.GENERIC_GOOD.getShades()[0] + ";'>Нормальные</span>"
 					+ "</div>"
 					+ "<div class='cosmetics-button active'>"
-						+ "[style.boldGood(Puffy)]"
+							+ "[style.boldGood(Пухлые)]"
 					+ "</div>");
 		} else {
 			contentSB.append(
 					"<div class='cosmetics-button active'>"
-						+ "[style.boldGood(Normal)]"
+							+ "[style.boldGood(Нормаьные)]"
 					+ "</div>"
 					+ "<div id='LIP_PUFFY_ON' class='cosmetics-button'>"
-						+ "<span style='color:"+PresetColour.GENERIC_GOOD.getShades()[0]+";'>Puffy</span>"
+							+ "<span style='color:" + PresetColour.GENERIC_GOOD.getShades()[0] + ";'>Пухлые</span>"
 					+ "</div>");
 		}
 		
@@ -5064,10 +4951,10 @@ public class CharacterModificationUtils {
 				"<div class='container-full-width'>"
 					+"<div class='cosmetics-inner-container left'>"
 						+ "<h5 style='text-align:center;'>"
-							+"Breast Size"
+						+ "Размер груди"
 						+"</h5>"
 						+ "<p style='text-align:center;'>"
-							+ "Choose how large your breasts are, in cup size."
+						+ "Выберите размер вашей груди по размеру чашки."
 						+ "</p>"
 						+ "</div>"
 						+ "<div class='cosmetics-inner-container right'>");
@@ -5101,10 +4988,10 @@ public class CharacterModificationUtils {
 				"<div class='container-full-width'>"
 					+"<div class='cosmetics-inner-container left'>"
 						+ "<h5 style='text-align:center;'>"
-							+"Breast Shape"
+						+ "Форма груди"
 						+"</h5>"
 						+ "<p style='text-align:center;'>"
-							+ "Choose the shape of your breasts."
+						+ "Выберите форму вашей груди."
 						+ "</p>"
 						+ "</div>"
 						+ "<div class='cosmetics-inner-container right'>");
@@ -5146,10 +5033,10 @@ public class CharacterModificationUtils {
 				"<div class='container-full-width'>"
 					+"<div class='cosmetics-inner-container left'>"
 						+ "<h5 style='text-align:center;'>"
-							+"Nipple Size"
+						+ "Размер сосков"
 						+"</h5>"
 						+ "<p style='text-align:center;'>"
-							+ "Choose how large your nipples are."
+						+ "Выберите размер своих сосков."
 						+ "</p>"
 						+ "</div>"
 						+ "<div class='cosmetics-inner-container right'>");
@@ -5191,10 +5078,10 @@ public class CharacterModificationUtils {
 				"<div class='container-full-width'>"
 					+"<div class='cosmetics-inner-container left'>"
 						+ "<h5 style='text-align:center;'>"
-							+"Areolae Size"
+						+ "Размер ареолов сосков"
 						+"</h5>"
 						+ "<p style='text-align:center;'>"
-							+ "Choose how large your areolae are."
+						+ "Выберите размер своих ареолов."
 						+ "</p>"
 						+ "</div>"
 						+ "<div class='cosmetics-inner-container right'>");
@@ -5228,10 +5115,10 @@ public class CharacterModificationUtils {
 				"<div class='container-full-width'>"
 					+ "<div class='cosmetics-inner-container left'>"
 						+ "<h5 style='text-align:center;'>"
-							+"Puffy Nipples"
+						+ "Пухлость сосков"
 						+"</h5>"
 						+ "<p style='text-align:center;'>"
-							+ "Choose whether your nipples are extra puffy or not."
+						+ "Выберите, будут ли ваши соски слишком пухлыми или нет."
 						+ "</p>"
 					+ "</div>"
 					+ "<div class='cosmetics-inner-container right'>");
@@ -5239,18 +5126,18 @@ public class CharacterModificationUtils {
 		if(BodyChanging.getTarget().hasNippleOrificeModifier(OrificeModifier.PUFFY)) {
 			contentSB.append(
 					"<div id='NIPPLE_PUFFY_OFF' class='cosmetics-button'>"
-							+ "<span style='color:"+PresetColour.GENERIC_GOOD.getShades()[0]+";'>Normal</span>"
+							+ "<span style='color:" + PresetColour.GENERIC_GOOD.getShades()[0] + ";'>Нормальные</span>"
 					+ "</div>"
 					+ "<div class='cosmetics-button active'>"
-						+ "[style.boldGood(Puffy)]"
+							+ "[style.boldGood(Пулые)]"
 					+ "</div>");
 		} else {
 			contentSB.append(
 					"<div class='cosmetics-button active'>"
-						+ "[style.boldGood(Normal)]"
+							+ "[style.boldGood(Нормальные)]"
 					+ "</div>"
 					+ "<div id='NIPPLE_PUFFY_ON' class='cosmetics-button'>"
-						+ "<span style='color:"+PresetColour.GENERIC_GOOD.getShades()[0]+";'>Puffy</span>"
+							+ "<span style='color:" + PresetColour.GENERIC_GOOD.getShades()[0] + ";'>Пухлые</span>"
 					+ "</div>");
 		}
 		
@@ -5276,10 +5163,10 @@ public class CharacterModificationUtils {
 				"<div class='container-full-width'>"
 					+"<div class='cosmetics-inner-container left'>"
 						+ "<h5 style='text-align:center;'>"
-							+"Ass Size"
+						+ "Размер задницы"
 						+"</h5>"
 						+ "<p style='text-align:center;'>"
-							+ "Choose how large your ass is."
+						+ "Выберите, насколько велика ваша задница."
 						+ "</p>"
 						+ "</div>"
 						+ "<div class='cosmetics-inner-container right'>");
@@ -5321,10 +5208,10 @@ public class CharacterModificationUtils {
 				"<div class='container-full-width'>"
 					+"<div class='cosmetics-inner-container left'>"
 						+ "<h5 style='text-align:center;'>"
-							+"Hip Size"
+						+ "Размер бедёр"
 						+"</h5>"
 						+ "<p style='text-align:center;'>"
-							+ "Choose how large your hips are."
+						+ "Выберите размер своих бедер."
 						+ "</p>"
 						+ "</div>"
 						+ "<div class='cosmetics-inner-container right'>");
@@ -5358,10 +5245,10 @@ public class CharacterModificationUtils {
 				"<div class='container-full-width'>"
 					+ "<div class='cosmetics-inner-container left'>"
 						+ "<h5 style='text-align:center;'>"
-							+"Bleached Anus"
+						+ "Отбеленный анус"
 						+"</h5>"
 						+ "<p style='text-align:center;'>"
-							+ "Choose whether your anus has been bleached to have the same skin tone as the rest of your body."
+						+ "Выберите, был ли ваш анус отбелен, чтобы иметь тот же оттенок кожи, что и остальная часть вашего тела."
 						+ "</p>"
 					+ "</div>"
 					+ "<div class='cosmetics-inner-container right'>");
@@ -5369,18 +5256,18 @@ public class CharacterModificationUtils {
 		if(BodyChanging.getTarget().isAssBleached()) {
 			contentSB.append(
 					"<div id='BLEACHING_OFF' class='cosmetics-button'>"
-							+ "<span style='color:"+PresetColour.GENERIC_GOOD.getShades()[0]+";'>Normal</span>"
+							+ "<span style='color:" + PresetColour.GENERIC_GOOD.getShades()[0] + ";'>Нормальный</span>"
 					+ "</div>"
 					+ "<div class='cosmetics-button active'>"
-						+ "[style.boldGood(Bleached)]"
+							+ "[style.boldGood(Отбеленный)]"
 					+ "</div>");
 		} else {
 			contentSB.append(
 					"<div class='cosmetics-button active'>"
-						+ "[style.boldGood(Normal)]"
+							+ "[style.boldGood(Нормальный)]"
 					+ "</div>"
 					+ "<div id='BLEACHING_ON' class='cosmetics-button'>"
-						+ "<span style='color:"+PresetColour.GENERIC_GOOD.getShades()[0]+";'>Bleached</span>"
+							+ "<span style='color:" + PresetColour.GENERIC_GOOD.getShades()[0] + ";'>Отбеленный</span>"
 					+ "</div>");
 		}
 		
@@ -5402,10 +5289,10 @@ public class CharacterModificationUtils {
 				"<div class='container-full-width'>"
 					+"<div class='cosmetics-inner-container left'>"
 						+ "<h5 style='text-align:center;'>"
-							+"Penis Length"
+						+ "Длина пениса"
 						+"</h5>"
 						+ "<p style='text-align:center;'>"
-							+ "Choose how long your penis is."
+						+ "Выберите длину своего пениса."
 						+ "</p>"
 						+ "</div>"
 						+ "<div class='cosmetics-inner-container right'>");
@@ -5443,10 +5330,10 @@ public class CharacterModificationUtils {
 				"<div class='container-full-width'>"
 					+"<div class='cosmetics-inner-container left'>"
 						+ "<h5 style='text-align:center;'>"
-							+"Testicle Size"
+						+ "Размер яичек"
 						+"</h5>"
 						+ "<p style='text-align:center;'>"
-							+ "Choose how large your testicles are."
+						+ "Выберите размер своих яичек."
 						+ "</p>"
 						+ "</div>"
 						+ "<div class='cosmetics-inner-container right'>");
@@ -5480,10 +5367,10 @@ public class CharacterModificationUtils {
 				"<div class='container-full-width'>"
 					+"<div class='cosmetics-inner-container left'>"
 						+ "<h5 style='text-align:center;'>"
-							+"Vagina Capacity"
+						+ "Емкость влагалища"
 						+"</h5>"
 						+ "<p style='text-align:center;'>"
-							+ "Select the capacity of your vagina. A higher capacity means that you'll be able to take larger insertions easier, but if it's too loose, it won't be very pleasurable for partners with small cocks."
+						+ "Выберите емкость вашего влагалища. Большая вместимость означает, что вам будет легче принимать более крупные введения, но если он будет слишком свободным, это будет не очень приятно для партнеров с маленькими членами."
 						+ "</p>"
 						+ "</div>"
 						+ "<div class='cosmetics-inner-container right'>");
@@ -5526,9 +5413,9 @@ public class CharacterModificationUtils {
 			}
 		}
 
-		return applyWrapper("Clitoris Modifiers",
-				UtilText.parse(BodyChanging.getTarget(), "Change the modifiers for [npc.namePos] clitoris."
-							+ "<br/><i>Clitoris modifiers affect descriptions and some actions in sex. The modifiers which have more than just descriptive effects are marked by an asterisk.</i>"),
+		return applyWrapper("Модификаторы клитора",
+				UtilText.parse(BodyChanging.getTarget(), "Измените модификаторы для [npc.namePos] клитора."
+						+ "<br/><i>Модификаторы клитора влияют на описания и некоторые действия в сексе. Модификаторы, имеющие не только описательный эффект, отмечены звездочкой.</i>"),
 				"CLITORIS_MODS",
 				contentSB.toString(),
 				true);
@@ -5545,10 +5432,10 @@ public class CharacterModificationUtils {
 				"<div class='container-full-width'>"
 					+"<div class='cosmetics-inner-container left'>"
 						+ "<h5 style='text-align:center;'>"
-							+"Clitoris Length"
+						+ "Длина клитора"
 						+"</h5>"
 						+ "<p style='text-align:center;'>"
-							+ "Choose how long your clitoris is."
+						+ "Выберите длину своего клитора."
 						+ "</p>"
 						+ "</div>"
 						+ "<div class='cosmetics-inner-container right'>");
@@ -5582,10 +5469,10 @@ public class CharacterModificationUtils {
 				"<div class='container-full-width'>"
 					+"<div class='cosmetics-inner-container left'>"
 						+ "<h5 style='text-align:center;'>"
-							+"Labia Size"
+						+ "Размер половых губ"
 						+"</h5>"
 						+ "<p style='text-align:center;'>"
-							+ "Choose how large your labia are."
+						+ "Выберите размер своих половых губ."
 						+ "</p>"
 						+ "</div>"
 						+ "<div class='cosmetics-inner-container right'>");
@@ -5827,14 +5714,14 @@ public class CharacterModificationUtils {
 			}
 		}
 
-		return applyWrapper("Hair Length"
+		return applyWrapper("Длина волос"
 				+(noCost
 					?""
 					:" "+(Main.game.getPlayer().getMoney()>=SuccubisSecrets.BASE_HAIR_LENGTH_COST
 							? UtilText.formatAsMoney(SuccubisSecrets.BASE_HAIR_LENGTH_COST, "b")
 							: UtilText.formatAsMoney(SuccubisSecrets.BASE_HAIR_LENGTH_COST, "b", PresetColour.GENERIC_BAD))),
-				UtilText.parse(BodyChanging.getTarget(), "Change the length of [npc.namePos] [npc.hair(true)]."
-						+ "<br/><i>Hair of a sufficient length (marked by an asterisk) can be pulled in some sex actions.</i>"),
+				UtilText.parse(BodyChanging.getTarget(), "Измените длину [npc.namePos] [npc.hair(true)]."
+						+ "<br/><i>Волосы достаточной длины (отмечены звездочкой) можно дергать при некоторых сексуальных действиях.</i>"),
 				"HAIR_LENGTH",
 				contentSB.toString(),
 				false);
@@ -5867,7 +5754,7 @@ public class CharacterModificationUtils {
 			}
 		}
 
-		return applyWrapper("Hair Style"
+		return applyWrapper("Причёска"
 				+(noCost
 						?""
 						:" "+(Main.game.getPlayer().getMoney()>=SuccubisSecrets.BASE_HAIR_STYLE_COST
@@ -5875,7 +5762,7 @@ public class CharacterModificationUtils {
 								: UtilText.formatAsMoney(SuccubisSecrets.BASE_HAIR_STYLE_COST, "b", PresetColour.GENERIC_BAD))),
 				UtilText.parse(BodyChanging.getTarget(), description)
 					+ "<br/><i>'"+Util.capitaliseSentence(HairStyle.TWIN_TAILS.getName(BodyChanging.getTarget()))
-						+"' and '"+Util.capitaliseSentence(HairStyle.TWIN_BRAIDS.getName(BodyChanging.getTarget()))+"' can be used as handles in some sex actions.</i>",
+						+ "' и '" + Util.capitaliseSentence(HairStyle.TWIN_BRAIDS.getName(BodyChanging.getTarget())) + "' могут использоваться как ручки в некоторых сексуальных действиях.</i>",
 				"HAIR_STYLE",
 				contentSB.toString(),
 				false);
@@ -5888,7 +5775,7 @@ public class CharacterModificationUtils {
 				description
 					+(BodyChanging.getTarget().isAssHairAvailable()
 						?""
-						:"<br/><i>Due to [npc.namePos] anus type, [npc.she] cannot grow any ass hair!</i>"),
+						: "<br/><i>Из-за типа ануса [npc.namePos] у [npc.she] не могут расти волосы на заднице!</i>"),
 				BodyChanging.getTarget().getAssHair(),
 				"ASS_HAIR_",
 				!BodyChanging.getTarget().isAssHairAvailable());
@@ -5900,7 +5787,7 @@ public class CharacterModificationUtils {
 				description
 					+(BodyChanging.getTarget().isUnderarmHairAvailable()
 						?""
-						:"<br/><i>Due to [npc.namePos] arm type, [npc.she] cannot grow any underam hair!</i>"),
+						: "<br/><i>Из-за типа рук [npc.names] у [npc.she] не могут расти волосы под мышками!</i>"),
 				BodyChanging.getTarget().getUnderarmHair(),
 				"UNDERARM_HAIR_",
 				!BodyChanging.getTarget().isUnderarmHairAvailable());
@@ -5911,10 +5798,10 @@ public class CharacterModificationUtils {
 				title,
 				description
 					+(BodyChanging.getTarget().isFeminine() && !Main.game.isFemaleFacialHairEnabled()
-						?"<br/><i>Due to the fact that [npc.nameIsFull] feminine, [npc.she] cannot grow a beard!</i>"
+						? "<br/><i>Из-за того, что [npc.nameIsFull] женского пола, [npc.she] не может отрастить бороду!</i>"
 						:(BodyChanging.getTarget().isUnderarmHairAvailable()
 							?""
-							:"<br/><i>Due to [npc.namePos] face type, [npc.she] cannot grow a beard!</i>")),
+						: "<br/><i>Из-за типа лица [npc.namePos] [npc.she] не может отрастить бороду!</i>")),
 				BodyChanging.getTarget().getFacialHair(),
 				"FACIAL_HAIR_",
 				!BodyChanging.getTarget().isFacialHairAvailable() || (BodyChanging.getTarget().isFeminine() && !Main.game.isFemaleFacialHairEnabled()));
@@ -5925,12 +5812,12 @@ public class CharacterModificationUtils {
 				title,
 				description
 					+(BodyChanging.getTarget().hasPenisIgnoreDildo() && !BodyChanging.getTarget().getPenisType().isPubicHairAllowed()
-						?"<br/><i>Due to [npc.namePos] penis type, [npc.she] cannot grow any pubic hair!</i>"
+						? "<br/><i>Из-за типа пениса [npc.namePos] у [npc.she] не могут расти лобковые волосы!</i>"
 						:(BodyChanging.getTarget().hasVagina() && !BodyChanging.getTarget().getVaginaType().isPubicHairAllowed()
-							?"<br/><i>Due to [npc.namePos] vagina type, [npc.she] cannot grow any pubic hair!</i>"
+						? "<br/><i>Из-за типа влагалища [npc.namePos] у [npc.she] не могут расти лобковые волосы!</i>"
 							:(BodyChanging.getTarget().hasPenisIgnoreDildo() || BodyChanging.getTarget().hasVagina()
 							?""
-							:"<br/><i>Due to the fact that [npc.she] [npc.verb(lack)] genitalia, [npc.name] cannot grow any pubic hair!</i>"))),
+                        : "<br/><i>Из-за того, что [npc.she] отсутствуют гениталии, у [npc.name] не могут расти лобковые волосы!</i>"))),
 				BodyChanging.getTarget().getPubicHair(),
 				"PUBIC_HAIR_",
 				!BodyChanging.getTarget().isPubicHairAvailable());
@@ -6007,7 +5894,7 @@ public class CharacterModificationUtils {
 
 			contentSB.append(
 						 "<div class='container-full-width' style='text-align:center; width:100%;padding:0;margin:0;'>"
-							+ "<b>Anal bleaching</b>"
+								 + "<b>Отбеливание ануса</b>"
 							+ (noCost
 								?""
 								:" "+(Main.game.getPlayer().getMoney()>=SuccubisSecrets.BASE_ANAL_BLEACHING_COST
@@ -6018,27 +5905,27 @@ public class CharacterModificationUtils {
 			contentSB.append(
 					getInformationDiv(
 							"ANAL_BLEACHING",
-							new TooltipInformationEventListener().setInformation("Anal bleaching", "Anal bleaching is the process of lightening the colour of the skin around the anus so as to make it blend in with the surrounding area."),
+							new TooltipInformationEventListener().setInformation("Отбеливание ануса", "Отбеливание ануса — это процесс осветления цвета кожи вокруг ануса, чтобы она гармонировала с окружающей областью."),
 							false));
 			
 			contentSB.append("<div class='container-full-width' style='text-align:center; width:100%;padding:0;margin:0;'>");
 			if(BodyChanging.getTarget().isAssBleached()) {
 				contentSB.append(
 						"<div id='BLEACHING_OFF' class='cosmetics-button'>"
-							+ "[style.colourDisabled(Normal)]"
+								+ "[style.colourDisabled(Нормальный)]"
 						+ "</div>"
 						+ "<div class='cosmetics-button active'>"
-							+ "[style.boldArcane(Bleached)]"
+								+ "[style.boldArcane(Отбеленный)]"
 						+ "</div>");
 			} else {
 				contentSB.append(
 						"<div class='cosmetics-button active'>"
-							+ "Normal"
+								+ "Нормальный"
 						+ "</div>"
 						+ "<div id='BLEACHING_ON' class='cosmetics-button'>"
 							+ (Main.game.getPlayer().getMoney()>=SuccubisSecrets.BASE_ANAL_BLEACHING_COST
-								?"<span style='color:"+PresetColour.GENERIC_ARCANE.getShades()[0]+";'>Bleached</span>"
-								:"[style.colourDisabled(Bleached)]")
+								? "<span style='color:" + PresetColour.GENERIC_ARCANE.getShades()[0] + ";'>Отбеленный</span>"
+								: "[style.colourDisabled(Отбеленный)]")
 						+ "</div>");
 			}
 	
@@ -6216,12 +6103,12 @@ public class CharacterModificationUtils {
 						if(activeCovering.isPrimaryGlowing()) {
 							sb.append(
 									"<div class='normal-button active' id='"+BodyCoveringType.getIdFromBodyCoveringType(coveringType)+"_PRIMARY_GLOW_OFF' style='width:50%; margin:1% 25%; padding:0; text-align:center;'>"
-										+ "[style.boldArcane(Arcane Glow)]"
+											+ "[style.boldArcane(Чародейское сияние)]"
 									+ "</div>");
 						} else {
 							sb.append(
 									"<div id='"+BodyCoveringType.getIdFromBodyCoveringType(coveringType)+"_PRIMARY_GLOW_ON' class='normal-button' style='width:50%; margin:1% 25%; padding:0; text-align:center;'>"
-										+ "<span style='color:"+PresetColour.GENERIC_ARCANE.getShades()[0]+";'>Arcane Glow</span>"
+											+ "<span style='color:" + PresetColour.GENERIC_ARCANE.getShades()[0] + ";'>Чародейское сияние</span>"
 									+ "</div>");
 						}
 					}
@@ -6230,7 +6117,7 @@ public class CharacterModificationUtils {
 				// Secondary:
 				sb.append("<div class='container-full-width' style='width:100%; padding:0; margin:0; text-align:center; "+border+"'>");
 					sb.append("<div class='container-full-width' style='width:100%; padding:0; margin:0; text-align:center; background:transparent;'>");
-						sb.append("Secondary Colour");
+		sb.append("Вторичный цвет");
 						if(!secondaryDisabled) {
 							sb.append(" | <span style='color:"+activeCovering.getSecondaryColour().toWebHexString()+";"
 											+(activeCovering.isSecondaryGlowing()
@@ -6241,7 +6128,7 @@ public class CharacterModificationUtils {
 						}
 					sb.append("</div>");
 					if(secondaryDisabled) {
-						sb.append("<p style='padding:0;margin:0;text-align:center;'>[style.italicsDisabled(None Available)]</p>");
+						sb.append("<p style='padding:0;margin:0;text-align:center;'>[style.italicsDisabled(Не доступно)]</p>");
 						
 					} else {
 						for (Colour c : availableSecondaryColours) {
@@ -6269,12 +6156,12 @@ public class CharacterModificationUtils {
 						if(activeCovering.isSecondaryGlowing()) {
 							sb.append(
 									"<div class='normal-button active' id='"+BodyCoveringType.getIdFromBodyCoveringType(coveringType)+"_SECONDARY_GLOW_OFF' style='width:50%; margin:1% 25%; padding:0; text-align:center;'>"
-										+ "[style.boldArcane(Arcane Glow)]"
+											+ "[style.boldArcane(Чародейское сияние)]"
 									+ "</div>");
 						} else {
 							sb.append(
 									"<div id='"+BodyCoveringType.getIdFromBodyCoveringType(coveringType)+"_SECONDARY_GLOW_ON' class='normal-button' style='width:50%; margin:1% 25%; padding:0; text-align:center;'>"
-										+ "<span style='color:"+PresetColour.GENERIC_ARCANE.getShades()[0]+";'>Arcane Glow</span>"
+											+ "<span style='color:" + PresetColour.GENERIC_ARCANE.getShades()[0] + ";'>Чародейское сияние</span>"
 									+ "</div>");
 						}
 					}
@@ -6287,30 +6174,30 @@ public class CharacterModificationUtils {
 				sb.append("<div class='container-full-width' style='width:100%; padding:0; margin:0; text-align:center; "+border+"'>");
 					sb.append("<div class='container-full-width' style='width:60%; padding:0; margin:0; text-align:center;'>");
 						sb.append(UtilText.parse(BodyChanging.getTarget(),
-								"By applying a heavy layer of lipstick, [npc.name] will leave marks on any part [npc.she] [npc.verb(kiss)]!"
-								+ "<br/>[style.italics(Heavy lipstick needs to be re-applied after a sex scene in which it's used.)]"));
+                                "Нанеся толстый слой помады, [npc.name] оставит следы на любой части тела [npc.she] поцелуя!"
+										+ "<br/>[style.italics(Густую помаду необходимо наносить повторно после сексуальной сцены, в которой она использовалась.)]"));
 					sb.append("</div>");
 					sb.append("<div class='container-full-width' style='width:40%; padding:0; margin:0; text-align:center;'>");
 						if(!heavyLipstick) {
 							sb.append(
 									"<div class='cosmetics-button active'>"
-										+ "<span style='color:" + PresetColour.BASE_PINK_LIGHT.toWebHexString() + ";'>Normal</span>"
+											+ "<span style='color:" + PresetColour.BASE_PINK_LIGHT.toWebHexString() + ";'>Нормальный</span>"
 									+ "</div>");
 						} else {
 							sb.append(
 									"<div id='MAKEUP_LIPSTICK_HEAVY_OFF' class='cosmetics-button'>"
-										+ "<span style='color:"+PresetColour.BASE_PINK_LIGHT.getShades()[0]+";'>Normal</span>"
+											+ "<span style='color:" + PresetColour.BASE_PINK_LIGHT.getShades()[0] + ";'>Нормальный</span>"
 									+ "</div>");
 						}
 						if(heavyLipstick) {
 							sb.append(
 									"<div class='cosmetics-button active'>"
-										+ "<span style='color:" + PresetColour.BASE_PINK_DEEP.toWebHexString() + ";'>Heavy</span>"
+											+ "<span style='color:" + PresetColour.BASE_PINK_DEEP.toWebHexString() + ";'>Густой</span>"
 									+ "</div>");
 						} else {
 							sb.append(
 									"<div id='MAKEUP_LIPSTICK_HEAVY_ON' class='cosmetics-button'>"
-										+ "<span style='color:"+PresetColour.BASE_PINK_DEEP.getShades()[0]+";'>Heavy</span>"
+											+ "<span style='color:" + PresetColour.BASE_PINK_DEEP.getShades()[0] + ";'>Густой</span>"
 									+ "</div>");
 						}
 					sb.append("</div>");
@@ -6369,7 +6256,7 @@ public class CharacterModificationUtils {
 		int i=0;
 		
 		for(PiercingType piercingType : PiercingType.values()) {
-			title = Util.capitaliseSentence(piercingType.getName())+" Piercing";
+            title = "Пирсинг " + Util.capitaliseSentence(piercingType.getName());
 			description = piercingType.getDescription();
 			
 			switch(piercingType) {
@@ -6441,31 +6328,31 @@ public class CharacterModificationUtils {
 					if(isPierced) {
 						contentSB.append(
 								"<div id='"+piercingType+"_PIERCE_REMOVE' class='cosmetics-button'>"
-									+ "[style.colourDisabled(Unpierced)]"
+										+ "[style.colourDisabled(Без прокола)]"
 								+ "</div>");
 						
 						contentSB.append(
 								"<div class='cosmetics-button active'>"
-									+ "[style.boldArcane(Pierced)]"
+										+ "[style.boldArcane(Проколото)]"
 								+ "</div>");
 					} else {
 						contentSB.append(
 								"<div class='cosmetics-button active'>"
-									+ "Unpierced"
+										+ "Без прокола"
 								+ "</div>");
 						
 						if(canPierce) {
 							contentSB.append(
 									"<div id='"+piercingType+"_PIERCE' class='cosmetics-button'>"
 										+ (Main.game.getPlayer().getMoney()>=SuccubisSecrets.getPiercingCost(piercingType) || noCost
-											?"<span style='color:"+PresetColour.GENERIC_ARCANE.getShades()[0]+";'>Pierced</span>"
-											:"[style.colourDisabled(Pierced)]")
+											? "<span style='color:" + PresetColour.GENERIC_ARCANE.getShades()[0] + ";'>Проколото</span>"
+											: "[style.colourDisabled(Проколото)]")
 									+ "</div>");
 							
 						} else {
 							contentSB.append(
 									"<div class='cosmetics-button disabled'>"
-										+ "[style.colourDisabled(Pierced)]"
+											+ "[style.colourDisabled(Проколото)]"
 									+ "</div>");
 						}
 					}
@@ -6546,12 +6433,12 @@ public class CharacterModificationUtils {
 						+ (tattooInSlot==null
 							?"<div class='modifier-icon-content'></div>"
 							:"<div class='modifier-icon-content' style='background-color:"+tattooInSlot.getRarity().getBackgroundColour().toWebHexString()+";'>"+tattooInSlot.getSVGImage(BodyChanging.getTarget())+"</div>")
-						+ "<div class='overlay no-pointer' id='TATTOO_INFO_"+invSlot.toString()+"'></div>"
+						+ "<div class='overlay no-pointer' id='TATTOO_INFO_"+ invSlot +"'></div>"
 					+ "</div>")
 				
 				+ "<div class='container-half-width inner' style='width:48%;margin:0 1%;padding:0;'>"
 					+ "<div style='float:left; width:98%; margin:0 1%; padding:0;'>"
-						+ "<div class='normal-button"+(disabled?" disabled":"")+"' "+(!disabled?"id='TATTOO_ADD_REMOVE_"+invSlot.toString()+"'":"")+" style='width:100%;'>"
+						+ "<div class='normal-button"+(disabled?" disabled":"")+"' "+(!disabled?"id='TATTOO_ADD_REMOVE_"+ invSlot +"'":"")+" style='width:100%;'>"
 							+(tattooInSlot==null
 								?"Add"
 								:(SuccubisSecrets.invSlotTattooToRemove==invSlot || !Main.getProperties().hasValue(PropertyValue.tattooRemovalConfirmations)?"[style.colourBad(Remove)]":"Remove"))
@@ -6559,12 +6446,12 @@ public class CharacterModificationUtils {
 					+ "</div>"
 					+ (Main.game.isInNewWorld()
 							?"<div style='float:left; width:98%; margin:0 1%; padding:0;'>"
-									+ "<div class='normal-button"+(disabled || tattooInSlot==null?" disabled":"")+"' "+(!disabled && tattooInSlot!=null?"id='TATTOO_MODIFY_"+invSlot.toString()+"'":"")+" style='width:100%;'>Modify</div>"
+									+ "<div class='normal-button"+(disabled || tattooInSlot==null?" disabled":"")+"' "+(!disabled && tattooInSlot!=null?"id='TATTOO_MODIFY_"+ invSlot +"'":"")+" style='width:100%;'>Modify</div>"
 								+ "</div>"
 							:"")
 					+ (Main.game.isInNewWorld()
 						?"<div style='float:left; width:98%; margin:0 1%; padding:0;'>"
-								+ "<div class='normal-button"+(disabled || tattooInSlot==null?" disabled":"")+"' "+(!disabled && tattooInSlot!=null?"id='TATTOO_ENCHANT_"+invSlot.toString()+"'":"")+" style='width:100%;'>Enchant</div>"
+								+ "<div class='normal-button"+(disabled || tattooInSlot==null?" disabled":"")+"' "+(!disabled && tattooInSlot!=null?"id='TATTOO_ENCHANT_"+ invSlot +"'":"")+" style='width:100%;'>Enchant</div>"
 							+ "</div>"
 						:"")
 				+ "</div>"

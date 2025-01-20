@@ -22,11 +22,12 @@
 		
 		<rarity>LEGENDARY</rarity> 
 		
-		<weaponSet>DARK_SIREN</weaponSet> 
-		
-		<equipText><![CDATA[[npc.Name] [npc.verb(take)] hold of the Dark Siren's Scythe as [npc.she] [npc.verb(ready)] [npc.herself] to use it in combat.]]></equipText>
-		
-		<unequipText><![CDATA[[npc.Name] [npc.verb(put)] away the Dark Siren's Scythe.]]></unequipText>
+		<weaponSet>DARK_SIREN</weaponSet>
+
+        <equipText>
+            <![CDATA[[npc.Name] take hold of the Dark Siren's Scythe as [npc.she] ready [npc.herself] to use it in combat.]]></equipText>
+
+        <unequipText><![CDATA[[npc.Name] put away the Dark Siren's Scythe.]]></unequipText>
 		
 		<imageName>scythe.svg</imageName> 
 		
@@ -79,26 +80,26 @@
 	
 	<hitDescriptions>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(swing)] [npc.her] scythe at [npc2.name], letting out an evil laugh as the ethereal blade unleashes a tremendous burst of arcane energy upon contacting [npc2.her] body!
+		[npc.Name] swing [npc.her] scythe at [npc2.name], letting out an evil laugh as the ethereal blade unleashes a tremendous burst of arcane energy upon contacting [npc2.her] body!
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(swing)] [npc.her] scythe at [npc2.name], grinning in delight as the ethereal blade delivers a cataclysmic blast of energy upon contacting with [npc2.her] body!
+		[npc.Name] swing [npc.her] scythe at [npc2.name], grinning in delight as the ethereal blade delivers a cataclysmic blast of energy upon contacting with [npc2.her] body!
 		]]></hitText>
 		<hitText><![CDATA[
-		[npc.Name] [npc.verb(swing)] at [npc2.name] with [npc.her] scythe, laughing in maniacal glee as [npc2.her] body's contact with the ethereal blade triggers a tremendous burst of arcane energy!
+		[npc.Name] swing at [npc2.name] with [npc.her] scythe, laughing in maniacal glee as [npc2.her] body's contact with the ethereal blade triggers a tremendous burst of arcane energy!
 		]]></hitText>
 	</hitDescriptions>
 
 	<!-- Descriptions that are used when missing an enemy. One of the missText values will be randomly selected each time the attacker misses their target. Follow the same guidelines as equipText. -->
 	<missDescriptions>
 		<missText><![CDATA[
-		[npc.Name] [npc.verb(swing)] [npc.her] scythe at [npc2.name], but [npc.verb(end)] up missing [npc2.herHim]!
+		[npc.Name] swing [npc.her] scythe at [npc2.name], but end up missing [npc2.herHim]!
 		]]></missText>
 		<missText><![CDATA[
-		Swinging at [npc2.name] with [npc.her] scythe, [npc.name] [npc.verb(let)] out a frustrated cry as [npc.she] [npc.verb(miss)] [npc.her] target!
+		Swinging at [npc2.name] with [npc.her] scythe, [npc.name] let out a frustrated cry as [npc.she] miss [npc.her] target!
 		]]></missText>
 		<missText><![CDATA[
-		With a quick step forwards, [npc.name] [npc.verb(swing)] at [npc2.name] with [npc.her] scythe, but [npc.she] [npc.verb(miss)] [npc.her] target!
+		With a quick step forwards, [npc.name] swing at [npc2.name] with [npc.her] scythe, but [npc.she] miss [npc.her] target!
 		]]></missText>
 	</missDescriptions>
 	

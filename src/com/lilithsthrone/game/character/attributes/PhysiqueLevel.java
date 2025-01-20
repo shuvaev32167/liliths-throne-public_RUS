@@ -11,54 +11,55 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @author Innoxia
  */
 public enum PhysiqueLevel {
-	
-	ZERO_WEAK("Хрупкий/Хрупкая", 0, 10, PresetColour.PHYSIQUE_STAGE_ZERO) {
+
+    ZERO_WEAK("[pc.genderBasedWord(хрупкий, хрупкая)]", 0, 10, PresetColour.PHYSIQUE_STAGE_ZERO) {
 		@Override
 		public AbstractStatusEffect getRelatedStatusEffect() {
 			return StatusEffect.PHYSIQUE_PERK_0;
 		}
 	},
-	
-	ONE_AVERAGE("Среднее", 10, 30, PresetColour.PHYSIQUE_STAGE_ONE) {
+
+    ONE_AVERAGE("среднее телосложение", 10, 30, PresetColour.PHYSIQUE_STAGE_ONE) {
 		@Override
 		public AbstractStatusEffect getRelatedStatusEffect() {
 			return StatusEffect.PHYSIQUE_PERK_1;
 		}
 	},
-	
-	TWO_STRONG("Спортивное", 30, 50, PresetColour.PHYSIQUE_STAGE_TWO) {
+
+    TWO_STRONG("спортивное телосложение", 30, 50, PresetColour.PHYSIQUE_STAGE_TWO) {
 		@Override
 		public AbstractStatusEffect getRelatedStatusEffect() {
 			return StatusEffect.PHYSIQUE_PERK_2;
 		}
 	},
-	
-	THREE_POWERFUL("Сильное", 50, 70, PresetColour.PHYSIQUE_STAGE_THREE) {
+
+    THREE_POWERFUL("сильное телосложение", 50, 70, PresetColour.PHYSIQUE_STAGE_THREE) {
 		@Override
 		public AbstractStatusEffect getRelatedStatusEffect() {
 			return StatusEffect.PHYSIQUE_PERK_3;
 		}
 	},
-	
-	FOUR_MIGHTY("Могущественное", 70, 90, PresetColour.PHYSIQUE_STAGE_FOUR) {
+
+    FOUR_MIGHTY("могущественное телосложение", 70, 90, PresetColour.PHYSIQUE_STAGE_FOUR) {
 		@Override
 		public AbstractStatusEffect getRelatedStatusEffect() {
 			return StatusEffect.PHYSIQUE_PERK_4;
 		}
 	},
-	
-	FIVE_HERCULEAN("Геркулесово", 90, 100, PresetColour.PHYSIQUE_STAGE_FIVE) {
+
+    FIVE_HERCULEAN("геркулесово телосложение", 90, 100, PresetColour.PHYSIQUE_STAGE_FIVE) {
 		@Override
 		public AbstractStatusEffect getRelatedStatusEffect() {
 			return StatusEffect.PHYSIQUE_PERK_5;
 		}
 	};
 	
-	private String name;
-	private int minimumValue, maximumValue;
-	private Colour colour;
+	private final String name;
+	private final int minimumValue;
+    private final int maximumValue;
+	private final Colour colour;
 
-	private PhysiqueLevel(String name, int minimumValue, int maximumValue, Colour colour) {
+	PhysiqueLevel(String name, int minimumValue, int maximumValue, Colour colour) {
 		this.name = name;
 		this.minimumValue = minimumValue;
 		this.maximumValue = maximumValue;

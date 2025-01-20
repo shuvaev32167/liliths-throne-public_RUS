@@ -1,25 +1,5 @@
 package com.lilithsthrone.game.inventory.weapon;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Objects;
-import java.util.Set;
-import java.util.StringJoiner;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
-import com.lilithsthrone.main.Main;
-import org.w3c.dom.Document;
-
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.controller.xmlParsing.XMLMissingTagException;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -29,21 +9,28 @@ import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractCoreType;
-import com.lilithsthrone.game.inventory.AbstractSetBonus;
-import com.lilithsthrone.game.inventory.ColourReplacement;
-import com.lilithsthrone.game.inventory.ItemTag;
-import com.lilithsthrone.game.inventory.Rarity;
-import com.lilithsthrone.game.inventory.SetBonus;
+import com.lilithsthrone.game.inventory.*;
 import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
+import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.SvgUtil;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.ColourListPresets;
 import com.lilithsthrone.utils.colours.PresetColour;
+import org.w3c.dom.Document;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * @since 0.1.84
@@ -163,7 +150,7 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 				}
 				
 				this.determiner = coreAttributes.getMandatoryFirstOf("determiner").getTextContent();
-				this.plural = Boolean.valueOf(((Element)coreAttributes.getMandatoryFirstOf("namePlural")).getAttribute("pluralByDefault"));
+				this.plural = Boolean.valueOf(coreAttributes.getMandatoryFirstOf("namePlural").getAttribute("pluralByDefault"));
 				this.name = coreAttributes.getMandatoryFirstOf("name").getTextContent();
 				this.namePlural = coreAttributes.getMandatoryFirstOf("namePlural").getTextContent();
 				this.description = coreAttributes.getMandatoryFirstOf("description").getTextContent();
@@ -324,7 +311,7 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 							.map(o -> o.getTextContent())
 							.collect(Collectors.toList());
 				} else {
-					this.missDescriptions = Util.newArrayListOfValues("[npc.Name] [npc.verb(recover)] [npc.her] "+this.name+"!");
+                    this.missDescriptions = Util.newArrayListOfValues("[npc.Name] recover [npc.her] " + this.name + "!");
 				}
 				
 				if(weaponElement.getOptionalFirstOf("oneShotEndTurnRecoveryDescriptions").isPresent()) {
@@ -461,21 +448,18 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 	public boolean equals(Object o) { // I know it doesn't include everything, but this should be enough to check for equality.
 		if(super.equals(o)){
 			if(o instanceof AbstractWeaponType){
-				if(((AbstractWeaponType)o).getName().equals(getName())
-						&& ((AbstractWeaponType)o).isMelee() == isMelee()
-						&& ((AbstractWeaponType)o).isTwoHanded() == isTwoHanded()
-						&& ((AbstractWeaponType)o).getPathName().equals(getPathName())
-						&& ((AbstractWeaponType)o).getPhysicalResistance() == getPhysicalResistance()
-						&& ((AbstractWeaponType)o).getDamage() == getDamage()
-						&& ((AbstractWeaponType)o).getDamageVariance() == getDamageVariance()
-						&& ((AbstractWeaponType)o).getRarity() == getRarity()
-						&& ((AbstractWeaponType)o).getAvailableDamageTypes().equals(getAvailableDamageTypes())
-						&& ((AbstractWeaponType)o).getSpells().equals(getSpells())
-						&& ((AbstractWeaponType)o).getEffects().equals(getEffects())
-						&& ((AbstractWeaponType)o).getClothingSet() == getClothingSet()
-						){
-					return true;
-				}
+                return ((AbstractWeaponType) o).getName().equals(getName())
+                        && ((AbstractWeaponType) o).isMelee() == isMelee()
+                        && ((AbstractWeaponType) o).isTwoHanded() == isTwoHanded()
+                        && ((AbstractWeaponType) o).getPathName().equals(getPathName())
+                        && ((AbstractWeaponType) o).getPhysicalResistance() == getPhysicalResistance()
+                        && ((AbstractWeaponType) o).getDamage() == getDamage()
+                        && ((AbstractWeaponType) o).getDamageVariance() == getDamageVariance()
+                        && ((AbstractWeaponType) o).getRarity() == getRarity()
+                        && ((AbstractWeaponType) o).getAvailableDamageTypes().equals(getAvailableDamageTypes())
+                        && ((AbstractWeaponType) o).getSpells().equals(getSpells())
+                        && ((AbstractWeaponType) o).getEffects().equals(getEffects())
+                        && ((AbstractWeaponType) o).getClothingSet() == getClothingSet();
 			}
 		}
 		return false;
@@ -534,8 +518,8 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 			for (Entry<Class, Set<String>> possibleMatch : possibleEnumValues.entrySet()) {
 				if (exMessage.contains(possibleMatch.getKey().getCanonicalName())) {
 					StringJoiner valueLister = new StringJoiner(",");
-					Arrays.asList(possibleMatch.getValue()).forEach(enumValue -> valueLister.add(enumValue.toString()));
-					System.err.println("Possible values for "+possibleMatch.getKey().getSimpleName()+" are " + valueLister.toString());
+                    Collections.singletonList(possibleMatch.getValue()).forEach(enumValue -> valueLister.add(enumValue.toString()));
+					System.err.println("Possible values for "+possibleMatch.getKey().getSimpleName()+" are " + valueLister);
 				}
 			}
 		}
@@ -619,24 +603,24 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 			if(character.isFeral()) {
 				return UtilText.parse(character, target,
 						UtilText.returnStringAtRandom(
-							"Darting forwards, [npc.name] [npc.verb(rear)] up [npc.verb(deliver)] a solid kick to [npc2.namePos] torso.",
-							"Striking out at [npc2.name], [npc.name] [npc.verb(manage)] to land a solid kick on [npc2.her] [npc2.leg]!",
-							"[npc.Name] [npc.verb(strike)] out at [npc2.name] in unarmed combat, and [npc.verb(manage)] to land a solid kick on [npc2.her] torso."));
+                                "Darting forwards, [npc.name] rear up deliver a solid kick to [npc2.namePos] torso.",
+                                "Striking out at [npc2.name], [npc.name] manage to land a solid kick on [npc2.her] [npc2.leg]!",
+                                "[npc.Name] strike out at [npc2.name] in unarmed combat, and manage to land a solid kick on [npc2.her] torso."));
 				
 			} else {
 				return UtilText.parse(character, target,
 						UtilText.returnStringAtRandom(
-							"Darting forwards, [npc.name] [npc.verb(deliver)] a solid punch to [npc2.namePos] [npc2.arm].",
-							"Striking out at [npc2.name], [npc.name] [npc.verb(manage)] to land a solid punch on [npc2.her] [npc2.arm]!",
-							"[npc.Name] [npc.verb(strike)] out at [npc2.name] in unarmed combat, and [npc.verb(manage)] to land a solid hit on [npc2.her] torso."));
+                                "Darting forwards, [npc.name] deliver a solid punch to [npc2.namePos] [npc2.arm].",
+                                "Striking out at [npc2.name], [npc.name] manage to land a solid punch on [npc2.her] [npc2.arm]!",
+                                "[npc.Name] strike out at [npc2.name] in unarmed combat, and manage to land a solid hit on [npc2.her] torso."));
 			}
 			
 		} else {
 			return UtilText.parse(character, target,
 					UtilText.returnStringAtRandom(
-						"Darting forwards, [npc.name] [npc.verb(try)] to deliver a punch to [npc2.namePos] [npc2.arm], but [npc2.she] [npc2.verb(manage)] to step out of the way in time.",
-						"[npc.Name] [npc.verb(throw)] a punch at [npc2.name], but fails to make contact with any part of [npc2.her] body.",
-						"[npc.Name] [npc.verb(strike)] out at [npc2.name] in unarmed combat, but [npc.she] [npc.verb(end)] up missing."));
+                            "Darting forwards, [npc.name] try to deliver a punch to [npc2.namePos] [npc2.arm], but [npc2.she] [npc2.verb(manage)] to step out of the way in time.",
+                            "[npc.Name] throw a punch at [npc2.name], but fails to make contact with any part of [npc2.her] body.",
+                            "[npc.Name] strike out at [npc2.name] in unarmed combat, but [npc.she] end up missing."));
 		}
 	}
 

@@ -186,9 +186,9 @@
 		NOTE: The damage is automatically applied to the target, so you don't need to handle parsing of that. -->
 		<execute><![CDATA[
 			#IF(npc.isSpeechMuffled())
-				As [npc.her] mouth is muffled, [npc.name] [npc.verb(fail)] to hit [npc2.name], and [npc.verb(end)] up doing no damage at all...
+				As [npc.her] mouth is muffled, [npc.name] fail to hit [npc2.name], and end up doing no damage at all...
 			#ELSE
-				[npc.Name] [npc.verb(open)] [npc.her] mouth and [npc.verb(let)] out a mighty 
+				[npc.Name] open [npc.her] mouth and let out a mighty
 				#IF(npc.getAttributeValue(ATTRIBUTE_DAMAGE_FIRE) >= npc.getAttributeValue(ATTRIBUTE_DAMAGE_ICE) && npc.getAttributeValue(ATTRIBUTE_DAMAGE_FIRE) >= npc.getAttributeValue(ATTRIBUTE_DAMAGE_POISON))
 					jet of fire
 				#ELSEIF(npc.getAttributeValue(ATTRIBUTE_DAMAGE_ICE) >= npc.getAttributeValue(ATTRIBUTE_DAMAGE_FIRE) && npc.getAttributeValue(ATTRIBUTE_DAMAGE_ICE) >= npc.getAttributeValue(ATTRIBUTE_DAMAGE_POISON))

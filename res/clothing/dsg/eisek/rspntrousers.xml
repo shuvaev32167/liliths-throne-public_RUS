@@ -72,49 +72,49 @@
 	
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc.her] trousers down and [npc.verb(kick)] them off [npc.her] [npc.feet].]]>
+            <![CDATA[[npc.Name] pull [npc.her] trousers down and kick them off [npc.her] [npc.feet].]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc2.namePos] trousers down and [npc.verb(slide)] them off [npc2.her] [npc2.feet].]]>
+            <![CDATA[[npc.Name] pull [npc2.namePos] trousers down and slide them off [npc2.her] [npc2.feet].]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(yank)] [npc2.namePos] trousers down and [npc.verb(toss)] them aside.]]>
+            <![CDATA[[npc.Name] yank [npc2.namePos] trousers down and toss them aside.]]>
 		</otherRough>
 	</displacementText>
 	
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(step)] into [npc.her] trousers before pulling them up to [npc.her] waist.]]>
+            <![CDATA[[npc.Name] step into [npc.her] trousers before pulling them up to [npc.her] waist.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] the trousers up [npc2.namePos] [npc2.legs] and [npc.verb(button)] them up around [npc2.her] waist.]]>
+            <![CDATA[[npc.Name] pull the trousers up [npc2.namePos] [npc2.legs] и button them up around [npc2.her] waist.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(force)] [npc2.namePos] [npc2.legs] into the trousers and [npc.verb(yank)] them up around [npc2.her] waist.]]>
+            <![CDATA[[npc.Name] force [npc2.namePos] [npc2.legs] into the trousers and yank them up around [npc2.her] waist.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="PULLS_DOWN">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc.her] trousers down.]]>
+            <![CDATA[[npc.Name] pull [npc.her] trousers down.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] [npc2.namePos] trousers down.]]>
+            <![CDATA[[npc.Name] pull [npc2.namePos] trousers down.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] [npc.verb(yank)] [npc2.namePos] trousers down.]]>
+            <![CDATA[[npc.Name] yank [npc2.namePos] trousers down.]]>
 		</otherRough>
 	</displacementText>
 	
 	<replacementText type="PULLS_UP">
 		<self>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] up [npc.her] trousers.]]>
+            <![CDATA[[npc.Name] pull up [npc.her] trousers.]]>
 		</self>
 		<other>
-		  <![CDATA[[npc.Name] [npc.verb(pull)] up [npc2.namePos] trousers.]]>
+            <![CDATA[[npc.Name] pull up [npc2.namePos] trousers.]]>
 		</other>
 		<otherRough>
-		  <![CDATA[[npc.Name] forcefully [npc.verb(pull)] up [npc2.namePos] trousers.]]>
+            <![CDATA[[npc.Name] forcefully pull up [npc2.namePos] trousers.]]>
 		</otherRough>
 	</replacementText>
 	
