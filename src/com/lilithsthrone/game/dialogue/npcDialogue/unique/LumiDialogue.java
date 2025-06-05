@@ -41,7 +41,7 @@ public class LumiDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-                return new Response("Продолжить", "Carry on your way...", null) {
+				return new Response("Продолжить", "Продолжить путь...", null) {
 					@Override
 					public DialogueNode getNextDialogue() {
 						return Main.game.getDefaultDialogue(false);
@@ -74,7 +74,7 @@ public class LumiDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-                return new Response("Продолжить", "Carry on your way...", null) {
+				return new Response("Продолжить", "Продолжить путь...", null) {
 					@Override
 					public DialogueNode getNextDialogue() {
 						return Main.game.getDefaultDialogue(false);
@@ -105,7 +105,7 @@ public class LumiDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-                return new Response("Продолжить", "Carry on your way...", null) {
+				return new Response("Продолжить", "Продолжить путь...", null) {
 					@Override
 					public DialogueNode getNextDialogue() {
 						return Main.game.getDefaultDialogue(false);
@@ -186,7 +186,7 @@ public class LumiDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-                return new Response("Продолжить", "Carry on your way...", null) {
+				return new Response("Продолжить", "Продолжить путь...", null) {
 					@Override
 					public DialogueNode getNextDialogue() {
 						return Main.game.getDefaultDialogue(false);
@@ -217,7 +217,7 @@ public class LumiDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-                return new Response("Продолжить", "Carry on your way...", null) {
+				return new Response("Продолжить", "Продолжить путь...", null) {
 					@Override
 					public DialogueNode getNextDialogue() {
 						return Main.game.getDefaultDialogue(false);
@@ -244,7 +244,7 @@ public class LumiDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-                return new Response("Продолжить", "Carry on your way...", null) {
+				return new Response("Продолжить", "Продолжить путь...", null) {
 					@Override
 					public DialogueNode getNextDialogue() {
 						return Main.game.getDefaultDialogue(false);
@@ -271,7 +271,7 @@ public class LumiDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-                return new Response("Продолжить", "Carry on your way...", null) {
+				return new Response("Продолжить", "Продолжить путь...", null) {
 					@Override
 					public DialogueNode getNextDialogue() {
 						return Main.game.getDefaultDialogue(false);

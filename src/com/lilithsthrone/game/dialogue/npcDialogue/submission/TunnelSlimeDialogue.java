@@ -584,7 +584,7 @@ public class TunnelSlimeDialogue {
 		
 			if (index == 1) {
                 return new Response("Продолжить",
-						"Carry on your way..."
+                        "Продолжить путь..."
 							+ (getSlime().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)
 									?UtilText.parse(getSlime(), "<br/>[style.italicsBad([npc.Name] will be permanently removed from the game.)]")
 									:""),
