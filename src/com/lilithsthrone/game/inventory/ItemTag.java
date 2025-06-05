@@ -275,6 +275,10 @@ public enum ItemTag {
 			Util.newArrayListOfValues(
 					"[style.colourHuman(Подходит для гуманоидных частей тела не двуногих)]"),
 			false),
+	FITS_BIPEDS(
+			Util.newArrayListOfValues(
+					"[style.colourTfGeneric(Only fits bipedal bodies)]"),
+			false),
 	FITS_TAUR_BODY(
 			Util.newArrayListOfValues(
 					"[style.colourTfGeneric(Подходит только для четвероногих)]"),

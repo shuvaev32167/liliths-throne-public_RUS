@@ -64,7 +64,7 @@ public class Elemental extends NPC {
 				20,
 				gender,
 				Subspecies.DEMON, RaceStage.GREATER,
-				new CharacterInventory(10), WorldType.EMPTY, PlaceType.GENERIC_HOLDING_CELL, false);
+				new CharacterInventory(false, 10), WorldType.EMPTY, PlaceType.GENERIC_HOLDING_CELL, false);
 
 		if(!isImported) {
 //			this.setLocation(summoner, false);
@@ -85,6 +85,8 @@ public class Elemental extends NPC {
 			
 			// RACE & NAME:
 			
+			this.setCombatBehaviour(this.getRace().getPreferredCombatBehaviour());
+			
 			setSexualOrientation(SexualOrientation.AMBIPHILIC);
 	
 			setName(Name.getRandomTriplet(Subspecies.DEMON));
@@ -103,7 +105,7 @@ public class Elemental extends NPC {
 			this.setElementalSchool(SpellSchool.ARCANE);
 			
 			this.removePersonalityTraits(PersonalityCategory.SPEECH);
-			
+
 			initHealthAndManaToMax();
 		}
 	}
@@ -406,6 +408,13 @@ public class Elemental extends NPC {
 				}
 				break;
 		}
+
+//		System.out.println(this.getName()+" 1");
+		if(this.getSummoner()!=null && !this.getSummoner().isPlayer()) {
+//			System.out.println(this.getName()+" 2 "+this.getSummoner().getNameIgnoresPlayerKnowledge());
+			initPerkTreeAndBackgroundPerks();
+		}
+
 		calculateSpells(school);
 	}
 	

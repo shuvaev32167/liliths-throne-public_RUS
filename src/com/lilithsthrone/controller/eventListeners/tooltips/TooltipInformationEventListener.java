@@ -820,9 +820,9 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 
 				if(owner.isRaceConcealed()) {
 					tooltipSB.setLength(0);
-					tooltipSB.append("<div class='title' style='color:" + PresetColour.RACE_UNKNOWN.toWebHexString() + ";'>"
-							+ "Неизвестная раса!"
-							+ "</div>");
+					tooltipSB.append("<div class='title' style='color:" + PresetColour.RACE_UNKNOWN.toWebHexString() + ";'>");
+						tooltipSB.append("Неизвестная раса!");
+					tooltipSB.append("</div>");
 
 					int knownAreas = 0;
 					if(Main.game.getPlayer().isKnowsCharacterArea(CoverableArea.ANUS, owner)) {

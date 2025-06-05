@@ -59,7 +59,7 @@ public class Rose extends NPC {
 						+ " Их отношения перерастают в нечто большее, чем соглашение между хозяином и рабом, и Розу и Лилайю часто можно увидеть обнимающимися и шепчущимися друг с другом.",
 				20, Month.MARCH, 5,
 				10, Gender.F_V_B_FEMALE, Subspecies.CAT_MORPH, RaceStage.PARTIAL_FULL,
-				new CharacterInventory(10), WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_ROSE, true);
+				new CharacterInventory(false, 10), WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_ROSE, true);
 		
 	}
 	

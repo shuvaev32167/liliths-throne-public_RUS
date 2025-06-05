@@ -3,6 +3,7 @@ package com.lilithsthrone.game.dialogue.places.dominion;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.npc.NPC;
+import com.lilithsthrone.game.character.npc.dominion.Callie;
 import com.lilithsthrone.game.character.npc.dominion.Cultist;
 import com.lilithsthrone.game.character.npc.dominion.Nyan;
 import com.lilithsthrone.game.character.npc.dominion.ReindeerOverseer;
@@ -31,6 +32,10 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.item.ItemType;
+import com.lilithsthrone.game.sex.SexAreaOrifice;
+import com.lilithsthrone.game.sex.SexAreaPenetration;
+import com.lilithsthrone.game.sex.SexParticipantType;
+import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Vector2i;
@@ -915,7 +920,7 @@ public class DominionPlaces {
 			}
 		}
 	};
-	
+
 	public static final DialogueNode CITY_EXIT_BAT_CAVERNS_FLY_DOWN = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {
@@ -1064,12 +1069,29 @@ public class DominionPlaces {
 			int hourClose = Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.getDialogueFlagValueFromId("nnxx_callie_upgrade_2"))?17:15;
 
 			if(Main.game.isHourBetween(hourOpen, hourClose) && Main.game.getDayOfWeek()!=DayOfWeek.SUNDAY) {
-                mommyResponses.add(new Response("Творожная выпечка",
+				DialogueNode initNode = DialogueManager.getDialogueFromId("nnxx_callie_bakery_entry_first_time");
+				if(Main.game.getDialogueFlags().hasFlag("nnxx_callie_introduced")) {
+					AbstractClothing playerNeckClothing = Main.game.getPlayer().getClothingInSlot(InventorySlot.NECK);
+					if(Main.game.getDialogueFlags().hasFlag("nnxx_callie_upgrade_3")
+							&& !Main.game.getDialogueFlags().hasFlag("nnxx_callie_upgrade_reaction_pending")
+							&& Main.game.getPlayer().getSexCount(Main.game.getNpc(Callie.class), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.ANUS))>0
+							&& Main.game.getNpc(Callie.class).isAttractedTo(Main.game.getPlayer())
+							&& Main.game.getPlayer().isQuestCompleted(QuestLine.ROMANCE_NATALYA)
+							&& (playerNeckClothing!=null && playerNeckClothing.getClothingType().getId().equals("innoxia_neck_filly_choker"))
+							&& Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.MOUTH, true)
+							&& (!Main.game.getDialogueFlags().hasFlag("innoxia_callie_natalya_encountered")
+									|| Main.game.getSecondsPassed() - Main.game.getDialogueFlags().getSavedLong("callie_natalya_encounter_time") >= 60*60*24*3)) {
+						initNode = DialogueManager.getDialogueFromId("nnxx_callie_bakery_entry_natalya"); // Can be encountered every three days
+
+					} else {
+						initNode = DialogueManager.getDialogueFromId("nnxx_callie_bakery_entry");
+					}
+				}
+
+				mommyResponses.add(new Response("The Creamy Bakey",
 						"Head over to the nearby bakery, 'The Creamy Bakey', and take a look inside."
 								+ "<br/><i>The bakery is open from [style.italicsMinorGood([unit.time("+hourOpen+")]-[unit.time("+hourClose+")])].</i>",
-						Main.game.getDialogueFlags().hasFlag("nnxx_callie_introduced")
-							?DialogueManager.getDialogueFromId("nnxx_callie_bakery_entry")
-							:DialogueManager.getDialogueFromId("nnxx_callie_bakery_entry_first_time")) {
+								initNode) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setLocation(WorldType.getWorldTypeFromId("nnxx_callie_bakery"), PlaceType.getPlaceTypeFromId("nnxx_callie_bakery_counter"));
@@ -1077,7 +1099,7 @@ public class DominionPlaces {
 				});
 
 			} else {
-                mommyResponses.add(new Response("Творожная выпечка",
+				mommyResponses.add(new Response("The Creamy Bakey",
 						"The nearby bakery, 'The Creamy Bakey', is closed at this time of day."
 								+ "<br/><i>You'll have to come back between"
 								+ (Main.game.isHourBetween(hourOpen, hourClose)
@@ -1094,9 +1116,9 @@ public class DominionPlaces {
 		for(NPC npc : characters) {
 			if(npc instanceof RentalMommy) {
 				if(Main.game.getCurrentWeather()==Weather.MAGIC_STORM) {
-                    mommyResponses.add(new Response("Мамочка", "'Mommy' is not sitting on her usual bench, and you suppose that she's waiting out the current storm inside her house.", null));
+					mommyResponses.add(new Response("Mommy", "'Mommy' is not sitting on her usual bench, and you suppose that she's waiting out the current storm inside her house.", null));
 				} else {
-                    mommyResponses.add(new Response("Мамочка", "You see 'Mommy' sitting on the wooden bench outside her house. Walk up to her and say hello.", RentalMommyDialogue.ENCOUNTER) {
+					mommyResponses.add(new Response("Mommy", "You see 'Mommy' sitting on the wooden bench outside her house. Walk up to her and say hello.", RentalMommyDialogue.ENCOUNTER) {
 						@Override
 						public void effects() {
 							Main.game.setActiveNPC(npc);

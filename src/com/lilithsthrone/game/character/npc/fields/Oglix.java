@@ -30,6 +30,7 @@ import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.spells.Spell;
+import com.lilithsthrone.game.combat.spells.SpellSchool;
 import com.lilithsthrone.game.combat.spells.SpellUpgrade;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.inventory.CharacterInventory;
@@ -70,7 +71,7 @@ public class Oglix extends NPC {
 						+ " Her size, strength, and considerable arcane abilities make her respected and feared by even the toughest of thugs to be found in Elis.",
 				48, Month.AUGUST, 9,
 				35, Gender.F_V_B_FEMALE, Subspecies.DEMON, RaceStage.GREATER,
-				new CharacterInventory(30),
+				new CharacterInventory(false, 30),
 				WorldType.getWorldTypeFromId("innoxia_fields_elis_tavern_alley"), PlaceType.getPlaceTypeFromId("innoxia_fields_elis_tavern_alley_bar"),
 				true);
 	}
@@ -81,6 +82,9 @@ public class Oglix extends NPC {
 
 		if(Main.isVersionOlderThan(Game.loadingVersion, "0.4.10.5")) {
 			this.equipClothing();
+		}
+		if(Main.isVersionOlderThan(Game.loadingVersion, "0.4.10.8")) {
+			this.setElementalSummoned(true);
 		}
 	}
 
@@ -338,6 +342,8 @@ public class Oglix extends NPC {
 		
 		initElemental();
 		
+		this.setElementalSummoned(true);
+		
 		return golix;
 	}
 	
@@ -346,6 +352,7 @@ public class Oglix extends NPC {
 	public void initElemental() {
 		Elemental elemental = this.getElemental();
 		elemental.setName("Golix");
+		elemental.setSurname("Oglixkamu");
 		
 		elemental.clearPersonalityTraits();
 		elemental.addPersonalityTrait(PersonalityTrait.BRAVE);
@@ -361,6 +368,8 @@ public class Oglix extends NPC {
 		elemental.addFetish(Fetish.FETISH_VAGINAL_GIVING);
 		elemental.addFetish(Fetish.FETISH_ANAL_GIVING);
 		elemental.addFetish(Fetish.FETISH_ORAL_RECEIVING);
+		
+		elemental.setElementalSchool(SpellSchool.EARTH);
 		
 		elemental.setBodyMaterial(BodyMaterial.STONE);
 		elemental.setSkinCovering(new Covering(BodyCoveringType.getMaterialBodyCoveringType(elemental.getBodyMaterial(), BodyCoveringCategory.MAIN_SKIN), PresetColour.COVERING_GREY), true);

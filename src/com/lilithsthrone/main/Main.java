@@ -52,7 +52,7 @@ import java.util.regex.Pattern;
 
 /**
  * @since 0.1.0
- * @version 0.4.8.2
+ * @version 0.4.10.9
  * @author Innoxia
  */
 public class Main extends Application {
@@ -73,7 +73,7 @@ public class Main extends Application {
 	
 	public static final String AUTHOR = "Innoxia";
 	public static final String GAME_NAME = "Трон Лилит";
-	public static final String VERSION_NUMBER = "0.4.10.7"; // Remember to do the stuff below!
+	public static final String VERSION_NUMBER = "0.4.10.9"; // Remember to do the stuff below!
 	/*
 	 * BEFORE BUILDING:
 	 * update pom.xml!
@@ -182,7 +182,7 @@ public class Main extends Application {
 	protected static void CheckForDataDirectory() {
 		File dir = new File("data/");
 		if(!dir.exists()) {
-			
+
 			Alert a = new Alert(AlertType.ERROR,
 					"Не найдена папка 'data' ("+dir.getAbsolutePath()+"). Сохранение и регистрация ошибок отключены."
 							+ "\nУбедитесь, что вы извлекли игру из zip-файла и что файл имеет права на запись."
@@ -197,7 +197,7 @@ public class Main extends Application {
 			 });
 		}
 	}
-	
+
 	protected static void CheckForResFolder() {
 		File dir = new File("res/");
 		if(!dir.exists()) {
@@ -312,7 +312,7 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
-		
+
 		// Create folders:
 		File dir = new File("data/");
 		dir.mkdir();
@@ -320,8 +320,8 @@ public class Main extends Application {
 		dir.mkdir();
 		dir = new File("data/characters");
 		dir.mkdir();
-		
-		
+
+
 		// Open error log
 		if(!DEBUG) {
 			System.out.println("Printing to error.log");
@@ -345,10 +345,10 @@ public class Main extends Application {
 					}
 					System.err.println();
 				}
-				
-				
+
+
 //				System.err.println("OS: "+System.getProperty("os.name"));
-				
+
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -368,44 +368,44 @@ public class Main extends Application {
 
 		launch(args);
 	}
-	
+
 	public static void refreshTitle() {
 		primaryStage.setTitle(getTitle());
 	}
-	
+
 	public static boolean isVersionOlderThan(String versionToCheck, String versionToCheckAgainst) {
 		String[] v1 = versionToCheck.split("\\.");
 		String[] v2 = versionToCheckAgainst.split("\\.");
-		
+
 		try {
 			int maxLength = (v1.length > v2.length) ? v1.length : v2.length;
 			for (int i = 0; i < maxLength; i++) {
 				int v1i;
 				int v2i;
-				
+
 				if(v1[1].charAt(0)=='1') { // Versions prior to 0.2.x used an old system of the format: 0.1.10.1 being a lower version than 0.1.9.1:
 					v1i = (i < v1.length) ? Integer.valueOf((v1[i]+"00").substring(0, 3)) : 0;
 					v2i = (i < v2.length) ? Integer.valueOf((v2[i]+"00").substring(0, 3)) : 0;
-					
+
 				} else { // Versions of 0.2.x and higher use a new system of the format: 0.2.10.1 being a higher version than 0.2.9.1:
 					v1i = (i < v1.length) ? Integer.valueOf(v1[i]) : 0;
 					v2i = (i < v2.length) ? Integer.valueOf(v2[i]) : 0;
 				}
-				
+
 				if (v1i < v2i) {
 					return true;
 				} else if (v1i > v2i) {
 					return false;
-				} 
+				}
 			}
-			
+
 		} catch(Exception ex) {
 			return true;
 		}
-		
+
 		return false;
 	}
-	
+
 	public static String getTitle() {
 		displayingTurnTimer = game != null && game.isDebugMode() && game.isStarted();
 
@@ -438,7 +438,7 @@ public class Main extends Application {
 		properties.fontSize = size;
 		properties.savePropertiesAsXML();
 	}
-	
+
 	public static String getQuickSaveUnavailabilityDescription() {
 		if (!game.isInNewWorld()) {
 			return "Вы не можете сохранить игру во время создания персонажа или пролога!";
@@ -458,7 +458,7 @@ public class Main extends Application {
 
 		return "";
 	}
-	
+
 	public static String getQuickSaveName() {
 		String name;
 		if (!game.isStarted()) {
@@ -468,7 +468,7 @@ public class Main extends Application {
 		}
 		return checkFileName(name);
 	}
-	
+
 	public static void quickSaveGame() {
 		if(isQuickSaveAvailable()){
 			getProperties().lastQuickSaveName = getQuickSaveName();
@@ -478,7 +478,7 @@ public class Main extends Application {
 			game.flashMessage(PresetColour.GENERIC_BAD, getQuickSaveUnavailabilityDescription());
 		}
 	}
-	
+
 	public static void quickLoadGame() {
 		String name = "";
 		if(quickSaved) {
@@ -527,7 +527,7 @@ public class Main extends Application {
 			ex.printStackTrace();
 		}
 	}
-	
+
 	public static String checkFileName(String name) {
 		name = name.replace(" ", "_").replaceAll("[^\\wа-яА-ЯёЁ]+", "");
 		if (name.length()==0) {
@@ -562,7 +562,7 @@ public class Main extends Application {
 
 		return file.exists();
 	}
-	
+
 	public static void loadGame(String name) {
 		if (isLoadGameAvailable(name)) {
 			Game.importGame(name);
@@ -574,7 +574,7 @@ public class Main extends Application {
 		Game.importGame(f);
 		MainController.updateUIButtons();
 	}
-	
+
 	public static void deleteExportedGame(String name) {
 		File file = new File("data/saves/"+name+".xml");
 
@@ -641,14 +641,14 @@ public class Main extends Application {
 			}
 		}
 	}
-	
+
 	/**
 	 * @param sortAlphabetically Pass in true if you want the files sorted alphabetically, false if you want them sorted by date modified.
 	 * @return A list of xml files from the 'data/saves' folder.
 	 */
 	public static List<File> getSavedGames(boolean sortAlphabetically) {
 		List<File> filesList = new ArrayList<>();
-		
+
 		File dir = new File("data/saves");
 		if (dir.isDirectory()) {
 			File[] directoryListing = dir.listFiles((path, name) -> name.endsWith(".xml"));
@@ -656,19 +656,19 @@ public class Main extends Application {
 				filesList.addAll(Arrays.asList(directoryListing));
 			}
 		}
-		
+
 		if(sortAlphabetically) {
 			filesList.sort(Comparator.comparing(File::getName));
 		} else {
 			filesList.sort(Comparator.comparingLong(File::lastModified).reversed());
 		}
-		
+
 		return filesList;
 	}
-	
+
 	public static List<File> getCharactersForImport() {
 		List<File> filesList = new ArrayList<>();
-		
+
 		File dir = new File("data/characters");
 		if (dir.isDirectory()) {
 			File[] directoryListing = dir.listFiles((path, name) -> name.endsWith(".xml"));
@@ -678,13 +678,13 @@ public class Main extends Application {
 		}
 
 		filesList.sort(Comparator.comparingLong(File::lastModified).reversed());
-		
+
 		return filesList;
 	}
-	
+
 	public static List<File> getSlavesForImport() {
 		List<File> filesList = new ArrayList<>();
-		
+
 		File dir = new File("data/characters");
 		if (dir.isDirectory()) {
 			File[] directoryListing = dir.listFiles((path, name) -> name.endsWith(".xml"));
@@ -692,15 +692,15 @@ public class Main extends Application {
 				filesList.addAll(Arrays.asList(directoryListing));
 			}
 		}
-		
+
 		filesList.sort(Comparator.comparingLong(File::lastModified).reversed());
-		
+
 		return filesList;
 	}
-	
+
 	public static List<File> getGamesForImport() {
 		List<File> filesList = new ArrayList<>();
-		
+
 		File dir = new File("data/saves");
 		if (dir.isDirectory()) {
 			File[] directoryListing = dir.listFiles((path, name) -> name.endsWith(".xml"));
@@ -710,10 +710,10 @@ public class Main extends Application {
 		}
 
 		filesList.sort(Comparator.comparingLong(File::lastModified).reversed());
-		
+
 		return filesList;
 	}
-	
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 

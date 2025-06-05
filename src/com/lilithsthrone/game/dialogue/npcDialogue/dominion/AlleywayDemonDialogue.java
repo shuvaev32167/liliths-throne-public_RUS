@@ -784,7 +784,19 @@ public class AlleywayDemonDialogue {
 			boolean rapePlay = getDemon().isPostCombatRapePlay();
 			
 			if (index == 1) {
-                return new Response("Продолжить", "Carry on your way...", Main.game.getDefaultDialogue(false)) {
+                return new Response("Продолжить",
+						"Carry on your way..."
+							+ (getDemon().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)
+								?UtilText.parse(getDemon(), "<br/>[style.italicsBad([npc.Name] will be permanently removed from the game.)]")
+								:""),
+						Main.game.getDefaultDialogue(false)) {
+					@Override
+					public Colour getHighlightColour() {
+						if(getDemon().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {
+							return PresetColour.GENERIC_NPC_REMOVAL;
+						}
+						return super.getHighlightColour();
+					}
 					@Override
 					public void effects() {
 						if(getDemon().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {

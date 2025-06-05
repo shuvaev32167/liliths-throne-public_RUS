@@ -1,5 +1,15 @@
 package com.lilithsthrone.game.dialogue.companions;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import com.lilithsthrone.controller.MainController;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -42,15 +52,9 @@ import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map.Entry;
-
 /**
  * @since 0.3.5.1
- * @version 0.3.5.1
+ * @version 0.4.10.8
  * @author Innoxia
  */
 public class CompanionManagement {
@@ -60,6 +64,95 @@ public class CompanionManagement {
 	private static DialogueNode coreNode;
 	private static int defaultResponseTab;
 	
+	private static SlaveJob[] savedJobSchedule = null;
+	private static Map<SlaveJob, Set<SlaveJobSetting>> savedJobSettings = null;
+	private static Map<SlavePermission, Set<SlavePermissionSetting>> savedPermissions = null;
+
+	// Saved job schedule:
+
+	public static boolean isJobSchedulePasteAvailable() {
+		return savedJobSchedule!=null;
+	}
+
+	public static void copyJobSchedule() {
+		savedJobSchedule = new SlaveJob[24];
+		for(int i=0; i<savedJobSchedule.length; i++) {
+			savedJobSchedule[i] = characterSelected().getSlaveJob(i);
+		}
+	}
+
+	/**
+	 * @return true if all jobs were successfully pasted, false if some were unavailable.
+	 */
+	public static boolean pasteJobSchedule() {
+		boolean fullSuccess = true;
+		characterSelected().setSlaveJob24Hours(SlaveJob.IDLE);
+
+		for(int i=0; i<savedJobSchedule.length; i++) {
+			SlaveJob jobAtHour = savedJobSchedule[i];
+			float stamina = characterSelected().getDailySlaveJobStamina();
+
+			if(jobAtHour.isAvailable(i, characterSelected())
+					&& !jobAtHour.isHidden(characterSelected())
+					&& (characterSelected().isSlave()
+							// If not a slave, don't work while wanting to sleep or if stamina is depleted
+							|| (stamina-jobAtHour.getHourlyStaminaDrain(characterSelected())+characterSelected().getSlaveJob(i).getHourlyStaminaDrain(characterSelected())>=0f
+								&& !characterSelected().isSleepingAtHour(i)
+								&& jobAtHour.hasFlag(SlaveJobFlag.GUEST_CAN_WORK)))) {
+				characterSelected().setSlaveJob(i, jobAtHour);
+			} else {
+				fullSuccess = false;
+			}
+		}
+
+		return fullSuccess;
+	}
+
+	// Saved job settings:
+
+	public static boolean isJobSettingsPasteAvailable() {
+		return savedJobSettings!=null;
+	}
+
+	public static void copyJobSettings() {
+		savedJobSettings = new HashMap<>();
+		for(SlaveJob job : SlaveJob.values()) {
+			savedJobSettings.putIfAbsent(job, new HashSet<>());
+			for(SlaveJobSetting jobSetting : characterSelected().getSlaveJobSettings(job)) {
+				savedJobSettings.get(job).add(jobSetting);
+			}
+		}
+	}
+
+	public static void pasteJobSettings() {
+		for(SlaveJob job : SlaveJob.values()) {
+			characterSelected().clearSlaveJobSettings(job);
+			for(SlaveJobSetting jobSetting : savedJobSettings.get(job)) {
+				characterSelected().addSlaveJobSettings(job, jobSetting);
+			}
+		}
+	}
+
+	// Saved permissions:
+
+	public static boolean isPermissionsPasteAvailable() {
+		return savedPermissions!=null;
+	}
+
+	public static void copyPermissions() {
+		savedPermissions = new HashMap<>();
+		for(Entry<SlavePermission, Set<SlavePermissionSetting>> entry : characterSelected().getSlavePermissionSettings().entrySet()) {
+			savedPermissions.put(entry.getKey(), new HashSet<>());
+			for(SlavePermissionSetting setting : entry.getValue()) {
+				savedPermissions.get(entry.getKey()).add(setting);
+			}
+		}
+	}
+
+	public static void pastePermissions() {
+		characterSelected().replaceSlavePermissionSettings(savedPermissions);
+	}
+
 	public static DialogueNode getCoreNode() {
 		return coreNode;
 	}
@@ -913,6 +1006,12 @@ public class CompanionManagement {
 	
 	public static final DialogueNode SLAVE_MANAGEMENT_JOBS = new DialogueNode("Slave Management", ".", true) {
 		@Override
+		public void applyPreParsingEffects() {
+			if(Main.game.getDialogueFlags().getSlaveryManagerJobSelected().isHidden(characterSelected())) {
+				Main.game.getDialogueFlags().setSlaveryManagerJobSelected(SlaveJob.IDLE);
+			}
+		}
+		@Override
 		public DialogueNodeType getDialogueNodeType() {
 			return DialogueNodeType.OCCUPANT_MANAGEMENT;
 		}
@@ -929,12 +1028,22 @@ public class CompanionManagement {
 			UtilText.nodeContentSB.append(getSlaveInformationHeader(character));
 			
 			// Job hours
-			UtilText.nodeContentSB.append(
-					"<div class='container-full-width' style='text-align:center;'>");
+			UtilText.nodeContentSB.append("<div class='container-full-width' style='text-align:center;'>");
+
+			UtilText.nodeContentSB.append("<div class='container-full-width inner' style='text-align:center;padding-left:2px;padding-right:2px;'>");
+
+			UtilText.nodeContentSB.append("<div class='title-button "+(!isJobSchedulePasteAvailable()?"no-select":"")+"' id='pasteSlaveJobSchedule'"
+					+ " style='position:absolute; left:auto; right:8px; top:8px; padding:2px; margin:0; width:24px; height:24px; border:1px solid #999; "+(!isJobSchedulePasteAvailable()?"opacity:0.5;":"")+"'>"
+									+ SVGImages.SVG_IMAGE_PROVIDER.getPasteIcon()
+								+ "</div>");
+			UtilText.nodeContentSB.append("<div class='title-button' id='copySlaveJobSchedule' style='position:absolute; left:auto; right:48px; top:8px; padding:2px; margin:0; width:24px; height:24px; border:1px solid #999;'>"
+									+ SVGImages.SVG_IMAGE_PROVIDER.getCopyIcon()
+								+ "</div>");
+
+			UtilText.nodeContentSB.append("<h6 style='color:"+PresetColour.GENERIC_EXPERIENCE.toWebHexString()+"; text-align:center;'>Job Schedule</h6>");
+			UtilText.nodeContentSB.append("<div style='width:100%;margin-top:8px;'><b>Available Jobs</b></div>");
 			
-			UtilText.nodeContentSB.append(
-							"<div class='container-full-width inner' style='text-align:center;padding-left:2px;padding-right:2px;'>"
-							+ "<div style='width:100%;margin-top:8px;'><b>Available Jobs</b></div>");
+
 			for(SlaveJob job : SlaveJob.values()) {
 				if(!job.isHidden(character) && (character.isSlave() || job.hasFlag(SlaveJobFlag.GUEST_CAN_WORK))) {
 					UtilText.nodeContentSB.append(
@@ -1020,8 +1129,17 @@ public class CompanionManagement {
 			
 			// Jobs:
 			UtilText.nodeContentSB.append(
-					"<div class='container-full-width' style='text-align:center;'>"
-						+ "<h6 style='color:"+PresetColour.GENERIC_EXPERIENCE.toWebHexString()+"; text-align:center;'>Job Settings & Related Information</h6>"
+					"<div class='container-full-width' style='text-align:center;'>");
+
+			UtilText.nodeContentSB.append("<div class='title-button "+(!isJobSettingsPasteAvailable()?"no-select":"")+"' id='pasteSlaveJobSettings'"
+					+ " style='position:absolute; left:auto; right:8px; top:8px; padding:2px; margin:0; width:24px; height:24px; border:1px solid #999; "+(!isJobSettingsPasteAvailable()?"opacity:0.5;":"")+"'>"
+									+ SVGImages.SVG_IMAGE_PROVIDER.getPasteIcon()
+								+ "</div>");
+			UtilText.nodeContentSB.append("<div class='title-button' id='copySlaveJobSettings' style='position:absolute; left:auto; right:48px; top:8px; padding:2px; margin:0; width:24px; height:24px; border:1px solid #999;'>"
+									+ SVGImages.SVG_IMAGE_PROVIDER.getCopyIcon()
+								+ "</div>");
+
+			UtilText.nodeContentSB.append("<h6 style='color:"+PresetColour.GENERIC_EXPERIENCE.toWebHexString()+"; text-align:center;'>Job Settings & Related Information</h6>"
 						+"<div class='container-full-width' style='margin-bottom:0;'>"
 							+ "<div style='width:20%; float:left; font-weight:bold; margin:0 0 0 4%; padding:0;'>"
 								+ "Job"
@@ -1203,9 +1321,17 @@ public class CompanionManagement {
 			UtilText.nodeContentSB.append(getSlaveInformationHeader(character));
 			
 			// Permissions:
-			UtilText.nodeContentSB.append(
-					"<div class='container-full-width' style='text-align:center;'>"
-						+ "<h6 style='color:"+PresetColour.GENERIC_ARCANE.toWebHexString()+"; text-align:center;'>Permissions</h6>");
+			UtilText.nodeContentSB.append("<div class='container-full-width' style='text-align:center;'>");
+
+			UtilText.nodeContentSB.append("<div class='title-button "+(!isPermissionsPasteAvailable()?"no-select":"")+"' id='pastePermissions'"
+					+ " style='position:absolute; left:auto; right:8px; top:8px; padding:2px; margin:0; width:24px; height:24px; border:1px solid #999; "+(!isPermissionsPasteAvailable()?"opacity:0.5;":"")+"'>"
+									+ SVGImages.SVG_IMAGE_PROVIDER.getPasteIcon()
+								+ "</div>");
+			UtilText.nodeContentSB.append("<div class='title-button' id='copyPermissions' style='position:absolute; left:auto; right:48px; top:8px; padding:2px; margin:0; width:24px; height:24px; border:1px solid #999;'>"
+									+ SVGImages.SVG_IMAGE_PROVIDER.getCopyIcon()
+								+ "</div>");
+
+			UtilText.nodeContentSB.append("<h6 style='color:"+PresetColour.GENERIC_ARCANE.toWebHexString()+"; text-align:center;'>Permissions</h6>");
 			
 			for(SlavePermission permission : SlavePermission.values()) {
 				if(permission.isAvailableForCharacter(character)) {
@@ -2024,7 +2150,7 @@ public class CompanionManagement {
 			return null;
 		}
 	};
-	
+
 	public static final DialogueNode SET_SLAVE_FREE_END_NO_CONTENT = new DialogueNode("", "", false) {
 		@Override
 		public int getSecondsPassed() {

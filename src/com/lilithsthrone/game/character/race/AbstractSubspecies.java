@@ -968,6 +968,7 @@ public abstract class AbstractSubspecies {
 	 */
 	public static Body getPreGeneratedBody(GameCharacter linkedCharacter,
 			Gender startingGender,
+			GameCharacter mother,
 			Body motherBody,
 			Body fatherBody
 //			AbstractSubspecies motherSubspecies,
@@ -983,7 +984,14 @@ public abstract class AbstractSubspecies {
 		
 		
 		if(startingGender==null) {
-			startingGender = Gender.getGenderFromUserPreferences(Math.random()<motherSubspecies.getRace().getChanceForMaleOffspring()?Femininity.MASCULINE:Femininity.FEMININE);
+			if(Main.getProperties().isOffspringGenderUsingPreferences(mother)) {
+				startingGender = Gender.getGenderFromUserPreferences(false, false);
+			} else {
+				startingGender = Gender.getBasicGender(
+						Math.random()<motherSubspecies.getRace().getChanceForMaleOffspring()
+							?Femininity.MASCULINE
+							:Femininity.FEMININE);
+			}
 		}
 		
 		Body preGeneratedBody = null;
@@ -1056,7 +1064,7 @@ public abstract class AbstractSubspecies {
 					|| fatherSubspecies==Subspecies.IMP
 					|| fatherSubspecies==Subspecies.IMP_ALPHA) {
 					// Just return this method, but with mother & father swapped, as all demonic offspring types are unaffected by who is the mother or father:
-				preGeneratedBody = getPreGeneratedBody(linkedCharacter, startingGender, fatherBody, motherBody);
+				preGeneratedBody = getPreGeneratedBody(linkedCharacter, startingGender, null, fatherBody, motherBody);
 			}
 		}
 		

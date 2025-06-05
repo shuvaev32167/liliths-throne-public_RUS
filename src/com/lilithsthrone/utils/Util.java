@@ -1426,6 +1426,7 @@ private static final String[] primarySequence = {
 	}
 
 	private static final String[] sexSounds = new String[] { " ~Аах!~", " ~Ммм!~", " ~Оох!~" };
+	private static final String[] sexSoundsResisting = new String[] { " ~Aah!~", " ~No!~", " ~Eugh!~" };
 	/**
 	 * Turns a normal sentence into a sexy sentence.<br/>
 	 * Example:<br/>
@@ -1439,8 +1440,8 @@ private static final String[] primarySequence = {
 	 * @return
 	 *            modified sentence
 	 */
-	public static String addSexSounds(String sentence, int frequency) {
-		return insertIntoSentences(sentence, frequency, sexSounds);
+	public static String addSexSounds(String sentence, int frequency, boolean resisting) {
+		return insertIntoSentences(sentence, frequency, resisting?sexSoundsResisting:sexSounds);
 	}
 
 	private static final String[] drunkSounds = new String[] { " ~Ик!~" };
@@ -1489,19 +1490,19 @@ private static final Map<String, String> slovenlySpeechReplacementMap = new Link
 static {
     slovenlySpeechReplacementMap.put("What are", "Чё за");
     slovenlySpeechReplacementMap.put("what are", "чё за");
-    
+
     slovenlySpeechReplacementMap.put("Are", "Ась");
     slovenlySpeechReplacementMap.put("are", "ась");
 
     slovenlySpeechReplacementMap.put("You're", "Те вона");
     slovenlySpeechReplacementMap.put("you're", "те вона");
-    
+
     slovenlySpeechReplacementMap.put("Your", "Тевое");
     slovenlySpeechReplacementMap.put("your", "тевое");
-    
+
     slovenlySpeechReplacementMap.put("You ", "Те "); // End with a space as sentences which are simply 'You.' are awkward to read when converted to 'Те.'
     slovenlySpeechReplacementMap.put("you", "те");
-    
+
     slovenlySpeechReplacementMap.put("Yourself", "Сибе");
     slovenlySpeechReplacementMap.put("yourself", "сибе");
 
@@ -1513,10 +1514,10 @@ static {
 
     slovenlySpeechReplacementMap.put("His", "Иго");
     slovenlySpeechReplacementMap.put("his", "иго");
-    
+
     slovenlySpeechReplacementMap.put("Going to", "Собрась");
     slovenlySpeechReplacementMap.put("going to", "собрась");
-    
+
     slovenlySpeechReplacementMap.put("To", "Ка");
     slovenlySpeechReplacementMap.put("to", "ка");
     slovenlySpeechReplacementMap.put("Into", "Ф");
@@ -1533,42 +1534,42 @@ static {
 
     slovenlySpeechReplacementMap.put("These", "Ети");
     slovenlySpeechReplacementMap.put("these", "ети");
-    
+
     slovenlySpeechReplacementMap.put("And", "Й");
     slovenlySpeechReplacementMap.put("and", "й");
-    
+
     slovenlySpeechReplacementMap.put("Of", "Ота");
     slovenlySpeechReplacementMap.put("of", "ота");
     slovenlySpeechReplacementMap.put("Who", "Каво");
     slovenlySpeechReplacementMap.put("who", "каво");
     slovenlySpeechReplacementMap.put("Whoever", "Каво слушь");
     slovenlySpeechReplacementMap.put("whoever", "каво слушь");
-    
+
     slovenlySpeechReplacementMap.put("Was", "Былл");
     slovenlySpeechReplacementMap.put("was", "былл");
-    
+
     slovenlySpeechReplacementMap.put("What", "Шо");
     slovenlySpeechReplacementMap.put("what", "шо");
-    
+
     slovenlySpeechReplacementMap.put("Isn't", "Несть");
     slovenlySpeechReplacementMap.put("isn't", "нест");
     slovenlySpeechReplacementMap.put("Aren't", "Несть");
     slovenlySpeechReplacementMap.put("aren't", "нест");
-    
+
     slovenlySpeechReplacementMap.put("This one", "Тоте");
     slovenlySpeechReplacementMap.put("this one", "тоте");
     slovenlySpeechReplacementMap.put("That one", "Тоте");
     slovenlySpeechReplacementMap.put("that one", "тоте");
-    
+
     slovenlySpeechReplacementMap.put("Before", "Докуда");
     slovenlySpeechReplacementMap.put("before", "докуда");
-    
+
     slovenlySpeechReplacementMap.put("Give me", "Дайка");
     slovenlySpeechReplacementMap.put("give me", "дайка");
-    
+
     slovenlySpeechReplacementMap.put("We're", "Мы-с");
     slovenlySpeechReplacementMap.put("we're", "мы-с");
-    
+
     slovenlySpeechReplacementMap.put("So that", "Чтобык");
     slovenlySpeechReplacementMap.put("so that", "чтобык");
 
@@ -1581,13 +1582,13 @@ static {
 
     slovenlySpeechReplacementMap.put("Here", "Туточки");
     slovenlySpeechReplacementMap.put("here", "туточки");
-    
+
     slovenlySpeechReplacementMap.put("My", "Моёк");
     slovenlySpeechReplacementMap.put("my", "моёк");
 
     slovenlySpeechReplacementMap.put("Myself", "Сам-с");
     slovenlySpeechReplacementMap.put("myself", "сам-с");
-    
+
     slovenlySpeechReplacementMap.put("That", "Туй");
     slovenlySpeechReplacementMap.put("that", "туй");
 
@@ -1596,22 +1597,22 @@ static {
 
     slovenlySpeechReplacementMap.put("This", "Ета");
     slovenlySpeechReplacementMap.put("this", "ета");
-    
+
     slovenlySpeechReplacementMap.put("For", "За-с");
     slovenlySpeechReplacementMap.put("for", "за-с");
-    
+
     slovenlySpeechReplacementMap.put("Very", "Охренеть как");
     slovenlySpeechReplacementMap.put("very", "охренеть как");
-    
+
     slovenlySpeechReplacementMap.put("Yes", "Ага");
     slovenlySpeechReplacementMap.put("yes", "ага");
 
     slovenlySpeechReplacementMap.put("Hurry", "Поспиши");
     slovenlySpeechReplacementMap.put("hurry", "поспиши");
-    
+
     slovenlySpeechReplacementMap.put("Doesn't", "Ни делит");
     slovenlySpeechReplacementMap.put("doesn't", "ни делит");
-    
+
     slovenlySpeechReplacementMap.put("Because", "Патамушта");
     slovenlySpeechReplacementMap.put("because", "патамушта");
 }

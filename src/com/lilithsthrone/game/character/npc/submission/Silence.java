@@ -70,7 +70,7 @@ public class Silence extends NPC {
 				"",
 				21, Month.MAY, 16,
 				15, Gender.F_V_B_FEMALE, Subspecies.RAT_MORPH, RaceStage.GREATER,
-				new CharacterInventory(30), WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_VENGARS_HALL, true);
+				new CharacterInventory(false, 30), WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_VENGARS_HALL, true);
 	}
 
 	@Override
@@ -380,6 +380,12 @@ public class Silence extends NPC {
 		Main.game.getDialogueFlags().setFlag(DialogueFlagValue.vengarCaptiveSilenceSatisfied, true);
 	}
 	
+	// Elemental:
+	
+	public void initElemental() {
+		
+	}
+	
 	// Combat:
 
 	@Override
@@ -395,14 +401,14 @@ public class Silence extends NPC {
 	@Override
 	public CombatBehaviour getCombatBehaviour() {
 		if(Main.game.isInCombat()) {
-			boolean spellsAvailable = false;
-			for(GameCharacter character : Main.combat.getAllCombatants(true)) {
-				if(!getWeightedSpellsAvailable(character).keySet().stream().filter(s->s!=Spell.ELEMENTAL_AIR).collect(Collectors.toList()).isEmpty()) {
-					spellsAvailable = true;
-					break;
-				}
-			}
-			if(spellsAvailable) {
+//			boolean spellsAvailable = false;
+//			for(GameCharacter character : Main.combat.getAllCombatants(true)) {
+//				if(!getWeightedSpellsAvailable(character).keySet().stream().filter(s->s!=Spell.ELEMENTAL_AIR).collect(Collectors.toList()).isEmpty()) {
+//					spellsAvailable = true;
+//					break;
+//				}
+//			}
+			if(!getWeightedSpellsAvailable(this).keySet().stream().filter(s->s!=Spell.ELEMENTAL_AIR).collect(Collectors.toList()).isEmpty()) {
 				return CombatBehaviour.SPELLS;
 			}
 		}

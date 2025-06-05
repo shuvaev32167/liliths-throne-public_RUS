@@ -784,7 +784,19 @@ public class HarpyAttackerDialogue {
 			boolean rapePlay = getHarpy().isPostCombatRapePlay();
 			
 			if (index == 1) {
-                return new Response("Продолжить", "Carry on your way...", Main.game.getDefaultDialogue(false)) {
+                return new Response("Продолжить",
+						"Carry on your way..."
+							+ (getHarpy().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)
+								?UtilText.parse(getHarpy(), "<br/>[style.italicsBad([npc.Name] will be permanently removed from the game.)]")
+								:""),
+						Main.game.getDefaultDialogue(false)) {
+					@Override
+					public Colour getHighlightColour() {
+						if(getHarpy().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {
+							return PresetColour.GENERIC_NPC_REMOVAL;
+						}
+						return super.getHighlightColour();
+					}
 					@Override
 					public void effects() {
 						if(getHarpy().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {

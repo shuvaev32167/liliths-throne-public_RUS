@@ -179,7 +179,7 @@ public class TongueArmpit {
 					"Eagerly sliding [npc.her] [npc.tongue+] over [npc2.namePos] [npc2.underarm+],"
                             + " [npc.name] press [npc.her] [npc.lips+] up against [npc2.her] [npc2.armpit+] и let out a muffled [npc.moan].",
 
-                    "Pulling [npc.her] [npc.tongue+] back into [npc.her] mouth, [npc.name] start to eagerly kiss and lick [npc2.namePos] [npc2.underarm+],"
+                    "Pulling [npc.her] [npc.tongue+] back into [npc.her] mouth, [npc.name] start to eagerly kiss [npc2.namePos] [npc2.underarm+],"
 							+ " before pressing forwards and greedily sliding [npc.her] [npc.tongue] over [npc2.her] [npc2.armpit+] once more.",
 
                     "Sliding [npc.her] [npc.tongue+] back into [npc.her] mouth, [npc.name] start happily kissing and nuzzling against [npc2.namePos] [npc2.underarm+],"
@@ -214,7 +214,7 @@ public class TongueArmpit {
 					"Roughly sliding [npc.her] [npc.tongue+] over [npc2.namePos] [npc2.underarm+],"
                             + " [npc.name] grind [npc.her] [npc.lips+] up against [npc2.her] [npc2.armpit+] и let out a muffled [npc.moan].",
 
-                    "Pulling [npc.her] [npc.tongue+] back into [npc.her] mouth, [npc.name] start to roughly kiss and lick [npc2.namePos] [npc2.underarm+],"
+                    "Pulling [npc.her] [npc.tongue+] back into [npc.her] mouth, [npc.name] start to roughly kiss [npc2.namePos] [npc2.underarm+],"
 							+ " before pressing forwards and forcefully sliding [npc.her] [npc.tongue] over [npc2.her] [npc2.armpit+] once more.",
 
                     "Sliding [npc.her] [npc.tongue+] back into [npc.her] mouth, [npc.name] start forcefully kissing and licking [npc2.namePos] [npc2.underarm+],"
@@ -308,7 +308,7 @@ public class TongueArmpit {
 					"Running [npc.her] [npc.tongue+] over [npc2.namePos] [npc2.underarm+],"
                             + " [npc.name] press [npc.her] [npc.lips+] up against [npc2.her] [npc2.armpit+] и let out a muffled [npc.moan].",
 
-                    "Pulling [npc.her] [npc.tongue+] back into [npc.her] mouth, [npc.name] start to kiss and lick [npc2.namePos] [npc2.underarm+],"
+                    "Pulling [npc.her] [npc.tongue+] back into [npc.her] mouth, [npc.name] start to kiss [npc2.namePos] [npc2.underarm+],"
 							+ " before pressing forwards and sliding [npc.her] [npc.tongue] over [npc2.her] [npc2.armpit+] once more.",
 
                     "Sliding [npc.her] [npc.tongue+] back into [npc.her] mouth, [npc.name] start kissing and nuzzling against [npc2.namePos] [npc2.underarm+],"
@@ -343,7 +343,7 @@ public class TongueArmpit {
 					"Eagerly sliding [npc.her] [npc.tongue+] over [npc2.namePos] [npc2.underarm+],"
                             + " [npc.name] press [npc.her] [npc.lips+] up against [npc2.her] [npc2.armpit+] и let out a muffled [npc.moan].",
 
-                    "Pulling [npc.her] [npc.tongue+] back into [npc.her] mouth, [npc.name] start to eagerly kiss and lick [npc2.namePos] [npc2.underarm+],"
+                    "Pulling [npc.her] [npc.tongue+] back into [npc.her] mouth, [npc.name] start to eagerly kiss [npc2.namePos] [npc2.underarm+],"
 							+ " before pressing forwards and greedily sliding [npc.her] [npc.tongue] over [npc2.her] [npc2.armpit+] once more.",
 
                     "Sliding [npc.her] [npc.tongue+] back into [npc.her] mouth, [npc.name] start happily kissing and nuzzling against [npc2.namePos] [npc2.underarm+],"
@@ -796,7 +796,7 @@ public class TongueArmpit {
 			return UtilText.nodeContentSB.toString();
 		}
 	};
-	
+
 	private static String getTargetedCharacterResponse(SexAction action) {
 		if(!action.isTargetedCharacterInanimate()) {
 			switch(Main.sex.getSexPace(Main.sex.getCharacterTargetedForSexAction(action))) {
@@ -860,7 +860,7 @@ public class TongueArmpit {
 		}
 		return "";
 	}
-	
+
 	private static String getTargetedCharacterReceivingResponse(SexAction action) {
 		if(!action.isTargetedCharacterInanimate()) {
 			switch(Main.sex.getSexPace(Main.sex.getCharacterTargetedForSexAction(action))) {

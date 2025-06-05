@@ -1154,12 +1154,10 @@ public class OptionsDialogue {
 		
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if (index == 0) {
+			if(index == 0) {
 				return new Response("Назад", "Вернутся в меню настроек.", MENU);
-				
-			}else {
-				return null;
 			}
+			return null;
 		}
 
 		@Override
@@ -1176,14 +1174,33 @@ public class OptionsDialogue {
 			UtilText.nodeContentSB.setLength(0);
 			
 			UtilText.nodeContentSB.append(
-					"<div class='container-full-width'>"
-					+ "Эти опции определяют частоту встреч случайных NPC по половому признаку."
-					+ " Некоторые NPC, например, случайные нападающие суккубы, имеют ограничения по полу, но ваши предпочтения будут учтены по мере возможности.<br/>"
-					+ "<b>Визуальное представление шансов на встречу можно увидеть в полосках внизу каждого раздела.</b>"
-					+ " (Различные оттенки каждого пола служат исключительно для распознавания в полосках и ничего кроме этого не значат.)"
-					+ "<br/>"
-					+ "Считается, что у персонажа есть грудь, если она не меньше чашечки АА."
-					+ "</div>");
+					"<details>"
+						+ "<summary>[style.boldFeminine(Нажмите для топ. инфы)]</summary>"
+						+ "Эти опции определяют частоту встреч случайных NPC по половому признаку."
+						+ " Некоторые NPC, например, случайные нападающие суккубы, имеют ограничения по полу, но ваши предпочтения будут учтены по мере возможности.<br/>"
+						+ "<b>Визуальное представление шансов на встречу можно увидеть в полосках внизу каждого раздела.</b>"
+						+ " (Различные оттенки каждого пола служат исключительно для распознавания в полосках и ничего кроме этого не значат.)"
+						+ "<br/>"
+						+ "Считается, что у персонажа есть грудь, если она не меньше чашечки АА."
+					+ "</details>");
+
+			// Offspring preferences:
+
+			UtilText.nodeContentSB.append(getCustomContentPreferenceDivStart(PresetColour.ANDROGYNOUS, "Offspring using gender preferences", "Define which offspring use your gender preferences."));
+				int[] orderOptions = new int[] {3, 0, 2, 1};
+				for(int i : orderOptions) {
+					UtilText.nodeContentSB.append(
+							(Main.getProperties().offspringGenderLevel==i
+								?"<div id='OFFSPRING_GENDER_PREF_"+i+"' class='normal-button selected' style='width:48%; margin:1%; text-align:center; float:right; color:"+PresetColour.ANDROGYNOUS.toWebHexString()+";'>"
+									+ com.lilithsthrone.game.Properties.offspringGenderName[i]
+									+ "</div>"
+								:"<div id='OFFSPRING_GENDER_PREF_"+i+"' class='normal-button' style='width:48%; margin:1%; text-align:center; float:right;'>"
+									+ "[style.colourDisabled("+com.lilithsthrone.game.Properties.offspringGenderName[i]+")]"
+									+ "</div>"));
+				}
+			UtilText.nodeContentSB.append("</div></div>");
+
+			// Gender preferences:
 			
 			UtilText.nodeContentSB.append(getGenderPreferencesPanel(PronounType.MASCULINE));
 			UtilText.nodeContentSB.append(getGenderPreferencesPanel(PronounType.NEUTRAL));
@@ -1300,12 +1317,13 @@ public class OptionsDialogue {
 			UtilText.nodeContentSB.setLength(0);
 			
 			UtilText.nodeContentSB.append(
-					"<div class='container-full-width'>"
-					+ "Эти опции определяют частоту встречи сексуальной ориентации случайных NPC."
-					+ " Обратите внимание, что раса и женственность NPC могут влиять на их ориентацию, а некоторые NPC имеют заранее определенную ориентацию, но ваши предпочтения будут учтены по мере возможности.</br>"
-					+ "<b>Визуальное представление шансов на встречу можно увидеть в столбиках внизу.</b>"
-					+ " (Различные оттенки каждой ориентации служат исключительно для распознавания в полосках и ничего кроме этого не значат.)"
-					+ "</div>"
+					"<details>"
+						+ "<summary>[style.boldAndrogynous(Нажмите для топ. инфы)]</summary>"
+						+ "Эти опции определяют частоту встречи сексуальной ориентации случайных NPC."
+						+ " Обратите внимание, что раса и женственность NPC могут влиять на их ориентацию, а некоторые NPC имеют заранее определенную ориентацию, но ваши предпочтения будут учтены по мере возможности.</br>"
+						+ "<b>Визуальное представление шансов на встречу можно увидеть в столбиках внизу.</b>"
+						+ " (Различные оттенки каждой ориентации служат исключительно для распознавания в полосках и ничего кроме этого не значат.)"
+					+ "</details>"
 		
 					+ "<div class='container-full-width' style='text-align:center;'>");
 			
@@ -1350,13 +1368,14 @@ public class OptionsDialogue {
 			UtilText.nodeContentSB.setLength(0);
 			
 			UtilText.nodeContentSB.append(
-					"<div class='container-full-width'>"
-							+ "Эти опции определяют вероятность того, что случайные NPC будут иметь эти фетиши и предпочтения."
-							+ " Некоторые расы более склонны к определенным фетишам, но ваши предпочтения будут учтены по мере возможности.<br/>"
-							+ " Настройки контента позволяют включать/выключать соответствующие фетиши."
-							+ "</div>"
+					"<details>"
+						+ "<summary>[style.boldFetish(Нажмите для топ. инфы)]</summary>"
+						+ "Эти опции определяют вероятность того, что случайные NPC будут иметь эти фетиши и предпочтения."
+						+ " Некоторые расы более склонны к определенным фетишам, но ваши предпочтения будут учтены по мере возможности.<br/>"
+						+ " Настройки контента позволяют включать/выключать соответствующие фетиши."
+					+ "</details>"
 							
-							+ "<div class='container-full-width' style='text-align:center;'>");
+					+ "<div class='container-full-width' style='text-align:center;'>");
 			for(AbstractFetish fetish : Fetish.getAllFetishes()) {
 				if(fetish.getFetishesForAutomaticUnlock().isEmpty()) {
 					UtilText.nodeContentSB.append(getFetishPreferencesPanel(fetish));
@@ -1533,11 +1552,12 @@ public class OptionsDialogue {
 			UtilText.nodeContentSB.setLength(0);
 			
 			UtilText.nodeContentSB.append(
-					"<div class='container-full-width'>"
-					+ "Эти опции определяют возраст случайных NPC в зависимости от их женственности."
-					+ " Некоторые NPC, такие как демоны и гарпии, могут казаться моложе, чем они есть на самом деле, но ваши предпочтения будут учтены по мере возможности.<br/>"
-					+ "<b>Визуальное представление возрастных шансов можно увидеть в виде полос в нижней части каждого раздела.</b>"
-					+ "</div>");
+					"<details>"
+						+ "<summary>[style.boldAge(Нажмите для топ. инфы)]</summary>"
+						+ "Эти опции определяют возраст случайных NPC в зависимости от их женственности."
+						+ " Некоторые NPC, такие как демоны и гарпии, могут казаться моложе, чем они есть на самом деле, но ваши предпочтения будут учтены по мере возможности.<br/>"
+						+ "<b>Визуальное представление возрастных шансов можно увидеть в виде полос в нижней части каждого раздела.</b>"
+					+ "</details>");
 			
 			UtilText.nodeContentSB.append(getAgePreferencesPanel(PronounType.MASCULINE));
 			UtilText.nodeContentSB.append(getAgePreferencesPanel(PronounType.NEUTRAL));
@@ -1645,15 +1665,16 @@ public class OptionsDialogue {
 			UtilText.nodeContentSB.setLength(0);
 			
 			UtilText.nodeContentSB.append(
-					"<div class='container-full-width'>"
+					"<details>"
+						+ "<summary>[style.boldHuman(Нажмите для доп. инфы)]</summary>"
 						+ "Эти параметры определяют количество фурри-контента, который вы встретите в игре."
 						+ " Опция `Встречи с людьми` определяет, какова вероятность того, что случайные NPC окажутся полностью людьми."
-						+ " <b>В данный момент эти опции затрагивают только случайных NPC, но я сделаю все возможное, чтобы добавить уменьшенные фурри версии всех основных NPC!</b>"
+						+ " <i>В данный момент эти опции затрагивают только случайных NPC, но я сделаю все возможное, чтобы добавить уменьшенные фурри версии всех основных NPC!</ш>"
 						
 						+ "<br/>[style.italicsGood(Наведите курсор на кнопки, чтобы узнать, что означает каждый вариант!)]"
 						
 						+ "<br/>Обратите внимание, что некоторые расы, такие как демоны и гарпии, ограничены в выборе фурри предпочтений."
-					+ "</div>"
+					+ "</details>"
 							
 					+ "<span style='height:16px;width:800px;float:left;'></span>");
 					
@@ -2418,19 +2439,35 @@ public class OptionsDialogue {
 					"Миниатюры",
 					"Включает всплывающие подсказки с уменьшенными изображениями персонажа.",
 					Main.getProperties().hasValue(PropertyValue.thumbnail)));
-			UtilText.nodeContentSB.append(getCustomContentPreferenceDivStart(PresetColour.BASE_AQUA, "Предпочитаемый художник", "Работы какого художника используются по умолчанию."));
+
+//			UtilText.nodeContentSB.append(getCustomContentPreferenceDivStart(PresetColour.BASE_AQUA, "Предпочитаемый художник", "Работы какого художника используются по умолчанию."));
+
+			UtilText.nodeContentSB.append("<div class='container-full-width' style='padding:0; margin:2px 0;'>"
+				+ "<div class='container-half-width' style='width:calc(55% - 16px);'>"
+					+ "<b style='text-align:center; color:"+PresetColour.BASE_AQUA.toWebHexString()+";'>Предпочитаемый художник</b><b>:</b> "
+					+ "Работы какого художника используются по умолчанию."
+				+ "</div>"
+				+ "<div class='container-half-width' style='width:calc(45% - 16px);'>");
+
 			List<Artist> artists = new ArrayList<>(Artwork.allArtists);
-			Collections.reverse(artists);// So that they're in alphabetical order
-			for (Artist artist : artists) {
+			artists.remove(Artwork.customArtist);
+			Collections.sort(artists, (e1, e2)->Main.getProperties().getArtistPriority(e2.getFolderName())-Main.getProperties().getArtistPriority(e1.getFolderName()));
+
+			for(int i=0; i<artists.size(); i++) {
+				Artist artist = artists.get(i);
 				if (!artist.getName().equals("Custom")) {
-					UtilText.nodeContentSB.append(
-							(Main.getProperties().preferredArtist.equals(artist.getFolderName())
-									?"<div id='ARTIST_"+artist.getFolderName()+"' class='normal-button selected' style='width:75%; text-align:center; float:right;'>"
-									+"<b style='color:"+artist.getColour().toWebHexString()+";'>"+artist.getName()+"</b>"
-									+"</div>"
-									:"<div id='ARTIST_"+artist.getFolderName()+"' class='normal-button' style='width:75%; text-align:center; float:right;'>"
-									+"[style.boldDisabled("+artist.getName()+")]"
-									+"</div>"));
+					UtilText.nodeContentSB.append("<div style='width:100%;  margin:1px 0; border-radius:4px; background-color:"+PresetColour.BACKGROUND.toWebHexString()+";'>");
+						UtilText.nodeContentSB.append("<div "+(i==0?"":"id='ARTIST_"+artist.getFolderName()+"_UP'")+" class='normal-button"+(i==0?" disabled":"")+"' style='width:10%; margin:0; text-align:center;'>");
+							UtilText.nodeContentSB.append("&#8593;");
+						UtilText.nodeContentSB.append("</div>");
+						UtilText.nodeContentSB.append("<div "+(i==artists.size()-1?"":"id='ARTIST_"+artist.getFolderName()+"_DOWN'")
+									+" class='normal-button"+(i==artists.size()-1?" disabled":"")+"' style='width:10%; margin:0; text-align:center; float:right;'>"
+								+"&#8595;"
+							+"</div>");
+						UtilText.nodeContentSB.append("<div style='width:80%; margin:0; text-align:center; float:right;'>"
+								+"<span style='color:"+artist.getColour().toWebHexString()+";'>"+artist.getName()+"</span> ("+artist.getArtworkCount()+")"
+							+"</div>");
+					UtilText.nodeContentSB.append("</div>");
 				}
 			}
 			UtilText.nodeContentSB.append("</div></div>");
