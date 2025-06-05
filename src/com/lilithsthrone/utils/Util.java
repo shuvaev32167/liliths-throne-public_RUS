@@ -22,8 +22,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.time.Instant;
-import java.util.List;
 import java.util.*;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.regex.Pattern;
@@ -62,7 +62,7 @@ public class Util {
 		put(KeyCode.DOLLAR, "$");
 		put(KeyCode.DOWN, "Down");
 		put(KeyCode.END, "End");
-        put(KeyCode.ENTER, "Вход");
+		put(KeyCode.ENTER, "Enter");
 		put(KeyCode.EQUALS, "=");
 		put(KeyCode.ESCAPE, "Esc");
 		put(KeyCode.EURO_SIGN, "&euro;"); // €
