@@ -2414,93 +2414,94 @@ public class Body implements XMLSaving {
 			if(hair.getType().getTags().contains(BodyPartTag.HAIR_NATURAL_MANE) && owner.getFaceType().getRace()==hair.getType().getRace()) {
 				sb.append(", which forms a mane running down the back of [npc.her] neck and which "); // If hair and face races match, the mane is fully formed
 			} else {
-				sb.append(", which ");
+				sb.append(", ");
 			}
-			
+
+			boolean defaultPlural = hair.getType().isDefaultPlural(owner);
 			switch (hair.getStyle()) {
 				case NONE:
-					sb.append((hair.getType().isDefaultPlural(owner)?"are":"is")+" unstyled.");
+					sb.append((defaultPlural ? "are" : "is") + " unstyled.");
 					break;
 				case BRAIDED:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been woven into a long braid.");
+					sb.append((defaultPlural ? "have" : "has") + " been woven into a long braid.");
 					break;
 				case CURLY:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been curled and left loose.");
+					sb.append((defaultPlural ? "have" : "has") + " been curled and left loose.");
 					break;
 				case LOOSE:
-					sb.append((hair.getType().isDefaultPlural(owner)?"are":"is")+" left loose and unstyled.");
+					sb.append((defaultPlural ? "are" : "is") + " left loose and unstyled.");
 					break;
 				case PONYTAIL:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been styled into a ponytail.");
+					sb.append((defaultPlural ? "have" : "has") + " been styled into a ponytail.");
 					break;
 				case STRAIGHT:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been straightened and left loose.");
+					sb.append((defaultPlural ? "have" : "has") + " been straightened and left loose.");
 					break;
 				case TWIN_TAILS:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been styled into twin tails.");
+					sb.append((defaultPlural ? "have" : "has") + " been styled into twin tails.");
 					break;
 				case WAVY:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been styled into waves and left loose.");
+					sb.append((defaultPlural ? "have" : "has") + " been styled into waves and left loose.");
 					break;
 				case MOHAWK:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been styled into a mohawk.");
+					sb.append((defaultPlural ? "have" : "has") + " been styled into a mohawk.");
 					break;
 				case AFRO:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been styled into an afro.");
+					sb.append((defaultPlural ? "have" : "has") + " been styled into an afro.");
 					break;
 				case SIDECUT:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been styled into a sidecut.");
+					sb.append((defaultPlural ? "have" : "has") + " been styled into a sidecut.");
 					break;
 				case BOB_CUT:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been styled into a bob cut.");
+					sb.append((defaultPlural ? "have" : "has") + " been styled into a bob cut.");
 					break;
 				case PIXIE:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been styled into a pixie-cut.");
+					sb.append((defaultPlural ? "have" : "has") + " been styled into a pixie-cut.");
 					break;
 				case SLICKED_BACK:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been slicked back.");
+					sb.append((defaultPlural ? "have" : "has") + " been slicked back.");
 					break;
 				case MESSY:
-					sb.append((hair.getType().isDefaultPlural(owner)?"are":"is")+" unstyled and very messy.");
+					sb.append((defaultPlural ? "are" : "is") + " unstyled and very messy.");
 					break;
 				case HIME_CUT:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been straightened and styled into a hime cut.");
+					sb.append((defaultPlural ? "have" : "has") + " been straightened and styled into a hime cut.");
 					break;
 				case CHONMAGE:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been straightened, oiled and styled into a chonmage topknot.");
+					sb.append((defaultPlural ? "have" : "has") + " been straightened, oiled and styled into a chonmage topknot.");
 					break;
 				case TOPKNOT:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been styled into a topknot.");
+					sb.append((defaultPlural ? "have" : "has") + " been styled into a topknot.");
 					break;
 				case DREADLOCKS:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been styled into dreadlocks.");
+					sb.append((defaultPlural ? "have" : "has") + " been styled into dreadlocks.");
 					break;
 				case BIRD_CAGE:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been styled into an elaborate bird cage"+UtilText.returnStringAtRandom(".",", birds not included."));
+					sb.append((defaultPlural ? "have" : "has") + " been styled into an elaborate bird cage" + UtilText.returnStringAtRandom(".", ", birds not included."));
 					break;
 				case TWIN_BRAIDS:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been woven into long twin braids.");
+					sb.append((defaultPlural ? "have" : "has") + " been woven into long twin braids.");
 					break;
 				case DRILLS:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been styled into ojou ringlets.");
+					sb.append((defaultPlural ? "have" : "has") + " been styled into ojou ringlets.");
 					break;
 				case LOW_PONYTAIL:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been styled into a low ponytail.");
+					sb.append((defaultPlural ? "have" : "has") + " been styled into a low ponytail.");
 					break;
 				case CROWN_BRAID:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been woven into a "+UtilText.returnStringAtRandom("crown of braids.","braided crown."));
+					sb.append((defaultPlural ? "have" : "has") + " been woven into a " + UtilText.returnStringAtRandom("crown of braids.", "braided crown."));
 					break;
 				case BUN:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been styled into a bun.");
+					sb.append((defaultPlural ? "have" : "has") + " been styled into a bun.");
 					break;
 				case CHIGNON:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been tied up into a chignon.");
+					sb.append((defaultPlural ? "have" : "has") + " been tied up into a chignon.");
 					break;
 				case SIDE_BRAIDS:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been woven into braids that hang down on either side of [npc.her] face.");
+					sb.append((defaultPlural ? "заплетены" : "заплетён") + " в косички " + (defaultPlural ? "свисающие по обе стороны от лица" : "свисающий по стороне лица"));
 					break;
 				case SIDE_PARTED:
-					sb.append((hair.getType().isDefaultPlural(owner)?"have":"has")+" been combed away from a parting on the side of [npc.her] head.");
+					sb.append((defaultPlural ? "have" : "has") + " been combed away from a parting on the side of [npc.her] head.");
 					break;
 			}
 		}

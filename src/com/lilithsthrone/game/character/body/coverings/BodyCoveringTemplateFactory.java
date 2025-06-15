@@ -128,7 +128,7 @@ public class BodyCoveringTemplateFactory {
 	}
 	
 	public static BodyCoveringTemplate createHeadHair(CoveringModifier modifier) {
-		return createHairWithoutPatterns("a head of", "волосы", modifier);
+		return createHairWithoutPatterns("на голове", "волосы", modifier);
 	}
 	
 	public static BodyCoveringTemplate createFurHeadHair(CoveringModifier modifier) {

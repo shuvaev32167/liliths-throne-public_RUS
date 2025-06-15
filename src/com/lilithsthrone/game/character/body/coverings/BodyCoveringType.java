@@ -1197,7 +1197,7 @@ public class BodyCoveringType {
 //								bct = new AbstractBodyCoveringType(cat, BodyCoveringTemplateFactory.createSilicone("a layer of", "silicone-hair", CoveringPattern.NONE, CoveringPattern.allSiliconeCoveringPatterns)) {};
 //								break;
 							case HAIR:
-//								bct = new AbstractBodyCoveringType(cat, BodyCoveringTemplateFactory.createSilicone("a head of", "silicone-hair", CoveringPattern.NONE, CoveringPattern.allSiliconeCoveringPatterns)) {};
+//								bct = new AbstractBodyCoveringType(cat, BodyCoveringTemplateFactory.createSilicone("на голове", "silicone-hair", CoveringPattern.NONE, CoveringPattern.allSiliconeCoveringPatterns)) {};
 //								break;
 							case MAIN_HAIR:
 							case ANTENNAE:

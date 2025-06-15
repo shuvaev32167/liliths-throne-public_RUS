@@ -3316,6 +3316,7 @@ public class UtilText {
                 if (parseAddPronoun) {
                     parseAddPronoun = false;
                     determiner = UtilText.generateSingularDeterminer(descriptor) + " ";
+                    determiner = "";
                 }
 
                 if (arguments.equals(" ") || arguments.equalsIgnoreCase("true")) {
