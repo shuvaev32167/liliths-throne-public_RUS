@@ -72,7 +72,7 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 	 * @param race What race has this leg type.
 	 * @param defaultFootStructure The default foot structure for this leg type.
 	 * @param footType The type of foot attached to this leg type.
-	 * @param determiner Will usually be "a pair of".
+	 * @param determiner Will usually be "пара".
 	 * @param name The singular name of the leg. This will usually just be "leg".
 	 * @param namePlural The plural name of the leg. This will usually just be "legs".
 	 * @param descriptorsMasculine The descriptors that can be used to describe a masculine form of this leg type.
@@ -254,7 +254,7 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 		if(gc.getLegCount()==1) {
 			return "a";
 		} else if(gc.getLegCount()==2) {
-			return "a pair of";
+			return "пара";
 		}
 		return Util.intToString(gc.getLegCount());
 	}

@@ -33,7 +33,7 @@ public class FaceType {
 			"Thankfully#IF(!npc.isPlayer())for [npc.herHim]#ENDIF, the transformation only lasts a matter of moments, leaving [npc.herHim] with a normal human face, [npc.materialDescriptor] [npc.faceSkin+].<br/>"
 					+ "[npc.Name] now [npc.has] a [style.boldHuman(человеческое лицо)], [npc.materialDescriptor] [npc.faceFullDescription]."
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldHuman(human tongue)].",
-			"У [npc.targetBasedWord(, н)][pc.morphSingleGent([npc.sheHasFull])] [pc.morphGenSinNetr([npc.a_feminineDescriptor(true)])], человеческое лицо, [pc.morphGenSinNetr([npc.materialDescriptor])] [pc.morphSingleInstr([pc.morphGenSinFem([npc.faceFullDescription(true)])])].",
+            "У [npc.targetBasedWord(, н)][pc.morphSingleGent([npc.him])] [pc.morphGenSinNetr([npc.a_feminineDescriptor(true)])], человеческое лицо, [pc.morphGenSinNetr([npc.materialDescriptor])] [pc.morphSingleInstr([pc.morphGenSinFem([npc.faceFullDescription(true)])])].",
 			Util.newArrayListOfValues()){
 	};
 

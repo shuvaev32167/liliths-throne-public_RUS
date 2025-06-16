@@ -79,6 +79,7 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.utils.time.DayPeriod;
+import com.lilithsthrone.utils.translate.russian.Morpher;
 import com.lilithsthrone.utils.translate.russian.NewCommand;
 import com.lilithsthrone.world.*;
 import com.lilithsthrone.world.places.AbstractPlaceType;
@@ -89,6 +90,7 @@ import org.openjdk.nashorn.api.scripting.NashornScriptEngine;
 import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import ru.shuvaev.morpher.tools.enams.Numeration;
 
 import javax.script.CompiledScript;
 import javax.script.ScriptContext;
@@ -1491,12 +1493,12 @@ public class UtilText {
                             + (parseCapitalise
                             ? Util.capitaliseSentence(Femininity.getFemininityName(character.getFemininityValue(), pronoun))
                             : Femininity.getFemininityName(character.getFemininityValue(), pronoun)) + "</span>"
-                            + " <span style='color:" + character.getRaceStage().getColour().toWebHexString() + ";'>" + character.getRaceStage().getName() + "</span>"
+                            + " <span style='color:" + character.getRaceStage().getColour().toWebHexString() + ";'>" + Morpher.morphGender(character.getRaceStage().getName(), Morpher.convertGender(character.getGender()), Numeration.SINGLE) + "</span>"
                             + " <span style='color:" + character.getSubspecies().getColour(character).toWebHexString() + ";'>" + getSubspeciesName(character.getSubspecies(), character) + "</span>";
                 }
                 return (parseCapitalise
                         ? Util.capitaliseSentence(Femininity.getFemininityName(character.getFemininityValue(), pronoun))
-                        : Femininity.getFemininityName(character.getFemininityValue(), pronoun)) + " " + character.getRaceStage().getName() + " " + getSubspeciesName(character.getSubspecies(), character);
+                        : Femininity.getFemininityName(character.getFemininityValue(), pronoun)) + " " + Morpher.morphGender(character.getRaceStage().getName(), Morpher.convertGender(character.getGender()), Numeration.SINGLE) + " " + getSubspeciesName(character.getSubspecies(), character);
             }
 
             @Override
@@ -3292,54 +3294,27 @@ public class UtilText {
             @Override
             public String parse(List<GameCharacter> specialNPCs, String command, String arguments, String target, GameCharacter character) {
 
-                String descriptor = "";
-
-                switch (character.getFemininity()) {
-                    case FEMININE_STRONG:
-                        descriptor = UtilText.returnStringAtRandom("очень женственная", "красивая", "великолепная");
-                        break;
-                    case FEMININE:
-                        descriptor = UtilText.returnStringAtRandom("красивая", "женственная", "милая");
-                        break;
-                    case ANDROGYNOUS:
-                        descriptor = UtilText.returnStringAtRandom("неопределённый");
-                        break;
-                    case MASCULINE:
-                        descriptor = UtilText.returnStringAtRandom("мужественный", "привлекательный");
-                        break;
-                    case MASCULINE_STRONG:
-                        descriptor = UtilText.returnStringAtRandom("очень мужественный", "чрезвычайно привлекательный");
-                        break;
-                }
-
-                String determiner = "";
-                if (parseAddPronoun) {
-                    parseAddPronoun = false;
-                    determiner = UtilText.generateSingularDeterminer(descriptor) + " ";
-                    determiner = "";
-                }
+                String descriptor = switch (character.getFemininity()) {
+                    case FEMININE_STRONG ->
+                            UtilText.returnStringAtRandom("очень женственная", "красивая", "великолепная");
+                    case FEMININE -> UtilText.returnStringAtRandom("красивая", "женственная", "милая");
+                    case ANDROGYNOUS -> UtilText.returnStringAtRandom("неопределённый");
+                    case MASCULINE -> UtilText.returnStringAtRandom("мужественный", "привлекательный");
+                    case MASCULINE_STRONG ->
+                            UtilText.returnStringAtRandom("очень мужественный", "чрезвычайно привлекательный");
+                };
 
                 if (arguments.equals(" ") || arguments.equalsIgnoreCase("true")) {
-                    switch (character.getFemininity()) {
-                        case FEMININE_STRONG:
-                            descriptor = "[style.colourFeminineStrong(" + descriptor + ")]";
-                            break;
-                        case FEMININE:
-                            descriptor = "[style.colourFeminine(" + descriptor + ")]";
-                            break;
-                        case ANDROGYNOUS:
-                            descriptor = "[style.colourAndrogynous(" + descriptor + ")]";
-                            break;
-                        case MASCULINE:
-                            descriptor = "[style.colourMasculine(" + descriptor + ")]";
-                            break;
-                        case MASCULINE_STRONG:
-                            descriptor = "[style.colourMasculineStrong(" + descriptor + ")]";
-                            break;
-                    }
+                    descriptor = switch (character.getFemininity()) {
+                        case FEMININE_STRONG -> "[style.colourFeminineStrong(" + descriptor + ")]";
+                        case FEMININE -> "[style.colourFeminine(" + descriptor + ")]";
+                        case ANDROGYNOUS -> "[style.colourAndrogynous(" + descriptor + ")]";
+                        case MASCULINE -> "[style.colourMasculine(" + descriptor + ")]";
+                        case MASCULINE_STRONG -> "[style.colourMasculineStrong(" + descriptor + ")]";
+                    };
                 }
 
-                return determiner + descriptor;
+                return descriptor;
             }
         });
 
@@ -4756,7 +4731,7 @@ public class UtilText {
             @Override
             public String parse(List<GameCharacter> specialNPCs, String command, String arguments, String target, GameCharacter character) {
                 if (character.getArmRows() == 1) {
-                    return "a pair of";
+                    return "пара";
                 } else if (character.getArmRows() == 2) {
                     return "two pairs of";
                 } else {
@@ -9606,7 +9581,7 @@ public class UtilText {
             if (Character.isUpperCase(command.split("_")[0].charAt(0)))
                 parseCapitalise = true;
             command = command.split("_")[1];
-            parseAddPronoun = true;
+            parseAddPronoun = false;
         }
 
         if (Character.isUpperCase(command.charAt(0))) {

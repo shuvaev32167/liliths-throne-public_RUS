@@ -1104,7 +1104,7 @@ public class ClothingType {
 	};
 	
 	public static AbstractClothingType WRIST_SUIT_CUFFS = new AbstractClothingType(100,
-			"a pair of",
+			"пара",
 			true,
 			"suit cuff",
 			"suit cuffs",
@@ -1154,7 +1154,7 @@ public class ClothingType {
 	};
 	
 	public static AbstractClothingType WRIST_WRISTBANDS = new AbstractClothingType(100,
-			"a pair of",
+			"пара",
 			true,
 			"wristband",
 			"wristbands",
@@ -1488,7 +1488,7 @@ public class ClothingType {
 //		}
 //	};
 //	public static AbstractClothingType MAID_STOCKINGS = new AbstractClothingType(450,
-//			"a pair of",
+//			"пара",
 //			true,
 //			"Maid's stockings",
 //			"Maid's stockings",
@@ -1541,7 +1541,7 @@ public class ClothingType {
 //	};
 	
 //	public static AbstractClothingType MAID_HEELS = new AbstractClothingType(800,
-//			"a pair of",
+//			"пара",
 //			true,
 //			"Maid's high heels",
 //			"Maid's high heels",
@@ -1594,7 +1594,7 @@ public class ClothingType {
 //	};
 	
 //	public static AbstractClothingType MAID_SLEEVES = new AbstractClothingType(350,
-//			"a pair of",
+//			"пара",
 //			true,
 //			"Maid's sleeves",
 //			"Maid's sleeves",
@@ -1716,7 +1716,7 @@ public class ClothingType {
 	};
 
 	public static AbstractClothingType ENFORCER_SHORTS = new AbstractClothingType(600,
-			"a pair of",
+			"пара",
 			true,
 			"fancy-dress Enforcer's shorts",
 			"fancy-dress Enforcer's shorts",
@@ -2294,7 +2294,7 @@ public class ClothingType {
 	};
 	
 	public static AbstractClothingType JOLNIR_BOOTS = new AbstractClothingType(500,
-			"a pair of",
+			"пара",
 			true,
 			"J&oacute;lnir's boot",
 			"J&oacute;lnir's boots",
@@ -2347,7 +2347,7 @@ public class ClothingType {
 	};
 	
 	public static AbstractClothingType JOLNIR_BOOTS_FEMININE = new AbstractClothingType(750,
-			"a pair of",
+			"пара",
 			true,
 			"J&oacute;lnir's heeled boot",
 			"J&oacute;lnir's heeled boots",

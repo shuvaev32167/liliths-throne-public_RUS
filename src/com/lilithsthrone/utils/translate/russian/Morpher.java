@@ -16,15 +16,18 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Morpher {
-    public static final MorpherType MORPHER = FactoryMorpherKt.getMorpherW3CachedMorpNoun();
+    private Morpher() {
+    }
+
+    private static final MorpherType WEB_MORPHER = FactoryMorpherKt.getMorpherW3CachedMorpNoun();
     private static final MorpherType SIMPLE_MORPHER = FactoryMorpherKt.getSimpleMorpNoun();
 
     public static String morphNoun(String text, Case aCase, Numeration numeration) {
-        return replaceBetweenHtmlTags(text, string -> MORPHER.morphNoun(string, aCase, numeration));
+        return replaceBetweenHtmlTags(text, string -> WEB_MORPHER.morphNoun(string, aCase, numeration));
     }
 
     public static String morphGender(String text, ru.shuvaev.morpher.tools.enams.Gender gender, Numeration numeration) {
-        return replaceBetweenHtmlTags(text, string -> MORPHER.morphGender(string, gender, numeration));
+        return replaceBetweenHtmlTags(text, string -> WEB_MORPHER.morphGender(string, gender, numeration));
     }
 
     public static String parseText(List<GameCharacter> specialNPCs, String command, String arguments, String target, GameCharacter character) {
@@ -86,7 +89,7 @@ public class Morpher {
         if (!gender.isFeminine()) {
             return surname;
         }
-        final var result = MORPHER.convertSurnameToFemale(surname);
+        final var result = WEB_MORPHER.convertSurnameToFemale(surname);
         final var p = Pattern.compile("[a-zA-Z]+");
         final var m = p.matcher(result);
         if (m.find()) {
@@ -113,10 +116,18 @@ public class Morpher {
     }
 
     public static String morphCountableNoun(int count, String noun) {
-        return MORPHER.morphCountableNoun(count, noun, Case.NOMINATIVUS);
+        return morphCountableNoun(count, noun, Case.NOMINATIVUS);
+    }
+
+    public static String morphCountableNoun(int count, String noun, Case aCase) {
+        return WEB_MORPHER.morphCountableNoun(count, noun, aCase);
     }
 
     public static String morphCountableNoun(double count, String noun) {
-        return MORPHER.morphCountableNoun(count, noun, Case.NOMINATIVUS);
+        return WEB_MORPHER.morphCountableNoun(count, noun, Case.NOMINATIVUS);
+    }
+
+    public static String morphParticipleToShortForm(String participle, ru.shuvaev.morpher.tools.enams.Gender gender, Numeration numeration) {
+        return WEB_MORPHER.participleToShortForm(participle, gender, numeration);
     }
 }

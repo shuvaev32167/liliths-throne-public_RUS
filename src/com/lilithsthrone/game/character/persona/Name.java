@@ -287,10 +287,10 @@ new NameTriplet("Торник", "Торно", "Торника")
 					
 					new NameTriplet("Митч", "Мисти", "Мисти"),
 					new NameTriplet("Мел", "Мел", "Мелоди"),
-					new NameTriplet("Майк", "Ноэль", "Ноэль"),
+			new NameTriplet("Майк", "Минди", "Минди"),
 					
 					new NameTriplet("Ники", "Никки", "Никки"),
-					new NameTriplet("Ноэль", "Noel", "Noelle"),
+			new NameTriplet("Ноэль", "Ноэль", "Ноэль"),
 		
 					new NameTriplet("Пирс", "Феникс", "Пенелопа"),
 					

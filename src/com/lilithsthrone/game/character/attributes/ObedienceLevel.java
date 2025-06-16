@@ -33,7 +33,7 @@ public enum ObedienceLevel {
 
 	POSITIVE_FOUR_DUTIFUL("dutiful", 70, 90, PresetColour.AFFECTION_POSITIVE_FOUR),
 
-	POSITIVE_FIVE_SUBSERVIENT("subservient", 90, 100, PresetColour.AFFECTION_POSITIVE_FIVE);
+	POSITIVE_FIVE_SUBSERVIENT("подчинённый", 90, 100, PresetColour.AFFECTION_POSITIVE_FIVE);
 	
 	
 	private final String name;
@@ -67,39 +67,39 @@ public enum ObedienceLevel {
 		
 		switch(affectionLevel) {
 			case NEGATIVE_FIVE_REBELLIOUS:
-                sb.append(UtilText.parse(character, "[npc.Name] [npc.is] " + obedienceName + (longDescription ? ", and outright refuse to obey any command." : ".")));
+				sb.append(UtilText.parse(character, "[npc.Name] [npc.genderBasedWordAuto(" + obedienceName + ")]" + (longDescription ? ", and outright refuse to obey any command." : ".")));
 				break;
 			case NEGATIVE_FOUR_DEFIANT:
-                sb.append(UtilText.parse(character, "[npc.Name] [npc.is] " + obedienceName + (longDescription ? ", and only obey commands when " + (character.isRaceConcealed() ? "they are" : "[npc.sheIs]") + " physically forced to." : ".")));
+				sb.append(UtilText.parse(character, "[npc.Name] [npc.genderBasedWordAuto(" + obedienceName + ")]" + (longDescription ? ", and only obey commands when " + (character.isRaceConcealed() ? "they are" : "[npc.sheIs]") + " physically forced to." : ".")));
 				break;
 			case NEGATIVE_THREE_STRONG_INSUBORDINATE:
-                sb.append(UtilText.parse(character, "[npc.Name] [npc.is] " + obedienceName + (longDescription ? ", and sometimes refuse to obey commands." : ".")));
+				sb.append(UtilText.parse(character, "[npc.Name] [npc.genderBasedWordAuto(" + obedienceName + ")]" + (longDescription ? ", and sometimes refuse to obey commands." : ".")));
 				break;
 			case NEGATIVE_TWO_UNRULY:
-				sb.append(UtilText.parse(character, "[npc.Name] [npc.is] "+obedienceName+(longDescription?", and will refuse to obey commands if"
+				sb.append(UtilText.parse(character, "[npc.Name] [npc.genderBasedWordAuto(" + obedienceName + ")]" + (longDescription ? ", and will refuse to obey commands if"
                         + (character.isRaceConcealed() ? " they think that they" : " [npc.she] think that [npc.she]")
 						+ " can get away with it.":".")));
 				break;
 			case NEGATIVE_ONE_DISOBEDIENT:
-				sb.append(UtilText.parse(character, "[npc.Name] [npc.is] "+obedienceName+(longDescription?", and will often complain about having to follow orders.":".")));
+				sb.append(UtilText.parse(character, "[npc.Name] [npc.genderBasedWordAuto(" + obedienceName + ")]" + (longDescription ? ", and will often complain about having to follow orders." : ".")));
 				break;
 			case ZERO_FREE_WILLED:
-                sb.append(UtilText.parse(character, "[npc.Name] [npc.is] " + obedienceName + (longDescription ? " and will do whatever " + (character.isRaceConcealed() ? "they want." : "[npc.she] want.") : ".")));
+				sb.append(UtilText.parse(character, "[npc.Name] [npc.genderBasedWordAuto(" + obedienceName + ")]" + (longDescription ? " and will do whatever " + (character.isRaceConcealed() ? "they want." : "[npc.she] want.") : ".")));
 				break;
 			case POSITIVE_ONE_AGREEABLE:
-				sb.append(UtilText.parse(character, "[npc.Name] [npc.is] "+obedienceName+(longDescription?", and will carry out most orders without complaint.":".")));
+				sb.append(UtilText.parse(character, "[npc.Name] [npc.genderBasedWordAuto(" + obedienceName + ")]" + (longDescription ? ", and will carry out most orders without complaint." : ".")));
 				break;
 			case POSITIVE_TWO_OBEDIENT:
-				sb.append(UtilText.parse(character, "[npc.Name] [npc.is] "+obedienceName+(longDescription?", and will do almost anything that "+(character.isRaceConcealed()?"they are":"[npc.sheIs]")+" told.":".")));
+				sb.append(UtilText.parse(character, "[npc.Name] [npc.genderBasedWordAuto(" + obedienceName + ")]" + (longDescription ? ", and will do almost anything that " + (character.isRaceConcealed() ? "they are" : "[npc.sheIs]") + " told." : ".")));
 				break;
 			case POSITIVE_THREE_DISCIPLINED:
-				sb.append(UtilText.parse(character, "[npc.Name] [npc.is] "+obedienceName+(longDescription?", and will carry out any order without complaint.":".")));
+				sb.append(UtilText.parse(character, "[npc.Name] [npc.genderBasedWordAuto(" + obedienceName + ")]" + (longDescription ? ", and will carry out any order without complaint." : ".")));
 				break;
 			case POSITIVE_FOUR_DUTIFUL:
-				sb.append(UtilText.parse(character, "[npc.Name] [npc.is] "+obedienceName+(longDescription?", and will often go above and beyond whatever's asked of [npc.herHim].":".")));
+				sb.append(UtilText.parse(character, "[npc.Name] [npc.genderBasedWordAuto(" + obedienceName + ")]" + (longDescription ? ", and will often go above and beyond whatever's asked of [npc.herHim]." : ".")));
 				break;
 			case POSITIVE_FIVE_SUBSERVIENT:
-				sb.append(UtilText.parse(character, "[npc.Name] [npc.is] "+obedienceName+(longDescription?", and will do absolutely anything that "+(character.isRaceConcealed()?"they are":"[npc.sheIs]")+" ordered to do.":".")));
+				sb.append(UtilText.parse(character, "[npc.Name] [npc.genderBasedWordAuto(" + obedienceName + ")]" + (longDescription ? ", и сделает абсолютно всё, что " + (character.isRaceConcealed() ? "им" : "[pc.morphSingleDativ([npc.sheIs])]") + " прикажут." : ".")));
 				break;
 		}
 		

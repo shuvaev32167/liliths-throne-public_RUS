@@ -1,19 +1,15 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractHornType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
+
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * 
@@ -185,7 +181,7 @@ public class HornType {
 			Util.newArrayListOfValues("swept-back", "smooth"),
 			"sleek #IFnpc.getTotalHorns()==1#THEN[npc.horn]#ELSE[npc.horns]#ENDIF, before sweeping back and curving over [npc.her] head."
 					+ "<br/>[npc.Name] now [npc.has] [npc.hornsDeterminer] [style.boldTfGeneric(swept-back #IFnpc.getTotalHorns()==1#THEN[npc.horn]#ELSE[npc.horns]#ENDIF)].",
-			"[npc.HornsDeterminer] [npc.hornSize], [npc.hornColour(true)], swept-back #IFnpc.getTotalHorns()==1#THEN[npc.horn] grows#ELSE[npc.horns] grow#ENDIF out of the #IFnpc.getHornsPerRow()==1#THENmiddle#ELSEupper sides#ENDIF of [npc.her] forehead.") {
+			"[npc.HornsDeterminer] #IFnpc.getTotalHorns()==1#THEN[npc.hornSize], [npc.hornColour(true)], загнутый назад [npc.horn] растёт#ELSE[pc.morphPluralGent([npc.hornSize])], [pc.morphPluralGent([npc.hornColour(true)])], загнутых назад [npc.horn] растут#ENDIF из #IFnpc.getHornsPerRow()==1#THENцентра#ELSEверхней части#ENDIF [npc.her] лба.") {
 		@Override
 		public boolean isGeneric() {
 			return true;
@@ -211,9 +207,9 @@ public class HornType {
 	};
 	
 	
-	private static List<AbstractHornType> allHornTypes;
-	private static Map<AbstractHornType, String> hornToIdMap = new HashMap<>();
-	private static Map<String, AbstractHornType> idToHornMap = new HashMap<>();
+	private static final List<AbstractHornType> allHornTypes;
+	private static final Map<AbstractHornType, String> hornToIdMap = new HashMap<>();
+	private static final Map<String, AbstractHornType> idToHornMap = new HashMap<>();
 	
 	static {
 		allHornTypes = new ArrayList<>();
@@ -304,7 +300,7 @@ public class HornType {
 		return allHornTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractHornType>> typesMap = new HashMap<>();
+	private static final Map<AbstractRace, List<AbstractHornType>> typesMap = new HashMap<>();
 	
 	/**
 	 * 

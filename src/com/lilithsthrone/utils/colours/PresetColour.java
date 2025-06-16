@@ -592,7 +592,8 @@ public class PresetColour {
 	public static Colour COVERING_WHITE = new Colour(false, BaseColour.WHITE, "white") {};
 	public static Colour COVERING_GREY = new Colour(false, BaseColour.GREY, "серый") {
 	}.setLinkedColourLighter(COVERING_WHITE);
-	public static Colour COVERING_DARK_GREY = new Colour(false, BaseColour.GREY_DARK, "dark-grey") {}.setLinkedColourLighter(COVERING_GREY);
+    public static Colour COVERING_DARK_GREY = new Colour(false, BaseColour.GREY_DARK, "тёмно-серый") {
+    }.setLinkedColourLighter(COVERING_GREY);
 	public static Colour COVERING_BLACK = new Colour(false, BaseColour.BLACK, "чёрный") {
 	}.setLinkedColourLighter(COVERING_DARK_GREY);
 	public static Colour COVERING_JET_BLACK = new Colour(false, BaseColour.BLACK, "pitch black") { public String getCoveringIconColour() { return BaseColour.PITCH_BLACK.toWebHexString(); } }.setLinkedColourLighter(COVERING_BLACK);
@@ -623,7 +624,8 @@ public class PresetColour {
 	public static Colour COVERING_DIRTY_BLONDE = new Colour(false, BaseColour.TAN, "dirty-blonde") {};
 	public static Colour COVERING_SANDY = new Colour(false, Util.newColour(0xddc48b), Util.newColour(0xddc48b), "sandy") {}.setLinkedColourLighter(COVERING_DIRTY_BLONDE);
 	public static Colour COVERING_YELLOW = new Colour(false, BaseColour.YELLOW, "yellow") {}.setLinkedColourLighter(COVERING_SANDY);
-	public static Colour COVERING_BLONDE = new Colour(false, BaseColour.YELLOW_LIGHT, "blonde") {}.setLinkedColourLighter(COVERING_YELLOW);
+    public static Colour COVERING_BLONDE = new Colour(false, BaseColour.YELLOW_LIGHT, "белокурый") {
+    }.setLinkedColourLighter(COVERING_YELLOW);
 	public static Colour COVERING_BLEACH_BLONDE = new Colour(false, BaseColour.YELLOW_PALE, "bleach-blonde") {}.setLinkedColourLighter(COVERING_BLONDE);
 	// Green:
 	public static Colour COVERING_GREEN_LIGHT = new Colour(false, BaseColour.GREEN_LIGHT, "light green") {};
@@ -703,9 +705,12 @@ public class PresetColour {
 	public static Colour EYE_GOLD = new Colour(false, BaseColour.GOLD, "golden") {};
 	public static Colour EYE_SILVER = new Colour(false, BaseColour.SILVER, "silver") {};
 	// Monochrome:
-	public static Colour EYE_WHITE = new Colour(false, BaseColour.WHITE, "white") {};
-	public static Colour EYE_GREY = new Colour(false, BaseColour.GREY, "grey") {}.setLinkedColourLighter(EYE_WHITE);
-	public static Colour EYE_BLACK = new Colour(false, BaseColour.BLACK, "black") {}.setLinkedColourLighter(EYE_GREY);
+	public static Colour EYE_WHITE = new Colour(false, BaseColour.WHITE, "белый") {
+	};
+	public static Colour EYE_GREY = new Colour(false, BaseColour.GREY, "серый") {
+	}.setLinkedColourLighter(EYE_WHITE);
+	public static Colour EYE_BLACK = new Colour(false, BaseColour.BLACK, "чёрный") {
+	}.setLinkedColourLighter(EYE_GREY);
 	public static Colour EYE_PITCH_BLACK = new Colour(false, BaseColour.BLACK, "pitch black") { public String getCoveringIconColour() { return BaseColour.PITCH_BLACK.toWebHexString(); } }.setLinkedColourLighter(EYE_BLACK);
 	// Pink:
 	public static Colour EYE_PINK_SALMON = new Colour(false, BaseColour.PINK_SALMON, "salmon-pink") {};
@@ -727,7 +732,8 @@ public class PresetColour {
 	public static Colour EYE_GREEN = new Colour(false, BaseColour.GREEN_DARK, "green") {}.setLinkedColourLighter(EYE_GREY_GREEN);
 	// Blue:
 	public static Colour EYE_BLUE_LIGHT = new Colour(false, BaseColour.BLUE_LIGHT, "light blue") {};
-	public static Colour EYE_BLUE = new Colour(false, BaseColour.BLUE, "blue") {}.setLinkedColourLighter(EYE_BLUE_LIGHT);
+    public static Colour EYE_BLUE = new Colour(false, BaseColour.BLUE, "голубой") {
+    }.setLinkedColourLighter(EYE_BLUE_LIGHT);
 	public static Colour EYE_AQUA = new Colour(false, BaseColour.AQUA, "aqua") {}.setLinkedColourLighter(EYE_BLUE);
 	public static Colour EYE_BLUE_DARK = new Colour(false, BaseColour.BLUE_DARK, "dark blue") {}.setLinkedColourLighter(EYE_AQUA);
 	// Purple:

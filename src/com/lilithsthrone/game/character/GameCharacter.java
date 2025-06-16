@@ -95,6 +95,7 @@ import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import ru.shuvaev.morpher.tools.enams.Case;
 
 import java.io.File;
 import java.io.IOException;
@@ -3592,7 +3593,7 @@ public abstract class GameCharacter implements XMLSaving {
 						(incubated
 							?" After being incubated by "+(this.getIncubator().isPlayer()?"yourself":this.getIncubator().getName())+", [npc.she]"
 							:" [npc.She]")
-						+" [npc.was] born on the "+this.getBirthdayString()));
+                                + " [npc.genderBasedWord(родился, родилась)] " + this.getBirthdayString()));
 			}
 
 		}
@@ -3603,11 +3604,11 @@ public abstract class GameCharacter implements XMLSaving {
 							", and [npc.she] [npc.is] considered to be <span style='color:"+this.getAge().getColour().toWebHexString()+";'>"+Util.intToString(this.getAgeValue())+"</span> years old."));
 				} else {
 					infoScreenSB.append(UtilText.parse(this,
-							", which"
+                            ", что"
 							+ (!this.isPlayer()
-								?", due to the fact that everyone in this world starts out as being 18 from the date of their birth,"
+                                    ? ", в связи с тем фактом, что каждый в этом мире начинает с 18-летнего возраста с момента своего рождения,"
 								:"")
-							+ " makes [npc.herHim] <span style='color:"+this.getAge().getColour().toWebHexString()+";'>"+Util.intToString(this.getAgeValue())+"</span> years old."));
+                                    + " делает [npc.targetBasedWord(тебя, [npc.herHim])] <span style='color:" + this.getAge().getColour().toWebHexString() + ";'>" + Util.intToString(this.getAgeValue()) + "</span> [npc.genderBasedWord(летним, летней)]."));
 				}
 				
 			} else {
@@ -3616,8 +3617,8 @@ public abstract class GameCharacter implements XMLSaving {
 		}
 
 		infoScreenSB.append("</p>");
-		
-		infoScreenSB.append("<h6>Relationships</h6>"
+
+        infoScreenSB.append("<h6>Отношения</h6>"
 				+ "<p>");
 		String relationships = this.getRelationshipStrTo(Main.game.getPlayer());
 		
@@ -3632,7 +3633,7 @@ public abstract class GameCharacter implements XMLSaving {
 					if(relationshipsSB.length()>0) {
 						relationshipsSB.append("<br/>");
 					}
-					relationshipsSB.append(UtilText.parse(this, "[npc.She] is your <span style='color:"+this.getFemininity().getColour().toWebHexString()+"'>"+relationships+"</span>. "));
+                    relationshipsSB.append(UtilText.parse(this, "[npc.She] [npc.genderBasedWord(твой, твоя)] <span style='color:" + this.getFemininity().getColour().toWebHexString() + "'>" + relationships + "</span>. "));
 				}
 
 				List<GameCharacter> charactersPlayerHasEncountered = Main.game.getPlayer().getCharactersEncounteredAsGameCharacters(true);
@@ -3688,7 +3689,7 @@ public abstract class GameCharacter implements XMLSaving {
 			if(!this.isPlayer()) {
 				if(!this.getSlavesOwned().isEmpty()) {
 					infoScreenSB.append("<br/>"
-							+ UtilText.parse(this, "[npc.She] owns "+Util.intToString(this.getSlavesOwned().size())+" "+(this.getSlavesOwned().size()==1?"slave":"slaves")+": "));
+                            + UtilText.parse(this, "[npc.She] владеет " + Util.intToString(this.getSlavesOwned().size()) + " " + Morpher.morphCountableNoun(this.getSlavesOwned().size(), "раб", Case.INSTRUMENTALIS) + ": "));
 					List<String> slaveNames = new ArrayList<>();
 					for(String id : this.getSlavesOwned()) {
 						try {
@@ -3701,8 +3702,8 @@ public abstract class GameCharacter implements XMLSaving {
 				}
 			}
 			infoScreenSB.append("</p>");
-			
-			infoScreenSB.append("<h6>Personality</h6>"
+
+            infoScreenSB.append("<h6>Личность</h6>"
 					+ "<p>");
 			int i=0;
 			for(PersonalityTrait trait : this.getPersonalityTraits()) {
@@ -3716,12 +3717,12 @@ public abstract class GameCharacter implements XMLSaving {
 				if(this.isDoll()) {
 					infoScreenSB.append(UtilText.parse(this, "[npc.NameIsFull] a sex doll, and as such [npc.has] no personality traits."));
 				} else {
-					infoScreenSB.append(UtilText.parse(this, "[npc.NameHasFull] a well-rounded personality, with no exceptionally good nor bad traits."));
+                    infoScreenSB.append(UtilText.parse(this, "[npc.Name] всесторонне развитая личность, без каких-либо исключительно хороших или плохих черт."));
 				}
 			}
 			infoScreenSB.append("</p>");
-			
-			infoScreenSB.append("<h6>Appearance</h6>"
+
+            infoScreenSB.append("<h6>Внешность</h6>"
 					+ "<p>"
 						+ this.getBodyDescription()
 					+ "</p>");
@@ -3747,7 +3748,7 @@ public abstract class GameCharacter implements XMLSaving {
 		} else {
 			infoScreenSB.append("</p>"
 					+ "<br/>"
-						+ "<h6>Appearance</h6>"
+                    + "<h6>Внешность</h6>"
 					+ "<p>"
 						+ UtilText.parse(this, "As [npc.namePos] body is mostly concealed, your knowledge of [npc.her] appearance is severely limited...")
 					+ "</p>"
@@ -4375,7 +4376,7 @@ public abstract class GameCharacter implements XMLSaving {
 
 	public String getBirthdayString() {
 		boolean bce = this.getBirthday().getYear()<0;
-        return Util.intToDate(this.getBirthday().getDayOfMonth()) + " " + this.getBirthday().getMonth().getDisplayName(TextStyle.FULL, RUSSIAN_LOCALE) + " " + Math.abs(this.getBirthday().getYear()) + (bce ? " BCE" : "");
+        return this.getBirthday().getDayOfMonth() + " " + this.getBirthday().getMonth().getDisplayName(TextStyle.FULL, RUSSIAN_LOCALE) + " " + Math.abs(this.getBirthday().getYear()) + (bce ? " до н.э." : "");
 	}
 	
 	public LocalDateTime getBirthday() {
@@ -22726,7 +22727,7 @@ public abstract class GameCharacter implements XMLSaving {
 		for(Entry<InventorySlot, AbstractClothing> entry : outfit.getClothing().entrySet()) {
 			AbstractClothing clothing = entry.getValue();
 			InventorySlot slot = entry.getKey();
-			if(!failureToEquipMap.values().contains(clothing)) {
+			if(!failureToEquipMap.containsValue(clothing)) {
 				this.equipClothingOverride(clothing, slot, false, Util.newArrayListOfValues(newClothingAndWeaponsDrawnFrom));
 			}
 		}

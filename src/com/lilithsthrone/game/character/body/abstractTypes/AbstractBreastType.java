@@ -213,7 +213,7 @@ public abstract class AbstractBreastType implements BodyPartTypeInterface {
 			return "a set of";
 		}
 		if(gc.getBreastRows()==1) {
-			return "a pair of";
+			return "пара";
 		} else {
 			return Util.intToString(gc.getBreastRows())+" pairs of";
 		}

@@ -2409,7 +2409,7 @@ public class Body implements XMLSaving {
 			}
 			
 		} else {
-			sb.append(" "+hair.getType().getBodyDescription(owner).trim());
+			sb.append(" ").append(hair.getType().getBodyDescription(owner).trim());
 			
 			if(hair.getType().getTags().contains(BodyPartTag.HAIR_NATURAL_MANE) && owner.getFaceType().getRace()==hair.getType().getRace()) {
 				sb.append(", which forms a mane running down the back of [npc.her] neck and which "); // If hair and face races match, the mane is fully formed
@@ -2420,88 +2420,88 @@ public class Body implements XMLSaving {
 			boolean defaultPlural = hair.getType().isDefaultPlural(owner);
 			switch (hair.getStyle()) {
 				case NONE:
-					sb.append((defaultPlural ? "are" : "is") + " unstyled.");
+					sb.append(defaultPlural ? "не уложены" : "не уложен").append(".");
 					break;
 				case BRAIDED:
-					sb.append((defaultPlural ? "have" : "has") + " been woven into a long braid.");
+					sb.append(defaultPlural ? "заплетённые" : "заплетён").append(" в длинную косу.");
 					break;
 				case CURLY:
-					sb.append((defaultPlural ? "have" : "has") + " been curled and left loose.");
+					sb.append(defaultPlural ? "завиты и оставлены распущенными" : "завит и оставлен распущенным").append(".");
 					break;
 				case LOOSE:
-					sb.append((defaultPlural ? "are" : "is") + " left loose and unstyled.");
+					sb.append(defaultPlural ? "распущены и не уложены" : "распущен и не уложен").append(".");
 					break;
 				case PONYTAIL:
-					sb.append((defaultPlural ? "have" : "has") + " been styled into a ponytail.");
+					sb.append(defaultPlural ? "собраны" : "собран").append(" в конский хвост.");
 					break;
 				case STRAIGHT:
-					sb.append((defaultPlural ? "have" : "has") + " been straightened and left loose.");
+					sb.append(defaultPlural ? "выпрямлены и оставлены распущенными" : "выпрямлен и оставлен распущенным").append(".");
 					break;
 				case TWIN_TAILS:
-					sb.append((defaultPlural ? "have" : "has") + " been styled into twin tails.");
+					sb.append(defaultPlural ? "уложены" : "уложен").append(" в два хвоста.");
 					break;
 				case WAVY:
-					sb.append((defaultPlural ? "have" : "has") + " been styled into waves and left loose.");
+					sb.append(defaultPlural ? "уложены волнами и оставлены распущенными" : "уложен волнами и оставлен распущенным").append(".");
 					break;
 				case MOHAWK:
-					sb.append((defaultPlural ? "have" : "has") + " been styled into a mohawk.");
+					sb.append(defaultPlural ? "уложены" : "уложен").append(" в виде ирокеза.");
 					break;
 				case AFRO:
-					sb.append((defaultPlural ? "have" : "has") + " been styled into an afro.");
+					sb.append(defaultPlural ? "уложены" : "уложен").append(" в стиле афро.");
 					break;
 				case SIDECUT:
-					sb.append((defaultPlural ? "have" : "has") + " been styled into a sidecut.");
+					sb.append(defaultPlural ? "уложены" : "уложен").append(" в косую причёску.");
 					break;
 				case BOB_CUT:
-					sb.append((defaultPlural ? "have" : "has") + " been styled into a bob cut.");
+					sb.append(defaultPlural ? "уложены" : "уложен").append(" в каре.");
 					break;
 				case PIXIE:
-					sb.append((defaultPlural ? "have" : "has") + " been styled into a pixie-cut.");
+					sb.append(defaultPlural ? "уложены" : "уложен").append(" в \"пикси\".");
 					break;
 				case SLICKED_BACK:
-					sb.append((defaultPlural ? "have" : "has") + " been slicked back.");
+					sb.append(defaultPlural ? "зачёсаны" : "зачёсан").append(" назад.");
 					break;
 				case MESSY:
-					sb.append((defaultPlural ? "are" : "is") + " unstyled and very messy.");
+					sb.append(defaultPlural ? "не уложены и очень растрёпаны" : "не уложен и очень растрёпан").append(".");
 					break;
 				case HIME_CUT:
-					sb.append((defaultPlural ? "have" : "has") + " been straightened and styled into a hime cut.");
+					sb.append(defaultPlural ? "выпрямлены и уложены" : "выпрямлён и уложен").append(" в \"химэ\".");
 					break;
 				case CHONMAGE:
-					sb.append((defaultPlural ? "have" : "has") + " been straightened, oiled and styled into a chonmage topknot.");
+					sb.append(defaultPlural ? "выпрямлены, смазаны маслом и уложены" : "выпрямлён, смазан маслом и уложен").append(" в пучок на макушке.");
 					break;
 				case TOPKNOT:
-					sb.append((defaultPlural ? "have" : "has") + " been styled into a topknot.");
+					sb.append(defaultPlural ? "уложены" : "уложен").append(" в пучок на макушке.");
 					break;
 				case DREADLOCKS:
-					sb.append((defaultPlural ? "have" : "has") + " been styled into dreadlocks.");
+					sb.append(defaultPlural ? "уложены" : "уложен").append(" в дреды.");
 					break;
 				case BIRD_CAGE:
-					sb.append((defaultPlural ? "have" : "has") + " been styled into an elaborate bird cage" + UtilText.returnStringAtRandom(".", ", birds not included."));
+					sb.append((defaultPlural ? "уложены" : "уложен") + " в замысловатую птичью клетку" + UtilText.returnStringAtRandom(".", ", без птиц."));
 					break;
 				case TWIN_BRAIDS:
-					sb.append((defaultPlural ? "have" : "has") + " been woven into long twin braids.");
+					sb.append((defaultPlural ? "заплетённые" : "заплетён") + " в длинные двойные косы.");
 					break;
 				case DRILLS:
-					sb.append((defaultPlural ? "have" : "has") + " been styled into ojou ringlets.");
+					sb.append((defaultPlural ? "уложены" : "уложен") + " в локоны оджу.");
 					break;
 				case LOW_PONYTAIL:
-					sb.append((defaultPlural ? "have" : "has") + " been styled into a low ponytail.");
+					sb.append((defaultPlural ? "собраны" : "собран") + " в короткий конский хвост.");
 					break;
 				case CROWN_BRAID:
-					sb.append((defaultPlural ? "have" : "has") + " been woven into a " + UtilText.returnStringAtRandom("crown of braids.", "braided crown."));
+					sb.append((defaultPlural ? "заплетённые" : "заплетён") + " в " + UtilText.returnStringAtRandom("корону из косичек.", "косу-корону."));
 					break;
 				case BUN:
-					sb.append((defaultPlural ? "have" : "has") + " been styled into a bun.");
+					sb.append((defaultPlural ? "собраны" : "собран") + " в пучок.");
 					break;
 				case CHIGNON:
-					sb.append((defaultPlural ? "have" : "has") + " been tied up into a chignon.");
+					sb.append((defaultPlural ? "собраны" : "собран") + " в шиньон.");
 					break;
 				case SIDE_BRAIDS:
-					sb.append((defaultPlural ? "заплетены" : "заплетён") + " в косички " + (defaultPlural ? "свисающие по обе стороны от лица" : "свисающий по стороне лица"));
+					sb.append((defaultPlural ? "заплетённые" : "заплетён") + " в косички " + (defaultPlural ? "свисающие по обе стороны от лица" : "свисающий по стороне лица"));
 					break;
 				case SIDE_PARTED:
-					sb.append((defaultPlural ? "have" : "has") + " been combed away from a parting on the side of [npc.her] head.");
+					sb.append((defaultPlural ? "зачёсаны" : "зачёсан") + " на прямой пробор сбоку [npc.targetBasedWord(твоей, [npc.her])] головы.");
 					break;
 			}
 		}

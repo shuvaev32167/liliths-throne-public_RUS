@@ -28,7 +28,7 @@ public class EarType {
 			Util.newArrayListOfValues("мягкое", "женственное"),
 			"Острый зуд проходит через несколько мгновений, и у [npc.herHim] остаются нормальные человеческие уши.<br/>"
 					+ "[npc.Name] теперь [npc.has] [style.boldHuman(человеческие уши)], которые [npc.materialCompositionDescriptor] [npc.earFullDescription].",
-			"[npc.She] [npc.has] пара нормальных человеческих ушей, которые [npc.materialCompositionDescriptor] [npc.earFullDescription(true)]#IF(npc.isPiercedEar()), и которые были проколоты#ENDIF.") {
+            "У [npc.targetBasedWord(тебя, н[npc.him])] пара нормальных человеческих ушей, которые [pc.morphPluralParticipleToShortForm([npc.materialCompositionDescriptor])] [pc.morphSingleInstr([pc.morphGenSinFem([npc.earFullDescription(true)])])]#IF(npc.isPiercedEar()), и которые были проколоты#ENDIF.") {
 	};
 
 	public static AbstractEarType ANGEL = new AbstractEarType(BodyCoveringType.ANGEL,

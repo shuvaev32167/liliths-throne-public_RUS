@@ -46,6 +46,7 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+import com.lilithsthrone.utils.translate.russian.Morpher;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import org.w3c.dom.events.Event;
@@ -58,7 +59,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.lilithsthrone.utils.translate.russian.Morpher.MORPHER;
 import static com.lilithsthrone.utils.translate.russian.Morpher.convertGender;
 
 /**
@@ -773,7 +773,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 				String temp;
 				if (attribute == Attribute.LUST) {
 					tooltipSB.append("<div class='description'>");
-					temp = MORPHER.morphGender(currentAttributeStatusEffect.getName(owner), convertGender(owner.getGender()), Numeration.SINGLE);
+					temp = Morpher.morphGender(currentAttributeStatusEffect.getName(owner), convertGender(owner.getGender()), Numeration.SINGLE);
 				} else {
 					tooltipSB.append("<div class='description-half'>");
 					temp = currentAttributeStatusEffect.getName(owner);

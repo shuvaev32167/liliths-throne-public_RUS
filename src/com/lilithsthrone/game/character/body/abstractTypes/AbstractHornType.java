@@ -1,12 +1,5 @@
 package com.lilithsthrone.game.character.body.abstractTypes;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.lilithsthrone.main.Main;
-import org.w3c.dom.Document;
-
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
@@ -18,7 +11,13 @@ import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
+import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
+import org.w3c.dom.Document;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @since 0.3.1
@@ -158,7 +157,7 @@ public abstract class AbstractHornType implements BodyPartTypeInterface {
 			if(gc.getHornsPerRow()==1) {
 				return "a solitary";
 			} else if(gc.getHornsPerRow()==2) {
-				return "a pair of";
+				return "пара";
 			} else if(gc.getHornsPerRow()==3) {
 				return "a trio of";
 			} else {

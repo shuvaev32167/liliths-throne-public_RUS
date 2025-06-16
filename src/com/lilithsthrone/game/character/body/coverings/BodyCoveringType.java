@@ -715,7 +715,7 @@ public class BodyCoveringType {
 	
 	public static AbstractBodyCoveringType EYE_FOX_MORPH = new AbstractBodyCoveringType(
 			BodyCoveringCategory.EYE_IRIS,
-			"a pair of",
+			"пара",
 			true,
 			"eyes",
 			"eye",
@@ -774,7 +774,7 @@ public class BodyCoveringType {
 
 	public static AbstractBodyCoveringType EYE_PUPILS = new AbstractBodyCoveringType(
 			BodyCoveringCategory.EYE_PUPIL,
-			"a pair of",
+			"пара",
 			true,
 			"pupils",
 			"pupil",
@@ -790,7 +790,7 @@ public class BodyCoveringType {
 
 	public static AbstractBodyCoveringType EYE_SCLERA = new AbstractBodyCoveringType(
 			BodyCoveringCategory.EYE_SCLERA,
-			"a pair of",
+			"пара",
 			true,
 			"sclerae",
 			"sclera",

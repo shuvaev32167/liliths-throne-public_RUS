@@ -201,7 +201,7 @@ public class BodyCoveringTemplateFactory {
 			natural = Util.newHashMapOfValues(new Value<>(CoveringPattern.EYE_IRISES, 1));
 			extra = Util.newHashMapOfValues(new Value<>(CoveringPattern.EYE_IRISES_HETEROCHROMATIC, 1));
 		}
-		return new BodyCoveringTemplate("a pair of",
+		return new BodyCoveringTemplate("пара",
 				true,
 				"глаза",
 				"глаз",

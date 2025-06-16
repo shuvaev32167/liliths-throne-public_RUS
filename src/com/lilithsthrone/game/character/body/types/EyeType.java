@@ -33,7 +33,7 @@ public class EyeType {
             " Когда [npc.she] нерешительно [npc.targetBasedWord(открываешь, открывает)] их снова, они превращаются в человеческие глаза, с нормально расположенными радужкой и зрачками."
 				+ "<br/>"
                     + "[npc.Name] теперь [npc.has] [style.boldHuman(человеческие глаза)] с [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
-            "[npc.SheHasFull] [npc.eyePairs] нормальные, человеческие глаза, с [npc.irisShape], [npc.irisColour(true)] радушками, [npc.pupilShape], [npc.pupilColour(true)] зрачками, и [npc.scleraColour(true)] белками.") {
+			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] нормальных, человеческих глаз, с [pc.morphPluralInstr([npc.irisShape])], [pc.morphPluralInstr([npc.irisColour(true)])] радушками, [pc.morphPluralInstr([npc.pupilShape])], [pc.morphPluralInstr([npc.pupilColour(true)])] зрачками, и [pc.morphPluralInstr([npc.scleraColour(true)])] белками.") {
 	};
 
 	public static AbstractEyeType ANGEL = new AbstractEyeType(BodyCoveringType.EYE_ANGEL,

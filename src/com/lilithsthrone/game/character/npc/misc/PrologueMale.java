@@ -1,11 +1,5 @@
 package com.lilithsthrone.game.character.npc.misc;
 
-import java.time.Month;
-import java.util.List;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.CharacterImportSetting;
@@ -14,24 +8,7 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
-import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
-import com.lilithsthrone.game.character.body.valueEnums.AssSize;
-import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
-import com.lilithsthrone.game.character.body.valueEnums.BodySize;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
-import com.lilithsthrone.game.character.body.valueEnums.Capacity;
-import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.body.valueEnums.HairLength;
-import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
-import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.body.valueEnums.LipSize;
-import com.lilithsthrone.game.character.body.valueEnums.Muscle;
-import com.lilithsthrone.game.character.body.valueEnums.NippleSize;
-import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
-import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.body.valueEnums.TesticleSize;
-import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
-import com.lilithsthrone.game.character.body.valueEnums.Wetness;
+import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.NPC;
@@ -48,6 +25,11 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.time.Month;
+import java.util.List;
 
 /**
  * @since 0.1.86
@@ -62,7 +44,7 @@ public class PrologueMale extends NPC {
 	
 	public PrologueMale(boolean isImported) {
 		super(isImported, new NameTriplet("Александр", "Алекс", "Александрия"), "Счастье",
-				"Один из гостей на открытии выставки в музее. Он высокий, красивый и мускулистый, и, что еще лучше, кажется, что вы ему сразу понравились...",
+				"Один из гостей на открытии выставки в музее. Он высокий, красивый и мускулистый, и, что ещё лучше, кажется, что ты ему сразу [pc.genderBasedWord(понравился, понравилась)]...",
 				29, Month.APRIL, 12,
 				3,
 				Gender.M_P_MALE,

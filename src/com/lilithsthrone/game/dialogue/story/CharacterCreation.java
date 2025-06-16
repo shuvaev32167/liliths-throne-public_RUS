@@ -50,6 +50,7 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+import com.lilithsthrone.utils.translate.russian.Morpher;
 import com.lilithsthrone.world.Weather;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -61,8 +62,6 @@ import java.time.LocalDateTime;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.lilithsthrone.utils.translate.russian.Morpher.MORPHER;
 
 /**
  * @since 0.1.0
@@ -792,7 +791,7 @@ public class CharacterCreation {
 
 					+ "<div class='container-full-width' style='text-align:center;'>"
 							+ "К вам будут обращаться как к <span style='color:"+Main.game.getPlayer().getGender().getColour().toWebHexString()+";'>"
-					+ MORPHER.morphNoun(
+					+ Morpher.morphNoun(
 					Main.game.getPlayer().getGender().getName(), Case.DATIVUS, Numeration.SINGLE) + "</span>.<br/>"
 							+ "<i>Вы можете изменить все имена полов в меню опций.</i>"
 						+ "</div>"

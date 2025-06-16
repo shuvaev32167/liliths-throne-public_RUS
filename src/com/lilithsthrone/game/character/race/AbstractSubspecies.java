@@ -1894,12 +1894,12 @@ public abstract class AbstractSubspecies {
 			String[] demonNames = demonLegConfigurationNames.get(body ==null?LegConfiguration.BIPEDAL: body.getLegConfiguration());
 			
 			names = new String[] {
-				"half-"+demonNames[0],
-				"half-"+demonNames[1],
-				"half-"+demonNames[2],
-				"half-"+demonNames[3],
-				"half-"+demonNames[4],
-				"half-"+demonNames[5]};	
+					"полу-" + demonNames[0],
+					"полу-" + demonNames[1],
+					"полу-" + demonNames[2],
+					"полу-" + demonNames[3],
+					"полу-" + demonNames[4],
+					"полу-" + demonNames[5]};
 		}
 		
 		if(names==null) {

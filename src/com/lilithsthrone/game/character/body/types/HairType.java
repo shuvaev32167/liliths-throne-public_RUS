@@ -29,7 +29,7 @@ public class HairType {
 			Util.newArrayListOfValues("мягкие", "женственные"),
 			"Превращение длится всего несколько мгновений, после чего у [npc.herHim] остаются волосы, похожие на человеческие.<br/>"
 					+ "[npc.Name] теперь [npc.has] [npc.hairColour], [style.boldHuman(человеческие волосы)].",
-            "У [npc.targetBasedWord(тебя, [npc.genderBasedWord(него, неё)])] [npc.hairDeterminer] [npc.hairLength], [npc.hairColour(true)], человеческие волосы",
+			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.hairDeterminer] [npc.hairLength], [npc.hairColour(true)], человеческие волосы",
             Util.newArrayListOfValues(BodyPartTag.HAIR_HANDLES_IN_SEX),
             true) {
 	};
@@ -61,8 +61,9 @@ public class HairType {
 				+ "The transformation only lasts a matter of moments, leaving [npc.herHim] with silken, demonic hair.<br/>"
 					+ "[npc.Name] now [npc.has] [npc.hairColour], [style.boldDemon(demonic hair)]."
 			+ "#ENDIF",
-			"[npc.SheHasFull] [npc.hairDeterminer] [npc.hairLength], [npc.hairColour(true)], #IF(npc.isShortStature())impish#ELSEdemonic#ENDIF hair",
-			Util.newArrayListOfValues(BodyPartTag.HAIR_HANDLES_IN_SEX)) {
+			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.hairDeterminer] [npc.hairLength], [npc.hairColour(true)], #IF(npc.isShortStature())импитские#ELSEдемонические#ENDIF волосы",
+			Util.newArrayListOfValues(BodyPartTag.HAIR_HANDLES_IN_SEX),
+			true) {
 	};
 
 	public static AbstractHairType DOG_MORPH = new AbstractHairType(BodyCoveringType.HAIR_CANINE_FUR,

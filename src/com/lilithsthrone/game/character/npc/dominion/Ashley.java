@@ -201,7 +201,7 @@ public class Ashley extends NPC {
 					+ this.getDescription()
 				+ "</p>"
 				+ "<br/>"
-				+ "<h4>Relationships</h4>"
+                        + "<h4>Отношения</h4>"
 				+ "<p>"
 					+ "[style.boldAffection(Affection:)]<br/>"
 					+ AffectionLevel.getDescription(this, Main.game.getPlayer(), true));
@@ -223,7 +223,7 @@ public class Ashley extends NPC {
 					+ "<br/>"+ObedienceLevel.getDescription(this, ObedienceLevel.getObedienceLevelFromValue(this.getObedienceValue()), true, true)
 				+"</p>"
 				+ "<br/>"
-					+ "<h4>Appearance</h4>"
+                + "<h4>Внешность</h4>"
 				+ "<p>"
 					+ (Main.game.getPlayer().hasTraitActivated(Perk.OBSERVANT)
                 ? "Несмотря на то, что ты очень [pc.genderBasedWord(наблюдателен, наблюдательна)], нет ни одной подсказки, которая бы намекнула на пол Эшли."
