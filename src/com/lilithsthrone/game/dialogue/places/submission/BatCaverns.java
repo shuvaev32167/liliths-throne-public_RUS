@@ -5,6 +5,7 @@ import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
+import com.lilithsthrone.game.dialogue.encounters.AbstractEncounter;
 import com.lilithsthrone.game.dialogue.encounters.BatCavernsEncounterDialogue;
 import com.lilithsthrone.game.dialogue.npcDialogue.dominion.WesQuest;
 import com.lilithsthrone.game.dialogue.places.dominion.DominionPlaces;
@@ -150,20 +151,15 @@ public class BatCaverns {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new ResponseEffectsOnly(
-						"Explore",
-						"Explore the cavern's dark depths. Although you don't think you're any more or less likely to find anything by doing this, at least you won't have to keep travelling back and forth..."){
-							@Override
-							public void effects() {
-								DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
-								Main.game.setContent(new Response("", "", dn));
-							}
-						};
+				return AbstractEncounter.exploreArea("the cavern's dark depths");
+				
+			} else if(index == 2) {
+				return AbstractEncounter.useOffspringMap();
 						
-			} else if(index==2) {
+			} else if(index==3) {
 				return getElleSearchResponse();
 				
-			} else if(index==3
+			} else if(index==4
 				    && (Main.game.getPlayer().getQuest(QuestLine.SIDE_REBEL_BASE) == Quest.REBEL_BASE_PASSWORD_PART_ONE
 				    	|| Main.game.getPlayer().getQuest(QuestLine.SIDE_REBEL_BASE) == Quest.REBEL_BASE_PASSWORD_PART_TWO)) {
 					if (!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.rebelBaseDarkPassFound)) {
@@ -190,7 +186,7 @@ public class BatCaverns {
 							    null);
 					}
 					
-			} else if(index==4
+			} else if(index==5
 				&& Main.game.isSillyMode()
 				&& (Main.game.getPlayer().getQuest(QuestLine.SIDE_REBEL_BASE) == Quest.REBEL_BASE_PASSWORD_PART_ONE
 					|| Main.game.getPlayer().getQuest(QuestLine.SIDE_REBEL_BASE) == Quest.REBEL_BASE_PASSWORD_PART_TWO)) {
@@ -224,20 +220,15 @@ public class BatCaverns {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new ResponseEffectsOnly(
-						"Explore",
-						"Explore the bioluminescent forest. Although you don't think you're any more or less likely to find anything by doing this, at least you won't have to keep travelling back and forth..."){
-							@Override
-							public void effects() {
-								DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
-								Main.game.setContent(new Response("", "", dn));
-							}
-						};
+				return AbstractEncounter.exploreArea("the bioluminescent forest");
+				
+			} else if(index == 2) {
+				return AbstractEncounter.useOffspringMap();
 						
-			} else if(index==2) {
+			} else if(index==3) {
 				return getElleSearchResponse();
 				
-			} else if(index==3
+			} else if(index==4
 				    && (Main.game.getPlayer().getQuest(QuestLine.SIDE_REBEL_BASE) == Quest.REBEL_BASE_PASSWORD_PART_ONE
 				    	|| Main.game.getPlayer().getQuest(QuestLine.SIDE_REBEL_BASE) == Quest.REBEL_BASE_PASSWORD_PART_TWO)) {
 					if (!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.rebelBaseLightPassFound)) {
@@ -261,7 +252,7 @@ public class BatCaverns {
 							    "You've already found the password in this area.", 
 							    null);
 					}
-			} else if(index==4
+			} else if(index==5
 				&& Main.game.isSillyMode()
 				&& (Main.game.getPlayer().getQuest(QuestLine.SIDE_REBEL_BASE) == Quest.REBEL_BASE_PASSWORD_PART_ONE
 				|| Main.game.getPlayer().getQuest(QuestLine.SIDE_REBEL_BASE) == Quest.REBEL_BASE_PASSWORD_PART_TWO)) {
@@ -291,17 +282,12 @@ public class BatCaverns {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new ResponseEffectsOnly(
-						"Explore",
-						"Explore the sides of the river. Although you don't think you're any more or less likely to find anything by doing this, at least you won't have to keep travelling back and forth..."){
-							@Override
-							public void effects() {
-								DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
-								Main.game.setContent(new Response("", "", dn));
-							}
-						};
+				return AbstractEncounter.exploreArea("the sides of the river");
+				
+			} else if(index == 2) {
+				return AbstractEncounter.useOffspringMap();
 						
-			} else if(index==2) {
+			} else if(index==3) {
 				return getElleSearchResponse();
 			}
 			return null;
@@ -325,17 +311,12 @@ public class BatCaverns {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new ResponseEffectsOnly(
-						"Explore",
-						"Explore the bridge's surroundings. Although you don't think you're any more or less likely to find anything by doing this, at least you won't have to keep travelling back and forth..."){
-							@Override
-							public void effects() {
-								DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
-								Main.game.setContent(new Response("", "", dn));
-							}
-						};
+				return AbstractEncounter.exploreArea("the bridge's surroundings");
+				
+			} else if(index == 2) {
+				return AbstractEncounter.useOffspringMap();
 						
-			} else if(index==2) {
+			} else if(index==3) {
 				return getElleSearchResponse();
 			}
 			return null;
@@ -359,17 +340,12 @@ public class BatCaverns {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new ResponseEffectsOnly(
-						"Explore",
-						"Explore the sides of the river. Although you don't think you're any more or less likely to find anything by doing this, at least you won't have to keep travelling back and forth..."){
-							@Override
-							public void effects() {
-								DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
-								Main.game.setContent(new Response("", "", dn));
-							}
-						};
+				return AbstractEncounter.exploreArea("the sides of the river");
+				
+			} else if(index == 2) {
+				return AbstractEncounter.useOffspringMap();
 						
-			} else if(index==2) {
+			} else if(index==3) {
 				return getElleSearchResponse();
 			}
 			return null;
@@ -452,17 +428,12 @@ public class BatCaverns {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new ResponseEffectsOnly(
-						"Explore",
-						"Explore the sides of the lake. Although you don't think you're any more or less likely to find anything by doing this, at least you won't have to keep travelling back and forth..."){
-							@Override
-							public void effects() {
-								DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
-								Main.game.setContent(new Response("", "", dn));
-							}
-						};
+				return AbstractEncounter.exploreArea("the sides of the lake");
+				
+			} else if(index == 2) {
+				return AbstractEncounter.useOffspringMap();
 						
-			} else if(index==2 && Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_TWO)) {
+			} else if(index==3 && Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_TWO)) {
 				return new Response("Island by boat", "You could use the boat to travel across the lake and reach the island.", SLIME_LAKE_ISLAND) {
 					@Override
 					public void effects() {
@@ -475,7 +446,7 @@ public class BatCaverns {
 					}
 				};
 				
-			} else if(index==3 && Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_TWO)) {
+			} else if(index==4 && Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_TWO)) {
 				if(Main.game.getPlayer().isAbleToFly()) {
 					return new Response("Fly to island", "Fly across to the island.", SLIME_LAKE_ISLAND) {
 						@Override

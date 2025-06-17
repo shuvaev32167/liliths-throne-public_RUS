@@ -351,8 +351,8 @@ public class Oglix extends NPC {
 	
 	public void initElemental() {
 		Elemental elemental = this.getElemental();
-		elemental.setName("Golix");
-		elemental.setSurname("Oglixkamu");
+		elemental.setName("Голикс");
+		elemental.setSurname("Огликскаму");
 		
 		elemental.clearPersonalityTraits();
 		elemental.addPersonalityTrait(PersonalityTrait.BRAVE);

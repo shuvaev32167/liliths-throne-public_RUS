@@ -58,6 +58,7 @@
 		
 		<itemTags>
 			<tag>CONTRABAND_HEAVY</tag>
+			<tag>REMOVE_FROM_DRESSING_ROOM_OUTFITS</tag>
 		</itemTags>
 	</coreAttributes>
 

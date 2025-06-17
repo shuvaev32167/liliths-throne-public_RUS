@@ -1,5 +1,26 @@
 package com.lilithsthrone.game.inventory.clothing;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.Set;
+import java.util.StringJoiner;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.controller.xmlParsing.XMLLoadException;
 import com.lilithsthrone.controller.xmlParsing.XMLMissingTagException;
@@ -11,7 +32,13 @@ import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.dialogue.utils.InventoryDialogue;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.*;
+import com.lilithsthrone.game.inventory.AbstractCoreType;
+import com.lilithsthrone.game.inventory.AbstractSetBonus;
+import com.lilithsthrone.game.inventory.ColourReplacement;
+import com.lilithsthrone.game.inventory.InventorySlot;
+import com.lilithsthrone.game.inventory.ItemTag;
+import com.lilithsthrone.game.inventory.Rarity;
+import com.lilithsthrone.game.inventory.SetBonus;
 import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
@@ -26,18 +53,6 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.ColourListPresets;
 import com.lilithsthrone.utils.colours.PresetColour;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * @since 0.1.84
@@ -58,6 +73,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 	private final String authorDescription;
 	
 	private final boolean appendColourName;
+	private final boolean appendEnchantmentPostfix;
 	private final boolean plural;
 	private final boolean isMod;
 	private final boolean isColourDerivedFromPattern;
@@ -214,6 +230,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		isColourDerivedFromPattern = false;
 		
 		this.appendColourName = true;
+		this.appendEnchantmentPostfix = true;
 		this.determiner = determiner;
 		this.plural = plural;
 		this.name = name;
@@ -334,10 +351,17 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 			}
 			
 			if(!coreAttributes.getMandatoryFirstOf("name").getAttribute("appendColourName").isEmpty()) {
-				this.appendColourName  =  Boolean.valueOf(coreAttributes.getMandatoryFirstOf("name").getAttribute("appendColourName"));
+				this.appendColourName = Boolean.valueOf(coreAttributes.getMandatoryFirstOf("name").getAttribute("appendColourName"));
 			} else {
 				this.appendColourName = true;
 			}
+			if(!coreAttributes.getMandatoryFirstOf("name").getAttribute("appendEnchantmentPostfix").isEmpty()) {
+				this.appendEnchantmentPostfix = Boolean.valueOf(coreAttributes.getMandatoryFirstOf("name").getAttribute("appendEnchantmentPostfix"));
+			} else {
+				this.appendEnchantmentPostfix = true;
+			}
+
+
 			this.plural =             Boolean.valueOf(coreAttributes.getMandatoryFirstOf("namePlural").getAttribute("pluralByDefault"));
 			this.baseValue =          Integer.valueOf(coreAttributes.getMandatoryFirstOf("value").getTextContent());
 			this.physicalResistance = Float.valueOf(coreAttributes.getMandatoryFirstOf("physicalResistance").getTextContent());	
@@ -1907,7 +1931,11 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 	public boolean isAppendColourName() {
 		return appendColourName;
 	}
-	
+
+	public boolean isAppendEnchantmentPostfix() {
+		return appendEnchantmentPostfix;
+	}
+
 	public String getDeterminer() {
 		return determiner;
 	}
@@ -1979,14 +2007,14 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 	 * <b>You should probably be using AbstractClothing's version of this!</b>
 	 */
 	public boolean isConcealsSlot(GameCharacter character, InventorySlot slotToCheck) {
-		return Main.game.getItemGen().generateClothing(this).isConcealsSlot(character, this.getEquipSlots().get(0), slotToCheck);
+		return Main.game.getItemGen().generateClothing(this, false).isConcealsSlot(character, this.getEquipSlots().get(0), slotToCheck);
 	}
 
 	/**
 	 * <b>You should probably be using AbstractClothing's version of this!</b>
 	 */
 	public boolean isConcealsCoverableArea(GameCharacter character, CoverableArea area) {
-		return Main.game.getItemGen().generateClothing(this).isConcealsCoverableArea(character, this.getEquipSlots().get(0), area);
+		return Main.game.getItemGen().generateClothing(this, false).isConcealsCoverableArea(character, this.getEquipSlots().get(0), area);
 	}
 	
 	public String getPathName() {

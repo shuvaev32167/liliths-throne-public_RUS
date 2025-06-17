@@ -40,13 +40,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
 import java.util.*;
+import java.util.List;
 import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
- * @version 0.4.2
+ * @version 0.4.10.10
  * @author Innoxia, Maxis
  */
 public class OptionsDialogue {
@@ -56,6 +56,8 @@ public class OptionsDialogue {
 	
 	private static boolean alphabeticalFileSort = false;
 	
+	private static boolean defaultResetConfirmation = false;
+
 	public static final DialogueNode MENU = new DialogueNode("Menu", "Menu", true) {
 		
 		@Override
@@ -65,35 +67,50 @@ public class OptionsDialogue {
 		
 		@Override
 		public String getContent(){
-			return "<h1 class='special-text' style='font-size:48px; line-height:52px; text-align:center;'>"+Main.GAME_NAME+"</h1>"
-					+ (Main.game.isSillyMode()
-						?"<p class='special-text' style='text-align:center; margin:0 0; padding:0 0;'><i>Или я не могу поверить, что упал в волшебное зеркало и попал в мир, где моя тетя - демон?!</i></p>"
-						:"")
-					+ "<h5 class='special-text' style='text-align:center;'>Разработано: "+Main.AUTHOR+"</h5>"
-					+ "<br/>"
-					+ "<p>"
-						+ "Эта игра представляет собой текстовую эротическую ролевую игру и содержит большое количество графического сексуального контента. Прежде чем играть в эту игру, вы должны согласиться с отказом от ответственности!"
-					+ "</p>"
-					+"<p>"
-						+ " [style.italicsMinorBad(<b>ВНИМАНИЕ:</b> Данная версия модифицирована для поддержки Русского языка, проект распостраняется на бесплатной основе, все права принадлежат правообладателям.)]"
-					+ "</p>"
-					+ "<p style='text-align:center'>"
-						+ "<b>Если вы хотите получить поcледнюю нерусифицированную версию Lilith's Throne, вы можете посетить блог или Github разработчика!</b>"
-					+ "</p>"
-					+ getJavaVersionInformation()
-					+ (Toolkit.getDefaultToolkit().getScreenSize().getHeight()<800
-							?"<p style='text-align:center; color:"+PresetColour.GENERIC_ARCANE.toWebHexString()+";'>"
-								+ "Если разрешение игры не соответствует вашему экрану, нажмите клавиши: 'Windows' + 'Стрелка вверх' для увеличения!"
-							+ "</p>"
-							:"")
-					+ (Main.game.isStarted() || Main.getProperties().name.isEmpty()
-							?""
-					: "<h4 style='text-align:center;'>Последнее сохранение:</h4>"
-								+ "<h5 style='color:" + Main.getProperties().nameColour + ";text-align:center;'>" + Main.getProperties().name + "</h5>"
-					+ "<p style='text-align:center;'><b>Уровень " + Main.getProperties().level + " " + Util.capitaliseSentence(Main.getProperties().race) + "</b></p>"
-								+ "<p style='text-align:center;'>" + UtilText.formatAsMoney(Main.getProperties().money, "b") + "</p>"
-								+ "<div style='text-align:center; display:block; margin:auto;'>" + UtilText.formatAsEssences(Main.getProperties().arcaneEssences, "b", false) + "</div>"
-					+ "<p style='text-align:center;'>Квест: " + Util.capitaliseSentence(Main.getProperties().quest) + "</p>");
+            StringBuilder sb = new StringBuilder();
+			sb.append("<h1 class='special-text' style='font-size:48px; line-height:52px; text-align:center;'>"+Main.GAME_NAME+"</h1>");
+			if(Main.game.isSillyMode()) {
+				sb.append("<p class='special-text' style='text-align:center; margin:0 0; padding:0 0;'><i>Или я не могу поверить, что упал в волшебное зеркало и попал в мир, где моя тетя - демон?!</i></p>");
+			}
+
+			sb.append("<h5 class='special-text' style='text-align:center;'>Разработано: "+Main.AUTHOR+"</h5><br/>");
+
+            if (Main.CheckNotUnpacked()) {
+				sb.append("<h3 class='special-text' style='text-align:center;'>[style.italicsBad("+Main.GAME_NAME+" в настоящее время работает из временного каталога!");
+				sb.append("<br/>Пожалуйста, распакуйте файл .zip перед игрой!)]</h3>");
+//				return sb.toString();
+			}
+
+            sb.append("<p>Эта игра представляет собой текстовую эротическую ролевую игру и содержит большое количество графического сексуального контента. Прежде чем играть в эту игру, вы должны согласиться с отказом от ответственности!</p>")
+					.append("<p>Вы можете посетить блог (https://lilithsthrone.blogspot.co.uk) чтобы проверить прогресс в разработке (используйте кнопку «Блог» ниже, чтобы открыть блог в браузере по умолчанию).")
+					.append(" [style.italicsMinorBad(<b>Примечание:</b> Навязчивая проверка возраста обещается в blogspot, поэтому я, скорее всего, скоро создам новый блог.)]</p>")
+					.append("<p style='text-align:center'><b>Пожалуйста, используйте блог или GitHub, чтобы получить последнюю официальную версию Throne Lilith!</b></p>");
+
+            sb.append("<p>[style.italicsMinorBad(<b>ВНИМАНИЕ:</b> Данная версия модифицирована для поддержки Русского языка, проект распостраняется на бесплатной основе, все права принадлежат правообладателям.)]</p>");
+
+			sb.append(getJavaVersionInformation());
+
+            if(Toolkit.getDefaultToolkit().getScreenSize().getHeight()<800) {
+				sb.append("<p style='text-align:center; color:").append(PresetColour.GENERIC_ARCANE.toWebHexString()).append(";'>")
+					.append("Если разрешение игры не соответствует вашему экрану, нажмите клавиши: 'Windows' + 'Стрелка вверх' для увеличения!</p>");
+			}
+
+            if(!Main.game.isStarted() && !Main.getProperties().name.isEmpty()) {
+				sb.append("<h4 style='text-align:center;'>Последнее сохранение:</h4>");
+				sb.append("<div class='container-full-width' style='width:50%;margin:0 25%;'>");
+					sb.append("<h5 style='color:").append(Main.getProperties().nameColour).append(";text-align:center;'>").append(Main.getProperties().name).append("</h5>");
+					sb.append("<p style='text-align:center;margin:0;padding:0;'><b>Уровень ").append(Main.getProperties().level).append("</b></p>");
+					String colourString = Main.getProperties().raceColour;
+					if(!colourString.isEmpty()) {
+						colourString = "color:" + colourString + ";";
+					}
+				sb.append("<p style='text-align:center;margin:0;padding:0;").append(colourString).append("'><b>").append(Util.capitaliseSentence(Main.getProperties().race)).append("</b></p>");
+					sb.append("<p style='text-align:center;margin:0;padding:0;'>").append(UtilText.formatAsMoney(Main.getProperties().money, "b")).append("</p>");
+					sb.append("<p style='text-align:center;margin:0;padding:0;'>").append(UtilText.formatAsEssences(Main.getProperties().arcaneEssences, "b", false)).append("</p>");
+					sb.append("<p style='text-align:center;margin:0;padding:0;'>Квест: ").append(Util.capitaliseSentence(Main.getProperties().quest)).append("</p>");
+				sb.append("</div>");
+			}
+			return sb.toString();
 		}
 		
 		@Override
@@ -214,10 +231,10 @@ public class OptionsDialogue {
 				};
 			
 			} else if (index == 12) {
-				return new ResponseEffectsOnly("Github(RU)", "Открывает страницу:<br/><br/><i>https://github.com/nexsus312/liliths-throne-public_RUS</i><br/><br/><b>Внешне в вашем браузере по умолчанию.</b>"){
+				return new ResponseEffectsOnly("Github", "OОткрывает страницу:<br/><br/><i>https://github.com/Innoxia/liliths-throne-public</i><br/><br/><b>Внешне в вашем браузере по умолчанию.</b>"){
 					@Override
 					public void effects() {
-						Util.openLinkInDefaultBrowser("https://github.com/nexsus312/liliths-throne-public_RUS");
+						Util.openLinkInDefaultBrowser("https://github.com/Innoxia/liliths-throne-public");
 						confirmNewGame=false;
 					}
 				};
@@ -271,9 +288,16 @@ public class OptionsDialogue {
 	};
 	
 	private static String getJavaVersionInformation() {
+		StringBuilder sb = new StringBuilder();
+		String version = System.getProperty("java.version");
 
-        String sb = "<p style='text-align:center;'>"
-                + "Ваша версия Java: " + System.getProperty("java.version") +
+		sb.append("<p style='text-align:center;'>");
+			sb.append("Ваша версия Java: "+System.getProperty("java.version"));
+//			if (!version.equals("1.8.0_172")) {
+//				sb.append("<br/>[style.italicsBad(1.8.0_172 is the recommended java version!)]");
+//				sb.append("<br/>[style.italicsMinorBad(This may result in abnormal behaviour such as tooltips getting stuck! Please launch with the recommended version or use the .exe build.)]");
+//			}
+		sb.append("</p>");
 //				+" | ");
 
 //		String[] version = System.getProperty("java.version").split("\\.");
@@ -304,9 +328,8 @@ public class OptionsDialogue {
 //			}
 //		}
 
-                "</p>";
 		
-		return sb;
+		return sb.toString();
 	}
 
 	public static String loadConfirmationName = "";
@@ -943,8 +966,11 @@ public class OptionsDialogue {
 				+ "</tr>";
 	}
 	
-	public static final DialogueNode OPTIONS_PRONOUNS = new DialogueNode("Options", "Options", true) {
-
+	public static final DialogueNode OPTIONS_PRONOUNS = new DialogueNode("Параметры", "Параметры", true) {
+		@Override
+		public void applyPreParsingEffects() {
+			defaultResetConfirmation = false;
+		}
 		@Override
 		public String getContent() {
 			StringBuilder sb = new StringBuilder();
@@ -1016,24 +1042,6 @@ public class OptionsDialogue {
 				};
 				
 			} else if (index == 2) {
-				return new Response("По умолчанию", "Сбрасывает все местоимения.", OPTIONS_PRONOUNS){
-					@Override
-					public void effects() {
-						for(GenderNames gn : GenderNames.values()) {
-							Main.getProperties().genderNameMale.put(gn, gn.getMasculine());
-							Main.getProperties().genderNameNeutral.put(gn, gn.getNeutral());
-							Main.getProperties().genderNameFemale.put(gn, gn.getFeminine());
-						}
-						for (GenderPronoun gp : GenderPronoun.values()) {
-							Main.getProperties().genderPronounFemale.put(gp, gp.getFeminine());
-							Main.getProperties().genderPronounMale.put(gp, gp.getMasculine());
-						}
-						Main.saveProperties();
-						
-					}
-				};
-				
-			} else if (index == 3) {
 				return new Response("<span style='color:"+Main.getProperties().androgynousIdentification.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(Main.getProperties().androgynousIdentification.getName())+"</span>",
 						"Переключите способ которым игра относится к неопределенным телам описанным выше.", OPTIONS_PRONOUNS){
 					@Override
@@ -1059,6 +1067,27 @@ public class OptionsDialogue {
 					}
 				};
 				
+			} else if (index == 11) {
+				if(!defaultResetConfirmation) {
+					return getDefaultResetConfirmationResponse();
+				}
+				return new Response("[style.colourMinorBad(По умолчанию)]", "Сбрасывает все местоимения.", OPTIONS_PRONOUNS){
+					@Override
+					public void effects() {
+						for(GenderNames gn : GenderNames.values()) {
+							Main.getProperties().genderNameMale.put(gn, gn.getMasculine());
+							Main.getProperties().genderNameNeutral.put(gn, gn.getNeutral());
+							Main.getProperties().genderNameFemale.put(gn, gn.getFeminine());
+						}
+						for (GenderPronoun gp : GenderPronoun.values()) {
+							Main.getProperties().genderPronounFemale.put(gp, gp.getFeminine());
+							Main.getProperties().genderPronounMale.put(gp, gp.getMasculine());
+						}
+						Main.saveProperties();
+
+					}
+				};
+
 			} else if (index == 0) {
 				return new Response("Назад", "Вернутся в меню настроек.", OPTIONS);
 				
@@ -1073,6 +1102,16 @@ public class OptionsDialogue {
 		}
 	};
 	
+	private static Response getDefaultResetConfirmationResponse() {
+		return new ResponseEffectsOnly("По умолчанию", "Сбрасывает все местоимения в их значениях по умолчанию.<br/>[style.italicsMinorBad(Требует второй активации, чтобы подтвердить.)]") {
+			@Override
+			public void effects() {
+				defaultResetConfirmation = true;
+				Main.game.updateResponses();
+			}
+		};
+	}
+
 	private static String getGenderNameTableRow(GenderNames name) {
 		return "<tr>"
 					+ "<td>"
@@ -1168,6 +1207,10 @@ public class OptionsDialogue {
 	
 	
 	public static final DialogueNode GENDER_PREFERENCE = new DialogueNode("Предпочтения по полам", "", true) {
+		@Override
+		public void applyPreParsingEffects() {
+			defaultResetConfirmation = false;
+		}
 		
 		@Override
 		public String getHeaderContent(){
@@ -1218,7 +1261,10 @@ public class OptionsDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			 if (index == 11) {
-				return new Response("По умолчанию", "Восстановите все половые предпочтения до значений по умолчанию.", GENDER_PREFERENCE) {
+				if(!defaultResetConfirmation) {
+					return getDefaultResetConfirmationResponse();
+				}
+				return new Response("[style.colourMinorBad(По умолчанию)]", "Восстановите все половые предпочтения до значений по умолчанию.", GENDER_PREFERENCE) {
 					@Override
 					public void effects() {
 						Main.getProperties().resetGenderPreferences();
@@ -1311,6 +1357,10 @@ public class OptionsDialogue {
 	}
 	
 	public static final DialogueNode ORIENTATION_PREFERENCE = new DialogueNode("Предпочтения по ориентациям", "", true) {
+		@Override
+		public void applyPreParsingEffects() {
+			defaultResetConfirmation = false;
+		}
 		
 		@Override
 		public String getHeaderContent(){
@@ -1344,7 +1394,10 @@ public class OptionsDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 11) {
-				return new Response("По умолчанию", "Восстановите все параметры ориентации до значений по умолчанию.", ORIENTATION_PREFERENCE) {
+				if(!defaultResetConfirmation) {
+					return getDefaultResetConfirmationResponse();
+				}
+				return new Response("[style.colourMinorBad(По умолчанию)]", "Восстановите все параметры ориентации до значений по умолчанию.", ORIENTATION_PREFERENCE) {
 					@Override
 					public void effects() {
 						Main.getProperties().resetOrientationPreferences();
@@ -1362,6 +1415,10 @@ public class OptionsDialogue {
 	};
 	
 	public static final DialogueNode FETISH_PREFERENCE = new DialogueNode("Предпочтения по фетишам", "", true) {
+		@Override
+		public void applyPreParsingEffects() {
+			defaultResetConfirmation = false;
+		}
 		
 		@Override
 		public String getHeaderContent(){
@@ -1394,7 +1451,10 @@ public class OptionsDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 11) {
-				return new Response("По умолчанию", "Сбросьте все фетиш-предпочтения к настройкам по умолчанию.", FETISH_PREFERENCE) {
+				if(!defaultResetConfirmation) {
+					return getDefaultResetConfirmationResponse();
+				}
+				return new Response("[style.colourMinorBad(По умолчанию)]", "Сбросьте все фетиш-предпочтения к настройкам по умолчанию.", FETISH_PREFERENCE) {
 					@Override
 					public void effects() {
 						Main.getProperties().resetFetishPreferences();
@@ -1546,6 +1606,10 @@ public class OptionsDialogue {
 	}
 	
 	public static final DialogueNode AGE_PREFERENCE = new DialogueNode("Возраст", "", true) {
+		@Override
+		public void applyPreParsingEffects() {
+			defaultResetConfirmation = false;
+		}
 		
 		@Override
 		public String getHeaderContent(){
@@ -1575,7 +1639,10 @@ public class OptionsDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 11) {
-				return new Response("По умолчанию", "Восстановите все возрастные предпочтения до значений по умолчанию.", AGE_PREFERENCE) {
+				if(!defaultResetConfirmation) {
+					return getDefaultResetConfirmationResponse();
+				}
+				return new Response("[style.colourMinorBad(По умолчанию)]", "Восстановите все возрастные предпочтения до значений по умолчанию.", AGE_PREFERENCE) {
 					@Override
 					public void effects() {
 						Main.getProperties().resetAgePreferences();
@@ -1659,6 +1726,10 @@ public class OptionsDialogue {
 	}
 	
 	public static final DialogueNode FURRY_PREFERENCE = new DialogueNode("Фурри", "", true) {
+		@Override
+		public void applyPreParsingEffects() {
+			defaultResetConfirmation = false;
+		}
 		
 		@Override
 		public String getHeaderContent(){
@@ -1815,7 +1886,10 @@ public class OptionsDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==11) {
-				return new Response("По умолчанию", "Сбросьте все настройки фурри и появлений до значений по умолчанию.", FURRY_PREFERENCE) {
+				if(!defaultResetConfirmation) {
+					return getDefaultResetConfirmationResponse();
+				}
+				return new Response("[style.colourMinorBad(По умолчанию)]", "Сбросьте все настройки фурри и появлений до значений по умолчанию.", FURRY_PREFERENCE) {
 					@Override
 					public void effects() {
 						for(AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
@@ -2446,8 +2520,8 @@ public class OptionsDialogue {
 				+ "<div class='container-half-width' style='width:calc(55% - 16px);'>"
 					+ "<b style='text-align:center; color:"+PresetColour.BASE_AQUA.toWebHexString()+";'>Предпочитаемый художник</b><b>:</b> "
 					+ "Работы какого художника используются по умолчанию."
-				+ "</div>"
-				+ "<div class='container-half-width' style='width:calc(45% - 16px);'>");
+					+ "</div>"
+					+ "<div class='container-half-width' style='width:calc(45% - 16px);'>");
 
 			List<Artist> artists = new ArrayList<>(Artwork.allArtists);
 			artists.remove(Artwork.customArtist);
@@ -2490,7 +2564,7 @@ public class OptionsDialogue {
 			UtilText.nodeContentSB.append(getContentPreferenceDiv("SILLY",
 					PresetColour.GENERIC_GOOD,
 					"Глупый режим",
-					"Это позволяет использовать забавный текст на протяжении всей игры. (Гарпии заменяются на птичек и т.д.)",
+					"Это позволяет использовать дополнительный глупый контент на протяжении всей игры.",
 					Main.getProperties().hasValue(PropertyValue.sillyMode)));
 			
 			return UtilText.nodeContentSB.toString();
@@ -2514,8 +2588,8 @@ public class OptionsDialogue {
 			
 			UtilText.nodeContentSB.append(getContentPreferenceDiv("ENCHANTMENT_LIMITS",
 					PresetColour.GENERIC_ARCANE,
-					"Вместимость зачарований",
-					"Когда включено, персонаж имеет определенное ограничение на максимальное количество зачарований, которое зависит от уровня и навыков. Когда отключено, зачаровывать можно до бесконечности (пока есть ресурс). (Отключение сравнимо с включением читов, делает игру слишком легкой.)",
+					"Нестабильность зачарований",
+					"Включить механику '"+Attribute.ENCHANTMENT_LIMIT.getName()+"' персонаж имеет определенное ограничение на максимальное количество зачарований. Эта функция включена по умолчанию, и, отключив её, вы потенциально нарушите баланс боя в игре.",
 					Main.getProperties().hasValue(PropertyValue.enchantmentLimits)));
 			UtilText.nodeContentSB.append(getContentPreferenceDiv("BAD_END",
 					PresetColour.GENERIC_TERRIBLE,
@@ -2792,7 +2866,7 @@ public class OptionsDialogue {
 			UtilText.nodeContentSB.append(getContentPreferenceDiv("FURRY_TAIL_PENETRATION",
 					PresetColour.BASE_MAGENTA,
 					"Проникновения хвостами",
-					"Отмечает все типы хвостов как пригодные для проникновения, позволяя использовать их в секс действиях проникновения.",
+					"Отмечает все типы цепких хвостов как пригодные для проникновения, позволяя использовать их в секс действиях проникновения.",
 					Main.getProperties().hasValue(PropertyValue.furryTailPenetrationContent)));
 			
 			UtilText.nodeContentSB.append(getContentPreferenceDiv("INFLATION_CONTENT",

@@ -386,7 +386,7 @@ public enum Quest {
 				Main.game.getPlayer().removeItem(Main.game.getItemGen().generateItem(ItemType.LYSSIETHS_RING));
 			}
 			if(!Main.game.getPlayer().hasClothingType(ClothingType.FINGER_LYSSIETHS_RING, true)) {
-				Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing(ClothingType.FINGER_LYSSIETHS_RING), false);
+				Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing(ClothingType.FINGER_LYSSIETHS_RING, false), false);
 			}
 		}
 	},
@@ -2615,22 +2615,22 @@ public enum Quest {
 		}
 		@Override
 		public String getDescription() {
-			return "Наталья, хозяйка конюшни в компании «Доминион Экспресс», предложила вам пройти собеседование на должность «кобылки».";
+			return "Наталья, хозяйка конюшни в компании «Доминион Экспресс», предложила вам пройти собеседование на должность «[pc.morphSingleGent([style.mule])]».";
 		}
 		@Override
 		public String getCompletedDescription() {
-			return "Вы приняли предложение Натальи пройти собеседование на должность кобылки в «Доминион Экспресс».";
+			return "Вы приняли предложение Натальи пройти собеседование на должность «[pc.morphSingleGent([style.mule])]» в «Доминион Экспресс».";
 		}
 	},
 
 	ROMANCE_NATALYA_2_CONTRACT_SIGNED(QuestType.RELATIONSHIP, 1, 5) {
 		@Override
 		public String getName() {
-			return "Натальина кобылка";
+			return "[pc.genderBasedWord(Натальин, Натальина)] [style.mule]";
 		}
 		@Override
 		public String getDescription() {
-			return "Приняв предложение о собеседовании на должность «кобылки», вы теперь должны успешно пройти его и подписать контракт.";
+			return "Приняв предложение о собеседовании на должность ««[pc.morphSingleGent([style.mule])]»», вы теперь должны успешно пройти его и подписать контракт.";
 		}
 		@Override
 		public String getCompletedDescription() {
@@ -2641,7 +2641,7 @@ public enum Quest {
 	ROMANCE_NATALYA_3_TRAINING_1(QuestType.RELATIONSHIP, 1, 5) {
 		@Override
 		public String getName() {
-			return "Дрессировка кобылки";
+			return "Тренировка «[pc.morphSingleGent([style.mule])]»";
 		}
 		@Override
 		public String getDescription() {
@@ -2679,7 +2679,7 @@ public enum Quest {
 		}
 		@Override
 		public String getCompletedDescription() {
-			return "Вы сделали анилингус рабу-кентавру, а затем вас оседлали и анально оттрахали, Наталья заявила, что обучение вас как кобылки завершено.";
+			return "Вы сделали анилингус рабу-кентавру, а затем вас оседлали и анально оттрахали, Наталья заявила, что обучение вас как [pc.morphSingleGent([style.mule])] завершено.";
 		}
 	},
 

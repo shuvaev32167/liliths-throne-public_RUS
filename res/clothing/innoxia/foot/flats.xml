@@ -47,25 +47,25 @@
 
 	<replacementText type="REMOVE_OR_EQUIP">
 		<self>
-            <![CDATA[[npc.Name] slip [npc.her] [npc.feet] into the heels.]]>
+            <![CDATA[[npc.Name] slip [npc.her] [npc.feet] into the flats.]]>
 		</self>
 		<other>
-            <![CDATA[[npc.Name] slip [npc2.namePos] [npc2.feet] into the heels.]]>
+            <![CDATA[[npc.Name] slip [npc2.namePos] [npc2.feet] into the flats.]]>
 		</other>
 		<otherRough>
-            <![CDATA[[npc.Name] roughly push [npc2.namePos] [npc2.feet] into the heels.]]>
+            <![CDATA[[npc.Name] roughly push [npc2.namePos] [npc2.feet] into the flats.]]>
 		</otherRough>
 	</replacementText>
 
 	<displacementText type="REMOVE_OR_EQUIP">
 		<self>
-            <![CDATA[[npc.Name] slip off [npc.her] heels.]]>
+            <![CDATA[[npc.Name] slip off [npc.her] flats.]]>
 		</self>
 		<other>
-            <![CDATA[[npc.Name] slip off [npc2.namePos] heels.]]>
+            <![CDATA[[npc.Name] slip off [npc2.namePos] flats.]]>
 		</other>
 		<otherRough>
-            <![CDATA[[npc.Name] roughly pull off [npc2.namePos] heels.]]>
+            <![CDATA[[npc.Name] roughly pull off [npc2.namePos] flats.]]>
 		</otherRough>
 	</displacementText>
 	

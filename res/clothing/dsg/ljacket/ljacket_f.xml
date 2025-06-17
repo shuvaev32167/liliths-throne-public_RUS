@@ -109,7 +109,7 @@
             <![CDATA[[npc.Name] guide [npc2.namePos] [npc2.arms] through the jacket's sleeves and pull the rest of it over [npc2.her] shoulders.]]>
 		</other>
 		<otherRough>
-            <![CDATA[CDATA[[npc.Name] force [npc2.namePos] [npc2.arms] through the jacket's sleeves and yank the rest of it over [npc2.her] shoulders.]]>
+            <![CDATA[[npc.Name] force [npc2.namePos] [npc2.arms] through the jacket's sleeves and yank the rest of it over [npc2.her] shoulders.]]>
 		</otherRough>
 	</replacementText>
 

@@ -47,13 +47,59 @@ public class PrologueDialogue {
 		return CharacterCreation.femalePrologueNPC();
 	}
 	
-	public static final DialogueNode INTRO_EMPTY_ROOM = new DialogueNode("В музей", "", true, true) {
+	public static final DialogueNode INTRO = new DialogueNode("В музей", "", true) {
 
 		@Override
 		public int getSecondsPassed() {
 			return 90;
 		}
 
+		@Override
+		public String getContent() {
+			if(femalePrologueNPC()) {
+				return UtilText.parseFromXMLFile("misc/prologue", "INTRO_FEMALE");
+
+			} else {
+				return UtilText.parseFromXMLFile("misc/prologue", "INTRO_MALE");
+			}
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 1) {
+				return new Response("Согласиться", "[pc.genderBasedWord(Переполняемый, Переполняемая)] возбуждением, ты решаешь согласиться и пойти развлечься.", INTRO_EMPTY_ROOM) {
+					@Override
+					public void effects() {
+						Main.game.getPlayer().setLocation(WorldType.MUSEUM, PlaceType.MUSEUM_OFFICE);
+						if(femalePrologueNPC()) {
+							Main.game.getNpc(PrologueFemale.class).setLocation(WorldType.MUSEUM, PlaceType.MUSEUM_OFFICE);
+						} else {
+							Main.game.getNpc(PrologueMale.class).setLocation(WorldType.MUSEUM, PlaceType.MUSEUM_OFFICE);
+						}
+					}
+				};
+
+			} else if (index == 2) {
+				return new Response("Сказать нет", "Ты не думаешь, что это хорошая идея - тайком заниматься сексом, когда ты [pc.genderBasedWord(прибыл, прибыла)] сюда чтобы повидаться с тётей Лили. Скажи нет.", INTRO_NO) {
+					@Override
+					public void effects() {
+						Main.game.getPlayer().setLocation(WorldType.MUSEUM, PlaceType.MUSEUM_CROWDS);
+					}
+				};
+
+			} else {
+				return null;
+			}
+		}
+	};
+	
+	public static final DialogueNode INTRO_EMPTY_ROOM = new DialogueNode("В музей", "", true, true) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 90;
+		}
+		
 		@Override
 		public String getContent() {
 			if(femalePrologueNPC()) {
@@ -175,77 +221,9 @@ public class PrologueDialogue {
 			return null;
 		}
 	};
-	public static final DialogueNode INTRO = new DialogueNode("В музей", "", true) {
+	
 
-		@Override
-		public int getSecondsPassed() {
-			return 90;
-		}
-
-		@Override
-		public String getContent() {
-			if(femalePrologueNPC()) {
-				return UtilText.parseFromXMLFile("misc/prologue", "INTRO_FEMALE");
-
-			} else {
-				return UtilText.parseFromXMLFile("misc/prologue", "INTRO_MALE");
-			}
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Согласиться", "[pc.genderBasedWord(Переполняемый, Переполняемая)] возбуждением, ты решаешь согласиться и пойти развлечься.", INTRO_EMPTY_ROOM) {
-					@Override
-					public void effects() {
-						Main.game.getPlayer().setLocation(WorldType.MUSEUM, PlaceType.MUSEUM_OFFICE);
-						if(femalePrologueNPC()) {
-							Main.game.getNpc(PrologueFemale.class).setLocation(WorldType.MUSEUM, PlaceType.MUSEUM_OFFICE);
-						} else {
-							Main.game.getNpc(PrologueMale.class).setLocation(WorldType.MUSEUM, PlaceType.MUSEUM_OFFICE);
-						}
-					}
-				};
-
-			} else if (index == 2) {
-				return new Response("Сказать нет", "Ты не думаешь, что это хорошая идея - тайком заниматься сексом, когда ты [pc.genderBasedWord(прибыл, прибыла)] сюда чтобы повидаться с тётей Лили. Скажи нет.", INTRO_NO) {
-					@Override
-					public void effects() {
-						Main.game.getPlayer().setLocation(WorldType.MUSEUM, PlaceType.MUSEUM_CROWDS);
-					}
-				};
-
-			} else {
-				return null;
-			}
-		}
-	};
-
-
-	public static final DialogueNode INTRO_2 = new DialogueNode("В музей", "", true, true) {
-
-		@Override
-		public int getSecondsPassed() {
-			return 60*10;
-		}
-
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("misc/prologue", "INTRO_2");
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Согласиться", "Пойти и заглянуть за зеркало, чтобы узнать, кто там находится.", INTRO_3A);
-			} else if (index == 2) {
-				return new Response("Нет", "Это самая очевидная ловушка, которую ты когда-либо [pc.genderBasedWord(видел, видела)].", INTRO_3B);
-			} else {
-				return null;
-			}
-		}
-	};
-	public static final DialogueNode AFTER_SEX = new DialogueNode("В музей", "Теперь, когда ты [pc.genderBasedWord(повеселился, повеселилась)], тебе действительно стоит пойти и найти свою тётю Лили...", true) {
+	public static final DialogueNode AFTER_SEX = new DialogueNode("Закончить", "Теперь, когда ты [pc.genderBasedWord(повеселился, повеселилась)], тебе действительно стоит пойти и найти свою тётю Лили...", true) {
 
 		@Override
 		public String getContent() {
@@ -363,6 +341,30 @@ public class PrologueDialogue {
 		}
 	};
 
+	public static final DialogueNode INTRO_2 = new DialogueNode("В музей", "", true, true) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 60*10;
+		}
+
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("misc/prologue", "INTRO_2");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 1) {
+				return new Response("Согласиться", "Пойти и заглянуть за зеркало, чтобы узнать, кто там находится.", INTRO_3A);
+			} else if (index == 2) {
+				return new Response("Нет", "Это самая очевидная ловушка, которую ты когда-либо [pc.genderBasedWord(видел, видела)].", INTRO_3B);
+			} else {
+				return null;
+			}
+		}
+	};
+
 	public static final DialogueNode INTRO_3A = new DialogueNode("", "", true, true) {
 
 		@Override
@@ -428,29 +430,49 @@ public class PrologueDialogue {
 			}
 		}
 	};
-	public static final DialogueNode INTRO_NEW_WORLD_9 = new DialogueNode("Стук", "Роза сказала, что вернётся примерно через полчаса, так что, должно быть, это она стучит в дверь.", true, true) {
+
+	public static final DialogueNode INTRO_5 = new DialogueNode("", "", true, true) {
 
 		@Override
 		public int getSecondsPassed() {
-			return 60*30;
+			return 20;
 		}
 
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("misc/prologue", "INTRO_NEW_WORLD_9");
+			return UtilText.parseFromXMLFile("misc/prologue", "INTRO_5");
 		}
 
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Свобода!", "Реши, что хочешь делать дальше.", RoomPlayer.ROOM) {
+				return new Response("Очнуться", "Ты медленно начинаешь приходить в себя.", INTRO_NEW_WORLD_1) {
 					@Override
 					public void effects() {
-						Main.game.getNpc(Rose.class).setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LAB, false);
-						Main.saveGame("AutoSave_"+Main.game.getPlayer().getName(false), true, true);
+
+						Main.game.setWeatherInSeconds(Weather.MAGIC_STORM, 5*60*60);
+
+						Main.game.setRenderMap(true);
+
+						MainController.updateUI();
+
+						Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_AUNTS_HOME);
+
+						Main.game.getPlayer().setAgeAppearanceDifference(-Game.TIME_SKIP_YEARS);
+
+						Main.game.applyStartingDateChange();
+
+						Main.game.getPlayer().addSpecialPerk(Perk.SPECIAL_PLAYER);
+
+						Main.game.getPlayer().setHealth(Main.game.getPlayer().getAttributeValue(Attribute.HEALTH_MAXIMUM));
+						Main.game.getPlayer().setMana(Main.game.getPlayer().getAttributeValue(Attribute.MANA_MAXIMUM));
+						Main.game.getPlayer().setLustNoText(Main.game.getPlayer().getRestingLust());
+
+                        if(femalePrologueNPC()) {
+							Main.game.getNpc(PrologueFemale.class).endPregnancy(false); // This is to clear the pregnancy stats from the player's phone menu
+						}
 					}
 				};
-
 			} else {
 				return null;
 			}
@@ -926,44 +948,30 @@ public class PrologueDialogue {
 			}
 		}
 	};
-	public static final DialogueNode INTRO_5 = new DialogueNode("", "", true, true) {
+
+	public static final DialogueNode INTRO_NEW_WORLD_9 = new DialogueNode("Стук", "Роза сказала, что вернётся примерно через полчаса, так что, должно быть, это она стучит в дверь.", true, true) {
 
 		@Override
 		public int getSecondsPassed() {
-			return 20;
+			return 60*30;
 		}
 
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("misc/prologue", "INTRO_5");
+			return UtilText.parseFromXMLFile("misc/prologue", "INTRO_NEW_WORLD_9");
 		}
 
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Очнуться", "Ты медленно начинаешь приходить в себя.", INTRO_NEW_WORLD_1) {
+				return new Response("Свобода!", "Реши, что хочешь делать дальше.", RoomPlayer.ROOM) {
 					@Override
 					public void effects() {
-
-						Main.game.setWeatherInSeconds(Weather.MAGIC_STORM, 5*60*60);
-
-						Main.game.setRenderMap(true);
-
-						MainController.updateUI();
-
-						Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_AUNTS_HOME);
-
-						Main.game.getPlayer().setAgeAppearanceDifference(-Game.TIME_SKIP_YEARS);
-
-						Main.game.applyStartingDateChange();
-
-						Main.game.getPlayer().addSpecialPerk(Perk.SPECIAL_PLAYER);
-
-						Main.game.getPlayer().setHealth(Main.game.getPlayer().getAttributeValue(Attribute.HEALTH_MAXIMUM));
-						Main.game.getPlayer().setMana(Main.game.getPlayer().getAttributeValue(Attribute.MANA_MAXIMUM));
-						Main.game.getPlayer().setLustNoText(Main.game.getPlayer().getRestingLust());
+						Main.game.getNpc(Rose.class).setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LAB, false);
+						Main.saveGame("AutoSave_"+Main.game.getPlayer().getName(false), true, true);
 					}
 				};
+
 			} else {
 				return null;
 			}

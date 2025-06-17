@@ -111,9 +111,9 @@ import static com.lilithsthrone.game.character.gender.Gender.M_P_MALE;
 import static com.lilithsthrone.utils.Constants.RUSSIAN_LOCALE;
 
 /**
- * @author Innoxia, Pimvgd, AlacoGit, Tad Unlikely, CognitiveMist, tarbh-uisge
- * @version 0.4.10.4
  * @since 0.1.0
+ * @version 0.4.10.4
+ * @author Innoxia, Pimvgd, AlacoGit, Tad Unlikely, CognitiveMist, tarbh-uisge
  */
 public class UtilText {
 
@@ -286,6 +286,1074 @@ public class UtilText {
             new Value<>("whisky", "whiskey"),
             new Value<>("queue", "line")
     );
+	
+	/**
+	 * Converts the input into a format suitable for html display. i.e. converts things like '<' to "&lt;".
+	 */
+	public static String parseForHTMLDisplay(String input) {
+		StringBuilder builder = new StringBuilder();
+		
+		for (char c : input.toCharArray()) {
+			switch (c) {
+				// I'm not sure why this was being changed to a non-breaking space... It was interfering with clothing name equality and such, so I removed it in v0.3.5.1
+//				case ' ':
+//					builder.append("&nbsp;");
+//					break;
+				case '<':
+					builder.append("&lt;");
+					break;
+				case '>':
+					builder.append("&gt;");
+					break;
+				case '&':
+					builder.append("&amp;");
+					break;
+				case '"':
+					builder.append("&quot;");
+					break;
+				case '\'':
+					builder.append("&#39;");
+					break;
+				default:
+					builder.append(c);
+					break;
+			}
+		}
+		
+		return builder.toString();
+	}
+	
+	public static String parsePlayerThought(String text) {
+		return parseThought(text, Main.game.getPlayer());
+	}
+
+	public static String parsePlayerSpeech(String text) {
+		return parseSpeech(text, Main.game.getPlayer());
+	}
+
+	private static String getGlowStyle(Colour colour) {
+		return colour==null?"":"text-shadow: 0px 0px 4px "+colour.getShadesRgbaFormat(0.75f)[1]+";";
+	}
+	
+	private static Boolean isPlayer(String target, GameCharacter character) {
+		return target.startsWith("npc") && character.isPlayer();
+	}
+
+	public static String parseSpeech(String text, GameCharacter target, boolean includePersonalityEffects, boolean includeExtraEffects) {
+		return parseSpeech(text, target, includePersonalityEffects, includeExtraEffects, true);
+	}
+	public static String parseSpeech(String text, GameCharacter target, boolean includePersonalityEffects, boolean includeExtraEffects, boolean canBeMuted) {
+		modifiedSentence = text.trim();
+		
+		String[] splitOnConditional = modifiedSentence.split("#THEN");
+		
+		modifiedSentence = UtilText.parse(parsingCharactersForSpeech, splitOnConditional[splitOnConditional.length-1]);
+		
+		if(target.isMute() && canBeMuted) {
+			modifiedSentence = Util.replaceWithMute(modifiedSentence, Main.game.isInSex() && Main.sex.getAllParticipants().contains(target));
+			
+		} else if(includeExtraEffects
+				&& !parserTags.contains(ParserTag.SEX_ALLOW_MUFFLED_SPEECH)
+				&& Main.game.isInSex()
+				&& Main.sex.getAllParticipants().contains(target)
+				&& target.isSpeechMuffled()) {
+			if(Main.sex.isOngoingActionsBlockingSpeech(target)) {
+				modifiedSentence = Util.replaceWithMuffle(modifiedSentence, 2);
+			}
+			
+		} else {
+			if(includePersonalityEffects) {
+				if(target.hasFetish(Fetish.FETISH_BIMBO)) {
+					if(target.isFeminine()) {
+						modifiedSentence = Util.addBimbo(modifiedSentence, 6);
+					} else {
+						modifiedSentence = Util.addBro(modifiedSentence, 6);
+					}
+				}
+				
+				if(target.hasPersonalityTrait(PersonalityTrait.SLOVENLY)) {
+					modifiedSentence = Util.applySlovenlySpeech(modifiedSentence);
+				}
+			}
+			
+			if(includeExtraEffects) {
+				if(target.getAlcoholLevel().getSlurredSpeechFrequency()>0) {
+					modifiedSentence = Util.addDrunkSlur(modifiedSentence, target.getAlcoholLevel().getSlurredSpeechFrequency());
+				}
+				
+				// Apply speech effects:
+				if(target.isSpeechMuffled()) {
+					modifiedSentence = Util.addMuffle(modifiedSentence, 5);
+					
+				} else if(Main.game.isInSex() && Main.sex.getAllParticipants().contains(target)) {
+					if(Main.sex.isCharacterEngagedInOngoingAction(target)) {
+						modifiedSentence = Util.addSexSounds(modifiedSentence, 6, Main.sex.getSexPace(target)==SexPace.SUB_RESISTING);
+					}
+					
+				}
+			}
+
+			if(includePersonalityEffects) {
+				if((Main.game.isLipLispEnabled() && target.getLipSize().isImpedesSpeech())
+						|| target.hasPersonalityTrait(PersonalityTrait.LISP)) {
+					modifiedSentence = Util.applyLisp(modifiedSentence);
+				}
+	
+				if(target.hasPersonalityTrait(PersonalityTrait.STUTTER)) {
+					modifiedSentence = Util.addStutter(modifiedSentence, 4);
+				}
+			}
+			
+			if(splitOnConditional.length>1) {
+				modifiedSentence = splitOnConditional[0]+"#THEN"+modifiedSentence;
+			}
+		}
+		
+		Colour glow = target.getSpeechGlowColour();
+		String classAddition = "";
+		if (target.getSpeechColour() != null) {
+			if(target.isDoll()) {
+				classAddition = " doll";
+			}
+			return "<span class='speech"+classAddition+"' style='color:" + target.getSpeechColour() + ";"+getGlowStyle(glow)+"'>"
+						+ modifiedSentence
+					+ "</span>";
+
+		} else {
+			if(target.isDoll()) {
+				classAddition = " doll";
+			}
+			if (Femininity.valueOf(target.getFemininityValue()) == Femininity.MASCULINE || Femininity.valueOf(target.getFemininityValue()) == Femininity.MASCULINE_STRONG) {
+				return "<span class='speech"+classAddition+"' style='color:" + PresetColour.MASCULINE_NPC.toWebHexString() + ";"+getGlowStyle(glow)+"'>" + modifiedSentence + "</span>";
+			} else if (Femininity.valueOf(target.getFemininityValue()) == Femininity.ANDROGYNOUS) {
+				return "<span class='speech"+classAddition+"' style='color:" + PresetColour.ANDROGYNOUS_NPC.toWebHexString() + ";"+getGlowStyle(glow)+"'>" + modifiedSentence + "</span>";
+			} else {
+				return "<span class='speech"+classAddition+"' style='color:" + PresetColour.FEMININE_NPC.toWebHexString() + ";"+getGlowStyle(glow)+"'>" + modifiedSentence + "</span>";
+			}
+		}
+	
+	}
+	
+	public static String parseSpeech(String text, GameCharacter target) {
+		return parseSpeech(text, target, true, true);
+	}
+	
+	public static String parseSpeechNoEffects(String text, GameCharacter target) {
+		return parseSpeech(text, target, false, false);
+	}
+	
+	public static String parseSpeechNoExtraEffects(String text, GameCharacter target) {
+		return parseSpeech(text, target, true, false);
+	}
+	
+	public static String parseThought(String text, GameCharacter target) {
+		return "<i>"+parseSpeech(text, target, true, false, false).replaceAll("class='speech'", "class='thoughts'")+"</i>";
+	}
+
+	public static String parseNPCThought(String text, Femininity femininity) {
+		return "<i>"+parseNPCSpeech(text, femininity, false, false).replaceAll("class='speech'", "class='thoughts'")+"</i>";
+	}
+	
+	public static String parseNPCSpeech(String text, Femininity femininity) {
+		return parseNPCSpeech(text, femininity, false, false);
+	}
+
+	public static String parseNPCSpeechDoll(String text, Femininity femininity) {
+		return parseNPCSpeech(text, femininity, false, false, true);
+	}
+	
+	public static String parseNPCSpeech(String text, Femininity femininity, boolean bimbo, boolean stutter) {
+		return parseNPCSpeech(text, femininity, bimbo, stutter, false);
+	}
+	
+	public static String parseNPCSpeech(String text, Femininity femininity, boolean bimbo, boolean stutter, boolean doll) {
+		modifiedSentence = text;
+		if (bimbo) {
+			modifiedSentence = Util.addBimbo(modifiedSentence, 6);
+		}
+		if (stutter) {
+			modifiedSentence = Util.addStutter(modifiedSentence, 4);
+		}
+		return "<span class='speech"+(doll?" doll":"")+"' style='color:" + femininity.getSpeechColour().toWebHexString() + ";'>" + modifiedSentence + "</span>";
+	}
+	
+	public static String getDisabledResponse(String label) {
+		return "<span class='option-disabled'>"+label+"</span>";
+	}
+	
+	// "Temporary" methods until I refine the way DialogueNodes work:
+	public static String getRequirementsDescription(AbstractPerk perkRequired) {
+		return ("You require the perk '<b style='color:"+perkRequired.getPerkCategory().getColour().toWebHexString()+";'>"+perkRequired.getName(Main.game.getPlayer())+"</b>'.");
+	}
+	
+	public static String getRequirementsDescription(AbstractPerk perkRequired, Gender... gendersRequired) {
+		descriptionSB.setLength(0);
+		
+		descriptionSB.append("You require the perk '<b style='color:"+perkRequired.getPerkCategory().getColour().toWebHexString()+";'>"+perkRequired.getName(Main.game.getPlayer())+"</b>'");
+		
+		if(gendersRequired.length==0) {
+			descriptionSB.append(".");
+		} else {
+			descriptionSB.append(", and need to be a ");
+			
+			for(int i=0 ;i<gendersRequired.length; i++) {
+				if(i!=0) {
+					if(i==gendersRequired.length-1)
+						descriptionSB.append(", or ");
+					else
+						descriptionSB.append(", ");
+				}
+				descriptionSB.append("<b style='color:"+gendersRequired[i].getColour().toWebHexString()+";'>"+gendersRequired[i].getName()+"</b>");
+			}
+			
+			descriptionSB.append(".");
+		}
+		
+		return descriptionSB.toString();
+	}
+	
+	public static String getRequirementsDescription(CorruptionLevel corruptionNeeded, AbstractPerk... perkRequired) {
+		descriptionSB.setLength(0);
+		
+		descriptionSB.append("You require a corruption level of <b style='color:"+corruptionNeeded.getColour().toWebHexString()+";'>"+corruptionNeeded.getName()+"</b>");
+		
+		if(perkRequired.length==0) {
+			descriptionSB.append(".");
+		} else {
+			descriptionSB.append(", or the perk"+(perkRequired.length>1?"s ":" "));
+			
+			for(int i=0 ;i<perkRequired.length; i++) {
+				if(i!=0) {
+					if(i==perkRequired.length-1)
+						descriptionSB.append(", or ");
+					else
+						descriptionSB.append(", ");
+				}
+				descriptionSB.append("<b style='color:"+perkRequired[i].getPerkCategory().getColour().toWebHexString()+";'>"+perkRequired[i].getName(Main.game.getPlayer())+"</b>");
+			}
+			
+			descriptionSB.append(".");
+		}
+		
+		return descriptionSB.toString();
+	}
+
+	public static String getCurrencySymbol() {
+//		return "&#9679;"; // Circle
+		return "&#164;"; // 'Generic' currency symbol
+	}
+	
+	public static String getPentagramSymbol() {
+		return "&#9956;";//"&#9737;"; // Java doesn't support unicode 6 ;_;   No pentagram for me... ;_;  "&#9956";
+	}
+
+	public static String getEssenceSymbol(Colour colour) {
+		return "<b style='color:"+colour.toWebHexString()+"; -webkit-text-stroke: 1px "+colour.toWebHexString()+";'>"+getPentagramSymbol()+"</b>";
+	}
+
+	public static String getShieldSymbol() {
+		return "&#9930;";
+	}
+
+	public static String getBasicInfinitySymbol() {
+		return "<span style='font-weight:normal; font-family:sans-serif; font-size:1.5em;'>&#8734;</span>";
+	}
+
+	/**
+	 * The infinity symbol really, really sucks in the default LT font.
+	 */
+	public static String getInfinitySymbol(boolean largerFont) {
+		//"&#9854;";
+//		return "<span style='font-family:serif; font-weight:normal; font-size:1.25em;'>&#8734;</span>";
+		return "<span style='font-weight:normal; font-family:sans-serif; color:"+PresetColour.GENERIC_EXCELLENT.toWebHexString()+"; "+(largerFont?"font-size:28px;":"")+"'>&#8734;</span>";
+	}
+
+	public static String applyGlow(String input) {
+		return "<span style='text-shadow: 0px 0px 4px;'>"+input+"</span>";
+	}
+
+	public static String applyGlow(String input, Colour colour) {
+		return "<span style='color:"+colour.toWebHexString()+"; text-shadow: 0px 0px 4px "+colour.getShades()[4]+";'>"+input+"</span>";
+	}
+
+	public static String applyVibration(String input, Colour colour) {
+		return "<span style='text-shadow: 2px 2px "+colour.getShades()[0]+";'>"+input+"</span>";
+	}
+
+	public static String formatAsEssencesUncoloured(int amount, String tag, boolean withOverlay) {
+		String disabledColour = PresetColour.TEXT_GREY.toWebHexString();
+		return
+//				"<div class='item-inline'>"
+//					+ SVGImages.SVG_IMAGE_PROVIDER.getEssenceUncoloured() + (withOverlay?"<div class='overlay no-pointer' id='ESSENCE_ICON'></div>":"")
+//				+"</div>"
+				getEssenceSymbol(PresetColour.TEXT_GREY)//+"<b style='color:"+disabledColour+"; -webkit-text-stroke: 1px "+disabledColour+";'>"+getPentagramSymbol()+"</b>"
+				+ "<"+tag+" style='color:"+disabledColour+";'>"+Units.number(amount)+"</"+tag+">";
+	}
+
+	public static String formatAsEssences(String essences, String tag) {
+		try {
+			int essenceInt = Integer.parseInt(UtilText.parse(essences));
+			return formatAsEssences(essenceInt, tag, false);
+		} catch(Exception ex) {
+		}
+		return formatAsMoney(essences, tag, PresetColour.TEXT);
+	}
+
+	public static String formatAsEssences(int amount, String tag, boolean withOverlay) {
+		String arcaneColour = PresetColour.GENERIC_ARCANE.toWebHexString();
+		return
+//				"<div class='item-inline'>"
+//					+ SVGImages.SVG_IMAGE_PROVIDER.getEssence() + (withOverlay?"<div class='overlay no-pointer' id='ESSENCE_ICON'></div>":"")
+//				+"</div>"
+//				 "<b style='color:"+arcaneColour+"; text-shadow: "+PresetColour.BASE_PINK_LIGHT.toWebHexString()+" 0 0 16px;'>&#9956;</b>"
+
+				getEssenceSymbol(PresetColour.GENERIC_ARCANE)// "<b style='color:"+arcaneColour+"; -webkit-text-stroke: 1px "+arcaneColour+";'>"+getPentagramSymbol()+"</b>"
+				+ "<"+tag+" style='color:"+arcaneColour+";'>"+Units.number(amount)+"</"+tag+">";
+	}
+
+	public static String getEnchantmentCapacitySymbolUncoloured() {
+		return "<b style='-webkit-text-stroke: 1px;'>&#9959;</b>";
+	}
+
+	public static String getEnchantmentCapacitySymbol() {
+		return "<b style='-webkit-text-stroke: 1px; color:#EA5D76;'>&#9959;</b>";// text-shadow: #FF385Dbb 0 2px 5px;
+	}
+
+	public static String formatAsEnchantmentCapacityUncoloured(int amount, String tag) {
+		return getEnchantmentCapacitySymbolUncoloured() + "<"+tag+">"+Units.number(amount)+"</"+tag+">";
+	}
+
+	public static String formatAsEnchantmentCapacity(int amount, String tag) {
+		String colour = PresetColour.GENERIC_BAD.toWebHexString();
+		return getEnchantmentCapacitySymbol() + "<"+tag+" style='color:"+colour+";'>"+Units.number(amount)+"</"+tag+">";
+	}
+
+	// Money formatting:
+
+	public static String formatAsItemPrice(int money) {
+		String moneyString = Units.number(money);
+
+		if(money > 1_000_000) {
+			float moneyAbbreviated = money/1_000_000f;
+			moneyString = Units.number(moneyAbbreviated, 1, 1)+"M";
+			return formatAsMoney(moneyString, "b", PresetColour.CURRENCY_GOLD);
+
+		} else if(money > 1_000) {
+			float moneyAbbreviated = money/1_000f;
+			int precision = money < 10_000?1:0;
+			moneyString = Units.number(moneyAbbreviated, precision, precision)+"k";
+			return formatAsMoney(moneyString, "b", PresetColour.CURRENCY_SILVER);
+		}
+
+		return formatAsMoney(moneyString, "b", PresetColour.CURRENCY_COPPER);
+	}
+
+	public static String formatAsMoney(int money) {
+		return formatAsMoney(money, "b");
+	}
+
+	public static String formatAsMoneyUncoloured(int money, String tag) {
+		return formatAsMoney(money, tag, null);
+	}
+
+	public static String formatAsMoneyUncoloured(String money, String tag) {
+		return formatAsMoney(money, tag, null);
+	}
+
+	public static String formatAsMoney(int money, String tag) {
+		return formatAsMoney(money, tag, PresetColour.TEXT);
+	}
+
+	public static String formatAsMoney(String money, String tag) {
+		if(!money.contains("[npc.")) { // Do not parse it out if this is a generic NPC's money
+			try {
+				// If 'thisItem' is not null, pass it through into the money parsing, so that [style.moneyFormat([#thisItem.getValue()], span)] will work without throwing an error
+				Object item = engine.get("thisItem");
+				int moneyInt;
+				if(item!=null) {
+					moneyInt = Integer.parseInt(UtilText.parse((AbstractCoreItem) item, money));
+				} else {
+					moneyInt = Integer.parseInt(UtilText.parse(money));
+				}
+				return formatAsMoney(moneyInt, tag, PresetColour.TEXT);
+			} catch(Exception ex) {
+			}
+		}
+		return formatAsMoney(money, tag, PresetColour.TEXT);
+	}
+
+	public static String formatAsMoney(int money, String tag, Colour amountColour) {
+		return formatAsMoney(Units.number(money), tag, amountColour);
+	}
+
+	public static String formatAsMoney(String money, String tag, Colour amountColour) {
+		return "<" + tag + " style='" + (amountColour==null?"":"color:"+PresetColour.CURRENCY_GOLD.toWebHexString()+";") + " padding-right:2px;'>" + getCurrencySymbol() + "</" + tag + ">"
+				+ "<" + tag + (amountColour==null?"":" style='color:"+amountColour.toWebHexString()+";'") + ">" + money + "</" + tag + ">";
+	}
+
+
+	public static String formatVirginityLoss(String s) {
+		return "<p style='text-align:center; color:"+PresetColour.GENERIC_TERRIBLE.toWebHexString()+";'><i>"+s+"</i></p>";
+	}
+
+	public static String formatTooLoose(String s) {
+		return "<p style='text-align:center; color:"+PresetColour.GENERIC_MINOR_BAD.toWebHexString()+";'><i>"+s+"</i></p>";
+	}
+
+	public static String formatStretching(String s) {
+		return "<p style='text-align:center; color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'><i>"+s+"</i></p>";
+	}
+
+	public static boolean isVowel(char c) {
+		return "AEIOUaeiou".indexOf(c) != -1;
+	}
+
+	/**
+	 * @return The word, with an appropriate determiner (either 'a' or 'an' ) added in front of it.
+	 */
+	public static String addDeterminer(String word) {
+		return generateSingularDeterminer(word)+" "+word;
+	}
+
+	/**
+	 * @return 'a' or 'an'
+	 */
+	public static String generateSingularDeterminer(String word) {
+		if(word.isEmpty()) {
+			return "";
+		}
+		if ((isVowel(word.charAt(0)) || word.charAt(0)=='x' || word.charAt(0)=='X')
+				 && !word.startsWith("Uni") && !word.startsWith("uni")
+				 && !word.startsWith("Used") && !word.startsWith("used")) {
+			return "an";
+
+		} else {
+			return "a";
+		}
+	}
+
+	/**
+	 * @return Returns one of the supplied Strings, randomly chosen by using Random's nextInt() method. <b>Automatically removes empty Strings and null entries.</b>
+	 */
+	public static String returnStringAtRandom(String... strings) {
+		List<String> randomStrings = new ArrayList<>();
+
+		for(String s : strings) {
+			if(s!=null && !s.isEmpty()) {
+				randomStrings.add(s);
+			}
+		}
+
+		if(!randomStrings.isEmpty()) {
+			return randomStrings.get(Util.random.nextInt(randomStrings.size()));
+		} else {
+			return "";
+		}
+	}
+
+	/**
+	 * Parses the tagged htmlContent from an xml file. If there is more than one htmlContent entry, it returns a random one.
+	 */
+	public static String parseFromXMLFile(String pathName, String tag) {
+		return parseFromXMLFile(new ArrayList<>(), "res/txt/", pathName, tag, new ArrayList<>());
+	}
+
+	/**
+	 * Parses the tagged htmlContent from an xml file. If there is more than one htmlContent entry, it returns a random one.
+	 */
+	public static String parseFromXMLFile(List<ParserTag> parserTags, String pathName, String tag) {
+		return parseFromXMLFile(parserTags, "res/txt/", pathName, tag, new ArrayList<>());
+	}
+
+	/**
+	 * Parses the tagged htmlContent from an xml file. If there is more than one htmlContent entry, it returns a random one.
+	 */
+	public static String parseFromXMLFile(String pathName, String tag, GameCharacter... specialNPCs) {
+		return parseFromXMLFile(new ArrayList<>(), "res/txt/", pathName, tag, Util.newArrayListOfValues(specialNPCs));
+	}
+
+	/**
+	 * Parses the tagged htmlContent from an xml file. If there is more than one htmlContent entry, it returns a random one.
+	 */
+	public static String parseFromXMLFile(List<ParserTag> parserTags, String pathName, String tag, GameCharacter... specialNPCs) {
+		return parseFromXMLFile(parserTags, "res/txt/", pathName, tag, Util.newArrayListOfValues(specialNPCs));
+	}
+
+	/**
+	 * Parses the tagged htmlContent from an xml file. If there is more than one htmlContent entry, it returns a random one.
+	 */
+	public static String parseFromXMLFile(String pathName, String tag, List<GameCharacter> specialNPC) {
+		return parseFromXMLFile(new ArrayList<>(), "res/txt/", pathName, tag, specialNPC);
+	}
+
+	/**
+	 * Parses the tagged htmlContent from an xml file. If there is more than one htmlContent entry, it returns a random one.
+	 */
+	public static String parseFromXMLFile(List<ParserTag> parserTags, String folderPath, String pathName, String tag, List<GameCharacter> specialNPC) {
+		File file = new File(folderPath+System.getProperty("file.separator")+pathName+".xml");
+
+		List<String> strings = new ArrayList<>();
+
+		if(file.exists()) {
+			try {
+				Document doc = Main.getDocBuilder().parse(file);
+
+				// Cast magic:
+				doc.getDocumentElement().normalize();
+
+//				String rootElelemnt = doc.getDocumentElement().getTagName();
+
+				for(int i=0; i<(doc.getDocumentElement()).getElementsByTagName("htmlContent").getLength(); i++){
+					Element e = (Element) (doc.getDocumentElement()).getElementsByTagName("htmlContent").item(i);
+
+					if(e.getAttribute("tag").equals(tag)) {
+						strings.add(e.getTextContent().replaceFirst("<!\\[CDATA\\[", "").replaceAll("\\]\\]>", ""));
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.err.println("Error in UtilText.parseFromXMLFile(): File '"+(folderPath+System.getProperty("file.separator")+pathName+".xml")+"' does not exist!");
+		}
+
+		if(strings.isEmpty()) {
+			return "<p><span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Dialogue for '"+tag+"' not found! (Make sure that the 'res' folder is in the same directory as the .jar or .exe.)</span></p>";
+
+		} else {
+			return parse(new ArrayList<>(specialNPC), strings.get(Util.random.nextInt(strings.size())), true, parserTags);
+		}
+	}
+
+	public static String runXmlTest(String pathName) {
+		return runXmlTest(pathName, Util.newArrayListOfValues(
+				Main.game.getNpc(Lilaya.class),
+				Main.game.getNpc(Brax.class),
+				Main.game.getNpc(Rose.class),
+				Main.game.getNpc(Ralph.class),
+				Main.game.getNpc(Nyan.class),
+				Main.game.getNpc(Zaranix.class)));
+	}
+
+	public static String runXmlTest(String pathName, List<GameCharacter> specialNPC) {
+		File file = new File(pathName);
+
+		Map<String, List<String>> strings = new HashMap<>();
+
+		if (file.exists()) {
+			try {
+				Document doc = Main.getDocBuilder().parse(file);
+
+				// Cast magic:
+				doc.getDocumentElement().normalize();
+
+				for(int i=0; i<((Element) doc.getElementsByTagName("dialogue").item(0)).getElementsByTagName("htmlContent").getLength(); i++){
+					Element e = (Element) ((Element) doc.getElementsByTagName("dialogue").item(0)).getElementsByTagName("htmlContent").item(i);
+
+					strings.putIfAbsent(e.getAttribute("tag"), new ArrayList<>());
+					strings.get(e.getAttribute("tag")).add(e.getTextContent().replaceFirst("<!\\[CDATA\\[", "").replaceAll("\\]\\]>", ""));
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		if(strings.isEmpty()) {
+			return "<p><span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>No dialogues found! (Make sure that the 'res' folder is in the same directory as the .jar or .exe.)</span></p>";
+
+		} else {
+			StringBuilder sb = new StringBuilder();
+			StringBuilder duplicationSB = new StringBuilder();
+			for(Entry<String, List<String>> s : strings.entrySet()) {
+				if(s.getValue().size()>1) {
+					duplicationSB.append("[style.italicsMinorBad(XML test duplication: tag '"+s.getKey()+"' is repeated "+s.getValue().size()+" times!)]<br/>");
+				}
+				for(String savedString : s.getValue()) {
+					sb.append("<p>"
+								+ "<b>Dialogue tag: "+s.getKey()+"</b>"
+							+ "</p>"
+							+ parse(specialNPC, savedString, true)
+							+"<br/><br/>");
+				}
+			}
+			return duplicationSB.toString() + sb;
+		}
+	}
+	
+	public static boolean isInSpeech() {
+		return speechTarget!=null && !speechTarget.isEmpty();
+	}
+
+
+	public static String parse(String input, ParserTag... tags) {
+		return parse(new ArrayList<>(), input, tags);
+	}
+
+	// v0.4.10.10: allowed null values in lists so that parsed content can check for null characters.
+	// It shouldn't have affected anything, but if text throughout the game starts throwing parsing errors just revert this to 'Util.newArrayListOfValues'...
+
+	public static String parse(GameCharacter specialNPC, String input, ParserTag... tags) {
+		return parse(Util.newArrayListOfValuesKeepNulls(specialNPC), input, tags);
+	}
+
+	public static String parse(GameCharacter specialNPC, AbstractCoreItem specialItem, String input, ParserTag... tags) {
+		return parse(Util.newArrayListOfValuesKeepNulls(specialNPC), specialItem, input, tags);
+	}
+
+	public static String parse(GameCharacter specialNPC1, GameCharacter specialNPC2, String input, ParserTag... tags) {
+		return parse(Util.newArrayListOfValuesKeepNulls(specialNPC1, specialNPC2), input, tags);
+	}
+
+	public static String parse(AbstractCoreItem specialItem, String input, ParserTag... tags) {
+		return parse(specialItem, input, false, tags);
+	}
+
+	public static String parse(List<GameCharacter> specialNPC, String input, ParserTag... tags) {
+		return parse(specialNPC, input, false, tags);
+	}
+
+	public static String parse(List<GameCharacter> specialNPC, AbstractCoreItem specialItem, String input, ParserTag... tags) {
+		return parse(specialNPC, specialItem, input, false, Arrays.asList(tags));
+	}
+
+	private static String parse(AbstractCoreItem specialItem, String input, boolean xmlParsing, ParserTag... tags) {
+		return parse(specialItem, input, xmlParsing, Arrays.asList(tags));
+	}
+
+	private static String parse(List<GameCharacter> specialNPC, String input, boolean xmlParsing, ParserTag... tags) {
+		return parse(specialNPC, input, xmlParsing, Arrays.asList(tags));
+	}
+
+	public static String parse(AbstractCoreItem specialItem, String input, boolean xmlParsing, List<ParserTag> tags) {
+		return parse(new ArrayList<>(), specialItem, input, xmlParsing, tags);
+	}
+
+	public static String parse(List<GameCharacter> specialNPC, String input, boolean xmlParsing, List<ParserTag> tags) {
+		return parse(specialNPC, null, input, xmlParsing, tags);
+	}
+	/**
+	 * Parses supplied text.
+	 */
+	public static String parse(List<GameCharacter> specialNPC, AbstractCoreItem specialItem, String input, boolean xmlParsing, List<ParserTag> tags) {
+		List<GameCharacter> parsingCharactersForSpeechSaved;
+		parserTags = (tags);
+		parsingCharactersForSpeechSaved = parsingCharactersForSpeech;
+		parsingCharactersForSpeech = specialNPC;
+
+		if(Main.game!=null && Main.game.getCurrentDialogueNode()==DebugDialogue.PARSER) {
+			input = input.replaceAll("\u200b", "");
+		}
+//		input = input.replaceAll("", ""); //???
+		for(int i=0; i<specialParsingStrings.size(); i++) {
+			input = input.replaceAll("\\[#SPECIAL_PARSE_"+i+"\\]", specialParsingStrings.get(i));
+		}
+
+		if(xmlParsing) {
+			if(input.contains("#VAR")) { // Set variables to be parsed on each conditional:
+				speechTarget = "";
+				parserVariableCalls = new ArrayList<>();
+				Matcher matcherVAR = Pattern.compile("(?s)#VAR(.*?)#ENDVAR").matcher(input);
+				while(matcherVAR.find()) {
+					String s = matcherVAR.group().replaceAll("#VAR", "").replaceAll("#ENDVAR", "");
+					parserVariableCalls.add(s);
+				}
+				input = input.replaceAll("(?s)#VAR(.*?)#ENDVAR", "");
+			} else {
+				speechTarget = "";
+				parserVariableCalls = new ArrayList<>();
+			}
+		}
+
+		try {
+			StringBuilder resultBuilder = new StringBuilder();
+			StringBuilder sb = new StringBuilder();
+			int openBrackets = 0;
+			int closeBrackets = 0;
+			int openArg = 0;
+			int closeArg = 0;
+			int startIndex = 0;
+			int endIndex = 0;
+
+			String target = null;
+			String command = null;
+			String arguments = null;
+			String conditionalStatement = null;
+			boolean usingConditionalBrackets = false;
+			boolean lastConditionalUsedBrackets = false;
+			int conditionalOpenBrackets = 0;
+			int conditionalCloseBrackets = 0;
+
+			Map<String, String> conditionals = null;
+
+			boolean conditionalElseFound = false;
+			ParseMode currentParseMode = ParseMode.UNKNOWN;
+
+			int startedParsingSegmentAt = 0;
+
+			for (int i = 0; i < input.length(); i++) {
+				char c = input.charAt(i);
+
+				// Advance the parser index to the final `>` if we encounter an SVG
+				if(c == 'g' && substringMatchesInReverseAtIndex(input, "<svg", i)) {
+					i = input.indexOf("</svg>", i) + 5; // 5 == "</svg>".length() - 1
+					continue;
+				}
+
+				if(usingConditionalBrackets) {
+					if(input.charAt(i)=='(') {
+						conditionalOpenBrackets++;
+
+					} else if(input.charAt(i)==')') {
+						conditionalCloseBrackets++;
+					}
+				}
+
+				if (currentParseMode != ParseMode.REGULAR && currentParseMode != ParseMode.REGULAR_SCRIPT) {
+					suppressOutput = false;
+					if (c == 'F' && substringMatchesInReverseAtIndex(input, "#IF", i)) {
+						if (openBrackets == 0) {
+							conditionals = new LinkedHashMap<>();
+							currentParseMode = ParseMode.CONDITIONAL;
+							startIndex = i-2;
+
+							for(int j=i+1;j<input.length();j++) {
+								if(!Character.isWhitespace(input.charAt(j))) {
+									usingConditionalBrackets = input.charAt(j)=='(';
+									lastConditionalUsedBrackets = usingConditionalBrackets;
+									break;
+								}
+							}
+						} else {
+							lastConditionalUsedBrackets = false;
+						}
+
+						openBrackets++;
+
+					} else if (currentParseMode == ParseMode.CONDITIONAL) {
+						if(usingConditionalBrackets) {
+							if(conditionalOpenBrackets>0 && conditionalOpenBrackets==conditionalCloseBrackets && openBrackets-1==closeBrackets) {
+								conditionalStatement = sb.substring(1, sb.length())+")";
+								conditionalStatement = conditionalStatement.replaceAll("\n", "").replaceAll("\t", "");
+								conditionalStatement = conditionalStatement.trim();
+
+								usingConditionalBrackets = false;
+								conditionalOpenBrackets = 0;
+								conditionalCloseBrackets = 0;
+
+								sb.setLength(0);
+
+							} else if(c == 'F' && substringMatchesInReverseAtIndex(input, "#ELSE IF", i) && openBrackets-1==closeBrackets && conditionalStatement!=null) {
+								conditionals.putIfAbsent(conditionalStatement, sb.substring(1, sb.length()-7)); // Cut off the '#ELSE IF' at the end of this section.
+								for(int j=i+1;j<input.length();j++) {
+									if(!Character.isWhitespace(input.charAt(j))) {
+										usingConditionalBrackets = input.charAt(j)=='(';
+										break;
+									}
+								}
+
+								sb.setLength(0);
+
+							} else if(c == 'F' && substringMatchesInReverseAtIndex(input, "#ELSEIF", i) && openBrackets-1==closeBrackets && conditionalStatement!=null) {
+								conditionals.putIfAbsent(conditionalStatement, sb.substring(1, sb.length()-6)); // Cut off the '#ELSEIF' at the end of this section.
+
+								for(int j=i+1;j<input.length();j++) {
+									if(!Character.isWhitespace(input.charAt(j))) {
+										usingConditionalBrackets = input.charAt(j)=='(';
+										break;
+									}
+								}
+
+								sb.setLength(0);
+
+							} else if(c == 'E' && substringMatchesInReverseAtIndex(input, "#ELSE", i)
+									&& (i+1==input.length()||i+2==input.length()||input.charAt(i+1)!='I'||input.charAt(i+2)!='F')
+									&& (i+1==input.length()||i+2==input.length()||i+3==input.length()||input.charAt(i+1)!=' '||input.charAt(i+2)!='I'||input.charAt(i+3)!='F')
+									&& openBrackets-1==closeBrackets
+									&& conditionalStatement!=null) {
+								conditionalElseFound = true;
+								conditionals.putIfAbsent(conditionalStatement, sb.substring(1, sb.length()-4)); // Cut off the '#ELSE' at the end of this section.
+								sb.setLength(0);
+
+							} else if(c == 'F' && substringMatchesInReverseAtIndex(input, "#ENDIF", i)) {
+								closeBrackets++;
+
+								if (openBrackets == closeBrackets) {
+									if (conditionalElseFound) {
+										conditionals.putIfAbsent("true", sb.substring(1, sb.length()-5)); // Cut off the '#ENDIF' at the end.
+									} else {
+										conditionals.putIfAbsent(conditionalStatement, sb.substring(1, sb.length()-5)); // Cut off the '#ENDIF' at the end of this section.
+									}
+
+									endIndex = i;
+								}
+							}
+
+						} else {
+//							System.out.println("noConditionalBrackets");
+							if(c == 'N' && substringMatchesInReverseAtIndex(input, "#THEN", i)) {
+								// If last conditional was brackets, remove the THEN
+								if(lastConditionalUsedBrackets) {
+									sb.replace(sb.length()-4, sb.length(), ""); // Reset StringBuilder to exclude #THEN
+									i++;
+									c = input.charAt(i);
+
+								} else if (openBrackets-1==closeBrackets) {
+									conditionalStatement = sb.substring(1, sb.length()-4); // Cut off the '#THEN' at the end of the conditional statement.
+									conditionalStatement = conditionalStatement.replaceAll("\n", "").replaceAll("\t", "");
+									conditionalStatement = conditionalStatement.trim();
+									sb.setLength(0);
+								}
+
+							} else if(c == 'F' && substringMatchesInReverseAtIndex(input, "#ELSE IF", i) && openBrackets-1==closeBrackets) {
+								conditionals.putIfAbsent(conditionalStatement, sb.substring(1, sb.length()-7)); // Cut off the '#ELSE IF' at the end of this section.
+
+								for(int j=i+1;j<input.length();j++) {
+									if(!Character.isWhitespace(input.charAt(j))) {
+										usingConditionalBrackets = input.charAt(j)=='(';
+										break;
+									}
+								}
+
+								sb.setLength(0);
+
+							} else if(c == 'F' && substringMatchesInReverseAtIndex(input, "#ELSEIF", i) && openBrackets-1==closeBrackets) {
+								conditionals.putIfAbsent(conditionalStatement, sb.substring(1, sb.length()-6)); // Cut off the '#ELSEIF' at the end of this section.
+
+								for(int j=i+1;j<input.length();j++) {
+									if(!Character.isWhitespace(input.charAt(j))) {
+										usingConditionalBrackets = input.charAt(j)=='(';
+										break;
+									}
+								}
+
+								sb.setLength(0);
+
+							} else if(c == 'E' && substringMatchesInReverseAtIndex(input, "#ELSE", i)
+									&& (i+1==input.length()||i+2==input.length()||input.charAt(i+1)!='I'||input.charAt(i+2)!='F')
+									&& (i+1==input.length()||i+2==input.length()||i+3==input.length()||input.charAt(i+1)!=' '||input.charAt(i+2)!='I'||input.charAt(i+3)!='F')
+									&& openBrackets-1==closeBrackets) {
+								conditionalElseFound = true;
+	//							conditionalTrue = sb.toString().substring(1, sb.length()-4); // Cut off the '#ELSE' at the end of this section.
+								conditionals.putIfAbsent(conditionalStatement, sb.substring(1, sb.length()-4)); // Cut off the '#ELSE' at the end of this section.
+								sb.setLength(0);
+
+							} else if(c == 'F' && substringMatchesInReverseAtIndex(input, "#ENDIF", i)) {
+								closeBrackets++;
+
+								if (openBrackets == closeBrackets) {
+
+									if (conditionalElseFound) {
+										// conditionalTrue has already been set in the #ELSE catch
+	//									conditionalFalse = sb.toString().substring(1, sb.length()-5); // Cut off the '#ENDIF' at the end.
+										conditionals.putIfAbsent("true", sb.substring(1, sb.length()-5)); // Cut off the '#ENDIF' at the end.
+									} else {
+	//									conditionalTrue = sb.toString().substring(1, sb.length()-5); // Cut off the '#ENDIF' at the end.
+	//									conditionalFalse = "";
+										conditionals.putIfAbsent(conditionalStatement, sb.substring(1, sb.length()-5)); // Cut off the '#ENDIF' at the end of this section.
+									}
+
+									endIndex = i;
+								}
+							}
+						}
+					}
+				}
+
+				if (currentParseMode != ParseMode.CONDITIONAL) {
+					suppressOutput = false;
+					if (c == '[') {
+						if(openBrackets==0) {
+							if(input.charAt(i+1) == '#') {
+								currentParseMode = ParseMode.REGULAR_SCRIPT;
+							} else {
+								currentParseMode = ParseMode.REGULAR;
+							}
+							startIndex = i;
+						}
+
+						openBrackets++;
+
+					} else if (currentParseMode == ParseMode.REGULAR) {
+						if (c =='.' && target == null) {
+							target = sb.substring(1); // Cut off the '[' at the start.
+							sb.setLength(0);
+
+						} else if (c == '(') {
+							if(command == null) {
+								command = sb.substring(1); // Cut off the '.' at the start.
+								if(command.equals("speech") || command.equals("speechNoEffects") || command.equals("speechNoExtraEffects")) {
+									speechTarget = target;
+								}
+								sb.setLength(0);
+							}
+
+							openArg++;
+
+						} else if (c == ')') {
+							closeArg++;
+
+							if (openArg == closeArg){
+								arguments = sb.substring(1);
+							}
+
+						} else if (c == ']') {
+							closeBrackets++;
+
+							if (openBrackets == closeBrackets) {
+								if (command == null) {
+									command = sb.substring(1); // Cut off the '.' at the start.
+									sb.setLength(0);
+								}
+
+								endIndex = i;
+							}
+						}
+
+					} else if (currentParseMode == ParseMode.REGULAR_SCRIPT) {
+						if (c == ']') {
+							closeBrackets++;
+
+							if (openBrackets == closeBrackets) {
+								if(command == null) {
+									if(sb.charAt(2)=='#') {
+										suppressOutput = true;
+										command = sb.substring(3); // Cut off the '[##' at the start.
+									} else {
+										suppressOutput = false;
+										command = sb.substring(2); // Cut off the '[#' at the start.
+									}
+									sb.setLength(0);
+								}
+
+								endIndex = i;
+							}
+						}
+					}
+				}
+
+				if (openBrackets>0 && ((target!=null && command!=null) || (!Character.isWhitespace(c) || c==' '))) {
+					sb.append(c);
+				}
+
+				if (endIndex != 0) {
+					resultBuilder.append(input, startedParsingSegmentAt, startIndex);
+					String subResult;
+					if(currentParseMode == ParseMode.CONDITIONAL) {
+						subResult = parseConditionalSyntaxNew(specialNPC, specialItem, conditionals, xmlParsing);
+					} else {
+						subResult = parseSyntaxNew(specialNPC, specialItem, target, command, arguments, currentParseMode);
+					}
+					if (openBrackets > 1) {
+						subResult = parse(specialNPC, specialItem, subResult, false, tags);
+					}
+					if(command!=null && (command.equals("speech") || command.equals("speechNoEffects") || command.equals("speechNoExtraEffects"))) {
+						speechTarget = "";
+					}
+					resultBuilder.append(subResult);
+					startedParsingSegmentAt = endIndex + 1;
+					//This is the lamest version of recursion unrolling there is: just reset all your variables by hand.
+					sb = new StringBuilder();
+					
+					openBrackets = 0;
+					closeBrackets = 0;
+					openArg = 0;
+					closeArg = 0;
+					startIndex = 0;
+					endIndex = 0;
+					
+					target = null;
+					command = null;
+					arguments = null;
+					conditionalStatement = null;
+					conditionals = null;
+					conditionalOpenBrackets = 0;
+					conditionalCloseBrackets = 0;
+					
+					conditionalElseFound = false;
+					currentParseMode = ParseMode.UNKNOWN;
+				}
+			}
+			
+			if (startIndex != 0) {
+				StringBuilder errMsg = new StringBuilder("Error in parsing: ");
+				switch(input.charAt(startIndex)) {
+					case '#':
+						errMsg.append("Missing #ENDIF for #IF at ");
+						break;
+					case '[':
+						errMsg.append("Missing ] for [ at ");
+						break;
+					default:
+						errMsg.append("Non-fatal error at ");
+						break;
+				}
+				errMsg.append(startIndex);
+				if(target != null) {
+					errMsg.append(" Target: '" + target + "'");
+				}
+				if(command != null) {
+					errMsg.append(" Command: '" + command + "'");
+				}
+				{
+					int errContext = 30;
+					errMsg.append("\nContext:  " + input.substring(Math.max(0, startIndex - errContext), Math.min(input.length(), startIndex + errContext)));
+					errMsg.append("\nLocation: ");// + "-".repeat(Math.min(errContext, startIndex)) + "^"); // .repeat was introduced in Java 11 and I use an older version
+					for(int i=0;i<Math.min(errContext, startIndex);i++) {
+						errMsg.append("-");
+					}
+					errMsg.append("^");
+				}
+				System.err.println(errMsg);
+				parsingCharactersForSpeech = parsingCharactersForSpeechSaved;
+				switch(input.charAt(startIndex)) {
+					// Replace the problematic character with its html entity, so that the error does
+					// not propagate further.
+					case '#':
+						return input.substring(0, startIndex) + "&#35;" + input.substring(startIndex+1);
+					case '[':
+						return input.substring(0, startIndex) + "&#91;" + input.substring(startIndex+1);
+				}
+				return input;
+			}
+			if (startedParsingSegmentAt < input.length()) {
+				resultBuilder.append(input, startedParsingSegmentAt, input.length());
+			}
+
+			String result = resultBuilder.toString();
+			
+			//TODO This really should be somewhere else or handled differently...
+			result = result.replaceAll("german", "German"); // This is needed as the subspecies 'german-shepherd-morph' needs to use a lowercase 'g' for generic name determiner detection.
+
+			parsingCharactersForSpeech = parsingCharactersForSpeechSaved;
+			return result;
+			
+		} catch(Exception ex) {
+			System.err.println("Failed to parse: "+input);
+			ex.printStackTrace();
+			parsingCharactersForSpeech = parsingCharactersForSpeechSaved;
+			return "";
+		}
+	}
+	
+	private static boolean substringMatchesInReverseAtIndex(String input, String stringToMatch, int index) {
+		index++;//this fixes my off by one error and I'm too tired to figure out why
+		int startingLocation = index - stringToMatch.length();
+		if (startingLocation < 0 || index > input.length()) {
+			return false;
+		}
+		return input.substring(startingLocation, index).equals(stringToMatch);
+	}
+
+	public static String convertToAmericanEnglish(String input) {
+		for(Entry<String, String> entry : americanEnglishConversions.entrySet()) {
+			input = input.replaceAll(entry.getKey()+"(\\s|\\.|,|s|e|i)", entry.getValue()+"$1");
+			input = input.replaceAll(Util.capitaliseSentence(entry.getKey())+"(\\s|\\.|,|s|e|i)", Util.capitaliseSentence(entry.getValue())+"$1");
+		}
+		
+		return input;
+	}
 
     private static final String[] lastDescriptors = new String[2];
     private static final Map<String, CompiledScript> memo = new HashMap<>();
@@ -306,7 +1374,7 @@ public class UtilText {
     private static List<GameCharacter> parsingCharactersForSpeech = new ArrayList<>();
     private static String speechTarget = "";
     private static boolean suppressOutput = false;
-
+	
     static {
 
         // Parsing:
@@ -368,10 +1436,29 @@ public class UtilText {
                 try {
                     secondArgument = arguments.split(", ")[1];
                 } catch (Exception ex) {
-                    System.err.println("Formatting 'moneyFormat' missing second argument, so 'span' used instead.");
+                    System.err.println("Formatting 'essenceFormat' missing second argument, so 'span' used instead.");
                     ex.printStackTrace();
                 }
                 return UtilText.formatAsEssences(arguments.split(", ")[0], secondArgument);
+			}
+		});
+
+		COMMANDS_LIST.add(new ParserCommand(
+				Util.newArrayListOfValues("enchantmentCapacityFormat"),
+				true,
+				false,
+				"(amount, tag)",
+				"Formats the supplied number as enchantment capacity, using the tag as the html tag."){
+			@Override
+			public String parse(List<GameCharacter> specialNPCs, String command, String arguments, String target, GameCharacter character) {
+				String secondArgument = "span";
+				try {
+					secondArgument = arguments.split(", ")[1];
+				} catch(Exception ex) {
+					System.err.println("Formatting 'enchantmentCapacityFormat' missing second argument, so 'span' used instead.");
+					ex.printStackTrace();
+				}
+				return UtilText.formatAsEnchantmentCapacity(Integer.valueOf(arguments.split(", ")[0]), secondArgument);
             }
         });
 
@@ -1375,7 +2462,47 @@ public class UtilText {
 
         COMMANDS_LIST.add(new ParserCommand(
                 Util.newArrayListOfValues(
-                        "bitch",
+                        "filly",
+						"mule"),
+				true,
+				true,
+				"",
+				"Returns 'mule', as the name of Natalya's slaves was changed from filly to mule in 0.4.10.10."){
+			@Override
+			public String parse(List<GameCharacter> specialNPCs, String command, String arguments, String target, GameCharacter character) {
+				try {
+					if(Main.game.getPlayer().getClothingInSlot(InventorySlot.NECK).getStickers().get("txt").equals("filly")) {
+						return "filly";
+					}
+				} catch(Exception ex) {
+				}
+				return "mule";
+			}
+		});
+
+		COMMANDS_LIST.add(new ParserCommand(
+				Util.newArrayListOfValues(
+						"fillies",
+						"mules"),
+				true,
+				true,
+				"",
+				"Returns 'mules', as the name of Natalya's slaves was changed from filly to mule in 0.4.10.10."){
+			@Override
+			public String parse(List<GameCharacter> specialNPCs, String command, String arguments, String target, GameCharacter character) {
+				try {
+					if(Main.game.getPlayer().getClothingInSlot(InventorySlot.NECK).getStickers().get("txt").equals("filly")) {
+						return "fillies";
+					}
+				} catch(Exception ex) {
+				}
+				return "mules";
+			}
+		});
+
+		COMMANDS_LIST.add(new ParserCommand(
+				Util.newArrayListOfValues(
+						"bitch",
                         "slut",
                         "insult"),
                 true,
@@ -3475,7 +4602,7 @@ public class UtilText {
                 true,
                 true,
                 "",
-                "Description of method") {//TODO
+                "Description of method") {
             @Override
             public String parse(List<GameCharacter> specialNPCs, String command, String arguments, String target, GameCharacter character) {
                 if (arguments == null && isPlayer(target, character)) {
@@ -8451,1022 +9578,11 @@ public class UtilText {
         }
     }
 
-    /**
-     * Converts the input into a format suitable for html display. i.e. converts things like '<' to "&lt;".
-     */
-    public static String parseForHTMLDisplay(String input) {
-        StringBuilder builder = new StringBuilder();
-
-        for (char c : input.toCharArray()) {
-            switch (c) {
-                // I'm not sure why this was being changed to a non-breaking space... It was interfering with clothing name equality and such, so I removed it in v0.3.5.1
-//				case ' ':
-//					builder.append("&nbsp;");
-//					break;
-                case '<':
-                    builder.append("&lt;");
-                    break;
-                case '>':
-                    builder.append("&gt;");
-                    break;
-                case '&':
-                    builder.append("&amp;");
-                    break;
-                case '"':
-                    builder.append("&quot;");
-                    break;
-                case '\'':
-                    builder.append("&#39;");
-                    break;
-                default:
-                    builder.append(c);
-                    break;
-            }
-        }
-
-        return builder.toString();
-    }
-
-    public static String parsePlayerThought(String text) {
-        return parseThought(text, Main.game.getPlayer());
-    }
-
-    public static String parsePlayerSpeech(String text) {
-        return parseSpeech(text, Main.game.getPlayer());
-    }
-
-    private static String getGlowStyle(Colour colour) {
-        return colour == null ? "" : "text-shadow: 0px 0px 4px " + colour.getShadesRgbaFormat(0.75f)[1] + ";";
-    }
-
-    private static Boolean isPlayer(String target, GameCharacter character) {
-        return target.startsWith("npc") && character.isPlayer();
-    }
-
-    public static String parseSpeech(String text, GameCharacter target, boolean includePersonalityEffects, boolean includeExtraEffects) {
-        return parseSpeech(text, target, includePersonalityEffects, includeExtraEffects, true);
-    }
-
-    public static String parseSpeech(String text, GameCharacter target, boolean includePersonalityEffects, boolean includeExtraEffects, boolean canBeMuted) {
-        modifiedSentence = text.trim();
-
-        String[] splitOnConditional = modifiedSentence.split("#THEN");
-
-        modifiedSentence = UtilText.parse(parsingCharactersForSpeech, splitOnConditional[splitOnConditional.length - 1]);
-
-        if (target.isMute() && canBeMuted) {
-            modifiedSentence = Util.replaceWithMute(modifiedSentence, Main.game.isInSex() && Main.sex.getAllParticipants().contains(target));
-
-        } else if (includeExtraEffects
-                && !parserTags.contains(ParserTag.SEX_ALLOW_MUFFLED_SPEECH)
-                && Main.game.isInSex()
-                && Main.sex.getAllParticipants().contains(target)
-                && target.isSpeechMuffled()) {
-            if (Main.sex.isOngoingActionsBlockingSpeech(target)) {
-                modifiedSentence = Util.replaceWithMuffle(modifiedSentence, 2);
-            }
-
-        } else {
-            if (includePersonalityEffects) {
-                if (target.hasFetish(Fetish.FETISH_BIMBO)) {
-                    if (target.isFeminine()) {
-                        modifiedSentence = Util.addBimbo(modifiedSentence, 6);
-                    } else {
-                        modifiedSentence = Util.addBro(modifiedSentence, 6);
-                    }
-                }
-
-                if (target.hasPersonalityTrait(PersonalityTrait.SLOVENLY)) {
-                    modifiedSentence = Util.applySlovenlySpeech(modifiedSentence);
-                }
-            }
-
-            if (includeExtraEffects) {
-                if (target.getAlcoholLevel().getSlurredSpeechFrequency() > 0) {
-                    modifiedSentence = Util.addDrunkSlur(modifiedSentence, target.getAlcoholLevel().getSlurredSpeechFrequency());
-                }
-
-                // Apply speech effects:
-                if (target.isSpeechMuffled()) {
-                    modifiedSentence = Util.addMuffle(modifiedSentence, 5);
-
-                } else if (Main.game.isInSex() && Main.sex.getAllParticipants().contains(target)) {
-                    if (Main.sex.isCharacterEngagedInOngoingAction(target)) {
-                        modifiedSentence = Util.addSexSounds(modifiedSentence, 6, Main.sex.getSexPace(target) == SexPace.SUB_RESISTING);
-                    }
-
-                }
-            }
-
-            if (includePersonalityEffects) {
-                if ((Main.game.isLipLispEnabled() && target.getLipSize().isImpedesSpeech())
-                        || target.hasPersonalityTrait(PersonalityTrait.LISP)) {
-                    modifiedSentence = Util.applyLisp(modifiedSentence);
-                }
-
-                if (target.hasPersonalityTrait(PersonalityTrait.STUTTER)) {
-                    modifiedSentence = Util.addStutter(modifiedSentence, 4);
-                }
-            }
-
-            if (splitOnConditional.length > 1) {
-                modifiedSentence = splitOnConditional[0] + "#THEN" + modifiedSentence;
-            }
-        }
-
-        Colour glow = target.getSpeechGlowColour();
-        String classAddition = "";
-        if (target.getSpeechColour() != null) {
-            if (target.isDoll()) {
-                classAddition = " doll";
-            }
-            return "<span class='speech" + classAddition + "' style='color:" + target.getSpeechColour() + ";" + getGlowStyle(glow) + "'>"
-                    + modifiedSentence
-                    + "</span>";
-
-        } else {
-            if (target.isDoll()) {
-                classAddition = " doll";
-            }
-            if (Femininity.valueOf(target.getFemininityValue()) == Femininity.MASCULINE || Femininity.valueOf(target.getFemininityValue()) == Femininity.MASCULINE_STRONG) {
-                return "<span class='speech" + classAddition + "' style='color:" + PresetColour.MASCULINE_NPC.toWebHexString() + ";" + getGlowStyle(glow) + "'>" + modifiedSentence + "</span>";
-            } else if (Femininity.valueOf(target.getFemininityValue()) == Femininity.ANDROGYNOUS) {
-                return "<span class='speech" + classAddition + "' style='color:" + PresetColour.ANDROGYNOUS_NPC.toWebHexString() + ";" + getGlowStyle(glow) + "'>" + modifiedSentence + "</span>";
-            } else {
-                return "<span class='speech" + classAddition + "' style='color:" + PresetColour.FEMININE_NPC.toWebHexString() + ";" + getGlowStyle(glow) + "'>" + modifiedSentence + "</span>";
-            }
-        }
-
-    }
-
-    public static String parseSpeech(String text, GameCharacter target) {
-        return parseSpeech(text, target, true, true);
-    }
-
-    public static String parseSpeechNoEffects(String text, GameCharacter target) {
-        return parseSpeech(text, target, false, false);
-    }
-
-    public static String parseSpeechNoExtraEffects(String text, GameCharacter target) {
-        return parseSpeech(text, target, true, false);
-    }
-
-    public static String parseThought(String text, GameCharacter target) {
-        return "<i>" + parseSpeech(text, target, true, false, false).replaceAll("class='speech'", "class='thoughts'") + "</i>";
-    }
-
-    public static String parseNPCThought(String text, Femininity femininity) {
-        return "<i>" + parseNPCSpeech(text, femininity, false, false).replaceAll("class='speech'", "class='thoughts'") + "</i>";
-    }
-
-    public static String parseNPCSpeech(String text, Femininity femininity) {
-        return parseNPCSpeech(text, femininity, false, false);
-    }
-
-    public static String parseNPCSpeechDoll(String text, Femininity femininity) {
-        return parseNPCSpeech(text, femininity, false, false, true);
-    }
-
-    public static String parseNPCSpeech(String text, Femininity femininity, boolean bimbo, boolean stutter) {
-        return parseNPCSpeech(text, femininity, bimbo, stutter, false);
-    }
-
-    public static String parseNPCSpeech(String text, Femininity femininity, boolean bimbo, boolean stutter, boolean doll) {
-        modifiedSentence = text;
-        if (bimbo) {
-            modifiedSentence = Util.addBimbo(modifiedSentence, 6);
-        }
-        if (stutter) {
-            modifiedSentence = Util.addStutter(modifiedSentence, 4);
-        }
-        return "<span class='speech" + (doll ? " doll" : "") + "' style='color:" + femininity.getSpeechColour().toWebHexString() + ";'>" + modifiedSentence + "</span>";
-    }
-
-    public static String getDisabledResponse(String label) {
-        return "<span class='option-disabled'>" + label + "</span>";
-    }
-
-    // "Temporary" methods until I refine the way DialogueNodes work:
-    public static String getRequirementsDescription(AbstractPerk perkRequired) {
-        return ("You require the perk '<b style='color:" + perkRequired.getPerkCategory().getColour().toWebHexString() + ";'>" + perkRequired.getName(Main.game.getPlayer()) + "</b>'.");
-    }
-
-    public static String getRequirementsDescription(AbstractPerk perkRequired, Gender... gendersRequired) {
-        descriptionSB.setLength(0);
-
-        descriptionSB.append("You require the perk '<b style='color:" + perkRequired.getPerkCategory().getColour().toWebHexString() + ";'>" + perkRequired.getName(Main.game.getPlayer()) + "</b>'");
-
-        if (gendersRequired.length == 0) {
-            descriptionSB.append(".");
-        } else {
-            descriptionSB.append(", and need to be a ");
-
-            for (int i = 0; i < gendersRequired.length; i++) {
-                if (i != 0) {
-                    if (i == gendersRequired.length - 1)
-                        descriptionSB.append(", or ");
-                    else
-                        descriptionSB.append(", ");
-                }
-                descriptionSB.append("<b style='color:" + gendersRequired[i].getColour().toWebHexString() + ";'>" + gendersRequired[i].getName() + "</b>");
-            }
-
-            descriptionSB.append(".");
-        }
-
-        return descriptionSB.toString();
-    }
-
-    public static String getRequirementsDescription(CorruptionLevel corruptionNeeded, AbstractPerk... perkRequired) {
-        descriptionSB.setLength(0);
-
-        descriptionSB.append("You require a corruption level of <b style='color:" + corruptionNeeded.getColour().toWebHexString() + ";'>" + corruptionNeeded.getName() + "</b>");
-
-        if (perkRequired.length == 0) {
-            descriptionSB.append(".");
-        } else {
-            descriptionSB.append(", or the perk" + (perkRequired.length > 1 ? "s " : " "));
-
-            for (int i = 0; i < perkRequired.length; i++) {
-                if (i != 0) {
-                    if (i == perkRequired.length - 1)
-                        descriptionSB.append(", or ");
-                    else
-                        descriptionSB.append(", ");
-                }
-                descriptionSB.append("<b style='color:" + perkRequired[i].getPerkCategory().getColour().toWebHexString() + ";'>" + perkRequired[i].getName(Main.game.getPlayer()) + "</b>");
-            }
-
-            descriptionSB.append(".");
-        }
-
-        return descriptionSB.toString();
-    }
-
-    public static String getCurrencySymbol() {
-//		return "&#9679;"; // Circle
-        return "&#164;"; // 'Generic' currency symbol
-    }
-
-    public static String getPentagramSymbol() {
-        return "&#9956;";//"&#9737;"; // Java doesn't support unicode 6 ;_;   No pentagram for me... ;_;  "&#9956";
-    }
-
-    public static String getShieldSymbol() {
-        return "&#9930;";
-    }
-
-    public static String getBasicInfinitySymbol() {
-        return "<span style='font-weight:normal; font-family:sans-serif; font-size:1.5em;'>&#8734;</span>";
-    }
-
-    /**
-     * The infinity symbol really, really sucks in the default LT font.
-     */
-    public static String getInfinitySymbol(boolean largerFont) {
-        //"&#9854;";
-//		return "<span style='font-family:serif; font-weight:normal; font-size:1.25em;'>&#8734;</span>";
-        return "<span style='font-weight:normal; font-family:sans-serif; color:" + PresetColour.GENERIC_EXCELLENT.toWebHexString() + "; " + (largerFont ? "font-size:28px;" : "") + "'>&#8734;</span>";
-    }
-
-    public static String applyGlow(String input) {
-        return "<span style='text-shadow: 0px 0px 4px;'>" + input + "</span>";
-    }
-
-    public static String applyGlow(String input, Colour colour) {
-        return "<span style='color:" + colour.toWebHexString() + "; text-shadow: 0px 0px 4px " + colour.getShades()[4] + ";'>" + input + "</span>";
-    }
-
-    public static String applyVibration(String input, Colour colour) {
-        return "<span style='text-shadow: 2px 2px " + colour.getShades()[0] + ";'>" + input + "</span>";
-    }
-
-    // Money formatting:
-
-    public static String formatAsEssencesUncoloured(int amount, String tag, boolean withOverlay) {
-        String disabledColour = PresetColour.TEXT_GREY.toWebHexString();
-        return
-//				"<div class='item-inline'>"
-//					+ SVGImages.SVG_IMAGE_PROVIDER.getEssenceUncoloured() + (withOverlay?"<div class='overlay no-pointer' id='ESSENCE_ICON'></div>":"")
-//				+"</div>"
-                "<b style='color:" + disabledColour + "; -webkit-text-stroke: 1px " + disabledColour + "; padding-right:2px;'>" + getPentagramSymbol() + "</b>"
-                        + "<" + tag + " style='color:" + disabledColour + ";'>" + Units.number(amount) + "</" + tag + ">";
-    }
-
-    public static String formatAsEssences(String essences, String tag) {
-        try {
-            int essenceInt = Integer.parseInt(UtilText.parse(essences));
-            return formatAsEssences(essenceInt, tag, false);
-        } catch (Exception ex) {
-        }
-        return formatAsMoney(essences, tag, PresetColour.TEXT);
-    }
-
-    public static String formatAsEssences(int amount, String tag, boolean withOverlay) {
-        String arcaneColour = PresetColour.GENERIC_ARCANE.toWebHexString();
-        return
-//				"<div class='item-inline'>"
-//					+ SVGImages.SVG_IMAGE_PROVIDER.getEssence() + (withOverlay?"<div class='overlay no-pointer' id='ESSENCE_ICON'></div>":"")
-//				+"</div>"
-//				 "<b style='color:"+arcaneColour+"; text-shadow: "+PresetColour.BASE_PINK_LIGHT.toWebHexString()+" 0 0 16px;'>&#9956;</b>"
-
-                "<b style='color:" + arcaneColour + "; -webkit-text-stroke: 1px " + arcaneColour + "; padding-right:2px;'>" + getPentagramSymbol() + "</b>"
-                        + "<" + tag + " style='color:" + arcaneColour + ";'>" + Units.number(amount) + "</" + tag + ">";
-    }
-
-    public static String formatAsItemPrice(int money) {
-        String moneyString = Units.number(money);
-
-        if (money > 1_000_000) {
-            float moneyAbbreviated = money / 1_000_000f;
-            moneyString = Units.number(moneyAbbreviated, 1, 1) + "M";
-            return formatAsMoney(moneyString, "b", PresetColour.CURRENCY_GOLD);
-
-        } else if (money > 1_000) {
-            float moneyAbbreviated = money / 1_000f;
-            int precision = money < 10_000 ? 1 : 0;
-            moneyString = Units.number(moneyAbbreviated, precision, precision) + "k";
-            return formatAsMoney(moneyString, "b", PresetColour.CURRENCY_SILVER);
-        }
-
-        return formatAsMoney(moneyString, "b", PresetColour.CURRENCY_COPPER);
-    }
-
-    public static String formatAsMoney(int money) {
-        return formatAsMoney(money, "b");
-    }
-
-    public static String formatAsMoneyUncoloured(int money, String tag) {
-        return formatAsMoney(money, tag, null);
-    }
-
-    public static String formatAsMoneyUncoloured(String money, String tag) {
-        return formatAsMoney(money, tag, null);
-    }
-
-    public static String formatAsMoney(int money, String tag) {
-        return formatAsMoney(money, tag, PresetColour.TEXT);
-    }
-
-    public static String formatAsMoney(String money, String tag) {
-        if (!money.contains("[npc.")) { // DO not parse it out if this is a generic NPC's money
-            try {
-                int moneyInt = Integer.parseInt(UtilText.parse(money));
-                return formatAsMoney(moneyInt, tag, PresetColour.TEXT);
-            } catch (Exception ex) {
-            }
-        }
-        return formatAsMoney(money, tag, PresetColour.TEXT);
-    }
-
-    public static String formatAsMoney(int money, String tag, Colour amountColour) {
-        return formatAsMoney(Units.number(money), tag, amountColour);
-    }
-
-    public static String formatAsMoney(String money, String tag, Colour amountColour) {
-        return "<" + tag + " style='" + (amountColour == null ? "" : "color:" + PresetColour.CURRENCY_GOLD.toWebHexString() + ";") + " padding-right:2px;'>" + getCurrencySymbol() + "</" + tag + ">"
-                + "<" + tag + (amountColour == null ? "" : " style='color:" + amountColour.toWebHexString() + ";'") + ">" + money + "</" + tag + ">";
-    }
-
-    public static String formatVirginityLoss(String s) {
-        return "<p style='text-align:center; color:" + PresetColour.GENERIC_TERRIBLE.toWebHexString() + ";'><i>" + s + "</i></p>";
-    }
-
-    public static String formatTooLoose(String s) {
-        return "<p style='text-align:center; color:" + PresetColour.GENERIC_MINOR_BAD.toWebHexString() + ";'><i>" + s + "</i></p>";
-    }
-
-    public static String formatStretching(String s) {
-        return "<p style='text-align:center; color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'><i>" + s + "</i></p>";
-    }
-
-    public static boolean isVowel(char c) {
-        return "AEIOUaeiou".indexOf(c) != -1;
-    }
-
-    /**
-     * @return The word, with an appropriate determiner (either 'a' or 'an' ) added in front of it.
-     */
-    public static String addDeterminer(String word) {
-        return generateSingularDeterminer(word) + " " + word;
-    }
-
-    /**
-     * @return 'a' or 'an'
-     */
-    public static String generateSingularDeterminer(String word) {
-        if (word.isEmpty()) {
-            return "";
-        }
-        if ((isVowel(word.charAt(0)) || word.charAt(0) == 'x' || word.charAt(0) == 'X')
-                && !word.startsWith("Uni") && !word.startsWith("uni")
-                && !word.startsWith("Used") && !word.startsWith("used")) {
-            return "an";
-
-        } else {
-            return "a";
-        }
-    }
-
-    /**
-     * @return Returns one of the supplied Strings, randomly chosen by using Random's nextInt() method. <b>Automatically removes empty Strings and null entries.</b>
-     */
-    public static String returnStringAtRandom(String... strings) {
-        List<String> randomStrings = new ArrayList<>();
-
-        for (String s : strings) {
-            if (s != null && !s.isEmpty()) {
-                randomStrings.add(s);
-            }
-        }
-
-        if (!randomStrings.isEmpty()) {
-            return randomStrings.get(Util.random.nextInt(randomStrings.size()));
-        } else {
-            return "";
-        }
-    }
-
-    /**
-     * Parses the tagged htmlContent from an xml file. If there is more than one htmlContent entry, it returns a random one.
-     */
-    public static String parseFromXMLFile(String pathName, String tag) {
-        return parseFromXMLFile(new ArrayList<>(), "res/txt/", pathName, tag, new ArrayList<>());
-    }
-
-    /**
-     * Parses the tagged htmlContent from an xml file. If there is more than one htmlContent entry, it returns a random one.
-     */
-    public static String parseFromXMLFile(List<ParserTag> parserTags, String pathName, String tag) {
-        return parseFromXMLFile(parserTags, "res/txt/", pathName, tag, new ArrayList<>());
-    }
-
-    /**
-     * Parses the tagged htmlContent from an xml file. If there is more than one htmlContent entry, it returns a random one.
-     */
-    public static String parseFromXMLFile(String pathName, String tag, GameCharacter... specialNPCs) {
-        return parseFromXMLFile(new ArrayList<>(), "res/txt/", pathName, tag, Util.newArrayListOfValues(specialNPCs));
-    }
-
-    /**
-     * Parses the tagged htmlContent from an xml file. If there is more than one htmlContent entry, it returns a random one.
-     */
-    public static String parseFromXMLFile(List<ParserTag> parserTags, String pathName, String tag, GameCharacter... specialNPCs) {
-        return parseFromXMLFile(parserTags, "res/txt/", pathName, tag, Util.newArrayListOfValues(specialNPCs));
-    }
-
-    /**
-     * Parses the tagged htmlContent from an xml file. If there is more than one htmlContent entry, it returns a random one.
-     */
-    public static String parseFromXMLFile(String pathName, String tag, List<GameCharacter> specialNPC) {
-        return parseFromXMLFile(new ArrayList<>(), "res/txt/", pathName, tag, specialNPC);
-    }
-
-    /**
-     * Parses the tagged htmlContent from an xml file. If there is more than one htmlContent entry, it returns a random one.
-     */
-    public static String parseFromXMLFile(List<ParserTag> parserTags, String folderPath, String pathName, String tag, List<GameCharacter> specialNPC) {
-        File file = new File(folderPath + System.getProperty("file.separator") + pathName + ".xml");
-
-        List<String> strings = new ArrayList<>();
-
-        if (file.exists()) {
-            try {
-                Document doc = Main.getDocBuilder().parse(file);
-
-                // Cast magic:
-                doc.getDocumentElement().normalize();
-
-//				String rootElelemnt = doc.getDocumentElement().getTagName();
-
-                for (int i = 0; i < (doc.getDocumentElement()).getElementsByTagName("htmlContent").getLength(); i++) {
-                    Element e = (Element) (doc.getDocumentElement()).getElementsByTagName("htmlContent").item(i);
-
-                    if (e.getAttribute("tag").equals(tag)) {
-                        strings.add(e.getTextContent().replaceFirst("<!\\[CDATA\\[", "").replaceAll("\\]\\]>", ""));
-                    }
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.err.println("Error in UtilText.parseFromXMLFile(): File '" + (folderPath + System.getProperty("file.separator") + pathName + ".xml") + "' does not exist!");
-        }
-
-        if (strings.isEmpty()) {
-            return "<p><span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Dialogue for '" + tag + "' not found! (Make sure that the 'res' folder is in the same directory as the .jar or .exe.)</span></p>";
-
-        } else {
-            return parse(new ArrayList<>(specialNPC), strings.get(Util.random.nextInt(strings.size())), true, parserTags);
-        }
-    }
-
-    public static String runXmlTest(String pathName) {
-        return runXmlTest(pathName, Util.newArrayListOfValues(
-                Main.game.getNpc(Lilaya.class),
-                Main.game.getNpc(Brax.class),
-                Main.game.getNpc(Rose.class),
-                Main.game.getNpc(Ralph.class),
-                Main.game.getNpc(Nyan.class),
-                Main.game.getNpc(Zaranix.class)));
-    }
-
-    public static String runXmlTest(String pathName, List<GameCharacter> specialNPC) {
-        File file = new File(pathName);
-
-        Map<String, List<String>> strings = new HashMap<>();
-
-        if (file.exists()) {
-            try {
-                Document doc = Main.getDocBuilder().parse(file);
-
-                // Cast magic:
-                doc.getDocumentElement().normalize();
-
-                for (int i = 0; i < ((Element) doc.getElementsByTagName("dialogue").item(0)).getElementsByTagName("htmlContent").getLength(); i++) {
-                    Element e = (Element) ((Element) doc.getElementsByTagName("dialogue").item(0)).getElementsByTagName("htmlContent").item(i);
-
-                    strings.putIfAbsent(e.getAttribute("tag"), new ArrayList<>());
-                    strings.get(e.getAttribute("tag")).add(e.getTextContent().replaceFirst("<!\\[CDATA\\[", "").replaceAll("\\]\\]>", ""));
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (strings.isEmpty()) {
-            return "<p><span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>No dialogues found! (Make sure that the 'res' folder is in the same directory as the .jar or .exe.)</span></p>";
-
-        } else {
-            StringBuilder sb = new StringBuilder();
-            StringBuilder duplicationSB = new StringBuilder();
-            for (Entry<String, List<String>> s : strings.entrySet()) {
-                if (s.getValue().size() > 1) {
-                    duplicationSB.append("[style.italicsMinorBad(XML test duplication: tag '" + s.getKey() + "' is repeated " + s.getValue().size() + " times!)]<br/>");
-                }
-                for (String savedString : s.getValue()) {
-                    sb.append("<p>"
-                            + "<b>Dialogue tag: " + s.getKey() + "</b>"
-                            + "</p>"
-                            + parse(specialNPC, savedString, true)
-                            + "<br/><br/>");
-                }
-            }
-            return duplicationSB.toString() + sb;
-        }
-    }
-
-    public static String parse(String input, ParserTag... tags) {
-        return parse(new ArrayList<>(), input, tags);
-    }
-
-    public static String parse(GameCharacter specialNPC, String input, ParserTag... tags) {
-        return parse(Util.newArrayListOfValues(specialNPC), input, tags);
-    }
-
-    public static String parse(GameCharacter specialNPC1, GameCharacter specialNPC2, String input, ParserTag... tags) {
-        return parse(Util.newArrayListOfValues(specialNPC1, specialNPC2), input, tags);
-    }
-
-    public static boolean isInSpeech() {
-        return speechTarget != null && !speechTarget.isEmpty();
-    }
-
-    public static String parse(List<GameCharacter> specialNPC, String input, ParserTag... tags) {
-        return parse(specialNPC, input, false, tags);
-    }
-
-    private static String parse(List<GameCharacter> specialNPC, String input, boolean xmlParsing, ParserTag... tags) {
-        return parse(specialNPC, input, xmlParsing, Arrays.asList(tags));
-    }
-
-    /**
-     * Parses supplied text.
-     */
-    public static String parse(List<GameCharacter> specialNPC, String input, boolean xmlParsing, List<ParserTag> tags) {
-        List<GameCharacter> parsingCharactersForSpeechSaved;
-        parserTags = (tags);
-        parsingCharactersForSpeechSaved = parsingCharactersForSpeech;
-        parsingCharactersForSpeech = specialNPC;
-
-        if (Main.game != null && Main.game.getCurrentDialogueNode() == DebugDialogue.PARSER) {
-            input = input.replaceAll("\u200b", "");
-        }
-//		input = input.replaceAll("", ""); //???
-        for (int i = 0; i < specialParsingStrings.size(); i++) {
-            input = input.replaceAll("\\[#SPECIAL_PARSE_" + i + "\\]", specialParsingStrings.get(i));
-        }
-
-        if (xmlParsing) {
-            if (input.contains("#VAR")) { // Set variables to be parsed on each conditional:
-                speechTarget = "";
-                parserVariableCalls = new ArrayList<>();
-                Matcher matcherVAR = Pattern.compile("(?s)#VAR(.*?)#ENDVAR").matcher(input);
-                while (matcherVAR.find()) {
-                    String s = matcherVAR.group().replaceAll("#VAR", "").replaceAll("#ENDVAR", "");
-                    parserVariableCalls.add(s);
-                }
-                input = input.replaceAll("(?s)#VAR(.*?)#ENDVAR", "");
-            } else {
-                speechTarget = "";
-                parserVariableCalls = new ArrayList<>();
-            }
-        }
-
-        try {
-            StringBuilder resultBuilder = new StringBuilder();
-            StringBuilder sb = new StringBuilder();
-            int openBrackets = 0;
-            int closeBrackets = 0;
-            int openArg = 0;
-            int closeArg = 0;
-            int startIndex = 0;
-            int endIndex = 0;
-
-            String target = null;
-            String command = null;
-            String arguments = null;
-            String conditionalStatement = null;
-            boolean usingConditionalBrackets = false;
-            boolean lastConditionalUsedBrackets = false;
-            int conditionalOpenBrackets = 0;
-            int conditionalCloseBrackets = 0;
-
-            Map<String, String> conditionals = null;
-
-            boolean conditionalElseFound = false;
-            ParseMode currentParseMode = ParseMode.UNKNOWN;
-
-            int startedParsingSegmentAt = 0;
-
-            for (int i = 0; i < input.length(); i++) {
-                char c = input.charAt(i);
-
-                // Advance the parser index to the final `>` if we encounter an SVG
-                if (c == 'g' && substringMatchesInReverseAtIndex(input, "<svg", i)) {
-                    i = input.indexOf("</svg>", i) + 5; // 5 == "</svg>".length() - 1
-                    continue;
-                }
-
-                if (usingConditionalBrackets) {
-                    if (input.charAt(i) == '(') {
-                        conditionalOpenBrackets++;
-
-                    } else if (input.charAt(i) == ')') {
-                        conditionalCloseBrackets++;
-                    }
-                }
-
-                if (currentParseMode != ParseMode.REGULAR && currentParseMode != ParseMode.REGULAR_SCRIPT) {
-                    suppressOutput = false;
-                    if (c == 'F' && substringMatchesInReverseAtIndex(input, "#IF", i)) {
-                        if (openBrackets == 0) {
-                            conditionals = new LinkedHashMap<>();
-                            currentParseMode = ParseMode.CONDITIONAL;
-                            startIndex = i - 2;
-
-                            for (int j = i + 1; j < input.length(); j++) {
-                                if (!Character.isWhitespace(input.charAt(j))) {
-                                    usingConditionalBrackets = input.charAt(j) == '(';
-                                    lastConditionalUsedBrackets = usingConditionalBrackets;
-                                    break;
-                                }
-                            }
-                        } else {
-                            lastConditionalUsedBrackets = false;
-                        }
-
-                        openBrackets++;
-
-                    } else if (currentParseMode == ParseMode.CONDITIONAL) {
-                        if (usingConditionalBrackets) {
-                            if (conditionalOpenBrackets > 0 && conditionalOpenBrackets == conditionalCloseBrackets && openBrackets - 1 == closeBrackets) {
-                                conditionalStatement = sb.substring(1, sb.length()) + ")";
-                                conditionalStatement = conditionalStatement.replaceAll("\n", "").replaceAll("\t", "");
-                                conditionalStatement = conditionalStatement.trim();
-
-                                usingConditionalBrackets = false;
-                                conditionalOpenBrackets = 0;
-                                conditionalCloseBrackets = 0;
-
-                                sb.setLength(0);
-
-                            } else if (c == 'F' && substringMatchesInReverseAtIndex(input, "#ELSE IF", i) && openBrackets - 1 == closeBrackets && conditionalStatement != null) {
-                                conditionals.putIfAbsent(conditionalStatement, sb.substring(1, sb.length() - 7)); // Cut off the '#ELSE IF' at the end of this section.
-                                for (int j = i + 1; j < input.length(); j++) {
-                                    if (!Character.isWhitespace(input.charAt(j))) {
-                                        usingConditionalBrackets = input.charAt(j) == '(';
-                                        break;
-                                    }
-                                }
-
-                                sb.setLength(0);
-
-                            } else if (c == 'F' && substringMatchesInReverseAtIndex(input, "#ELSEIF", i) && openBrackets - 1 == closeBrackets && conditionalStatement != null) {
-                                conditionals.putIfAbsent(conditionalStatement, sb.substring(1, sb.length() - 6)); // Cut off the '#ELSEIF' at the end of this section.
-
-                                for (int j = i + 1; j < input.length(); j++) {
-                                    if (!Character.isWhitespace(input.charAt(j))) {
-                                        usingConditionalBrackets = input.charAt(j) == '(';
-                                        break;
-                                    }
-                                }
-
-                                sb.setLength(0);
-
-                            } else if (c == 'E' && substringMatchesInReverseAtIndex(input, "#ELSE", i)
-                                    && (i + 1 == input.length() || i + 2 == input.length() || input.charAt(i + 1) != 'I' || input.charAt(i + 2) != 'F')
-                                    && (i + 1 == input.length() || i + 2 == input.length() || i + 3 == input.length() || input.charAt(i + 1) != ' ' || input.charAt(i + 2) != 'I' || input.charAt(i + 3) != 'F')
-                                    && openBrackets - 1 == closeBrackets
-                                    && conditionalStatement != null) {
-                                conditionalElseFound = true;
-                                conditionals.putIfAbsent(conditionalStatement, sb.substring(1, sb.length() - 4)); // Cut off the '#ELSE' at the end of this section.
-                                sb.setLength(0);
-
-                            } else if (c == 'F' && substringMatchesInReverseAtIndex(input, "#ENDIF", i)) {
-                                closeBrackets++;
-
-                                if (openBrackets == closeBrackets) {
-                                    if (conditionalElseFound) {
-                                        conditionals.putIfAbsent("true", sb.substring(1, sb.length() - 5)); // Cut off the '#ENDIF' at the end.
-                                    } else {
-                                        conditionals.putIfAbsent(conditionalStatement, sb.substring(1, sb.length() - 5)); // Cut off the '#ENDIF' at the end of this section.
-                                    }
-
-                                    endIndex = i;
-                                }
-                            }
-
-                        } else {
-//							System.out.println("noConditionalBrackets");
-                            if (c == 'N' && substringMatchesInReverseAtIndex(input, "#THEN", i)) {
-                                // If last conditional was brackets, remove the THEN
-                                if (lastConditionalUsedBrackets) {
-                                    sb.replace(sb.length() - 4, sb.length(), ""); // Reset StringBuilder to exclude #THEN
-                                    i++;
-                                    c = input.charAt(i);
-
-                                } else if (openBrackets - 1 == closeBrackets) {
-                                    conditionalStatement = sb.substring(1, sb.length() - 4); // Cut off the '#THEN' at the end of the conditional statement.
-                                    conditionalStatement = conditionalStatement.replaceAll("\n", "").replaceAll("\t", "");
-                                    conditionalStatement = conditionalStatement.trim();
-                                    sb.setLength(0);
-                                }
-
-                            } else if (c == 'F' && substringMatchesInReverseAtIndex(input, "#ELSE IF", i) && openBrackets - 1 == closeBrackets) {
-                                conditionals.putIfAbsent(conditionalStatement, sb.substring(1, sb.length() - 7)); // Cut off the '#ELSE IF' at the end of this section.
-
-                                for (int j = i + 1; j < input.length(); j++) {
-                                    if (!Character.isWhitespace(input.charAt(j))) {
-                                        usingConditionalBrackets = input.charAt(j) == '(';
-                                        break;
-                                    }
-                                }
-
-                                sb.setLength(0);
-
-                            } else if (c == 'F' && substringMatchesInReverseAtIndex(input, "#ELSEIF", i) && openBrackets - 1 == closeBrackets) {
-                                conditionals.putIfAbsent(conditionalStatement, sb.substring(1, sb.length() - 6)); // Cut off the '#ELSEIF' at the end of this section.
-
-                                for (int j = i + 1; j < input.length(); j++) {
-                                    if (!Character.isWhitespace(input.charAt(j))) {
-                                        usingConditionalBrackets = input.charAt(j) == '(';
-                                        break;
-                                    }
-                                }
-
-                                sb.setLength(0);
-
-                            } else if (c == 'E' && substringMatchesInReverseAtIndex(input, "#ELSE", i)
-                                    && (i + 1 == input.length() || i + 2 == input.length() || input.charAt(i + 1) != 'I' || input.charAt(i + 2) != 'F')
-                                    && (i + 1 == input.length() || i + 2 == input.length() || i + 3 == input.length() || input.charAt(i + 1) != ' ' || input.charAt(i + 2) != 'I' || input.charAt(i + 3) != 'F')
-                                    && openBrackets - 1 == closeBrackets) {
-                                conditionalElseFound = true;
-                                //							conditionalTrue = sb.toString().substring(1, sb.length()-4); // Cut off the '#ELSE' at the end of this section.
-                                conditionals.putIfAbsent(conditionalStatement, sb.substring(1, sb.length() - 4)); // Cut off the '#ELSE' at the end of this section.
-                                sb.setLength(0);
-
-                            } else if (c == 'F' && substringMatchesInReverseAtIndex(input, "#ENDIF", i)) {
-                                closeBrackets++;
-
-                                if (openBrackets == closeBrackets) {
-
-                                    if (conditionalElseFound) {
-                                        // conditionalTrue has already been set in the #ELSE catch
-                                        //									conditionalFalse = sb.toString().substring(1, sb.length()-5); // Cut off the '#ENDIF' at the end.
-                                        conditionals.putIfAbsent("true", sb.substring(1, sb.length() - 5)); // Cut off the '#ENDIF' at the end.
-                                    } else {
-                                        //									conditionalTrue = sb.toString().substring(1, sb.length()-5); // Cut off the '#ENDIF' at the end.
-                                        //									conditionalFalse = "";
-                                        conditionals.putIfAbsent(conditionalStatement, sb.substring(1, sb.length() - 5)); // Cut off the '#ENDIF' at the end of this section.
-                                    }
-
-                                    endIndex = i;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if (currentParseMode != ParseMode.CONDITIONAL) {
-                    suppressOutput = false;
-                    if (c == '[') {
-                        if (openBrackets == 0) {
-                            if (input.charAt(i + 1) == '#') {
-                                currentParseMode = ParseMode.REGULAR_SCRIPT;
-                            } else {
-                                currentParseMode = ParseMode.REGULAR;
-                            }
-                            startIndex = i;
-                        }
-
-                        openBrackets++;
-
-                    } else if (currentParseMode == ParseMode.REGULAR) {
-                        if (c == '.' && target == null) {
-                            target = sb.substring(1); // Cut off the '[' at the start.
-                            sb.setLength(0);
-
-                        } else if (c == '(') {
-                            if (command == null) {
-                                command = sb.substring(1); // Cut off the '.' at the start.
-                                if (command.equals("speech") || command.equals("speechNoEffects") || command.equals("speechNoExtraEffects")) {
-                                    speechTarget = target;
-                                }
-                                sb.setLength(0);
-                            }
-
-                            openArg++;
-
-                        } else if (c == ')') {
-                            closeArg++;
-
-                            if (openArg == closeArg) {
-                                arguments = sb.substring(1);
-                            }
-
-                        } else if (c == ']') {
-                            closeBrackets++;
-
-                            if (openBrackets == closeBrackets) {
-                                if (command == null) {
-                                    command = sb.substring(1); // Cut off the '.' at the start.
-                                    sb.setLength(0);
-                                }
-
-                                endIndex = i;
-                            }
-                        }
-
-                    } else if (currentParseMode == ParseMode.REGULAR_SCRIPT) {
-                        if (c == ']') {
-                            closeBrackets++;
-
-                            if (openBrackets == closeBrackets) {
-                                if (command == null) {
-                                    if (sb.charAt(2) == '#') {
-                                        suppressOutput = true;
-                                        command = sb.substring(3); // Cut off the '[##' at the start.
-                                    } else {
-                                        suppressOutput = false;
-                                        command = sb.substring(2); // Cut off the '[#' at the start.
-                                    }
-                                    sb.setLength(0);
-                                }
-
-                                endIndex = i;
-                            }
-                        }
-                    }
-                }
-
-                if (openBrackets > 0 && ((target != null && command != null) || (!Character.isWhitespace(c) || c == ' '))) {
-                    sb.append(c);
-                }
-
-                if (endIndex != 0) {
-                    resultBuilder.append(input, startedParsingSegmentAt, startIndex);
-                    String subResult;
-                    if (currentParseMode == ParseMode.CONDITIONAL) {
-                        subResult = parseConditionalSyntaxNew(specialNPC, conditionals, xmlParsing);
-                    } else {
-                        subResult = parseSyntaxNew(specialNPC, target, command, arguments, currentParseMode);
-                    }
-                    if (openBrackets > 1) {
-                        subResult = parse(specialNPC, subResult, false, tags);
-                    }
-                    if (command != null && (command.equals("speech") || command.equals("speechNoEffects") || command.equals("speechNoExtraEffects"))) {
-                        speechTarget = "";
-                    }
-                    resultBuilder.append(subResult);
-                    startedParsingSegmentAt = endIndex + 1;
-                    //This is the lamest version of recursion unrolling there is: just reset all your variables by hand.
-                    sb = new StringBuilder();
-
-                    openBrackets = 0;
-                    closeBrackets = 0;
-                    openArg = 0;
-                    closeArg = 0;
-                    startIndex = 0;
-                    endIndex = 0;
-
-                    target = null;
-                    command = null;
-                    arguments = null;
-                    conditionalStatement = null;
-                    conditionals = null;
-                    conditionalOpenBrackets = 0;
-                    conditionalCloseBrackets = 0;
-
-                    conditionalElseFound = false;
-                    currentParseMode = ParseMode.UNKNOWN;
-                }
-            }
-
-            if (startIndex != 0) {
-                StringBuilder errMsg = new StringBuilder("Error in parsing: ");
-                switch (input.charAt(startIndex)) {
-                    case '#':
-                        errMsg.append("Missing #ENDIF for #IF at ");
-                        break;
-                    case '[':
-                        errMsg.append("Missing ] for [ at ");
-                        break;
-                    default:
-                        errMsg.append("Non-fatal error at ");
-                        break;
-                }
-                errMsg.append(startIndex);
-                if (target != null) {
-                    errMsg.append(" Target: '" + target + "'");
-                }
-                if (command != null) {
-                    errMsg.append(" Command: '" + command + "'");
-                }
-                {
-                    int errContext = 30;
-                    errMsg.append("\nContext:  " + input.substring(Math.max(0, startIndex - errContext), Math.min(input.length(), startIndex + errContext)));
-                    errMsg.append("\nLocation: ");// + "-".repeat(Math.min(errContext, startIndex)) + "^"); // .repeat was introduced in Java 11 and I use an older version
-                    for (int i = 0; i < Math.min(errContext, startIndex); i++) {
-                        errMsg.append("-");
-                    }
-                    errMsg.append("^");
-                }
-                System.err.println(errMsg);
-                parsingCharactersForSpeech = parsingCharactersForSpeechSaved;
-                switch (input.charAt(startIndex)) {
-                    // Replace the problematic character with its html entity, so that the error does
-                    // not propagate further.
-                    case '#':
-                        return input.substring(0, startIndex) + "&#35;" + input.substring(startIndex + 1);
-                    case '[':
-                        return input.substring(0, startIndex) + "&#91;" + input.substring(startIndex + 1);
-                }
-                return input;
-            }
-            if (startedParsingSegmentAt < input.length()) {
-                resultBuilder.append(input, startedParsingSegmentAt, input.length());
-            }
-
-            String result = resultBuilder.toString();
-
-            //TODO This really should be somewhere else or handled differently...
-            result = result.replaceAll("german", "German"); // This is needed as the subspecies 'german-shepherd-morph' needs to use a lowercase 'g' for generic name determiner detection.
-            result = result.replaceAll("\t", " ").replaceAll("  ", " ").replaceAll("\u200b", "");
-
-            parsingCharactersForSpeech = parsingCharactersForSpeechSaved;
-            return result;
-
-        } catch (Exception ex) {
-            System.err.println("Failed to parse: " + input);
-            ex.printStackTrace();
-            parsingCharactersForSpeech = parsingCharactersForSpeechSaved;
-            return "";
-        }
-    }
-
-    private static boolean substringMatchesInReverseAtIndex(String input, String stringToMatch, int index) {
-        index++;//this fixes my off by one error and I'm too tired to figure out why
-        int startingLocation = index - stringToMatch.length();
-        if (startingLocation < 0 || index > input.length()) {
-            return false;
-        }
-        return input.substring(startingLocation, index).equals(stringToMatch);
-    }
-
-    public static String convertToAmericanEnglish(String input) {
-        for (Entry<String, String> entry : americanEnglishConversions.entrySet()) {
-            input = input.replaceAll(entry.getKey() + "(\\s|\\.|,|s|e|i)", entry.getValue() + "$1");
-            input = input.replaceAll(Util.capitaliseSentence(entry.getKey()) + "(\\s|\\.|,|s|e|i)", Util.capitaliseSentence(entry.getValue()) + "$1");
-        }
-
-        return input;
-    }
-
     private static String parseSyntaxNew(List<GameCharacter> specialNPCs, String target, String command, String arguments, ParseMode currentParseMode) {
-        GameCharacter character;
+        return parseSyntaxNew(specialNPCs, null, target, command, arguments, currentParseMode);
+	}
+
+	private static String parseSyntaxNew(List<GameCharacter> specialNPCs, AbstractCoreItem specialItem, String target, String command, String arguments, ParseMode currentParseMode) {GameCharacter character;
 
         if (currentParseMode == ParseMode.REGULAR_SCRIPT) {
             if (engine == null) {
@@ -9485,7 +9601,9 @@ public class UtilText {
                 } catch (Exception ex) {
 //					System.err.println("Parsing error: Could not initialise npc");
                 }
-            }
+			}
+
+            engine.put("thisItem", specialItem);
 
             // Companion parsing tags:
             if (Main.game.isStarted() && Main.game.getPlayer().hasCompanions()) {
@@ -9550,7 +9668,9 @@ public class UtilText {
                 }
             }
 
-            // Companion parsing tags:
+            engine.put("thisItem", specialItem);
+
+			// Companion parsing tags:
             if (Main.game.getPlayer().hasCompanions()) {
                 for (int i = 0; i < Main.game.getPlayer().getCompanions().size(); i++) {
                     if (i == 0) {
@@ -9722,7 +9842,7 @@ public class UtilText {
         // Parser targets:
         if (Main.game.isStarted()) {
             for (AbstractParserTarget target : ParserTarget.getAllParserTargets()) {
-                if (target != ParserTarget.STYLE && target != ParserTarget.UNIT && target != ParserTarget.NPC && target != ParserTarget.COMPANION && target != ParserTarget.NON_COMPANION) {
+                if (target != ParserTarget.STYLE && target != ParserTarget.UNIT && target!=ParserTarget.ITEM && target != ParserTarget.NPC && target != ParserTarget.COMPANION && target != ParserTarget.NON_COMPANION) {
                     for (String tag : target.getTags()) {
                         engine.put(tag, target.getCharacter(tag, null));
                     }
@@ -10193,12 +10313,12 @@ public class UtilText {
 //		System.out.println(sb.toString());
     }
 
-    private static String parseConditionalSyntaxNew(List<GameCharacter> specialNPCs, Map<String, String> conditionals, boolean hasXmlVariables) {
+    private static String parseConditionalSyntaxNew(List<GameCharacter> specialNPCs, AbstractCoreItem specialItem, Map<String, String> conditionals, boolean hasXmlVariables) {
 
         for (Entry<String, String> entry : conditionals.entrySet()) {
             try {
-                if (evaluateConditional(specialNPCs, entry.getKey(), hasXmlVariables)) {
-                    return UtilText.parse(specialNPCs, entry.getValue(), false);
+                if (evaluateConditional(specialNPCs, specialItem, entry.getKey(), hasXmlVariables)) {
+                    return UtilText.parse(specialNPCs, specialItem, entry.getValue(), false, new ArrayList<>()); //TODO tags lost
                 }
 
             } catch (ScriptException e) {
@@ -10212,7 +10332,7 @@ public class UtilText {
         return "";
     }
 
-    public static boolean evaluateConditional(List<GameCharacter> specialNPCs, String conditionalStatement, boolean hasXmlVariables) throws ScriptException {
+    public static boolean evaluateConditional(List<GameCharacter> specialNPCs, AbstractCoreItem specialItem, String conditionalStatement, boolean hasXmlVariables) throws ScriptException {
         if (engine == null) {
             initScriptEngine();
         }
@@ -10236,6 +10356,9 @@ public class UtilText {
                     //				System.err.println("Parsing error 2: Could not initialise npc");
                 }
             }
+
+            engine.put("thisItem", specialItem);
+
 
             // Companion parsing tags:
             if (Main.game.getPlayer().hasCompanions()) {

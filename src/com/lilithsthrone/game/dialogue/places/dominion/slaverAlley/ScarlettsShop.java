@@ -354,7 +354,7 @@ public class ScarlettsShop {
 		SuccubisSecrets.initCoveringsMap(slave);
 	}
 	
-	private static boolean isFilly() {
+	private static boolean isMule() {
 		return Main.game.getPlayer().isQuestCompleted(QuestLine.ROMANCE_NATALYA) || Main.game.getPlayer().hasQuest(QuestLine.ROMANCE_NATALYA) || Main.game.getPlayer().hasItemType(ItemType.NATALYA_BUSINESS_CARD);
 	}
 	
@@ -1551,10 +1551,10 @@ public class ScarlettsShop {
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
 				return new Response(
-						isFilly()
+						isMule()
 							?"Greet Natalya"
 							:"Introduction",
-						isFilly()
+						isMule()
 							?"Greet your Mistress and tell her that you're here to take delivery of the furniture which must be in the back of the cart."
 							:"Introduce yourself as the person this [natalya.race] is looking for, and then proceed to take delivery of the furniture which must be in the back of the cart.",
 						ROMANCE_PAINTING_FURNITURE_DELIVERY) {
@@ -1611,7 +1611,7 @@ public class ScarlettsShop {
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if(isFilly()) {
+			if(isMule()) {
 				if(index==1) {
 					return new Response("Follow",
 							"Follow Mistress Natalya down the alleyway to see what she requires of you.",
@@ -3176,7 +3176,7 @@ public class ScarlettsShop {
 							"Your slave does not have a spinneret!<br/><i>Spinnerets are gained via certain tail or leg types.</i>",
 							null);
 				}
-				return new Response("Spinneret", "Customise aspects of your slave's penis.", HELENAS_SHOP_CUSTOM_SLAVE_BODY_SPINNERET) {
+				return new Response("Spinneret", "Customise aspects of your slave's spinneret.", HELENAS_SHOP_CUSTOM_SLAVE_BODY_SPINNERET) {
 					@Override
 					public int getSecondsPassed() {
 						return 10;

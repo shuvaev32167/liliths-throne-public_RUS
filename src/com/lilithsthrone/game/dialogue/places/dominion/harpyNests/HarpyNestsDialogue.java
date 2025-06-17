@@ -7,6 +7,7 @@ import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
+import com.lilithsthrone.game.dialogue.encounters.AbstractEncounter;
 import com.lilithsthrone.game.dialogue.encounters.Encounter;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
@@ -51,62 +52,8 @@ public class HarpyNestsDialogue {
 			}
 		}
 	};
-
-    public static final DialogueNode WALKWAY = new DialogueNode("Аллея", ".", false) {
-		@Override
-		public int getSecondsPassed() {
-			return 2*60;
-		}
-		@Override
-		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/generic", "WALKWAY"));
-
-			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/generic", "WALKWAY_CORE", new ArrayList<>(Main.game.getNonCompanionCharactersPresent())));
-
-			for(GameCharacter npc : Main.game.getNonCompanionCharactersPresent()) {
-				sb.append(((NPC) npc).getPresentInTileDescription(false));
-			}
-
-			return sb.toString();
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index == 1) {
-				if(Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_HARPY_PACIFICATION)) {
-					return new ResponseEffectsOnly(
-							"Look for trouble",
-							"Although you've pacified the harpy nests, you're sure that you can find a harpy who's looking for a confrontation..."){
-								@Override
-								public int getSecondsPassed() {
-									return 30*60;
-								}
-								@Override
-								public void effects() {
-									DialogueNode dn = Encounter.HARPY_NEST_LOOK_FOR_TROUBLE.getRandomEncounter(true);
-									Main.game.setContent(new Response("", "", dn));
-								}
-							};
-
-				} else {
-					return new ResponseEffectsOnly(
-							"Explore",
-							"Explore the walkways. Although you don't think you're any more or less likely to find anything by doing this, at least you won't have to keep travelling back and forth..."){
-								@Override
-								public int getSecondsPassed() {
-									return 30*60;
-								}
-								@Override
-								public void effects() {
-									DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
-									Main.game.setContent(new Response("", "", dn));
-								}
-							};
-				}
-			}
-			return null;
-		}
-	};    public static final DialogueNode ENTRANCE_ENFORCER_POST = new DialogueNode("Пост энфорсеров", ".", true) {
+	
+	public static final DialogueNode ENTRANCE_ENFORCER_POST = new DialogueNode("Пост энфорсеров", ".", true) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;
@@ -205,29 +152,8 @@ public class HarpyNestsDialogue {
 			
 		}
 	};
-    public static final DialogueNode WALKWAY_BRIDGE = new DialogueNode("Пешеходный мост", "", false) {
-		@Override
-		public int getSecondsPassed() {
-			return 2*60;
-		}
-		@Override
-		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/generic", "WALKWAY_BRIDGE"));
-
-			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/generic", "WALKWAY_CORE", new ArrayList<>(Main.game.getNonCompanionCharactersPresent())));
-
-			for(GameCharacter npc : Main.game.getNonCompanionCharactersPresent()) {
-				sb.append(((NPC) npc).getPresentInTileDescription(false));
-			}
-
-			return sb.toString();
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return WALKWAY.getResponse(responseTab, index);
-		}
-	};    public static final DialogueNode ENTRANCE_ENFORCER_POST_ASK_FOR_ACCESS = new DialogueNode("Пост энфорсеров", ".", true) {
+	
+	public static final DialogueNode ENTRANCE_ENFORCER_POST_ASK_FOR_ACCESS = new DialogueNode("Пост энфорсеров", ".", true) {
 		@Override
 		public boolean isTravelDisabled() {
 			return !Main.game.getDialogueFlags().values.contains(DialogueFlagValue.hasHarpyNestAccess);
@@ -334,9 +260,75 @@ public class HarpyNestsDialogue {
 			return ENTRANCE_ENFORCER_POST.getResponse(responseTab, index);
 		}
 	};
+	
+	public static final DialogueNode WALKWAY = new DialogueNode("Аллея", ".", false) {
+		@Override
+		public int getSecondsPassed() {
+			return 2*60;
+		}
+		@Override
+		public String getContent() {
+			StringBuilder sb = new StringBuilder();
+			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/generic", "WALKWAY"));
+			
+			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/generic", "WALKWAY_CORE", new ArrayList<>(Main.game.getNonCompanionCharactersPresent())));
+			
+			for(GameCharacter npc : Main.game.getNonCompanionCharactersPresent()) {
+				sb.append(((NPC) npc).getPresentInTileDescription(false));
+			}
+			
+			return sb.toString();
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index == 1) {
+				if(Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_HARPY_PACIFICATION)) {
+					return new ResponseEffectsOnly(
+							"Look for trouble",
+							"Although you've pacified the harpy nests, you're sure that you can find a harpy who's looking for a confrontation..."){
+								@Override
+								public int getSecondsPassed() {
+									return 30*60;
+								}
+								@Override
+								public void effects() {
+									DialogueNode dn = Encounter.HARPY_NEST_LOOK_FOR_TROUBLE.getRandomEncounter(true);
+									Main.game.setContent(new Response("", "", dn));
+								}
+							};
+							
+				} else {
+					return AbstractEncounter.exploreArea("the walkways");
+				}
+			} else if (index == 2) {
+				return AbstractEncounter.useOffspringMap();
+			}
+			return null;
+		}
+	};
+	
+	public static final DialogueNode WALKWAY_BRIDGE = new DialogueNode("Пешеходный мост", "", false) {
+		@Override
+		public int getSecondsPassed() {
+			return 2*60;
+		}
+		@Override
+		public String getContent() {
+			StringBuilder sb = new StringBuilder();
+			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/generic", "WALKWAY_BRIDGE"));
 
+			sb.append(UtilText.parseFromXMLFile("places/dominion/harpyNests/generic", "WALKWAY_CORE", new ArrayList<>(Main.game.getNonCompanionCharactersPresent())));
 
+			for(GameCharacter npc : Main.game.getNonCompanionCharactersPresent()) {
+				sb.append(((NPC) npc).getPresentInTileDescription(false));
+			}
 
-
+			return sb.toString();
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return WALKWAY.getResponse(responseTab, index);
+		}
+	};
 	
 }

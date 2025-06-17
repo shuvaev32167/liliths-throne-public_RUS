@@ -30,12 +30,16 @@ import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
- * @version 0.3.9.1
+ * @version 0.4.10.10
  * @author Innoxia
  */
 public interface SexManagerInterface {
 
 	default String getSexTitle() {
+		return getDefaultSexTitle();
+	}
+
+	default String getDefaultSexTitle() {
 		return (!Main.sex.isConsensual() && Main.getProperties().hasValue(PropertyValue.nonConContent)?"Non-consensual ":"")
 				+(Main.sex.isPublicSex()?"Public ":"")
 				+(getPosition().getName().isEmpty()

@@ -49,7 +49,7 @@
 	</p>
 	<p>
 		#IF(npc.isMute())
-			Поскольку [npc.sheIs] [npc.genderBasedWord(немой, немая)], [npc.race] просто кивает и 
+			Поскольку [npc.sheIs] [npc.genderBasedWord(немой, немая)], [npc.race] просто кивает и
 			#IF(npc.isFeminine())
 				 делает реверанс
 			#ELSE
@@ -108,7 +108,7 @@
 	</p>
 	<p>
 		#IF(npc.isMute())
-			Поскольку [npc.sheIs] [npc.genderBasedWord(немой, немая)], [npc.race] просто кивает и 
+			Поскольку [npc.sheIs] [npc.genderBasedWord(немой, немая)], [npc.race] просто кивает и
 			#IF(npc.isFeminine())
 				 делает реверанс
 			#ELSE
@@ -146,48 +146,7 @@
 	]]>
 	</htmlContent>
 	
-	
-	<!-- ROOM_ROSE -->
-	
-	<htmlContent tag="ROOM_ROSE"><![CDATA[
-	<p>
-		Свидетельство тесной связи Розы с Лилайей становится очевидным, когда ты подходишь к комнате кошкодевушки. На двери висит самодельная табличка с её именем, а под ней, изящным почерком, который ты определяешь как почерк Лилайи, написано короткое сообщение: <i>'Моей любимой Госпоже'</i>.
-	</p>
-	#IF(game.isExtendedWorkTime())
-		<p>
-			Дверь сейчас, похоже, заперта, и внутри не слышно никаких звуков движения. Роза, кажется, позволяет себе отдохнуть только тогда, когда она уверена, что рядом нет никого, кто мог бы нуждаться в её помощи, так что сейчас она, вероятно, находится в другой части дома.
-		</p>
-		<p>
-			Ты замечаешь, что рядом с дверью в стену встроен маленький звонок, и задумываешь, не стоит ли позвонить в него, чтобы позвать Розу подняться в свою комнату.
-		</p>
-	#ELSE
-		<p>
-			Дверь, похоже, заперта, и изнутри доносится слабый звук движения. Учитывая, который сейчас час, можно предположить, что горничная-кошка, должно быть, спит.
-		</p>
-		<p>
-			На стене рядом с дверью висит маленький колокольчик, а под ним - небольшая табличка с надписью: [style.italicsBad(Просьба не беспокоить.)].
-		</p>
-		<p>
-			Похоже, придётся вернуться в светлое время суток, если захочешь поговорить с Розой о чём-нибудь...
-		</p>
-	#ENDIF
-	]]>
-	</htmlContent>
-	
-	<htmlContent tag="ROOM_ROSE_INITIAL_CALL"><![CDATA[
-	<p>
-		Deciding that you'd like to talk to Rose, you decide to push the little bell that's situated beside her bedroom's door, causing a faint ringing noise to echo up from somewhere else in the house. Despite the enormous size of Lilaya's home, Rose never seems to be far away, and you soon hear her walking down the corridor as she rushes to respond to your call.
-	</p>
-	<p>
-		As she approaches, you see her cat-like tail swishing from side to side, and you notice one of her ears twitch as she sees you standing outside her bedroom waiting for her. Realising that you're obviously wanting to have a talk, she curtsies before issuing a greeting.
-	</p>
-	<p>
-		[rose.speech(Good [style.morning],)] she says, [rose.speech(How may I help you?)]
-	</p>
-	]]>
-	</htmlContent>
-	
-	
+
 	<!-- ROSE -->
 	
 	<htmlContent tag="ROSE_TALK_LILAYA"><![CDATA[

@@ -1856,10 +1856,10 @@ public class ImpFortressDialogue {
 		public String getContent() {
 			UtilText.nodeContentSB.setLength(0);
 
-			if(isDefeated()) {
-				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/fortress"+getDialogueEncounterId(), "KEEP_DEFEATED", getAllCharacters()));
-			} else if(isPacified()) {
+			if(isPacified() && Main.game.getCharactersPresent().contains(getBoss())) {
 				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/fortress"+getDialogueEncounterId(), "KEEP_PACIFIED", getAllCharacters()));
+			} else if(isDefeated()) {
+				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/fortress"+getDialogueEncounterId(), "KEEP_DEFEATED", getAllCharacters()));
 			} else {
 				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/fortress"+getDialogueEncounterId(), "KEEP", getAllCharacters()));
 			}
@@ -1870,7 +1870,7 @@ public class ImpFortressDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				if(isDefeated()) {
+				if(isDefeated() && !Main.game.getCharactersPresent().contains(getBoss())) {
                     return new Response("Вход", "The keep is deserted, and there's nothing of value inside...", null);
 				} else {
                     return new Response("Вход", "Push open the doors of the keep and step inside.", KEEP_ENTRY) {
@@ -1883,7 +1883,9 @@ public class ImpFortressDialogue {
 			}
 			return null;
 		}
-	};	public static final DialogueNode GUARDS_AFTER_SEX_VICTORY = new DialogueNode("Step back", "", true) {
+	};
+
+    public static final DialogueNode GUARDS_AFTER_SEX_VICTORY = new DialogueNode("Step back", "", true) {
 		
 		@Override
 		public String getDescription(){
@@ -2156,7 +2158,7 @@ public class ImpFortressDialogue {
 			return null;
 		}
 	};
-	
+
 	public static final DialogueNode KEEP_ALPHA_BRAWLER = new DialogueNode("Keep", ".", true, true) {
 
 		@Override
@@ -2183,7 +2185,7 @@ public class ImpFortressDialogue {
 						clearFortress();
 					}
 				};
-					
+
 			} else if(index==2 && Main.game.isNonConEnabled()) {
 				return new ResponseSex(isCompanionDialogue()?"Rape (solo)":"Rape",
 						UtilText.parse(getBoss(), "Push [npc.name] down and force yourself on [npc.herHim]."),
@@ -2222,10 +2224,10 @@ public class ImpFortressDialogue {
 						Main.game.getPlayer().incrementKarma(-50);
 					}
 				};
-				
+
 			} else if(index==3 && isCompanionDialogue() && Main.game.isNonConEnabled()) {
 				if(!getMainCompanion().isWillingToRape() && getMainCompanion().isAbleToRefuseSexAsCompanion()) {
-					return new Response("Rape (companion)", 
+					return new Response("Rape (companion)",
 							UtilText.parse(getMainCompanion(), getBoss(), "[npc.Name] is not interested in raping [npc2.name], and as [npc.sheIs] not a slave, you can't force [npc.herHim] to do so..."), null);
 				}
 				return new ResponseSex("Rape (companion)",
@@ -2265,10 +2267,10 @@ public class ImpFortressDialogue {
 						Main.game.getPlayer().incrementKarma(-50);
 					}
 				};
-				
+
 			} else if(index==4 && isCompanionDialogue() && Main.game.isNonConEnabled()) {
 				if(!getMainCompanion().isWillingToRape() && getMainCompanion().isAbleToRefuseSexAsCompanion()) {
-					return new Response("Rape (both)", 
+					return new Response("Rape (both)",
 							UtilText.parse(getMainCompanion(), getBoss(), "[npc.Name] is not interested in raping [npc2.name], and as [npc.sheIs] not a slave, you can't force [npc.herHim] to do so..."), null);
 				}
 				return new ResponseSex("Rape (both)",
@@ -2314,7 +2316,7 @@ public class ImpFortressDialogue {
 			return null;
 		}
 	};
-	
+
 	public static final DialogueNode KEEP_ALPHA_BRAWLER_SCARED_OFF = new DialogueNode("Keep", ".", false, true) {
 
 		@Override
@@ -2332,7 +2334,7 @@ public class ImpFortressDialogue {
 			return null;
 		}
 	};
-	
+
 	public static final DialogueNode KEEP_AFTER_SEX_ALPHA_FORCED = new DialogueNode("Finished", "", true, true) {
 
 		@Override
@@ -2381,7 +2383,7 @@ public class ImpFortressDialogue {
 			return null;
 		}
 	};
-	
+
 	public static final DialogueNode KEEP_FEMALES_NYMPHO = new DialogueNode("Keep", ".", true, true) {
 
 		@Override
@@ -2406,7 +2408,7 @@ public class ImpFortressDialogue {
 						clearFortress();
 					}
 				};
-					
+
 			} else if(index==2 && Main.game.isNonConEnabled()) {
 				return new ResponseSex(isCompanionDialogue()?"Sex (solo)":"Sex",
 						UtilText.parse(getBoss(), "Do as [npc.name] asks and have sex with [npc.herHim]."),
@@ -2419,10 +2421,10 @@ public class ImpFortressDialogue {
 						null,
 						KEEP_AFTER_SEX_FEMALES_NYMPHO,
 						UtilText.parseFromXMLFile("places/submission/fortress"+getDialogueEncounterId(), "KEEP_FEMALES_NYMPHO_SEX", getAllCharacters()));
-				
+
 			} else if(index==3 && isCompanionDialogue() && Main.game.isNonConEnabled()) {
 				if(!getMainCompanion().isAttractedTo(getBoss()) && getMainCompanion().isAbleToRefuseSexAsCompanion()) {
-					return new Response("Sex (companion)", 
+					return new Response("Sex (companion)",
 							UtilText.parse(getMainCompanion(), getBoss(), "[npc.Name] is not interested in having sex with [npc2.name], and as [npc.sheIs] not a slave, you can't force [npc.herHim] to do so..."), null);
 				}
 				return new ResponseSex("Sex (companion)",
@@ -2436,10 +2438,10 @@ public class ImpFortressDialogue {
 						null,
 						KEEP_AFTER_SEX_FEMALES_NYMPHO,
 						UtilText.parseFromXMLFile("places/submission/fortress"+getDialogueEncounterId(), "KEEP_FEMALES_NYMPHO_SEX_WITH_COMPANION", getAllCharacters()));
-				
+
 			} else if(index==4 && isCompanionDialogue() && Main.game.isNonConEnabled()) {
 				if(!getMainCompanion().isAttractedTo(getBoss()) && getMainCompanion().isAbleToRefuseSexAsCompanion()) {
-					return new Response("Sex (both)", 
+					return new Response("Sex (both)",
 							UtilText.parse(getMainCompanion(), getBoss(), "[npc.Name] is not interested in having sex with [npc2.name], and as [npc.sheIs] not a slave, you can't force [npc.herHim] to do so..."), null);
 				}
 				return new ResponseSex("Sex (both)",
@@ -2459,7 +2461,7 @@ public class ImpFortressDialogue {
 			return null;
 		}
 	};
-	
+
 	public static final DialogueNode KEEP_FEMALES_NYMPHO_SCARED_OFF = new DialogueNode("Keep", ".", false, true) {
 
 		@Override
@@ -2477,7 +2479,7 @@ public class ImpFortressDialogue {
 			return null;
 		}
 	};
-	
+
 	public static final DialogueNode KEEP_AFTER_SEX_FEMALES_NYMPHO = new DialogueNode("Finished", "", true, true) {
 
 		@Override

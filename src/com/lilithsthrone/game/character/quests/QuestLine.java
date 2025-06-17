@@ -128,7 +128,7 @@ public enum QuestLine {
 			QuestType.RELATIONSHIP,
 			QuestTree.helenaTree),
 
-	ROMANCE_NATALYA("Дрессировка кобылок", "Пройдя обучение у госпожи Натальи, вы стали квалифицированной кобылкой и должны сексуально обслуживать рабов-кентавров «Доминион Экспресс».",
+	ROMANCE_NATALYA("Тренировка [pc.morphSingleGent([style.mule])]", "Пройдя обучение у госпожи Натальи, ты [pc.genderBasedWord(стал, стала)] квалифицированной [pc.morphSingleInstr([style.mule])] и [npc.genderBasedWord(должен, должна)] сексуально обслуживать рабов-кентавров «Доминион Экспресс».",
 			QuestType.RELATIONSHIP,
 			QuestTree.natalyaTree),
 

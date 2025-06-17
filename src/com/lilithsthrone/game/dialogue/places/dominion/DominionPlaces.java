@@ -16,6 +16,7 @@ import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueManager;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.companions.OccupantDialogue;
+import com.lilithsthrone.game.dialogue.encounters.AbstractEncounter;
 import com.lilithsthrone.game.dialogue.npcDialogue.dominion.CultistDialogue;
 import com.lilithsthrone.game.dialogue.npcDialogue.dominion.ReindeerOverseerDialogue;
 import com.lilithsthrone.game.dialogue.npcDialogue.dominion.RentalMommyDialogue;
@@ -150,8 +151,8 @@ public class DominionPlaces {
 		AbstractClothing collar = Main.game.getPlayer().getClothingInSlot(InventorySlot.NECK);
 		if(collar!=null && collar.getClothingType().getId().equals("innoxia_neck_filly_choker")) {
 			mommySB.append("<p>");
-				mommySB.append("[style.boldPinkLight(Filly Choker:)]<br/>");
-				mommySB.append("By wearing your filly choker, you're signalling to any passing centaur slaves from Dominion Express that you're available to sexually service them.");
+				mommySB.append("[style.boldPinkLight([style.Mule] Choker:)]<br/>");
+				mommySB.append("By wearing your [style.mule] choker, you're signalling to any passing centaur slaves from Dominion Express that you're available to sexually service them.");
 				if(Main.game.getCurrentWeather()==Weather.MAGIC_STORM) {
 					mommySB.append(" As there's an ongoing arcane storm, however, there's [style.colourMinorBad(zero chance)] that you'll encounter any of them...");
 				} else if(!Main.game.isExtendedWorkTime()) {
@@ -168,47 +169,256 @@ public class DominionPlaces {
 		return mommySB.toString();
 	}
 	
-    public static final DialogueNode STREET = new DialogueNode("Улицы Доминиона", "", false) {
+	private static List<Response> getExtraStreetResponses() {
+		List<Response> mommyResponses = new ArrayList<>();
+		List<Response> occupantResponses = new ArrayList<>();
+		List<Response> cultistResponses = new ArrayList<>();
+		List<Response> reindeerResponses = new ArrayList<>();
 
-		@Override
-		public int getSecondsPassed() {
-			return TRAVEL_TIME_STREET;
+		Set<NPC> characters = new HashSet<>(Main.game.getNonCompanionCharactersPresent());
+		characters.addAll(Main.game.getCharactersTreatingCellAsHome(Main.game.getPlayerCell()));
+		
+		if(Main.game.getPlayerCell().getPlace().getPlaceType()==PlaceType.DOMINION_NYAN_APARTMENT) {
+			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumDateCompleted)) {
+				//TODO
+//				if(Main.game.getNpc(Nyan.class).getWorldLocation()==WorldType.NYANS_APARTMENT) {
+//					mommyResponses.add(new Response("Visit Nyan", "Head over to Nyan's apartment building and pay her a visit.", Main.game.getDefaultDialogue(false)));
+//					
+//				} else {
+//					mommyResponses.add(new Response("Visit Nyan", "Nyan is out at work at this time of day, so you're unable to head over to her apartment building and pay her a visit...", null));
+//				}
+			}
+			
+			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumInterviewPassed)
+					&& (!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumDateCompleted) || Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumGirlfriend))) {
+				int dateCost = 4000;
+				if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanWeekendDated)) {
+					if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumDateCompleted)) {
+						mommyResponses.add(new Response("Double date ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
+								"You've already taken Nyan out for a date this weekend. You'll have to wait until next weekend before taking her and [nyanmum.name] out for a double date...",
+								null));
+					} else {
+						mommyResponses.add(new Response("Double date ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
+								"You've already taken Nyan and [nyanmum.name] out for a date this weekend. You'll have to wait until next weekend before taking them out again...",
+								null));
+					}
+					
+				} else if((Main.game.getDayOfWeek()==DayOfWeek.FRIDAY || Main.game.getDayOfWeek()==DayOfWeek.SATURDAY) && (Main.game.isHourBetween(20, 23))) {
+					if(Main.game.getNpc(Nyan.class).getWorldLocation()!=WorldType.NYANS_APARTMENT) {
+						mommyResponses.add(new Response("Double date ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
+								"Nyan and [nyanmum.name] are not at home at the moment. You'll have to come back after their work day ends...",
+								null));
+						
+					} else if(Main.game.getPlayer().getMoney()<dateCost) {
+						mommyResponses.add(new Response("Double date ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
+								"'The Oaken Glade' is a very expensive place to go on a date. You need at least "+Util.intToString(dateCost)+" flames before asking Nyan and [nyanmum.name] out to a date there.",
+								null));
+						
+					} else if(!Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.MOUTH, true)) {
+						mommyResponses.add(new Response("Double date ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
+								"You're not going to be able to go out on a date to a restaurant if you're not able to eat anything!"
+									+ "<br/>[style.italicsMinorBad(You need to be able to access your mouth in order to take Nyan and [nyanmum.name] out on a date...)]",
+								null));
+						
+					} else {
+						mommyResponses.add(new Response("Double date ("+UtilText.formatAsMoney(dateCost, "span")+")",
+								"Pick Nyan and [nyanmum.name] up from their apartment building and take them out on a date to the restaurant, 'The Oaken Glade'.",
+								Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumGirlfriend)
+									?NyanDateFinalRepeat.DOUBLE_DATE_START
+									:NyanFirstDoubleDate.DATE_START));
+					}
+					
+				} else {
+					mommyResponses.add(new Response("Double date ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
+							"You cannot take Nyan and [nyanmum.name] out for a date at this time..."
+								+ "<br/><i>It needs to be either a "
+								+ (Main.game.getDayOfWeek()==DayOfWeek.FRIDAY
+									?"[style.italicsMinorGood(Friday)]"
+									:"[style.italicsMinorBad(Friday)]")
+								+" or "
+								+ (Main.game.getDayOfWeek()==DayOfWeek.SATURDAY
+									?"[style.italicsMinorGood(Saturday)]"
+									:"[style.italicsMinorBad(Saturday)]")
+								+", and between the hours of "
+								+ (Main.game.isHourBetween(20, 23)
+									?"[style.italicsMinorGood([unit.time(20)]-[unit.time(23)])]"
+									:"[style.italicsMinorBad([unit.time(20)]-[unit.time(23)])]")
+								+" in order to take Nyan and [nyanmum.name] out for a date!",
+							null));
+				}
+				
+			} else {
+				int dateCost = 2500;
+				if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanWeekendDated)) {
+					mommyResponses.add(new Response("Date Nyan ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
+							"You've already taken Nyan out for a date this weekend. You'll have to wait until next weekend before taking her out again...",
+							null));
+					
+				} else if((Main.game.getDayOfWeek()==DayOfWeek.FRIDAY || Main.game.getDayOfWeek()==DayOfWeek.SATURDAY)
+						&& (Main.game.getHourOfDay()>=18 && Main.game.getHourOfDay()<23)) {
+					if(Main.game.getNpc(Nyan.class).getWorldLocation()!=WorldType.NYANS_APARTMENT) {
+						mommyResponses.add(new Response("Date Nyan ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
+								"Nyan is out at work at the moment. You'll have to come back after her work day ends...",
+								null));
+						
+					} else if(Main.game.getPlayer().getMoney()<dateCost) {
+						mommyResponses.add(new Response("Date Nyan ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
+								"'The Oaken Glade' looked to be a very expensive place to go on a date. You need at least "+Util.intToString(dateCost)+" flames before asking Nyan out to a date there.",
+								null));
+						
+					} else if(!Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.MOUTH, true)) {
+						mommyResponses.add(new Response("Date Nyan ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
+								"You're not going to be able to go out on a date to a restaurant if you're not able to eat anything!"
+									+ "<br/>[style.italicsMinorBad(You need to be able to access your mouth in order to take Nyan out on a date...)]",
+								null));
+						
+					} else {
+						mommyResponses.add(new Response("Date Nyan ("+UtilText.formatAsMoney(dateCost, "span")+")",
+								"Pick Nyan up from her apartment building and take her out on a date to the restaurant, 'The Oaken Glade'.",
+								Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumDateCompleted)
+									?NyanDateFinalRepeat.SOLO_DATE_START
+									:(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanRestaurantDateCompleted) && !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumInterviewPassed)
+										?NyanRepeatDate.DATE_START
+										:NyanFirstDate.DATE_START)));
+					}
+					
+				} else {
+					mommyResponses.add(new Response("Date Nyan ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
+							"You cannot take Nyan out for a date at this time..."
+								+ "<br/><i>It needs to be either a "
+								+ (Main.game.getDayOfWeek()==DayOfWeek.FRIDAY
+									?"[style.italicsMinorGood(Friday)]"
+									:"[style.italicsMinorBad(Friday)]")
+								+" or "
+								+ (Main.game.getDayOfWeek()==DayOfWeek.SATURDAY
+									?"[style.italicsMinorGood(Saturday)]"
+									:"[style.italicsMinorBad(Saturday)]")
+								+", and between the hours of "
+								+ (Main.game.getHourOfDay()>=18 && Main.game.getHourOfDay()<23
+									?"[style.italicsMinorGood([unit.time(18)]-[unit.time(23)])]"
+									:"[style.italicsMinorBad([unit.time(18)]-[unit.time(23)])]")
+								+" in order to take Nyan out for a date!",
+							null));
+				}
+			}
 		}
-
-		@Override
-		public String getContent() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(UtilText.parseFromXMLFile("places/dominion/dominionPlaces", "STREET"));
-			if (Main.game.getCurrentWeather() != Weather.MAGIC_STORM) {
-				sb.append(getRandomStreetEvent());
+		
+		if(Main.game.getPlayerCell().getPlace().getPlaceType()==PlaceType.DOMINION_CALLIE_BAKERY) {
+			int hourOpen = Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.getDialogueFlagValueFromId("nnxx_callie_upgrade_2"))?7:9;
+			int hourClose = Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.getDialogueFlagValueFromId("nnxx_callie_upgrade_2"))?17:15;
+			
+			if(Main.game.isHourBetween(hourOpen, hourClose) && Main.game.getDayOfWeek()!=DayOfWeek.SUNDAY) {
+				DialogueNode initNode = DialogueManager.getDialogueFromId("nnxx_callie_bakery_entry_first_time");
+				if(Main.game.getDialogueFlags().hasFlag("nnxx_callie_introduced")) {
+					AbstractClothing playerNeckClothing = Main.game.getPlayer().getClothingInSlot(InventorySlot.NECK);
+					if(Main.game.getDialogueFlags().hasFlag("nnxx_callie_upgrade_3")
+							&& !Main.game.getDialogueFlags().hasFlag("nnxx_callie_upgrade_reaction_pending")
+							&& Main.game.getPlayer().getSexCount(Main.game.getNpc(Callie.class), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.ANUS))>0
+							&& Main.game.getNpc(Callie.class).isAttractedTo(Main.game.getPlayer())
+							&& Main.game.getPlayer().isQuestCompleted(QuestLine.ROMANCE_NATALYA)
+							&& (playerNeckClothing!=null && playerNeckClothing.getClothingType().getId().equals("innoxia_neck_filly_choker"))
+							&& Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.MOUTH, true)
+							&& (!Main.game.getDialogueFlags().hasFlag("innoxia_callie_natalya_encountered")
+									|| Main.game.getSecondsPassed() - Main.game.getDialogueFlags().getSavedLong("callie_natalya_encounter_time") >= 60*60*24*3)) {
+						initNode = DialogueManager.getDialogueFromId("nnxx_callie_bakery_entry_natalya"); // Can be encountered every three days
+						
+					} else {
+						initNode = DialogueManager.getDialogueFromId("nnxx_callie_bakery_entry");
+					}
+				}
+				
+				mommyResponses.add(new Response("The Creamy Bakey",
+						"Head over to the nearby bakery, 'The Creamy Bakey', and take a look inside."
+								+ "<br/><i>The bakery is open from [style.italicsMinorGood([unit.time("+hourOpen+")]-[unit.time("+hourClose+")])].</i>",
+								initNode) {
+					@Override
+					public void effects() {
+						Main.game.getPlayer().setLocation(WorldType.getWorldTypeFromId("nnxx_callie_bakery"), PlaceType.getPlaceTypeFromId("nnxx_callie_bakery_counter"));
+					}
+				});
+				
+			} else {
+				mommyResponses.add(new Response("The Creamy Bakey",
+						"The nearby bakery, 'The Creamy Bakey', is closed at this time of day."
+								+ "<br/><i>You'll have to come back between"
+								+ (Main.game.isHourBetween(hourOpen, hourClose)
+										?" [style.italicsMinorGood([unit.time("+hourOpen+")]-[unit.time("+hourClose+")])],"
+										:" [style.italicsMinorBad([unit.time("+hourOpen+")]-[unit.time("+hourClose+")])],")
+								+ (Main.game.getDayOfWeek()!=DayOfWeek.SUNDAY
+										?" [style.italicsMinorGood(Monday to Saturday)]"
+										:" [style.italicsMinorBad(Monday to Saturday)]")
+								+ ".</i>",
+						null));
 			}
-
-			sb.append(getExtraStreetFeatures());
-
-			if(Main.game.getDateNow().getMonth()==Month.OCTOBER) {
-				sb.append(UtilText.parseFromXMLFile("places/dominion/dominionPlaces", "STREET_EVENT_OCTOBER"));
-			}
-			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.hasSnowedThisWinter) && Main.game.getSeason()==Season.WINTER) {
-				sb.append(UtilText.parseFromXMLFile("places/dominion/dominionPlaces", "STREET_EVENT_SNOW"));
-			}
-
-			return sb.toString();
 		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			List<Response> responses = getExtraStreetResponses();
-
-			if(index == 0) {
-				return null;
-
-			} else if(index-1 < responses.size()) {
-				return responses.get(index-1);
+		
+		for(NPC npc : characters) {
+			if(npc instanceof RentalMommy) {
+				if(Main.game.getCurrentWeather()==Weather.MAGIC_STORM) {
+					mommyResponses.add(new Response("Mommy", "'Mommy' is not sitting on her usual bench, and you suppose that she's waiting out the current storm inside her house.", null));
+				} else {
+					mommyResponses.add(new Response("Mommy", "You see 'Mommy' sitting on the wooden bench outside her house. Walk up to her and say hello.", RentalMommyDialogue.ENCOUNTER) {
+						@Override
+						public void effects() {
+							Main.game.setActiveNPC(npc);	
+						}
+					});
+				}
 			}
-
-			return null;
+			
+			if(Main.game.getPlayer().getFriendlyOccupants().contains(npc.getId())) {
+//				if(!Main.game.getCharactersPresent().contains(npc)) {
+//					occupantResponses.add(new Response(
+//							UtilText.parse(npc, "[npc.Name]"),
+//							UtilText.parse(npc, "[npc.Name] is out at work at the moment, and so you'll have to return at another time if you wanted to pay [npc.herHim] a visit..."),
+//							null));
+//				}
+				occupantResponses.add(new Response(
+						UtilText.parse(npc, "[npc.Name]"),
+						UtilText.parse(npc,
+								Main.game.getPlayer().getCompanions().contains(npc)
+									?"Head back over to [npc.namePos] apartment."
+									:"Head over to [npc.namePos] apartment building and pay [npc.herHim] a visit."),
+						OccupantDialogue.OCCUPANT_APARTMENT) {
+					@Override
+					public void effects() {
+						OccupantDialogue.initDialogue(npc, true, false);
+					}
+				});
+			}
+			
+			if(npc instanceof Cultist) {
+				cultistResponses.add(new Response("Chapel", UtilText.parse(npc, "Visit [npc.namePos] chapel again."), CultistDialogue.ENCOUNTER_CHAPEL_REPEAT) {
+						@Override
+						public void effects() {
+							Main.game.setActiveNPC(npc);
+						}
+					});
+			}
+			
+			if(npc instanceof ReindeerOverseer) {
+				if(Main.game.getCurrentWeather()==Weather.MAGIC_STORM) {
+					reindeerResponses.add(new Response("Overseer",
+							"The reindeer-morph workers are currently sheltering from the ongoing arcane storm. You'll have to come back later if you wanted to speak to the overseer.",
+							null));
+				} else {
+					reindeerResponses.add(new Response("Overseer", UtilText.parse(npc, "Walk up to [npc.name] and say hello."), ReindeerOverseerDialogue.ENCOUNTER_START) {
+							@Override
+							public void effects() {
+								Main.game.setActiveNPC(npc);
+								npc.setPlayerKnowsName(true);
+							}
+						});
+				}
+			}
 		}
-	};
+		
+		mommyResponses.addAll(cultistResponses);
+		mommyResponses.addAll(occupantResponses);
+		mommyResponses.addAll(reindeerResponses);
+		
+		return mommyResponses;
+	}
 
 	private static String getRandomStreetEvent() {
 		int extraText = Util.random.nextInt(100) + 1;
@@ -285,45 +495,46 @@ public class DominionPlaces {
 		
 		return sb.toString();
 	}
-    public static final DialogueNode DARK_ALLEYS = new DialogueNode("Тёмные переулки", "", false) {
+	
+	public static final DialogueNode STREET = new DialogueNode("Улицы Доминиона", "", false) {
 
 		@Override
 		public int getSecondsPassed() {
-			return 3*60;
+			return TRAVEL_TIME_STREET;
 		}
 
 		@Override
 		public String getContent() {
-			UtilText.nodeContentSB.setLength(0);
-
-			UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/dominion/dominionPlaces", "DARK_ALLEYS", new ArrayList<GameCharacter>(Main.game.getNonCompanionCharactersPresent())));
-
-			for(GameCharacter npc : Main.game.getNonCompanionCharactersPresent()) {
-				UtilText.nodeContentSB.append(((NPC) npc).getPresentInTileDescription(false));
+			StringBuilder sb = new StringBuilder();
+			sb.append(UtilText.parseFromXMLFile("places/dominion/dominionPlaces", "STREET"));
+			if (Main.game.getCurrentWeather() != Weather.MAGIC_STORM) {
+				sb.append(getRandomStreetEvent());
 			}
 
-			return UtilText.nodeContentSB.toString();
+			sb.append(getExtraStreetFeatures());
+
+			if(Main.game.getDateNow().getMonth()==Month.OCTOBER) {
+				sb.append(UtilText.parseFromXMLFile("places/dominion/dominionPlaces", "STREET_EVENT_OCTOBER"));
+			}
+			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.hasSnowedThisWinter) && Main.game.getSeason()==Season.WINTER) {
+				sb.append(UtilText.parseFromXMLFile("places/dominion/dominionPlaces", "STREET_EVENT_SNOW"));
+			}
+
+			return sb.toString();
 		}
 
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if(index == 1) {
-				return new ResponseEffectsOnly(
-						"Explore",
-						"Explore the alleyways. Although you don't think you're any more or less likely to find anything by doing this, at least you won't have to keep travelling back and forth..."){
-						@Override
-						public int getSecondsPassed() {
-							return 30*60;
-						}
-						@Override
-						public void effects() {
-							DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
-							Main.game.setContent(new Response("", "", dn));
-						}
-					};
-			} else {
+			List<Response> responses = getExtraStreetResponses();
+
+			if(index == 0) {
 				return null;
+
+			} else if(index-1 < responses.size()) {
+				return responses.get(index-1);
 			}
+
+			return null;
 		}
 	};
 	
@@ -368,25 +579,47 @@ public class DominionPlaces {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new ResponseEffectsOnly(
-						"Explore",
-						"Explore the alleyways. Although you don't think you're any more or less likely to find anything by doing this, at least you won't have to keep travelling back and forth..."){
-						@Override
-						public int getSecondsPassed() {
-							return 30*60;
-						}
-						@Override
-						public void effects() {
-							DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
-							Main.game.setContent(new Response("", "", dn));
-						}
-					};
-			} else {
-				return null;
+				return AbstractEncounter.exploreArea("the alleyways");
+			} else if(index == 2) {
+				return AbstractEncounter.useOffspringMap();
 			}
+
+			return null;
 		}
 	};
-    public static final DialogueNode BACK_ALLEYS_CANAL = new DialogueNode("Пересечение канала", ".", false) {
+	
+	public static final DialogueNode DARK_ALLEYS = new DialogueNode("Тёмные переулки", "", false) {
+
+		@Override
+		public int getSecondsPassed() {
+			return 3*60;
+		}
+
+		@Override
+		public String getContent() {
+			UtilText.nodeContentSB.setLength(0);
+
+			UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/dominion/dominionPlaces", "DARK_ALLEYS", new ArrayList<GameCharacter>(Main.game.getNonCompanionCharactersPresent())));
+
+			for(GameCharacter npc : Main.game.getNonCompanionCharactersPresent()) {
+				UtilText.nodeContentSB.append(((NPC) npc).getPresentInTileDescription(false));
+			}
+
+			return UtilText.nodeContentSB.toString();
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if(index == 1) {
+				return AbstractEncounter.exploreArea("the alleyways");
+			} else if(index == 2) {
+				return AbstractEncounter.useOffspringMap();
+			}
+			return null;
+		}
+	};
+	
+	public static final DialogueNode BACK_ALLEYS_CANAL = new DialogueNode("Пересечение канала", ".", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -410,54 +643,11 @@ public class DominionPlaces {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new ResponseEffectsOnly(
-						"Explore",
-						"Explore this area. Although you don't think you're any more or less likely to find anything by doing this, at least you won't have to keep travelling back and forth..."){
-						@Override
-						public int getSecondsPassed() {
-							return 30*60;
-						}
-						@Override
-						public void effects() {
-							DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
-							Main.game.setContent(new Response("", "", dn));
-						}
-					};
-			} else {
-				return null;
+				return AbstractEncounter.exploreArea("the alleyways");
+			} else if(index == 2) {
+				return AbstractEncounter.useOffspringMap();
 			}
-		}
-	};
-    public static final DialogueNode CITY_EXIT_SEWERS = new DialogueNode("Вход в Подземье", "Enter the undercity of Submission.", false) {
-
-		@Override
-		public int getSecondsPassed() {
-			return TRAVEL_TIME_STREET;
-		}
-
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/dominionPlaces", "CITY_EXIT_SEWERS");
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-                return new Response("Подземье", "Enter the undercity of Submission.", CITY_EXIT_SEWERS_ENTERING_SUBMISSION) {
-					@Override
-					public void effects() {
-						if(!Main.game.getPlayer().hasQuest(QuestLine.SIDE_SLIME_QUEEN)) {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.visitedSubmission, false);
-						}
-						Main.game.getPlayer().setLocation(WorldType.SUBMISSION, PlaceType.SUBMISSION_ENTRANCE, false);
-
-						Main.game.getNpc(Claire.class).setLocation(Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocation(), true);
-					}
-				};
-
-			} else {
-				return null;
-			}
+			return null;
 		}
 	};
 	
@@ -706,19 +896,9 @@ public class DominionPlaces {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new ResponseEffectsOnly(
-						"Explore",
-						"Explore this area. Although you don't think you're any more or less likely to find anything by doing this, at least you won't have to keep travelling back and forth..."){
-						@Override
-						public int getSecondsPassed() {
-							return 30*60;
-						}
-						@Override
-						public void effects() {
-							DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
-							Main.game.setContent(new Response("", "", dn));
-						}
-					};
+				return AbstractEncounter.exploreArea("the canals");
+			} else if(index == 2) {
+				return AbstractEncounter.useOffspringMap();
 			}
 			return null;
 		}
@@ -749,56 +929,46 @@ public class DominionPlaces {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new ResponseEffectsOnly(
-						"Explore",
-						"Explore this area. Although you don't think you're any more or less likely to find anything by doing this, at least you won't have to keep travelling back and forth..."){
-						@Override
-						public int getSecondsPassed() {
-							return 30*60;
-						}
-						@Override
-						public void effects() {
-							DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
-							Main.game.setContent(new Response("", "", dn));
-						}
-					};
-			} else {
-				return null;
+				return AbstractEncounter.exploreArea("the canals");
+			} else if(index == 2) {
+				return AbstractEncounter.useOffspringMap();
 			}
+			return null;
 		}
 	};
 
 	// Entrances and exits:
-	public static final DialogueNode CITY_EXIT_BAT_CAVERNS = new DialogueNode("", "", false) {
+
+	public static final DialogueNode CITY_EXIT_SEWERS = new DialogueNode("Вход в Подземье", "Enter the undercity of Submission.", false) {
+
 		@Override
 		public int getSecondsPassed() {
 			return TRAVEL_TIME_STREET;
 		}
+
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/dominionPlaces", "CITY_EXIT_BAT_CAVERNS");
+			return UtilText.parseFromXMLFile("places/dominion/dominionPlaces", "CITY_EXIT_SEWERS");
 		}
+
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				if(Main.game.getPlayer().isAbleToFly()) {
-					if(!Main.game.getPlayer().isPartyAbleToFly()) {
-                        return new Response("Пещеры летучих мышей", "As your party members are unable to fly, you cannot use the shaft to travel down to the Bat Caverns...", null);
+                return new Response("Подземье", "Enter the undercity of Submission.", CITY_EXIT_SEWERS_ENTERING_SUBMISSION) {
+					@Override
+					public void effects() {
+						if(!Main.game.getPlayer().hasQuest(QuestLine.SIDE_SLIME_QUEEN)) {
+							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.visitedSubmission, false);
+						}
+						Main.game.getPlayer().setLocation(WorldType.SUBMISSION, PlaceType.SUBMISSION_ENTRANCE, false);
 
-					} else {
-                        return new Response("Пещеры летучих мышей", "Fly down the shaft to return to the Bat Caverns.", CITY_EXIT_BAT_CAVERNS_FLY_DOWN) {
-							@Override
-							public void effects() {
-								Main.game.getPlayer().setLocation(WorldType.BAT_CAVERNS, PlaceType.BAT_CAVERN_SHAFT, false);
-							}
-						};
+						Main.game.getNpc(Claire.class).setLocation(Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocation(), true);
 					}
+				};
 
-				} else {
-                    return new Response("Пещеры летучих мышей", "As you are unable to fly, you cannot use the shaft to travel down to the Bat Caverns...", null);
-				}
+			} else {
+				return null;
 			}
-			return null;
 		}
 	};
 
@@ -873,7 +1043,56 @@ public class DominionPlaces {
 			}
 		}
 	};
-    public static final DialogueNode CITY_EXIT = new DialogueNode("Выход из Доминиона", "", false) {
+	
+	public static final DialogueNode CITY_EXIT_BAT_CAVERNS = new DialogueNode("", "", false) {
+		@Override
+		public int getSecondsPassed() {
+			return TRAVEL_TIME_STREET;
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/dominionPlaces", "CITY_EXIT_BAT_CAVERNS");
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 1) {
+				if(Main.game.getPlayer().isAbleToFly()) {
+					if(!Main.game.getPlayer().isPartyAbleToFly()) {
+                        return new Response("Пещеры летучих мышей", "As your party members are unable to fly, you cannot use the shaft to travel down to the Bat Caverns...", null);
+
+					} else {
+                        return new Response("Пещеры летучих мышей", "Fly down the shaft to return to the Bat Caverns.", CITY_EXIT_BAT_CAVERNS_FLY_DOWN) {
+							@Override
+							public void effects() {
+								Main.game.getPlayer().setLocation(WorldType.BAT_CAVERNS, PlaceType.BAT_CAVERN_SHAFT, false);
+							}
+						};
+					}
+
+				} else {
+                    return new Response("Пещеры летучих мышей", "As you are unable to fly, you cannot use the shaft to travel down to the Bat Caverns...", null);
+				}
+			}
+			return null;
+		}
+	};
+	
+	public static final DialogueNode CITY_EXIT_BAT_CAVERNS_FLY_DOWN = new DialogueNode("", "", false) {
+		@Override
+		public int getSecondsPassed() {
+			return 2*60;
+		}
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("places/dominion/dominionPlaces", "CITY_EXIT_BAT_CAVERNS_FLY_DOWN");
+		}
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return BatCaverns.SHAFT.getResponse(responseTab, index);
+		}
+	};
+	
+	public static final DialogueNode CITY_EXIT = new DialogueNode("Выход из Доминиона", "", false) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -920,264 +1139,4 @@ public class DominionPlaces {
 			}
 		}
 	};
-
-	public static final DialogueNode CITY_EXIT_BAT_CAVERNS_FLY_DOWN = new DialogueNode("", "", false) {
-		@Override
-		public int getSecondsPassed() {
-			return 2*60;
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/dominionPlaces", "CITY_EXIT_BAT_CAVERNS_FLY_DOWN");
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return BatCaverns.SHAFT.getResponse(responseTab, index);
-		}
-	};
-
-	private static List<Response> getExtraStreetResponses() {
-		List<Response> mommyResponses = new ArrayList<>();
-		List<Response> occupantResponses = new ArrayList<>();
-		List<Response> cultistResponses = new ArrayList<>();
-		List<Response> reindeerResponses = new ArrayList<>();
-
-		Set<NPC> characters = new HashSet<>(Main.game.getNonCompanionCharactersPresent());
-		characters.addAll(Main.game.getCharactersTreatingCellAsHome(Main.game.getPlayerCell()));
-
-		if(Main.game.getPlayerCell().getPlace().getPlaceType()==PlaceType.DOMINION_NYAN_APARTMENT) {
-			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumDateCompleted)) {
-				//TODO
-//				if(Main.game.getNpc(Nyan.class).getWorldLocation()==WorldType.NYANS_APARTMENT) {
-//					mommyResponses.add(new Response("Visit Nyan", "Head over to Nyan's apartment building and pay her a visit.", Main.game.getDefaultDialogue(false)));
-//
-//				} else {
-//					mommyResponses.add(new Response("Visit Nyan", "Nyan is out at work at this time of day, so you're unable to head over to her apartment building and pay her a visit...", null));
-//				}
-			}
-
-			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumInterviewPassed)
-					&& (!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumDateCompleted) || Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumGirlfriend))) {
-				int dateCost = 4000;
-				if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanWeekendDated)) {
-					mommyResponses.add(new Response("Double date ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
-							"You've already taken Nyan and [nyanmum.name] out for a date this weekend. You'll have to wait until next weekend before taking them out again...",
-							null));
-
-				} else if((Main.game.getDayOfWeek()==DayOfWeek.FRIDAY || Main.game.getDayOfWeek()==DayOfWeek.SATURDAY) && (Main.game.isHourBetween(20, 23))) {
-					if(Main.game.getNpc(Nyan.class).getWorldLocation()!=WorldType.NYANS_APARTMENT) {
-						mommyResponses.add(new Response("Double date ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
-								"Nyan and [nyanmum.name] are not at home at the moment. You'll have to come back after their work day ends...",
-								null));
-
-					} else if(Main.game.getPlayer().getMoney()<dateCost) {
-						mommyResponses.add(new Response("Double date ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
-								"'The Oaken Glade' is a very expensive place to go on a date. You need at least "+Util.intToString(dateCost)+" flames before asking Nyan and [nyanmum.name] out to a date there.",
-								null));
-
-					} else if(!Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.MOUTH, true)) {
-						mommyResponses.add(new Response("Double date ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
-								"You're not going to be able to go out on a date to a restaurant if you're not able to eat anything!"
-									+ "<br/>[style.italicsMinorBad(You need to be able to access your mouth in order to take Nyan and [nyanmum.name] out on a date...)]",
-								null));
-
-					} else {
-						mommyResponses.add(new Response("Double date ("+UtilText.formatAsMoney(dateCost, "span")+")",
-								"Pick Nyan and [nyanmum.name] up from their apartment building and take them out on a date to the restaurant, 'The Oaken Glade'.",
-								Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumGirlfriend)
-									?NyanDateFinalRepeat.DOUBLE_DATE_START
-									:NyanFirstDoubleDate.DATE_START));
-					}
-
-				} else {
-					mommyResponses.add(new Response("Double date ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
-							"You cannot take Nyan and [nyanmum.name] out for a date at this time..."
-								+ "<br/><i>It needs to be either a "
-								+ (Main.game.getDayOfWeek()==DayOfWeek.FRIDAY
-									?"[style.italicsMinorGood(Friday)]"
-									:"[style.italicsMinorBad(Friday)]")
-								+" or "
-								+ (Main.game.getDayOfWeek()==DayOfWeek.SATURDAY
-									?"[style.italicsMinorGood(Saturday)]"
-									:"[style.italicsMinorBad(Saturday)]")
-								+", and between the hours of "
-								+ (Main.game.isHourBetween(20, 23)
-									?"[style.italicsMinorGood([unit.time(20)]-[unit.time(23)])]"
-									:"[style.italicsMinorBad([unit.time(20)]-[unit.time(23)])]")
-								+" in order to take Nyan and [nyanmum.name] out for a date!",
-							null));
-				}
-
-			} else {
-				int dateCost = 2500;
-				if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanWeekendDated)) {
-					mommyResponses.add(new Response("Date Nyan ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
-							"You've already taken Nyan out for a date this weekend. You'll have to wait until next weekend before taking her out again...",
-							null));
-
-				} else if((Main.game.getDayOfWeek()==DayOfWeek.FRIDAY || Main.game.getDayOfWeek()==DayOfWeek.SATURDAY)
-						&& (Main.game.getHourOfDay()>=18 && Main.game.getHourOfDay()<23)) {
-					if(Main.game.getNpc(Nyan.class).getWorldLocation()!=WorldType.NYANS_APARTMENT) {
-						mommyResponses.add(new Response("Date Nyan ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
-								"Nyan is out at work at the moment. You'll have to come back after her work day ends...",
-								null));
-
-					} else if(Main.game.getPlayer().getMoney()<dateCost) {
-						mommyResponses.add(new Response("Date Nyan ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
-								"'The Oaken Glade' looked to be a very expensive place to go on a date. You need at least "+Util.intToString(dateCost)+" flames before asking Nyan out to a date there.",
-								null));
-
-					} else if(!Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.MOUTH, true)) {
-						mommyResponses.add(new Response("Date Nyan ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
-								"You're not going to be able to go out on a date to a restaurant if you're not able to eat anything!"
-									+ "<br/>[style.italicsMinorBad(You need to be able to access your mouth in order to take Nyan out on a date...)]",
-								null));
-
-					} else {
-						mommyResponses.add(new Response("Date Nyan ("+UtilText.formatAsMoney(dateCost, "span")+")",
-								"Pick Nyan up from her apartment building and take her out on a date to the restaurant, 'The Oaken Glade'.",
-								Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumDateCompleted)
-									?NyanDateFinalRepeat.SOLO_DATE_START
-									:(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanRestaurantDateCompleted) && !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumInterviewPassed)
-										?NyanRepeatDate.DATE_START
-										:NyanFirstDate.DATE_START)));
-					}
-
-				} else {
-					mommyResponses.add(new Response("Date Nyan ("+UtilText.formatAsMoneyUncoloured(dateCost, "span")+")",
-							"You cannot take Nyan out for a date at this time..."
-								+ "<br/><i>It needs to be either a "
-								+ (Main.game.getDayOfWeek()==DayOfWeek.FRIDAY
-									?"[style.italicsMinorGood(Friday)]"
-									:"[style.italicsMinorBad(Friday)]")
-								+" or "
-								+ (Main.game.getDayOfWeek()==DayOfWeek.SATURDAY
-									?"[style.italicsMinorGood(Saturday)]"
-									:"[style.italicsMinorBad(Saturday)]")
-								+", and between the hours of "
-								+ (Main.game.getHourOfDay()>=18 && Main.game.getHourOfDay()<23
-									?"[style.italicsMinorGood([unit.time(18)]-[unit.time(23)])]"
-									:"[style.italicsMinorBad([unit.time(18)]-[unit.time(23)])]")
-								+" in order to take Nyan out for a date!",
-							null));
-				}
-			}
-		}
-
-		if(Main.game.getPlayerCell().getPlace().getPlaceType()==PlaceType.DOMINION_CALLIE_BAKERY) {
-			int hourOpen = Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.getDialogueFlagValueFromId("nnxx_callie_upgrade_2"))?7:9;
-			int hourClose = Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.getDialogueFlagValueFromId("nnxx_callie_upgrade_2"))?17:15;
-
-			if(Main.game.isHourBetween(hourOpen, hourClose) && Main.game.getDayOfWeek()!=DayOfWeek.SUNDAY) {
-				DialogueNode initNode = DialogueManager.getDialogueFromId("nnxx_callie_bakery_entry_first_time");
-				if(Main.game.getDialogueFlags().hasFlag("nnxx_callie_introduced")) {
-					AbstractClothing playerNeckClothing = Main.game.getPlayer().getClothingInSlot(InventorySlot.NECK);
-					if(Main.game.getDialogueFlags().hasFlag("nnxx_callie_upgrade_3")
-							&& !Main.game.getDialogueFlags().hasFlag("nnxx_callie_upgrade_reaction_pending")
-							&& Main.game.getPlayer().getSexCount(Main.game.getNpc(Callie.class), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.ANUS))>0
-							&& Main.game.getNpc(Callie.class).isAttractedTo(Main.game.getPlayer())
-							&& Main.game.getPlayer().isQuestCompleted(QuestLine.ROMANCE_NATALYA)
-							&& (playerNeckClothing!=null && playerNeckClothing.getClothingType().getId().equals("innoxia_neck_filly_choker"))
-							&& Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.MOUTH, true)
-							&& (!Main.game.getDialogueFlags().hasFlag("innoxia_callie_natalya_encountered")
-									|| Main.game.getSecondsPassed() - Main.game.getDialogueFlags().getSavedLong("callie_natalya_encounter_time") >= 60*60*24*3)) {
-						initNode = DialogueManager.getDialogueFromId("nnxx_callie_bakery_entry_natalya"); // Can be encountered every three days
-
-					} else {
-						initNode = DialogueManager.getDialogueFromId("nnxx_callie_bakery_entry");
-					}
-				}
-
-				mommyResponses.add(new Response("The Creamy Bakey",
-						"Head over to the nearby bakery, 'The Creamy Bakey', and take a look inside."
-								+ "<br/><i>The bakery is open from [style.italicsMinorGood([unit.time("+hourOpen+")]-[unit.time("+hourClose+")])].</i>",
-								initNode) {
-					@Override
-					public void effects() {
-						Main.game.getPlayer().setLocation(WorldType.getWorldTypeFromId("nnxx_callie_bakery"), PlaceType.getPlaceTypeFromId("nnxx_callie_bakery_counter"));
-					}
-				});
-
-			} else {
-				mommyResponses.add(new Response("The Creamy Bakey",
-						"The nearby bakery, 'The Creamy Bakey', is closed at this time of day."
-								+ "<br/><i>You'll have to come back between"
-								+ (Main.game.isHourBetween(hourOpen, hourClose)
-										?" [style.italicsMinorGood([unit.time("+hourOpen+")]-[unit.time("+hourClose+")])],"
-										:" [style.italicsMinorBad([unit.time("+hourOpen+")]-[unit.time("+hourClose+")])],")
-								+ (Main.game.getDayOfWeek()!=DayOfWeek.SUNDAY
-										?" [style.italicsMinorGood(Monday to Saturday)]"
-										:" [style.italicsMinorBad(Monday to Saturday)]")
-								+ ".</i>",
-						null));
-			}
-		}
-
-		for(NPC npc : characters) {
-			if(npc instanceof RentalMommy) {
-				if(Main.game.getCurrentWeather()==Weather.MAGIC_STORM) {
-					mommyResponses.add(new Response("Mommy", "'Mommy' is not sitting on her usual bench, and you suppose that she's waiting out the current storm inside her house.", null));
-				} else {
-					mommyResponses.add(new Response("Mommy", "You see 'Mommy' sitting on the wooden bench outside her house. Walk up to her and say hello.", RentalMommyDialogue.ENCOUNTER) {
-						@Override
-						public void effects() {
-							Main.game.setActiveNPC(npc);
-						}
-					});
-				}
-			}
-
-			if(Main.game.getPlayer().getFriendlyOccupants().contains(npc.getId())) {
-//				if(!Main.game.getCharactersPresent().contains(npc)) {
-//					occupantResponses.add(new Response(
-//							UtilText.parse(npc, "[npc.Name]"),
-//							UtilText.parse(npc, "[npc.Name] is out at work at the moment, and so you'll have to return at another time if you wanted to pay [npc.herHim] a visit..."),
-//							null));
-//				}
-				occupantResponses.add(new Response(
-						UtilText.parse(npc, "[npc.Name]"),
-						UtilText.parse(npc,
-								Main.game.getPlayer().getCompanions().contains(npc)
-									?"Head back over to [npc.namePos] apartment."
-									:"Head over to [npc.namePos] apartment building and pay [npc.herHim] a visit."),
-						OccupantDialogue.OCCUPANT_APARTMENT) {
-					@Override
-					public void effects() {
-						OccupantDialogue.initDialogue(npc, true, false);
-					}
-				});
-			}
-
-			if(npc instanceof Cultist) {
-				cultistResponses.add(new Response("Chapel", UtilText.parse(npc, "Visit [npc.namePos] chapel again."), CultistDialogue.ENCOUNTER_CHAPEL_REPEAT) {
-						@Override
-						public void effects() {
-							Main.game.setActiveNPC(npc);
-						}
-					});
-			}
-
-			if(npc instanceof ReindeerOverseer) {
-				if(Main.game.getCurrentWeather()==Weather.MAGIC_STORM) {
-					reindeerResponses.add(new Response("Overseer",
-							"The reindeer-morph workers are currently sheltering from the ongoing arcane storm. You'll have to come back later if you wanted to speak to the overseer.",
-							null));
-				} else {
-					reindeerResponses.add(new Response("Overseer", UtilText.parse(npc, "Walk up to [npc.name] and say hello."), ReindeerOverseerDialogue.ENCOUNTER_START) {
-							@Override
-							public void effects() {
-								Main.game.setActiveNPC(npc);
-								npc.setPlayerKnowsName(true);
-							}
-						});
-				}
-			}
-		}
-
-		mommyResponses.addAll(cultistResponses);
-		mommyResponses.addAll(occupantResponses);
-		mommyResponses.addAll(reindeerResponses);
-
-		return mommyResponses;
-	}
 }

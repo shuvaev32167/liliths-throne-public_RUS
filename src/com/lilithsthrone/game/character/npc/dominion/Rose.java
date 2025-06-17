@@ -7,7 +7,25 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
-import com.lilithsthrone.game.character.body.valueEnums.*;
+import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
+import com.lilithsthrone.game.character.body.valueEnums.AssSize;
+import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
+import com.lilithsthrone.game.character.body.valueEnums.BodySize;
+import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
+import com.lilithsthrone.game.character.body.valueEnums.Capacity;
+import com.lilithsthrone.game.character.body.valueEnums.ClitorisSize;
+import com.lilithsthrone.game.character.body.valueEnums.CupSize;
+import com.lilithsthrone.game.character.body.valueEnums.HairLength;
+import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
+import com.lilithsthrone.game.character.body.valueEnums.HipSize;
+import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
+import com.lilithsthrone.game.character.body.valueEnums.LipSize;
+import com.lilithsthrone.game.character.body.valueEnums.Muscle;
+import com.lilithsthrone.game.character.body.valueEnums.NippleSize;
+import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
+import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
+import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
+import com.lilithsthrone.game.character.body.valueEnums.Wetness;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
@@ -21,15 +39,15 @@ import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.places.dominion.lilayashome.RoomPlayer;
-import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.inventory.CharacterInventory;
+import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.game.sex.managers.dominion.SMRoseHands;
 import com.lilithsthrone.main.Main;
+import com.lilithsthrone.rendering.Pattern;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
@@ -283,46 +301,37 @@ public class Rose extends NPC {
 	
 	@Override
 	public void endSex() {
-//		if(this.getClothingInSlot(InventorySlot.PENIS)!=null) {
-//			this.unequipClothingIntoVoid(this.getClothingInSlot(InventorySlot.PENIS), true, this);
-//			if(this.getClothingInSlot(InventorySlot.GROIN)==null) {
-//				this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_groin_vstring", PresetColour.CLOTHING_BLACK, false), true, this);
-//			}
-//			this.replaceAllClothing();
-//		}
 		this.equipClothing();
 	}
 	
-	public static final DialogueNode END_HAND_SEX = new DialogueNode("Выдохнуть", "Вы с Розой очень устали после сеанса держания за руки.", true) {
+	public void initKittyScene() {
+		// Both of them should already be on the player's tile, but just in case...
+		Main.game.getNpc(Lilaya.class).setLocation(Main.game.getPlayer());
+		this.setLocation(Main.game.getPlayer());
+
+		Main.game.getNpc(Lilaya.class).unequipAllClothingIntoVoid(true, true);
 		
-		@Override
-		public String getContent() {
-			return "<p>"
-                    + "Роза, пошатываясь, возвращает свою маленькую метёлку для пыли из перьев и бросает на тебя знойный взгляд, после чего закусывает губу и спешит в другую часть дома, несомненно, чтобы прийти в себя после вашего экстремального сеанса держания за руки."
-					+ "</p>"
-					+ "<p>"
-						+ "Обессиленно вздохнув, вы опускаетесь на кровать в комнате и думаете о том, какой потрясающий опыт вы только что получили."
-					+ "</p>";
-		}
+		Main.game.getNpc(Lilaya.class).equipClothingFromNowhere(Main.game.getItemGen().generateClothing("dsg_ckls_ckls_bra", PresetColour.CLOTHING_BLACK, false), true, this);
+		Main.game.getNpc(Lilaya.class).equipClothingFromNowhere(Main.game.getItemGen().generateClothing("dsg_ckls_ckls_gloves", PresetColour.CLOTHING_BLACK, false), true, this);
+		Main.game.getNpc(Lilaya.class).equipClothingFromNowhere(Main.game.getItemGen().generateClothing("dsg_ckls_ckls_panties", PresetColour.CLOTHING_BLACK, PresetColour.CLOTHING_PINK_LIGHT, PresetColour.CLOTHING_BLACK, false), true, this);
+		Main.game.getNpc(Lilaya.class).equipClothingFromNowhere(Main.game.getItemGen().generateClothing("dsg_ckls_ckls_stockings", PresetColour.CLOTHING_BLACK, false), true, this);
+		Main.game.getNpc(Lilaya.class).equipClothingFromNowhere(Main.game.getItemGen().generateClothing("dsg_ckls_ckls_headband", PresetColour.CLOTHING_BLACK, false), true, this);
+
+		this.unequipAllClothingIntoVoid(true, true);
 		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Продолжить", "Вы наконец-то оправились от напряженного сеанса держания за руки с Розой.", RoomPlayer.ROOM){
-					@Override
-					public void effects() {
-						Main.game.getNpc(Rose.class).setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LAB, false);
-					}
-					
-					@Override
-					public DialogueNode getNextDialogue() {
-						return Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true);
-					}
-				};
-			} else {
-				return null;
-			}
-		}
-	};
+		this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_chest_lacy_plunge_bra", PresetColour.CLOTHING_RED_BURGUNDY, false), true, this);
+		AbstractClothing thong = Main.game.getItemGen().generateClothing("innoxia_groin_crotchless_thong", PresetColour.CLOTHING_RED_BURGUNDY, false);
+		thong.setPattern(Pattern.getPatternIdByName("irbynx_leopard_printed"));
+		thong.setPatternColours(Util.newArrayListOfValues(PresetColour.CLOTHING_RED, PresetColour.CLOTHING_RED_DARK, PresetColour.CLOTHING_RED));
+		this.equipClothingFromNowhere(thong, true, this);
+		this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_neck_velvet_choker", PresetColour.CLOTHING_BLACK, false), true, this);
+	}
+
+	public void endKittyScene() {
+		Main.game.getNpc(Lilaya.class).equipClothing();
+		this.equipClothing();
+		// Remove Lilaya's frustrated status effect, as she will be orgasming immediately after this scene ends:
+		Main.game.getNpc(Lilaya.class).setLastTimeOrgasmedSeconds(Main.game.getSecondsPassed());
+	}
 
 }

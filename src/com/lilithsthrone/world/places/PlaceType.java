@@ -1199,16 +1199,8 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "")
 			.initWeatherImmune();
-	public static final AbstractPlaceType ENFORCER_HQ_OFFICE_QUARTERMASTER = new AbstractPlaceType(
-			WorldRegion.DOMINION,
-			"Квартермейстерский офис",
-			"Ответственный за управление снаряжением энфорсеров, квартирмейстер штаба имеет свой кабинет, удобно расположенный напротив стола учёта.",
-			"dominion/enforcerHQ/office",
-			PresetColour.BASE_ORANGE,
-			EnforcerHQDialogue.OFFICE_QUARTERMASTER,
-			Darkness.ALWAYS_LIGHT,
-			null, "")
-			.initWeatherImmune();	public static final AbstractPlaceType ENFORCER_HQ_REQUISITIONS = new AbstractPlaceType(
+
+	public static final AbstractPlaceType ENFORCER_HQ_REQUISITIONS = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Стол учёта",
 			"В этой зоне проверяется специальное или запасное оборудование энфорсеров.",
@@ -1226,6 +1218,20 @@ public class PlaceType {
 			return super.getPopulation();
 		}
 	}.initWeatherImmune();
+
+	public static final AbstractPlaceType ENFORCER_HQ_OFFICE_QUARTERMASTER = new AbstractPlaceType(
+			WorldRegion.DOMINION,
+			"Квартермейстерский офис",
+			"Ответственный за управление снаряжением энфорсеров, квартирмейстер штаба имеет свой кабинет, удобно расположенный напротив стола учёта.",
+			"dominion/enforcerHQ/office",
+			PresetColour.BASE_ORANGE,
+			EnforcerHQDialogue.OFFICE_QUARTERMASTER,
+			Darkness.ALWAYS_LIGHT,
+			null, "")
+			.initWeatherImmune();
+	
+        //Felicia's Apartment       
+        
         public static final AbstractPlaceType FELICIA_APARTMENT_ENTRYWAY = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 				"Прихожая",
@@ -1237,8 +1243,7 @@ public class PlaceType {
 			null,
 				"в прихожей квартиры [felicia.morphSingleNameGene([felicia.NamePos])]"
         ).initWeatherImmune();
-	
-        //Felicia's Apartment       
+        
         public static final AbstractPlaceType FELICIA_APARTMENT_BEDROOM = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 				"Спальня",
@@ -1250,6 +1255,7 @@ public class PlaceType {
 			null,
 				"в спальне [felicia.morphSingleNameGene([felicia.NamePos])]"
         ).initWeatherImmune();
+        
         public static final AbstractPlaceType FELICIA_APARTMENT_BATHROOM = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 				"Ванная",
@@ -1261,6 +1267,7 @@ public class PlaceType {
 			null,
 				"в ванной в квартире Фелиции"
         ).initWeatherImmune();
+        
         public static final AbstractPlaceType FELICIA_APARTMENT_KITCHEN = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 				"Кухня",
@@ -1272,16 +1279,6 @@ public class PlaceType {
 			null,
 				"на кухне в квартире [felicia.morphSingleNameGene([felicia.NamePos])]"
         ).initWeatherImmune();
-	public static final AbstractPlaceType CITY_HALL_STAIRS = new AbstractPlaceType(
-			WorldRegion.DOMINION,
-			"Лестница",
-			"Лестницы на верхние этажи ратуши обозначены как частные и оцеплены красными веревочными барьерами.",
-			"dominion/cityHall/stairs",
-			PresetColour.BASE_GREY,
-			CityHall.CITY_HALL_STAIRS,
-			Darkness.ALWAYS_LIGHT,
-			null, "в ратуше Доминиона") {
-	}.initWeatherImmune();
         
         public static final AbstractPlaceType FELICIA_APARTMENT_DINING_AREA = new AbstractPlaceType(
 			WorldRegion.DOMINION,
@@ -1554,6 +1551,18 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в ратуше Доминиона") {
 	}.initWeatherImmune();
+
+	public static final AbstractPlaceType CITY_HALL_STAIRS = new AbstractPlaceType(
+			WorldRegion.DOMINION,
+			"Лестница",
+			"Лестницы на верхние этажи ратуши обозначены как частные и оцеплены красными веревочными барьерами.",
+			"dominion/cityHall/stairs",
+			PresetColour.BASE_GREY,
+			CityHall.CITY_HALL_STAIRS,
+			Darkness.ALWAYS_LIGHT,
+			null, "в ратуше Доминиона") {
+	}.initWeatherImmune();
+	
 	public static final AbstractPlaceType CITY_HALL_BUREAU_OF_DEMOGRAPHICS = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Бюро демографии",
@@ -1564,6 +1573,7 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в ратуше Доминиона") {
 	}.initWeatherImmune();
+
 	public static final AbstractPlaceType CITY_HALL_ARCHIVES = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Бюро демографии (архивы)",
@@ -1574,6 +1584,7 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в ратуше Доминиона") {
 	}.initWeatherImmune();
+
 	public static final AbstractPlaceType CITY_HALL_BUREAU_OF_PROPERTY_RIGHTS_AND_COMMERCE = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Коридор",
@@ -1584,6 +1595,10 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в ратуше Доминиона") {
 	}.initWeatherImmune();
+
+	
+	// Home Improvements:
+	
 	public static final AbstractPlaceType HOME_IMPROVEMENTS_CORRIDOR = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Проходы",
@@ -1599,8 +1614,6 @@ public class PlaceType {
 		}
 	}.initWeatherImmune();
 
-	
-	// Home Improvements:
 	public static final AbstractPlaceType HOME_IMPROVEMENTS_ENTRANCE = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Вход",
@@ -1615,6 +1628,7 @@ public class PlaceType {
 			return HOME_IMPROVEMENTS_CORRIDOR.getPopulation();
 		}
 	}.initWeatherImmune();
+
 	public static final AbstractPlaceType HOME_IMPROVEMENTS_SHELVING_PREMIUM = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Стеллажи (премиум)",
@@ -1629,6 +1643,7 @@ public class PlaceType {
 			return Util.newArrayListOfValues(new Population(true, PopulationType.SHOPPER, PopulationDensity.FEW, Subspecies.getWorldSpecies(WorldType.DOMINION, this, true)));
 		}
 	}.initWeatherImmune();
+
 	public static final AbstractPlaceType HOME_IMPROVEMENTS_SHELVING_STANDARD = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Стеллажи (стандартные)",
@@ -1643,6 +1658,7 @@ public class PlaceType {
 			return HOME_IMPROVEMENTS_CORRIDOR.getPopulation();
 		}
 	}.initWeatherImmune();
+
 	public static final AbstractPlaceType HOME_IMPROVEMENTS_BUILDING_SUPPLIES = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Строительные материалы",
@@ -1657,6 +1673,7 @@ public class PlaceType {
 			return Util.newArrayListOfValues(new Population(true, PopulationType.SHOPPER, PopulationDensity.COUPLE, Subspecies.getWorldSpecies(WorldType.DOMINION, this, true)));
 		}
 	}.initWeatherImmune();
+
 	public static final AbstractPlaceType HOME_IMPROVEMENTS_OFFICE = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Офис управляющего",
@@ -1667,6 +1684,7 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в офисе Аргуса")
 	.initWeatherImmune();
+
 	public static final AbstractPlaceType HOME_IMPROVEMENTS_TOILETS = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Туалеты",
@@ -1677,6 +1695,10 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в туалете в «Магазине „Сделай сам“ Аргуса»")
 	.initWeatherImmune();
+
+	
+	// Dominion Express:
+	
 	public static final AbstractPlaceType DOMINION_EXPRESS_CORRIDOR = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Коридор",
@@ -1694,8 +1716,6 @@ public class PlaceType {
 		}
 	}.initWeatherImmune();
 
-	
-	// Dominion Express:
 	public static final AbstractPlaceType DOMINION_EXPRESS_EXIT = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Вход",
@@ -1713,6 +1733,7 @@ public class PlaceType {
 			return Util.newArrayListOfValues(new Population(false, PopulationType.RECEPTIONIST, PopulationDensity.ONE, Util.newHashMapOfValues(new Value<>(Subspecies.HORSE_MORPH, SubspeciesSpawnRarity.TEN))));
 		}
 	}.initWeatherImmune();
+
 	public static final AbstractPlaceType DOMINION_EXPRESS_STORAGE = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Хранилище",
@@ -1726,6 +1747,7 @@ public class PlaceType {
 			return DOMINION_EXPRESS_CORRIDOR.getPopulation();
 		}
 	}.initWeatherImmune();
+
 	public static final AbstractPlaceType DOMINION_EXPRESS_OFFICE = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Кабинет",
@@ -1740,16 +1762,18 @@ public class PlaceType {
 			return Util.newArrayListOfValues(new Population(false, PopulationType.OFFICE_WORKER, PopulationDensity.OCCASIONAL, Subspecies.getWorldSpecies(WorldType.DOMINION, this, true)));
 		}
 	}.initWeatherImmune();
+
 	public static final AbstractPlaceType DOMINION_EXPRESS_FILLY_STATION = new AbstractPlaceType(
 			WorldRegion.DOMINION,
-			"Станция вознаграждения кобылок",
-			"В небольшой нише на одной из сторон складского коридора стоит любопытный магический торговый автомат, четко обозначенный как «Станция вознаграждения кобылок».",
+			"Станция вознаграждения [pc.morphPluralGent([style.mule])]",
+			"В небольшой нише на одной из сторон складского коридора стоит любопытный магический торговый автомат, четко обозначенный как «Станция вознаграждения [pc.morphPluralGent([style.mule])]».",
 			"dominion/dominionExpress/fillyStation",
 			PresetColour.BASE_PINK_LIGHT,
 			DominionExpress.FILLY_STATION,
 			Darkness.ALWAYS_LIGHT,
 			null, "на складе «Экспресс Доминиона»")
 		.initWeatherImmune();
+	
 	public static final AbstractPlaceType DOMINION_EXPRESS_OFFICE_STABLE = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Кабинет хозяйки конюшни",
@@ -1760,6 +1784,7 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в кабинете хозяйки конюшни на складе «Экспресс Доминиона»")
 	.initWeatherImmune();
+
 	public static final AbstractPlaceType DOMINION_EXPRESS_STABLES = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Конюшни",
@@ -1774,6 +1799,11 @@ public class PlaceType {
 			return Util.newArrayListOfValues(new Population(true, PopulationType.SLAVE, PopulationDensity.NUMEROUS, Util.newHashMapOfValues(new Value<>(Subspecies.CENTAUR, SubspeciesSpawnRarity.TEN))));
 		}
 	}.initWeatherImmune();
+	
+	
+	
+	// Harpy Nests:
+	
 	public static final AbstractPlaceType HARPY_NESTS_WALKWAYS = new AbstractPlaceType(
 			WorldRegion.HARPY_NESTS,
 			"Аллея",
@@ -1796,9 +1826,6 @@ public class PlaceType {
 		}
 	}.initSexNotBlockedFromCharacterPresent();
 	
-	
-	
-	// Harpy Nests:
 	public static final AbstractPlaceType HARPY_NESTS_WALKWAYS_BRIDGE = new AbstractPlaceType(
 			WorldRegion.HARPY_NESTS,
 			"Пешеходный мост",
@@ -1816,6 +1843,7 @@ public class PlaceType {
 			return HARPY_NESTS_WALKWAYS.getPopulation();
 		}
 	}.initSexNotBlockedFromCharacterPresent();
+
 	public static final AbstractPlaceType HARPY_NESTS_ENTRANCE_ENFORCER_POST = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Пост энфорсеров",
@@ -1830,6 +1858,7 @@ public class PlaceType {
 			return Util.newArrayListOfValues(new Population(true, PopulationType.ENFORCER, PopulationDensity.NUMEROUS, Subspecies.getWorldSpecies(WorldType.DOMINION, this, true, Subspecies.HUMAN)));
 		}
 	}.initWeatherImmune();
+	
 	public static final AbstractPlaceType HARPY_NESTS_HELENAS_NEST = new AbstractPlaceType(
 			WorldRegion.HARPY_NESTS,
 			"Гнездо Елены",
@@ -1844,6 +1873,7 @@ public class PlaceType {
 			return HARPY_NESTS_WALKWAYS.getPopulation();
 		}
 	};
+	
 	public static final AbstractPlaceType HARPY_NESTS_HARPY_NEST_RED = new AbstractPlaceType(
 			WorldRegion.HARPY_NESTS,
 			"Гнездо гарпий",
@@ -1862,6 +1892,7 @@ public class PlaceType {
 			return DialogueManager.getDialogueFromId("innoxia_places_dominion_harpy_nests_dominant_exterior");
 		}
 	};
+	
 	public static final AbstractPlaceType HARPY_NESTS_HARPY_NEST_PINK = new AbstractPlaceType(
 			WorldRegion.HARPY_NESTS,
 			"Гнездо гарпий",
@@ -1880,6 +1911,7 @@ public class PlaceType {
 			return DialogueManager.getDialogueFromId("innoxia_places_dominion_harpy_nests_nympho_exterior");
 		}
 	};
+	
 	public static final AbstractPlaceType HARPY_NESTS_HARPY_NEST_YELLOW = new AbstractPlaceType(
 			WorldRegion.HARPY_NESTS,
 			"Гнездо гарпий",
@@ -1898,6 +1930,10 @@ public class PlaceType {
 			return DialogueManager.getDialogueFromId("innoxia_places_dominion_harpy_nests_bimbo_exterior");
 		}
 	};
+	
+			
+	// Lilaya's home (ground floor):
+	
 	public static final AbstractPlaceType LILAYA_HOME_CORRIDOR = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Коридор",
@@ -1911,8 +1947,6 @@ public class PlaceType {
 		).initItemsPersistInTile()
 		.initWeatherImmune();
 	
-			
-	// Lilaya's home (ground floor):
 	public static final AbstractPlaceType LILAYA_HOME_ROOM_WINDOW_GROUND_FLOOR = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Комната",
@@ -1983,6 +2017,7 @@ public class PlaceType {
 		}
 	}.initItemsPersistInTile()
 	.initWeatherImmune();
+	
 	public static final AbstractPlaceType LILAYA_HOME_ROOM_GARDEN_GROUND_FLOOR = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Комната у сада",
@@ -2018,44 +2053,6 @@ public class PlaceType {
 		@Override
 		public String getPlaceNameAppendFormat(int count) {
 			return " GG-"+String.format("%02d", count);
-		}
-	}.initItemsPersistInTile()
-	.initWeatherImmune();
-	public static final AbstractPlaceType LILAYA_HOME_ROOM_GARDEN_FIRST_FLOOR = new AbstractPlaceType(
-			WorldRegion.DOMINION,
-			"Комната у сада",
-			"Внутренние комнаты на втором этаже, включая эту, выходят окнами в частный сад.",
-			"dominion/lilayasHome/room",
-			PresetColour.BASE_GREY,
-			LilayaHomeGeneric.ROOM_GARDEN,
-			Darkness.ALWAYS_LIGHT,
-			null, "в доме Лилайи") {
-		@Override
-		protected DialogueNode getBaseDialogue(Cell cell) {
-			if(cell!=null) {
-				for(AbstractPlaceUpgrade pu : cell.getPlace().getPlaceUpgrades()) {
-					if(pu.getRoomDialogue(cell)!=null) {
-						return pu.getRoomDialogue(cell);
-					}
-				}
-			}
-			return LilayaHomeGeneric.ROOM_GARDEN;
-		}
-		@Override
-		public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
-			return Util.newArrayListOfValues(PlaceUpgrade.LILAYA_EMPTY_ROOM);
-		}
-		@Override
-		public ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
-			return LILAYA_HOME_ROOM_WINDOW_GROUND_FLOOR.getAvailablePlaceUpgrades(upgrades);
-		}
-		@Override
-		public boolean isAbleToBeUpgraded() {
-			return true;
-		}
-		@Override
-		public String getPlaceNameAppendFormat(int count) {
-			return " FG-"+String.format("%02d", count);
 		}
 	}.initItemsPersistInTile()
 	.initWeatherImmune();
@@ -2098,17 +2095,45 @@ public class PlaceType {
 		}
 	}.initItemsPersistInTile()
 	.initWeatherImmune();
-	public static final AbstractPlaceType LILAYA_HOME_STAIR_UP = new AbstractPlaceType(
+	
+	public static final AbstractPlaceType LILAYA_HOME_ROOM_GARDEN_FIRST_FLOOR = new AbstractPlaceType(
 			WorldRegion.DOMINION,
-			"Лестница",
-			"Эта лестница соединяет первый и второй этажи дома Лилайи и имеет небольшую вспомогательную площадку на полпути вверх.",
-			"dominion/lilayasHome/stairsUp",
-			PresetColour.BASE_GREEN_LIGHT,
-			LilayaHomeGeneric.STAIRCASE_UP,
+			"Комната у сада",
+			"Внутренние комнаты на втором этаже, включая эту, выходят окнами в частный сад.",
+			"dominion/lilayasHome/room",
+			PresetColour.BASE_GREY,
+			LilayaHomeGeneric.ROOM_GARDEN,
 			Darkness.ALWAYS_LIGHT,
-			null, "в доме Лилайи"
-			).initItemsPersistInTile()
-			.initWeatherImmune();
+			null, "в доме Лилайи") {
+		@Override
+		protected DialogueNode getBaseDialogue(Cell cell) {
+			if(cell!=null) {
+				for(AbstractPlaceUpgrade pu : cell.getPlace().getPlaceUpgrades()) {
+					if(pu.getRoomDialogue(cell)!=null) {
+						return pu.getRoomDialogue(cell);
+					}
+				}
+			}
+			return LilayaHomeGeneric.ROOM_GARDEN;
+		}
+		@Override
+		public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+			return Util.newArrayListOfValues(PlaceUpgrade.LILAYA_EMPTY_ROOM);
+		}
+		@Override
+		public ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+			return LILAYA_HOME_ROOM_WINDOW_GROUND_FLOOR.getAvailablePlaceUpgrades(upgrades);
+		}
+		@Override
+		public boolean isAbleToBeUpgraded() {
+			return true;
+		}
+		@Override
+		public String getPlaceNameAppendFormat(int count) {
+			return " FG-"+String.format("%02d", count);
+		}
+	}.initItemsPersistInTile()
+	.initWeatherImmune();
 	
 	public static final AbstractPlaceType LILAYA_HOME_DUNGEON_CELL = new AbstractPlaceType(
 			WorldRegion.DOMINION,
@@ -2201,6 +2226,19 @@ public class PlaceType {
 		}
 	}.initItemsPersistInTile()
 	.initWeatherImmune();
+	
+	public static final AbstractPlaceType LILAYA_HOME_STAIR_UP = new AbstractPlaceType(
+			WorldRegion.DOMINION,
+			"Лестница",
+			"Эта лестница соединяет первый и второй этажи дома Лилайи и имеет небольшую вспомогательную площадку на полпути вверх.",
+			"dominion/lilayasHome/stairsUp",
+			PresetColour.BASE_GREEN_LIGHT,
+			LilayaHomeGeneric.STAIRCASE_UP,
+			Darkness.ALWAYS_LIGHT,
+			null, "в доме Лилайи"
+			).initItemsPersistInTile()
+			.initWeatherImmune();
+	
 	public static final AbstractPlaceType LILAYA_HOME_STAIR_UP_SECONDARY = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Лестница",
@@ -2212,6 +2250,7 @@ public class PlaceType {
 			null, "в доме Лилайи"
 			).initItemsPersistInTile()
 			.initWeatherImmune();
+	
 	public static final AbstractPlaceType LILAYA_HOME_ENTRANCE_HALL = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Вестибюль",
@@ -2223,17 +2262,6 @@ public class PlaceType {
 			null, "в доме Лилайи"
 			).initItemsPersistInTile()
 			.initWeatherImmune();
-	public static final AbstractPlaceType LILAYA_HOME_GARDEN = new AbstractPlaceType(
-			WorldRegion.DOMINION,
-			"Сад",
-			"Этот частный сад со всех четырех сторон окружён стенами дома Лилайи.",
-			null,
-			PresetColour.BASE_GREEN,
-			LilayaHomeGeneric.GARDEN,
-			Darkness.DAYLIGHT,
-			null, "в саду Лилайи"
-			).initItemsPersistInTile()
-			.initMapBackgroundColour(PresetColour.MAP_BACKGROUND_GREEN);
 	
 	public static final AbstractPlaceType LILAYA_HOME_LAB = new AbstractPlaceType(
 			WorldRegion.DOMINION,
@@ -2250,6 +2278,19 @@ public class PlaceType {
 //		}
 	}.initItemsPersistInTile()
 	.initWeatherImmune();
+	
+	public static final AbstractPlaceType LILAYA_HOME_GARDEN = new AbstractPlaceType(
+			WorldRegion.DOMINION,
+			"Сад",
+			"Этот частный сад со всех четырех сторон окружён стенами дома Лилайи.",
+			null,
+			PresetColour.BASE_GREEN,
+			LilayaHomeGeneric.GARDEN,
+			Darkness.DAYLIGHT,
+			null, "в саду Лилайи"
+			).initItemsPersistInTile()
+			.initMapBackgroundColour(PresetColour.MAP_BACKGROUND_GREEN);
+	
 	public static final AbstractPlaceType LILAYA_HOME_FOUNTAIN = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Фонтан",
@@ -2262,17 +2303,6 @@ public class PlaceType {
 			).initItemsPersistInTile()
 			.initMapBackgroundColour(PresetColour.MAP_BACKGROUND_GREEN)
 			.initAquatic(Aquatic.MIXED);
-	public static final AbstractPlaceType LILAYA_HOME_STAIR_DOWN = new AbstractPlaceType(
-			WorldRegion.DOMINION,
-			"Лестница",
-			"Эта лестница соединяет второй и первый этажи дома Лилайи и имеет небольшую вспомогательную площадку на полпути вниз.",
-			"dominion/lilayasHome/stairsDown",
-			PresetColour.BASE_RED,
-			LilayaHomeGeneric.STAIRCASE_DOWN,
-			Darkness.ALWAYS_LIGHT,
-			null, "в доме Лилайи"
-			).initItemsPersistInTile()
-			.initWeatherImmune();
 
 	public static final AbstractPlaceType LILAYA_HOME_UNDER_CONSTRUCTION = new AbstractPlaceType(
 			WorldRegion.DOMINION,
@@ -2378,6 +2408,19 @@ public class PlaceType {
 				}
 			}.initItemsPersistInTile()
 			.initWeatherImmune();
+	
+	public static final AbstractPlaceType LILAYA_HOME_STAIR_DOWN = new AbstractPlaceType(
+			WorldRegion.DOMINION,
+			"Лестница",
+			"Эта лестница соединяет второй и первый этажи дома Лилайи и имеет небольшую вспомогательную площадку на полпути вниз.",
+			"dominion/lilayasHome/stairsDown",
+			PresetColour.BASE_RED,
+			LilayaHomeGeneric.STAIRCASE_DOWN,
+			Darkness.ALWAYS_LIGHT,
+			null, "в доме Лилайи"
+			).initItemsPersistInTile()
+			.initWeatherImmune();
+
 	public static final AbstractPlaceType LILAYA_HOME_STAIR_DOWN_SECONDARY = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Лестница",
@@ -2389,25 +2432,6 @@ public class PlaceType {
 			null, "в доме Лилайи"
 			).initItemsPersistInTile()
 			.initWeatherImmune();
-	public static final AbstractPlaceType ZARANIX_GF_STAIRS = new AbstractPlaceType(
-			WorldRegion.DOMINION,
-			"Лестница",
-			"Эта лестница соединяет первый и второй этажи дома Зараникса.",
-			"dominion/zaranixHome/stairsDown",
-			PresetColour.BASE_GREEN_LIGHT,
-			ZaranixHomeGroundFloor.STAIRS,
-			Darkness.ALWAYS_LIGHT,
-			null, "в доме Зараникса") {
-		@Override
-		public DialogueNode getDialogue(Cell c, boolean withRandomEncounter, boolean forceEncounter) {
-			if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_1_H_THE_GREAT_ESCAPE)) {
-				return ZaranixHomeGroundFloorRepeat.STAIRS;
-
-			} else {
-				return ZaranixHomeGroundFloor.STAIRS;
-			}
-		}
-	}.initWeatherImmune();
 	
 
 	
@@ -2433,25 +2457,26 @@ public class PlaceType {
 			}
 		}
 	}.initWeatherImmune();
-	public static final AbstractPlaceType ZARANIX_GF_GARDEN = new AbstractPlaceType(
+	
+	public static final AbstractPlaceType ZARANIX_GF_STAIRS = new AbstractPlaceType(
 			WorldRegion.DOMINION,
-			"Сад",
-			"Сад, в котором выращивают всевозможные странные и экзотические растения.",
-			"dominion/zaranixHome/garden",
-			PresetColour.BASE_GREEN,
-			ZaranixHomeGroundFloor.GARDEN,
-			Darkness.DAYLIGHT,
-			null, "в саду Зараникса") {
+			"Лестница",
+			"Эта лестница соединяет первый и второй этажи дома Зараникса.",
+			"dominion/zaranixHome/stairsDown",
+			PresetColour.BASE_GREEN_LIGHT,
+			ZaranixHomeGroundFloor.STAIRS,
+			Darkness.ALWAYS_LIGHT,
+			null, "в доме Зараникса") {
 		@Override
 		public DialogueNode getDialogue(Cell c, boolean withRandomEncounter, boolean forceEncounter) {
 			if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_1_H_THE_GREAT_ESCAPE)) {
-				return ZaranixHomeGroundFloorRepeat.GARDEN;
+				return ZaranixHomeGroundFloorRepeat.STAIRS;
 
 			} else {
-				return ZaranixHomeGroundFloor.GARDEN;
+				return ZaranixHomeGroundFloor.STAIRS;
 			}
 		}
-	};
+	}.initWeatherImmune();
 	
 	public static final AbstractPlaceType ZARANIX_GF_ENTRANCE = new AbstractPlaceType(
 			WorldRegion.DOMINION,
@@ -2563,6 +2588,27 @@ public class PlaceType {
 			}
 		}
 	}.initWeatherImmune();
+	
+	public static final AbstractPlaceType ZARANIX_GF_GARDEN = new AbstractPlaceType(
+			WorldRegion.DOMINION,
+			"Сад",
+			"Сад, в котором выращивают всевозможные странные и экзотические растения.",
+			"dominion/zaranixHome/garden",
+			PresetColour.BASE_GREEN,
+			ZaranixHomeGroundFloor.GARDEN,
+			Darkness.DAYLIGHT,
+			null, "в саду Зараникса") {
+		@Override
+		public DialogueNode getDialogue(Cell c, boolean withRandomEncounter, boolean forceEncounter) {
+			if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_1_H_THE_GREAT_ESCAPE)) {
+				return ZaranixHomeGroundFloorRepeat.GARDEN;
+
+			} else {
+				return ZaranixHomeGroundFloor.GARDEN;
+			}
+		}
+	};
+	
 	public static final AbstractPlaceType ZARANIX_GF_GARDEN_ENTRY = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Сад",
@@ -2582,25 +2628,6 @@ public class PlaceType {
 			}
 		}
 	};
-	public static final AbstractPlaceType ZARANIX_FF_STAIRS = new AbstractPlaceType(
-			WorldRegion.DOMINION,
-			"Лестница",
-			"Эта лестница соединяет второй и первый этажи дома Зараникса.",
-			"dominion/zaranixHome/stairsDown",
-			PresetColour.BASE_RED,
-			ZaranixHomeFirstFloor.STAIRS,
-			Darkness.ALWAYS_LIGHT,
-			null, "в доме Зараникса") {
-		@Override
-		public DialogueNode getDialogue(Cell c, boolean withRandomEncounter, boolean forceEncounter) {
-			if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_1_H_THE_GREAT_ESCAPE)) {
-				return ZaranixHomeFirstFloorRepeat.STAIRS;
-
-			} else {
-				return ZaranixHomeFirstFloor.STAIRS;
-			}
-		}
-	}.initWeatherImmune();
 	
 	
 	
@@ -2625,16 +2652,26 @@ public class PlaceType {
 			}
 		}
 	}.initWeatherImmune();
-	public static final AbstractPlaceType ANGELS_KISS_ENTRANCE = new AbstractPlaceType(
+	
+	public static final AbstractPlaceType ZARANIX_FF_STAIRS = new AbstractPlaceType(
 			WorldRegion.DOMINION,
-			"Прихожая",
-			"С высокого потолка свисает золотая люстра, освещающая мягким белым светом длинную стойку прихожей из красного дерева.",
-			"dominion/angelsKiss/entrance",
+			"Лестница",
+			"Эта лестница соединяет второй и первый этажи дома Зараникса.",
+			"dominion/zaranixHome/stairsDown",
 			PresetColour.BASE_RED,
-			RedLightDistrict.ANGELS_KISS_ENTRANCE,
+			ZaranixHomeFirstFloor.STAIRS,
 			Darkness.ALWAYS_LIGHT,
-			null, "в «Поцелуе ангела»"
-			).initWeatherImmune();
+			null, "в доме Зараникса") {
+		@Override
+		public DialogueNode getDialogue(Cell c, boolean withRandomEncounter, boolean forceEncounter) {
+			if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_1_H_THE_GREAT_ESCAPE)) {
+				return ZaranixHomeFirstFloorRepeat.STAIRS;
+
+			} else {
+				return ZaranixHomeFirstFloor.STAIRS;
+			}
+		}
+	}.initWeatherImmune();
 	
 	public static final AbstractPlaceType ZARANIX_FF_OFFICE = new AbstractPlaceType(
 			WorldRegion.DOMINION,
@@ -2727,6 +2764,18 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в «Поцелуе Ангела»"
 			).initWeatherImmune();
+	
+	public static final AbstractPlaceType ANGELS_KISS_ENTRANCE = new AbstractPlaceType(
+			WorldRegion.DOMINION,
+			"Прихожая",
+			"С высокого потолка свисает золотая люстра, освещающая мягким белым светом длинную стойку прихожей из красного дерева.",
+			"dominion/angelsKiss/entrance",
+			PresetColour.BASE_RED,
+			RedLightDistrict.ANGELS_KISS_ENTRANCE,
+			Darkness.ALWAYS_LIGHT,
+			null, "в «Поцелуе ангела»"
+			).initWeatherImmune();
+	
 	public static final AbstractPlaceType ANGELS_KISS_STAIRCASE_UP = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Лестница",
@@ -2737,6 +2786,7 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в «Поцелуе Ангела»"
 		).initWeatherImmune();
+	
 	public static final AbstractPlaceType ANGELS_KISS_STAIRCASE_DOWN = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Лестница",
@@ -2747,6 +2797,7 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в «Поцелуе Ангела»"
 			).initWeatherImmune();
+	
 	public static final AbstractPlaceType ANGELS_KISS_BEDROOM = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Спальня",
@@ -2757,6 +2808,7 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в «Поцелуе Ангела»"
 			).initWeatherImmune();
+	
 	public static final AbstractPlaceType ANGELS_KISS_BEDROOM_BUNNY = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Спальня Банни",
@@ -2767,6 +2819,7 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в спальне Банни"
 			).initWeatherImmune();
+	
 	public static final AbstractPlaceType ANGELS_KISS_BEDROOM_LOPPY = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Спальня Лоппи",
@@ -2777,6 +2830,7 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в спальне Лоппи"
 			).initWeatherImmune();
+	
 	public static final AbstractPlaceType ANGELS_KISS_OFFICE = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Офис Ангела",
@@ -2787,6 +2841,12 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в кабинете Ангела"
 			).initWeatherImmune();
+	
+	
+	
+	
+	// Shopping arcade:
+	
 	public static final AbstractPlaceType SHOPPING_ARCADE_PATH = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Галерея",
@@ -2808,11 +2868,7 @@ public class PlaceType {
 			return pop;
 		}
 	}.initWeatherImmune();
-	
-	
-	
-	
-	// Shopping arcade:
+
 	public static final AbstractPlaceType SHOPPING_ARCADE_GENERIC_SHOP = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Магазин",
@@ -2831,6 +2887,7 @@ public class PlaceType {
 			}
 		}
 	}.initWeatherImmune();
+	
 	public static final AbstractPlaceType SHOPPING_ARCADE_RALPHS_SHOP = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Закуски Ральфа",
@@ -2841,6 +2898,7 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в его магазине"
 			).initWeatherImmune();
+	
 	public static final AbstractPlaceType SHOPPING_ARCADE_NYANS_SHOP = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Магазин одежды Ньян",
@@ -2860,6 +2918,7 @@ public class PlaceType {
 			}
 		}
 	}.initWeatherImmune();
+	
 	public static final AbstractPlaceType SHOPPING_ARCADE_VICKYS_SHOP = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Магические искусства",
@@ -2870,6 +2929,7 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в её магазине"
 			).initWeatherImmune();
+
 	public static final AbstractPlaceType SHOPPING_ARCADE_KATES_SHOP = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Секреты суккубов",
@@ -2880,6 +2940,7 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в её салоне красоты"
 			).initWeatherImmune();
+
 	public static final AbstractPlaceType SHOPPING_ARCADE_ASHLEYS_SHOP = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Возлюбленная мечта",
@@ -2890,6 +2951,7 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в его магазине"
 			).initWeatherImmune();
+
 	public static final AbstractPlaceType SHOPPING_ARCADE_ANTIQUES = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Антиквариат",
@@ -2900,6 +2962,7 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в антикварном магазине"
 			).initWeatherImmune();
+	
 	public static final AbstractPlaceType SHOPPING_ARCADE_RESTAURANT = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Дубовая поляна",
@@ -2918,6 +2981,7 @@ public class PlaceType {
 			}
 		}
 	}.initWeatherImmune();
+	
 	public static final AbstractPlaceType SHOPPING_ARCADE_PIXS_GYM = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Игровая площадка Пикс",
@@ -2928,6 +2992,7 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в спортзале, «Игровая площадка Пикс»"
 			).initWeatherImmune();
+
 	public static final AbstractPlaceType SHOPPING_ARCADE_ENTRANCE = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Выход",
@@ -2938,6 +3003,7 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "в Торговой галерее"
 			).initWeatherImmune();
+
 	public static final AbstractPlaceType SHOPPING_ARCADE_TOILETS = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Туалеты",
@@ -2956,6 +3022,11 @@ public class PlaceType {
 			}
 		}
 	}.initWeatherImmune();
+	
+	
+	
+	// Supplier Depot:
+	
 	public static final AbstractPlaceType TEXTILE_WAREHOUSE_CORRIDOR = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Коридор",
@@ -2976,9 +3047,6 @@ public class PlaceType {
 		}
 	}.initWeatherImmune();
 	
-	
-	
-	// Supplier Depot:
 	public static final AbstractPlaceType TEXTILE_WAREHOUSE_ENTRANCE = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Приёмная",
@@ -3002,6 +3070,7 @@ public class PlaceType {
 			}
 		}
 	}.initWeatherImmune();
+	
 	public static final AbstractPlaceType TEXTILE_WAREHOUSE_STORAGE_ROOM = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Кладовая",
@@ -3033,6 +3102,7 @@ public class PlaceType {
 		}
 	}.initItemsPersistInTile()
 	.initWeatherImmune();
+	
 	public static final AbstractPlaceType TEXTILE_WAREHOUSE_ENCHANTING = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Ткацкие станки",
@@ -3058,16 +3128,7 @@ public class PlaceType {
 									new Value<>(Subspecies.HUMAN, SubspeciesSpawnRarity.TEN))));
 		}
 	}.initWeatherImmune();
-	public static final AbstractPlaceType TEXTILE_WAREHOUSE_OFFICE = new AbstractPlaceType(
-			WorldRegion.DOMINION,
-			"Офис Кея",
-			"Кабинет Кея, в который можно попасть через станцию надзирателя, довольно мал, но очень элегантно обставлен.",
-			"dominion/textilesWarehouse/office",
-			PresetColour.BASE_BLUE_LIGHT,
-			KaysWarehouse.OFFICE,
-			Darkness.ALWAYS_LIGHT,
-			null,
-			"в «Текстиле Кея»").initWeatherImmune();
+	
 	public static final AbstractPlaceType TEXTILE_WAREHOUSE_OVERSEER_STATION = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Станция надзирателей",
@@ -3100,6 +3161,22 @@ public class PlaceType {
 			}
 		}
 	}.initWeatherImmune();
+	
+	public static final AbstractPlaceType TEXTILE_WAREHOUSE_OFFICE = new AbstractPlaceType(
+			WorldRegion.DOMINION,
+			"Офис Кея",
+			"Кабинет Кея, в который можно попасть через станцию надзирателя, довольно мал, но очень элегантно обставлен.",
+			"dominion/textilesWarehouse/office",
+			PresetColour.BASE_BLUE_LIGHT,
+			KaysWarehouse.OFFICE,
+			Darkness.ALWAYS_LIGHT,
+			null,
+			"в «Текстиле Кея»").initWeatherImmune();
+	
+	
+	
+	// Slaver Alley:
+	
 	public static final AbstractPlaceType SLAVER_ALLEY_PATH = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Переулок",
@@ -3121,10 +3198,7 @@ public class PlaceType {
 			return pop;
 		}
 	}.initWeatherImmune(Weather.MAGIC_STORM);
-	
-	
-	
-	// Slaver Alley:
+
 	public static final AbstractPlaceType SLAVER_ALLEY_STALL_FEMALES = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Женское прикосновение",
@@ -3139,6 +3213,7 @@ public class PlaceType {
 			return SLAVER_ALLEY_PATH.getPopulation();
 		}
 	}.initWeatherImmune(Weather.MAGIC_STORM);
+
 	public static final AbstractPlaceType SLAVER_ALLEY_STALL_MALES = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Железо и сталь",
@@ -3153,6 +3228,7 @@ public class PlaceType {
 			return SLAVER_ALLEY_PATH.getPopulation();
 		}
 	}.initWeatherImmune(Weather.MAGIC_STORM);
+
 	public static final AbstractPlaceType SLAVER_ALLEY_STALL_ANAL = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Задний вход",
@@ -3167,6 +3243,7 @@ public class PlaceType {
 			return SLAVER_ALLEY_PATH.getPopulation();
 		}
 	}.initWeatherImmune(Weather.MAGIC_STORM);
+
 	public static final AbstractPlaceType SLAVER_ALLEY_STALL_VAGINAL = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Белые лилии",
@@ -3181,6 +3258,7 @@ public class PlaceType {
 			return SLAVER_ALLEY_PATH.getPopulation();
 		}
 	}.initWeatherImmune(Weather.MAGIC_STORM);
+
 	public static final AbstractPlaceType SLAVER_ALLEY_STALL_ORAL = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Вива Воче",
@@ -3195,6 +3273,7 @@ public class PlaceType {
 			return SLAVER_ALLEY_PATH.getPopulation();
 		}
 	}.initWeatherImmune(Weather.MAGIC_STORM);
+
 	public static final AbstractPlaceType SLAVER_ALLEY_STATUE = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Статуя падшего ангела",
@@ -3209,6 +3288,7 @@ public class PlaceType {
 			return SLAVER_ALLEY_PATH.getPopulation();
 		}
 	}.initWeatherImmune(Weather.MAGIC_STORM);
+
 	public static final AbstractPlaceType SLAVER_ALLEY_MARKET_STALL_EXCLUSIVE = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Магазин аренды рабов",
@@ -3223,6 +3303,7 @@ public class PlaceType {
 			return SLAVER_ALLEY_PATH.getPopulation();
 		}
 	}.initWeatherImmune(Weather.MAGIC_STORM);
+
 	public static final AbstractPlaceType SLAVER_ALLEY_MARKET_STALL_BULK = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Биржа Дзайбацу",
@@ -3237,6 +3318,7 @@ public class PlaceType {
 			return SLAVER_ALLEY_PATH.getPopulation();
 		}
 	}.initWeatherImmune(Weather.MAGIC_STORM);
+	
 	public static final AbstractPlaceType SLAVER_ALLEY_CAFE = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Кафе",
@@ -3257,6 +3339,7 @@ public class PlaceType {
 			return pop;
 		}
 	}.initWeatherImmune(Weather.MAGIC_STORM);
+	
 	public static final AbstractPlaceType SLAVER_ALLEY_CAFE_2 = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Кафе",
@@ -3277,6 +3360,8 @@ public class PlaceType {
 			return pop;
 		}
 	}.initWeatherImmune(Weather.MAGIC_STORM);
+
+	
 	public static final AbstractPlaceType SLAVER_ALLEY_CAFE_3 = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Кафе",
@@ -3297,6 +3382,8 @@ public class PlaceType {
 			return pop;
 		}
 	}.initWeatherImmune(Weather.MAGIC_STORM);
+
+	
 	public static final AbstractPlaceType SLAVER_ALLEY_CAFE_4 = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Кафе",
@@ -3317,6 +3404,7 @@ public class PlaceType {
 			return pop;
 		}
 	}.initWeatherImmune(Weather.MAGIC_STORM);
+	
 	public static final AbstractPlaceType SLAVER_ALLEY_AUCTIONING_BLOCK = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Аукционная площадка",
@@ -3331,6 +3419,22 @@ public class PlaceType {
 			return Util.newArrayListOfValues(new Population(false, PopulationType.CROWD, PopulationDensity.DENSE, Subspecies.getWorldSpecies(WorldType.DOMINION, this, true)));
 		}
 	}.initWeatherImmune(Weather.MAGIC_STORM);
+
+public static final AbstractPlaceType SLAVER_ALLEY_PUBLIC_STOCKS = new AbstractPlaceType(
+			WorldRegion.DOMINION,
+			"Общественные товары",
+			"Непосредственно перед входом на Аллею работорговцев установлен ряд колодок для общественного пользования, которые служат напоминанием о том, что происходит с непокорными рабами.",
+			"dominion/slaverAlley/stocks",
+			PresetColour.BASE_TAN,
+			SlaverAlleyDialogue.PUBLIC_STOCKS,
+			Darkness.ALWAYS_LIGHT,
+			null, "в колодках на Аллее работорговцев") {
+		@Override
+		public List<Population> getPopulation() {
+			return Util.newArrayListOfValues(new Population(false, PopulationType.CROWD, PopulationDensity.SPARSE, Subspecies.getWorldSpecies(WorldType.DOMINION, this, true)));
+		}
+	}.initWeatherImmune(Weather.MAGIC_STORM);
+	
 	public static final AbstractPlaceType SLAVER_ALLEY_BOUNTY_HUNTERS = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"«Ржавый ошейник»",
@@ -3346,21 +3450,7 @@ public class PlaceType {
 			return Util.newArrayListOfValues(new Population(true, PopulationType.PERSON, PopulationDensity.NUMEROUS, Subspecies.getWorldSpecies(WorldType.DOMINION, this, true)));
 		}
 	}.initWeatherImmune(Weather.MAGIC_STORM);
-
-	public static final AbstractPlaceType SLAVER_ALLEY_PUBLIC_STOCKS = new AbstractPlaceType(
-			WorldRegion.DOMINION,
-			"Общественные товары",
-			"Непосредственно перед входом на Аллею работорговцев установлен ряд колодок для общественного пользования, которые служат напоминанием о том, что происходит с непокорными рабами.",
-			"dominion/slaverAlley/stocks",
-			PresetColour.BASE_TAN,
-			SlaverAlleyDialogue.PUBLIC_STOCKS,
-			Darkness.ALWAYS_LIGHT,
-			null, "в колодках на Аллее работорговцев") {
-		@Override
-		public List<Population> getPopulation() {
-			return Util.newArrayListOfValues(new Population(false, PopulationType.CROWD, PopulationDensity.SPARSE, Subspecies.getWorldSpecies(WorldType.DOMINION, this, true)));
-		}
-	}.initWeatherImmune(Weather.MAGIC_STORM);
+	
 	public static final AbstractPlaceType SLAVER_ALLEY_SLAVERY_ADMINISTRATION = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Управление рабовладением",
@@ -3446,10 +3536,10 @@ public class PlaceType {
 			if(Main.game.isStarted()) {
 				if(Main.game.getPlayer().isQuestFailed(QuestLine.ROMANCE_HELENA)) {
 					return "Заброшенный магазин";
-					
+
 				} else if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.ROMANCE_HELENA, Quest.ROMANCE_HELENA_3_C_EXTERIOR_DECORATOR)) {
 					return "Бутик Елены";
-					
+
 				} else if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.ROMANCE_HELENA, Quest.ROMANCE_HELENA_3_A_EXTERIOR_DECORATOR)) {
 					return "Безымянный магазин";
 				}
@@ -3460,7 +3550,7 @@ public class PlaceType {
 		public DialogueNode getDialogue(Cell c, boolean withRandomEncounter, boolean forceEncounter) {
 			if(Main.game.getPlayer().isQuestProgressLessThan(QuestLine.MAIN, Quest.MAIN_1_F_SCARLETTS_FATE)) { // Scarlett owns the shop:
 				return ScarlettsShop.SCARLETTS_SHOP_EXTERIOR;
-				
+
 			} else { // Helena owns the shop:
 				return ScarlettsShop.HELENAS_SHOP_EXTERIOR;
 			}
@@ -3469,10 +3559,10 @@ public class PlaceType {
 		public String getTooltipDescription() {
 			if(Main.game.getPlayer().isQuestFailed(QuestLine.ROMANCE_HELENA)) {
 				return "Этот магазин рабов был заброшен Еленой после того, как ты [pc.genderBasedWord(отказался, отказалась)] продать ей Скарлетт...";
-				
+
 			} else if(Main.game.getPlayer().isQuestProgressLessThan(QuestLine.MAIN, Quest.MAIN_1_F_SCARLETTS_FATE)) {
 				return "Магазин рабов, которым управляет гарпия Скарлетт. В отличие от всех остальных магазинов на Аллее работорговцев, в её магазине нет абсолютно никаких рабов на продажу...";
-				
+
 			} else {
 				return "Матриарх Скарлетт, Елена, взяла на себя управление этим рабовладельческим магазином.";
 			}
@@ -3527,7 +3617,7 @@ public class PlaceType {
 			"в «Ржавом ошейнике»")
 		.initWeatherImmune(Weather.MAGIC_STORM);
 	
-	
+
 	// Bounty hunter lodge:
 	public static final AbstractPlaceType BOUNTY_HUNTER_LODGE_FLOOR = new AbstractPlaceType(
 			WorldRegion.DOMINION,
@@ -3635,7 +3725,7 @@ public class PlaceType {
 			return true;
 		}
 	}.initWeatherImmune(Weather.MAGIC_STORM);
-	
+
 	// First floor:
 	public static final AbstractPlaceType BOUNTY_HUNTER_LODGE_UPSTAIRS_STAIRS = new AbstractPlaceType(
 			WorldRegion.DOMINION,
@@ -3842,7 +3932,7 @@ public class PlaceType {
 			}
 		}.initWeatherImmune();
 	
-	
+
 	// Helena's apartment:
 	public static final AbstractPlaceType HELENA_APARTMENT_BALCONY = new AbstractPlaceType(
 			WorldRegion.DOMINION,
@@ -3980,7 +4070,7 @@ public class PlaceType {
 			"в коридоре квартиры Ньян"
 		).initWeatherImmune();
 	
-	
+
 
 	// Helena's apartment:
 	public static final AbstractPlaceType NYAN_APARTMENT_BATHROOM = new AbstractPlaceType(
@@ -4086,9 +4176,9 @@ public class PlaceType {
 	}.initWeatherImmune();
 	
 
-	
-	
-	
+
+
+
 	// Submission:
 	public static final AbstractPlaceType SUBMISSION_WALKWAYS = new AbstractPlaceType(
 			WorldRegion.SUBMISSION,
@@ -4603,10 +4693,10 @@ public class PlaceType {
 			return LYSSIETH_PALACE_CORRIDOR.getPopulation();
 		}
 	}.initWeatherImmune();
-	
-	
-	
-	
+
+
+
+
 	// Lyssieth's palace:
 	public static final AbstractPlaceType LYSSIETH_PALACE_WINDOWS = new AbstractPlaceType(
 			WorldRegion.SUBMISSION,
@@ -4738,8 +4828,8 @@ public class PlaceType {
 			null, "в пещерах летучих мышей"
 			).initWeatherImmune();
 	
-	
-	
+
+
 	// Bat caverns:
 	public static final AbstractPlaceType BAT_CAVERN_DARK = new AbstractPlaceType(
 			WorldRegion.SUBMISSION,
@@ -4818,7 +4908,7 @@ public class PlaceType {
 			null,
 			"в пещерах летучих мышей"
 			).initWeatherImmune();
-	
+
 	public static final AbstractPlaceType BAT_CAVERN_SLIME_QUEEN_LAIR = new AbstractPlaceType(
 			WorldRegion.SUBMISSION,
 			"Озеро слизи",
@@ -4844,9 +4934,9 @@ public class PlaceType {
 			   "в пещерах летучих мышей"
 			).initDangerous()
 			.initWeatherImmune();
-	
+
 	// HLF Quest places:
-	
+
 	public static final AbstractPlaceType BAT_CAVERNS_REBEL_BASE_ENTRANCE_EXTERIOR = new AbstractPlaceType(
 			WorldRegion.SUBMISSION,
 			"Вход в скрытую пещеру",
@@ -4983,10 +5073,10 @@ public class PlaceType {
 			).initWeatherImmune();
 	
 
+
 	
 	
-	
-	
+
 	// Gambling Den:
 	
 

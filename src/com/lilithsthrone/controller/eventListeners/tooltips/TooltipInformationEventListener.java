@@ -910,8 +910,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 					}
 
 					Main.mainController.setTooltipSize(dimensions[0], dimensions[1]);
-					
-					boolean showWinged = (owner.hasWings() || owner.isArmWings()) && !owner.getFleshSubspecies().isWinged();
+
 					tooltipSB.setLength(0);
 					tooltipSB.append("<div class='title' style='color:" + owner.getRace().getColour().toWebHexString() + ";'>"
 							+(owner.getRaceStage().getName()!=""
@@ -919,8 +918,8 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 								:"")
 							+ "<b style='color:"+owner.getSubspecies().getColour(owner).toWebHexString()+";'>"
 								+ (owner.isFeminine()
-							? Util.capitaliseSentence((showWinged ? "крылатая " : "") + owner.getSubspecies().getSingularFemaleName(owner.getBody()))
-							: Util.capitaliseSentence((showWinged ? "крылатый " : "") + owner.getSubspecies().getSingularMaleName(owner.getBody())))
+							? Util.capitaliseSentence((owner.isPrependWingedToRaceName() ? "крылатая " : "") + owner.getSubspecies().getSingularFemaleName(owner.getBody()))
+							: Util.capitaliseSentence((owner.isPrependWingedToRaceName() ? "крылатый " : "") + owner.getSubspecies().getSingularMaleName(owner.getBody())))
 							+ "</b>"
 							+ "</div>");
 					

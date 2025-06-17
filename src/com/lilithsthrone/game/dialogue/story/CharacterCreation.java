@@ -9,6 +9,7 @@ import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.valueEnums.*;
 import com.lilithsthrone.game.character.effects.Perk;
+import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.markings.TattooCounterType;
@@ -61,7 +62,9 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @since 0.1.0
@@ -100,29 +103,13 @@ public class CharacterCreation {
 		return SpellSchool.FIRE;
 	}
 
-	public static final DialogueNode INTRO_2_FROM_IMPORT = new DialogueNode("В музее", "", true) {
-
-		@Override
-		public int getSecondsPassed() {
-			return 60*10;
-		}
-
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("misc/prologue", "INTRO_2");
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return PrologueDialogue.INTRO_2.getResponse(responseTab, index);
-		}
-	};	public static final DialogueNode CHARACTER_CREATION_START = new DialogueNode("Отказ от ответственности", "", true) {
+	public static final DialogueNode CHARACTER_CREATION_START = new DialogueNode("Отказ от ответственности", "", true) {
 
 		@Override
 		public String getContent() {
 			return Main.disclaimer;
 		}
-
+		
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
@@ -132,123 +119,9 @@ public class CharacterCreation {
 			}
 		}
 	};
-	public static final DialogueNode START_GAME_WITH_IMPORT = new DialogueNode("Начать игру", "", true) {
 
-		@Override
-		public String getLabel() {
-			return "Импортированные персонажи";
-		}
-
-		@Override
-		public String getContent() {
-			return "<p>"
-						+ "<b>TODO:</b> Я включу возможность полного создания персонажа с импортированными персонажами в какой-то момент!"
-					+ "</p>"
-					+ "<br/>"
-					+"<details>"
-						+ "<summary class='quest-title' style='color:" + QuestType.MAIN.getColour().toWebHexString() + ";'>Импортировать лог</summary>"
-						+ Main.game.getCharacterUtils().getCharacterImportLog()
-					+ "</details>"
-					+ "<div class='container-full-width'>"
-						+ "<h5 style='text-align:center;'>Внешность</h5>"
-						+ Main.game.getPlayer().getBodyDescription()
-					+ "</div>";
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Начать", "Используйте этого персонажа и начните игру с самого начала.", INTRO_2_FROM_IMPORT){
-					@Override
-					public void effects() {
-						if(resetImportedCharacter){
-							resetPlayerCharacter();
-						}
-						Main.game.getPlayer().resetAllQuests();
-						Main.game.getPlayer().getCharactersEncountered().clear();
-						Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().startQuest(QuestLine.MAIN));
-						applyGameStart();
-					}
-				};
-
-			} else if (index == 2) {
-				return new ResponseEffectsOnly("Пропустить пролог", "Начните игру и пропустите пролог.<br/><br/><i style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Не рекомендуется для тех, кто играет впервые!</i>"){
-					@Override
-					public void effects() {
-						Main.game.setRenderMap(true);
-						if(resetImportedCharacter){
-							resetPlayerCharacter();
-						}
-						Main.game.getPlayer().incrementMoney(5000);
-
-						Main.game.getPlayer().resetAllQuests();
-						Main.game.getPlayer().getCharactersEncountered().clear();
-						Main.game.getTextStartStringBuilder().append(Main.game.getPlayer().startQuest(QuestLine.MAIN));
-						Main.game.getTextStartStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.MAIN, Quest.MAIN_1_A_LILAYAS_TESTS));
-
-						DamageType damageType = DamageType.FIRE;
-						switch(CharacterCreation.getStartingDemonstoneSpellSchool()) {
-							case AIR:
-								damageType = DamageType.POISON;
-								break;
-							case EARTH:
-								damageType = DamageType.PHYSICAL;
-								break;
-							case ARCANE:
-							case FIRE:
-								damageType = DamageType.FIRE;
-								break;
-							case WATER:
-								damageType = DamageType.ICE;
-								break;
-						}
-						if(Main.game.getPlayer().getMainWeapon(0)==null) {
-							Main.game.getPlayer().equipMainWeaponFromNowhere(Main.game.getItemGen().generateWeapon("innoxia_crystal_rare", damageType));
-						} else {
-							Main.game.getPlayer().addWeapon(Main.game.getItemGen().generateWeapon("innoxia_crystal_rare", damageType), false);
-						}
-
-						AbstractItem spellBook = Main.game.getItemGen().generateItem(ItemType.getSpellBookType(Spell.FIREBALL));
-						if(Main.game.getPlayer().getBirthMonth().getValue() % 4 == 1) {
-							spellBook = Main.game.getItemGen().generateItem(ItemType.getSpellBookType(Spell.SLAM));
-						} else if(Main.game.getPlayer().getBirthMonth().getValue() % 4 == 2) {
-							spellBook = Main.game.getItemGen().generateItem(ItemType.getSpellBookType(Spell.POISON_VAPOURS));
-						} else if(Main.game.getPlayer().getBirthMonth().getValue()  % 4 == 3) {
-							spellBook = Main.game.getItemGen().generateItem(ItemType.getSpellBookType(Spell.ICE_SHARD));
-						}
-						Main.game.getWorlds().get(WorldType.LILAYAS_HOUSE_FIRST_FLOOR).getCell(PlaceType.LILAYA_HOME_ROOM_PLAYER).getInventory().addItem(spellBook);
-
-						applyGameStart();
-						applySkipPrologueStart(true);
-						Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_PLAYER);
-						Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
-					}
-				};
-
-			} else if (index == 5) {
-				return new ResponseEffectsOnly(resetImportedCharacter
-						?"Сброс персонажа: <span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Вкл</span>"
-						:"Сброс персонажа: <span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Выкл</span>",
-						"Сбросьте опыт и деньги до 0, очищает весь инвентарь, кроме экипированной одежды и оружия. " +
-								"Заклинания и перки заклинаний также удалены."){
-					@Override
-					public void effects(){
-						resetImportedCharacter = !resetImportedCharacter;
-					}
-				};
-
-
-			}
-			// Throws error when going back and then resuming
-//			else if (index == 0) {
-//				return new Response("Back", "Return to new game screen.", OptionsDialogue.MENU);
-//			}
-			else {
-				return null;
-			}
-		}
-	};	public static final DialogueNode ALPHA_MESSAGE = new DialogueNode("", "", true) {
-
+	public static final DialogueNode ALPHA_MESSAGE = new DialogueNode("", "", true) {
+		
 		@Override
 		public String getLabel() {
 			return "Version " + Main.VERSION_NUMBER + " | <b style='color:" + PresetColour.BASE_YELLOW_LIGHT.toWebHexString() + ";'>"+Main.VERSION_DESCRIPTION+"</b>";
@@ -406,89 +279,74 @@ public class CharacterCreation {
 			colour1 = PresetColour.CLOTHING_SILVER;
 			colour2 = PresetColour.CLOTHING_SILVER;
 		}
-
-		for(InventorySlot slot : InventorySlot.getPiercingSlots()) {
-			if(Main.game.getPlayer().getClothingInSlot(slot)!=null){
-				Main.game.getPlayer().unequipClothingIntoVoid(Main.game.getPlayer().getClothingInSlot(slot), true, Main.game.getPlayer());
-			}
-		}
-
+		
+		Map<InventorySlot, AbstractClothing> pendingPiercings = new HashMap<>();
+		
 		// Ear piercings:
 		if(Main.game.getPlayer().isPiercedEar()) {
 			if(Main.game.getPlayer().getFemininity()==Femininity.FEMININE_STRONG) {
-				Main.game.getPlayer().equipClothingFromGround(Main.game.getItemGen().generateClothing("innoxia_piercing_ear_chain_dangle", colour1, false), true, Main.game.getPlayer());
+				pendingPiercings.put(InventorySlot.PIERCING_EAR, Main.game.getItemGen().generateClothing("innoxia_piercing_ear_chain_dangle", colour1, false));
 			} else if(Main.game.getPlayer().getFemininity()==Femininity.FEMININE) {
-				Main.game.getPlayer().equipClothingFromGround(Main.game.getItemGen().generateClothing("innoxia_piercing_ear_ring", colour1, false), true, Main.game.getPlayer());
+				pendingPiercings.put(InventorySlot.PIERCING_EAR, Main.game.getItemGen().generateClothing("innoxia_piercing_ear_ring", colour1, false));
 			} else {
-				Main.game.getPlayer().equipClothingFromGround(Main.game.getItemGen().generateClothing("innoxia_piercing_ear_ball_studs", colour1, false), true, Main.game.getPlayer());
+				pendingPiercings.put(InventorySlot.PIERCING_EAR, Main.game.getItemGen().generateClothing("innoxia_piercing_ear_ball_studs", colour1, false));
 			}
-
-		} else if(Main.game.getPlayer().getClothingInSlot(InventorySlot.PIERCING_EAR)!=null){
-			Main.game.getPlayer().unequipClothingIntoVoid(Main.game.getPlayer().getClothingInSlot(InventorySlot.PIERCING_EAR), true, Main.game.getPlayer());
 		}
 
 		// Lip piercings:
 		if(Main.game.getPlayer().isPiercedLip()) {
-			Main.game.getPlayer().equipClothingFromGround(Main.game.getItemGen().generateClothing("innoxia_piercing_lip_double_ring", colour1, false), true, Main.game.getPlayer());
-
-		} else if(Main.game.getPlayer().getClothingInSlot(InventorySlot.PIERCING_LIP)!=null){
-			Main.game.getPlayer().unequipClothingIntoVoid(Main.game.getPlayer().getClothingInSlot(InventorySlot.PIERCING_LIP), true, Main.game.getPlayer());
+			pendingPiercings.put(InventorySlot.PIERCING_LIP, Main.game.getItemGen().generateClothing("innoxia_piercing_lip_double_ring", colour1, false));
 		}
 
 		// Navel piercings:
 		if(Main.game.getPlayer().isPiercedNavel()) {
 			if(Main.game.getPlayer().isFeminine()) {
-				Main.game.getPlayer().equipClothingFromGround(Main.game.getItemGen().generateClothing("innoxia_piercing_gemstone_barbell", colour2, false), InventorySlot.PIERCING_STOMACH, true, Main.game.getPlayer());
+				pendingPiercings.put(InventorySlot.PIERCING_STOMACH, Main.game.getItemGen().generateClothing("innoxia_piercing_gemstone_barbell", colour2, false));
 			} else {
-				Main.game.getPlayer().equipClothingFromGround(Main.game.getItemGen().generateClothing("innoxia_piercing_ringed_barbell", colour2, false), InventorySlot.PIERCING_STOMACH, true, Main.game.getPlayer());
+				pendingPiercings.put(InventorySlot.PIERCING_STOMACH, Main.game.getItemGen().generateClothing("innoxia_piercing_ringed_barbell", colour2, false));
 			}
-
-		} else if(Main.game.getPlayer().getClothingInSlot(InventorySlot.PIERCING_STOMACH)!=null){
-			Main.game.getPlayer().unequipClothingIntoVoid(Main.game.getPlayer().getClothingInSlot(InventorySlot.PIERCING_STOMACH), true, Main.game.getPlayer());
 		}
 
 		// Nipples piercings:
 		if(Main.game.getPlayer().isPiercedNipple()) {
-			Main.game.getPlayer().equipClothingFromGround(Main.game.getItemGen().generateClothing("innoxia_piercing_basic_barbell_pair", colour2, false), InventorySlot.PIERCING_NIPPLE, true, Main.game.getPlayer());
-
-		} else if(Main.game.getPlayer().getClothingInSlot(InventorySlot.PIERCING_NIPPLE)!=null){
-			Main.game.getPlayer().unequipClothingIntoVoid(Main.game.getPlayer().getClothingInSlot(InventorySlot.PIERCING_NIPPLE), true, Main.game.getPlayer());
+			pendingPiercings.put(InventorySlot.PIERCING_NIPPLE, Main.game.getItemGen().generateClothing("innoxia_piercing_basic_barbell_pair", colour2, false));
 		}
 
 		// Nose piercings:
 		if(Main.game.getPlayer().isPiercedNose()) {
 			if(Main.game.getPlayer().isFeminine()) {
-				Main.game.getPlayer().equipClothingFromGround(Main.game.getItemGen().generateClothing("innoxia_piercing_nose_ring", colour1, false), true, Main.game.getPlayer());
+				pendingPiercings.put(InventorySlot.PIERCING_NOSE, Main.game.getItemGen().generateClothing("innoxia_piercing_nose_ring", colour1, false));
 			} else {
-				Main.game.getPlayer().equipClothingFromGround(Main.game.getItemGen().generateClothing("innoxia_piercing_nose_ball_stud", colour1, false), true, Main.game.getPlayer());
+				pendingPiercings.put(InventorySlot.PIERCING_NOSE, Main.game.getItemGen().generateClothing("innoxia_piercing_nose_ball_stud", colour1, false));
 			}
-
-		} else if(Main.game.getPlayer().getClothingInSlot(InventorySlot.PIERCING_NOSE)!=null){
-			Main.game.getPlayer().unequipClothingIntoVoid(Main.game.getPlayer().getClothingInSlot(InventorySlot.PIERCING_NOSE), true, Main.game.getPlayer());
 		}
 
 		// Penis piercings:
 		if(Main.game.getPlayer().hasPenis() && Main.game.getPlayer().isPiercedPenis()) {
-			Main.game.getPlayer().equipClothingFromGround(Main.game.getItemGen().generateClothing("innoxia_piercing_penis_ring", colour2, false), true, Main.game.getPlayer());
-
-		} else if(Main.game.getPlayer().getClothingInSlot(InventorySlot.PIERCING_PENIS)!=null){
-			Main.game.getPlayer().unequipClothingIntoVoid(Main.game.getPlayer().getClothingInSlot(InventorySlot.PIERCING_PENIS), true, Main.game.getPlayer());
+			pendingPiercings.put(InventorySlot.PIERCING_PENIS, Main.game.getItemGen().generateClothing("innoxia_piercing_penis_ring", colour2, false));
 		}
 
 		// Tongue piercings:
 		if(Main.game.getPlayer().isPiercedTongue()) {
-			Main.game.getPlayer().equipClothingFromGround(Main.game.getItemGen().generateClothing("innoxia_piercing_basic_barbell", colour1, false), InventorySlot.PIERCING_TONGUE, true, Main.game.getPlayer());
-
-		} else if(Main.game.getPlayer().getClothingInSlot(InventorySlot.PIERCING_TONGUE)!=null){
-			Main.game.getPlayer().unequipClothingIntoVoid(Main.game.getPlayer().getClothingInSlot(InventorySlot.PIERCING_TONGUE), true, Main.game.getPlayer());
+			pendingPiercings.put(InventorySlot.PIERCING_TONGUE, Main.game.getItemGen().generateClothing("innoxia_piercing_basic_barbell", colour1, false));
 		}
 
 		// Vagina piercings:
 		if(Main.game.getPlayer().hasVagina() && Main.game.getPlayer().isPiercedVagina()) {
-			Main.game.getPlayer().equipClothingFromGround(Main.game.getItemGen().generateClothing("innoxia_piercing_ringed_barbell", colour2, false), InventorySlot.PIERCING_VAGINA, true, Main.game.getPlayer());
+			pendingPiercings.put(InventorySlot.PIERCING_VAGINA, Main.game.getItemGen().generateClothing("innoxia_piercing_ringed_barbell", colour2, false));
+		}
 
-		} else if(Main.game.getPlayer().getClothingInSlot(InventorySlot.PIERCING_VAGINA)!=null){
-			Main.game.getPlayer().unequipClothingIntoVoid(Main.game.getPlayer().getClothingInSlot(InventorySlot.PIERCING_VAGINA), true, Main.game.getPlayer());
+		for(InventorySlot slot : InventorySlot.getPiercingSlots()) {
+			AbstractClothing clothingCurrentlyInSlot = Main.game.getPlayer().getClothingInSlot(slot);
+
+			if(pendingPiercings.get(slot)!=null){
+				if(clothingCurrentlyInSlot==null || clothingCurrentlyInSlot.getClothingType()!=pendingPiercings.get(slot).getClothingType()) {
+					Main.game.getPlayer().equipClothingFromNowhere(pendingPiercings.get(slot), slot, true, Main.game.getPlayer());
+				}
+
+			} else if(clothingCurrentlyInSlot!=null){
+				Main.game.getPlayer().unequipClothingIntoVoid(slot, true, Main.game.getPlayer());
+			}
 		}
 	}
 
@@ -553,7 +411,7 @@ public class CharacterCreation {
 			case FEMININE:
 				character.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_groin_panties", PresetColour.CLOTHING_WHITE, false), true, character);
 				character.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_chest_plunge_bra", PresetColour.CLOTHING_WHITE, false), true, character);
-				character.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(ClothingType.TORSO_SKATER_DRESS, PresetColour.CLOTHING_BLACK, false), true, character);
+				character.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_torso_skater_dress", PresetColour.CLOTHING_BLACK, false), true, character);
 				character.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_sock_trainer_socks", PresetColour.CLOTHING_WHITE, false), true, character);
 				character.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_foot_heels", PresetColour.CLOTHING_BLACK, false), true, character);
 				character.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(ClothingType.WRIST_WOMENS_WATCH, PresetColour.CLOTHING_PINK_LIGHT, false), true, character);
@@ -568,7 +426,7 @@ public class CharacterCreation {
 			case FEMININE_STRONG:
 				character.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_groin_thong", PresetColour.CLOTHING_BLACK, false), true, character);
 				character.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_chest_plunge_bra", PresetColour.CLOTHING_BLACK, false), true, character);
-				character.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(ClothingType.TORSO_SLIP_DRESS, PresetColour.CLOTHING_RED_BURGUNDY, false), true, character);
+				character.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_torso_slip_dress", PresetColour.CLOTHING_RED_BURGUNDY, false), true, character);
 				character.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_sock_pantyhose", PresetColour.CLOTHING_BLACK, false), true, character);
 				character.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_foot_stiletto_heels", PresetColour.CLOTHING_RED_BURGUNDY, false), true, character);
 				character.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(ClothingType.WRIST_WOMENS_WATCH, PresetColour.CLOTHING_BLACK, false), true, character);
@@ -662,8 +520,8 @@ public class CharacterCreation {
 
 				generateClothingOnFloor("innoxia_torso_tshirt", PresetColour.CLOTHING_BLUE_LIGHT);
 				generateClothingOnFloor("innoxia_torso_blouse", PresetColour.CLOTHING_BLUE_LIGHT);
-				generateClothingOnFloor(ClothingType.TORSO_CAMITOP_STRAPS, PresetColour.CLOTHING_GREEN);
-
+				generateClothingOnFloor("innoxia_torso_cami_straps", PresetColour.CLOTHING_GREEN);
+				
 				generateClothingOnFloor("innoxia_torsoOver_hoodie", PresetColour.CLOTHING_PINK_LIGHT);
 				generateClothingOnFloor("innoxia_torsoOver_open_front_cardigan", PresetColour.CLOTHING_BLACK);
 
@@ -722,13 +580,13 @@ public class CharacterCreation {
 
 				generateClothingOnFloor(ClothingType.getClothingTypeFromId("innoxia_torso_feminine_short_sleeve_shirt"), PresetColour.CLOTHING_BLUE_LIGHT);
 				generateClothingOnFloor("innoxia_torso_blouse", PresetColour.CLOTHING_BLUE_LIGHT);
-				generateClothingOnFloor(ClothingType.TORSO_CAMITOP_STRAPS, PresetColour.CLOTHING_GREEN);
-				generateClothingOnFloor(ClothingType.TORSO_LONG_SLEEVE_DRESS, PresetColour.CLOTHING_BLACK);
-				generateClothingOnFloor(ClothingType.TORSO_SHORT_CROPTOP, PresetColour.CLOTHING_PINK);
-				generateClothingOnFloor(ClothingType.TORSO_VIRGIN_KILLER_SWEATER, PresetColour.CLOTHING_WHITE);
-				generateClothingOnFloor(ClothingType.TORSO_SLIP_DRESS, PresetColour.CLOTHING_RED);
-				generateClothingOnFloor(ClothingType.TORSO_SKATER_DRESS, PresetColour.CLOTHING_BLACK);
-
+				generateClothingOnFloor("innoxia_torso_cami_straps", PresetColour.CLOTHING_GREEN);
+				generateClothingOnFloor("innoxia_torso_long_sleeve_dress", PresetColour.CLOTHING_BLACK);
+				generateClothingOnFloor("innoxia_torso_short_croptop", PresetColour.CLOTHING_PINK);
+				generateClothingOnFloor("innoxia_torso_virgin_killer_sweater", PresetColour.CLOTHING_WHITE);
+				generateClothingOnFloor("innoxia_torso_slip_dress", PresetColour.CLOTHING_RED);
+				generateClothingOnFloor("innoxia_torso_skater_dress", PresetColour.CLOTHING_BLACK);
+				
 				generateClothingOnFloor("innoxia_torsoOver_open_front_cardigan", PresetColour.CLOTHING_BLACK);
 
 				generateClothingOnFloor("innoxia_wrist_bangle", PresetColour.CLOTHING_GOLD);
@@ -736,37 +594,9 @@ public class CharacterCreation {
 				break;
 		}
 	}
-
-	public static String getCheckingClothingDescription() {
-		StringBuilder sb = new StringBuilder();
-
-		File dir = new File("res/");
-		if(!dir.exists()) {
-			sb.append("<p style='text-align:center;'>"
-						+ "[style.italicsBad(Игра не может прочитать папку 'res', и поэтому жизненно важные предметы одежды будут отсутствовать! Пожалуйста, обратитесь к разделу 'MISSING FOLDERS' в README.txt, прежде чем продолжить!)]"
-					+ "</p>");
-		}
-
-		sb.append("<div class='container-full-width' style='background:transparent;'>"
-					+ "<p>"
-				+ "На главной сцене, кажется, нет никаких признаков деятельности, поэтому, получив ещё несколько минут, ты решаешь немного приукрасить свою одежду."
-				+ " В конце концов, это важный вечер для Лили, и ты хочешь, чтобы она видела, что ты [pc.genderBasedWord(приложил, приложила)] некоторые усилия к своему внешнему виду."
-					+ "</p>"
-					+ "<p>"
-				+ "Поворачиваясь то в одну, то в другую сторону, чтобы получше рассмотреть себя в зеркале, ты начинаешь замечать, как [pc.genderBasedWord(симпатично, горячо)] ты выглядишь сегодня вечером..."
-					+ "</p>"
-					+ "<p>"
-				+ "[pc.thought(Почему я вдруг так [pc.genderBasedWord(возбуждён, возбуждена)]?)]"
-					+ "</p>"
-					+ "<div class='container-full-width' style='text-align:center;'>"
-				+ "<i>Выберите, что ты [pc.genderBasedWord(решил, решила)] надеть в музей.</i><br/>"
-				+ "<i>Прежде чем продолжить, нужно будет надеть какую-нибудь обувь, а также одежду, скрывающую гениталии и грудь.</i>"
-					+ "</div>"
-				+ "</div>");
-
-		return sb.toString();
-	}	public static final DialogueNode CHOOSE_APPEARANCE = new DialogueNode("Ночная прогулка", "", true) {
-
+	
+	public static final DialogueNode CHOOSE_APPEARANCE = new DialogueNode("Ночная прогулка", "", true) {
+		
 		@Override
 		public String getHeaderContent() {
 			return "<p>"
@@ -818,149 +648,20 @@ public class CharacterCreation {
 					public int getSecondsPassed() {
 						return TIME_TO_NAME;
 					}
+					@Override
+					public void effects() {
+//						getDressed();
+					}
 				};
 
 			} else if (index == 0) {
 				return new Response("Назад", "Возврат в главное меню.", OptionsDialogue.MENU);
-			} else {
-				return null;
 			}
+			return null;
 		}
 	};
-
-	public static void moveNPCIntoPlayerTile() {
-		if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC || (Main.game.getPlayer().getSexualOrientation()==SexualOrientation.AMBIPHILIC && Main.game.getPlayer().hasVagina())) {
-			Main.game.getNpc(PrologueMale.class).setLocation(Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocation(), false);
-
-		} else {
-			Main.game.getNpc(PrologueFemale.class).setLocation(Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocation(), false);
-		}
-	}		public static final DialogueNode CHOOSE_BACKGROUND = new DialogueNode("В музее", "-", true) {
-
-		@Override
-		public String getContent() {
-			UtilText.nodeContentSB.setLength(0);
-
-			UtilText.nodeContentSB.append("<p>"
-					+ "[pc.genderBasedWord(Удовлетворённый, Удовлетворённая)] своим внешним видом, ты отворачиваешься от зеркала и начинаешь идти к главной сцене."
-					+ " С каждым шагом ты необъяснимо возбуждаешься всё больше и больше, и к тому моменту, как [pc.genderBasedWord(преодолел, преодолела)] половину расстояния до шумной толпы посетителей,"
-							+(Main.game.getPlayer().hasPenis()
-					? " ты изо всех сил пытаешься удержать себя от эрекции."
-					: " ты чувствуешь, как твоя киска мокнет от желания.")
-					+ "</p>"
-					+ "<p>"
-					+ "Спрятавшись за ближайшей колонной, ты трясёшь головой, пытаясь отогнать грязные мысли, которые начинают просачиваться в разум."
-					+ " Когда ты прислоняешься спиной к холодному камню и делаешь глубокий вдох, голос внезапно прерывает твои мысли,");
-
-			if(!femalePrologueNPC()) {
-				UtilText.nodeContentSB.append(" [prologueMale.speech(Тоже хотите отдохнуть от толпы?)]"
-						+ "</p>"
-						+ "<p>"
-						+ "Обернувшись, ты видишь высокого красивого мужчину, который, должно быть, всего на пару лет старше тебя, одаривающего тебя самой очаровательной улыбкой, которую ты когда-либо [pc.genderBasedWord(видел, видела)]."
-						+ " Прежде чем ты осознаёшь, что делаешь, твои глаза путешествуют вверх и вниз по всем [pc.morphPluralDativ([unit.size])] его мужественного, мускулистого тела, и тебе удается удержаться от отчаянного стона."
-						+ "</p>"
-						+ "<p>"
-						+ "[pc.thought(Сфокусируйся, [pc.name], сфокусируйся!)] ты стараешься вести себя как можно непринуждённее, улыбаясь незнакомцу, стоящему перед тобой."
-						+ "</p>"
-						+ "<p>"
-						+ "[pc.speech(На самом деле)], говоришь ты, [pc.speech(Я только что [pc.genderBasedWord(приехал, приехала)]. [pc.genderBasedWord(Думал, Думала)], что опоздаю, но, похоже, ещё ничего не началось.)]"
-						+ "</p>"
-						+ "<p>"
-						+ "[prologueMale.speech(А, вы, должно быть, просто пропустили объявление)], отвечает он, [prologueMale.speech(вступительная речь задерживается на полчаса."
-								+ " Я пробовал болтаться в этой толпе, но я не историк, и большинство разговоров довольно сухие...)]"
-						+ "</p>"
-						+ "<p>"
-						+ "[pc.speech(Хаха)],"
-						+ " ты смеёшься, отчаянно пытаясь не представлять, как он выглядит обнажённым,"
-						+ " [pc.speech(Я <i>очень</i> хорошо понимаю что ты имеешь в виду. Моя тётя - дама, произносящая вступительную речь, и каждый раз, когда я встречаю её друзей из музея, я никогда не могу уследить за их разговором."
-									+ " Ну, кроме Артура. Он ближе к нашему возрасту, и с ним очень легко и весело общаться.)]"
-						+ "</p>"
-						+ "<p>"
-						+ "[prologueMale.speech(Ха! Ты знаешь Артура? Я здесь по его приглашению. Мы с ним давно знакомы)],"
-						+ " весело отвечает мужчина, его улыбка заставляет твоё сердце учащенно биться."
-						+ " [prologueMale.speech(Я [prologueMale.name] кстати, рад познакомиться с тобой [pc.genderBasedWord(М-р., М-с.)] ...?)]"
-						+ "</p>"
-						+ "<p>"
-						+ "[pc.speech(Аналогично)], ты отвечаешь, пожимая предложенную им руку и стараясь не думать о том, насколько сильной и доминирующей является его хватка. [pc.speech(Я [pc.Name].)]"
-						+ "</p>"
-						+ "<p>"
-						+ "Вы продолжаете разговаривать друг с другом, ожидая начала презентации."
-						+ " Вскоре тема разговора переходит на работу, и ты узнаёшь, что он - пилот авиакомпании, базирующейся в аэропорту на окраине города."
-						+ " Затем разговор переходит на то, чем ты занимаешься, и в итоге вы еще некоторое время говорите об этом..."
-						+ "</p>");
-
-			} else {
-				UtilText.nodeContentSB.append(" [prologueFemale.speech(Тоже хотите отдохнуть от толпы?)]"
-						+ "</p>"
-						+ "<p>"
-						+ "Обернувшись, ты видишь красивую женщину примерно того же возраста, что и ты, которая дарит тебе самую потрясающую улыбку, которую ты когда-либо [pc.genderBasedWord(видел, видела)]."
-						+ " Прежде чем ты осознаешь, что делаешь, твои глаза путешествуют вверх и вниз по каждому [pc.morphSingleDativ([unit.size])] изгиба её женского тела, и ты только успеваешь сдерживать себя, чтобы не издать голодный стон."
-						+ "</p>"
-						+ "<p>"
-						+ "[pc.thought(Сфокусируйся [pc.name], сфокусируйся!)] ты стараешься вести себя как можно непринуждённее, улыбаясь незнакомке, стоящей перед тобой."
-						+ "</p>"
-						+ "<p>"
-						+ "[pc.speech(На самом деле)], говоришь ты, [pc.speech(Я только что [pc.genderBasedWord(приехал, приехала)]. [pc.genderBasedWord(Думал, Думала)], что опоздаю, но, похоже, ещё ничего не началось.)]"
-						+ "</p>"
-						+ "<p>"
-						+ "[prologueFemale.speech(А, ты, должно быть, просто пропустили объявление)], отвечает она, [prologueFemale.speech(вступительная речь задерживается на полчаса."
-								+ " Я пробовала потусоваться в той толпе, но я не историк, и большинство разговоров довольно сухие...)]"
-						+ "</p>"
-						+ "<p>"
-						+ "[pc.speech(Хаха)],"
-						+ " ты смеёшься, отчаянно пытаясь не представлять, как она выглядит голой,"
-						+ " [pc.speech(Я <i>очень</i> хорошо понимаю что ты имеешь в виду. Моя тётя выступает на открытии, и каждый раз, когда я встречаю её друзей из музея, я не могу уследить за их разговором."
-									+ " Ну, кроме Артура. Он ближе к нашему возрасту, и с ним очень легко и весело общаться.)]"
-						+ "</p>"
-						+ "<p>"
-						+ "[prologueFemale.speech(О! Ты знаешь Артура? Я здесь по его приглашению, вообще-то. Мы с ним давно знакомы)],"
-						+ " весело отвечает женщина, её улыбка заставляет твоё сердце учащенно биться."
-						+ " [prologueFemale.speech(Я [prologueFemale.name] к слову, рада познакомиться с тобой [pc.genderBasedWord(М-р., М-с.)] ...?)]"
-						+ "</p>"
-						+ "<p>"
-						+ "[pc.speech(Аналогично)], ты отвечаешь, пожимая предложенную ей руку и стараясь не думать о том, какая мягкая и нежная у нее кожа. [pc.speech(Я [pc.Name].)]"
-						+ "</p>"
-						+ "<p>"
-						+ "Вы продолжайте общаться друг с другом в ожидании начала презентации."
-						+ " Вскоре тема разговора переходит на работу, и ты узнаёшь, что она готовится стать врачом и учится здесь, в городском университете."
-						+ " Затем разговор переходит на то, чем ты занимаешься, и в итоге вы ещё некоторое время говорите об этом..."
-						+ "</p>");
-			}
-
-			return UtilText.nodeContentSB.toString();
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 0) {
-				return new ResponseEffectsOnly("Назад", "Вернитесь к выбору одежды.") {
-					@Override
-					public int getSecondsPassed() {
-						return -TIME_TO_BACKGROUND;
-					}
-					@Override
-					public void effects() {
-						moveNPCOutOfPlayerTile();
-						InventoryDialogue.setBuyback(false);
-						InventoryDialogue.setInventoryNPC(null);
-						InventoryDialogue.setNPCInventoryInteraction(InventoryInteraction.CHARACTER_CREATION);
-						Main.game.setContent(new Response("", "", InventoryDialogue.INVENTORY_MENU));
-					}
-				};
-
-			} else if (index == 1) {
-				return new Response("Выбрать Работу", "Перейдите к экрану выбора работы.", BACKGROUND_SELECTION_MENU) {
-					@Override
-					public int getSecondsPassed() {
-						return TIME_TO_JOB;
-					}
-				};
-
-			} else {
-				return null;
-			}
-		}
-	};public static final DialogueNode CHOOSE_NAME = new DialogueNode("Ночная прогулка", "", true) {
+	
+	public static final DialogueNode CHOOSE_NAME = new DialogueNode("Ночная прогулка", "", true) {
 
 		boolean unsuitableName = false, unsuitableSurname = false;
 
@@ -1131,210 +832,9 @@ public class CharacterCreation {
 			}
 		}
 	};
-
-	private static void applyGameStart() {
-		CharacterModificationUtils.resetImpossibeSexExperience();
-
-		Main.getProperties().addRaceDiscovered(Subspecies.HUMAN);
-		Main.game.getPlayer().setGenderIdentity(Main.game.getPlayer().getGender());
-
-		Main.game.getNpc(Lilaya.class).setSkinCovering(new Covering(BodyCoveringType.HUMAN, Main.game.getPlayer().getCovering(BodyCoveringType.HUMAN).getPrimaryColour()), true);
-
-		Main.game.getNpc(Lilaya.class).setBirthday(LocalDateTime.of(Main.game.getPlayer().getBirthday().getYear()-22+18, Main.game.getNpc(Lilaya.class).getBirthMonth(), Main.game.getNpc(Lilaya.class).getDayOfBirth(), 12, 0));
-
-		Main.game.clearTextStartStringBuilder();
-		Main.game.clearTextEndStringBuilder();
-
-		Main.game.setWeatherInSeconds(Weather.MAGIC_STORM, 5*60*60);
-
-		Main.game.getPlayerCell().resetInventory();
-
-		Main.game.getPlayer().addItem(Main.game.getItemGen().generateItem("innoxia_quest_clothing_keys"), false);
-	}		public static final DialogueNode CHOOSE_SEX_EXPERIENCE = new DialogueNode("Начать", "", true) {
-
-		@Override
-		public String getContent() {
-			UtilText.nodeContentSB.setLength(0);
-
-			UtilText.nodeContentSB.append("<p>");
-			switch(Main.game.getPlayer().getHistory()) {
-				case ATHLETE:
-					UtilText.nodeContentSB.append(
-							"[pc.speech(Я профессиональный атлет,)]"
-									+ " ты объясняешь,"
-							+ " [pc.speech(и я провожу большую часть своего времени, тренируясь и посещая соревнования.)]");
-					break;
-				case BUTLER:
-					UtilText.nodeContentSB.append(
-							"[pc.speech(Я работаю дворецким в одной очень влиятельной семье в этом городе,)]"
-									+ " ты объясняешь,"
-							+ " [pc.speech(но я взял выходной, чтобы присутствовать на презентации Лили.)]");
-					break;
-				case CHEF:
-					UtilText.nodeContentSB.append(
-							"[pc.speech(Я шеф-повар в ресторане, расположенном за углом отсюда,)]"
-									+ " ты объясняешь,"
-							+ " [pc.speech(но я взял(а) выходной, чтобы присутствовать на презентации Лили.)]");
-					break;
-				case CONSTRUCTION_WORKER:
-					UtilText.nodeContentSB.append(
-							"[pc.speech(Я строитель,)]"
-									+ " ты объясняешь,"
-							+ " [pc.speech(и сейчас я руковожу крупным проектом на окраине города.)]");
-					break;
-				case MAID:
-					UtilText.nodeContentSB.append(
-							"[pc.speech(Я работаю старшей горничной в одной очень влиятельной семье в этом городе,)]"
-									+ " ты объясняешь,"
-							+ " [pc.speech(но я взяла выходной, чтобы присутствовать на презентации Лили.)]");
-					break;
-				case MUSICIAN:
-					UtilText.nodeContentSB.append(
-							"[pc.speech(Я играю в городском оркестре,)]"
-									+ " ты объясняешь,"
-							+ " [pc.speech(я также занимаюсь частным преподаванием музыки.)]");
-					break;
-				case OFFICE_WORKER:
-					UtilText.nodeContentSB.append(
-							"[pc.speech(Я работаю в одном из корпоративных офисов в центре города,)]"
-									+ " ты объясняешь,"
-							+ " [pc.speech(в основном занимаюсь административной и бумажной работой.)]");
-					break;
-				case SOLDIER:
-					UtilText.nodeContentSB.append(
-							"[pc.speech(Я служу в армии,)]"
-									+ " ты объясняешь,"
-							+ " [pc.speech(я в отпуске до конца недели, а потом вернусь в казарму.)]");
-					break;
-				case STUDENT:
-					UtilText.nodeContentSB.append(
-							"[pc.speech(Я учусь в городском университете,)]"
-									+ " ты объясняешь,"
-							+ " [pc.speech(хотя я еще не решил(а), что выбрать в качестве специализации.)]");
-					break;
-				case TEACHER:
-					UtilText.nodeContentSB.append(
-							"[pc.speech(Я работаю учителем в местной средней школе,)]"
-									+ " ты объясняешь,"
-							+ " [pc.speech(Но поскольку сейчас середина каникул, на этой неделе я могу не напрягаться.)]");
-					break;
-				case UNEMPLOYED:
-					UtilText.nodeContentSB.append(
-							"[pc.speech(Сейчас я нахожусь в перерыве от работы,)]"
-									+ " ты объясняешь,"
-							+ " [pc.speech(Вообще-то я подумываю о том, чтобы поступить на работу в музей.)]");
-					break;
-				case WRITER:
-					UtilText.nodeContentSB.append(
-							"[pc.speech(Я профессиональный автор,)]" // I write erotic novels...
-									+ " ты объясняешь,"
-							+ " [pc.speech(и сейчас я жду ответа от своего издателя по поводу моего последнего романа.)]");
-					break;
-				case ARISTOCRAT:
-					UtilText.nodeContentSB.append(
-							"[pc.speech(Мне не нужно беспокоиться о работе,)]"
-									+ " ты объясняешь,"
-							+ " [pc.speech(Мое семейное поместье обеспечивает все необходимые мне доходы, поэтому я провожу время, путешествуя и наслаждаясь жизнью.)]");
-					break;
-				case TOURIST:
-					UtilText.nodeContentSB.append(
-							"[pc.speech(Я здесь в отпуске,)]"
-									+ " ты объясняешь,"
-							+ " [pc.speech(Пока я нахожусь здесь, в Великобритании, я не хочу думать о работе.)]");
-					break;
-				default:
-					break;
-			}
-			UtilText.nodeContentSB.append("</p>");
-
-			if(femalePrologueNPC()) {
-				UtilText.nodeContentSB.append(
-						"<p>"
-								+ "По мере того как вы двое продолжаете разговаривать, сначала о работе, а затем на более общие темы, ты всё больше и больше заводишься."
-							+ " Более того, вы стали замечать, что щеки [prologueFemale.namePos] начинают краснеть, а она продолжает жадно разглядывать ваше тело, когда думает, что вы не смотрите."
-						+ "</p>"
-						+ "<p>"
-							+ "В качестве последнего доказательства того, что она заводится так же, как и вы, она начинает открыто говорить о своей сексуальной жизни."
-							+ " Поначалу вас немного удивляет ее открытость, но чем больше она говорит, тем комфортнее вам становится говорить о сексе с этим относительно незнакомым человеком."
-						+ "</p>"
-						+ "<p>"
-							+ "И вот, проговорив с [prologueFemale.name] не более десяти минут, вы рассказываете ей все подробности своего сексуального опыта..."
-						+ "</p>");
-
-			} else {
-				UtilText.nodeContentSB.append(
-						"<p>"
-								+ "По мере того как вы двое продолжаете разговаривать, сначала о работе, а затем на более общие темы, ты всё больше и больше заводишься."
-								+ " Более того, ты начинаешь замечать, что щёки [prologueMale.morphSingleNameGene([prologueMale.namePos])] начинают краснеть, а он всё время бросает голодные взгляды на твоё тело, когда думает, что ты не смотришь."
-						+ "</p>"
-						+ "<p>"
-								+ "В качестве последнего доказательства того, что он заводится не меньше тебя, он начнет открыто говорить о своей сексуальной жизни."
-								+ " Поначалу тебя немного удивляет его открытость, но чем больше он говорит, тем комфортнее становится говорить о сексе с этим относительно незнакомым человеком."
-						+ "</p>"
-						+ "<p>"
-								+ "И вот, проговорив с [prologueMale.morphSingleNameInstr([prologueMale.name])] не более десяти минут, ты рассказываешь ему все подробности своего сексуального опыта..."
-						+ "</p>");
-			}
-
-			UtilText.nodeContentSB.append(
-						"<div class='container-full-width' style='text-align:center;'>"
-							+ "<i>При увеличении сексуального опыта вы получите больше испорченности. (Свою испорченность, как и другие атрибуты, вы можете увидеть на панели персонажа в левой части экрана).)"
-							+ "<br/>"
-								+ "Выбрав '<span style='color:" + FetishDesire.FOUR_LOVE.getColour().toWebHexString() + ";'>" + FetishDesire.FOUR_LOVE.getName() + "</span>'"
-								+ " жажда фетиша приведет к тому, что ваш персонаж начнет игру с этим фетишем, в то время как остальные четыре желания просто определяют отношение персонажа к этому фетишу.</i>"
-						+ "</div>"
-						+CharacterModificationUtils.getSexualExperienceDiv()
-						+CharacterModificationUtils.getFetishChoiceDiv());
-
-			return UtilText.nodeContentSB.toString();
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Продолжить", "Когда вы будете довольны своим сексуальным опытом, переходите к заключительной части создания персонажа.", FINAL_CHECK) {
-					@Override
-					public int getSecondsPassed() {
-						return TIME_TO_FINAL_CHECK;
-					}
-					@Override
-					public void effects() {
-						if(!Main.game.getPlayer().hasPenis()) {
-							for(SexAreaOrifice ot : SexAreaOrifice.values()) {
-								SexType st = new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, ot);
-								Main.game.getPlayer().resetVirginityLoss(st);
-								st = new SexType(SexParticipantType.SELF, SexAreaPenetration.PENIS, ot);
-								Main.game.getPlayer().resetVirginityLoss(st);
-							}
-							Main.game.getPlayer().setPenisVirgin(true);
-
-						}
-						if(!Main.game.getPlayer().hasVagina()) {
-							for(SexAreaPenetration pt : SexAreaPenetration.values()) {
-								SexType st = new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, pt);
-								Main.game.getPlayer().resetVirginityLoss(st);
-								st = new SexType(SexParticipantType.SELF, SexAreaOrifice.VAGINA, pt);
-								Main.game.getPlayer().resetVirginityLoss(st);
-							}
-							Main.game.getPlayer().setVaginaVirgin(true);
-						}
-					}
-				};
-
-			} else if (index == 0) {
-				return new Response("Назад", "Возврат к выбору фона.", BACKGROUND_SELECTION_MENU) {
-					@Override
-					public int getSecondsPassed() {
-						return -TIME_TO_SEX_EXPERIENCE;
-					}
-				};
-
-			} else {
-				return null;
-			}
-		}
-	};public static final DialogueNode CHOOSE_ADVANCED_APPEARANCE = new DialogueNode("В музее", "", true) {
-
+	
+	public static final DialogueNode CHOOSE_ADVANCED_APPEARANCE = new DialogueNode("В музее", "", true) {
+		
 		@Override
 		public String getHeaderContent() {
 			return "<p>"
@@ -1440,24 +940,9 @@ public class CharacterCreation {
 			}
 		}
 	};
-
-	private static void applySkipPrologueStart(boolean imported) {
-		Main.game.getPlayer().addCharacterEncountered(Main.game.getNpc(Lilaya.class));
-		Main.game.getPlayer().addCharacterEncountered(Main.game.getNpc(Rose.class));
-
-		Main.getProperties().addRaceDiscovered(Main.game.getNpc(Lilaya.class).getSubspecies());
-		Main.getProperties().addRaceDiscovered(Main.game.getNpc(Rose.class).getSubspecies());
-
-		Main.game.applyStartingDateChange();
-		if(!imported) {
-			Main.game.getPlayer().setAgeAppearanceDifference(-Game.TIME_SKIP_YEARS);
-		}
-
-		Main.game.getPlayer().addSpecialPerk(Perk.SPECIAL_PLAYER);
-
-		moveNPCOutOfPlayerTile();
-	}	public static final DialogueNode CHOOSE_ADVANCED_APPEARANCE_CORE = new DialogueNode("Основа внешнего вида тела", "", true) {
-
+	
+	public static final DialogueNode CHOOSE_ADVANCED_APPEARANCE_CORE = new DialogueNode("Основа внешнего вида тела", "", true) {
+		
 		@Override
 		public String getHeaderContent() {
 			return "<div class='container-full-width' style='text-align:center;'>"
@@ -1497,24 +982,9 @@ public class CharacterCreation {
 			}
 		}
 	};
-
-	private static String getImportRow(int i, String name) {
-		String baseName = Util.getFileName(name);
-		String identifier = Util.getFileIdentifier(name);
-
-		return "<tr>"
-				+ "<td>"
-					+ i+"."
-				+ "</td>"
-				+ "<td style='min-width:200px;'>"
-					+ baseName
-				+ "</td>"
-				+ "<td>"
-					+ "<div class='saveLoadButton' id='IMPORT_CHARACTER_" + identifier + "' style='color:"+PresetColour.GENERIC_GOOD.toWebHexString()+";'>Загрузить</div>"
-				+ "</td>"
-				+ "</tr>";
-	}	public static final DialogueNode CHOOSE_ADVANCED_APPEARANCE_FACE = new DialogueNode("Внешний вид лица", "", true) {
-
+	
+	public static final DialogueNode CHOOSE_ADVANCED_APPEARANCE_FACE = new DialogueNode("Внешний вид лица", "", true) {
+		
 		@Override
 		public String getHeaderContent() {
 			return "<div class='container-full-width' style='text-align:center;'>"
@@ -1921,11 +1391,47 @@ public class CharacterCreation {
 			}
 		}
 	};
+	
+	public static String getCheckingClothingDescription() {
+		StringBuilder sb = new StringBuilder();
 
+		File dir = new File("res/");
+		if(!dir.exists()) {
+			sb.append("<p style='text-align:center;'>"
+						+ "[style.italicsBad(Игра не может прочитать папку 'res', и поэтому жизненно важные предметы одежды будут отсутствовать! Пожалуйста, обратитесь к разделу 'MISSING FOLDERS' в README.txt, прежде чем продолжить!)]"
+					+ "</p>");
+		}
 
+		sb.append("<div class='container-full-width' style='background:transparent;'>"
+					+ "<p>"
+				+ "На главной сцене, кажется, нет никаких признаков деятельности, поэтому, получив ещё несколько минут, ты решаешь немного приукрасить свою одежду."
+				+ " В конце концов, это важный вечер для Лили, и ты хочешь, чтобы она видела, что ты [pc.genderBasedWord(приложил, приложила)] некоторые усилия к своему внешнему виду."
+					+ "</p>"
+					+ "<p>"
+				+ "Поворачиваясь то в одну, то в другую сторону, чтобы получше рассмотреть себя в зеркале, ты начинаешь замечать, как [pc.genderBasedWord(симпатично, горячо)] ты выглядишь сегодня вечером..."
+					+ "</p>"
+					+ "<p>"
+				+ "[pc.thought(Почему я вдруг так [pc.genderBasedWord(возбуждён, возбуждена)]?)]"
+					+ "</p>"
+					+ "<div class='container-full-width' style='text-align:center;'>"
+				+ "<i>Выберите, что ты [pc.genderBasedWord(решил, решила)] надеть в музей.</i><br/>"
+				+ "<i>Прежде чем продолжить, нужно будет надеть какую-нибудь обувь, а также одежду, скрывающую гениталии и грудь.</i>"
+					+ "</div>"
+				+ "</div>");
 
-
-
+		return sb.toString();
+	}
+	
+	public static void moveNPCIntoPlayerTile() {
+		if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC || (Main.game.getPlayer().getSexualOrientation()==SexualOrientation.AMBIPHILIC && Main.game.getPlayer().hasVagina())) {
+			Main.game.getNpc(PrologueMale.class).setLocation(Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocation(), false);
+			
+		} else {
+			Main.game.getNpc(PrologueFemale.class).setLocation(Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocation(), false);
+			Main.game.getNpc(PrologueFemale.class).addStatusEffect(StatusEffect.PROMISCUITY_PILL_PROLOGUE, 60*60*24*3); // 3 days
+		}
+	}
+	
 	public static void moveNPCOutOfPlayerTile() {
 		Main.game.getNpc(PrologueMale.class).setLocation(WorldType.EMPTY, PlaceType.GENERIC_HOLDING_CELL, false);
 		Main.game.getNpc(PrologueFemale.class).setLocation(WorldType.EMPTY, PlaceType.GENERIC_HOLDING_CELL, false);
@@ -1934,11 +1440,136 @@ public class CharacterCreation {
 	public static boolean femalePrologueNPC() {
 		return Main.game.getPlayer().getSexualOrientation()==SexualOrientation.GYNEPHILIC || (Main.game.getPlayer().getSexualOrientation()==SexualOrientation.AMBIPHILIC && Main.game.getPlayer().hasPenis());
 	}
+	
+	public static final DialogueNode CHOOSE_BACKGROUND = new DialogueNode("В музее", "-", true) {
 
+		@Override
+		public String getContent() {
+			UtilText.nodeContentSB.setLength(0);
 
+			UtilText.nodeContentSB.append("<p>"
+					+ "[pc.genderBasedWord(Удовлетворённый, Удовлетворённая)] своим внешним видом, ты отворачиваешься от зеркала и начинаешь идти к главной сцене."
+					+ " С каждым шагом ты необъяснимо возбуждаешься всё больше и больше, и к тому моменту, как [pc.genderBasedWord(преодолел, преодолела)] половину расстояния до шумной толпы посетителей,"
+							+(Main.game.getPlayer().hasPenis()
+					? " ты изо всех сил пытаешься удержать себя от эрекции."
+					: " ты чувствуешь, как твоя киска мокнет от желания.")
+					+ "</p>"
+					+ "<p>"
+					+ "Спрятавшись за ближайшей колонной, ты трясёшь головой, пытаясь отогнать грязные мысли, которые начинают просачиваться в разум."
+					+ " Когда ты прислоняешься спиной к холодному камню и делаешь глубокий вдох, голос внезапно прерывает твои мысли,");
 
+			if(!femalePrologueNPC()) {
+				UtilText.nodeContentSB.append(" [prologueMale.speech(Тоже хотите отдохнуть от толпы?)]"
+						+ "</p>"
+						+ "<p>"
+						+ "Обернувшись, ты видишь высокого красивого мужчину, который, должно быть, всего на пару лет старше тебя, одаривающего тебя самой очаровательной улыбкой, которую ты когда-либо [pc.genderBasedWord(видел, видела)]."
+						+ " Прежде чем ты осознаёшь, что делаешь, твои глаза путешествуют вверх и вниз по всем [pc.morphPluralDativ([unit.size])] его мужественного, мускулистого тела, и тебе удается удержаться от отчаянного стона."
+						+ "</p>"
+						+ "<p>"
+						+ "[pc.thought(Сфокусируйся, [pc.name], сфокусируйся!)] ты стараешься вести себя как можно непринуждённее, улыбаясь незнакомцу, стоящему перед тобой."
+						+ "</p>"
+						+ "<p>"
+						+ "[pc.speech(На самом деле)], говоришь ты, [pc.speech(Я только что [pc.genderBasedWord(приехал, приехала)]. [pc.genderBasedWord(Думал, Думала)], что опоздаю, но, похоже, ещё ничего не началось.)]"
+						+ "</p>"
+						+ "<p>"
+						+ "[prologueMale.speech(А, вы, должно быть, просто пропустили объявление)], отвечает он, [prologueMale.speech(вступительная речь задерживается на полчаса."
+								+ " Я пробовал болтаться в этой толпе, но я не историк, и большинство разговоров довольно сухие...)]"
+						+ "</p>"
+						+ "<p>"
+						+ "[pc.speech(Хаха)],"
+						+ " ты смеёшься, отчаянно пытаясь не представлять, как он выглядит обнажённым,"
+						+ " [pc.speech(Я <i>очень</i> хорошо понимаю что ты имеешь в виду. Моя тётя - дама, произносящая вступительную речь, и каждый раз, когда я встречаю её друзей из музея, я никогда не могу уследить за их разговором."
+									+ " Ну, кроме Артура. Он ближе к нашему возрасту, и с ним очень легко и весело общаться.)]"
+						+ "</p>"
+						+ "<p>"
+						+ "[prologueMale.speech(Ха! Ты знаешь Артура? Я здесь по его приглашению. Мы с ним давно знакомы)],"
+						+ " весело отвечает мужчина, его улыбка заставляет твоё сердце учащенно биться."
+						+ " [prologueMale.speech(Я [prologueMale.name] кстати, рад познакомиться с тобой [pc.genderBasedWord(М-р., М-с.)] ...?)]"
+						+ "</p>"
+						+ "<p>"
+						+ "[pc.speech(Аналогично)], ты отвечаешь, пожимая предложенную им руку и стараясь не думать о том, насколько сильной и доминирующей является его хватка. [pc.speech(Я [pc.Name].)]"
+						+ "</p>"
+						+ "<p>"
+						+ "Вы продолжаете разговаривать друг с другом, ожидая начала презентации."
+						+ " Вскоре тема разговора переходит на работу, и ты узнаёшь, что он - пилот авиакомпании, базирующейся в аэропорту на окраине города."
+						+ " Затем разговор переходит на то, чем ты занимаешься, и в итоге вы еще некоторое время говорите об этом..."
+						+ "</p>");
+
+			} else {
+				UtilText.nodeContentSB.append(" [prologueFemale.speech(Тоже хотите отдохнуть от толпы?)]"
+						+ "</p>"
+						+ "<p>"
+						+ "Обернувшись, ты видишь красивую женщину примерно того же возраста, что и ты, которая дарит тебе самую потрясающую улыбку, которую ты когда-либо [pc.genderBasedWord(видел, видела)]."
+						+ " Прежде чем ты осознаешь, что делаешь, твои глаза путешествуют вверх и вниз по каждому [pc.morphSingleDativ([unit.size])] изгиба её женского тела, и ты только успеваешь сдерживать себя, чтобы не издать голодный стон."
+						+ "</p>"
+						+ "<p>"
+						+ "[pc.thought(Сфокусируйся [pc.name], сфокусируйся!)] ты стараешься вести себя как можно непринуждённее, улыбаясь незнакомке, стоящей перед тобой."
+						+ "</p>"
+						+ "<p>"
+						+ "[pc.speech(На самом деле)], говоришь ты, [pc.speech(Я только что [pc.genderBasedWord(приехал, приехала)]. [pc.genderBasedWord(Думал, Думала)], что опоздаю, но, похоже, ещё ничего не началось.)]"
+						+ "</p>"
+						+ "<p>"
+						+ "[prologueFemale.speech(А, ты, должно быть, просто пропустили объявление)], отвечает она, [prologueFemale.speech(вступительная речь задерживается на полчаса."
+								+ " Я пробовала потусоваться в той толпе, но я не историк, и большинство разговоров довольно сухие...)]"
+						+ "</p>"
+						+ "<p>"
+						+ "[pc.speech(Хаха)],"
+						+ " ты смеёшься, отчаянно пытаясь не представлять, как она выглядит голой,"
+						+ " [pc.speech(Я <i>очень</i> хорошо понимаю что ты имеешь в виду. Моя тётя выступает на открытии, и каждый раз, когда я встречаю её друзей из музея, я не могу уследить за их разговором."
+									+ " Ну, кроме Артура. Он ближе к нашему возрасту, и с ним очень легко и весело общаться.)]"
+						+ "</p>"
+						+ "<p>"
+						+ "[prologueFemale.speech(О! Ты знаешь Артура? Я здесь по его приглашению, вообще-то. Мы с ним давно знакомы)],"
+						+ " весело отвечает женщина, её улыбка заставляет твоё сердце учащенно биться."
+						+ " [prologueFemale.speech(Я [prologueFemale.name] к слову, рада познакомиться с тобой [pc.genderBasedWord(М-р., М-с.)] ...?)]"
+						+ "</p>"
+						+ "<p>"
+						+ "[pc.speech(Аналогично)], ты отвечаешь, пожимая предложенную ей руку и стараясь не думать о том, какая мягкая и нежная у нее кожа. [pc.speech(Я [pc.Name].)]"
+						+ "</p>"
+						+ "<p>"
+						+ "Вы продолжайте общаться друг с другом в ожидании начала презентации."
+						+ " Вскоре тема разговора переходит на работу, и ты узнаёшь, что она готовится стать врачом и учится здесь, в городском университете."
+						+ " Затем разговор переходит на то, чем ты занимаешься, и в итоге вы ещё некоторое время говорите об этом..."
+						+ "</p>");
+			}
+
+			return UtilText.nodeContentSB.toString();
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 0) {
+				return new ResponseEffectsOnly("Назад", "Вернитесь к выбору одежды.") {
+					@Override
+					public int getSecondsPassed() {
+						return -TIME_TO_BACKGROUND;
+					}
+					@Override
+					public void effects() {
+						moveNPCOutOfPlayerTile();
+						InventoryDialogue.setBuyback(false);
+						InventoryDialogue.setInventoryNPC(null);
+						InventoryDialogue.setNPCInventoryInteraction(InventoryInteraction.CHARACTER_CREATION);
+						Main.game.setContent(new Response("", "", InventoryDialogue.INVENTORY_MENU));
+					}
+				};
+
+			} else if (index == 1) {
+				return new Response("Выбрать Работу", "Перейдите к экрану выбора работы.", BACKGROUND_SELECTION_MENU) {
+					@Override
+					public int getSecondsPassed() {
+						return TIME_TO_JOB;
+					}
+				};
+
+			} else {
+				return null;
+			}
+		}
+	};
+	
 	public static final DialogueNode BACKGROUND_SELECTION_MENU = new DialogueNode("В музее", "-", true) {
-
+		
 		@Override
 		public String getContent() {
 			UtilText.nodeContentSB.setLength(0);
@@ -2011,16 +1642,232 @@ public class CharacterCreation {
 			}
 		}
 	};
+	
+	
+	public static final DialogueNode CHOOSE_SEX_EXPERIENCE = new DialogueNode("Начать", "", true) {
 
+		@Override
+		public String getContent() {
+			UtilText.nodeContentSB.setLength(0);
 
+			UtilText.nodeContentSB.append("<p>");
+			switch(Main.game.getPlayer().getHistory()) {
+				case ATHLETE:
+					UtilText.nodeContentSB.append(
+							"[pc.speech(Я профессиональный атлет,)]"
+									+ " ты объясняешь,"
+							+ " [pc.speech(и я провожу большую часть своего времени, тренируясь и посещая соревнования.)]");
+					break;
+				case BUTLER:
+					UtilText.nodeContentSB.append(
+							"[pc.speech(Я работаю дворецким в одной очень влиятельной семье в этом городе,)]"
+									+ " ты объясняешь,"
+							+ " [pc.speech(но я взял выходной, чтобы присутствовать на презентации Лили.)]");
+					break;
+				case CHEF:
+					UtilText.nodeContentSB.append(
+							"[pc.speech(Я шеф-повар в ресторане, расположенном за углом отсюда,)]"
+									+ " ты объясняешь,"
+							+ " [pc.speech(но я взял(а) выходной, чтобы присутствовать на презентации Лили.)]");
+					break;
+				case CONSTRUCTION_WORKER:
+					UtilText.nodeContentSB.append(
+							"[pc.speech(Я строитель,)]"
+									+ " ты объясняешь,"
+							+ " [pc.speech(и сейчас я руковожу крупным проектом на окраине города.)]");
+					break;
+				case MAID:
+					UtilText.nodeContentSB.append(
+							"[pc.speech(Я работаю старшей горничной в одной очень влиятельной семье в этом городе,)]"
+									+ " ты объясняешь,"
+							+ " [pc.speech(но я взяла выходной, чтобы присутствовать на презентации Лили.)]");
+					break;
+				case MUSICIAN:
+					UtilText.nodeContentSB.append(
+							"[pc.speech(Я играю в городском оркестре,)]"
+									+ " ты объясняешь,"
+							+ " [pc.speech(я также занимаюсь частным преподаванием музыки.)]");
+					break;
+				case OFFICE_WORKER:
+					UtilText.nodeContentSB.append(
+							"[pc.speech(Я работаю в одном из корпоративных офисов в центре города,)]"
+									+ " ты объясняешь,"
+							+ " [pc.speech(в основном занимаюсь административной и бумажной работой.)]");
+					break;
+				case SOLDIER:
+					UtilText.nodeContentSB.append(
+							"[pc.speech(Я служу в армии,)]"
+									+ " ты объясняешь,"
+							+ " [pc.speech(я в отпуске до конца недели, а потом вернусь в казарму.)]");
+					break;
+				case STUDENT:
+					UtilText.nodeContentSB.append(
+							"[pc.speech(Я учусь в городском университете,)]"
+									+ " ты объясняешь,"
+							+ " [pc.speech(хотя я еще не решил(а), что выбрать в качестве специализации.)]");
+					break;
+				case TEACHER:
+					UtilText.nodeContentSB.append(
+							"[pc.speech(Я работаю учителем в местной средней школе,)]"
+									+ " ты объясняешь,"
+							+ " [pc.speech(Но поскольку сейчас середина каникул, на этой неделе я могу не напрягаться.)]");
+					break;
+				case UNEMPLOYED:
+					UtilText.nodeContentSB.append(
+							"[pc.speech(Сейчас я нахожусь в перерыве от работы,)]"
+									+ " ты объясняешь,"
+							+ " [pc.speech(Вообще-то я подумываю о том, чтобы поступить на работу в музей.)]");
+					break;
+				case WRITER:
+					UtilText.nodeContentSB.append(
+							"[pc.speech(Я профессиональный автор,)]" // I write erotic novels...
+									+ " ты объясняешь,"
+							+ " [pc.speech(и сейчас я жду ответа от своего издателя по поводу моего последнего романа.)]");
+					break;
+				case ARISTOCRAT:
+					UtilText.nodeContentSB.append(
+							"[pc.speech(Мне не нужно беспокоиться о работе,)]"
+									+ " ты объясняешь,"
+							+ " [pc.speech(Мое семейное поместье обеспечивает все необходимые мне доходы, поэтому я провожу время, путешествуя и наслаждаясь жизнью.)]");
+					break;
+				case TOURIST:
+					UtilText.nodeContentSB.append(
+							"[pc.speech(Я здесь в отпуске,)]"
+									+ " ты объясняешь,"
+							+ " [pc.speech(Пока я нахожусь здесь, в Великобритании, я не хочу думать о работе.)]");
+					break;
+				default:
+					break;
+			}
+			UtilText.nodeContentSB.append("</p>");
 
+			if(femalePrologueNPC()) {
+				UtilText.nodeContentSB.append(
+						"<p>"
+								+ "По мере того как вы двое продолжаете разговаривать, сначала о работе, а затем на более общие темы, ты всё больше и больше заводишься."
+							+ " Более того, вы стали замечать, что щеки [prologueFemale.namePos] начинают краснеть, а она продолжает жадно разглядывать ваше тело, когда думает, что вы не смотрите."
+						+ "</p>"
+						+ "<p>"
+							+ "В качестве последнего доказательства того, что она заводится так же, как и вы, она начинает открыто говорить о своей сексуальной жизни."
+							+ " Поначалу вас немного удивляет ее открытость, но чем больше она говорит, тем комфортнее вам становится говорить о сексе с этим относительно незнакомым человеком."
+						+ "</p>"
+						+ "<p>"
+							+ "И вот, проговорив с [prologueFemale.name] не более десяти минут, вы рассказываете ей все подробности своего сексуального опыта..."
+						+ "</p>");
 
+			} else {
+				UtilText.nodeContentSB.append(
+						"<p>"
+								+ "По мере того как вы двое продолжаете разговаривать, сначала о работе, а затем на более общие темы, ты всё больше и больше заводишься."
+								+ " Более того, ты начинаешь замечать, что щёки [prologueMale.morphSingleNameGene([prologueMale.namePos])] начинают краснеть, а он всё время бросает голодные взгляды на твоё тело, когда думает, что ты не смотришь."
+						+ "</p>"
+						+ "<p>"
+								+ "В качестве последнего доказательства того, что он заводится не меньше тебя, он начнет открыто говорить о своей сексуальной жизни."
+								+ " Поначалу тебя немного удивляет его открытость, но чем больше он говорит, тем комфортнее становится говорить о сексе с этим относительно незнакомым человеком."
+						+ "</p>"
+						+ "<p>"
+								+ "И вот, проговорив с [prologueMale.morphSingleNameInstr([prologueMale.name])] не более десяти минут, ты рассказываешь ему все подробности своего сексуального опыта..."
+						+ "</p>");
+			}
 
+			UtilText.nodeContentSB.append(
+						"<div class='container-full-width' style='text-align:center;'>"
+							+ "<i>При увеличении сексуального опыта вы получите больше испорченности. (Свою испорченность, как и другие атрибуты, вы можете увидеть на панели персонажа в левой части экрана).)"
+							+ "<br/>"
+								+ "Выбрав '<span style='color:" + FetishDesire.FOUR_LOVE.getColour().toWebHexString() + ";'>" + FetishDesire.FOUR_LOVE.getName() + "</span>'"
+								+ " жажда фетиша приведет к тому, что ваш персонаж начнет игру с этим фетишем, в то время как остальные четыре желания просто определяют отношение персонажа к этому фетишу.</i>"
+						+ "</div>"
+						+CharacterModificationUtils.getSexualExperienceDiv()
+						+CharacterModificationUtils.getFetishChoiceDiv());
 
+			return UtilText.nodeContentSB.toString();
+		}
 
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 1) {
+				return new Response("Продолжить", "Когда вы будете довольны своим сексуальным опытом, переходите к заключительной части создания персонажа.", FINAL_CHECK) {
+					@Override
+					public int getSecondsPassed() {
+						return TIME_TO_FINAL_CHECK;
+					}
+					@Override
+					public void effects() {
+						if(!Main.game.getPlayer().hasPenis()) {
+							for(SexAreaOrifice ot : SexAreaOrifice.values()) {
+								SexType st = new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, ot);
+								Main.game.getPlayer().resetVirginityLoss(st);
+								st = new SexType(SexParticipantType.SELF, SexAreaPenetration.PENIS, ot);
+								Main.game.getPlayer().resetVirginityLoss(st);
+							}
+							Main.game.getPlayer().setPenisVirgin(true);
 
+						}
+						if(!Main.game.getPlayer().hasVagina()) {
+							for(SexAreaPenetration pt : SexAreaPenetration.values()) {
+								SexType st = new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, pt);
+								Main.game.getPlayer().resetVirginityLoss(st);
+								st = new SexType(SexParticipantType.SELF, SexAreaOrifice.VAGINA, pt);
+								Main.game.getPlayer().resetVirginityLoss(st);
+							}
+							Main.game.getPlayer().setVaginaVirgin(true);
+						}
+					}
+				};
+
+			} else if (index == 0) {
+				return new Response("Назад", "Возврат к выбору фона.", BACKGROUND_SELECTION_MENU) {
+					@Override
+					public int getSecondsPassed() {
+						return -TIME_TO_SEX_EXPERIENCE;
+					}
+				};
+
+			} else {
+				return null;
+			}
+		}
+	};
+
+	private static void applyGameStart() {
+		CharacterModificationUtils.resetImpossibeSexExperience();
+
+		Main.getProperties().addRaceDiscovered(Subspecies.HUMAN);
+		Main.game.getPlayer().setGenderIdentity(Main.game.getPlayer().getGender());
+
+		Main.game.getNpc(Lilaya.class).setSkinCovering(new Covering(BodyCoveringType.HUMAN, Main.game.getPlayer().getCovering(BodyCoveringType.HUMAN).getPrimaryColour()), true);
+
+		Main.game.getNpc(Lilaya.class).setBirthday(LocalDateTime.of(Main.game.getPlayer().getBirthday().getYear()-22+18, Main.game.getNpc(Lilaya.class).getBirthMonth(), Main.game.getNpc(Lilaya.class).getDayOfBirth(), 12, 0));
+
+		Main.game.clearTextStartStringBuilder();
+		Main.game.clearTextEndStringBuilder();
+
+		Main.game.setWeatherInSeconds(Weather.MAGIC_STORM, 5*60*60);
+
+		Main.game.getPlayerCell().resetInventory();
+
+		Main.game.getPlayer().addItem(Main.game.getItemGen().generateItem("innoxia_quest_clothing_keys"), false);
+	}
+
+	private static void applySkipPrologueStart(boolean imported) {
+		Main.game.getPlayer().addCharacterEncountered(Main.game.getNpc(Lilaya.class));
+		Main.game.getPlayer().addCharacterEncountered(Main.game.getNpc(Rose.class));
+
+		Main.getProperties().addRaceDiscovered(Main.game.getNpc(Lilaya.class).getSubspecies());
+		Main.getProperties().addRaceDiscovered(Main.game.getNpc(Rose.class).getSubspecies());
+
+		Main.game.applyStartingDateChange();
+		if(!imported) {
+			Main.game.getPlayer().setAgeAppearanceDifference(-Game.TIME_SKIP_YEARS);
+		}
+
+		Main.game.getPlayer().addSpecialPerk(Perk.SPECIAL_PLAYER);
+
+		moveNPCOutOfPlayerTile();
+	}
+	
 	public static final DialogueNode FINAL_CHECK = new DialogueNode("Начать", "", true) {
-
+		
 		@Override
 		public String getContent() {
 			UtilText.nodeContentSB.setLength(0);
@@ -2189,11 +2036,141 @@ public class CharacterCreation {
 			}
 		}
 	};
+	private static String getImportRow(int i, String name) {
+		String baseName = Util.getFileName(name);
+		String identifier = Util.getFileIdentifier(name);
 
+		return "<tr>"
+				+ "<td>"
+					+ i+"."
+				+ "</td>"
+				+ "<td style='min-width:200px;'>"
+					+ baseName
+				+ "</td>"
+				+ "<td>"
+					+ "<div class='saveLoadButton' id='IMPORT_CHARACTER_" + identifier + "' style='color:"+PresetColour.GENERIC_GOOD.toWebHexString()+";'>Загрузить</div>"
+				+ "</td>"
+				+ "</tr>";
+	}
 
 	private static boolean resetImportedCharacter = false;
 
+	public static final DialogueNode START_GAME_WITH_IMPORT = new DialogueNode("Начать игру", "", true) {
 
+		@Override
+		public String getLabel() {
+			return "Импортированные персонажи";
+		}
+
+		@Override
+		public String getContent() {
+			return "<p>"
+						+ "<b>TODO:</b> Я включу возможность полного создания персонажа с импортированными персонажами в какой-то момент!"
+					+ "</p>"
+					+ "<br/>"
+					+"<details>"
+						+ "<summary class='quest-title' style='color:" + QuestType.MAIN.getColour().toWebHexString() + ";'>Импортировать лог</summary>"
+						+ Main.game.getCharacterUtils().getCharacterImportLog()
+					+ "</details>"
+					+ "<div class='container-full-width'>"
+						+ "<h5 style='text-align:center;'>Внешность</h5>"
+						+ Main.game.getPlayer().getBodyDescription()
+					+ "</div>";
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			if (index == 1) {
+				return new Response("Начать", "Используйте этого персонажа и начните игру с самого начала.", INTRO_2_FROM_IMPORT){
+					@Override
+					public void effects() {
+						if(resetImportedCharacter){
+							resetPlayerCharacter();
+						}
+						Main.game.getPlayer().resetAllQuests();
+						Main.game.getPlayer().getCharactersEncountered().clear();
+						Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().startQuest(QuestLine.MAIN));
+						applyGameStart();
+					}
+				};
+
+			} else if (index == 2) {
+				return new ResponseEffectsOnly("Пропустить пролог", "Начните игру и пропустите пролог.<br/><br/><i style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Не рекомендуется для тех, кто играет впервые!</i>"){
+					@Override
+					public void effects() {
+						Main.game.setRenderMap(true);
+						if(resetImportedCharacter){
+							resetPlayerCharacter();
+						}
+						Main.game.getPlayer().incrementMoney(5000);
+
+						Main.game.getPlayer().resetAllQuests();
+						Main.game.getPlayer().getCharactersEncountered().clear();
+						Main.game.getTextStartStringBuilder().append(Main.game.getPlayer().startQuest(QuestLine.MAIN));
+						Main.game.getTextStartStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.MAIN, Quest.MAIN_1_A_LILAYAS_TESTS));
+
+						DamageType damageType = DamageType.FIRE;
+						switch(CharacterCreation.getStartingDemonstoneSpellSchool()) {
+							case AIR:
+								damageType = DamageType.POISON;
+								break;
+							case EARTH:
+								damageType = DamageType.PHYSICAL;
+								break;
+							case ARCANE:
+							case FIRE:
+								damageType = DamageType.FIRE;
+								break;
+							case WATER:
+								damageType = DamageType.ICE;
+								break;
+						}
+						if(Main.game.getPlayer().getMainWeapon(0)==null) {
+							Main.game.getPlayer().equipMainWeaponFromNowhere(Main.game.getItemGen().generateWeapon("innoxia_crystal_rare", damageType));
+						} else {
+							Main.game.getPlayer().addWeapon(Main.game.getItemGen().generateWeapon("innoxia_crystal_rare", damageType), false);
+						}
+
+						AbstractItem spellBook = Main.game.getItemGen().generateItem(ItemType.getSpellBookType(Spell.FIREBALL));
+						if(Main.game.getPlayer().getBirthMonth().getValue() % 4 == 1) {
+							spellBook = Main.game.getItemGen().generateItem(ItemType.getSpellBookType(Spell.SLAM));
+						} else if(Main.game.getPlayer().getBirthMonth().getValue() % 4 == 2) {
+							spellBook = Main.game.getItemGen().generateItem(ItemType.getSpellBookType(Spell.POISON_VAPOURS));
+						} else if(Main.game.getPlayer().getBirthMonth().getValue()  % 4 == 3) {
+							spellBook = Main.game.getItemGen().generateItem(ItemType.getSpellBookType(Spell.ICE_SHARD));
+						}
+						Main.game.getWorlds().get(WorldType.LILAYAS_HOUSE_FIRST_FLOOR).getCell(PlaceType.LILAYA_HOME_ROOM_PLAYER).getInventory().addItem(spellBook);
+
+						applyGameStart();
+						applySkipPrologueStart(true);
+						Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_PLAYER);
+						Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+					}
+				};
+
+			} else if (index == 5) {
+				return new ResponseEffectsOnly(resetImportedCharacter
+						?"Сброс персонажа: <span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Вкл</span>"
+						:"Сброс персонажа: <span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Выкл</span>",
+						"Сбросьте опыт и деньги до 0, очищает весь инвентарь, кроме экипированной одежды и оружия. " +
+								"Заклинания и перки заклинаний также удалены."){
+					@Override
+					public void effects(){
+						resetImportedCharacter = !resetImportedCharacter;
+					}
+				};
+
+
+			}
+			// Throws error when going back and then resuming
+//			else if (index == 0) {
+//				return new Response("Back", "Return to new game screen.", OptionsDialogue.MENU);
+//			}
+			else {
+				return null;
+			}
+		}
+	};
 
 	private static void resetPlayerCharacter(){
 		PlayerCharacter player = Main.game.getPlayer();
@@ -2205,6 +2182,22 @@ public class CharacterCreation {
 		player.resetPerksMap(false);
 	}
 
+	public static final DialogueNode INTRO_2_FROM_IMPORT = new DialogueNode("В музее", "", true) {
 
+		@Override
+		public int getSecondsPassed() {
+			return 60*10;
+		}
 
+		@Override
+		public String getContent() {
+			return UtilText.parseFromXMLFile("misc/prologue", "INTRO_2");
+		}
+
+		@Override
+		public Response getResponse(int responseTab, int index) {
+			return PrologueDialogue.INTRO_2.getResponse(responseTab, index);
+		}
+	};
+	
 }

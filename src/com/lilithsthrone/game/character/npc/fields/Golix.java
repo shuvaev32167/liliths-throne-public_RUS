@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.character.npc.fields;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -10,6 +7,8 @@ import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.misc.Elemental;
 import com.lilithsthrone.game.combat.spells.SpellSchool;
 import com.lilithsthrone.main.Main;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  * @since 0.4.9
@@ -26,7 +25,7 @@ public class Golix extends Elemental {
 		super(isImported);
 		
 		if(!isImported) {
-			this.setSurname("Oglixkamu");
+			this.setSurname("Огликскаму");
 		}
 	}
 
@@ -39,7 +38,7 @@ public class Golix extends Elemental {
 		super.loadFromXML(parentElement, doc, settings);
 		
 		if(Main.isVersionOlderThan(Game.loadingVersion, "0.4.10.8")) {
-			this.setSurname("Oglixkamu");
+			this.setSurname("Огликскаму");
 			this.setElementalSchool(SpellSchool.EARTH);
 		}
 	}
@@ -51,7 +50,7 @@ public class Golix extends Elemental {
 	
 	@Override
 	public String getArtworkFolderName() {
-		return "Golix";
+		return "Голикс";
 	}
 	
 }
