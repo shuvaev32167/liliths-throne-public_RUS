@@ -37,8 +37,8 @@ import java.util.stream.Collectors;
  * @author Innoxia, CognitiveMist
  */
 public class Util {
-	
-	public static Random random = new Random();
+
+	public static final Random random = new Random();
 
 	private static final Map<KeyCode, String> KEY_NAMES = new LinkedHashMap<KeyCode, String>() {
 		private static final long serialVersionUID = 1L;
@@ -346,7 +346,7 @@ public class Util {
 	public static void openLinkInDefaultBrowser(String url) {
 		Runtime runtime = Runtime.getRuntime();
 		try {
-			runtime.exec("xdg-open " + url);
+			runtime.exec(new String[]{"xdg-open " + url});
 		} catch (IOException e0) {
 			Desktop desktop = Desktop.getDesktop();
 			try {

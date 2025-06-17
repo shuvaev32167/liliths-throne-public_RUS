@@ -364,7 +364,7 @@ public class Attribute {
 
 	// Damages:
 
-	public static AbstractAttribute DAMAGE_UNARMED = new AbstractAttribute(true, 0, -80, 100, "unarmed damage", "Unarmed damage", "swordIcon", PresetColour.DAMAGE_TYPE_UNARMED, "martial arts", "martial incompetence", null) {
+	public static AbstractAttribute DAMAGE_UNARMED = new AbstractAttribute(true, 0, -80, 100, "безоружный урон", "Безоружный урон", "swordIcon", PresetColour.DAMAGE_TYPE_UNARMED, "martial arts", "martial incompetence", null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Increases damage dealt from unarmed attacks, including special attacks obtained from non-human bodyparts.";
@@ -375,7 +375,7 @@ public class Attribute {
 			return 220;
 		}
 	};
-public static AbstractAttribute DAMAGE_MELEE_WEAPON = new AbstractAttribute(true, 0, -80, 100, "melee weapon damage", "Melee Weapon damage", "swordIcon", PresetColour.DAMAGE_TYPE_MELEE, "melee mastery", "melee incompetence", null) {
+	public static AbstractAttribute DAMAGE_MELEE_WEAPON = new AbstractAttribute(true, 0, -80, 100, "урон в ближнем бою", "Урон в ближнем бою", "swordIcon", PresetColour.DAMAGE_TYPE_MELEE, "melee mastery", "melee incompetence", null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Increases damage dealt from attacks by melee weapons.";
@@ -387,7 +387,7 @@ public static AbstractAttribute DAMAGE_MELEE_WEAPON = new AbstractAttribute(true
 		}
 	};
 
-	public static AbstractAttribute DAMAGE_RANGED_WEAPON = new AbstractAttribute(true, 0, -80, 100, "ranged weapon damage", "Ranged weapon damage", "swordIcon", PresetColour.DAMAGE_TYPE_RANGED, "ranged mastery", "ranged incompetence", null) {
+	public static AbstractAttribute DAMAGE_RANGED_WEAPON = new AbstractAttribute(true, 0, -80, 100, "урон в дали", "Урон в дали", "swordIcon", PresetColour.DAMAGE_TYPE_RANGED, "ranged mastery", "ranged incompetence", null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Increases damage dealt from attacks by ranged weapons.";
@@ -399,7 +399,7 @@ public static AbstractAttribute DAMAGE_MELEE_WEAPON = new AbstractAttribute(true
 		}
 	};
 
-	public static AbstractAttribute DAMAGE_SPELLS = new AbstractAttribute(true, 0, -80, 100, "spell damage", "Spell damage", "swordIcon", PresetColour.ATTRIBUTE_MANA, "arcane power", "arcane dulling", null) {
+	public static AbstractAttribute DAMAGE_SPELLS = new AbstractAttribute(true, 0, -80, 100, "урон заклинаний", "Урон заклинаний", "swordIcon", PresetColour.ATTRIBUTE_MANA, "arcane power", "arcane dulling", null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Increases spell damage.";

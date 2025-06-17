@@ -1229,7 +1229,7 @@ public class OptionsDialogue {
 
 			// Offspring preferences:
 
-			UtilText.nodeContentSB.append(getCustomContentPreferenceDivStart(PresetColour.ANDROGYNOUS, "Offspring using gender preferences", "Define which offspring use your gender preferences."));
+            UtilText.nodeContentSB.append(getCustomContentPreferenceDivStart(PresetColour.ANDROGYNOUS, "Потомство с использованием гендерных предпочтений", "Определите, какое потомство используйте ваши гендерные предпочтения."));
 				int[] orderOptions = new int[] {3, 0, 2, 1};
 				for(int i : orderOptions) {
 					UtilText.nodeContentSB.append(
@@ -2988,19 +2988,19 @@ public class OptionsDialogue {
 						+com.lilithsthrone.game.Properties.uddersLabels[i]+")]</div>");
 			}
 			UtilText.nodeContentSB.append("</div></div>");
-			
-			UtilText.nodeContentSB.append(getCustomContentPreferenceDivStart(PresetColour.BASE_BROWN_LIGHT, "Hair growth", "Select how often the player's hair will grow by 1cm. NPCs maintain their hair lengths, so this setting only affects you."));
+
+            UtilText.nodeContentSB.append(getCustomContentPreferenceDivStart(PresetColour.BASE_BROWN_LIGHT, "Рост волос", "Выберите, как часто волосы игрока будут расти на 1 см. NPC поддерживают свои длины волос, поэтому эта обстановка влияет только на вас."));
 			int[] hairButtonOrder = new int[] {2, 1, 0, 3}; // Order buttons in this manner so that they appear to be a little more logical
 			for (int i : hairButtonOrder) {
 				boolean active = Main.getProperties().getHairGrowth() == i;
 				UtilText.nodeContentSB.append("<div id='HAIR_GROWTH_PREFERENCE_"+i+"' class='normal-button"+(Main.getProperties().getHairGrowth() == i?" selected":"")+"' style='width:calc(33% - 8px); margin-right:8px; text-align:center; float:right;'>"
 						+(i == 0
-								?"[style.bold"+(active?"Bad":"Disabled")+"(Never)]"
+                        ? "[style.bold" + (active ? "Bad" : "Disabled") + "(Никогда)]"
 								:(i == 1
-									?"[style.bold"+(active?"Size10":"Disabled")+"(Weekly)]"
+                        ? "[style.bold" + (active ? "Size10" : "Disabled") + "(Еженедельно)]"
 									:(i == 2
-										?"[style.bold"+(active?"Size5":"Disabled")+"(Daily)]"
-										:"[style.bold"+(active?"Size0":"Disabled")+"(Hourly)]")))
+                        ? "[style.bold" + (active ? "Size5" : "Disabled") + "(Ежедневно)]"
+                        : "[style.bold" + (active ? "Size0" : "Disabled") + "(Ежечасно)]")))
 						+"</div>");
 			}
 			UtilText.nodeContentSB.append("</div></div>");

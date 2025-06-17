@@ -1,39 +1,12 @@
 package com.lilithsthrone.game;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.valueEnums.AgeCategory;
 import com.lilithsthrone.game.character.body.valueEnums.CupSize;
 import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
-import com.lilithsthrone.game.character.gender.AndrogynousIdentification;
-import com.lilithsthrone.game.character.gender.Gender;
-import com.lilithsthrone.game.character.gender.GenderNames;
-import com.lilithsthrone.game.character.gender.GenderPronoun;
-import com.lilithsthrone.game.character.gender.PronounType;
+import com.lilithsthrone.game.character.gender.*;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.FurryPreference;
@@ -48,16 +21,25 @@ import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
-import com.lilithsthrone.game.settings.DifficultyLevel;
-import com.lilithsthrone.game.settings.ForcedFetishTendency;
-import com.lilithsthrone.game.settings.ForcedTFTendency;
-import com.lilithsthrone.game.settings.KeyCodeWithModifiers;
-import com.lilithsthrone.game.settings.KeyboardAction;
+import com.lilithsthrone.game.settings.*;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.Artist;
 import com.lilithsthrone.rendering.Artwork;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -102,15 +84,15 @@ public class Properties {
 
 	// Offspring gender options:
 	public static final String[] offspringGenderName = new String[] {
-			"No offspring",
-			"Self-offspring",
-			"NPC-offspring",
-			"All offspring"};
+			"Никакое потомство",
+			"Потомство игрока",
+			"Потомство NPC",
+			"Всё потомство"};
 	public static final String[] offspringGenderDescription = new String[] {
-			"The gender of all offspring birthed throughout the game by both NPCs and the player will use gender ratios which are derived from their race.",
-			"The gender of offspring birthed by the player will use the gender preferences that you've defined on this page. Offspring birthed by NPCs will use gender ratios which are derived from the offspring's race.",
-			"The gender of offspring birthed by NPCs will use the gender preferences that you've defined on this page. Offspring birthed by the player will use gender ratios which are derived from the offspring's race.",
-			"The gender of all offspring birthed throughout the game by both NPCs and the player will use the gender preferences that you've defined on this page."};
+			"Пол всех потомков, родившийся на протяжении всей игры как NPC, и игрок будет использовать гендерные соотношения, которые получены из их расы.",
+			"Пол потомства, родившийся от игрока, будет использовать гендерные предпочтения, которые вы определили на этой странице. Потомство, рожденное NPC, будет использовать гендерные соотношения, которые получены из расы потомства.",
+			"Пол потомства, родившийся от NPC, будет использовать гендерные предпочтения, которые вы определили на этой странице. Потомство, рожденное игроком, будет использовать гендерные соотношения, которые получены из расы потомства.",
+			"Пол всего потомства, родившегося на протяжении всей игры как от NPC, так и от игрока будет использовать гендерные предпочтения, которые вы определили на этой странице."};
 	public int offspringGenderLevel = 0;
 	
 	public int humanSpawnRate = 5;
@@ -224,11 +206,11 @@ public class Properties {
 
 	public Map<PronounType, Map<AgeCategory, Integer>> agePreferencesMap;
 	
-	private Map<AbstractSubspecies, FurryPreference> subspeciesFeminineFurryPreferencesMap;
-	private Map<AbstractSubspecies, FurryPreference> subspeciesMasculineFurryPreferencesMap;
+	private final Map<AbstractSubspecies, FurryPreference> subspeciesFeminineFurryPreferencesMap;
+	private final Map<AbstractSubspecies, FurryPreference> subspeciesMasculineFurryPreferencesMap;
 	
-	private Map<AbstractSubspecies, SubspeciesPreference> subspeciesFemininePreferencesMap;
-	private Map<AbstractSubspecies, SubspeciesPreference> subspeciesMasculinePreferencesMap;
+	private final Map<AbstractSubspecies, SubspeciesPreference> subspeciesFemininePreferencesMap;
+	private final Map<AbstractSubspecies, SubspeciesPreference> subspeciesMasculinePreferencesMap;
 
 	public Map<Colour, Integer> skinColourPreferencesMap;
 	
@@ -238,11 +220,11 @@ public class Properties {
 	private ForcedFetishTendency forcedFetishTendency;
 	
 	// Discoveries:
-	private Set<AbstractItemType> itemsDiscovered;
-	private Set<AbstractWeaponType> weaponsDiscovered;
-	private Set<AbstractClothingType> clothingDiscovered;
-	private Set<AbstractSubspecies> subspeciesDiscovered;
-	private Set<AbstractSubspecies> subspeciesAdvancedKnowledge;
+	private final Set<AbstractItemType> itemsDiscovered;
+	private final Set<AbstractWeaponType> weaponsDiscovered;
+	private final Set<AbstractClothingType> clothingDiscovered;
+	private final Set<AbstractSubspecies> subspeciesDiscovered;
+	private final Set<AbstractSubspecies> subspeciesAdvancedKnowledge;
 
 	public Properties() {
 		values = new HashSet<>();

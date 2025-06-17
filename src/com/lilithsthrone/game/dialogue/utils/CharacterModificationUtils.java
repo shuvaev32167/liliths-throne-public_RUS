@@ -534,7 +534,7 @@ public class CharacterModificationUtils {
 		contentSB.setLength(0);
 		
 		contentSB.append("<div class='container-full-width'>"
-							+ "<div class='container-full-width' style='text-align:center;'><b>Sex Actions [style.colourSex(Performed)]</b></div>");
+				+ "<div class='container-full-width' style='text-align:center;'><b>[style.colourSex(Совершённые)] сексуальные действия</b></div>");
 		
 			contentSB.append(
 							getSexExperienceEntry("HANDJOBS_GIVEN",
@@ -578,7 +578,7 @@ public class CharacterModificationUtils {
 		contentSB.append("</div>");
 
 		contentSB.append("<div class='container-full-width'>"
-							+ "<div class='container-full-width' style='text-align:center;'><b>Sex Actions [style.colourSexDom(Received)]</b></div>");
+				+ "<div class='container-full-width' style='text-align:center;'><b>[style.colourSexDom(Полученные)] сексуальные действия</b></div>");
 			contentSB.append(
 							(BodyChanging.getTarget().hasPenis()
 									?getSexExperienceEntry("HANDJOBS_TAKEN",

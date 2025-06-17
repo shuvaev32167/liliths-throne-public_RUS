@@ -2471,12 +2471,13 @@ public class UtilText {
 			@Override
 			public String parse(List<GameCharacter> specialNPCs, String command, String arguments, String target, GameCharacter character) {
 				try {
-					if(Main.game.getPlayer().getClothingInSlot(InventorySlot.NECK).getStickers().get("txt").equals("filly")) {
-						return "filly";
+					if (Main.game.getPlayer().getClothingInSlot(InventorySlot.NECK).getStickers().get("txt").equals("filly") ||
+							Main.game.getPlayer().getClothingInSlot(InventorySlot.NECK).getStickers().get("txt").equals("кобылка")) {
+						return "кобылка";
 					}
-				} catch(Exception ex) {
+				} catch (Exception ignored) {
 				}
-				return "mule";
+				return "мул";
 			}
 		});
 
@@ -2491,12 +2492,13 @@ public class UtilText {
 			@Override
 			public String parse(List<GameCharacter> specialNPCs, String command, String arguments, String target, GameCharacter character) {
 				try {
-					if(Main.game.getPlayer().getClothingInSlot(InventorySlot.NECK).getStickers().get("txt").equals("filly")) {
-						return "fillies";
+					if (Main.game.getPlayer().getClothingInSlot(InventorySlot.NECK).getStickers().get("txt").equals("filly") ||
+							Main.game.getPlayer().getClothingInSlot(InventorySlot.NECK).getStickers().get("txt").equals("кобылка")) {
+						return "кобылки";
 					}
-				} catch(Exception ex) {
+				} catch (Exception ignored) {
 				}
-				return "mules";
+				return "мулы";
 			}
 		});
 

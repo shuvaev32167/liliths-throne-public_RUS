@@ -1204,7 +1204,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 		} else if (extraAttributes) {
 
 			boolean elemental = owner.isElemental() && ((Elemental)owner).getSummoner().isPlayer();
-			Main.mainController.setTooltipSize(400, 528+(Main.game.isEnchantmentCapacityEnabled()?46:32)+(elemental?28:0));
+			Main.mainController.setTooltipSize(440, 548 + (Main.game.isEnchantmentCapacityEnabled() ? 46 : 32) + (elemental ? 28 : 0));
 
 			int enchantmentPointsUsed = owner.getEnchantmentPointsUsedTotal();
 			tooltipSB.setLength(0);
@@ -1265,13 +1265,13 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 
 					// Header:
 					+ "<div class='subTitle-third combatValue' style='padding:2px; margin:2px 0 2px 2%; width:31.5%;'>"
-						+ "Type"
+							+ "Тип"
 					+ "</div>"
 						+ "<div class='subTitle-third combatValue' style='padding:2px; margin:2px 0.75%; width:31.5%;'>"
-					+ "Damage"
+							+ "Урон"
 						+ "</div>"
 					+ "<div class='subTitle-third combatValue' style='padding:2px; margin:2px 2% 2px 0; width:31.5%;'>"
-						+ "Shielding"
+							+ "Защита"
 					+ "</div>"
 
 					// Values:

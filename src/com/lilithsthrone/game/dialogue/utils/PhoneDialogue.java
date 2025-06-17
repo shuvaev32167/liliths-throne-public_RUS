@@ -1079,12 +1079,12 @@ public class PhoneDialogue {
 						+ "<b class='quest-extra experience' style='color:" + PresetColour.GENERIC_EXPERIENCE.toWebHexString() + ";'>" + q.getExperienceReward() + " xp</b>";
 				
 			} else {
-				return "<b class='quest-extra level'>Level " + q.getLevel()+ "</b>"
+				return "<b class='quest-extra level'>Уровень " + q.getLevel() + "</b>"
 						+ "<b class='quest-extra experience' style='color:" + PresetColour.GENERIC_EXPERIENCE.toWebHexString() + ";'>" + q.getExperienceReward() + " xp</b>";
 			}
 			
 		} else {
-			return "<b class='quest-extra level' style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'>Level " + q.getLevel() + "</b>"
+			return "<b class='quest-extra level' style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'>Уровень " + q.getLevel() + "</b>"
 					+ "<b class='quest-extra experience' style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'>" + q.getExperienceReward() + " xp</b>";
 		}
 	}
