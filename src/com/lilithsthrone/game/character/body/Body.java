@@ -4122,7 +4122,7 @@ public class Body implements XMLSaving {
 		
 		// Eye makeup:
 		if(owner.getEyeLiner().getPrimaryColour()!=PresetColour.COVERING_NONE) {
-			sb.append(" Around [npc.her] [npc.eyes], [npc.sheHas] got a layer of "+owner.getEyeLiner().getColourDescriptor(owner, true, false)+" eye liner.");
+			sb.append(" Вокруг [npc.her] [pc.morphPluralGent([npc.eyes])], нанесена [pc.morphGenSinFem(" + owner.getEyeLiner().getColourDescriptor(owner, true, false) + ")] подводка.");
 		}
 		if(owner.getEyeShadow().getPrimaryColour()!=PresetColour.COVERING_NONE) {
 			sb.append(" [npc.SheIs] wearing a tasteful amount of "+owner.getEyeShadow().getFullDescription(owner, true)+".");

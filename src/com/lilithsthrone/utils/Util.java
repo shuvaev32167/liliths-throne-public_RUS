@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
  */
 public class Util {
 
-	public static final Random random = new Random();
+	public static Random random = new Random();
 
 	private static final Map<KeyCode, String> KEY_NAMES = new LinkedHashMap<KeyCode, String>() {
 		private static final long serialVersionUID = 1L;

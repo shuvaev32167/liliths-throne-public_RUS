@@ -40,6 +40,7 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.utils.time.DateAndTime;
 import com.lilithsthrone.utils.time.SolarElevationAngle;
+import com.lilithsthrone.utils.translate.russian.Morpher;
 import com.lilithsthrone.world.places.GenericPlace;
 import com.lilithsthrone.world.places.PlaceUpgrade;
 
@@ -630,52 +631,52 @@ public class RoomPlayer {
 		
 		return sb.toString();
 	}
-	
-	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR = new DialogueNode("Calendar", "", true) {
+
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR = new DialogueNode("Календарь", "", true) {
 		@Override
 		public void applyPreParsingEffects() {
 			StringBuilder sb = new StringBuilder();
 
 			sb.append("<p>"
-					+ "You step over to one side of your room, where a calendar has been pinned to the wall."
-					+ " It's quite obviously enchanted, for as you flick through the pages, you discover that each month's picture changes based on your current train of thought.");
+					+ "Ты подходишь к одной стороне своей комнаты, где к стене прикреплён календарь."
+					+ " Очевидно, что он зачарован, поскольку, листая страницы, ты обнаруживаешь, что картинка каждого месяца меняется в зависимости от того, о чём ты думаешь в данный момент.");
 
 			if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
-				sb.append(" As you think about each month, a thematically-dressed man, incubus, or some kind of animal-boy appears on the page.");
+				sb.append(" По мере того, как ты думаешь о каждом месяце, на странице появляется тематически одетый человек, инкуб или какой-нибудь зверомальчик.");
 			} else {
-				sb.append(" As you think about each month, a thematically-dressed woman, succubus, or some kind of animal-girl appears on the page.");
+				sb.append(" По мере того как ты думаешь о каждом месяце, на странице появляется тематически одетая женщина, суккуб или какая-нибудь зверодевочка.");
 			}
 
 			if(Main.game.getPlayer().getCorruptionLevel()==CorruptionLevel.ZERO_PURE) {
-				sb.append(" The more you flick back and forth through the calendar, the more scantily-dressed the subject of each picture becomes, until you suddenly realise what you're doing and step back, shocked.");
+				sb.append(" Чем больше ты листаешь календарь туда-сюда, тем более раздетым становится объект каждой фотографии, пока ты вдруг не понимаешь, что делаешь, и в шоке отступаешь назад.");
 			} else {
-				sb.append(" The more you flick back and forth through the calendar, the more scantily-dressed the subject of each picture becomes, and you find yourself getting a little turned on...");
+				sb.append(" Чем больше ты листаешь календарь туда-сюда, тем более раздетым становится объект каждой фотографии, и ты начинаешь понемногу заводиться...");
 			}
 			sb.append("</p>");
 
 			if(Main.game.getDialogueFlags().values.contains(DialogueFlagValue.knowsDate)) {
 				sb.append("<p>"
-						+ "Suddenly remembering what it was that you wanted to look at, you scan through the calendar to find the current date,");
+						+ "Внезапно вспомнив, что именно ты [pc.genderBasedWord(хотел, хотела)] посмотреть, ты просматриваешь календарь, чтобы найти текущую дату,");
 			} else {
 				sb.append("<p>"
-						+ "You were so distracted by the changing pictures that you momentarily forgot what it was that you wanted to check."
-						+ " Shaking your head, you flip back through the calendar to find out what the current date is,");
+						+ "Ты так [pc.genderBasedWord(увлёкся, увлеклась)] сменой фотографий, что на мгновение [pc.genderBasedWord(забыл, забыла)], что именно [pc.genderBasedWord(хотел, хотела)] выяснить."
+						+ " Встряхнув головой, ты перелистываешь календарь, чтобы узнать текущую дату,");
 			}
 
-			sb.append(" and see that it's the <b style='color:"+PresetColour.BASE_BLUE_LIGHT.toWebHexString()+";'>"
+			sb.append(" и видишь, что сегодня <b style='color:" + PresetColour.BASE_BLUE_LIGHT.toWebHexString() + ";'>"
 						+ Units.date(Main.game.getDateNow(), Units.DateType.LONG)
-					+"</b>. From a quick calculation "+(Main.game.getPlayer().getAttributeValue(Attribute.MAJOR_ARCANE)<IntelligenceLevel.ONE_AVERAGE.getMaximumValue()?"(with some help from your phone's calculator)":"")
-					+ ", you figure out that it's been <b style='color:"+PresetColour.GENERIC_EXCELLENT.toWebHexString()+";'>"+Main.game.getDayNumber()+" day"+(Main.game.getDayNumber()>1?"s":"")+"</b> since you appeared in this world."
+					+ "</b>. Быстро посчитав " + (Main.game.getPlayer().getAttributeValue(Attribute.MAJOR_ARCANE) < IntelligenceLevel.ONE_AVERAGE.getMaximumValue() ? "(с помощью калькулятора твоего телефона)" : "")
+					+ ", ты узнаёшь, что находишься в этом мире <b style='color:" + PresetColour.GENERIC_EXCELLENT.toWebHexString() + ";'>" + Main.game.getDayNumber() + " " + Morpher.morphCountableNoun(Main.game.getDayNumber(), "день") + "</b>."
 					+ "</p>");
 
 			if(!Main.game.getDialogueFlags().values.contains(DialogueFlagValue.knowsDate)) {
 				sb.append("<p>"
-						+ "[pc.thought(Wait... " + Main.game.getDateNow().format(DateTimeFormatter.ofPattern("yyyy", RUSSIAN_LOCALE)) + "?! I need to check in with Lilaya about that...)]"
+						+ "[pc.thought(Что... " + Main.game.getDateNow().format(DateTimeFormatter.ofPattern("yyyy", RUSSIAN_LOCALE)) + "?! Мне нужно поговорить с Лилайей об этом...)]"
 						+ "</p>");
 			}
 
 			sb.append("<p>"
-					+ "You notice that on each page of the calendar, there's a few paragraphs detailing the events that occur during that month."
+					+ "Ты замечаешь, что на каждой странице календаря есть несколько абзацев с подробным описанием событий, которые случаются в этом месяце."
 					+ "</p>");
 
 			Main.game.getTextStartStringBuilder().append(sb);
@@ -698,31 +699,31 @@ public class RoomPlayer {
 //				return LilayaHomeGeneric.getLilayasHouseFastTravelResponses(index);
 //			}
 			if (index == 0) {
-				return new Response("Back", "Step away from the calendar.", ROOM);
+				return new Response("Назад", "Отойди от календаря.", ROOM);
 			} else if(index==1) {
-				return new Response("January", "Read the information on January's page. [style.italicsMinorBad(There are currently no special events during January.)]", AUNT_HOME_PLAYERS_ROOM_CALENDAR_JANUARY);
+				return new Response("Январь", "Прочитать информацию на странице января. [style.italicsMinorBad(В настоящее время нет особых мероприятий в январе.)]", AUNT_HOME_PLAYERS_ROOM_CALENDAR_JANUARY);
 			} else if(index==2) {
-				return new Response("February", "Read the information on February page. [style.italicsMinorBad(There are currently no special events during February.)]", AUNT_HOME_PLAYERS_ROOM_CALENDAR_FEBRUARY);
+				return new Response("Февраль", "Прочитать информацию на странице февраля. [style.italicsMinorBad(В настоящее время нет специальных мероприятий в феврале.)]", AUNT_HOME_PLAYERS_ROOM_CALENDAR_FEBRUARY);
 			} else if(index==3) {
-				return new Response("March", "Read the information on March's page. [style.italicsMinorBad(There are currently no special events during March.)]", AUNT_HOME_PLAYERS_ROOM_CALENDAR_MARCH);
+				return new Response("Март", "Прочитать информацию на странице марта. [style.italicsMinorBad(В настоящее время нет специальных мероприятий в марте.)]", AUNT_HOME_PLAYERS_ROOM_CALENDAR_MARCH);
 			} else if(index==4) {
-				return new Response("April", "Read the information on April's page. [style.italicsMinorBad(There are currently no special events during April.)]", AUNT_HOME_PLAYERS_ROOM_CALENDAR_APRIL);
+				return new Response("Апрель", "Прочитать информацию на странице апреля. [style.italicsMinorBad(В настоящее время нет специальных мероприятий в апреле.)]", AUNT_HOME_PLAYERS_ROOM_CALENDAR_APRIL);
 			} else if(index==5) {
-				return new Response("May", "Read the information on May's page.", AUNT_HOME_PLAYERS_ROOM_CALENDAR_MAY);
+				return new Response("Май", "Прочитать информацию на странице мая.", AUNT_HOME_PLAYERS_ROOM_CALENDAR_MAY);
 			} else if(index==6) {
-				return new Response("June", "Read the information on June's page.", AUNT_HOME_PLAYERS_ROOM_CALENDAR_JUNE);
+				return new Response("Июнь", "Прочитать информацию на странице июня.", AUNT_HOME_PLAYERS_ROOM_CALENDAR_JUNE);
 			} else if(index==7) {
-				return new Response("July", "Read the information on July's page. [style.italicsMinorBad(There are currently no special events during July.)]", AUNT_HOME_PLAYERS_ROOM_CALENDAR_JULY);
+				return new Response("Июль", "Прочитать информацию на странице июля. [style.italicsMinorBad(В настоящее время нет специальных мероприятий в июле.)]", AUNT_HOME_PLAYERS_ROOM_CALENDAR_JULY);
 			} else if(index==8) {
-				return new Response("August", "Read the information on August's page. [style.italicsMinorBad(There are currently no special events during August.)]", AUNT_HOME_PLAYERS_ROOM_CALENDAR_AUGUST);
+				return new Response("Август", "Прочитать информацию на странице августа [style.italicsMinorBad(В настоящее время нет специальных мероприятий в августе.)]", AUNT_HOME_PLAYERS_ROOM_CALENDAR_AUGUST);
 			} else if(index==9) {
-				return new Response("September", "Read the information on September's page. [style.italicsMinorBad(There are currently no special events during September.)]", AUNT_HOME_PLAYERS_ROOM_CALENDAR_SEPTEMBER);
+				return new Response("Сентябрь", "Прочитать информацию на странице сентября. [style.italicsMinorBad(В настоящее время нет специальных мероприятий в сентябре.)]", AUNT_HOME_PLAYERS_ROOM_CALENDAR_SEPTEMBER);
 			} else if(index==10) {
-				return new Response("October", "Read the information on October's page.", AUNT_HOME_PLAYERS_ROOM_CALENDAR_OCTOBER);
+				return new Response("Октябрь", "Прочитать информацию на странице октября.", AUNT_HOME_PLAYERS_ROOM_CALENDAR_OCTOBER);
 			} else if(index==11) {
-				return new Response("November", "Read the information on November's page. [style.italicsMinorBad(There are currently no special events during November.)]", AUNT_HOME_PLAYERS_ROOM_CALENDAR_NOVEMBER);
+				return new Response("Ноябрь", "Прочитать информацию на странице ноября. [style.italicsMinorBad(В настоящее время нет специальных мероприятий в ноябре.)]", AUNT_HOME_PLAYERS_ROOM_CALENDAR_NOVEMBER);
 			} else if(index==12) {
-				return new Response("December", "Read the information on December's page.", AUNT_HOME_PLAYERS_ROOM_CALENDAR_DECEMBER);
+				return new Response("Декабрь", "Прочитать информацию на странице декабря.", AUNT_HOME_PLAYERS_ROOM_CALENDAR_DECEMBER);
 			} else {
 				return null;
 			}
@@ -772,7 +773,7 @@ public class RoomPlayer {
 					names.add("<span style='color:"+npc.getFemininity().getColour().toWebHexString()+";'>"+npc.getName()+"</span>");
 				}
 				sb.append("<p>"
-							+ "Assigned to your room "+(soloSlave?"is your slave":"are your slaves")+"; "+Util.stringsToStringList(names, false)+".");
+						+ "В твоей комнате " + (soloSlave ? "будет находиться твой раб" : "будут находиться твои рабы") + "; " + Util.stringsToStringList(names, false) + ".");
 				
 				List<NPC> greetings = charactersPresent.stream().filter(npc -> npc.hasSlaveJobSetting(SlaveJob.BEDROOM, SlaveJobSetting.BEDROOM_GREETING)).collect(Collectors.toList());
 				names = new ArrayList<>();
@@ -2282,7 +2283,7 @@ public class RoomPlayer {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("<p>"
-				+ "Flicking through the calendar until you're looking at the page for " + month.getDisplayName(TextStyle.FULL, RUSSIAN_LOCALE) + ", you see that this month's image is now of ");
+				+ "Перелистываешь календаря, пока не попадёшь на страницу " + month.getDisplayName(TextStyle.FULL, RUSSIAN_LOCALE) + ", ты видишь, что изображение в этом месяце теперь ");
 
 		if(Util.random.nextInt()<15) {
 			if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {

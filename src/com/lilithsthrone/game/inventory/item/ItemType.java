@@ -2827,8 +2827,8 @@ public class ItemType {
 			AbstractItemType spellBook = new AbstractItemType(value,
 					null,
 					false,
-					"Spellbook: "+s.getName(),
-					"Spellbooks: "+s.getName(),
+					"Том чар: " + s.getName(),
+					"Тома чар: " + s.getName(),
 					"An arcane tome which contains detailed instructions on how to cast the spell '"+s.getName()+"'."
 							+ " Reading this tome will permanently unlock the ability to cast this spell.",
 					"spell_book",

@@ -827,7 +827,7 @@ public class PhoneDialogue {
 			return DialogueNodeType.PHONE;
 		}
 	};
-	public static final DialogueNode PLANNER_SIDE = new DialogueNode("Planner", "", true) {
+	public static final DialogueNode PLANNER_SIDE = new DialogueNode("Планировщик", "", true) {
 
 		@Override
 		public String getContent() {
@@ -892,7 +892,7 @@ public class PhoneDialogue {
 			}
 			
 			if(!sideQuestsFound) {
-				journalSB.append("<div class='subTitle'>You haven't got any side quests!</div>");
+				journalSB.append("<div class='subTitle'>У тебя ещё нет побочных квестов!</div>");
 			}
 
 			return journalSB.toString();
@@ -984,7 +984,7 @@ public class PhoneDialogue {
 			}
 			
 			if(!relationshipQuestFound) {
-				journalSB.append("<div class='subTitle'>You haven't got any romance quests!</div>");
+				journalSB.append("<div class='subTitle'>У тебя ещё нет романтических квестов!</div>");
 			}
 
 			return journalSB.toString();
@@ -3450,10 +3450,10 @@ public class PhoneDialogue {
 				};
 				
 			} else if(index==3) {
-				return new Response("Spell books",
+				return new Response("Книги заклинаний",
 						encyclopediaItemIndex==2
-							?"You're already viewing all of the spell books that you've discovered..."
-							:"View all of the spell books that you've discovered.",
+								? "Ты уже [pc.genderBasedWord(просмотрел, просмотрела)] все книги заклинаний, которые [pc.genderBasedWord(обнаружил, обнаружила)]..."
+								: "Посмотреть все книги заклинаний, которые ты [pc.genderBasedWord(обнаружил, обнаружила)].",
 						encyclopediaItemIndex==2
 							?null
 							:ITEM_CATALOGUE){
