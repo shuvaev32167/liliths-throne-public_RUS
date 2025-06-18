@@ -742,7 +742,7 @@ public class PhoneDialogue {
 		}
 	};
 
-	public static final DialogueNode PLANNER_MAIN = new DialogueNode("Planner", "", true) {
+	public static final DialogueNode PLANNER_MAIN = new DialogueNode("Планировщик", "", true) {
 
 		@Override
 		public String getContent() {
@@ -787,14 +787,14 @@ public class PhoneDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Main quests", "View your progress on the main quest.", null);
+				return new Response("Основные квесты", "Посмотреть свой прогресс в основных квестах.", null);
 				
 			} else if (index == 2) {
 				return new Response(
 						(Main.game.getPlayer().isSideQuestUpdated()
 							?"<span style='color:" + PresetColour.GENERIC_EXCELLENT.toWebHexString() + ";'>Side quests</span>"
-							:"Side quests"),
-						"View your side quests.",
+								: "Побочные квесты"),
+						"Посмотреть на свои побочные квесты.",
 						PLANNER_SIDE){
 					@Override
 					public void effects() {
@@ -805,9 +805,9 @@ public class PhoneDialogue {
 			} else if (index == 3) {
 				return new Response(
 						(Main.game.getPlayer().isRelationshipQuestUpdated()
-							?"<span style='color:" + PresetColour.GENERIC_EXCELLENT.toWebHexString() + ";'>Romance quests</span>"
-							:"Romance quests"),
-						"View your romance quests.",
+								? "<span style='color:" + PresetColour.GENERIC_EXCELLENT.toWebHexString() + ";'>Романтические квесты</span>"
+								: "Романтические квесты"),
+						"Посмотреть на свои романтические квесты.",
 						PLANNER_RELATIONSHIP){
 					@Override
 					public void effects() {
@@ -816,7 +816,7 @@ public class PhoneDialogue {
 				};
 				
 			} else if (index == 0) {
-				return new Response("Back", "Return to the phone's main menu.", MENU);
+				return new Response("Назад", "Вернуться в главное меню телефона.", MENU);
 			} else {
 				return null;
 			}
@@ -857,7 +857,7 @@ public class PhoneDialogue {
 						journalSB.append(
 								"<details>"
 								+ "<summary class='quest-title' style='color:" + PresetColour.GENERIC_TERRIBLE.getShades()[1] + ";'>"
-									+ "Failed - " + questLine.getName()
+										+ "Провалено - " + questLine.getName()
 								+ "</summary>");
 						journalSB.append(getQuestBoxDivFailed(Main.game.getPlayer().getQuestsFailed().get(questLine)));
 //						journalSB.append(getQuestBoxDiv(q, true)); // Do not append, as this was the failed Quest
@@ -901,15 +901,15 @@ public class PhoneDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Main quests", "View your progress on the main quest.", PLANNER_MAIN);
+				return new Response("Основные квесты", "Посмотреть свой прогресс в основных квестах.", PLANNER_MAIN);
 			} else if (index == 2) {
-				return new Response("Side quests", "View your side quests.", null);
+				return new Response("Побочные квесты", "Посмотреть на свои побочные квесты.", null);
 			} else if (index == 3) {
 				return new Response(
 						(Main.game.getPlayer().isRelationshipQuestUpdated()
-						?"<span style='color:" + PresetColour.GENERIC_EXCELLENT.toWebHexString() + ";'>Romance quests</span>"
-							:"Romance quests"),
-							"View your romance quests.",
+								? "<span style='color:" + PresetColour.GENERIC_EXCELLENT.toWebHexString() + ";'>Романтические квесты</span>"
+								: "Романтические квесты"),
+						"Посмотреть на свои романтические квесты.",
 						PLANNER_RELATIONSHIP){
 					@Override
 					public void effects() {
@@ -917,7 +917,7 @@ public class PhoneDialogue {
 					}
 				};
 			} else if (index == 0) {
-				return new Response("Back", "Return to the phone's main menu.", MENU);
+				return new Response("Назад", "Вернуться в главное меню телефона.", MENU);
 			} else {
 				return null;
 			}
@@ -928,7 +928,7 @@ public class PhoneDialogue {
 			return DialogueNodeType.PHONE;
 		}
 	};
-	public static final DialogueNode PLANNER_RELATIONSHIP = new DialogueNode("Planner", "", true) {
+	public static final DialogueNode PLANNER_RELATIONSHIP = new DialogueNode("Планировщик", "", true) {
 
 		@Override
 		public String getContent() {
@@ -949,7 +949,7 @@ public class PhoneDialogue {
 						journalSB.append(
 								"<details>"
 								+ "<summary class='quest-title' style='color:" + PresetColour.GENERIC_TERRIBLE.getShades()[1] + ";'>"
-									+ "Failed - " + questLine.getName()
+										+ "Провалено - " + questLine.getName()
 								+ "</summary>");
 						journalSB.append(getQuestBoxDivFailed(Main.game.getPlayer().getQuestsFailed().get(questLine)));
 //						journalSB.append(getQuestBoxDiv(q, true)); // Do not append, as this was the failed Quest
@@ -993,20 +993,20 @@ public class PhoneDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Main quests", "View your progress on the main quest.", PLANNER_MAIN);
+				return new Response("Основные квесты", "Посмотреть свой прогресс в основных квестах.", PLANNER_MAIN);
 			} else if (index == 2) {
 				return new Response((Main.game.getPlayer().isSideQuestUpdated()
 						?"<span style='color:" + PresetColour.GENERIC_EXCELLENT.toWebHexString() + ";'>Side quests</span>"
-						:"Side quests"), "View your side quests.", PLANNER_SIDE){
+						: "Побочные квесты"), "Посмотреть на свои побочные квесты.", PLANNER_SIDE) {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setSideQuestUpdated(false);
 					}
 				};
 			} else if (index == 3) {
-				return new Response("Romance quests", "View your romance quests.", null);
+				return new Response("Романтические квесты", "Посмотреть на свои романтические квесты.", null);
 			} else if (index == 0) {
-				return new Response("Back", "Return to the phone's main menu.", MENU);
+				return new Response("Назад", "Вернуться в главное меню телефона.", MENU);
 			} else {
 				return null;
 			}
@@ -1101,7 +1101,7 @@ public class PhoneDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 0) {
-				return new Response("Back", "Return to the phone's main menu.", MENU);
+				return new Response("Назад", "Вернуться в главное меню телефона.", MENU);
 			} else {
 				return null;
 			}
@@ -1296,7 +1296,7 @@ public class PhoneDialogue {
 				return new Response("Pregnancy stats", "Have a detailed look at your pregnancy stats.", CHARACTER_STATS_PREGNANCY);
 			
 			} else if (index == 0) {
-				return new Response("Back", "Return to the phone's main menu.", MENU);
+				return new Response("Назад", "Вернуться в главное меню телефона.", MENU);
 			
 			} else {
 				return null;
@@ -1761,7 +1761,7 @@ public class PhoneDialogue {
 				return new Response("Pregnancy stats", "Have a detailed look at your pregnancy stats.", CHARACTER_STATS_PREGNANCY);
 			
 			} else if (index == 0) {
-				return new Response("Back", "Return to the phone's main menu.", MENU);
+				return new Response("Назад", "Вернуться в главное меню телефона.", MENU);
 			
 			} else {
 				return null;
@@ -1969,7 +1969,7 @@ public class PhoneDialogue {
 				return new Response("Pregnancy stats", "Have a detailed look at your pregnancy stats.", CHARACTER_STATS_PREGNANCY);
 			
 			} else if (index == 0) {
-				return new Response("Back", "Return to the phone's main menu.", MENU);
+				return new Response("Назад", "Вернуться в главное меню телефона.", MENU);
 			
 			} else {
 				return null;
@@ -2245,7 +2245,7 @@ public class PhoneDialogue {
 				return new Response("Pregnancy stats", "Have a detailed look at your pregnancy stats.", null);
 			
 			} else if (index == 0) {
-				return new Response("Back", "Return to the phone's main menu.", MENU);
+				return new Response("Назад", "Вернуться в главное меню телефона.", MENU);
 			
 			} else {
 				return null;
@@ -2851,7 +2851,7 @@ public class PhoneDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 0) {
-				return new Response("Back", "Return to the phone's main menu.", MENU);
+				return new Response("Назад", "Вернуться в главное меню телефона.", MENU);
 			
 			} else if (index <= charactersEncountered.size()) {
 				GameCharacter npc = charactersEncountered.get(index-1);
@@ -2894,7 +2894,7 @@ public class PhoneDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 0) {
-				return new Response("Back", "Return to the phone's main menu.", MENU);
+				return new Response("Назад", "Вернуться в главное меню телефона.", MENU);
 			
 			} else if (index <= Main.game.getPlayer().getCharactersEncountered().size()) {
 				try {
@@ -3044,7 +3044,7 @@ public class PhoneDialogue {
 				}
 				
 			} else if (index == 0) {
-				return new Response("Back", "Return to the phone's main menu.", MENU);
+				return new Response("Назад", "Вернуться в главное меню телефона.", MENU);
 
 			} else {
 				return null;
@@ -4116,7 +4116,7 @@ public class PhoneDialogue {
 				}
 			
 			} else if (index == 0) {
-				return new Response("Back", "Return to the phone's main menu.", MENU);
+				return new Response("Назад", "Вернуться в главное меню телефона.", MENU);
 			
 			} else {
 				return null;

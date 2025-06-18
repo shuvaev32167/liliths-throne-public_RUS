@@ -39,7 +39,7 @@ public enum BodyPartType {
 	MOUTH("mouth"),
 	TONGUE("tongue"),
     HAIR("волосы"),
-	HORN("horns"),
+	HORN("рога"),
 	
 	// Penis:
 	PENIS("penis"),

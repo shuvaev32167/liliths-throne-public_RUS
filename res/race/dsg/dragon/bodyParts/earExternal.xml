@@ -51,17 +51,17 @@
 	<transformationDescription><![CDATA[
 		They quickly begin to lengthen into a triangular shape and grow in size.
 		#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)
-		 A layer of [npc.earFullDescriptionColour] quickly grows to cover them,
+		 Слой [npc.earFullDescriptionColour] быстро растет, покрывая их,
 		#ELSE
-		 Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],
+		 Как и остальные части [npc.targetBasedWord(твоей, [npc.her])] тела, они сделаны из [npc.earFullDescription].,
 		#ENDIF
 		 and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new dragon-like ears back and forth.
-		<br/>[npc.Name] now [npc.has] [style.boldDragon(triangular, dragon-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].
+		<br/>[npc.Name] now [npc.has] [style.boldDragon(triangular, dragon-like ears)], которые [npc.materialCompositionDescriptor] [npc.earFullDescription].
 	]]></transformationDescription>
 	
 	<!-- How this ear is described in a character's description page. -->
 	<bodyDescription><![CDATA[
-		[npc.She] [npc.has] a pair of triangular,#IF(npc.isPiercedEar()) pierced,#ENDIF dragon-like ears, which are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].
+		У [npc.targetBasedWord(тебя, н[npc.him])] пара of triangular,#IF(npc.isPiercedEar()) pierced,#ENDIF dragon-like ears, which are [pc.morphPluralParticipleToShortForm([npc.materialCompositionDescriptor])] [pc.morphSingleInstr([pc.morphGenSinFem([npc.earFullDescription(true)])])].
 	]]></bodyDescription>
 	
 </ear>

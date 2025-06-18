@@ -1544,7 +1544,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 					if(!target.isHasAnyPregnancyEffects()) { // Vagina cannot be transformed if pregnant, so skip this
 						possibleEffects.add(new PossibleItemEffect(
 							new ItemEffect(genitalsItemType.getEnchantmentEffect(), TFModifier.TF_VAGINA, TFModifier.REMOVAL, TFPotency.MINOR_BOOST, 1),
-							"Say goodbye to your cunt; you're not going to be needing it anymore!"));
+								"Попрощайся со своей пиздой, она тебе больше не понадобится!"));
 					}
 					
 				} else {
@@ -1559,7 +1559,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 				if(body.getPenis().getType()==PenisType.NONE) {
 					possibleEffects.add(new PossibleItemEffect(
 						new ItemEffect(genitalsItemType.getEnchantmentEffect(), TFModifier.TF_PENIS, TFModifier.REMOVAL, TFPotency.MINOR_BOOST, 1),
-						"It's time to get rid of that cock of yours!"));
+							"Пора избавиться от этого члена!"));
 					if(possibleEffects.size()>=numberOfTransformations) { return new TransformativePotion(itemType, possibleEffects, body); }
 					
 				} else {
@@ -1578,65 +1578,65 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 					possibleEffects.add(new PossibleItemEffect(
 						new ItemEffect(getItemEnchantmentEffect(itemType, body.getAntenna()), TFModifier.TF_ANTENNA, TFModifier.NONE, TFPotency.MINOR_BOOST, 1),
 						body.getAntenna().getType()==AntennaType.NONE
-							?UtilText.parse(target, "I don't want you having those [npc.antennae] anymore!")
-							:"Time to give you some antennae!"));//TODO
+								? UtilText.parse(target, "Я не хочу, чтобы у тебя больше были эти [npc.antennae]!")
+								: "Пора сделать тебе антенны!"));//TODO
 					if(possibleEffects.size()>=numberOfTransformations) { return new TransformativePotion(itemType, possibleEffects, body); }
 				}
 				if(Main.getProperties().getForcedTFPreference() != FurryPreference.MINIMUM) {
 					if(target.getAssType() != body.getAss().getType()) {
 						possibleEffects.add(new PossibleItemEffect(
 							new ItemEffect(getItemEnchantmentEffect(itemType, body.getAss()), TFModifier.TF_ASS, TFModifier.NONE, TFPotency.MINOR_BOOST, 1),
-							"Let's transform your ass!"));
+								"Преобразим твою задницу!"));
 						if(possibleEffects.size()>=numberOfTransformations) { return new TransformativePotion(itemType, possibleEffects, body); }
 					}
 					if(target.getBreastType() != body.getBreast().getType()) {
 						possibleEffects.add(new PossibleItemEffect(
 							new ItemEffect(getItemEnchantmentEffect(itemType, body.getBreast()), TFModifier.TF_BREASTS, TFModifier.NONE, TFPotency.MINOR_BOOST, 1),
-							"Your breasts need to be transformed as well!"));
+								"Твоя грудь тоже должна преобразиться!"));
 						if(possibleEffects.size()>=numberOfTransformations) { return new TransformativePotion(itemType, possibleEffects, body); }
 					}
 					if(applyingCrotchBoobTF && target.getBreastCrotchType() != body.getBreastCrotch().getType() && body.getBreastCrotch().getType()!=BreastType.NONE) {
 						possibleEffects.add(new PossibleItemEffect(
 							new ItemEffect(getItemEnchantmentEffect(itemType, body.getBreastCrotch()), TFModifier.TF_BREASTS_CROTCH, TFModifier.NONE, TFPotency.MINOR_BOOST, 1),
-							"You need some new crotch-boobs!"));
+								"Тебе нужно новое вымя!"));
 						if(possibleEffects.size()>=numberOfTransformations) { return new TransformativePotion(itemType, possibleEffects, body); }
 					}
 				}
 				if(target.getEarType() != body.getEar().getType()) {
 					possibleEffects.add(new PossibleItemEffect(
 						new ItemEffect(getItemEnchantmentEffect(itemType, body.getEar()), TFModifier.TF_EARS, body.getEar().getType().getTFModifier(), TFPotency.MINOR_BOOST, 1),
-						"Your ears could use some improvement!"));
+							"Твои уши не помешало бы улучшить!"));
 					if(possibleEffects.size()>=numberOfTransformations) { return new TransformativePotion(itemType, possibleEffects, body); }
 				}
 				if(target.getEyeType() != body.getEye().getType()) {
 					possibleEffects.add(new PossibleItemEffect(
 						new ItemEffect(getItemEnchantmentEffect(itemType, body.getEye()), TFModifier.TF_EYES, TFModifier.NONE, TFPotency.MINOR_BOOST, 1),
-						"Now for your eyes to be transformed!"));
+							"Теперь твои глаза преобразятся!"));
 					if(possibleEffects.size()>=numberOfTransformations) { return new TransformativePotion(itemType, possibleEffects, body); }
 				}
 				if(target.getHairType() != body.getHair().getType()) {
 					possibleEffects.add(new PossibleItemEffect(
 						new ItemEffect(getItemEnchantmentEffect(itemType, body.getHair()), TFModifier.TF_HAIR, body.getHair().getType().getTFModifier(), TFPotency.MINOR_BOOST, 1),
-						"This might tingle a little!"));
+							"Это может вызвать лёгкое покалывание!"));
 					if(possibleEffects.size()>=numberOfTransformations) { return new TransformativePotion(itemType, possibleEffects, body); }
 				}
 				if(target.getHornType() != body.getHorn().getType()) {
 					possibleEffects.add(new PossibleItemEffect(
 						new ItemEffect(getItemEnchantmentEffect(itemType, body.getHorn()), TFModifier.TF_HORNS, body.getHorn().getType().getTFModifier(), TFPotency.MINOR_BOOST, 1),
 						body.getHorn().getType()==HornType.NONE
-							?"Let's get rid of those horns of yours..."
-							:"Ready to grow some new horns?"));
+								? "Давай избавимся от этих твоих рогов..."
+								: "[npc.genderBasedWord(Готов, Готова)] отрастить новые рога?"));
 					if(possibleEffects.size()>=numberOfTransformations) { return new TransformativePotion(itemType, possibleEffects, body); }
 				} else if (target.getHornType() != HornType.NONE) {
 					if(target.getHornLengthValue() + 3 < body.getHorn().getHornLengthValue()) {
 						possibleEffects.add(new PossibleItemEffect(
 							new ItemEffect(itemType.getEnchantmentEffect(), TFModifier.TF_HORNS, TFModifier.TF_MOD_SIZE, TFPotency.BOOST, 1),
-							"Let's make your horn" + ((target.getHornsPerRow() * target.getHornRows()) > 1 ? "s" : "") + " longer!"));
+								"Давай сделаем тво" + ((target.getHornsPerRow() * target.getHornRows()) > 1 ? "и рога" : "й рог") + " длиннее!"));
 						if(possibleEffects.size()>=numberOfTransformations) { return new TransformativePotion(itemType, possibleEffects, body); }
 					} else if(target.getHornLengthValue() - 3 > body.getHorn().getHornLengthValue()) {
 						possibleEffects.add(new PossibleItemEffect(
 							new ItemEffect(itemType.getEnchantmentEffect(), TFModifier.TF_HORNS, TFModifier.TF_MOD_SIZE, TFPotency.DRAIN, 1),
-							"Let's make your horn" + ((target.getHornsPerRow() * target.getHornRows()) > 1 ? "s" : "") + " shorter!"));
+								"Давай сделаем тво" + ((target.getHornsPerRow() * target.getHornRows()) > 1 ? "и рога" : "й рог") + " короче!"));
 						if(possibleEffects.size()>=numberOfTransformations) { return new TransformativePotion(itemType, possibleEffects, body); }
 					}
 				}
@@ -1646,16 +1646,16 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 					possibleEffects.add(new PossibleItemEffect(
 						new ItemEffect(getItemEnchantmentEffect(itemType, body.getTail()), TFModifier.TF_TAIL, body.getTail().getType().getTFModifier(), TFPotency.MINOR_BOOST, 1), 
 						body.getTail().getType()==TailType.NONE
-							?"That tail of yours is only getting in the way!"
-							:"Time to get a new tail!"));
+								? "Этот твой хвост только мешает!"
+								: "Время получить новый хвост!"));
 					if(possibleEffects.size()>=numberOfTransformations) { return new TransformativePotion(itemType, possibleEffects, body); }
 				}
 				if(target.getWingType() != body.getWing().getType()) {
 					possibleEffects.add(new PossibleItemEffect(
 						new ItemEffect(getItemEnchantmentEffect(itemType, body.getWing()), TFModifier.TF_WINGS, body.getWing().getType().getTFModifier(), TFPotency.MINOR_BOOST, 1),
 						body.getWing().getType()==WingType.NONE
-							?"Let's get rid of those wings of yours..."
-							:"Ready to grow some new wings?"));
+								? "Давайте избавимся от тоих крыльев ..."
+								: "[npc.genderBasedWord(Готов, Готова)] вырастить новые крылья?"));
 					if(possibleEffects.size()>=numberOfTransformations) { return new TransformativePotion(itemType, possibleEffects, body); }
 				}
 			}
@@ -1666,18 +1666,18 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 					if(target.getArmType() != body.getArm().getType()) {
 						possibleEffects.add(new PossibleItemEffect(
 							new ItemEffect(getItemEnchantmentEffect(itemType, body.getArm()), TFModifier.TF_ARMS, TFModifier.NONE, TFPotency.MINOR_BOOST, 1),
-							"Your arms could do with a change!"));
+								"Твои руки не помешало бы изменить!"));
 					}
 					// TODO: Add separate chunks for LegConfiguration and LegType if more races have multiple leg types
 					if(target.getLegType() != body.getLeg().getType()) {
 						possibleEffects.add(new PossibleItemEffect(
 							new ItemEffect(getItemEnchantmentEffect(itemType, body.getLeg()), TFModifier.TF_LEGS, TFModifier.NONE, TFPotency.MINOR_BOOST, 1),
-							"Your legs need changing as well!"));
+								"Твои ноги тоже нуждаются в изменении!"));
 					}
 					if(target.getLegConfiguration() != body.getLeg().getLegConfiguration()) {
 						possibleEffects.add(new PossibleItemEffect(
 							new ItemEffect(getItemEnchantmentEffect(itemType, body.getLeg()), TFModifier.TF_LEGS, body.getLeg().getLegConfiguration().getTFModifier(), TFPotency.MINOR_BOOST, 1),
-							"I want you with "+UtilText.generateSingularDeterminer(body.getLeg().getLegConfiguration().getName())+" "+body.getLeg().getLegConfiguration().getName()+" body!"));
+								"Я хочу, чтобы ты [npc.genderBasedWord(был, была)] с " + UtilText.generateSingularDeterminer(body.getLeg().getLegConfiguration().getName()) + " " + body.getLeg().getLegConfiguration().getName() + " телом!"));
 					}
 					if(possibleEffects.size()>=numberOfTransformations) { return new TransformativePotion(itemType, possibleEffects, body); } // Apply arms & legs at the same time
 				}
@@ -1688,12 +1688,12 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 					if(target.getTorsoType() != body.getTorso().getType()) {
 						possibleEffects.add(new PossibleItemEffect(
 							new ItemEffect(getItemEnchantmentEffect(itemType, body.getTorso()), TFModifier.TF_SKIN, TFModifier.NONE, TFPotency.MINOR_BOOST, 1),
-							"This is going to be good!"));
+								"Это будет здорово!"));
 					}
 					if(target.getFaceType() != body.getFace().getType()) {
 						possibleEffects.add(new PossibleItemEffect(
 							new ItemEffect(getItemEnchantmentEffect(itemType, body.getFace()), TFModifier.TF_FACE, body.getFace().getType().getTFModifier(), TFPotency.MINOR_BOOST, 1),
-							"I can't wait to see how you'll look after this!"));
+								"Не могу дождаться, чтобы увидеть, как ты будешь выглядеть после этого!"));
 					}
 					if(possibleEffects.size()>=numberOfTransformations) { return new TransformativePotion(itemType, possibleEffects, body); } // Apply face & skin at the same time
 				}

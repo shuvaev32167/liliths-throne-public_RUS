@@ -8904,7 +8904,7 @@ public class StatusEffect {
 	};
 	
 	public static AbstractStatusEffect SET_JOLNIR = new AbstractStatusEffect(70,
-			"J&oacute;lnir",
+            "Йолнир",
 			"clothingSets/jolnir",
 			PresetColour.BASE_BLACK,
 			true,

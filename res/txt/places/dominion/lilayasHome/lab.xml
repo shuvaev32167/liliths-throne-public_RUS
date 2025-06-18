@@ -523,7 +523,7 @@
 	
 	<htmlContent tag="LILAYA_PRESENT_1"><![CDATA[
 	<p>
-		[pc.speech(I wanted to get you something for Yuletide, to thank you for everything,)] you say, holding out the wrapped gift towards Lilaya, [pc.speech(so here you go. Happy Yuletide, Lilaya!)]
+		[pc.speech(I wanted to get you something for Юлэтид, to thank you for everything,)] you say, holding out the wrapped gift towards Lilaya, [pc.speech(so here you go. Happy Юлэтид, Lilaya!)]
 	</p>
 	<p>
 		Your [lilaya.relation(pc)] gasps as you give her the gift you bought, [lilaya.speech([pc.Name]! Y-You didn't have to do that! Oh my goodness, t-thank you so much!)]
@@ -551,7 +551,7 @@
 	
 	<htmlContent tag="LILAYA_PRESENT_2"><![CDATA[
 	<p>
-		[pc.speech(After I saw how happy you were to receive that [#CT_innoxia_japanese_kanzashi.getName()], I decided to get you another Yuletide gift,)] you say, holding out another wrapped gift towards Lilaya, [pc.speech(so here you go. Happy Yuletide again, Lilaya!)]
+		[pc.speech(After I saw how happy you were to receive that [#CT_innoxia_japanese_kanzashi.getName()], I decided to get you another Юлэтид gift,)] you say, holding out another wrapped gift towards Lilaya, [pc.speech(so here you go. Happy Юлэтид again, Lilaya!)]
 	</p>
 	<p>
 		Your [lilaya.relation(pc)]'s cheeks flush bright red as you give her another gift. [lilaya.speech([pc.name]! Y-You didn't have to! O-One gift was more than enough!)]
@@ -576,7 +576,7 @@
 	
 	<htmlContent tag="LILAYA_PRESENT_3"><![CDATA[
 	<p>
-		[pc.speech(Seeing as you have the other two parts already, I thought I'd get you one last gift, to see if it contains the kimono to finish the set,)] you say, holding out the wrapped gift towards Lilaya, [pc.speech(so here you go. Happy Yuletide yet again Lilaya!)]
+		[pc.speech(Seeing as you have the other two parts already, I thought I'd get you one last gift, to see if it contains the kimono to finish the set,)] you say, holding out the wrapped gift towards Lilaya, [pc.speech(so here you go. Happy Юлэтид yet again Lilaya!)]
 	</p>
 	<p>
 		Your demonic [lilaya.relation(pc)] cheeks turn a deep shade of scarlet, and she stutters in her embarrassment, [lilaya.speech(P-Please! [pc.Name]! I-I said you'd already given me enough!)]
@@ -585,7 +585,7 @@
 		[pc.speech(I know, I know,)] you laugh, pressing the gift into Lilaya's hands, [pc.speech(but I really wanted to get you the whole set!)]
 	</p>
 	<p>
-		[lilaya.speech(W-Well, these are random gifts, right? S-So it's probably not even going to be a kimono, b-but thank you anyway,)] Lilaya says, placing the gift down on the table beside her, before pulling off the ribbon and wrapping paper. Lifting off the lid, your easily-embarrassed [lilaya.relation(pc)] fails to contain an excited little cry as she sees what's inside. Your suspicions as to what it is are proven correct, as she quickly lifts out a beautiful pink [#CT_innoxia_japanese_kimono.getName()], before turning and beaming at you in delight. [lilaya.speech(Thank you so, so much, [pc.name]! This is the best Yuletide ever!)]
+		[lilaya.speech(W-Well, these are random gifts, right? S-So it's probably not even going to be a kimono, b-but thank you anyway,)] Lilaya says, placing the gift down on the table beside her, before pulling off the ribbon and wrapping paper. Lifting off the lid, your easily-embarrassed [lilaya.relation(pc)] fails to contain an excited little cry as she sees what's inside. Your suspicions as to what it is are proven correct, as she quickly lifts out a beautiful pink [#CT_innoxia_japanese_kimono.getName()], before turning and beaming at you in delight. [lilaya.speech(Thank you so, so much, [pc.name]! This is the best Юлэтид ever!)]
 	</p>
 	<p>
 		Before you can say anything, your demonic [lilaya.relation(pc)] leaps forwards and pulls you into the most loving hug yet; her [lilaya.breastSize] breasts squishing up against your body as she holds you close. After a moment, she then pulls back, and, placing the [#CT_innoxia_japanese_kimono.getName()] to one side, she waits to see what you'd like to discuss next.
@@ -771,7 +771,7 @@
 		[lilaya.speech(Aah! I-I forgot you were there!)] Lilaya calls out, proving the second assumption to be true. [lilaya.speech(Y-You can turn around now.)]
 	</p>
 	<p>
-		Turning around, you see your demonic [lilaya.relation(pc)] blushing profusely as she looks to the floor. The elegant pink kimono, delicate kanzashi, and delightful geta that you bought her as a Yuletide gift all work together to accentuate your [lilaya.relation(pc)]'s natural beauty. You find yourself gasping at how gorgeous she looks, which makes her look up and smile shyly at you.
+		Turning around, you see your demonic [lilaya.relation(pc)] blushing profusely as she looks to the floor. The elegant pink kimono, delicate kanzashi, and delightful geta that you bought her as a Юлэтид gift all work together to accentuate your [lilaya.relation(pc)]'s natural beauty. You find yourself gasping at how gorgeous she looks, which makes her look up and smile shyly at you.
 	</p>
 	<p>
 		[pc.speech(Wow, Lilaya, you look gorgeous!)] you exclaim, causing her cheeks to turn an even deeper shade of red.

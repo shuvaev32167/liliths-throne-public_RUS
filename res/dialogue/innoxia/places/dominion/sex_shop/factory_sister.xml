@@ -469,7 +469,7 @@
 			<response>
 				<responseTabIndex><![CDATA[0]]></responseTabIndex>
 				<index><![CDATA[1]]></index>
-				<responseTitle><![CDATA[Nightmares]]></responseTitle>
+				<responseTitle><![CDATA[Кошмары]]></responseTitle>
 				<responseTooltip><![CDATA[You recognise the two nightmares from having encountered them during the SWORD raid in Elis.]]></responseTooltip>
 				<nextDialogue><![CDATA[innoxia_places_dominion_sex_shop_factory_sister_travel_end]]></nextDialogue>
 			</response>

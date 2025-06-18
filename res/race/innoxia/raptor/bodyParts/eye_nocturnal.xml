@@ -30,7 +30,7 @@
 	]]></transformationDescription>
 	
 	<bodyDescription><![CDATA[
-		[npc.SheHasFull] [npc.eyePairs] large, owl-like eyes, which provide [npc.herHim] with excellent night vision. They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.
+		У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] large, owl-like eyes, which provide [npc.herHim] with excellent night vision. They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.
 	]]></bodyDescription>
 	
 </eye>

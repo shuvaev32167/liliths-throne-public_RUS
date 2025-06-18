@@ -30,7 +30,7 @@ public class FaceType {
 			"noses",
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-			"Thankfully#IF(!npc.isPlayer())for [npc.herHim]#ENDIF, the transformation only lasts a matter of moments, leaving [npc.herHim] with a normal human face, [npc.materialDescriptor] [npc.faceSkin+].<br/>"
+            "Thankfully#IF(!npc.isPlayer())for [npc.herHim]#ENDIF, Превращение длится всего несколько мгновений, после чего у [npc.herHim] [npc.targetBasedWord(остаёшься, остаётся)] с a normal human face, [npc.materialDescriptor] [npc.faceSkin+].<br/>"
 					+ "[npc.Name] now [npc.has] a [style.boldHuman(человеческое лицо)], [npc.materialDescriptor] [npc.faceFullDescription]."
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldHuman(human tongue)].",
             "У [npc.targetBasedWord(, н)][pc.morphSingleGent([npc.him])] [pc.morphGenSinNetr([npc.a_feminineDescriptor(true)])], человеческое лицо, [pc.morphGenSinNetr([npc.materialDescriptor])] [pc.morphSingleInstr([pc.morphGenSinFem([npc.faceFullDescription(true)])])].",
@@ -48,7 +48,7 @@ public class FaceType {
 			"noses",
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-			"Thankfully#IF(!npc.isPlayer())for [npc.herHim]#ENDIF, the transformation only lasts a matter of moments, leaving [npc.herHim] with an angelic, human-looking face, [npc.materialDescriptor] [npc.faceSkin+].<br/>"
+            "Thankfully#IF(!npc.isPlayer())for [npc.herHim]#ENDIF, Превращение длится всего несколько мгновений, после чего у [npc.herHim] [npc.targetBasedWord(остаёшься, остаётся)] с an angelic, human-looking face, [npc.materialDescriptor] [npc.faceSkin+].<br/>"
 					+ "[npc.Name] now [npc.has] an [style.boldAngel(angelic face)], [npc.materialDescriptor] [npc.faceFullDescription]."
 					+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] an [style.boldAngel(angelic tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], angelic face, [npc.materialDescriptor] [npc.faceFullDescription(true)].",
@@ -67,11 +67,11 @@ public class FaceType {
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			"#IF(npc.isShortStature())"
-				+ "Thankfully#IF(!npc.isPlayer())for [npc.herHim]#ENDIF, the transformation only lasts a matter of moments, leaving [npc.herHim] with an impish, human-looking face, [npc.materialDescriptor] [npc.faceSkin+].<br/>"
+                    + "Thankfully#IF(!npc.isPlayer())for [npc.herHim]#ENDIF, Превращение длится всего несколько мгновений, после чего у [npc.herHim] [npc.targetBasedWord(остаёшься, остаётся)] с an impish, human-looking face, [npc.materialDescriptor] [npc.faceSkin+].<br/>"
 				+ "[npc.Name] now [npc.has] a [style.boldImp(impish face)], [npc.materialDescriptor] [npc.faceFullDescription]."
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldImp(impish tongue)]."
 			+ "#ELSE"
-				+ "Thankfully#IF(!npc.isPlayer())for [npc.herHim]#ENDIF, the transformation only lasts a matter of moments, leaving [npc.herHim] with a demonic, human-looking face, [npc.materialDescriptor] [npc.faceSkin+].<br/>"
+                    + "Thankfully#IF(!npc.isPlayer())for [npc.herHim]#ENDIF, Превращение длится всего несколько мгновений, после чего у [npc.herHim] [npc.targetBasedWord(остаёшься, остаётся)] с a demonic, human-looking face, [npc.materialDescriptor] [npc.faceSkin+].<br/>"
 				+ "[npc.Name] now [npc.has] a [style.boldDemon(demonic face)], [npc.materialDescriptor] [npc.faceFullDescription]."
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldDemon(demonic tongue)]."
 			+ "#ENDIF",

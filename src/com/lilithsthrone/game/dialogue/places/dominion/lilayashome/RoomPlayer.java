@@ -642,9 +642,9 @@ public class RoomPlayer {
 					+ " Очевидно, что он зачарован, поскольку, листая страницы, ты обнаруживаешь, что картинка каждого месяца меняется в зависимости от того, о чём ты думаешь в данный момент.");
 
 			if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
-				sb.append(" По мере того, как ты думаешь о каждом месяце, на странице появляется тематически одетый человек, инкуб или какой-нибудь зверомальчик.");
+				sb.append(" По мере того как ты думаешь о каждом месяце, на странице появляется тематически одетый человек, инкуб или какой-нибудь зверопарень.");
 			} else {
-				sb.append(" По мере того как ты думаешь о каждом месяце, на странице появляется тематически одетая женщина, суккуб или какая-нибудь зверодевочка.");
+				sb.append(" По мере того как ты думаешь о каждом месяце, на странице появляется тематически одетая женщина, суккуб или какая-нибудь зверодувушка.");
 			}
 
 			if(Main.game.getPlayer().getCorruptionLevel()==CorruptionLevel.ZERO_PURE) {
@@ -2283,126 +2283,130 @@ public class RoomPlayer {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("<p>"
-				+ "Перелистываешь календаря, пока не попадёшь на страницу " + month.getDisplayName(TextStyle.FULL, RUSSIAN_LOCALE) + ", ты видишь, что изображение в этом месяце теперь ");
-
+				+ "Перелистываешь календаря, пока не попадёшь на страницу " + month.getDisplayName(TextStyle.FULL, RUSSIAN_LOCALE) + ", видишь, что в этом месяце на картинке ");
+		if (Main.game.getPlayer().getSexualOrientation() == SexualOrientation.ANDROPHILIC) {
+			sb.append("изображён ");
+		} else {
+			sb.append("изображена ");
+		}
 		if(Util.random.nextInt()<15) {
 			if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
 				sb.append(UtilText.returnStringAtRandom(
-						"a handsome merman, who's busily flexing his muscles while perched on a wave-swept rock.",
-						"muscular reindeer-boy, who's grinning as he presents his huge cock to you."));
+						"красивый тритон, который деловито разминает мускулы, сидя на скале, окатываемой волнами.",
+						"мускулистый олень-парень, который с ухмылкой демонстрирует свой огромный член."));
 			} else {
 				sb.append(UtilText.returnStringAtRandom(
-						"a beautiful mermaid, who's happily showing off her exposed breasts while perched on a wave-swept rock.",
-						"a curvy reindeer-girl, who's bending over a wooden table and presenting her wet pussy to you."));
+						"прекрасная русалка, которая с удовольствием демонстрирует свою обнаженную грудь, сидя на скале, окатываемой волнами.",
+						"изящная оленедевушка, которая склонилась над деревянным столом и демонстрирует свою мокрую киску."));
 			}
 
 		} else {
 			switch(month) {
 				case JANUARY:
 					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
-						sb.append("a toned "+Subspecies.RAT_MORPH.getSingularMaleName(null)+", who's grinning mischievously at you while stroking his fat, erect cock.");
+						sb.append("подтянутый " + Subspecies.RAT_MORPH.getSingularMaleName(null) + ", который озорно ухмыляется, поглаживая свой толстый эрегированный член.");
 					} else {
-						sb.append("a horny "+Subspecies.RAT_MORPH.getSingularFemaleName(null)+", who's bent over a table in order to present her dripping pussy to you.");
+						sb.append("похотливая " + Subspecies.RAT_MORPH.getSingularFemaleName(null) + ", которая перегнулась через стол, чтобы показать свою капающую киску.");
 					}
 					break;
 				case FEBRUARY:
 					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
-						sb.append("a topless "+Subspecies.COW_MORPH.getSingularMaleName(null)+"."
-								+ " His huge muscles are flexing as he carries a felled tree over one shoulder, while between his legs, you can't help but notice that he's got a massive bulge pressing out against the fabric of his shorts.");
+						sb.append("топлес " + Subspecies.COW_MORPH.getSingularMaleName(null) + "."
+								+ " Его огромные мышцы напрягаются, когда он несёт срубленное дерево через одно плечо, а между его ног можно заметить огромную выпуклость, которая давит на ткань его шорт.");
 					} else {
-						sb.append("a black-and-white "+Subspecies.COW_MORPH.getSingularFemaleName(null)+", who's sitting on a small milking stool."
-								+ " With a happy smile on her face, she's busily pinching and tugging at her engorged nipples, causing a stream of milk to flow out into a metal bucket.");
+						sb.append("чёрно-белая " + Subspecies.COW_MORPH.getSingularFemaleName(null) + ", которая сидит на маленькой доильной платформе."
+								+ " Со счастливой улыбкой на лице она деловито щиплет и дёргает свои набухшие соски, заставляя струйку молока вытекать в металлическое ведро.");
 					}
 					break;
 				case MARCH:
 					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
-						sb.append("a fierce-looking "+Subspecies.getSubspeciesFromId("innoxia_panther_subspecies_tiger").getSingularMaleName(null)+"."
-								+ " Striking a dominant pose, he's flashing you a toothy grin, clearly excited by the fact that his huge feline cock is fully on display.");
+						sb.append("свирепого вида " + Subspecies.getSubspeciesFromId("innoxia_panther_subspecies_tiger").getSingularMaleName(null) + "."
+								+ " Приняв доминирующую позу, он оскалился в зубастой ухмылке, явно возбуждённый тем, что его огромный кошачий член выставлен на всеобщее обозрение.");
 					} else {
 						sb.append("a fierce-looking "+Subspecies.getSubspeciesFromId("innoxia_panther_subspecies_tiger").getSingularFemaleName(null)+"."
-								+ " Striking a dominant pose, she's flashing you a toothy grin, clearly excited by the fact that her large breasts and tight pussy are fully on display.");
+								+ " Приняв доминирующую позу, она оскалилась в зубастой ухмылке, явно возбужденная тем, что её большая грудь и тугая киска выставлены на всеобщее обозрение.");
 					}
 					break;
 				case APRIL:
 					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
-						sb.append("a handsome "+Subspecies.RABBIT_MORPH.getSingularMaleName(null)+", who's holding his massive cock in one hand while giving you a suggestive wink.");
+						sb.append("красивый " + Subspecies.RABBIT_MORPH.getSingularMaleName(null) + ", который держит свой массивный член в одной руке, а другой соблазнительно помахивает.");
 					} else {
-						sb.append("three blushing "+Subspecies.RABBIT_MORPH.getPluralFemaleName(null)+", who are down on all fours, side-by-side, presenting their pussies to you.");
+						sb.append("три краснеющих " + Subspecies.RABBIT_MORPH.getPluralFemaleName(null) + ", стоят на четвереньках, бок о бок, демонстрируя свои киски.");
 					}
 					break;
 				case MAY:
 					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
-						sb.append("a powerful dragon, who's sitting on a golden throne perched on the top of a huge pile of treasure."
-								+ " His huge, scaly cock is fully on display, and with a grin on his face, he's giving you an expectant look, as though he's waiting for you to climb up and get a taste of it.");
+						sb.append("могущественный дракон, восседающий на золотом троне, стоящем на вершине огромной кучи сокровищ."
+								+ " Его огромный, покрытый чешуёй член выставлен на всеобщее обозрение, и с ухмылкой на лице он смотрит на тебя выжидающе, как будто ждёт, что ты заберёшься на него и попробуешь на вкус.");
 					} else {
-						sb.append("a powerful dragoness, who's sitting on a golden throne perched on the top of a huge pile of treasure."
-								+ " Her wet, scaly pussy is fully on display, and with a grin on her face, she's giving you an expectant look, as though she's waiting for you to climb up and get a taste of it.");
+						sb.append("могущественная драконица, восседающая на золотом троне, стоящем на вершине огромной кучи сокровищ."
+								+ " Её мокрая чешуйчатая киска полностью выставлена напоказ, и с ухмылкой на лице она смотрит на тебя выжидающе, как будто ждет, когда ты заберешься к ней и попробуешь на вкус.");
 					}
 					break;
 				case JUNE:
 					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
-						sb.append("an exotic-looking male lamia."
-								+ " He's quite clearly turned on and eager to have sex with someone, for his twin-cocks have pushed out from his cloaca; their heads already glistening in the sun from the slimy precum they're starting to exude.");
+						sb.append("экзотически выглядящий мужчина-ламия."
+								+ " Он явно возбуждён и жаждет секса с кем-то, потому что его члены-близнецы высунулись из клоаки; их головки уже блестят на солнце от слизистой спермы, которую они начинают выделять.");
 					} else {
-						sb.append("an exotic-looking female lamia."
-								+ " She's quite clearly turned on and eager to have sex with someone, for she's reaching down to spread her cloaca and present her dripping-wet pussy to you.");
+						sb.append("экзотически выглядящая женщина-ламия."
+								+ " Она явно возбуждена и жаждет секса с кем-то, ведь она тянется вниз, чтобы раздвинуть свою клоаку и показать свою мокрую от капель киску.");
 					}
 					break;
 				case JULY:
 					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
-						sb.append("an impressively-endowed "+Subspecies.HORSE_MORPH.getSingularMaleName(null)+", who's flexing his muscles as he presents his fully-erect flared cock to you.");
+						sb.append("впечатляюще одаренный " + Subspecies.HORSE_MORPH.getSingularMaleName(null) + ", который напрягает мускулы, демонстрируя свой полностью эрегированный член.");
 					} else {
-						sb.append("a fit "+Subspecies.HORSE_MORPH.getSingularFemaleName(null)+", who's leaning against a fence, flicking her tail to one side in order to present her animalistic-pussy to you.");
+						sb.append("подтянутая  " + Subspecies.HORSE_MORPH.getSingularFemaleName(null) + ", прислонившаяся к забору и виляющая хвостом в разные стороны, чтобы продемонстрировать свою звериную киску.");
 					}
 					break;
 				case AUGUST:
 					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
-						sb.append("a sheep-boy and goat-boy, standing side-by-side and presenting their erect cocks as they wink playfully at you.");
+						sb.append("овцепаень и козлопарень, стоящие бок о бок и демонстрирующие свои эрегированные члены, игриво подмигивающие.");
 					} else {
-						sb.append("a woolly sheep-girl and goat-girl, who are lying back and spreading their legs, presenting you with their tight, wet pussies.");
+						sb.append("шерстяные овечкодевушка и козодевушка, которые лежат и раздвигают ножки, демонстрируя свои тугие, влажные киски.");
 					}
 					break;
 				case SEPTEMBER:
 					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
-						sb.append("an unusually-masculine harpy."
-								+ " Although the size of his cock is nothing to write home about, he's extremely handsome, and you feel your heart beating faster as you see him winking at you.");
+						sb.append("необычайно мужественная гарпия."
+								+ " Несмотря на то, что размер его члена оставляет желать лучшего, он очень красив. Ты чувствуешь, как учащается сердцебиение, когда видишь, как он подмигивает тебе.");
 					} else {
-						sb.append("a beautiful female harpy."
-								+ " Although she's willingly presenting her wet pussy to you, the look on her face is one of condescending superiority,"
-									+ " and you get the impression that she'd make some kind of outrageous demand in exchange for allowing you to have sex with her.");
+						sb.append("красивая женщина-гарпия."
+								+ " Несмотря на то, что она охотно демонстрирует свою мокрую киску, выражение её лица выражает снисходительное превосходство,"
+								+ " и у тебя создается впечатление, что она выдвинет какое-то возмутительное требование в обмен на разрешение заняться с ней сексом.");
 					}
 					break;
 				case OCTOBER:
 					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
-						sb.append("a fit, handsome "+Subspecies.DEMON.getSingularMaleName(null)+", who's suggestively winking at you as he runs his fingers over his huge, erect cock.");
+						sb.append("подтянутый, симпатичный " + Subspecies.DEMON.getSingularMaleName(null) + ", который заманчиво подмигивает тебе, проводя пальцами по своему огромному эрегированному члену.");
 					} else {
-						sb.append("a fit, beautiful "+Subspecies.DEMON.getSingularFemaleName(null)+", wearing nothing but a witch's hat, who's suggestively winking at you as she runs her fingers over her wet pussy and huge breasts.");
+						sb.append("подтянутая, красивая " + Subspecies.DEMON.getSingularFemaleName(null) + ", в одной лишь шляпе ведьмы, которая заманчиво подмигивает тебе, проводя пальцами по своей мокрой киске и огромной груди.");
 					}
 					break;
 				case NOVEMBER:
 					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
-						sb.append("an energetic-looking "+Subspecies.DOG_MORPH.getSingularMaleName(null)+", who's smiling at you as he strokes his erect, knotted dog-cock.");
+						sb.append("энергичный " + Subspecies.DOG_MORPH.getSingularMaleName(null) + ", который улыбается тебе, поглаживая свой эрегированный, узловатый собачий член.");
 					} else {
-						sb.append("an excited-looking "+Subspecies.DOG_MORPH.getSingularFemaleName(null)+", who's down on all fours, raising her hips in order to present you with her wet pussy.");
+						sb.append("возбужденно выглядящая " + Subspecies.DOG_MORPH.getSingularFemaleName(null) + ", которая опустилась на четвереньки, приподняв бедра, чтобы показать свою мокрую киску.");
 					}
 					break;
 				case DECEMBER:
 					if(Main.game.getPlayer().getSexualOrientation()==SexualOrientation.ANDROPHILIC) {
-						sb.append("a muscular boar-boy, who's grinning at you in anticipation as he strokes his huge cock and pair of massive, cum-filled balls.");
+						sb.append("мускулистый хрякопарень, который с предвкушением ухмыляется, поглаживая свой огромный член и пару массивных, наполненных спермой яиц.");
 					} else {
-						sb.append("a pretty, blushing pig-girl, who's leaning back against a wall and reaching down to spread her puffy pink pussy to you.");
+						sb.append("симпатичная, румяная свинодевушка, которая прислонилась спиной к стене и тянется вниз, чтобы раздвинуть свою пухлую розовую киску.");
 					}
 					break;
 			}
 		}
 
-		sb.append(" After gazing at the picture for a few moments, you force yourself to look away and read the information that's written beneath:"
+		sb.append(" Полюбовавшись на картинку несколько мгновений, ты заставляешь себя отвести взгляд и прочитать информацию, написанную ниже:"
 				+ "</p>");
 
 		return sb.toString();
 	}
 
-	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_JANUARY = new DialogueNode("Calendar", "", true) {
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_JANUARY = new DialogueNode("Календарь", "", true) {
 
 		@Override
 		public String getContent() {
@@ -2412,20 +2416,20 @@ public class RoomPlayer {
 
 			UtilText.nodeContentSB.append(
 					"<h6 style='text-align:center;'>"
-							+ "[style.italicsMinorBad(There are currently no special events during January.)]");
+							+ "[style.italicsMinorBad(В настоящее время нет особых мероприятий в январе.)]");
 
 			return UtilText.nodeContentSB.toString();
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("January", "You are already reading the calendar's page concerning the month of January.", null);
+				return new Response("Январь", "Ты уже просматриваешь страницу календаря, посвященную январю.", null);
 			}
 			return AUNT_HOME_PLAYERS_ROOM_CALENDAR.getResponse(responseTab, index);
 		}
 	};
 
-	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_FEBRUARY = new DialogueNode("Calendar", "", true) {
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_FEBRUARY = new DialogueNode("Календарь", "", true) {
 
 		@Override
 		public String getContent() {
@@ -2435,20 +2439,20 @@ public class RoomPlayer {
 
 			UtilText.nodeContentSB.append(
 					"<h6 style='text-align:center;'>"
-							+ "[style.italicsMinorBad(There are currently no special events during February.)]");
+							+ "[style.italicsMinorBad(В настоящее время нет особых мероприятий в феврале.)]");
 
 			return UtilText.nodeContentSB.toString();
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==2) {
-				return new Response("February", "You are already reading the calendar's page concerning the month of February.", null);
+				return new Response("Февраль", "Ты уже просматриваешь страницу календаря, посвященную февралю.", null);
 			}
 			return AUNT_HOME_PLAYERS_ROOM_CALENDAR.getResponse(responseTab, index);
 		}
 	};
 
-	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_MARCH = new DialogueNode("Calendar", "", true) {
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_MARCH = new DialogueNode("Календарь", "", true) {
 
 		@Override
 		public String getContent() {
@@ -2458,20 +2462,20 @@ public class RoomPlayer {
 
 			UtilText.nodeContentSB.append(
 					"<h6 style='text-align:center;'>"
-							+ "[style.italicsMinorBad(There are currently no special events during March.)]");
+							+ "[style.italicsMinorBad(В настоящее время нет особых мероприятий в марте.)]");
 
 			return UtilText.nodeContentSB.toString();
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==3) {
-				return new Response("March", "You are already reading the calendar's page concerning the month of March.", null);
+				return new Response("Март", "Ты уже просматриваешь страницу календаря, посвященную марту.", null);
 			}
 			return AUNT_HOME_PLAYERS_ROOM_CALENDAR.getResponse(responseTab, index);
 		}
 	};
 
-	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_APRIL = new DialogueNode("Calendar", "", true) {
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_APRIL = new DialogueNode("Календарь", "", true) {
 
 		@Override
 		public String getContent() {
@@ -2481,20 +2485,20 @@ public class RoomPlayer {
 
 			UtilText.nodeContentSB.append(
 					"<h6 style='text-align:center;'>"
-							+ "[style.italicsMinorBad(There are currently no special events during April.)]");
+							+ "[style.italicsMinorBad(В настоящее время нет особых мероприятий в апреле.)]");
 
 			return UtilText.nodeContentSB.toString();
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==4) {
-				return new Response("April", "You are already reading the calendar's page concerning the month of April.", null);
+				return new Response("Апрель", "Ты уже просматриваешь страницу календаря, посвященную апрелю.", null);
 			}
 			return AUNT_HOME_PLAYERS_ROOM_CALENDAR.getResponse(responseTab, index);
 		}
 	};
 
-	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_MAY = new DialogueNode("Calendar", "", true) {
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_MAY = new DialogueNode("Календарь", "", true) {
 
 		@Override
 		public String getContent() {
@@ -2504,17 +2508,17 @@ public class RoomPlayer {
 
 			UtilText.nodeContentSB.append(
 					"<h4 style='text-align:center;'>"
-						+ "<span style='color:"+PresetColour.BASE_BLUE_LIGHT.toWebHexString()+";'>May</span>"
+							+ "<span style='color:" + PresetColour.BASE_BLUE_LIGHT.toWebHexString() + ";'>Май</span>"
 					+ "</h4>"
 					+ "<h6 style='text-align:center;'>"
-						+ "<span style='color:"+PresetColour.BASE_PINK_LIGHT.toWebHexString()+";'>Mother's Week</span>"
+							+ "<span style='color:" + PresetColour.BASE_PINK_LIGHT.toWebHexString() + ";'>Неделя материнства</span>"
 						+ "<br/>"
-						+ "8th-14th May"
+							+ "8-14 мая"
 					+ "</h6>"
 					+ "<p><i>"
-						+ "The second week of May is a time in which to celebrate mothers, motherhood, and the nature of the maternal bond between mother and child."
-						+ " During this time, fertility-enhancing consumables are generously provided free of charge for all residents of Dominion, and are handed out by volunteers down the main boulevards."
-						+ " In this way, Lilith shows her love for mothers, and ensures that many more will be made!"
+							+ "Вторая неделя мая - это время, когда чествуют матерей, материнство и природу материнской связи между матерью и ребёнком."
+							+ " В это время всем жителям Доминиона бесплатно предоставляются препараты, повышающие фертильность, которые раздаются волонтёрами на главных бульварах."
+							+ " Таким образом Лилит демонстрирует свою любовь к матерям и заботится о том, чтобы их стало гораздо больше.!"
 					+ "</i></p>");
 			
 			return UtilText.nodeContentSB.toString();
@@ -2524,13 +2528,13 @@ public class RoomPlayer {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==5) {
-				return new Response("May", "You are already reading the calendar's page concerning the month of May.", null);
+				return new Response("Май", "Ты уже просматриваешь страницу календаря, посвященную маю.", null);
 			}
 			return AUNT_HOME_PLAYERS_ROOM_CALENDAR.getResponse(responseTab, index);
 		}
 	};
 
-	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_JUNE = new DialogueNode("Calendar", "", true) {
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_JUNE = new DialogueNode("Календарь", "", true) {
 
 		@Override
 		public String getContent() {
@@ -2540,17 +2544,17 @@ public class RoomPlayer {
 
 			UtilText.nodeContentSB.append(
 					"<h4 style='text-align:center;'>"
-						+ "<span style='color:"+PresetColour.BASE_BLUE_LIGHT.toWebHexString()+";'>June</span>"
+							+ "<span style='color:" + PresetColour.BASE_BLUE_LIGHT.toWebHexString() + ";'>Июнь</span>"
 					+ "</h4>"
 					+"<h6 style='text-align:center;'>"
-						+ "<span style='color:"+PresetColour.BASE_BLUE.toWebHexString()+";'>Father's Week</span>"
+							+ "<span style='color:" + PresetColour.BASE_BLUE.toWebHexString() + ";'>Неделя отцовства</span>"
 						+ "<br/>"
-						+ "15th-21st June"
+							+ "15-21 июня"
 					+ "</h6>"
 					+ "<p><i>"
-						+ "The third week of June is a time in which to celebrate fathers, fatherhood, and the nature of the paternal bond between father and child."
-						+ " During this time, fertility-enhancing consumables are generously provided free of charge for all residents of Dominion, and are handed out by volunteers down the main boulevards."
-						+ " In this way, Lilith shows her love for fathers, and ensures that many more will be made!"
+							+ "Третья неделя июня - это время, когда чествуют отцов, отцовство и природу отцовской связи между отцом и ребёнком."
+							+ " В это время всем жителям Доминиона бесплатно предоставляются препараты, повышающие фертильность, которые раздаются волонтёрами на главных бульварах."
+							+ " Таким образом Лилит демонстрирует свою любовь к отцам и заботится о том, чтобы их было гораздо больше!"
 					+ "</i></p>");
 			
 			return UtilText.nodeContentSB.toString();
@@ -2560,13 +2564,13 @@ public class RoomPlayer {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==6) {
-				return new Response("June", "You are already reading the calendar's page concerning the month of June.", null);
+				return new Response("Июнь", "Ты уже просматриваешь страницу календаря, посвященную июню.", null);
 			}
 			return AUNT_HOME_PLAYERS_ROOM_CALENDAR.getResponse(responseTab, index);
 		}
 	};
 
-	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_JULY = new DialogueNode("Calendar", "", true) {
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_JULY = new DialogueNode("Календарь", "", true) {
 
 		@Override
 		public String getContent() {
@@ -2576,20 +2580,20 @@ public class RoomPlayer {
 
 			UtilText.nodeContentSB.append(
 					"<h6 style='text-align:center;'>"
-							+ "[style.italicsMinorBad(There are currently no special events during July.)]");
+							+ "[style.italicsMinorBad(В настоящее время нет особых мероприятий в июле.)]");
 
 			return UtilText.nodeContentSB.toString();
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==7) {
-				return new Response("July", "You are already reading the calendar's page concerning the month of July.", null);
+				return new Response("Июль", "Ты уже просматриваешь страницу календаря, посвященную июлю.", null);
 			}
 			return AUNT_HOME_PLAYERS_ROOM_CALENDAR.getResponse(responseTab, index);
 		}
 	};
 
-	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_AUGUST = new DialogueNode("Calendar", "", true) {
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_AUGUST = new DialogueNode("Календарь", "", true) {
 
 		@Override
 		public String getContent() {
@@ -2599,20 +2603,20 @@ public class RoomPlayer {
 
 			UtilText.nodeContentSB.append(
 					"<h6 style='text-align:center;'>"
-							+ "[style.italicsMinorBad(There are currently no special events during August.)]");
+							+ "[style.italicsMinorBad(В настоящее время нет особых мероприятий в августе.)]");
 
 			return UtilText.nodeContentSB.toString();
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==8) {
-				return new Response("August", "You are already reading the calendar's page concerning the month of August.", null);
+				return new Response("Август", "Ты уже просматриваешь страницу календаря, посвященную августу.", null);
 			}
 			return AUNT_HOME_PLAYERS_ROOM_CALENDAR.getResponse(responseTab, index);
 		}
 	};
 
-	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_SEPTEMBER = new DialogueNode("Calendar", "", true) {
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_SEPTEMBER = new DialogueNode("Календарь", "", true) {
 
 		@Override
 		public String getContent() {
@@ -2622,20 +2626,20 @@ public class RoomPlayer {
 
 			UtilText.nodeContentSB.append(
 					"<h6 style='text-align:center;'>"
-							+ "[style.italicsMinorBad(There are currently no special events during September.)]");
+							+ "[style.italicsMinorBad(В настоящее время нет особых мероприятий в сентябре.)]");
 
 			return UtilText.nodeContentSB.toString();
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==9) {
-				return new Response("September", "You are already reading the calendar's page concerning the month of September.", null);
+				return new Response("Сентябрь", "Ты уже просматриваешь страницу календаря, посвященную сентябрю.", null);
 			}
 			return AUNT_HOME_PLAYERS_ROOM_CALENDAR.getResponse(responseTab, index);
 		}
 	};
 
-	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_OCTOBER = new DialogueNode("Calendar", "", true) {
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_OCTOBER = new DialogueNode("Календарь", "", true) {
 
 		@Override
 		public String getContent() {
@@ -2645,23 +2649,23 @@ public class RoomPlayer {
 
 			UtilText.nodeContentSB.append(
 					"<h4 style='text-align:center;'>"
-							+ "<span style='color:"+PresetColour.BASE_BLUE_LIGHT.toWebHexString()+";'>October</span>"
+							+ "<span style='color:" + PresetColour.BASE_BLUE_LIGHT.toWebHexString() + ";'>Октябрь</span>"
 					+ "</h4>"
 					+"<h6 style='text-align:center;'>"
-						+ "<span style='color:"+PresetColour.GENERIC_ARCANE.toWebHexString()+";'>Lilith's Month</span>"
+							+ "<span style='color:" + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Месяц Лилит</span>"
 						+ "<br/>"
-						+ "All Month"
+							+ "Весь месяц"
 					+ "</h6>"
 					+ "<p><i>"
-						+ "October was chosen by Lilith herself to be the month in which all of Dominion shows their devotion towards their glorious queen!"
-						+ " Banners and ribbons, typically in Lilith's traditional colours of orange, purple, and black, are proudly flown from every building, in order to show our queen just how devoted her subjects are!"
-						+ " While all citizens are expected to celebrate Lilith's rule, the most devout of her followers dress up in traditional demonic costumes in order to prove their loyalty."
+							+ "Октябрь был выбран самой Лилит как месяц, в котором весь Доминион демонстрирует свою преданность своей славной королеве!"
+							+ " Знамёна и ленты, как правило, традиционных цветов Лилит - оранжевого, пурпурного и чёрного, - гордо развеваются над каждым зданием, чтобы показать нашей королеве, насколько преданны ей подданные!"
+							+ " Хотя все жители должны праздновать правление Лилит, самые набожные из её почитателей наряжаются в традиционные демонические костюмы, чтобы доказать свою преданность."
 					+ "</p>"
 					+ "<p>"
-						+ "The officially sanctioned 'Cult of Lilith' is the most fanatical group of our queen's supporters, and are very easy to spot during October,"
-							+ " as they refuse to wear anything but traditional witch's outfits, of the sort worn by Lilith herself in centuries past."
-						+ " While content to carry out their acts of devotion in private for the rest of the year, these cultists can get quite zealous during October,"
-							+ " and will sometimes even go so far as to approach members of the public and demand a display of loyalty from them!"
+							+ "Официально разрешенный «Культ Лилит» - самая фанатичная группа сторонников королевы, и их очень легко распознать в октябре,"
+							+ " поскольку они отказываются носить что-либо, кроме традиционных ведьминских нарядов, подобных тем, что носила сама Лилит в прошлые века."
+							+ " В остальное время года эти культисты довольствуются тем, что совершают свои акты преданности в уединении, но в октябре они могут проявить немалое рвение,"
+							+ " но в октябре они становятся весьма ревностными и иногда даже подходят к людям и требуют от них проявления преданности!"
 					+ "</i></p>");
 			
 			return UtilText.nodeContentSB.toString();
@@ -2671,13 +2675,13 @@ public class RoomPlayer {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==10) {
-				return new Response("October", "You are already reading the calendar's page concerning the month of October.", null);
+				return new Response("Октябрь", "Ты уже просматриваешь страницу календаря, посвященную октябрю.", null);
 			}
 			return AUNT_HOME_PLAYERS_ROOM_CALENDAR.getResponse(responseTab, index);
 		}
 	};
 
-	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_NOVEMBER = new DialogueNode("Calendar", "", true) {
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_NOVEMBER = new DialogueNode("Календарь", "", true) {
 
 		@Override
 		public String getContent() {
@@ -2687,20 +2691,20 @@ public class RoomPlayer {
 
 			UtilText.nodeContentSB.append(
 					"<h6 style='text-align:center;'>"
-							+ "[style.italicsMinorBad(There are currently no special events during November.)]");
+							+ "[style.italicsMinorBad(В настоящее время нет особых мероприятий в ноябре.)]");
 
 			return UtilText.nodeContentSB.toString();
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==11) {
-				return new Response("November", "You are already reading the calendar's page concerning the month of November.", null);
+				return new Response("Ноябрь", "Ты уже просматриваешь страницу календаря, посвященную ноябрю.", null);
 			}
 			return AUNT_HOME_PLAYERS_ROOM_CALENDAR.getResponse(responseTab, index);
 		}
 	};
 
-	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_DECEMBER = new DialogueNode("Calendar", "", true) {
+	public static final DialogueNode AUNT_HOME_PLAYERS_ROOM_CALENDAR_DECEMBER = new DialogueNode("Календарь", "", true) {
 
 		@Override
 		public String getContent() {
@@ -2710,25 +2714,25 @@ public class RoomPlayer {
 
 			UtilText.nodeContentSB.append(
 					"<h4 style='text-align:center;'>"
-							+ "<span style='color:"+PresetColour.BASE_BLUE_LIGHT.toWebHexString()+";'>December</span>"
+							+ "<span style='color:" + PresetColour.BASE_BLUE_LIGHT.toWebHexString() + ";'>Декабрь</span>"
 					+ "</h4>"
 					+ "<h6 style='text-align:center;'>"
-						+ "<span style='color:"+PresetColour.BASE_GOLD.toWebHexString()+";'>Yuletide</span>"
+							+ "<span style='color:" + PresetColour.BASE_GOLD.toWebHexString() + ";'>Юлэтид</span>"
 						+ "<br/>"
-						+ "All Month"
+							+ "Весь месяц"
 					+ "</h6>"
 					+ "<i>"
 					+ "<p>"
-						+ "The celebration of Yuletide is held throughout the month of December, and sometimes even drags on through January and February!"
-						+ " Giving gifts, holding feasts, and throwing parties are the ways in which Yuletide is celebrated."
-						+ " As this celebration coincides with the arrival of the reindeer-morphs in Dominion, it has become tradition for the gifts given during Yuletide to be items purchased from these reindeer-morphs."
+							+ "Празднование Юлэтида длится весь декабрь, а иногда даже затягивается на январь и февраль!"
+							+ " Дарить подарки, устраивать пиры и вечеринки - вот способы, которыми празднуется Юлэтид."
+							+ " Поскольку этот праздник совпадает с прибытием в Доминион оленей-морфов, стало традицией, что подарками, которые дарят во время Юлэтида, являются предметы, купленные у этих оленей-морфов."
 					+ "</p>"
 					+ "<p>"
-						+ "The figure associated with this season is the Lilin 'J&oacute;lnir' (meaning 'the Yule one', or 'Yule figure')."
-						+ " Not much is known about this Lilin, other than the obvious fact that their name breaks with the tradition of all Lilin's names beginning with an 'L', and that they are the leader of the 'Wild Hunt'."
+							+ "Фигура, связанная с этим сезоном, - Лилин «Йолнир» (что означает „Йоль“ или «Йольская фигура»)."
+							+ " Об этой Лилин известно немного, кроме того, что её имя нарушает традицию, согласно которой имена всех Лилин начинаются на букву «Л», и что она является лидером «Дикой охоты»."
 					+ "</p>"
 					+ "<p>"
-						+ "Consisting of a wandering horde of summoned arcane elementals, the 'Wild Hunt' was driven away from Dominion many years ago, and is now only found during Yuletide out in the Foloi Fields and the forests nearby."
+							+ "Состоящая из бродячей орды призванных арканных элементалей, «Дикая охота» была изгнана из Доминиона много лет назад, и теперь ее можно встретить только во время Юлэтида в Фолойских полях и близлежащих лесах."
 					+ "</p>"
 					+ "</i>");
 			
@@ -2739,7 +2743,7 @@ public class RoomPlayer {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==12) {
-				return new Response("December", "You are already reading the calendar's page concerning the month of December.", null);
+				return new Response("Декабрь", "Ты уже просматриваешь страницу календаря, посвященную декабрю.", null);
 			}
 			return AUNT_HOME_PLAYERS_ROOM_CALENDAR.getResponse(responseTab, index);
 		}

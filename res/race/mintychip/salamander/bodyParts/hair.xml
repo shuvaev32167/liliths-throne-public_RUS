@@ -51,7 +51,7 @@
 	<!-- The description which is shown when a character transforms to obtain this hair type.
 	This description immediately follows a brief description of the hair type beginning to transform. -->
 	<transformationDescription><![CDATA[
-		The transformation only lasts a matter of moments, leaving [npc.herHim] with salamander-like hair.
+		Превращение длится всего несколько мгновений, после чего у [npc.herHim] [npc.targetBasedWord(остаёшься, остаётся)] с salamander-like hair.
 		<br/>[npc.Name] now [npc.has] [npc.hairColour] [style.boldSalamander(salamander hair)].
 	]]></transformationDescription>
 	

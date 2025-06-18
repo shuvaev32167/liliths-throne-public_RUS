@@ -42,7 +42,7 @@
 	<iconName displaySize="80">dalmatianIcon</iconName>
 	<backgroundName>background</backgroundName>
 	<bookIconName>dalmatianIcon</bookIconName>
-	<bookName>Canine Culture</bookName>
+    <bookName>Культура собак</bookName>
 	<basicDescriptionId>DOG_MORPH_BASIC</basicDescriptionId>
 	<advancedDescriptionId>DOG_MORPH_ADVANCED</advancedDescriptionId>
 	<defaultPreference>TWO_AVERAGE</defaultPreference>
@@ -69,12 +69,12 @@
 	<description><![CDATA[A dog-morph which resembles an anthropomorphised dalmatian. They are known as 'dalmatian-morphs' when bipedal, and 'dalmatiantaurs' when the lower body is that of an oversized feral dalmatian. To be identified as a dalmatian-morph, a character must be a dog-morph that has floppy ears and short, white fur, with either black or pitch black spots.]]></description>
 	<nameHalfDemon>
 		<namesDefault>
-			<name><![CDATA[hellhound]]></name>
-			<namePlural><![CDATA[hellhounds]]></namePlural>
-			<singularMaleName><![CDATA[hellhound]]></singularMaleName>
-			<singularFemaleName><![CDATA[hellhound]]></singularFemaleName>
-			<pluralMaleName><![CDATA[hellhounds]]></pluralMaleName>
-			<pluralFemaleName><![CDATA[hellhounds]]></pluralFemaleName>
+            <name><![CDATA[адская гончая]]></name>
+            <namePlural><![CDATA[адские гончии]]></namePlural>
+            <singularMaleName><![CDATA[адская гончая]]></singularMaleName>
+            <singularFemaleName><![CDATA[адская гончая]]></singularFemaleName>
+            <pluralMaleName><![CDATA[адские гончии]]></pluralMaleName>
+            <pluralFemaleName><![CDATA[адские гончии]]></pluralFemaleName>
 		</namesDefault>
 	</nameHalfDemon>
 	<feralAttributes>

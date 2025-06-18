@@ -16,7 +16,7 @@
 		<descriptor>coarse</descriptor>
 	</descriptorsFeminine>
 	<transformationDescription><![CDATA[
-		The transformation only lasts a matter of moments, leaving [npc.herHim] with coarse hair.
+		Превращение длится всего несколько мгновений, после чего у [npc.herHim] [npc.targetBasedWord(остаёшься, остаётся)] с coarse hair.
 		<br/>[npc.Name] now [npc.has] [npc.hairColour] [style.boldSnake(snake hair)].
 	]]></transformationDescription>
 	<bodyDescription><![CDATA[

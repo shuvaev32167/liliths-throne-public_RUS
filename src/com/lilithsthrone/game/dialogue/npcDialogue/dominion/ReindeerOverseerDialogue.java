@@ -25,7 +25,7 @@ public class ReindeerOverseerDialogue {
 	private static Response getDefaultResponses(int index) {
 		if(index == 1) {
 			return new ResponseTrade("Trade",
-					UtilText.parse(getReindeer(), "Ask [npc.name] what Yuletide presents [npc.sheIs] selling."),
+                    UtilText.parse(getReindeer(), "Ask [npc.name] what Юлэтид presents [npc.sheIs] selling."),
 					getReindeer()) {
 				@Override
 				public void effects() {

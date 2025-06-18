@@ -357,7 +357,7 @@ public class Main extends Application {
 		credits.add(new CreditsSlot("Beldamon", "", 0, 0, 0, 10));
 		credits.add(new CreditsSlot("matchsticks", "", 0, 0, 10, 0));
 		credits.add(new CreditsSlot("masterpuppet", "", 0, 0, 15, 0));
-		credits.add(new CreditsSlot("Nightmare", "", 0, 0, 0, 5));
+		credits.add(new CreditsSlot("Кошмар", "", 0, 0, 0, 5));
 		credits.add(new CreditsSlot("AlphaOneBravo", "", 0, 0, 0, 19));
 		credits.add(new CreditsSlot("Max Nobody", "", 0, 0, 0, 19));
 		credits.add(new CreditsSlot("Mega", "", 0, 0, 11, 0));

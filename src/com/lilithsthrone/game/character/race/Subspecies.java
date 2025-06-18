@@ -113,15 +113,15 @@ public class Subspecies {
 			"женщины",
 			null,
 			Nocturnality.DIURNAL,
-			"Humans have a much higher resistance to the arousing effects of the arcane than any other race.",
+			"Люди обладают гораздо большей устойчивостью к возбуждающим эффектам арканы, чем представители любой другой расы.",
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
 					new Value<>(Attribute.MAJOR_ARCANE, 0f),
 					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
 					new Value<>(Attribute.RESISTANCE_LUST, 5f)),
 			null,
-			"Concerning Humans",
-			"Concerning Humans",
+			"О людях",
+			"О людях",
 			"HUMAN_BASIC",
 			"HUMAN_ADVANCED",
 			Race.HUMAN,
@@ -135,7 +135,7 @@ public class Subspecies {
 					new Value<>(PerkCategory.ARCANE, 1)),
 			PresetColour.RACE_HUMAN,
 			SubspeciesPreference.FOUR_ABUNDANT,
-			"A typical human.",
+			"Типичный человек.",
 			Util.newHashMapOfValues(
 					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.TEN),
 					new Value<>(WorldRegion.SUBMISSION, SubspeciesSpawnRarity.TEN),
@@ -478,7 +478,7 @@ public class Subspecies {
 			"суккубы",
 			null,
 			Nocturnality.CATHEMERAL,
-			"Due to the fact that demons are very easily able to harness arcane power, [npc.namePos] spell-casting abilities are truly a terrifying force to behold!",
+			"Благодаря тому, что демоны очень легко могут использовать арканную силу, способности [pc.morphSingleGent([npc.namePos])] к произнесению заклинаний становятся поистине ужасающей силой!",
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 25f),
 					new Value<>(Attribute.MAJOR_ARCANE, 30f),
@@ -487,10 +487,10 @@ public class Subspecies {
 					new Value<>(Attribute.DAMAGE_LUST, 25f),
 					new Value<>(Attribute.DAMAGE_SPELLS, 75f)),
 			Util.newArrayListOfValues(
-					"[style.boldDemon(Demonic)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>",
-					"<b style='color: "+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Immune to race transformations</b>"),
-			"Demonic Origins",
-			"Demonic Origins'",
+					"[style.boldDemon(Демоническое)] <b style='color: " + PresetColour.TRANSFORMATION_GENERIC.toWebHexString() + ";'> самопреобразования</b>",
+					"<b style='color: " + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Невосприимчивость к расовым трансформациям</b>"),
+			"Происхождение демонов",
+			"Происхождение демонов",
 			"DEMON_BASIC",
 			"DEMON_ADVANCED",
 			Race.DEMON,
@@ -504,7 +504,7 @@ public class Subspecies {
 					new Value<>(PerkCategory.ARCANE, 5)),
 			PresetColour.RACE_DEMON,
 			SubspeciesPreference.FOUR_ABUNDANT,
-			"A typical demon.",
+			"Типичный демон.",
 			Util.newHashMapOfValues(
 					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.THREE),
 					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.THREE),
@@ -525,7 +525,7 @@ public class Subspecies {
 
 				switch(legConfiguration) {
 					case BIPEDAL:
-						return "demon";
+						return "демон";
 					case ARACHNID:
 					case CEPHALOPOD:
 					case QUADRUPEDAL:
@@ -535,10 +535,10 @@ public class Subspecies {
 					case WINGED_BIPED:
 						return r==Race.HUMAN || r==Race.DEMON
 								?Race.DEMON.getFeralName(new LegConfigurationAffinity(legConfiguration, getAffinity()), false)
-								:"demonic-"+r.getName(body, true);
+								: (body.isFeminine() ? "демоническая-" : "демонический-") + r.getName(body, true);
 				}
 			}
-			return "demon";
+			return "демон";
 		}
 		@Override
 		public void applySpeciesChanges(Body body) {
@@ -666,7 +666,7 @@ public class Subspecies {
 			"полу-суккубы",
 			null,
 			Nocturnality.CATHEMERAL,
-			"Half-demons are almost as capable as regular demons at harnessing arcane power, and as a result, [npc.namePos] spell-casting abilities are exceptionally powerful!",
+			"Полудемоны почти так же, как и обычные демоны, способны использовать арканную силу, и в результате способности [pc.morphSingleGent([npc.namePos])] к произнесению заклинаний становятся исключительно мощными!",
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 10f),
 					new Value<>(Attribute.MAJOR_ARCANE, 20f),
@@ -675,10 +675,10 @@ public class Subspecies {
 					new Value<>(Attribute.DAMAGE_LUST, 20f),
 					new Value<>(Attribute.DAMAGE_SPELLS, 60f)),
 			Util.newArrayListOfValues(
-					"<b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'>Limited self-transformations</b>",
-					"<b style='color: "+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Immune to race transformations</b>"),
-			"Demonic Half-breeds",
-			"Demonic Half-breeds'",
+					"<b style='color: " + PresetColour.TRANSFORMATION_GENERIC.toWebHexString() + ";'>Ограниченное самопреобразование</b>",
+					"<b style='color: " + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Невосприимчивость к расовым трансформациям</b>"),
+			"Демонические полукровки",
+			"Демонические полукровки",
 			"HALF_DEMON_BASIC",
 			"HALF_DEMON_ADVANCED",
 			Race.DEMON,
@@ -692,7 +692,7 @@ public class Subspecies {
 					new Value<>(PerkCategory.ARCANE, 2)),
 			PresetColour.RACE_HALF_DEMON,
 			SubspeciesPreference.FOUR_ABUNDANT,
-			"The result of copulation between a demon and a non-demonic partner.",
+			"Результат совокупления между демоном и недемоническим партнёром.",
 			Util.newHashMapOfValues(
 					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.TWO),
 					new Value<>(WorldRegion.SUBMISSION, SubspeciesSpawnRarity.TWO),
@@ -908,14 +908,14 @@ public class Subspecies {
 			"пёсопарень",
 			"собакодевушка",
 			"пёсопарни",
-			"соакодевушки",
+			"собакодевушки",
 			new FeralAttributes(
-					"dog",
-					"dogs",
-					"dog",
-					"bitch",
-					"dogs",
-					"bitches",
+					"собака",
+					"собаки",
+					"пёс",
+					"сука",
+					"псы",
+					"суки",
 					LegConfiguration.QUADRUPEDAL,
 					70,
 					0,
@@ -923,8 +923,8 @@ public class Subspecies {
 					5,
 					1, false),
 			Nocturnality.DIURNAL,
-			"[npc.Name] always [npc.has] lots of energy, and [npc.she] get excited about new things very easily."
-					+ " [npc.She] also [npc.has] an instinctive desire to display [npc.her] dominance over innocent cat-morphs...",
+			"У [pc.morphSingleGent([npc.name])] всегда [npc.есть] много энергии, и [npc.она] очень легко радуется новым вещам."
+					+ " [npc.She] так же [npc.has] инстинктивное желание демонстрировать своё господство над невинными кошками-морфами...",
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 10f),
 					new Value<>(Attribute.MAJOR_ARCANE, 0f),
@@ -932,8 +932,8 @@ public class Subspecies {
 					new Value<>(Attribute.HEALTH_MAXIMUM, 5f),
 					new Value<>(Attribute.getRacialDamageAttribute(Race.CAT_MORPH), 5f)),
 			null,
-			"Canine Culture",
-			"Canine Cultures",
+			"Культура собак",
+			"Культуры собак",
 			"DOG_MORPH_BASIC",
 			"DOG_MORPH_ADVANCED",
 			Race.DOG_MORPH,
@@ -946,7 +946,7 @@ public class Subspecies {
 					new Value<>(PerkCategory.LUST, 1),
 					new Value<>(PerkCategory.ARCANE, 0)),
 			PresetColour.RACE_DOG_MORPH, SubspeciesPreference.FOUR_ABUNDANT,
-			"An anthropomorphic dog, known as a 'dog-morph' when bipedal, and a 'dogtaur' when the lower body is that of an oversized feral dog.",
+			"Антропоморфная собака, известная как «собакоморф», когда она двуногая, и «собакотавр», когда нижняя часть тела напоминает огромную дикую собаку.",
 			Util.newHashMapOfValues(
 					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.TEN),
 					new Value<>(WorldRegion.SUBMISSION, SubspeciesSpawnRarity.TEN),
@@ -961,21 +961,21 @@ public class Subspecies {
 		@Override
 		public String[] getHalfDemonName(Body body) {
 			String[] names = new String[] {
-					"hellhound",
-					"hellhounds",
-					"hellhound",
-					"hellhound",
-					"hellhounds",
-					"hellhounds"};
+					"адская гончая",
+					"адские гончии",
+					"адская гончая",
+					"адская гончая",
+					"адские гончии",
+					"адские гончии"};
 
 			if(body !=null && !body.getHalfDemonSubspecies().isNonBiped()) {
 				names = new String[] {
-					applyNonBipedNameChange(body, "hellhound", false, false),
-					applyNonBipedNameChange(body, "hellhound", false, true),
-					applyNonBipedNameChange(body, "hellhound", false, false),
-					applyNonBipedNameChange(body, "hellhound", true, false),
-					applyNonBipedNameChange(body, "hellhound", false, true),
-					applyNonBipedNameChange(body, "hellhound", true, true)
+						applyNonBipedNameChange(body, "адская гончая", false, false),
+						applyNonBipedNameChange(body, "адская гончая", false, true),
+						applyNonBipedNameChange(body, "адская гончая", false, false),
+						applyNonBipedNameChange(body, "адская гончая", true, false),
+						applyNonBipedNameChange(body, "адская гончая", false, true),
+						applyNonBipedNameChange(body, "адская гончая", true, true)
 				};
 			}
 
@@ -998,19 +998,19 @@ public class Subspecies {
 			"innoxia_race_cow_bubble_cream",
 			"statusEffects/race/raceCowMorph",
 			"statusEffects/race/raceBackground",
-			"cattle-morph",
-			"cattle-morphs",
-			"bull-boy",
-			"cow-girl",
-			"bull-boys",
-			"cow-girls",
+			"скотоморф",
+			"скотоморфы",
+			"быкопарень",
+			"короводувушка",
+			"быкопарни",
+			"короводувушки",
 			new FeralAttributes(
-					"cattle",
-					"cattle",
-					"bull",
-					"cow",
-					"bulls",
-					"cows",
+					"скот",
+					"скоты",
+					"бык",
+					"корова",
+					"быки",
+					"коровы",
 					LegConfiguration.QUADRUPEDAL,
 					160,
 					0,
@@ -1018,7 +1018,7 @@ public class Subspecies {
 					1,
 					4, false),
 			Nocturnality.DIURNAL,
-			"Although [npc.namePos] body possesses a great strength and toughness, [npc.her] mind isn't exactly the quickest...",
+			"Хотя тело [pc.morphSingleGent([npc.namePos])] обладает большой силой и выносливостью, [npc.her] ум не самый быстрый...",
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 30f),
 					new Value<>(Attribute.MAJOR_ARCANE, 0f),
@@ -1027,8 +1027,8 @@ public class Subspecies {
 					new Value<>(Attribute.DAMAGE_PHYSICAL, 10f),
 					new Value<>(Attribute.RESISTANCE_PHYSICAL, 2f)),
 			null,
-			"Milking Cows",
-			"Milking Cows'",
+			"Дойка коров",
+			"Дойка коров",
 			"COW_MORPH_BASIC",
 			"COW_MORPH_ADVANCED",
 			Race.COW_MORPH,
@@ -1041,7 +1041,7 @@ public class Subspecies {
 					new Value<>(PerkCategory.LUST, 1),
 					new Value<>(PerkCategory.ARCANE, 0)),
 			PresetColour.RACE_COW_MORPH, SubspeciesPreference.FOUR_ABUNDANT,
-			"An anthropomorphic cow, known as a 'cattle-morph' when bipedal, and a 'cowtaur'/'bulltaur' when the lower body is that of a feral cow or bull.",
+			"Антропоморфная корова, известная как «скотоморф», когда она двуногая, и «ковтавр»/«быкотавр», когда нижняя часть тела принадлежит дикой корове или быку.",
 			Util.newHashMapOfValues(
 					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.THREE),
 					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.TEN),
@@ -1052,19 +1052,19 @@ public class Subspecies {
 		@Override
 		public String[] getHalfDemonName(Body body) {
 			return new String[] {
-					"minotaur",
-					"minotaurs",
-					"minotaur",
-					"minotaur",
-					"minotaurs",
-					"minotaurs"};
+					"минотавр",
+					"минотавры",
+					"минотавр",
+					"минотавр",
+					"минотавры",
+					"минотавры"};
 		}
 		@Override
 		protected String applyNonBipedNameChange(Body body, String baseName, boolean applyFeminineForm, boolean plural) {
 			if(body.getLegConfiguration()==LegConfiguration.QUADRUPEDAL) {
 				return applyFeminineForm
-						?("cowtaur"+(plural?"s":""))
-						:("bulltaur"+(plural?"s":""));
+						? ("ковтавр" + (plural ? "ы" : ""))
+						: ("быкотавр" + (plural ? "ы" : ""));
 			}
 			return super.applyNonBipedNameChange(body, baseName, applyFeminineForm, plural);
 		}
@@ -1111,8 +1111,8 @@ public class Subspecies {
 					new Value<>(Attribute.DAMAGE_PHYSICAL, 15f),
 					new Value<>(Attribute.getRacialDamageAttribute(Race.CAT_MORPH), 5f)),
 			null,
-			"Canine Culture",
-			"Canine Cultures",
+			"Культура собак",
+			"Культуры собак",
 			"DOG_MORPH_BASIC",
 			"DOG_MORPH_ADVANCED",
 			Race.DOG_MORPH,
@@ -1160,21 +1160,21 @@ public class Subspecies {
 		@Override
 		public String[] getHalfDemonName(Body body) {
 			String[] names = new String[] {
-					"hellhound",
-					"hellhounds",
-					"hellhound",
-					"hellhound",
-					"hellhounds",
-					"hellhounds"};
+					"адская гончая",
+					"адские гончии",
+					"адская гончая",
+					"адская гончая",
+					"адские гончии",
+					"адские гончии"};
 
 			if(body !=null && !body.getHalfDemonSubspecies().isNonBiped()) {
 				names = new String[] {
-					applyNonBipedNameChange(body, "hellhound", false, false),
-					applyNonBipedNameChange(body, "hellhound", false, true),
-					applyNonBipedNameChange(body, "hellhound", false, false),
-					applyNonBipedNameChange(body, "hellhound", true, false),
-					applyNonBipedNameChange(body, "hellhound", false, true),
-					applyNonBipedNameChange(body, "hellhound", true, true)
+						applyNonBipedNameChange(body, "адская гончая", false, false),
+						applyNonBipedNameChange(body, "адская гончая", false, true),
+						applyNonBipedNameChange(body, "адская гончая", false, false),
+						applyNonBipedNameChange(body, "адская гончая", true, false),
+						applyNonBipedNameChange(body, "адская гончая", false, true),
+						applyNonBipedNameChange(body, "адская гончая", true, true)
 				};
 			}
 
@@ -1235,8 +1235,8 @@ public class Subspecies {
 					new Value<>(Attribute.HEALTH_MAXIMUM, 5f),
 					new Value<>(Attribute.getRacialDamageAttribute(Race.getRaceFromId("innoxia_sheep")), 25f)),
 			null,
-			"Canine Culture",
-			"Canine Cultures",
+			"Культура собак",
+			"Культуры собак",
 			"DOG_MORPH_BASIC",
 			"DOG_MORPH_ADVANCED",
 			Race.DOG_MORPH,
@@ -1272,21 +1272,21 @@ public class Subspecies {
 		@Override
 		public String[] getHalfDemonName(Body body) {
 			String[] names = new String[] {
-					"hellhound",
-					"hellhounds",
-					"hellhound",
-					"hellhound",
-					"hellhounds",
-					"hellhounds"};
+					"адская гончая",
+					"адские гончии",
+					"адская гончая",
+					"адская гончая",
+					"адские гончии",
+					"адские гончии"};
 			
 			if(body !=null && !body.getHalfDemonSubspecies().isNonBiped()) {
 				names = new String[] {
-					applyNonBipedNameChange(body, "hellhound", false, false),
-					applyNonBipedNameChange(body, "hellhound", false, true),
-					applyNonBipedNameChange(body, "hellhound", false, false),
-					applyNonBipedNameChange(body, "hellhound", true, false),
-					applyNonBipedNameChange(body, "hellhound", false, true),
-					applyNonBipedNameChange(body, "hellhound", true, true)
+						applyNonBipedNameChange(body, "адская гончая", false, false),
+						applyNonBipedNameChange(body, "адская гончая", false, true),
+						applyNonBipedNameChange(body, "адская гончая", false, false),
+						applyNonBipedNameChange(body, "адская гончая", true, false),
+						applyNonBipedNameChange(body, "адская гончая", false, true),
+						applyNonBipedNameChange(body, "адская гончая", true, true)
 				};
 			}
 			
@@ -1474,8 +1474,8 @@ public class Subspecies {
 					new Value<>(Attribute.DAMAGE_PHYSICAL, 5f),
 					new Value<>(Attribute.HEALTH_MAXIMUM, 5f)),
 			null,
-			"Canine Culture",
-			"Canine Cultures",
+			"Культура собак",
+			"Культуры собак",
 			"DOG_MORPH_BASIC",
 			"DOG_MORPH_ADVANCED",
 			Race.DOG_MORPH,
@@ -1511,21 +1511,21 @@ public class Subspecies {
 		@Override
 		public String[] getHalfDemonName(Body body) {
 			String[] names = new String[] {
-					"hellhound",
-					"hellhounds",
-					"hellhound",
-					"hellhound",
-					"hellhounds",
-					"hellhounds"};
+					"адская гончая",
+					"адские гончии",
+					"адская гончая",
+					"адская гончая",
+					"адские гончии",
+					"адские гончии"};
 			
 			if(body !=null && !body.getHalfDemonSubspecies().isNonBiped()) {
 				names = new String[] {
-					applyNonBipedNameChange(body, "hellhound", false, false),
-					applyNonBipedNameChange(body, "hellhound", false, true),
-					applyNonBipedNameChange(body, "hellhound", false, false),
-					applyNonBipedNameChange(body, "hellhound", true, false),
-					applyNonBipedNameChange(body, "hellhound", false, true),
-					applyNonBipedNameChange(body, "hellhound", true, true)
+						applyNonBipedNameChange(body, "адская гончая", false, false),
+						applyNonBipedNameChange(body, "адская гончая", false, true),
+						applyNonBipedNameChange(body, "адская гончая", false, false),
+						applyNonBipedNameChange(body, "адская гончая", true, false),
+						applyNonBipedNameChange(body, "адская гончая", false, true),
+						applyNonBipedNameChange(body, "адская гончая", true, true)
 				};
 			}
 			
@@ -2608,12 +2608,12 @@ public class Subspecies {
 			"конепарни",
 			"лошадедевушки",
 			new FeralAttributes(
-					"horse",
-					"horses",
-					"stallion",
-					"mare",
-					"stallions",
-					"mares",
+					"лошадь",
+					"лошади",
+					"жеребец",
+					"кобыла",
+					"жеребцы",
+					"кобылы",
 					LegConfiguration.QUADRUPEDAL,
 					175,
 					0,
@@ -2622,7 +2622,7 @@ public class Subspecies {
 					1,
 					true),
 			Nocturnality.DIURNAL,
-			"While [npc.namePos] body possesses remarkable strength and speed, [npc.sheIs] not the sharpest tool in the shed, and struggle more than most when it comes to harnessing the arcane.",
+			"Хотя тело [pc.morphSingleGent([npc.namePos])] обладает недюжинной силой и скоростью, [npc.sheIs] не самый простой инструмент в сарае, и [npc.genderBasedWord(ему, ей)] сложнее, чем остальным, когда дело доходит до использования арканы.",
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 25f),
 					new Value<>(Attribute.MAJOR_ARCANE, -5f),
@@ -2631,8 +2631,8 @@ public class Subspecies {
 					new Value<>(Attribute.DAMAGE_PHYSICAL, 25f),
 					new Value<>(Attribute.CRITICAL_DAMAGE, 25f)),
 			null,
-			"Equine Encyclopedia",
-			"Equine Encyclopedias",
+			"Энциклопедия лошадей",
+			"Энциклопедии лошадей",
 			"HORSE_MORPH_BASIC",
 			"HORSE_MORPH_ADVANCED",
 			Race.HORSE_MORPH,
@@ -2646,7 +2646,7 @@ public class Subspecies {
 					new Value<>(PerkCategory.ARCANE, 0)),
 			PresetColour.RACE_HORSE_MORPH,
 			SubspeciesPreference.FOUR_ABUNDANT,
-			"An anthropomorphic, bipedal horse.",
+			"Антропоморфная двуногая лошадь.",
 			Util.newHashMapOfValues(
 					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.TEN),
 					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.TEN),
@@ -2666,21 +2666,21 @@ public class Subspecies {
 		@Override
 		public String[] getHalfDemonName(Body body) {
 			String[] names = new String[] {
-					"nightmare",
-					"nightmares",
-					"nightmare",
-					"nightmare",
-					"nightmares",
-					"nightmares"};
+					"кошмар",
+					"кошмары",
+					"кошмар",
+					"кошмар",
+					"кошмары",
+					"кошмары"};
 
 			if(body !=null && !body.getHalfDemonSubspecies().isNonBiped()) {
 				names = new String[] {
-					applyNonBipedNameChange(body, "nightmare", false, false),
-					applyNonBipedNameChange(body, "nightmare", false, true),
-					applyNonBipedNameChange(body, "nightmare", false, false),
-					applyNonBipedNameChange(body, "nightmare", true, false),
-					applyNonBipedNameChange(body, "nightmare", false, true),
-					applyNonBipedNameChange(body, "nightmare", true, true)
+						applyNonBipedNameChange(body, "кошмар", false, false),
+						applyNonBipedNameChange(body, "кошмар", false, true),
+						applyNonBipedNameChange(body, "кошмар", false, false),
+						applyNonBipedNameChange(body, "кошмар", true, false),
+						applyNonBipedNameChange(body, "кошмар", false, true),
+						applyNonBipedNameChange(body, "кошмар", true, true)
 				};
 			}
 
@@ -3131,8 +3131,8 @@ public class Subspecies {
 					new Value<>(Attribute.DAMAGE_PHYSICAL, 10f),
 					new Value<>(Attribute.CRITICAL_DAMAGE, 50f)),
 			null,
-			"Equine Encyclopedia",
-			"Equine Encyclopedias",
+		"Энциклопедия лошадей",
+		"Энциклопедии лошадей",
 			"HORSE_MORPH_BASIC",
 			"HORSE_MORPH_ADVANCED",
 			Race.HORSE_MORPH,
@@ -3239,8 +3239,8 @@ public class Subspecies {
 					new Value<>(Attribute.DAMAGE_PHYSICAL, 5f),
 					new Value<>(Attribute.CRITICAL_DAMAGE, 10f)),
 			null,
-			"Equine Encyclopedia",
-			"Equine Encyclopedias",
+			"Энциклопедия лошадей",
+			"Энциклопедии лошадей",
 			"HORSE_MORPH_BASIC",
 			"HORSE_MORPH_ADVANCED",
 			Race.HORSE_MORPH,
@@ -3341,8 +3341,8 @@ public class Subspecies {
 					new Value<>(Attribute.DAMAGE_PHYSICAL, 10f),
 					new Value<>(Attribute.CRITICAL_DAMAGE, 30f)),
 			null,
-			"Equine Encyclopedia",
-			"Equine Encyclopedias",
+			"Энциклопедия лошадей",
+			"Энциклопедии лошадей",
 			"HORSE_MORPH_BASIC",
 			"HORSE_MORPH_ADVANCED",
 			Race.HORSE_MORPH,
@@ -3786,8 +3786,8 @@ public class Subspecies {
 					new Value<>(Attribute.CRITICAL_DAMAGE, 20f),
 					new Value<>(Attribute.RESISTANCE_FIRE, 5f)),
 			null,
-			"Equine Encyclopedia",
-			"Equine Encyclopedias",
+			"Энциклопедия лошадей",
+			"Энциклопедии лошадей",
 			"HORSE_MORPH_BASIC",
 			"HORSE_MORPH_ADVANCED",
 			Race.HORSE_MORPH,
@@ -3905,8 +3905,8 @@ public class Subspecies {
 					new Value<>(Attribute.getRacialDamageAttribute(Race.WOLF_MORPH), 25f),
 					new Value<>(Attribute.getRacialDamageAttribute(Race.FOX_MORPH), 25f)),
 			null,
-			"Equine Encyclopedia",
-			"Equine Encyclopedias",
+			"Энциклопедия лошадей",
+			"Энциклопедии лошадей",
 			"HORSE_MORPH_BASIC",
 			"HORSE_MORPH_ADVANCED",
 			Race.HORSE_MORPH,
@@ -4119,12 +4119,12 @@ public class Subspecies {
 			"innoxia_race_rabbit_bunny_carrot_cake",
 			"statusEffects/race/raceRabbitMorph",
 			"statusEffects/race/raceBackground",
-			"rabbit-morph",
-			"rabbit-morphs",
-			"rabbit-boy",
-			"rabbit-girl",
-			"rabbit-boys",
-			"rabbit-girls",
+			"кроликоморф",
+			"кроликоморфы",
+			"кроликопарень",
+			"кроликодувушка",
+			"кроликопарни",
+			"кроликодувушки",
 			new FeralAttributes(
 					"rabbit",
 					"rabbits",
@@ -4135,8 +4135,8 @@ public class Subspecies {
 					5,
 					1, false),
 			Nocturnality.CREPUSCULAR,
-			"[npc.NameIsFull] very agile and alert, and [npc.is] capable of short bursts of incredible speed."
-					+ " [npc.Her] body, whether [npc.she] like it or not, is also adapted for producing as many offspring as possible.",
+			"[npc.NameIsFull] очень [npc.genderBasedWordAuto(проворный)] и [npc.genderBasedWordAuto(бдительный)], и [npc.genderBasedWordAuto(способен)] на короткие серии невероятной скорости."
+					+ " [npc.Her] тело, хочет [npc.she] того или нет, приспособлено для того, чтобы производить как можно больше потомства.",
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
 					new Value<>(Attribute.MAJOR_ARCANE, 0f),
@@ -4145,8 +4145,8 @@ public class Subspecies {
 					new Value<>(Attribute.FERTILITY, 50f),
 					new Value<>(Attribute.VIRILITY, 50f)),
 			null,
-			"Bunny Litters",
-			"Bunny Litters'",
+			"Помёт кроликов",
+			"Помёт кроликов",
 			"RABBIT_MORPH_BASIC",
 			"RABBIT_MORPH_ADVANCED",
 			Race.RABBIT_MORPH,
@@ -4160,7 +4160,7 @@ public class Subspecies {
 					new Value<>(PerkCategory.ARCANE, 0)),
 			PresetColour.RACE_RABBIT_MORPH,
 			SubspeciesPreference.FOUR_ABUNDANT,
-			"An anthropomorphic rabbit, known as a 'rabbit-morph' when bipedal, and a 'rabbit-taur' when the lower body is that of an oversized feral rabbit.",
+			"Антропоморфный кролик, известный как «кроликоморф», когда он двуногий, и «кроликотавр», когда нижняя часть тела принадлежит огромному дикому кролику.",
 			Util.newHashMapOfValues(
 					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.FIVE),
 					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.TEN),
@@ -4177,21 +4177,21 @@ public class Subspecies {
 		@Override
 		public String[] getHalfDemonName(Body body) {
 			String[] names = new String[] {
-					"jackalope",
-					"jackalopes",
-					"jackalope",
-					"jackalope",
-					"jackalopes",
-					"jackalopes"};
+					"кроликолоп",
+					"кроликолопы",
+					"кроликолоп",
+					"кроликолоп",
+					"кроликолопы",
+					"кроликолопы"};
 
 			if(body !=null && !body.getHalfDemonSubspecies().isNonBiped()) {
 				names = new String[] {
-					applyNonBipedNameChange(body, "jackalope", false, false),
-					applyNonBipedNameChange(body, "jackalope", false, true),
-					applyNonBipedNameChange(body, "jackalope", false, false),
-					applyNonBipedNameChange(body, "jackalope", true, false),
-					applyNonBipedNameChange(body, "jackalope", false, true),
-					applyNonBipedNameChange(body, "jackalope", true, true)
+						applyNonBipedNameChange(body, "кроликолоп", false, false),
+						applyNonBipedNameChange(body, "кроликолоп", false, true),
+						applyNonBipedNameChange(body, "кроликолоп", false, false),
+						applyNonBipedNameChange(body, "кроликолоп", true, false),
+						applyNonBipedNameChange(body, "кроликолоп", false, true),
+						applyNonBipedNameChange(body, "кроликолоп", true, true)
 				};
 			}
 
@@ -4277,15 +4277,15 @@ public class Subspecies {
 			"innoxia_race_rat_brown_rats_burger",
 			"statusEffects/race/raceRatMorph",
 			"statusEffects/race/raceBackground",
-			"rat-morph",
-			"rat-morphs",
-			"rat-boy",
-			"rat-girl",
-			"rat-boys",
-			"rat-girls",
+			"крысоморф",
+			"крысоморфы",
+			"крысопарень",
+			"крысодувушка",
+			"крысопарни",
+			"крысодувушки",
 			new FeralAttributes(
-					"rat",
-					"rats",
+					"крыса",
+					"крысы",
 					LegConfiguration.QUADRUPEDAL,
 					15,
 					0,
@@ -4293,7 +4293,7 @@ public class Subspecies {
 					6,
 					1, false),
 			Nocturnality.CREPUSCULAR,
-			"[npc.NamePos] body is very hardy, and [npc.she] [npc.has] both a high resistance to, and affinity with, arcane poison.",
+			"Тело [npc.morphSingleGent([npc.NamePos])] очень выносливо, и [npc.she] [npc.has] как высокую устойчивость к арканному яду, так и сродство с ним.",
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 0f),
 					new Value<>(Attribute.MAJOR_ARCANE, 0f),
@@ -4301,8 +4301,8 @@ public class Subspecies {
 					new Value<>(Attribute.DAMAGE_POISON, 15f),
 					new Value<>(Attribute.RESISTANCE_POISON, 5f)),
 			null,
-			"Causing Mischief",
-			"Causing Mischiefs",
+			"Причинение зла",
+			"Причинение зла",
 			"RAT_MORPH_BASIC",
 			"RAT_MORPH_ADVANCED",
 			Race.RAT_MORPH,
@@ -4316,7 +4316,7 @@ public class Subspecies {
 					new Value<>(PerkCategory.ARCANE, 0)),
 			PresetColour.RACE_RAT_MORPH,
 			SubspeciesPreference.FOUR_ABUNDANT,
-			"An anthropomorphic rat, known as a 'rat-morph' when bipedal, and a 'rat-taur' when the lower body is that of an oversized feral rat.",
+			"Антропоморфная крыса, известная как «крысоморф», когда она передвигается на двух ногах, и «крысотавр», когда нижняя часть тела принадлежит огромной дикой крысе.",
 			Util.newHashMapOfValues(
 					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.TEN),
 					new Value<>(WorldRegion.SUBMISSION, SubspeciesSpawnRarity.TEN),
@@ -4365,8 +4365,8 @@ public class Subspecies {
 					new Value<>(Attribute.FERTILITY, 50f),
 					new Value<>(Attribute.VIRILITY, 50f)),
 			null,
-			"Bunny Litters",
-			"Bunny Litters'",
+			"Помёт кроликов",
+			"Помёт кроликов",
 			"RABBIT_MORPH_BASIC",
 			"RABBIT_MORPH_ADVANCED",
 			Race.RABBIT_MORPH,
@@ -4401,21 +4401,21 @@ public class Subspecies {
 		@Override
 		public String[] getHalfDemonName(Body body) {
 			String[] names = new String[] {
-					"jackalope",
-					"jackalopes",
-					"jackalope",
-					"jackalope",
-					"jackalopes",
-					"jackalopes"};
+					"кроликолоп",
+					"кроликолопы",
+					"кроликолоп",
+					"кроликолоп",
+					"кроликолопы",
+					"кроликолопы"};
 
 			if(body !=null && !body.getHalfDemonSubspecies().isNonBiped()) {
 				names = new String[] {
-					applyNonBipedNameChange(body, "jackalope", false, false),
-					applyNonBipedNameChange(body, "jackalope", false, true),
-					applyNonBipedNameChange(body, "jackalope", false, false),
-					applyNonBipedNameChange(body, "jackalope", true, false),
-					applyNonBipedNameChange(body, "jackalope", false, true),
-					applyNonBipedNameChange(body, "jackalope", true, true)
+						applyNonBipedNameChange(body, "кроликолоп", false, false),
+						applyNonBipedNameChange(body, "кроликолоп", false, true),
+						applyNonBipedNameChange(body, "кроликолоп", false, false),
+						applyNonBipedNameChange(body, "кроликолоп", true, false),
+						applyNonBipedNameChange(body, "кроликолоп", false, true),
+						applyNonBipedNameChange(body, "кроликолоп", true, true)
 				};
 			}
 

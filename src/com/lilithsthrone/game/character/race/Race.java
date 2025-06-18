@@ -141,11 +141,12 @@ public class Race {
 
 		return names;
 	}
-	public static AbstractRace DEMON = new AbstractRace("demon",
-			"demons",
+
+	public static AbstractRace DEMON = new AbstractRace("демон",
+			"демоны",
 			generateDemonNameFeralMap(),
 			generateDemonNameFeralPluralMap(),
-			"demonic",
+			"демоник",
 			PresetColour.RACE_DEMON,
 			Disposition.CIVILIZED,
 			RacialClass.MAMMAL,
@@ -164,7 +165,7 @@ public class Race {
 		public String getName(Body body, boolean feral) {
 			if(feral) {
 				if(body!=null && body.getHalfDemonSubspecies()!=null && body.getHalfDemonSubspecies()!=Subspecies.HUMAN) {
-					return "demonic-"+ body.getHalfDemonSubspecies().getFeralName(body);
+					return (body.isFeminine() ? "демоническая-" : "демонический-") + body.getHalfDemonSubspecies().getFeralName(body);
 				}
 				if(body!=null) {
 					AbstractRace r = body.getLegType().getRace();
@@ -172,7 +173,7 @@ public class Race {
 
 					switch(legConfiguration) {
 						case BIPEDAL:
-							return "demon";
+							return "демон";
 						case ARACHNID:
 						case CEPHALOPOD:
 						case QUADRUPEDAL:
@@ -181,9 +182,9 @@ public class Race {
 						case AVIAN:
 						case WINGED_BIPED:
 							if(r==Race.DEMON) {
-								return "demonic-horse";
+								return (body.isFeminine() ? "демоническая-лошадь" : "демонический-конь");
 							}
-							return "demonic-"+r.getName(body, true);
+							return (body.isFeminine() ? "демоническая-" : "демонический-") + r.getName(body, true);
 					}
 				}
 //				return "demonic-horse";
@@ -194,7 +195,7 @@ public class Race {
 		public String getNamePlural(Body body, boolean feral) {
 			if(feral) {
 				if(body!=null && body.getHalfDemonSubspecies()!=null && body.getHalfDemonSubspecies()!=Subspecies.HUMAN) {
-					return "demonic-"+ body.getHalfDemonSubspecies().getFeralNamePlural(body);
+					return (body.isFeminine() ? "демоническая-" : "демонический-") + body.getHalfDemonSubspecies().getFeralNamePlural(body);
 				}
 				if(body!=null) {
 					AbstractRace r = body.getLegType().getRace();
@@ -202,7 +203,7 @@ public class Race {
 
 					switch(legConfiguration) {
 						case BIPEDAL:
-							return "demons";
+							return "демоны";
 						case ARACHNID:
 						case CEPHALOPOD:
 						case QUADRUPEDAL:
@@ -211,9 +212,9 @@ public class Race {
 						case AVIAN:
 						case WINGED_BIPED:
 							if(r==Race.DEMON) {
-								return "demonic-horses";
+								return "демонические-лошади";
 							}
-							return "demonic-"+r.getNamePlural(body, true);
+							return (body.isFeminine() ? "демоническая-" : "демонический-") + r.getNamePlural(body, true);
 					}
 				}
 //				return "demonic-horses";
@@ -442,11 +443,11 @@ public class Race {
 	
 
 	// FELINES:
-	public static AbstractRace CAT_MORPH = new AbstractRace("cat-morph",
-				"cat-morphs",
-				"cat",
-				"cats",
-				"cat",
+	public static AbstractRace CAT_MORPH = new AbstractRace("котоморф",
+			"котоморфы",
+			"кошка",
+			"кошки",
+			"кошко",
 				PresetColour.RACE_CAT_MORPH,
 				Disposition.CIVILIZED,
 				RacialClass.MAMMAL,
@@ -461,9 +462,9 @@ public class Race {
 		public String getName(Body body, boolean feral) {
 			if(Main.game!=null && Main.game.isSillyModeEnabled()) {
 				if(feral) {
-					return "catte";
+					return "кошечка";
 				}
-				return "catte-morph";
+				return "кошечкоморф";
 			}
 			return super.getName(body, feral);
 		}
@@ -471,9 +472,9 @@ public class Race {
 		public String getNamePlural(Body body, boolean feral) {
 			if(Main.game!=null && Main.game.isSillyModeEnabled()) {
 				if(feral) {
-					return "cattes";
+					return "кошечки";
 				}
-				return "catte-morphs";
+				return "кошечкоморфы";
 			}
 			return super.getNamePlural(body, feral);
 		}

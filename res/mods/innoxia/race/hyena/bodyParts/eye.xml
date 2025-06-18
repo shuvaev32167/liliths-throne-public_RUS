@@ -55,7 +55,7 @@
 	
 	<!-- How this eye is described in a character's description page. -->
 	<bodyDescription><![CDATA[
-		[npc.SheHasFull] [npc.eyePairs] hyena-like eyes, the irises and pupils of which are larger than a regular human's. They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.
+		У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] hyena-like eyes, the irises and pupils of which are larger than a regular human's. They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.
 	]]></bodyDescription>
 	
 </eye>

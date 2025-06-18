@@ -42,7 +42,7 @@
 		</p>
 		#IF(game.getDialogueFlags().hasEncounteredAnyReindeers())
 			<p>
-				Feeling happy now that you've found the overseer for this particular group, you reply, [pc.speech(What sort of goods do you have? I've spoken with another overseer already, and they mostly had Yuletide-related clothing, food and drink, as well as some clothing from the youko.)]
+				Feeling happy now that you've found the overseer for this particular group, you reply, [pc.speech(What sort of goods do you have? I've spoken with another overseer already, and they mostly had Юлэтид-related clothing, food and drink, as well as some clothing from the youko.)]
 			</p>
 			<p>
 				The [npc.race] smiles as [npc.she] answers, [npc.speech(Well, all of us reindeer-morphs travel together, so we've got the same goods as any of the other groups. Still, if you'd like to take a look, just let me know.)]

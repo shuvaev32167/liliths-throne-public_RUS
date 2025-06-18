@@ -19,6 +19,6 @@
 		<br/>[npc.Name] now [npc.has] [style.boldSpider(spider-like eyes)] of a solid [npc.irisColour(true)] colour.
 	]]></transformationDescription>
 	<bodyDescription><![CDATA[
-		[npc.SheHasFull] [npc.eyePairs] spider-like eyes, with two larger ones located where a human's would be and the rest spread across [npc.her] forehead and the sides of [npc.her] head. They are a reflective, solid [npc.irisColour(true)] colour.
+		У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] spider-like eyes, with two larger ones located where a human's would be and the rest spread across [npc.her] forehead and the sides of [npc.her] head. They are a reflective, solid [npc.irisColour(true)] colour.
 	]]></bodyDescription>
 </eye>

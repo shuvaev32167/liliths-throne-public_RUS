@@ -32,7 +32,7 @@
 			 Just like the rest of [npc.her] body, [npc.her] now-fully-internal ears are made out of [npc.earFullDescription],
 		#ENDIF
 		 and as the transformation finishes, [npc.sheIs] left with a pair of feathered raptor ears.
-		<br/>[npc.Name] now [npc.has] [style.boldRaptor(internal, feather-covered raptor ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].
+		<br/>[npc.Name] now [npc.has] [style.boldRaptor(internal, feather-covered raptor ears)], которые [npc.materialCompositionDescriptor] [npc.earFullDescription].
 	]]></transformationDescription>
 	
 	<bodyDescription><![CDATA[

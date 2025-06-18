@@ -35,7 +35,7 @@ public class ArmType {
 			"fingers",
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues("soft", "feminine"),
-			"Thankfully, the transformation only lasts a matter of moments, leaving [npc.herHim] with normal-looking human arms, complete with human hands.<br/>"
+            "Thankfully, Превращение длится всего несколько мгновений, после чего у [npc.herHim] [npc.targetBasedWord(остаёшься, остаётся)] с normal-looking human arms, complete with human hands.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldHuman(human arms and hands)], which are [npc.materialDescriptor] [npc.armFullDescription].",
 			"[npc.She] [npc.has] [npc.armRows] normal human arms and hands, which are [npc.materialCompositionDescriptor] [npc.armFullDescription(true)].") {
 	};

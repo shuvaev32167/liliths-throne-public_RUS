@@ -2982,8 +2982,8 @@ public class SlaveDialogue {
 			UtilText.nodeContentSB.setLength(0);
 			
 			UtilText.nodeContentSB.append("<p>"
-							+ "Deciding that [npc.name] deserves a gift this Yuletide, you hold out the present towards [npc.herHim]."
-							+ " [pc.speech(This is for you, [npc.name]. Happy Yuletide!)]"
+                    + "Deciding that [npc.name] deserves a gift this Юлэтид, you hold out the present towards [npc.herHim]."
+                    + " [pc.speech(This is for you, [npc.name]. Happy Юлэтид!)]"
 						+ "</p>"
 						+ "<p>");
 			
@@ -3033,7 +3033,7 @@ public class SlaveDialogue {
 						case OBEDIENT:
 							UtilText.nodeContentSB.append(
 									"Taken completely off-guard, [npc.name] lets out a happy little cry, and as you press the gift into [npc.her] [npc.hands], [npc.she] smiles at you."
-									+ " [npc.speech(Thank you, [npc.pcName], I wish you a happy Yuletide as well!)]"
+                                            + " [npc.speech(Thank you, [npc.pcName], I wish you a happy Юлэтид as well!)]"
 								+ "</p>");
 							break;
 					}
@@ -3047,19 +3047,19 @@ public class SlaveDialogue {
 						case DISOBEDIENT:
 							UtilText.nodeContentSB.append(
 										"Taken completely off-guard, [npc.name] lets out an ecstatic cry, and as you press the gift into [npc.her] [npc.hands], [npc.she] bursts out,"
-										+ " [npc.speech([npc.PcName]! Thank you so much! Happy Yuletide to you too!)]"
+                                                + " [npc.speech([npc.PcName]! Thank you so much! Happy Юлэтид to you too!)]"
 									+ "</p>");
 							break;
 						case NEUTRAL:
 							UtilText.nodeContentSB.append(
 									"Taken completely off-guard, [npc.name] lets out an ecstatic cry, and as you press the gift into [npc.her] [npc.hands], [npc.she] bursts out,"
-									+ " [npc.speech([npc.PcName]! Thank you so much! Happy Yuletide to you too!)]"
+                                            + " [npc.speech([npc.PcName]! Thank you so much! Happy Юлэтид to you too!)]"
 								+ "</p>");
 							break;
 						case OBEDIENT:
 							UtilText.nodeContentSB.append(
 									"Taken completely off-guard, [npc.name] lets out an ecstatic cry, and as you press the gift into [npc.her] [npc.hands], [npc.she] beams at you."
-									+ " [npc.speech(Thank you, [npc.pcName]! Happy Yuletide to you too!)]"
+                                            + " [npc.speech(Thank you, [npc.pcName]! Happy Юлэтид to you too!)]"
 								+ "</p>");
 							break;
 					}

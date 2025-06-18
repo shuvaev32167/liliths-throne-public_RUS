@@ -52,12 +52,12 @@
 		 A thin membrane of quickly grows to cover them. Just like the rest of [npc.her] body, it's made out of [npc.earFullDescription],
 		#ENDIF
 		 and as the transformation finishes, [npc.she] notices twitch [npc.her] hearing hasn't actually been affected at all.
-		<br/>[npc.Name] now [npc.has] [style.boldShark(hidden, shark-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].
+		<br/>[npc.Name] now [npc.has] [style.boldShark(hidden, shark-like ears)], которые [npc.materialCompositionDescriptor] [npc.earFullDescription].
 	]]></transformationDescription>
 	
 	<!-- How this ear is described in a character's description page. -->
 	<bodyDescription><![CDATA[
-		[npc.She] [npc.has] a pair of upright,#IF(npc.isPiercedEar()) pierced,#ENDIF shark-like ears, which are actually holes hidden by a thin membrane of [npc.earFullDescription(true)].
+		У [npc.targetBasedWord(тебя, н[npc.him])] пара of upright,#IF(npc.isPiercedEar()) pierced,#ENDIF shark-like ears, which are actually holes hidden by a thin membrane of [npc.earFullDescription(true)].
 	]]></bodyDescription>
 	
 </ear>

@@ -2537,7 +2537,7 @@ public class Body implements XMLSaving {
 		
 		// Ear:
 		if(owner.isFeral()) {
-			sb.append(" [npc.She] [npc.has] a pair of #IF(npc.isPiercedEar()) pierced,#ENDIF [npc.earRace] ears, which are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].");
+			sb.append(" У [npc.targetBasedWord(тебя, н[npc.him])] пара #IF(npc.isPiercedEar()) проколотых,#ENDIF [npc.earRace] ears, which are [pc.morphPluralParticipleToShortForm([npc.materialCompositionDescriptor])] [pc.morphSingleInstr([pc.morphGenSinFem([npc.earFullDescription(true)])])].");
 			
 		} else {
 			sb.append(" "+ear.getType().getBodyDescription(owner));
@@ -4115,7 +4115,7 @@ public class Body implements XMLSaving {
 		StringBuilder sb = new StringBuilder();
 		
 		if(owner.isFeral()) {
-			sb.append(" [npc.SheHasFull] [npc.eyePairs] [npc.eyeRace] eyes, with [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.");
+			sb.append(" У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] [npc.eyeRace] eyes, with [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.");
 		} else {
 			sb.append(" "+eye.getType().getBodyDescription(owner));
 		}
@@ -4125,7 +4125,7 @@ public class Body implements XMLSaving {
 			sb.append(" Вокруг [npc.her] [pc.morphPluralGent([npc.eyes])], нанесена [pc.morphGenSinFem(" + owner.getEyeLiner().getColourDescriptor(owner, true, false) + ")] подводка.");
 		}
 		if(owner.getEyeShadow().getPrimaryColour()!=PresetColour.COVERING_NONE) {
-			sb.append(" [npc.SheIs] wearing a tasteful amount of "+owner.getEyeShadow().getFullDescription(owner, true)+".");
+			sb.append(" [npc.SheIs] [npc.genderBasedWord(нанёс, нанесла)] небольшое количество [pc.morphPluralGent(" + owner.getEyeShadow().getFullDescription(owner, true) + ")].");
 		}
 		
 		return sb.toString();

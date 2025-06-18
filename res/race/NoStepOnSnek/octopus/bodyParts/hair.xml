@@ -18,7 +18,7 @@
 		<descriptor>floppy</descriptor>
 	</descriptorsFeminine>
 	<transformationDescription><![CDATA[
-		The transformation only lasts a matter of moments, leaving [npc.herHim] with decorative tentacles. Much to [npc.her] disappointment, [npc.she] [npc.does] not have any significant control over them.
+		Превращение длится всего несколько мгновений, после чего у [npc.herHim] [npc.targetBasedWord(остаёшься, остаётся)] с decorative tentacles. Much to [npc.her] disappointment, [npc.she] [npc.does] not have any significant control over them.
 		<br/>[npc.Name] now [npc.has] [npc.hairColour] [style.boldOctopus(tentacles)].
 	]]></transformationDescription>
 	<bodyDescription><![CDATA[

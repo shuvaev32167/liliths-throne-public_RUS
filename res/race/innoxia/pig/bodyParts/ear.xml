@@ -25,16 +25,16 @@
 	<transformationDescription><![CDATA[
 		They quickly grow a lot larger and take on a distinctly pig-like shape as they shift to sit higher up on [npc.her] head than a normal pair of human ears would.
 		#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)
-		 A layer of [npc.earFullDescriptionColour] quickly grows to cover them,
+		 Слой [npc.earFullDescriptionColour] быстро растет, покрывая их,
 		#ELSE
-		 Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],
+		 Как и остальные части [npc.targetBasedWord(твоей, [npc.her])] тела, они сделаны из [npc.earFullDescription].,
 		#ENDIF
 		 and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new pig-like ears back and forth.
-		 <br/>[npc.Name] now [npc.has] [style.boldPig(pig-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].
+		 <br/>[npc.Name] now [npc.has] [style.boldPig(pig-like ears)], которые [npc.materialCompositionDescriptor] [npc.earFullDescription].
 	]]></transformationDescription>
 	
 	<bodyDescription><![CDATA[
-		[npc.She] [npc.has] a pair of #IF(npc.isPiercedEar()) pierced,#ENDIF pig-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].
+		У [npc.targetBasedWord(тебя, н[npc.him])] пара #IF(npc.isPiercedEar()) проколотых,#ENDIF pigподобных ушей, которые расположены высоко на [npc.targetBasedWord(твоей, [npc.her])] голове и которые  [pc.morphPluralParticipleToShortForm([npc.materialCompositionDescriptor])] [pc.morphSingleInstr([npc.earFullDescription(true)])].
 	]]></bodyDescription>
 	
 </ear>

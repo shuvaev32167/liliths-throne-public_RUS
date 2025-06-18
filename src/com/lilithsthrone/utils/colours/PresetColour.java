@@ -603,8 +603,10 @@ public class PresetColour {
 	public static Colour COVERING_PINK = new Colour(false, BaseColour.PINK, "pink") {}.setLinkedColourLighter(COVERING_PINK_LIGHT);
 	public static Colour COVERING_PINK_DARK = new Colour(false, BaseColour.PINK_DEEP, "dark pink") {}.setLinkedColourLighter(COVERING_PINK);
 	// Red:
-	public static Colour COVERING_RED_LIGHT = new Colour(false, BaseColour.RED_LIGHT, "light red") {};
-	public static Colour COVERING_RED = new Colour(false, BaseColour.RED, "red") {}.setLinkedColourLighter(COVERING_RED_LIGHT);
+	public static Colour COVERING_RED_LIGHT = new Colour(false, BaseColour.RED_LIGHT, "светло-красный") {
+	};
+	public static Colour COVERING_RED = new Colour(false, BaseColour.RED, "красный") {
+	}.setLinkedColourLighter(COVERING_RED_LIGHT);
 	public static Colour COVERING_RED_DARK = new Colour(false, BaseColour.RED_DARK, "dark red") {}.setLinkedColourLighter(COVERING_RED);
 	public static Colour COVERING_SCARLET = new Colour(false, BaseColour.CRIMSON, "scarlet") {}.setLinkedColourLighter(COVERING_RED_DARK);
 	// Brown:
@@ -727,10 +729,12 @@ public class PresetColour {
 	public static Colour EYE_AMBER = new Colour(false, BaseColour.AMBER, "amber") {};
 	public static Colour EYE_ORANGE = new Colour(false, BaseColour.ORANGE, "orange") {}.setLinkedColourLighter(EYE_AMBER);
 	// Yellow:
-	public static Colour EYE_YELLOW = new Colour(false, BaseColour.YELLOW, "yellow") {};
+	public static Colour EYE_YELLOW = new Colour(false, BaseColour.YELLOW, "жёлтый") {
+	};
 	// Green:
 	public static Colour EYE_GREY_GREEN = new Colour(false, Util.newColour(0xA9BA9D), Util.newColour(0xA9BA9D), "grey-green") {};
-	public static Colour EYE_GREEN = new Colour(false, BaseColour.GREEN_DARK, "green") {}.setLinkedColourLighter(EYE_GREY_GREEN);
+	public static Colour EYE_GREEN = new Colour(false, BaseColour.GREEN_DARK, "зелёный") {
+	}.setLinkedColourLighter(EYE_GREY_GREEN);
 	// Blue:
 	public static Colour EYE_BLUE_LIGHT = new Colour(false, BaseColour.BLUE_LIGHT, "light blue") {};
     public static Colour EYE_BLUE = new Colour(false, BaseColour.BLUE, "голубой") {

@@ -26,11 +26,11 @@ public class HornType {
 			Race.NONE,
 			2,
 			"none",
-			"horn",
-			"horns",
+			"рог",
+			"рога",
 			new ArrayList<>(),
 			new ArrayList<>(),
-			"<br/>[npc.Name] now [npc.has] [style.boldTfGeneric(no horns)].",
+			"<br/>[npc.Name] теперь [style.boldTfGeneric(не [npc.has] рогов)].",
 			"") {
 	};
 
@@ -174,14 +174,14 @@ public class HornType {
 			BodyCoveringType.HORN,
 			Race.NONE,
 			2,
-			"swept-back",
-			"horn",
-			"horns",
-			Util.newArrayListOfValues("swept-back"),
-			Util.newArrayListOfValues("swept-back", "smooth"),
+			"загнутые назад",
+			"рог",
+			"рога",
+			Util.newArrayListOfValues("загнутые назад"),
+			Util.newArrayListOfValues("загнутые назад", "гладкие"),
 			"sleek #IFnpc.getTotalHorns()==1#THEN[npc.horn]#ELSE[npc.horns]#ENDIF, before sweeping back and curving over [npc.her] head."
 					+ "<br/>[npc.Name] now [npc.has] [npc.hornsDeterminer] [style.boldTfGeneric(swept-back #IFnpc.getTotalHorns()==1#THEN[npc.horn]#ELSE[npc.horns]#ENDIF)].",
-			"[npc.HornsDeterminer] #IFnpc.getTotalHorns()==1#THEN[npc.hornSize], [npc.hornColour(true)], загнутый назад [npc.horn] растёт#ELSE[pc.morphPluralGent([npc.hornSize])], [pc.morphPluralGent([npc.hornColour(true)])], загнутых назад [npc.horn] растут#ENDIF из #IFnpc.getHornsPerRow()==1#THENцентра#ELSEверхней части#ENDIF [npc.her] лба.") {
+			"[npc.HornsDeterminer] #IFnpc.getTotalHorns()==1#THEN[npc.hornSize], [npc.hornColour(true)], загнутый назад [npc.horn] растёт#ELSE[pc.morphPluralGent([npc.hornSize])], [pc.morphPluralGent([npc.hornColour(true)])], загнутых назад [pc.morphPluralGent([npc.horn])] растут#ENDIF из #IFnpc.getHornsPerRow()==1#THENцентра#ELSEверхней части#ENDIF [npc.her] лба.") {
 		@Override
 		public boolean isGeneric() {
 			return true;

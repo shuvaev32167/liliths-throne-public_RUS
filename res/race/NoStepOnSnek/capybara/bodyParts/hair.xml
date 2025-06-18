@@ -18,7 +18,7 @@
 		<descriptor>fur-like</descriptor>
 	</descriptorsFeminine>
 	<transformationDescription><![CDATA[
-		The transformation only lasts a matter of moments, leaving [npc.herHim] with fur-like hair.
+		Превращение длится всего несколько мгновений, после чего у [npc.herHim] остаются волосы, похожие на мех.
 		<br/>[npc.Name] now [npc.has] [npc.hairColour] [style.boldCapybara(capybara hair)].
 	]]></transformationDescription>
 	<bodyDescription><![CDATA[

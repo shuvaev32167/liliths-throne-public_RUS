@@ -98,7 +98,7 @@
 	<bookIconName>samoyedicon</bookIconName>
 	
 	<!-- The name for the book. -->
-	<bookName>Canine Cultures</bookName>
+    <bookName>Культуры собак</bookName>
 	
 	<!-- The element names which contain the book's basic and advanced descriptions.
 	These should be entered into the 'bookEntries.xml' file in the same folder location as this file. -->
@@ -125,12 +125,12 @@
 	
 	<nameHalfDemon>
 		<namesDefault>
-			<name><![CDATA[hellhound]]></name>
-			<namePlural><![CDATA[hellhounds]]></namePlural>
-			<singularMaleName><![CDATA[hellhound]]></singularMaleName>
-			<singularFemaleName><![CDATA[hellhound]]></singularFemaleName>
-			<pluralMaleName><![CDATA[hellhounds]]></pluralMaleName>
-			<pluralFemaleName><![CDATA[hellhounds]]></pluralFemaleName>
+            <name><![CDATA[адская гончая]]></name>
+            <namePlural><![CDATA[адские гончии]]></namePlural>
+            <singularMaleName><![CDATA[адская гончая]]></singularMaleName>
+            <singularFemaleName><![CDATA[адская гончая]]></singularFemaleName>
+            <pluralMaleName><![CDATA[адские гончии]]></pluralMaleName>
+            <pluralFemaleName><![CDATA[адские гончии]]></pluralFemaleName>
 		</namesDefault>
 	</nameHalfDemon>
 	

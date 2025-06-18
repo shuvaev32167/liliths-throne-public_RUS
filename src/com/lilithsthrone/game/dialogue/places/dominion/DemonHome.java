@@ -50,7 +50,7 @@ public class DemonHome {
 		if(Main.game.getDateNow().getMonth()==Month.OCTOBER) {
 			sb.append(
 				"<p>"
-					+ "<b style='color:"+PresetColour.BASE_ORANGE.toWebHexString()+";'>October;</b> <b style='color:"+PresetColour.GENERIC_ARCANE.toWebHexString()+";'>Lilith's Month:</b><br/>"
+                        + "<b style='color:" + PresetColour.BASE_ORANGE.toWebHexString() + ";'>Октябрь;</b> <b style='color:" + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Месяц Лилит:</b><br/>"
 					+ "Orange, black, and purple flags fly from almost every window, and you look up to see that large banners have been hung across the street, each one bearing a different slogan celebrating Lilith's rule."
 					+ " The occasional demon that you see is usually dressed up in a Halloween-esque costume for the occasion, which does nothing to help alleviate the eerie atmosphere."
 				+ "</p>");

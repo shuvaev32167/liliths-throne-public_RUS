@@ -30,10 +30,10 @@ public class EyeType {
             "глаза",
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-            " Когда [npc.she] нерешительно [npc.targetBasedWord(открываешь, открывает)] их снова, они превращаются в человеческие глаза, с нормально расположенными радужкой и зрачками."
+			" Когда [npc.she] нерешительно [npc.targetBasedWord(открываешь, открывает)] их снова, они превратились в человеческие глаза, с нормально расположенными радужкой и зрачками."
 				+ "<br/>"
                     + "[npc.Name] теперь [npc.has] [style.boldHuman(человеческие глаза)] с [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
-			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] нормальных, человеческих глаз, с [pc.morphPluralInstr([npc.irisShape])], [pc.morphPluralInstr([npc.irisColour(true)])] радушками, [pc.morphPluralInstr([npc.pupilShape])], [pc.morphPluralInstr([npc.pupilColour(true)])] зрачками, и [pc.morphPluralInstr([npc.scleraColour(true)])] белками.") {
+			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] нормальных, человеческих глаз, с [pc.morphPluralInstr([npc.irisShape])], [pc.morphPluralInstr([npc.irisColour(true)])] радужками, [pc.morphPluralInstr([npc.pupilShape])], [pc.morphPluralInstr([npc.pupilColour(true)])] зрачками, и [pc.morphPluralInstr([npc.scleraColour(true)])] белками.") {
 	};
 
 	public static AbstractEyeType ANGEL = new AbstractEyeType(BodyCoveringType.EYE_ANGEL,
@@ -49,7 +49,7 @@ public class EyeType {
             " By the time [npc.she] hesitantly open them again, they've changed into angelic eyes, with normally-proportioned irises and pupils."
 				+ "<br/>"
                     + "[npc.Name] now [npc.has] [style.boldAngel(angelic eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
-			"[npc.SheHasFull] [npc.eyePairs] angelic eyes, with [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
+			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] angelic eyes, with [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 	};
 
 	public static AbstractEyeType DEMON_COMMON = new AbstractEyeType(BodyCoveringType.EYE_DEMON_COMMON,
@@ -57,21 +57,21 @@ public class EyeType {
 			1,
 			EyeShape.ROUND,
 			EyeShape.VERTICAL,
-			"demonic",
-			"eye",
-			"eyes",
+			"демонический",
+			"глаз",
+			"глаза",
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			"#IF(npc.isShortStature())"
-                    + "By the time [npc.she] hesitantly open them again, they've changed into impish eyes, with vertical pupils and large irises."
+					+ "Когда [npc.she] нерешительно [npc.targetBasedWord(открываешь, открывает)] их снова, они превратились в коварные глаза с вертикальными зрачками и большими радужками."
 				+ "<br/>"
-                    + "[npc.Name] now [npc.has] [style.boldImp(impish eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)]."
+					+ "[npc.Name] теперь [npc.has] [style.boldImp(импитские глаза)] с [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)]."
 			+ "#ELSE"
-                    + "By the time [npc.she] hesitantly open them again, they've changed into demonic eyes, with vertical pupils and large irises."
+					+ "Когда [npc.she] нерешительно [npc.targetBasedWord(открываешь, открывает)] их снова, они превратились в демонические глаза с вертикальными зрачками и большими радужками."
 				+ "<br/>"
-                    + "[npc.Name] now [npc.has] [style.boldDemon(demonic eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)]."
+					+ "[npc.Name] теперь [npc.has] [style.boldDemon(демонические глаза)] с [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)]."
 			+ "#ENDIF",
-			"[npc.SheHasFull] [npc.eyePairs] #IF(npc.isShortStature())impish#ELSEdemonic#ENDIF eyes, with [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
+			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] #IF(npc.isShortStature())импитских#ELSEдемонических#ENDIF глаз, с [pc.morphPluralInstr([npc.irisShape])], [pc.morphPluralInstr([npc.irisColour(true)])] радужками, [pc.morphPluralInstr([npc.pupilShape])], [pc.morphPluralInstr([npc.pupilColour(true)])] зрачками, и [pc.morphPluralInstr([npc.scleraColour(true)])] белками.") {
 		@Override
 		public List<BodyPartTag> getTags() {
 			return Util.newArrayListOfValues(BodyPartTag.NIGHT_VISION);
@@ -90,7 +90,7 @@ public class EyeType {
 			Util.newArrayListOfValues(""),
             "By the time [npc.she] hesitantly open them again, they've changed into demonic, owl-like eyes, which provide [npc.herHim] with excellent night vision."
                     + "<br/>[npc.Name] now [npc.has] [style.boldDemon(demonic-owl eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
-			"[npc.SheHasFull] [npc.eyePairs] demonic-owl eyes, with [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
+			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] demonic-owl eyes, with [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 		@Override
 		public List<BodyPartTag> getTags() {
 			return Util.newArrayListOfValues(BodyPartTag.NIGHT_VISION);
@@ -102,16 +102,16 @@ public class EyeType {
 			1,
 			EyeShape.ROUND,
 			EyeShape.VERTICAL,
-			"cat",
-			"eye",
-			"eyes",
+			"кошачьи",
+			"глаз",
+			"глаза",
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-            "By the time [npc.she] hesitantly open them again, they've changed into cat-like eyes, with large irises and vertical pupils."
+			"Когда [npc.she] нерешительно [npc.targetBasedWord(открываешь, открывает)] их снова, они превратились в кошачьи глаза с большими радужными оболочками и вертикальными зрачками."
 					+ "<br/>"
-                    + "[npc.Name] now [npc.has] [style.boldCatMorph(cat-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
-			"[npc.SheHasFull] [npc.eyePairs] cat-like eyes, the irises and pupils of which are larger than a regular human's."
-				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
+					+ "[npc.Name] теперь [npc.has] [style.boldCatMorph(глаза как у кошки)] с [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
+			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] глаза, похожие на кошачьи, радужная оболочка и зрачки которых больше, чем у обычного человека."
+					+ " У них [pc.morphGenPlural([npc.irisShape])], [pc.morphGenPlural([npc.irisColour(true)])] радужки, [pc.morphGenPlural([npc.pupilShape])], [pc.morphGenPlural([npc.pupilColour(true)])] зрачки, и [pc.morphGenPlural([npc.scleraColour(true)])] белки.") {
 		@Override
 		public List<BodyPartTag> getTags() {
 			return Util.newArrayListOfValues(BodyPartTag.NIGHT_VISION);
@@ -131,7 +131,7 @@ public class EyeType {
             "By the time [npc.she] hesitantly open them again, they've changed into cow-like eyes, with large pupils and horizontal irises."
 				+ "<br/>"
                     + "[npc.Name] now [npc.has] [style.boldCowMorph(cow-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
-			"[npc.SheHasFull] [npc.eyePairs] cow-like eyes, the irises and pupils of which are larger than a regular human's."
+			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] cow-like eyes, the irises and pupils of which are larger than a regular human's."
 			+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 		@Override
 		public List<BodyPartTag> getTags() {
@@ -152,7 +152,7 @@ public class EyeType {
             "By the time [npc.she] hesitantly open them again, they've changed into dog-like eyes, with large pupils and irises."
 				+ "<br/>"
                     + "[npc.Name] now [npc.has] [style.boldDogMorph(dog-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
-			"[npc.SheHasFull] [npc.eyePairs] dog-like eyes, the irises and pupils of which are larger than a regular human's."
+			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] dog-like eyes, the irises and pupils of which are larger than a regular human's."
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 		@Override
 		public List<BodyPartTag> getTags() {
@@ -173,7 +173,7 @@ public class EyeType {
             "By the time [npc.she] hesitantly open them again, they've changed into fox-like eyes, with large irises and vertical pupils."
 				+ "<br/>"
                     + "[npc.Name] now [npc.has] [style.boldFoxMorph(fox-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
-			"[npc.SheHasFull] [npc.eyePairs] fox-like eyes, the irises and pupils of which are larger than a regular human's."
+			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] fox-like eyes, the irises and pupils of which are larger than a regular human's."
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 		@Override
 		public List<BodyPartTag> getTags() {
@@ -194,7 +194,7 @@ public class EyeType {
             "By the time [npc.she] hesitantly open them again, they've changed into wolf-like eyes, with large irises and pupils."
 				+ "<br/>"
                     + "[npc.Name] now [npc.has] [style.boldWolfMorph(wolf-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
-			"[npc.SheHasFull] [npc.eyePairs] wolf-like eyes, the irises and pupils of which are larger than a regular human's."
+			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] wolf-like eyes, the irises and pupils of which are larger than a regular human's."
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 		@Override
 		public List<BodyPartTag> getTags() {
@@ -215,7 +215,7 @@ public class EyeType {
             "By the time [npc.she] hesitantly open them again, they've changed into squirrel-like eyes, with large irises and pupils."
 				+ "<br/>"
                     + "[npc.Name] now [npc.has] [style.boldSquirrelMorph(squirrel-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
-			"[npc.SheHasFull] [npc.eyePairs] squirrel-like eyes, the irises and pupils of which are larger than a regular human's."
+			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] squirrel-like eyes, the irises and pupils of which are larger than a regular human's."
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 	};
 
@@ -232,7 +232,7 @@ public class EyeType {
             "By the time [npc.she] hesitantly open them again, they've changed into rat-like eyes, with large irises and pupils."
 				+ "<br/>"
                     + "[npc.Name] now [npc.has] [style.boldRatMorph(rat-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
-			"[npc.SheHasFull] [npc.eyePairs] rat-like eyes, the irises and pupils of which are larger than a regular human's."
+			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] rat-like eyes, the irises and pupils of which are larger than a regular human's."
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 	};
 
@@ -249,7 +249,7 @@ public class EyeType {
             "By the time [npc.she] hesitantly open them again, they've changed into rabbit-like eyes, with large irises and pupils."
 				+ "<br/>"
                     + "[npc.Name] now [npc.has] [style.boldRabbitMorph(rabbit-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
-			"[npc.SheHasFull] [npc.eyePairs] rabbit-like eyes, the irises and pupils of which are larger than a regular human's."
+			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] rabbit-like eyes, the irises and pupils of which are larger than a regular human's."
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 	};
 
@@ -266,7 +266,7 @@ public class EyeType {
             "By the time [npc.she] hesitantly open them again, they've changed into bat-like eyes, with large irises and pupils."
 				+ "<br/>"
                     + "[npc.Name] now [npc.has] [style.boldBatMorph(bat-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
-			"[npc.SheHasFull] [npc.eyePairs] bat-like eyes, the irises and pupils of which are larger than a regular human's."
+			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] bat-like eyes, the irises and pupils of which are larger than a regular human's."
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 		@Override
 		public List<BodyPartTag> getTags() {
@@ -287,7 +287,7 @@ public class EyeType {
             "By the time [npc.she] hesitantly open them again, they've changed into alligator-like eyes, with large irises and vertical pupils."
 				+ "<br/>"
                     + "[npc.Name] now [npc.has] [style.boldAlligatorMorph(alligator-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
-			"[npc.SheHasFull] [npc.eyePairs] alligator-like eyes, the irises and pupils of which are larger than a regular human's."
+			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] alligator-like eyes, the irises and pupils of which are larger than a regular human's."
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 		@Override
 		public List<BodyPartTag> getTags() {
@@ -308,7 +308,7 @@ public class EyeType {
             "By the time [npc.she] hesitantly open them again, they've changed into horse-like eyes, with large irises and horizontal pupils."
 				+ "<br/>"
                     + "[npc.Name] now [npc.has] [style.boldHorseMorph(horse-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
-			"[npc.SheHasFull] [npc.eyePairs] horse-like eyes, the irises and pupils of which are larger than a regular human's."
+			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] horse-like eyes, the irises and pupils of which are larger than a regular human's."
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 		@Override
 		public List<BodyPartTag> getTags() {
@@ -329,7 +329,7 @@ public class EyeType {
             "By the time [npc.she] hesitantly open them again, they've changed into reindeer-like eyes, with large irises and horizontal pupils."
 				+ "<br/>"
                     + "[npc.Name] now [npc.has] [style.boldReindeerMorph(reindeer-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
-			"[npc.SheHasFull] [npc.eyePairs] reindeer-like eyes, the irises and pupils of which are larger than a regular human's."
+			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] reindeer-like eyes, the irises and pupils of which are larger than a regular human's."
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 		@Override
 		public List<BodyPartTag> getTags() {
@@ -350,7 +350,7 @@ public class EyeType {
             "By the time [npc.she] hesitantly open them again, they've changed into bird-like eyes, with large irises and pupils."
 				+ "<br/>"
                     + "[npc.Name] now [npc.has] [style.boldHarpy(bird-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
-			"[npc.SheHasFull] [npc.eyePairs] bird-like eyes, the irises and pupils of which are larger than a regular human's."
+			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] bird-like eyes, the irises and pupils of which are larger than a regular human's."
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 	};
 	

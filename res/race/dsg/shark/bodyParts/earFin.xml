@@ -49,17 +49,17 @@
 	<transformationDescription><![CDATA[
 		They quickly begin to narrow and grow longer while shifting to sit higher up on [npc.her] head than normal human ears would until they resemble a pair of swept, pointed fins.
 		#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)
-		 A layer of [npc.earFullDescriptionColour] quickly grows to cover them,
+		 Слой [npc.earFullDescriptionColour] быстро растет, покрывая их,
 		#ELSE
-		 Just like the rest of [npc.her] body, they're made out of [npc.earFullDescription],
+		 Как и остальные части [npc.targetBasedWord(твоей, [npc.her])] тела, они сделаны из [npc.earFullDescription].,
 		#ENDIF
 		 and as the transformation finishes, [npc.she] experimentally twitch [npc.her] new shark-like ears back and forth.
-		<br/>[npc.Name] now [npc.has] [style.boldShark(large, shark-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].
+		<br/>[npc.Name] now [npc.has] [style.boldShark(large, shark-like ears)], которые [npc.materialCompositionDescriptor] [npc.earFullDescription].
 	]]></transformationDescription>
 	
 	<!-- How this ear is described in a character's description page. -->
 	<bodyDescription><![CDATA[
-		[npc.She] [npc.has] a pair of upright,#IF(npc.isPiercedEar()) pierced,#ENDIF shark-like ears that resemble swept, pointed fins. They are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].
+		У [npc.targetBasedWord(тебя, н[npc.him])] пара of upright,#IF(npc.isPiercedEar()) pierced,#ENDIF shark-like ears that resemble swept, pointed fins. They are positioned high up on [npc.her] head and are [pc.morphPluralParticipleToShortForm([npc.materialCompositionDescriptor])] [pc.morphSingleInstr([pc.morphGenSinFem([npc.earFullDescription(true)])])].
 	]]></bodyDescription>
 	
 </ear>

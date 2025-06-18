@@ -121,9 +121,9 @@ public class DominionEncounterDialogue {
 		@Override
 		public String getLabel() {
 			if(Main.game.getDateNow().getMonth()==Month.MAY) {
-				return "Mother's Week Gift";
+                return "Подарок недели материнства";
 			} else {
-				return "Father's Week Gift";
+                return "Подарок недели отцовства";
 			}
 		}
 		@Override

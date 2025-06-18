@@ -36,7 +36,7 @@ This gives the user both a good experience on entering the game and allows you t
 	Face and full body fur would be among the highest scoring items.(edited)
 	Humans are if you score low on everything, a chimera or similar name would come up if you score high on several items.
 	You can also have hidden race combos to find that would give special names too.
-	Like a rabbit morph with antlers could be called a jackalope.
+	Like a rabbit morph with antlers could be called a кроликолоп.
 	The other idea I had was a serpent, with antlers, and whiskers would be called an eastern dragon or long.
 	
 	It's actually almost like a set collection thing in Diablo.
@@ -418,7 +418,7 @@ Miscellaneous things I've noted:
 	As you progress in the game, expanding the areas and difficulty you can tackle, quests that reward you with new summon types or a larger number of companion slots become available.
 	Also, more customization options and more equipment slots to buff your summons.(edited)
 	
-	The ideas I had for summons so far are: elementals (most basic), clockwork pets, mini-race fairies (cat fae, dog fae, bovine fae), demon animals (hellhounds, bloodhawk, chimera), etc.
+	The ideas I had for summons so far are: elementals (most basic), clockwork pets, mini-race fairies (cat fae, dog fae, bovine fae), demon animals (адские гончии, bloodhawk, chimera), etc.
 	  The player unlocks these in different ways and your opponents will call on ones that are suitable for their personality, culture, and environment.
 	    For example, mini-races require romancing an NPC that started as that race, demon animals come from demons.
 	      In turn, generic NPCs of a specific race are more likely to call on their mini-race as a summon while demons are more likely to rely on demon animals.

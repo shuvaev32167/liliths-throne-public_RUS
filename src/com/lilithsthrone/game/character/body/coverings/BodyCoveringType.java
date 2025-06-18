@@ -892,10 +892,10 @@ public class BodyCoveringType {
 	
 	public static AbstractBodyCoveringType MAKEUP_EYE_SHADOW = new AbstractBodyCoveringType(
 			BodyCoveringCategory.MAKEUP,
-			"a layer of",
+			"слой из",
 			false,
-			"eye shadow",
-			"eye shadow",
+			"тени для глаз",
+			"тени для глаз",
 			Util.newArrayListOfValues(
 					CoveringModifier.MATTE,
 					CoveringModifier.SPARKLY,

@@ -985,7 +985,7 @@
 	
 	<htmlContent tag="OFFSPRING_PRESENT"><![CDATA[
 	<p>
-		Deciding that it would be nice to give your [npc.relation(pc)] a present this Yuletide, you hold out the gift towards [npc.herHim]. [pc.speech(This is for you, [npc.name]. Happy Yuletide!)]
+		Deciding that it would be nice to give your [npc.relation(pc)] a present this Юлэтид, you hold out the gift towards [npc.herHim]. [pc.speech(This is for you, [npc.name]. Happy Yuletide!)]
 	</p>
 	<p>
 		[npc.Name] lets out a little gasp as you give [npc.herHim] the present, and, looking up into your [pc.eyes], [npc.she] cries out, [npc.speech([npc.pcName]! Thank you so much! I-I don't know what to say!)]

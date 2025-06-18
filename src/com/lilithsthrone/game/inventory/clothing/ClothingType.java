@@ -2089,8 +2089,8 @@ public class ClothingType {
 	public static AbstractClothingType JOLNIR_HAT = new AbstractClothingType(400,
 			"a",
 			false,
-			"J&oacute;lnir's hat",
-			"J&oacute;lnir's hats",
+            "Шапка Йолнир",
+            "Шапки Йолнир",
 			"A hat made in the same style as that worn by the Yule figure.",
 			0,
 			null,
@@ -2117,22 +2117,22 @@ public class ClothingType {
 		@Override
 		public String equipText(GameCharacter clothingOwner, GameCharacter clothingRemover, InventorySlot slotToEquipInto, boolean rough, AbstractClothing clothing, boolean applyEffects) {
 			return getEquipDescriptions(clothingOwner, clothingRemover, rough,
-					"You put on J&oacute;lnir's hat.",
-					"You place J&oacute;lnir's hat onto [npc.namePos] head.",
+                    "You put on шапка Йолнир.",
+                    "You place шапка Йолнир onto [npc.namePos] head.",
 					null,
-					"[npc.Name] puts on J&oacute;lnir's hat.",
-					"[npc.Name] places J&oacute;lnir's hat onto your head.",
+                    "[npc.Name] puts on шапка Йолнир.",
+                    "[npc.Name] places шапка Йолнир onto your head.",
 					null, null, null);
 		}
 
 		@Override
 		public String unequipText(GameCharacter clothingOwner, GameCharacter clothingRemover, InventorySlot slotToEquipInto, boolean rough, AbstractClothing clothing, boolean applyEffects) {
 			return getEquipDescriptions(clothingOwner, clothingRemover, rough,
-					"You take off J&oacute;lnir's hat.",
-					"You take off [npc.namePos] J&oacute;lnir's hat.",
+                    "You take off шапка Йолнир.",
+                    "You take off [npc.namePos] шапка Йолнир.",
 					null,
-					"[npc.Name] takes J&oacute;lnir's hat off.",
-					"[npc.Name] takes your J&oacute;lnir's hat off.",
+                    "[npc.Name] takes шапка Йолнир off.",
+                    "[npc.Name] takes your шапка Йолнир off.",
 					null, null, null);
 		}
 
@@ -2141,8 +2141,8 @@ public class ClothingType {
 	public static AbstractClothingType JOLNIR_COAT = new AbstractClothingType(750,
 			"a",
 			false,
-			"J&oacute;lnir's coat",
-			"J&oacute;lnir's coats",
+            "Пальто Йолнир",
+            "Пальто Йолнир",
 			"A coat similar to the one worn by the Yule figure.",
 			0,
 			null,
@@ -2200,8 +2200,8 @@ public class ClothingType {
 	public static AbstractClothingType JOLNIR_DRESS = new AbstractClothingType(900,
 			"a",
 			false,
-			"J&oacute;lnir's dress",
-			"J&oacute;lnir's dresses",
+            "Платье Йолнир",
+            "Платья Йолнир",
 			"A dress made to be in the same style as the clothing worn by the Yule figure.",
 			0,
 			Femininity.FEMININE,
@@ -2251,44 +2251,44 @@ public class ClothingType {
 		@Override
 		public String equipText(GameCharacter clothingOwner, GameCharacter clothingRemover, InventorySlot slotToEquipInto, boolean rough, AbstractClothing clothing, boolean applyEffects) {
 			return getEquipDescriptions(clothingOwner, clothingRemover, rough,
-					"You pull on the J&oacute;lnir's dress, tidying the skirt down before moving the straps into a comfortable position on your shoulders.",
-					"You pull the J&oacute;lnir's dress over [npc.namePos] head and down around [npc.her] torso, tidying the skirt before moving the straps to sit comfortably on [npc.her] shoulders.",
+                    "You pull on the Платье Йолнир, tidying the skirt down before moving the straps into a comfortable position on your shoulders.",
+                    "You pull the Платье Йолнир over [npc.namePos] head and down around [npc.her] torso, tidying the skirt before moving the straps to sit comfortably on [npc.her] shoulders.",
 					null,
-					"[npc.Name] pulls on the J&oacute;lnir's dress, tidying the skirt down before moving the straps into a comfortable position on [npc.her] shoulders.",
-					"[npc.Name] pulls the J&oacute;lnir's dress over your head and down around your torso, tidying the skirt before moving the straps to sit comfortably on your shoulders.",
+                    "[npc.Name] pulls on the Платье Йолнир, tidying the skirt down before moving the straps into a comfortable position on [npc.her] shoulders.",
+                    "[npc.Name] pulls the Платье Йолнир over your head and down around your torso, tidying the skirt before moving the straps to sit comfortably on your shoulders.",
 					null, null, null);
 		}
 
 		@Override
 		public String unequipText(GameCharacter clothingOwner, GameCharacter clothingRemover, InventorySlot slotToEquipInto, boolean rough, AbstractClothing clothing, boolean applyEffects) {
 			return getEquipDescriptions(clothingOwner, clothingRemover, rough,
-					"You pull your J&oacute;lnir's dress up over your head and take it off.",
-					"You pull [npc.namePos] J&oacute;lnir's dress up over [npc.her] head and take it off.",
+                    "You pull your Платье Йолнир up over your head and take it off.",
+                    "You pull [npc.namePos] Платье Йолнир up over [npc.her] head and take it off.",
 					null,
-					"[npc.Name] pulls [npc.her] J&oacute;lnir's dress up over [npc.her] head and takes it off.",
-					"[npc.Name] pulls your J&oacute;lnir's dress up over your head and takes it off.",
+                    "[npc.Name] pulls [npc.her] Платье Йолнир up over [npc.her] head and takes it off.",
+                    "[npc.Name] pulls your Платье Йолнир up over your head and takes it off.",
 					null, null, null);
 		}
 
 		@Override
 		public String displaceText(GameCharacter clothingOwner, GameCharacter clothingRemover, InventorySlot slotToEquipInto, DisplacementType dt, boolean rough) {
 			return getEquipDescriptions(clothingOwner, clothingRemover, rough,
-					"You pull up the skirt of your J&oacute;lnir's dress.",
-					"You pull up the skirt of [npc.namePos] J&oacute;lnir's dress.",
+                    "You pull up the skirt of your Платье Йолнир.",
+                    "You pull up the skirt of [npc.namePos] Платье Йолнир.",
 					null,
-					"[npc.Name] pulls up the skirt of [npc.her] J&oacute;lnir's dress.",
-					"[npc.Name] pulls up the skirt of your J&oacute;lnir's dress.",
+                    "[npc.Name] pulls up the skirt of [npc.her] Платье Йолнир.",
+                    "[npc.Name] pulls up the skirt of your Платье Йолнир.",
 					null, null, null);
 		}
 
 		@Override
 		public String replaceText(GameCharacter clothingOwner, GameCharacter clothingRemover, InventorySlot slotToEquipInto, DisplacementType dt, boolean rough) {
 			return getEquipDescriptions(clothingOwner, clothingRemover, rough,
-					"You pull your J&oacute;lnir's dress back down into its proper position.",
-					"You pull [npc.namePos] J&oacute;lnir's dress back down into its proper position.",
+                    "You pull your Платье Йолнир back down into its proper position.",
+                    "You pull [npc.namePos] Платье Йолнир back down into its proper position.",
 					null,
-					"[npc.Name] pulls [npc.her] J&oacute;lnir's dress back down into its proper position.",
-					"[npc.Name] your J&oacute;lnir's dress back down into its proper position.",
+                    "[npc.Name] pulls [npc.her] Платье Йолнир back down into its proper position.",
+                    "[npc.Name] your Платье Йолнир back down into its proper position.",
 					null, null, null);
 		}
 	};
@@ -2296,8 +2296,8 @@ public class ClothingType {
 	public static AbstractClothingType JOLNIR_BOOTS = new AbstractClothingType(500,
 			"пара",
 			true,
-			"J&oacute;lnir's boot",
-			"J&oacute;lnir's boots",
+            "Ботинок Йолнир",
+            "Бонтинки Йолнир",
 			"A pair of boots, of the sort worn by the Yule figure.",
 			0,
 			Femininity.MASCULINE,
@@ -2349,8 +2349,8 @@ public class ClothingType {
 	public static AbstractClothingType JOLNIR_BOOTS_FEMININE = new AbstractClothingType(750,
 			"пара",
 			true,
-			"J&oacute;lnir's heeled boot",
-			"J&oacute;lnir's heeled boots",
+            "Сапог Йолнир",
+            "Сапоги Йолнир",
 			"A pair of boots, of the same style as those worn by the Yule figure.",
 			0,
 			Femininity.FEMININE,
