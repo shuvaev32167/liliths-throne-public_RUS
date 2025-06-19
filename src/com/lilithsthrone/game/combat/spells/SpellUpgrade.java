@@ -1,16 +1,16 @@
 package com.lilithsthrone.game.combat.spells;
 
+import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.attributes.AbstractAttribute;
+import com.lilithsthrone.game.character.attributes.Attribute;
+import com.lilithsthrone.utils.Util;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
-
-import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
-import com.lilithsthrone.game.character.attributes.Attribute;
-import com.lilithsthrone.utils.Util;
 
 /**
  * @since 0.2.4
@@ -590,7 +590,7 @@ public enum SpellUpgrade {
 			5,
 			SpellSchool.ARCANE,
 			"arcane_arousal_overwhelming_lust",
-			"Overwhelming Lust",
+			"Необузданная похоть",
 			"The images that are projected into the target's mind become especially lewd and depraved.",
 			null, Util.newArrayListOfValues(
 					"Arcane Arousal damage [style.colourExcellent(doubled)] to <b>30</b> "+Attribute.DAMAGE_LUST.getColouredName("b"))),
@@ -826,36 +826,36 @@ public enum SpellUpgrade {
 	};
 
 	
-	private boolean isAlwaysAvailable;
-	private int pointCost;
-	private SpellSchool spellSchool;
-	private String name;
-	private String description;
+	private final boolean isAlwaysAvailable;
+	private final int pointCost;
+	private final SpellSchool spellSchool;
+	private final String name;
+	private final String description;
 
-	private HashMap<AbstractAttribute, Integer> attributeModifiers;
-	private List<String> extraEffects;
-	private List<String> modifiersList;
+	private final HashMap<AbstractAttribute, Integer> attributeModifiers;
+	private final List<String> extraEffects;
+	private final List<String> modifiersList;
 	
 	private String SVGString;
 	
-	private SpellUpgrade(int pointCost,
-			SpellSchool spellSchool,
-			String pathName,
-			String name,
-			String description,
-			HashMap<AbstractAttribute, Integer> attributeModifiers,
-			List<String> extraEffects) {
+	SpellUpgrade(int pointCost,
+                 SpellSchool spellSchool,
+                 String pathName,
+                 String name,
+                 String description,
+                 HashMap<AbstractAttribute, Integer> attributeModifiers,
+                 List<String> extraEffects) {
 		this(false, pointCost, spellSchool, pathName, name, description, attributeModifiers, extraEffects);
 	}
 	
-	private SpellUpgrade(boolean isAlwaysAvailable,
-			int pointCost,
-			SpellSchool spellSchool,
-			String pathName,
-			String name,
-			String description,
-			HashMap<AbstractAttribute, Integer> attributeModifiers,
-			List<String> extraEffects) {
+	SpellUpgrade(boolean isAlwaysAvailable,
+                 int pointCost,
+                 SpellSchool spellSchool,
+                 String pathName,
+                 String name,
+                 String description,
+                 HashMap<AbstractAttribute, Integer> attributeModifiers,
+                 List<String> extraEffects) {
 		
 		this.isAlwaysAvailable = isAlwaysAvailable;
 		this.pointCost = pointCost;

@@ -41,9 +41,9 @@ public class DemonHome {
 		if(Main.game.getCurrentWeather()==Weather.MAGIC_STORM) {
 			sb.append(
 					"<p>"
-						+ "The arcane storm that's raging overhead has brought out a heavy presence of demon Enforcers in this area."
-						+ " Unaffected by the arousing power of the storm's thunder, these elite Enforcers keep a close watch on you as you pass through the all-but-deserted area known as Demon Home."
-						+ " There's no way anyone would be able to assault you while under their watchful gaze, allowing you continue on your way in peace..."
+                            + "Магическая буря, бушующая над головой, привлекла в эту область большое количество демонов-энфорсеров."
+                            + " Не поддаваясь воздействию бурной силы грозы, эти элитные стражи внимательно следят за тобой, когда ты проходишь через практически пустынный район, известный как «Дом демонов»."
+                            + " Никто не сможет напасть на тебя под их бдительным взглядом, и ты сможешь спокойно продолжить свой путь..."
 					+ "</p>");
 		}
 
@@ -51,22 +51,22 @@ public class DemonHome {
 			sb.append(
 				"<p>"
                         + "<b style='color:" + PresetColour.BASE_ORANGE.toWebHexString() + ";'>Октябрь;</b> <b style='color:" + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Месяц Лилит:</b><br/>"
-					+ "Orange, black, and purple flags fly from almost every window, and you look up to see that large banners have been hung across the street, each one bearing a different slogan celebrating Lilith's rule."
-					+ " The occasional demon that you see is usually dressed up in a Halloween-esque costume for the occasion, which does nothing to help alleviate the eerie atmosphere."
+                        + "Оранжевые, чёрные и фиолетовые флаги развеваются почти из каждого окна, и, подняв глаза, ты видишь, что через улицу натянуты большие плакаты, на каждом из которых написан свой лозунг, прославляющий правление Лилит."
+                        + " Иногда появляющиеся демоны обычно одеты в костюмы в стиле Хэллоуина, что ничуть не помогает развеять жуткую атмосферу."
 				+ "</p>");
 		}
 		if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.hasSnowedThisWinter) && Main.game.getSeason()==Season.WINTER) {
 			sb.append(
 				"<p>"
-					+ "The reindeer-morph workers are doing a good job of keeping Dominion's streets clear from the snow, but the rooftops, trees, and tops of lamp posts are all home to a thick layer of white."
-					+ " You see your breath exiting your mouth in a little cloud of condensation, but despite the clear evidence of the air's freezing temperature, your arcane aura protects your body from feeling the cold."
+                        + "Рабочие оленоморфы отлично справляются с уборкой снега с улиц Доминиона, но крыши домов, деревья и верхушки фонарных столбов по-прежнему покрыты толстым слоем белого снега."
+                        + " Ты видишь, как твой выдох выходит из рта в виде небольшого облачка конденсата, но, несмотря на явные признаки низкой температуры воздуха, твоя магическая аура защищает твоё тело от ощущения холода."
 				+ "</p>");
 		}
 		
 		return sb.toString();
     }
-    
-	public static final DialogueNode DEMON_HOME_GATE = new DialogueNode("Demon Home (Gates)", "Demon Home", false) {
+
+    public static final DialogueNode DEMON_HOME_GATE = new DialogueNode("Дом демонов (Врата)", "Дом демонов", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -79,12 +79,12 @@ public class DemonHome {
 
 			UtilText.nodeContentSB.append(
 					"<p>"
-						+ "A set of huge, iron gates have been built across the street here, separating the regular areas of Dominion from that known as 'Demon Home' beyond."
-						+ " Half a dozen elite demon Enforcers are stationed here, keeping a close eye on anyone who comes and goes."
+                            + "Здесь, через улицу, были построены огромные железные ворота, отделяющие обычные районы Доминиона от района, известного как «Дом демонов»."
+                            + " Здесь размещено полдюжины элитных демонов-энфорсеров, которые внимательно следят за всеми, кто приходит и уходит."
 					+ "</p>"
 					+ "<p>"
-						+ "As you walk forwards to pass through the gates, you see one of these demonic guards staring at you."
-						+ " Ignoring their penetrating gaze, you stride forwards, breathing a sigh of relief as you get through to the other side without being stopped."
+                            + "Когда ты идёшь вперёд, чтобы пройти через ворота, ты видишь, как один из этих демонических стражников пристально смотрит на тебя."
+                            + " Игнорируя их пронзительные взгляды, ты шагаешь вперёд, вздыхая с облегчением, когда проходишь на другую сторону, не будучи [pc.genderBasedWord(остановленным, остановленной)]."
 					+ "</p>");
 			
 			UtilText.nodeContentSB.append(getAdditionalDescriptions());
@@ -97,8 +97,8 @@ public class DemonHome {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode DEMON_HOME_STREET = new DialogueNode("Demon Home", "Demon Home", false) {
+
+    public static final DialogueNode DEMON_HOME_STREET = new DialogueNode("Дом демонов", "Дом демонов", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -112,21 +112,21 @@ public class DemonHome {
 			
 			UtilText.nodeContentSB.append(
 					"<p>"
-						+ "From the wide, marble-paved streets, to the immaculate frontages of the regency-style buildings, it's quite clear that this district of 'Demon Home' is one of the more upmarket areas of Dominion."
-						+ " Numerous masterfully-carved statues, the vast majority of which depict some form of demon or another, are dotted around the area, and, considering their subject matter,"
-							+ " you assume that these sculptures are what gives this area its name."
+                            + "От широких улиц с мраморной мостовой до безупречных фасадов зданий в стиле ампир – совершенно очевидно, что район «Дом демонов» является одним из самых престижных районов Доминиона."
+                            + " Многочисленные искусно вырезанные статуи, большинство из которых изображают тех или иных демонов, разбросаны по всей территории, и, учитывая их тематику,"
+                            + " ты предполагаешь, что именно эти скульптуры дали название этой местности."
 					+ "</p>"
 					+ "<p>"
-						+ "As you walk down the street, you pass several fenced-off private gardens; their lush splash of greenery helping to break up the monotony of the surrounding building's creamy-white stone facades."
-						+ " Despite the fact that Demon Home is a little quieter than most of the other areas of Dominion, you notice that there are slightly more Enforcers patrolling the streets;"
-									+ " evidence that the wealthy and influential residents of the city are afforded extra protection."
+                            + "Прогуливаясь по улице, ты проходишь мимо нескольких огороженных частных садов; их пышная зелень помогает разбавить монотонность кремово-белых каменных фасадов окружающих зданий."
+                            + " Несмотря на то, что «Дом демонов» немного тише, чем большинство других районов Доминиона, ты замечаешь, что на улицах патрулирует немного больше энфорсеров;"
+                            + " доказательства того, что богатые и влиятельные жители города пользуются дополнительной защитой."
 					+ "</p>");
 			
 			if(Main.game.getPlayerCell().getPlace().getPlaceType().equals(PlaceType.DOMINION_DEMON_HOME_DADDY)) {
 				UtilText.nodeContentSB.append(
 						"<p>"
-							+ "<b style='color:"+PresetColour.RACE_DEMON.toWebHexString()+";'>[daddy.NamePos] residence:</b><br/>"
-							+ "[daddy.NamePos] apartment is located in this particular area of Demon Home."
+                                + "<b style='color:" + PresetColour.RACE_DEMON.toWebHexString() + ";'>Место жительства [daddy.morphSingleNameGene([daddy.name])]:</b><br/>"
+                                + "Квартира [daddy.morphSingleNameGene([daddy.name])] расположена в этом конкретном районе «Дома демонов»."
 							+ Daddy.getAvailabilityText()
 						+ "</p>");
 			}
@@ -134,8 +134,8 @@ public class DemonHome {
 			if(Main.game.getPlayerCell().getPlace().getPlaceType().equals(PlaceType.DOMINION_DEMON_HOME_ARTHUR)) {
 				UtilText.nodeContentSB.append(
 						"<p>"
-							+ "<b style='color:"+PresetColour.RACE_HUMAN.toWebHexString()+";'>Sawlty Towers:</b><br/>"
-							+ "Arthur's apartment building, 'Sawlty Towers', is located in this particular area of Demon Home."
+								+ "<b style='color:" + PresetColour.RACE_HUMAN.toWebHexString() + ";'>Величественные башни:</b><br/>"
+                                + "Дом Артура, «Величественные башни», находится в этом конкретном районе «Дома демонов»."
 						+ "</p>");
 			}
 
@@ -149,8 +149,8 @@ public class DemonHome {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode DEMON_HOME_STREET_ARTHUR = new DialogueNode("Demon Home", "Demon Home", false) {
+
+    public static final DialogueNode DEMON_HOME_STREET_ARTHUR = new DialogueNode("Дом демонов", "Дом демонов", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -166,10 +166,10 @@ public class DemonHome {
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
 				if (Main.game.getPlayer().getQuest(QuestLine.MAIN) == Quest.MAIN_1_B_DEMON_HOME) {
-					return new Response("Sawlty Towers", "Find Arthur's apartment in the building using the instructions Lilaya gave to you.", DEMON_HOME_ARTHURS_APARTMENT);
+                    return new Response("Величественные башни", "Найди квартиру Артура в здании, следуя инструкциям, которые дала тебя Лилайя.", DEMON_HOME_ARTHURS_APARTMENT);
 					
 				} else if (Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_1_B_DEMON_HOME)) {
-					return new Response("Sawlty Towers", "Head over to the Sawlty Towers apartment building.", DEMON_HOME_ARTHURS_APARTMENT);
+                    return new Response("Величественные башни", "Отправляйся в жилой дом «Величественные башни».", DEMON_HOME_ARTHURS_APARTMENT);
 					
 				} else {
 					return null;
@@ -180,8 +180,8 @@ public class DemonHome {
 			}
 		}
 	};
-	
-	public static final DialogueNode DEMON_HOME_STREET_ZARANIX = new DialogueNode("Demon Home", "Demon Home", false) {
+
+    public static final DialogueNode DEMON_HOME_STREET_ZARANIX = new DialogueNode("Дом демонов", "Дом демонов", false) {
 		
 		@Override
 		public int getSecondsPassed() {
@@ -197,10 +197,10 @@ public class DemonHome {
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
 				if (Main.game.getPlayer().getQuest(QuestLine.MAIN) == Quest.MAIN_1_H_THE_GREAT_ESCAPE) {
-					return new Response("Zaranix's Home", "A little way down the road from Arthur's apartment building stands the home of Zaranix; the demon that Scarlett told you about.", ZaranixHomeGroundFloor.OUTSIDE);
+                    return new Response("Дом Зараникса", "A little way down the road from Arthur's apartment building stands the home of Zaranix; the demon that Scarlett told you about.", ZaranixHomeGroundFloor.OUTSIDE);
 					
 				} else if (Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_1_H_THE_GREAT_ESCAPE)) {
-					return new Response("Zaranix's Home", "Pay Zaranix another visit.", ZaranixHomeGroundFloorRepeat.OUTSIDE);
+                    return new Response("Дом Зараникса", "Pay Zaranix another visit.", ZaranixHomeGroundFloorRepeat.OUTSIDE);
 				}
 				return null;
 
@@ -209,8 +209,8 @@ public class DemonHome {
 			}
 		}
 	};
-	
-	public static final DialogueNode DEMON_HOME_STREET_DADDY = new DialogueNode("Demon Home", "Demon Home", false) {
+
+    public static final DialogueNode DEMON_HOME_STREET_DADDY = new DialogueNode("Дом демонов", "Дом демонов", false) {
 		
 		@Override
 		public int getSecondsPassed() {

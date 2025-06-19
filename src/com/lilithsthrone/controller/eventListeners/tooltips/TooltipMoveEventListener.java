@@ -1,6 +1,9 @@
 package com.lilithsthrone.controller.eventListeners.tooltips;
 
 import com.lilithsthrone.main.Main;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.w3c.dom.events.Event;
 import org.w3c.dom.events.MouseEvent;
 
@@ -10,9 +13,18 @@ import org.w3c.dom.events.MouseEvent;
  * @author Innoxia
  * Перевод не нужен
  */
-public class TooltipMoveEventListener implements ClonedEventListener {
+@RequiredArgsConstructor
+@NoArgsConstructor(force = true)
+public class TooltipMoveEventListener implements ClonedEventListener<TooltipMoveEventListener> {
+	@Getter(onMethod = @__(@Override))
+	private final TooltipMoveEventListener parent;
+
 	@Override
 	public void handleEvent(Event event) {
+		if (parent != null) {
+			parent.handleEvent(event);
+			return;
+		}
 //		boolean tooWide = false;
 		double xPosition = ((MouseEvent) event).getScreenX() + 16;
 		
@@ -44,6 +56,6 @@ public class TooltipMoveEventListener implements ClonedEventListener {
 	}
 
 	public TooltipMoveEventListener newInstance() {
-		return new TooltipMoveEventListener();
+		return new TooltipMoveEventListener(tryGetParent());
 	}
 }

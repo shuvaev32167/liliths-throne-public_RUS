@@ -25,6 +25,8 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+import com.lilithsthrone.utils.translate.russian.Morpher;
+import lombok.val;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -696,11 +698,11 @@ public enum Spell {
 			descriptionSB.append(getCastDescription(caster, target,
 											Util.newArrayListOfValues(
 													"Потоком и ручьем, рекой и морем я взываю к вечным течениям, не знающим конца! Я передаю тебе свою силу и приношу источник вечной жизни!"),
-											"Легким движением руки вы вызываете сферу с целебной водой, которую быстро выпиваете.",
-											"Легким движением руки вы вызываете сферу с целебной водой, которую отправляете пить [npc.name].",
-											"Легким движением [npc.her] [npc.hand] [npc.name] вызывает сферу с целебной водой, которую [npc.she] быстро выпивает.",
-											"Легким движением [npc.her] [npc.hand] [npc.name] вызывает сферу с целебной водой, которую [npc.she] посылает вам, чтобы вы выпили.",
-											"Легким движением [npc.her] [npc.hand] [npc.name] вызывает сферу с целебной водой, которую [npc.she] посылает [npc2.name] выпить."));
+                    "Легким движением [pc.morphSingleGent([pc.hand])] ты вызываешь сферу с целебной водой, которую быстро выпиваешь.",
+                    "Легким движением [pc.morphSingleGent([pc.hand])] ты вызываешь сферу с целебной водой, которую отдаёшь пить [npc.morphSingleNameDativ([npc.name])].",
+                    "Легким движением [pc.morphSingleGent([npc.hand])] [npc.name] вызывает сферу с целебной водой, которую [npc.she] быстро выпивает.",
+                    "Легким движением [pc.morphSingleGent([npc.hand])] [npc.name] вызывает сферу с целебной водой, которую посылает тебе выпить.",
+                    "Легким движением [pc.morphSingleGent([npc.hand])] [npc.name] вызывает сферу с целебной водой, которую посылает [npc2.morphSingleNameDativ([npc2.name])] выпить."));
 
 			if(caster.hasSpellUpgrade(SpellUpgrade.SOOTHING_WATERS_3) ) {
 				descriptionSB.append(" От основной сферы откололись маленькие шарики воды!");
@@ -708,15 +710,18 @@ public enum Spell {
 			
 			// If attack hits, apply damage and effects:
 			if (isHit) {
+                final double restoredHealth;
+                val restoredMana = target.getAttributeValue(Attribute.MANA_MAXIMUM) * 0.2;
 				if(caster.hasSpellUpgrade(SpellUpgrade.SOOTHING_WATERS_3)) {
+                    restoredHealth = target.getAttributeValue(Attribute.HEALTH_MAXIMUM) * 0.4;
 					descriptionSB.append(getDamageDescription(caster, target, 0, isHit, isCritical));
 
 					descriptionSB.append("<br/>"
-								+ "Сфера воды исцеляет "+UtilText.parse(target,"[npc.name]")+" в сумме "
-									+(int)(target.getAttributeValue(Attribute.HEALTH_MAXIMUM)*0.4f)+" "+Attribute.HEALTH_MAXIMUM.getColouredName("b")+" и "
-									+(int)(target.getAttributeValue(Attribute.MANA_MAXIMUM)*0.2f)+" "+Attribute.MANA_MAXIMUM.getColouredName("b")+"!");
-					descriptionSB.append(applyDamage(caster, target, -target.getAttributeValue(Attribute.HEALTH_MAXIMUM)*0.4f));
-					target.incrementMana(target.getAttributeValue(Attribute.MANA_MAXIMUM)*0.2f);
+                            + "Сфера воды исцеляет " + UtilText.parse(target, "[npc.morphSingleNameGene([npc.name])]") + " на "
+                            + (int) (restoredHealth) + " " + Morpher.morphCountableNoun(restoredHealth, Attribute.HEALTH_MAXIMUM.getColouredName("b")) + " и "
+                            + (int) (restoredMana) + " " + Morpher.morphCountableNoun(restoredMana, Attribute.MANA_MAXIMUM.getColouredName("b")) + "!");
+                    descriptionSB.append(applyDamage(caster, target, (float) -restoredHealth));
+                    target.incrementMana((float) restoredMana);
 					
 //					descriptionSB.append("<br/>"
 //											+ UtilText.parse(target, "One of the small orbs circles around to heal [npc.name] for a second time, restoring a total of "
@@ -730,18 +735,18 @@ public enum Spell {
 						alliesPlusCaster.add(caster);
 						for(GameCharacter combatant : alliesPlusCaster) {
 							descriptionSB.append("<br/>"
-									+ UtilText.parse(combatant, "Одна из маленьких сфер летит к [npc.name], исцеляя [npc.herHim] на общее количество "
+                                    + UtilText.parse(combatant, "Одна из маленьких сфер летит к [npc.morphSingleNameDativ([npc.name])], исцеляя [npc.targetBasedWord(тебя, [npc.herHim])] на "
 																+(int)(target.getAttributeValue(Attribute.HEALTH_MAXIMUM)*0.1f)+" "+Attribute.HEALTH_MAXIMUM.getColouredName("b")+" и "
 																+(int)(target.getAttributeValue(Attribute.MANA_MAXIMUM)*0.1f)+" "+Attribute.MANA_MAXIMUM.getColouredName("b")+"!"));
 							descriptionSB.append(applyDamage(caster, combatant, -combatant.getAttributeValue(Attribute.HEALTH_MAXIMUM)*0.1f));
 							combatant.incrementMana(combatant.getAttributeValue(Attribute.MANA_MAXIMUM)*0.1f);
 							if(caster.hasSpellUpgrade(SpellUpgrade.SOOTHING_WATERS_1_CLEAN)) {
-								descriptionSB.append(UtilText.parse(combatant, "<br/>Тело [npc.NamePos] и вся [npc.her] носимая одежда [style.colorAqua(cleaned)] под действием заклинания!"));
+                                descriptionSB.append(UtilText.parse(combatant, "<br/>[npc.targetBasedWord(Твоё тело, Тело [npc.morphSingleNameGene([npc.NamePos])])] и вся [npc.targetBasedWord(твоя, [npc.her])] носимая одежда [style.colorAqua(очищена)] под действием заклинания!"));
 								combatant.cleanAllClothing(false, false);
 								combatant.cleanAllDirtySlots(true);
 							}
 							if(caster.hasSpellUpgrade(SpellUpgrade.SOOTHING_WATERS_2_CLEAN)) {
-								descriptionSB.append(UtilText.parse(combatant, "<br/>Тело [npc.NamePos] стало [style.colorAqua(тщательно вымытым)] от заклинания!"));
+                                descriptionSB.append(UtilText.parse(combatant, "<br/>[npc.targetBasedWord(Твоё тело, Тело [npc.morphSingleNameGene([npc.NamePos])])] стало [style.colorAqua(тщательно вымытым)] от заклинания!"));
 								combatant.drainTotalFluidsStored(SexAreaOrifice.ANUS, 250);
 								combatant.drainTotalFluidsStored(SexAreaOrifice.VAGINA, 250);
 								combatant.drainTotalFluidsStored(SexAreaOrifice.NIPPLE, 250);
@@ -753,37 +758,40 @@ public enum Spell {
 					}
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.SOOTHING_WATERS_2)) {
+                    restoredHealth = target.getAttributeValue(Attribute.HEALTH_MAXIMUM) * 0.4;
 					descriptionSB.append(getDamageDescription(caster, target, 0, isHit, isCritical));
 					descriptionSB.append("<br/>"
-								+ "Сфера воды исцеляет "+UtilText.parse(target,"[npc.name]")+" на "
-									+(int)(target.getAttributeValue(Attribute.HEALTH_MAXIMUM)*0.4f)+" "+Attribute.HEALTH_MAXIMUM.getColouredName("b")+" и "
-									+(int)(target.getAttributeValue(Attribute.MANA_MAXIMUM)*0.2f)+" "+Attribute.MANA_MAXIMUM.getColouredName("b")+"!");
-					descriptionSB.append(applyDamage(caster, target, -target.getAttributeValue(Attribute.HEALTH_MAXIMUM)*0.4f));
-					target.incrementMana(target.getAttributeValue(Attribute.MANA_MAXIMUM)*0.2f);
+                            + "Сфера воды исцеляет " + UtilText.parse(target, "[npc.morphSingleNameGene([npc.name])]") + " на "
+                            + (int) (restoredHealth) + " " + Morpher.morphCountableNoun(restoredHealth, Attribute.HEALTH_MAXIMUM.getColouredName("b")) + " и "
+                            + (int) (restoredMana) + " " + Morpher.morphCountableNoun(restoredMana, Attribute.MANA_MAXIMUM.getColouredName("b")) + "!");
+                    descriptionSB.append(applyDamage(caster, target, (float) -restoredHealth));
+                    target.incrementMana((float) restoredMana);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.SOOTHING_WATERS_1)) {
+                    restoredHealth = target.getAttributeValue(Attribute.HEALTH_MAXIMUM) * 0.2f;
 					descriptionSB.append(getDamageDescription(caster, target, 0, isHit, isCritical));
 					descriptionSB.append("<br/>"
-								+"Сфера воды исцеляет "+UtilText.parse(target,"[npc.name]")+" на "
-									+(int)(target.getAttributeValue(Attribute.HEALTH_MAXIMUM)*0.2f)+" "+Attribute.HEALTH_MAXIMUM.getColouredName("b")+" и "
-									+(int)(target.getAttributeValue(Attribute.MANA_MAXIMUM)*0.2f)+" "+Attribute.MANA_MAXIMUM.getColouredName("b")+"!");
-					descriptionSB.append(applyDamage(caster, target, -target.getAttributeValue(Attribute.HEALTH_MAXIMUM)*0.2f));
-					target.incrementMana(target.getAttributeValue(Attribute.MANA_MAXIMUM)*0.2f);
+                            + "Сфера воды исцеляет " + UtilText.parse(target, "[npc.morphSingleNameGene([npc.name])]") + " на "
+                            + (int) (restoredHealth) + " " + Morpher.morphCountableNoun(restoredHealth, Attribute.HEALTH_MAXIMUM.getColouredName("b")) + " и "
+                            + (int) (restoredMana) + " " + Morpher.morphCountableNoun(restoredMana, Attribute.MANA_MAXIMUM.getColouredName("b")) + "!");
+                    descriptionSB.append(applyDamage(caster, target, (float) -restoredHealth));
+                    target.incrementMana((float) restoredMana);
 					
 				} else {
+                    restoredHealth = target.getAttributeValue(Attribute.HEALTH_MAXIMUM) * 0.2f;
 					descriptionSB.append(getDamageDescription(caster, target, 0, isHit, isCritical));
 					descriptionSB.append("<br/>"
-								+ "Сфера воды исцеляет "+UtilText.parse(target,"[npc.name]")+" на "
-									+(int)(target.getAttributeValue(Attribute.HEALTH_MAXIMUM)*0.2f)+" "+Attribute.HEALTH_MAXIMUM.getColouredName("b")+"!");
-					descriptionSB.append(applyDamage(caster, target, -target.getAttributeValue(Attribute.HEALTH_MAXIMUM)*0.2f));
+                            + "Сфера воды исцеляет " + UtilText.parse(target, "[npc.morphSingleNameGene([npc.name])]") + " на "
+                            + (int) (restoredHealth) + " " + Morpher.morphCountableNoun(restoredHealth, Attribute.HEALTH_MAXIMUM.getColouredName("b")) + "!");
+                    descriptionSB.append(applyDamage(caster, target, (float) -restoredHealth));
 				}
 				if(caster.hasSpellUpgrade(SpellUpgrade.SOOTHING_WATERS_1_CLEAN)) {
-					descriptionSB.append(UtilText.parse(target, "<br/>Тело [npc.NamePos] и вся [npc.her] носимая одежда [style.colorAqua(очищена)] под действием заклинания!"));
+                    descriptionSB.append(UtilText.parse(target, "<br/>[npc.targetBasedWord(Твоё тело, Тело [npc.morphSingleNameGene([npc.NamePos])])] и вся [npc.targetBasedWord(твоя, [npc.her])] носимая одежда [style.colorAqua(очищена)] под действием заклинания!"));
 					target.cleanAllClothing(false, false);
 					target.cleanAllDirtySlots(true);
 				}
 				if(caster.hasSpellUpgrade(SpellUpgrade.SOOTHING_WATERS_2_CLEAN)) {
-					descriptionSB.append(UtilText.parse(target, "<br/>Тело [npc.NamePos] стало [style.colorAqua(тщательно вымытым)] от заклинания!"));
+                    descriptionSB.append(UtilText.parse(target, "<br/>[npc.targetBasedWord(Твоё тело, Тело [npc.morphSingleNameGene([npc.NamePos])])] стало [style.colorAqua(тщательно вымытым)] от заклинания!"));
 					target.drainTotalFluidsStored(SexAreaOrifice.ANUS, 250);
 					target.drainTotalFluidsStored(SexAreaOrifice.VAGINA, 250);
 					target.drainTotalFluidsStored(SexAreaOrifice.NIPPLE, 250);
@@ -1611,7 +1619,7 @@ public enum Spell {
 			SpellType.OFFENSIVE,
 			DamageType.LUST,
 			false,
-			"Магическое возбуждение",
+            "Маг. возбуждение",
 			"arcane_arousal",
 			"Вызывает у цели возбуждающее магическое видение.",
 			15,
@@ -2496,7 +2504,7 @@ public enum Spell {
 		public boolean isSpellBook() {
 			return false;
 		}
-		
+
 		@Override
 		public String getBasicEffectsString(GameCharacter caster, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
 			return "Запечатывает на [style.colourTerrible(-3)] очка действий!";
@@ -2550,8 +2558,8 @@ public enum Spell {
 		public boolean isSpellBook() {
 			return false;
 		}
-		
-		@Override
+
+        @Override
 		public String getBasicEffectsString(GameCharacter caster, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
 			return "Increases seduction damage.";
 		}
@@ -2608,8 +2616,8 @@ public enum Spell {
 		public boolean isSpellBook() {
 			return false;
 		}
-		
-		@Override
+
+        @Override
 		public String getBasicEffectsString(GameCharacter caster, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
 			return getFormattedSpellDamageRange(caster, target, enemies, allies);
 		}
@@ -2685,8 +2693,8 @@ public enum Spell {
 		public boolean isSpellBook() {
 			return false;
 		}
-		
-		@Override
+
+        @Override
 		public String getBasicEffectsString(GameCharacter caster, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
 			return "Наносит [style.colourDmgLust("
 					+Attack.getMinimumSpellDamage(caster, target, getDamageType(), this.getDamage(caster), this.getDamageVariance())
@@ -3242,7 +3250,7 @@ public enum Spell {
 	 * @return A list of all available SpellUpgrades for this Spell. <b>You should most likely be checking getSpellUpgradeTree() instead!</b>
 	 */
 	public List<SpellUpgrade> getUpgradeList() {
-		return upgradeList;
+        return Optional.ofNullable(upgradeList).orElseGet(Collections::emptyList);
 	}
 	
 	public Map<Integer, List<TreeEntry<SpellSchool, SpellUpgrade>>> getSpellUpgradeTree() {

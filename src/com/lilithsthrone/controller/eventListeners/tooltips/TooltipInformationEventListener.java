@@ -49,6 +49,9 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.utils.translate.russian.Morpher;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.w3c.dom.events.Event;
 import ru.shuvaev.morpher.tools.enams.Numeration;
 
@@ -66,7 +69,9 @@ import static com.lilithsthrone.utils.translate.russian.Morpher.convertGender;
  * @version 0.3.8.6
  * @author Innoxia
  */
-public class TooltipInformationEventListener implements ClonedEventListener {
+@RequiredArgsConstructor
+@NoArgsConstructor(force = true)
+public class TooltipInformationEventListener implements ClonedEventListener<TooltipInformationEventListener> {
 	private String title;
 	private String description;
 	
@@ -105,16 +110,9 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 	
 	private static final int LINE_HEIGHT= 16;
 	private static final int TOOLTIP_WIDTH = 480;
-	
+
+	@Getter(onMethod = @__(@Override))
     private final TooltipInformationEventListener parent;
-
-    private TooltipInformationEventListener(TooltipInformationEventListener parent) {
-        this.parent = parent;
-    }
-
-    public TooltipInformationEventListener() {
-        parent = null;
-    }
 
 	@Override
 	public void handleEvent(Event event) {
@@ -186,7 +184,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 			if(effectsSB.length()>0) {
 				specialYIncrease += 16;
 				tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
-					tooltipSB.append(effectsSB.toString());
+					tooltipSB.append(effectsSB);
 				tooltipSB.append("</div>");
 			}
 
@@ -205,7 +203,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 			if(extraDescriptionsSB.length()>0) {
 				specialYIncrease += 16;
 				tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
-					tooltipSB.append(extraDescriptionsSB.toString());
+					tooltipSB.append(extraDescriptionsSB);
 				tooltipSB.append("</div>");
 			}
 
@@ -280,7 +278,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 				if(timerSB.length()>0) {
 					specialYIncrease += 16;
 					tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
-						tooltipSB.append(timerSB.toString());
+						tooltipSB.append(timerSB);
 					tooltipSB.append("</div>");
 				}
 			}
@@ -289,7 +287,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 			
 			Main.mainController.setTooltipContent(UtilText.parse(tooltipSB.toString()));
 
-			Main.mainController.setTooltipSize(TOOLTIP_WIDTH, 218 + specialYIncrease + (yIncrease * 18));
+			Main.mainController.setTooltipSize(TOOLTIP_WIDTH, 218 + specialYIncrease + (yIncrease * 18) + 15);
 
 			
 		} else if (perk != null || levelUpPerk != null) { // Perks:
@@ -356,7 +354,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 			if(attributesSB.length()>0) {
 				specialYIncrease += 16;
 				tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
-					tooltipSB.append(attributesSB.toString());
+					tooltipSB.append(attributesSB);
 				tooltipSB.append("</div>");
 			}
 
@@ -440,6 +438,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 							+ "</div>");
 			
 			if(currentCooldown>0) {
+				yIncrease++;
 				tooltipSB.append("<div class='subTitle'>[style.colourMinorBad(На перезарядке)]: "+currentCooldown+(currentCooldown==1?" ход":" ходов")+"</div>");
 			}
 			
@@ -490,7 +489,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 			if(effectsSB.length()>0) {
 				specialYIncrease += 16;
 				tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
-					tooltipSB.append(effectsSB.toString());
+					tooltipSB.append(effectsSB);
 				tooltipSB.append("</div>");
 			}
 			
@@ -503,7 +502,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 			tooltipSB.append("</div>");
 
 			if(!Main.game.isInCombat()) {
-				specialYIncrease += 16;
+				specialYIncrease += 20;
 				yIncrease++;
 				tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal; font-style:italic;'>");
 					if(owner.getEquippedMoves().contains(move)) {
@@ -521,7 +520,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 			tooltipSB.append("</body>");
 
 			Main.mainController.setTooltipContent(UtilText.parse(tooltipSB.toString()));
-			Main.mainController.setTooltipSize(TOOLTIP_WIDTH, 260 + specialYIncrease + (yIncrease * 18));
+			Main.mainController.setTooltipSize(TOOLTIP_WIDTH + 20, 260 + specialYIncrease + (yIncrease * 18) + 100);
 
 
 		} else if (desire != null) { // Desire:
@@ -564,7 +563,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 			if(attributesSB.length()>0) {
 				specialYIncrease += 16;
 				tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
-					tooltipSB.append(attributesSB.toString());
+					tooltipSB.append(attributesSB);
 				tooltipSB.append("</div>");
 			}
 
@@ -594,7 +593,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 				tooltipSB.setLength(0);
 				tooltipSB.append("<div class='title'>" + Util.capitaliseSentence(fetish.getName(owner)) + " фетиш</div>");
 				FetishLevel level = FetishLevel.getFetishLevelFromValue(owner.getFetishExperience(fetish));
-				tooltipSB.append("<div class='subTitle'>Уровень "+level.getNumeral()+": <span style='color:"+level.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(level.getName())+"</span>"
+				tooltipSB.append("<div class='subTitle'>Уровень " + level.getNumeral() + ": <span style='color:" + level.getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(Morpher.morphNoun(level.getName(), owner)) + "</span>"
 									+ " <span style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'>|</span> " + owner.getFetishExperience(fetish) +" / "+ level.getMaximumExperience() + " xp" + "</div>");
 				tooltipSB.append("<div class='description' style='height:53px'>Вы зарабатываете очки опыта фетиша выполняя связанные с ним действия. Каждый уровень увеличивает бонусы фетиша (максимальный уровень: 5).</div>");
 
@@ -615,7 +614,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 				// Fetish level and experience:
 				FetishLevel level = FetishLevel.getFetishLevelFromValue(owner.getFetishExperience(fetish));
 				tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
-					tooltipSB.append("Уровень " + level.getNumeral() + ": <span style='color:" + level.getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(level.getName()) + "</span>"
+				tooltipSB.append("Уровень " + level.getNumeral() + ": <span style='color:" + level.getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(Morpher.morphNoun(level.getName(), owner)) + "</span>"
 							+ " <span style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'>|</span> " + owner.getFetishExperience(fetish) +" / "+ level.getMaximumExperience() + " xp");
 
 					String appliedFetishLevelDescription = fetish.getAppliedFetishLevelEffectDescription(owner);
@@ -678,7 +677,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 				if(attributesSB.length()>0) {
 					specialYIncrease += 16;
 					tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
-						tooltipSB.append(attributesSB.toString());
+						tooltipSB.append(attributesSB);
 					tooltipSB.append("</div>");
 				}
 				
@@ -756,7 +755,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 			if(attributesSB.length()>0) {
 				specialYIncrease += 16;
 				tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
-					tooltipSB.append(attributesSB.toString());
+					tooltipSB.append(attributesSB);
 				tooltipSB.append("</div>");
 			}
 
@@ -808,7 +807,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 			if(attributesSB.length()>0) {
 				specialYIncrease += 16;
 				tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
-					tooltipSB.append(attributesSB.toString());
+					tooltipSB.append(attributesSB);
 				tooltipSB.append("</div>");
 			}
 
@@ -1033,7 +1032,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 					tooltipSB.setLength(0);
 					tooltipSB.append("<div class='title' style='color:" + owner.getRace().getColour().toWebHexString() + ";'>"
 							+(owner.getRaceStage().getName()!=""
-								?"<b style='color:"+owner.getRaceStage().getColour().toWebHexString()+";'>" + Util.capitaliseSentence(owner.getRaceStage().getName())+"</b> "
+							? "<b style='color:" + owner.getRaceStage().getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(Morpher.morphGender(owner.getRaceStage().getName(), convertGender(owner.getGender()), Numeration.SINGLE)) + "</b> "
 								:"")
 							+ "<b style='color:"+owner.getSubspecies().getColour(owner).toWebHexString()+";'>"
 								+ (owner.isFeminine()
@@ -1334,13 +1333,13 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 										?"[npc.NameFull]"
 										:"[npc.Name]"))
 							+"</span>"
-						+"<br/>Level "
+							+ "<br/>Уровень "
 							+ owner.getLevel()
 							+ (owner.getLevel()!=owner.getTrueLevel()?" [style.colourDisabled(("+owner.getTrueLevel()+"))]":"")
 							+ " <span style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'>| "
 						+ (owner.isElemental()
 								?"Элементали имеют тот же уровень что и у призывателя</span>"
-								:"</span>"+owner.getExperience() + " / "+ (10 * owner.getLevel()) + " xp")
+							: "</span>" + owner.getExperience() + " / " + (10 * owner.getLevel()) + " опыта")
 						+ "</div>");
 			
 			tooltipSB.append(
@@ -1426,10 +1425,10 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 				+ "</div>"
 				+ "<div class='title'><b>"
 					+ (hours>0
-							?hours+" час"+(hours>1?"ов ":" ")
+						? hours + " " + Morpher.morphCountableNoun(hours, "час") + " "
 							:"")
 					+ (minutes%60>0
-							?minutes+" минут"+(minutes>1?" ":"а ")
+						? minutes + " " + Morpher.morphCountableNoun(minutes, "минута") + " "
 							:"")
 					+"осталось"
 				+ "</b></div>");
@@ -1599,9 +1598,9 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 					}
 				}
 			}
-			
-			
-			Main.mainController.setTooltipSize(360, 175+(yIncrease>0?32:0)+(teleport?8+48:0)+(yIncrease * LINE_HEIGHT));
+
+
+			Main.mainController.setTooltipSize(360, 180 + (yIncrease > 0 ? 32 : 0) + (teleport ? 8 + 48 : 0) + (yIncrease * LINE_HEIGHT) + 20);
 			
 			String tooltipDesc = cell.getPlace().getPlaceType().getTooltipDescription();
 			
@@ -1875,7 +1874,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 						"<div class='description' style='height:"+(descriptionHeightOverride>0?(descriptionHeightOverride+26):"176")+"px;'>"+description+"</div>"));
 				
 			} else {
-				Main.mainController.setTooltipSize(360, descriptionHeightOverride > 0 ? descriptionHeightOverride + 64 + 20 : 195);
+				Main.mainController.setTooltipSize(380, descriptionHeightOverride > 0 ? descriptionHeightOverride + 64 + 20 + 35 : 240);
 
 				Main.mainController.setTooltipContent(UtilText.parse(
 						"<div class='title'>"+title+"</div>"
@@ -2384,7 +2383,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 	}
 
     @Override
-    public ClonedEventListener newInstance() {
+	public TooltipInformationEventListener newInstance() {
         return new TooltipInformationEventListener(this);
     }
 }

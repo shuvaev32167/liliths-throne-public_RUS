@@ -514,8 +514,8 @@ public class UtilText {
 	
 	public static String getRequirementsDescription(CorruptionLevel corruptionNeeded, AbstractPerk... perkRequired) {
 		descriptionSB.setLength(0);
-		
-		descriptionSB.append("You require a corruption level of <b style='color:"+corruptionNeeded.getColour().toWebHexString()+";'>"+corruptionNeeded.getName()+"</b>");
+
+		descriptionSB.append("Тебе нужен уровень развращённсти -  <b style='color:" + corruptionNeeded.getColour().toWebHexString() + ";'>" + Morpher.morphNoun(corruptionNeeded.getName(), Main.game.getPlayer()) + "</b>");
 		
 		if(perkRequired.length==0) {
 			descriptionSB.append(".");
@@ -807,7 +807,7 @@ public class UtilText {
 					Element e = (Element) (doc.getDocumentElement()).getElementsByTagName("htmlContent").item(i);
 
 					if(e.getAttribute("tag").equals(tag)) {
-						strings.add(e.getTextContent().replaceFirst("<!\\[CDATA\\[", "").replaceAll("\\]\\]>", ""));
+						strings.add(e.getTextContent().replaceFirst("<!\\[CDATA\\[", "").replaceAll("\\]\\]>", "").replace('\t', ' ').replaceAll("  ", " "));
 					}
 				}
 
@@ -936,7 +936,8 @@ public class UtilText {
 	/**
 	 * Parses supplied text.
 	 */
-	public static String parse(List<GameCharacter> specialNPC, AbstractCoreItem specialItem, String input, boolean xmlParsing, List<ParserTag> tags) {
+	public static String parse(List<GameCharacter> specialNPC, AbstractCoreItem specialItem, String inp, boolean xmlParsing, List<ParserTag> tags) {
+		var input = Optional.ofNullable(inp).orElse("");
 		List<GameCharacter> parsingCharactersForSpeechSaved;
 		parserTags = (tags);
 		parsingCharactersForSpeechSaved = parsingCharactersForSpeech;

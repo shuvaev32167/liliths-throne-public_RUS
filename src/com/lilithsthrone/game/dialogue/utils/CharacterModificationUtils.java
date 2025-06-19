@@ -520,8 +520,8 @@ public class CharacterModificationUtils {
 	public static float[] sexExperienceCorruption = new float[] {0, 0.5f, 1, 2.5f, 5};
 	
 	private static final Colour[] sexColours = new Colour[] {PresetColour.GENERIC_EXCELLENT, PresetColour.BASE_PINK_LIGHT, PresetColour.BASE_PINK_SALMON, PresetColour.BASE_PINK, PresetColour.BASE_PINK_DEEP};
-	public static String[] feminineNames = new String[] {"Virgin", "Inexperienced", "Experienced", "Expert", "Slut"};
-	public static String[] masculineNames = new String[] {"Virgin", "Inexperienced", "Experienced", "Expert", "Stud"};
+	public static String[] feminineNames = new String[]{"Девственница", "Неопытная", "Опытная", "Эксперт", "Шлюха"};
+	public static String[] masculineNames = new String[]{"Девственник", "Неопытный", "Опытный", "Эксперт", "Жеребец"};
 	
 //	public static String[] virginityLossesGynephilic = new String[] {"your girlfriend", "", "some girl in your apartment", "some girl in a club's restroom"};
 //	public static String[] virginityLossesAmbiphilic = new String[] {"your girlfriend in her apartment", "your girlfriend in your apartment", "some girl in her apartment", "some girl in your apartment", "some girl in a club's restroom",
@@ -933,7 +933,7 @@ public class CharacterModificationUtils {
 	
 	public static String getHeightChoiceDiv(boolean fullWidth) {
 		return applyFullVariableWrapperSizes("Рост",
-				UtilText.parse(BodyChanging.getTarget(), "Изменить рост [npc.name] [npc.is]."
+				UtilText.parse(BodyChanging.getTarget(), "Изменить [npc.targetBasedWord(твой, )] рост [npc.targetBasedWord(, [npc.morphSingleNameGene([npc.name])])]."
 						+ "<br/><i>Это влияет на некоторые второстепенные описания, а также используется для определения того, относится ли сексуальная сцена к категории «разница в размерах» или нет.</i>"
 						+ (!Main.game.isInNewWorld()
 						? "<br/>[style.italicsMinorBad(Рост ограничен [units.sizes(" + Height.getMaximumHeightForCharacterCreation() + ")]"
@@ -4618,8 +4618,8 @@ public class CharacterModificationUtils {
 	
 	public static String getSelfTransformCumProductionDiv() {
 		return applyVariableWrapperFluids("Хранение спермы",
-				UtilText.parse(BodyChanging.getTarget(), "Измените [npc.namePos] максимальное хранилище спермы."
-						+ "<br/><i>После истощения [npc.namePos] шары наполняются спермой до этого значения со скоростью, определяемой значением [npc.her] регенерации спермы.</i>"),
+				UtilText.parse(BodyChanging.getTarget(), "Измените [npc.targetBasedWord(твоё, [npc.namePos])] максимальное хранилище спермы."
+						+ "<br/><i>После истощения [npc.targetBasedWord(твои, [npc.namePos])] шары наполняются спермой до этого значения со скоростью, определяемой значением регенерации спермы.</i>"),
 				"CUM_PRODUCTION",
 				Util.capitaliseSentence(BodyChanging.getTarget().getPenisCumStorage().getName())
 					+"<br/>("+Units.fluid(BodyChanging.getTarget().getPenisRawCumStorageValue(), ValueType.PRECISE)+")",
@@ -4894,8 +4894,8 @@ public class CharacterModificationUtils {
 		}
 
 		return applyWrapper("Определение мышц",
-				UtilText.parse(BodyChanging.getTarget(), "Изменить [npc.namePos] определение мышц." + (!Main.game.isInNewWorld() ? " Это не влияет на атрибут телосложения вашего персонажа." : "")
-						+ "<br/><i>Это определяет, сколько мускулов у [npc.namePos], и является чисто косметическим преобразованием.</i>"),
+				UtilText.parse(BodyChanging.getTarget(), "Изменить [npc.targetBasedWord(твоё, [npc.namePos])] определение мышц." + (!Main.game.isInNewWorld() ? " Это не влияет на атрибут телосложения вашего персонажа." : "")
+						+ "<br/><i>Это определяет, сколько мускулов у [npc.morphSingleNameGene([npc.namePos])], и является чисто косметическим преобразованием.</i>"),
 				"MUSCLE",
 				contentSB.toString(),
 				true);
@@ -6529,7 +6529,11 @@ public class CharacterModificationUtils {
 	
 	public static void resetTattooColours() {
 		if(!tattoo.getType().getAvailablePrimaryColours().contains(tattoo.getPrimaryColour())) {
-			tattoo.setPrimaryColour(tattoo.getType().getAvailablePrimaryColours().get(0));
+			if (tattoo.getType().getAvailablePrimaryColours().isEmpty()) {
+				tattoo.setPrimaryColour(null);
+			} else {
+				tattoo.setPrimaryColour(tattoo.getType().getAvailablePrimaryColours().get(0));
+			}
 		}
 		
 		if(!tattoo.getType().getAvailableSecondaryColours().contains(tattoo.getSecondaryColour())) {

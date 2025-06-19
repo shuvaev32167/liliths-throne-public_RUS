@@ -91,7 +91,7 @@ public class MiscDialogue {
 						for(Entry<AbstractStatusEffect, String> innerEntry : entry.getValue().entrySet()) {
 							sb.append("<hr/>");
 							sb.append("<h6 style='text-align:center; margin:0; padding:0;'>");
-								sb.append(Util.capitaliseSentence(innerEntry.getKey()==null?"Miscellaneous Effects":innerEntry.getKey().getName(Main.game.getPlayer())));
+                            sb.append(Util.capitaliseSentence(innerEntry.getKey() == null ? "Разные эффекты" : innerEntry.getKey().getName(Main.game.getPlayer())));
 							sb.append("</h6>");
 							sb.append("<p style='margin-top:0;'>");
 								sb.append(UtilText.parse(Main.game.getPlayer(), innerEntry.getValue()));
@@ -236,7 +236,7 @@ public class MiscDialogue {
 	private static String condomUseDescription;
 	
 	public static DialogueNode getUsedCondomSelectionDialogue(GameCharacter condomOwner, GameCharacter condomUser, GameCharacter condomTarget, AbstractFilledCondom usedCondom, String condomUseDescription) {
-		boolean debug = false;
+        boolean debug = true;
 		
 		MiscDialogue.condomOwner = condomOwner;
 		MiscDialogue.condomUser = condomUser;

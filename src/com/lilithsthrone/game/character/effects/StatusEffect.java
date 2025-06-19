@@ -49,6 +49,7 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+import com.lilithsthrone.utils.translate.russian.Morpher;
 import com.lilithsthrone.world.Weather;
 import com.lilithsthrone.world.WorldRegion;
 import com.lilithsthrone.world.WorldType;
@@ -69,7 +70,7 @@ public class StatusEffect {
 
 	// Attribute-related status effects:
 	// Strength:
-	public static AbstractStatusEffect PHYSIQUE_PERK_0 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+	public static final AbstractStatusEffect PHYSIQUE_PERK_0 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"sissy",
 			"attStrength0",
@@ -99,8 +100,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect PHYSIQUE_PERK_1 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect PHYSIQUE_PERK_1 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"average",
 			"attStrength1",
@@ -128,8 +129,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect PHYSIQUE_PERK_2 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect PHYSIQUE_PERK_2 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"strong",
 			"attStrength2",
@@ -158,8 +159,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect PHYSIQUE_PERK_3 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect PHYSIQUE_PERK_3 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"powerful",
 			"attStrength3",
@@ -188,8 +189,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect PHYSIQUE_PERK_4 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect PHYSIQUE_PERK_4 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"mighty",
 			"attStrength4",
@@ -218,8 +219,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect PHYSIQUE_PERK_5 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect PHYSIQUE_PERK_5 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"Herculean",
 			"attStrength5",
@@ -250,7 +251,7 @@ public class StatusEffect {
 	};
 
 	// Intelligence:
-	public static AbstractStatusEffect INTELLIGENCE_PERK_0_OLD_WORLD = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+	public static final AbstractStatusEffect INTELLIGENCE_PERK_0_OLD_WORLD = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
             "Нет магической силы",
 			"attIntelligence0",
@@ -273,8 +274,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect INTELLIGENCE_PERK_0 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect INTELLIGENCE_PERK_0 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"arcane impotence",
 			"attIntelligence0",
@@ -284,9 +285,9 @@ public class StatusEffect {
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_SPELLS, -75f),
 					new Value<>(Attribute.SPELL_COST_MODIFIER, -75f)),
-			Util.newArrayListOfValues("<b style='color: " + PresetColour.GENERIC_TERRIBLE.toWebHexString() + "'>Surrender in combat at maximum lust</b>",
-					"[style.boldMana(Maximum "+Attribute.MANA_MAXIMUM.getName()+")] [style.boldBad(limited to 5)]",
-					"[style.boldBad(Vulnerable)] to [style.boldArcane(arcane storms)]")) {
+			Util.newArrayListOfValues("<b style='color: " + PresetColour.GENERIC_TERRIBLE.toWebHexString() + "'>Капитуляция в бою при максимальной похоти</b>",
+					"[style.boldMana(Максимум " + Attribute.MANA_MAXIMUM.getName() + ")] [style.boldBad(ограничено 5)]",
+					"[style.boldBad(Уязвимость)] к [style.boldArcane(магическим штормам)]")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(IntelligenceLevel.ZERO_AIRHEAD.getName());
@@ -294,9 +295,9 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			if (owner.isPlayer()) {
-				return "Despite your natural affinity with the arcane, you've somehow managed to end up losing most of your power...";
+				return "Несмотря на твою природную склонность к магии, ты каким-то образом [pc.genderBasedWord(умудрился, умудрилась)] потерять большую часть своей силы...";
 			} else {
-				return UtilText.parse(owner, "[npc.NameIsFull] unable to harness the arcane in any significant manner. This is a typical level of arcane affinity in all the common races of this world.");
+				return UtilText.parse(owner, "[npc.NameIsFull] не [npc.genderBasedWord(способен, способена)] использовать магию каким-либо значимым образом. Это типичный уровень способности к магии у всех рас, обитающих в этом мире.");
 			}
 		}
 		@Override
@@ -308,8 +309,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect INTELLIGENCE_PERK_1 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect INTELLIGENCE_PERK_1 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"arcane potential",
 			"attIntelligence1",
@@ -321,7 +322,7 @@ public class StatusEffect {
 					new Value<>(Attribute.DAMAGE_SPELLS, 10f),
 					new Value<>(Attribute.SPELL_COST_MODIFIER, 10f)),
 			Util.newArrayListOfValues(
-					"[style.boldExcellent(Immune)] to [style.boldArcane(arcane storms)]")) {
+					"[style.boldExcellent(Иммунитет)] к [style.boldArcane(магических штормам)]")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(IntelligenceLevel.ONE_AVERAGE.getName());
@@ -329,9 +330,9 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter target) {
 			if (target.isPlayer()) {
-				return "You have an exceptional natural ability to harness the arcane, and as a result, you're far more powerful than the vast majority of Dominion's population.";
+				return "У тебя есть исключительная природная способность использовать магию, и благодаря этому ты гораздо сильнее, чем подавляющее большинство населения Доминиона.";
 			} else {
-				return UtilText.parse(target, "[npc.Name] has a respectable knowledge of how to harness the arcane; equal to that of a common race who's undergone extensive training.");
+				return UtilText.parse(target, "[npc.Name] обладает солидными знаниями о том, как использовать магию; они сопоставимы со знаниями представителя обычной расы, прошедшего интенсивную подготовку.");
 			}
 		}
 		@Override
@@ -343,8 +344,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect INTELLIGENCE_PERK_2 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect INTELLIGENCE_PERK_2 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"arcane proficiency",
 			"attIntelligence2",
@@ -356,14 +357,14 @@ public class StatusEffect {
 					new Value<>(Attribute.DAMAGE_SPELLS, 10f),
 					new Value<>(Attribute.SPELL_COST_MODIFIER, 10f)),
 			Util.newArrayListOfValues(
-					"[style.boldExcellent(Immune)] to [style.boldArcane(arcane storms)]")) {
+					"[style.boldExcellent(Иммунитет)] к [style.boldArcane(магических штормам)]")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(IntelligenceLevel.TWO_SMART.getName());
 		}
 		@Override
 		public String getDescription(GameCharacter target) {
-			return UtilText.parse(target, "[npc.NameIsFull] proficient at harnessing the arcane, and [npc.her] spells are not only easier to cast, but also do more damage.");
+			return UtilText.parse(target, "[npc.NameIsFull] [npc.targetBasedWord(владеешь, владеет)] тайнами магии, и [npc.targetBasedWord(тебе, [npc.genderBasedWord(ему, ей)])] не только легче произносить заклинания, но и они наносят больше урона.");
 		}
 		@Override
 		public boolean isConditionsMet(GameCharacter target) {
@@ -374,8 +375,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect INTELLIGENCE_PERK_3 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect INTELLIGENCE_PERK_3 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"arcane prowess",
 			"attIntelligence3",
@@ -389,7 +390,7 @@ public class StatusEffect {
 					new Value<>(Attribute.DAMAGE_ICE, 5f),
 					new Value<>(Attribute.DAMAGE_POISON, 5f)),
 			Util.newArrayListOfValues(
-					"[style.boldExcellent(Immune)] to [style.boldArcane(arcane storms)]")) {
+					"[style.boldExcellent(Иммунитет)] к [style.boldArcane(магических штормам)]")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(IntelligenceLevel.THREE_BRAINY.getName());
@@ -397,9 +398,9 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter target) {
 			if (target.isPlayer()) {
-				return "You are highly proficient with the arcane. Your spells are easier to cast and do more damage, and you also have a small amount of elemental damage affinity.";
+				return "Ты обладаешь высоким мастерством в области магии. Твои заклинания легче произносить и они наносят больше урона, а также ты обладаешь небольшой склонностью к стихийному урону.";
 			} else {
-				return UtilText.parse(target, "[npc.NameIsFull] highly proficient with the arcane. [npc.Her] spells are easier to cast and do more damage, and [npc.she] also has a small amount of elemental damage affinity.");
+				return UtilText.parse(target, "[npc.NameIsFull] в совершенстве владеет магией. [npc.Her] заклинания легче произносить и они наносят больше урона, а [npc.she] также обладает небольшой склонностью к стихийному урону.");
 			}
 		}
 		@Override
@@ -411,8 +412,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect INTELLIGENCE_PERK_4 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect INTELLIGENCE_PERK_4 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"arcane mastery",
 			"attIntelligence4",
@@ -426,7 +427,7 @@ public class StatusEffect {
 					new Value<>(Attribute.DAMAGE_ICE, 10f),
 					new Value<>(Attribute.DAMAGE_POISON, 10f)),
 			Util.newArrayListOfValues(
-					"[style.boldExcellent(Immune)] to [style.boldArcane(arcane storms)]")) {
+					"[style.boldExcellent(Иммунитет)] к [style.boldArcane(магических штормам)]")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(IntelligenceLevel.FOUR_GENIUS.getName());
@@ -434,10 +435,10 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter target) {
 			if (target.isPlayer()) {
-				return "You are extremely proficient with the arcane. Your spells are easier to cast and do more damage, and you also have a considerable amount of elemental damage affinity.";
+				return "Твои знания в области магии чрезвычайно обширны. Заклинания легче произносить и они наносят больше урона, и также ты обладаешь значительной склонностью к стихийному урону.";
 			} else {
-				return UtilText.parse(target, "[npc.NameIsFull] extremely proficient with the arcane."
-						+ " [npc.Her] spells are easier to cast and do more damage, and [npc.she] also has a considerable amount of elemental damage affinity.");
+				return UtilText.parse(target, "[npc.NameIsFull] чрезвычайно хорошо владеет магией." +
+						" [npc.Her] заклинания легче произносить и они наносят больше урона, и [npc.she] также обладает значительной склонностью к стихийному урону.");
 			}
 		}
 		@Override
@@ -449,8 +450,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect INTELLIGENCE_PERK_5 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect INTELLIGENCE_PERK_5 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"arcane brilliance",
 			"attIntelligence5",
@@ -464,7 +465,7 @@ public class StatusEffect {
 					new Value<>(Attribute.DAMAGE_ICE, 15f),
 					new Value<>(Attribute.DAMAGE_POISON, 15f)),
 			Util.newArrayListOfValues(
-					"[style.boldExcellent(Immune)] to [style.boldArcane(arcane storms)]")) {
+					"[style.boldExcellent(Иммунитет)] к [style.boldArcane(магических штормам)]")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(IntelligenceLevel.FIVE_POLYMATH.getName());
@@ -472,9 +473,9 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			if (owner.isPlayer()) {
-				return "Your ability to harness the arcane is rivalled only by Lilith herself. Casting spells comes as naturally to you as does breathing.";
+				return "Твоя способность использовать магию сравнима только со способностями самой Лилит. Заклинания даются тебе так же легко, как дыхание.";
 			} else {
-				return UtilText.parse(owner, "[npc.NamePos] arcane ability is rivalled only by Lilith herself. Casting spells comes as naturally to [npc.herHim] as does breathing.");
+				return UtilText.parse(owner, "[npc.NamePos] обладает магическими способностями, которые могут сравниться разве что с самими Лилит. Заклинания для [npc.herHim] так же естественны, как дыхание.");
 			}
 		}
 		@Override
@@ -488,7 +489,7 @@ public class StatusEffect {
 	};
 
 	// Corruption:
-	public static AbstractStatusEffect CORRUPTION_PERK_0 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+	public static final AbstractStatusEffect CORRUPTION_PERK_0 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"Pure",
 			"attCorruption0",
@@ -501,14 +502,14 @@ public class StatusEffect {
 			null) {
 		@Override
 		public String getName(GameCharacter target) {
-			return Util.capitaliseSentence(CorruptionLevel.ZERO_PURE.getName());
+			return Util.capitaliseSentence(Morpher.morphNoun(CorruptionLevel.ZERO_PURE.getName(), target));
 		}
 		@Override
 		public String getDescription(GameCharacter owner) {
 			if (owner.isPlayer()) {
                 return "Ты совершенно не [pc.genderBasedWord(испорчен, испорчена)] и, если не считать самых консервативных сексуальных актов с любимым человеком, вообще не интересуешься сексом.";
 			} else {
-				return UtilText.parse(owner, "[npc.NameIsFull] completely uncorrupted, and aside from performing the most conservative of sexual acts with the person [npc.she] loves, [npc.sheIs] not really interested in sex at all.");
+				return UtilText.parse(owner, "[npc.NameIsFull] совершенно [npc.genderBasedWord(неразвращён, неразвращенна)] и, помимо самых консервативных сексуальных действий с человеком, которого [npc.she] любит, [npc.sheIs] вообще не интересуется сексом.");
 			}
 		}
 		@Override
@@ -520,8 +521,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect CORRUPTION_PERK_1 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect CORRUPTION_PERK_1 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"Vanilla",
 			"attCorruption1",
@@ -535,14 +536,14 @@ public class StatusEffect {
 			null) {
 		@Override
 		public String getName(GameCharacter target) {
-			return Util.capitaliseSentence(CorruptionLevel.ONE_VANILLA.getName());
+			return Util.capitaliseSentence(Morpher.morphNoun(CorruptionLevel.ONE_VANILLA.getName(), target));
 		}
 		@Override
 		public String getDescription(GameCharacter owner) {
 			if (owner.isPlayer()) {
-				return "You're open to the idea of having casual sex, but are still unwilling to perform any extreme sexual acts.";
+				return "Ты [pc.genderBasedWord(открыт, открыта)] для идеи случайного секса, но всё ещё не [pc.genderBasedWord(готов, готова)] к экстремальным сексуальным практикам.";
 			} else {
-				return UtilText.parse(owner, "[npc.NameIsFull] open to the idea of having casual sex, but is unwilling to perform any extreme sexual acts.");
+				return UtilText.parse(owner, "[npc.NameIsFull] [npc.genderBasedWord(открыт, открыта)] для идеи случайного секса, но всё ещё не [npc.genderBasedWord(готов, готова)] к экстремальным сексуальным практикам.");
 			}
 		}
 		@Override
@@ -554,8 +555,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect CORRUPTION_PERK_2 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect CORRUPTION_PERK_2 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"dirty",
 			"attCorruption2",
@@ -569,14 +570,14 @@ public class StatusEffect {
 			null) {
 		@Override
 		public String getName(GameCharacter target) {
-			return Util.capitaliseSentence(CorruptionLevel.TWO_HORNY.getName());
+			return Util.capitaliseSentence(Morpher.morphNoun(CorruptionLevel.TWO_HORNY.getName(), target));
 		}
 		@Override
 		public String getDescription(GameCharacter owner) {
 			if (owner.isPlayer()) {
-				return "Sexual acts that once may have made you feel uncomfortable are now the focus of your fantasies, and you can't wait to try them out on a willing partner...";
+				return "Сексуальные действия, которые когда-то могли вызывать у тебя дискомфорт, теперь стали предметом твоих фантазий, и ты не можешь дождаться, чтобы попробовать их с готовым к этому партнером...";
 			} else {
-				return UtilText.parse(owner, "[npc.Name] has a dirty look in [npc.her] eyes, and you often notice [npc.her] gaze lingering hungrily over your body.");
+				return UtilText.parse(owner, "[npc.Name] имеет грязный взгляд в [npc.her] глазах, и ты часто замечаешь, как [npc.her] жадно смотрит на твоё тело.");
 			}
 		}
 		@Override
@@ -588,8 +589,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect CORRUPTION_PERK_3 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect CORRUPTION_PERK_3 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"Lewd",
 			"attCorruption3",
@@ -604,31 +605,31 @@ public class StatusEffect {
 			null) {
 		@Override
 		public String getName(GameCharacter target) {
-			return Util.capitaliseSentence(CorruptionLevel.THREE_DIRTY.getName());
+			return Util.capitaliseSentence(Morpher.morphNoun(CorruptionLevel.THREE_DIRTY.getName(), target));
 		}
 		@Override
 		public String getDescription(GameCharacter owner) {
 			if (owner.isPlayer()) {
 				if (owner.hasVagina()) {
-					return "Given power by the fantasies that constantly run through your mind, the arcane is starting to have a physical effect on your body, and you feel as though it's going to be far easier to get pregnant from now on...";
+					return "Благодаря фантазиям, которые постоянно проносятся в твоей голове, магия начинает оказывать физическое воздействие на твоё тело, и ты чувствуешь, что теперь тебе будет гораздо легче забеременеть...";
 				} else if (owner.hasPenis()) {
-					return "Given power by the fantasies that constantly run through your mind, the arcane is starting to have a physical effect on your body,"
-							+ " and you feel as though it's going to be far easier to impregnate your sexual partners from now on...";
+					return "Благодаря фантазиям, которые постоянно проносятся в твоей голове, магия начинает оказывать физическое воздействие на твоё тело, и ты чувствуешь," +
+							" что теперь тебе будет гораздо легче оплодотворить своих сексуальных партнёров...";
 				} else {
-					return "Given power by the fantasies that constantly run through your mind, the arcane is starting to have a physical effect on your body, but because you don't have any sexual organs, there's not much that's happened...";
+					return "Благодаря фантазиям, которые постоянно проносятся в твоей голове, магия начинает оказывать физическое воздействие на твоё тело, но поскольку у тебя нет половых органов, ничего особенного не происходит...";
 				}
 				
 			} else {
 				if (owner.hasVagina()) {
 					return UtilText.parse(owner,
-							"Given power by the fantasies that constantly run through [npc.her] mind, the arcane is starting to have a physical effect on [npc.namePos] body, making it far easier for [npc.herHim] to get pregnant.");
+							"Благодаря фантазиям, которые постоянно проносятся в [npc.her]г олове, магия начинает оказывать физическое воздействие на [npc.namePos] тело, что значительно [npc.herHim] облегчает забеременеть.");
 				} else if (owner.hasPenis()) {
 					return UtilText.parse(owner,
-							"Given power by the fantasies that constantly run through [npc.her] mind, the arcane is starting to have a physical effect on [npc.namePos] body, making it far easier for [npc.herHim] to impregnate others.");
+							"Благодаря фантазиям, которые постоянно проносятся в [npc.her] голове, магия начинает оказывать физическое воздействие на [npc.namePos] тело, что значительно облегчает [npc.herHim] оплодотворение других.");
 				} else {
 					return UtilText.parse(owner,
-							"Given power by the fantasies that constantly run through [npc.her] mind, the arcane is starting to have a physical effect on [npc.namePos] body,"
-							+ " but because [npc.she] doesn't have any sexual organs, there's not much that's happened.");
+							"Благодаря фантазиям, которые постоянно проносятся в [npc.her] голове, магия начинает оказывать физическое воздействие на [npc.namePos] тело," +
+									" но поскольку [npc.she] не имеет половых органов, ничего особенного не происходит.");
 				}
 			}
 		}
@@ -641,8 +642,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect CORRUPTION_PERK_4 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect CORRUPTION_PERK_4 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"Lustful",
 			"attCorruption4",
@@ -657,35 +658,35 @@ public class StatusEffect {
 			null) {
 		@Override
 		public String getName(GameCharacter target) {
-			return Util.capitaliseSentence(CorruptionLevel.FOUR_LUSTFUL.getName());
+			return Util.capitaliseSentence(Morpher.morphNoun(CorruptionLevel.FOUR_LUSTFUL.getName(), target));
 		}
 		@Override
 		public String getDescription(GameCharacter owner) {
 			if (owner.isPlayer()) {
 				if (owner.hasVagina()) {
-					return "Given a huge amount of power by the lewd fantasies that constantly run through your mind, the arcane is starting to have a physical effect on your body,"
-							+ " and you feel as though it's going to be far easier to get pregnant from now on...";
+					return "Благодаря огромной силе, которую дают тебе постоянно кружащие в голове развратные фантазии, магия начинает значительно влиять на твоё тело," +
+							" и ты чувствуешь, что отныне забеременеть будет гораздо проще...";
 				} else if (owner.hasPenis()) {
-					return "Given a huge amount of power by the lewd fantasies that constantly run through your mind, the arcane is starting to have a physical effect on your body,"
-							+ " and you feel as though it's going to be far easier to impregnate your sexual partners from now on...";
+					return "Благодаря огромной силе, которую дают тебе постоянно кружащие в голове развратные фантазии, магия начинает значительно влиять на твоё тело," +
+							" и ты чувствуешь, что отныне тебе будет гораздо легче оплодотворить своих сексуальных партнёров...";
 				} else {
-					return "Given a huge amount of power by the lewd fantasies that constantly run through your mind, the arcane is starting to have a physical effect on your body,"
-							+ " but because you don't have any sexual organs, there's not much that's happened...";
+					return "Благодаря огромной силе, которую дают тебе постоянно кружащие в голове развратные фантазии, магия начинает значительно влиять на твоё тело," +
+							" но поскольку у тебя нет половых органов, ничего особенного не происходит...";
 				}
 				
 			} else {
 				if (owner.hasVagina()) {
 					return UtilText.parse(owner,
-							"Given a huge amount of power by the lewd fantasies that constantly run through [npc.her] mind, the arcane is starting to have a physical effect on [npc.namePos] body,"
-							+ " making it far easier for [npc.herHim] to get pregnant.");
+							"Благодаря огромной силе, которую дают постоянно кружащие в [npc.her] голове развратные фантазии, магия начинает оказывать физическое воздействие на [npc.namePos] тело," +
+									" что значительно облегчает [npc.herHim] забеременеть.");
 				} else if (owner.hasPenis()) {
 					return UtilText.parse(owner,
-							"Given a huge amount of power by the lewd fantasies that constantly run through [npc.her] mind, the arcane is starting to have a physical effect on [npc.namePos] body,"
-							+ " making it far easier for [npc.herHim] to impregnate others.");
+							"Благодаря огромной силе, которую дают постоянно кружащие в [npc.her] голове развратные фантазии, магия начинает оказывать физическое воздействие на [npc.namePos] тело," +
+									" что значительно облегчает [npc.herHim] зачатие детей.");
 				} else {
 					return UtilText.parse(owner,
-							"Given a huge amount of power by the lewd fantasies that constantly run through [npc.her] mind, the arcane is starting to have a physical effect on [npc.namePos] body,"
-							+ " but because [npc.she] doesn't have any sexual organs, there's not much that's happened.");
+							"Благодаря огромной силе, которую дают постоянно кружащие в [npc.her] голове развратные фантазии, магия начинает оказывать физическое воздействие на [npc.namePos] тело," +
+									" но поскольку [npc.she] не имеет половых органов, ничего особенного не происходит.");
 				}
 			}
 		}
@@ -698,8 +699,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-			
-	public static AbstractStatusEffect CORRUPTION_PERK_5 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect CORRUPTION_PERK_5 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"Corrupt",
 			"attCorruption5",
@@ -711,19 +712,19 @@ public class StatusEffect {
 					new Value<>(Attribute.DAMAGE_LUST, 50f),
 					new Value<>(Attribute.FERTILITY, 75f),
 					new Value<>(Attribute.VIRILITY, 75f)),
-			Util.newArrayListOfValues("<b style='color: "+ PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString()+ "'>Demonic mindset</b>")) {
+			Util.newArrayListOfValues("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Демоническое мышление</b>")) {
 		@Override
 		public String getName(GameCharacter target) {
-			return Util.capitaliseSentence(CorruptionLevel.FIVE_CORRUPT.getName());
+			return Util.capitaliseSentence(Morpher.morphNoun(CorruptionLevel.FIVE_CORRUPT.getName(), target));
 		}
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner,
-					"[npc.NameIsFull] completely and utterly corrupted,"
+					"[npc.NameIsFull] полностью и окончательно [npc.genderBasedWord(развращён, развращена)],"
 						+ (owner.getSubspeciesOverrideRace()==Race.DEMON
-							?" as is fitting for a demon."
-                            : " and desperately wish that [npc.she] [npc.was] a demon.")
-					+ " The lewd thoughts and fantasies that continuously run through [npc.her] mind have unlocked the full power of the arcane, making [npc.her] body hyper-fertile and virile.");
+							? " как и подобает демону."
+							: " и отчаянно желает, чтобы [npc.she] [npc.genderBasedWord(был, была)] демоном...")
+							+ " Непристойные мысли и фантазии, которые постоянно проносятся в [npc.targetBasedWord(твоей, [npc.her])] голове, раскрыли всю мощь магии, сделав [npc.targetBasedWord(твоё, [npc.her])] тело сверхплодородным и мужественным.");
 		}
 		@Override
 		public boolean isConditionsMet(GameCharacter target) {
@@ -736,7 +737,7 @@ public class StatusEffect {
 	};
 	
 	// Arousal:
-	public static AbstractStatusEffect AROUSAL_PERK_0 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+	public static final AbstractStatusEffect AROUSAL_PERK_0 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"none",
 			"attArousal0",
@@ -781,8 +782,8 @@ public class StatusEffect {
 			return effects;
 		}
 	};
-	
-	public static AbstractStatusEffect AROUSAL_PERK_1 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect AROUSAL_PERK_1 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"turned on",
 			"attArousal1",
@@ -818,8 +819,8 @@ public class StatusEffect {
 			return AROUSAL_PERK_0.getExtraEffects(target);
 		}
 	};
-	
-	public static AbstractStatusEffect AROUSAL_PERK_2 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect AROUSAL_PERK_2 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"excited",
 			"attArousal2",
@@ -851,8 +852,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect AROUSAL_PERK_3 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect AROUSAL_PERK_3 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"heated",
 			"attArousal3",
@@ -884,8 +885,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect AROUSAL_PERK_4 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect AROUSAL_PERK_4 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"passionate",
 			"attArousal4",
@@ -917,8 +918,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect AROUSAL_PERK_5 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect AROUSAL_PERK_5 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"imminent orgasm",
 			"attArousal5",
@@ -953,7 +954,7 @@ public class StatusEffect {
 	
 	
 	// Lust:
-	public static AbstractStatusEffect LUST_PERK_0 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+	public static final AbstractStatusEffect LUST_PERK_0 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"none",
 			"attLust0",
@@ -986,8 +987,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect LUST_PERK_1 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect LUST_PERK_1 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"turned on",
 			"attLust1",
@@ -1020,8 +1021,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect LUST_PERK_2 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect LUST_PERK_2 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"excited",
 			"attLust2",
@@ -1054,8 +1055,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect LUST_PERK_3 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect LUST_PERK_3 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"heated",
 			"attLust3",
@@ -1088,8 +1089,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect LUST_PERK_4 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect LUST_PERK_4 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"passionate",
 			"attLust4",
@@ -1122,8 +1123,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect LUST_PERK_5 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
+
+	public static final AbstractStatusEffect LUST_PERK_5 = new AbstractStatusEffect(StatusEffectCategory.ATTRIBUTE,
 			100,
 			"passionate",
 			"attLust5",
@@ -1161,8 +1162,8 @@ public class StatusEffect {
 	
 	
 	// WEATHER & LOCATION EFFECTS:
-	
-	public static AbstractStatusEffect WEATHER_PROLOGUE = new AbstractStatusEffect(100,
+
+	public static final AbstractStatusEffect WEATHER_PROLOGUE = new AbstractStatusEffect(100,
 			"Странная атмосфера",
 			"weatherNightStormIncoming",
 			PresetColour.CLOTHING_WHITE,
@@ -1178,9 +1179,9 @@ public class StatusEffect {
 			return !Main.game.isInNewWorld();
 		}
 	};
-	
-	public static AbstractStatusEffect WEATHER_CLEAR = new AbstractStatusEffect(100,
-			"Clear skies",
+
+	public static final AbstractStatusEffect WEATHER_CLEAR = new AbstractStatusEffect(100,
+			"Чистое небо",
 			"weatherDayClear",
 			PresetColour.CLOTHING_WHITE,
 			false,
@@ -1190,14 +1191,14 @@ public class StatusEffect {
 		public String getDescription(GameCharacter target) {
 			StringBuilder sb = new StringBuilder();
 			if(Main.game.isDayTime()) {
-				sb.append("The sun shines down from a perfectly clear blue sky.");
+				sb.append("Солнце светит с совершенно чистого голубого неба.");
 			} else {
-				sb.append("The moon and stars shine down from a perfectly clear night's sky.");
+				sb.append("Луна и звёзды сияют в совершенно чистом ночном небе.");
 			}
 			if(target.hasPerkAnywhereInTree(Perk.DOLL_ARCANE_3)) {
-				sb.append(" Although there's no sign of a storm at the moment, [npc.nameIsFull] still able to absorb background arcane energy to power [npc.herself].");
+				sb.append(" Хотя в данный момент нет никаких признаков бури, [npc.nameIsFull] по-прежнему [npc.genderBasedWord(способен, способна)] поглощать фоновую магическую энергию, чтобы питать себя.");
 			} else {
-				sb.append(" Although there's no sign of a storm at the moment, [npc.name] can still feel the effects of the arcane manifesting in the form of an increased libido.");
+				sb.append(" Хотя в данный момент нет никаких признаков бури, [npc.name] всё ещё ощущает на себе влияние магии, проявляющееся в виде повышенного либидо.");
 			}
 			return UtilText.parse(target, sb.toString());
 		}
@@ -1217,20 +1218,20 @@ public class StatusEffect {
 		public List<String> getExtraEffects(GameCharacter target) {
 			List<String> exEff = new ArrayList<>();
 			if(target.hasPerkAnywhereInTree(Perk.DOLL_ARCANE_3)) {
-				exEff.add("[style.colourGood(Gaining)] energy from background [style.colourArcane(arcane)]");
+				exEff.add("[style.colourGood(Получение)] энергии из фонового [style.colourArcane(магического поля)]");
 			} else {
-				exEff.add("[style.colourArcane(Enhanced libido)]");
+				exEff.add("[style.colourArcane(Повышенное либидо)]");
 			}
 			if(Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.ARCANE)) {
-				exEff.add("Time until next [style.colourArcane(arcane storm)]:");
+				exEff.add("Время до следующего [style.colourArcane(магического шторм)]:");
 				exEff.add(Main.game.getNextStormTimeAsTimeString());
 			}
 			return exEff;
 		}
 	};
-	
-	public static AbstractStatusEffect WEATHER_CLOUD = new AbstractStatusEffect(100,
-			"Cloudy skies",
+
+	public static final AbstractStatusEffect WEATHER_CLOUD = new AbstractStatusEffect(100,
+			"Облачное небо",
 			"weatherDayCloudy",
 			PresetColour.CLOTHING_WHITE,
 			false,
@@ -1239,11 +1240,11 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter target) {
 			StringBuilder sb = new StringBuilder();
-			sb.append("The weather seems to change at a moment's notice, and is currently overcast, with a chance of rain.");
+			sb.append("Погода, кажется, меняется в мгновение ока, и в настоящее время небо затянуто облаками, возможен дождь.");
 			if(target.hasPerkAnywhereInTree(Perk.DOLL_ARCANE_3)) {
-				sb.append(" Although there's no sign of a storm at the moment, [npc.nameIsFull] still able to absorb background arcane energy to power [npc.herself].");
+				sb.append(" Хотя в данный момент нет никаких признаков бури, [npc.nameIsFull] по-прежнему [npc.genderBasedWord(способен, способна)] поглощать фоновую магическую энергию, чтобы питать себя.");
 			} else {
-				sb.append(" Although there's no sign of a storm at the moment, [npc.name] can still feel the effects of the arcane manifesting in the form of an increased libido.");
+				sb.append(" Хотя в данный момент нет никаких признаков бури, [npc.name] всё ещё ощущает на себе влияние магии, проявляющееся в виде повышенного либидо.");
 			}
 			return UtilText.parse(target, sb.toString());
 		}
@@ -1263,20 +1264,20 @@ public class StatusEffect {
 		public List<String> getExtraEffects(GameCharacter target) {
 			List<String> exEff = new ArrayList<>();
 			if(target.hasPerkAnywhereInTree(Perk.DOLL_ARCANE_3)) {
-				exEff.add("[style.colourGood(Gaining)] energy from background [style.colourArcane(arcane)]");
+				exEff.add("[style.colourGood(Получение)] энергии из фонового [style.colourArcane(магического поля)]");
 			} else {
-				exEff.add("[style.colourArcane(Enhanced libido)]");
+				exEff.add("[style.colourArcane(Повышенное либидо)]");
 			}
 			if(Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.ARCANE)) {
-				exEff.add("Time until next [style.colourArcane(arcane storm)]:");
+				exEff.add("Время до следующего [style.colourArcane(магического шторм)]:");
 				exEff.add(Main.game.getNextStormTimeAsTimeString());
 			}
 			return exEff;
 		}
 	};
-	
-	public static AbstractStatusEffect WEATHER_RAIN = new AbstractStatusEffect(100,
-			"Rain",
+
+	public static final AbstractStatusEffect WEATHER_RAIN = new AbstractStatusEffect(100,
+			"Дождь",
 			"weatherDayRain",
 			PresetColour.CLOTHING_WHITE,
 			false,
@@ -1285,11 +1286,11 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter target) {
 			StringBuilder sb = new StringBuilder();
-			sb.append("The heavy rain clouds overhead have finally burst, unleashing a sudden, torrential downpour.");
+			sb.append("Грозовые тучи над головой наконец разразились, вызвав внезапный проливной дождь.");
 			if(target.hasPerkAnywhereInTree(Perk.DOLL_ARCANE_3)) {
-				sb.append(" Although there's no sign of a storm at the moment, [npc.nameIsFull] still able to absorb background arcane energy to power [npc.herself].");
+				sb.append(" Хотя в данный момент нет никаких признаков бури, [npc.nameIsFull] по-прежнему [npc.genderBasedWord(способен, способна)] поглощать фоновую магическую энергию, чтобы питать себя.");
 			} else {
-				sb.append(" Although there's no sign of a storm at the moment, [npc.name] can still feel the effects of the arcane manifesting in the form of an increased libido.");
+				sb.append(" Хотя в данный момент нет никаких признаков бури, [npc.name] всё ещё ощущает на себе влияние магии, проявляющееся в виде повышенного либидо.");
 			}
 			return UtilText.parse(target, sb.toString());
 		}
@@ -1309,20 +1310,20 @@ public class StatusEffect {
 		public List<String> getExtraEffects(GameCharacter target) {
 			List<String> exEff = new ArrayList<>();
 			if(target.hasPerkAnywhereInTree(Perk.DOLL_ARCANE_3)) {
-				exEff.add("[style.colourGood(Gaining)] energy from background [style.colourArcane(arcane)]");
+				exEff.add("[style.colourGood(Получение)] энергии из фонового [style.colourArcane(магического поля)]");
 			} else {
-				exEff.add("[style.colourArcane(Enhanced libido)]");
+				exEff.add("[style.colourArcane(Повышенное либидо)]");
 			}
 			if(Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.ARCANE)) {
-				exEff.add("Time until next [style.colourArcane(arcane storm)]:");
+				exEff.add("Время до следующего [style.colourArcane(магического шторм)]:");
 				exEff.add(Main.game.getNextStormTimeAsTimeString());
 			}
 			return exEff;
 		}
 	};
-	
-	public static AbstractStatusEffect WEATHER_SNOW = new AbstractStatusEffect(100,
-			"Snow",
+
+	public static final AbstractStatusEffect WEATHER_SNOW = new AbstractStatusEffect(100,
+			"Снег",
 			"weatherDaySnow",
 			PresetColour.CLOTHING_WHITE,
 			false,
@@ -1350,25 +1351,24 @@ public class StatusEffect {
 					}
 				}
 				return "<p>"
-							+ "The oppressive, dark-grey clouds which have been hanging over Dominion for the past few hours finally burst."
-							+ " Large, fluffy snowflakes slowly drift down from above, and although the first few crystals quickly melt away upon coming into contact with the ground below,"
-								+ " it doesn't take long before a thin white dusting of powdery white has settled upon the rooftops and pathways of the capital."
+						+ "Угнетающие тёмно-серые облака, которые висели над Доминионом в течение последних нескольких часов, наконец разразились." +
+						" Крупные пушистые снежинки медленно падают с неба, и хотя первые кристаллы быстро тают при соприкосновении с землёй," +
+						" не проходит много времени, как тонкий белый слой пушистого снега покрывает крыши и тротуары столицы."
 						+ "</p>"
 						+ "<p>"
-							+ "What looked at first to be no more than a quick flurry soon intensifies into a wild snowstorm, and in less than an hour, a thick white blanket of snow has begun to smother the streets."
-							+ " Another hour later, and the snow's built up to such a degree that all travel through the city slows to a crawl."
-							+ " A few demons try to use their arcane fire to blast a path through the freezing snowdrifts, but the snowfall is so heavy that even their powerful spells seem to have a limited impact."
+						+ "То, что сначала казалось не более чем быстрой метелью, вскоре превращается в сильную снежную бурю, и менее чем через час толстый белый покров снега начинает засыпать улицы." +
+						" Ещё через час снег навалился настолько, что движение по городу практически остановилось." +
+						" Несколько демонов пытаются проложить путь через замёрзшие сугробы с помощью своего магического огня, но снегопад настолько сильный, что даже их мощные заклинания оказывают лишь ограниченное воздействие."
 						+ "</p>"
 						+ "<p>"
-							+ "Just as it seems as though the entire capital is about to grind to a halt, the faint jingle of bells heralds the arrival of the city's saviours."
-							+ " Travelling a great distance from their frozen tundra homeland, a host of reindeer-morphs descends upon Dominion."
-							+ " Their large, cloven hoofs allow them to traverse the snow-bound streets with incredible ease, and they quickly split up into numerous snow-shovelling groups,"
-								+ " before setting off into different areas of the city."
-							+ " Under the guidance of particularly large, muscular individuals, the reindeer-morphs quickly set about clearing a path through the snow."
+						+ "Как раз когда кажется, что вся столица вот-вот остановится, слабый звон колокольчиков возвещает о прибытии спасителей города." +
+						" Пройдя большой путь из своей замёрзшей тундры, стадо оленоморфов спускается на Доминион." +
+						" Их большие копытные ноги позволяют им с невероятной легкостью перемещаться по заснеженным улицам, и они быстро разделяются на многочисленные группы, чтобы расчистить снег, а затем отправляются в разные районы города." +
+						" Под руководством особенно крупных и мускулистых особей оленоморфы быстро приступают к расчистке пути через снег."
 						+ "</p>"
 						+ "<p>"
-							+ "Although the weather refuses to let up, it only takes a few hours for the impressive reindeer-morphs to clear all of the snow from the streets."
-							+ " Talk soon spreads about how the visitors will be staying in Dominion to work until the end of February, making sure that the city is able to function through these cold winter months."
+						+ "Несмотря на то, что погода не улучшается, впечатляющим оленоморфам требуется всего несколько часов, чтобы очистить улицы от снега." +
+						" Вскоре распространяется информация о том, что гости останутся в Доминионе до конца февраля, чтобы обеспечить функционирование города в эти холодные зимние месяцы."
 						+ "</p>";
 			} else {
 				return "";
@@ -1377,11 +1377,11 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter target) {
 			StringBuilder sb = new StringBuilder();
-			sb.append("The heavy clouds overhead have finally burst, unleashing a flurry of brilliant white snowflakes upon the land below.");
+			sb.append("Тяжелые облака над головой наконец разразились, обрушив на землю ниже вихрь ярких белых снежинок.");
 			if(target.hasPerkAnywhereInTree(Perk.DOLL_ARCANE_3)) {
-				sb.append(" Although there's no sign of a storm at the moment, [npc.nameIsFull] still able to absorb background arcane energy to power [npc.herself].");
+				sb.append(" Хотя в данный момент нет никаких признаков бури, [npc.nameIsFull] по-прежнему [npc.genderBasedWord(способен, способна)] поглощать фоновую магическую энергию, чтобы питать себя.");
 			} else {
-				sb.append(" Although there's no sign of a storm at the moment, [npc.name] can still feel the effects of the arcane manifesting in the form of an increased libido.");
+				sb.append(" Хотя в данный момент нет никаких признаков бури, [npc.name] всё ещё ощущает на себе влияние магии, проявляющееся в виде повышенного либидо.");
 			}
 			return UtilText.parse(target, sb.toString());
 		}
@@ -1401,20 +1401,20 @@ public class StatusEffect {
 		public List<String> getExtraEffects(GameCharacter target) {
 			List<String> exEff = new ArrayList<>();
 			if(target.hasPerkAnywhereInTree(Perk.DOLL_ARCANE_3)) {
-				exEff.add("[style.colourGood(Gaining)] energy from background [style.colourArcane(arcane)]");
+				exEff.add("[style.colourGood(Получение)] энергии из фонового [style.colourArcane(магического поля)]");
 			} else {
-				exEff.add("[style.colourArcane(Enhanced libido)]");
+				exEff.add("[style.colourArcane(Повышенное либидо)]");
 			}
 			if(Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.ARCANE)) {
-				exEff.add("Time until next [style.colourArcane(arcane storm)]:");
+				exEff.add("Время до следующего [style.colourArcane(магического шторм)]:");
 				exEff.add(Main.game.getNextStormTimeAsTimeString());
 			}
 			return exEff;
 		}
 	};
-	
-	public static AbstractStatusEffect WEATHER_STORM_GATHERING = new AbstractStatusEffect(100,
-			"Gathering storm",
+
+	public static final AbstractStatusEffect WEATHER_STORM_GATHERING = new AbstractStatusEffect(100,
+			"Надвигающаяся буря",
 			"weatherDayStormIncoming",
 			PresetColour.CLOTHING_WHITE,
 			false,
@@ -1423,8 +1423,8 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target,
-					"A roiling mass of thick black storm clouds hang heavy in the skies above [npc.name]."
-                            + " Flashes of pink and purple energy can be seen just beneath their surface, and [npc.she] realise that an arcane storm is going to break out at any moment.");
+					"Над [npc.morphSingleNameInstr([npc.name])] нависает бурлящая масса густых чёрных грозовых облаков." +
+							" Прямо под их поверхностью видны вспышки розовой и фиолетовой энергии, и [npc.she] [npc.targetBasedWord(понимаешь, понимает)], что в любой момент может разразиться магическая буря.");
 		}
 		@Override
 		public boolean isConditionsMet(GameCharacter target) {
@@ -1442,20 +1442,20 @@ public class StatusEffect {
 		public List<String> getExtraEffects(GameCharacter target) {
 			List<String> exEff = new ArrayList<>();
 			if(target.hasPerkAnywhereInTree(Perk.DOLL_ARCANE_3)) {
-				exEff.add("[style.colourGood(Gaining)] energy from background [style.colourArcane(arcane)]");
+				exEff.add("[style.colourGood(Получение)] энергии из фонового [style.colourArcane(магического поля)]");
 			} else {
-				exEff.add("[style.colourArcane(Enhanced libido)]");
+				exEff.add("[style.colourArcane(Повышенное либидо)]");
 			}
 			if(Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.ARCANE)) {
-				exEff.add("Time until next [style.colourArcane(arcane storm)]:");
+				exEff.add("Время до следующего [style.colourArcane(магического шторм)]:");
 				exEff.add(Main.game.getNextStormTimeAsTimeString());
 			}
 			return exEff;
 		}
 	};
-	
-	public static AbstractStatusEffect WEATHER_STORM = new AbstractStatusEffect(100,
-			"Arcane storm",
+
+	public static final AbstractStatusEffect WEATHER_STORM = new AbstractStatusEffect(100,
+			"Магический шторм",
 			"weatherDayStorm",
 			PresetColour.CLOTHING_WHITE,
 			false,
@@ -1472,20 +1472,20 @@ public class StatusEffect {
 				StringBuilder sb = new StringBuilder();
 				
 				sb.append("<p>"
-							+ "A bright pink flash suddenly illuminates the entire city of Dominion, causing those few residents still prowling the streets to look skywards."
-							+ " High up above them, the threatening storm clouds have finally broken, and a roiling mass of arcane energy finally crackles into life."
+						+ "Яркая розовая вспышка внезапно освещает весь город Доминион, заставляя тех немногих жителей, которые всё ещё бродят по улицам, посмотреть в небо." +
+						" Высоко над ними угрожающие грозовые облака наконец разорвались, и бурлящая масса магической энергии наконец-то затрещала, оживая."
 						+ "</p>"
 						+ "<p>"
-							+ "Within moments, a ghostly series of lewd moans and ecstatic screams start echoing throughout the city, and as the arcane thunder penetrates into the minds of those without a strong aura,"
-							+ " they find themselves unable to think of anything but sex."
+						+ "В считанные секунды по всему городу раздаётся призрачная серия похотливых стонов и экстатических криков, и когда таинственный гром проникает в умы тех," +
+						" кто не обладает сильной аурой, они обнаруживают, что не могут думать ни о чём, кроме секса."
 						+ "</p>");
 				
 				WorldRegion region = target.getWorldLocation().getWorldRegion();
 				
 				if(region!=WorldRegion.DOMINION && region!=WorldRegion.HARPY_NESTS) {
 					sb.append("<p>"
-							+ "Although it breaks high over Dominion, the storm isn't contained to just within the city, and swiftly sweeps out across the Foloi Fields and into the surrounding forests and grassland wilderness."
-							+ " Like a chain reaction, flashes of purple lightning streak across the sky in all directions, which are quickly followed by the erotic moaning of arcane thunder."
+							+ "Хотя шторм разражается над Доминионом, он не ограничивается только городом, а быстро распространяется по Фолойским полям и в окружающие леса и дикие луга." +
+							" Как цепная реакция, вспышки фиолетовой молнии пронзают небо во всех направлениях, за которыми быстро следует эротическое стонание магического грома."
 						+ "</p>");
 
 					if(region==WorldRegion.FIELD_CITY
@@ -1495,20 +1495,20 @@ public class StatusEffect {
 						
 						if(target.getLocationPlace().isStormImmune()) {
 							sb.append("<p>"
-										+ "Although completely immune to its effects yourself, you can feel that the storm is considerably weaker out here, far from the epicentre."
-										+ " While it's highly likely that anyone you meet in this area will be hornier than usual, you imagine that they'll be able to control themselves enough to resist the storm's arousing effects."
+									+ "Хотя ты [npc.genderBasedWord(сам, сама)] полностью [npc.genderBasedWord(невосприимчив, невосприимчива)] к его воздействию, ты чувствуешь, что здесь, вдали от эпицентра, буря значительно слабее." +
+									" Хотя вполне вероятно, что все кого ты встретишь в этой области, будут более возбуждены, чем обычно. Ты полагаешь, что они смогут контролировать себя настолько, чтобы противостоять возбуждающему воздействию бури."
 									+ "</p>");
 						} else {
 							sb.append("<p>"
-										+ "Although normally vulnerable to its effects, you only feel a little hornier than usual; proof that the storm is considerably weaker out here, far from the epicentre."
-										+ " You quickly realise that anyone you meet in this area will surely be able to control themselves enough to resist the usual arousing effects, just as you can."
+									+ "Хотя обычно ты [npc.genderBasedWord(уязвим, уязвима)] к его воздействию, ты чувствуешь себя лишь немного более [npc.genderBasedWord(возбуждённым, возбужденной)], чем обычно; это доказательство того, что здесь, вдали от эпицентра, буря значительно слабее." +
+									" Ты быстро понимаешь, что любой, кого встретишь в этой области, наверняка сможет контролировать себя настолько, чтобы противостоять обычным возбуждающим эффектам, так же как и ты."
 									+ "</p>");
 						}
 						
 					} else {
 						sb.append("<p>"
-									+ "As the storm's epicentre is directly over Dominion, you're far enough away so that you can only hear the very faintest of arcane moans in the air."
-									+ " While it's likely that anyone you come across out here will be a little hornier than usual, you imagine that they'll easily be able to resist the storm's arousing effects."
+								+ "Поскольку эпицентр бури находится прямо над Доминионом, ты находишься достаточно далеко, чтобы слышать лишь самые слабые магичские стоны в воздухе." +
+								" Хотя вполне вероятно, что все, кого ты встретишь здесь, будут немного более возбуждёнными, чем обычно. Ты полагаешь, что они легко смогут противостоять возбуждающему воздействию бури."
 								+ "</p>");
 					}
 				}
@@ -1520,15 +1520,15 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter target) {
 			StringBuilder sb = new StringBuilder();
-			sb.append("Huge streaks of pink and purple lightning arc through the sky as an arcane storm rages high above Dominion.");
+			sb.append("Огромные полосы розовых и фиолетовых молний пронзают небо, когда над Доминионом бушует таинственная буря.");
 			if(target.hasPerkAnywhereInTree(Perk.DOLL_ARCANE_3)) {
-				sb.append(" As an arcane-powered sex doll, [npc.nameIsFull] filled with a colossal amount of energy!");
+				sb.append(" Как секс-кукла, питающаяся магической энергией, [npc.nameIsFull] [npc.genderBasedWord(наполнен, наполнена)] колоссальным количеством энергии!");
 				
 			} else {
 				if(target.getWorldLocation().getWorldRegion()!=WorldRegion.DOMINION && target.getWorldLocation().getWorldRegion()!=WorldRegion.HARPY_NESTS) {
-					sb.append(" [npc.NameIsFull] far enough away from the storm's epicentre to be rendered all but immune to its arousing effects.");
+					sb.append(" [npc.NameIsFull] [npc.targetBasedWord(находишься, находится)] достаточно далеко от эпицентра шторма, чтобы быть практически [npc.genderBasedWord(невосприимчивым, невосприимчивой)] к его возбуждающему воздействию.");
 				} else {
-					sb.append(" [npc.NamePos] affinity with the arcane has rendered [npc.herHim] almost completely immune to the arousing effects of arcane storms.");
+					sb.append(" [npc.TargetBasedWord(твоя, [npc.namePos])] близость к магии сделала [npc.targetBasedWord(тебя, [npc.herHim])] почти полностью [npc.genderBasedWord(невосприимчивым, невосприимчивой)] к возбуждающему воздействию магических бурь.");
 				}
 			}
 			return UtilText.parse(target, sb.toString());
@@ -1566,21 +1566,21 @@ public class StatusEffect {
 		public List<String> getExtraEffects(GameCharacter target) {
 			List<String> exEff = new ArrayList<>();
 			if(target.hasPerkAnywhereInTree(Perk.DOLL_ARCANE_3)) {
-				exEff.add("[style.colourGood(Gaining)] [style.colourExcellent(massive)] energy from [style.colourArcane(arcane storm)]");
+				exEff.add("[style.colourGood(Получение)] [style.colourExcellent(огромного)] количества энергия от [style.colourArcane(магического шторма)]");
 			} else {
-				exEff.add("[style.colourArcane(Enhanced libido)]");
-				exEff.add("[style.boldExcellent(Double)] [style.colourArcane(essence gains)] from sex & combat");
+				exEff.add("[style.colourArcane(Повышенное либидо)]");
+				exEff.add("Получение [style.boldExcellent(двойного)] количества [style.colourArcane(эссенции)] от секса и от боя");
 			}
 			if(Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.ARCANE)) {
-				exEff.add("Time until [style.colourArcane(storm ends)]:");
+				exEff.add("Время до [style.colourArcane(завершения шторма)]:");
 				exEff.add(Main.game.getWeatherTimeRemainingAsTimeString());
 			}
 			return exEff;
 		}
 	};
-	
-	public static AbstractStatusEffect WEATHER_STORM_VULNERABLE = new AbstractStatusEffect(100,
-			"Arcane storm",
+
+	public static final AbstractStatusEffect WEATHER_STORM_VULNERABLE = new AbstractStatusEffect(100,
+			"Магический шторм",
 			"weatherDayStorm",
 			PresetColour.CLOTHING_WHITE,
 			false,
@@ -1595,16 +1595,16 @@ public class StatusEffect {
 				}
 				
 				return "<p>"
-							+ "A bright pink flash suddenly illuminates the entire city of Dominion, causing those few residents still prowling the streets to look skywards."
-							+ " High up above them, the threatening storm clouds have finally broken, and a roiling mass of arcane energy finally crackles into life."
+						+ "Яркая розовая вспышка внезапно освещает весь город Доминион, заставляя тех немногих жителей, которые всё ещё бродят по улицам, посмотреть в небо." +
+						" Высоко над ними наконец разразилась гроза, и бурлящая масса магической энергии наконец-то ожила."
 						+ "</p>"
 						+ "<p>"
-							+ "Within moments, a ghostly series of lewd moans and ecstatic screams start echoing throughout the city."
-							+ " Although you entered this world with a high enough arcane affinity to be rendered immune to the storm's effects, you've ended up losing most of your power,"
-								+ " and you can't help but let out a desperate [pc.moan] as you start to feel incredibly turned on."
+						+ "В считанные секунды по всему городу раздаётся призрачная серия сладострастных стонов и экстатических криков." +
+						" Хотя ты [pc.genderBasedWord(пришёл, пришла)] в этот мир с достаточно высокой степенью магической склонности, чтобы быть [pc.genderBasedWord(невосприимчивым, невосприимчивой)] к воздействию бури, ты в конечном итоге [pc.genderBasedWord(потерял, потеряла)] большую часть своей силы и не можешь сдержать отчаянного [pc.morphSingleGent([pc.moan])]," +
+						" когда начинаешь чувствовать невероятное возбуждение."
 						+ "</p>"
 						+ "<p>"
-							+ "As you continue on your way, you find yourself hoping that you'll run into someone willing to give you a good fuck..."
+						+ "Продолжая свой путь, ты надеешься, что встретишь кого-нибудь, кто захочет тебя хорошенько оттрахать..."
 						+ "</p>";
 			}
 			return "";
@@ -1612,12 +1612,12 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter target) {
 			StringBuilder sb = new StringBuilder();
-			sb.append("Huge streaks of pink and purple lightning arc through the sky as an arcane storm rages high above Dominion.");
+			sb.append("Огромные полосы розовых и фиолетовых молний пронзают небо, когда над Доминионом бушует таинственная буря.");
 			if(target.hasPerkAnywhereInTree(Perk.DOLL_ARCANE_3)) {
-				sb.append(" As an arcane-powered sex doll, [npc.nameIsFull] filled with a colossal amount of energy!");
+				sb.append(" Как секс-кукла, питающаяся магической энергией, [npc.nameIsFull] [npc.genderBasedWord(наполнен, наполнена)] колоссальным количеством энергии!");
 				
 			} else {
-				sb.append(" [npc.NameIsFull] being heavily affected by the ongoing arcane storm, and can think of nothing but sex...");
+				sb.append(" [npc.NameIsFull] сильно [npc.genderBasedWord(пострадал, пострадала)] от продолжающейся магической бури и не может думать ни о чем, кроме секса...");
 			}
 			return UtilText.parse(target, sb.toString());
 		}
@@ -1658,22 +1658,22 @@ public class StatusEffect {
 		public List<String> getExtraEffects(GameCharacter target) {
 			List<String> exEff = new ArrayList<>();
 			if(target.hasPerkAnywhereInTree(Perk.DOLL_ARCANE_3)) {
-				exEff.add("[style.colourGood(Gaining)] [style.colourExcellent(massive)] energy from [style.colourArcane(arcane storm)]");
+				exEff.add("[style.colourGood(Получение)] [style.colourExcellent(огромного)] количества энергия от [style.colourArcane(магического шторма)]");
 			} else {
-				exEff.add("[style.colourArcane(Enhanced libido)]");
-				exEff.add("[style.colourArcane(Overwhelming Lust)]");
-				exEff.add("[style.boldExcellent(Double)] [style.colourArcane(essence gains)] from sex & combat");
+				exEff.add("[style.colourArcane(Повышенное либидо)]");
+				exEff.add("[style.colourArcane(Необузданная похоть)]");
+				exEff.add("Получение [style.boldExcellent(двойного)] количества [style.colourArcane(эссенции)] от секса и от боя");
 			}
 			if(Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.ARCANE)) {
-				exEff.add("Time until [style.colourArcane(storm ends)]:");
+				exEff.add("Время до [style.colourArcane(завершения шторма)]:");
 				exEff.add(Main.game.getWeatherTimeRemainingAsTimeString());
 			}
 			return exEff;
 		}
 	};
-	
-	public static AbstractStatusEffect WEATHER_STORM_PROTECTED = new AbstractStatusEffect(100,
-			"Arcane storm (protected)",
+
+	public static final AbstractStatusEffect WEATHER_STORM_PROTECTED = new AbstractStatusEffect(100,
+			"Магический шторм (под защитой)",
 			"weatherDayStorm",
 			PresetColour.GENERIC_GOOD,
 			true,
@@ -1688,12 +1688,12 @@ public class StatusEffect {
 				}
 				
 				return "<p>"
-							+ "A bright-pink flash suddenly illuminates the entire city of Dominion, causing those few residents still prowling the streets to look skywards."
-							+ " High up above them, the threatening storm clouds have finally broken, and a roiling mass of arcane energy finally crackles into life."
+						+ "Яркая розовая вспышка внезапно освещает весь город Доминион, заставляя тех немногих жителей, которые всё ещё бродят по улицам, посмотреть в небо." +
+						" Высоко над ними угрожающие грозовые облака наконец разорвались, и бурлящая масса магической энергии наконец-то затрещала, оживая."
 						+ "</p>"
 						+ "<p>"
-							+ "Within moments, a ghostly series of lewd moans and ecstatic screams start echoing throughout the city, and as the arcane thunder penetrates into the minds of those without a strong aura,"
-							+ " they find themselves unable to think of anything but sex..."
+						+ "В считанные секунды по всему городу раздается призрачная серия похотливых стонов и экстатических криков, и когда таинственный гром проникает в умы тех, кто не обладает сильной аурой," +
+						" они обнаруживают, что не могут думать ни о чём, кроме секса..."
 						+ "</p>";
 			} else {
 				return "";
@@ -1702,12 +1702,13 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter target) {
 			StringBuilder sb = new StringBuilder();
-			sb.append("Huge streaks of pink and purple lightning arc through the sky as an arcane storm rages high above Dominion.");
+			sb.append("Огромные полосы розовых и фиолетовых молний пронзают небо, когда над Доминионом бушует таинственная буря.");
 			if(target.hasPerkAnywhereInTree(Perk.DOLL_ARCANE_3)) {
-				sb.append(" Although [npc.nameIsFull] protected from the storm, [npc.sheIs] still able to absorb background arcane energy to power [npc.herself].");
+				sb.append(" Хотя [npc.nameIsFull] [npc.genderBasedWord(защищён, защищена)] от бури, [npc.sheIs] по-прежнему [npc.genderBasedWord(способен, способна)] поглощать фоновую магическую энергию, чтобы питать себя.");
 				
 			} else {
-				sb.append(" Although [npc.she] can still feel its effects taking the form of an increased libido, [npc.nameIsFull] currently protected from most of the storm's wrath.");
+				sb.append(" Хотя [npc.she] всё ещё \n" +
+						"[npc.targetBasedWord(ощущаешь, ощущает)] его последствия в виде повышенного либидо, [npc.nameIsFull] в настоящее время [npc.genderBasedWord(защищён, защищена)] от большей части ярости бури.");
 			}
 			return UtilText.parse(target, sb.toString());
 		}
@@ -1735,19 +1736,19 @@ public class StatusEffect {
 		public List<String> getExtraEffects(GameCharacter target) {
 			List<String> exEff = new ArrayList<>();
 			if(target.hasPerkAnywhereInTree(Perk.DOLL_ARCANE_3)) {
-				exEff.add("[style.colourGood(Gaining)] energy from background [style.colourArcane(arcane)]");
+				exEff.add("[style.colourGood(Получение)] энергии из фонового [style.colourArcane(магического поля)]");
 			} else {
-				exEff.add("[style.colourArcane(Enhanced libido)]");
+				exEff.add("[style.colourArcane(Повышенное либидо)]");
 			}
 			if(Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.ARCANE)) {
-				exEff.add("Time until [style.colourArcane(storm ends)]:");
+				exEff.add("Время до [style.colourArcane(завершения шторма)]:");
 				exEff.add(Main.game.getWeatherTimeRemainingAsTimeString());
 			}
 			return exEff;
 		}
 	};
 
-	public static AbstractStatusEffect BLINDED = new AbstractStatusEffect(90,
+	public static final AbstractStatusEffect BLINDED = new AbstractStatusEffect(90,
 			"Blinded",
 			"blinded",
 			PresetColour.BASE_BLACK,
@@ -1775,7 +1776,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect BLINDED_NEGATED = new AbstractStatusEffect(90,
+	public static final AbstractStatusEffect BLINDED_NEGATED = new AbstractStatusEffect(90,
 			"Blinded (Echo location)",
 			"blinded_negated",
 			PresetColour.BASE_BLACK,
@@ -1802,7 +1803,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect DARKNESS = new AbstractStatusEffect(90,
+	public static final AbstractStatusEffect DARKNESS = new AbstractStatusEffect(90,
 			"Darkness",
 			"darkness",
 			PresetColour.BASE_BLACK,
@@ -1829,7 +1830,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect DARKNESS_NEGATED = new AbstractStatusEffect(90,
+	public static final AbstractStatusEffect DARKNESS_NEGATED = new AbstractStatusEffect(90,
 			"Darkness (Negated)",
 			"darkness_negated",
 			PresetColour.BASE_BLACK,
@@ -1859,7 +1860,7 @@ public class StatusEffect {
 	
 	// RACES:
 	// HUMAN:
-	public static AbstractStatusEffect PURE_HUMAN_PROLOGUE = new AbstractStatusEffect(1000,
+	public static final AbstractStatusEffect PURE_HUMAN_PROLOGUE = new AbstractStatusEffect(1000,
             "человек",
 			null,
 			PresetColour.CLOTHING_WHITE,
@@ -1885,8 +1886,8 @@ public class StatusEffect {
 			return owner.getSubspecies().getSVGString(owner);
 		}
 	};
-	
-	public static AbstractStatusEffect SUBSPECIES_BONUS = new AbstractStatusEffect(1000,
+
+	public static final AbstractStatusEffect SUBSPECIES_BONUS = new AbstractStatusEffect(1000,
 			"",
 			null,
 			PresetColour.CLOTHING_WHITE,
@@ -2009,7 +2010,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect AQUATIC_TAIL_POSITIVE = new AbstractStatusEffect(90,
+	public static final AbstractStatusEffect AQUATIC_TAIL_POSITIVE = new AbstractStatusEffect(90,
 			"Aquatic harmony",
 			"aquatic_positive",
 			PresetColour.GENERIC_GOOD,
@@ -2051,7 +2052,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect AQUATIC_TAIL_NEGATIVE = new AbstractStatusEffect(90,
+	public static final AbstractStatusEffect AQUATIC_TAIL_NEGATIVE = new AbstractStatusEffect(90,
 			"Fish out of water",
 			"aquatic_negative",
 			PresetColour.GENERIC_BAD,
@@ -2092,8 +2093,8 @@ public class StatusEffect {
 					&& target.getSubspecies().isAquatic(target);
 		}
 	};
-	
-	public static AbstractStatusEffect AQUATIC_POSITIVE = new AbstractStatusEffect(90,
+
+	public static final AbstractStatusEffect AQUATIC_POSITIVE = new AbstractStatusEffect(90,
 			"Aquatic harmony",
 			"aquatic_positive",
 			PresetColour.GENERIC_GOOD,
@@ -2120,7 +2121,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect AQUATIC_NEGATIVE = new AbstractStatusEffect(90,
+	public static final AbstractStatusEffect AQUATIC_NEGATIVE = new AbstractStatusEffect(90,
 			"Fish out of water",
 			"aquatic_negative",
 			PresetColour.GENERIC_BAD,
@@ -2147,7 +2148,7 @@ public class StatusEffect {
 		}
 	};
 
-//	public static AbstractStatusEffect OCCUPATION_PERK = new AbstractStatusEffect(1000,
+//	public static final AbstractStatusEffect OCCUPATION_PERK = new AbstractStatusEffect(1000,
 //			"",
 //			null,
 //			PresetColour.CLOTHING_WHITE,
@@ -2184,8 +2185,8 @@ public class StatusEffect {
 //	};
 	
 	// SEXUAL ORIENTATIONS:
-	
-	public static AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractStatusEffect(90,
+
+public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractStatusEffect(90,
 		"интерес к мужчинам",
 			"orientation_androphilic",
 			PresetColour.MASCULINE,
@@ -2207,8 +2208,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect ORIENTATION_GYNEPHILIC = new AbstractStatusEffect(90,
+
+	public static final AbstractStatusEffect ORIENTATION_GYNEPHILIC = new AbstractStatusEffect(90,
 			"интерес к женщинам",
 			"orientation_gynephilic",
 			PresetColour.FEMININE,
@@ -2230,7 +2231,7 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	public static AbstractStatusEffect ORIENTATION_AMBIPHILIC = new AbstractStatusEffect(90,
+	public static final AbstractStatusEffect ORIENTATION_AMBIPHILIC = new AbstractStatusEffect(90,
 			"интерес ко всем",
 			"orientation_ambiphilic",
 			PresetColour.ANDROGYNOUS,
@@ -2254,7 +2255,7 @@ public class StatusEffect {
 
 	// CLOTHING:
 
-	public static AbstractStatusEffect CLOTHING_FEMININITY = new AbstractStatusEffect(85,
+	public static final AbstractStatusEffect CLOTHING_FEMININITY = new AbstractStatusEffect(85,
 			"clothing too feminine",
 			"clothingFemininity",
 			PresetColour.CLOTHING_PINK_LIGHT,
@@ -2282,8 +2283,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect CLOTHING_MASCULINITY = new AbstractStatusEffect(85,
+
+	public static final AbstractStatusEffect CLOTHING_MASCULINITY = new AbstractStatusEffect(85,
 			"clothing too masculine",
 			"clothingMasculinity",
 			PresetColour.CLOTHING_BLUE,
@@ -2311,9 +2312,9 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect CLOTHING_CUM = new AbstractStatusEffect(80,
-			"dirty clothing",
+
+	public static final AbstractStatusEffect CLOTHING_CUM = new AbstractStatusEffect(80,
+			"грязная одежда",
 			"clothingCummedIn",
 			PresetColour.CLOTHING_WHITE,
 			false,
@@ -2327,17 +2328,17 @@ public class StatusEffect {
 		public String getDescription(GameCharacter target) {
 			if(target.hasPerkAnywhereInTree(Perk.DOLL_LUST_3)) {
 				return UtilText.parse(target,
-						"Some of [npc.namePos] clothes have been covered in cum, milk or other sexual fluids."
-							+ " Wearing such filthy clothing reinforces the fact that [npc.sheIs] nothing more than a sex toy.");
+						"Некоторые из одежд [npc.morphSingleNameGene([npc.namePos])] покрыты спермой, молоком или другими сексуальными жидкостями."
+								+ " Ношение такой грязной одежды подчеркивает тот факт, что [npc.sheIs] не более чем секс-игрушка.");
 			}
 			return UtilText.parse(target,
-					"Some of [npc.namePos] clothes have been covered in cum, milk or other sexual fluids."
-						+ " [npc.SheIs] feeling incredibly embarrassed to be walking around in such filthy clothing.");
+					"Некоторые из одежд [npc.morphSingleNameGene([npc.namePos])] покрыты спермой, молоком или другими сексуальными жидкостями."
+							+ " [npc.SheIs] [npc.targetBasedWord(чувствуешь, чувствует)] себя невероятно неловко, ходя в такой грязной одежде.");
 		}
 		@Override
 		protected Value<Integer, String> getAdditionalDescription(GameCharacter target) {
 			if(Main.game.isOpportunisticAttackersEnabled() && target.isPlayer()) {
-				return new Value<>(2, "<b style='color:" + PresetColour.BASE_GREY.toWebHexString() + ";'>Возможность нападения</b><br/>Your smelly clothes seem to attract trouble.");
+				return new Value<>(2, "<b style='color:" + PresetColour.BASE_GREY.toWebHexString() + ";'>Возможность нападения</b><br/>Твоя вонючая одежда, похоже, притягивает неприятности.");
 			}
 			return super.getAdditionalDescription(target);
 		}
@@ -2356,9 +2357,9 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect CLOTHING_CUM_MASOCHIST = new AbstractStatusEffect(80,
-			"dirty clothing",
+
+	public static final AbstractStatusEffect CLOTHING_CUM_MASOCHIST = new AbstractStatusEffect(80,
+			"грязная одежда",
 			"clothingCummedInMasochist",
 			PresetColour.CLOTHING_WHITE,
 			false,
@@ -2371,17 +2372,17 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter target) {
 			if(target.isPlayer()) {
-				return "Some of your clothes have been covered in cum, milk or other sexual fluids."
-						+ " You find yourself incredibly turned on to be walking around in such filthy clothing.";
+				return "Некоторые из твоих одежд испачканы спермой, молоком или другими сексуальными жидкостями."
+						+ " Ти чувствуешь, что тебя невероятно возбуждает ходить в такой грязной одежде.";
 			} else {
-				return UtilText.parse(target, "Some of [npc.namePos] clothes have been covered in cum, milk or other sexual fluids."
-						+ " [npc.sheIs] feeling incredibly turned on to be walking around in such filthy clothing.");
+				return UtilText.parse(target, "Некоторые из одежд [npc.morphSingleNameGene([npc.namePos])] покрыты спермой, молоком или другими сексуальными жидкостями."
+						+ " [npc.sheIs] чувствует себя невероятно [npc.genderBasedWord(возбужденным, возбужденной)], ходя в такой грязной одежде.");
 			}
 		}
 		@Override
 		protected Value<Integer, String> getAdditionalDescription(GameCharacter target) {
 			if(Main.game.isOpportunisticAttackersEnabled() && target.isPlayer()) {
-				return new Value<>(2, "<b style='color:" + PresetColour.BASE_GREY.toWebHexString() + ";'>Возможность нападения</b><br/>Your smelly clothes seem to attract trouble.");
+				return new Value<>(2, "<b style='color:" + PresetColour.BASE_GREY.toWebHexString() + ";'>Возможность нападения</b><br/>Твоя вонючая одежда, похоже, притягивает неприятности.");
 			}
 			return super.getAdditionalDescription(target);
 		}
@@ -2400,9 +2401,9 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect BODY_CUM = new AbstractStatusEffect(80,
-			"dirty body",
+
+	public static final AbstractStatusEffect BODY_CUM = new AbstractStatusEffect(80,
+			"грязное тело",
 			"dirtyBody",
 			PresetColour.CLOTHING_WHITE,
 			false,
@@ -2475,16 +2476,16 @@ public class StatusEffect {
 		public String getDescription(GameCharacter target) {
 			if(target.hasPerkAnywhereInTree(Perk.DOLL_LUST_3)) {
 				return UtilText.parse(target,
-						"Some parts of [npc.namePos] body have been covered in cum, milk or other sexual fluids."
-							+ " Being in such a filthy state reinforces the fact that [npc.sheIs] nothing more than a sex toy.");
+						"Некоторые части тела [npc.morphSingleNameGene([npc.namePos])] покрыты спермой, молоком или другими сексуальными жидкостями."
+								+ " Нахождение в таком грязном состоянии подкрепляет тот факт, что [npc.sheIs] не более чем секс-игрушка.");
 			}
-			return UtilText.parse(target, "Some parts of [npc.namePos] body have been covered in cum, milk or other sexual fluids."
-					+ " [npc.SheIs] feeling incredibly embarrassed to be walking around in such a filthy state.");
+			return UtilText.parse(target, "Некоторые части тела [npc.morphSingleNameGene([npc.namePos])] покрыты спермой, молоком или другими сексуальными жидкостями."
+					+ " [npc.SheIs] [npc.targetBasedWord(чувствуешь, чувствует)] себя невероятно неловко, ходя в таком грязном виде.");
 		}
 		@Override
 		protected Value<Integer, String> getAdditionalDescription(GameCharacter target) {
 			if(Main.game.isOpportunisticAttackersEnabled() && target.isPlayer()) {
-				return new Value<>(2, "<b style='color:" + PresetColour.BASE_GREY.toWebHexString() + ";'>Возможность нападения</b><br/>Your smelly body seems to attract trouble.");
+				return new Value<>(2, "<b style='color:" + PresetColour.BASE_GREY.toWebHexString() + ";'>Возможность нападения</b><br/>Твоё вонючее тело, кажется, притягивает неприятности.");
 			}
 			return super.getAdditionalDescription(target);
 		}
@@ -2493,9 +2494,9 @@ public class StatusEffect {
 			return (!isCumEffectPositive(target)) && !target.getDirtySlots().isEmpty();
 		}
 	};
-	
-	public static AbstractStatusEffect BODY_CUM_MASOCHIST = new AbstractStatusEffect(80,
-			"dirty body",
+
+	public static final AbstractStatusEffect BODY_CUM_MASOCHIST = new AbstractStatusEffect(80,
+			"грязное тело",
 			"dirtyBodyMasochist",
 			PresetColour.CLOTHING_WHITE,
 			false,
@@ -2508,17 +2509,17 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter target) {
 			if(target.isPlayer()) {
-				return "Some parts of your body have been covered in cum, milk or other sexual fluids."
-						+ " You find yourself feeling incredibly turned on by walking around in such a filthy state.";
+				return "Некоторые части твоего тела покрыты спермой, молоком или другими сексуальными жидкостями."
+						+ " Ты чувствуешь, что тебя невероятно возбуждает ходить в таком грязном состоянии.";
 			} else {
-				return UtilText.parse(target, "Some parts of [npc.namePos] body have been covered in cum, milk or other sexual fluids."
-						+ " [npc.sheIs] feeling incredibly turned on by walking around in such a filthy state.");
+				return UtilText.parse(target, "Некоторые части тела [npc.morphSingleNameGene([npc.namePos])] покрыты спермой, молоком или другими сексуальными жидкостями."
+						+ " [npc.sheIs] [npc.targetBasedWord(чувствуешь, чувствует)] себя невероятно [npc.genderBasedWord(возбужденным, возбужденной)], ходя в таком грязном состоянии.");
 			}
 		}
 		@Override
 		protected Value<Integer, String> getAdditionalDescription(GameCharacter target) {
 			if(Main.game.isOpportunisticAttackersEnabled() && target.isPlayer()) {
-				return new Value<>(2, "<b style='color:" + PresetColour.BASE_GREY.toWebHexString() + ";'>Возможность нападения</b><br/>Your smelly body seems to attract trouble.");
+				return new Value<>(2, "<b style='color:" + PresetColour.BASE_GREY.toWebHexString() + ";'>Возможность нападения</b><br/>Твоё вонючее тело, кажется, притягивает неприятности.");
 			}
 			return super.getAdditionalDescription(target);
 		}
@@ -2527,8 +2528,8 @@ public class StatusEffect {
 			return (isCumEffectPositive(target)) && !target.getDirtySlots().isEmpty();
 		}
 	};
-	
-	public static AbstractStatusEffect MARKED_BY_MUSK = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect MARKED_BY_MUSK = new AbstractStatusEffect(80,
 			"marked by musk",
 			"marked_by_musk",
 			PresetColour.BASE_YELLOW_LIGHT,
@@ -2563,8 +2564,8 @@ public class StatusEffect {
 			return Main.game.isMuskContentEnabled() && !target.getMuskMarkers().isEmpty();
 		}
 	};
-	
-	public static AbstractStatusEffect CLOTHING_ENCHANTMENT_OVER_LIMIT = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CLOTHING_ENCHANTMENT_OVER_LIMIT = new AbstractStatusEffect(80,
 			"unstable enchantments",
 			"unstable_enchantment_1",
 			PresetColour.ATTRIBUTE_CORRUPTION,
@@ -2588,8 +2589,8 @@ public class StatusEffect {
 			return Main.game.isEnchantmentCapacityEnabled() && overBy>0 && overBy<10;
 		}
 	};
-	
-	public static AbstractStatusEffect CLOTHING_ENCHANTMENT_OVER_LIMIT_2 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CLOTHING_ENCHANTMENT_OVER_LIMIT_2 = new AbstractStatusEffect(80,
 			"volatile enchantments",
 			"unstable_enchantment_2",
 			PresetColour.ATTRIBUTE_CORRUPTION,
@@ -2613,8 +2614,8 @@ public class StatusEffect {
 			return Main.game.isEnchantmentCapacityEnabled() && overBy>=10 && overBy<20;
 		}
 	};
-	
-	public static AbstractStatusEffect CLOTHING_ENCHANTMENT_OVER_LIMIT_3 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CLOTHING_ENCHANTMENT_OVER_LIMIT_3 = new AbstractStatusEffect(80,
 			"shattered enchantments",
 			"unstable_enchantment_3",
 			PresetColour.ATTRIBUTE_CORRUPTION,
@@ -2638,8 +2639,8 @@ public class StatusEffect {
 			return Main.game.isEnchantmentCapacityEnabled() && overBy>=20;
 		}
 	};
-	
-	public static AbstractStatusEffect CLOTHING_JINXED = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CLOTHING_JINXED = new AbstractStatusEffect(80,
 			"sealed clothing",
 			"jinxed_clothing",
 			PresetColour.ATTRIBUTE_CORRUPTION,
@@ -2731,7 +2732,7 @@ public class StatusEffect {
 	
 	// OTHER:
 
-	public static AbstractStatusEffect SLEEPING = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect SLEEPING = new AbstractStatusEffect(80,
 			"sleeping",
 			"sleeping",
 			PresetColour.SLEEP,
@@ -2759,7 +2760,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect SLEEPING_HEAVY = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect SLEEPING_HEAVY = new AbstractStatusEffect(80,
 			"heavily sleeping",
 			"sleeping_heavy",
 			PresetColour.SLEEP_HEAVY,
@@ -2792,8 +2793,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect WELL_RESTED = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect WELL_RESTED = new AbstractStatusEffect(80,
 			"well rested",
 			"wellRested",
 			PresetColour.ATTRIBUTE_HEALTH,
@@ -2811,8 +2812,8 @@ public class StatusEffect {
 			}
 		}
 	};
-	
-	public static AbstractStatusEffect WELL_RESTED_BOOSTED = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect WELL_RESTED_BOOSTED = new AbstractStatusEffect(80,
 			"well rested (boosted)",
 			"wellRestedBoosted",
 			PresetColour.ATTRIBUTE_HEALTH,
@@ -2834,8 +2835,8 @@ public class StatusEffect {
 			}
 		}
 	};
-	
-	public static AbstractStatusEffect WELL_RESTED_BOOSTED_EXTRA = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect WELL_RESTED_BOOSTED_EXTRA = new AbstractStatusEffect(80,
 			"well rested (extra boosted)",
 			"wellRestedBoostedExtra",
 			PresetColour.ATTRIBUTE_HEALTH,
@@ -2857,7 +2858,7 @@ public class StatusEffect {
 		}
 	};
 
-//	public static AbstractStatusEffect SHOWER = new AbstractStatusEffect(80,
+//	public static final AbstractStatusEffect SHOWER = new AbstractStatusEffect(80,
 //			"recently showered",
 //			"bath_minor",
 //			PresetColour.ATTRIBUTE_HEALTH,
@@ -2877,8 +2878,8 @@ public class StatusEffect {
 //			}
 //		}
 //	};
-	
-//	public static AbstractStatusEffect BATH = new AbstractStatusEffect(80,
+
+//	public static final AbstractStatusEffect BATH = new AbstractStatusEffect(80,
 //			"recently bathed",
 //			"bath",
 //			PresetColour.ATTRIBUTE_HEALTH,
@@ -2899,7 +2900,7 @@ public class StatusEffect {
 //		}
 //	};
 
-//	public static AbstractStatusEffect BATH_BOOSTED = new AbstractStatusEffect(80,
+//	public static final AbstractStatusEffect BATH_BOOSTED = new AbstractStatusEffect(80,
 //			"recently bathed (spa)",
 //			"bath_boosted",
 //			PresetColour.ATTRIBUTE_HEALTH,
@@ -2920,8 +2921,8 @@ public class StatusEffect {
 //			}
 //		}
 //	};
-	
-	public static AbstractStatusEffect OVERWORKED_1 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect OVERWORKED_1 = new AbstractStatusEffect(80,
 			"slightly overworked",
 			"overworked1",
 			PresetColour.BASE_RED,
@@ -2951,8 +2952,8 @@ public class StatusEffect {
 					&& target.getDailySlaveJobStamina()>=-9;
 		}
 	};
-	
-	public static AbstractStatusEffect OVERWORKED_2 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect OVERWORKED_2 = new AbstractStatusEffect(80,
 			"overworked",
 			"overworked2",
 			PresetColour.BASE_RED,
@@ -2982,8 +2983,8 @@ public class StatusEffect {
 					&& target.getDailySlaveJobStamina()>=-19;
 		}
 	};
-	
-	public static AbstractStatusEffect OVERWORKED_3 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect OVERWORKED_3 = new AbstractStatusEffect(80,
 			"severely overworked",
 			"overworked3",
 			PresetColour.BASE_RED,
@@ -3012,8 +3013,8 @@ public class StatusEffect {
 					&& target.getDailySlaveJobStamina()<-19;
 		}
 	};
-	
-	public static AbstractStatusEffect GYM_FATIGUE = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect GYM_FATIGUE = new AbstractStatusEffect(80,
 			"post-workout fatigue",
 			"gym_fatigue",
 			PresetColour.ATTRIBUTE_HEALTH,
@@ -3031,8 +3032,8 @@ public class StatusEffect {
 			}
 		}
 	};
-	
-	public static AbstractStatusEffect FATIGUED = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect FATIGUED = new AbstractStatusEffect(80,
 			"fatigued",
 			"fatigued",
 			PresetColour.ATTRIBUTE_HEALTH,
@@ -3052,7 +3053,7 @@ public class StatusEffect {
 	};
 	
 	// Utility status effect to display text of companions leaving:
-	public static AbstractStatusEffect COMPANIONS_LEAVING = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect COMPANIONS_LEAVING = new AbstractStatusEffect(80,
 			"Companions Leaving",
 			"",
 			PresetColour.BASE_MAGENTA,
@@ -3072,8 +3073,8 @@ public class StatusEffect {
 			return target.isPlayer();
 		}
 	};
-	
-	public static AbstractStatusEffect PSYCHOACTIVE = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect PSYCHOACTIVE = new AbstractStatusEffect(80,
 			"Psychoactive Trip",
 			"psychoactive",
 			PresetColour.BASE_YELLOW,
@@ -3200,8 +3201,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect CLEANED_MASSAGED = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CLEANED_MASSAGED = new AbstractStatusEffect(80,
 			"Recently massaged",
 			"cleaned_massage",
 			PresetColour.ATTRIBUTE_HEALTH,
@@ -3218,8 +3219,8 @@ public class StatusEffect {
 					"Having recently received a massage, [npc.nameIsFull] feeling extremely relaxed and limber!");
 		}
 	};
-	
-	public static AbstractStatusEffect CLEANED_SHOWER = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CLEANED_SHOWER = new AbstractStatusEffect(80,
 			"Recently showered",
 			"cleaned_shower",
 			PresetColour.ATTRIBUTE_HEALTH,
@@ -3237,8 +3238,8 @@ public class StatusEffect {
                     "Having recently taken the time to have a shower, [npc.name] feel refreshed!");
 		}
 	};
-	
-	public static AbstractStatusEffect CLEANED_BATH = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CLEANED_BATH = new AbstractStatusEffect(80,
 			"Recently bathed",
 			"cleaned_bath",
 			PresetColour.ATTRIBUTE_HEALTH,
@@ -3261,8 +3262,8 @@ public class StatusEffect {
                     "Having recently taken the time to relax in [npc.her] bath, [npc.name] feel refreshed and rejuvenated.");
 		}
 	};
-	
-	public static AbstractStatusEffect CLEANED_SPA = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CLEANED_SPA = new AbstractStatusEffect(80,
 			"Spa soak",
 			"cleaned_spa",
 			PresetColour.ATTRIBUTE_HEALTH,
@@ -3286,8 +3287,8 @@ public class StatusEffect {
                     "Having recently taken the time to relax in the spa, [npc.name] feel like [npc.sheHas] been born anew!");
 		}
 	};
-	
-	public static AbstractStatusEffect LOLLIPOP_SUCKING = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect LOLLIPOP_SUCKING = new AbstractStatusEffect(80,
 			"sucking lollipop",
 			"lollipop",
 			PresetColour.CLOTHING_PINK,
@@ -3303,8 +3304,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect SMOKING = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect SMOKING = new AbstractStatusEffect(80,
 			"smoking",
 			"smoking",
 			PresetColour.CLOTHING_ORANGE,
@@ -3334,8 +3335,8 @@ public class StatusEffect {
 			return "";
 		}
 	};
-	
-	public static AbstractStatusEffect RECENTLY_SMOKED = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect RECENTLY_SMOKED = new AbstractStatusEffect(80,
 			"recently smoked",
 			"recentlySmoked",
 			PresetColour.CLOTHING_ORANGE,
@@ -3352,7 +3353,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect RECENTLY_EATEN = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect RECENTLY_EATEN = new AbstractStatusEffect(80,
 			"recently eaten",
 			"recentlyEaten",
 			PresetColour.BASE_GREEN,
@@ -3374,7 +3375,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect RECENTLY_EATEN_POOR = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect RECENTLY_EATEN_POOR = new AbstractStatusEffect(80,
 			"recently eaten (junk)",
 			"recentlyEaten",
 			PresetColour.BASE_GREEN_LIGHT,
@@ -3396,7 +3397,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect RECENTLY_EATEN_QUALITY = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect RECENTLY_EATEN_QUALITY = new AbstractStatusEffect(80,
 			"recently eaten (quality)",
 			"recentlyEaten",
 			PresetColour.BASE_GREEN_DARK,
@@ -3419,7 +3420,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect THIRST_QUENCHED = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect THIRST_QUENCHED = new AbstractStatusEffect(80,
 			"thirst quenched",
 			"recentlyDrank",
 			PresetColour.BASE_BLUE,
@@ -3441,7 +3442,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect THIRST_QUENCHED_POOR = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect THIRST_QUENCHED_POOR = new AbstractStatusEffect(80,
 			"thirst quenched (basic)",
 			"recentlyDrank",
 			PresetColour.BASE_BLUE_LIGHT,
@@ -3463,7 +3464,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect THIRST_QUENCHED_QUALITY = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect THIRST_QUENCHED_QUALITY = new AbstractStatusEffect(80,
 			"thirst quenched (quality)",
 			"recentlyDrank",
 			PresetColour.BASE_BLUE_DARK,
@@ -3485,8 +3486,8 @@ public class StatusEffect {
 					+ " With [npc.her] thirst temporarily quenched, and with the memory of such a fine beverage still fresh in [npc.her] mind, [npc.sheIs] able to focus and concentrate on the task at hand.");
 		}
 	};
-	
-	public static AbstractStatusEffect DRUNK_1 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect DRUNK_1 = new AbstractStatusEffect(80,
 			"Intoxicated I - Tipsy",
 			"drunk1",
 			PresetColour.BASE_YELLOW,
@@ -3517,8 +3518,8 @@ public class StatusEffect {
 			return target.getAlcoholLevel()==AlcoholLevel.ONE_TIPSY;
 		}
 	};
-	
-	public static AbstractStatusEffect DRUNK_2 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect DRUNK_2 = new AbstractStatusEffect(80,
 			"Intoxicated II - Merry",
 			"drunk2",
 			PresetColour.BASE_YELLOW,
@@ -3548,8 +3549,8 @@ public class StatusEffect {
 			return target.getAlcoholLevel()==AlcoholLevel.TWO_MERRY;
 		}
 	};
-	
-	public static AbstractStatusEffect DRUNK_3 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect DRUNK_3 = new AbstractStatusEffect(80,
 			"Intoxicated III - Drunk",
 			"drunk3",
 			PresetColour.BASE_YELLOW,
@@ -3585,8 +3586,8 @@ public class StatusEffect {
 			return target.getAlcoholLevel()==AlcoholLevel.THREE_DRUNK;
 		}
 	};
-	
-	public static AbstractStatusEffect DRUNK_4 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect DRUNK_4 = new AbstractStatusEffect(80,
 			"Intoxicated IV - Hammered",
 			"drunk4",
 			PresetColour.BASE_YELLOW,
@@ -3623,8 +3624,8 @@ public class StatusEffect {
 			return target.getAlcoholLevel()==AlcoholLevel.FOUR_HAMMERED;
 		}
 	};
-	
-	public static AbstractStatusEffect DRUNK_5 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect DRUNK_5 = new AbstractStatusEffect(80,
 			"Intoxicated V - Wasted",
 			"drunk5",
 			PresetColour.BASE_YELLOW,
@@ -3661,8 +3662,8 @@ public class StatusEffect {
 			return target.getAlcoholLevel()==AlcoholLevel.FIVE_WASTED;
 		}
 	};
-	
-	public static AbstractStatusEffect ADDICTIONS = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect ADDICTIONS = new AbstractStatusEffect(80,
 			"addictions",
 			"addictions",
 			PresetColour.BASE_CRIMSON,
@@ -3714,8 +3715,8 @@ public class StatusEffect {
 			return !target.getAddictions().isEmpty();
 		}
 	};
-	
-	public static AbstractStatusEffect WITHDRAWAL_1 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect WITHDRAWAL_1 = new AbstractStatusEffect(80,
 			"Mild Withdrawal",
 			"withdrawal1",
 			PresetColour.CORRUPTION_STAGE_ONE,
@@ -3777,8 +3778,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect WITHDRAWAL_2 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect WITHDRAWAL_2 = new AbstractStatusEffect(80,
 			"Noticeable Withdrawal",
 			"withdrawal2",
 			PresetColour.CORRUPTION_STAGE_TWO,
@@ -3840,8 +3841,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect WITHDRAWAL_3 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect WITHDRAWAL_3 = new AbstractStatusEffect(80,
 			"Strong Withdrawal",
 			"withdrawal3",
 			PresetColour.CORRUPTION_STAGE_THREE,
@@ -3903,8 +3904,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect WITHDRAWAL_4 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect WITHDRAWAL_4 = new AbstractStatusEffect(80,
 			"Severe Withdrawal",
 			"withdrawal4",
 			PresetColour.CORRUPTION_STAGE_FOUR,
@@ -3966,8 +3967,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect WITHDRAWAL_5 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect WITHDRAWAL_5 = new AbstractStatusEffect(80,
 			"Intense Withdrawal",
 			"withdrawal5",
 			PresetColour.CORRUPTION_STAGE_FIVE,
@@ -4024,7 +4025,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect MENOPAUSE = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect MENOPAUSE = new AbstractStatusEffect(80,
 			"Menopause",
 			"menopause",
 			PresetColour.BASE_CRIMSON,
@@ -4058,9 +4059,9 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect PREGNANT_0 = new AbstractStatusEffect(80,
-			"risk of pregnancy",
+
+	public static final AbstractStatusEffect PREGNANT_0 = new AbstractStatusEffect(80,
+			"риск беременности",
 			"pregnancy0",
 			PresetColour.GENERIC_ARCANE,
 			true,
@@ -4070,11 +4071,11 @@ public class StatusEffect {
 		public String getDescription(GameCharacter target) {
 			if(Main.game.isInNewWorld()) {
 				return UtilText.parse(target,
-						"After recently having unprotected sex, there's a risk that [npc.name] will get pregnant!"
-							+ " Due to the fact that the arcane accelerates people's pregnancies, [npc.she]'ll know if [npc.sheIs] pregnant within a matter of hours...");
+						"После недавнего незащищенного секса существует риск, что [npc.name] [npc.targetBasedWord(забеременеешь, забеременеет)]!"
+								+ " В связи с тем, что магия ускоряет беременность, [npc.she] [npc.targetBasedWord(узнаёшь, узнаёт)] о результате в течение нескольких часов...");
 			} else {
 				return UtilText.parse(target,
-						"After recently having unprotected sex, there's a risk that [npc.name] will get pregnant!");
+						"После недавнего незащищенного секса существует риск, что [npc.name] [npc.targetBasedWord(забеременеешь, забеременеет)]!");
 			}
 		}
 		@Override
@@ -4304,8 +4305,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect PREGNANT_1 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect PREGNANT_1 = new AbstractStatusEffect(80,
 			"pregnant",
 			"pregnancy1",
 			PresetColour.GENERIC_ARCANE,
@@ -4419,8 +4420,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect PREGNANT_2 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect PREGNANT_2 = new AbstractStatusEffect(80,
 			"heavily pregnant",
 			"pregnancy2",
 			PresetColour.GENERIC_ARCANE,
@@ -4543,7 +4544,7 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	public static AbstractStatusEffect PREGNANT_3 = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect PREGNANT_3 = new AbstractStatusEffect(80,
 			"ready for birthing",
 			"pregnancy3",
 			PresetColour.GENERIC_ARCANE,
@@ -4580,8 +4581,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect INCUBATING_EGGS_STOMACH_1 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect INCUBATING_EGGS_STOMACH_1 = new AbstractStatusEffect(80,
 			"Egg Incubation (Stomach)",
 			"incubation1",
 			PresetColour.GENERIC_ARCANE,
@@ -4624,8 +4625,8 @@ public class StatusEffect {
 			return getIncubationSVGString(owner, SexAreaOrifice.ASS, 1);
 		}
 	};
-	
-	public static AbstractStatusEffect INCUBATING_EGGS_STOMACH_2 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect INCUBATING_EGGS_STOMACH_2 = new AbstractStatusEffect(80,
 			"Advanced Egg Incubation (Stomach)",
 			"incubation2",
 			PresetColour.GENERIC_ARCANE,
@@ -4676,8 +4677,8 @@ public class StatusEffect {
 			return getIncubationSVGString(owner, SexAreaOrifice.ASS, 2);
 		}
 	};
-	
-	public static AbstractStatusEffect INCUBATING_EGGS_STOMACH_3 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect INCUBATING_EGGS_STOMACH_3 = new AbstractStatusEffect(80,
 			"Completed Egg Incubation (Stomach)",
 			"incubation3",
 			PresetColour.GENERIC_ARCANE,
@@ -4708,8 +4709,8 @@ public class StatusEffect {
 			return getIncubationSVGString(owner, SexAreaOrifice.ASS, 3);
 		}
 	};
-	
-	public static AbstractStatusEffect INCUBATING_EGGS_NIPPLES_1 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect INCUBATING_EGGS_NIPPLES_1 = new AbstractStatusEffect(80,
 			"Egg Incubation (Breasts)",
 			"incubation1",
 			PresetColour.GENERIC_ARCANE,
@@ -4752,8 +4753,8 @@ public class StatusEffect {
 			return getIncubationSVGString(owner, SexAreaOrifice.BREAST, 1);
 		}
 	};
-	
-	public static AbstractStatusEffect INCUBATING_EGGS_NIPPLES_2 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect INCUBATING_EGGS_NIPPLES_2 = new AbstractStatusEffect(80,
 			"Advanced Egg Incubation (Breasts)",
 			"incubation2",
 			PresetColour.GENERIC_ARCANE,
@@ -4803,8 +4804,8 @@ public class StatusEffect {
 			return getIncubationSVGString(owner, SexAreaOrifice.BREAST, 2);
 		}
 	};
-	
-	public static AbstractStatusEffect INCUBATING_EGGS_NIPPLES_3 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect INCUBATING_EGGS_NIPPLES_3 = new AbstractStatusEffect(80,
 			"Completed Egg Incubation (Breasts)",
 			"incubation3",
 			PresetColour.GENERIC_ARCANE,
@@ -4835,8 +4836,8 @@ public class StatusEffect {
 			return getIncubationSVGString(owner, SexAreaOrifice.BREAST, 3);
 		}
 	};
-	
-	public static AbstractStatusEffect INCUBATING_EGGS_NIPPLES_CROTCH_1 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect INCUBATING_EGGS_NIPPLES_CROTCH_1 = new AbstractStatusEffect(80,
 			"Egg Incubation (Crotch-boobs)",
 			"incubation1",
 			PresetColour.GENERIC_ARCANE,
@@ -4886,8 +4887,8 @@ public class StatusEffect {
 			return getIncubationSVGString(owner, SexAreaOrifice.BREAST_CROTCH, 1);
 		}
 	};
-	
-	public static AbstractStatusEffect INCUBATING_EGGS_NIPPLES_CROTCH_2 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect INCUBATING_EGGS_NIPPLES_CROTCH_2 = new AbstractStatusEffect(80,
 			"Advanced Egg Incubation (Crotch-boobs)",
 			"incubation2",
 			PresetColour.GENERIC_ARCANE,
@@ -4944,8 +4945,8 @@ public class StatusEffect {
 			return getIncubationSVGString(owner, SexAreaOrifice.BREAST_CROTCH, 2);
 		}
 	};
-	
-	public static AbstractStatusEffect INCUBATING_EGGS_NIPPLES_CROTCH_3 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect INCUBATING_EGGS_NIPPLES_CROTCH_3 = new AbstractStatusEffect(80,
 			"Completed Egg Incubation (Crotch-boobs)",
 			"incubation3",
 			PresetColour.GENERIC_ARCANE,
@@ -4985,7 +4986,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect INCUBATING_EGGS_SPINNERET_1 = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect INCUBATING_EGGS_SPINNERET_1 = new AbstractStatusEffect(80,
 			"Egg Incubation (Spinneret)",
 			"incubation1",
 			PresetColour.GENERIC_ARCANE,
@@ -5028,8 +5029,8 @@ public class StatusEffect {
 			return getIncubationSVGString(owner, SexAreaOrifice.SPINNERET, 1);
 		}
 	};
-	
-	public static AbstractStatusEffect INCUBATING_EGGS_SPINNERET_2 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect INCUBATING_EGGS_SPINNERET_2 = new AbstractStatusEffect(80,
 			"Advanced Egg Incubation (Spinneret)",
 			"incubation2",
 			PresetColour.GENERIC_ARCANE,
@@ -5079,8 +5080,8 @@ public class StatusEffect {
 			return getIncubationSVGString(owner, SexAreaOrifice.SPINNERET, 2);
 		}
 	};
-	
-	public static AbstractStatusEffect INCUBATING_EGGS_SPINNERET_3 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect INCUBATING_EGGS_SPINNERET_3 = new AbstractStatusEffect(80,
 			"Completed Egg Incubation (Spinneret)",
 			"incubation3",
 			PresetColour.GENERIC_ARCANE,
@@ -5113,7 +5114,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect INCUBATING_EGGS_WOMB_1 = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect INCUBATING_EGGS_WOMB_1 = new AbstractStatusEffect(80,
 			"Egg Incubation (Womb)",
 			"incubation1",
 			PresetColour.GENERIC_ARCANE,
@@ -5156,8 +5157,8 @@ public class StatusEffect {
 			return getIncubationSVGString(owner, SexAreaOrifice.VAGINA, 1);
 		}
 	};
-	
-	public static AbstractStatusEffect INCUBATING_EGGS_WOMB_2 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect INCUBATING_EGGS_WOMB_2 = new AbstractStatusEffect(80,
 			"Advanced Egg Incubation (Womb)",
 			"incubation2",
 			PresetColour.GENERIC_ARCANE,
@@ -5207,8 +5208,8 @@ public class StatusEffect {
 			return getIncubationSVGString(owner, SexAreaOrifice.VAGINA, 2);
 		}
 	};
-	
-	public static AbstractStatusEffect INCUBATING_EGGS_WOMB_3 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect INCUBATING_EGGS_WOMB_3 = new AbstractStatusEffect(80,
 			"Completed Egg Incubation (Womb)",
 			"incubation3",
 			PresetColour.GENERIC_ARCANE,
@@ -5239,8 +5240,8 @@ public class StatusEffect {
 			return getIncubationSVGString(owner, SexAreaOrifice.VAGINA, 3);
 		}
 	};
-	
-	public static AbstractStatusEffect VIXENS_VIRILITY = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect VIXENS_VIRILITY = new AbstractStatusEffect(80,
 			"pharmaceutical fertility",
 			"vixensVirility",
 			PresetColour.GENERIC_SEX,
@@ -5258,7 +5259,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect PROMISCUITY_PILL = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect PROMISCUITY_PILL = new AbstractStatusEffect(80,
 			"pharmaceutical sterility",
 			"promiscuityPill",
 			PresetColour.GENERIC_SEX,
@@ -5278,7 +5279,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect PROMISCUITY_PILL_PROLOGUE = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect PROMISCUITY_PILL_PROLOGUE = new AbstractStatusEffect(80,
 			"On the pill",
 			"promiscuityPill",
 			PresetColour.GENERIC_SEX,
@@ -5296,7 +5297,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect BROODMOTHER_PILL = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect BROODMOTHER_PILL = new AbstractStatusEffect(80,
 			"pharmaceutical hyper-fertility",
 			"broodmother_pill",
 			PresetColour.CLOTHING_PINK,
@@ -5318,7 +5319,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect LUBE_PILL = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect LUBE_PILL = new AbstractStatusEffect(80,
 			"lubricated body",
 			"lube_pill",
 			PresetColour.WETNESS,
@@ -5350,7 +5351,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect CUM_PRODUCTION = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect CUM_PRODUCTION = new AbstractStatusEffect(80,
 			"Производство спермы",
 			"cumProduction",
 			PresetColour.GENERIC_SEX,
@@ -5383,7 +5384,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect CUM_FULL = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect CUM_FULL = new AbstractStatusEffect(80,
 			"Полные яйца",
 			"cumFull",
 			PresetColour.GENERIC_SEX,
@@ -5416,7 +5417,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect MILK_PRODUCTION = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect MILK_PRODUCTION = new AbstractStatusEffect(80,
 			"Milk Production",
 			"milkProduction",
 			PresetColour.GENERIC_SEX,
@@ -5447,7 +5448,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect MILK_FULL = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect MILK_FULL = new AbstractStatusEffect(80,
 			"Full Breasts",
 			"milkFull",
 			PresetColour.GENERIC_SEX,
@@ -5478,7 +5479,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect MILK_CROTCH_PRODUCTION = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect MILK_CROTCH_PRODUCTION = new AbstractStatusEffect(80,
 			"Crotch-boob Milk Production",
 			"milkCrotchProduction",
 			PresetColour.GENERIC_SEX,
@@ -5518,7 +5519,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect MILK_CROTCH_FULL = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect MILK_CROTCH_FULL = new AbstractStatusEffect(80,
 			"Full Crotch-boobs",
 			"milkCrotchFull",
 			PresetColour.GENERIC_SEX,
@@ -5557,7 +5558,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect STRETCHING_ORIFICE = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect STRETCHING_ORIFICE = new AbstractStatusEffect(80,
 			"Big Toys",
 			"sexEffects/combinationStretching",
 			PresetColour.BASE_MAGENTA,
@@ -5760,8 +5761,8 @@ public class StatusEffect {
 			return getStretchingOrificeStatus(target, !target.getSexToyOrificeStretching().isEmpty(), !target.getSexToyOrificePreventingStretchRecovery().isEmpty(), !target.getSexToyOrificeTooDeep().isEmpty(), orifices);
 		}
 	};
-	
-	public static AbstractStatusEffect RECOVERING_ORIFICE = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect RECOVERING_ORIFICE = new AbstractStatusEffect(80,
 			"Recovering Vagina",
 			"recoveringOrifice",
 			PresetColour.GENERIC_SEX,
@@ -6024,10 +6025,9 @@ public class StatusEffect {
 			return getRecoveringOrificeStatus(owner, super.getSVGString(owner));
 		}
 	};
-	
-	
-	
-	public static AbstractStatusEffect CREAMPIE_VAGINA = new AbstractStatusEffect(80,
+
+
+	public static final AbstractStatusEffect CREAMPIE_VAGINA = new AbstractStatusEffect(80,
 			"Pussy Creampie",
 			"creampie",
 			PresetColour.CUM,
@@ -6159,8 +6159,8 @@ public class StatusEffect {
 			return getCreampieSVGString(owner, SexAreaOrifice.VAGINA);
 		}
 	};
-	
-	public static AbstractStatusEffect CREAMPIE_VAGINA_URETHRA = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CREAMPIE_VAGINA_URETHRA = new AbstractStatusEffect(80,
 			"Vaginal Urethra Creampie",
 			"creampie",
 			PresetColour.CUM,
@@ -6287,8 +6287,8 @@ public class StatusEffect {
 			return getCreampieSVGString(owner, SexAreaOrifice.URETHRA_VAGINA);
 		}
 	};
-	
-	public static AbstractStatusEffect CREAMPIE_PENIS_URETHRA = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CREAMPIE_PENIS_URETHRA = new AbstractStatusEffect(80,
 			"Penis Urethra Creampie",
 			"creampie",
 			PresetColour.CUM,
@@ -6408,8 +6408,8 @@ public class StatusEffect {
 			return getCreampieSVGString(owner, SexAreaOrifice.URETHRA_PENIS);
 		}
 	};
-	
-	public static AbstractStatusEffect CREAMPIE_ANUS = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CREAMPIE_ANUS = new AbstractStatusEffect(80,
 			"Anal Creampie",
 			"creampie",
 			PresetColour.CUM,
@@ -6523,8 +6523,8 @@ public class StatusEffect {
 			return getCreampieSVGString(owner, SexAreaOrifice.ANUS);
 		}
 	};
-	
-	public static AbstractStatusEffect CREAMPIE_NIPPLES = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CREAMPIE_NIPPLES = new AbstractStatusEffect(80,
 			"Nipple Creampie",
 			"creampie",
 			PresetColour.CUM,
@@ -6649,7 +6649,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect CREAMPIE_NIPPLES_CROTCH = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect CREAMPIE_NIPPLES_CROTCH = new AbstractStatusEffect(80,
 			"Nipple Creampie",
 			"creampie",
 			PresetColour.CUM,
@@ -6777,8 +6777,8 @@ public class StatusEffect {
 			return getCreampieSVGString(owner, SexAreaOrifice.NIPPLE_CROTCH);
 		}
 	};
-	
-	public static AbstractStatusEffect CREAMPIE_MOUTH = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CREAMPIE_MOUTH = new AbstractStatusEffect(80,
 			"Cummy Meal",
 			"creampie",
 			PresetColour.CUM,
@@ -6863,7 +6863,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect CREAMPIE_SPINNERET = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect CREAMPIE_SPINNERET = new AbstractStatusEffect(80,
 			"Spinneret Creampie",
 			"creampie",
 			PresetColour.CUM,
@@ -6960,8 +6960,8 @@ public class StatusEffect {
 			return getCreampieSVGString(owner, SexAreaOrifice.SPINNERET);
 		}
 	};
-	
-	public static AbstractStatusEffect CUM_INFLATION_1 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CUM_INFLATION_1 = new AbstractStatusEffect(80,
 			"swollen belly",
 			"inflation_stomach_1",
 			PresetColour.GENERIC_ARCANE,
@@ -7009,8 +7009,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect CUM_INFLATION_2 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CUM_INFLATION_2 = new AbstractStatusEffect(80,
 			"inflated belly",
 			"inflation_stomach_2",
 			PresetColour.GENERIC_ARCANE,
@@ -7059,8 +7059,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect CUM_INFLATION_3 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CUM_INFLATION_3 = new AbstractStatusEffect(80,
 			"over-inflated belly",
 			"inflation_stomach_3",
 			PresetColour.GENERIC_ARCANE,
@@ -7108,9 +7108,9 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	
-	public static AbstractStatusEffect BREAST_CUM_INFLATION_1 = new AbstractStatusEffect(80,
+
+
+	public static final AbstractStatusEffect BREAST_CUM_INFLATION_1 = new AbstractStatusEffect(80,
 			"swollen breasts",
 			"inflation_breasts_1",
 			PresetColour.GENERIC_ARCANE,
@@ -7152,8 +7152,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect BREAST_CUM_INFLATION_2 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect BREAST_CUM_INFLATION_2 = new AbstractStatusEffect(80,
 			"inflated breasts",
 			"inflation_breasts_2",
 			PresetColour.GENERIC_ARCANE,
@@ -7196,8 +7196,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect BREAST_CUM_INFLATION_3 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect BREAST_CUM_INFLATION_3 = new AbstractStatusEffect(80,
 			"over-inflated breasts",
 			"inflation_breasts_3",
 			PresetColour.GENERIC_ARCANE,
@@ -7239,8 +7239,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect SPINNERET_CUM_INFLATION_1 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect SPINNERET_CUM_INFLATION_1 = new AbstractStatusEffect(80,
 			"swollen spinneret",
 			"inflation_spinneret_1",
 			PresetColour.GENERIC_ARCANE,
@@ -7287,8 +7287,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect SPINNERET_CUM_INFLATION_2 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect SPINNERET_CUM_INFLATION_2 = new AbstractStatusEffect(80,
 			"inflated spinneret",
 			"inflation_spinneret_2",
 			PresetColour.GENERIC_ARCANE,
@@ -7335,8 +7335,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect SPINNERET_CUM_INFLATION_3 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect SPINNERET_CUM_INFLATION_3 = new AbstractStatusEffect(80,
 			"over-inflated spinneret",
 			"inflation_spinneret_3",
 			PresetColour.GENERIC_ARCANE,
@@ -7382,8 +7382,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect FRUSTRATED_NO_ORGASM = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect FRUSTRATED_NO_ORGASM = new AbstractStatusEffect(80,
 			"Frustrated",
 			"frustrated",
 			PresetColour.GENERIC_BAD,
@@ -7411,8 +7411,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect PENT_UP_SLAVE = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect PENT_UP_SLAVE = new AbstractStatusEffect(80,
 			"Pent-up",
 			"frustrated",
 			PresetColour.GENERIC_ARCANE,
@@ -7443,7 +7443,7 @@ public class StatusEffect {
 	/**
 	 * This status effect is automatically removed from a character when orgasming in sex.
 	 */
-	public static AbstractStatusEffect DESPERATELY_HORNY = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect DESPERATELY_HORNY = new AbstractStatusEffect(80,
 			"Desperately horny",
 			"desperately_horny",
 			PresetColour.GENERIC_SEX,
@@ -7468,8 +7468,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect CHASTITY_1 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CHASTITY_1 = new AbstractStatusEffect(80,
 			"Forced chastity (calm)",
 			"chastity1",
 			PresetColour.GENERIC_SEX,
@@ -7538,8 +7538,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect CHASTITY_2 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CHASTITY_2 = new AbstractStatusEffect(80,
 			"Forced chastity (restless)",
 			"chastity2",
 			PresetColour.GENERIC_SEX,
@@ -7566,8 +7566,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect CHASTITY_3 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CHASTITY_3 = new AbstractStatusEffect(80,
 			"Forced chastity (pent-up)",
 			"chastity3",
 			PresetColour.GENERIC_SEX,
@@ -7590,8 +7590,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect CHASTITY_4 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CHASTITY_4 = new AbstractStatusEffect(80,
 			"Forced chastity (desperate)",
 			"chastity4",
 			PresetColour.GENERIC_SEX,
@@ -7627,7 +7627,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect CHASTITY_REMOVED_2 = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect CHASTITY_REMOVED_2 = new AbstractStatusEffect(80,
 			"Released from chastity (restless)",
 			"chastityRemoved2",
 			PresetColour.GENERIC_ARCANE,
@@ -7676,8 +7676,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect CHASTITY_REMOVED_3 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CHASTITY_REMOVED_3 = new AbstractStatusEffect(80,
 			"Released from chastity (pent-up)",
 			"chastityRemoved3",
 			PresetColour.GENERIC_ARCANE,
@@ -7726,8 +7726,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect CHASTITY_REMOVED_4 = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CHASTITY_REMOVED_4 = new AbstractStatusEffect(80,
 			"Released from chastity (desperate)",
 			"chastityRemoved4",
 			PresetColour.GENERIC_ARCANE,
@@ -7775,8 +7775,8 @@ public class StatusEffect {
 //			return false;
 //		}
 	};
-	
-	public static AbstractStatusEffect RECOVERING_AURA = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect RECOVERING_AURA = new AbstractStatusEffect(80,
 			"Strengthened aura",
 			"recoveringAura",
 			PresetColour.GENERIC_ARCANE,
@@ -7803,7 +7803,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect EXPOSED = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect EXPOSED = new AbstractStatusEffect(80,
 			"exposed",
 			"exposed",
 			PresetColour.BASE_PINK_LIGHT,
@@ -7841,7 +7841,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect EXPOSED_ANIMAL = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect EXPOSED_ANIMAL = new AbstractStatusEffect(80,
 			"exposed (feral parts)",
 			"exposedFeral",
 			PresetColour.BASE_PINK_LIGHT,
@@ -7878,7 +7878,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect EXPOSED_DOLL = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect EXPOSED_DOLL = new AbstractStatusEffect(80,
 			"exposed (doll)",
 			"exposedDoll",
 			PresetColour.BASE_PINK_LIGHT,
@@ -7908,8 +7908,8 @@ public class StatusEffect {
 			return getExposedStatus(owner, super.getSVGString(owner));
 		}
 	};
-	
-	public static AbstractStatusEffect EXPOSED_BREASTS = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect EXPOSED_BREASTS = new AbstractStatusEffect(80,
 			"exposed breasts",
 			"exposed",
 			PresetColour.BASE_PINK_LIGHT,
@@ -7954,8 +7954,8 @@ public class StatusEffect {
 			return getExposedStatus(owner, super.getSVGString(owner));
 		}
 	};
-	
-	public static AbstractStatusEffect EXPOSED_PLUS_BREASTS = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect EXPOSED_PLUS_BREASTS = new AbstractStatusEffect(80,
 			"exposed",
 			"exposed",
 			PresetColour.BASE_PINK_LIGHT,
@@ -7992,8 +7992,8 @@ public class StatusEffect {
 			return getExposedStatus(owner, super.getSVGString(owner));
 		}
 	};
-	
-	public static AbstractStatusEffect FETISH_EXHIBITIONIST = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect FETISH_EXHIBITIONIST = new AbstractStatusEffect(80,
 			"exhibitionist",
 			"exposedExhibitionist",
 			PresetColour.BASE_PINK_LIGHT,
@@ -8027,8 +8027,8 @@ public class StatusEffect {
 			return getExposedStatus(owner, super.getSVGString(owner));
 		}
 	};
-	
-	public static AbstractStatusEffect FETISH_EXHIBITIONIST_BREASTS = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect FETISH_EXHIBITIONIST_BREASTS = new AbstractStatusEffect(80,
 			"exhibitionist",
 			"exposedExhibitionist",
 			PresetColour.BASE_PINK_LIGHT,
@@ -8062,8 +8062,8 @@ public class StatusEffect {
 			return getExposedStatus(owner, super.getSVGString(owner));
 		}
 	};
-	
-	public static AbstractStatusEffect FETISH_EXHIBITIONIST_PLUS_BREASTS = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect FETISH_EXHIBITIONIST_PLUS_BREASTS = new AbstractStatusEffect(80,
 			"exhibitionist",
 			"exposedExhibitionist",
 			PresetColour.BASE_PINK_LIGHT,
@@ -8098,7 +8098,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect FETISH_PURE_VIRGIN = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect FETISH_PURE_VIRGIN = new AbstractStatusEffect(80,
 			"Pure Virgin",
 			"virginPure",
 			PresetColour.GENERIC_EXCELLENT,
@@ -8124,8 +8124,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect FETISH_PURE_VIRGIN_NO_HYMEN = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect FETISH_PURE_VIRGIN_NO_HYMEN = new AbstractStatusEffect(80,
 			"'Pure' Virgin",
 			"virginPureNoHymen",
 			PresetColour.GENERIC_GOOD,
@@ -8151,8 +8151,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect FETISH_PURE_VIRGIN_ONLY_HYMEN = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect FETISH_PURE_VIRGIN_ONLY_HYMEN = new AbstractStatusEffect(80,
 			"Pure 'Virgin'",
 			"virginPureRepaired",
 			PresetColour.GENERIC_GOOD,
@@ -8177,8 +8177,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect FETISH_BROKEN_VIRGIN = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect FETISH_BROKEN_VIRGIN = new AbstractStatusEffect(80,
 			"Broken Virgin",
 			"virginBroken",
 			PresetColour.GENERIC_TERRIBLE,
@@ -8205,8 +8205,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect FETISH_LUSTY_MAIDEN = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect FETISH_LUSTY_MAIDEN = new AbstractStatusEffect(80,
 			"Lusty Maiden",
 			"virginLustyMaidenPure",
 			PresetColour.GENERIC_EXCELLENT,
@@ -8232,8 +8232,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect FETISH_LUSTY_MAIDEN_NO_HYMEN = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect FETISH_LUSTY_MAIDEN_NO_HYMEN = new AbstractStatusEffect(80,
 			"Lusty 'Maiden'",
 			"virginLustyMaidenNoHymen",
 			PresetColour.GENERIC_GOOD,
@@ -8259,8 +8259,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect FETISH_LUSTY_MAIDEN_ONLY_HYMEN = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect FETISH_LUSTY_MAIDEN_ONLY_HYMEN = new AbstractStatusEffect(80,
 			"Lusty 'Maiden'",
 			"virginLustyMaidenRepaired",
 			PresetColour.GENERIC_GOOD,
@@ -8285,8 +8285,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect FETISH_LUSTY_MAIDEN_BROKEN = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect FETISH_LUSTY_MAIDEN_BROKEN = new AbstractStatusEffect(80,
 			"Broken Maiden",
 			"virginLustyMaidenBroken",
 			PresetColour.GENERIC_TERRIBLE,
@@ -8316,8 +8316,8 @@ public class StatusEffect {
 	
 	
 	// JOB/OCCUPATION EFFECTS:
-	
-	public static AbstractStatusEffect COMBAT_JOB_SOLDIER = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect COMBAT_JOB_SOLDIER = new AbstractStatusEffect(10,
 			"Controlled Aggression",
 			"res/perks/jobs/soldier",
 			PresetColour.BASE_GREEN,
@@ -8336,8 +8336,8 @@ public class StatusEffect {
 	
 	
 	// CLOTHING SETS:
-	
-	public static AbstractStatusEffect SET_MAID = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_MAID = new AbstractStatusEffect(70,
 			"Hard-working Maid",
 			"clothingSets/maid",
 			PresetColour.CLOTHING_BLACK,
@@ -8363,8 +8363,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_maid").isCharacterWearingCompleteSet(target) && !target.hasTrait(Perk.JOB_MAID, true);
 		}
 	};
-	
-	public static AbstractStatusEffect SET_MAID_BOOSTED = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_MAID_BOOSTED = new AbstractStatusEffect(70,
 			"Professional Maid",
 			"clothingSets/maid_boosted",
 			PresetColour.CLOTHING_BLACK,
@@ -8393,8 +8393,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_maid").isCharacterWearingCompleteSet(target) && target.hasTrait(Perk.JOB_MAID, true);
 		}
 	};
-	
-	public static AbstractStatusEffect SET_MILK_MAID = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_MILK_MAID = new AbstractStatusEffect(70,
 			"Milk Maid",
 			"clothingSets/milk_maid",
 			PresetColour.BASE_WHITE,
@@ -8420,8 +8420,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_milk_maid").isCharacterWearingCompleteSet(target) && !target.hasTrait(Perk.JOB_MAID, true);
 		}
 	};
-	
-	public static AbstractStatusEffect SET_MILK_MAID_BOOSTED = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_MILK_MAID_BOOSTED = new AbstractStatusEffect(70,
 			"Professional Milk Maid",
 			"clothingSets/milk_maid_boosted",
 			PresetColour.BASE_WHITE,
@@ -8450,8 +8450,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_milk_maid").isCharacterWearingCompleteSet(target) && target.hasTrait(Perk.JOB_MAID, true);
 		}
 	};
-	
-	public static AbstractStatusEffect SET_BUTLER = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_BUTLER = new AbstractStatusEffect(70,
 			"Butler",
 			"clothingSets/butler",
 			PresetColour.CLOTHING_WHITE,
@@ -8477,8 +8477,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_butler").isCharacterWearingCompleteSet(target) && !target.hasTrait(Perk.JOB_BUTLER, true);
 		}
 	};
-	
-	public static AbstractStatusEffect SET_BUTLER_BOOSTED = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_BUTLER_BOOSTED = new AbstractStatusEffect(70,
 			"Professional Butler",
 			"clothingSets/butler_boosted",
 			PresetColour.CLOTHING_WHITE,
@@ -8507,8 +8507,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_butler").isCharacterWearingCompleteSet(target) && target.hasTrait(Perk.JOB_BUTLER, true);
 		}
 	};
-	
-	public static AbstractStatusEffect SET_WITCH = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_WITCH = new AbstractStatusEffect(70,
 			"Arcane Witch",
 			"clothingSets/witch",
 			PresetColour.CLOTHING_BLACK,
@@ -8540,8 +8540,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_witch").isCharacterWearingCompleteSet(target);
 		}
 	};
-	
-	public static AbstractStatusEffect SET_SCIENTIST = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_SCIENTIST = new AbstractStatusEffect(70,
 			"Scientist",
 			"clothingSets/scientist",
 			PresetColour.CLOTHING_BLACK,
@@ -8574,8 +8574,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_scientist").isCharacterWearingCompleteSet(target);
 		}
 	};
-	
-	public static AbstractStatusEffect SET_SLUTTY_ENFORCER = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_SLUTTY_ENFORCER = new AbstractStatusEffect(70,
 			"Slutty Enforcer",
 			"clothingSets/slutty_enforcer",
 			PresetColour.BASE_PINK,
@@ -8601,8 +8601,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_slutty_enforcer").isCharacterWearingCompleteSet(target);
 		}
 	};
-	
-	public static AbstractStatusEffect SET_RAINBOW = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_RAINBOW = new AbstractStatusEffect(70,
 			"Double Rainbow",
 			"clothingSets/rainbow",
 			PresetColour.CLOTHING_RED,
@@ -8622,8 +8622,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_rainbow").isCharacterWearingCompleteSet(target);
 		}
 	};
-	
-	public static AbstractStatusEffect SET_DARK_SIREN = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_DARK_SIREN = new AbstractStatusEffect(70,
             "Тёмная Сирена",
 			"clothingSets/dark_siren",
 			PresetColour.CLOTHING_PURPLE_DARK,
@@ -8646,8 +8646,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_dark_siren").isCharacterWearingCompleteSet(target);
 		}
 	};
-	
-	public static AbstractStatusEffect SET_LYSSIETH_GUARD = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_LYSSIETH_GUARD = new AbstractStatusEffect(70,
 			"Lyssieth's Guard",
 			"clothingSets/lyssieth_guard",
 			PresetColour.CLOTHING_OLIVE,
@@ -8670,8 +8670,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_lyssieth_guard").isCharacterWearingCompleteSet(target);
 		}
 	};
-	
-	public static AbstractStatusEffect SET_BDSM = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_BDSM = new AbstractStatusEffect(70,
 			"Bound Bitch",
 			"clothingSets/bdsm",
 			PresetColour.CLOTHING_BLACK,
@@ -8708,8 +8708,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_bdsm").isCharacterWearingCompleteSet(target);
 		}
 	};
-	
-	public static AbstractStatusEffect SET_CATTLE = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_CATTLE = new AbstractStatusEffect(70,
 			"Cattle",
 			"clothingSets/cattle",
 			PresetColour.BASE_TAN,
@@ -8739,8 +8739,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_cattle").isCharacterWearingCompleteSet(target);
 		}
 	};
-	
-	public static AbstractStatusEffect SET_SNOWFLAKE = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_SNOWFLAKE = new AbstractStatusEffect(70,
 			"Glacial",
 			"clothingSets/snowflake",
 			PresetColour.BASE_BLUE_LIGHT,
@@ -8765,8 +8765,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_snowflake").isCharacterWearingCompleteSet(target);
 		}
 	};
-		
-	public static AbstractStatusEffect SET_SUN = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_SUN = new AbstractStatusEffect(70,
 			"Radiant",
 			"clothingSets/sun",
 			PresetColour.CLOTHING_COPPER,
@@ -8793,8 +8793,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_sun").isCharacterWearingCompleteSet(target);
 		}
 	};
-	
-	public static AbstractStatusEffect SET_GEISHA = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_GEISHA = new AbstractStatusEffect(70,
 			"Geisha",
 			"clothingSets/geisha",
 			PresetColour.BASE_ROSE,
@@ -8818,8 +8818,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_geisha").isCharacterWearingCompleteSet(target);
 		}
 	};
-	
-	public static AbstractStatusEffect SET_RONIN = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_RONIN = new AbstractStatusEffect(70,
 			"Ronin",
 			"clothingSets/ronin",
 			PresetColour.BASE_ROSE,
@@ -8851,8 +8851,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_ronin").isCharacterWearingCompleteSet(target);
 		}
 	};
-	
-	public static AbstractStatusEffect SET_DAISHO = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_DAISHO = new AbstractStatusEffect(70,
 			"Daisho",
 			"clothingSets/daisho",
 			PresetColour.BASE_ROSE,
@@ -8878,8 +8878,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_daisho").isCharacterWearingCompleteSet(target);
 		}
 	};
-	
-	public static AbstractStatusEffect SET_JOLNIR = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_JOLNIR = new AbstractStatusEffect(70,
             "Йолнир",
 			"clothingSets/jolnir",
 			PresetColour.BASE_BLACK,
@@ -8911,8 +8911,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_jolnir").isCharacterWearingCompleteSet(target);
 		}
 	};
-	
-	public static AbstractStatusEffect SET_KITTY = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_KITTY = new AbstractStatusEffect(70,
 			"Playful Kitty",
 			"clothingSets/kitty",
 			PresetColour.CLOTHING_PINK_LIGHT,
@@ -8937,8 +8937,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_kitty").isCharacterWearingCompleteSet(target);
 		}
 	};
-	
-	public static AbstractStatusEffect SET_STURDY_STEED = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect SET_STURDY_STEED = new AbstractStatusEffect(70,
 			"All Tacked Up",
 			"clothingSets/sturdy_steed",
 			PresetColour.CLOTHING_STEEL,
@@ -8964,8 +8964,8 @@ public class StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_sturdy_steed").isCharacterWearingCompleteSet(target);
 		}
 	};
-	
-	public static AbstractStatusEffect CLOTHING_EFFECT = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect CLOTHING_EFFECT = new AbstractStatusEffect(70,
 			"clothing effects",
 			"combatHidden",
 			PresetColour.TRANSFORMATION_GENERIC,
@@ -8985,8 +8985,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect POTION_EFFECTS = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect POTION_EFFECTS = new AbstractStatusEffect(80,
 			"potion effects",
 			"potionEffects",
 			PresetColour.GENERIC_ARCANE,
@@ -9033,8 +9033,8 @@ public class StatusEffect {
 			return "";
 		}
 	};
-	
-	public static AbstractStatusEffect HAPPINESS = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect HAPPINESS = new AbstractStatusEffect(70,
 			"happiness",
 			"happinessFox",
 			PresetColour.CLOTHING_SILVER,
@@ -9056,7 +9056,7 @@ public class StatusEffect {
 
 	// COMBAT EFFECTS:
 
-	public static AbstractStatusEffect SPECIAL_SILENCE_TRANCE = new AbstractStatusEffect(70,
+	public static final AbstractStatusEffect SPECIAL_SILENCE_TRANCE = new AbstractStatusEffect(70,
 			"Silence's Trance",
 			"glowingEyes",
 			PresetColour.GENERIC_ARCANE,
@@ -9082,7 +9082,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect SPECIAL_SHADOW_BESERK = new AbstractStatusEffect(70,
+	public static final AbstractStatusEffect SPECIAL_SHADOW_BESERK = new AbstractStatusEffect(70,
 			"Shadow's Rage",
 			"glowingEyes",
 			PresetColour.BASE_CRIMSON,
@@ -9108,7 +9108,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect SPECIAL_AMERICAN_FREEDOM = new AbstractStatusEffect(70,
+	public static final AbstractStatusEffect SPECIAL_AMERICAN_FREEDOM = new AbstractStatusEffect(70,
 			"Blinded by Freedom",
 			"american_freedom",
 			PresetColour.BASE_RED,
@@ -9135,8 +9135,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect COMBAT_HIDDEN = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect COMBAT_HIDDEN = new AbstractStatusEffect(70,
 			"hidden",
 			"combatHidden",
 			PresetColour.GENERIC_BAD,
@@ -9152,8 +9152,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect DESPERATE_FOR_SEX = new AbstractStatusEffect(70,
+
+	public static final AbstractStatusEffect DESPERATE_FOR_SEX = new AbstractStatusEffect(70,
 			"desperate for sex",
 			"desperateForSex",
 			PresetColour.ATTRIBUTE_HEALTH,
@@ -9185,8 +9185,8 @@ public class StatusEffect {
 	};
 
 	// From spells or combat moves (still in combat):
-	
-	public static AbstractStatusEffect ARCANE_WEAKNESS = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ARCANE_WEAKNESS = new AbstractStatusEffect(10,
 			"arcane weakness",
 			"negativeCombatEffect",
 			PresetColour.GENERIC_ARCANE,
@@ -9206,8 +9206,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect DAZED = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect DAZED = new AbstractStatusEffect(10,
 			"dazed",
 			"dazed",
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -9224,8 +9224,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect CRIPPLE = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect CRIPPLE = new AbstractStatusEffect(10,
 			"crippled",
 			"negativeCombatEffect",
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -9241,8 +9241,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect VULNERABLE = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect VULNERABLE = new AbstractStatusEffect(10,
 			"vulnerable",
 			"negativeCombatEffect",
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -9261,7 +9261,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect POISONED = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect POISONED = new AbstractStatusEffect(10,
 			"poisoned",
 			"combat_poisoned",
 			PresetColour.ATTRIBUTE_HEALTH,
@@ -9284,7 +9284,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect POISONED_LUST = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect POISONED_LUST = new AbstractStatusEffect(10,
 			"lust-poisoned",
 			"combat_poisoned",
 			PresetColour.DAMAGE_TYPE_LUST,
@@ -9311,7 +9311,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect INKY_ATTACK = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect INKY_ATTACK = new AbstractStatusEffect(10,
 			"Inky's lover",
 			"inky_summon",
 			PresetColour.DAMAGE_TYPE_LUST,
@@ -9336,8 +9336,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect WITCH_SEAL = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect WITCH_SEAL = new AbstractStatusEffect(10,
 			"Witch's Seal",
 			"combat_witch_seal",
 			PresetColour.GENERIC_ARCANE,
@@ -9360,8 +9360,8 @@ public class StatusEffect {
 					ItemTag.PREVENTS_COMBAT_ESCAPE);
 		}
 	};
-	
-	public static AbstractStatusEffect WITCH_CHARM = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect WITCH_CHARM = new AbstractStatusEffect(10,
 			"Bewitching Charm",
 			"combat_witch_charm",
 			PresetColour.GENERIC_SEX,
@@ -9405,7 +9405,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect ROPE_BOUND_SEX = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect ROPE_BOUND_SEX = new AbstractStatusEffect(10,
 			"Bound in rope",
 			"immobilised_rope",
 			PresetColour.GENERIC_BAD,
@@ -9433,7 +9433,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect CHAINS_BOUND_SEX = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect CHAINS_BOUND_SEX = new AbstractStatusEffect(10,
 			"Bound in chains",
 			"immobilised_chains",
 			PresetColour.GENERIC_BAD,
@@ -9461,7 +9461,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect STOCKS_BOUND_SEX = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect STOCKS_BOUND_SEX = new AbstractStatusEffect(10,
 			"Locked in stocks",
 			"immobilised_stocks",
 			PresetColour.CLOTHING_DESATURATED_BROWN,
@@ -9503,8 +9503,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect WEBBED_1 = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect WEBBED_1 = new AbstractStatusEffect(10,
 			"Webbed",
 			"restrain_webbed_1",
 			PresetColour.GENERIC_BAD,
@@ -9524,7 +9524,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect WEBBED_2 = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect WEBBED_2 = new AbstractStatusEffect(10,
 			"Seriously webbed",
 			"restrain_webbed_2",
 			PresetColour.GENERIC_BAD,
@@ -9551,7 +9551,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect WEBBED_3 = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect WEBBED_3 = new AbstractStatusEffect(10,
 			"Cocooned",
 			"restrain_webbed_3",
 			PresetColour.GENERIC_BAD,
@@ -9579,7 +9579,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect WEBBED_SEX = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect WEBBED_SEX = new AbstractStatusEffect(10,
 			"Cocooned",
 			"immobilised_cocoon",
 			PresetColour.GENERIC_BAD,
@@ -9607,7 +9607,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect WITCH_SEAL_SEX = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect WITCH_SEAL_SEX = new AbstractStatusEffect(10,
 			"Witch's Seal",
 			"immobilised_seal",
 			PresetColour.GENERIC_ARCANE,
@@ -9635,7 +9635,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect TENTACLE_RESTRAIN_1 = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect TENTACLE_RESTRAIN_1 = new AbstractStatusEffect(10,
 			"Tentacle-grabbed",
 			"restrain_tentacles_1",
 			PresetColour.GENERIC_BAD,
@@ -9657,7 +9657,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect TENTACLE_RESTRAIN_2 = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect TENTACLE_RESTRAIN_2 = new AbstractStatusEffect(10,
 			"Tentacle-embraced",
 			"restrain_tentacles_2",
 			PresetColour.GENERIC_BAD,
@@ -9686,7 +9686,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect TENTACLE_RESTRAIN_3 = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect TENTACLE_RESTRAIN_3 = new AbstractStatusEffect(10,
 			"Tentacle-constricted",
 			"restrain_tentacles_3",
 			PresetColour.GENERIC_BAD,
@@ -9716,7 +9716,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect TENTACLE_RESTRICTION_SEX = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect TENTACLE_RESTRICTION_SEX = new AbstractStatusEffect(10,
 			"Tentacle-bound",
 			"immobilised_tentacles",
 			PresetColour.getColourFromId("NoStepOnSnek_octopus"),
@@ -9748,7 +9748,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect TAIL_RESTRAIN_1 = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect TAIL_RESTRAIN_1 = new AbstractStatusEffect(10,
 			"Tail-grabbed",
 			"restrain_tail_1",
 			PresetColour.GENERIC_BAD,
@@ -9770,7 +9770,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect TAIL_RESTRAIN_2 = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect TAIL_RESTRAIN_2 = new AbstractStatusEffect(10,
 			"Tail-embraced",
 			"restrain_tail_2",
 			PresetColour.GENERIC_BAD,
@@ -9799,7 +9799,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect TAIL_RESTRAIN_3 = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect TAIL_RESTRAIN_3 = new AbstractStatusEffect(10,
 			"Tail-constricted",
 			"restrain_tail_3",
 			PresetColour.GENERIC_BAD,
@@ -9828,8 +9828,8 @@ public class StatusEffect {
 					ItemTag.PREVENTS_COMBAT_ESCAPE);
 		}
 	};
-	
-	public static AbstractStatusEffect TAIL_CONSTRICTION_SEX = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect TAIL_CONSTRICTION_SEX = new AbstractStatusEffect(10,
 			"Constricted",
 			"immobilised_tail",
 			PresetColour.BASE_GREEN_DARK,
@@ -9860,8 +9860,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect COMMAND_IMMOBILE_SEX = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect COMMAND_IMMOBILE_SEX = new AbstractStatusEffect(10,
 			"Immobile",
 			"immobilised_command",
 			PresetColour.BASE_WHITE,
@@ -9894,8 +9894,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect SLEEP_SEX = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect SLEEP_SEX = new AbstractStatusEffect(10,
 			"Asleep",
 			"immobilised_sleep",
 			PresetColour.SLEEP_HEAVY,
@@ -9924,8 +9924,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect BANEFUL_FISSURE = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect BANEFUL_FISSURE = new AbstractStatusEffect(10,
 			"Fissure's Fumes",
 			null,
 			PresetColour.DAMAGE_TYPE_POISON,
@@ -9953,7 +9953,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect FIRE_MANA_BURN = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect FIRE_MANA_BURN = new AbstractStatusEffect(10,
 			"Aura Burn",
 			"melee_fire",
 			PresetColour.DAMAGE_TYPE_FIRE,
@@ -9975,8 +9975,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect LINGERING_FLAMES = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect LINGERING_FLAMES = new AbstractStatusEffect(10,
 			"Lingering Flames",
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
@@ -10007,8 +10007,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect FLASH = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect FLASH = new AbstractStatusEffect(10,
 			"Blinded",
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
@@ -10030,7 +10030,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect FLASH_1 = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect FLASH_1 = new AbstractStatusEffect(10,
 			"Blinded (Secondary Sparks)",
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
@@ -10051,7 +10051,7 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	public static AbstractStatusEffect CLOAK_OF_FLAMES = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect CLOAK_OF_FLAMES = new AbstractStatusEffect(10,
 			"Cloak of Flames",
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
@@ -10073,8 +10073,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect CLOAK_OF_FLAMES_1 = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect CLOAK_OF_FLAMES_1 = new AbstractStatusEffect(10,
 			"Cloak of Flames (Incendiary)",
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
@@ -10097,8 +10097,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect CLOAK_OF_FLAMES_2 = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect CLOAK_OF_FLAMES_2 = new AbstractStatusEffect(10,
 			"Cloak of Flames (Inferno)",
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
@@ -10122,8 +10122,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect CLOAK_OF_FLAMES_3 = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect CLOAK_OF_FLAMES_3 = new AbstractStatusEffect(10,
 			"Cloak of Flames (Ring of Fire)",
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
@@ -10149,8 +10149,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_FIRE_WILDFIRE = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_FIRE_WILDFIRE = new AbstractStatusEffect(10,
 			"Wildfire",
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
@@ -10181,8 +10181,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_FIRE_BURNING_DESIRE = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_FIRE_BURNING_DESIRE = new AbstractStatusEffect(10,
 			"Burning Desire",
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
@@ -10217,8 +10217,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_FIRE_SERVANT_OF_FIRE = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_FIRE_SERVANT_OF_FIRE = new AbstractStatusEffect(10,
 			"Servant of Fire",
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
@@ -10241,8 +10241,8 @@ public class StatusEffect {
 					&& target.getElemental().getCurrentSchool()==SpellSchool.FIRE;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_FIRE_SERVANT_OF_FIRE_ELEMENTAL_BUFF = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_FIRE_SERVANT_OF_FIRE_ELEMENTAL_BUFF = new AbstractStatusEffect(10,
 			"Energy Siphon",
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
@@ -10265,8 +10265,8 @@ public class StatusEffect {
 					&& ((Elemental)target).getCurrentSchool()==SpellSchool.FIRE;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_FIRE_BINDING_OF_FIRE = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_FIRE_BINDING_OF_FIRE = new AbstractStatusEffect(10,
 			"Binding of Fire",
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
@@ -10290,8 +10290,8 @@ public class StatusEffect {
 					&& target.getElemental().getCurrentSchool()==SpellSchool.FIRE;
 		}
 	};
-	
-	public static AbstractStatusEffect FREEZING_FOG = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect FREEZING_FOG = new AbstractStatusEffect(10,
 			"Freezing Fog",
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
@@ -10312,8 +10312,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect FROZEN = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect FROZEN = new AbstractStatusEffect(10,
 			"Frozen",
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
@@ -10333,8 +10333,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect RAIN_CLOUD = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect RAIN_CLOUD = new AbstractStatusEffect(10,
 			"Rain Cloud",
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
@@ -10356,7 +10356,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect RAIN_CLOUD_DEEP_CHILL = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect RAIN_CLOUD_DEEP_CHILL = new AbstractStatusEffect(10,
 			"Rain Cloud (Deep Chill)",
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
@@ -10379,7 +10379,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect RAIN_CLOUD_DOWNPOUR = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect RAIN_CLOUD_DOWNPOUR = new AbstractStatusEffect(10,
 			"Rain Cloud (Downpour)",
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
@@ -10404,7 +10404,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect RAIN_CLOUD_DOWNPOUR_FOR_CLOUDBURST = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect RAIN_CLOUD_DOWNPOUR_FOR_CLOUDBURST = new AbstractStatusEffect(10,
 			"Rain Cloud (Downpour)",
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
@@ -10428,8 +10428,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect RAIN_CLOUD_CLOUDBURST = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect RAIN_CLOUD_CLOUDBURST = new AbstractStatusEffect(10,
 			"Rain Cloud (Cloudburst)",
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
@@ -10453,8 +10453,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_WATER_CRASHING_WAVES = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_WATER_CRASHING_WAVES = new AbstractStatusEffect(10,
 			"Crashing Waves",
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
@@ -10486,8 +10486,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_WATER_CALM_WATERS = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_WATER_CALM_WATERS = new AbstractStatusEffect(10,
 			"Calm Waters",
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
@@ -10522,8 +10522,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_WATER_SERVANT_OF_WATER = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_WATER_SERVANT_OF_WATER = new AbstractStatusEffect(10,
 			"Servant of Water",
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
@@ -10546,8 +10546,8 @@ public class StatusEffect {
 					&& target.getElemental().getCurrentSchool()==SpellSchool.WATER;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_WATER_SERVANT_OF_WATER_ELEMENTAL_BUFF = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_WATER_SERVANT_OF_WATER_ELEMENTAL_BUFF = new AbstractStatusEffect(10,
 			"Energy Siphon",
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
@@ -10570,8 +10570,8 @@ public class StatusEffect {
 					&& ((Elemental)target).getCurrentSchool()==SpellSchool.WATER;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_WATER_BINDING_OF_WATER = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_WATER_BINDING_OF_WATER = new AbstractStatusEffect(10,
 			"Binding of Water",
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
@@ -10595,8 +10595,8 @@ public class StatusEffect {
 					&& target.getElemental().getCurrentSchool()==SpellSchool.WATER;
 		}
 	};
-	
-	public static AbstractStatusEffect POISON_VAPOURS = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect POISON_VAPOURS = new AbstractStatusEffect(10,
 			"Poison Vapours",
 			null,
 			PresetColour.DAMAGE_TYPE_POISON,
@@ -10623,7 +10623,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect POISON_VAPOURS_CHOKING_HAZE = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect POISON_VAPOURS_CHOKING_HAZE = new AbstractStatusEffect(10,
 			"Poison Vapours (Choking Haze)",
 			null,
 			PresetColour.DAMAGE_TYPE_POISON,
@@ -10650,7 +10650,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect POISON_VAPOURS_ARCANE_SICKNESS = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect POISON_VAPOURS_ARCANE_SICKNESS = new AbstractStatusEffect(10,
 			"Poison Vapours (Arcane Sickness)",
 			null,
 			PresetColour.DAMAGE_TYPE_POISON,
@@ -10683,7 +10683,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect POISON_VAPOURS_WEAKENING_CLOUD = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect POISON_VAPOURS_WEAKENING_CLOUD = new AbstractStatusEffect(10,
 			"Poison Vapours (Weakening Cloud)",
 			null,
 			PresetColour.DAMAGE_TYPE_POISON,
@@ -10717,8 +10717,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect VACUUM = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect VACUUM = new AbstractStatusEffect(10,
 			"Vacuum",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -10739,7 +10739,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect VACUUM_SECONDARY_VOIDS = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect VACUUM_SECONDARY_VOIDS = new AbstractStatusEffect(10,
 			"Vacuum (Secondary Voids)",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -10763,7 +10763,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect VACUUM_SUCTION = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect VACUUM_SUCTION = new AbstractStatusEffect(10,
 			"Vacuum (Suction)",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -10809,7 +10809,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect VACUUM_TOTAL_VOID = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect VACUUM_TOTAL_VOID = new AbstractStatusEffect(10,
 			"Vacuum (Total Void)",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -10854,8 +10854,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect PROTECTIVE_GUSTS = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect PROTECTIVE_GUSTS = new AbstractStatusEffect(10,
 			"Protective Gusts",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -10878,7 +10878,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect PROTECTIVE_GUSTS_GUIDING_WIND = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect PROTECTIVE_GUSTS_GUIDING_WIND = new AbstractStatusEffect(10,
 			"Protective Gusts (Guiding Wind)",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -10903,7 +10903,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect PROTECTIVE_GUSTS_FOCUSED_BLAST = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect PROTECTIVE_GUSTS_FOCUSED_BLAST = new AbstractStatusEffect(10,
 			"Protective Gusts (Focused Blast)",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -10928,8 +10928,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_AIR_WHIRLWIND = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_AIR_WHIRLWIND = new AbstractStatusEffect(10,
 			"Whirlwind",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -10965,8 +10965,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_AIR_VITALISING_SCENTS = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_AIR_VITALISING_SCENTS = new AbstractStatusEffect(10,
 			"Vitalising Scents",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -10999,8 +10999,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_AIR_SERVANT_OF_AIR = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_AIR_SERVANT_OF_AIR = new AbstractStatusEffect(10,
 			"Servant of Air",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -11023,8 +11023,8 @@ public class StatusEffect {
 					&& target.getElemental().getCurrentSchool()==SpellSchool.AIR;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_AIR_SERVANT_OF_AIR_ELEMENTAL_BUFF = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_AIR_SERVANT_OF_AIR_ELEMENTAL_BUFF = new AbstractStatusEffect(10,
 			"Energy Siphon",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -11047,8 +11047,8 @@ public class StatusEffect {
 					&& ((Elemental)target).getCurrentSchool()==SpellSchool.AIR;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_AIR_BINDING_OF_AIR = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_AIR_BINDING_OF_AIR = new AbstractStatusEffect(10,
 			"Binding of Air",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -11072,8 +11072,8 @@ public class StatusEffect {
 					&& target.getElemental().getCurrentSchool()==SpellSchool.AIR;
 		}
 	};
-	
-	public static AbstractStatusEffect SLAM_GROUND_SHAKE = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect SLAM_GROUND_SHAKE = new AbstractStatusEffect(10,
 			"Ground Shake",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -11095,7 +11095,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect SLAM_AFTER_SHOCK = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect SLAM_AFTER_SHOCK = new AbstractStatusEffect(10,
 			"Ground Shake (After Shock)",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -11123,8 +11123,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect TELEKENETIC_SHOWER = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect TELEKENETIC_SHOWER = new AbstractStatusEffect(10,
 			"Telekinetic Shower",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -11151,8 +11151,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect TELEKENETIC_SHOWER_PRECISION_STRIKES = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect TELEKENETIC_SHOWER_PRECISION_STRIKES = new AbstractStatusEffect(10,
 			"Telekinetic Shower (Precision Strikes)",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -11179,8 +11179,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect TELEKENETIC_SHOWER_UNSEEN_FORCE = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect TELEKENETIC_SHOWER_UNSEEN_FORCE = new AbstractStatusEffect(10,
 			"Telekinetic Shower (Unseen Force)",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -11207,8 +11207,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect STONE_SHELL = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect STONE_SHELL = new AbstractStatusEffect(10,
 			"Stone Shell",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -11230,7 +11230,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect STONE_SHELL_SHIFTING_SANDS = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect STONE_SHELL_SHIFTING_SANDS = new AbstractStatusEffect(10,
 			"Stone Shell (Shifting Sands)",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -11253,8 +11253,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect STONE_SHELL_HARDENED_CARAPACE = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect STONE_SHELL_HARDENED_CARAPACE = new AbstractStatusEffect(10,
 			"Stone Shell (Hardened Carapace)",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -11277,8 +11277,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect STONE_SHELL_EXPLOSIVE_FINISH = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect STONE_SHELL_EXPLOSIVE_FINISH = new AbstractStatusEffect(10,
 			"Stone Shell (Explosive Finish)",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -11317,8 +11317,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_EARTH_ROLLING_STONE = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_EARTH_ROLLING_STONE = new AbstractStatusEffect(10,
 			"Rolling Stone",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -11351,8 +11351,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_EARTH_HARDENING = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_EARTH_HARDENING = new AbstractStatusEffect(10,
 			"Hardening",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -11384,8 +11384,8 @@ public class StatusEffect {
 			return false;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_EARTH_SERVANT_OF_EARTH = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_EARTH_SERVANT_OF_EARTH = new AbstractStatusEffect(10,
 			"Servant of Earth",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -11408,8 +11408,8 @@ public class StatusEffect {
 					&& target.getElemental().getCurrentSchool()==SpellSchool.EARTH;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_EARTH_SERVANT_OF_EARTH_ELEMENTAL_BUFF = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_EARTH_SERVANT_OF_EARTH_ELEMENTAL_BUFF = new AbstractStatusEffect(10,
 			"Energy Siphon",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -11432,8 +11432,8 @@ public class StatusEffect {
 					&& ((Elemental)target).getCurrentSchool()==SpellSchool.EARTH;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_EARTH_BINDING_OF_EARTH = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_EARTH_BINDING_OF_EARTH = new AbstractStatusEffect(10,
 			"Binding of Earth",
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
@@ -11457,9 +11457,9 @@ public class StatusEffect {
 					&& target.getElemental().getCurrentSchool()==SpellSchool.EARTH;
 		}
 	};
-	
 
-	public static AbstractStatusEffect ARCANE_AROUSAL_LUSTFUL_DISTRACTION = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ARCANE_AROUSAL_LUSTFUL_DISTRACTION = new AbstractStatusEffect(10,
 			"Lustful Distraction",
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
@@ -11480,8 +11480,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect ARCANE_AROUSAL_DIRTY_PROMISES = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ARCANE_AROUSAL_DIRTY_PROMISES = new AbstractStatusEffect(10,
 			"Lustful Distraction (Dirty Promises)",
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
@@ -11504,8 +11504,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect TELEPATHIC_COMMUNICATION = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect TELEPATHIC_COMMUNICATION = new AbstractStatusEffect(10,
 			"Telepathic Communication",
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
@@ -11526,8 +11526,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect TELEPATHIC_COMMUNICATION_PROJECTED_TOUCH = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect TELEPATHIC_COMMUNICATION_PROJECTED_TOUCH = new AbstractStatusEffect(10,
 			"Projected Touch",
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
@@ -11549,8 +11549,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect TELEPATHIC_COMMUNICATION_POWER_OF_SUGGESTION = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect TELEPATHIC_COMMUNICATION_POWER_OF_SUGGESTION = new AbstractStatusEffect(10,
 			"Power of Suggestion",
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
@@ -11572,8 +11572,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect TELEPATHIC_COMMUNICATION_POWER_OF_SUGGESTION_TARGETED = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect TELEPATHIC_COMMUNICATION_POWER_OF_SUGGESTION_TARGETED = new AbstractStatusEffect(10,
 			"Power of Suggestion",
 			"telepathic_communication_power_of_suggestion_targeted",
 			PresetColour.DAMAGE_TYPE_LUST,
@@ -11590,9 +11590,9 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	
-	public static AbstractStatusEffect ARCANE_CLOUD = new AbstractStatusEffect(10,
+
+
+	public static final AbstractStatusEffect ARCANE_CLOUD = new AbstractStatusEffect(10,
 			"Arcane Cloud",
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
@@ -11614,7 +11614,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect ARCANE_CLOUD_ARCANE_LIGHTNING = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect ARCANE_CLOUD_ARCANE_LIGHTNING = new AbstractStatusEffect(10,
 			"Arcane Cloud (Arcane Lightning)",
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
@@ -11642,7 +11642,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect ARCANE_CLOUD_ARCANE_THUNDER = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect ARCANE_CLOUD_ARCANE_THUNDER = new AbstractStatusEffect(10,
 			"Arcane Cloud (Arcane Thunder)",
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
@@ -11669,8 +11669,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect ARCANE_CLOUD_LOCALISED_STORM = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ARCANE_CLOUD_LOCALISED_STORM = new AbstractStatusEffect(10,
 			"Arcane Cloud (Localised Storm)",
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
@@ -11707,8 +11707,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_ARCANE_LEWD_ENCOURAGEMENTS = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_ARCANE_LEWD_ENCOURAGEMENTS = new AbstractStatusEffect(10,
 			"Lewd Encouragements",
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
@@ -11741,7 +11741,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect ELEMENTAL_ARCANE_CARESSING_TOUCH = new AbstractStatusEffect(10,
+	public static final AbstractStatusEffect ELEMENTAL_ARCANE_CARESSING_TOUCH = new AbstractStatusEffect(10,
 			"Caressing Touch",
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
@@ -11777,8 +11777,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_ARCANE_SERVANT_OF_ARCANE = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_ARCANE_SERVANT_OF_ARCANE = new AbstractStatusEffect(10,
 			"Servant of Arcane",
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
@@ -11801,8 +11801,8 @@ public class StatusEffect {
 					&& target.getElemental().getCurrentSchool()==SpellSchool.ARCANE;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_ARCANE_SERVANT_OF_ARCANE_ELEMENTAL_BUFF = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_ARCANE_SERVANT_OF_ARCANE_ELEMENTAL_BUFF = new AbstractStatusEffect(10,
 			"Energy Siphon",
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
@@ -11825,8 +11825,8 @@ public class StatusEffect {
 					&& ((Elemental)target).getCurrentSchool()==SpellSchool.ARCANE;
 		}
 	};
-	
-	public static AbstractStatusEffect ELEMENTAL_ARCANE_BINDING_OF_ARCANE = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ELEMENTAL_ARCANE_BINDING_OF_ARCANE = new AbstractStatusEffect(10,
 			"Binding of Arcane",
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
@@ -11850,8 +11850,8 @@ public class StatusEffect {
 					&& target.getElemental().getCurrentSchool()==SpellSchool.ARCANE;
 		}
 	};
-	
-	public static AbstractStatusEffect ARCANE_DUALITY_POSITIVE = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ARCANE_DUALITY_POSITIVE = new AbstractStatusEffect(10,
 			"Arcane Duality (Defence)",
 			"cleanse_positive",
 			PresetColour.GENERIC_ARCANE,
@@ -11872,8 +11872,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect ARCANE_DUALITY_NEGATIVE = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect ARCANE_DUALITY_NEGATIVE = new AbstractStatusEffect(10,
 			"Arcane Duality (Weakness)",
 			"cleanse_negative",
 			PresetColour.GENERIC_ARCANE,
@@ -11894,8 +11894,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect TELEPORT = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect TELEPORT = new AbstractStatusEffect(10,
 			"Teleport",
 			null,
 			PresetColour.GENERIC_ARCANE,
@@ -11916,8 +11916,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect TELEPORT_ARCANE_ARRIVAL = new AbstractStatusEffect(10,
+
+	public static final AbstractStatusEffect TELEPORT_ARCANE_ARRIVAL = new AbstractStatusEffect(10,
 			"Teleport (Arcane Arrival)",
 			null,
 			PresetColour.GENERIC_ARCANE,
@@ -11948,8 +11948,8 @@ public class StatusEffect {
 	};
 	
 	// SEX EFFECTS:
-	
-	public static AbstractStatusEffect CONDOM_WORN = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect CONDOM_WORN = new AbstractStatusEffect(80,
 			"Wearing a condom",
 			"condom",
 			PresetColour.CLOTHING_PINK_LIGHT,
@@ -11988,7 +11988,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect FLOWING_WATER = new AbstractStatusEffect(80,
+	public static final AbstractStatusEffect FLOWING_WATER = new AbstractStatusEffect(80,
 			"Flowing Water",
 			"sexEffects/flowing_water",
 			PresetColour.BASE_BLUE_LIGHT,
@@ -12016,9 +12016,9 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect DESIRES = new AbstractStatusEffect(80,
-			"Desires",
+
+	public static final AbstractStatusEffect DESIRES = new AbstractStatusEffect(80,
+			"Желания",
 			"desires",
 			PresetColour.GENERIC_ARCANE,
 			false,
@@ -12027,7 +12027,7 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter target) {
 			if(target.isPlayer()) {
-				return "Your fetishes and desires affect how much arousal you gain from performing related sex actions. Selecting an action with an associated fetish that you own will also not increase your corruption.";
+				return "Твои фетиши и желания влияют на то, насколько сильно ты возбуждаешься от выполнения связанных с ними сексуальных действий. Выбор действия, связанного с твоим фетишем, также не увеличит твою развращённость.";
 				
 //			} else if(Main.game.isInSex()) {
 //				GameCharacter targetedCharacter = Main.sex.getTargetedPartner(target);
@@ -12055,10 +12055,10 @@ public class StatusEffect {
 			} else {
 				return UtilText.parse(target,
 						(Main.game.isInNewWorld()
-								?"Due to the underlying power of your arcane aura, you can sense [npc.namePos] non-neutral preferences towards sexual actions."
-								:"Somehow, you're able to instinctively tell what [npc.namePos] non-neutral preferences towards sexual actions are.")
+								? "Благодаря скрытой силе твоей тайной ауры, ты можешь почувствовать не нейтральное отношение [npc.morphSingleNameGene([npc.namePos])] к некоторым сексуальным действиям."
+								: "Каким-то образом ты инстинктивно понимаешь, какие не нейтральные предпочтения имеет [npc.namePos] в отношении сексуальных действий.")
 						+ "<br/>"
-						+ "[style.italicsSex(You can detect what areas [npc.name] wants to use when in sex.)]");
+								+ "[style.italicsSex(Ты можешь определить, какие области [npc.name] хочет использовать во время секса.)]");
 			}
 		}
 		@Override
@@ -12125,8 +12125,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect ORGASM_COUNTER = new AbstractStatusEffect(80,
+
+	public static final AbstractStatusEffect ORGASM_COUNTER = new AbstractStatusEffect(80,
 			"Orgasms",
 			"sexEffects/orgasms",
 			PresetColour.GENERIC_ARCANE,
@@ -12259,8 +12259,8 @@ public class StatusEffect {
 			return true;
 		}
 	};
-	
-	public static AbstractStatusEffect PENIS_STATUS = new AbstractStatusEffect(95,
+
+	public static final AbstractStatusEffect PENIS_STATUS = new AbstractStatusEffect(95,
 			"Penis status",
 			null,
 			PresetColour.GENERIC_SEX,
@@ -12389,8 +12389,8 @@ public class StatusEffect {
 			return getOrificeSVGString(owner, SexAreaPenetration.PENIS, SVGImages.SVG_IMAGE_PROVIDER.getPenetrationTypePenis());
 		}
 	};
-	
-	public static AbstractStatusEffect CLIT_STATUS = new AbstractStatusEffect(95,
+
+	public static final AbstractStatusEffect CLIT_STATUS = new AbstractStatusEffect(95,
 			"Clitoris status",
 			null,
 			PresetColour.GENERIC_SEX,
@@ -12520,8 +12520,8 @@ public class StatusEffect {
 			return getOrificeSVGString(owner, SexAreaPenetration.CLIT, SVGImages.SVG_IMAGE_PROVIDER.getPenetrationTypeClit());
 		}
 	};
-	
-	public static AbstractStatusEffect ANUS_STATUS = new AbstractStatusEffect(96,
+
+	public static final AbstractStatusEffect ANUS_STATUS = new AbstractStatusEffect(96,
 			"Anus status",
 			null,
 			PresetColour.GENERIC_SEX,
@@ -12709,7 +12709,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect ASS_STATUS = new AbstractStatusEffect(96,
+	public static final AbstractStatusEffect ASS_STATUS = new AbstractStatusEffect(96,
 			"Ass status",
 			null,
 			PresetColour.GENERIC_SEX,
@@ -12868,8 +12868,8 @@ public class StatusEffect {
 			return getOrificeSVGString(owner, SexAreaOrifice.ASS, SVGImages.SVG_IMAGE_PROVIDER.getCoverableAreaAss());
 		}
 	};
-	
-	public static AbstractStatusEffect MOUTH_STATUS = new AbstractStatusEffect(99,
+
+	public static final AbstractStatusEffect MOUTH_STATUS = new AbstractStatusEffect(99,
 			"Mouth status",
 			null,
 			PresetColour.GENERIC_SEX,
@@ -13075,8 +13075,8 @@ public class StatusEffect {
 			return getOrificeSVGString(owner, SexAreaOrifice.MOUTH, SVGImages.SVG_IMAGE_PROVIDER.getCoverableAreaMouth());
 		}
 	};
-	
-	public static AbstractStatusEffect BREAST_STATUS = new AbstractStatusEffect(98,
+
+	public static final AbstractStatusEffect BREAST_STATUS = new AbstractStatusEffect(98,
 			"Breast status",
 			null,
 			PresetColour.GENERIC_SEX,
@@ -13243,8 +13243,8 @@ public class StatusEffect {
 			return getOrificeSVGString(owner, SexAreaOrifice.BREAST, owner.hasBreasts()?SVGImages.SVG_IMAGE_PROVIDER.getCoverableAreaBreasts():SVGImages.SVG_IMAGE_PROVIDER.getCoverableAreaBreastsFlat());
 		}
 	};
-	
-	public static AbstractStatusEffect NIPPLE_STATUS = new AbstractStatusEffect(97,
+
+	public static final AbstractStatusEffect NIPPLE_STATUS = new AbstractStatusEffect(97,
 			"Nipple status",
 			null,
 			PresetColour.GENERIC_SEX,
@@ -13393,8 +13393,8 @@ public class StatusEffect {
 			return getOrificeSVGString(owner, SexAreaOrifice.NIPPLE, SVGImages.SVG_IMAGE_PROVIDER.getCoverableAreaNipple());
 		}
 	};
-	
-	public static AbstractStatusEffect BREAST_CROTCH_STATUS = new AbstractStatusEffect(98,
+
+	public static final AbstractStatusEffect BREAST_CROTCH_STATUS = new AbstractStatusEffect(98,
 			"Crotch-boob status",
 			null,
 			PresetColour.GENERIC_SEX,
@@ -13564,8 +13564,8 @@ public class StatusEffect {
 						:SVGImages.SVG_IMAGE_PROVIDER.getCoverableAreaBreastsCrotch());
 		}
 	};
-	
-	public static AbstractStatusEffect NIPPLE_CROTCH_STATUS = new AbstractStatusEffect(97,
+
+	public static final AbstractStatusEffect NIPPLE_CROTCH_STATUS = new AbstractStatusEffect(97,
 			"Nipple status",
 			null,
 			PresetColour.GENERIC_SEX,
@@ -13722,8 +13722,8 @@ public class StatusEffect {
 			return getOrificeSVGString(owner, SexAreaOrifice.NIPPLE_CROTCH, SVGImages.SVG_IMAGE_PROVIDER.getCoverableAreaNipple());
 		}
 	};
-	
-	public static AbstractStatusEffect URETHRA_PENIS_STATUS = new AbstractStatusEffect(97,
+
+	public static final AbstractStatusEffect URETHRA_PENIS_STATUS = new AbstractStatusEffect(97,
 			"Penis Urethra status",
 			null,
 			PresetColour.GENERIC_SEX,
@@ -13871,8 +13871,8 @@ public class StatusEffect {
 			return getOrificeSVGString(owner, SexAreaOrifice.URETHRA_PENIS, SVGImages.SVG_IMAGE_PROVIDER.getCoverableAreaUrethraPenis());
 		}
 	};
-	
-	public static AbstractStatusEffect URETHRA_VAGINA_STATUS = new AbstractStatusEffect(97,
+
+	public static final AbstractStatusEffect URETHRA_VAGINA_STATUS = new AbstractStatusEffect(97,
 			"Vaginal Urethra status",
 			null,
 			PresetColour.GENERIC_SEX,
@@ -14020,8 +14020,8 @@ public class StatusEffect {
 			return getOrificeSVGString(owner, SexAreaOrifice.URETHRA_VAGINA, SVGImages.SVG_IMAGE_PROVIDER.getCoverableAreaUrethraVagina());
 		}
 	};
-	
-	public static AbstractStatusEffect VAGINA_STATUS = new AbstractStatusEffect(95,
+
+	public static final AbstractStatusEffect VAGINA_STATUS = new AbstractStatusEffect(95,
 			"Pussy status",
 			null,
 			PresetColour.GENERIC_SEX,
@@ -14223,8 +14223,8 @@ public class StatusEffect {
 			return getOrificeSVGString(owner, SexAreaOrifice.VAGINA, SVGImages.SVG_IMAGE_PROVIDER.getCoverableAreaVagina());
 		}
 	};
-	
-	public static AbstractStatusEffect SPINNERET_STATUS = new AbstractStatusEffect(95,
+
+	public static final AbstractStatusEffect SPINNERET_STATUS = new AbstractStatusEffect(95,
 			"Spinneret status",
 			null,
 			PresetColour.GENERIC_SEX,
@@ -14426,8 +14426,8 @@ public class StatusEffect {
 			return getOrificeSVGString(owner, SexAreaOrifice.SPINNERET, SVGImages.SVG_IMAGE_PROVIDER.getCoverableAreaSpinneret());
 		}
 	};
-	
-	public static AbstractStatusEffect THIGH_STATUS = new AbstractStatusEffect(95,
+
+	public static final AbstractStatusEffect THIGH_STATUS = new AbstractStatusEffect(95,
 			"Thigh status",
 			null,
 			PresetColour.GENERIC_SEX,
@@ -14585,8 +14585,8 @@ public class StatusEffect {
 			return getOrificeSVGString(owner, SexAreaOrifice.THIGHS, SVGImages.SVG_IMAGE_PROVIDER.getCoverableAreaThighs());
 		}
 	};
-	
-	public static AbstractStatusEffect ARMPIT_STATUS = new AbstractStatusEffect(95,
+
+	public static final AbstractStatusEffect ARMPIT_STATUS = new AbstractStatusEffect(95,
 			"Armpit status",
 			null,
 			PresetColour.GENERIC_SEX,
@@ -14744,7 +14744,7 @@ public class StatusEffect {
 		}
 	};
 
-	public static AbstractStatusEffect HAND_STATUS = new AbstractStatusEffect(95,
+	public static final AbstractStatusEffect HAND_STATUS = new AbstractStatusEffect(95,
 			"Hand status",
 			null,
 			PresetColour.GENERIC_SEX,

@@ -423,10 +423,10 @@ public class Attribute {
 		}
 	};
 
-	public static AbstractAttribute DAMAGE_LUST = new AbstractAttribute(true, 0, -80, 100, "lust damage", "Lust damage", "swordIcon", PresetColour.GENERIC_SEX, "seduction", "repulsion", null) {
+    public static AbstractAttribute DAMAGE_LUST = new AbstractAttribute(true, 0, -80, 100, "урон похотью", "Урон похотью", "swordIcon", PresetColour.GENERIC_SEX, "seduction", "repulsion", null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return "Increases lust damage.";
+            return "Увеличение урона похотью.";
 		}
 
 		@Override
@@ -435,10 +435,10 @@ public class Attribute {
 		}
 	};
 
-	public static AbstractAttribute DAMAGE_FIRE = new AbstractAttribute(true, 0, -80, 100, "fire damage", "Fire damage", "swordIcon", PresetColour.DAMAGE_TYPE_FIRE, "inferno", "dying embers", null) {
+    public static AbstractAttribute DAMAGE_FIRE = new AbstractAttribute(true, 0, -80, 100, "урон огнём", "Урон огнём", "swordIcon", PresetColour.DAMAGE_TYPE_FIRE, "inferno", "dying embers", null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return "Increases fire damage.";
+            return "Увеличение урон огнём.";
 		}
 
 		@Override
@@ -447,10 +447,10 @@ public class Attribute {
 		}
 	};
 
-	public static AbstractAttribute DAMAGE_ICE = new AbstractAttribute(true, 0, -80, 100, "cold damage", "Cold damage", "swordIcon", PresetColour.DAMAGE_TYPE_COLD, "blizzard", "slush", null) {
+    public static AbstractAttribute DAMAGE_ICE = new AbstractAttribute(true, 0, -80, 100, "урон холодом", "Урон холодом", "swordIcon", PresetColour.DAMAGE_TYPE_COLD, "blizzard", "slush", null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return "Increases cold damage.";
+            return "Увеличение урон огнём.";
 		}
 
 		@Override
@@ -459,10 +459,10 @@ public class Attribute {
 		}
 	};
 
-	public static AbstractAttribute DAMAGE_POISON = new AbstractAttribute(true, 0, -80, 100, "poison damage", "Poison damage", "swordIcon", PresetColour.DAMAGE_TYPE_POISON, "venom", "dilution", null) {
+    public static AbstractAttribute DAMAGE_POISON = new AbstractAttribute(true, 0, -80, 100, "урон ядом", "Урон ядом", "swordIcon", PresetColour.DAMAGE_TYPE_POISON, "venom", "dilution", null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return "Increases poison damage.";
+            return "Увеличение урона ядом.";
 		}
 
 		@Override
@@ -516,7 +516,7 @@ public class Attribute {
 	public static AbstractAttribute RESISTANCE_LUST = new AbstractAttribute(false, 0, -100, 500, "защита от похоти", "Защита от похоти", "shieldIcon", PresetColour.GENERIC_SEX, "chastity", "temptation", null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return "Reduces lust damage taken.";
+            return "Уменьшение получаемого урона похотью.";
 		}
 		@Override
 		public boolean isInfiniteAtUpperLimit() {
@@ -524,7 +524,7 @@ public class Attribute {
 		}
 		@Override
 		public String getInfiniteDescription() {
-			return "[style.colourExcellent(Immune)] to [style.colourLust(lust damage)]";
+            return "[style.colourExcellent(Иммунитет)] к [style.colourLust(урону похотью)]";
 		}
 		@Override
 		public int getOrderPriority() {
@@ -535,7 +535,7 @@ public class Attribute {
 	public static AbstractAttribute RESISTANCE_FIRE = new AbstractAttribute(false, 0, -100, 500, "защита от огня", "Защита от огня", "shieldIcon", PresetColour.DAMAGE_TYPE_FIRE, "extinguishing", "flammability", null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return "Reduces fire damage taken.";
+            return "Уменьшен получаемый урон от огня.";
 		}
 		@Override
 		public boolean isInfiniteAtUpperLimit() {
@@ -543,7 +543,7 @@ public class Attribute {
 		}
 		@Override
 		public String getInfiniteDescription() {
-			return "[style.colourExcellent(Immune)] to [style.colourFire(fire damage)]";
+            return "[style.colourExcellent(Иммунитет)] к [style.colourFire(урону огнём)]";
 		}
 		@Override
 		public int getOrderPriority() {

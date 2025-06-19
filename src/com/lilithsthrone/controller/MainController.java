@@ -137,6 +137,10 @@ public class MainController implements Initializable {
     static ButtonJournalEventListener journalButtonListener = new ButtonJournalEventListener();
     static ButtonMainMenuEventListener menuButtonListener = new ButtonMainMenuEventListener();
     static ButtonZoomEventListener zoomButtonListener = new ButtonZoomEventListener();
+    static ButtonQuickSaveEventListener quickSaveButtonListener = new ButtonQuickSaveEventListener();
+    static ButtonQuickLoadEventListener quickLoadButtonListener = new ButtonQuickLoadEventListener();
+    static ButtonExportCharacterEventListener exportCharacterEventListener = new ButtonExportCharacterEventListener();
+    static ButtonMoneyOnFloorEventListener moneyOnFloorEventListener = new ButtonMoneyOnFloorEventListener();
     // Responses:
     static TooltipResponseMoveEventListener responseTooltipListener = new TooltipResponseMoveEventListener();
     static SetContentEventListener nextResponsePageListener = new SetContentEventListener().nextPage();
@@ -185,14 +189,14 @@ public class MainController implements Initializable {
         final EventListener targetEventListener;
         if (listener instanceof ClonedEventListener clonedListener) {
             targetEventListener = clonedListener.newInstance();
-            var list = EventListenerDataMap.getOrDefault(document, Collections.emptyList()).stream()
-                    .filter(eventListenerData ->
-                            Objects.equals(eventListenerData.ID, ID) && Objects.equals(eventListenerData.type, type))
+            var eventListenerData = EventListenerDataMap.getOrDefault(document, Collections.emptyList()).stream()
+                    .filter(event ->
+                            Objects.equals(event.ID, ID) && Objects.equals(event.type, type))
                     .findFirst();
-            list.ifPresent(eventListenerData -> {
+            eventListenerData.ifPresent(event -> {
                 ((EventTarget) document.getElementById(ID))
-                        .removeEventListener(eventListenerData.type, eventListenerData.listener, eventListenerData.useCapture);
-                EventListenerDataMap.get(document).remove(eventListenerData);
+                        .removeEventListener(event.type, event.listener, event.useCapture);
+                EventListenerDataMap.get(document).remove(event);
             });
         } else {
             targetEventListener = listener;
@@ -1972,15 +1976,13 @@ public class MainController implements Initializable {
         boolean quickLoadAvailable = Main.isLoadGameAvailable(Main.getQuickSaveName()) && Main.game.isInNewWorld();
         KeyCodeWithModifiers hotKey;
 
+        String id = "quickSave";
         if (documentButtonsRight.getElementById("quickSave") != null) {
-            addEventListener(documentButtonsRight, "quickSave", "click", e -> {
-                Main.quickSaveGame();
-            }, false);
-
-            addEventListener(documentButtonsRight, "quickSave", "mousemove", moveTooltipListener, false);
-            addEventListener(documentButtonsRight, "quickSave", "mouseleave", hideTooltipListener, false);
+            addEventListener(documentButtonsRight, id, "click", quickSaveButtonListener, false);
+            addEventListener(documentButtonsRight, id, "mousemove", moveTooltipListener, false);
+            addEventListener(documentButtonsRight, id, "mouseleave", hideTooltipListener, false);
             hotKey = Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.QUICKSAVE);
-            addEventListener(documentButtonsRight, "quickSave", "mouseenter", new TooltipInformationEventListener().setInformation(
+            addEventListener(documentButtonsRight, id, "mouseenter", new TooltipInformationEventListener().setInformation(
                             quickSaveAvailable
                                     ? "[style.colourGood(Быстрое сохранение" + (hotKey == null ? "" : " (" + hotKey.getFullName() + ")") + ")]"
                                     : "[style.colourBad(Быстрое сохранение" + (hotKey == null ? "" : " (" + hotKey.getFullName() + ")") + ")]",
@@ -1994,15 +1996,13 @@ public class MainController implements Initializable {
                     false);
         }
 
-        if (documentButtonsRight.getElementById("quickLoad") != null) {
-            addEventListener(documentButtonsRight, "quickLoad", "click", e -> {
-                Main.quickLoadGame();
-            }, false);
-
-            addEventListener(documentButtonsRight, "quickLoad", "mousemove", moveTooltipListener, false);
-            addEventListener(documentButtonsRight, "quickLoad", "mouseleave", hideTooltipListener, false);
+        id = "quickLoad";
+        if (documentButtonsRight.getElementById(id) != null) {
+            addEventListener(documentButtonsRight, id, "click", quickLoadButtonListener, false);
+            addEventListener(documentButtonsRight, id, "mousemove", moveTooltipListener, false);
+            addEventListener(documentButtonsRight, id, "mouseleave", hideTooltipListener, false);
             hotKey = Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.QUICKLOAD);
-            addEventListener(documentButtonsRight, "quickLoad", "mouseenter", new TooltipInformationEventListener().setInformation(
+            addEventListener(documentButtonsRight, id, "mouseenter", new TooltipInformationEventListener().setInformation(
                             quickLoadAvailable
                                     ? "[style.colourGood(Быстрая загрузка" + (hotKey == null ? "" : " (" + hotKey.getFullName() + ")") + ")]"
                                     : "[style.colourBad(Быстрая загрузка" + (hotKey == null ? "" : " (" + hotKey.getFullName() + ")") + ")]",
@@ -2016,7 +2016,7 @@ public class MainController implements Initializable {
                     false);
         }
 
-        String id = "copyContent";
+        id = "copyContent";
         if (documentButtonsRight.getElementById(id) != null) {
             addEventListener(documentButtonsRight, id, "click", copyDialogueButtonListener, false);
             addEventListener(documentButtonsRight, id, "mousemove", moveTooltipListener, false);
@@ -2045,10 +2045,7 @@ public class MainController implements Initializable {
             if (exportAvailable) {
                 GameCharacter exportCharacter = Main.game.getCurrentDialogueNode().equals(PhoneDialogue.CHARACTER_APPEARANCE) ? Main.game.getPlayer() : CharactersPresentDialogue.characterViewed;
                 String name = "<span style='color:" + exportCharacter.getFemininity().getColour().toWebHexString() + ";'>" + exportCharacter.getName(false) + "</span>";
-                addEventListener(documentButtonsRight, id, "click", e -> {
-                    Game.exportCharacter(exportCharacter);
-                    Main.game.flashMessage(PresetColour.GENERIC_EXCELLENT, "Персонаж экспортирован!");
-                }, false);
+                addEventListener(documentButtonsRight, id, "click", exportCharacterEventListener.setExportCharacter(exportCharacter), false);
                 addEventListener(documentButtonsRight, id, "mouseenter", new TooltipInformationEventListener().setInformation(
                         "Экспорт персонажа",
                         "Экспорт " + name + " в папку data/characters. Экспортированных персонажей можно импортировать на аукционе в Аллее Работорговцев.",
@@ -2550,9 +2547,7 @@ public class MainController implements Initializable {
             id = "MONEY_ON_FLOOR";
             if (documentRight.getElementById(id) != null) {
                 if (!Main.game.getCurrentDialogueNode().isInventoryDisabled() || Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.INVENTORY) {
-                    addEventListener(documentRight, id, "click", e -> {
-                        Main.mainController.openInventory();
-                    }, false);
+                    addEventListener(documentRight, id, "click", moneyOnFloorEventListener, false);
                 }
             }
 

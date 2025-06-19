@@ -3,8 +3,8 @@
 	<coreAttributes>
 		<value>350</value>
 		<determiner><![CDATA[a pair of]]></determiner>
-		<name><![CDATA[geta]]></name>
-		<namePlural pluralByDefault="true"><![CDATA[geta]]></namePlural>
+		<name><![CDATA[гэта]]></name>
+		<namePlural pluralByDefault="true"><![CDATA[гэта]]></namePlural>
 		<description><![CDATA[These sandals have a slightly elevated wooden base, and are held onto the foot by means of a cloth thong.]]></description>
 		<physicalResistance>0</physicalResistance>
 		<femininity>FEMININE</femininity>

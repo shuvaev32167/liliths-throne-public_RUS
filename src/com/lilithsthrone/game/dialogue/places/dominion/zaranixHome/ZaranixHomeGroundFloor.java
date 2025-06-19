@@ -75,7 +75,7 @@ public class ZaranixHomeGroundFloor {
 		
 		@Override
 		public String getLabel() {
-			return "Zaranix's Home";
+            return "Дом Зараникса";
 		}
 
 		@Override
@@ -193,7 +193,7 @@ public class ZaranixHomeGroundFloor {
 		}
 		@Override
 		public String getLabel() {
-			return "Zaranix's Home";
+            return "Дом Зараникса";
 		}
 		@Override
 		public String getContent() {
@@ -263,7 +263,7 @@ public class ZaranixHomeGroundFloor {
 
 		@Override
 		public String getLabel() {
-			return "Zaranix's Home";
+            return "Дом Зараникса";
 		}
 
 		@Override
@@ -294,7 +294,7 @@ public class ZaranixHomeGroundFloor {
 
 		@Override
 		public String getLabel() {
-			return "Zaranix's Home";
+            return "Дом Зараникса";
 		}
 
 		@Override
@@ -356,7 +356,7 @@ public class ZaranixHomeGroundFloor {
 	public static final DialogueNode OUTSIDE_KNOCK_ON_DOOR_ASK_FOR_ARTHUR_GOOD_DOGGY = new DialogueNode("", "", true, true) {
 		@Override
 		public String getLabel() {
-			return "Zaranix's Home";
+            return "Дом Зараникса";
 		}
 		@Override
 		public String getContent() {
@@ -380,7 +380,7 @@ public class ZaranixHomeGroundFloor {
 
 		@Override
 		public String getLabel() {
-			return "Zaranix's Home";
+            return "Дом Зараникса";
 		}
 
 		@Override
@@ -406,7 +406,7 @@ public class ZaranixHomeGroundFloor {
 
 		@Override
 		public String getLabel() {
-			return "Zaranix's Home";
+            return "Дом Зараникса";
 		}
 
 		@Override
@@ -440,7 +440,7 @@ public class ZaranixHomeGroundFloor {
 
 		@Override
 		public String getLabel() {
-			return "Zaranix's Home";
+            return "Дом Зараникса";
 		}
 
 		@Override

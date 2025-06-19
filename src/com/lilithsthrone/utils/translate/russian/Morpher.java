@@ -66,6 +66,9 @@ public class Morpher {
                     if (word.equals(",")) {
                         return word;
                     }
+                    if (word.length() == 1 || (word.length() == 2 && word.contains("ь"))) {
+                        return word;
+                    }
                     //Игнорируем слова с латиницей
                     var p = Pattern.compile("[a-zA-Z]+");
                     var m = p.matcher(word);
@@ -120,14 +123,18 @@ public class Morpher {
     }
 
     public static String morphCountableNoun(int count, String noun, Case aCase) {
-        return WEB_MORPHER.morphCountableNoun(count, noun, aCase);
+        return replaceBetweenHtmlTags(noun, string -> WEB_MORPHER.morphCountableNoun(count, string, aCase));
     }
 
     public static String morphCountableNoun(double count, String noun) {
-        return WEB_MORPHER.morphCountableNoun(count, noun, Case.NOMINATIVUS);
+        return replaceBetweenHtmlTags(noun, string -> WEB_MORPHER.morphCountableNoun(count, string, Case.NOMINATIVUS));
     }
 
     public static String morphParticipleToShortForm(String participle, ru.shuvaev.morpher.tools.enams.Gender gender, Numeration numeration) {
         return WEB_MORPHER.participleToShortForm(participle, gender, numeration);
+    }
+
+    public static String morphNoun(String world, GameCharacter owner) {
+        return morphGender(world, convertGender(owner.getGender()), Numeration.SINGLE);
     }
 }

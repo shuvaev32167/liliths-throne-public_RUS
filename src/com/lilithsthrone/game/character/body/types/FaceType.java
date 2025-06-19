@@ -26,8 +26,8 @@ public class FaceType {
 			null,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
-			"nose",
-			"noses",
+			"нос",
+			"носы",
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
             "Thankfully#IF(!npc.isPlayer())for [npc.herHim]#ENDIF, Превращение длится всего несколько мгновений, после чего у [npc.herHim] [npc.targetBasedWord(остаёшься, остаётся)] с a normal human face, [npc.materialDescriptor] [npc.faceSkin+].<br/>"

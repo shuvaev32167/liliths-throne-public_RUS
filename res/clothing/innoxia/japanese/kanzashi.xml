@@ -4,8 +4,8 @@
 	<coreAttributes>
 		<value>500</value>
 		<determiner><![CDATA[a]]></determiner>
-		<name><![CDATA[kanzashi]]></name>
-		<namePlural pluralByDefault="false"><![CDATA[kanzashi]]></namePlural>
+		<name><![CDATA[канзаси]]></name>
+		<namePlural pluralByDefault="false"><![CDATA[канзаси]]></namePlural>
 		<description><![CDATA[A traditional Japanese hair ornament, composed primarily of folded cloth flowers.]]></description>
 		<physicalResistance>0</physicalResistance>
 		<femininity>FEMININE</femininity>

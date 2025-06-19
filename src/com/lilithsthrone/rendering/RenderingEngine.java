@@ -705,17 +705,17 @@ public enum RenderingEngine {
                     "<p style='width:100%; text-align:center; padding:0; margin:0;'>"
                             + "<b style='color:" + Femininity.valueOf(charactersInventoryToRender.getFemininityValue()).getColour().toWebHexString() + ";'>"
                             + (charactersInventoryToRender.isPlayer()
-                            ? "Your</b> <b>Inventory | Page " + (pageLeft + 1) + "</b>"
-                            : (UtilText.parse(charactersInventoryToRender, "[npc.NamePos]")) + "</b> <b>Inventory | " + (buyback ? "[style.colourCurrency(Buyback)]" : "Page " + (pageRight + 1)) + "</b>")
+                            ? "Your</b> <b>Инвентарь | Страница " + (pageLeft + 1) + "</b>"
+                            : (UtilText.parse(charactersInventoryToRender, "[npc.NamePos]")) + "</b> <b>Инвентарь | " + (buyback ? "[style.colourCurrency(Buyback)]" : "Страница " + (pageRight + 1)) + "</b>")
                             + "</p>");
 
         } else {
             inventorySB.append(
                     "<p style='width:100%; text-align:center; padding:0; margin:0;'>"
                             + (InventoryDialogue.getNPCInventoryInteraction() == InventoryInteraction.CHARACTER_CREATION
-                            ? "<b style='color:" + PresetColour.BASE_TAN.toWebHexString() + ";'>Your wardrobe</b>"
-                            : "<b style='color:" + PresetColour.BASE_TAN.toWebHexString() + ";'>In this Area</b>")
-                            + "<b> | Page " + (pageRight + 1) + "</b>"
+                            ? "<b style='color:" + PresetColour.BASE_TAN.toWebHexString() + ";'>Твой гардероб</b>"
+                            : "<b style='color:" + PresetColour.BASE_TAN.toWebHexString() + ";'>В этой области</b>")
+                            + "<b> | Страница " + (pageRight + 1) + "</b>"
                             + "</p>");
         }
 

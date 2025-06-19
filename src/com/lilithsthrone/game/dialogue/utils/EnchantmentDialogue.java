@@ -253,7 +253,7 @@ public class EnchantmentDialogue {
 						|| getEnchantmentEffectBlockedReason(effect)!=null) {
 					inventorySB.append(
 							"<div class='normal-button disabled' style='width:100%; margin:auto 0;'>"
-							+ "<b>Add</b> | "
+									+ "<b>Добавить</b> | "
 							+ (ingredient instanceof Tattoo
 									?UtilText.formatAsMoneyUncoloured(EnchantingUtils.getModifierEffectCost(true, ingredient, effect)*EnchantingUtils.FLAME_COST_MODIFER, "b")
 									:UtilText.formatAsEssencesUncoloured(EnchantingUtils.getModifierEffectCost(true, ingredient, effect), "b", false))
@@ -263,7 +263,7 @@ public class EnchantmentDialogue {
 				} else {
 					inventorySB.append(
 							"<div class='normal-button' style='width:100%; margin:auto 0;'>"
-							+ "<b style='color:"+PresetColour.GENERIC_GOOD.toWebHexString()+";'>Add</b> | "
+									+ "<b style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Добавить</b> | "
 									+ (ingredient instanceof Tattoo
 											?UtilText.formatAsMoney(EnchantingUtils.getModifierEffectCost(true, ingredient, effect)*EnchantingUtils.FLAME_COST_MODIFER, "b")
 											:UtilText.formatAsEssences(EnchantingUtils.getModifierEffectCost(true, ingredient, effect), "b", false))

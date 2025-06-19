@@ -3,6 +3,9 @@ package com.lilithsthrone.controller.eventListeners;
 import com.lilithsthrone.controller.MainController;
 import com.lilithsthrone.controller.eventListeners.tooltips.ClonedEventListener;
 import com.lilithsthrone.main.Main;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.w3c.dom.events.Event;
 
 /**
@@ -13,12 +16,20 @@ import org.w3c.dom.events.Event;
  * @author Innoxia
  * Перевод не требуется
  */
-public class SetContentEventListener implements ClonedEventListener {
+@RequiredArgsConstructor
+@NoArgsConstructor(force = true)
+public class SetContentEventListener implements ClonedEventListener<SetContentEventListener> {
 	private int index;
 	private boolean nextPage = false, previousPage = false;
+	@Getter(onMethod = @__(@Override))
+	private final SetContentEventListener parent;
 
 	@Override
 	public void handleEvent(Event event) {
+		if (parent != null) {
+			parent.handleEvent(event);
+			return;
+		}
 		if (nextPage) {
 			if (Main.game.isHasNextResponsePage()) {
 				Main.game.setResponsePage(Main.game.getResponsePage() + 1);
@@ -45,6 +56,10 @@ public class SetContentEventListener implements ClonedEventListener {
 	}
 
 	public SetContentEventListener setIndex(int index) {
+		if (parent != null) {
+			parent.setIndex(index);
+			return this;
+		}
 		this.index = index;
 
 		nextPage = false;
@@ -53,6 +68,10 @@ public class SetContentEventListener implements ClonedEventListener {
 	}
 
 	public SetContentEventListener nextPage() {
+		if (parent != null) {
+			parent.nextPage();
+			return this;
+		}
 		nextPage = true;
 		previousPage = false;
 
@@ -60,23 +79,18 @@ public class SetContentEventListener implements ClonedEventListener {
 	}
 
 	public SetContentEventListener previousPage() {
+		if (parent != null) {
+			parent.previousPage();
+			return this;
+		}
 		nextPage = false;
 		previousPage = true;
 
 		return this;
 	}
 
-	public SetContentEventListener() {
-	}
-
-	public SetContentEventListener(int index, boolean nextPage, boolean previousPage) {
-		this.index = index;
-		this.nextPage = nextPage;
-		this.previousPage = previousPage;
-	}
-
 	@Override
-	public ClonedEventListener newInstance() {
-		return new SetContentEventListener(index, nextPage, previousPage);
+	public SetContentEventListener newInstance() {
+		return new SetContentEventListener(tryGetParent());
 	}
 }

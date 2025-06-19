@@ -437,7 +437,7 @@ public class LilayaHomeGeneric {
                         sb.append(UtilText.parse(npc, "<i>[npc.Name] спит между [style.time(" + npc.getSleepStartHour() + ")]-[style.time(" + npc.getSleepEndHour() + ")]</i>"));
 
                     } else {
-                        sb.append(UtilText.parse(npc, "colourMinorGood,"));
+                        sb.append(UtilText.parse(npc, "сейчас [style.colourMinorGood(здесь)],"));
                         if (npc.isAsleep()) {
                             sb.append(UtilText.parse(npc, " но [npc.sheIs] сейчас [style.colourSleep(спит)]..."));
                         } else {

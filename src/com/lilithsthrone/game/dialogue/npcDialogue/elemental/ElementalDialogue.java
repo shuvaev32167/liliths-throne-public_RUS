@@ -4,7 +4,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.effects.PerkManager;
 import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
-import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.npc.NPCFlagValue;
 import com.lilithsthrone.game.character.npc.misc.Elemental;
 import com.lilithsthrone.game.character.race.AbstractSubspecies;
@@ -403,7 +402,7 @@ public class ElementalDialogue {
 		}
 	};
 
-	public static final DialogueNode ELEMENTAL_PERKS = new DialogueNode("[el.NamePos] Perk Tree", "", true) {
+	public static final DialogueNode ELEMENTAL_PERKS = new DialogueNode("[el.NamePos] Дерево навыков", "", true) {
 		@Override
 		public String getContent() {
 			UtilText.nodeContentSB.setLength(0);

@@ -237,7 +237,7 @@ public class Wes extends NPC {
 		if(isSlave()) {
 			return "WesSlave";
 		} else {
-            return "Уэс";
+			return "Wes";
 		}
 	}
 	

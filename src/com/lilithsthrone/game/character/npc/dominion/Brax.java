@@ -291,7 +291,11 @@ public class Brax extends NPC {
 
 	@Override
 	public String getArtworkFolderName() {
-		return this.getNameIgnoresPlayerKnowledge();
+        return switch (this.getFemininity()) {
+            case MASCULINE_STRONG, MASCULINE -> "Brax";
+            case ANDROGYNOUS -> "Bree";
+            default -> "Brandi";
+        };
 	}
 	
 	@Override

@@ -7704,7 +7704,7 @@ public abstract class GameCharacter implements XMLSaving {
 		statusEffectDescriptions.putIfAbsent(seconds, new HashMap<>());
 		statusEffectDescriptions.get(seconds).putIfAbsent(statusEffect, "");
 		statusEffectDescriptions.get(seconds).put(statusEffect, statusEffectDescriptions.get(seconds).get(statusEffect)+description);
-		Main.game.addEvent(new EventLogEntry("[style.colourStatusEffect(Status effect)]", statusEffect==null?"Miscellaneous Effects":Util.capitaliseSentence(statusEffect.getName(this))), false);
+        Main.game.addEvent(new EventLogEntry("[style.colourStatusEffect(Status effect)]", statusEffect == null ? "Разные эффекты" : Util.capitaliseSentence(statusEffect.getName(this))), false);
 	}
 
 	public void removeStatusEffectDescription(AbstractStatusEffect statusEffect) {
@@ -22473,7 +22473,7 @@ public abstract class GameCharacter implements XMLSaving {
 					+countText+"<b>" + (count>1? item.getDisplayNamePlural(true): item.getDisplayName(true)) + "</b>";
 			
 		} else if(item instanceof AbstractClothing) {
-			returnString = "<b style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Clothing added to [npc.namePos] inventory:</b> "
+            returnString = "<b style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Одежда добавлена в [npc.namePos] инвентарь:</b> "
 					+countText+"<b>" + item.getDisplayName(true) + "</b>";
 			
 		} else if(item instanceof AbstractWeapon) {
@@ -25490,7 +25490,7 @@ public abstract class GameCharacter implements XMLSaving {
 					return new GenderAppearance(
 							isPlayer()
                                     ? "Из-за того, что ваши [pc.vagina] и [pc.penis] обнажены, а также из-за того, что у вас [pc.breastSize] грудь, каждый может сказать, что вы [pc.a_gender(" + colouredGender + ")] с первого взгляд."
-                                    : "Благодаря тому, что [npc.her] [npc.vaginа] и [npc.penis] обнажены, а также тому, что [npc.sheHasFull] [npc.breastSize] грудь каждый может сказать, что [npc. sheIs] [npc.a_gender(" + colouredGender + ")] с первого взгляд.",
+                                    : "Благодаря тому, что [npc.her] [npc.vagina] и [npc.penis] обнажены, а также тому, что [npc.sheHasFull] [npc.breastSize] грудь каждый может сказать, что [npc.sheIs] [npc.a_gender(" + colouredGender + ")] с первого взгляд.",
 							Gender.F_P_V_B_FUTANARI);
 						
 				} else if(visibleVagina) {
@@ -25499,14 +25499,14 @@ public abstract class GameCharacter implements XMLSaving {
 						return new GenderAppearance(
 								isPlayer()
                                         ? "[pc.MorphGenSinFem([pc.cockSize])] выпуклость между вашими ногами в сочетании с обнаженными [pc.vagina] и [pc.breastSize] грудью показывает всем, что вы [pc.a_gender(" + colouredGender + ")]."
-                                        : "[pc.MorphGenSinFem([npc.cockSize])] выпуклость [npc.cockSize] между [npc.her] ногами в сочетании с [npc.her] обнаженными [npc.vaginа] и [npc.breastSize] грудью показывает всем, что [npc.sheIs] [npc.a_gender( " + colouredGender + ")].",
+                                        : "[pc.MorphGenSinFem([npc.cockSize])] выпуклость [npc.cockSize] между [npc.her] ногами в сочетании с [npc.her] обнаженными [npc.vagina] и [npc.breastSize] грудью показывает всем, что [npc.sheIs] [npc.a_gender( " + colouredGender + ")].",
 								Gender.F_P_V_B_FUTANARI);
 						
 					} else if (isTesticleBulgeVisible()) {
 						return new GenderAppearance(
 								isPlayer()
                                         ? "[pc.MorphGenSinFem([pc.ballSize])] выпуклость твоих [pc.balls] между ног в сочетании с обнаженными [pc.vagina] и [pc.breastSize] грудью показывает всем, что вы [pc.a_gender(" + colouredGender + ")]."
-                                        : "[pc.MorphGenSinFem([npc.ballSize])] выпуклость между [npc.her] ногами в сочетании с [npc.her] обнаженными [npc.vaginа] и [npc.breastSize] грудью показывает всем, что [npc.sheIs] [npc.a_gender( " + colouredGender + ")].",
+                                        : "[pc.MorphGenSinFem([npc.ballSize])] выпуклость между [npc.her] ногами в сочетании с [npc.her] обнаженными [npc.vagina] и [npc.breastSize] грудью показывает всем, что [npc.sheIs] [npc.a_gender( " + colouredGender + ")].",
 								Gender.F_P_V_B_FUTANARI);
 					}
 					

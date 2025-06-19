@@ -413,7 +413,7 @@
 	
 	<scene id="reception_pix_workout_end">
 		<preParsingEffects><![CDATA[
-			[#pc.addStatusEffect(SE_GYM_FATIGUE, 23400)]
+
 			[#pix.incrementPerkProgress()]
 			[#flags.setFlag(FLAG_innoxia_pix_workout_pix_completed, true)]
 			[#game.appendToTextEndStringBuilder(pix.incrementAffection(pc, 5))]
@@ -785,7 +785,7 @@
 				]]></nextDialogue>
 				<effects><![CDATA[
 					[#game.appendToTextStartStringBuilder(game.parseFromFile('txt/places/dominion/shoppingArcade/pixsPlayground', 'CARDIO_WORKOUT_RUNNING'))]
-					[#pc.addStatusEffect(SE_GYM_FATIGUE, 25200)]
+
 					[#game.appendToTextEndStringBuilder(pc.incrementBodySize(-5))]
 					#IF(pix.getSexCount(pc).getTotalTimesHadSex()>0 && pix.getWorldLocation()==WORLD_TYPE_innoxia_dominion_shopping_arcade_gym)
 						[#game.appendToTextEndStringBuilder(pix.incrementAffection(pc, 5))]
@@ -815,7 +815,7 @@
 				]]></nextDialogue>
 				<effects><![CDATA[
 					[#game.appendToTextStartStringBuilder(game.parseFromFile('txt/places/dominion/shoppingArcade/pixsPlayground', 'CARDIO_WORKOUT_CYCLING'))]
-					[#pc.addStatusEffect(SE_GYM_FATIGUE, 25200)]
+
 					[#game.appendToTextEndStringBuilder(pc.incrementBodySize(-5))]
 					#IF(pix.getSexCount(pc).getTotalTimesHadSex()>0 && pix.getWorldLocation()==WORLD_TYPE_innoxia_dominion_shopping_arcade_gym)
 						[#game.appendToTextEndStringBuilder(pix.incrementAffection(pc, 5))]
@@ -845,7 +845,7 @@
 				]]></nextDialogue>
 				<effects><![CDATA[
 					[#game.appendToTextStartStringBuilder(game.parseFromFile('txt/places/dominion/shoppingArcade/pixsPlayground', 'CARDIO_WORKOUT_ROWING'))]
-					[#pc.addStatusEffect(SE_GYM_FATIGUE, 25200)]
+
 					[#game.appendToTextEndStringBuilder(pc.incrementBodySize(-5))]
 					#IF(pix.getSexCount(pc).getTotalTimesHadSex()>0 && pix.getWorldLocation()==WORLD_TYPE_innoxia_dominion_shopping_arcade_gym)
 						[#game.appendToTextEndStringBuilder(pix.incrementAffection(pc, 5))]
@@ -891,7 +891,7 @@
 				]]></nextDialogue>
 				<effects><![CDATA[
 					[#game.appendToTextStartStringBuilder(game.parseFromFile('txt/places/dominion/shoppingArcade/pixsPlayground', 'WEIGHTS_WORKOUT_WEIGHTS'))]
-					[#pc.addStatusEffect(SE_GYM_FATIGUE, 25200)]
+
 					[#game.appendToTextEndStringBuilder(pc.incrementMuscle(5))]
 					#IF(pix.getSexCount(pc).getTotalTimesHadSex()>0 && pix.getWorldLocation()==WORLD_TYPE_innoxia_dominion_shopping_arcade_gym)
 						[#game.appendToTextEndStringBuilder(pix.incrementAffection(pc, 5))]
@@ -919,7 +919,7 @@
 				]]></nextDialogue>
 				<effects><![CDATA[
 					[#game.appendToTextStartStringBuilder(game.parseFromFile('txt/places/dominion/shoppingArcade/pixsPlayground', 'WEIGHTS_WORKOUT_MACHINES'))]
-					[#pc.addStatusEffect(SE_GYM_FATIGUE, 25200)]
+
 					[#game.appendToTextEndStringBuilder(pc.incrementMuscle(5))]
 					#IF(pix.getSexCount(pc).getTotalTimesHadSex()>0 && pix.getWorldLocation()==WORLD_TYPE_innoxia_dominion_shopping_arcade_gym)
 						[#game.appendToTextEndStringBuilder(pix.incrementAffection(pc, 5))]
@@ -947,7 +947,7 @@
 				]]></nextDialogue>
 				<effects><![CDATA[
 					[#game.appendToTextStartStringBuilder(game.parseFromFile('txt/places/dominion/shoppingArcade/pixsPlayground', 'WEIGHTS_WORKOUT_BODY_WEIGHT'))]
-					[#pc.addStatusEffect(SE_GYM_FATIGUE, 25200)]
+
 					[#game.appendToTextEndStringBuilder(pc.incrementMuscle(5))]
 					#IF(pix.getSexCount(pc).getTotalTimesHadSex()>0 && pix.getWorldLocation()==WORLD_TYPE_innoxia_dominion_shopping_arcade_gym)
 						[#game.appendToTextEndStringBuilder(pix.incrementAffection(pc, 5))]
@@ -1257,7 +1257,7 @@
 	
 	<scene id="boxing_lesson">
 		<preParsingEffects><![CDATA[
-			[#pc.addStatusEffect(SE_GYM_FATIGUE, 23400)]
+
 			[#hannah.incrementPerkProgress()]
 			[#game.appendToTextEndStringBuilder(hannah.getPerkProgressString())]
 		]]></preParsingEffects>
@@ -1270,7 +1270,7 @@
 	
 	<scene id="boxing_lesson_final">
 		<preParsingEffects><![CDATA[
-			[#pc.addStatusEffect(SE_GYM_FATIGUE, 23400)]
+
 			[#hannah.incrementPerkProgress()]
 			[#game.appendToTextEndStringBuilder(hannah.getPerkProgressString())]
 			[#game.appendToTextEndStringBuilder(game.parseFromFile('txt/places/dominion/shoppingArcade/pixsPlayground', 'BOXING_PERK_PROGRESS_COMPLETE'))]

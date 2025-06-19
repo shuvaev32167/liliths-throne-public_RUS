@@ -158,7 +158,7 @@ public class Lab {
 					null));
 		} else if(isLilayaAngryAtPlayerDemonTF()) {
 			generatedResponses.add(new Response("Объятие",
-					"Из-за своей неприязни к тебе за то, что ты полноценный демон, Лилайя абсолютно не хочет, обниматься!",
+                    "Из-за своей неприязни к тебе за то, что ты [pc.genderBasedWord(полноценный демон, полноценная демоница)], Лилайя абсолютно не хочет, обниматься!",
 					null));
 		} else {
 			generatedResponses.add(new Response("Объятие", "[pc.Step] к Лилайе и крепко обними её.", LAB_LILAYA_HUG));
@@ -217,10 +217,10 @@ public class Lab {
 		if(Main.game.getPlayer().hasQuest(QuestLine.SIDE_ENCHANTMENT_DISCOVERY)) {
 			if(!Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY)) {
 				if (!Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_1_A_LILAYAS_TESTS)) {
-					generatedResponses.add(new Response("Essences & Enchantments", "You'll need to complete Lilaya's initial tests before you're able to ask her about that strange energy you absorbed.", null));
+					generatedResponses.add(new Response("Эссенции и чары", "Прежде чем задавать Лилайе вопросы о поглощённой странной энергии, необходимо пройти её начальные тесты.", null));
 					
 				} else {
-					generatedResponses.add(new Response("Essences & Enchantments", "Ask Lilaya about that strange energy you absorbed.", LILAYA_EXPLAINS_ESSENCES){
+					generatedResponses.add(new Response("Эссенции и чары", "Спросить Лилайю о той странной энергии, которую ты [pc.genderBasedWord(поглотил, поглотила)].", LILAYA_EXPLAINS_ESSENCES) {
 						@Override
 						public void effects() {
 							setEntryFlags();
@@ -229,10 +229,10 @@ public class Lab {
 				}
 				
 			} else {
-				generatedResponses.add(new Response("Extract Essences",
+				generatedResponses.add(new Response("Извлечение эссенций",
 						Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.essenceExtractionKnown)
-								?"Ask Lilaya if you can use her equipment to extract some essences."
-								:"Ask Lilaya if there's any way to extract essences you've absorbed",
+								? "Спросить Лилайю, можно ли использовать её оборудование для извлечения эссенций."
+								: "Спросить Лилайю, есть ли способ извлечь поглощённые тобой эссенции.",
 							ESSENCE_EXTRACTION){
 					@Override
 					public void effects() {
@@ -245,10 +245,10 @@ public class Lab {
 		if(Main.game.getPlayer().hasQuest(QuestLine.SIDE_SLAVERY)) {
 			if(Main.game.getPlayer().getQuest(QuestLine.SIDE_SLAVERY) == Quest.SIDE_SLAVER_NEED_RECOMMENDATION) {
 				if (!Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_1_A_LILAYAS_TESTS)) {
-					generatedResponses.add(new Response("Slaver", "You'll need to complete Lilaya's initial tests before you can ask her for a letter of recommendation.", null));
+					generatedResponses.add(new Response("Работорговец", "Прежде чем ты сможешь попросить у Лилайи рекомендательное письмо, нужно пройти первоначальные тесты.", null));
 					
 				} else {
-					generatedResponses.add(new Response("Slaver", "Ask Lilaya for a letter of recommendation in order to obtain a slaver license.", LILAYA_SLAVER_RECOMMENDATION){
+					generatedResponses.add(new Response("Работорговец", "Попросить Лилайю написать рекомендательное письмо, чтобы получить лицензию работорговца.", LILAYA_SLAVER_RECOMMENDATION) {
 						@Override
 						public void effects() {
 							setEntryFlags();
@@ -260,10 +260,10 @@ public class Lab {
 		
 		if(Main.game.getPlayer().hasQuest(QuestLine.SIDE_ACCOMMODATION) && !Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ACCOMMODATION)) {
 			if (!Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_1_A_LILAYAS_TESTS)) {
-				generatedResponses.add(new Response("Accommodation", "You'll need to complete Lilaya's initial tests before you can ask her about inviting friends home!", null));
+				generatedResponses.add(new Response("Проживание", "Прежде чем спрашивать Лилайю о приглашении друзей домой, нужно пройти её первоначальные тесты!", null));
 				
 			} else {
-				generatedResponses.add(new Response("Accommodation", "Ask Lilaya about inviting your new friend to live in one of the many spare rooms in the mansion.", LILAYA_FRIEND_ACCOMMODATION){
+				generatedResponses.add(new Response("Проживание", "Спросить Лилайю о возможности пригласить твоего нового друга жить в одной из многих свободных комнат в особняке.", LILAYA_FRIEND_ACCOMMODATION) {
 					@Override
 					public void effects() {
 						setEntryFlags();
@@ -275,10 +275,10 @@ public class Lab {
 		
 		if(Main.game.getPlayer().hasQuest(QuestLine.SIDE_DOLL_STORAGE) && !Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_DOLL_STORAGE)) {
 			if (!Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_1_A_LILAYAS_TESTS)) {
-				generatedResponses.add(new Response("Doll storage", "You'll need to complete Lilaya's initial tests before you can ask her about storing sex dolls in the mansion!", null));
+				generatedResponses.add(new Response("Шкаф для кукол", "Прежде чем спросить Лилайю о возможности хранения секс-кукол в особняке, необходимо пройти её первоначальные тесты!", null));
 				
 			} else {
-				generatedResponses.add(new Response("Doll storage", "Ask Lilaya if you can use one of the spare rooms in the mansion to store sex dolls.", LILAYA_DOLL_STORAGE){
+				generatedResponses.add(new Response("Шкаф для кукол", "Спросить Лилайю, можно ли использовать одну из свободных комнат в особняке для шкафа секс-кукол.", LILAYA_DOLL_STORAGE) {
 					@Override
 					public void effects() {
 						setEntryFlags();
@@ -292,7 +292,7 @@ public class Lab {
 		
 		if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.lilayaDateTalk)
 				&& Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.knowsDate)) {
-			generatedResponses.add(new Response("Current Date", "Ask Lilaya why the calendar in your room is three years ahead of the correct date.", LILAYA_CURRENT_DATE_TALK) {
+            generatedResponses.add(new Response("Текущая дата", "Спросите Лилайю, почему календарь в твоей комнате находится на три года впереди правильной даты.", LILAYA_CURRENT_DATE_TALK) {
 				@Override
 				public void effects() {
 					setEntryFlags();
@@ -303,10 +303,10 @@ public class Lab {
 		
 		if(Main.game.getPlayer().hasItemType(ItemType.PRESENT) && !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.givenLilayaPresent3)) {
 			if(isLilayaAngryAtPlayerDemonTF()) {
-				generatedResponses.add(new Response("Give Present", "Although you have a present in your inventory, Lilaya is not interested in receiving it, due to her resentment towards you for being a full demon, while she is not.", null));
+                generatedResponses.add(new Response("Подарить подарок", "Хотя у тебе есть подарок в инвентаре, Лилайя не заинтересована в его получении. Из-за своей обиды на тебя за то, что ты [pc.genderBasedWord(полноценный демон, полноценная демоница)], а она нет.", null));
 				
 			} else {
-				generatedResponses.add(new Response("Give Present", "Give the present in your inventory to Lilaya.", LILAYA_PRESENT) {
+				generatedResponses.add(new Response("Подарить подарок", "Подарите Лилайе предмет из своего инвентаря.", LILAYA_PRESENT) {
 					@Override
 					public void effects() {
 						setEntryFlags();
@@ -328,10 +328,10 @@ public class Lab {
 		
 		if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.givenLilayaPresent3)) {
 			if(isLilayaAngryAtPlayerDemonTF()) {
-				generatedResponses.add(new Response("Geisha Lilaya", "Lilaya is not interested in showing off her kimono, nor having sex with you, until she's a full demon as well.", null));
+                generatedResponses.add(new Response("Гейша Лилайя", "Лилая не заинтересована в том, чтобы показывать своё кимоно или заниматься с тобой сексом, пока она сама не станет полноценной демоницей.", null));
 				
 			} else {
-				generatedResponses.add(new Response("Geisha Lilaya", "Ask Lilaya if she'd like to wear the gifts you got for her.", LILAYA_GEISHA) {
+				generatedResponses.add(new Response("Гейша Лилайя", "Спопроси Лилайю, хочет ли она надеть подарки, которые ты ей [pc.genderBasedWord(купил, купила)].", LILAYA_GEISHA) {
 					@Override
 					public void effects() {
 						setEntryFlags();
@@ -444,8 +444,8 @@ public class Lab {
 		}
 		
 		if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.obtainedScientistClothing)) {
-			generatedResponses.add(new Response("Scientist outfit",
-					"Ask Lilaya if she has a spare lab coat you could have.",
+            generatedResponses.add(new Response("Нучная одежда",
+                    "Спросите Лилайю, есть ли у неё запасной лабораторный халат, который ты можешь взять.",
 					LILAYA_SCIENTIST_OUTFIT){
 				@Override
 				public void effects() {
@@ -649,17 +649,17 @@ public class Lab {
 							
 						} else {
 							if(Main.game.getNpc(Arthur.class).getLocationPlace().getPlaceType().equals(PlaceType.LILAYA_HOME_LAB)) {
-								return new Response("\"Тесты\"", "Лилая не может проводить с тобой никаких \"тестов\", пока Артур всё ещё находится в её лаборатории. Сначала найди ему подходящее помещение.", null);
+                                return new Response("«Тесты»", "Лилая не может проводить с тобой никаких «тестов», пока Артур всё ещё находится в её лаборатории. Сначала найди ему подходящее помещение.", null);
 								
 							} else if (Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.hadSexWithLilaya)) {
-								return new Response("\"Тесты\"", "Дай Лилайе знать, что ты здесь для того, чтобы она провела над тобой ещё несколько своих \"тестов\".", AUNT_HOME_LABORATORY_TESTING_MORE_SEX) {
+                                return new Response("«Тесты»", "Дай Лилайе знать, что ты здесь для того, чтобы она провела над тобой ещё несколько своих «тестов».", AUNT_HOME_LABORATORY_TESTING_MORE_SEX) {
 									@Override
 									public void effects() {
 										setEntryFlags();
 									}
 								};
 							} else {
-								return new Response("Тесты", "Скажи Лилайе, что ты хочешь, чтобы она провела на тебе еще несколько своих \"тестов\".", AUNT_HOME_LABORATORY_TESTING_REPEAT) {
+                                return new Response("Тесты", "Скажи Лилайе, что ты хочешь, чтобы она провела на тебе еще несколько своих «тестов».", AUNT_HOME_LABORATORY_TESTING_REPEAT) {
 									@Override
 									public void effects() {
 										setEntryFlags();
@@ -1312,7 +1312,7 @@ public class Lab {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Thank her", "Thank Lilaya for her information (or lack thereof), and think about asking her something else.", LAB_EXIT);
+                return new Response("Поблагодарить её", "Поблагодарить Лилайю за информацию (или её отсутствие) и подумать о том, чтобы спросить её о чём-нибудь ещё.", LAB_EXIT);
 			} else {
 				return null;
 			}
@@ -1332,7 +1332,7 @@ public class Lab {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Returning home", "Ask Lilaya if she's found a way to send you back home.", AUNT_HOME_LABORATORY_TESTING_ARTHUR){
+				return new Response("Возвращение домой", "Спроси Лилайю, нашла ли она способ отправить тебя домой.", AUNT_HOME_LABORATORY_TESTING_ARTHUR) {
 					@Override
 					public void effects() {
 						if (Main.game.getPlayer().getQuest(QuestLine.MAIN) == Quest.MAIN_1_A_LILAYAS_TESTS) {
@@ -1469,13 +1469,13 @@ public class Lab {
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
 				return new Response(
-						"'Tests'",
-						"Accept Lilaya's offer of more 'tests'. You're not sure what her intentions really are, but you're confident that you'll be able to stop her if she tries any funny business.",
+						"«Тесты»",
+						"Прими предложение Лилайи о проведении дополнительных «тестов». Тебе не совсем понятны её намерения, но ты [pc.genderBasedWord(уверен, уверена)], что сможешь остановить её, если она попытается что-то выкинуть.",
 						AUNT_HOME_LABORATORY_TESTING_HORNY_LILAYA);
 
 			} else if (index == 2) {
-				return new Response("Decline",
-						"Tell Lilaya that you're not up for this sort of thing. While she'll probably be a little disappointed, you can always come back later to take up her offer if you should change your mind.",
+				return new Response("Отказ",
+						"Скажи Лилайе, что ты не [pc.genderBasedWord(готов, готова)] к такому роду вещей. Хотя она, вероятно, будет немного разочарована, ты всегда сможешь вернуться позже, чтобы принять её предложение, если передумаешь.",
 						LAB_EXIT){
 					@Override public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/lab", "AUNT_HOME_LABORATORY_TESTING_ARTHUR_DECLINED"));
@@ -1633,7 +1633,7 @@ public class Lab {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Accommodation", "Agree with Lilaya's observation that you'll need somewhere to keep your slaves.", LILAYA_SLAVER_RECOMMENDATION_SLAVE_ACCOMMODATION) {
+				return new Response("Проживание", "Agree with Lilaya's observation that you'll need somewhere to keep your slaves.", LILAYA_SLAVER_RECOMMENDATION_SLAVE_ACCOMMODATION) {
 					@Override
 					public void effects() {
 						if (Main.game.getPlayer().getQuest(QuestLine.SIDE_SLAVERY) == Quest.SIDE_SLAVER_NEED_RECOMMENDATION) {

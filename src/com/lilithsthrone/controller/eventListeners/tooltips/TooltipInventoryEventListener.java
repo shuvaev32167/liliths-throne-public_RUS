@@ -40,6 +40,9 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.w3c.dom.events.Event;
 
 import java.util.ArrayList;
@@ -55,7 +58,9 @@ import java.util.Map.Entry;
  * @version 0.3.9
  * @author Innoxia
  */
-public class TooltipInventoryEventListener implements ClonedEventListener {
+@RequiredArgsConstructor
+@NoArgsConstructor(force = true)
+public class TooltipInventoryEventListener implements ClonedEventListener<TooltipInventoryEventListener> {
 	private GameCharacter owner;
 	private GameCharacter equippedToCharacter;
 	
@@ -91,15 +96,8 @@ public class TooltipInventoryEventListener implements ClonedEventListener {
 	private static final int LINE_HEIGHT = 17;
 	private static final int TOOLTIP_WIDTH = 400;
 
+	@Getter(onMethod = @__(@Override))
     private final TooltipInventoryEventListener parent;
-
-    private TooltipInventoryEventListener(TooltipInventoryEventListener parent) {
-        this.parent = parent;
-    }
-
-    public TooltipInventoryEventListener() {
-        parent = null;
-    }
 
 	@Override
 	public void handleEvent(Event event) {
@@ -1047,7 +1045,7 @@ public class TooltipInventoryEventListener implements ClonedEventListener {
 		if(effectsSB.length()>0) {
 			specialYIncrease += 16;
 			tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
-				tooltipSB.append(effectsSB.toString());
+				tooltipSB.append(effectsSB);
 			tooltipSB.append("</div>");
 		}
 
@@ -1322,7 +1320,7 @@ public class TooltipInventoryEventListener implements ClonedEventListener {
 		if(effectsSB.length()>0) {
 			specialYIncrease += 16;
 			tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
-				tooltipSB.append(effectsSB.toString());
+				tooltipSB.append(effectsSB);
 			tooltipSB.append("</div>");
 		}
 
@@ -1342,7 +1340,7 @@ public class TooltipInventoryEventListener implements ClonedEventListener {
 		if(extraDescriptionsSB.length()>0) {
 			specialYIncrease += 16;
 			tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
-				tooltipSB.append(extraDescriptionsSB.toString());
+				tooltipSB.append(extraDescriptionsSB);
 			tooltipSB.append("</div>");
 		}
 		
@@ -1598,13 +1596,13 @@ public class TooltipInventoryEventListener implements ClonedEventListener {
 			String background = "";//"box-shadow: 0 0 10px 2px "+PresetColour.GENERIC_ARCANE.toWebHexString()+";";
 
 			tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;"+background+"'>");
-				tooltipSB.append(effectsSB.toString());
+				tooltipSB.append(effectsSB);
 			tooltipSB.append("</div>");
 		}
 		if(extraDescriptionsSB.length()>0) {
 			specialYIncrease += 16;
 			tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
-				tooltipSB.append(extraDescriptionsSB.toString());
+				tooltipSB.append(extraDescriptionsSB);
 			tooltipSB.append("</div>");
 		}
 
@@ -1622,7 +1620,7 @@ public class TooltipInventoryEventListener implements ClonedEventListener {
 		if(fullNameWithHtmlTags.replaceAll("<[^>]*>", "").length()>45) {
 			specialYIncrease += 26;
 		}
-		Main.mainController.setTooltipSize(TOOLTIP_WIDTH+80, 300 + (yIncrease * 18) + specialYIncrease);
+		Main.mainController.setTooltipSize(TOOLTIP_WIDTH + 90, 300 + (yIncrease * 18) + specialYIncrease);
 		Main.mainController.setTooltipContent(UtilText.parse(equippedToCharacter==null?Main.game.getPlayer():equippedToCharacter, absClothing, tooltipSB.toString()));
 
 	}
@@ -1759,10 +1757,10 @@ public class TooltipInventoryEventListener implements ClonedEventListener {
 				}
 				if(writingSB.length()>0) {
 					tooltipSB.append(" <i>");
-					tooltipSB.append(writingSB.toString());
+					tooltipSB.append(writingSB);
 					if(counterSB.length()>0){
 						tooltipSB.append(" and ");
-						tooltipSB.append(counterSB.toString());
+						tooltipSB.append(counterSB);
 						tooltipSB.append(" form part of this tattoo.");
 					} else {
 						tooltipSB.append(" forms part of this tattoo.");
@@ -1806,7 +1804,7 @@ public class TooltipInventoryEventListener implements ClonedEventListener {
 		if(effectsSB.length()>0) {
 			specialIncrease += 16;
 			tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
-				tooltipSB.append(effectsSB.toString());
+				tooltipSB.append(effectsSB);
 			tooltipSB.append("</div>");
 		}
 
@@ -1931,7 +1929,7 @@ public class TooltipInventoryEventListener implements ClonedEventListener {
 	}
 
     @Override
-    public ClonedEventListener newInstance() {
-        return new TooltipInventoryEventListener(this);
+    public TooltipInventoryEventListener newInstance() {
+        return new TooltipInventoryEventListener(tryGetParent());
     }
 }

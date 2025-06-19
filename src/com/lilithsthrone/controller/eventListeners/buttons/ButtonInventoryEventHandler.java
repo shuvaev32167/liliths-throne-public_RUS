@@ -2,6 +2,9 @@ package com.lilithsthrone.controller.eventListeners.buttons;
 
 import com.lilithsthrone.controller.eventListeners.tooltips.ClonedEventListener;
 import com.lilithsthrone.main.Main;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.w3c.dom.events.Event;
 
 /**
@@ -9,15 +12,23 @@ import org.w3c.dom.events.Event;
  * @version 0.1.69.9
  * @author Innoxia
  */
-public class ButtonInventoryEventHandler implements ClonedEventListener {
+@RequiredArgsConstructor
+@NoArgsConstructor(force = true)
+public class ButtonInventoryEventHandler implements ClonedEventListener<ButtonInventoryEventHandler> {
+    @Getter(onMethod = @__(@Override))
+    private final ButtonInventoryEventHandler parent;
 
 	@Override
 	public void handleEvent(Event event) {
-		Main.mainController.openInventory();
+        if (parent != null) {
+            parent.handleEvent(event);
+            return;
+        }
+        Main.mainController.openInventory();
 	}
 
     @Override
-    public ClonedEventListener newInstance() {
-        return new ButtonInventoryEventHandler();
+    public ButtonInventoryEventHandler newInstance() {
+        return new ButtonInventoryEventHandler(tryGetParent());
     }
 }

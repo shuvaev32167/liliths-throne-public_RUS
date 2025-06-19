@@ -341,7 +341,7 @@ public class PlaceType {
 	
 	public static final AbstractPlaceType DOMINION_ENFORCER_HQ = new AbstractPlaceType(
 			WorldRegion.DOMINION,
-			"Штаб-квартира энфорсеров",
+			"ШК энфорсеров",
 			"Штаб-квартира энфорсеров - одно из самых современных зданий в Доминионе, и именно отсюда осуществляется управление всеми сотрудниками правоохранительных органов Доминиона.",
 			"dominion/enforcerHQIcon",
 			PresetColour.BASE_BLUE,
@@ -746,7 +746,7 @@ public class PlaceType {
 
 	public static final AbstractPlaceType DOMINION_HOME_IMPROVEMENT = new AbstractPlaceType(
 			WorldRegion.DOMINION,
-			"Магазин «Сделай сам» Аргуса",
+            "«Сделай сам» Аргуса",
 			"Снабжая как энтузиастов самостоятельного ремонта, так и профессиональные строительные фирмы, «Магазин Аргуса» имеет вид пары огромных складов, расположенных посреди обширного склада пиломатериалов.",
 			"dominion/construction",
 			PresetColour.BASE_ORANGE,
@@ -4119,7 +4119,7 @@ public static final AbstractPlaceType SLAVER_ALLEY_PUBLIC_STOCKS = new AbstractP
 		).initWeatherImmune();
 	public static final AbstractPlaceType SUBMISSION_BAT_CAVERNS = new AbstractPlaceType(
 			WorldRegion.SUBMISSION,
-			"Пещеры летучих мышей",
+			"Пещеры лет. мышей",
 			"Прогулочные дорожки Подземья здесь заканчиваются, и в глубокий тёмный проём спускается ряд крутых каменных ступеней, ведущих в пещеры летучих мышей, расположенные внизу.",
 			"submission/batCaverns",
 			PresetColour.BASE_BLUE,

@@ -314,7 +314,7 @@ public class Lunexis extends NPC {
 
 	@Override
 	public String getArtworkFolderName() {
-        return "Лунексис";
+		return "Lunexis";
 	}
 	
 	@Override

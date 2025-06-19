@@ -81,8 +81,8 @@ public class Nyan extends NPC {
 	
 	public Nyan(boolean isImported) {
         super(isImported, new NameTriplet("Ньян"), "Рей",
-				"Nyan is the owner of the store 'Nyan's Clothing Emporium', found in Dominion's shopping arcade."
-						+ " She's extremely shy, and gets very nervous when having to talk to people.",
+                "Ньян является владелицей магазина «Магазин одежды Ньян», расположенного в торговом центре Доминиона."
+                        + " Она очень застенчивая и сильно нервничает, когда приходится разговаривать с людьми.",
 				21, Month.APRIL, 12,
 				10, Gender.F_V_B_FEMALE, Subspecies.CAT_MORPH, RaceStage.LESSER,
 				new CharacterInventory(false, 10), WorldType.NYANS_APARTMENT, PlaceType.NYAN_APARTMENT_NYAN_BEDROOM, true);

@@ -23,46 +23,46 @@
 	
 	<htmlContent tag="LAB_PREGNANT"><![CDATA[
 	<p>
-		As you approach the door to Lilaya's lab, you notice that it's been firmly pulled shut. A little piece of paper has been stuck on it, and you see that your demonic [lilaya.relation(pc)] has left you a handwritten note:
+		Когда ты подходишь к двери лаборатории Лилайи, ты замечаешь, что она плотно закрыта. На ней приклеен маленький листок бумаги, и ты видишь, что твоя демоническая [lilaya.relation(pc)] оставила тебе рукописную записку:
 	</p>
 	<p style='text-align:center;'>
 		#IF(lilaya.isCondomBroke())
-			<i>Hey [pc.name], I know the condom breaking wasn't your fault, but I need some time alone. I don't want anyone seeing me pregnant. Come back later after I've given birth.</i>
+			<i>Привет, [pc.name], я знаю, что разрыв презерватива не был твоей виной, но мне нужно побыть одной. Я не хочу, чтобы кто-нибудь видел меня беременной. Вернись позже, после того как я рожу.</i>
 		#ELSE
-			<i>Hey [pc.name], would you kindly fuck off and give me some time alone? I don't want anyone seeing me pregnant, especially not you! Come back later after I've given birth.</i>
+			<i>Привет, [pc.name], не мог бы ты отвалить и дать мне побыть одной? Я не хочу, чтобы кто-нибудь видел меня беременной, особенно ты! Вернись позже, когда я рожу.</i>
 		#ENDIF
 	</p>
 	<p>
-		Letting out a defeated sigh, you decide to do as the note asks, and step back from the door.
+		Выдохнув с досадой, ты решаешь поступить так, как написано в записке, и отступаешь от двери.
 	</p>
 	<p style='text-align:center;'>
-		[style.italicsBad(It doesn't look as though you're going to be able to get back in until Lilaya's pregnancy has run its course. Maybe Rose could help?)]
+		[style.italicsBad(Похоже, ты не сможешь вернуться, пока Лилайя не родит. Может, Роза сможет помочь?)]
 	</p>
 	]]>
 	</htmlContent>
 
 	<htmlContent tag="LAB_PREGNANCY_RISK"><![CDATA[
 	<p>
-		As you approach the door to Lilaya's lab, you notice that it's been firmly pulled shut. A little piece of paper has been stuck on it, and you see that demonic [lilaya.relation(pc)] has left you a handwritten note:
+		Когда ты подходишь к двери лаборатории Лилайи, ты замечаешь, что она плотно закрыта. На ней приклеен маленький листок бумаги, и ты видишь, что демоническая [lilaya.relation(pc)] оставила тебе рукописную записку:
 	</p>
 	<p style='text-align:center;'>
 		#IF(lilaya.isCondomBroke())
-			<i>Hey [pc.name], I may have overreacted a little, but this really is all your fault for buying cheap crappy condoms. I'm keeping this door locked until I know if I'm pregnant or not.</i>
+			<i>Привет, [pc.name], возможно, я немного переборщила, но это действительно твоя вина, потому что ты купил дёшевые презервативы плохого качества. Я буду держать эту дверь запертой, пока не узнаю, беременна я или нет.</i>
 		#ELSEIF(lilaya.isAmazonsSecretImpregnation())
-			<i>Hey [pc.name], I thought you could do with taking some time to think about what 'don't use Amazon's Secret next time you fucking asshole' could possibly mean. I'm keeping this door locked until I know if I'm pregnant or not. You'd better hope I'm not.</i>
+			<i>Привет, [pc.name], я подумала, что тебе не помешает немного поразмыслить над тем, что может означать фраза «не используй «Секрет Амазонки» в следующий раз, ты, ёбаный мудак». Я буду держать эту дверь запертой, пока не узнаю, беременна я или нет. Тебе лучше надеяться, что я не беременна.</i>
 		#ELSE
-			<i>Hey [pc.name], I thought you could do with taking some time to think about what 'pull out next time you fucking asshole' could possibly mean. I'm keeping this door locked until I know if I'm pregnant or not. You'd better hope I'm not.</i>
+			<i>Привет, [pc.name], я подумала, что тебе не помешает немного поразмыслить над тем, что может означать фраза «в следующий раз вытаскивай, ты, ёбаный мудак». Я буду держать эту дверь запертой, пока не узнаю, беременна я или нет. Тебе лучше надеяться, что я не беременна.</i>
 		#ENDIF
 	</p>
 	<p>
-		Letting out a defeated sigh, you decide to leave Lilaya alone for now, and step back from the door. It looks like you'll just have to wait until she's calmed down before seeing her again...
+		Выдохнув с досадой, ты решаешь пока оставить Лилайю в покое и отходишь от двери. Похоже, тебе придется подождать, пока она успокоится, прежде чем снова увидеться с ней...
 	</p>
 	]]>
 	</htmlContent>
 	
 	<htmlContent tag="LAB_PREGNANCY_RESOLVED"><![CDATA[
 	<p>
-		You find yourself walking towards the door to Lilaya's laboratory, and as you get closer, you see that it's once again been left wide open. Realising that Lilaya's pregnancy must now have been resolved, you wonder if you should enter her lab right now, or continue on your way and choose to come back at another time.
+		Ти идёшь к двери лаборатории Лилайи и, приблизившись, видишь, что она снова широко открыта. Понимая, что Лилайя, должно быть, уже родила, ты задумываешься, стоит ли тебе заходить в её лабораторию прямо сейчас или лучше продолжить свой путь и вернуться в другое время.
 	</p>
 	]]>
 	</htmlContent>
@@ -73,50 +73,50 @@
 	
 	<htmlContent tag="LAB_ENTRY_DEMON_REACTION_PREGNANCY_RESOLVED"><![CDATA[
 	<p>
-		As Lilaya hasn't seen you since you were transformed into a demon by Lyssieth, you ready yourself for the worst as you step through the open doorway into her lab.
+		Поскольку Лилайя не видела тебя с тех пор, как Лиссиет превратила тебя в демона, ты готовишься к худшему, шагая через открытую дверь в её лабораторию.
 	</p>
 	<p>
-		На противоположной стороне комнаты ты видишь свою демоническую [lilaya.relation(pc)], сидящую за одним из длинных лабораторных столов и увлеченно проводящую эксперимент. Noticing your entry out of the corner of her eye, she looks across and shoots you a furious glare, before starting to stand up. As she gets to her feet, you notice that she has a flat belly, so although there's still the issue of you being a demon at hand, at least the issue of her pregnancy has been resolved.
+		На противоположной стороне комнаты ты видишь свою демоническую [lilaya.relation(pc)], сидящую за одним из длинных лабораторных столов и увлеченно проводящую эксперимент. Заметив твоё появление краем глаза, она смотрит на тебя и бросает яростный взгляд, прежде чем начать вставать. Когда она поднимается, ты замечаешь, что у неё плоский живот, так что, хотя проблема с тем, что ты демон, всё ещё остаётся, по крайней мере, вопрос о её беременности решён.
 	</p>
 	]]>
 	</htmlContent>
 	
 	<htmlContent tag="LAB_ENTRY_DEMON_REACTION_NO_PREGNANCY"><![CDATA[
 	<p>
-		As Lilaya hasn't seen you since you were transformed into a demon by Lyssieth, you ready yourself for the worst and step through the open doorway into her lab.
+		Поскольку Лилайя не видела тебя с тех пор, как Лиссиет превратила тебя в демона, ты готовишься к худшему и входишь в её лабораторию через открытую дверь.
 	</p>
 	<p>
-		On the opposite side of the room, you see the half-demon who's now your demonic [lilaya.relation(pc)] sitting at one of the long lab tables, busily performing an experiment. Noticing your entry out of the corner of her eye, she looks across and shoots you a furious glare, before standing up and marching over to you.
+		На противоположной стороне комнаты ты видишь полудемона, которая теперь является твоей демонической [lilaya.relation(pc)], сидящую за одним из длинных лабораторных столов и занятую проведением эксперимента. Заметив твоё появление краем глаза, она смотрит на тебя и бросает яростный взгляд, после чего встаёт и направляется к тебе.
 	</p>
 	]]>
 	</htmlContent>
 	
 	<htmlContent tag="LAB_ENTRY_DEMON_REACTION"><![CDATA[
 	<p>
-		[lilaya.speech(I simply do <i>not</i> even know what to say!)] she yells in a shrill voice, before contradicting her statement by continuing, [lilaya.speech(I already heard from Meraxis via the resonance stone all about what mommy did! A full demon?! I didn't believe her at first! H-How could you?!)]
+		[lilaya.speech(Я даже <i>не знаю</i>, что сказать!)] — кричит она пронзительным голосом, а затем противоречит самой себе, продолжая: [lilaya.speech(Я уже услышала от Мэраксис через резонансный камень обо всем, что сделала мама! [pc.genderBasedWord(Полноценный демон, Полноценная демоница)]?! Сначала я ей не поверила! К-Как ты [pc.genderBasedWord(мог, могла)]?!)]
 	</p>
 	<p>
-		[pc.speech(How else am I to defeat the other elder lilin without a demon's power?)] you respond with your own question as you try to reason with Lilaya. [pc.speech(Surely you can see how this is for the best?)]
+		[pc.speech(Как ещё я могу победить другого старейшего Лилин без силы демона?)] Ты отвечаешь встречным вопросом, пытаясь вразумить Лилайю. [pc.speech(Ты же понимаешь, что это к лучшему?)]
 	</p>
 	<p>
-		[lilaya.speech(Oh, I can see how it's for the best alright,)] Lilaya replies, crossing her arms and letting her voice take on a sinister, icy tone, [lilaya.speech(For my entire life, I've been begging mommy to turn me into a full demon, but no matter what I said, she always refused, telling me that she'd sworn never to turn anyone into a demon ever again. Now that she's quite clearly proven that her word means <i>nothing</i>, she has no choice but to finally give me what I want.)]
+		[lilaya.speech(О, я понимаю, что это к лучшему, конечно)]— отвечает Лилайя, скрестив руки и придав своему голосу зловещий, ледяной тон: [lilaya.speech(Всю свою жизнь я умоляла маму превратить меня в полноценную демоницу, но что бы я ни говорила, она всегда отказывалась, говоря, что поклялась никогда больше никого не превращать в демона. Теперь, когда она ясно доказала, что её слово <i>ничего</i> не значит, у неё нет другого выбора, кроме как наконец дать мне то, что я хочу.)]
 	</p>
 	<p>
-		[pc.speech(Lilaya, please, there's no-)] you start to reason, finding your [lilaya.relation(pc)]'s cold, calculating voice to be of some concern, but you're not able to get even one sentence out before her composure breaks. 
+		[pc.speech(Лилайя, пожалуйста, не...)] - ты начинаешь рассуждать, находя холодный, расчетливый голос [pc.morphSingleGent([lilaya.relation(pc)])] несколько тревожным, но не успеваешь произнести ни слова, как её самообладание исчезает.
 	</p>
 	<p>
-		[lilaya.speech(<b><i>No!</i></b>)] she screams, [lilaya.speech(I won't hear any of it! Both you and mommy have betrayed me, so you can make it up to me by convincing her to finally turn me into a real demon! I <i>hate</i> being a half-demon! <b><i>I hate it!</i></b>)]
+		[lilaya.speech(<b><i>Нет!</i></b>)] - она кричит: [lilaya.speech(Я не хочу ничего слышать! И ты, и мама предали меня, так что ты можешь загладить свою вину, убедив её наконец превратить меня в полноценную демоницу! Я <i>ненавижу</i> быть полудемоном! <b><i>Ненавижу!</i></b>)]
 	</p>
 	<p>
-		Although most of her anger seems directed at your now-shared mother, Lilaya is definitely more than a little upset with you. As you're wondering whether to agree with her demands and convince Lyssieth to transform her into a full demon, she continues,
+		Хотя большая часть её гнева, похоже, направлена на вашу теперь общую мать, Лилайя явно более чем недовольна тобой. Пока ты раздумываешь, соглашаться ли на её требования и убеждать Лиссиет превратить её в полноценную демоницу, она продолжает:
 		#IF(lilaya.getTotalTimesHadSex(pc)>0)
-			 [lilaya.speech(And don't think for <i>one second</i> that I'm going to let you fuck me again until you agree to do as I say!)]
+			 [lilaya.speech(И ни <i>на секунду</i> не думай, что я позволю тебе снова трахнуть меня, пока ты не согласишься делать то, что я сказала!)]
 		#ELSE
-			 [lilaya.speech(And don't think for <i>one second</i> that I'm going to offer you any special tests until you agree to do as I say!)]
+			 [lilaya.speech(И ни <i>на секунду</i> не думай, что я предложу тебе какие-то специальные тесты, пока ты не согласишься делать то, что я сказала!)]
 		#ENDIF
 	</p>
 	<p>
-		Knowing that demonic transformations are permanent, you wonder what you should choose to say...
+		Зная, что демонические преобразования являются необратимыми, ты раздумываешь, что же тебе сказать...
 	</p>
 	]]>
 	</htmlContent>
@@ -127,29 +127,29 @@
 		Войдя в лабораторию Лилайи, ты быстро осматриваешь помещение в поисках признаков жизни.
 	</p>
 	<p>
-		На противоположной стороне комнаты ты видишь свою демоническую [lilaya.relation(pc)], сидящую за одним из длинных лабораторных столов и увлеченно проводящую эксперимент. Noticing your entry out of the corner of her eye, she looks across and glares angrily at you, before starting to stand up. As she gets to her feet, you notice that her movements are slightly unusual, and as she steps around the table that she was working at, you see the cause of her clumsy motions taking the form of a clearly swollen belly.
+		На противоположной стороне комнаты ты видишь свою демоническую [lilaya.relation(pc)], сидящую за одним из длинных лабораторных столов и увлеченно проводящую эксперимент. Заметив твоё появление краем глаза, она поворачивается и сердито смотрит на тебя, а затем начинает вставать. Когда она поднимается, ты замечаешь, что её движения немного необычны, и когда она обходит стол, за которым работала, ты видишь причину её неуклюжих движений в виде явно вздувшегося живота.
 	</p>
 	<p>
-		[lilaya.speech(Yes, that's right!)] she angrily shouts, before marching over towards you.
+		[lilaya.speech(Да, верно!)] — сердито кричит она, прежде чем направиться к тебе.
 		#IF(lilaya.isCondomBroke())
-			 [lilaya.speech(You ended up getting me pregnant! This is all your fault for using such cheap, crappy condoms! Why couldn't you have just pulled out instead?!)]
+			 [lilaya.speech(Ты [pc.genderBasedWord(сделал, сделала)] меня беременной! Это всё твоя вина, потому что ты [pc.genderBasedWord(использовал, использовала)] такие дешёвые, дерьмовые презервативы! Почему ты просто не [pc.genderBasedWord(вытащил, вытащила)] его?!)]
 		#ELSEIF(lilaya.isAmazonsSecretImpregnation())
-			 [lilaya.speech(You ended up getting me pregnant! I <i>told</i> you to pull back before you orgasmed! I knew this would happen!)]	
+			 [lilaya.speech(Ты [pc.genderBasedWord(сделал, сделала)] меня беременной! Я <i>говорила</i> тебе, чтобы ты остановился до оргазма! Я знала, что так и будет!)]
 		#ELSE
-			 [lilaya.speech(You ended up getting me pregnant! I <i>told</i> you to pull out! I knew this would happen!)]		
+			 [lilaya.speech(Ты сделал меня беременной! Я <i>говорила</i> тебе вытащить! Я знала, что так будет!)]
 		#ENDIF
 	</p>
 	<p>
-		Not giving you a chance to talk, she continues furiously scolding you, before launching into the reason as to why she's so upset to be pregnant, [lilaya.speech(You <i>know</i> I'm just a half-demon! That means all my kids end up as imps! Do you have any idea of how embarrassing and shameful it is to be called an 'imp-breeder', or 'imp-fucker'?! <i>Do you?!</i>)]
+		Не давая тебе возможности сказать ни слова, она продолжает яростно ругать тебя, а затем переходит к объяснению причин, по которым она так расстроена своей беременностью: [lilaya.speech(Ты же <i>знаешь</i>, что я всего лишь полудемон! Это значит, что все мои дети будут бесами! Ты хоть представляешь, как унизительно и стыдно быть «разводчицей бесов» или «бесовской шлюхой»?! <i>Представляешь?!</i>)]
 	</p>
 	<p>
-		As you start to answer in the negative, Lilaya suddenly whacks you on the arm, and, with tears in her eyes, she shouts, [lilaya.speech(Get out! <b>Get out!</b>)]
+		Когда ты начинаешь отвечать отрицательно, Лилайя внезапно хлещет тебя по руке и со слезами на глазах кричит: [lilaya.speech(Убирайся! <b>Убирайся!</b>)]
 	</p>
 	<p>
-		You try to apologise as your furious [lilaya.relation(pc)] marches you over to the door of her lab, but your words fall on deaf ears. With one last furious yell, she pushes you out into the corridor, before slamming the door shut and locking it behind you.
+		Ты пытаешься извиниться, пока разъярённая [lilaya.relation(pc)] ведёт тебя к двери своей лаборатории, но твои слова остаются без внимания. С последним яростным криком она выталкивает тебя в коридор, а затем с силой захлопывает дверь и запирает её за тобой.
 	</p>
 	<p>
-		[style.italicsBad(It doesn't look as though you're going to be able to get back in until Lilaya's pregnancy has run its course...)]
+		[style.italicsBad(Похоже, что ты не сможешь вернуться, пока Лилайя не родит...)]
 	</p>
 	]]>
 	</htmlContent>
@@ -159,31 +159,31 @@
 		Войдя в лабораторию Лилайи, ты быстро осматриваешь помещение в поисках признаков жизни.
 	</p>
 	<p>
-		На противоположной стороне комнаты ты видишь свою демоническую [lilaya.relation(pc)], сидящую за одним из длинных лабораторных столов и увлеченно проводящую эксперимент. Noticing your entry out of the corner of her eye, she looks across and narrows her eyes at you, before standing up and marching over to where you're standing.
+		На противоположной стороне комнаты ты видишь свою демоническую [lilaya.relation(pc)], сидящую за одним из длинных лабораторных столов и увлеченно проводящую эксперимент. Заметив твоё появление краем глаза, она смотрит на тебя, прищуриваясь, а затем встаёт и направляется к тебе.
 	</p>
 	<p>
-		[lilaya.speech(You're a very lucky [pc.girl],)] she firmly states as she approaches, [lilaya.speech(As you can see, I'm not pregnant. You'd have been in so much trouble if I was!)]
+		[lilaya.speech(Ты очень [pc.genderBasedWord(везучий, везучая)] [pc.girl])], она твёрдо заявляет, приближаясь, [lilaya.speech(Как видишь, я не беременна. Если бы я была беременна, у тебя были бы большие неприятности!)]
 	</p>
 	<p>
 		#IF(lilaya.isCondomBroke())
-			[pc.speech(Well, it wasn't my fault the condom broke. Everything worked out fine in the end anyway,)] you say, sensing that Lilaya's anger won't last.
+			[pc.speech(Ну, это не моя вина, что презерватив порвался. В конце концов, всё обошлось)], ты говоришь, чувствуя, что гнев Лилайи не продлится долго.
 		#ELSE
-			[pc.speech(Everything worked out fine in the end then,)] you say, sensing that Lilaya's anger won't last.
+			[pc.speech(В конце концов всё сложилось хорошо.)], ты говоришь, чувствуя, что гнев Лилайи не продлится долго.
 		#ENDIF
 	</p>
 	<p>
-		True enough, she lets out a resigned sigh as you say that, and, lowering her voice, she continues, [lilaya.speech(Yes, it did. As we only ever give birth to imps, it's extremely embarrassing and shameful for half-demons to get pregnant. Even those who know that I'm the recognised daughter of Lyssieth herself would call me 'imp-breeder' or 'imp-fucker' behind my back... I <i>hate</i> being pregnant!)]
+		Действительно, она сдаётся и вздыхает, когда ты это говоришь, и, понизив голос, продолжает: [lilaya.speech(Да, так и есть. Поскольку мы рожаем только бесов, для полудемонов беременность — это чрезвычайно постыдное и унизительное событие. Даже те, кто знает, что я признанная дочь самой Лиссиет, за моей спиной называют меня «разводчицей бесов» или «бесовской шлюхой»... Я <i>ненавижу</i> быть беременной!)]
 	</p>
 	<p>
-		Reassuring your [lilaya.relation(pc)] that everything's ok, you walk her back over to her lab table, where she lets out one final sigh and says that she forgives you for not pulling out like she asked. As her thoughts turn back to the sex which the two of you had, Lilaya starts hungrily staring at your body, and, with a sultry tone in her voice, she traces a finger over your chest and asks,
+		Успокаивая твою [pc.morphSingleGent([lilaya.relation(pc)])] что всё в порядке, ты проводишь её обратно к лабораторному столу, где она выдыхает последний вздох и говорит, что прощает тебя за то, что ты не вытащил член, как она просила. Когда её мысли возвращаются к сексу, который у вас был, Лилайя начинает жадно смотреть на твоё тело и, с чувственным тоном в голосе, проводит пальцем по твоей груди и спрашивает:
 		#IF(lilaya.isCondomBroke())
-			 [lilaya.speech(Now that you're here, would you like me to run some more <i>tests</i>? With the condition that you've got a proper condom this time, or that you'll be sure to pull out...)]
+			 [lilaya.speech(Раз уж ты здесь, хочешь, я проведу ещё несколько <i>тестов</i>? При условии, что на этот раз у тебя будет подходящий презерватив или ты обязательно вытащишь...)]
 		#ELSE
-			 [lilaya.speech(Now that you're here, would you like me to run some more <i>tests</i>? With the condition that you'll promise not to get me pregnant, of course...)]
+			 [lilaya.speech(Раз уж ты здесь, хочешь, я проведу ещё несколько <i>тестов</i>? Конечно, при условии, что ты обещаешь не сделать меня беременной...)]
 		#ENDIF
 	</p>
 	<p>
-		You wonder if you should take her up on that offer, or discuss some other business with her...
+		Ты задаешься вопросом, стоит ли принять её предложение или обсудить с ней другие дела...
 	</p>
 	]]>
 	</htmlContent>
@@ -193,33 +193,33 @@
 		Войдя в лабораторию Лилайи, ты быстро осматриваешь помещение в поисках признаков жизни.
 	</p>
 	<p>
-		На противоположной стороне комнаты ты видишь свою демоническую [lilaya.relation(pc)], сидящую за одним из длинных лабораторных столов и увлеченно проводящую эксперимент. Noticing your entry out of the corner of her eye, she looks across and narrows her eyes at you, before standing up and marching over to where you're standing.
+		На противоположной стороне комнаты ты видишь свою демоническую [lilaya.relation(pc)], сидящую за одним из длинных лабораторных столов и увлеченно проводящую эксперимент. Заметив твоё появление краем глаза, она смотрит на тебя, прищуриваясь, а затем встаёт и направляется к тебе.
 	</p>
 	<p>
-		[lilaya.speech(I've decided to forgive you,)] she firmly states as she approaches, and as she comes to stand before you, you take note of the fact that her belly is flat once again. [lilaya.speech(As you can see, I've given birth, and the imps that you got me knocked up with are no doubt out there in Submission somewhere, causing trouble for everyone! They even tried stealing some of my lab equipment as they left...)]
+		[lilaya.speech(Я решила простить тебя)] - она твердо заявляет, приближаясь, и когда она останавливается перед тобой, ты замечаешь, что её живот снова стал плоским. [lilaya.speech(Как ты видишь, я родила, и те бесенята, которых ты мне [pc.genderBasedWord(зачал, зачала)], без сомнения, где-то там, в Подземье, доставляют всем неприятности! Они даже пытались украсть часть моего лабораторного оборудования, когда уходили...)]
 	</p>
 	<p>
-		[pc.speech(Sorry for the trouble,)] you say.
+		[pc.speech(Прости за неудобства)] - ты говоришь.
 	</p>
 	<p>
 		#IF(lilaya.isCondomBroke())
-			Your [lilaya.relation(pc)] lets out a resigned sigh as you say that, and, lowering her voice, she continues, [lilaya.speech(Yes, well, I've already forgiven you. It wasn't really your fault that the condom broke. Just know now that I <i>hate</i> being pregnant, so don't let this happen again.)]
+			Твоя [lilaya.relation(pc)] выдыхает умиротворенный вздох, когда ты это говоришь, и, понизив голос, продолжает: [lilaya.speech(Да, ну, я уже простила тебя. Это не твоя вина, что презерватив порвался. Просто знай, что я <i>ненавижу</i> быть беременной, так что не допускай, чтобы это повторилось.)]
 		#ELSEIF(lilaya.isAmazonsSecretImpregnation())
-			Your [lilaya.relation(pc)] lets out a resigned sigh as you say that, and, lowering her voice, she continues, [lilaya.speech(Yes, well, I've already forgiven you. Just know now that I <i>hate</i> being pregnant, so when I say pull back before you orgasm, I mean it.)]
+			Твоя [lilaya.relation(pc)] выдыхает умиротворенный вздох, когда ты это говоришь, и, понизив голос, продолжает: [lilaya.speech(Да, ну, я уже простила тебя. Просто знай, что я <i>ненавижу</i> быть беременной, поэтому когда я говорю, что нужно остановиться перед оргазмом, я имею в виду именно это.)]
 		#ELSE
-			Your [lilaya.relation(pc)] lets out a resigned sigh as you say that, and, lowering her voice, she continues, [lilaya.speech(Yes, well, I've already forgiven you. Just know now that I <i>hate</i> being pregnant, so when I say pull out, I mean it.)]
+			Твоя [lilaya.relation(pc)] выдыхает умиротворенный вздох, когда ты это говоришь, и, понизив голос, продолжает: [lilaya.speech(Да, ну, я уже простила тебя. Просто знай, что я <i>ненавижу</i> быть беременной, поэтому когда я говорю «вытащи», я имею в виду именно это.)]
 		#ENDIF
 	</p>
 	<p>
-		Reassuring your [lilaya.relation(pc)] that you now appreciate how much she dislikes being pregnant, you walk her back over to her lab table, where she lets out one final sigh and says that she really did try to warn you about pulling out. As her thoughts turn back to the sex which the two of you had, Lilaya starts hungrily staring at your body, and, with a sultry tone in her voice, she traces a finger over your chest and asks,
+		Успокаивая твою [pc.morphSingleGent([lilaya.relation(pc)])] теперь ты понимаешь, насколько ей не нравится быть беременной, ты проводишь её обратно к её лабораторному столу, где она выдыхает последний вздох и говорит, что действительно пыталась предупредить тебя о том, что нужно вытаскивать член. Когда её мысли возвращаются к сексу, который у вас был, Лилайя начинает жадно смотреть на твоё тело и, с соблазнительным тоном в голосе, проводит пальцем по твоей груди и спрашивает:
 		#IF(lilaya.isCondomBroke())
-			 [lilaya.speech(Now that you're here, and that whole business is behind us, would you like me to run some more <i>tests</i>? With the condition that you've got a proper condom this time, or that you'll be sure to pull out...)]
+			 [lilaya.speech(Теперь, когда ты здесь, и всё это дело позади, хочешь, я проведу еще несколько <i>тестов</i>? При условии, что на этот раз у тебя будет подходящий презерватив или ты обязательно вытащишь...)]
 		#ELSE
-			 [lilaya.speech(Now that you're here, and that whole business is behind us, would you like me to run some more <i>tests</i>? With the condition that you'll promise not to get me pregnant, of course...)]
+			 [lilaya.speech(Теперь, когда ты здесь, и всё это дело позади, хочешь, я проведу еще несколько <i>тестов</i>? Конечно, при условии, что ты пообещаешь не сделать меня беременной...)]
 		#ENDIF
 	</p>
 	<p>
-		You wonder if you should take her up on that offer, or discuss some other business with her...
+		Ты задаешься вопросом, стоит ли принять её предложение или обсудить с ней другие дела...
 	</p>
 	]]>
 	</htmlContent>
@@ -268,7 +268,7 @@
 	
 	<htmlContent tag="LAB_ENTRY_ROSE_TOLD_ON_YOU_DEMON"><![CDATA[
 	<p>
-		Роза обвивает руками шею Лилайи и откидывается назад, издавая глубокий стон, в то время как пальцы её хозяйки продолжают работать у неё между ног. She suddenly notices you out of the corner of her eye, and, turning to give you an evil grin, she pointedly grinds down against your demonic [lilaya.relation(pc)], before letting out a little eek and jumping to her feet as she feigns surprise. [rose.speech(Г-госпожа! [pc.NameIsFull] здесь!)]
+		Роза обвивает руками шею Лилайи и откидывается назад, издавая глубокий стон, в то время как пальцы её хозяйки продолжают работать у неё между ног. Она внезапно замечает тебя краем глаза, поворачивается, злобно ухмыляется и демонстративно прижимается к твоей демонической [pc.morphSingleGent([lilaya.relation(pc)])], а затем, притворяясь удивлённой, взвизгивает и вскакивает на ноги. [rose.speech(Г-госпожа! [pc.NameIsFull] здесь!)]
 	</p>
 	<p>
 		Лилайя, услышав это, повторяет движения своей горничной и вскакивает со стула. [lilaya.speech([pc.Name]! Э-э-эм, м-мы просто..... Проводили эксперимент! Да! Не так ли, Роза?!)]
@@ -277,23 +277,23 @@
 		[rose.speech(Да, госпожа!)] Роза писклявит в знак согласия, [rose.speech(Правильно!)]
 	</p>
 	<p>
-		Brushing down her skirt, Lilaya blushes a little and clears her throat, [lilaya.speech(~Ahem!~ Well, it's a good job that you came here to see me, [pc.name]. Rose has already told me all about your little adventure in my room with my underwear. So, what do you have to say for yourself?)]
+		Поглаживая юбку, Лилайя слегка краснеет и прочищает горло: [lilaya.speech(~Э-э-э!~ Ну, хорошо, что ты [pc.genderBasedWord(пришёл, пришла)] ко мне, [pc.name]. Роза уже рассказала мне всё о твоём маленьком приключении в моей комнате с моим нижним бельём. Итак, что ты можешь сказать в своё оправдание?)]
 	</p>
 	<p>
-		As you're indebted to Lilaya for allowing you to live here, you see no other option but to apologise. Stepping forwards, you make up an excuse and say, [pc.speech(I'm sorry, Lilaya. I don't know what came over me. It must be this arcane aura of mine... or something...)]
+		Поскольку ты в долгу перед Лилайей за то, что она разрешила тебе жить здесь, ты не видишь другого выхода, кроме как извиниться. Сделав шаг вперед, ты придумываешь оправдание и говоришь: [pc.speech(Прости, Лилайя. Не знаю, что на меня нашло. Наверное, это из-за моей магической ауры... или чего-то ещё...)]
 	</p>
 	<p>
-		[lilaya.speech(Hmm... Well, I've already told you that you're not getting any sex from me until you help me convince mommy to turn me into a full demon. As you're quite clearly desperate for it, perhaps you should just do as I say already!)] Lilaya exclaims in her sternest voice.
+		[lilaya.speech(Хм... Ну, я уже сказала тебе, что не буду с тобой спать, пока не поможешь убедить маму превратить меня в полноценную демоницу. Поскольку ты явно очень этого хочешь, может, тебе просто стоит сделать то, что я попросила?!)] - Лилайя восклицает самым строгим голосом.
 	</p>
 	<p>
-		You wonder if you should agree to convince Lyssieth to permanently transform Lilaya into a full demon, or just ask about some other business...
+		Ты задаёшься вопросом, стоит ли согласиться убедить Лиссиет навсегда превратить Лилайю в полноценную демоницу или просто спросить о чём-то другом...
 	</p>
 	]]>
 	</htmlContent>
 	
 	<htmlContent tag="LAB_ENTRY_BASE_END_DEMON"><![CDATA[
 	<p>
-		Роза обвивает руками шею Лилайи и откидывается назад, издавая глубокий стон, в то время как пальцы её хозяйки продолжают работать у неё между ног. Она вдруг замечает тебя краем глаза и, тихонько вскрикнув, быстро вскакивает на ноги. [rose.speech(M-Mistress! [pc.NamePos] here!)]
+		Роза обвивает руками шею Лилайи и откидывается назад, издавая глубокий стон, в то время как пальцы её хозяйки продолжают работать у неё между ног. Она вдруг замечает тебя краем глаза и, тихонько вскрикнув, быстро вскакивает на ноги. [rose.speech(Г-госпожа! [pc.NamePos] здесь!)]
 	</p>
 	<p>
 		Лилайя, услышав это, повторяет движения своей горничной и вскакивает со стула. [lilaya.speech([pc.Name]! Э-э-эм, м-мы просто..... Проводили эксперимент! Да! Не так ли, Роза?!)]
@@ -302,14 +302,14 @@
 		[rose.speech(Да, госпожа!)] Роза писклявит в знак согласия, [rose.speech(Правильно!)]
 	</p>
 	<p>
-		Одергивая юбку, Лилая откашливается, [lilaya.speech(~Ahem!~ So, have you changed your mind, [pc.name]? You're ready to convince mommy to turn me into a full demon as well, aren't you?)]
+		Одергивая юбку, Лилая откашливается, [lilaya.speech(~Э-э-э!~ Итак, ты [pc.genderBasedWord(передумал, передумала)], [pc.name]? Ты готов убедить маму превратить меня в полноценную демоницу, да?)]
 	</p>
 	]]>
 	</htmlContent>
 	
 	<htmlContent tag="LAB_ENTRY_ROSE_TOLD_ON_YOU"><![CDATA[
 	<p>
-		Роза обвивает руками шею Лилайи и откидывается назад, издавая глубокий стон, в то время как пальцы её хозяйки продолжают работать у неё между ног. She suddenly notices you out of the corner of her eye, and, turning to give you an evil grin, she pointedly grinds down against your demonic [lilaya.relation(pc)], before letting out a little eek and jumping to her feet as she feigns surprise. [rose.speech(Г-госпожа! [pc.NameIsFull] здесь!)]
+		Роза обвивает руками шею Лилайи и откидывается назад, издавая глубокий стон, в то время как пальцы её хозяйки продолжают работать у неё между ног. Она внезапно замечает тебя краем глаза, поворачивается, злобно ухмыляется и демонстративно прижимается к твоей демонической [pc.morphSingleGent([lilaya.relation(pc)])], а затем, притворяясь удивленной, вскрикивает и вскакивает на ноги. [rose.speech(Г-госпожа! [pc.NameIsFull] здесь!)]
 	</p>
 	<p>
 		Лилайя, услышав это, повторяет движения своей горничной и вскакивает со стула. [lilaya.speech([pc.Name]! Э-э-эм, м-мы просто..... Проводили эксперимент! Да! Не так ли, Роза?!)]
@@ -322,37 +322,37 @@
 	#THEN
 		#IF lilaya.getPregnantLitter().isFatherId(pc.getId())
 		#THEN
-			As Lilaya brushes down her skirt, you can't help but notice the visible bulge in her belly. As she sees what it is you're looking at, your [lilaya.relation(pc)] clears her throat and confirms, [lilaya.speech(~Ahem!~ Yes, [pc.name], you got me pregnant. As I'm a full demon now, it's really no big deal... As I'm not going to be birthing any imps, I don't mind it at all. But anyway, it's a good job that you came here to see me, [pc.name]. Rose has already told me all about your little adventure in my room with my underwear. So, what do you have to say for yourself?)]
+			Когда Лилайя поправляет юбку, нельзя не заметить заметную выпуклость на её животе. Увидев, на что ты смотришь, твоя [lilaya.relation(pc)] прочищает горло и подтверждает: [lilaya.speech(~Э-э-э!~ Да, [pc.name], ты [pc.genderBasedWord(сделал, сделала)] меня беременной. Поскольку я теперь полноценная демоница, это действительно не имеет большого значения... Поскольку я не собираюсь рожать бесов, мне это совершенно не мешает. Но в любом случае, хорошо, что ты [pc.genderBasedWord(пришёл, пришла)] ко мне, [pc.name]. Роза уже рассказала мне всё о твоём маленьком приключении в моей комнате с моим нижним бельем. Итак, что ты можешь сказать в своё оправдание?)
 		#ELSE
-			As Lilaya brushes down her skirt, you can't help but notice the visible bulge in her belly. As she sees what it is you're looking at, your [lilaya.relation(pc)] clears her throat and confirms, [lilaya.speech(~Ahem!~ Yes, [pc.name], mommy got me pregnant. As I'm a full demon now, it's really no big deal... As I'm not going to be birthing any imps, I don't mind it at all. But anyway, it's a good job that you came here to see me, [pc.name]. Rose has already told me all about your little adventure in my room with my underwear. So, what do you have to say for yourself?)]
+			Когда Лилайя поправляет юбку, нельзя не заметить заметную выпуклость на её животе. Увидев, на что ты смотришь, твоя [lilaya.relation(pc)] прочищает горло и подтверждает: [lilaya.speech(~Э-э-э!~ Да, [pc.name], я забеременела от мамы. Поскольку я теперь полноценная демоница, это действительно не имеет большого значения... Поскольку я не собираюсь рожать бесов, мне это совершенно не мешает. Но в любом случае, хорошо, что ты [pc.genderBasedWord(пришёл, пришла)] ко мне, [pc.name]. Роза уже рассказала мне всё о твоём маленьком приключении в моей комнате с моим нижним бельем. Итак, что ты можешь сказать в своё оправдание?)]
 		#ENDIF
 	#ELSE
 		#IF !lilaya.getBaseFetishDesire(FETISH_PREGNANCY).isNegative() && lilaya.isVisiblyPregnant()
 		#THEN
-			As Lilaya brushes down her skirt, you can't help but notice that she's still got a very visible bulge in her belly. As she sees what it is you're looking at, your [lilaya.relation(pc)] clears her throat and confirms, [lilaya.speech(~Ahem!~ Yes, [pc.name], I'm still pregnant... But anyway, it's a good job that you came here to see me. Rose has already told me all about your little adventure in my room with my underwear. So, what do you have to say for yourself?)]
+			Когда Лилайя поправляет юбку, нельзя не заметить, что у неё всё ещё очень заметный живот. Увидев, на что ты смотришь, твоя [lilaya.relation(pc)] прочищает горло и подтверждает: [lilaya.speech(~Э-э-э!~ Да, [pc.name], я всё ещё беременна... Но в любом случае, хорошо, что ты [pc.genderBasedWord(пришёл, пришла)] ко мне. Роза уже рассказала мне всё о твоём маленьком приключении в моей комнате с моим нижним бельем. Итак, что ты можешь сказать в своё оправдание?)]
 		#ELSE
-			Brushing down her skirt, Lilaya blushes a little and clears her throat, [lilaya.speech(~Ahem!~ Well, it's a good job that you came here to see me, [pc.name]. Rose has already told me all about your little adventure in my room with my underwear. So, what do you have to say for yourself?)]
+			Отряхивая юбку, Лилайя слегка краснеет и прочищает горло: [lilaya.speech(~Э-э-э!~ Ну, хорошо, что ты [pc.genderBasedWord(пришёл, пришла)] ко мне, [pc.name]. Роза уже рассказала мне всё о твоём маленьком приключении в моей комнате с моим нижним бельем. Итак, что ты можешь сказать в своё оправдание?)]
 		#ENDIF
 	#ENDIF
 	</p>
 	<p>
-		As you're indebted to Lilaya for allowing you to live here, you see no other option but to apologise. Stepping forwards, you make up an excuse and say, [pc.speech(I'm sorry, Lilaya. I don't know what came over me. It must be this arcane aura of mine... or something...)]
+		Поскольку ты в долгу перед Лилайей за то, что она разрешила тебе жить здесь, ты не видишь другого выхода, кроме как извиниться. Сделав шаг вперед, ты придумываешь оправдание и говоришь: [pc.speech(Прости, Лилайя. Не знаю, что на меня нашло. Наверное, это из-за моей магической ауры... или чего-то ещё...)]
 	</p>
 	<p>
-		[lilaya.speech(Hmm... Well, if you find yourself feeling like that, there's no need to sneak off into my room. J-Just come back here and I-I can run some tests on you! O-Ok?)] Lilaya responds, trying her best to sound stern and in control, but ultimately failing as her thoughts shift to wanting to do lewd things with you.
+		[lilaya.speech(Хм... Ну, если ты так себя чувствуешь, нет нужды тайком забираться в мою комнату. Просто вернись сюда, и я проведу тебе несколько тестов! Хорошо?)] — отвечает Лилайя, стараясь звучать строго и уверенно, но в конечном итоге терпит неудачу, поскольку её мысли переключаются на желание заняться с тобой развратными вещами.
 	</p>
 	<p>
-		[pc.speech(Yes, Lilaya,)] you respond, much in the same way you always used to with your aunt Lily.
+		[pc.speech(Да, Лилайя)] — отвечаешь ты, почти так же, как всегда, [pc.genderBasedWord(отвечал, отвечала)] своей тёте Лили.
 	</p>
 	<p>
-		[lilaya.speech(So, now that that's out of the way, what is it you need?)]
+		[lilaya.speech(Итак, теперь, когда это улажено, что тебе нужно?)]
 	</p>
 	]]>
 	</htmlContent>
 	
 	<htmlContent tag="LAB_ENTRY_BASE_END"><![CDATA[
 	<p>
-		Роза обвивает руками шею Лилайи и откидывается назад, издавая глубокий стон, в то время как пальцы её хозяйки продолжают работать у неё между ног. Она вдруг замечает тебя краем глаза и, тихонько вскрикнув, быстро вскакивает на ноги. [rose.speech(M-Mistress! [pc.NamePos] here!)]
+		Роза обвивает руками шею Лилайи и откидывается назад, издавая глубокий стон, в то время как пальцы её хозяйки продолжают работать у неё между ног. Она вдруг замечает тебя краем глаза и, тихонько вскрикнув, быстро вскакивает на ноги. [rose.speech(Г-госпожа! [pc.NamePos] здесь!)]
 	</p>
 	<p>
 		Лилайя, услышав это, повторяет движения своей горничной и вскакивает со стула. [lilaya.speech([pc.Name]! Э-э-эм, м-мы просто..... Проводили эксперимент! Да! Не так ли, Роза?!)]
@@ -364,16 +364,16 @@
 	#IF !lilaya.isCharacterReactedToPregnancy(pc) && !lilaya.getBaseFetishDesire(FETISH_PREGNANCY).isNegative() && lilaya.isVisiblyPregnant()
 	#THEN
 		#IF(lilaya.getPregnantLitter().isFatherId(pc.getId()))
-			As Lilaya brushes down her skirt, you can't help but notice the visible bulge in her belly. As she sees what it is you're looking at, your [lilaya.relation(pc)] clears her throat and confirms, [lilaya.speech(~Ahem!~ Yes, [pc.name], you got me pregnant. As I'm a full demon now, it's really no big deal... As I'm not going to be birthing any imps, I don't mind it at all. So, what is it you want?)]
+			Когда Лилайя поправляет юбку, нельзя не заметить заметную выпуклость на её животе. Увидев, на что ты смотришь, твоя [lilaya.relation(pc)] прочищает горло и подтверждает: [lilaya.speech(~Э-э-э!~ Да, [pc.name], ты [pc.genderBasedWord(сделал, сделала)] меня беременной. Поскольку я теперь полноценная демоница, это действительно не имеет большого значения... Поскольку я не собираюсь рожать бесов, мне это совершенно не мешает. Итак, что ты хочешь?)]
 		#ELSEIF(lilaya.getPregnantLitter().isFatherId(lyssieth.getId()))
-			As Lilaya brushes down her skirt, you can't help but notice the visible bulge in her belly. As she sees what it is you're looking at, your [lilaya.relation(pc)] clears her throat and confirms, [lilaya.speech(~Ahem!~ Yes, [pc.name], mommy got me pregnant. As I'm a full demon now, it's really no big deal... As I'm not going to be birthing any imps, I don't mind it at all. So, what is it you want?)]
+			Когда Лилая поправляет юбку, нельзя не заметить заметную выпуклость на её животе. Увидев, на что ты смотришь, твоя [lilaya.relation(pc)] прочищает горло и подтверждает: [lilaya.speech(~Э-э-э!~ Да, [pc.name], я забеременела от мамы. Поскольку я теперь полноценная демоница, это действительно не имеет большого значения... Поскольку я не собираюсь рожать бесов, мне это совершенно не мешает. Итак, что ты хочешь?)]
 		#ELSE
-			As Lilaya brushes down her skirt, you can't help but notice the visible bulge in her belly. As she sees what it is you're looking at, your [lilaya.relation(pc)] clears her throat and confirms, [lilaya.speech(~Ahem!~ Yes, [pc.name], [daddy.name] got me pregnant. As I'm a full demon now, it's really no big deal... As I'm not going to be birthing any imps, I don't mind it at all. So, what is it you want?)]
+			Когда Лилая поправляет юбку, нельзя не заметить заметную выпуклость на её животе. Увидев, на что ты смотришь, твоя [lilaya.relation(pc)] прочищает горло и подтверждает: [lilaya.speech(~Э-э-э!~ Да, [pc.name], [daddy.name] сделал меня беременной. Поскольку я теперь полноценная демоница, это действительно не имеет большого значения... Я не собираюсь рожать бесов, поэтому мне это совершенно не мешает. Итак, что ты хочешь?)]
 		#ENDIF
 	#ELSE
 		#IF !lilaya.getBaseFetishDesire(FETISH_PREGNANCY).isNegative() && lilaya.isVisiblyPregnant()
 		#THEN
-			As Lilaya brushes down her skirt, you can't help but notice that she's still got a very visible bulge in her belly. As she sees what it is you're looking at, your [lilaya.relation(pc)] clears her throat and confirms, [lilaya.speech(~Ahem!~ Yes, I'm still pregnant... So, what is it you need, [pc.name]?)]
+			Когда Лилая поправляет юбку, нельзя не заметить, что у неё всё ещё очень заметный живот. Увидев, на что ты смотришь, твоя [lilaya.relation(pc)] прочищает горло и подтверждает: [lilaya.speech(~Э-э-э!~ Да, я всё ещё беременна... Так что тебе нужно, [pc.name]?)]
 		#ELSE
 			Одергивая юбку, Лилая откашливается, [lilaya.speech(~Кхм!~ Итак, что же тебе нужно, [pc.name]?)]
 		#ENDIF
@@ -384,113 +384,113 @@
 	
 	<htmlContent tag="LAB_ENTRY_ARTHUR_PREGNANCY_BASE"><![CDATA[
 	<p>
-		As you approach the door to Lilaya's lab, you hear the distinctive sound of your demonic [lilaya.relation(pc)]'s voice getting louder and louder, [lilaya.speech(...and I told you <i>three times</i> already! <i>Don't touch my notes!</i>)]
+		По мере приближения к двери в лабораторию Лилайи ты различаешь всё более отчётливый голос твоей демонической [pc.morphSingleGent([lilaya.relation(pc)])]: [lilaya.speech(...я же говорила тебе уже трижды! <i>Не прикасайся к моим записям!</i>)]
 	</p>
 	<p>
-		Stepping through the open doorway, you see a rather flustered-looking Arthur sitting down on one of the lab's many chairs, his eyes cast to the floor as he endures your angry [lilaya.relation(pc)]'s furious scolding. [arthur.speech(Sorry, Lilaya, I just thought that-)]
+		Переступая через открытый дверной проём, ты замечаешь Артура, который выглядит слегка растерянным. Он сидит на одном из стульев в лаборатории, опустив взгляд в пол, пока твоя разгневанная [lilaya.relation(pc)] отчитывает его. [arthur.speech(Прости, Лилайя, я просто решил, что...)]
 	</p>
 	<p>
-		[lilaya.speech(Be quiet!)] Lilaya shrieks, before suddenly noticing your entry. [lilaya.speech(And now the other asshole's here! [pc.Name]! Come and take a seat, <i>this instant</i>!)]
+		[lilaya.speech(Тише!)] — вскрикивает Лилайя, после чего внезапно замечает твоё появление. [lilaya.speech(И вот ещё [pc.genderBasedWord(один идиот пожаловал, одна идиотка пожаловала)]! [pc.Name]! Подойди и садись, немедленно!)]
 	</p>
 	]]>
 	</htmlContent>
 	
 	<htmlContent tag="LAB_ENTRY_ARTHUR_PREGNANT"><![CDATA[
 	<p>
-		Looking down at your [lilaya.relation(pc)]'s stomach, you see the reason why she's addressing you in such a furious manner; her belly is quite visibly swollen, making it obvious that you've ended up getting her pregnant. Knowing from experience that it's best to just do as you're told when your [lilaya.relation(pc)] is like this, you walk over to the chair next to Arthur and sit down.
+		Глядя на живот своей [pc.morphSingleGent([lilaya.relation(pc)])], ты понимаешь, почему она обращается к тебе так яростно: её живот заметно вздулся, и стало очевидно, что ты [pc.genderBasedWord(сделал , сделала)] её беременной. Зная по опыту, что в таких случаях лучше просто делать то, что тебе говорят, ты подходишь к стулу рядом с Артуром и садишься.
 	</p>
 	<p>
-		Addressing you, Lilaya shouts, [lilaya.speech(You <i>know</i> I'm just a half-demon! That means all my kids end up as imps! Do you have any idea of how embarrassing and shameful it is to be called an 'imp-breeder', or 'imp-fucker'?! <i>Do you?!</i>)]
+		Обращаясь к тебе, Лилйая кричит: [lilaya.speech(Ты же <i>знаешь</i>, что я всего лишь полудемон! Это значит, что все мои дети будут бесами! Ты хоть представляешь, как унизительно и стыдно быть «разводчицей бесов» или «бесовской шлюхой»?! <i>Представляешь?!</i>)]
 	</p>
 	<p>
-		Not even giving you a chance to answer, she continues in the same furious tone, [lilaya.speech(Once this business with Arthur is sorted out, I don't want to see you anywhere near my lab until my pregnancy is resolved!)]
+		Не давая тебе даже возможности ответить, она продолжает в том же яростном тоне: [lilaya.speech(Как только этот вопрос с Артуром будет решён, я не хочу видеть тебя рядом с моей лабораторией, пока моя беременность не закончится!)]
 	</p>
 	]]>
 	</htmlContent>
 	
 	<htmlContent tag="LAB_ENTRY_ARTHUR_NOT_PREGNANT"><![CDATA[
 	<p>
-		Knowing from experience that it's best to just do as you're told when your [lilaya.relation(pc)]'s like this, you walk over to the chair next to Arthur and sit down. Looking up at Lilaya's flat stomach, you see that you didn't end up getting her pregnant after all, and, seeing what it is you're glancing at, she firmly says, [lilaya.speech(Yes, luckily for you, I'm not pregnant. You'd have been in so much trouble if I was!)]
+		Зная по опыту, что лучше всего просто делать то, что тебе говорят, когда твоя [lilaya.relation(pc)] в таком состоянии, ты подходишь к стулу рядом с Артуром и садишься. Глядя на плоский живот Лилайи, ты видишь, что она в итоге не забеременела. Заметив, на что ты смотришь, она твёрдо говорит: [lilaya.speech(Да, к твоему счастью, я не беременна. Если бы я была беременна, у тебя были бы большие неприятности!)]
 	</p>
 	<p>
-		Taking a step back, Lilaya doesn't pause for a moment, and angrily continues, [lilaya.speech(As we only ever give birth to imps, it's extremely embarrassing and shameful for half-demons to get pregnant. Even those who know that I'm the recognised daughter of Lyssieth herself would call me 'imp-breeder' or 'imp-fucker' behind my back... I <i>hate</i> being pregnant!)]
+		Отступив на шаг назад, Лилайя не задумываясь продолжает: [lilaya.speech(Поскольку мы рожаем только бесов, для полудемонов беременность является чрезвычайно постыдным и унизительным явлением. Даже те, кто знает, что я признанная дочь самой Лиссиет, за моей спиной называют меня «разводчицей бесов» или «бесовской шлюхой»... Я <i>ненавижу</i> быть беременной!)]
 	</p>
 	]]>
 	</htmlContent>
 	
 	<htmlContent tag="LAB_ENTRY_ARTHUR_BASE"><![CDATA[
 	<p>
-		As you approach the door to Lilaya's lab, you hear the distinctive sound of your demonic [lilaya.relation(pc)]'s voice getting louder and louder, [lilaya.speech(...and I told you <i>three times</i> already! <i>Don't touch my notes!</i>)]
+		Когда ты подходишь к двери лаборатории Лилайи, ты слышишь характерный голос твоей демонической [pc.morphSingleGent([lilaya.relation(pc)])], который становится всё громче и громче: [lilaya.speech(...и я уже <i>три раза</i> тебе говорила! <i>Не трогай мои записи</i>!)]
 	</p>
 	<p>
-		Stepping through the open doorway, you see a rather flustered-looking Arthur sitting down on one of the lab's many chairs, his eyes cast to the floor as he endures your angry [lilaya.relation(pc)]'s furious scolding. [arthur.speech(Sorry, Lilaya, I just thought that-)]
+		Пройдя через открытую дверь, ты видишь довольно растерянного Артура, сидящего на одном из многочисленных стульев в лаборатории, с опущенными глазами, терпеливо выслушивающего гневные упреки твоей разгневанной [pc.morphSingleGent([lilaya.relation(pc)])]. [arthur.speech(Прости, Лилайя, я просто подумал, что...)]
 	</p>
 	<p>
-		[lilaya.speech(Be quiet!)] Lilaya shrieks, before suddenly noticing your entry. [lilaya.speech([pc.Name]! Please come in and take a seat!)]
+		[lilaya.speech(Тише!)] Лилайя вскрикивает, прежде чем внезапно заметить твое появление. [lilaya.speech([pc.Name]! Пожалуйста, входи и присаживайся!)]
 	</p>
 	<p>
-		Knowing from experience that it's best to just do as you're told when your [lilaya.relation(pc)]'s like this, you walk over to the chair next to Arthur and sit down.
+		Зная по опыту, что лучше всего просто делать то, что тебе говорят, когда твоя [lilaya.relation(pc)] в таком состоянии, ты подходишь к стулу рядом с Артуром и садишься.
 	</p>
 	]]>
 	</htmlContent>
 	
 	<htmlContent tag="LAB_ENTRY_ARTHUR"><![CDATA[
 	<p>
-		Lilaya starts pacing back and forth, her eyes fixed on Arthur as she explains the situation to the two of you, [lilaya.speech(It's just impossible. Absolutely <i>impossible</i>! I might need your help in order to figure out how to return [pc.name] to [pc.her] world, but I simply <i>cannot</i> be around you for longer than five minutes!)]
+		Лилайя начинает ходить взад-вперед, не сводя глаз с Артура, и объясняет вам обоим ситуацию: [lilaya.speech(Это просто невозможно. Абсолютно <i>невозможно</i>! Мне может понадобиться ваша помощь, чтобы понять, как вернуть [pc.morphSingleNameGene([pc.name])] в [pc.her] мир , но я просто <i>не могу</i> находиться рядом с вами дольше пяти минут!)]
 	</p>
 	<p>
-		[arthur.speech(Lilaya, please, how many times to I have to say I'm sorr-)] Arthur starts, before being cut short by a sudden exclamation from your [lilaya.relation(pc)].
+		[arthur.speech(Лилайя, пожалуйста, сколько раз я должен просить прощения?)] - Артур начинает говорить, но его прерывает внезапный возглас твоей [pc.morphPluralGent([lilaya.relation(pc)])].
 	</p>
 	<p>
-		[lilaya.speech(You wouldn't have had to say sorry even <i>once</i> if you could have just refrained from fucking my mother! And right here in my lab of all places!)] Lilaya shouts, her cheeks burning red from embarrassment and anger. With a dismissive swipe of her hand, she turns to you and demands, [lilaya.speech([pc.Name], you're going to help Rose clear out my lab's storeroom so that it can be converted into a bedroom for Arthur! I simply can't endure having this insufferable cheating bastard in my presence for more than a few minutes at a time!)]
+		[lilaya.speech(Тебе не пришлось бы извиняться <i>ни разу</i>, если бы ты просто воздержался от секса с моей матерью! И притом прямо здесь, в моей лаборатории!)] — кричит Лилайя, щеки которой покраснели от смущения и гнева. С пренебрежительным взмахом руки она поворачивается к тебе и требует: [lilaya.speech([pc.Name], ты поможешь Розе очистить кладовую моей лаборатории, чтобы её можно было превратить в спальню для Артура! Я просто не могу терпеть этого невыносимого изменника в моём присутствии дольше, чем несколько минут!)]
 	</p>
 	<p>
-		Finding yourself in an increasingly awkward position, you realise that your only real option is to agree to do as your [lilaya.relation(pc)] asks...
+		Оказавшись во всё более неловком положении, ты понимаешь, что единственный реальный выход — согласиться сделать то, о чём просит твоя [lilaya.relation(pc)]...
 	</p>
 	]]>
 	</htmlContent>
 	
 	<htmlContent tag="LILAYA_ELLE_HELP_REPEAT"><![CDATA[
 	<p>
-		Having forgotten what it was that Lilaya deduced about Elle's location, you ask your [lilaya.relation(pc)] if she can remind you of where you should be looking for her. Letting out an exasperated sigh, Lilaya pushes her glasses up onto the bridge of her nose and sharply states, [lilaya.speech(She's going down into the Bat Caverns, remember?! Just travel down to the west side of Submission to get there!)]
+		Забыв, что именно Лилайя вычислила о местонахождении Элль, ты спрашиваешь свою [pc.morphPluralGent([lilaya.relation(pc)])], может ли она напомнить тебе, где следует её искать. Выдохнув с досадой, Лилайя поднимает очки на переносицу и резко заявляет: [lilaya.speech(Она спускается в Пещеры Летучих Мышей, помнишь?! Просто отправляйся на западную сторону Подземья, чтобы туда добраться!)]
 	</p>
 	<p>
 		#IF(game.isSillyMode())
-			As you start to thank Lilaya for her help, she steps forwards and bonks you over the head with a rolled-up stack of papers. Frowning at you in disapproval, she states, [lilaya.speech(Please do try to remember what I've said this time!)]
+			Когда ты начинаешь благодарить Лилайю за помощь, она делает шаг вперёд и бьет тебя по голове свернутым стопкой бумаг. Нахмурившись в знак неодобрения, она говорит: [lilaya.speech(Пожалуйста, постарайся запомнить то, что я сказала на этот раз!)]
 		#ELSE
-			Thanking Lilaya for her help, and reassuring her that you'll be careful, you wonder what to do next...
+			Поблагодарив Лилайю за помощь и заверив её, что будешь [pc.genderBasedWord(осторожен, осторожна)], ты задумываешься, что делать дальше...
 		#ENDIF
 	</p>
 	<p style='text-align:center;'>
-		[style.italicsMinorGood(You can find Elle by searching in the Bat Caverns between [units.time(12)]-[units.time(15)] on a Wednesday!)]
+		[style.italicsMinorGood(Ты можешь найти Элль, проведя поиск в пещерах Летучих мышей между [units.time(12)] и [units.time(15)] в среду!)]
 	</p>
 	]]>
 	</htmlContent>
 	
 	<htmlContent tag="LILAYA_ELLE_HELP"><![CDATA[
 	<p>
-		Struggling to figure out for yourself where Elle could be teleporting to during her long Wednesday lunch breaks, you ask Lilaya if she can help you to figure out where to go. Telling her that the Superintendent apparently takes a pair of night vision goggles with her, and that she returns with wet shoes often coated in some kind of glowing residue, you ask your [lilaya.relation(pc)] if she can figure out what location Elle is visiting.
+		Пытаясь самостоятельно выяснить, куда Элль может телепортироваться во время своих длинных обеденных перерывов по средам, ты спрашиваешь Лилайю, может ли она помочь тебе выяснить, куда нужно идти. Рассказывая ей, что суперинтендант, по-видимому, берет с собой очки ночного видения и часто возвращается с мокрыми ботинками, покрытыми каким-то светящимся налётом, ты спрашиваешь свою [pc.morphSingleGent([lilaya.relation(pc)])], может ли она выяснить, какое место посещает Элль.
 	</p>
 	<p>
-		[lilaya.speech(Hmm, well, if she's taking night vision goggles with her, then she's going somewhere that's dark even in the middle of the day,)] Lilaya muses, before stepping over to a nearby pile of books and retrieving one that appears to be a reference guide on local flora. Flicking through the pages, she quickly finds what she was looking for, and reads out loud, [lilaya.speech(<i>'Bioluminescent fungi are found all throughout Lilith's Realm...'</i> Now where's the section on Dominion... Ah, here it is; <i>'One may be surprised to discover that the subterranean Bat Caverns are home to one of the most diverse fungal ecosystems currently known to exist. In places, vast carpets of bioluminescent fungi can be observed, and it is impossible to take a step without disturbing their vividly-glowing spores...'</i>)]
+		[lilaya.speech(Хм, ну, если она берет с собой очки ночного видения, значит, она собирается в место, где даже днём темно)] - размышляет Лилайя, прежде чем подойти к ближайшей стопке книг и взять одну из них, которая, судя по всему, является справочником по местной флоре. Листая страницы, она быстро находит то, что искала, и читает вслух: [lilaya.speech(<i>«Биолюминесцентные грибы встречаются по всему царству Лилит...»</i> А где же раздел о Доминионе... А, вот оно: <i>«Может удивить тот факт, что подземные пещеры летучих мышей являются домом для одной из самых разнообразных грибных экосистем, известных на сегодняшний день. В некоторых местах можно увидеть обширные ковры из биолюминесцентных грибов, и невозможно сделать ни шага, не потревожив их ярко светящиеся споры...»</i>)]
 	</p>
 	<p>
-		Closing her book and looking up at you with a triumphant look on her face, your [lilaya.relation(pc)] proudly declares, [lilaya.speech(Mystery solved! Your elusive Enforcer must be teleporting down into the Bat Caverns. If you've never been there before, then you should know that you have to travel down to the west side of Submission to get there. Please do be careful if you do decide to follow this 'Elle' character though; the last I heard, the Bat Caverns are quite a dangerous place...)]
+		Закрыв книгу и посмотрев на тебя с торжествующим выражением лица, твоя [lilaya.relation(pc)] гордо заявляет: [lilaya.speech(Загадка решена! Твой неуловимый Исполнитель, должно быть, телепортируется в Пещеры Летучих мышей. Если ты никогда там не [pc.genderBasedWord(был, была)], то знай, что чтобы туда добраться, нужно спуститься на западную сторону Подземья. Однако будь [pc.genderBasedWord(осторожен, осторожена)], если решишь последовать за этой «Элль»; насколько я знаю, Пещеры Летучих Мышей — довольно опасное место...)]
 	</p>
 	#IF(game.isSillyMode())
 		<p>
-			You start to thank Lilaya for her help, but before you're able to articulate your thoughts, she steps forwards and bonks you on the head with the book that she's still holding. Frowning at you in disapproval, she tuts, [lilaya.speech(You really should have been able to solve this by yourself...)]
+			Ты начинаешь благодарить Лилайю за помощь, но, не успев выразить свои мысли, она делает шаг вперёд и бьет тебя по голове книгой, которую всё ещё держит в руках. Нахмурившись в знак неодобрения, она цыкает: [lilaya.speech(Ты действительно [pc.genderBasedWord(должен был, должна была)] решить эту проблему [pc.genderBasedWord(сам, сама)]...)]
 		</p>
 		<p>
-			Rubbing your head and feeling more than a little ashamed from your [lilaya.relation(pc)]'s words, you wonder what to do next...
+			Потирая голову и чувствуя себя более чем немного [pc.genderBasedWord(смущенным, смущенной)] словами [pc.morphSingleGent([lilaya.relation(pc)])], ты задаешься вопросом, что делать дальше...
 		</p>
 	#ELSE
 		<p>
-			Thanking Lilaya for her help, and reassuring her that you'll be careful, you wonder what to do next...
+			Поблагодарив Лилайю за помощь и заверив её, что будешь [pc.genderBasedWord(осторожен, осторожена)], ты задумываешься, что делать дальше...
 		</p>
 	#ENDIF
 	<p style='text-align:center;'>
-		[style.italicsMinorGood(You can find Elle by searching in the Bat Caverns between [units.time(12)]-[units.time(15)] on a Wednesday!)]
+		[style.italicsMinorGood(Ты можешь найти Элль, проведя поиск в пещерах Летучих мышей между [units.time(12)] и [units.time(15)] в среду!)]
 	</p>
 	]]>
 	</htmlContent>
@@ -500,10 +500,10 @@
 	
 	<htmlContent tag="LAB_EXIT"><![CDATA[
 	<p>
-		You find yourself standing in what appears at first to be a huge library. The walls are covered in shelving, holding what must be hundreds, if not thousands, of ancient-looking leather-bound tomes. Most of the room, however, is occupied by a series of long tables, each covered in strange glass vials, odd-looking instruments, and bottles of glowing liquids.
+		Ты оказываешься в помещении, которое на первый взгляд кажется огромной библиотекой. Стены заставлены стеллажами, на которых стоят сотни, если не тысячи, старинных фолиантов в кожаных переплетах. Однако большую часть комнаты занимают длинные столы, на которых стоят странные стеклянные пробирки, необычные приборы и бутылки со светящимися жидкостями.
 	</p>
 	<p>
-		Lilaya is hovering close by, ready to answer any questions you might have. Her cat-girl maid, Rose, is dutifully standing in one corner of the room, ready to assist with any request her mistress might make.
+		Лилайя находится поблизости, готовая ответить на любые твои вопросы. Её горничная-кошкодеушка Роза послушно стоит в углу комнаты, готовая выполнить любое пожелание своей хозяйки.
 	</p>
 	]]>
 	</htmlContent>
@@ -513,7 +513,7 @@
 	
 	<htmlContent tag="LAB_EXIT_THROWN_OUT"><![CDATA[
 	<p>
-		You find yourself standing outside the door to Lilaya's laboratory. Your demonic [lilaya.relation(pc)] seemed pretty angry, and you think that it's probably a good idea if you gave her some time to cool off before trying to speak to her again...
+		Ты стоишь у двери лаборатории Лилайи. Твоя демоническая [lilaya.relation(pc)] казалась довольно разгневанной, и ты думаешь, что, вероятно, было бы неплохо дать ей немного времени, чтобы она успокоилась, прежде чем снова пытаться с ней поговорить...
 	</p>
 	]]>
 	</htmlContent>
@@ -523,72 +523,72 @@
 	
 	<htmlContent tag="LILAYA_PRESENT_1"><![CDATA[
 	<p>
-		[pc.speech(I wanted to get you something for Юлэтид, to thank you for everything,)] you say, holding out the wrapped gift towards Lilaya, [pc.speech(so here you go. Happy Юлэтид, Lilaya!)]
+		[pc.speech(Я хочу подарить тебе что-нибудь на Юлетид, чтобы поблагодарить тебя за всё)] — говоришь ты, протягивая Лилайе завернутый подарок, [pc.speech(так что, вот. Счастливого Юлетида, Лилайя!)]
 	</p>
 	<p>
-		Your [lilaya.relation(pc)] gasps as you give her the gift you bought, [lilaya.speech([pc.Name]! Y-You didn't have to do that! Oh my goodness, t-thank you so much!)]
+		Твоя [lilaya.relation(pc)] ахает, когда ты даришь ей купленный подарок: [lilaya.speech([pc.Name]! Н-не нужно было! О боже, б-большое спасибо!)]
 	</p>
 	<p>
-		She seems completely shocked at the fact that you're giving her a gift, and awkwardly takes the present from out of your hands. [lilaya.speech(S-Should I open it now?)]
+		Она кажется совершенно потрясенной тем, что ты даришь ей подарок, и неловко принимает его из твоих рук. [lilaya.speech(М-можно я его сейчас открою?)]
 	</p>
 	<p>
-		[pc.speech(Go on, it'll be fun,)] you reply. [pc.speech(I got it from one of the reindeer-morphs who're working to keep the streets clear of snow. The contents are a surprise, so I guess we'll find out what's in there together!)]
+		[pc.speech(Давай, будет весело)] — отвечаешь ты: [pc.speech(Я [pc.genderBasedWord(получил, получила)] его от одного из оленоморфов, которые работают над очисткой улиц от снега. Содержимое — сюрприз, так что, полагаю, мы вместе узнаем, что там внутри!)]
 	</p>
 	<p>
-		Lilaya sets the present down on the table behind her, before pulling off the ribbon and tearing off the wrapping paper. Opening the top of the box, she gasps as she sees what's inside, and then just a moment later you see it too, as she reaches in and lifts out a beautiful pink [#CT_innoxia_japanese_kanzashi.getName()].
+		Лилайя кладёт подарок на стол позади себя, снимает ленту и разрывает оберточную бумагу. Открыв крышку коробки, она ахает, увидев, что внутри, и через мгновение ты тоже это видишь, когда она достаёт из коробки красивое розовое [#CT_innoxia_japanese_kanzashi.getName()].
 	</p>
 	<p>
-		Lilaya turns towards you, a huge smile on her face as she exclaims, [lilaya.speech(Oh, [pc.name]! It's beautiful! Thank you so much!)]
+		Лилайя поворачивается к тебе с широкой улыбкой на лице и восклицает: [lilaya.speech(О, [pc.name]! Это прекрасно! Большое спасибо!)]
 	</p>
 	<p>
-		Before you can react, your demonic [lilaya.relation(pc)] leaps forwards and pulls you into a loving hug; a gesture that you instantly reciprocate. You feel the warmth of her body as she presses herself tightly against you, squashing her [lilaya.breastSize] breasts into your chest as she sighs, [lilaya.speech(Really, thank you so much.)]
+		Прежде чем ты успеваешь отреагировать, твоя демоническая [lilaya.relation(pc)] прыгает вперед и обнимает тебя; ты мгновенно отвечаешь на этот жест. Ты чувствуешь тепло её тела, когда она прижимается к тебе, прижимая свои [pc.morphGenPlural([lilaya.breastSize])] груди к твоей груди, и вздыхает: [lilaya.speech(Правда, спасибо тебе большое.)]
 	</p>
 	<p>
-		After a few moments, Lilaya pulls back, placing the [#CT_innoxia_japanese_kanzashi.getName()] to one side and waiting to see what you'd like to discuss next.
+		Через несколько мгновений Лилайя отстраняется, откладывает [#CT_innoxia_japanese_kanzashi.getName()] в сторону и ждёт, чтобы узнать, о чём ты хочешь поговорить дальше.
 	</p>
 	]]>
 	</htmlContent>
 	
 	<htmlContent tag="LILAYA_PRESENT_2"><![CDATA[
 	<p>
-		[pc.speech(After I saw how happy you were to receive that [#CT_innoxia_japanese_kanzashi.getName()], I decided to get you another Юлэтид gift,)] you say, holding out another wrapped gift towards Lilaya, [pc.speech(so here you go. Happy Юлэтид again, Lilaya!)]
+		[pc.speech(Увидев, как ты обрадовалась, получив [#CT_innoxia_japanese_kanzashi.getName()], я [pc.genderBasedWord(решил, решилf)] подарить тебе ещё один подарок на Юлетид),] — говоришь ты, протягивая Лилае ещё один завернутый подарок: [pc.speech(так что, держи. Снова счастливого Юлетида, Лилайя!)]
 	</p>
 	<p>
-		Your [lilaya.relation(pc)]'s cheeks flush bright red as you give her another gift. [lilaya.speech([pc.name]! Y-You didn't have to! O-One gift was more than enough!)]
+		Щёки твоей [pc.morphSingleGent([lilaya.relation(pc)])] краснеют, когда ты даришь ей ещё один подарок. [lilaya.speech([pc.name]! Н-Не нужно было! О-Одного подарка было более чем достаточно!)]
 	</p>
 	<p>
-		[pc.speech(I know I didn't have to, but I wanted to,)] you smile, handing the gift over to Lilaya, [pc.speech(so go on, open it and let's find out what it is this time!)]
+		[pc.speech(Я знаю, что не [pc.genderBasedWord(обязан, обязана)] этого делать, но я хочу)] — ты улыбаешься, передавая подарок Лилайе: [pc.speech(так что давай, открой его и посмотрим, что это на этот раз!)]
 	</p>
 	<p>
-		Doing as you suggest, Lilaya places the gift down on the table beside her, before pulling off the ribbon and wrapping paper. Taking off the lid, she reaches inside and produces a pair of [#CT_innoxia_japanese_geta.getNamePlural()], before turning and smiling lovingly at you, [lilaya.speech(Thank you, [pc.name]! These will go perfectly with the [#CT_innoxia_japanese_kanzashi.getName()] you got me before!)]
+		Следуя твоему совету, Лилайя кладёт подарок на стол рядом с собой, а затем снимает ленту и оберточную бумагу. Сняв крышку, она достает изнутри пару [#CT_innoxia_japanese_geta.getNamePlural()], а затем поворачивается к тебе и с любовью улыбается: [lilaya.speech(Спасибо, [pc.name]! Они идеально подойдут к [#CT_innoxia_japanese_kanzashi.getName()], которое ты мне [pc.genderBasedWord(подарил, подарила)] раньше!)]
 	</p>
 	<p>
-		[pc.speech(Now all you need is the kimono itself,)] you reply, [pc.speech(and then you've got the full set!)]
+		[pc.speech(Теперь тебе нужно только само кимоно)] — отвечаешь ты: [pc.speech(и тогда у тебя будет полный комплект!)]
 	</p>
 	<p>
-		[lilaya.speech(P-Please,)] Lilaya stutters a little, [lilaya.speech(don't feel obliged to get me any more gifts! This is already far more than I ever would have dreamed of!)]
+		[lilaya.speech(П-пожалуйста,)] Лилая немного заикается, [lilaya.speech(не считай себя обязанным дарить мне ещё подарки! Это уже гораздо больше, чем я когда-либо могла мечтать!)]
 	</p>
 	<p>
-		Almost as if to hide her sudden embarrassment, your demonic [lilaya.relation(pc)] steps forwards and pulls you into another tight hug; her [lilaya.breastSize] breasts pressing up against you as she holds you close. After a moment, she then pulls back, and, placing the [#CT_innoxia_japanese_geta.getNamePlural()] to one side, she waits to see what you'd like to discuss next.
+		Словно пытаясь скрыть своё внезапное смущение, твоя демоническая [lilaya.relation(pc)] делает шаг вперёд и снова крепко обнимает тебя; её [pc.morphGenSinFem([lilaya.breastSize])] грудь прижимается к тебе, когда она держит тебя близко. Через мгновение она отстраняется, откладывает [#CT_innoxia_japanese_geta.getNamePlural()] в сторону и ждёт, чтобы узнать, о чём ты хочешь поговорить дальше.
 	</p>
 	]]>
 	</htmlContent>
 	
 	<htmlContent tag="LILAYA_PRESENT_3"><![CDATA[
 	<p>
-		[pc.speech(Seeing as you have the other two parts already, I thought I'd get you one last gift, to see if it contains the kimono to finish the set,)] you say, holding out the wrapped gift towards Lilaya, [pc.speech(so here you go. Happy Юлэтид yet again Lilaya!)]
+		[pc.speech(Увидев, что у тебя уже есть две другие части, я [pc.genderBasedWord(решил, решила)] подарить тебе последний подарок, чтобы посмотреть, есть ли в нём кимоно, которое завершит комплект)] — говоришь ты, протягивая Лилайе завернутый подарок: [pc.speech(так что, держи. Снова счастливого Юлетида, Лилайя!)]
 	</p>
 	<p>
-		Your demonic [lilaya.relation(pc)] cheeks turn a deep shade of scarlet, and she stutters in her embarrassment, [lilaya.speech(P-Please! [pc.Name]! I-I said you'd already given me enough!)]
+		Щёки твоей демонической [pc.morphSingleGent([lilaya.relation(pc)])] окрашиваются в глубокий оттенок алого, и она заикается от смущения: [lilaya.speech(П-пожалуйста! [pc.Name]! Я-я сказала, что ты уже [pc.genderBasedWord(дал, дала)] мне достаточно!)]
 	</p>
 	<p>
-		[pc.speech(I know, I know,)] you laugh, pressing the gift into Lilaya's hands, [pc.speech(but I really wanted to get you the whole set!)]
+		[pc.speech(Я знаю, знаю)] - ты смеёшься, вкладывая подарок в руки Лилайи: [pc.speech(но я действительно хочу подарить тебе весь набор!)]
 	</p>
 	<p>
-		[lilaya.speech(W-Well, these are random gifts, right? S-So it's probably not even going to be a kimono, b-but thank you anyway,)] Lilaya says, placing the gift down on the table beside her, before pulling off the ribbon and wrapping paper. Lifting off the lid, your easily-embarrassed [lilaya.relation(pc)] fails to contain an excited little cry as she sees what's inside. Your suspicions as to what it is are proven correct, as she quickly lifts out a beautiful pink [#CT_innoxia_japanese_kimono.getName()], before turning and beaming at you in delight. [lilaya.speech(Thank you so, so much, [pc.name]! This is the best Юлэтид ever!)]
+		[lilaya.speech(Ну, это же случайные подарки, верно? Так что, скорее всего, это даже не будет кимоно, но все равно спасибо)] — говорит Лилайя, положив подарок на стол рядом с собой, а затем снимая ленту и оберточную бумагу. Сняв крышку, твоя легко смущающаяся [lilaya.relation(pc)] не может сдержать восторженного возгласа, увидев, что находится внутри. Ваши подозрения о том, что это такое, подтверждаются, когда она быстро вынимает красивое розовое [#CT_innoxia_japanese_kimono.getName()], а затем поворачивается к тебе и лучезарно улыбается. [lilaya.speech(Спасибо тебе огромное, [pc.name]! Это лучший Юлетид в моей жизни!)]
 	</p>
 	<p>
-		Before you can say anything, your demonic [lilaya.relation(pc)] leaps forwards and pulls you into the most loving hug yet; her [lilaya.breastSize] breasts squishing up against your body as she holds you close. After a moment, she then pulls back, and, placing the [#CT_innoxia_japanese_kimono.getName()] to one side, she waits to see what you'd like to discuss next.
+		Не успеваешь ты ничего сказать, как твоя демоническая [lilaya.relation(pc)] бросается вперед и обнимает тебя самым нежным объятием; её [pc.morphGenSinFem([lilaya.breastSize])] грудь прижимается к твоему телу, когда она крепко обнимает тебя. Через мгновение она отстраняется, откладывает [#CT_innoxia_japanese_kimono.getName()] в сторону и ждет, чтобы узнать, о чём ты хочешь поговорить дальше.
 	</p>
 	]]>
 	</htmlContent>
@@ -598,10 +598,10 @@
 	
 	<htmlContent tag="LAB_DEMON_TF_AGREE"><![CDATA[
 	<p>
-		Having been convinced by Lilaya's passionate plea, you agree to do as she asks,
+		[pc.genderBasedWord(Убежденный, Убежденная)] страстной просьбой Лилайи, ты соглашаешься сделать то, о чём она просит.
 		#IF pc.hasFetish(FETISH_INCEST)
-		#THEN [pc.speech(Ok, Lilaya, use the resonance stone to contact mommy, and I'll help you to convince her.)]
-		#ELSE [pc.speech(Ok, Lilaya, use the resonance stone to contact Lyssieth, and I'll help you to convince her.)]
+		#THEN [pc.speech(Хорошо, Лилайя, используй резонансный камень, чтобы связаться с мамой, а я помогу тебе её убедить.)]
+		#ELSE [pc.speech(Хорошо, Лилайя, используй резонансный камень, чтобы связаться с Лиссиет, а я помогу тебе её убедить.)]
 		#ENDIF
 	</p>
 	]]>
@@ -609,10 +609,10 @@
 	
 	<htmlContent tag="LAB_DEMON_TF_AGREE_AFTER_REPEAT"><![CDATA[
 	<p>
-		Wanting to let Lilaya know that you've changed your mind, you say,
+		Желая сообщить Лилайе, что ты [pc.genderBasedWord(передумал, передумала)], ты говоришь:
 		#IF pc.hasFetish(FETISH_INCEST)
-		#THEN [pc.speech(Go on, use the resonance stone to contact mommy, and I'll help you to convince her to turn you into a full demon.)]
-		#ELSE [pc.speech(Go on, use the resonance stone to contact Lyssieth, and I'll help you to convince her to turn you into a full demon.)]
+		#THEN [pc.speech(Давай, используй резонансный камень, чтобы связаться с мамой, а я помогу тебе убедить её превратить тебя в полноценного демона.)]
+		#ELSE [pc.speech(Давай, используй резонансный камень, чтобы связаться с Лиссиет, а я помогу тебе убедить её превратить тебя в полноценного демона.)]
 		#ENDIF
 	</p>
 	]]>
@@ -620,46 +620,46 @@
 	
 	<htmlContent tag="LAB_DEMON_TF_AGREE_CORE"><![CDATA[
 	<p>
-		Your [lilaya.relation(pc)]'s eyes light up as you say this, and she quickly rushes over to the other side of her lab where she keeps the resonance stone. Holding it in one hand, you see the dark-purple sphere light up and start to emit a soft pink glow. In a clear voice, Lilaya states, [lilaya.speech(Mommy, I need you to come here. Right now.)]
+		Когда ты это говоришь, глаза твоей [pc.morphSingleGent([lilaya.relation(pc)])] загораются, и она быстро бежит на другую сторону своей лаборатории, где хранит резонансный камень. Держа его в одной руке, ты видишь, как темно-пурпурная сфера загорается и начинает излучать мягкое розовое свечение. Четким голосом Лилайя говорит: [lilaya.speech(Мамочка, мне нужно, чтобы ты подошла сюда. Сейчас же.)]
 	</p>
 	<p>
-		[lyssieth.speech(Yes, dear,)] you hear Lyssieth's voice being projected from out of the arcane device. A moment later, the elder lilin appears before you in a bright purple flash, and although at first she's smiling, her expression turns into one of worry as she sees the angry expression on Lilaya's face. [lyssieth.speech(Oh, sweetheart, what's wrong? You look upse-)]
+		[lyssieth.speech(Да, дорогая)] - ты слышишь голос Лиссиет, проецируемый из таинственного устройства. Через мгновение старая лилин появляется перед тобой в яркой пурпурной вспышке, и хотя сначала она улыбается, её выражение лица меняется на озабоченное, когда она видит сердитое выражение лица Лилайи. [lyssieth.speech(О, дорогая, что случилось? Ты выглядишь расстроенной-)]
 	</p>
 	<p>
-		[lilaya.speech(Of course I'm upset!)] Lilaya interrupts, [lilaya.speech(You said you'd never turn anyone into a demon ever again, and then you go back on your word the moment you meet [pc.name]! So it turns out that you were just lying to me for all these years! You have no problem at all with turning people into demons, so you've got no reason to leave me as a half-demon for any longer! Tell her, [pc.name]!)]
+		[lilaya.speech(Конечно, я расстроена!)] - Лилайя прерывает: [lilaya.speech(Ты сказала, что больше никогда не превратишь никого в демона, а потом нарушила своё слово, как только встретила [pc.morphSingleNameGene([pc.name])]! Так что оказывается, ты все эти годы просто лгала мне! Ты не видишь ничего плохого в том, чтобы превращать людей в демонов, так что у тебя нет причин больше оставлять меня полудемоном! Скажи ей, [pc.name]!)]
 	</p>
 	<p>
-		Having already agreed to help Lilaya, you ask your mother,
+		Уже согласившись помочь Лилайе, ты спрашиваешь свою мать:
 		#IF pc.hasFetish(FETISH_INCEST)
-		#THEN [pc.speech(There'd be no harm in making Lilaya a full demon, would there mommy? It's what she really wants...)]
-		#ELSE [pc.speech(There'd be no harm in making Lilaya a full demon, would there? It's what she really wants...)]
+		#THEN [pc.speech(Не будет ничего плохого в том, чтобы сделать Лилайю полноценной демоницей, правда, мамочка? Это то, чего она действительно хочет...)]
+		#ELSE [pc.speech(Не будет ничего плохого в том, чтобы сделать Лилайю полноценной демоницей, правда? Это то, чего она действительно хочет...)]
 		#ENDIF
 	</p>
 	<p>
-		Lyssieth starts to let out a deep, defeated sigh, before suddenly noticing that Rose is present and duly altering her reaction into an unfriendly sneer, [lyssieth.speech(I will only discuss this back in the privacy of my palace. Come here.)]
+		Лиссет начинает выдыхать глубокий вздох поражения, но внезапно замечает присутствие Розы и меняет свою реакцию на недружелюбную усмешку: [lyssieth.speech(Я обсужу это только в уединении своего дворца. Иди сюда.)]
 	</p>
 	<p>
-		Doing as your mother says, both you and Lilaya step up next to her, and, wrapping an arm around each of you, she teleports you back to her palace in yet another flash of purple light...
+		Следуя совету матери, ты и Лилайя подходите к ней, и она, обнимая вас за плечи, телепортирует вас обратно в свой дворец в очередном вспышке фиолетового света...
 	</p>
 	]]>
 	</htmlContent>
 	
 	<htmlContent tag="LAB_DEMON_TF_REFUSE"><![CDATA[
 	<p>
-		Shaking your head, you reply,
+		Покачав головой, ты отвечаешь:
 		#IF pc.hasFetish(FETISH_INCEST)
-		#THEN [pc.speech(This issue is between you and mommy. I don't want to get between the two of you like this, so I can't do as you ask. Sorry, Lilaya.)]
-		#ELSE [pc.speech(This issue is between you and mother. I don't want to get between the two of you like this, so I can't do as you ask. Sorry, Lilaya.)]
+		#THEN [pc.speech(Это дело между тобой и мамочкой. Я не хочу вмешиваться в ваши отношения, поэтому не могу сделать то, о чём ты просишь. Прости, Лилайя.)]
+		#ELSE [pc.speech(Это дело между тобой и мамой. Я не хочу вмешиваться в ваши отношения, поэтому не могу сделать то, о чем ты просишь. Прости, Лилайя.)]
 		#ENDIF
 	</p>
 	<p>
-		[lilaya.speech(Eugh! You're unbelievable,)] Lilaya crossly states, before turning and pacing back and forth in front of you. [lilaya.speech(I should have known that you and mommy would already have agreed to keep me as a half-demon... Fine! I think you can see how upset I am about being stuck in this half-demon form, so if you want to be a good [pc.sister], then you'll think this over and let me know when you've agreed to help me out.)]
+		[lilaya.speech(Фу! Ты просто [pc.genderBasedWord(невыносим, невыносима)]!)] — сердито заявляет Лилайя, после чего поворачивается и начинает ходить перед тобой взад-вперёд. [lilaya.speech(Я должна была догадаться, что ты и мама уже договорились оставить меня полудемоном... Ладно! Думаю, ты видишь, как я расстроена тем, что застряла в этой полудемонической форме, так что, если хочешь быть [pc.genderBasedWord(хорошим, хорошей)] [pc.morphSingleInstr([pc.sister])], то подумай над этим и дай мне знать, когда согласишься мне помочь.)]
 	</p>
 	<p>
-		[pc.speech(Ok, I'll think about it some more,)] you reply.
+		[pc.speech(Хорошо, я ещё подумаю над этим)] - отвечаешь ты.
 	</p>
 	<p>
-		[lilaya.speech(And remember, you're not getting any sex from me until I'm a full demon, just like you!)] Lilaya finally states, and although her voice is still raised, you sense that her initial anger is dying down. Wondering if you'll change your mind after giving this matter some thought, you think about what to ask your [lilaya.relation(pc)] next...
+		[lilaya.speech(И помни, ты не получишь от меня секса, пока я не стану полноценной демоницей, такой же, как ты!)] — наконец заявляет Лилайя, и хотя её голос по-прежнему повышен, ты чувствуешь, что её первоначальный гнев угасает. Задаваясь вопросом, не изменишь ли ты своё решение после того, как обдумаешь этот вопрос, ты думаешь, о чем спросить свою [pc.morphSingleGent([lilaya.relation(pc)])] дальше...
 	</p>
 	]]>
 	</htmlContent>
@@ -908,13 +908,13 @@
 	
 	<htmlContent tag="LILAYA_SCIENTIST_OUTFIT"><![CDATA[
 	<p>
-		Liking the look of Lilaya's lab coat, you compliment her on her appearance, before asking if she has a spare lying around which you could have.
+		Тебе нравится внешний вид халата Лилайи, и ты делаешь ей комплимент, а затем спрашиваешь, нет ли у неё лишнего халата, который ты [pc.genderBasedWord(мог, могла)] бы взять.
 	</p>
 	<p>
-		[lilaya.speech(Well, in this instance, flattery will get you somewhere after all,)] she responds with a smile on her face. Striding over to a cabinet on the far side of the room, she slides open one of the drawers and retrieves the white lab coat you've asked for. Walking back over to you, she hands you the garment and says, [lilaya.speech(Don't get carried away and start thinking you're a real arcane researcher; it takes years of study to get to that level.)]
+		[lilaya.speech(Ну, в данном случае лесть всё-таки сработает)], она отвечает с улыбкой на лице. Подойдя к шкафу на другом конце комнаты, она открывает один из ящиков и достаёт белый халат, о котором ты [pc.genderBasedWord(просил, просила)]. Вернувшись к тебе, она протягивает тебе халат и говорит: [lilaya.speech(Не дайте себе увлечься и не начинайте думать, что ты настоящий исследователь магии; чтобы достичь моего уровня, нужны годы учёбы)].
 	</p>
 	<p>
-		As you thank your [lilaya.relation(pc)], she hands you something else which she'd just retrieved from the same drawer, and you look down to see that it's a pair of safety goggles. Flashing you another smile, Lilaya says, [lilaya.speech(If you're trying to get the look right, you'll need these too. Anyway, is there anything else you want?)]
+		Ты благодаришь свою [lilaya.relation(pc)], она протягивает тебе ещё одну вещь, которую только что достала из того же ящика, ты смотришь вниз и видишь, что это защитные очки. Улыбаясь тебе, Лилайя говорит: [lilaya.speech(Если ты хочешь выглядеть стильно, тебе понадобятся и они. В общем, тебе ещё что-нибудь нужно?)]
 	</p>
 	]]>
 	</htmlContent>
@@ -925,27 +925,27 @@
 	<htmlContent tag="LAB_LILAYA_HUG"><![CDATA[
 	<p>
 		#IF(pc.isQuestProgressGreaterThan(QUEST_LINE_MAIN, QUEST_MAIN_2_D_MEETING_A_LILIN))
-			Although she's no longer the same person you knew before Lilith's spell altered this reality, you know that Lilaya is sure to love the same sort of big hug which you used to give her when she was your aunt Lily.
+			Хотя она больше не та, кого ты [pc.genderBasedWord(знал, знала)] до того, как заклинание Лилит изменило эту реальность, ты знаешь, что Лилайя наверняка по-прежнему любит те же самые крепкие объятия, которые ты [pc.genderBasedWord(дарил, дарила)] ей, когда она была твоей тётей Лили.
 		#ELSE
-			Although she's not the same person as the Lily from your world, you know that Lilaya is sure to love the same sort of big hug which you used to give your aunt.
+			Хотя она не та же Лили из твоего мира, ты знаешь, что Лилайя наверняка любит такие же крепкие объятия, как те, которыми ты [pc.genderBasedWord(обнимал, обнимала)] свою тетю.
 		#ENDIF
 		#IF(pc.isShy())
-			 Although you're shy around most people, you feel at ease when in the presence of [lilaya.race], and so you don't feel any trepidation in throwing your [pc.arms] around her and pulling her into your loving embrace.
+			 Хотя ты стесняешься большинства людей, в присутствии [lilaya.race] ты чувствуешь себя непринужденно, поэтому без колебаний обнимаешь её [pc.arms] и притягиваешь к себе.
 		#ELSE
-			 Stepping up to the [lilaya.race], you throw your [pc.arms] around her and pull her into your loving embrace.
+			 Подходя к [lilaya.race], ты обнимаешь её [pc.arms] и притягиваешь к себе в любовном объятии.
 		#ENDIF
 	</p>
 	<p>
-		Furiously blushing at this sudden display of affection, your [lilaya.relation(pc)] stutters, [lilaya.speech(W-What are you doing?! I-I have important work to be getting on with! I-I don't have time for this!)]
+		Ярко покраснев от этого внезапного проявления нежности, твоя [lilaya.relation(pc)] заикается: [lilaya.speech(Ч-Что ты делаешь?! М-Мне нужно заниматься важной работой! У-У меня нет на это времени!)]
 	</p>
 	<p>
-		Despite her words, the embarrassed [lilaya.race] makes no move to push you off of her, and in fact actually seems to lean into your hug. What's more, you're able to see that her [lilaya.tail+] is excitedly wrapping itself around the leg of the table behind her, and as you continue to hold your [lilaya.relation(pc)] in your embrace, her [lilaya.wings+] suddenly flap out and curl around to return your hug. With her cheeks still flushing a deep shade of scarlet, she mutters, [lilaya.speech(I-I suppose I can spare a minute or two...)]
+		Несмотря на свои слова, смущённая [lilaya.race] не делает никаких движений, чтобы оттолкнуть тебя, и, на самом деле, кажется, даже прижимается к тебе. Более того, ты видишь, что её [lilaya.tail+] возбужденно обвивается вокруг ножки стола позади неё, и когда ты продолжаешь держать свою [pc.morphSingleGent([lilaya.relation(pc)])] в объятиях, её [lilaya.wings+] внезапно расправляются и обвиваются вокруг тебя, отвечая на твоё объятие. С щеками, всё ещё покрасневшими до глубокого алого оттенка, она бормочет: [lilaya.speech(Я-я думаю, я могу уделить тебе минуту-другую...)]
 	</p>
 	<p>
-		After sharing a hug with your [lilaya.relation(pc)] for another couple of minutes, she eventually breaks it off and declares, [lilaya.speech(T-That was nice, thank you, [pc.name]. Now, I really have a lot of important work to get done today, s-so please don't try this again!)]
+		После того как ты ещё пару минут обнимаешься с [pc.morphSingleInstr([lilaya.relation(pc)])], она наконец отрывается от тебя и говорит: [lilaya.speech(Э-это было мило, спасибо, [pc.name]. Но у меня сегодня много важных дел, т-так что, пожалуйста, не повторяй это больше!)]
 	</p>
 	<p>
-		Although she made it very clear from her body language that she actually likes being hugged, you're sure that Lilaya would get angry if you were to try and hug her again today. As your [lilaya.relation(pc)] waits to hear if there's anything else you want from her, you think to yourself that you could always do this to her again tomorrow without risk of annoying her... 
+		Хотя она своим языком тела дала понять, что ей на самом деле нравится, когда её обнимают, ты [pc.genderBasedWord(уверен, уверена)], что Лилайя рассердится, если ты попробуешь обнять её снова сегодня. Пока твоя [lilaya.relation(pc)] ждёт, чтобы узнать, хочешь ли ты от неё ещё что-нибудь. Ты думаешь про себя, что всегда можешь повторить это завтра, не рискуя её раздражать...
 	</p>
 	]]>
 	</htmlContent>
@@ -957,144 +957,144 @@
 	#IF(game.getDialogueFlags().hasFlag(FLAG_jinxedClothingDiscovered))
 		#IF(!pc.isAnyEquippedClothingSealed())
 			<p>
-				[pc.speech(I managed to take it off already, but some clothing that I put on a little while ago sort of stuck onto me,)] you explain. [pc.speech(Every time I tried to take it off, some kind of weird enchantment stopped me. I was wondering if you knew what was causing that?)]
+				[pc.speech(Я уже успел его снять, но некоторые вещи, которые я [pc.genderBasedWord(надел, надела)] недавно, как бы прилипли ко мне)] - ты объясняешь. [pc.speech(Каждый раз, когда я [pc.genderBasedWord(пытался, пыталась)] это снять, какое-то странное заклинание мешало мне. Может быть, ты знаешь, что вызывает это?)]
 			</p>
 		#ELSE
 			<p>
-				[pc.speech(There seems to be something wrong with [#SPECIAL_PARSE_2] [#SPECIAL_PARSE_0] I'm wearing,)] you explain. [pc.speech(Every time I try to take [#SPECIAL_PARSE_1] off, some kind of weird enchantment stops me. Can you help?)]
+				[pc.speech(Кажется, что-то не так с [#SPECIAL_PARSE_2] [#SPECIAL_PARSE_0], которое я ношу)] - ты объясняешь. [pc.speech(Каждый раз, когда я пытаюсь снять [#SPECIAL_PARSE_1], какое-то странное заклинание мешает мне это сделать. Ты можешь мне помочь?)]
 			</p>
 		#ENDIF
 		<p>
-			Lilaya frowns at you for a moment, then, much to your surprise, she starts scolding you, [lilaya.speech(Well, what did you expect to happen if you're going to start trying on random pieces of clothing like that?!)]
+			Лилайя на мгновение хмурится, а затем, к твоему удивлению, начинает тебя ругать: [lilaya.speech(Ну, а чего ты [pc.genderBasedWord(ожидал, ожидала)], если [pc.genderBasedWord(начал, начала)] примерять случайные вещи?!)]
 		</p>
 		<p>
-			[pc.speech(Well, it's not really my fau-)] you start, but Lilaya quickly interrupts you.
+			[pc.speech(Ну, это не совсем моя вина...)] - ты начинаешь, но Лилайя быстро прерывает тебя.
 		</p>
 		<p>
-			[lilaya.speech(Well then, whose fault is it? Hmm? I can't be running around saving you every time you get in trouble, understood?!)]
+			[lilaya.speech(Ну, тогда чья это вина? Хм? Я не могу бегать за тобой и спасать тебя каждый раз, когда ты попадаешь в беду, понятно?!)]
 		</p>
 		<p>
-			If it were anyone else, you might have argued back, but Lilaya's stern words sound exactly like the sort of lecture you used to receive from your [lilaya.relation(pc)] Lily. That, combined with the fact that this is a rare display of frustration from Lilaya, leaves you muttering out an apology in the hope that you can calm her down. Thankfully, she lets out one last exasperated sigh before taking in a deep breath and speaking in her normal tone.
+			Если бы это была кто-то другой, ты бы, возможно, [pc.genderBasedWord(ответил , ответила)] ей, но строгие слова Лилайи звучат точно так же, как наставления, которые ты [pc.genderBasedWord(получал, получала)] от своей [pc.morphSingleGent([lilaya.relation(pc)])] Лили. Это, в сочетании с тем фактом, что Лилайя редко проявляет такое раздражение, заставляет тебя пробормотать извинение в надежде успокоить её. К счастью, она выдыхает последний раздраженный вздох, а затем глубоко вдыхает и говорит своим обычным тоном.
 		</p>
 		<p>
-			[lilaya.speech(Sorry, I didn't mean to be so stern, it's just that I don't want you to get hurt out there... Anyway, if that's all it is, the solution to sealed clothing is actually quite simple!)]
+			[lilaya.speech(Извини, я не хотела быть такой строгой, просто я не хочу, чтобы ты [pc.genderBasedWord(пострадал, пострадала)]... В любом случае, если дело только в этом, то решение проблемы с запечатанной одеждой на самом деле довольно простое!)]
 		</p>
 		#IF(game.getDialogueFlags().hasFlag(FLAG_essenceOrgasmDiscovered) || game.getDialogueFlags().hasFlag(FLAG_essencePostCombatDiscovered))
 			<p>
-				[pc.speech(Actually, there <i>is</i> something else as well. I recently had this weird experience, where I saw someone's arcane aura. A piece of it broke off and shot <i>into</i> me, and I'm not sure if it needs to be removed or anything...)] your voice trails off as you see an extremely concerned look flash across Lilaya's face.
+				[pc.speech(На самом деле, <i>есть</i> ещё кое-что. Недавно со мной произошло странное событие: я увидел чью-то магическую ауру. Часть её откололась и попала <i>в</i> меня. Не знаю, нужно ли её удалять или что-то в этом роде...)] - твой голос затихает, когда ты видишь крайне обеспокоенное выражение на лице Лилайи.
 			</p>
 			<p>
-				[lilaya.speech(Are you sure?! You absorbed someone's essence directly from them?!)] Lilaya asks, failing to conceal the worried tone in her voice.
+				[lilaya.speech(Ты [pc.genderBasedWord(уверен, уверена)]?! Ты [pc.genderBasedWord(поглотил, поглотила)] чью-то сущность прямо из них?!)] - Лилайя спрашивает, не скрывая беспокойства в голосе.
 			</p>
 			<p>
-				Before you can respond, Lilaya grabs your [pc.arm] and starts pulling you over to the same place where she ran her first test on you. Instructing you to sit on the chair in the middle of the chalk square, she once more starts adjusting the floodlight-like pieces of arcane equipment at each corner.
+				Не успеваешь ты ответить, как Лилайя хватает тебя за [pc.morphSingleAccus([pc.arm])] и тянет к тому месту, где она проводила твой первый тест. Она велит тебе сесть на стул посреди мелового квадрата и снова начинает настраивать похожие на прожекторы устройства в каждом углу.
 			</p>
 			<p>
-				[pc.speech(Wait, my clothes aren't going to be teleported all over the room or anything again, are they?)] you ask.
+				[pc.speech(Погоди, моя одежда же не будет снова разбросана по всей комнате, правда?)] - ты спрашиваешь.
 			</p>
 			<p>
-				[lilaya.speech(No, don't worry, I fixed that little problem!)] Lilaya responds, and before you get the chance to say anything else, arcane energy suddenly crackles into life around her arm, before shooting out into each of the curious instruments. A familiar bright pink flash illuminates the room, but this time, thankfully, your clothes and sight are unaffected.
+				[lilaya.speech(Нет, не беспокойся, я исправила эту маленькую проблему!)] - Лилайя отвечает, и прежде чем ты успеваешь сказать что-либо ещё, магическая энергия внезапно затрещала вокруг её руки, а затем выстрелила в каждый из любопытных инструментов. Знакомая ярко-розовая вспышка осветила комнату, но на этот раз, к счастью, твоя одежда и зрение не пострадали.
 			</p>
 			<p>
-				Once again, you find yourself surrounded by the shimmering pink outline of your arcane aura. This time, however, you see a strange ball of energy orbiting your body, which looks to be the same sort of size as the shard of energy that you remember shooting into you. Looking up at Lilaya, you see that her cheeks have completely drained of colour, and she's looking down at you with an extremely worried expression on her face.
+				Ты снова оказываешься в окружении мерцающего розового ореола своей магической ауры. Однако на этот раз ты видишь странный шар энергии, вращающийся вокруг твоего тела, похожий по размеру на осколок энергии, который, как ты помнишь, пронзил тебя. Подняв глаза на Лилайю, ты видишь, что её щеки полностью побледнели, и она смотрит на тебя с крайне обеспокоенным выражением лица.
 			</p>
 		#ELSEIF(game.getDialogueFlags().hasFlag(FLAG_essenceBottledDiscovered))
 			<p>
-				[pc.speech(Actually, there <i>is</i> something else as well. I had this little bottle with a swirling light in it, and when I took out the stopper, the light sort of shot <i>into</i> me...)] you explain, hoping that Lilaya can tell you what that was all about as well.
+				[pc.speech(На самом деле, <i>есть</i> ещё кое-что. У меня была маленькая бутылочка с вихревым светом внутри. Когда я [pc.genderBasedWord(вытащил, вытащила)] пробку, свет как бы ворвался <i>в</i> меня...)] - ты объясняешь, надеясь, что Лилайя тоже сможет рассказать тебе, что это было.
 			</p>
 			<p>
-				[lilaya.speech(Oh! Of course! I should have mentioned that,)] Lilaya responds. [lilaya.speech(As you've got a demon-strength aura, it's only natural that you'd be able to absorb arcane essences! I really should have tested you for that as well... But we can just do it now!)]
+				[lilaya.speech(О! Конечно! Я должна была упомянуть об этом)] - Лилайя отвечает. [lilaya.speech(У тебя аура силы демона, поэтому вполне естественно, что ты можешь поглощать тайную эссенцию! Мне действительно следовало проверить тебя и на это... Но мы можем сделать это прямо сейчас!)]
 			</p>
 			<p>
-				Before you can respond, Lilaya grabs your [pc.arm] and starts pulling you over to the same place where she ran her first test on you. Instructing you to sit on the chair in the middle of the chalk square, she once more starts adjusting the floodlight-like pieces of arcane equipment at each corner.
+				Не успеваешь ты ответить, как Лилайя хватает тебя за [pc.morphSingleAccus([pc.arm])] и тянет к тому месту, где она проводила твой первый тест. Она велит тебе сесть на стул посреди мелового квадрата и снова начинает настраивать похожие на прожекторы устройства в каждом углу.
 			</p>
 			<p>
-				[pc.speech(Wait, my clothes aren't going to be teleported all over the room or anything again, are they?)] you ask.
+				[pc.speech(Погоди, моя одежда же не будет снова разбросана по всей комнате, правда?)] - ты спрашиваешь.
 			</p>
 			<p>
-				[lilaya.speech(No, don't worry, I fixed that little problem!)] Lilaya responds, and before you get the chance to say anything else, arcane energy suddenly crackles into life around her arm, before shooting out into each of the curious instruments. A familiar bright pink flash illuminates the room, but this time, thankfully, your clothes and sight are unaffected.
+				[lilaya.speech(Нет, не беспокойся, я исправила эту маленькую проблему!)] - Лилайя отвечает, и прежде чем ты успеваешь сказать что-либо ещё, магическая энергия внезапно затрещала вокруг её руки, а затем выстрелила в каждый из любопытных инструментов. Знакомая ярко-розовая вспышка осветила комнату, но на этот раз, к счастью, твоя одежда и зрение не пострадали.
 			</p>
 			<p>
-				Once again, you find yourself surrounded by the shimmering pink outline of your arcane aura. This time, however, you see a strange ball of energy orbiting your body, which looks to be the same sort of size as the shard of energy that you remember shooting into you. Looking up at Lilaya, you see that her cheeks have completely drained of colour, and she's looking down at you with an extremely worried expression on her face.
+				Ты снова оказываешься в окружении мерцающего розового ореола своей магической ауры. Однако на этот раз ты видишь странный шар энергии, вращающийся вокруг твоего тела, похожий по размеру на осколок энергии, который, как ты помнишь, пронзил тебя. Подняв глаза на Лилайю, ты видишь, что её щеки полностью побледнели, и она смотрит на тебя с крайне обеспокоенным выражением лица.
 			</p>
 		#ELSEIF(!pc.isAnyEquippedClothingSealed())
 			<p>
-				[pc.speech(That's good to hear, so what would I need to do if it happens again?)] you ask.
+				[pc.speech([pc.genderBasedWord(Рад, Рада)] это слышать, так что мне нужно делать, если это повторится?)] - ты спрашиваешь.
 			</p>
 			<p>
-				[lilaya.speech(Well, as you've got a demon-strength aura, it's only natural that you'd be able to absorb arcane essences too, and then you could channel some of them into clothing to remove seals yourself! I really should have tested you for that as well... But we can just do it now!)]
+				[lilaya.speech(Ну, раз у тебя аура силы демона, то вполне естественно, что ты можешь поглощать магическую эссенцию, а затем направлять её в одежду, чтобы самостоятельно снимать печати! Мне действительно следовало проверить тебя и на это... Но мы можем сделать это прямо сейчас!)]
 			</p>
 			<p>
-				Before you can respond, Lilaya grabs your [pc.arm] and starts pulling you over to the same place where she ran her first test on you. Instructing you to sit on the chair in the middle of the chalk square, she once more starts adjusting the floodlight-like pieces of arcane equipment at each corner.
+				Не успеваешь ты ответить, как Лилайя хватает тебя за [pc.morphSingleAccus([pc.arm])] и тянет к тому месту, где она проводила твой первый тест. Она велит тебе сесть на стул посреди мелового квадрата и снова начинает настраивать похожие на прожекторы устройства в каждом углу.
 			</p>
 			<p>
-				[pc.speech(Wait, my clothes aren't going to be teleported all over the room or anything again, are they?)] you ask.
+				[pc.speech(Погоди, моя одежда же не будет снова разбросана по всей комнате, правда?)] - ты спрашиваешь.
 			</p>
 			<p>
-				[lilaya.speech(No, don't worry, I fixed that little problem!)] Lilaya responds, and before you get the chance to say anything else, arcane energy suddenly crackles into life around her arm, before shooting out into each of the curious instruments. A familiar bright pink flash illuminates the room, but this time, thankfully, your clothes and sight are unaffected.
+				[lilaya.speech(Нет, не беспокойся, я исправила эту маленькую проблему!)] - Лилайя отвечает, и прежде чем ты успеваешь сказать что-либо ещё, магическая энергия внезапно затрещала вокруг её руки, а затем выстрелила в каждый из любопытных инструментов. Знакомая ярко-розовая вспышка осветила комнату, но на этот раз, к счастью, твоя одежда и зрение не пострадали.
 			</p>
 			<p>
-				Once again, you find yourself surrounded by the shimmering pink outline of your arcane aura. This time, however, you see a strange ball of energy orbiting your body, which looks to be the same sort of size as the shard of energy that you remember shooting into you. Looking up at Lilaya, you see that her cheeks have completely drained of colour, and she's looking down at you with an extremely worried expression on her face.
+				Ты снова оказываешься в окружении мерцающего розового ореола своей магической ауры. Однако на этот раз ты видишь странный шар энергии, вращающийся вокруг твоего тела, похожий по размеру на осколок энергии, который, как ты помнишь, пронзил тебя. Подняв глаза на Лилайю, ты видишь, что её щеки полностью побледнели, и она смотрит на тебя с крайне обеспокоенным выражением лица.
 			</p>
 		#ELSE
 			<p>
-				[pc.speech(That's good to hear, so what do I need to do?)] you ask.
+				[pc.speech([pc.genderBasedWord(Рад, Рада)] это слышать, так что мне нужно делать?)] - ты спрашиваешь.
 			</p>
 			<p>
-				[lilaya.speech(Well, I could just channel some of my absorbed essences into [#SPECIAL_PARSE_1] to remove the seal, but...)] Lilaya responds, her sentence trailing off a little as she suddenly thinks of something. [lilaya.speech(As you've got a demon-strength aura, it's only natural that you'd be able to absorb arcane essences too, and then you could remove [#SPECIAL_PARSE_1] yourself! I really should have tested you for that as well... But we can just do it now!)]
+				[lilaya.speech(Ну, я могла бы просто направить часть поглощенной мной эссенции в [#SPECIAL_PARSE_1], чтобы снять печать, но...)] - Лилая отвечает, но её фраза обрывается, потому что она вдруг о чём-то вспомнила. [lilaya.speech(Поскольку у тебя аура силы демона, вполне естественно, что ты также можешь поглощать магическую эссенцию, а затем удалять [#SPECIAL_PARSE_1] из себя! Мне действительно следовало проверить тебя и на это... Но мы можем сделать это прямо сейчас!)]
 			</p>
 			<p>
-				Before you can respond, Lilaya grabs your [pc.arm] and starts pulling you over to the same place where she ran her first test on you. Instructing you to sit on the chair in the middle of the chalk square, she once more starts adjusting the floodlight-like pieces of arcane equipment at each corner.
+				Не успеваешь ты ответить, как Лилайя хватает тебя за [pc.morphSingleAccus([pc.arm])] и тянет к тому месту, где она проводила твой первый тест. Она велит тебе сесть на стул посреди мелового квадрата и снова начинает настраивать похожие на прожекторы устройства в каждом углу.
 			</p>
 			<p>
-				[pc.speech(Wait, my clothes aren't going to be teleported all over the room or anything again, are they?)] you ask.
+				[pc.speech(Погоди, моя одежда же не будет снова разбросана по всей комнате, правда?)] - ты спрашиваешь.
 			</p>
 			<p>
-				[lilaya.speech(No, don't worry, I fixed that little problem!)] Lilaya responds, and before you get the chance to say anything else, arcane energy suddenly crackles into life around her arm, before shooting out into each of the curious instruments. A familiar bright pink flash illuminates the room, but this time, thankfully, your clothes and sight are unaffected.
+				[lilaya.speech(Нет, не беспокойся, я исправила эту маленькую проблему!)] - Лилайя отвечает, и прежде чем ты успеваешь сказать что-либо ещё, магическая энергия внезапно затрещала вокруг её руки, а затем выстрелила в каждый из любопытных инструментов. Знакомая ярко-розовая вспышка осветила комнату, но на этот раз, к счастью, твоя одежда и зрение не пострадали.
 			</p>
 			<p>
-				Once again, you find yourself surrounded by the shimmering pink outline of your arcane aura. This time, however, you see a strange ball of energy orbiting your body, which looks to be the same sort of size as the shard of energy that you remember shooting into you. Looking up at Lilaya, you see that her cheeks have completely drained of colour, and she's looking down at you with an extremely worried expression on her face.
+				Ты снова оказываешься в окружении мерцающего розового ореола своей магической ауры. Однако на этот раз ты видишь странный шар энергии, вращающийся вокруг твоего тела, похожий по размеру на осколок энергии, который, как ты помнишь, пронзил тебя. Подняв глаза на Лилайю, ты видишь, что её щеки полностью побледнели, и она смотрит на тебя с крайне обеспокоенным выражением лица.
 			</p>
 		#ENDIF
 	#ELSE
 		#IF(game.getDialogueFlags().hasFlag(FLAG_essenceOrgasmDiscovered) || game.getDialogueFlags().hasFlag(FLAG_essencePostCombatDiscovered))
 			<p>
-				[pc.speech(I wanted to ask you about this weird experience I recently had, where I saw someone's arcane aura. A piece of it broke off and shot <i>into</i> me, and I'm not sure if it needs to be removed or anything...)] your voice trails off as you see an extremely concerned look flash across Lilaya's face.
+				[pc.speech(Я [pc.genderBasedWord(хотел, хотела)] спросить тебя об одном странном случае, который недавно со мной произошел: я [pc.genderBasedWord(увидел, увидела)] чью-то магическую ауру. Часть этой ауры откололась и попала <i>в</i> меня, и я не знаю, нужно ли её удалять или что-то в этом роде...)] - твой голос затихает, когда ты видишь крайне обеспокоенное выражение на лице Лилайи.
 			</p>
 			<p>
-				[lilaya.speech(Are you sure?! You absorbed someone's essence directly from them?!)] Lilaya asks, failing to conceal the worried tone in her voice.
+				[lilaya.speech(Ты [pc.genderBasedWord(уверен, уверена)]?! Ты [pc.genderBasedWord(поглотил, поглотила)] чью-то сущность прямо из них?!)] - Лилайя спрашивает, не скрывая беспокойства в голосе.
 			</p>
 			<p>
-				Before you can respond, Lilaya grabs your [pc.arm] and starts pulling you over to the same place where she ran her first test on you. Instructing you to sit on the chair in the middle of the chalk square, she once more starts adjusting the floodlight-like pieces of arcane equipment at each corner.
+				Не успеваешь ты ответить, как Лилайя хватает тебя за [pc.morphSingleAccus([pc.arm])] и тянет к тому месту, где она проводила твой первый тест. Она велит тебе сесть на стул посреди мелового квадрата и снова начинает настраивать похожие на прожекторы устройства в каждом углу.
 			</p>
 			<p>
-				[pc.speech(Wait, my clothes aren't going to be teleported all over the room or anything again, are they?)] you ask.
+				[pc.speech(Погоди, моя одежда же не будет снова разбросана по всей комнате, правда?)] - ты спрашиваешь.
 			</p>
 			<p>
-				[lilaya.speech(No, don't worry, I fixed that little problem!)] Lilaya responds, and before you get the chance to say anything else, arcane energy suddenly crackles into life around her arm, before shooting out into each of the curious instruments. A familiar bright pink flash illuminates the room, but this time, thankfully, your clothes and sight are unaffected.
+				[lilaya.speech(Нет, не беспокойся, я исправила эту маленькую проблему!)] - Лилайя отвечает, и прежде чем ты успеваешь сказать что-либо ещё, магическая энергия внезапно затрещала вокруг её руки, а затем выстрелила в каждый из любопытных инструментов. Знакомая ярко-розовая вспышка осветила комнату, но на этот раз, к счастью, твоя одежда и зрение не пострадали.
 			</p>
 			<p>
-				Once again, you find yourself surrounded by the shimmering pink outline of your arcane aura. This time, however, you see a strange ball of energy orbiting your body, which looks to be the same sort of size as the shard of energy that you remember shooting into you. Looking up at Lilaya, you see that her cheeks have completely drained of colour, and she's looking down at you with an extremely worried expression on her face.
+				Ты снова оказываешься в окружении мерцающего розового ореола своей магической ауры. Однако на этот раз ты видишь странный шар энергии, вращающийся вокруг твоего тела, похожий по размеру на осколок энергии, который, как ты помнишь, пронзил тебя. Подняв глаза на Лилайю, ты видишь, что её щеки полностью побледнели, и она смотрит на тебя с крайне обеспокоенным выражением лица.
 			</p>
 			
 		#ELSEIF(game.getDialogueFlags().hasFlag(FLAG_essenceBottledDiscovered))
 			<p>
-				[pc.speech(Well, you see, I had this little bottle with a swirling light in it, and when I took out the stopper, the light sort of shot <i>into</i> me...)] you explain, hoping that Lilaya can tell you what that was all about as well.
+				[pc.speech(Ну, знаешь, у меня была такая маленькая бутылочка с кружащимся светом внутри, и когда я [pc.genderBasedWord(вытащил, вытащила)] пробку, свет как бы ворвался <i>в</i> меня...)] - ты объясняешь, надеясь, что Лилайя тоже сможет рассказать тебе, что это было.
 			</p>
 			<p>
-				[lilaya.speech(Oh! Of course! I should have mentioned that,)] Lilaya responds. [lilaya.speech(As you've got a demon-strength aura, it's only natural that you'd be able to absorb arcane essences! I really should have tested you for that as well... But we can just do it now!)]
+				[lilaya.speech(О! Конечно! Я должна была упомянуть об этом)] - Лилайя отвечает. [lilaya.speech(У тебя аура силы демона, поэтому вполне естественно, что ты можешь поглощать тайную эссенцию! Мне действительно следовало проверить тебя и на это... Но мы можем сделать это прямо сейчас!)]
 			</p>
 			<p>
-				Before you can respond, Lilaya grabs your [pc.arm] and starts pulling you over to the same place where she ran her first test on you. Instructing you to sit on the chair in the middle of the chalk square, she once more starts adjusting the floodlight-like pieces of arcane equipment at each corner.
+				Не успеваешь ты ответить, как Лилайя хватает тебя за [pc.morphSingleAccus([pc.arm])] и тянет к тому месту, где она проводила твой первый тест. Она велит тебе сесть на стул посреди мелового квадрата и снова начинает настраивать похожие на прожекторы устройства в каждом углу.
 			</p>
 			<p>
-				[pc.speech(Wait, my clothes aren't going to be teleported all over the room or anything again, are they?)] you ask.
+				[pc.speech(Погоди, моя одежда же не будет снова разбросана по всей комнате, правда?)] - ты спрашиваешь.
 			</p>
 			<p>
-				[lilaya.speech(No, don't worry, I fixed that little problem!)] Lilaya responds, and before you get the chance to say anything else, arcane energy suddenly crackles into life around her arm, before shooting out into each of the curious instruments. A familiar bright pink flash illuminates the room, but this time, thankfully, your clothes and sight are unaffected.
+				[lilaya.speech(Нет, не беспокойся, я исправила эту маленькую проблему!)] - Лилайя отвечает, и прежде чем ты успеваешь сказать что-либо ещё, магическая энергия внезапно затрещала вокруг её руки, а затем выстрелила в каждый из любопытных инструментов. Знакомая ярко-розовая вспышка осветила комнату, но на этот раз, к счастью, твоя одежда и зрение не пострадали.
 			</p>
 			<p>
-				Once again, you find yourself surrounded by the shimmering pink outline of your arcane aura. This time, however, you see a strange ball of energy orbiting your body, which looks to be the same sort of size as the shard of energy that you remember shooting into you. Looking up at Lilaya, you see that her cheeks have completely drained of colour, and she's looking down at you with an extremely worried expression on her face.
+				Ты снова оказываешься в окружении мерцающего розового ореола своей магической ауры. Однако на этот раз ты видишь странный шар энергии, вращающийся вокруг твоего тела, похожий по размеру на осколок энергии, который, как ты помнишь, пронзил тебя. Подняв глаза на Лилайю, ты видишь, что её щеки полностью побледнели, и она смотрит на тебя с крайне обеспокоенным выражением лица.
 			</p>
 		#ENDIF
 	#ENDIF
@@ -1284,22 +1284,22 @@
 	
 	<htmlContent tag="LILAYA_CURRENT_DATE_TALK"><![CDATA[
 	<p>
-		Curious about the date shown on the calendar in your room, you decide to ask Lilaya about it, [pc.speech(Is the calendar in my room accurate? It's three years into the future from my world...)]
+		Заинтересовавшись датой, указанной в календаре в твоей комнате, ты решаешь спросить об этом у Лилайи: [pc.speech(Календарь в моей комнате точный? Он на три года впереди моего мира...)]
 	</p>
 	<p>
-		Lilaya frowns as she hears you say that, and leans back against the desk behind her. [lilaya.speech(Well, I can assure you that the year is [#game.getYear()]. Your world was still in [#game.getStartingDate().minusYears(3).getYear()], huh?)]
+		Лолайя хмурится, услышав твои слова, и откидывается на спинку стола позади неё: [lilaya.speech(Ну, я могу тебя заверить, что год [#game.getYear()]. Твой мир всё ещё был в [#game.getStartingDate().minusYears(3).getYear()], да?)]
 	</p>
 	<p>
-		You answer in the affirmative, and Lilaya pushes her glasses up to the bridge of her nose, before crossing her arms and sighing, [lilaya.speech(It shouldn't be anything to worry about. There must have been a chain of events in our world's past that led to the year being counted slightly differently to yours. Or maybe you time-travelled when you were teleported into this world!)] As she starts thinking out loud, you can hear the growing excitement in her voice, [lilaya.speech(In fact, it's pretty incredible that your world even uses the same calendar system as ours! And, thinking about it even more, why do we even speak the same language? And how come your customs, clothing, and even your appearance are similar to ours?!)]
+		Ты отвечаешь утвердительно, и Лилайя поднимает очки на переносицу, скрещивает руки и вздыхает: [lilaya.speech(Не стоит об этом беспокоиться. Должно быть, в прошлом нашего мира произошла цепочка событий, в результате которой год стал отсчитываться немного иначе, чем у вас. Или, может быть, ты [pc.genderBasedWord(путешествовал, путешествовала)] во времени, когда [pc.genderBasedWord(был телепортирован, была телепортирована)] в этот мир!)] Когда она начинает думать вслух, в её голосе слышится растущее волнение: [lilaya.speech(На самом деле, просто невероятно, что твой мир использует ту же календарную систему, что и наш! А если подумать ещё больше, почему мы вообще говорим на одном языке? И почему твои обычаи, одежда и даже внешний вид похожи на наши?!)]
 	</p>
 	<p>
-		You start to chat with Lilaya about the peculiarities of these shared features between your worlds. The more you start to delve into it, however, the more surprised you are at the lack of historical knowledge that Lilaya has. [lilaya.speech(Well, the only history that anyone really knows about is stuff concerning Lilith. She's been ruling this world since before any trace of civilisation even existed, so I guess all of our customs come from her direct influence. I don't think anybody other than Lilith herself really knows much about this world's history. Maybe mommy-)]
+		Ты начинаешь беседовать с Лилайей об особенностях этих общих черт ваших миров. Однако чем больше ты вникаешь в эту тему, тем больше удивляешься недостатку исторических знаний у Лилайи. [lilaya.speech(Ну, единственная история, о которой кто-либо действительно знает, это то, что касается Лилит. Она правит этим миром с тех пор, как ещё не было никаких следов цивилизации, так что, я думаю, все наши обычаи происходят от её прямого влияния. Я не думаю, что кто-либо, кроме самой Лилит, действительно знает много о истории этого мира. Может быть, мама...)]
 	</p>
 	<p>
-		Lilaya's cheeks suddenly flush red, and she turns away as she brings a close to the conversation, [lilaya.speech(Anyway! D-Don't worry about anything! Three years into the future is nothing! I-I'll try and investigate a little more, ok?!)]
+		Щеки Лилайи внезапно покраснели, и она отвернулась, завершая разговор: [lilaya.speech(В любом случае! Н-не беспокойся ни о чём! Три года в будущем — это ничто! Я-я постараюсь расследовать это немного подробнее, ладно?!)]
 	</p>
 	<p>
-		It's quite apparent that Lilaya isn't interested in discussing the matter any more...
+		Совершенно очевидно, что Лилайя больше не заинтересована в обсуждении этого вопроса...
 	</p>
 	]]>
 	</htmlContent>
@@ -1325,46 +1325,46 @@
 	
 	<htmlContent tag="AUNT_HOME_LABORATORY_TESTING"><![CDATA[
 	<p>
-		Stepping forwards, you smile at your demonic [lilaya.relation(pc)]. [pc.speech(Hi, Lilaya, I'm here for those tests you mentioned.)]
+		Сделав шаг вперёд, ты улыбаешься своей демонической [pc.morphSingleDativ([lilaya.relation(pc)])]. [pc.speech(Привет, Лилайя, я [pc.genderBasedWord(пришёл, пришла)] на те тесты, о которых ты говорила.)]
 	</p>
 	#IF(game.getPlayer().isVisiblyPregnant() && !game.getDialogueFlags().hasFlag(FLAG_reactedToPregnancyLilaya))
 		<p>
-			[lilaya.speech(Excellent! Let's just... Wait... Are you <i>pregnant</i>?! Well, nevermind, I can help you deal with that later! For now, let's just get these tests done, come over here!)]
+			[lilaya.speech(Отлично! Тогда... Подождите... Ты <i>[pc.genderBasedWord(беремен, беременна)]</i>?! Ну, неважно, я помогу тебе справиться с этим позже! А пока давай просто сделаем эти тесты, иди сюда!)]
 		</p>
 	#ELSE
 		<p>
-			[lilaya.speech(Excellent! Let's get these tests done then, come over here!)]
+			[lilaya.speech(Отлично! Тогда приступим к тестам, иди сюда!)]
 		</p>
 	#ENDIF
 	<p>
-		You do as she instructs, and make your way over to where Lilaya's standing. Rose quickly moves out of the way, hurrying over to a corner of the room and blushing as you say hello.
+		Следуя её указаниям, ты подходишь к Лилайе. Роза быстро уходит с дороги, спеша в угол комнаты и краснея, когда ты её приветствуешь.
 		#IF(!pc.isTaur())
-			 Lilaya motions for you to sit down in the chair she just vacated, and as you do so, she grabs a smooth, wand-like instrument from another table.
+			 Лилайя предлагает тебе сесть на стул, который она только что освободила. Когда ты садишься, она берёт с другого стола гладкий инструмент, похожий на палочку.
 		#ELSE
-			 Lilaya motions for you to stand next to the chair she just vacated, and as you do so, she grabs a smooth, wand-like instrument from another table.
+			 Лилайя предлагает тебе встать рядом со стулом, который она только что освободила. Когда ты это делаешь, она берёт с другого стола гладкий инструмент, похожий на палочку.
 		#ENDIF
-		 Moving over to you, the wand suddenly starts giving off a faint pink glow, and she starts swiping it over your body, humming as she does so.
+		 Переместившись к тебе, палочка внезапно начинает испускать слабое розовое свечение, и она начинает проводить ею по твоему телу, напевая при этом.
 	</p>
 	<p>
-		[lilaya.speech(Hmm... Yes... That's what I thought...)] she says, but before you have a chance to ask her what's going on, she steps back and places the wand to one side. [lilaya.speech(Your arcane aura hasn't shown any signs of degradation at all. It looks like it's permanent. If you've been out in Dominion, maybe you've noticed by now, but with an aura that strong, you have the same effect on people that a demon would.)]
+		[lilaya.speech(Хм... Да... Я так и думала...)] - говорит она, но прежде чем ты успеваешь спросить её, что происходит, она отступает назад и откладывает палочку в сторону. [lilaya.speech(Твоя магическая аура не показала никаких признаков ослабления. Похоже, она постоянна. Если ты [pc.genderBasedWord(бывал, бывала)] в Доминионе, то, возможно, уже [pc.genderBasedWord(замечал, замечала)], что с такой сильной аурой ты производишь на людей такое же впечатление, как и демон.)]
 	</p>
 	<p>
-		[pc.speech(You mean...)] you start, but Lilaya cuts you off.
+		[pc.speech(Ты имеешь в виду...)] - ты начинаешь, но Лилайя перебивает тебя.
 	</p>
 	<p>
-		[lilaya.speech(Yes, I mean that anyone you encounter is going to feel extremely aroused when in your presence,)] she explains, [lilaya.speech(and if you haven't figured it out yet, that's the main power behind the arcane. Sure, it can be harnessed to create all sorts of spells and enchantments, but at its core, it's a primitive force linked very closely to sexual energy.)]
+		[lilaya.speech(Да, я имею в виду, что любой, с кем ты встретишься, будет испытывать сильное возбуждение в твоём присутствии)] - она объясняет - [lilaya.speech(и если ты ещё не [pc.genderBasedWord(догадался, догадалась)], это главная сила, стоящая за магией. Конечно, её можно использовать для создания всевозможных заклинаний и чар, но в своей основе это примитивная сила, тесно связанная с сексуальной энергией.)]
 	</p>
 	<p>
-		[pc.speech(So everyone I meet is going to want to have sex with me?)] you ask.
+		[pc.speech(Так что все, кого я встречу, захотят со мной переспать?)] - спрашиваешь ты.
 	</p>
 	<p>
-		[lilaya.speech(Sort of, but remember that they have their own, less powerful, auras that shield them from the potency of yours. If they become too weak, whether mentally or physically, they won't be able to control their aura any more, and that's when all they'll be able to think of is... well... A-Anyway, the same applies right back at you!)] she says, starting to blush a little.
+		[lilaya.speech(Вроде того, но помни, что у них есть свои, менее мощные ауры, которые защищают их от силы твоей ауры. Если они станут слишком слабыми, будь-то умственно или физически, они больше не смогут контролировать свою ауру, и тогда всё, о чём они смогут думать, это... ну... В-во всяком случае, то же самое относится и к тебе!)] - говорит она, слегка покраснев.
 	</p>
 	<p>
-		[pc.speech(So if someone beats me up, my own arcane aura is going to make me want to have sex with them?!)] you ask.
+		[pc.speech(Так что, если кто-то изобьёт меня, моя собственная магическая аура заставит меня захотеть заняться с ним сексом?!)] - спрашиваешь ты.
 	</p>
 	<p>
-		[lilaya.speech(Well, you'll still be able to summon some resistance, but it's unlikely that you'll be able to put up much of a fight at that stage... Anyway, enough of that for now, I need to tell you what I've discovered!)]
+		[lilaya.speech(Ну, ты всё ещё сможешь оказать некоторое сопротивление, но вряд ли на этом этапе ты сможешь дать серьёзный отпор... В любом случае, хватит об этом. Я должна рассказать тебе о том, что обнаружила!)]
 	</p>
 	]]>
 	</htmlContent>
@@ -1481,28 +1481,28 @@
 	
 	<htmlContent tag="AUNT_HOME_LABORATORY_TESTING_ARTHUR"><![CDATA[
 	<p>
-		[pc.speech(Have you found a way to get me back home then?)] you ask.
+		[pc.speech(Ты нашла способ вернуть меня домой?)] - спрашиваешь ты.
 	</p>
 	<p>
-		[lilaya.speech(Sorry, but no. That's what I needed to talk to you about,)] Lilaya answers, [lilaya.speech(The truth is, even though I'm considered one of the top experts in all things related to the arcane, I have no idea how you've ended up here.)]
+		[lilaya.speech(К сожалению, нет. Об этом я и хотела с тобой поговорить)], Лилайя отвечает. [lilaya.speech(Правда в том, что, хоть я и считаюсь одним из ведущих экспертов во всех вопросах, связанных с магией, я понятия не имею, как ты [pc.genderBasedWord(оказался, оказалась)] здесь.)]
 	</p>
 	<p>
-		You can't help but feel completely deflated. Although Lilaya's home isn't exactly the worst place to be living, this whole world still makes you feel uneasy. You were rather hoping that this demonic version of your aunt could have found some way to send you back to where you belong, and as she delivers this bad news, you collapse back in your chair and let out a deep sigh.
+		Ты не можешь не чувствовать себя полностью [pc.genderBasedWord(опустошенным, опустошенной)]. Хотя дом Лилайи не является самым худшим местом для жизни, весь этот мир все равно вызывает у тебя беспокойство. Ты [pc.genderBasedWord(надеялся, надеялась)], что эта демоническая версия твоей тёти найдет способ отправить тебя туда, где тебе и положено быть. И когда она сообщает тебе эту плохую новость, ты падаешь на стул и глубоко вздыхаешь.
 	</p>
 	<p>
-		Seeing your reaction, Lilaya lets out a sigh of her own, before offering you a sliver of hope, [lilaya.speech(Well... I suppose there is <i>one</i> way we could find out more... but it means I'd have to talk to <i>him</i> again. There's no way I'm going over there to ask for his help though!)]
+		Увидев твою реакцию, Лилайя вздыхает, а затем дает тебе небольшую надежду: [lilaya.speech(Хорошо... Полагаю, есть ещё <i>один</i> способ узнать больше... но это значит, что мне придется поговорить с <i>ним</i> ещё раз. Но я ни за что не пойду к нему и не попрошу его о помощи!)]
 	</p>
 	<p>
-		You look up to see Lilaya's face turned up into a scowl as she continues, [lilaya.speech(If you ever want to find a way to go back home, you're going to have to get the help of Arthur... <i>that bastard!</i>)] she spits, before realising how angry she's become. Lilaya closes her eyes for a moment and takes a deep breath, calming herself down before continuing, [lilaya.speech(He and I used to work together, and with the exception of the Lilin themselves, he probably understands more about the arcane than anyone currently living. His apartment's over in Demon Home, but despite the name, people of all races live there. He's actually just a human, which makes his knowledge of the arcane all the more impressive. Here's his address... look for a building called 'Sawlty Towers'. So if you want his help, you're going to have to convince him to stop being such a <i>selfish bastard!</i> He'll need access to my research, and the only way he's going to get it is if he comes crawling to my front door, begging for my forgiveness.)]
+		Ты поднимаешь глаза и видишь, что Лилайя нахмурилась, продолжая говорить: [lilaya.speech(Если ты когда-нибудь захочешь найти способ вернуться домой, тебе придется обратиться за помощью к Артуру... к <i>этому ублюдку!</i>)], она плюёт, прежде чем осознаёт, насколько она разозлилась. Лилайя на мгновение закрывает глаза и делает глубокий вдох, успокаиваясь, прежде чем продолжить: [lilaya.speech(Мы с ним раньше работали вместе, и, за исключением самих Лилин, он, вероятно, знает о тайнах магии больше, чем кто-либо из ныне живущих. Его квартира находится в Демонском Доме, но, несмотря на название, там живут люди всех рас. На самом деле он просто человек, что делает его знания о тайнах магии ещё более впечатляющими. Вот его адрес... ищите здание под названием «Величественные башни». Так что, если ты хочешь его помощи, тебе придется убедить его перестать быть таким <i>эгоистичным ублюдком!</i> Ему понадобится доступ к моим исследованиям, и единственный способ его получить — это приползти ко мне на коленях и умолять о прощении.)]
 	</p>
 	<p>
-		You're quite taken aback at Lilaya's apparent hatred for Arthur. You assume, seeing as he shares the same name, that he's this world's version of your [lilaya.relation(pc)] Lily's colleague from the museum. Back there, they were close friends, and you wonder what's happened in this reality to cause Lilaya to dislike him so much. Seeing how angry she's gotten just at the thought of him, you decide that it would be wise not to press the matter further, and instead you just agree to convince Arthur to apologise.
+		Тебя очень удивляет явная ненависть Лилайи к Артуру. Ты предполагаешь, что, поскольку у него такое же имя, он является версией коллеги твоей [pc.morphSingleGent([lilaya.relation(pc)])] Лили из музея в этом мире. Там они были близкими друзьями, и ты задаешься вопросом, что же произошло в этой реальности, что Лилайя так сильно его не любит. Видя, как она злится при одной только мысли о нём, ты решаешь, что будет разумнее не настаивать на этом вопросе. Вместо этого просто соглашаешься убедить Артура извиниться.
 	</p>
 	<p>
-		[lilaya.speech(Good, good... Well, anyway, umm, I guess we're done here,)] Lilaya says, but before you can make a move, she nervously picks up the little wand-like instrument she used to test you earlier, and continues, [lilaya.speech(W-Wait, erm, I mean, t-there's some more tests I could... try on you...)]
+		[lilaya.speech(Хорошо, хорошо... Ну, в любом случае, э-э, я думаю, мы здесь закончили)], Лилая говорит, но прежде чем ты успеваешь что-то сделать, она нервно берёт маленький инструмент, похожий на палочку, которым она тестировала тебя ранее, и продолжает: [lilaya.speech(П-подождите, э-э, я имею в виду, е-есть еще несколько тестов, которые я могла бы... попробовать на тебе...)]
 	</p>
 	<p>
-		Lilaya seems to have become quite embarrassed by something, and you find this sudden offer of 'more tests' to be pretty suspicious. She's gripping the wand quite tightly now, and you notice her eyes keep glancing down hungrily at your body. You're almost certain that she's just making an excuse to get you to stay here, and the sudden thought that she's trying to hit on you flashes across your mind...
+		Лилайя, похоже, чем-то сильно смутилась, и тебе это внезапное предложение «провести дополнительные тесты» кажется довольно подозрительным. Она теперь довольно крепко сжимает палочку, и ты замечаешь, что её глаза жадно скользят по твоему телу. Ты почти [pc.genderBasedWord(уверен, уверена)], что она просто придумывает повод, чтобы задержать тебя здесь, и в твоей голове мелькает мысль, что она пытается с тобой заигрывать...
 	</p>
 	]]>
 	</htmlContent>

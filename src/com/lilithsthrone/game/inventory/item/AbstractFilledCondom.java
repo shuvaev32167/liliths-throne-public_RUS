@@ -25,6 +25,7 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+import com.lilithsthrone.utils.translate.russian.Morpher;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -277,7 +278,7 @@ public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
 		}
 		return "Вы не можете придумать, как его использовать. Может, лучше выбросить его...<br/>"
 				+ "(Вам требуется либо '[style.colourFetish("+Fetish.FETISH_CUM_ADDICT.getName(user)+")]' фетиш"
-						+ " или иметь как минимум <b style='color:"+CorruptionLevel.THREE_DIRTY.getColour().toWebHexString()+";'>"+CorruptionLevel.THREE_DIRTY.getName()+"</b> уровень развращения для использования этого!)";
+				+ " или иметь как минимум <b style='color:" + CorruptionLevel.THREE_DIRTY.getColour().toWebHexString() + ";'>" + Morpher.morphNoun(CorruptionLevel.THREE_DIRTY.getName(), target) + "</b> уровень развращения для использования этого!)";
 	}
 
 }

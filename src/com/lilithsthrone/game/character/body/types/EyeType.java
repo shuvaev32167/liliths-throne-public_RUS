@@ -65,13 +65,13 @@ public class EyeType {
 			"#IF(npc.isShortStature())"
 					+ "Когда [npc.she] нерешительно [npc.targetBasedWord(открываешь, открывает)] их снова, они превратились в коварные глаза с вертикальными зрачками и большими радужками."
 				+ "<br/>"
-					+ "[npc.Name] теперь [npc.has] [style.boldImp(импитские глаза)] с [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)]."
+                    + "[npc.Name] теперь [npc.has] [style.boldImp(бесовские глаза)] с [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)]."
 			+ "#ELSE"
 					+ "Когда [npc.she] нерешительно [npc.targetBasedWord(открываешь, открывает)] их снова, они превратились в демонические глаза с вертикальными зрачками и большими радужками."
 				+ "<br/>"
 					+ "[npc.Name] теперь [npc.has] [style.boldDemon(демонические глаза)] с [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)]."
 			+ "#ENDIF",
-			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] #IF(npc.isShortStature())импитских#ELSEдемонических#ENDIF глаз, с [pc.morphPluralInstr([npc.irisShape])], [pc.morphPluralInstr([npc.irisColour(true)])] радужками, [pc.morphPluralInstr([npc.pupilShape])], [pc.morphPluralInstr([npc.pupilColour(true)])] зрачками, и [pc.morphPluralInstr([npc.scleraColour(true)])] белками.") {
+            "У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] #IF(npc.isShortStature())бесовских#ELSEдемонических#ENDIF глаз, с [pc.morphPluralInstr([npc.irisShape])], [pc.morphPluralInstr([npc.irisColour(true)])] радужками, [pc.morphPluralInstr([npc.pupilShape])], [pc.morphPluralInstr([npc.pupilColour(true)])] зрачками, и [pc.morphPluralInstr([npc.scleraColour(true)])] белками.") {
 		@Override
 		public List<BodyPartTag> getTags() {
 			return Util.newArrayListOfValues(BodyPartTag.NIGHT_VISION);

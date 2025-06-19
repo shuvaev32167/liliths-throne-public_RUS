@@ -956,12 +956,12 @@ public enum Quest {
 	HARPY_PACIFICATION_TWO(QuestType.SIDE, 6, 25) {
 		@Override
 		public String getName() {
-			return "Минус одно, два осталось";
+			return "Минус одна, две осталось";
 		}
 
 		@Override
 		public String getDescription() {
-			return "Вам удалось подчинить себе одну из матриархов, но осталось еще две!";
+			return "Вам удалось подчинить себе одну из матриархов, но осталось ещё две!";
 		}
 
 		@Override

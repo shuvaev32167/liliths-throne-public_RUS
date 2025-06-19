@@ -494,7 +494,7 @@ public class GenericOffspringDialogue {
 					
 				}  else if (index == 7) {
 					if(Main.game.getPlayer().hasItemType(ItemType.PRESENT)) {
-						return new Response("Give Present", UtilText.parse(offspring(), "Give [npc.name] the present that you're carrying."), OFFSPRING_PRESENT) {
+						return new Response("Подарить подарок", UtilText.parse(offspring(), "Give [npc.name] the present that you're carrying."), OFFSPRING_PRESENT) {
 							@Override
 							public void effects() {
 								Main.game.getPlayer().removeItem(Main.game.getItemGen().generateItem(ItemType.PRESENT));
@@ -812,7 +812,7 @@ public class GenericOffspringDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 7 && Main.game.getDialogueFlags().offspringDialogueTokens>0) {
-				return new Response("Give Present", "You're already giving [npc.name] a present.", null);
+				return new Response("Подарить подарок", "You're already giving [npc.name] a present.", null);
 				
 			} else {
 				return OFFSPRING_ENCOUNTER_TALKING.getResponse(0, index);

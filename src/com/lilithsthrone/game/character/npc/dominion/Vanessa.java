@@ -229,7 +229,7 @@ public class Vanessa extends NPC {
 	
 	@Override
 	public String getArtworkFolderName() {
-        return "Ванесса";
+		return "Vanessa";
 	}
 	
 	@Override
@@ -244,7 +244,7 @@ public class Vanessa extends NPC {
 	
 	@Override
 	public String getGenericName() {
-        return "Ms. Каннингем";
+		return "мисс Каннингем";
 	}
 	
 	@Override

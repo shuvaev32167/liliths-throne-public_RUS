@@ -1,12 +1,12 @@
 package com.lilithsthrone.game.character.fetishes;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import com.lilithsthrone.utils.SvgUtil;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @since 0.1.99
@@ -15,28 +15,28 @@ import com.lilithsthrone.utils.colours.PresetColour;
  */
 public enum FetishLevel {
 	/*overlay1 и т.д. НЕ ПЕРЕВОДИТЬ. ЯВЛЯЮТСЯ ТЕГАМИ ДЛЯ ДВИЖКА ИГРЫ.*/
-	ZERO_NO_EXPERIENCE("неопытн(ая,ый)", "I", "", "overlay1", 0, 0, 0, 10, PresetColour.DESIRE_STAGE_ZERO),
+	ZERO_NO_EXPERIENCE("неопытный", "I", "", "overlay1", 0, 0, 0, 10, PresetColour.DESIRE_STAGE_ZERO),
 	
 	ONE_AMATEUR("любитель", "II", "", "overlay2", 0.5f, 1, 10, 50, PresetColour.DESIRE_STAGE_ONE),
-	
-	TWO_EXPERIENCED("опытн(ая,ый)", "III", "", "overlay3", 1f, 2, 50, 100, PresetColour.DESIRE_STAGE_TWO),
+
+	TWO_EXPERIENCED("опытный", "III", "", "overlay3", 1f, 2, 50, 100, PresetColour.DESIRE_STAGE_TWO),
 	
 	THREE_EXPERT("эксперт", "IV", "", "overlay4", 2f, 3, 100, 200, PresetColour.DESIRE_STAGE_THREE),
 	
 	FOUR_MASTERFUL("мастер", "V", "", "overlay5", 2.5f, 4, 200, 200, PresetColour.DESIRE_STAGE_FOUR);
 	
 	
-	private String name;
-	private String numeral;
-	private String description;
+	private final String name;
+	private final String numeral;
+	private final String description;
 	private String SVGImageOverlay;
-	private float bonusArousalIncrease;
-	private int bonusTeaseDamage;
-	private int minimumExperience;
-	private int maximumExperience;
-	private Colour colour;
+	private final float bonusArousalIncrease;
+	private final int bonusTeaseDamage;
+	private final int minimumExperience;
+	private final int maximumExperience;
+	private final Colour colour;
 	
-	private FetishLevel(String name, String numeral, String description, String pathName, float bonusArousalIncrease, int bonusTeaseDamage, int minimumExperience, int maximumExperience, Colour colour) {
+	FetishLevel(String name, String numeral, String description, String pathName, float bonusArousalIncrease, int bonusTeaseDamage, int minimumExperience, int maximumExperience, Colour colour) {
 		this.name = name;
 		this.numeral = numeral;
 		this.description = description;

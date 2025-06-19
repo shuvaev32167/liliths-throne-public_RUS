@@ -307,7 +307,7 @@ public class Astrapi extends NPC {
 
 	@Override
 	public String getArtworkFolderName() {
-        return "Астрапи";
+		return "Astrapi";
 	}
 	
 	@Override

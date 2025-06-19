@@ -86,8 +86,8 @@ public class ArcaneArts {
 	private static boolean isMuskMarked() {
 		return Main.game.getPlayer().isMarkedByMuskMarkerCharacter(getVicky());
 	}
-	
-	public static final DialogueNode EXTERIOR = new DialogueNode("Arcane Arts (Exterior)", "-", false) {
+
+    public static final DialogueNode EXTERIOR = new DialogueNode("Магические искусства (снаружи)", "-", false) {
 
 		@Override
 		public String getContent() {

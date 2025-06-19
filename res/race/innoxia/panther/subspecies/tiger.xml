@@ -78,7 +78,7 @@
 		<hairPresent>true</hairPresent>
 	</feralAttributes>
 	<statusEffectDescription><![CDATA[
-		Тело [pc.morphSingleGent([npc.namePos])] чрезвычайно крепкое, и [npc.sheIsFull] [npc.genderBasedWord(способен, способна)] на великие подвиги.
+		Тело [pc.morphSingleNameGene([npc.namePos])] чрезвычайно крепкое, и [npc.sheIsFull] [npc.genderBasedWord(способен, способна)] на великие подвиги.
 	]]></statusEffectDescription>
 	<statusEffectAttributeModifiers>
 		<attribute value="35">MAJOR_PHYSIQUE</attribute>

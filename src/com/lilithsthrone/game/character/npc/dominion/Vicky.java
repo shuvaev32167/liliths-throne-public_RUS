@@ -150,7 +150,7 @@ public class Vicky extends NPC {
 	
 	public Vicky(boolean isImported) {
         super(isImported, new NameTriplet("Вики"), "Хауген",
-				"Vicky is the owner of the shop 'Arcane Arts'. Her manner of staring at anyone who enters her shop is quite unsettling, and you feel as though she's ready to pounce on you at any moment...",
+                "Вики — владелица магазина «Магисеские искуства». Её манера пристально смотреть на каждого, кто входит в её магазин, довольно тревожна. Создаётся ощущение, что она готова в любой момент наброситься на тебя...",
 				37, Month.MAY, 26,
 				10, Gender.F_P_V_B_FUTANARI,
 				Subspecies.WOLF_MORPH, RaceStage.GREATER, new CharacterInventory(false, 10), WorldType.SHOPPING_ARCADE, PlaceType.SHOPPING_ARCADE_VICKYS_SHOP, true);
@@ -481,7 +481,7 @@ public class Vicky extends NPC {
 
 		int count=0;
 		for(AbstractWeaponType type : weaponTypesAvailable) {
-			weaponsForSale.put(Main.game.getItemGen().generateWeapon((AbstractWeaponType) type), 2+Util.random.nextInt(5));
+			weaponsForSale.put(Main.game.getItemGen().generateWeapon(type), 2+Util.random.nextInt(5));
 			count++;
 			if(count>=this.getMaximumInventorySpace()) {
 				break;
@@ -489,7 +489,7 @@ public class Vicky extends NPC {
 		}
 		count=0;
 		for(AbstractClothingType type : clothingTypesAvailable) {
-			clothingForSale.put(Main.game.getItemGen().generateClothing((AbstractClothingType) type, false), 2+Util.random.nextInt(5));
+			clothingForSale.put(Main.game.getItemGen().generateClothing(type, false), 2+Util.random.nextInt(5));
 			count++;
 			if(count>=this.getMaximumInventorySpace()) {
 				break;
@@ -497,7 +497,7 @@ public class Vicky extends NPC {
 		}
 		count=0;
 		for(AbstractItemType type : itemTypesAvailable) {
-			itemsForSale.put(Main.game.getItemGen().generateItem((AbstractItemType) type), 2+Util.random.nextInt(5));
+			itemsForSale.put(Main.game.getItemGen().generateItem(type), 2+Util.random.nextInt(5));
 			count++;
 			if(count>=this.getMaximumInventorySpace()-requiredRoomForMiscItems) {
 				break;

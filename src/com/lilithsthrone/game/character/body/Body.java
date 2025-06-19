@@ -33,9 +33,12 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+import com.lilithsthrone.utils.translate.russian.Morpher;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import ru.shuvaev.morpher.tools.enams.Case;
+import ru.shuvaev.morpher.tools.enams.Numeration;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -2524,7 +2527,7 @@ public class Body implements XMLSaving {
 		// Nose:
 		
 		if(face.isPiercedNose()) {
-			sb.append(" [npc.Her] [npc.nose] has been pierced.");
+			sb.append(" [npc.TargetBasedWord(твой, [npc.her])] [npc.nose] проколот.");
 		}
 		
 		// Eyes:
@@ -2576,7 +2579,7 @@ public class Body implements XMLSaving {
 					switch(owner.getFacialHair()) {
 						case ZERO_NONE:
 							if(!owner.isFeminine()) {
-								sb.append(" [npc.She] [npc.do]n't have any trace of facial "+owner.getFacialHairType().getName(owner)+".");
+								sb.append(" У [npc.targetBasedWord(тебя, н[npc.her])] нет ни следа " + Morpher.morphNoun(owner.getFacialHairType().getName(owner), Case.GENITIVUS, Numeration.PLURAL) + " на лице.");
 							}
 							break;
 						case ONE_STUBBLE:

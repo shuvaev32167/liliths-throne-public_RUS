@@ -55,13 +55,13 @@ public class HairType {
 			Util.newArrayListOfValues(""),
             Util.newArrayListOfValues("шелковистые", "мягкие", "женственные"),
 			"#IF(npc.isShortStature())"
-                    + "Превращение длится всего несколько мгновений, после чего у [npc.herHim] [npc.targetBasedWord(остаёшься, остаётся)] с шелковистыми, импитскими волосами.<br/>"
-                    + "[npc.Name] теперь [npc.has] [npc.hairColour] [style.boldImp(импитские волосы)]."
+                    + "Превращение длится всего несколько мгновений, после чего у [npc.herHim] [npc.targetBasedWord(остаёшься, остаётся)] с шелковистыми, бесовскими волосами.<br/>"
+                    + "[npc.Name] теперь [npc.has] [npc.hairColour] [style.boldImp(бесовские волосы)]."
 			+ "#ELSE"
                     + "Превращение длится всего несколько мгновений, после чего у [npc.herHim] [npc.targetBasedWord(остаёшься, остаётся)] с шелковистыми, демоническими волосами.<br/>"
                     + "[npc.Name] теперь [npc.has] [npc.hairColour], [style.boldDemon(демонические волосы)]."
 			+ "#ENDIF",
-			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.hairDeterminer] [npc.hairLength], [npc.hairColour(true)], #IF(npc.isShortStature())импитские#ELSEдемонические#ENDIF волосы",
+            "У [npc.targetBasedWord(тебя, н[npc.him])] [npc.hairDeterminer] [npc.hairLength], [npc.hairColour(true)], #IF(npc.isShortStature())бесовские#ELSEдемонические#ENDIF волосы",
 			Util.newArrayListOfValues(BodyPartTag.HAIR_HANDLES_IN_SEX),
 			true) {
 	};

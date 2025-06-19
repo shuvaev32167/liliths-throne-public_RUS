@@ -465,7 +465,7 @@ public class WorldType {
 	};
 	
 	public static AbstractWorldType ENFORCER_HQ = new AbstractWorldType(WorldRegion.DOMINION,
-			"Штаб-квартира энфорсеров",
+			"ШК энфорсеров",
 			PresetColour.BASE_BLUE,
 			false,
 			false,
@@ -567,7 +567,7 @@ public class WorldType {
 	
 
 	public static AbstractWorldType HOME_IMPROVEMENTS = new AbstractWorldType(WorldRegion.DOMINION,
-			"Магазин «Сделай сам» Аргуса",
+			"«Сделай сам» Аргуса",
 			PresetColour.BASE_ORANGE,
 			false,
 			false,
@@ -977,7 +977,7 @@ public class WorldType {
 	};
 
 	public static AbstractWorldType BAT_CAVERNS = new AbstractWorldType(WorldRegion.SUBMISSION,
-			"Пещеры летучих мышей",
+			"Пещеры лет. мышей",
 			PresetColour.BASE_BLACK,
 			true,
 			true,
@@ -1007,7 +1007,7 @@ public class WorldType {
 	};
 
 	public static AbstractWorldType SLIME_QUEENS_LAIR_GROUND_FLOOR = new AbstractWorldType(WorldRegion.SUBMISSION,
-			"Башня королевы слизи Эт1",
+			"Башня кор. слизи Эт1",
 			PresetColour.BASE_PINK,
 			false,
 			false,
@@ -1033,7 +1033,7 @@ public class WorldType {
 	};
 
 	public static AbstractWorldType SLIME_QUEENS_LAIR_FIRST_FLOOR = new AbstractWorldType(WorldRegion.SUBMISSION,
-			"Башня королевы слизи Эт2",
+			"Башня кор. слизи Эт2",
 			PresetColour.BASE_PINK,
 			false,
 			false,

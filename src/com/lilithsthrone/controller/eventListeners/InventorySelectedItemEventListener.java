@@ -14,6 +14,9 @@ import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.RenderingEngine;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.w3c.dom.events.Event;
 
 /**
@@ -22,7 +25,9 @@ import org.w3c.dom.events.Event;
  * @author Innoxia
  * Перевод не требуется
  */
-public class InventorySelectedItemEventListener implements ClonedEventListener {
+@RequiredArgsConstructor
+@NoArgsConstructor(force = true)
+public class InventorySelectedItemEventListener implements ClonedEventListener<InventorySelectedItemEventListener> {
 	private AbstractItem item;
 	
 	private AbstractClothing clothing;
@@ -36,15 +41,8 @@ public class InventorySelectedItemEventListener implements ClonedEventListener {
 	private GameCharacter owner;
 	
 	private int buyBackIndex;
+	@Getter(onMethod = @__(@Override))
     private final InventorySelectedItemEventListener parent;
-
-    private InventorySelectedItemEventListener(InventorySelectedItemEventListener parent) {
-        this.parent = parent;
-    }
-
-    public InventorySelectedItemEventListener() {
-        parent = null;
-    }
 
 	@Override
 	public void handleEvent(Event event) {
@@ -261,7 +259,7 @@ public class InventorySelectedItemEventListener implements ClonedEventListener {
 	}
 
     @Override
-    public ClonedEventListener newInstance() {
-        return new InventorySelectedItemEventListener(this);
+    public InventorySelectedItemEventListener newInstance() {
+        return new InventorySelectedItemEventListener(tryGetParent());
     }
 }

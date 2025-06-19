@@ -1,16 +1,16 @@
 package com.lilithsthrone.controller.eventListeners;
 
-import org.w3c.dom.events.Event;
-import org.w3c.dom.events.EventListener;
-
-import com.lilithsthrone.game.dialogue.places.dominion.lilayashome.LilayaDressingRoomDialogue;
 import com.lilithsthrone.controller.eventListeners.tooltips.ClonedEventListener;
+import com.lilithsthrone.game.dialogue.places.dominion.lilayashome.LilayaDressingRoomDialogue;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.EnchantmentDialogue;
 import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
 import com.lilithsthrone.main.Main;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.w3c.dom.events.Event;
 
 /**
@@ -18,7 +18,9 @@ import org.w3c.dom.events.Event;
  * @version 0.4.10.8
  * @author Innoxia
  */
-public class EnchantmentEventListener implements ClonedEventListener {
+@RequiredArgsConstructor
+@NoArgsConstructor(force = true)
+public class EnchantmentEventListener implements ClonedEventListener<EnchantmentEventListener> {
 	private AbstractCoreItem itemToEnchant;
 	private TFModifier primaryModifier;
 	private TFModifier secondaryModifier;
@@ -26,15 +28,8 @@ public class EnchantmentEventListener implements ClonedEventListener {
 	private boolean effect;
 	private int effectIndex;
 	private int limit;
+	@Getter(onMethod = @__(@Override))
     private final EnchantmentEventListener parent;
-
-    public EnchantmentEventListener() {
-        this.parent = null;
-    }
-
-    public EnchantmentEventListener(EnchantmentEventListener parent) {
-        this.parent = parent;
-    }
 
 	@Override
 	public void handleEvent(Event event) {
@@ -123,6 +118,10 @@ public class EnchantmentEventListener implements ClonedEventListener {
 	}
 
 	public EnchantmentEventListener setItemToEnchant(AbstractCoreItem itemToEnchant) {
+        if (parent != null) {
+            parent.setItemToEnchant(itemToEnchant);
+            return this;
+        }
 		resetVariables();
 		this.itemToEnchant = itemToEnchant;
 
@@ -130,6 +129,10 @@ public class EnchantmentEventListener implements ClonedEventListener {
 	}
 	
 	public EnchantmentEventListener setPrimaryModifier(TFModifier primaryModifier) {
+        if (parent != null) {
+            parent.setPrimaryModifier(primaryModifier);
+            return this;
+        }
 		resetVariables();
 		this.primaryModifier = primaryModifier;
 
@@ -137,6 +140,10 @@ public class EnchantmentEventListener implements ClonedEventListener {
 	}
 	
 	public EnchantmentEventListener setSecondaryModifier(TFModifier secondaryModifier) {
+        if (parent != null) {
+            parent.setSecondaryModifier(secondaryModifier);
+            return this;
+        }
 		resetVariables();
 		this.secondaryModifier = secondaryModifier;
 
@@ -144,6 +151,10 @@ public class EnchantmentEventListener implements ClonedEventListener {
 	}
 	
 	public EnchantmentEventListener setPotency(TFPotency potency) {
+        if (parent != null) {
+            parent.setPotency(potency);
+            return this;
+        }
 		resetVariables();
 		this.potency = potency;
 
@@ -184,7 +195,7 @@ public class EnchantmentEventListener implements ClonedEventListener {
 	}
 
     @Override
-    public ClonedEventListener newInstance() {
-        return new EnchantmentEventListener(this);
+    public EnchantmentEventListener newInstance() {
+        return new EnchantmentEventListener(tryGetParent());
     }
 }

@@ -250,7 +250,7 @@ public class Kay extends NPC {
 		if(this.isFeminine()) {
 			return "KayFeminine";
 		}
-        return "Кей";
+		return "Kay";
 	}
 	
 	@Override

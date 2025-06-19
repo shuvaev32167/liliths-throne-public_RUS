@@ -19,7 +19,7 @@
 	This can be overridden by the 'sexBlockedReason' value of the place type in which the character is located.
 	If left blank, or omitted entirely, then characters can freely have sex in this world type.
 	Characters can have sex in this world type, so I've left it blank, but if you wanted to define a value, it would look like this:
-		<sexBlockedReason><![CDATA[[npc.Name] cannot have sex here!]]></sexBlockedReason> -->
+		<sexBlockedReason><![CDATA[[npc.Name] не [npc.targetBasedWord(можешь, может)] заниматься здесь сексом!]]></sexBlockedReason> -->
 	<sexBlockedReason/>
 	
 	<!-- Whether or not there is furniture present in this area.

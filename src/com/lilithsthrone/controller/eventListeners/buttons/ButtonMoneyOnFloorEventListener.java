@@ -7,28 +7,23 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.w3c.dom.events.Event;
 
-/**
- * @since 0.1.69.9
- * @version 0.1.69.9
- * @author Innoxia
- */
 @RequiredArgsConstructor
 @NoArgsConstructor(force = true)
-public class ButtonMoveWestEventListener implements ClonedEventListener<ButtonMoveWestEventListener> {
+public class ButtonMoneyOnFloorEventListener implements ClonedEventListener<ButtonMoneyOnFloorEventListener> {
     @Getter(onMethod = @__(@Override))
-    private final ButtonMoveWestEventListener parent;
-
-	@Override
-	public void handleEvent(Event event) {
-        if (parent != null) {
-            parent.handleEvent(event);
-            return;
-        }
-        Main.mainController.moveWest();
-	}
+    private final ButtonMoneyOnFloorEventListener parent;
 
     @Override
-    public ButtonMoveWestEventListener newInstance() {
-        return new ButtonMoveWestEventListener(tryGetParent());
+    public void handleEvent(Event evt) {
+        if (parent != null) {
+            parent.handleEvent(evt);
+            return;
+        }
+        Main.mainController.openInventory();
+    }
+
+    @Override
+    public ButtonMoneyOnFloorEventListener newInstance() {
+        return new ButtonMoneyOnFloorEventListener(tryGetParent());
     }
 }

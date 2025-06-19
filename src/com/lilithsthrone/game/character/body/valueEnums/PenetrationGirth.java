@@ -17,22 +17,22 @@ public enum PenetrationGirth {
 	TWO_NARROW(2, -0.2f, "узкий", PresetColour.GENERIC_SIZE_THREE),
 	
 	THREE_AVERAGE(3, 0, "средней толщины", PresetColour.GENERIC_SIZE_FOUR),
-	
-	FOUR_GIRTHY(4, 0.2f, "пыный", PresetColour.GENERIC_SIZE_FIVE),
+
+    FOUR_GIRTHY(4, 0.2f, "объёмный", PresetColour.GENERIC_SIZE_FIVE),
 	
 	FIVE_THICK(5, 0.4f, "толстый", PresetColour.GENERIC_SIZE_SIX),
 	
 	SIX_CHUBBY(6, 0.6f, "пухлый", PresetColour.GENERIC_SIZE_SEVEN),
-	
-	SEVEN_FAT(7, 0.8f, "толстый", PresetColour.GENERIC_SIZE_EIGHT);
-	
-	
-	private int value;
-	private float diameterPercentageModifier;
-	private String descriptor;
-	private Colour colour;
 
-	private PenetrationGirth(int value, float diameterPercentageModifier, String descriptor, Colour colour) {
+    SEVEN_FAT(7, 0.8f, "жирный", PresetColour.GENERIC_SIZE_EIGHT);
+
+
+    private final int value;
+    private final float diameterPercentageModifier;
+    private final String descriptor;
+    private final Colour colour;
+
+    PenetrationGirth(int value, float diameterPercentageModifier, String descriptor, Colour colour) {
 		this.value = value;
 		this.diameterPercentageModifier = diameterPercentageModifier;
 		this.descriptor = descriptor;

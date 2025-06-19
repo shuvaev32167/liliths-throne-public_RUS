@@ -3,9 +3,10 @@
 	<coreAttributes>
 		<value>800</value> 
 		<determiner><![CDATA[a]]></determiner>
-		<name><![CDATA[lab coat]]></name>
-		<namePlural pluralByDefault="false"><![CDATA[lab coats]]></namePlural>
-		<description><![CDATA[A knee-length cotton overcoat which helps protect the wearer against accidental chemical spills.]]></description>
+		<name><![CDATA[лабораторный халат]]></name>
+		<namePlural pluralByDefault="false"><![CDATA[лабораторные халаты]]></namePlural>
+		<description>
+			<![CDATA[Хлопковый халат длиной до колен, который защищает владельца от случайных попаданий химических веществ.]]></description>
 		<physicalResistance>0</physicalResistance>
 		<femininity>ANDROGYNOUS</femininity>
 		<slot>TORSO_OVER</slot>

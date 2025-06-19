@@ -396,6 +396,9 @@ public class AbstractTattooType extends AbstractCoreType {
 	}
 	
 	private String getSVGStringFromMap(Colour colour, Colour colourSecondary, Colour colourTertiary) {
+		if (SVGStringMap == null) {
+			return null;
+		}
 		if(SVGStringMap.get(colour)==null) {
 			return null;
 		} else {
@@ -431,7 +434,11 @@ public class AbstractTattooType extends AbstractCoreType {
 					Collections.sort(svgPathInformation, (i1, i2)->i1.getZLayer()-i2.getZLayer());
 					StringBuilder svgBuilder = new StringBuilder();
 					for(SvgInformation info : getSvgPathInformation()) {
-						List<String> lines = Files.readAllLines(Paths.get(info.getPathName()));
+						var path = Paths.get(info.getPathName());
+						if (!Files.exists(path) || Files.isDirectory(path)) {
+							continue;
+						}
+						List<String> lines = Files.readAllLines(path);
 						StringBuilder sb = new StringBuilder();
 						for(String line : lines) {
 							sb.append(line);

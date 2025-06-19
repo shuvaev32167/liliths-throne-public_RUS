@@ -33,7 +33,7 @@
 	<iconName displaySize="75">icon</iconName>
 	<backgroundName/>
 	<bookIconName>icon</bookIconName>
-	<bookName>Curious Kitties</bookName>
+    <bookName>Любопытные котики</bookName>
 	<basicDescriptionId>CAT_MORPH_BASIC</basicDescriptionId>
 	<advancedDescriptionId>CAT_MORPH_ADVANCED</advancedDescriptionId>
 	<defaultPreference>TWO_AVERAGE</defaultPreference>

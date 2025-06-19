@@ -4,8 +4,8 @@
 	<coreAttributes>
 		<value>3000</value>
 		<determiner><![CDATA[a]]></determiner>
-		<name><![CDATA[kimono]]></name>
-		<namePlural pluralByDefault="false"><![CDATA[kimonos]]></namePlural>
+		<name><![CDATA[кимоно]]></name>
+		<namePlural pluralByDefault="false"><![CDATA[кимоно]]></namePlural>
 		<description><![CDATA[Primarily worn by the reclusive youko, these full-length robes are identical to their traditional Japanese namesake.]]></description>
 		<physicalResistance>0</physicalResistance>
 		<femininity>FEMININE</femininity>

@@ -1132,9 +1132,9 @@ public class SlaveDialogue {
 					} else if(index == 9) {
 						if(Main.game.getPlayer().hasItemType(ItemType.PRESENT)) {
 							if(isDoll()) {
-								return new Response("Give Present", UtilText.parse(getSlave(), "As a doll, [npc.name] has no need or appreciation for presents..."), null);
+								return new Response("Подарить подарок", UtilText.parse(getSlave(), "As a doll, [npc.name] has no need or appreciation for presents..."), null);
 							}
-							return new Response("Give Present", UtilText.parse(getSlave(), "Give [npc.name] the present that you're carrying."), SLAVE_PRESENT) {
+							return new Response("Подарить подарок", UtilText.parse(getSlave(), "Give [npc.name] the present that you're carrying."), SLAVE_PRESENT) {
 								@Override
 								public void effects() {
 									applyReactionReset();

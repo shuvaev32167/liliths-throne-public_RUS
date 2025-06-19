@@ -23,6 +23,7 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+import com.lilithsthrone.utils.translate.russian.Morpher;
 import com.lilithsthrone.world.places.PlaceType;
 
 import java.util.ArrayList;
@@ -495,7 +496,7 @@ public class Response {
 			
 			if(getCorruptionNeeded() != null) {
 				if(!isActionCorrupting()) {
-					SB.append("Your <span style='color:"+Main.game.getPlayer().getCorruptionLevel().getColour().toWebHexString()+";'>"+Util.capitaliseSentence(Main.game.getPlayer().getCorruptionLevel().getName())+"</span>"
+                    SB.append("Your <span style='color:" + Main.game.getPlayer().getCorruptionLevel().getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(Morpher.morphNoun(Main.game.getPlayer().getCorruptionLevel().getName(), Main.game.getPlayer())) + "</span>"
 							+ " [style.colourCorruption(corruption)] has unlocked this action!");
 				} else {
 					SB.append("Ты получишь <b>+" + getCorruptionNeeded().getCorruptionBypass() + "</b> [style.boldCorruption(развращённости)], поскольку ты не соответствуешь требуемым [style.colourCorruption(развращённости)] или [style.colourFetish(фетишу)]!");
@@ -759,14 +760,14 @@ public class Response {
 						+ (!isActionCorrupting()
 						? " ([style.colourMinorGood(в пределах диапазона)]): "
 						: " ([style.colourMinorBad(просто вне диапазона)]): ")
-						+ Util.capitaliseSentence(getCorruptionNeeded().getName()));
+                        + Util.capitaliseSentence(Morpher.morphNoun(getCorruptionNeeded().getName(), Main.game.getPlayer())));
 			} else {
 				SB.append("<br/>"
 						+ "[style.colourCorruption(Связанная развращённость)]"
 						+ (!Main.game.isBypassSexActionsEnabled()
 						? " ([style.colourTerrible(вне диапазона)]): "
 						: " ([style.colourMinorBad(вне диапазона)]): ")
-						+ Util.capitaliseSentence(getCorruptionNeeded().getName()));
+                        + Util.capitaliseSentence(Morpher.morphNoun(getCorruptionNeeded().getName(), Main.game.getPlayer())));
 			}
 		}
 		

@@ -275,8 +275,8 @@ public class PhoneDialogue {
 				} else if (index == 2) {
 					return new Response(
 							Main.getProperties().hasValue(PropertyValue.levelUpHightlight)
-								? "<span style='color:" + PresetColour.GENERIC_EXCELLENT.toWebHexString() + ";'>Perk Tree</span>"
-								:"Perk Tree",
+									? "<span style='color:" + PresetColour.GENERIC_EXCELLENT.toWebHexString() + ";'>Дерево навыков</span>"
+									: "Дерево навыков",
 							"View your character page.", CHARACTER_PERK_TREE);
 					
 				} else if (index == 3) {
@@ -3757,7 +3757,7 @@ public class PhoneDialogue {
 		}
 	};
 
-	public static final DialogueNode CHARACTER_PERK_TREE = new DialogueNode("Perk Tree", "", true) {
+	public static final DialogueNode CHARACTER_PERK_TREE = new DialogueNode("Дерево навыков", "", true) {
 		@Override
 		public void applyPreParsingEffects() {
 			Main.getProperties().setValue(PropertyValue.levelUpHightlight, false);

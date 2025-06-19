@@ -331,8 +331,8 @@ public class Race {
 			return Util.newHashMapOfValues(
 					new Value<>(Fetish.FETISH_BREASTS_SELF,
 							Util.newHashMapOfValues(
-									new Value<>("love", 5),
-									new Value<>("like", 5))));
+									new Value<>("обожает", 5),
+									new Value<>("любит", 5))));
 		}
 	};
 
@@ -644,12 +644,12 @@ public class Race {
 			return Util.newHashMapOfValues(
 					new Value<>(Fetish.FETISH_IMPREGNATION,
 							Util.newHashMapOfValues(
-									new Value<>("love", 5),
-									new Value<>("like", 5))),
+									new Value<>("обожает", 5),
+									new Value<>("любит", 5))),
 					new Value<>(Fetish.FETISH_PREGNANCY,
 							Util.newHashMapOfValues(
-									new Value<>("love", 5),
-									new Value<>("like", 5))));
+									new Value<>("обожает", 5),
+									new Value<>("любит", 5))));
 		}
 	};
 	

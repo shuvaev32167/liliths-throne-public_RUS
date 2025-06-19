@@ -9,6 +9,9 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.PresetColour;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.w3c.dom.events.Event;
 import org.w3c.dom.events.MouseEvent;
 
@@ -17,10 +20,15 @@ import org.w3c.dom.events.MouseEvent;
  * @version 0.3.4.5
  * @author Innoxia
  */
-public class TooltipResponseDescriptionEventListener implements ClonedEventListener {
+@RequiredArgsConstructor
+@NoArgsConstructor(force = true)
+public class TooltipResponseDescriptionEventListener implements ClonedEventListener<TooltipResponseDescriptionEventListener> {
 	private int index;
 	private boolean nextPage = false;
 	private boolean previousPage = false;
+
+	@Getter(onMethod = @__(@Override))
+    private final TooltipResponseDescriptionEventListener parent;
 	
 	private static final StringBuilder tooltipSB;
 	static {
@@ -29,6 +37,10 @@ public class TooltipResponseDescriptionEventListener implements ClonedEventListe
 
 	@Override
 	public void handleEvent(Event event) {
+        if (parent != null) {
+            parent.handleEvent(event);
+            return;
+        }
 
 		Main.mainController.setTooltipContent("");
 
@@ -286,6 +298,10 @@ public class TooltipResponseDescriptionEventListener implements ClonedEventListe
 	}
 
 	public TooltipResponseDescriptionEventListener setIndex(int index) {
+        if (parent != null) {
+            parent.setIndex(index);
+            return this;
+        }
 		this.index = index;
 
 		nextPage = false;
@@ -294,6 +310,10 @@ public class TooltipResponseDescriptionEventListener implements ClonedEventListe
 	}
 
 	public TooltipResponseDescriptionEventListener nextPage() {
+        if (parent != null) {
+            parent.nextPage();
+            return this;
+        }
 		nextPage = true;
 		previousPage = false;
 
@@ -301,23 +321,18 @@ public class TooltipResponseDescriptionEventListener implements ClonedEventListe
 	}
 
 	public TooltipResponseDescriptionEventListener previousPage() {
+        if (parent != null) {
+            parent.previousPage();
+            return this;
+        }
 		nextPage = false;
 		previousPage = true;
 
 		return this;
 	}
 
-    public TooltipResponseDescriptionEventListener() {
-    }
-
-    public TooltipResponseDescriptionEventListener(int index, boolean nextPage, boolean previousPage) {
-        this.index = index;
-        this.nextPage = nextPage;
-        this.previousPage = previousPage;
-    }
-
     @Override
-    public ClonedEventListener newInstance() {
-        return new TooltipResponseDescriptionEventListener(index, nextPage, previousPage);
+    public TooltipResponseDescriptionEventListener newInstance() {
+        return new TooltipResponseDescriptionEventListener(tryGetParent());
     }
 }

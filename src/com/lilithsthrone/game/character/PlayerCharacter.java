@@ -769,9 +769,9 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 			return ""; // This isn't displayed anywhere before the game starts for real.
 		} else {
 			if(description==null || description.isEmpty()) {
-				return "Having been pulled into an enchanted mirror in your aunt Lily's museum, you woke up to find yourself in another world."
-					+ " By a stroke of good fortune, one of the first people you met was Lilaya; this world's version of your aunt."
-					+ " Having convinced her that your story is true, you're now working towards finding a way to get back to your old world.";
+				return "Попав в волшебное зеркало в музее своей тёти Лили, ты [pc.genderBasedWord(проснулся, проснулась)] и [pc.genderBasedWord(обнаружил, обнаружила)], что оказался в другом мире."
+						+ " По счастливой случайности, одним из первых людей, которых ты [pc.genderBasedWord(встретил, встретила)], была Лилайя — твоя тётя в этом мире."
+						+ " Убедив её в правдивости своей истории, ты теперь ищешь способ вернуться в свой прежний мир.";
 			} else {
 				return UtilText.parse(this, description);
 			}
@@ -1003,11 +1003,11 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 		String experienceUpdate = incrementExperience(quest.getExperienceReward(), true);
 		
 		quests.get(questLine).add(0, quest);
-		
-		Main.game.addEvent(new EventLogEntry("[style.colourGood(Optional Task Complete)]", quest.getName()), false);
+
+        Main.game.addEvent(new EventLogEntry("[style.colourGood(Дополнительная задача завершена)]", quest.getName()), false);
 		return "<p style='text-align:center;'>"
-				+ "<b style='color:" + questLine.getType().getColour().toWebHexString() + ";'>Quest - " + questLine.getName() + "</b><br/>"
-				+ "<b style='color:"+PresetColour.GENERIC_GOOD.toWebHexString()+";'>Optional Task Completed: " + quest.getName() + "</b><br/>"
+                + "<b style='color:" + questLine.getType().getColour().toWebHexString() + ";'>Квест - " + questLine.getName() + "</b><br/>"
+                + "<b style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Дополнительная задача завершена: " + quest.getName() + "</b><br/>"
 				+ experienceUpdate;
 	}
 	
@@ -1036,19 +1036,19 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 			quests.get(questLine).add(quest);
 			
 			if (questLine.getQuestTree().getFirstNodeWithData(quest).getChildren().isEmpty()) { // QuestLine complete (No more children in the tree)
-				Main.game.addEvent(new EventLogEntry("[style.colourExcellent(Quest Complete)]", questLine.getName()), false);
+				Main.game.addEvent(new EventLogEntry("[style.colourExcellent(Квест завершён)]", questLine.getName()), false);
 				return "<p style='text-align:center;'>"
-						+ "<b style='color:" + questLine.getType().getColour().toWebHexString() + ";'>Quest - " + questLine.getName() + "</b><br/>"
-						+ "<b style='color:"+PresetColour.GENERIC_GOOD.toWebHexString()+";'>Task Completed</b><b> - "+currentQuest.getName()+"</b><br/>"
-						+ "<b>All Tasks Completed!</b></p>"
+                        + "<b style='color:" + questLine.getType().getColour().toWebHexString() + ";'>Квест - " + questLine.getName() + "</b><br/>"
+                        + "<b style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Задача завершена</b><b> - " + currentQuest.getName() + "</b><br/>"
+                        + "<b>Все задачи завершены!</b></p>"
 						+ experienceUpdate;
 				
 			} else {
-				Main.game.addEvent(new EventLogEntry("[style.colourMinorGood(New Task)]", quest.getName()), false);
+                Main.game.addEvent(new EventLogEntry("[style.colourMinorGood(Новая задача)]", quest.getName()), false);
 				return "<p style='text-align:center;'>"
-						+ "<b style='color:" + questLine.getType().getColour().toWebHexString() + ";'>Quest - " + questLine.getName() + "</b><br/>"
+                        + "<b style='color:" + questLine.getType().getColour().toWebHexString() + ";'>Квест - " + questLine.getName() + "</b><br/>"
 						+ "<b style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Задача выполнена - " + currentQuest.getName() + "</b><br/>"
-						+ "<b>New Task - " + quest.getName() + "</b></p>"
+                        + "<b>Новая задача - " + quest.getName() + "</b></p>"
 						+ experienceUpdate;
 			}
 			
@@ -1059,8 +1059,8 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 			Main.game.addEvent(new EventLogEntry("[style.colourGood(Quest Started)]", questLine.getName()), false);
 			
 			return "<p style='text-align:center;'>"
-					+ "<b style='color:" + questLine.getType().getColour().toWebHexString() + ";'>New Quest - " + questLine.getName() + "</b><br/>"
-					+ "<b>New Task - " + quest.getName() + "</b></p>";
+                    + "<b style='color:" + questLine.getType().getColour().toWebHexString() + ";'>Новый квест - " + questLine.getName() + "</b><br/>"
+                    + "<b>Новая задача - " + quest.getName() + "</b></p>";
 		}
 		
 	}

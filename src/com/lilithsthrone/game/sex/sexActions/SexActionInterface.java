@@ -26,6 +26,7 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+import com.lilithsthrone.utils.translate.russian.Morpher;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -1590,12 +1591,12 @@ public interface SexActionInterface {
 							SB.append("<br/>"
 									+"<span style='color:"+PresetColour.GENERIC_ARCANE.toWebHexString()+";'>Связанная совращеность</span>"
 									+ " (<span style='color:"+PresetColour.GENERIC_GOOD.toWebHexString()+";'>достигнута</span>): "
-									+ Util.capitaliseSentence(corruptionBypass.getName()));
+                                    + Util.capitaliseSentence(Morpher.morphNoun(corruptionBypass.getName(), Main.game.getPlayer())));
 						} else {
 							SB.append("<br/>"
 									+"<span style='color:"+PresetColour.GENERIC_ARCANE.toWebHexString()+";'>Связанная совращеность</span>"
 									+ " (<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>не достигнута</span>): "
-									+ Util.capitaliseSentence(corruptionBypass.getName()));
+                                    + Util.capitaliseSentence(Morpher.morphNoun(corruptionBypass.getName(), Main.game.getPlayer())));
 						}
 					}
 

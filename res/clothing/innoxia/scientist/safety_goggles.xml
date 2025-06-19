@@ -4,9 +4,10 @@
 	<coreAttributes>
 		<value>500</value>
 		<determiner><![CDATA[a pair of]]></determiner>
-		<name><![CDATA[safety goggles]]></name>
-		<namePlural pluralByDefault="true"><![CDATA[safety goggles]]></namePlural>
-		<description><![CDATA[A form of protective eyewear which fully enclose and shield the wearer's eyes from particulates and chemicals.]]></description>
+        <name><![CDATA[защитные очки]]></name>
+        <namePlural pluralByDefault="true"><![CDATA[защитные очки]]></namePlural>
+        <description>
+            <![CDATA[Тип защитных очков, которые полностью закрывают и защищают глаза владельца от частиц и химических веществ.]]></description>
 		<physicalResistance>0</physicalResistance>
 		<femininity>ANDROGYNOUS</femininity>
 		<slot>EYES</slot>

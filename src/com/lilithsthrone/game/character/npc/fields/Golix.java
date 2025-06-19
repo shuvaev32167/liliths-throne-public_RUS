@@ -50,7 +50,7 @@ public class Golix extends Elemental {
 	
 	@Override
 	public String getArtworkFolderName() {
-		return "Голикс";
+		return "Golix";
 	}
 	
 }

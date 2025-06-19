@@ -85,8 +85,8 @@ public class ClothingEmporium {
 	private static Nyan getNyan() {
 		return ((Nyan)Main.game.getNpc(Nyan.class));
 	}
-	
-	public static final DialogueNode EXTERIOR = new DialogueNode("Nyan's Clothing Emporium (Exterior)", "", false) {
+
+    public static final DialogueNode EXTERIOR = new DialogueNode("Магазин одежды Ньян (снаружи)", "", false) {
 		@Override
 		public int getSecondsPassed() {
 			return 60;

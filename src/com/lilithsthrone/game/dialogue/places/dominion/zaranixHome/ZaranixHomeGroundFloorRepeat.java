@@ -57,8 +57,8 @@ public class ZaranixHomeGroundFloorRepeat {
 		Main.game.getNpc(ZaranixMaidKatherine.class).setStartingBody(false);
 		Main.game.getNpc(ZaranixMaidKelly.class).setStartingBody(false);
 	}
-	
-	public static final DialogueNode OUTSIDE = new DialogueNode("Zaranix's Home", "", true) {
+
+    public static final DialogueNode OUTSIDE = new DialogueNode("Дом Зараникса", "", true) {
 
 		@Override
 		public String getContent() {
@@ -111,8 +111,8 @@ public class ZaranixHomeGroundFloorRepeat {
 			}
 		}
 	};
-	
-	public static final DialogueNode OUTSIDE_KNOCK_ON_DOOR_KNOWS_AMBER = new DialogueNode("Zaranix's Home", "", true) {
+
+    public static final DialogueNode OUTSIDE_KNOCK_ON_DOOR_KNOWS_AMBER = new DialogueNode("Дом Зараникса", "", true) {
 
 		@Override
 		public String getContent() {
@@ -162,7 +162,7 @@ public class ZaranixHomeGroundFloorRepeat {
 			}
 		}
 	};
-	public static final DialogueNode OUTSIDE_LICKING_RELUCTANT = new DialogueNode("Zaranix's Home", "", true, true) {
+    public static final DialogueNode OUTSIDE_LICKING_RELUCTANT = new DialogueNode("Дом Зараникса", "", true, true) {
 
 		@Override
 		public String getContent() {
@@ -186,7 +186,7 @@ public class ZaranixHomeGroundFloorRepeat {
 			}
 		}
 	};
-	public static final DialogueNode OUTSIDE_APOLOGY = new DialogueNode("Zaranix's Home", "", true, true) {
+    public static final DialogueNode OUTSIDE_APOLOGY = new DialogueNode("Дом Зараникса", "", true, true) {
 
 		@Override
 		public String getContent() {
@@ -258,8 +258,8 @@ public class ZaranixHomeGroundFloorRepeat {
 			}
 		}
 	};
-	
-	public static final DialogueNode OUTSIDE_LICKING_EAGER = new DialogueNode("Zaranix's Home", "", true, true) {
+
+    public static final DialogueNode OUTSIDE_LICKING_EAGER = new DialogueNode("Дом Зараникса", "", true, true) {
 
 		@Override
 		public String getContent() {
@@ -292,7 +292,7 @@ public class ZaranixHomeGroundFloorRepeat {
 			}
 		}
 	};
-	public static final DialogueNode OUTSIDE_KNOCK_ON_DOOR = new DialogueNode("Zaranix's Home", "", true) {
+    public static final DialogueNode OUTSIDE_KNOCK_ON_DOOR = new DialogueNode("Дом Зараникса", "", true) {
 
 		@Override
 		public String getContent() {
@@ -353,7 +353,7 @@ public class ZaranixHomeGroundFloorRepeat {
 	};
 	
 	// General places:
-	public static final DialogueNode OUTSIDE_LICKING_SOLES = new DialogueNode("Zaranix's Home", "", true, true) {
+    public static final DialogueNode OUTSIDE_LICKING_SOLES = new DialogueNode("Дом Зараникса", "", true, true) {
 
 		@Override
 		public String getContent() {
@@ -1456,8 +1456,7 @@ public class ZaranixHomeGroundFloorRepeat {
 	};
 
 
-	
-	public static final DialogueNode WALKIES_HUMILIATION = new DialogueNode("Demon Home", "", true) {
+    public static final DialogueNode WALKIES_HUMILIATION = new DialogueNode("Дом демонов", "", true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -1526,8 +1525,8 @@ public class ZaranixHomeGroundFloorRepeat {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode WALKIES_HUMILIATION_REFUSE = new DialogueNode("Demon Home", "", true, true) {
+
+    public static final DialogueNode WALKIES_HUMILIATION_REFUSE = new DialogueNode("Дом демонов", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
 			return 5*60;
@@ -1550,8 +1549,8 @@ public class ZaranixHomeGroundFloorRepeat {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode WALKIES_HUMILIATION_RELUCTANT = new DialogueNode("Demon Home", "", true, true) {
+
+    public static final DialogueNode WALKIES_HUMILIATION_RELUCTANT = new DialogueNode("Дом демонов", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
 			return 5*60;
@@ -1578,8 +1577,8 @@ public class ZaranixHomeGroundFloorRepeat {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode WALKIES_HUMILIATION_EAGER = new DialogueNode("Demon Home", "", true, true) {
+
+    public static final DialogueNode WALKIES_HUMILIATION_EAGER = new DialogueNode("Дом демонов", "", true, true) {
 		@Override
 		public int getSecondsPassed() {
 			return 5*60;
@@ -1606,8 +1605,8 @@ public class ZaranixHomeGroundFloorRepeat {
 			return null;
 		}
 	};
-	
-	public static final DialogueNode WALKIES_PEACEFUL = new DialogueNode("Demon Home", "", true, true) {
+
+    public static final DialogueNode WALKIES_PEACEFUL = new DialogueNode("Дом демонов", "", true, true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -1635,8 +1634,8 @@ public class ZaranixHomeGroundFloorRepeat {
 			}
 		}
 	};
-	
-	public static final DialogueNode WALKIES_PUNISHMENT = new DialogueNode("Demon Home", "", true, true) {
+
+    public static final DialogueNode WALKIES_PUNISHMENT = new DialogueNode("Дом демонов", "", true, true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -1664,8 +1663,8 @@ public class ZaranixHomeGroundFloorRepeat {
 			}
 		}
 	};
-	
-	public static final DialogueNode WALKIES_AMBER_FUCKS = new DialogueNode("Demon Home", "", true, true) {
+
+    public static final DialogueNode WALKIES_AMBER_FUCKS = new DialogueNode("Дом демонов", "", true, true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -1710,8 +1709,8 @@ public class ZaranixHomeGroundFloorRepeat {
 			}
 		}
 	};
-	
-	public static final DialogueNode WALKIES_AMBER_FUCKS_REFUSED = new DialogueNode("Demon Home", "", true, true) {
+
+    public static final DialogueNode WALKIES_AMBER_FUCKS_REFUSED = new DialogueNode("Дом демонов", "", true, true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -1763,8 +1762,8 @@ public class ZaranixHomeGroundFloorRepeat {
 			}
 		}
 	};
-	
-	public static final DialogueNode WALKIES_PET_FUCKS = new DialogueNode("Demon Home", "", true, true) {
+
+    public static final DialogueNode WALKIES_PET_FUCKS = new DialogueNode("Дом демонов", "", true, true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -1842,8 +1841,8 @@ public class ZaranixHomeGroundFloorRepeat {
 			}
 		}
 	};
-	
-	public static final DialogueNode WALKIES_PET_FUCKS_SNIFFING = new DialogueNode("Demon Home", "", true, true) {
+
+    public static final DialogueNode WALKIES_PET_FUCKS_SNIFFING = new DialogueNode("Дом демонов", "", true, true) {
 
 		@Override
 		public int getSecondsPassed() {
@@ -2004,8 +2003,8 @@ public class ZaranixHomeGroundFloorRepeat {
 			}
 		}
 	};
-	
-	public static final DialogueNode WALKIES_PET_FUCKS_REFUSE = new DialogueNode("Demon Home", "", true, true) {
+
+    public static final DialogueNode WALKIES_PET_FUCKS_REFUSE = new DialogueNode("Дом демонов", "", true, true) {
 
 		@Override
 		public int getSecondsPassed() {

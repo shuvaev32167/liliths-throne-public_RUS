@@ -29,7 +29,10 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+import com.lilithsthrone.utils.translate.russian.Morpher;
 import com.lilithsthrone.world.places.PlaceType;
+import ru.shuvaev.morpher.tools.enams.Case;
+import ru.shuvaev.morpher.tools.enams.Numeration;
 
 import java.io.File;
 import java.io.IOException;
@@ -770,7 +773,7 @@ public class ItemType {
 		@Override
 		public String getUnableToBeUsedDescription(GameCharacter user, GameCharacter target) {
 			return "You can't think of a use for this. Maybe it's best to throw it away...<br/>"
-					+ "(You need have at least a <b style='color:"+CorruptionLevel.THREE_DIRTY.getColour().toWebHexString()+";'>"+CorruptionLevel.THREE_DIRTY.getName()+"</b> level of corruption to know how to use this!)";
+					+ "(You need have at least a <b style='color:" + CorruptionLevel.THREE_DIRTY.getColour().toWebHexString() + ";'>" + Morpher.morphNoun(CorruptionLevel.THREE_DIRTY.getName(), target) + "</b> level of corruption to know how to use this!)";
 		}
 		@Override
 		public boolean isAbleToBeUsedInCombatAllies() {
@@ -2914,9 +2917,9 @@ public class ItemType {
 			AbstractItemType scroll = new AbstractItemType(1000,
 					null,
 					false,
-					"Scroll of "+Util.capitaliseSentence(school.getName()),
-					"Scrolls of "+Util.capitaliseSentence(school.getName()),
-					"An arcane scroll which, when read, imbues the reader with the power of the school of '"+Util.capitaliseSentence(school.getName())+"'.",
+					"Свиток " + Util.capitaliseSentence(Morpher.morphNoun(school.getName(), Case.GENITIVUS, Numeration.SINGLE)),
+					"Свитки " + Util.capitaliseSentence(Morpher.morphNoun(school.getName(), Case.GENITIVUS, Numeration.SINGLE)),
+					"Магический свиток, который при чтении наполняет читателя силой школы '" + Util.capitaliseSentence(Morpher.morphNoun(school.getName(), Case.GENITIVUS, Numeration.SINGLE)) + "'.",
 					"spell_scroll",
 					school.getColour(),
 					null,
@@ -2932,21 +2935,21 @@ public class ItemType {
 				@Override
 				public String getUnableToBeUsedDescription(GameCharacter user, GameCharacter target) {
 					if(target.isElemental()) {
-						return "Elementals cannot make use of scrolls, and instead must improve their spells via their perks!";
+						return "Элементали не могут использовать свитки, и вместо этого должны улучшить свои заклинания с помощью своих навыков!";
 					}
-					return UtilText.parse(target, "[npc.Name] does not have enough arcane skill to know how to absorb the power of this scroll! (Requires arcane to be at least "+IntelligenceLevel.ONE_AVERAGE.getMinimumValue()+".)");
+					return UtilText.parse(target, "[npc.Name] не обладает достаточным уровнем магических навыков, чтобы понять, как поглотить силу этого свитка! (Требуется уровень магии не ниже " + IntelligenceLevel.ONE_AVERAGE.getMinimumValue() + ".)");
 				}
 				@Override
 				public String getUseName() {
-					return "read";
+					return "читать";
 				}
 				@Override
 				public String getUseDescription(GameCharacter user, GameCharacter target) {
 					return getGenericUseDescription(user, target,
-							"Unravelling the scroll, you read its contents...",
-							"Unravelling the scroll, you get [npc.name] to read its contents...",
-							"[npc.Name] produces a scroll, which [npc.she] then starts to read...",
-							"[npc.Name] produces a scroll, which [npc.she] then forces you to read...");
+							"Развернув свиток, ты читаешь его содержание...",
+							"Развернув свиток, ты просишь [npc.name] прочитать его содержание...",
+							"[npc.Name] достает свиток, который [npc.she] начинает читать...",
+							"[npc.Name] достает свиток, который [npc.she] заставляет тебя прочитать...");
 				}
 				@Override
 				public boolean isAbleToBeUsedInSex() {

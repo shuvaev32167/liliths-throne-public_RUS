@@ -256,7 +256,7 @@ public class FortressMalesLeader extends NPC {
 
 	@Override
 	public String getArtworkFolderName() {
-        return "Йхортракс";
+		return "Jhortrax";
 	}
 
 	@Override

@@ -91,6 +91,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.utils.time.DateAndTime;
 import com.lilithsthrone.utils.time.DayPeriod;
 import com.lilithsthrone.utils.time.SolarElevationAngle;
+import com.lilithsthrone.utils.translate.russian.Morpher;
 import com.lilithsthrone.world.*;
 import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.GenericPlace;
@@ -120,8 +121,8 @@ import java.nio.file.StandardCopyOption;
 import java.time.*;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
-import java.util.List;
 import java.util.*;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -2684,7 +2685,7 @@ public class Game implements XMLSaving {
 		if(slavesUpdated) {
 			for(int i=1; i <= hoursPassed; i++) {
 				Main.game.getPlayer().performHourlyFluidsCheck();
-				occupancyUtil.performHourlyUpdate(this.getDayNumber((startHour*60*60) + (i*60*60)), (hourStartTo24+i)%24);
+				occupancyUtil.performHourlyUpdate(this.getDayNumber((startHour*60*60) + ((long) i *60*60)), (hourStartTo24+i)%24);
 				for(String slaveId : occupancyUtil.getAllCharacters()) { // Update slaves' status effects per hour to give them a chance to refill fluids and such.
 					try {
 						Main.game.getNPCById(slaveId).calculateStatusEffects(3600);
@@ -3349,7 +3350,12 @@ public class Game implements XMLSaving {
 	public String getNextStormTimeAsTimeString() {
 		long minutes = ((nextStormTimeInSeconds+gatheringStormDurationInSeconds)-getSecondsPassed())/60;
 		long hours = minutes/60;
-		return (hours/24)+" days, "+hours%24+" hours, "+minutes%60+" minutes";
+		final var untilDays = hours / 24;
+		final var untilHours = hours % 24;
+		final var untilMinutes = minutes % 60;
+		return untilDays + " " + Morpher.morphCountableNoun(untilDays, "день") + ", "
+				+ untilHours + " " + Morpher.morphCountableNoun(untilHours, "час") + ", "
+				+ untilMinutes + " " + Morpher.morphCountableNoun(untilMinutes, "минута");
 	}
 	
 	public Weather getWeather() {
@@ -4733,6 +4739,9 @@ public class Game implements XMLSaving {
 	
 	public World getActiveWorld() {
 		worlds.size();
+		if (player == null) {
+			return null;
+		}
 		player.isFeminine();
 		return worlds.get(player.getWorldLocation());
 	}
@@ -6120,7 +6129,7 @@ public class Game implements XMLSaving {
 			boolean commonClothing = Math.random()<0.8; // 80% chance of common clothing
 			Collections.shuffle(randomClothingList);
 
-			AbstractClothingType typeSelected = randomClothingList.stream().filter(ct->commonClothing?ct.getRarity()==Rarity.COMMON:ct.getRarity()!=Rarity.COMMON).findFirst().get();
+			AbstractClothingType typeSelected = randomClothingList.stream().filter(ct-> commonClothing == (ct.getRarity() == Rarity.COMMON)).findFirst().get();
 			if(typeSelected==null) {
 				typeSelected = randomClothingList.get(Util.random.nextInt(randomClothingList.size()));
 			}

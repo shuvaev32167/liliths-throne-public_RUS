@@ -3,7 +3,8 @@
 	<worldRegion>FIELD_CITY</worldRegion>
 	<name><![CDATA[The Red Dragon F1]]></name>
 	<colour>BASE_RED</colour>
-	<sexBlockedReason><![CDATA[[npc.Name] cannot have sex here!]]></sexBlockedReason> 
+	<sexBlockedReason>
+		<![CDATA[[npc.Name] не [npc.targetBasedWord(можешь, может)] заниматься здесь сексом!]]></sexBlockedReason>
 	<furniturePresent>true</furniturePresent>
 	<wallsPresent>true</wallsPresent>
 	<loiteringEnabled>true</loiteringEnabled>

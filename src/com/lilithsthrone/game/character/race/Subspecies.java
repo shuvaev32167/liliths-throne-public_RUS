@@ -478,7 +478,7 @@ public class Subspecies {
 			"суккубы",
 			null,
 			Nocturnality.CATHEMERAL,
-			"Благодаря тому, что демоны очень легко могут использовать арканную силу, способности [pc.morphSingleGent([npc.namePos])] к произнесению заклинаний становятся поистине ужасающей силой!",
+            "Благодаря тому, что демоны очень легко могут использовать арканную силу, способности [pc.morphSingleNameGene([npc.namePos])] к произнесению заклинаний становятся поистине ужасающей силой!",
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 25f),
 					new Value<>(Attribute.MAJOR_ARCANE, 30f),
@@ -666,7 +666,7 @@ public class Subspecies {
 			"полу-суккубы",
 			null,
 			Nocturnality.CATHEMERAL,
-			"Полудемоны почти так же, как и обычные демоны, способны использовать арканную силу, и в результате способности [pc.morphSingleGent([npc.namePos])] к произнесению заклинаний становятся исключительно мощными!",
+            "Полудемоны почти так же, как и обычные демоны, способны использовать арканную силу, и в результате способности [pc.morphSingleNameGene([npc.namePos])] к произнесению заклинаний становятся исключительно мощными!",
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 10f),
 					new Value<>(Attribute.MAJOR_ARCANE, 20f),
@@ -923,7 +923,7 @@ public class Subspecies {
 					5,
 					1, false),
 			Nocturnality.DIURNAL,
-			"У [pc.morphSingleGent([npc.name])] всегда [npc.есть] много энергии, и [npc.она] очень легко радуется новым вещам."
+			"У [pc.morphSingleNameGene([npc.name])] всегда [npc.has] много энергии, и [npc.she] очень легко [npc.targetBasedWord(радуешься, радуется)] новым вещам."
 					+ " [npc.She] так же [npc.has] инстинктивное желание демонстрировать своё господство над невинными кошками-морфами...",
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 10f),
@@ -1018,7 +1018,7 @@ public class Subspecies {
 					1,
 					4, false),
 			Nocturnality.DIURNAL,
-			"Хотя тело [pc.morphSingleGent([npc.namePos])] обладает большой силой и выносливостью, [npc.her] ум не самый быстрый...",
+            "Хотя тело [pc.morphSingleNameGene([npc.namePos])] обладает большой силой и выносливостью, [npc.her] ум не самый быстрый...",
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 30f),
 					new Value<>(Attribute.MAJOR_ARCANE, 0f),
@@ -1561,12 +1561,12 @@ public class Subspecies {
 			"котопарни",
 			"котодевушки",
 			new FeralAttributes(
-					"cat",
-					"cats",
-					"tomcat",
-					"cat",
-					"tomcats",
-					"cats",
+                    "кошка",
+                    "кошки",
+                    "кот",
+                    "киска",
+                    "коты",
+                    "киски",
 					LegConfiguration.QUADRUPEDAL,
 					25,
 					0,
@@ -1574,8 +1574,8 @@ public class Subspecies {
 					4,
 					1, false),
 			Nocturnality.CREPUSCULAR,
-			"[npc.NamePos] body is incredibly agile, and [npc.she] possess lightning reflexes."
-					+ " [npc.She] also [npc.has] an instinctive desire to display [npc.her] dominance over innocent harpies and rodent-morphs...",
+            "Тело [pc.morphSingleNameGene([npc.namePos])] невероятно гибкое, и [npc.she] обладает молниеносными рефлексами."
+                    + " [npc.She] также [npc.has] инстинктивное желание продемонстрировать [npc.her] своё превосходство над невинными гарпиями и грызунами-морфами...",
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
 					new Value<>(Attribute.MAJOR_ARCANE, 0f),
@@ -1585,8 +1585,8 @@ public class Subspecies {
 					new Value<>(Attribute.getRacialDamageAttribute(Race.RAT_MORPH), 5f),
 					new Value<>(Attribute.getRacialDamageAttribute(Race.SQUIRREL_MORPH), 5f)),
 			null,
-			"Curious Kitties",
-			"Curious Kitties",
+            "Любопытные котики",
+            "Любопытные котики",
 			"CAT_MORPH_BASIC",
 			"CAT_MORPH_ADVANCED",
 			Race.CAT_MORPH,
@@ -1600,7 +1600,7 @@ public class Subspecies {
 					new Value<>(PerkCategory.ARCANE, 0)),
 			PresetColour.RACE_CAT_MORPH,
 			SubspeciesPreference.FOUR_ABUNDANT,
-			"An anthropomorphic cat, known as a 'cat-morph' when bipedal, and a 'cat-taur' when the lower body is that of a typically-oversized feral cat.",
+            "Антропоморфная кошка, известная как «котоморф», когда она ходит на двух ногах, и «кототавр», когда нижняя часть тела представляет собой типичную крупную дикую кошку.",
 			Util.newHashMapOfValues(
 					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.TEN),
 					new Value<>(WorldRegion.SUBMISSION, SubspeciesSpawnRarity.TEN),
@@ -1615,28 +1615,28 @@ public class Subspecies {
 		@Override
 		public String getName(Body body) {
 			if(Main.game!=null && Main.game.isSillyModeEnabled() && (body ==null || (!body.isFeral() && body.getLegConfiguration()==LegConfiguration.BIPEDAL))) {
-				return "catte-morph";
+                return "кошечкоморф";
 			}
 			return super.getName(body);
 		}
 		@Override
 		public String getNamePlural(Body body) {
 			if(Main.game!=null && Main.game.isSillyModeEnabled() && (body ==null || (!body.isFeral() && body.getLegConfiguration()==LegConfiguration.BIPEDAL))) {
-				return "catte-morphs";
+                return "кошечкоморыф";
 			}
 			return super.getNamePlural(body);
 		}
 		@Override
 		public String getSingularMaleName(Body body) {
 			if(Main.game!=null && Main.game.isSillyModeEnabled() && body !=null && !body.isFeral() && body.getLegConfiguration()==LegConfiguration.BIPEDAL) {
-				return "catte-boi";
+                return "кошечкомальчик";
 			}
 			return super.getSingularMaleName(body);
 		}
 		@Override
 		public String getSingularFemaleName(Body body) {
 			if(Main.game!=null && Main.game.isSillyModeEnabled() && body !=null && !body.isFeral() && body.getLegConfiguration()==LegConfiguration.BIPEDAL) {
-				return "catte-girl";
+                return "кошечкодевушка";
 			}
 			return super.getSingularFemaleName(body);
 		}
@@ -2333,8 +2333,8 @@ public class Subspecies {
 					4,
 					1, false),
 			Nocturnality.CREPUSCULAR,
-			"[npc.NamePos] body is incredibly agile, and [npc.she] possess lightning reflexes."
-					+ " [npc.She] also [npc.has] an instinctive desire to display [npc.her] dominance over innocent harpies and rodent-morphs...",
+            "Тело [pc.morphSingleNameGene([npc.namePos])] невероятно гибкое, и [npc.she] обладает молниеносными рефлексами."
+                    + " [npc.She] также [npc.has] инстинктивное желание продемонстрировать [npc.her] своё превосходство над невинными гарпиями и грызунами-морфами...",
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 10f),
 					new Value<>(Attribute.MAJOR_ARCANE, 0f),
@@ -2344,8 +2344,8 @@ public class Subspecies {
 					new Value<>(Attribute.getRacialDamageAttribute(Race.RAT_MORPH), 5f),
 					new Value<>(Attribute.getRacialDamageAttribute(Race.SQUIRREL_MORPH), 5f)),
 			null,
-			"Curious Kitties",
-			"Curious Kitties",
+            "Любопытные котики",
+            "Любопытные котики",
 			"CAT_MORPH_BASIC",
 			"CAT_MORPH_ADVANCED",
 			Race.CAT_MORPH,
@@ -2434,8 +2434,8 @@ public class Subspecies {
 					4,
 					1, false),
 			Nocturnality.NOCTURNAL,
-			"[npc.NamePos] body is incredibly agile, and [npc.she] possess lightning reflexes."
-					+ " [npc.She] also [npc.has] an instinctive desire to display [npc.her] dominance over innocent harpies and rodent-morphs...",
+            "Тело [pc.morphSingleNameGene([npc.namePos])] невероятно гибкое, и [npc.she] обладает молниеносными рефлексами."
+                    + " [npc.She] также [npc.has] инстинктивное желание продемонстрировать [npc.her] своё превосходство над невинными гарпиями и грызунами-морфами...",
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
 					new Value<>(Attribute.MAJOR_ARCANE, 0f),
@@ -2445,8 +2445,8 @@ public class Subspecies {
 					new Value<>(Attribute.getRacialDamageAttribute(Race.RAT_MORPH), 5f),
 					new Value<>(Attribute.getRacialDamageAttribute(Race.SQUIRREL_MORPH), 5f)),
 			null,
-			"Curious Kitties",
-			"Curious Kitties",
+            "Любопытные котики",
+            "Любопытные котики",
 			"CAT_MORPH_BASIC",
 			"CAT_MORPH_ADVANCED",
 			Race.CAT_MORPH,
@@ -2518,8 +2518,8 @@ public class Subspecies {
 					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
 					new Value<>(Attribute.CRITICAL_DAMAGE, 25f)),
 			Util.newArrayListOfValues("[style.boldExcellent(100%)] chance of escape vs non-cheetah-morphs"),
-			"Curious Kitties",
-			"Curious Kitties",
+            "Любопытные котики",
+            "Любопытные котики",
 			"CAT_MORPH_BASIC",
 			"CAT_MORPH_ADVANCED",
 			Race.CAT_MORPH,
@@ -2616,7 +2616,7 @@ public class Subspecies {
 					1,
 					true),
 			Nocturnality.DIURNAL,
-			"Хотя тело [pc.morphSingleGent([npc.namePos])] обладает недюжинной силой и скоростью, [npc.sheIs] не самый простой инструмент в сарае, и [npc.genderBasedWord(ему, ей)] сложнее, чем остальным, когда дело доходит до использования арканы.",
+            "Хотя тело [pc.morphSingleNameGene([npc.namePos])] обладает недюжинной силой и скоростью, [npc.sheIs] не самый простой инструмент в сарае, и [npc.genderBasedWord(ему, ей)] сложнее, чем остальным, когда дело доходит до использования арканы.",
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 25f),
 					new Value<>(Attribute.MAJOR_ARCANE, -5f),
@@ -2725,8 +2725,8 @@ public class Subspecies {
 //					new Value<>(Attribute.DAMAGE_PHYSICAL, 5f),
 //					new Value<>(Attribute.RESISTANCE_ICE, 5f)),
 //			null,
-//			"Curious Kitties",
-//			"Curious Kitties",
+//			"Любопытные котики",
+//			"Любопытные котики",
 //			"CAT_MORPH_BASIC",
 //			"CAT_MORPH_ADVANCED",
 //			Race.CAT_MORPH,
@@ -2828,8 +2828,8 @@ public class Subspecies {
 //					new Value<>(Attribute.DAMAGE_PHYSICAL, 5f),
 //					new Value<>(Attribute.RESISTANCE_FIRE, 5f)),
 //			null,
-//			"Curious Kitties",
-//			"Curious Kitties",
+//			"Любопытные котики",
+//			"Любопытные котики",
 //			"CAT_MORPH_BASIC",
 //			"CAT_MORPH_ADVANCED",
 //			Race.CAT_MORPH,
@@ -2927,8 +2927,8 @@ public class Subspecies {
 //					new Value<>(Attribute.DAMAGE_PHYSICAL, 15f),
 //					new Value<>(Attribute.RESISTANCE_FIRE, 5f)),
 //			null,
-//			"Curious Kitties",
-//			"Curious Kitties",
+//			"Любопытные котики",
+//			"Любопытные котики",
 //			"CAT_MORPH_BASIC",
 //			"CAT_MORPH_ADVANCED",
 //			Race.CAT_MORPH,
@@ -3024,8 +3024,8 @@ public class Subspecies {
 //					new Value<>(Attribute.DAMAGE_UNARMED, 25f),
 //					new Value<>(Attribute.DAMAGE_PHYSICAL, 25f)),
 //			null,
-//			"Curious Kitties",
-//			"Curious Kitties",
+//			"Любопытные котики",
+//			"Любопытные котики",
 //			"CAT_MORPH_BASIC",
 //			"CAT_MORPH_ADVANCED",
 //			Race.CAT_MORPH,
@@ -4287,7 +4287,7 @@ public class Subspecies {
 					6,
 					1, false),
 			Nocturnality.CREPUSCULAR,
-			"Тело [npc.morphSingleGent([npc.NamePos])] очень выносливо, и [npc.she] [npc.has] как высокую устойчивость к арканному яду, так и сродство с ним.",
+            "Тело [npc.morphSingleNameGene([npc.namePos])] очень выносливо, и [npc.she] [npc.has] как высокую устойчивость к арканному яду, так и сродство с ним.",
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 0f),
 					new Value<>(Attribute.MAJOR_ARCANE, 0f),
