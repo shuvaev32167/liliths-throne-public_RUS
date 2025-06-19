@@ -1437,7 +1437,8 @@ public enum Spell {
 					SpellUpgrade.STONE_SHELL_2,
 					SpellUpgrade.STONE_SHELL_3),
 			Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 5)), Util.newArrayListOfValues("Действует в течение [style.colourGood(3 ходов)]")) {
+					new Value<>(Attribute.RESISTANCE_PHYSICAL, 5)),
+			Util.newArrayListOfValues("Действует в течение [style.colourGood(3 ходов)]")) {
 		
 		@Override
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
@@ -1768,7 +1769,7 @@ public enum Spell {
 	ARCANE_CLOUD(false,
 			SpellSchool.ARCANE,
 			SpellType.OFFENSIVE_STATUS_EFFECT,
-			DamageType.PHYSICAL,
+			DamageType.LUST,
 			false,
 			"Колдовское облако",
 			"arcane_cloud",

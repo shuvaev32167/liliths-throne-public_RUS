@@ -273,10 +273,7 @@ public class Takahashi extends NPC {
 
 	@Override
 	public String getArtworkFolderName() {
-		if(this.isVisiblyPregnant()) {
-			return "TakahashiPregnant";
-		}
-		return "Такахаси";
+		return "Takahashi";
 	}
 	
 	@Override

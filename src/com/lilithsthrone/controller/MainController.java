@@ -112,9 +112,9 @@ import java.util.Map.Entry;
 import static com.lilithsthrone.utils.Constants.RUSSIAN_LOCALE;
 
 /**
- * @author Innoxia, Maxis010
- * @version 0.4.6.4
  * @since 0.1.0
+ * @version 0.4.6.4
+ * @author Innoxia, Maxis010
  */
 public class MainController implements Initializable {
 
@@ -2039,7 +2039,7 @@ public class MainController implements Initializable {
                     || Main.game.getCurrentDialogueNode().equals(PhoneDialogue.CONTACTS_CHARACTER));
 
 
-            addEventListener(documentButtonsRight, id, "mousemove", moveTooltipListener, false);
+			addEventListener(documentButtonsRight, id, "mousemove", moveTooltipListener, false);
             addEventListener(documentButtonsRight, id, "mouseleave", hideTooltipListener, false);
 
             if (exportAvailable) {
@@ -2062,8 +2062,8 @@ public class MainController implements Initializable {
             }
         }
     }
-
-    private void manageAttributeListeners() {
+	
+	private void manageAttributeListeners() {
         documentAttributes = (Document) webEngineAttributes.executeScript("document");
         EventListenerDataMap.put(documentAttributes, new ArrayList<>());
 
@@ -2133,18 +2133,6 @@ public class MainController implements Initializable {
                     Util.capitaliseSentence(Attribute.ENCHANTMENT_LIMIT.getName()),
                     "Общее количество зачарований оружия, одежды и атрибутов татуировки, которые ты можешь использовать, не получая больших штрафов."
                             + " Твой лимит рассчитывается исходя из: <i>10 + (уровень) + (бонус от навыков)</i>");
-            addEventListener(documentAttributes, id, "mouseenter", el2, false);
-        }
-
-        id = "INVENTORY_ENCHANTMENT_LIMIT_NPC";
-        if (documentAttributes.getElementById(id) != null) {
-            addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
-            addEventListener(documentAttributes, id, "mouseleave", hideTooltipListener, false);
-            TooltipInformationEventListener el2 = new TooltipInformationEventListener().setInformation(
-                    Util.capitaliseSentence(Attribute.ENCHANTMENT_LIMIT.getName()),
-                    UtilText.parse(RenderingEngine.getCharacterToRender(),
-                            "Общее количество зачарований оружия, одежды и атрибутов татуировки, которые ты можешь использовать, не получая больших штрафов."
-                                    + " [npc.Her] лимит рассчитывается исходя из: <i>10 + (уровень) + (бонус от навыков)</i>"));
             addEventListener(documentAttributes, id, "mouseenter", el2, false);
         }
 
@@ -2454,7 +2442,7 @@ public class MainController implements Initializable {
                     addEventListener(documentAttributes, "FETISH_" + idModifier + Fetish.getIdFromFetish(f), "mousemove", moveTooltipListener, false);
                     addEventListener(documentAttributes, "FETISH_" + idModifier + Fetish.getIdFromFetish(f), "mouseleave", hideTooltipListener, false);
 
-                    TooltipInformationEventListener el = new TooltipInformationEventListener().setFetish(f, character);
+                    TooltipInformationEventListener el = new TooltipInformationEventListener().setFetish(f, character, false);
                     addEventListener(documentAttributes, "FETISH_" + idModifier + Fetish.getIdFromFetish(f), "mouseenter", el, false);
                 }
             }
@@ -2544,6 +2532,18 @@ public class MainController implements Initializable {
                     "");
             addEventListener(documentRight, id, "mouseenter", el2, false);
         }
+
+        id = "INVENTORY_ENCHANTMENT_LIMIT_NPC";
+		if (documentAttributes.getElementById(id) != null) {
+            addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
+            addEventListener(documentAttributes, id, "mouseleave", hideTooltipListener, false);
+            TooltipInformationEventListener el2 = new TooltipInformationEventListener().setInformation(
+                    Util.capitaliseSentence(Attribute.ENCHANTMENT_LIMIT.getName()),
+                    UtilText.parse(RenderingEngine.getCharacterToRender(),
+                            "Общее количество зачарований оружия, одежды и атрибутов татуировки, которые [npc.nameIsFull] [npc.targetBasedWord(можешь, может)] использовать, не получая больших штрафов."
+                                    + " [npc.Her] лимит рассчитывается исходя из: <i>10 + (уровень) + (бонус от навыков)</i>"));
+            addEventListener(documentAttributes, id, "mouseenter", el2, false);
+		}
 
         if (Main.game.getPlayer() != null) {
             // Money on floor:
@@ -2795,7 +2795,7 @@ public class MainController implements Initializable {
                         addEventListener(documentRight, "FETISH_NPC_" + idModifier + Fetish.getIdFromFetish(f), "mousemove", moveTooltipListener, false);
                         addEventListener(documentRight, "FETISH_NPC_" + idModifier + Fetish.getIdFromFetish(f), "mouseleave", hideTooltipListener, false);
 
-                        TooltipInformationEventListener el = new TooltipInformationEventListener().setFetish(f, character);
+                        TooltipInformationEventListener el = new TooltipInformationEventListener().setFetish(f, character, false);
                         addEventListener(documentRight, "FETISH_NPC_" + idModifier + Fetish.getIdFromFetish(f), "mouseenter", el, false);
                     }
                 }

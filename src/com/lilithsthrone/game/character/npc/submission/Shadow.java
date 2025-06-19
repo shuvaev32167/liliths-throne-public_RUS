@@ -304,17 +304,7 @@ public class Shadow extends NPC {
 	
 	@Override
 	public String getArtworkFolderName() {
-		if(this.getBreastRows()>1) {
-			if(this.isVisiblyPregnant()) {
-				return "ShadowMultiBoobPregnant";
-			}
-			return "ShadowMultiBoob";
-		} else {
-			if(this.isVisiblyPregnant()) {
-				return "ShadowPregnant";
-			}
-            return "Тень";
-		}
+		return "Shadow";
 	}
 	
 	@Override

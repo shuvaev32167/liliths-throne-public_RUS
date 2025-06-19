@@ -17020,6 +17020,31 @@ public abstract class GameCharacter implements XMLSaving {
 				break;
 		}
 		
+		String penetrationName = penetrationType.getName(characterPenetrating);
+		switch(penetrationType) {
+			case CLIT:
+				penetrationName = "[npc.clit+]";
+				break;
+			case FINGER:
+				penetrationName = "[npc.fingers+]";
+				break;
+			case FOOT:
+				penetrationName = "[npc.foot+(true)]";
+				break;
+			case PENIS:
+				penetrationName = "[npc.cock+]";
+				break;
+			case TAIL:
+				penetrationName = "[npc.tail+(true)]";
+				break;
+			case TENTACLE:
+				penetrationName = "[npc.tentacle+(true)]";
+				break;
+			case TONGUE:
+				penetrationName = "[npc.tongue+]";
+				break;
+		}
+
 		String penetrationAdjective = "into";
 		
 		if(orifice.isOrifice()) {
@@ -17063,18 +17088,15 @@ public abstract class GameCharacter implements XMLSaving {
 		if(immobile) {
 			if(characterPenetrating.isAsleep()) {
 				return UtilText.parse(characterPenetrating, characterPenetrated,
-						"[npc.Name] [npc.verb(remain)] deeply asleep as [npc.her] "
-								+penetrationType.getName(characterPenetrating)+" pushes "+penetrationAdjective+" "+ownerName+" "+orifice.getName(characterPenetrated)+".");
+						"[npc.Name] [npc.verb(remain)] deeply asleep as [npc.her] "+penetrationName+" pushes "+penetrationAdjective+" "+ownerName+" "+orifice.getName(characterPenetrated)+".");
 			} else {
 				return UtilText.parse(characterPenetrating, characterPenetrated,
-						"[npc.Name] [npc.verb(remain)] totally motionless as [npc.her] "
-								+penetrationType.getName(characterPenetrating)+" pushes "+penetrationAdjective+" "+ownerName+" "+orifice.getName(characterPenetrated)+".");
+						"[npc.Name] [npc.verb(remain)] totally motionless as [npc.her] "+penetrationName+" pushes "+penetrationAdjective+" "+ownerName+" "+orifice.getName(characterPenetrated)+".");
 			}
 			
 		} else {
 			return UtilText.parse(characterPenetrating, characterPenetrated,
-					"[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb("+penetrationAdverb+" "+penetrationVerb+")] [npc.her] "
-							+penetrationType.getName(characterPenetrating)+" "+penetrationAdjective+" "+ownerName+" "+orifice.getName(characterPenetrated)+".");
+					"[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb("+penetrationAdverb+" "+penetrationVerb+")] [npc.her] "+penetrationName+" "+penetrationAdjective+" "+ownerName+" "+orifice.getName(characterPenetrated)+".");
 		}
 	}
 	
@@ -17952,9 +17974,9 @@ public abstract class GameCharacter implements XMLSaving {
 										:characterPenetrating.getTailLength(true),
 									characterPenetrated,
 									orifice,
-									"[npc.tail]",
-									"[npc.tail+]",
-									"[npc.tail]"));
+									"[npc.tail(true)]",
+									"[npc.tail+(true)]",
+									"[npc.tail(true)]"));
 							break;
 							
 						case TENTACLE:
@@ -17963,9 +17985,9 @@ public abstract class GameCharacter implements XMLSaving {
 									characterPenetrating.getTentacleLength(true),
 									characterPenetrated,
 									orifice,
-									"[npc.tentacle]",
-									"[npc.tentacle+]",
-									"[npc.tentacle]"));
+									"[npc.tentacle(true)]",
+									"[npc.tentacle+(true)]",
+									"[npc.tentacle(true)]"));
 							break;
 					}
 				sb.append("</p>");
@@ -18007,9 +18029,9 @@ public abstract class GameCharacter implements XMLSaving {
 									:characterPenetrating.getTailLength(true),
 								characterPenetrated,
 								orifice,
-								"[npc.tail]",
-								"[npc.tail+]",
-								"[npc.tail]"));
+								"[npc.tail(true)]",
+								"[npc.tail+(true)]",
+								"[npc.tail(true)]"));
 						break;
 						
 					case TENTACLE:
@@ -18018,9 +18040,9 @@ public abstract class GameCharacter implements XMLSaving {
 								characterPenetrating.getTentacleLength(true),
 								characterPenetrated,
 								orifice,
-								"[npc.tentacle]",
-								"[npc.tentacle+]",
-								"[npc.tentacle]"));
+								"[npc.tentacle(true)]",
+								"[npc.tentacle+(true)]",
+								"[npc.tentacle(true)]"));
 						break;
 				}
 			}
@@ -18450,7 +18472,7 @@ public abstract class GameCharacter implements XMLSaving {
 			if(sb.length()>0) {
 				sb.append("</br>");
 			}
-			sb.append("[style.italicsPinkDeep(The size of [npc.namePos] "+(penetrationType.getName(characterPenetrating))+" is causing [npc2.namePos] stomach to bulge!)]");
+			sb.append("[style.italicsPinkDeep(The size of [npc.namePos] "+name+" is causing [npc2.namePos] stomach to bulge!)]");
 		}
 		
 		return UtilText.parse(characterPenetrating, characterPenetrated, sb.toString());
@@ -18516,7 +18538,7 @@ public abstract class GameCharacter implements XMLSaving {
 			if(sb.length()>0) {
 				sb.append("</br>");
 			}
-			sb.append("[style.italicsPinkDeep(The size of [npc.namePos] "+(penetrationType.getName(characterPenetrating))+" is causing [npc2.namePos] stomach to bulge!)]");
+			sb.append("[style.italicsPinkDeep(The size of [npc.namePos] "+name+" is causing [npc2.namePos] stomach to bulge!)]");
 		}
 		
 		if(sb.length()!=0) {
@@ -18534,23 +18556,76 @@ public abstract class GameCharacter implements XMLSaving {
 					?characterTarget.isBreastFuckableNipplePenetration()
 					:characterTarget.isBreastCrotchFuckableNipplePenetration());
 
+		String performerAreaName = performerArea.getName(characterPerformer);
+		if(performerArea instanceof SexAreaPenetration) {
+			switch((SexAreaPenetration)performerArea) {
+				case FINGER:
+					performerAreaName = "[npc.fingers]";
+					break;
+				case PENIS:
+					performerAreaName = "[npc.penis+]";
+					break;
+				case TAIL:
+					performerAreaName = "[npc.tail+(true)]";
+					break;
+				case TENTACLE:
+					performerAreaName = "[npc.tentacle+(true)]";
+					break;
+				case TONGUE:
+					performerAreaName = "[npc.tongue+]";
+					break;
+				case CLIT:
+					performerAreaName = "[npc.clit+]";
+					break;
+				case FOOT:
+					performerAreaName = "[npc.foot(true)]";
+					break;
+			}
+		}
+		String targetAreaName = targetArea.getName(characterTarget);
+		if(targetArea instanceof SexAreaPenetration) {
+			switch((SexAreaPenetration)targetArea) {
+				case FINGER:
+					targetAreaName = "[npc.fingers]";
+					break;
+				case PENIS:
+					targetAreaName = "[npc.penis+]";
+					break;
+				case TAIL:
+					targetAreaName = "[npc.tail+(true)]";
+					break;
+				case TENTACLE:
+					targetAreaName = "[npc.tentacle+(true)]";
+					break;
+				case TONGUE:
+					targetAreaName = "[npc.tongue+]";
+					break;
+				case CLIT:
+					targetAreaName = "[npc.clit+]";
+					break;
+				case FOOT:
+					targetAreaName = "[npc.foot(true)]";
+					break;
+			}
+		}
+
 		if(characterPerformer.equals(characterTarget)) {
 			if(performerArea.isPenetration()) {
 				if(targetArea.isPenetration()
                         || (!nipplePenetrationDescription && (targetArea==SexAreaOrifice.NIPPLE || targetArea==SexAreaOrifice.NIPPLE_CROTCH))) {
 					return UtilText.parse(characterPerformer,
-                            "[npc.Name] take [npc.her] " + performerArea.getName(characterPerformer) + " away from [npc.her] " + targetArea.getName(characterPerformer) + ".");
+                            "[npc.Name] take [npc.her] " + performerAreaName + " away from [npc.her] " + targetAreaName + ".");
 				} else {
 					return UtilText.parse(characterPerformer,
-                            "[npc.Name] slide [npc.her] " + performerArea.getName(characterPerformer) + " out of [npc.her] " + targetArea.getName(characterPerformer) + ".");
+                            "[npc.Name] slide [npc.her] " + performerAreaName + " out of [npc.her] " + targetAreaName + ".");
 				}
 			} else {
 				if(targetArea.isPenetration()) {
 					return UtilText.parse(characterPerformer,
-                            "[npc.Name] slide [npc.her] " + targetArea.getName(characterPerformer) + " out of [npc.her] " + performerArea.getName(characterPerformer) + ".");
+                            "[npc.Name] slide [npc.her] " + targetAreaName + " out of [npc.her] " + performerAreaName + ".");
 				} else {
 					return UtilText.parse(characterPerformer,
-                            "[npc.Name] take [npc.her] " + performerArea.getName(characterPerformer) + " away from [npc.her] " + targetArea.getName(characterPerformer) + ".");
+                            "[npc.Name] take [npc.her] " + performerAreaName + " away from [npc.her] " + targetAreaName + ".");
 				}
 			}
 			
@@ -18559,18 +18634,18 @@ public abstract class GameCharacter implements XMLSaving {
 				if(targetArea.isPenetration()
 				    || (!nipplePenetrationDescription && (targetArea==SexAreaOrifice.NIPPLE || targetArea==SexAreaOrifice.NIPPLE_CROTCH))){
 					return UtilText.parse(characterPerformer, characterTarget,
-                            "[npc.Name] take [npc.her] " + performerArea.getName(characterPerformer) + " away from [npc2.namePos] " + targetArea.getName(characterTarget) + ".");
+                            "[npc.Name] take [npc.her] " + performerAreaName + " away from [npc2.namePos] " + targetAreaName + ".");
 				} else {
 					return UtilText.parse(characterPerformer, characterTarget,
-                            "[npc.Name] slide [npc.her] " + performerArea.getName(characterPerformer) + " out of [npc2.namePos] " + targetArea.getName(characterTarget) + ".");
+                            "[npc.Name] slide [npc.her] " + performerAreaName + " out of [npc2.namePos] " + targetAreaName + ".");
 				}
 			} else {
 				if(targetArea.isPenetration()) {
 					return UtilText.parse(characterPerformer, characterTarget,
-                            "[npc.Name] slide [npc2.namePos] " + targetArea.getName(characterTarget) + " out of [npc.her] " + performerArea.getName(characterPerformer) + ".");
+                            "[npc.Name] slide [npc2.namePos] " + targetAreaName + " out of [npc.her] " + performerAreaName + ".");
 				} else {
 					return UtilText.parse(characterPerformer, characterTarget,
-                            "[npc.Name] take [npc.her] " + performerArea.getName(characterPerformer) + " away from [npc2.namePos] " + targetArea.getName(characterTarget) + ".");
+                            "[npc.Name] take [npc.her] " + performerAreaName + " away from [npc2.namePos] " + targetAreaName + ".");
 				}
 			}
 		}
@@ -20680,6 +20755,7 @@ public abstract class GameCharacter implements XMLSaving {
 	 */
 	public boolean isFertile() {
 		return !this.hasStatusEffect(StatusEffect.MENOPAUSE)
+				&& !this.hasStatusEffect(StatusEffect.PROMISCUITY_PILL_PROLOGUE)
 				&& (this.getAttributeValue(Attribute.FERTILITY) > 0 || !this.hasTraitActivated(Perk.BARREN));
 	}
 

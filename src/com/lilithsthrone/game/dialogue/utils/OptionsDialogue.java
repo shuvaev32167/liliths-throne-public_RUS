@@ -85,9 +85,10 @@ public class OptionsDialogue {
 					.append("<p>Вы можете посетить блог (https://lilithsthrone.blogspot.co.uk) чтобы проверить прогресс в разработке (используйте кнопку «Блог» ниже, чтобы открыть блог в браузере по умолчанию).")
 					.append(" [style.italicsMinorBad(<b>Примечание:</b> Навязчивая проверка возраста обещается в blogspot, поэтому я, скорее всего, скоро создам новый блог.)]</p>")
 					.append("<p style='text-align:center'><b>Пожалуйста, используйте блог или GitHub, чтобы получить последнюю официальную версию Throne Lilith!</b></p>");
+			sb.append("<p style='text-align:center'><i>Скопируйте содержимое папки «data», чтобы использовать ваши старые сохранения в этой версии!</i></p>");
 
             sb.append("<p>[style.italicsMinorBad(<b>ВНИМАНИЕ:</b> Данная версия модифицирована для поддержки Русского языка, проект распостраняется на бесплатной основе, все права принадлежат правообладателям.)]</p>");
-
+			
 			sb.append(getJavaVersionInformation());
 
             if(Toolkit.getDefaultToolkit().getScreenSize().getHeight()<800) {

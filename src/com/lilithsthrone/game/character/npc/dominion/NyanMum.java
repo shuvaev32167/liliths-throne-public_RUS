@@ -286,9 +286,6 @@ public class NyanMum extends NPC {
 
 	@Override
 	public String getArtworkFolderName() {
-		if(this.isVisiblyPregnant()) {
-			return "NyanMumPregnant";
-		}
 		return "NyanMum";
 	}
 	

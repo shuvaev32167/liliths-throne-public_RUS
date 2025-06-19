@@ -19,7 +19,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
 public enum FetishDesire {
 	/*fondness1, это названия иконок. НЕ ПЕРЕВОДИТЬ. */
 	ZERO_HATE(0, "ненавидит", "ненавидит", "ненавидит", "fondness1", PresetColour.BASE_CRIMSON),
-	
+
 	ONE_DISLIKE(1, "не любит", "не любит", "не любит", "fondness2", PresetColour.BASE_RED),
 	
 	TWO_NEUTRAL(2, "безразлично", "безразлично к", "безразлично к", "fondness3", PresetColour.BASE_BLUE_STEEL),
@@ -45,7 +45,7 @@ public enum FetishDesire {
 		this.colour = colour;
 		
 		modifiersList = new ArrayList<>();
-		modifiersList.add("Модифицирует секс действия' [style.boldLust("+ Util.capitaliseSentence(Attribute.LUST.getAbbreviatedName())+ " повышая)]");
+		modifiersList.add("Модифицирует [style.boldLust("+ Util.capitaliseSentence(Attribute.LUST.getAbbreviatedName())+ " повышая)] секс действия");
 
 		
 		try {

@@ -82,6 +82,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 	private AbstractPerk levelUpPerk;
 	private int perkRow;
 	private AbstractFetish fetish;
+	private boolean fetishWithCostInformation;
 	private boolean fetishExperience = false;
 	private FetishDesire desire;
 	private Spell spell;
@@ -103,6 +104,8 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 	private int descriptionHeightOverride;
 	
 	private static final int LINE_HEIGHT= 16;
+	private static final int TOOLTIP_WIDTH = 480;
+	
     private final TooltipInformationEventListener parent;
 
     private TooltipInformationEventListener(TooltipInformationEventListener parent) {
@@ -123,89 +126,118 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 		Main.mainController.setTooltipContent("");
 
 		if (statusEffect != null) {
-
-			// I hate this. If only JavaFX's height detection and resizing methods actually worked...
-			int size = statusEffect.getModifiersAsStringList(owner).size() + statusEffect.getCombatMoves().size() + statusEffect.getSpells().size();
-			int yIncrease = (size > 4 ? size - 4 : 0) + (owner.hasStatusEffect(statusEffect)?(owner.getStatusEffectDuration(statusEffect)==-1 && !statusEffect.isCombatEffect() ? 0 : 2):0);
-//								+ (owner.hasStatusEffect(statusEffect)?(owner.getStatusEffectDuration(statusEffect) == -1 ? 0 : 2):0);
-			int spacingHeight = 0;
-			
-			List<Value<Integer, String>> additionalDescriptions = statusEffect.getAdditionalDescriptions(owner);
-			if(additionalDescriptions!=null && !additionalDescriptions.isEmpty()) {
-				for(Value<Integer, String> value : additionalDescriptions) {
-					yIncrease += 1 + value.getKey();
-				}
-				spacingHeight += 12 * additionalDescriptions.size();
-			}
-
-			Main.mainController.setTooltipSize(360, 285 + spacingHeight + (yIncrease * LINE_HEIGHT));
-			
+			int specialYIncrease = 0;
+			int yIncrease = 0;
 			
 			// Title:
 			tooltipSB.setLength(0);
-			tooltipSB.append("<body>"
-					+ "<div class='title'>" + Util.capitaliseSentence(statusEffect.getName(owner)) + "</div>");
+			tooltipSB.append("<body>");
 
-			// Attribute modifiers:
-			tooltipSB.append("<div class='subTitle-picture'>");// style='white-space: nowrap'>");
-				boolean effectsFound = false;
-				if(statusEffect!=StatusEffect.SUBSPECIES_BONUS || (Main.getProperties().isAdvancedRaceKnowledgeDiscovered(owner.getTrueSubspecies()) && !owner.isRaceConcealed()) || owner.isPlayer()) {
-					if (!statusEffect.getModifiersAsStringList(owner).isEmpty()) {
-						for (String s : statusEffect.getModifiersAsStringList(owner)) {
-							tooltipSB.append((effectsFound?"<br/>":"")+UtilText.parse(owner, s));
-							effectsFound = true;
-						}
-					}
-				} else {
-					tooltipSB.append("<p style='color:"+PresetColour.TEXT_GREY.toWebHexString()+";'>");
-					if(owner.isRaceConcealed()) {
-						tooltipSB.append(UtilText.parse(owner, "Вы не знаете расу [npc.namePos], поэтому не можете знать [npc.her] сильные и слабые стороны ...</p>"));
-					} else {
-						tooltipSB.append(UtilText.parse(owner, "Вы не обладаете достаточными зананиями о [npc.racePlural] чтобы занть [npc.her] сильные и слабые стороны...</p>"));
-					}
-					effectsFound = true;
-				}
-				for (AbstractCombatMove cm : statusEffect.getCombatMoves()) {
-					tooltipSB.append((effectsFound?"<br/>":"")+"[style.boldExcellent(Дает)] [style.boldCombat(Движение)]: "+Util.capitaliseSentence(cm.getName(0, owner)));
-					effectsFound =true;
-				}
-				for (Spell spell : statusEffect.getSpells()) {
-					tooltipSB.append((effectsFound?"<br/>":"")+"[style.boldExcellent(Дает)] [style.boldSpell(Заклинание)]<b>:</b> <b style='color:"+spell.getSpellSchool().getColour().toWebHexString()+";'>"+Util.capitaliseSentence(spell.getName())+"</b>");
-					effectsFound =true;
-				}
-				
-				if(!effectsFound) {
-					tooltipSB.append("<span style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'>Без бонусов</span>");
-				}
+			tooltipSB.append("<div class='container-full-width center'><h5>" + Util.capitaliseSentence(statusEffect.getName(owner)) + "</h5></div>");
+
+
+			// Main description box & image:
+			tooltipSB.append("<div class='container-full-width' style='padding:0; min-height:106px;'>");
+				tooltipSB.append("<div class='container-half-width' style='width:calc(100% - 16px); font-weight:normal; text-align:left; max-height:140px;'>");
+
+				// Picture:
+				tooltipSB.append("<div class='item-image' style='float:right;'>"
+									+ "<div class='item-image-content'>"
+										+ statusEffect.getSVGString(owner)
+									+ "</div>"
+								+ "</div>");
+				tooltipSB.append(statusEffect.getDescription(owner));
+				tooltipSB.append("</div>");
 			tooltipSB.append("</div>");
 
-			// Picture:
-			tooltipSB.append("<div class='picture'>"
-								+ statusEffect.getSVGString(owner)
-							+ "</div>"
-							+ "<div class='description'>"
-								+ statusEffect.getDescription(owner)
-							+ "</div>");
+			StringBuilder effectsSB = new StringBuilder();
+			boolean effectsFound = false;
+			if((statusEffect!=StatusEffect.SUBSPECIES_BONUS) || (Main.getProperties().isAdvancedRaceKnowledgeDiscovered(owner.getTrueSubspecies()) && !owner.isRaceConcealed()) || owner.isPlayer()) {
+				if (!statusEffect.getModifiersAsStringList(owner).isEmpty()) {
+					for (String s : statusEffect.getModifiersAsStringList(owner)) {
+						effectsSB.append((effectsFound?"<br/>":"")+UtilText.parse(owner, s));
+						effectsFound = true;
+						yIncrease++;
+					}
+				}
+			} else {
+				effectsSB.append("<span style='color:"+PresetColour.TEXT_GREY.toWebHexString()+";'>");
+					if(owner.isRaceConcealed()) {
+						effectsSB.append(UtilText.parse(owner, "Ты не знаешь расу [npc.namePos], поэтому не можешь знать [npc.her] сильные и слабые стороны ..."));
+					} else {
+						effectsSB.append(UtilText.parse(owner, "Ты не обладаешь достаточными знаниями о "+owner.getSubspecies().getNamePlural(null)+" чтобы занть [npc.namePos] сильные и слабые стороны..."));
+					}
+				effectsSB.append("</span>");
+				yIncrease++;
+				yIncrease++;
+				effectsFound = true;
+			}
+			for (AbstractCombatMove cm : statusEffect.getCombatMoves()) {
+				effectsSB.append((effectsFound?"<br/>":"")+"[style.boldExcellent(Даёт)] [style.boldCombat(Движение)]: "+Util.capitaliseSentence(cm.getName(0, owner)));
+				effectsFound =true;
+				yIncrease++;
+			}
+			for (Spell spell : statusEffect.getSpells()) {
+				effectsSB.append((effectsFound?"<br/>":"")+"[style.boldExcellent(Даёт)] [style.boldSpell(Заклинание)]<b>:</b> <b style='color:"+spell.getSpellSchool().getColour().toWebHexString()+";'>"+Util.capitaliseSentence(spell.getName())+"</b>");
+				effectsFound =true;
+				yIncrease++;
+			}
+
+			if(effectsSB.length()>0) {
+				specialYIncrease += 16;
+				tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
+					tooltipSB.append(effectsSB.toString());
+				tooltipSB.append("</div>");
+			}
+
 			
-			if(additionalDescriptions!=null && !additionalDescriptions.isEmpty()) {
-				for(Value<Integer, String> desc : additionalDescriptions) {
-					int heightString = 16+(desc.getKey()*LINE_HEIGHT);
-					tooltipSB.append("<div class='description' style='text-align:center; line-height:"+LINE_HEIGHT+"px; min-height:"+heightString+"px;height:"+heightString+"px;'>"
-							+ desc.getValue()
-						+ "</div>");
+			// Extra descriptions:
+			StringBuilder extraDescriptionsSB = new StringBuilder();
+			List<Value<Integer, String>> extraDescriptions = statusEffect.getAdditionalDescriptions(owner);
+			if(extraDescriptions!=null && !extraDescriptions.isEmpty()) {
+				int i=0;
+				for(Value<Integer, String> desc : extraDescriptions) {
+					extraDescriptionsSB.append((i==0?"":"<br/>")+desc.getValue());
+					yIncrease+=desc.getKey();
+					i++;
 				}
 			}
-			
+			if(extraDescriptionsSB.length()>0) {
+				specialYIncrease += 16;
+				tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
+					tooltipSB.append(extraDescriptionsSB.toString());
+				tooltipSB.append("</div>");
+			}
+
+
 			if(owner.hasStatusEffect(statusEffect)) {
+				StringBuilder timerSB = new StringBuilder();
 				if (owner.getStatusEffectDuration(statusEffect) != -1 || statusEffect.isCombatEffect()) {
 					if (statusEffect.isCombatEffect()) {
-						tooltipSB.append("<div class='subTitle'><b>Осталось ходов: ");
-						if(owner.getStatusEffectDuration(statusEffect) != -1) {
-							tooltipSB.append(owner.getStatusEffectDuration(statusEffect));
+						timerSB.append("Осталось ходов: ");
+						int turnsRemaining = owner.getStatusEffectDuration(statusEffect);
+
+						Colour turnCountColour;
+						if(turnsRemaining<0) {
+							turnCountColour = PresetColour.GENERIC_EXCELLENT; // Infinite
+						} else if(turnsRemaining>10) {
+							turnCountColour = PresetColour.STATUS_EFFECT_TIME_OVERFLOW;
+						} else if(turnsRemaining>5) {
+							turnCountColour = PresetColour.STATUS_EFFECT_TIME_HIGH;
+						} else if(turnsRemaining>=2) {
+							turnCountColour = PresetColour.STATUS_EFFECT_TIME_MEDIUM;
 						} else {
-							tooltipSB.append(UtilText.getBasicInfinitySymbol());
+							turnCountColour = PresetColour.STATUS_EFFECT_TIME_LOW;
 						}
-						tooltipSB.append("</b></div>");
+
+						timerSB.append("<b style='color:"+turnCountColour.toWebHexString()+";'>");
+							if(owner.getStatusEffectDuration(statusEffect)!=-1) {
+								timerSB.append(owner.getStatusEffectDuration(statusEffect));
+							} else {
+								timerSB.append(UtilText.getBasicInfinitySymbol());
+							}
+						timerSB.append("</b>");
+						yIncrease++;
 						
 					} else {
 						int timerHeight = (int) ((owner.getStatusEffectDuration(statusEffect)/(60*60*6f))*100);
@@ -224,7 +256,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 						int hours = minutes/60;
 						int days = hours/24;
 						
-						tooltipSB.append("<div class='subTitle'><b>Осталось времени: "
+						timerSB.append("Осталось времени: "
 								+ "<b style='color:"+timerColour.toWebHexString()+";'>"
 								+(days>0
 								? days + " дней"
@@ -241,285 +273,322 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 													+ (minutes%60>0
 								? " " + (minutes % 60) + " минут"
 																	:"")
-								: (minutes) + " минут"))
-								+ "</b>"
-								+ "</div>");
-						//STATUS_EFFECT_TIME_OVERFLOW
+								: (minutes) + " минут")));
+						yIncrease++;
 					}
+				}
+				if(timerSB.length()>0) {
+					specialYIncrease += 16;
+					tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
+						tooltipSB.append(timerSB.toString());
+					tooltipSB.append("</div>");
 				}
 			}
 			
 			tooltipSB.append("</body>");
 			
 			Main.mainController.setTooltipContent(UtilText.parse(tooltipSB.toString()));
-			
-			// Wasted more time trying to get JavaFX to return sensible height values.
-//			int height = Integer.valueOf(((String) Main.mainController.getWebEngineTooltip().executeScript("window.getComputedStyle(document.body, null).getPropertyValue('height')")).replace("px", ""));
-////					"Math.max( document.body.scrollHeight, document.body.offsetHeight );");
-//			
-//			System.out.println(height);
-//
-//			Main.mainController.setTooltipSize(360, height+8);
 
-		} else if (perk != null) { // Perks:
-			
-			int yIncrease = (perk.getModifiersAsStringList(owner).size() > 4 ? perk.getModifiersAsStringList(owner).size() - 4 : 0);
+			Main.mainController.setTooltipSize(TOOLTIP_WIDTH, 218 + specialYIncrease + (yIncrease * 18));
 
-			Main.mainController.setTooltipSize(360, 324 + (yIncrease * LINE_HEIGHT));
+			
+		} else if (perk != null || levelUpPerk != null) { // Perks:
+			int yIncrease = 0;
+			int specialYIncrease = 0;
+
+			AbstractPerk activePerk;
+			if(perk != null) {
+				activePerk = perk;
+			} else {
+				activePerk = levelUpPerk;
+			}
 
 			// Title:
 			tooltipSB.setLength(0);
-			tooltipSB.append("<div class='title'>" + Util.capitaliseSentence(perk.getName(owner)) + "</div>");
+			tooltipSB.append("<body>");
 
-			if(perk.isEquippableTrait()) {
-				tooltipSB.append("<div class='subTitle' style='color:"+PresetColour.TRAIT.toWebHexString()+";'>Черта</div>");
-			} else {
-				tooltipSB.append("<div class='subTitle' style='color:"+PresetColour.PERK.toWebHexString()+";'>Перк</div>");
-			}
-			
-			// Attribute modifiers:
-			tooltipSB.append("<div class='subTitle-picture'>");
-			if (!perk.getModifiersAsStringList(owner).isEmpty()) {
-				int i=0;
-				for (String s : perk.getModifiersAsStringList(owner)) {
-					tooltipSB.append((i!=0?"<br/>":"") + s);
-					i++;
-				}
-			} else {
-				tooltipSB.append("<b style='color:" + PresetColour.PERK.toWebHexString() + ";'>Перк</b>" + "<br/><span style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'>Нет</span>");
-			}
-			tooltipSB.append("</div>");
+			tooltipSB.append("<div class='container-full-width center'><h5>" + Util.capitaliseSentence(activePerk.getName(owner)) + "</h5></div>");
 
-			// Picture:
-			tooltipSB.append("<div class='picture'>" + perk.getSVGString(owner) + "</div>");
-
-			// Description:
-			tooltipSB.append("<div class='description'>" + UtilText.parse(owner, perk.getDescription(owner)) + "</div>");
-			
-			Main.mainController.setTooltipContent(UtilText.parse(tooltipSB.toString()));
-				
-			
-		} else if (levelUpPerk != null) { // Level Up Perk (same as Perk, but with requirements at top):
-
-			int yIncrease = (levelUpPerk.getModifiersAsStringList(owner).size() > 4 ? levelUpPerk.getModifiersAsStringList(owner).size() - 4 : 0);
-
-			Main.mainController.setTooltipSize(360, 320 + (availableForSelection?32:0) + (yIncrease * LINE_HEIGHT));
-			
-			// Title:
-			tooltipSB.setLength(0);
-			tooltipSB.append("<div class='title'>" + Util.capitaliseSentence(levelUpPerk.getName(owner)) + "</div>");
-			
-			if(levelUpPerk.isEquippableTrait()) {
-				if(levelUpPerk.getPerkCategory()==PerkCategory.JOB) {
-					tooltipSB.append("<div class='subTitle' style='color:"+PresetColour.GENERIC_EXCELLENT.toWebHexString()+";'>'"+Util.capitaliseSentence(owner.getHistory().getName(owner))+"' Профессиональная черта</div>");
-				} else if(levelUpPerk.isHiddenPerk()) {
-					tooltipSB.append("<div class='subTitle' style='color:"+PresetColour.GENERIC_EXCELLENT.toWebHexString()+";'>Уникальная Черта</div>");
-				} else {
-					tooltipSB.append("<div class='subTitle' style='color:"+PresetColour.TRAIT.toWebHexString()+";'>Черта</div>");
-				}
-			} else {
-				 if(levelUpPerk.isHiddenPerk()) {
-					tooltipSB.append("<div class='subTitle' style='color:"+PresetColour.GENERIC_EXCELLENT.toWebHexString()+";'>Уникальный перк</div>");
-				} else {
-					tooltipSB.append("<div class='subTitle' style='color:"+PresetColour.PERK.toWebHexString()+";'>Перк</div>");
-				}
-			}
-			
-			// Attribute modifiers:
-			tooltipSB.append("<div class='subTitle-picture'>");
-			if (!levelUpPerk.getModifiersAsStringList(owner).isEmpty()) {
-				int i=0;
-				for (String s : levelUpPerk.getModifiersAsStringList(owner)) {
-					tooltipSB.append((i!=0?"<br/>":"") + s);
-					i++;
-				}
-			} else {
-				tooltipSB.append("<b style='color:" + PresetColour.PERK.toWebHexString() + ";'>Перк</b>" + "<br/><span style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'>Нет</span>");
-			}
-			tooltipSB.append("</div>");
-
-			// Picture:
-			tooltipSB.append("<div class='picture'>" + levelUpPerk.getSVGString(owner) + "</div>");
-
-			// Description:
-//			boolean booly1 = PerkManager.MANAGER.isPerkEndOfTreeBranch(owner, perkRow, levelUpPerk, true);
-//			boolean booly2 = PerkManager.MANAGER.isPerkEndOfTreeBranch(owner, perkRow, levelUpPerk, false);
-			tooltipSB.append("<div class='description'>"
-//					+ booly1+", "+booly2+"<br/>"
-					+ UtilText.parse(owner, levelUpPerk.getDescription(owner))
-			+ "</div>");
-			
-			if(availableForSelection) {
-				if(levelUpPerk.isEquippableTrait()) {
-					if(levelUpPerk.getPerkCategory()==PerkCategory.JOB) {
-						tooltipSB.append("<div class='subTitle' style='color:"+PresetColour.GENERIC_EXCELLENT.toWebHexString()+";'>Профессиональные черты не могут быть убраны.</div>");
-						
+			// Perk type box:
+			tooltipSB.append("<div class='container-full-width titular'>");
+				if(activePerk.isEquippableTrait()) {
+					if(activePerk.getPerkCategory()==PerkCategory.JOB) {
+						tooltipSB.append("<span style='color:"+PresetColour.GENERIC_EXCELLENT.toWebHexString()+";'>'"+Util.capitaliseSentence(owner.getHistory().getName(owner))+"' черта профессии</span>");
+					} else if(activePerk.isHiddenPerk()) {
+						tooltipSB.append("<span style='color:"+PresetColour.GENERIC_EXCELLENT.toWebHexString()+";'>Уникальная черта</span>");
 					} else {
-						if(!owner.hasPerkInTree(perkRow, levelUpPerk)) {
-							if(!PerkManager.MANAGER.isPerkAvailable(owner, perkRow, levelUpPerk)) {
-								tooltipSB.append("<div class='subTitle' style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Покупка требует соединяющего перка или черты.</div>");
+						tooltipSB.append("<span style='color:"+PresetColour.TRAIT.toWebHexString()+";'>Черта</span>");
+					}
+				} else {
+					 if(activePerk.isHiddenPerk()) {
+						tooltipSB.append("<span style='color:"+PresetColour.GENERIC_EXCELLENT.toWebHexString()+";'>Уникальный перк</span>");
+					} else {
+						tooltipSB.append("<span style='color:"+PresetColour.PERK.toWebHexString()+";'>Перк</span>");
+					}
+				}
+			tooltipSB.append("</div>");
+
+			// Main description box & image:
+			tooltipSB.append("<div class='container-full-width' style='padding:0; min-height:106px;'>");
+				tooltipSB.append("<div class='container-half-width' style='width:calc(100% - 16px); font-weight:normal; text-align:left; max-height:140px;'>");
+
+				// Picture:
+				tooltipSB.append("<div class='item-image' style='float:right;'>"
+									+ "<div class='item-image-content'>"
+										+ activePerk.getSVGString(owner)
+									+ "</div>"
+								+ "</div>");
+				tooltipSB.append(UtilText.parse(owner, activePerk.getDescription(owner)));
+				tooltipSB.append("</div>");
+			tooltipSB.append("</div>");
+			
+			// Attribute modifiers:
+			StringBuilder attributesSB = new StringBuilder();
+			List<String> extraDescriptions = activePerk.getModifiersAsStringList(owner);
+			if(extraDescriptions!=null && !extraDescriptions.isEmpty()) {
+				int i=0;
+				for (String s : extraDescriptions) {
+					attributesSB.append((i!=0?"<br/>":"") + s);
+					i++;
+					yIncrease++;
+				}
+			}
+			if(attributesSB.length()>0) {
+				specialYIncrease += 16;
+				tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
+					tooltipSB.append(attributesSB.toString());
+				tooltipSB.append("</div>");
+			}
+
+			if(levelUpPerk!=null) {
+				if(availableForSelection) {
+					specialYIncrease += 16;
+					yIncrease++;
+					tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal; font-style:italic;'>");
+						if(levelUpPerk.isEquippableTrait()) {
+							if(levelUpPerk.getPerkCategory()==PerkCategory.JOB) {
+								tooltipSB.append("<span style='color:"+PresetColour.GENERIC_EXCELLENT.toWebHexString()+";'>Профессиональные черты не могут быть убраны.</span>");
+
 							} else {
-								tooltipSB.append("<div class='subTitle' style='color:"+PresetColour.GENERIC_MINOR_GOOD.toWebHexString()+";'>Клик для покупки черты.</div>");
-							}
-						} else {
-							if(owner.getTraits().contains(levelUpPerk)) {
-								tooltipSB.append("<div class='subTitle' style='color:"+PresetColour.GENERIC_MINOR_BAD.toWebHexString()+";'>Клик для снятия черты.</div>");
-							} else {
-								if(owner.getTraits().size()==GameCharacter.MAX_TRAITS) {
-									tooltipSB.append("<div class='subTitle' style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Максимум черт активно.</div>");
+								if(!owner.hasPerkInTree(perkRow, levelUpPerk)) {
+									if(!PerkManager.MANAGER.isPerkAvailable(owner, perkRow, levelUpPerk)) {
+										tooltipSB.append("<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Покупка требует соединяющего перка или черты.</span>");
+									} else {
+										tooltipSB.append("<span style='color:"+PresetColour.GENERIC_MINOR_GOOD.toWebHexString()+";'>Клик для покупки черты.</span>");
+									}
 								} else {
-									tooltipSB.append("<div class='subTitle' style='color:"+PresetColour.TRAIT.toWebHexString()+";'>Клик для активации черты.</div>");
+									if(owner.getTraits().contains(levelUpPerk)) {
+										tooltipSB.append("<span style='color:"+PresetColour.GENERIC_MINOR_BAD.toWebHexString()+";'>Клик для снятия черты.</span>");
+									} else {
+										if(owner.getTraits().size()==GameCharacter.MAX_TRAITS) {
+											tooltipSB.append("<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Максимум черт активно.</span>");
+										} else {
+											tooltipSB.append("<span style='color:"+PresetColour.TRAIT.toWebHexString()+";'>Клик для активации черты.</span>");
+										}
+									}
 								}
 							}
-						}
-					}
-					
-				} else {
-					if(!owner.hasPerkInTree(perkRow, levelUpPerk) && !levelUpPerk.isHiddenPerk()) {
-						if(!PerkManager.MANAGER.isPerkAvailable(owner, perkRow, levelUpPerk)) {
-							tooltipSB.append("<div class='subTitle' style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Покупка требует соединяющего перка или черты.</div>");
+
 						} else {
-							tooltipSB.append("<div class='subTitle' style='color:"+PresetColour.GENERIC_MINOR_GOOD.toWebHexString()+";'>Клик для покупки перка.</div>");
+							if(!owner.hasPerkInTree(perkRow, levelUpPerk) && !levelUpPerk.isHiddenPerk()) {
+								if(!PerkManager.MANAGER.isPerkAvailable(owner, perkRow, levelUpPerk)) {
+									tooltipSB.append("<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Покупка требует соединяющего перка или черты.</span>");
+								} else {
+									tooltipSB.append("<span style='color:"+PresetColour.GENERIC_MINOR_GOOD.toWebHexString()+";'>Клик для покупки перка.</span>");
+								}
+
+							} else {
+								tooltipSB.append("<span style='color:"+PresetColour.PERK.toWebHexString()+";'>"
+													+ UtilText.parse(owner, "[npc.Name] уже имеет этот перк!")
+												+ "</span>");
+							}
 						}
-						
-					} else {
-						tooltipSB.append("<div class='subTitle' style='color:"+PresetColour.PERK.toWebHexString()+";'>"
-											+ UtilText.parse(owner, "[npc.Name] уже имеет этот перк!")
-										+ "</div>");
-					}
+					tooltipSB.append("</div>");
 				}
 			}
 			
+			tooltipSB.append("</body>");
+
 			Main.mainController.setTooltipContent(UtilText.parse(tooltipSB.toString()));
 
+			Main.mainController.setTooltipSize(TOOLTIP_WIDTH, 320 + specialYIncrease + (yIncrease * 18));
+
+
 		} else if (move != null) {
+			int specialYIncrease = 0;
+			int yIncrease = 0;
+
 			List<String> critReqs = move.getCritRequirements(owner, null, null, null);
-			
 			int currentCooldown = owner.getMoveCooldown(move.getIdentifier());
-			
-			Main.mainController.setTooltipSize(400,
-					(Main.game.isInCombat()?340:370)
-					+ (critReqs.size()>0?(32+critReqs.size()*16):0)
-					+ (currentCooldown>0?32:0));
+			boolean coreMove = owner.getEquippedMoves().contains(move);
+
 
 			// Title:
 			tooltipSB.setLength(0);
-			tooltipSB.append("<div class='title'>" + Util.capitaliseSentence(move.getName(0, owner)) + "</div>");
+			tooltipSB.append("<body>");
+			tooltipSB.append("<div class='container-full-width center'><h5>" + Util.capitaliseSentence(move.getName(0, owner)) + "</h5></div>");
 
-			boolean coreMove = owner.getEquippedMoves().contains(move);
-			
-			tooltipSB.append("<div class='subTitle' style='width:46%; margin:2% 2% 0% 2%;'>"+(coreMove?"[style.colourMinorGood(Основные)]":"[style.colourMinorBad(Не основные)]")+"</div>");
-			tooltipSB.append("<div class='subTitle' style='color:"+move.getColourByDamageType(0, owner).toWebHexString()+"; width:46%; margin:2% 2% 0% 2%;'>"+move.getType().getName()+"</div>");
+
+			// Core move info (half-width title):
+			tooltipSB.append("<div class='container-half-width titular' style='margin:2px 2px 2px 8px; width:calc(50% - 10px);'>"
+								+ (coreMove?"[style.colourMinorGood(Основные)]":"[style.colourMinorBad(Не основные)]")
+							+ "</div>");
+
+			// Move type (half-width title):
+			tooltipSB.append("<div class='container-half-width titular' style='margin:2px 8px 2px 2px; width:calc(50% - 10px); color:"+move.getColourByDamageType(0, owner).toWebHexString()+";'>"
+								+ move.getType().getName()
+							+ "</div>");
 			
 			if(currentCooldown>0) {
-				tooltipSB.append("<div class='subTitle'><span style='color:"+PresetColour.GENERIC_MINOR_BAD.toWebHexString()+";'>На перезарядке</span>: "+currentCooldown+(currentCooldown==1?" ход":" ходов")+"</div>");
+				tooltipSB.append("<div class='subTitle'>[style.colourMinorBad(На перезарядке)]: "+currentCooldown+(currentCooldown==1?" ход":" ходов")+"</div>");
 			}
 			
-			// Picture:
+			// Main description box & image:
+			Value<Boolean, String> availableValue = owner.isMoveAvailable(move.getIdentifier());
+			tooltipSB.append("<div class='container-full-width' style='padding:0; min-height:106px;'>");
+				tooltipSB.append("<div class='container-half-width' style='width:calc(100% - 16px); font-weight:normal; text-align:left; max-height:140px;'>");
 
-			// Description:
-			tooltipSB.append("<div class='subTitle-picture'>");
+				// Picture:
+				tooltipSB.append("<div class='item-image' style='float:right;'>"
+									+ "<div class='item-image-content'>"
+										+ move.getSVGString()
+									+ "</div>"
+								+ "</div>");
+				tooltipSB.append("<span style='color:"+(availableValue.getKey()?PresetColour.GENERIC_MINOR_GOOD:PresetColour.GENERIC_MINOR_BAD).toWebHexString()+";'>"+availableValue.getValue()+"</span> "
+						+ move.getDescription(!Main.game.isInCombat()?0:owner.getSelectedMoves().size(), owner));
+				tooltipSB.append("</div>");
+			tooltipSB.append("</div>");
 
+
+
+			// AP cost and status effects applied:
 			int apCost = move.getAPcost(owner);
 			int cooldown = move.getCooldown(owner);
-
-			tooltipSB.append(
-					"Стоимость действий: "
+			StringBuilder effectsSB = new StringBuilder();
+			effectsSB.append("[style.italicsMinorBad(+1 к стоимости действий и перезаряда для не основных действий)]");
+			effectsSB.append(
+					"<br/>Стоимость действий: "
 						+"<span style='color:"+(PresetColour.ACTION_POINT_COLOURS[apCost]).toWebHexString()+";'>"
-						+(coreMove?apCost:(apCost-1)+"[style.colourBad(+1)]")
-						+"</span>"
-					+ "<br/>Перезарядка: "
+						+(coreMove
+							?apCost
+							:(apCost-1)+"[style.colourBad(+1)]")
+						+"</span>");
+			effectsSB.append(
+					"<br/>Перезарядка: "
 						+ "<span style='color:"+(cooldown-(coreMove?0:1)<=0?PresetColour.GENERIC_MINOR_GOOD:PresetColour.GENERIC_MINOR_BAD).toWebHexString()+";'>"
-						+(coreMove?cooldown:(cooldown-1)+"[style.colourBad(+1)]")
+						+(coreMove
+							?cooldown
+							:(cooldown-1)+"[style.colourBad(+1)]")
 						+"</span> ход"+(cooldown==1?"":"ов"));
-			
-//			tooltipSB.append("AP cost: "+"<span style='color:"+(apColours[apCost]).toWebHexString()+";'>"+apCost+"</span>");
-//			tooltipSB.append("<br/>Cooldown: "+"<span style='color:"+(cooldown==0?PresetColour.GENERIC_MINOR_GOOD:PresetColour.GENERIC_MINOR_BAD).toWebHexString()+";'>"+cooldown+(cooldown==1?" turn":" turns")+"</span>");
-			
 			if(move.getStatusEffects(owner, owner, false)!=null) {
 				for(Entry<AbstractStatusEffect, Integer> entry : move.getStatusEffects(owner, owner, false).entrySet()) {
-					tooltipSB.append("<br/>Применяется: <span style='color:"+entry.getKey().getColour().toWebHexString()+";'>"+Util.capitaliseSentence(entry.getKey().getName(null))+"</span> на "+entry.getValue()+(entry.getValue()==1?" ход":" ходов"));
+					effectsSB.append("<br/>");
+					effectsSB.append("Применяется: <span style='color:"+entry.getKey().getColour().toWebHexString()+";'>"+Util.capitaliseSentence(entry.getKey().getName(null))+"</span> на "+entry.getValue()+(entry.getValue()==1?" ход":" ходов"));
+					yIncrease++;
 				}
 			}
-			tooltipSB.append("</div>");
-			
-			tooltipSB.append("<div class='picture'>" + move.getSVGString() + "</div>");
-
-			// Description:
-			Value<Boolean, String> availableValue = owner.isMoveAvailable(move.getIdentifier());
-			
-			tooltipSB.append(
-					"<div class='description'>"
-						+"<span style='color:"+(availableValue.getKey()?PresetColour.GENERIC_MINOR_GOOD:PresetColour.GENERIC_MINOR_BAD).toWebHexString()+";'>"+availableValue.getValue()+"</span> "
-						+ move.getDescription(!Main.game.isInCombat()?0:owner.getSelectedMoves().size(), owner)
-					+ "</div>");
-			
-
-			tooltipSB.append("<div class='subTitle'><span style='color:"+PresetColour.CRIT.toWebHexString()+";'>Критический удар когда:</span>");
-			for(String s : critReqs) {
-				tooltipSB.append("<br/>"+s);
+			if(effectsSB.length()>0) {
+				specialYIncrease += 16;
+				tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
+					tooltipSB.append(effectsSB.toString());
+				tooltipSB.append("</div>");
 			}
+			
+			// Crit info:
+			tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
+				tooltipSB.append("<span style='color:"+PresetColour.CRIT.toWebHexString()+";'>Критический удар когда:</span>");
+				for(String s : critReqs) {
+					tooltipSB.append("<br/>"+s);
+				}
 			tooltipSB.append("</div>");
 
 			if(!Main.game.isInCombat()) {
-				if(owner.getEquippedMoves().contains(move)) {
-					tooltipSB.append("<div class='subTitle' style='color:"+PresetColour.GENERIC_MINOR_BAD.toWebHexString()+";'>Клик чтобы убрать движение.</div>");
-				} else {
-					if(owner.getEquippedMoves().size()>=GameCharacter.MAX_COMBAT_MOVES) {
-						tooltipSB.append("<div class='subTitle' style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Максимум основных движений.</div>");
+				specialYIncrease += 16;
+				yIncrease++;
+				tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal; font-style:italic;'>");
+					if(owner.getEquippedMoves().contains(move)) {
+						tooltipSB.append("<span style='color:"+PresetColour.GENERIC_MINOR_BAD.toWebHexString()+";'>Клик чтобы убрать движение.</div>");
 					} else {
-						tooltipSB.append("<div class='subTitle' style='color:"+PresetColour.TRAIT.toWebHexString()+";'>Клик чтобы взять движение.</div>");
+						if(owner.getEquippedMoves().size()>=GameCharacter.MAX_COMBAT_MOVES) {
+							tooltipSB.append("<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Максимум основных движений.</div>");
+						} else {
+							tooltipSB.append("<span style='color:"+PresetColour.TRAIT.toWebHexString()+";'>Клик чтобы взять движение.</div>");
+						}
 					}
-				}
+				tooltipSB.append("</div>");
 			}
 
+			tooltipSB.append("</body>");
+
 			Main.mainController.setTooltipContent(UtilText.parse(tooltipSB.toString()));
+			Main.mainController.setTooltipSize(TOOLTIP_WIDTH, 260 + specialYIncrease + (yIncrease * 18));
+
 
 		} else if (desire != null) { // Desire:
-
-			Main.mainController.setTooltipSize(400, 280);
+			int yIncrease = 0;
+			int specialYIncrease = 0;
 
 			// Title:
 			tooltipSB.setLength(0);
-			tooltipSB.append("<div class='title'>Set Desire: <b style='color:" + desire.getColour().toWebHexString() + ";'>"+Util.capitaliseSentence(desire.getName())+"</b></div>");
+			tooltipSB.append("<body>");
+			tooltipSB.append("<div class='container-full-width center' style='color:"+desire.getColour().toWebHexString()+";'><h5>" + Util.capitaliseSentence(desire.getName()) + "</h5></div>");
+
+			// Main description box & image:
+			tooltipSB.append("<div class='container-full-width' style='padding:0; min-height:106px;'>");
+				tooltipSB.append("<div class='container-half-width' style='width:calc(100% - 16px); font-weight:normal; text-align:left; max-height:140px;'>");
+				// Picture:
+				tooltipSB.append("<div class='item-image' style='float:right;'>"
+									+ "<div class='item-image-content'>"
+										+ desire.getSVGImage()
+									+ "</div>"
+								+ "</div>");
+				tooltipSB.append(fetish.getFetishDesireDescription(owner, desire));
+				if(owner.hasFetish(fetish) && desire!=FetishDesire.FOUR_LOVE) {
+					tooltipSB.append("<br/><i>Твоё желание [style.boldBad(заблокировано)] на <b style='color:"+FetishDesire.FOUR_LOVE.getColour().toWebHexString()+";'>"+FetishDesire.FOUR_LOVE.getName()+"</b>,"
+							+ " из-за обладания соответствующим фетишем ("+fetish.getName(owner)+").</i>");
+				}
+				tooltipSB.append("</div>");
+			tooltipSB.append("</div>");
 			
 			// Attribute modifiers:
-			tooltipSB.append("<div class='subTitle-picture'>");
-			int i=0;
-			for (String s : desire.getModifiersAsStringList()) {
-				tooltipSB.append((i!=0?"<br/>":"") + s);
-				i++;
-			}
-			tooltipSB.append("</div>");
-
-			// Picture:
-			tooltipSB.append("<div class='picture'>" + desire.getSVGImage() + "</div>");
-
-			// Description:
-			if(owner.hasFetish(fetish) && desire!=FetishDesire.FOUR_LOVE) {
-				tooltipSB.append("<div class='description' style='height:53px'>Your desire is [style.boldBad(locked)] to <b style='color:"+FetishDesire.FOUR_LOVE.getColour().toWebHexString()+";'>"+FetishDesire.FOUR_LOVE.getName()+"</b>,"
-						+ " из-за обладания соответствующим фетишем ("+fetish.getName(owner)+").</div>");
-				tooltipSB.append("<div class='subTitle' style='text-align:center;'>Стоимость: [style.boldDisabled(Нет)]</div>");
-			} else {
-				tooltipSB.append("<div class='description' style='height:53px'>" + fetish.getFetishDesireDescription(owner, desire) + "</div>");
-				if(owner.getBaseFetishDesire(fetish)==desire) {
-					tooltipSB.append("<div class='subTitle' style='text-align:center;'>Стоимость: [style.boldDisabled(Нет)]</div>");
-				} else {
-					tooltipSB.append("<div class='subTitle' style='text-align:center;'>Стоимость: [style.boldArcane("
-							+ (FetishDesire.getCostToChange()==0
-								?"Бесплатно"
-								: FetishDesire.getCostToChange() +" Магических Эссенций"+(FetishDesire.getCostToChange()>1?"s":""))
-							+ ")]</div>");
+			StringBuilder attributesSB = new StringBuilder();
+			List<String> extraDescriptions = desire.getModifiersAsStringList();
+			if(extraDescriptions!=null && !extraDescriptions.isEmpty()) {
+				int i=0;
+				for (String s : extraDescriptions) {
+					attributesSB.append((i!=0?"<br/>":"") + s);
+					i++;
+					yIncrease++;
 				}
 			}
+			if(attributesSB.length()>0) {
+				specialYIncrease += 16;
+				tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
+					tooltipSB.append(attributesSB.toString());
+				tooltipSB.append("</div>");
+			}
 
+			// Cost to change desire:
+			tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal; font-style:italic;'>");
+				if((owner.hasFetish(fetish) && desire!=FetishDesire.FOUR_LOVE) || owner.getBaseFetishDesire(fetish)==desire) {
+					tooltipSB.append("Стоимость: [style.colourDisabled(Нет)]");
+				} else {
+					tooltipSB.append("Стоимость: "
+							+ (FetishDesire.getCostToChange()==0
+								?"Бесплатно"
+								:UtilText.formatAsEssences(FetishDesire.getCostToChange(), "span", false)));
+				}
+			tooltipSB.append("</div>");
+
+			tooltipSB.append("</body>");
 			
 			Main.mainController.setTooltipContent(UtilText.parse(tooltipSB.toString()));
+			Main.mainController.setTooltipSize(TOOLTIP_WIDTH, 262 + specialYIncrease + (yIncrease * 18));
+
 
 		} else if (fetish != null) { // Fetishes:
-			
 			if(fetishExperience) {
-				
+				//TODO not used? Remove it?
 				Main.mainController.setTooltipSize(440, 170);
 				
 				tooltipSB.setLength(0);
@@ -532,182 +601,232 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 				Main.mainController.setTooltipContent(UtilText.parse(tooltipSB.toString()));
 				
 			} else {
-				int yIncrease = (fetish.getModifiersAsStringList(owner).size()>4
-									? fetish.getModifiersAsStringList(owner).size() - 4
-									: 0);
+				int yIncrease = 0;
+				int specialYIncrease = 0;
 				
-				yIncrease += fetish.getFetishesForAutomaticUnlock().size();
-				if(!owner.hasFetish(fetish)) {
-					yIncrease += fetish.getPerkRequirements(owner).size();
-				}
-				int specialIncrease = 0;
-				if(!owner.hasFetish(fetish) && !fetish.getPerkRequirements(owner).isEmpty()) {
-					specialIncrease += LINE_HEIGHT*2 + 8;
-					
-				} else if(!fetish.getFetishesForAutomaticUnlock().isEmpty()) {
-					specialIncrease += 8;
-				}
-				specialIncrease += LINE_HEIGHT; // For fetish level effects
-				
-				Main.mainController.setTooltipSize(380, 370 + specialIncrease + (yIncrease * LINE_HEIGHT));
-				
+				boolean fetishHasUnlockRequirements = !fetish.getFetishesForAutomaticUnlock().isEmpty() || (!owner.hasFetish(fetish) && !fetish.getPerkRequirements(owner).isEmpty());
+
 				// Title:
 				tooltipSB.setLength(0);
-				tooltipSB.append("<div class='title'>" + Util.capitaliseSentence(fetish.getName(owner)) + " фетиш</div>");
-				FetishLevel level = FetishLevel.getFetishLevelFromValue(owner.getFetishExperience(fetish));
-				tooltipSB.append("<div class='subTitle'>");
-				tooltipSB.append("Уровень " + level.getNumeral() + ": <span style='color:" + level.getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(level.getName()) + "</span>"
-						+ " <span style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'>|</span> " + owner.getFetishExperience(fetish) +" / "+ level.getMaximumExperience() + " xp");
+				tooltipSB.append("<body>");
 
-				String appliedFetishLevelDescription = fetish.getAppliedFetishLevelEffectDescription(owner);
-				tooltipSB.append("<br/>[style.boldFetish(Эффект уровня:)] ");
-				if(appliedFetishLevelDescription!=null && !appliedFetishLevelDescription.isEmpty()) {
-					tooltipSB.append(appliedFetishLevelDescription);
-				} else {
-					tooltipSB.append("[style.colourDisabled(Нет...)]");
-				}
+				tooltipSB.append("<div class='container-full-width center'><h5>" + Util.capitaliseSentence(fetish.getName(owner)) + "</h5></div>");
+
+				// Fetish level and experience:
+				FetishLevel level = FetishLevel.getFetishLevelFromValue(owner.getFetishExperience(fetish));
+				tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
+					tooltipSB.append("Уровень " + level.getNumeral() + ": <span style='color:" + level.getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(level.getName()) + "</span>"
+							+ " <span style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'>|</span> " + owner.getFetishExperience(fetish) +" / "+ level.getMaximumExperience() + " xp");
+
+					String appliedFetishLevelDescription = fetish.getAppliedFetishLevelEffectDescription(owner);
+					tooltipSB.append("<br/>[style.colourFetish(Эффект уровня:)] ");
+					if(appliedFetishLevelDescription!=null && !appliedFetishLevelDescription.isEmpty()) {
+						tooltipSB.append("<i>"+appliedFetishLevelDescription+"</i>");
+					} else {
+						tooltipSB.append("[style.colourDisabled(Нет...)]");
+					}
 				tooltipSB.append("</div>");
 				
-				// Requirements:
-				if(!fetish.getFetishesForAutomaticUnlock().isEmpty() || (!owner.hasFetish(fetish) && !fetish.getPerkRequirements(owner).isEmpty())) {
-					tooltipSB.append("<div class='subTitle' style='font-weight:normal;'><b>Требования</b>");
-					for(AbstractFetish f : fetish.getFetishesForAutomaticUnlock()) {
-						if(owner.hasFetish(f)) {
-							tooltipSB.append("<br/>[style.italicsGood(" + Util.capitaliseSentence(f.getName(owner))+")]");
-						} else {
-							tooltipSB.append("<br/>[style.italicsBad(" + Util.capitaliseSentence(f.getName(owner))+")]");
+				// Requirements (only shown for derived fetishes):
+				if(fetishHasUnlockRequirements) {
+					specialYIncrease += 16;
+					tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
+						tooltipSB.append("<b>Требования</b>");
+						yIncrease++;
+						for(AbstractFetish f : fetish.getFetishesForAutomaticUnlock()) {
+							if(owner.hasFetish(f)) {
+								tooltipSB.append("<br/>[style.italicsGood(" + Util.capitaliseSentence(f.getName(owner))+")]");
+							} else {
+								tooltipSB.append("<br/>[style.italicsBad(" + Util.capitaliseSentence(f.getName(owner))+")]");
+							}
+							yIncrease++;
 						}
-					}
-					if(!owner.hasFetish(fetish)) {
-						for(String s : fetish.getPerkRequirements(owner)) {
-							tooltipSB.append("<br/>"+s);
+						if(!owner.hasFetish(fetish)) {
+							for(String s : fetish.getPerkRequirements(owner)) {
+								tooltipSB.append("<br/>"+s);
+								yIncrease++;
+							}
 						}
+					tooltipSB.append("</div>");
+				}
+
+				// Main description box & image:
+				tooltipSB.append("<div class='container-full-width' style='padding:0; min-height:106px;'>");
+					tooltipSB.append("<div class='container-half-width' style='width:calc(100% - 16px); font-weight:normal; text-align:left; max-height:140px;'>");
+					// Picture:
+					tooltipSB.append("<div class='item-image' style='float:right;'>"
+										+ "<div class='item-image-content'>"
+											+ fetish.getSVGString(owner)
+										+ "</div>"
+									+ "</div>");
+					tooltipSB.append(fetish.getDescription(owner));
+					tooltipSB.append("</div>");
+				tooltipSB.append("</div>");
+
+
+				// Attribute modifiers:
+				StringBuilder attributesSB = new StringBuilder();
+				List<String> extraDescriptions = fetish.getModifiersAsStringList(owner);
+				if(extraDescriptions!=null && !extraDescriptions.isEmpty()) {
+					int i=0;
+					for (String s : extraDescriptions) {
+						attributesSB.append((i!=0?"<br/>":"") + s);
+						i++;
+						yIncrease++;
 					}
+				}
+				if(attributesSB.length()>0) {
+					specialYIncrease += 16;
+					tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
+						tooltipSB.append(attributesSB.toString());
 					tooltipSB.append("</div>");
 				}
 				
-				// Attribute modifiers:
-				tooltipSB.append("<div class='subTitle-picture'>");
-				if (!fetish.getModifiersAsStringList(owner).isEmpty()) {
-					int i=0;
-					for (String s : fetish.getModifiersAsStringList(owner)) {
-						tooltipSB.append((i!=0?"<br/>":"") + s);
-						i++;
-					}
-				} else {
-					tooltipSB.append("<b style='color:" + PresetColour.FETISH.toWebHexString() + ";'>Fetish</b>" + "<br/><span style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'>Нет</span>");
+				if(!fetishHasUnlockRequirements && fetishWithCostInformation) {
+					specialYIncrease += 16;
+					// Cost to take fetish:
+					tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal; font-style:italic;'>");
+						if(owner.hasBaseFetish(fetish)) {
+							tooltipSB.append("Стоимость:  [style.colourDisabled(Нет - Уже обретено)]");
+						} else {
+							tooltipSB.append("Стоимость:  "+UtilText.formatAsEssences(fetish.getCost(), "span", false));
+						}
+						yIncrease++;
+					tooltipSB.append("</div>");
 				}
-				tooltipSB.append("</div>");
-	
-				// Picture:
-				tooltipSB.append("<div class='picture'>" + fetish.getSVGString(owner) + "</div>");
-	
-				// Description:
-				tooltipSB.append("<div class='description'>" + fetish.getDescription(owner) + "</div>");
-				
-				if(fetish.getFetishesForAutomaticUnlock().isEmpty()) {
-					if(owner.hasBaseFetish(fetish)) {
-						tooltipSB.append("<div class='subTitle' style='text-align:center;'>Стоимость: [style.boldDisabled(Нет)]</div>");
-					} else {
-						tooltipSB.append("<div class='subTitle' style='text-align:center;'>Стоимость: [style.boldArcane("+fetish.getCost()+" Волшебных эссенций)]</div>");
-					}
-				}
-				
+
+				tooltipSB.append("</body>");
+
 				Main.mainController.setTooltipContent(UtilText.parse(tooltipSB.toString()));
+				Main.mainController.setTooltipSize(TOOLTIP_WIDTH, 300 + specialYIncrease + (yIncrease * 18));
 			}
 
 		} else if (spell != null) { // Spells:
-
-			int yIncrease = (spell.getModifiersAsStringList().size() > 5 ? spell.getModifiersAsStringList().size() - 5 : 0);
-
-			Main.mainController.setTooltipSize(380, 330 + (yIncrease * LINE_HEIGHT));
+			int yIncrease = 0;
+			int specialYIncrease = 0;
 
 			// Title:
 			tooltipSB.setLength(0);
-			tooltipSB.append("<div class='title'>" + Util.capitaliseSentence(spell.getName()) + "</div>");
+			tooltipSB.append("<body>");
 
-			// Attribute modifiers:
-			tooltipSB.append("<div class='subTitle-picture'>");
+			tooltipSB.append("<div class='container-full-width center'><h5>" + Util.capitaliseSentence(spell.getName()) + "</h5></div>");
 
-			if(spell.getDamage(Main.game.getPlayer())>0) {
-				tooltipSB.append(
-						"<b>Base "+spell.getDamage(owner)+"</b> <b style='color:"+ spell.getDamageType().getMultiplierAttribute().getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(spell.getDamageType().getName()) + " Урон</b><br/>"
-						+"<b>"
-							+ Attack.getMinimumSpellDamage(owner, null, spell.getDamageType(), spell.getDamage(owner), spell.getDamageVariance())
-							+ "-"
-							+ Attack.getMaximumSpellDamage(owner, null, spell.getDamageType(), spell.getDamage(owner), spell.getDamageVariance())
-						+ "</b>"
-						+ " <b style='color:"+ spell.getDamageType().getMultiplierAttribute().getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(spell.getDamageType().getName()) + " Урон</b><br/>");
-			}
-			
-			if(!spell.getModifiersAsStringList().isEmpty()) {
-				for(int i=0; i<spell.getModifiersAsStringList().size(); i++) {
-					tooltipSB.append(spell.getModifiersAsStringList().get(i)+(i<spell.getModifiersAsStringList().size()-1?"<br/>":""));
-				}
-			} else {
-				tooltipSB.append("<span style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'>Без эффекта</span><br/>");
-			}
+			// Main description box & image:
+			tooltipSB.append("<div class='container-full-width' style='padding:0; min-height:106px;'>");
+				tooltipSB.append("<div class='container-half-width' style='width:calc(100% - 16px); font-weight:normal; text-align:left; max-height:140px;'>");
+				// Picture:
+				tooltipSB.append("<div class='item-image' style='float:right;'>"
+									+ "<div class='item-image-content'>"
+										+ spell.getSVGString()
+									+ "</div>"
+								+ "</div>");
+				tooltipSB.append((spell.isForbiddenSpell() && !owner.hasSpell(spell)?"[style.italicsArcane(Это запрещённое заклинание, и может быть получено только через специальное задание!)]<br/>":""));
+				tooltipSB.append(spell.getDescription(owner));
+				tooltipSB.append("</div>");
 			tooltipSB.append("</div>");
 
-			// Picture:
-			tooltipSB.append("<div class='picture'>" + spell.getSVGString() + "</div>");
+			// Crit requirements:
+			tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
+				tooltipSB.append("[style.colourExcellent(Требования крита)]:");
+				for(String s : spell.getCritRequirements(owner, null, null, null)) {
+					yIncrease++;
+					tooltipSB.append("<br/>"+s);
+				}
+			tooltipSB.append("</div>");
 
-			// Description & turns remaining:
-			tooltipSB.append(
-					"<div class='description'>"
-							+ (spell.isForbiddenSpell() && !owner.hasSpell(spell) ? "[style.italicsArcane(Это запрещенное заклинание и оно может быть получено только через специальное задание!)]<br/>" : "")
-							+ spell.getDescription(owner)
-							+ "<br/>[style.colourExcellent(Требования крита)]: ");
-			for(String s : spell.getCritRequirements(owner, null, null, null)) {
-				tooltipSB.append(s);
+
+			// Attribute modifiers:
+			StringBuilder attributesSB = new StringBuilder();
+			if(spell.getDamage(Main.game.getPlayer())>0) {
+				attributesSB.append(
+						(attributesSB.length()==0?"":"<br/>")
+						+"Основной "+spell.getDamage(owner)+" <span style='color:"+ spell.getDamageType().getMultiplierAttribute().getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(spell.getDamageType().getName()) + " Урон</span>"
+						+ "<br/>"
+						+ Attack.getMinimumSpellDamage(owner, null, spell.getDamageType(), spell.getDamage(owner), spell.getDamageVariance())
+						+ "-"
+						+ Attack.getMaximumSpellDamage(owner, null, spell.getDamageType(), spell.getDamage(owner), spell.getDamageVariance())
+						+ " <span style='color:"+ spell.getDamageType().getMultiplierAttribute().getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(spell.getDamageType().getName()) + " Урон</span>");
+				yIncrease++;
+				yIncrease++;
 			}
-			tooltipSB.append("</div>"
-					+ "<div class='subTitle'>"
-						+ "<b style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Стоимость</b> <b>" + (spell.getModifiedCost(owner)) + "</b> <b style='color:" + PresetColour.ATTRIBUTE_MANA.toWebHexString() + ";'>ауры</b>"
-					+ "</div>");
+			for(int i=0; i<spell.getModifiersAsStringList().size(); i++) {
+				attributesSB.append((attributesSB.length()==0?"":"<br/>")+spell.getModifiersAsStringList().get(i));
+				yIncrease++;
+			}
+			if(attributesSB.length()>0) {
+				specialYIncrease += 16;
+				tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
+					tooltipSB.append(attributesSB.toString());
+				tooltipSB.append("</div>");
+			}
+
+			// Aura cost:
+			tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
+				tooltipSB.append("<b style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Стоимость</b> <b>" + (spell.getModifiedCost(owner)) + "</b> <b style='color:" + PresetColour.ATTRIBUTE_MANA.toWebHexString() + ";'>ауры</b>");
+			tooltipSB.append("</div>");
+
+			tooltipSB.append("</body>");
 
 			Main.mainController.setTooltipContent(UtilText.parse(tooltipSB.toString()));
+			Main.mainController.setTooltipSize(TOOLTIP_WIDTH, 290 + specialYIncrease + (yIncrease * 18));
+
 
 		} else if (spellUpgrade != null) { // Spell upgrades:
-
-			int yIncrease = (spellUpgrade.getModifiersAsStringList().size() > 5 ? spellUpgrade.getModifiersAsStringList().size() - 5 : 0);
-
-			Main.mainController.setTooltipSize(380, 330 + (yIncrease * LINE_HEIGHT));
+			int yIncrease = 0;
+			int specialYIncrease = 0;
 
 			// Title:
 			tooltipSB.setLength(0);
-			tooltipSB.append("<div class='title'>" + Util.capitaliseSentence(spellUpgrade.getName()) + "</div>");
+			tooltipSB.append("<body>");
 
-			// Attribute modifiers:
-			tooltipSB.append("<div class='subTitle-picture'>");
+			tooltipSB.append("<div class='container-full-width center'><h5>" + Util.capitaliseSentence(spellUpgrade.getName()) + "</h5></div>");
 
-			if(!spellUpgrade.getModifiersAsStringList().isEmpty()) {
-				for(int i=0; i<spellUpgrade.getModifiersAsStringList().size(); i++) {
-					tooltipSB.append(spellUpgrade.getModifiersAsStringList().get(i)+(i<spellUpgrade.getModifiersAsStringList().size()-1?"<br/>":""));
-				}
-			} else {
-				tooltipSB.append("<span style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'>Без эффекта</span><br/>");
-			}
-			
+			// Main description box & image:
+			tooltipSB.append("<div class='container-full-width' style='padding:0; min-height:106px;'>");
+				tooltipSB.append("<div class='container-half-width' style='width:calc(100% - 16px); font-weight:normal; text-align:left; max-height:140px;'>");
+				// Picture:
+				tooltipSB.append("<div class='item-image' style='float:right;'>"
+									+ "<div class='item-image-content'>"
+										+ spellUpgrade.getSVGString()
+									+ "</div>"
+								+ "</div>");
+				tooltipSB.append(spellUpgrade.getDescription());
+				tooltipSB.append("</div>");
 			tooltipSB.append("</div>");
 
-			// Picture:
-			tooltipSB.append("<div class='picture'>" + spellUpgrade.getSVGString() + "</div>");
+			// Attribute modifiers:
+			StringBuilder attributesSB = new StringBuilder();
+			String unavailableReason = spellUpgrade.getUnavailableReason(owner);
+			if(unavailableReason!=null && !unavailableReason.isEmpty()) {
+				attributesSB.append(unavailableReason);
+				yIncrease++;
+			}
+			for(int i=0; i<spellUpgrade.getModifiersAsStringList().size(); i++) {
+				attributesSB.append((attributesSB.length()==0?"":"<br/>")+spellUpgrade.getModifiersAsStringList().get(i));
+				yIncrease++;
+			}
+			if(attributesSB.length()>0) {
+				specialYIncrease += 16;
+				tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
+					tooltipSB.append(attributesSB.toString());
+				tooltipSB.append("</div>");
+			}
 
-			// Description:
-			tooltipSB.append(
-					"<div class='description'>"
-							+ spellUpgrade.getDescription()+" "+spellUpgrade.getUnavailableReason(owner)
-					+ "</div>"
-					+ "<div class='subTitle'>"
-						+ (owner.hasSpellUpgrade(spellUpgrade)
-								?"[style.boldExcellent(Есть)] (Cost <b style='color:"+spellUpgrade.getSpellSchool().getColour().toWebHexString()+";'>"+spellUpgrade.getPointCost()+"</b> очко"+(spellUpgrade.getPointCost()==1?"":"s")+")"
-								:(owner.getSpellUpgradePoints(spellUpgrade.getSpellSchool()) >= spellUpgrade.getPointCost()
-										?"Стоит <b style='color:"+spellUpgrade.getSpellSchool().getColour().toWebHexString()+";'>"+spellUpgrade.getPointCost()+"</b> очко"+(spellUpgrade.getPointCost()==1?"":"в")+" - [style.colourGood(Можете себе позволить!)]"
-										:"Стоит <b style='color:"+spellUpgrade.getSpellSchool().getColour().toWebHexString()+";'>"+spellUpgrade.getPointCost()+"</b> очко"+(spellUpgrade.getPointCost()==1?"":"в")+" - [style.colourBad(Не можете себе позволить!)]"))
-					+ "</div>");
+			// Cost:
+			tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
+				if(owner.hasSpellUpgrade(spellUpgrade)) {
+					tooltipSB.append("[style.boldExcellent(Есть)] (Cost <b style='color:"+spellUpgrade.getSpellSchool().getColour().toWebHexString()+";'>"+spellUpgrade.getPointCost()+"</b> очко"+(spellUpgrade.getPointCost()==1?"":"в")+")");
+				} else if(owner.getSpellUpgradePoints(spellUpgrade.getSpellSchool()) >= spellUpgrade.getPointCost()) {
+					tooltipSB.append("Стоит <b style='color:"+spellUpgrade.getSpellSchool().getColour().toWebHexString()+";'>"+spellUpgrade.getPointCost()+"</b> очко"+(spellUpgrade.getPointCost()==1?"":"в")+" - [style.colourGood(Можешь себе позволить!)]");
+				} else {
+					tooltipSB.append("Стоит <b style='color:"+spellUpgrade.getSpellSchool().getColour().toWebHexString()+";'>"+spellUpgrade.getPointCost()+"</b> очко"+(spellUpgrade.getPointCost()==1?"":"в")+" - [style.colourBad(Не можешь себе позволить!)]");
+				}
+			tooltipSB.append("</div>");
+
+			tooltipSB.append("</body>");
 
 			Main.mainController.setTooltipContent(UtilText.parse(tooltipSB.toString()));
+			Main.mainController.setTooltipSize(TOOLTIP_WIDTH, 260 + specialYIncrease + (yIncrease * 18));
 
 		} else if (attribute != null) {
 			if (attribute == Attribute.MAJOR_PHYSIQUE
@@ -752,7 +871,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 					yIncrease += 3;
 				}
 
-				Main.mainController.setTooltipSize(380, 450 + (yIncrease * LINE_HEIGHT));
+				Main.mainController.setTooltipSize(380, 460 + (yIncrease * LINE_HEIGHT));
 				
 				tooltipSB.setLength(0);
 				tooltipSB.append("<div class='title' style='color:" + attribute.getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(attribute.getName()) + "</div>"
@@ -784,7 +903,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 				// Related status effect:
 				tooltipSB.append("<div class='title'>"
 												+ "<span style='color:"+currentAttributeStatusEffect.getColour().toWebHexString()+";'>"
-						+ temp
+						                        + temp
 												+"</span> ("+minimumLevelValue
 												+"-"
 												+ maximumLevelValue
@@ -1161,8 +1280,6 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 			} else {
 				if (attribute == Attribute.HEALTH_MAXIMUM) {
 					Main.mainController.setTooltipSize(360, 264);
-				} else if (attribute == Attribute.MANA_MAXIMUM) {
-					Main.mainController.setTooltipSize(360, 228);
 				} else {
 					Main.mainController.setTooltipSize(360, 234);
 				}
@@ -1309,10 +1426,10 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 				+ "</div>"
 				+ "<div class='title'><b>"
 					+ (hours>0
-							?hours+" часов"+(hours>1?"сек ":" ")
+							?hours+" час"+(hours>1?"ов ":" ")
 							:"")
 					+ (minutes%60>0
-							?minutes+" минут"+(minutes>1?"сек ":" ")
+							?minutes+" минут"+(minutes>1?" ":"а ")
 							:"")
 					+"осталось"
 				+ "</b></div>");
@@ -1495,8 +1612,8 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 							?""
 							:tooltipDesc+"<br/>")
 						+(cell.getPlace().getPlaceType().isDangerous()
-							?"This is a [style.italicsBad(опасная)] область!"
-							:"This is a [style.italicsGood(безопасная)] область.")
+							?"Это [style.italicsBad(опасная)] область!"
+							:"Это [style.italicsGood(безопасная)] область.")
 					+ "</div>"
 					+ (yIncrease>0
 							?"<div class='description' style='height:"+(24 + yIncrease * LINE_HEIGHT)+"px;'>"+ charactersPresentDescription +"</div>"
@@ -1548,13 +1665,13 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 				transferAmount = (int) Math.max(1, owner.getMoney()*(moneyTransferPercentage/100f));
 				tooltipSB.append("<div class='subtitle'>"
 						+ (owner.getMoney()==0
-								?"[style.italicsBad(У вас нет пламени, вы не можете перенести никаких денег...)]"
+								?"[style.italicsBad(У тебя нет пламени, ты не можешь перенести никаких денег...)]"
 								:((moneyTransferTarget==null
 									?(Main.game.getPlayerCell().getPlace().isItemsDisappear()
-											?"[style.colourBad(Бросить)] "+percentageTransfer+" пламени в этой области:<br/> "
-											:"[style.colourGood(Безопасно хранить)] "+percentageTransfer+" пламени в этой области:<br/> ")
+											?"[style.colourBad(Бросить)] "+percentageTransfer+" пламя в этой области:<br/> "
+											:"[style.colourGood(Безопасно хранить)] "+percentageTransfer+" пламя в этой области:<br/> ")
 									:UtilText.parse(moneyTransferTarget,
-											"Перевести "+percentageTransfer+" вашего пламени [npc.name]:<br/> "))
+											"Перевести "+percentageTransfer+" твоего пламени [npc.name]:<br/> "))
 									+UtilText.formatAsMoney(transferAmount, "i")))
 						+"</div>");
 				
@@ -1564,7 +1681,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 						+ UtilText.parse(owner,
 								(owner.getMoney()==0
 									?"[style.italicsBad([npc.Name] не имеет пламени...)]"
-									:"Взять "+percentageTransfer+" [npc.namePos] пламени:<br/> "
+									:"Взять "+percentageTransfer+" [npc.namePos] пламя:<br/> "
 										+ UtilText.formatAsMoney(transferAmount, "i")))
 						+"</div>");
 			}
@@ -1622,7 +1739,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 			
 			// LESSER:
 			if(feral && !loadedBody.getSubspecies().getFeralAttributes(loadedBody).isArmsOrWingsPresent() && loadedBody.getLegConfiguration()!=LegConfiguration.AVIAN) {
-				tooltipSB.append(getEmptyBodyPartDiv("Руки", "None"));
+				tooltipSB.append(getEmptyBodyPartDiv("Руки", "Нет"));
 			} else {
 				tooltipSB.append(getBodyPartDiv(loadedBody, Util.capitaliseSentence(Util.intToString(loadedBody.getArm().getArmRows()*2))+" руки", loadedBody.getArm()));
 			}
@@ -2055,13 +2172,14 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 		return this;
 	}
 	
-	public TooltipInformationEventListener setFetish(AbstractFetish fetish, GameCharacter owner) {
+	public TooltipInformationEventListener setFetish(AbstractFetish fetish, GameCharacter owner, boolean withCostInformation) {
         if (parent != null) {
-            parent.setFetish(fetish, owner);
+            parent.setFetish(fetish, owner, withCostInformation);
             return this;
         }
 		resetFields();
 		this.fetish = fetish;
+		this.fetishWithCostInformation = withCostInformation;
 		this.owner = owner;
 		return this;
 	}
@@ -2243,6 +2361,7 @@ public class TooltipInformationEventListener implements ClonedEventListener {
 		statusEffect = null;
 		perk = null;
 		fetish = null;
+		fetishWithCostInformation = false;
 		fetishExperience = false;
 		desire = null;
 		levelUpPerk = null;

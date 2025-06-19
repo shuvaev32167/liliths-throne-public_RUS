@@ -244,17 +244,7 @@ public class Jess extends NPC {
 	
 	@Override
 	public String getArtworkFolderName() {
-		if(this.getBreastRows()>1) {
-			if(this.isVisiblyPregnant()) {
-				return "JessMultiBoobPregnant";
-			}
-			return "JessMultiBoob";
-		} else {
-			if(this.isVisiblyPregnant()) {
-				return "JessPregnant";
-			}
-            return "Джесс";
-		}
+		return "Jess";
 	}
 
 	@Override

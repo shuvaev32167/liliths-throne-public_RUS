@@ -229,17 +229,7 @@ public class Silvia extends NPC {
 	
 	@Override
 	public String getArtworkFolderName() {
-		if(this.getBreastRows()>1) {
-			if(this.isVisiblyPregnant()) {
-				return "SilviaMultiBoobPregnant";
-			}
-			return "SilviaMultiBoob";
-		} else {
-			if(this.isVisiblyPregnant()) {
-				return "SilviaPregnant";
-			}
-            return "Сильвия";
-		}
+		return "Silvia";
 	}
 	
 	@Override

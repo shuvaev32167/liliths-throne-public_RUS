@@ -1789,9 +1789,13 @@ static {
 	}
 	
 	public static String charactersToStringListOfNames(Collection<GameCharacter> characters) {
+		return charactersToStringListOfNames(characters, false);
+	}
+	
+	public static String charactersToStringListOfNames(Collection<GameCharacter> characters, boolean withColouring) {
 		return Util.toStringList(characters,
 				(GameCharacter c) -> 
-					UtilText.parse(c, "[npc.name]"),
+					UtilText.parse(c, (withColouring?"<span style='color:"+c.getFemininity().getColour().toWebHexString()+";'>":"")+"[npc.name]"+(withColouring?"</span>":"")),
 				"and");
 	}
 

@@ -404,15 +404,9 @@ public class DarkSiren extends NPC {
 	@Override
 	public String getArtworkFolderName() {
 		if(this.getTorsoType().getRace()==Race.HUMAN) {
-			if(this.isVisiblyPregnant()) {
-				return "MeraxisPregnant";
-			}
-            return "Мераксис";
+			return "Meraxis";
 			
 		} else {
-			if(this.isVisiblyPregnant()) {
-				return "MeraxisDemonPregnant";
-			}
 			return "MeraxisDemon";
 		}
 	}

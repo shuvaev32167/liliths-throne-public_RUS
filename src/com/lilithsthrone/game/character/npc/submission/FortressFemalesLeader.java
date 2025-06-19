@@ -236,10 +236,7 @@ public class FortressFemalesLeader extends NPC {
 
 	@Override
 	public String getArtworkFolderName() {
-		if(this.isVisiblyPregnant()) {
-			return "HyorlyssPregnant";
-		}
-        return "Хьорлисс";
+		return "Hyorlyss";
 	}
 
 	@Override

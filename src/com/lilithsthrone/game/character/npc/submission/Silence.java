@@ -314,17 +314,7 @@ public class Silence extends NPC {
 	
 	@Override
 	public String getArtworkFolderName() {
-		if(this.getBreastRows()>1) {
-			if(this.isVisiblyPregnant()) {
-				return "SilenceMultiBoobPregnant";
-			}
-			return "SilenceMultiBoob";
-		} else {
-			if(this.isVisiblyPregnant()) {
-				return "SilencePregnant";
-			}
-			return "Сайленс";
-		}
+		return "Silence";
 	}
 	
 	@Override
