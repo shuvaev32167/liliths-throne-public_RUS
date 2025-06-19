@@ -98,18 +98,18 @@ public class Lab {
 			if(index==1) {
 				if(Main.game.getNpc(Lilaya.class).getBaseFetishDesire(Fetish.FETISH_PREGNANCY).isNegative()) {
 					if(Main.game.getNpc(Lilaya.class).hasStatusEffect(StatusEffect.PREGNANT_0)) {
-                        return new Response("Вход", "The door to Lilaya's laboratory is firmly shut. You'd better come back later.", null);
+						return new Response("Вход", "Дверь в лабораторию Лилайи прочно закрыта. Тебе лучше вернуться позже.", null);
 						
 					} else if((Main.game.getNpc(Lilaya.class).isPregnant() && Main.game.getNpc(Lilaya.class).isCharacterReactedToPregnancy(Main.game.getPlayer()))) {
-                        return new Response("Вход", "The door to Lilaya's laboratory is firmly shut. You're not going to be able to get back in until her pregnancy is resolved.", null);
+						return new Response("Вход", "Дверь в лабораторию Лилайи прочно закрыта. Ты не сможешь войти, пока её беременность не будет закончена.", null);
 					}
 				}
 				
 				if(Main.game.getNpc(Lilaya.class).getLocationPlaceType()!=PlaceType.LILAYA_HOME_LAB) {
-                    return new Response("Вход", "The door to Lilaya's laboratory is firmly shut, and, considering the hour, she's probably sleeping upstairs.", null);
+					return new Response("Вход", "Дверь в лабораторию Лилайи прочно закрыта, и, учитывая час, она, вероятно, спит наверху.", null);
 				}
 
-                return new Response("Вход", "Step through the door and enter Lilaya's laboratory.", LAB_ENTRY) {
+				return new Response("Вход", "Пройти через дверь и войти в лабораторию Лилайи.", LAB_ENTRY) {
 					@Override
 					public void effects() {
 						if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.roseToldOnYou)
@@ -152,25 +152,25 @@ public class Lab {
 		List<Response> generatedResponses = new ArrayList<>();
 		
 		if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.lilayaHug)) {
-			generatedResponses.add(new Response("Hug",
-					"You've already given Lilaya an unexpected hug today, and although she liked it, she seemed serious about not doing again..."
-							+ "<br/><i>You should wait until tomorrow before giving her another hug!</i>",
+			generatedResponses.add(new Response("Объятие",
+					"Сегодня ты уже неожиданно обнял Лилайю, и, хотя ей это понравилось, она, похоже, всерьёз решила больше этого не делать..."
+							+ "<br/><i>Тебе следует подождать до завтра, прежде чем обнимать её ещё раз!</i>",
 					null));
 		} else if(isLilayaAngryAtPlayerDemonTF()) {
-			generatedResponses.add(new Response("Hug",
-					"Due to her resentment towards you for being a full demon, Lilaya absolutely does not want a hug!",
+			generatedResponses.add(new Response("Объятие",
+					"Из-за своей неприязни к тебе за то, что ты полноценный демон, Лилайя абсолютно не хочет, обниматься!",
 					null));
 		} else {
-			generatedResponses.add(new Response("Hug", "[pc.Step] up to Lilaya and give her a big hug.", LAB_LILAYA_HUG));
+			generatedResponses.add(new Response("Объятие", "[pc.Step] к Лилайе и крепко обними её.", LAB_LILAYA_HUG));
 		}
 		
 		if(Main.game.getPlayer().isVisiblyPregnant()) {
 			if (!Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_1_A_LILAYAS_TESTS)) {
-				generatedResponses.add(new Response("Pregnancy", "You'll need to complete Lilaya's initial tests before she'll agree to help you deal with your pregnancy.", null));
+				generatedResponses.add(new Response("Беременность", "Тебе нужно пройти первичные тесты Лилайи, прежде чем она согласится помочь тебе справиться с беременностью.", null));
 				
 			} else {
 				if(Main.game.getPlayer().getQuest(QuestLine.SIDE_FIRST_TIME_PREGNANCY) == Quest.SIDE_PREGNANCY_CONSULT_LILAYA) {
-					generatedResponses.add(new Response("Pregnancy", "Speak to Lilaya about your pregnancy.", LilayaBirthing.LILAYA_ASSISTS_PREGNANCY){
+					generatedResponses.add(new Response("Беременность", "Поговори с Лилайей о своей беременности.", LilayaBirthing.LILAYA_ASSISTS_PREGNANCY) {
 						@Override
 						public void effects() {
 							setEntryFlags();
@@ -179,7 +179,7 @@ public class Lab {
 					});
 					
 				} else {
-					generatedResponses.add(new Response("Pregnancy", "Speak to Lilaya about your pregnancy.", LilayaBirthing.LILAYA_ASSISTS_PREGNANCY_REPEAT){
+					generatedResponses.add(new Response("Беременность", "Поговори с Лилайей о своей беременности.", LilayaBirthing.LILAYA_ASSISTS_PREGNANCY_REPEAT) {
 						@Override
 						public void effects() {
 							setEntryFlags();
@@ -640,7 +640,7 @@ public class Lab {
 						
 					} else {
 						if (Main.game.getPlayer().getQuest(QuestLine.MAIN) == Quest.MAIN_1_A_LILAYAS_TESTS) {
-							return new Response("Tests", "Let Lilaya know that you're here to let her run her tests on you.", AUNT_HOME_LABORATORY_TESTING){
+							return new Response("Тесты", "Дай Лилайе знать, что ты здесь для того, чтобы позволить ей провести над тобой свои тесты.", AUNT_HOME_LABORATORY_TESTING) {
 								@Override
 								public void effects() {
 									setEntryFlags();
@@ -649,17 +649,17 @@ public class Lab {
 							
 						} else {
 							if(Main.game.getNpc(Arthur.class).getLocationPlace().getPlaceType().equals(PlaceType.LILAYA_HOME_LAB)) {
-								return new Response("\"Tests\"", "Lilaya can't run any \"tests\" on you while Arthur is still present in her lab. Find him a suitable room first.", null);
+								return new Response("\"Тесты\"", "Лилая не может проводить с тобой никаких \"тестов\", пока Артур всё ещё находится в её лаборатории. Сначала найди ему подходящее помещение.", null);
 								
 							} else if (Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.hadSexWithLilaya)) {
-								return new Response("\"Tests\"", "Let Lilaya know that you're here to let her run more of her \"tests\" on you.", AUNT_HOME_LABORATORY_TESTING_MORE_SEX){
+								return new Response("\"Тесты\"", "Дай Лилайе знать, что ты здесь для того, чтобы она провела над тобой ещё несколько своих \"тестов\".", AUNT_HOME_LABORATORY_TESTING_MORE_SEX) {
 									@Override
 									public void effects() {
 										setEntryFlags();
 									}
 								};
 							} else {
-								return new Response("Tests", "Tell Lilaya that you want her to run more of her 'tests' on you.", AUNT_HOME_LABORATORY_TESTING_REPEAT){
+								return new Response("Тесты", "Скажи Лилайе, что ты хочешь, чтобы она провела на тебе еще несколько своих \"тестов\".", AUNT_HOME_LABORATORY_TESTING_REPEAT) {
 									@Override
 									public void effects() {
 										setEntryFlags();

@@ -1,11 +1,5 @@
 package com.lilithsthrone.game.dialogue.responses;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -30,6 +24,12 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * @since 0.1.69
@@ -57,10 +57,10 @@ public class Response {
 	private SexActionType sexActionType;
 	
 	private GameCharacter characterPerformingSexAction;
-	private List<SexAreaInterface> sexAreaAccessRequiredForPerformer;
+	private final List<SexAreaInterface> sexAreaAccessRequiredForPerformer;
 
 	private GameCharacter characterTargetedForSexAction;
-	private List<SexAreaInterface> sexAreaAccessRequiredForTargeted;
+	private final List<SexAreaInterface> sexAreaAccessRequiredForTargeted;
 
 	protected boolean stripContent = false;
 	protected boolean forceContinue = false; // Forces the next dialogue node to act as though isContinuesDialogue() is true
@@ -350,7 +350,7 @@ public class Response {
 	 * @return true if all values in the getAdditionalOngoingAvailableMap() are true.
 	 */
 	private boolean isAvailableFromAdditionalOngoingAvailableMap() {
-		return getAdditionalOngoingAvailableMap()!=null && !getAdditionalOngoingAvailableMap().values().contains(false);
+		return getAdditionalOngoingAvailableMap()!=null && !getAdditionalOngoingAvailableMap().containsValue(false);
 	}
 
 	/**
@@ -498,7 +498,7 @@ public class Response {
 					SB.append("Your <span style='color:"+Main.game.getPlayer().getCorruptionLevel().getColour().toWebHexString()+";'>"+Util.capitaliseSentence(Main.game.getPlayer().getCorruptionLevel().getName())+"</span>"
 							+ " [style.colourCorruption(corruption)] has unlocked this action!");
 				} else {
-					SB.append("You will gain <b>+"+getCorruptionNeeded().getCorruptionBypass()+"</b> [style.boldCorruption(corruption)], as you don't meet the [style.colourCorruption(corruption)] or [style.colourFetish(fetish)] requirements!");
+					SB.append("Ты получишь <b>+" + getCorruptionNeeded().getCorruptionBypass() + "</b> [style.boldCorruption(развращённости)], поскольку ты не соответствуешь требуемым [style.colourCorruption(развращённости)] или [style.colourFetish(фетишу)]!");
 				}
 			} else {
 				SB.append("This action cannot be unlocked with [style.colourCorruption(corruption)].");
@@ -739,14 +739,14 @@ public class Response {
 			for(AbstractFetish f : getFetishesForUnlock()){
 				if(Main.game.getPlayer().hasFetish(f)) {
 					SB.append("<br/>"
-							+"[style.colourFetish(Associated Fetish)]"
-							+ " (<span style='color:"+PresetColour.GENERIC_MINOR_GOOD.toWebHexString()+";'>owned</span>): "
+							+ "[style.colourFetish(Связанный фетиш)]"
+							+ " (<span style='color:" + PresetColour.GENERIC_MINOR_GOOD.toWebHexString() + ";'>имеется</span>): "
 							+ Util.capitaliseSentence(f.getName(Main.game.getPlayer())));
 					
 				} else {
 					SB.append("<br/>"
-							+"[style.colourFetish(Associated Fetish)]"
-							+ " (<span style='color:"+PresetColour.GENERIC_MINOR_BAD.toWebHexString()+";'>not owned</span>): "
+							+ "[style.colourFetish(Связанный фетиш)]"
+							+ " (<span style='color:" + PresetColour.GENERIC_MINOR_BAD.toWebHexString() + ";'>не имеется</span>): "
 							+ Util.capitaliseSentence(f.getName(Main.game.getPlayer())));
 				}
 			}
@@ -755,17 +755,17 @@ public class Response {
 		if(getCorruptionNeeded()!=null) {
 			if(isCorruptionWithinRange()) {
 				SB.append("<br/>"
-						+"[style.colourCorruption(Associated Corruption)]"
+						+ "[style.colourCorruption(Связанная развращённость)]"
 						+ (!isActionCorrupting()
-							?" ([style.colourMinorGood(within range)]): "
-							:" ([style.colourMinorBad(just out of range)]): ")
+						? " ([style.colourMinorGood(в пределах диапазона)]): "
+						: " ([style.colourMinorBad(просто вне диапазона)]): ")
 						+ Util.capitaliseSentence(getCorruptionNeeded().getName()));
 			} else {
 				SB.append("<br/>"
-						+"[style.colourCorruption(Associated Corruption)]"
+						+ "[style.colourCorruption(Связанная развращённость)]"
 						+ (!Main.game.isBypassSexActionsEnabled()
-								?" ([style.colourTerrible(out of range)]): "
-								:" ([style.colourMinorBad(out of range)]): ")
+						? " ([style.colourTerrible(вне диапазона)]): "
+						: " ([style.colourMinorBad(вне диапазона)]): ")
 						+ Util.capitaliseSentence(getCorruptionNeeded().getName()));
 			}
 		}

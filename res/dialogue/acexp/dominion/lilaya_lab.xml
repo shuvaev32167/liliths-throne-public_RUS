@@ -13,9 +13,9 @@
                 ]]></availabilityConditional>
                 <responseTabIndex><![CDATA[0]]></responseTabIndex>
                 <index><![CDATA[1]]></index>
-                <responseTitle><![CDATA[Spy on them]]></responseTitle>
+                <responseTitle><![CDATA[Шпионить за ними]]></responseTitle>
                 <responseTooltip><![CDATA[
-					You've already spied on Lilaya and Rose today, and doing so for a second time would undoubtedly be pushing your luck too far. It would be best to return here tomorrow if you wanted to watch them have sex again.
+					Ты уже [pc.genderBasedWord(подглядывал, подглядывала)] за Лилайей и Розой сегодня, и делать это во второй раз, несомненно, было бы слишком рискованно. Лучше всего вернуться сюда завтра, если хочешь снова посмотреть, как они занимаются сексом.
                 ]]></responseTooltip>
                 <nextDialogue><![CDATA[null]]></nextDialogue>
                 <effects/>
@@ -26,9 +26,9 @@
                 ]]></availabilityConditional>
                 <responseTabIndex><![CDATA[0]]></responseTabIndex>
                 <index><![CDATA[1]]></index>
-                <responseTitle><![CDATA[Spy on them]]></responseTitle>
+                <responseTitle><![CDATA[Шпионить за ними]]></responseTitle>
                 <responseTooltip><![CDATA[
-					Spying on your [lilaya.relation(pc)] and her maid? That idea gets you so excited, you just have to do this, whatever may happen next...
+					Шпионить за [lilaya.genderBasedWord(твоим, твоей)] [pc.morphSingleInstr([lilaya.relation(pc)])] и её горничной? Эта идея так тебя возбуждает, что ты просто [pc.genderBasedWord(должен, должна)] это сделать, что бы ни случилось дальше...
                 ]]></responseTooltip>
                 <colour><![CDATA[TEXT]]></colour>
                 <nextDialogue/>

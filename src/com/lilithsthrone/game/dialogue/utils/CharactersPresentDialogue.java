@@ -149,7 +149,7 @@ public class CharactersPresentDialogue {
 			
 			if(responseTab==0) {
 				if (index == 0) {
-					return new ResponseEffectsOnly("Back", "Stop viewing the characters present and return to the main game."){
+                    return new ResponseEffectsOnly("Назад", "Прекрати просмотр присутствующих персонажей и вернись к основной игре.") {
 						@Override
 						public void effects() {
 							Main.game.getDialogueFlags().setManagementCompanion(null);
@@ -194,7 +194,7 @@ public class CharactersPresentDialogue {
 				
 			} else if (responseTab==1 && Main.game.getPlayer().hasCompanion(characterViewed)) {
 				if (index == 0) {
-					return new ResponseEffectsOnly("Back", "Stop viewing the characters present and return to the main game."){
+                    return new ResponseEffectsOnly("Назад", "Прекрати просмотр присутствующих персонажей и вернись к основной игре.") {
 						@Override
 						public void effects() {
 							Main.game.getDialogueFlags().setManagementCompanion(null);

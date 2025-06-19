@@ -1,15 +1,5 @@
 package com.lilithsthrone.game.dialogue.companions;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import com.lilithsthrone.controller.MainController;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -51,6 +41,10 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.text.DecimalFormat;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @since 0.3.5.1
@@ -323,7 +317,7 @@ public class CompanionManagement {
 			Collections.sort(charactersPresent, (c1, c2) -> Main.game.getPlayer().hasCompanion(c1)?1:0);
 			
 			if (index == 0) {
-				return new ResponseEffectsOnly("Back", "Stop viewing the characters present and return to the main game."){
+                return new ResponseEffectsOnly("Назад", "Прекрати просмотр присутствующих персонажей и вернись к основной игре.") {
 					@Override
 					public void effects() {
 						Main.game.getDialogueFlags().setManagementCompanion(null);
