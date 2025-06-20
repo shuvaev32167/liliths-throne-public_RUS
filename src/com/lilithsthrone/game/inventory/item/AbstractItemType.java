@@ -471,7 +471,7 @@ public abstract class AbstractItemType extends AbstractCoreType {
 	// Enchantments:
 	
 	public int getEnchantmentLimit() {
-		return 100;
+		return 1000;
 	}
 	
 	public AbstractItemEffectType getEnchantmentEffect() {

@@ -2053,7 +2053,7 @@ static {
 	
 	private static final Map<String, List<String>> errorLogMap = new HashMap<>();
 	public static void logGetNpcByIdError(String method, String id) {
-		if(Main.DEBUG) { // So this doesn't flood error.log
+		if (true) { // So this doesn't flood error.log
 			errorLogMap.putIfAbsent(method, new ArrayList<>());
 			if(!errorLogMap.get(method).contains(id)) {
 				System.err.println("Main.game.getNPCById("+id+") returning null in method: "+method);

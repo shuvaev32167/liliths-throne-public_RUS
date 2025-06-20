@@ -68,7 +68,7 @@ public class EnchantingUtils {
 		
 		craftedClothing = Main.game.getItemGen().generateClothing(
 				(AbstractClothingType) ingredient.getEnchantmentItemType(effects),
-				((AbstractClothing)ingredient).getColours(),
+				ingredient.getColours(),
 				effectsToBeAdded);
 		
 		craftedClothing.setPattern(((AbstractClothing)ingredient).getPattern());
@@ -128,7 +128,7 @@ public class EnchantingUtils {
 		craftedWeapon = Main.game.getItemGen().generateWeapon(
 				(AbstractWeaponType) ingredient.getEnchantmentItemType(effects),
 				((AbstractWeapon) ingredient).getDamageType(),
-				((AbstractWeapon)ingredient).getColours());
+				ingredient.getColours());
 		
 		craftedWeapon.setEffects(effectsToBeAdded);
 
@@ -224,11 +224,10 @@ public class EnchantingUtils {
 		
 		return Util.capitaliseSentence(finalPotionName);
 	}
-	
-	
-	
-	private static Set<TFModifier> freePrimaryModifiers = Util.newHashSetOfValues(TFModifier.TF_MOD_WETNESS, TFModifier.TF_MILK, TFModifier.TF_MILK_CROTCH, TFModifier.TF_CUM, TFModifier.TF_GIRLCUM);
-	private static Set<TFModifier> freeSecondaryModifiers = Util.newHashSetOfValues(TFModifier.TF_MOD_WETNESS, TFModifier.TF_MOD_REGENERATION, TFModifier.TF_MOD_CUM_EXPULSION);
+
+
+	private static final Set<TFModifier> freePrimaryModifiers = Util.newHashSetOfValues(TFModifier.TF_MOD_WETNESS, TFModifier.TF_MILK, TFModifier.TF_MILK_CROTCH, TFModifier.TF_CUM, TFModifier.TF_GIRLCUM);
+	private static final Set<TFModifier> freeSecondaryModifiers = Util.newHashSetOfValues(TFModifier.TF_MOD_WETNESS, TFModifier.TF_MOD_REGENERATION, TFModifier.TF_MOD_CUM_EXPULSION);
 	
 	private static boolean isEffectFreeForWaterSchool(ItemEffect effect) {
 		return freePrimaryModifiers.contains(effect.getPrimaryModifier())
@@ -247,10 +246,7 @@ public class EnchantingUtils {
 		if(effect.getPrimaryModifier()==TFModifier.CLOTHING_ATTRIBUTE || effect.getPrimaryModifier()==TFModifier.CLOTHING_MAJOR_ATTRIBUTE) {
 			return !effect.getPotency().isNegative();
 		}
-		if(TFModifier.getTFRacialBodyPartsList().contains(effect.getPrimaryModifier())) {
-			return true;
-		}
-		return false;
+		return TFModifier.getTFRacialBodyPartsList().contains(effect.getPrimaryModifier());
 	}
 	
 	private static int applyDiscountsForPerksAndFetishes(AbstractCoreItem ingredient, int cost) {
@@ -331,7 +327,7 @@ public class EnchantingUtils {
 			
 			cost += costIncrement;
 		}
-		
+		cost = Math.min(0, cost);
 		return applyDiscountsForPerksAndFetishes(ingredient, cost);
 	}
 	

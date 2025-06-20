@@ -8,9 +8,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -20,6 +17,8 @@ import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.Colour;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /** Перевод не требуется
  * @since 0.1.0
@@ -100,7 +99,7 @@ public abstract class AbstractCoreItem implements XMLSaving {
 	}
 	
 	public int getEnchantmentLimit() {
-		return 100;
+		return 1000;
 	}
 	
 	public AbstractItemEffectType getEnchantmentEffect() {
@@ -120,15 +119,13 @@ public abstract class AbstractCoreItem implements XMLSaving {
 	@Override
 	public boolean equals(Object o) {
 		if(o instanceof AbstractCoreItem){
-			if(((AbstractCoreItem)o).getName().equals(this.getName())
-				&& ((AbstractCoreItem)o).getColours().equals(this.getColours())
-				&& ((AbstractCoreItem)o).getRarity() == this.getRarity()
-				&& ((AbstractCoreItem)o).getAttributeModifiers().equals(this.getAttributeModifiers())
-				&& ((AbstractCoreItem)o).getEnchantmentEffect() == getEnchantmentEffect()
-				&& ((AbstractCoreItem)o).getEnchantmentItemType(null) == getEnchantmentItemType(null)
-				&& ((AbstractCoreItem)o).getItemTags().equals(getItemTags())){
-					return true;
-			}
+			return ((AbstractCoreItem) o).getName().equals(this.getName())
+					&& ((AbstractCoreItem) o).getColours().equals(this.getColours())
+					&& ((AbstractCoreItem) o).getRarity() == this.getRarity()
+					&& ((AbstractCoreItem) o).getAttributeModifiers().equals(this.getAttributeModifiers())
+					&& ((AbstractCoreItem) o).getEnchantmentEffect() == getEnchantmentEffect()
+					&& ((AbstractCoreItem) o).getEnchantmentItemType(null) == getEnchantmentItemType(null)
+					&& ((AbstractCoreItem) o).getItemTags().equals(getItemTags());
 		}
 		return false;
 	}

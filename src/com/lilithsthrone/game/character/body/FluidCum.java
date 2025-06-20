@@ -1,14 +1,5 @@
 package com.lilithsthrone.game.character.body;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -19,6 +10,14 @@ import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.utils.Util;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @since 0.1.83
@@ -120,12 +119,10 @@ public class FluidCum implements FluidInterface {
 	@Override
 	public boolean equals(Object o) {
 		if(o instanceof FluidCum){
-			if(((FluidCum)o).getType().equals(this.getType())
-				&& ((FluidCum)o).getFlavour() == this.getFlavour()
-				&& ((FluidCum)o).getFluidModifiers().equals(this.getFluidModifiers())
-				&& ((FluidCum)o).getTransformativeEffects().equals(this.getTransformativeEffects())){
-					return true;
-			}
+            return ((FluidCum) o).getType().equals(this.getType())
+                    && ((FluidCum) o).getFlavour() == this.getFlavour()
+                    && ((FluidCum) o).getFluidModifiers().equals(this.getFluidModifiers())
+                    && ((FluidCum) o).getTransformativeEffects().equals(this.getTransformativeEffects());
 		}
 		return false;
 	}
@@ -387,7 +384,7 @@ public class FluidCum implements FluidInterface {
 	}
 
 	public float getValuePerMl() {
-		return 0.1f * type.getValueModifier();
+		return type.getValueModifier();
 	}
 
 	@Override

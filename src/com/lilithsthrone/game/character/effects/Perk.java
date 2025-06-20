@@ -2683,7 +2683,7 @@ public class Perk {
 			PerkCategory.LUST,
 			"perks/barren",
 			PresetColour.GENERIC_SEX,
-			Util.newHashMapOfValues(new Value<>(Attribute.FERTILITY, -200)),
+			Util.newHashMapOfValues(new Value<>(Attribute.FERTILITY, -300)),
 			Util.newArrayListOfValues("While "+Attribute.FERTILITY.getName()+" value is 0 or less, pregnancy is [style.colourTerrible(impossible)]")) {
 
 		@Override
@@ -2698,7 +2698,7 @@ public class Perk {
 			PerkCategory.LUST,
 			"perks/firing_blanks",
 			PresetColour.GENERIC_SEX,
-			Util.newHashMapOfValues(new Value<>(Attribute.VIRILITY, -200)),
+			Util.newHashMapOfValues(new Value<>(Attribute.VIRILITY, -300)),
 			Util.newArrayListOfValues("While "+Attribute.VIRILITY.getName()+" value is 0 or less, impregnation is [style.colourTerrible(impossible)]")) {
 
 		@Override

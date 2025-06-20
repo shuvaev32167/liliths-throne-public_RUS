@@ -2973,7 +2973,7 @@ public class Sex {
 			
 			// Draining levels:
 			Set<GameCharacter> levelDrains = new HashSet<>();
-			if(!Main.sex.getCharacterPerformingAction().isImmuneToLevelDrain() && !Main.sex.getInitialSexManager().isHidden(Main.sex.getCharacterPerformingAction())) {
+			if (!Main.sex.getInitialSexManager().isHidden(Main.sex.getCharacterPerformingAction())) {
 				if(Main.sex.isDom(Main.sex.getCharacterPerformingAction())) {
 					for(GameCharacter sub : Main.sex.getSubmissiveParticipants(true).keySet()) {
 						if(sub.hasTrait(Perk.ORGASMIC_LEVEL_DRAIN, true) && ((!sub.isPlayer() && sub.isWantingToLevelDrain(Main.sex.getCharacterPerformingAction())) || Main.sex.playerLevelDrain)) {
@@ -3504,7 +3504,7 @@ public class Sex {
 								"Thanks to the <b>[#ITEM_innoxia_pills_lubrication.getName(false)]</b> [npc.sheHas] recently swallowed,"
 								+ " [npc.namePos] orifices instantly get wet, and a thin layer of slippery, odourless liquid seeps out of [npc.her] [npc.skin] to coat [npc.her] entire body in a thin layer of lubricant.")));
 					}
-					wetSB.append(lubeSB.toString());
+					wetSB.append(lubeSB);
 				}
 			}
 		}

@@ -148,7 +148,7 @@ public abstract class GameCharacter implements XMLSaving {
 
     public static final int LEVEL_CAP = 5000;
     public static final int MAX_TRAITS = 17;
-	public static final int MAX_COMBAT_MOVES = 8;
+    public static final int MAX_COMBAT_MOVES = 13;
 	public static final int DEFAULT_COMBAT_AP = 3;
 
 	public static final int MINIMUM_AGE = 18;
@@ -6401,10 +6401,16 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 
 	public String levelDown(int levels) {
+        if (isImmuneToLevelDrain() || isPlayer()) {
+            return null;
+        }
 		float experiencePercentage = experience/getExperienceNeededForNextLevel();
 		
 		experience = 0;
 		level-=levels;
+        if (level < 1) {
+            level = 1;
+        }
 		experience = (int) (getExperienceNeededForNextLevel() * experiencePercentage);
 		
 		StringBuilder sb = new StringBuilder();
@@ -9841,10 +9847,10 @@ public abstract class GameCharacter implements XMLSaving {
 			}
 
 			if(!Main.game.isBadEnd()) { // Do not drain levels during a bad end
-				if(partnerPresent && partner.isAbleToOrgasm() && this.hasTrait(Perk.ORGASMIC_LEVEL_DRAIN, true) && this.isLevelDrainAvailableToUse() && !partner.isImmuneToLevelDrain() && !flags.contains(GenericSexFlag.PREVENT_LEVEL_DRAIN)) {
+                if (partnerPresent && partner.isAbleToOrgasm() && this.hasTrait(Perk.ORGASMIC_LEVEL_DRAIN, true) && this.isLevelDrainAvailableToUse() && !flags.contains(GenericSexFlag.PREVENT_LEVEL_DRAIN)) {
 					levelDrainDescription = applyLevelDrain(partner);
 				}
-				if(this.isAbleToOrgasm() && partnerPresent && partner.hasTrait(Perk.ORGASMIC_LEVEL_DRAIN, true) && partner.isLevelDrainAvailableToUse() && !this.isImmuneToLevelDrain() && !flags.contains(GenericSexFlag.PREVENT_LEVEL_DRAIN)) {
+                if (this.isAbleToOrgasm() && partnerPresent && partner.hasTrait(Perk.ORGASMIC_LEVEL_DRAIN, true) && partner.isLevelDrainAvailableToUse() && !flags.contains(GenericSexFlag.PREVENT_LEVEL_DRAIN)) {
 					levelDrainDescription = partner.applyLevelDrain(this);
 				}
 			}
@@ -10720,9 +10726,9 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 	
 	public String applyLevelDrain(GameCharacter target) {
-		if(target.getTrueLevel()>1) {
+        if (target.getLevel() > 1) {
 //			int exp = target.getExperienceNeededForNextLevel();
-			int exp = target.getTrueLevel()*5; // A bit of a nerf to this in v0.4.10.10, as level drain was pretty absurdly overpowered with the above code (implemented from PR#1778)
+            int exp = target.getLevel() * 5; // A bit of a nerf to this in v0.4.10.10, as level drain was pretty absurdly overpowered with the above code (implemented from PR#1778)
 			return UtilText.parse(target, this,
 					"<p style='text-align:center; margin:0;'>"
 						+ this.getLevelDrainDescription(target)

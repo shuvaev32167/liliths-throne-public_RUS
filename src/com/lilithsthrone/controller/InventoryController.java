@@ -3,8 +3,6 @@ package com.lilithsthrone.controller;
 import java.util.List;
 import java.util.Map;
 
-import org.w3c.dom.events.EventTarget;
-
 import com.lilithsthrone.controller.eventListeners.InventorySelectedItemEventListener;
 import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInformationEventListener;
 import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInventoryEventListener;
@@ -26,6 +24,7 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.Pattern;
 import com.lilithsthrone.rendering.RenderingEngine;
 import com.lilithsthrone.utils.colours.Colour;
+import org.w3c.dom.events.EventTarget;
 
 /**
  * @since 0.4.6.4
@@ -42,15 +41,15 @@ public class InventoryController {
 			MainController.setInventoryPageRight(i);
 		}
 		// Quest inventory:
-		MainController.setInventoryPageLeft(5);
-		MainController.setInventoryPageRight(5);
+		MainController.setInventoryPageLeft(6);
+		MainController.setInventoryPageRight(6);
 		
 		// Floor pages:
 		//SCROLL_LEFT_DOUBLE
 		String id = "FLOOR_SCROLL_LEFT_DOUBLE";
 		if (MainController.document.getElementById(id) != null) {
 			((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
-				RenderingEngine.setPageRight(RenderingEngine.getPageRight()-5);
+				RenderingEngine.setPageRight(RenderingEngine.getPageRight() - 6);
 				Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
 //				System.out.println("<<");
 			}, false);
@@ -74,7 +73,7 @@ public class InventoryController {
 		id = "FLOOR_SCROLL_RIGHT_DOUBLE";
 		if (MainController.document.getElementById(id) != null) {
 			((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
-				RenderingEngine.setPageRight(Math.min(RenderingEngine.getPageRight()+5, RenderingEngine.getMaximumFloorPageIndex()));
+				RenderingEngine.setPageRight(Math.min(RenderingEngine.getPageRight() + 6, RenderingEngine.getMaximumFloorPageIndex()));
 				Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
 //				System.out.println(">>");
 			}, false);

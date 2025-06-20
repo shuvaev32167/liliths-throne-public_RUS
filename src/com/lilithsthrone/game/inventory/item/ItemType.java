@@ -2657,9 +2657,9 @@ public class ItemType {
 		}
 		
 		for(Spell s : Spell.values()) {
-			if(!s.isSpellBook()) {
-				continue;
-			}
+//			if(!s.isSpellBook()) {
+//				continue;
+//			}
 			
 			List<String> effectsString = Util.newArrayListOfValues(
 					"[style.boldExcellent(Permanently)] gain the spell '<b style='color:"+s.getSpellSchool().getColour().toWebHexString()+";'>"+s.getName()+"</b>'.");

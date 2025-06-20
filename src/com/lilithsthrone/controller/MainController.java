@@ -189,19 +189,19 @@ public class MainController implements Initializable {
 
 	private int tooltipWidth = 0;
 	private int tooltipHeight = 0;
-	
+
 	// Responses:
 	public static final int RESPONSE_COUNT = 15;
-	
+
 	// Misc:
 	private boolean allowInput;
 	private KeyCode[] lastKeys;
-	
+
 	static Colour flashMessageColour = null;
 	static String flashMessageText = null;
 
 	java.net.CookieManager cookieManager = new java.net.CookieManager();
-	
+
 	// Hotkey binding:
 	static KeyboardAction actionToBind;
 	static boolean primaryBinding;
@@ -439,14 +439,14 @@ public class MainController implements Initializable {
 						) {
 					Main.game.saveDialogueNode();
 				}
-				
+
 				CharactersPresentDialogue.resetContent(characterViewed);
 				Main.game.setContent(new Response("", "", CharactersPresentDialogue.MENU));
 			}
 		}
 	}
-	
-	/**
+
+    /**
 	 * Sets up buttons and hotkeys.
 	 */
 	public List<KeyCode> buttonsPressed = new ArrayList<>();
@@ -1190,12 +1190,12 @@ public class MainController implements Initializable {
     }
 
 	// Event listeners:
-	
-	// General tooltips:
+
+    // General tooltips:
 	static TooltipMoveEventListener moveTooltipListener = new TooltipMoveEventListener();
 	static TooltipHideEventListener hideTooltipListener = new TooltipHideEventListener();
-	
-	// Buttons:
+
+    // Buttons:
 	static ButtonCopyDialogueEventListener copyDialogueButtonListener = new ButtonCopyDialogueEventListener();
 	static ButtonCharactersEventListener charactersPresentButtonListener = new ButtonCharactersEventListener();
 	static ButtonInventoryEventHandler inventoryButtonListener = new ButtonInventoryEventHandler();
@@ -1212,16 +1212,16 @@ public class MainController implements Initializable {
 	private final ButtonMoveSouthEventListener moveSouthListener = new ButtonMoveSouthEventListener();
 	private final ButtonMoveEastEventListener moveEastListener = new ButtonMoveEastEventListener();
 	private final ButtonMoveWestEventListener moveWestListener = new ButtonMoveWestEventListener();
-	
-	// Responses:
+
+    // Responses:
 	static TooltipResponseMoveEventListener responseTooltipListener = new TooltipResponseMoveEventListener();
 	static SetContentEventListener nextResponsePageListener = new SetContentEventListener().nextPage();
 	static SetContentEventListener previousResponsePageListener = new SetContentEventListener().previousPage();
-	
-	// Temporary ones to clear:
+
+    // Temporary ones to clear:
 	static Map<Document, List<EventListenerData>> EventListenerDataMap = new HashMap<>();
-	
-	private void unbindListeners(Document document) {
+
+    private void unbindListeners(Document document) {
         cookieManager.getCookieStore().removeAll();
         if (document != null) {
             for (EventListenerData data : EventListenerDataMap.get(document)) {
@@ -1232,8 +1232,8 @@ public class MainController implements Initializable {
             EventListenerDataMap.remove(document);
         }
     }
-	
-	static void addEventListener(Document document, String ID, String type, EventListener listener, boolean useCapture) {
+
+    static void addEventListener(Document document, String ID, String type, EventListener listener, boolean useCapture) {
         final EventListener targetEventListener;
         if (listener instanceof ClonedEventListener clonedListener) {
             targetEventListener = clonedListener.newInstance();
@@ -1252,8 +1252,8 @@ public class MainController implements Initializable {
         ((EventTarget) document.getElementById(ID)).addEventListener(type, targetEventListener, useCapture);
         EventListenerDataMap.get(document).add(new EventListenerData(ID, type, targetEventListener, useCapture));
     }
-	
-	public static void addTooltipListeners(String id, EventListener tooltip) {
+
+    public static void addTooltipListeners(String id, EventListener tooltip) {
         addTooltipListeners(id, tooltip, null, false);
     }
 
@@ -1265,8 +1265,8 @@ public class MainController implements Initializable {
             addEventListener(document, id, "click", click, capture);
         }
     }
-	
-	public static Document document, documentButtonsLeft, documentButtonsRight, documentAttributes, documentRight, documentInventory, documentMap, documentMapTitle;
+
+    public static Document document, documentButtonsLeft, documentButtonsRight, documentAttributes, documentRight, documentInventory, documentMap, documentMapTitle;
 	private final boolean debugAllowListeners = true;
 	/**
 	 * Sets up all WebView EventListeners and WebEngines.
@@ -1393,8 +1393,8 @@ public class MainController implements Initializable {
         }
 
     }
-	
-	private void manageMainListeners() {
+
+    private void manageMainListeners() {
         document = (Document) webEngine.executeScript("document");
         EventListenerDataMap.put(document, new ArrayList<>());
 
@@ -1865,8 +1865,8 @@ public class MainController implements Initializable {
 		}
 		setResponseEventListeners();
 	}
-	
-	public static void setResponseEventListeners() {
+
+    public static void setResponseEventListeners() {
 
         if (Main.game.getCurrentDialogueNode().getResponseTabTitle(0) != null && !Main.game.getCurrentDialogueNode().getResponseTabTitle(0).isEmpty()) {
             int responsePageCounter = 0;
@@ -1896,8 +1896,8 @@ public class MainController implements Initializable {
             addEventListener(document, "switch_left", "click", previousResponsePageListener, false);
         }
     }
-	
-	private static void setResponseTabListeners(int responsePageCounter) {
+
+    private static void setResponseTabListeners(int responsePageCounter) {
         String id = "tab_" + responsePageCounter;
 
         ((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
@@ -1905,17 +1905,17 @@ public class MainController implements Initializable {
             Main.game.updateResponses();
         }, false);
     }
-	
-	static void setInventoryPageLeft(int i) {
+
+    static void setInventoryPageLeft(int i) {
         String id = "INV_PAGE_LEFT_" + i;
         if (document.getElementById(id) != null) {
-            if (i != 5 || Main.game.getPlayer().isCarryingQuestItems()) {
+            if (i != 6 || Main.game.getPlayer().isCarryingQuestItems()) {
                 ((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
                     RenderingEngine.setPageLeft(i);
                     Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
                 }, false);
             }
-            if (i == 5) {
+            if (i == 6) {
                 addEventListener(document, id, "mousemove", moveTooltipListener, false);
                 addEventListener(document, id, "mouseleave", hideTooltipListener, false);
                 TooltipInformationEventListener el2 = new TooltipInformationEventListener().setInformation("Уникальные вещи", "");
@@ -1923,11 +1923,11 @@ public class MainController implements Initializable {
             }
         }
     }
-	
-	static void setInventoryPageRight(int i) {
+
+    static void setInventoryPageRight(int i) {
         String id = "INV_PAGE_RIGHT_" + i;
         if (document.getElementById(id) != null) {
-            if (i != 5
+            if (i != 6
                     || (InventoryDialogue.getInventoryNPC() == null
                     ? Main.game.getPlayer().getCell().getInventory().isAnyQuestItemPresent()
                     : InventoryDialogue.getInventoryNPC().isCarryingQuestItems())) {
@@ -1936,7 +1936,7 @@ public class MainController implements Initializable {
                     Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
                 }, false);
             }
-            if (i == 5) {
+            if (i == 6) {
                 addEventListener(document, id, "mousemove", moveTooltipListener, false);
                 addEventListener(document, id, "mouseleave", hideTooltipListener, false);
                 TooltipInformationEventListener el2 = new TooltipInformationEventListener().setInformation("Уникальные вещи", "");
@@ -1944,8 +1944,8 @@ public class MainController implements Initializable {
             }
         }
     }
-	
-	private void manageButtonLeftListeners() {
+
+    private void manageButtonLeftListeners() {
         documentButtonsLeft = (Document) webEngineButtonsLeft.executeScript("document");
         EventListenerDataMap.put(documentButtonsLeft, new ArrayList<>());
 
@@ -1986,8 +1986,8 @@ public class MainController implements Initializable {
             addEventListener(documentButtonsLeft, "mapZoom", "mouseenter", new TooltipInformationEventListener().setInformation("Маштабирование миникарты" + (hotKey == null ? "" : " (" + hotKey.getFullName() + ")"), ""), false);
         }
     }
-	
-	private void manageButtonRightListeners() {
+
+    private void manageButtonRightListeners() {
         documentButtonsRight = (Document) webEngineButtonsRight.executeScript("document");
         EventListenerDataMap.put(documentButtonsRight, new ArrayList<>());
 
@@ -2505,8 +2505,8 @@ public class MainController implements Initializable {
             }
         }, false);
     }
-	
-	private void manageRightListeners() {
+
+    private void manageRightListeners() {
         documentRight = (Document) webEngineRight.executeScript("document");
         EventListenerDataMap.put(documentRight, new ArrayList<>());
 
@@ -2856,10 +2856,10 @@ public class MainController implements Initializable {
             }
         }
     }
-	
-	
-	private final boolean useJavascriptToSetContent = true;
-	
+
+
+    private final boolean useJavascriptToSetContent = true;
+
     private void setWebEngineContent(WebEngine engine, String content) {
         content = content.replaceAll("[\r\n]", "");
         content = content.replaceAll("\"", "'");
@@ -3191,17 +3191,17 @@ public class MainController implements Initializable {
         }
         updateUIButtons();
     }
-	
-	public static void updateUIButtons() {
+
+    public static void updateUIButtons() {
         RenderingEngine.ENGINE.renderButtonsLeft();
         RenderingEngine.ENGINE.renderButtonsRight();
     }
-	
-	public void updateUILeftPanel() {
+
+    public void updateUILeftPanel() {
         RenderingEngine.ENGINE.renderAttributesPanelLeft();
     }
-	
-	public static void updateUIRightPanel() {
+
+    public static void updateUIRightPanel() {
         RenderingEngine.ENGINE.renderAttributesPanelRight();
     }
 

@@ -95,9 +95,9 @@ public enum RenderingEngine {
     private boolean renderingTattoosLeft = false;
     private boolean renderingTattoosRight = false;
 
-    public static final int INVENTORY_PAGES = 5;
-    public static final int ITEMS_PER_PAGE = 6 * 5; // 6 items per row
-    public static final int ITEMS_PER_PAGE_FLOOR = 7 * 4; // 7 items per row for inventories on the floor (which have unlimited space)
+    public static final int INVENTORY_PAGES = 6;
+    public static final int ITEMS_PER_PAGE = 6 * 6; // 6 items per row
+    public static final int ITEMS_PER_PAGE_FLOOR = 7 * 5; // 7 items per row for inventories on the floor (which have unlimited space)
 
     public static Colour[] orgasmColours = new Colour[]{
             PresetColour.AROUSAL_STAGE_ZERO,
@@ -124,7 +124,7 @@ public enum RenderingEngine {
             InventorySlot.PIERCING_PENIS, InventorySlot.PIERCING_VAGINA};
 
 	
-	private RenderingEngine() {
+	RenderingEngine() {
 	}
 
 	private final StringBuilder inventorySB = new StringBuilder(), equippedPanelSB = new StringBuilder();
@@ -774,7 +774,7 @@ public enum RenderingEngine {
                     + charactersInventoryToRender.getUniqueWeaponCount() - charactersInventoryToRender.getUniqueQuestWeaponCount();
             pageIdMod = (charactersInventoryToRender.isPlayer() ? "INV_PAGE_LEFT_" : "INV_PAGE_RIGHT_");
             // Reset page index if the number of items is too low to be displayed on that index:
-            if (charactersInventoryToRender.isPlayer() ? pageLeft != 5 : pageRight != 5) { // So long as current page is not uniques
+            if (charactersInventoryToRender.isPlayer() ? pageLeft != 6 : pageRight != 6) { // So long as current page is not uniques
                 if (charactersInventoryToRender.isPlayer()) {
                     while (totalUniques <= pageLeft * ITEMS_PER_PAGE && pageLeft > 0) {
                         pageLeft--;
@@ -833,12 +833,21 @@ public enum RenderingEngine {
                             ? "<div class='overlay' " + (currentPage == 4 ? "" : "id='" + pageIdMod + "4'") + "></div>"
                             : "<div class='overlay disabled'></div>")
                             + "</div>"
+                            + "<div class='square-button max" + (currentPage == 5 ? " selected" : "") + "'>"
+                            + "<div style='width:80%;height:80%;position:absolute;left:0; bottom:0;'>"
+                            + (totalUniques > 5 * ITEMS_PER_PAGE && !buyback ? SVGImages.SVG_IMAGE_PROVIDER.getInventoryIcon() : SVGImages.SVG_IMAGE_PROVIDER.getInventoryIconDisabled())
+                            + "</div>"
+                            + "<div style='width:50%;height:50%;position:absolute;right:4px; top:0;'>" + (currentPage == 5 ? SVGImages.SVG_IMAGE_PROVIDER.getCounterFive() : SVGImages.SVG_IMAGE_PROVIDER.getCounterFiveDisabled()) + "</div>"
+                            + (totalUniques > 5 * ITEMS_PER_PAGE && !buyback
+                            ? "<div class='overlay' " + (currentPage == 5 ? "" : "id='" + pageIdMod + "5'") + "></div>"
+                            : "<div class='overlay disabled'></div>")
+                            + "</div>"
                             + (renderQuestTab
-                            ? "<div class='square-button max" + (currentPage == 5 ? " selected" : "") + "'>"
+                            ? "<div class='square-button max" + (currentPage == 6 ? " selected" : "") + "'>"
                             + "<div style='width:100%;height:100%;position:absolute;left:0; bottom:0;'>" + (hasQuestItems ? SVGImages.SVG_IMAGE_PROVIDER.getQuestInventoryIcon() : SVGImages.SVG_IMAGE_PROVIDER.getQuestInventoryIconDisabled()) + "</div>"
                             + (hasQuestItems && !buyback
-                            ? "<div class='overlay' id='" + pageIdMod + "5'></div>"
-                            : "<div class='overlay disabled' id='" + pageIdMod + "5'></div>")
+                            ? "<div class='overlay' id='" + pageIdMod + "6'></div>"
+                            : "<div class='overlay disabled' id='" + pageIdMod + "6'></div>")
                             + "</div>"
                             : "")
                             + "</div>");
@@ -1027,7 +1036,7 @@ public enum RenderingEngine {
             }
 
         } else {
-            if (page == 5) { // Quest:
+            if (page == 6) { // Quest:
                 for (Entry<AbstractWeapon, Integer> entry : charactersInventoryToRender.getAllWeaponsInInventory().entrySet()) {
                     if (entry.getKey().getRarity() == Rarity.QUEST) {
 //						if(uniqueItemCount < ITEMS_PER_PAGE) {
@@ -1085,7 +1094,7 @@ public enum RenderingEngine {
             }
 
             // Fill space:
-            for (int i = uniqueItemCount - (page == 5 ? 0 : page) * ITEMS_PER_PAGE; i < ITEMS_PER_PAGE; i++) {
+            for (int i = uniqueItemCount - (page == 6 ? 0 : page) * ITEMS_PER_PAGE; i < ITEMS_PER_PAGE; i++) {
                 pageSB.append("<div class='inventory-item-slot'></div>");
             }
         }
@@ -1094,7 +1103,7 @@ public enum RenderingEngine {
         return pageSB.toString();
     }
 	
-	private static StringBuilder itemSB = new StringBuilder();
+	private static final StringBuilder itemSB = new StringBuilder();
 	private static String getInventoryItemDiv(GameCharacter charactersInventoryToRender, AbstractCoreItem item, int count, String idPrefix) {
         itemSB.setLength(0);
         boolean known = true;
@@ -1248,7 +1257,7 @@ public enum RenderingEngine {
     }
 
 	// DecimalFormat decimalFormatter = new DecimalFormat("#,###");
-	private StringBuilder uiAttributeSB = new StringBuilder();
+	private final StringBuilder uiAttributeSB = new StringBuilder();
 
 	private DialogueNode renderedDialogueNode = null;
 	
@@ -1921,7 +1930,7 @@ public enum RenderingEngine {
         Main.mainController.setRightPanelContent(uiAttributeSB.toString());
     }
 
-	private StringBuilder mapSB = new StringBuilder();
+	private final StringBuilder mapSB = new StringBuilder();
 	
 	private Colour getPlayerIconColour(boolean isDangerous) {
         if (isDangerous) {
@@ -3243,10 +3252,10 @@ public enum RenderingEngine {
 
         if (item.getRarity() == Rarity.QUEST && charactersInventoryToRender != null) {
             if (charactersInventoryToRender.isPlayer()) {
-                setPageLeft(5);
+                setPageLeft(6);
                 return;
             } else {
-                setPageRight(5);
+                setPageRight(6);
                 return;
             }
         }

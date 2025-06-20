@@ -40,7 +40,7 @@ public class MiscActions {
 		}
 		@Override
 		public String getActionTitle() {
-			if(!isOppositeDom() || isCharacterImmune()) {
+			if (!isOppositeDom()) {
 				return "[style.colourDisabled(Вытягивание уровня: "
 						+(Main.sex.playerLevelDrain
 							?"Вкл)]"
@@ -75,7 +75,7 @@ public class MiscActions {
 		}
 		@Override
 		public void applyEffects() {
-			if(isOppositeDom() && !isCharacterImmune()) {
+			if (isOppositeDom()) {
 				Main.sex.playerLevelDrain = !Main.sex.playerLevelDrain;
 			}
 		}

@@ -1,5 +1,20 @@
 package com.lilithsthrone.game.dialogue.utils;
 
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
+
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -17,7 +32,12 @@ import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
-import com.lilithsthrone.game.inventory.enchanting.*;
+import com.lilithsthrone.game.inventory.enchanting.EnchantingUtils;
+import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
+import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
+import com.lilithsthrone.game.inventory.enchanting.LoadedEnchantment;
+import com.lilithsthrone.game.inventory.enchanting.TFModifier;
+import com.lilithsthrone.game.inventory.enchanting.TFPotency;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
@@ -30,16 +50,6 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.places.PlaceType;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import java.io.File;
-import java.io.StringWriter;
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * @since 0.1.7
@@ -256,7 +266,7 @@ public class EnchantmentDialogue {
 							"<div class='normal-button disabled' style='width:100%; margin:auto 0;'>"
 									+ "<b>Добавить</b> | "
 							+ (ingredient instanceof Tattoo
-									?UtilText.formatAsMoneyUncoloured(EnchantingUtils.getModifierEffectCost(true, ingredient, effect)*EnchantingUtils.FLAME_COST_MODIFER, "b")
+									?UtilText.formatAsMoneyUncoloured((long) EnchantingUtils.getModifierEffectCost(true, ingredient, effect) *EnchantingUtils.FLAME_COST_MODIFER, "b")
 									:UtilText.formatAsEssencesUncoloured(EnchantingUtils.getModifierEffectCost(true, ingredient, effect), "b", false))
 							+ "<div class='overlay no-pointer' id='ENCHANT_ADD_BUTTON_DISABLED'></div>"
 							+ "</div>");
@@ -266,7 +276,7 @@ public class EnchantmentDialogue {
 							"<div class='normal-button' style='width:100%; margin:auto 0;'>"
 									+ "<b style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Добавить</b> | "
 									+ (ingredient instanceof Tattoo
-											?UtilText.formatAsMoney(EnchantingUtils.getModifierEffectCost(true, ingredient, effect)*EnchantingUtils.FLAME_COST_MODIFER, "b")
+											?UtilText.formatAsMoney((long) EnchantingUtils.getModifierEffectCost(true, ingredient, effect) *EnchantingUtils.FLAME_COST_MODIFER, "b")
 											:UtilText.formatAsEssences(EnchantingUtils.getModifierEffectCost(true, ingredient, effect), "b", false))
 							+ "<div class='overlay' id='ENCHANT_ADD_BUTTON'></div>"
 							+ "</div>");
@@ -313,7 +323,7 @@ public class EnchantmentDialogue {
 									+ (effects.size()>=ingredient.getEnchantmentLimit()?"<b style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>":"<b>")
                         + effects.size()+"/"+ingredient.getEnchantmentLimit()+"</b><b>)</b> | Cost: "
 												+ (ingredient instanceof Tattoo
-														?UtilText.formatAsMoney(EnchantingUtils.getCost(ingredient, effects)*EnchantingUtils.FLAME_COST_MODIFER, "b")
+														?UtilText.formatAsMoney((long) EnchantingUtils.getCost(ingredient, effects) *EnchantingUtils.FLAME_COST_MODIFER, "b")
 														:UtilText.formatAsEssences(EnchantingUtils.getCost(ingredient, effects), "b", false)));
 			
 				if(effects.isEmpty()) {
@@ -354,7 +364,7 @@ public class EnchantmentDialogue {
 										?"<div class='normal-button' style='width:auto; min-width:64px; height:22px; line-height:22px; font-size:16px; margin:0; padding:0 0 0 4px; float:right; text-align:left;'>"
 												+ "<b style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>X</b> "
 												+ (ingredient instanceof Tattoo
-														?UtilText.formatAsMoney(EnchantingUtils.getModifierEffectCost(false, ingredient, ie)*EnchantingUtils.FLAME_COST_MODIFER, "b")
+														?UtilText.formatAsMoney((long) EnchantingUtils.getModifierEffectCost(false, ingredient, ie) *EnchantingUtils.FLAME_COST_MODIFER, "b")
 														:UtilText.formatAsEssences(EnchantingUtils.getModifierEffectCost(false, ingredient, ie), "b", false))
 												+ "<div class='overlay' id='DELETE_EFFECT_"+it+"'></div>"
 											+ "</div>"
@@ -366,6 +376,7 @@ public class EnchantmentDialogue {
 							i++;
 						}
 					}
+                    cost = Math.min(0, cost);
 					
 					if(Main.game.isEnchantmentCapacityEnabled()) {
 						if((ingredient instanceof AbstractClothing)
@@ -657,7 +668,7 @@ public class EnchantmentDialogue {
 	
 	public static boolean canAffordCost(AbstractCoreItem ingredient, List<ItemEffect> itemEffects, int count) {
 		if(ingredient instanceof Tattoo) {
-			return Main.game.getPlayer().getMoney()  >= EnchantingUtils.getCost(ingredient, itemEffects) * count * EnchantingUtils.FLAME_COST_MODIFER;
+			return Main.game.getPlayer().getMoney()  >= (long) EnchantingUtils.getCost(ingredient, itemEffects) * count * EnchantingUtils.FLAME_COST_MODIFER;
 		}
 		return Main.game.getPlayer().getEssenceCount() >= EnchantingUtils.getCost(ingredient, itemEffects) * count;
 	}
@@ -716,7 +727,7 @@ public class EnchantmentDialogue {
 			
 		} else if(ingredient instanceof Tattoo) {
 			if(applyCost) {
-				Main.game.getPlayer().incrementMoney(-EnchantingUtils.getCost(ingredient, effects)*EnchantingUtils.FLAME_COST_MODIFER);
+				Main.game.getPlayer().incrementMoney((long) -EnchantingUtils.getCost(ingredient, effects) *EnchantingUtils.FLAME_COST_MODIFER);
 			}
 			Tattoo tattoo;
 			if (EnchantmentDialogue.isEquipped) {

@@ -33,8 +33,8 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @author Innoxia
  */
 public class AbstractTattooType extends AbstractCoreType {
-	
-	private static List<InventorySlot> standardInventorySlots = new ArrayList<>(InventorySlot.getClothingSlots());
+
+	private static final List<InventorySlot> standardInventorySlots = new ArrayList<>(InventorySlot.getClothingSlots());
 	
 	private boolean isMod;
 	
@@ -376,7 +376,7 @@ public class AbstractTattooType extends AbstractCoreType {
 	}
 	
 	public int getEnchantmentLimit() {
-		return 100;
+		return 1000;
 	}
 	
 	public AbstractItemEffectType getEnchantmentEffect() {

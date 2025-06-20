@@ -11,10 +11,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -59,6 +55,9 @@ import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.utils.comparators.ItemEffectComparator;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 /**
  * @since 0.1.0
@@ -67,7 +66,7 @@ import com.lilithsthrone.utils.comparators.ItemEffectComparator;
  */
 public abstract class AbstractClothing extends AbstractCoreItem implements XMLSaving {
 
-	private AbstractClothingType clothingType;
+	private final AbstractClothingType clothingType;
 
 	private InventorySlot slotEquippedTo;
 	
@@ -364,21 +363,16 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 	public boolean equalsWithoutEquippedSlot(Object o) {
 		if(super.equals(o)){
 			if(o instanceof AbstractClothing){
-				if(((AbstractClothing)o).getClothingType().equals(getClothingType())
-						&& ((AbstractClothing)o).getColours().equals(getColours())
-						&& ((AbstractClothing)o).getPattern().equals(getPattern())
-						&& (this.getPattern()!="none"
-							?((AbstractClothing)o).getPatternColours().equals(getPatternColours())
-							:true)
-						&& ((AbstractClothing)o).isSealed()==this.isSealed()
-						&& ((AbstractClothing)o).isDirty()==this.isDirty()
-						&& ((AbstractClothing)o).isEnchantmentKnown()==this.isEnchantmentKnown()
-						&& Objects.equals(((AbstractClothing)o).getHiddenName(), this.getHiddenName())
-						&& ((AbstractClothing)o).isBadEnchantment()==this.isBadEnchantment()
-						&& ((AbstractClothing)o).getEffects().equals(this.getEffects())
-						){
-					return true;
-				}
+				return ((AbstractClothing) o).getClothingType().equals(getClothingType())
+						&& ((AbstractClothing) o).getColours().equals(getColours())
+						&& ((AbstractClothing) o).getPattern().equals(getPattern())
+						&& (this.getPattern() == "none" || ((AbstractClothing) o).getPatternColours().equals(getPatternColours()))
+						&& ((AbstractClothing) o).isSealed() == this.isSealed()
+						&& ((AbstractClothing) o).isDirty() == this.isDirty()
+						&& ((AbstractClothing) o).isEnchantmentKnown() == this.isEnchantmentKnown()
+						&& Objects.equals(((AbstractClothing) o).getHiddenName(), this.getHiddenName())
+						&& ((AbstractClothing) o).isBadEnchantment() == this.isBadEnchantment()
+						&& ((AbstractClothing) o).getEffects().equals(this.getEffects());
 			}
 		}
 		return false;
@@ -388,22 +382,17 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 	public boolean equals(Object o) {
 		if(super.equals(o)){
 			if(o instanceof AbstractClothing){
-				if(((AbstractClothing)o).getClothingType().equals(getClothingType())
-						&& ((AbstractClothing)o).getColours().equals(getColours())
-						&& ((AbstractClothing)o).getPattern().equals(getPattern())
-						&& (this.getPattern()!="none"
-							?((AbstractClothing)o).getPatternColours().equals(getPatternColours())
-							:true)
-						&& ((AbstractClothing)o).isSealed()==this.isSealed()
-						&& ((AbstractClothing)o).isDirty()==this.isDirty()
-						&& ((AbstractClothing)o).isEnchantmentKnown()==this.isEnchantmentKnown()
-						&& Objects.equals(((AbstractClothing)o).getHiddenName(), this.getHiddenName())
-						&& ((AbstractClothing)o).isBadEnchantment()==this.isBadEnchantment()
-						&& ((AbstractClothing)o).getEffects().equals(this.getEffects())
-						&& ((AbstractClothing)o).getSlotEquippedTo()==this.getSlotEquippedTo()
-						){
-					return true;
-				}
+				return ((AbstractClothing) o).getClothingType().equals(getClothingType())
+						&& ((AbstractClothing) o).getColours().equals(getColours())
+						&& ((AbstractClothing) o).getPattern().equals(getPattern())
+						&& (this.getPattern() == "none" || ((AbstractClothing) o).getPatternColours().equals(getPatternColours()))
+						&& ((AbstractClothing) o).isSealed() == this.isSealed()
+						&& ((AbstractClothing) o).isDirty() == this.isDirty()
+						&& ((AbstractClothing) o).isEnchantmentKnown() == this.isEnchantmentKnown()
+						&& Objects.equals(((AbstractClothing) o).getHiddenName(), this.getHiddenName())
+						&& ((AbstractClothing) o).isBadEnchantment() == this.isBadEnchantment()
+						&& ((AbstractClothing) o).getEffects().equals(this.getEffects())
+						&& ((AbstractClothing) o).getSlotEquippedTo() == this.getSlotEquippedTo();
 			}
 		}
 		return false;
@@ -704,11 +693,8 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 			}
 
 			String loadedId = parentElement.getAttribute("id");
-			boolean swapPrimaryAndSecondary = false;
-			if(Main.isVersionOlderThan(Game.loadingVersion, "0.4.9.13") && loadedId.equals("norin_piercings_heart_barbells")) {
-				swapPrimaryAndSecondary = true;
-			}
-			
+			boolean swapPrimaryAndSecondary = Main.isVersionOlderThan(Game.loadingVersion, "0.4.9.13") && loadedId.equals("norin_piercings_heart_barbells");
+
 			Element colourElement = (Element) parentElement.getElementsByTagName("colours").item(0);
 			if(colourElement!=null) {
 				NodeList nodes = colourElement.getElementsByTagName("colour");
@@ -976,8 +962,9 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 					DisplacementType dt = DisplacementType.valueOf(e.getAttribute("value"));
 					boolean displacementTypeFound = false;
 					for (BlockedParts bp : clothing.getBlockedPartsMap(null, clothing.getSlotEquippedTo())) {
-						if(bp.displacementType == dt) {
+						if (bp.displacementType == dt) {
 							displacementTypeFound = true;
+							break;
 						}
 					}
 					if(displacementTypeFound) {
@@ -1716,7 +1703,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 		return getClothingType().unequipText(clothingOwner, clothingEquipper, this.getSlotEquippedTo(), rough, this, false);
 	}
 
-	private static List<String> incompatibleClothing = new ArrayList<>();
+	private static final List<String> incompatibleClothing = new ArrayList<>();
 	
 	public String getDisplacementBlockingDescriptions(GameCharacter equippedToCharacter){
 		descriptionSB = new StringBuilder("<p><b>Displacement types:</b>");
@@ -1726,13 +1713,13 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 				if(equippedToCharacter.isAbleToUnequip(this, false, equippedToCharacter)) {
 					descriptionSB.append("<b style='color:"+PresetColour.GENERIC_GOOD.toWebHexString()+";'>Available</b>");
 				} else {
-					descriptionSB.append("<b style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Blocked</b> by "+equippedToCharacter.getBlockingClothing().getName()+"");
+					descriptionSB.append("<b style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Blocked</b> by " + equippedToCharacter.getBlockingClothing().getName());
 				}
 			} else {
 				if(equippedToCharacter.isAbleToBeDisplaced(this, bp.displacementType, false, false, equippedToCharacter)) {
 					descriptionSB.append("<b style='color:"+PresetColour.GENERIC_GOOD.toWebHexString()+";'>Available</b>");
 				} else {
-					descriptionSB.append("<b style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Blocked</b> by "+equippedToCharacter.getBlockingClothing().getName()+"");
+					descriptionSB.append("<b style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Blocked</b> by " + equippedToCharacter.getBlockingClothing().getName());
 				}
 			}
 		}
@@ -2287,7 +2274,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 			cost = ItemEffect.SEALED_COST_MINOR_BOOST;
 		}
 		if(remover.hasFetish(Fetish.FETISH_BONDAGE_VICTIM) && selfUnseal) {
-			cost *= 5;
+			cost *= 0.2;
 		}
 		return cost;
 	}
@@ -2592,8 +2579,9 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 		
 		getAttributeModifiers().entrySet().stream().filter(ent -> ent.getKey()!=Attribute.FERTILITY && ent.getKey()!=Attribute.VIRILITY)
 			.forEach(ent -> noCorruption.put(ent.getKey(), !ent.getKey().isAffectedByEnchantmentCost()?0:(ent.getValue()*(ent.getKey()==Attribute.MAJOR_CORRUPTION?-1:1))));
-		
-		return noCorruption.values().stream().reduce(0, (a, b) -> a + Math.max(0, b));
+
+//		return noCorruption.values().stream().reduce(0, (a, b) -> a + Math.max(0, b));
+		return 0;
 	}
 	
 	@Override

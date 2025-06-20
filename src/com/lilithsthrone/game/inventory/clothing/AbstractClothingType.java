@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -2523,7 +2522,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 	// Enchantments:
 	
 	public int getEnchantmentLimit() {
-		return 100;
+		return 1000;
 	}
 	
 	public AbstractItemEffectType getEnchantmentEffect() {

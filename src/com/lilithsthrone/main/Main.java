@@ -665,6 +665,7 @@ public class Main extends Application {
 			try {
 				PrintStream stream = new PrintStream("data/error.log");
 				System.setErr(stream);
+				System.setOut(stream);
 				System.err.println("Game Version: "+VERSION_NUMBER+" ("+System.getProperty("build.type", "jar")+")");
 				System.err.println("Java: "+System.getProperty("java.version")+" ("+System.getProperty("java.vendor")+")");
 				System.err.println("OS: "+System.getProperty("os.name")+" ("+System.getProperty("os.arch")+")");

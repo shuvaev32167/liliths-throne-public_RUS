@@ -87,60 +87,64 @@ public class Vicky extends NPC {
 	
 	static {
 		for(Spell s : Spell.values()) {
-			switch(s) {
-				// Tier 1:
-				case ARCANE_AROUSAL:
-				case ICE_SHARD:
-				case POISON_VAPOURS:
-				case FIREBALL:
-				case SLAM:
-					availableSpellBooks.add(ItemType.getSpellBookType(s));
-					break;
-					
-				// Tier 2:
-				case ARCANE_CLOUD:
-				case FLASH:
-				case RAIN_CLOUD:
-				case TELEKENETIC_SHOWER:
-				case TELEPATHIC_COMMUNICATION:
-				case VACUUM:
-					availableSpellBooks.add(ItemType.getSpellBookType(s));
-					break;
-		
-				// Tier 3:
-				case STONE_SHELL:
-				case PROTECTIVE_GUSTS:
-				case CLOAK_OF_FLAMES:
-				case SOOTHING_WATERS:
-					availableSpellBooks.add(ItemType.getSpellBookType(s));
-					break;
-				case CLEANSE:
-				case STEAL:
-					break;
-					
-				// Tier 4:
-				case ELEMENTAL_AIR:
-				case ELEMENTAL_ARCANE:
-				case ELEMENTAL_EARTH:
-				case ELEMENTAL_FIRE:
-				case ELEMENTAL_WATER:
-					availableSpellBooks.add(ItemType.getSpellBookType(s));
-					break;
-					
-				// Tier 5: // Special quest spells
-				case LILITHS_COMMAND:
-				case TELEPORT:
-					break;
-					
-				case WITCH_CHARM:
-				case WITCH_SEAL:
-				case DARK_SIREN_SIRENS_CALL:
-				case LIGHTNING_SPHERE_DISCHARGE:
-				case LIGHTNING_SPHERE_OVERCHARGE:
-				case ARCANE_CHAIN_LIGHTNING:
-				case ARCANE_LIGHTNING_SUPERBOLT:
-					break;
+			AbstractItemType spellBookType = ItemType.getSpellBookType(s);
+			if (spellBookType != null) {
+				availableSpellBooks.add(spellBookType);
 			}
+//			switch(s) {
+//				// Tier 1:
+//				case ARCANE_AROUSAL:
+//				case ICE_SHARD:
+//				case POISON_VAPOURS:
+//				case FIREBALL:
+//				case SLAM:
+//					availableSpellBooks.add(spellBookType);
+//					break;
+//
+//				// Tier 2:
+//				case ARCANE_CLOUD:
+//				case FLASH:
+//				case RAIN_CLOUD:
+//				case TELEKENETIC_SHOWER:
+//				case TELEPATHIC_COMMUNICATION:
+//				case VACUUM:
+//					availableSpellBooks.add(spellBookType);
+//					break;
+//
+//				// Tier 3:
+//				case STONE_SHELL:
+//				case PROTECTIVE_GUSTS:
+//				case CLOAK_OF_FLAMES:
+//				case SOOTHING_WATERS:
+//					availableSpellBooks.add(spellBookType);
+//					break;
+//				case CLEANSE:
+//				case STEAL:
+//					break;
+//
+//				// Tier 4:
+//				case ELEMENTAL_AIR:
+//				case ELEMENTAL_ARCANE:
+//				case ELEMENTAL_EARTH:
+//				case ELEMENTAL_FIRE:
+//				case ELEMENTAL_WATER:
+//					availableSpellBooks.add(spellBookType);
+//					break;
+//
+//				// Tier 5: // Special quest spells
+//				case LILITHS_COMMAND:
+//				case TELEPORT:
+//					break;
+//
+//				case WITCH_CHARM:
+//				case WITCH_SEAL:
+//				case DARK_SIREN_SIRENS_CALL:
+//				case LIGHTNING_SPHERE_DISCHARGE:
+//				case LIGHTNING_SPHERE_OVERCHARGE:
+//				case ARCANE_CHAIN_LIGHTNING:
+//				case ARCANE_LIGHTNING_SUPERBOLT:
+//					break;
+//			}
 		}
 	}
 	
@@ -535,6 +539,23 @@ public class Vicky extends NPC {
 				ingredient = Main.game.getItemGen().generateItem(availableIngredients[Util.random.nextInt(availableIngredients.length)]);
 				primaryMod = TFModifier.getTFRacialBodyPartsList().get(Util.random.nextInt(TFModifier.getTFRacialBodyPartsList().size()));
 			} catch(Exception ex) {
+			}
+		}
+
+		for (var item : availableIngredients) {
+			ingredient = Main.game.getItemGen().generateItem(item);
+			primaryMod = TFModifier.getTFRacialBodyPartsList().get(Util.random.nextInt(TFModifier.getTFRacialBodyPartsList().size()));
+			for (int i = 0; i < 2; i++) {
+				try {
+					if (ingredient.getEnchantmentEffect().getEffectsDescription(primaryMod, TFModifier.NONE, TFPotency.MINOR_BOOST, 0, Main.game.getPlayer(), Main.game.getPlayer()) != null) {
+						AbstractItem potion = EnchantingUtils.craftItem(ingredient, Util.newArrayListOfValues(new ItemEffect(ingredient.getEnchantmentEffect(), primaryMod, TFModifier.NONE, TFPotency.MINOR_BOOST, 0)));
+						itemsForSale.putIfAbsent(potion, 0);
+						itemsForSale.put(potion, 1 + itemsForSale.get(potion));
+						potion.setName(EnchantingUtils.getPotionName(ingredient, potion.getEffects()));
+					}
+					primaryMod = TFModifier.getTFRacialBodyPartsList().get(Util.random.nextInt(TFModifier.getTFRacialBodyPartsList().size()));
+				} catch (Exception ex) {
+				}
 			}
 		}
 		
