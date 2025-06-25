@@ -1,5 +1,8 @@
 package com.lilithsthrone.game.dialogue.places.dominion.lilayashome;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -40,9 +43,6 @@ import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.GenericPlace;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @since 0.1.75
@@ -421,13 +421,13 @@ public class Lab {
 		
 		if(Main.game.getPlayer().getQuest(QuestLine.SIDE_WES)==Quest.WES_1) {
 			if(Main.game.getCurrentDialogueNode()==LILAYA_ELLE_HELP) {
-				generatedResponses.add(new Response("Elle's location", "You are already asking Lilaya about where Elle could be!", null));
+				generatedResponses.add(new Response("Расположение Эль", "Ты уже [pc.genderBasedWord(узнавал, узнавала)] у Лилайи, где может быть Элль!", null));
 				
 			} else {
-				generatedResponses.add(new Response("Elle's location",
+				generatedResponses.add(new Response("Расположение Эль",
 						Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.wesQuestLilayaHelp)
-							?"Ask Lilaya if she can remind you where Elle is teleporting to."
-							:"Ask Lilaya for some help in figuring out where Elle is teleporting to.",
+								? "Спросить Лилаю, может ли она напомнить тебе, куда телепортируется Элль."
+								: "Попросить Лилайю помочь выяснить, куда телепортируется Элль.",
 						LILAYA_ELLE_HELP){
 					@Override
 					public void effects() {
@@ -610,21 +610,21 @@ public class Lab {
 				
 				// Return responses:
 				if(index==0) {
-					return new Response("Leave", "Say goodbye to Lilaya and exit her lab.", LAB) {
+					return new Response("Уйти", "Попрощаться с Лилайей и выйти из её лаборатории.", LAB) {
 						@Override
 						public void effects() {
 							setEntryFlags();
 							Main.game.getTextStartStringBuilder().append(
 									"<p>"
-										+ "You tell Lilaya that you've got to get going, and, after saying goodbye, you head over to the lab's door and make your exit."
+											+ "Ты говоришь Лилайе, что тебе пора уходить, и, попрощавшись, направляешься к двери лаборатории и выходишь."
 									+ "</p>");
 						}
 					};
 					
 				} else if (index == 1) {
 					if(isLilayaAngryAtPlayerDemonTF()) {
-						return new Response("Full demon",
-								"Tell Lilaya that you'll help her convince her mother to turn her into a full demon.<br/>[style.italicsDemon(This will end with Lilaya being permanently transformed into a full demon!)]",
+						return new Response("Полноценный демон",
+								"Скажи Лилайе, что ты поможешь ей убедить мать превратить её в полноценную демоницу. <br/>[style.italicsDemon(Это приведёт к тому, что Лилайя навсегда превратится в полноценную демоницу!)]",
 								LAB_DEMON_TF_AGREE) {
 							@Override
 							public Colour getHighlightColour() {
@@ -678,7 +678,7 @@ public class Lab {
 					
 				} else if(index==11 && Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_2_D_MEETING_A_LILIN)) {
 					// Teleport
-					return new Response("Lyssieth's office", "Ask Lilaya to use the resonance stone to contact Lyssieth, and ask her to teleport you to her office.", LyssiethPalaceDialogue.LYSSIETH_OFFICE_TALK){
+					return new Response("Офис Лиссиет", "Попросить Лилайю использовать резонансный камень, чтобы связаться с Лиссиет, и попросить её телепортировать тебя в её офис.", LyssiethPalaceDialogue.LYSSIETH_OFFICE_TALK) {
 						@Override
 						public void effects() {
 							Main.game.getPlayer().setLocation(WorldType.LYSSIETH_PALACE, PlaceType.LYSSIETH_PALACE_OFFICE);

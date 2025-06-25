@@ -668,32 +668,32 @@
 	
 	<htmlContent tag="LAB_TELEPORT_TO_LYSSIETHS_OFFICE"><![CDATA[
 	<p>
-		Wanting to see Lyssieth again, you ask, [pc.speech(Lilaya, could you use the resonance stone to contact Lyssieth? I'd like to talk to her about something.)]
+		Желая снова увидеть Лиссиет, ты спрашиваешь: [pc.speech(Лилайя, можешь использовать камень резонанса, чтобы связаться с Лиссиет? Я хочу поговорить с ней о чём-то.)]
 	</p>
 	<p>
-		[lilaya.speech(Of course,)] your [lilaya.relation(pc)] replies, before heading over to the desk in which she keeps the communication device. As she retrieves the small, dark sphere and holds it up in one hand, you see it start to emit a pink glow, and she says, [lilaya.speech(Mommy, [pc.name] would like you to come here.)]
+		[lilaya.speech(Конечно)] — отвечает твоя [lilaya.relation(pc)], прежде чем подойти к столу, на котором лежит устройство связи. Когда она берёт маленький тёмный шар и поднимает его одной рукой, ты видишь, как он начинает излучать розовое свечение, и она говорит: [lilaya.speech(Мамочка, [pc.name] хочет, чтобы ты сюда подошла.)]
 	</p>
 	<p>
-		Just a moment later, a flash of purple light fills the lab, and there before you stands the familiar figure of Lyssieth. Smiling at Lilaya, she then turns and steps towards you, before pulling you into a hug and saying, [lyssieth.speech(Let's return to my palace.)]
+		Через мгновение лабораторию заполняет пурпурный свет, и перед тобой появляется знакомая фигура Лиссиет. Улыбаясь Лилайе, она поворачивается к тебе, обнимает тебя и говорит: [lyssieth.speech(Давай вернёмся в мой дворец.)]
 	</p>
 	<p>
-		With that, the two of you are teleported back into the elder lilin's office, and, releasing you from the hug, Lyssieth smiles at you and asks, [lyssieth.speech(So, what is it you wanted?)]
+		После этого вы вдвоем телепортируетесь обратно в кабинет старейшей Лилин, и, отпустив тебя из объятий, Лиссит улыбается тебе и спрашивает: [lyssieth.speech(Итак, что ты хочешь?)]
 	</p>
 	]]>
 	</htmlContent>
 	
 	<htmlContent tag="LAB_TELEPORT_TO_LYSSIETHS_OFFICE_COMPANION"><![CDATA[
 	<p>
-		Wanting to see Lyssieth again, you ask, [pc.speech(Lilaya, could you use the resonance stone to contact Lyssieth? I'd like to talk to her about something.)]
+		Желая снова увидеть Лиссиет, ты спрашиваешь: [pc.speech(Лилайя, можешь использовать камень резонанса, чтобы связаться с Лиссиет? Я хочу поговорить с ней о чём-то.)]
 	</p>
 	<p>
-		[lilaya.speech(Of course,)] your [lilaya.relation(pc)] replies, before heading over to the desk in which she keeps the communication device. As she retrieves the small, dark sphere and holds it up in one hand, you see it start to emit a pink glow, and she says, [lilaya.speech(Mommy, [pc.name] would like you to come here.)]
+		[lilaya.speech(Конечно)] — отвечает твоя [lilaya.relation(pc)], прежде чем подойти к столу, на котором лежит устройство связи. Когда она берёт маленький тёмный шар и поднимает его одной рукой, ты видишь, как он начинает излучать розовое свечение, и она говорит: [lilaya.speech(Мамочка, [pc.name] хочет, чтобы ты сюда подошла.)]
 	</p>
 	<p>
-		Just a moment later, a flash of purple light fills the lab, and there before you stands the familiar figure of Lyssieth. Smiling at Lilaya, she then turns and steps towards you, before pulling you and [npc.name] into a hug and saying, [lyssieth.speech(Let's return to my palace.)]
+		Через мгновение лабораторию заполняет пурпурный свет, и перед тобой появляется знакомая фигура Лиссиет. Улыбаясь Лилйае, она поворачивается и подходит к тебе, обнимает тебя и [npc.morphSingleNameGene([npc.name])] и говорит: [lyssieth.speech(Давайте вернёмся в мой дворец.)]
 	</p>
 	<p>
-		With that, the three of you are teleported back into the elder lilin's office, and, releasing you both from the hug, Lyssieth asks [npc.name] to wait in Meraxis's office. After [npc.sheHas] left, Lyssieth smiles at you and asks, [lyssieth.speech(So, what is it you wanted?)]
+		После этого вы трое телепортируетесь обратно в кабинет старейшей Лилин, и, отпустив вас двоих из объятий, Лиссиет просит [npc.morphSingleNameGene([npc.name])] подождать в кабинете Мераксис. После того, как [npc.sheHas] уходит, Лиссиет улыбается тебе и спрашивает: [lyssieth.speech(Итак, что ты хочешь?)]
 	</p>
 	]]>
 	</htmlContent>
