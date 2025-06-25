@@ -50,6 +50,10 @@ public class EyeType {
 				+ "<br/>"
                     + "[npc.Name] now [npc.has] [style.boldAngel(angelic eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] и [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
 			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] angelic eyes, with [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
+		@Override
+		public List<BodyPartTag> getTags() {
+			return Util.newArrayListOfValues(BodyPartTag.EYE_PERFECT_VISION);
+		}
 	};
 
 	public static AbstractEyeType DEMON_COMMON = new AbstractEyeType(BodyCoveringType.EYE_DEMON_COMMON,
@@ -74,7 +78,9 @@ public class EyeType {
             "У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] #IF(npc.isShortStature())бесовских#ELSEдемонических#ENDIF глаз, с [pc.morphPluralInstr([npc.irisShape])], [pc.morphPluralInstr([npc.irisColour(true)])] радужками, [pc.morphPluralInstr([npc.pupilShape])], [pc.morphPluralInstr([npc.pupilColour(true)])] зрачками, и [pc.morphPluralInstr([npc.scleraColour(true)])] белками.") {
 		@Override
 		public List<BodyPartTag> getTags() {
-			return Util.newArrayListOfValues(BodyPartTag.NIGHT_VISION);
+			return Util.newArrayListOfValues(
+					BodyPartTag.NIGHT_VISION,
+					BodyPartTag.EYE_PERFECT_VISION);
 		}
 	};
 
@@ -93,7 +99,9 @@ public class EyeType {
 			"У [npc.targetBasedWord(тебя, н[npc.him])] [npc.eyePairs] demonic-owl eyes, with [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 		@Override
 		public List<BodyPartTag> getTags() {
-			return Util.newArrayListOfValues(BodyPartTag.NIGHT_VISION);
+			return Util.newArrayListOfValues(
+					BodyPartTag.NIGHT_VISION,
+					BodyPartTag.EYE_PERFECT_VISION);
 		}
 	};
 

@@ -653,63 +653,82 @@ private static final String[] tensGreaterThanNineteen = {
 };
 	
 	/**
-	 * Only works for values -99,999 to 99,999.
+	 * Only works for values -9,223,372,036,854,775,807 to 9,223,372,036,854,775,807.
 	 *
 	 * Пускай число остаётся числом
 	 *
-	 * @param integer
-	 * @return
+	 * @param integer (it's a long :3)
+	 * @return Who knows?! It's a mystery!
 	 */
-	public static String intToString(int integer) {
-//		String intToString = "";
-//
-//		if(integer<0) {
-//			intToString = "minus ";
-//		}
+	public static String intToString(long integer) {
+//		boolean minus = integer<0;
 //		integer = Math.abs(integer);
-//		if (integer >= 100_000) {
-//			return String.valueOf(integer); // Too big
-//		}
 //
+//		int i=0;
+//		StringBuilder sb = new StringBuilder();
+//		while(integer > 0) {
+//			StringBuilder innerSB = new StringBuilder();
+//			int thousandths = (int) (integer % 1000);
 //
-//		if(integer>=1000) {
-//			if((integer/1000)<20) {
-//				intToString+=numbersLessThanTwenty[(integer/1000)]+" тысяч";
-//			} else {
-//				intToString+=tensGreaterThanNineteen[integer/10000] + (((integer/1000)%10!=0)?"-"+numbersLessThanTwenty[(integer/1000)%10]:"")+" тысяч";
+//			int hundred = thousandths/100;
+//			if(hundred>0) {
+//				innerSB.append(numbersLessThanTwenty[hundred]+" hundred");
 //			}
-//		}
-//
-//		if(integer>=100) {
-//			if(integer>=1000
-//					&& integer%1000 != 0
-//					&& ((integer/100)%10!=0)) {
-//				intToString+=", ";
-//			}
-//			integer = integer % 1000;
-//			if (intToString.isEmpty() || integer>=100) {
-//				intToString += numbersLessThanTwenty[integer/100]+" сотен";
-//			}
-//			if(integer%100!=0) {
-//				intToString += " и ";
-//				integer = integer % 100;
-//			}
-//		}
-//
-//		if(integer%100<20) {
-//			if (integer%100 == 0) {
-//				if (intToString.isEmpty()) {
-//					return "ноль";
+//			int tens = thousandths%100;
+//			if(thousandths%100>0) {
+//				if(innerSB.length()>0) {
+//					innerSB.append(" and ");
 //				}
-//			} else {
-//				intToString+=numbersLessThanTwenty[integer%100];
+//				if(tens<20) {
+//					innerSB.append(numbersLessThanTwenty[thousandths%100]);
+//				} else {
+//					innerSB.append(tensGreaterThanNineteen[tens/10]);
+//					if(tens%10>0) {
+//						innerSB.append(" ");
+//						innerSB.append(numbersLessThanTwenty[tens%10]);
+//					}
+//				}
 //			}
-//		} else {
-//			intToString+=tensGreaterThanNineteen[(integer%100)/10] + ((integer%10!=0)?"-"+numbersLessThanTwenty[integer%10]:"");
+//			if(innerSB.length()>0) {
+//				switch(i) {
+//					case 1:
+//						innerSB.append(" thousand");
+//						break;
+//					case 2:
+//						innerSB.append(" million");
+//						break;
+//					case 3:
+//						innerSB.append(" billion");
+//						break;
+//					case 4:
+//						innerSB.append(" trillion");
+//						break;
+//					case 5:
+//						innerSB.append(" quadrillion");
+//						break;
+//					case 6:
+//						innerSB.append(" quintillion");
+//						break;
+//					// This isn't needed but whatever...
+//					case 7:
+//						innerSB.append(" sextillion");
+//						break;
+//				}
+//			}
+//			if(sb.length()>0) {
+//				innerSB.append(", ");
+//			}
+//			sb.insert(0, innerSB.toString());
+//			integer /= 1000;
+//			i++;
 //		}
 //
-//		return intToString;
-		return String.valueOf(integer);
+//		if(minus) {
+//			sb.insert(0, "minus ");
+//		}
+//
+//		return sb.toString();
+        return String.valueOf(integer);
 	}
 
 	/**

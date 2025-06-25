@@ -55,7 +55,7 @@ public class CMSpecialAttack {
         	return DamageType.UNARMED.getParentDamageType(source, null);
     	}
         @Override
-        protected int getBaseDamage(GameCharacter source) {
+        public int getBaseDamage(GameCharacter source) {
             return (int) Math.max(1, (source.getUnarmedDamage() * 2 * (source.isLegMovementHindered()?0.1f:1)));
         }
         @Override
@@ -134,7 +134,7 @@ public class CMSpecialAttack {
         	return DamageType.UNARMED.getParentDamageType(source, null);
     	}
         @Override
-        protected int getBaseDamage(GameCharacter source) {
+        public int getBaseDamage(GameCharacter source) {
             return (int) Math.max(1, ((source.getUnarmedDamage()*1.5f) * (source.isArmMovementHindered()?0.5f:1)));
         }
         @Override
@@ -209,7 +209,7 @@ public class CMSpecialAttack {
         	return DamageType.UNARMED.getParentDamageType(source, null);
     	}
         @Override
-        protected int getBaseDamage(GameCharacter source) {
+        public int getBaseDamage(GameCharacter source) {
             return source.getUnarmedDamage()*3;
         }
         @Override
@@ -284,7 +284,7 @@ public class CMSpecialAttack {
         	return DamageType.UNARMED.getParentDamageType(source, null);
     	}
         @Override
-        protected int getBaseDamage(GameCharacter source) {
+        public int getBaseDamage(GameCharacter source) {
             return (int) Math.max(1, source.getUnarmedDamage() * (source.isArmMovementHindered()?0.5f:1));
         }
         @Override
@@ -360,7 +360,7 @@ public class CMSpecialAttack {
         	return DamageType.UNARMED.getParentDamageType(source, null);
     	}
 		@Override
-        protected int getBaseDamage(GameCharacter source) {
+        public int getBaseDamage(GameCharacter source) {
             return (int) Math.max(1, source.getUnarmedDamage() * 4 * (source.isArmMovementHindered()?0.5f:1));
         }
         @Override
@@ -436,7 +436,7 @@ public class CMSpecialAttack {
         	return DamageType.UNARMED.getParentDamageType(source, null);
     	}
         @Override
-        protected int getBaseDamage(GameCharacter source) {
+        public int getBaseDamage(GameCharacter source) {
             return source.getUnarmedDamage()*2;
         }
         @Override
@@ -507,7 +507,7 @@ public class CMSpecialAttack {
         	return DamageType.UNARMED.getParentDamageType(source, null);
     	}
         @Override
-        protected int getBaseDamage(GameCharacter source) {
+        public int getBaseDamage(GameCharacter source) {
             return source.getUnarmedDamage()*2;
         }
         @Override
@@ -601,7 +601,7 @@ public class CMSpecialAttack {
     		return super.getWeight(source, enemies, allies);
     	}
     	@Override
-        protected int getBaseDamage(GameCharacter source) {
+        public int getBaseDamage(GameCharacter source) {
             return source.getUnarmedDamage() * 2 * (!source.isCoverableAreaExposed(CoverableArea.MOUTH)?0:1);
         }
         @Override
@@ -705,7 +705,7 @@ public class CMSpecialAttack {
         	return DamageType.UNARMED.getParentDamageType(source, null);
     	}
         @Override
-        protected int getBaseDamage(GameCharacter source) {
+        public int getBaseDamage(GameCharacter source) {
 //            return (int) Math.max(1, 20 * (source.isLegMovementHindered()?0.1f:1)); // kerambit damage
             return (int) Math.max(1, source.getUnarmedDamage() * 1.2f * (source.isLegMovementHindered()?0.1f:1));
         }

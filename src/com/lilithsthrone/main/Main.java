@@ -73,7 +73,7 @@ public class Main extends Application {
 	
 	public static final String AUTHOR = "Innoxia";
 	public static final String GAME_NAME = "Трон Лилит";
-	public static final String VERSION_NUMBER = "0.4.11.1"; // Remember to do the stuff below!
+	public static final String VERSION_NUMBER = "0.4.11.3"; // Remember to do the stuff below!
 	/*
 	 * BEFORE BUILDING:
 	 * update pom.xml!

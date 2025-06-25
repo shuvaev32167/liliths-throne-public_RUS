@@ -6,6 +6,7 @@ import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.NPC;
+import com.lilithsthrone.game.character.npc.NPCFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.eventLog.EventLogEntry;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -913,7 +914,14 @@ public enum SlaveJob {
 					SlaveJobFlag.INTERACTION_SEX,
 					SlaveJobFlag.INTERACTION_BONDING),
 			WorldType.LILAYAS_HOUSE_FIRST_FLOOR,
-			PlaceType.LILAYA_HOME_ROOM_PLAYER),
+			PlaceType.LILAYA_HOME_ROOM_PLAYER) {
+
+		@Override
+		public void applyJobEndEffects(GameCharacter slave) {
+//			System.out.println(UtilText.parse(slave, "[npc.name]"));
+			((NPC)slave).removeFlag(NPCFlagValue.slaveBedroomHadSleepSex);
+		}
+	},
 	
 	SPA(PresetColour.BASE_AQUA,
 			0.05f,

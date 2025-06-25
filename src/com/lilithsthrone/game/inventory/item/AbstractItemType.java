@@ -1,5 +1,20 @@
 package com.lilithsthrone.game.inventory.item;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.controller.xmlParsing.XMLLoadException;
 import com.lilithsthrone.controller.xmlParsing.XMLMissingTagException;
@@ -22,15 +37,6 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
-
 /**
  * @since 0.1.84
  * @version 0.4.0
@@ -49,6 +55,7 @@ public abstract class AbstractItemType extends AbstractCoreType {
 	private final boolean combatUseAllies;
 	private final boolean combatUseEnemies;
 	private final boolean consumedOnUse;
+	private boolean breakOutOfInventory;
 	
 	private final Rarity rarity;
 	
@@ -138,7 +145,8 @@ public abstract class AbstractItemType extends AbstractCoreType {
 		this.combatUseAllies = true;
 		this.combatUseEnemies = false;
 		this.consumedOnUse = true;
-		
+		this.breakOutOfInventory = false;
+
 		this.value = value;
 		this.rarity = rarity;
 		
@@ -215,8 +223,8 @@ public abstract class AbstractItemType extends AbstractCoreType {
 			this.namePlural = coreAttributes.getMandatoryFirstOf("namePlural").getTextContent();
 			this.description = coreAttributes.getMandatoryFirstOf("description").getTextContent();
 			this.useDescriptor = coreAttributes.getMandatoryFirstOf("useDescriptor").getTextContent();
-			this.plural = Boolean.valueOf(coreAttributes.getMandatoryFirstOf("namePlural").getAttribute("pluralByDefault"));
-			this.value = Integer.valueOf(coreAttributes.getMandatoryFirstOf("value").getTextContent());
+			this.plural = Boolean.parseBoolean(coreAttributes.getMandatoryFirstOf("namePlural").getAttribute("pluralByDefault"));
+			this.value = Integer.parseInt(coreAttributes.getMandatoryFirstOf("value").getTextContent());
 			this.rarity = Rarity.valueOf(coreAttributes.getMandatoryFirstOf("rarity").getTextContent());
 			
 			if(coreAttributes.getOptionalFirstOf("authorTag").isPresent()) {
@@ -226,12 +234,17 @@ public abstract class AbstractItemType extends AbstractCoreType {
 			} else {
 				this.authorDescription = "";
 			}
+
+			this.sexUse = Boolean.parseBoolean(coreAttributes.getMandatoryFirstOf("sexUse").getTextContent());
+			this.combatUseAllies = Boolean.parseBoolean(coreAttributes.getMandatoryFirstOf("combatUseAllies").getTextContent());
+			this.combatUseEnemies = Boolean.parseBoolean(coreAttributes.getMandatoryFirstOf("combatUseEnemies").getTextContent());
+			this.consumedOnUse = Boolean.parseBoolean(coreAttributes.getMandatoryFirstOf("consumedOnUse").getTextContent());
 			
-			this.sexUse = Boolean.valueOf(coreAttributes.getMandatoryFirstOf("sexUse").getTextContent());
-			this.combatUseAllies = Boolean.valueOf(coreAttributes.getMandatoryFirstOf("combatUseAllies").getTextContent());
-			this.combatUseEnemies = Boolean.valueOf(coreAttributes.getMandatoryFirstOf("combatUseEnemies").getTextContent());
-			this.consumedOnUse = Boolean.valueOf(coreAttributes.getMandatoryFirstOf("consumedOnUse").getTextContent());
-			
+			this.breakOutOfInventory = false;
+			if(coreAttributes.getOptionalFirstOf("breakOutOfInventory").isPresent()) {
+				this.breakOutOfInventory = Boolean.parseBoolean(coreAttributes.getMandatoryFirstOf("breakOutOfInventory").getTextContent());
+			}
+
 			this.svgPathInformation = new ArrayList<>();
 			
 			for(Element imagePathElement : coreAttributes.getAllOf("imageName")) {
@@ -249,19 +262,19 @@ public abstract class AbstractItemType extends AbstractCoreType {
 
 				if(!imagePathElement.getAttribute("zLayer").isEmpty()) {
 					try {
-						zLayer = Integer.valueOf(imagePathElement.getAttribute("zLayer"));
+						zLayer = Integer.parseInt(imagePathElement.getAttribute("zLayer"));
 					} catch(Exception ex) {
 					}
 				}
 				if(!imagePathElement.getAttribute("imageSize").isEmpty()) {
 					try {
-						imageSize = Math.min(100, Math.max(1, Integer.valueOf(imagePathElement.getAttribute("imageSize"))));
+						imageSize = Math.min(100, Math.max(1, Integer.parseInt(imagePathElement.getAttribute("imageSize"))));
 					} catch(Exception ex) {
 					}
 				}
 				if(!imagePathElement.getAttribute("imageRotation").isEmpty()) {
 					try {
-						imageRotation = Math.min(360, Math.max(-360, Integer.valueOf(imagePathElement.getAttribute("imageRotation"))));
+						imageRotation = Math.min(360, Math.max(-360, Integer.parseInt(imagePathElement.getAttribute("imageRotation"))));
 					} catch(Exception ex) {
 					}
 				}
@@ -318,7 +331,7 @@ public abstract class AbstractItemType extends AbstractCoreType {
 			}
 			if(coreAttributes.getOptionalFirstOf("statusEffects").isPresent()) {
 				for(Element e : coreAttributes.getMandatoryFirstOf("statusEffects").getAllOf("effect")) {
-					int seconds = Integer.valueOf(e.getAttribute("seconds"));
+					int seconds = Integer.parseInt(e.getAttribute("seconds"));
 					AbstractStatusEffect se = StatusEffect.getStatusEffectFromId(e.getTextContent());
 					String conditional = e.getAttribute("conditional");
 					appliedStatusEffects.put(se, new Value<>(conditional.isEmpty()?"true":conditional, seconds));
@@ -758,6 +771,10 @@ public abstract class AbstractItemType extends AbstractCoreType {
 		return consumedOnUse;
 	}
 	
+	public boolean isBreakOutOfInventory() {
+		return breakOutOfInventory;
+	}
+
 	public boolean isTransformative() {
 		return getItemTags().contains(ItemTag.RACIAL_TF_ITEM);
 	}

@@ -1,9 +1,24 @@
 package com.lilithsthrone.rendering;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.*;
+import com.lilithsthrone.game.character.attributes.ArousalLevel;
+import com.lilithsthrone.game.character.attributes.Attribute;
+import com.lilithsthrone.game.character.attributes.CorruptionLevel;
+import com.lilithsthrone.game.character.attributes.IntelligenceLevel;
+import com.lilithsthrone.game.character.attributes.LustLevel;
+import com.lilithsthrone.game.character.attributes.PhysiqueLevel;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
 import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
@@ -21,8 +36,18 @@ import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.eventLog.EventLogEntry;
-import com.lilithsthrone.game.dialogue.utils.*;
-import com.lilithsthrone.game.inventory.*;
+import com.lilithsthrone.game.dialogue.utils.CharactersPresentDialogue;
+import com.lilithsthrone.game.dialogue.utils.DebugDialogue;
+import com.lilithsthrone.game.dialogue.utils.InventoryDialogue;
+import com.lilithsthrone.game.dialogue.utils.InventoryInteraction;
+import com.lilithsthrone.game.dialogue.utils.MapTravelType;
+import com.lilithsthrone.game.dialogue.utils.PhoneDialogue;
+import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.game.inventory.AbstractCoreItem;
+import com.lilithsthrone.game.inventory.CharacterInventory;
+import com.lilithsthrone.game.inventory.InventorySlot;
+import com.lilithsthrone.game.inventory.Rarity;
+import com.lilithsthrone.game.inventory.ShopTransaction;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
@@ -35,7 +60,11 @@ import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotGeneric;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.*;
+import com.lilithsthrone.utils.Pathing;
+import com.lilithsthrone.utils.SizedStack;
+import com.lilithsthrone.utils.Units;
+import com.lilithsthrone.utils.Util;
+import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.utils.colours.BaseColour;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
@@ -49,10 +78,6 @@ import com.lilithsthrone.world.places.AbstractGlobalPlaceType;
 import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.population.Population;
-
-import java.time.LocalDateTime;
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -90,7 +115,7 @@ public enum RenderingEngine {
             InventorySlot.HAND, InventorySlot.HIPS, InventorySlot.STOMACH, InventorySlot.FINGER,
             InventorySlot.ANKLE, InventorySlot.LEG, InventorySlot.GROIN, InventorySlot.TAIL};
 
-    public static InventorySlot[] secondaryInventorySlots = {InventorySlot.SOCK, InventorySlot.FOOT, InventorySlot.ANUS, InventorySlot.PENIS, InventorySlot.VAGINA};
+	public static InventorySlot[] secondaryInventorySlots = {InventorySlot.SOCK, InventorySlot.FOOT, InventorySlot.ANUS, InventorySlot.PENIS, InventorySlot.VAGINA};
 
     public static final InventorySlot[] piercingSlots = {
             InventorySlot.PIERCING_EAR, InventorySlot.PIERCING_NOSE,
@@ -98,54 +123,19 @@ public enum RenderingEngine {
             InventorySlot.PIERCING_NIPPLE, InventorySlot.PIERCING_STOMACH,
             InventorySlot.PIERCING_PENIS, InventorySlot.PIERCING_VAGINA};
 
+	
+	private RenderingEngine() {
+	}
 
-    private static final StringBuilder pageSB = new StringBuilder();
-
-    private final StringBuilder inventorySB = new StringBuilder();
-    private final StringBuilder equippedPanelSB = new StringBuilder();
-
-    public String getInventoryPanel(GameCharacter charactersInventoryToRender, boolean buyback) {
+	private final StringBuilder inventorySB = new StringBuilder(), equippedPanelSB = new StringBuilder();
+	
+	public String getInventoryPanel(GameCharacter charactersInventoryToRender, boolean buyback) {
         return "<div class='container-full-width' style='background:" + PresetColour.BACKGROUND_DARK.toWebHexString() + "; margin-top:0; padding-top:0;'>"
                 + getInventoryDiv(Main.game.getPlayer(), false) + getInventoryDiv(charactersInventoryToRender, buyback)
                 + "</div>";
     }
-
-    private static final StringBuilder itemSB = new StringBuilder();
-    // DecimalFormat decimalFormatter = new DecimalFormat("#,###");
-    private final StringBuilder uiAttributeSB = new StringBuilder();
-    private final StringBuilder mapSB = new StringBuilder();
-
-    RenderingEngine() {
-    }
-
-    public static GameCharacter getCharacterToRender() {
-        if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.CHARACTERS_PRESENT || Main.game.getCurrentDialogueNode() == PhoneDialogue.CONTACTS_CHARACTER) {
-            return CharactersPresentDialogue.characterViewed;
-        }
-
-        if (Main.game.isInSex()) {
-            if (Main.sex.isMasturbation() && Main.sex.getTotalParticipantCount(true) == 1) {
-                return null;
-            }
-            return Main.sex.getTargetedPartner(Main.game.getPlayer());
-        }
-
-        if (Main.game.isInCombat()) {
-            return Main.combat.getTargetedCombatant();
-        }
-
-        if (InventoryDialogue.getInventoryNPC() != null && Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.INVENTORY) {
-            return InventoryDialogue.getInventoryNPC();
-        }
-
-        if (Main.game.getDialogueFlags().getManagementCompanion() != null) {
-            return Main.game.getDialogueFlags().getManagementCompanion();
-        }
-
-        return Main.game.getActiveNPC();
-    }
-
-    private String getInventoryEquippedPanel(GameCharacter charactersInventoryToRender) {
+	
+	private String getInventoryEquippedPanel(GameCharacter charactersInventoryToRender) {
         equippedPanelSB.setLength(0);
 
         if (charactersInventoryToRender == null) {
@@ -523,8 +513,8 @@ public enum RenderingEngine {
 
         return equippedPanelSB.toString();
     }
-
-    private static String getEmptyWeaponDiv(GameCharacter charactersInventoryToRender, boolean disabled, InventorySlot slot, String weaponStyle) {
+	
+	private static String getEmptyWeaponDiv(GameCharacter charactersInventoryToRender, boolean disabled, InventorySlot slot, String weaponStyle) {
         BodyPartClothingBlock block = slot.getBodyPartClothingBlock(charactersInventoryToRender);
 
         if (!disabled && block != null) {
@@ -544,8 +534,8 @@ public enum RenderingEngine {
                     + "</div>";
         }
     }
-
-    private void appendEquippedClothingSlot(GameCharacter charactersInventoryToRender, InventorySlot invSlot, Set<InventorySlot> blockedSlots, Map<InventorySlot, List<AbstractClothing>> concealedSlots, boolean isSecondary) {
+	
+	private void appendEquippedClothingSlot(GameCharacter charactersInventoryToRender, InventorySlot invSlot, Set<InventorySlot> blockedSlots, Map<InventorySlot, List<AbstractClothing>> concealedSlots, boolean isSecondary) {
         String inventorySlotId = "inventory-item-slot";
         if (isSecondary) {
             inventorySlotId = "inventory-item-slot secondary";
@@ -676,8 +666,8 @@ public enum RenderingEngine {
             }
         }
     }
-
-    private static String lipstickMarkingsString(GameCharacter character, InventorySlot slot) {
+	
+	private static String lipstickMarkingsString(GameCharacter character, InventorySlot slot) {
         SizedStack<Covering> lipstickMarkings = character.getLipstickMarkingsInSlot(slot);
         StringBuilder sb = new StringBuilder();
         if (lipstickMarkings != null) {
@@ -690,8 +680,8 @@ public enum RenderingEngine {
         }
         return sb.toString();
     }
-
-    private String getInventoryDiv(GameCharacter charactersInventoryToRender, boolean buyback) {
+	
+	private String getInventoryDiv(GameCharacter charactersInventoryToRender, boolean buyback) {
         boolean isFloorInventory = charactersInventoryToRender == null;
 
         inventorySB.setLength(0);
@@ -922,8 +912,8 @@ public enum RenderingEngine {
 
         return inventorySB.toString();
     }
-
-    public String getGiftDiv(GameCharacter receiver) {
+	
+	public String getGiftDiv(GameCharacter receiver) {
         inventorySB.setLength(0);
 
         Map<AbstractCoreItem, Integer> giftsAvailable = new HashMap<>();
@@ -969,7 +959,8 @@ public enum RenderingEngine {
         return inventorySB.toString();
     }
 
-    private static String getInventoryIconsForPage(int page, GameCharacter charactersInventoryToRender, String idModifier) {
+    private static final StringBuilder pageSB = new StringBuilder();
+	private static String getInventoryIconsForPage(int page, GameCharacter charactersInventoryToRender, String idModifier) {
         int uniqueItemCount = 0;
         pageSB.setLength(0);
 
@@ -1102,8 +1093,9 @@ public enum RenderingEngine {
 
         return pageSB.toString();
     }
-
-    private static String getInventoryItemDiv(GameCharacter charactersInventoryToRender, AbstractCoreItem item, int count, String idPrefix) {
+	
+	private static StringBuilder itemSB = new StringBuilder();
+	private static String getInventoryItemDiv(GameCharacter charactersInventoryToRender, AbstractCoreItem item, int count, String idPrefix) {
         itemSB.setLength(0);
         boolean known = true;
         if (item instanceof AbstractClothing) {
@@ -1169,8 +1161,8 @@ public enum RenderingEngine {
         itemSB.append(overlay + "' id='" + idPrefix + item.hashCode() + "'>" + getItemCountDiv(count) + last_layer + "</div></div>");
         return itemSB.toString();
     }
-
-    private static String getInventoryItemDiv(CharacterInventory inventory, AbstractCoreItem item, int count, String idPrefix) {
+	
+	private static String getInventoryItemDiv(CharacterInventory inventory, AbstractCoreItem item, int count, String idPrefix) {
         itemSB.setLength(0);
         boolean known = true;
         if (item instanceof AbstractClothing) {
@@ -1255,9 +1247,12 @@ public enum RenderingEngine {
                 + "</div>";
     }
 
-    private DialogueNode renderedDialogueNode = null;
+	// DecimalFormat decimalFormatter = new DecimalFormat("#,###");
+	private StringBuilder uiAttributeSB = new StringBuilder();
 
-    private String getDefaultAttributeColumnHeader(boolean rightColumn) {
+	private DialogueNode renderedDialogueNode = null;
+	
+	private String getDefaultAttributeColumnHeader(boolean rightColumn) {
         if (rightColumn) {
             if (Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.badEnd)) {
                 return "<div class='full-width-container'>"
@@ -1342,7 +1337,7 @@ public enum RenderingEngine {
         uiAttributeSB.setLength(0);
 
         uiAttributeSB.append(
-                "<body onLoad='scrollEventLogToBottom()'>");
+                "<body onLoad='scrollEventLogToBottom()' style='"+Main.game.getBodyStyle()+"'>");
 
         if (Main.game.isInSex()) {
             // Name box:
@@ -1555,14 +1550,41 @@ public enum RenderingEngine {
                 if (renderedDialogueNode != Main.game.getCurrentDialogueNode()) {
                     renderedDialogueNode = Main.game.getCurrentDialogueNode();
 
-                }
-            }
+				}
+			}
+		}
+		
+		Main.mainController.setAttributePanelContent(uiAttributeSB.toString());
+	}
+	
+	public static GameCharacter getCharacterToRender() {
+        if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.CHARACTERS_PRESENT || Main.game.getCurrentDialogueNode() == PhoneDialogue.CONTACTS_CHARACTER) {
+            return CharactersPresentDialogue.characterViewed;
         }
 
-        Main.mainController.setAttributePanelContent(uiAttributeSB.toString());
-    }
+        if (Main.game.isInSex()) {
+            if (Main.sex.isMasturbation() && Main.sex.getTotalParticipantCount(true) == 1) {
+                return null;
+            }
+            return Main.sex.getTargetedPartner(Main.game.getPlayer());
+        }
 
-    public static String getEntryBackgroundColour(boolean alternative) {
+        if (Main.game.isInCombat()) {
+            return Main.combat.getTargetedCombatant();
+        }
+
+        if (InventoryDialogue.getInventoryNPC() != null && Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.INVENTORY) {
+            return InventoryDialogue.getInventoryNPC();
+        }
+
+        if (Main.game.getDialogueFlags().getManagementCompanion() != null) {
+            return Main.game.getDialogueFlags().getManagementCompanion();
+        }
+
+        return Main.game.getActiveNPC();
+    }
+	
+	 public static String getEntryBackgroundColour(boolean alternative) {
         if (alternative) {
             return PresetColour.BACKGROUND_ALT.toWebHexString();
         }
@@ -1584,7 +1606,7 @@ public enum RenderingEngine {
         uiAttributeSB.setLength(0);
 
         uiAttributeSB.append(
-                "<body onLoad='scrollEventLogToBottom()'>"
+                "<body onLoad='scrollEventLogToBottom()' style='"+Main.game.getBodyStyle()+"'>"
                         + " <script>"
                         + "function scrollEventLogToBottom() {document.getElementById('event-log-inner-id').scrollTop = document.getElementById('event-log-inner-id').scrollHeight;}"
                         + "</script>");
@@ -1899,7 +1921,9 @@ public enum RenderingEngine {
         Main.mainController.setRightPanelContent(uiAttributeSB.toString());
     }
 
-    private Colour getPlayerIconColour(boolean isDangerous) {
+	private StringBuilder mapSB = new StringBuilder();
+	
+	private Colour getPlayerIconColour(boolean isDangerous) {
         if (isDangerous) {
             return PresetColour.BASE_RED;
         } else {

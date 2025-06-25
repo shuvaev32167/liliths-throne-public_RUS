@@ -1,9 +1,25 @@
 package com.lilithsthrone.game.combat.spells;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
+import java.util.Set;
+
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
-import com.lilithsthrone.game.character.effects.*;
+import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
+import com.lilithsthrone.game.character.effects.EffectBenefit;
+import com.lilithsthrone.game.character.effects.Perk;
+import com.lilithsthrone.game.character.effects.StatusEffect;
+import com.lilithsthrone.game.character.effects.TreeEntry;
 import com.lilithsthrone.game.combat.Attack;
 import com.lilithsthrone.game.combat.CombatBehaviour;
 import com.lilithsthrone.game.combat.DamageType;
@@ -27,11 +43,6 @@ import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.utils.translate.russian.Morpher;
 import lombok.val;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -155,7 +166,7 @@ public enum Spell {
 			SpellType.OFFENSIVE_STATUS_EFFECT,
 			DamageType.FIRE,
 			false,
-			"Вспышка",
+			"Flash",
 			"flash",
 			"Создает ослепительную вспышку света, которая ослепляет цель.",
 			0,

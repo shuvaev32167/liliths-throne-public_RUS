@@ -1554,6 +1554,12 @@ public class TooltipInventoryEventListener implements ClonedEventListener<Toolti
 		StringBuilder extraDescriptionsSB = new StringBuilder();
 		List<String> extraDescriptions = new ArrayList<>();
 		if(slotEquippedTo==null && absClothing.getClothingType().getEquipSlots().size()>1) {
+			if(!absClothing.getExtraDescriptions(equippedToCharacter, null, false).isEmpty()) {
+				for (String s : absClothing.getExtraDescriptions(equippedToCharacter, null, false)) {
+					extraDescriptions.add(s);
+					yIncrease++;
+				}
+			}
 			for(int i=0; i<absClothing.getClothingType().getEquipSlots().size();i++) {
 				InventorySlot slot = absClothing.getClothingType().getEquipSlots().get(i);
 				
@@ -1568,6 +1574,14 @@ public class TooltipInventoryEventListener implements ClonedEventListener<Toolti
 			}
 			
 		} else {
+			if(slotEquippedTo!=null) {
+				if(!absClothing.getExtraDescriptions(equippedToCharacter, null, false).isEmpty()) {
+					for (String s : absClothing.getExtraDescriptions(equippedToCharacter, null, false)) {
+						extraDescriptions.add(s);
+						yIncrease++;
+					}
+				}
+			}
 			if(!absClothing.getExtraDescriptions(equippedToCharacter, slotEquippedTo, false).isEmpty()) {
 				for (String s : absClothing.getExtraDescriptions(equippedToCharacter, slotEquippedTo, false)) {
 					extraDescriptions.add(s);

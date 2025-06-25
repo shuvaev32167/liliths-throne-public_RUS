@@ -73,7 +73,7 @@ public class OptionsDialogue {
 				sb.append("<p class='special-text' style='text-align:center; margin:0 0; padding:0 0;'><i>Или я не могу поверить, что упал в волшебное зеркало и попал в мир, где моя тетя - демон?!</i></p>");
 			}
 
-			sb.append("<h5 class='special-text' style='text-align:center;'>Разработано: "+Main.AUTHOR+"</h5><br/>");
+			sb.append("<h5 class='special-text' style='text-align:center;'>Разработано: "+Main.AUTHOR+"</h5>");
 
             if (Main.CheckNotUnpacked()) {
 				sb.append("<h3 class='special-text' style='text-align:center;'>[style.italicsBad("+Main.GAME_NAME+" в настоящее время работает из временного каталога!");

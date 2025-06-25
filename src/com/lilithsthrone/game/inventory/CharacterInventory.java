@@ -49,7 +49,7 @@ public class CharacterInventory implements XMLSaving {
 	private final Map<String, List<InventorySlot>> unlockKeyMap;
 
 	protected int essenceCount;
-	protected int money;
+	protected long money;
 	
 	private final Set<InventorySlot> dirtySlots;
 	
@@ -263,7 +263,7 @@ public class CharacterInventory implements XMLSaving {
 			inventory.floorInventory = CharacterInventory.loadingFromFloorBackupCheck;
 		}
 		
-		inventory.setMoney(Integer.valueOf(((Element)parentElement.getElementsByTagName("money").item(0)).getAttribute("value")));
+		inventory.setMoney(Long.valueOf(((Element)parentElement.getElementsByTagName("money").item(0)).getAttribute("value")));
 		
 		if(parentElement.getElementsByTagName("essences").item(0)!=null) { // Old version support.
 			inventory.setEssenceCount(Integer.valueOf(((Element)parentElement.getElementsByTagName("essences").item(0)).getAttribute("value")));
@@ -442,25 +442,25 @@ public class CharacterInventory implements XMLSaving {
 				&& clothingCurrentlyEquipped.isEmpty();
 	}
 
-	public int getMoney() {
+	public long getMoney() {
 		return money;
 	}
 
 	/**
 	 * Does not allow money to fall below 0.
 	 */
-	public void setMoney(int newValue) {
+	public void setMoney(long newValue) {
 		money = Math.max(0, newValue);
 	}
 	
 	/**
 	 * Does not allow money to fall below 0.
 	 */
-	public void incrementMoney(int increment) {
+	public void incrementMoney(long increment) {
 		try {
 			setMoney(Math.addExact(money, increment));
 		} catch (ArithmeticException ex) {
-			setMoney(Integer.MAX_VALUE);
+			setMoney(Long.MAX_VALUE);
 		}
 	}
 	
@@ -1723,14 +1723,17 @@ public class CharacterInventory implements XMLSaving {
 				removalTextMap.put(c,
 						(equipTextSB.length() == 0 ? "" : "<br/>")
 						+ (dt == DisplacementType.REMOVE_OR_EQUIP
-							? (c == clothing ? c.onUnequipApplyEffects(characterClothingOwner, characterRemovingClothing, (Main.game.isInSex() && Main.sex.getSexPace(characterRemovingClothing) == SexPace.DOM_ROUGH))
-									: c.onUnequipText(characterClothingOwner, characterRemovingClothing, (Main.game.isInSex() && Main.sex.getSexPace(characterRemovingClothing) == SexPace.DOM_ROUGH)))
+							? (c == clothing
+								? c.onUnequipApplyEffects(characterClothingOwner, characterRemovingClothing, (Main.game.isInSex()?Main.sex.getSexPace(characterRemovingClothing)==SexPace.DOM_ROUGH:false))
+								: c.onUnequipText(characterClothingOwner, characterRemovingClothing, (Main.game.isInSex()?Main.sex.getSexPace(characterRemovingClothing)==SexPace.DOM_ROUGH:false)))
 							: c.getClothingType().displaceText(
 									characterClothingOwner,
 									characterRemovingClothing,
 									c.getSlotEquippedTo(),
 									dt,
-									(Main.game.isInSex() && Main.sex.getSexPace(characterRemovingClothing) == SexPace.DOM_ROUGH))));
+									(Main.game.isInSex()
+										?Main.sex.getSexPace(characterRemovingClothing)==SexPace.DOM_ROUGH
+										:false))));
 			}
 
 			// Append removal descriptions, sorted by zLayer:

@@ -1,28 +1,56 @@
 package com.lilithsthrone.controller.eventListeners.tooltips;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.w3c.dom.events.Event;
+import org.w3c.dom.events.EventListener;
+
 import com.lilithsthrone.controller.TooltipUpdateThread;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.*;
+import com.lilithsthrone.game.character.attributes.AbstractAttribute;
+import com.lilithsthrone.game.character.attributes.ArousalLevel;
+import com.lilithsthrone.game.character.attributes.Attribute;
+import com.lilithsthrone.game.character.attributes.CorruptionLevel;
+import com.lilithsthrone.game.character.attributes.IntelligenceLevel;
+import com.lilithsthrone.game.character.attributes.LustLevel;
+import com.lilithsthrone.game.character.attributes.PhysiqueLevel;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.BodyPartInterface;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
-import com.lilithsthrone.game.character.body.types.*;
+import com.lilithsthrone.game.character.body.types.AntennaType;
+import com.lilithsthrone.game.character.body.types.HornType;
+import com.lilithsthrone.game.character.body.types.TailType;
+import com.lilithsthrone.game.character.body.types.VaginaType;
+import com.lilithsthrone.game.character.body.types.WingType;
+import com.lilithsthrone.game.character.body.valueEnums.BodyShape;
 import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
 import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.effects.*;
+import com.lilithsthrone.game.character.effects.AbstractPerk;
+import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
+import com.lilithsthrone.game.character.effects.Perk;
+import com.lilithsthrone.game.character.effects.PerkCategory;
+import com.lilithsthrone.game.character.effects.PerkManager;
+import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.fetishes.FetishLevel;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.npc.misc.Elemental;
+import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.game.combat.AoEData;
 import com.lilithsthrone.game.combat.Attack;
 import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
@@ -52,15 +80,7 @@ import com.lilithsthrone.world.WorldType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.w3c.dom.events.Event;
 import ru.shuvaev.morpher.tools.enams.Numeration;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import static com.lilithsthrone.utils.translate.russian.Morpher.convertGender;
 
@@ -311,7 +331,14 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 			tooltipSB.append("<div class='container-full-width titular'>");
 				if(activePerk.isEquippableTrait()) {
 					if(activePerk.getPerkCategory()==PerkCategory.JOB) {
-						tooltipSB.append("<span style='color:"+PresetColour.GENERIC_EXCELLENT.toWebHexString()+";'>'"+Util.capitaliseSentence(owner.getHistory().getName(owner))+"' черта профессии</span>");
+						Occupation associatedOccupation = owner.getHistory();
+						for(Occupation occ : Occupation.getAvailableHistories(Main.game.getPlayer())) {
+							if(occ.getAssociatedPerk()==activePerk) {
+								associatedOccupation = occ;
+								break;
+							}
+						}
+						tooltipSB.append("<span style='color:"+PresetColour.GENERIC_EXCELLENT.toWebHexString()+";'>'"+Util.capitaliseSentence(associatedOccupation.getName(owner))+"' черта профессии</span>");
 					} else if(activePerk.isHiddenPerk()) {
 						tooltipSB.append("<span style='color:"+PresetColour.GENERIC_EXCELLENT.toWebHexString()+";'>Уникальная черта</span>");
 					} else {
@@ -419,8 +446,8 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 			List<String> critReqs = move.getCritRequirements(owner, null, null, null);
 			int currentCooldown = owner.getMoveCooldown(move.getIdentifier());
 			boolean coreMove = owner.getEquippedMoves().contains(move);
-
-
+			int combatTurn = Main.game.isInCombat()?Main.combat.getTurn():0;
+			
 			// Title:
 			tooltipSB.setLength(0);
 			tooltipSB.append("<body>");
@@ -428,18 +455,18 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 
 
 			// Core move info (half-width title):
-			tooltipSB.append("<div class='container-half-width titular' style='margin:2px 2px 2px 8px; width:calc(50% - 10px);'>"
+			tooltipSB.append("<div class='container-half-width titular' style='margin:2px 2px 0 8px; width:calc(50% - 10px);'>"
 								+ (coreMove?"[style.colourMinorGood(Основные)]":"[style.colourMinorBad(Не основные)]")
 							+ "</div>");
 
 			// Move type (half-width title):
-			tooltipSB.append("<div class='container-half-width titular' style='margin:2px 8px 2px 2px; width:calc(50% - 10px); color:"+move.getColourByDamageType(0, owner).toWebHexString()+";'>"
+			tooltipSB.append("<div class='container-half-width titular' style='margin:2px 8px 0 2px; width:calc(50% - 10px); color:"+move.getColourByDamageType(0, owner).toWebHexString()+";'>"
 								+ move.getType().getName()
 							+ "</div>");
 			
 			if(currentCooldown>0) {
-				yIncrease++;
-				tooltipSB.append("<div class='subTitle'>[style.colourMinorBad(На перезарядке)]: "+currentCooldown+(currentCooldown==1?" ход":" ходов")+"</div>");
+				specialYIncrease += 64;
+				tooltipSB.append("<div class='subTitle'>[style.colourTerrible(На перезарядке)]: "+currentCooldown+(currentCooldown==1?" ход":" ходов")+"</div>");
 			}
 			
 			// Main description box & image:
@@ -458,15 +485,45 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 				tooltipSB.append("</div>");
 			tooltipSB.append("</div>");
 
-
-
+			if(move.getBaseDamage(owner)>0 || !move.getAoeDamage().isEmpty()) {
+				specialYIncrease += 16;
+				tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
+					if(move.getBaseDamage(owner)>0) {
+						yIncrease++;
+						tooltipSB.append("Base "+move.getBaseDamage(owner)+" "+Util.capitaliseSentence(move.getDamageType(combatTurn, owner).getMultiplierAttribute().getColouredName("span")));
+					}
+					if(!move.getAoeDamage().isEmpty()) {
+						for(AoEData aoe : move.getAoeDamage()) {
+							yIncrease++;
+							int aoeChance = aoe.getChance();
+							tooltipSB.append("<br/>");
+							tooltipSB.append("[style.colourAqua(AoE)] "
+									+ "(<span style='color:"
+										+(aoeChance<=25
+											?PresetColour.GENERIC_BAD
+											:(aoeChance<=50
+												?PresetColour.GENERIC_MINOR_BAD
+												:(aoeChance<=75
+													?PresetColour.GENERIC_MINOR_GOOD
+													:PresetColour.GENERIC_GOOD))).toWebHexString()+";'>"
+										+aoeChance+"%</span>): "
+									+ aoe.getDamage(owner)
+									+ " "
+									+ Util.capitaliseSentence(move.getDamageType(combatTurn, owner).getMultiplierAttribute().getColouredName("span")));
+						}
+					}
+				tooltipSB.append("</div>");
+			}
 			// AP cost and status effects applied:
 			int apCost = move.getAPcost(owner);
 			int cooldown = move.getCooldown(owner);
 			StringBuilder effectsSB = new StringBuilder();
-			effectsSB.append("[style.italicsMinorBad(+1 к стоимости действий и перезаряда для не основных действий)]");
+			if(!coreMove) {
+				yIncrease++;
+				effectsSB.append("[style.italicsMinorBad(+1 к стоимости действий и перезаряда для не основных действий)]<br/>");
+			}
 			effectsSB.append(
-					"<br/>Стоимость действий: "
+					"Стоимость действий: "
 						+"<span style='color:"+(PresetColour.ACTION_POINT_COLOURS[apCost]).toWebHexString()+";'>"
 						+(coreMove
 							?apCost
@@ -497,6 +554,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 			tooltipSB.append("<div class='container-full-width titular' style='font-weight:normal;'>");
 				tooltipSB.append("<span style='color:"+PresetColour.CRIT.toWebHexString()+";'>Критический удар когда:</span>");
 				for(String s : critReqs) {
+					yIncrease++;
 					tooltipSB.append("<br/>"+s);
 				}
 			tooltipSB.append("</div>");
@@ -520,8 +578,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 			tooltipSB.append("</body>");
 
 			Main.mainController.setTooltipContent(UtilText.parse(tooltipSB.toString()));
-			Main.mainController.setTooltipSize(TOOLTIP_WIDTH + 20, 260 + specialYIncrease + (yIncrease * 18) + 100);
-
+			Main.mainController.setTooltipSize(TOOLTIP_WIDTH + 20, 276 + specialYIncrease + (yIncrease * 18) + 100);
 
 		} else if (desire != null) { // Desire:
 			int yIncrease = 0;
@@ -1015,7 +1072,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 					int crotchBreastAddition = crotchBreasts?24:0;
 					int spinneretAddition = spinneret?24:0;
 
-					int[] dimensions = new int[]{519, elemental ? 108 + (((Elemental) owner).getSummoner().isPlayer() ? 28 : 0) : (508 + crotchBreastAddition + spinneretAddition)};
+					int[] dimensions = new int[]{519, elemental ? 108 + (((Elemental) owner).getSummoner().isPlayer() ? 28 : 0) : (522 + crotchBreastAddition + spinneretAddition)};
 					int imagePadding = 0;
 					int imageWidth = 0;
 					if (displayImage) {
@@ -1030,7 +1087,11 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 					Main.mainController.setTooltipSize(dimensions[0], dimensions[1]);
 
 					tooltipSB.setLength(0);
-					tooltipSB.append("<div class='title' style='color:" + owner.getRace().getColour().toWebHexString() + ";'>"
+
+					BodyShape bodyShape = owner.getBodyShape();
+					boolean feral = owner.isFeral();
+
+					tooltipSB.append("<div class='title'>" //  style='color:" + owner.getRace().getColour().toWebHexString() + ";'
 							+(owner.getRaceStage().getName()!=""
 							? "<b style='color:" + owner.getRaceStage().getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(Morpher.morphGender(owner.getRaceStage().getName(), convertGender(owner.getGender()), Numeration.SINGLE)) + "</b> "
 								:"")
@@ -1039,6 +1100,17 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 							? Util.capitaliseSentence((owner.isPrependWingedToRaceName() ? "крылатая " : "") + owner.getSubspecies().getSingularFemaleName(owner.getBody()))
 							: Util.capitaliseSentence((owner.isPrependWingedToRaceName() ? "крылатый " : "") + owner.getSubspecies().getSingularMaleName(owner.getBody())))
 							+ "</b>"
+							+(elemental
+								?""
+								:"<div class='subTitle' style='font-weight:normal; margin:0; padding:0; background:#00000000; width:100%;'>"
+									+ "<span style='color:"+owner.getFemininity().getColour().toWebHexString()+";'>"+Util.capitaliseSentence(owner.getFemininity().getName(false))+"</span>"
+									+" | "
+									+ "<span style='color:"+bodyShape.toWebHexStringColour()+";'>"+Util.capitaliseSentence(bodyShape.getName(false))+" body</span>"
+									+" | "
+									+(feral && !owner.getFeralAttributes().isSizeHeight()
+										?"[unit.sizeShort(" + owner.getHeightValue()+ ")] long"
+										:"[unit.sizeShort(" + owner.getHeightValue() + ")] tall"
+									+ "</div>"))
 							+ "</div>");
 					
 					if (displayImage) {
@@ -1046,8 +1118,6 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 					}
 
 					if(!elemental) {
-						boolean feral = owner.isFeral();
-						
 						// GREATER:
 						if(owner.getCovering(owner.getFaceCovering()).getPattern()==CoveringPattern.FRECKLED_FACE) {
 							Covering c = owner.getCovering(owner.getFaceCovering());
@@ -1065,16 +1135,24 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 						} else {
 							tooltipSB.append(getBodyPartDiv(owner, "Лицо", owner.getFaceRace(), owner.getFaceCovering(), owner.isFaceFeral()));
 						}
-						tooltipSB.append(getBodyPartDiv(owner, "Тело", owner.getSkinRace(), owner.getTorsoCovering(), owner.isTorsoFeral(),
-								(owner.isSizeDifferenceShorterThan(Main.game.getPlayer())
-								?"<span style='color:"+PresetColour.BODY_SIZE_ONE.toWebHexString()+";'>"
-								:(owner.isSizeDifferenceTallerThan(Main.game.getPlayer())
-									?"<span style='color:"+PresetColour.BODY_SIZE_FOUR.toWebHexString()+";'>"
-									:"<span>"))
-								+(feral&&!owner.getFeralAttributes().isSizeHeight()
-//										?"Length: [unit.sizeShort(" + (owner.getHeightValue() + owner.getLegTailLength(false))+ ")]</span>"
-										?"Длинна: [unit.sizeShort(" + (owner.getHeightValue())+ ")]</span>"
-										:"Высота: [unit.sizeShort(" + owner.getHeightValue() + ")]</span>")));
+//						BodyShape bodyShape = owner.getBodyShape();
+						tooltipSB.append(getBodyPartDiv(owner, "Тело", owner.getSkinRace(), owner.getTorsoCovering(), owner.isTorsoFeral()
+//								,
+//								"<span style='color:"+bodyShape.toWebHexStringColour()+";'>"+bodyShape.getName(false)+"</span>"
+//								+", "
+//								+ (owner.isSizeDifferenceShorterThan(Main.game.getPlayer())
+//									?"<span style='color:"+PresetColour.BODY_SIZE_ONE.toWebHexString()+";'>"
+//									:(owner.isSizeDifferenceTallerThan(Main.game.getPlayer())
+//										?"<span style='color:"+PresetColour.BODY_SIZE_FOUR.toWebHexString()+";'>"
+//										:"<span>"))
+//									+(feral&&!owner.getFeralAttributes().isSizeHeight()
+//										?"[unit.sizeShort(" + (owner.getHeightValue())+ ")] long"
+//										:"[unit.sizeShort(" + owner.getHeightValue() + ")] tall")
+//								+"</span>"
+//								+(feral&&!owner.getFeralAttributes().isSizeHeight()
+//										?"Длинна: [unit.sizeShort(" + (owner.getHeightValue())+ ")]</span>"
+//										:"Высота: [unit.sizeShort(" + owner.getHeightValue() + ")]</span>")
+								));
 						
 						
 						// LESSER:
@@ -1632,7 +1710,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 			tooltipSB.setLength(0);
 
 			String percentageTransfer;
-			int transferAmount;
+			long transferAmount;
 			
 			if(this.moneyTransferPercentage==1) {
 				tooltipSB.append("<div class='title'>[style.colourMinorGood(Перенести немного пламени)]</div>");
@@ -1651,7 +1729,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 						+ "</div>");
 				
 			} else if(owner==null) {
-				transferAmount = (int) Math.max(1, Main.game.getPlayerCell().getInventory().getMoney()*(moneyTransferPercentage/100f));
+				transferAmount = (long) Math.max(1, Main.game.getPlayerCell().getInventory().getMoney()*(moneyTransferPercentage/100f));
 				tooltipSB.append("<div class='subtitle'>"
 						+ (Main.game.getPlayerCell().getInventory().getMoney()==0
 								?"[style.italicsBad(В этой области нет пламени...)]"
@@ -1661,7 +1739,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 						+"</div>");
 				
 			} else if(owner.isPlayer()) {
-				transferAmount = (int) Math.max(1, owner.getMoney()*(moneyTransferPercentage/100f));
+				transferAmount = (long) Math.max(1, owner.getMoney()*(moneyTransferPercentage/100f));
 				tooltipSB.append("<div class='subtitle'>"
 						+ (owner.getMoney()==0
 								?"[style.italicsBad(У тебя нет пламени, ты не можешь перенести никаких денег...)]"
@@ -1675,7 +1753,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 						+"</div>");
 				
 			} else {
-				transferAmount = (int) Math.max(1, owner.getMoney()*(moneyTransferPercentage/100f));
+				transferAmount = (long) Math.max(1, owner.getMoney()*(moneyTransferPercentage/100f));
 				tooltipSB.append("<div class='subtitle'>"
 						+ UtilText.parse(owner,
 								(owner.getMoney()==0
@@ -1695,10 +1773,12 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 			int crotchBreastAddition = crotchBreasts?24:0;
 			int spinneretAddition = spinneret?24:0;
 			
-			int[] dimensions = new int[]{419, (508+crotchBreastAddition+spinneretAddition)};
+			int[] dimensions = new int[]{419, (522+crotchBreastAddition+spinneretAddition)};
 
 			Main.mainController.setTooltipSize(dimensions[0], dimensions[1]);
-			
+
+			BodyShape bodyShape = loadedBody.getBodyShape();
+
 			tooltipSB.setLength(0);
 			tooltipSB.append("<div class='title' style='color:" + loadedBody.getRace().getColour().toWebHexString() + ";'>"
 					+(loadedBody.getRaceStage().getName()!=""
@@ -1706,9 +1786,18 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 						:"")
 					+ "<b style='color:"+loadedBody.getSubspecies().getColour(null).toWebHexString()+";'>"
 						+ (loadedBody.isFeminine()
-								?Util.capitaliseSentence(loadedBody.getSubspecies().getSingularFemaleName(loadedBody))
-								:Util.capitaliseSentence(loadedBody.getSubspecies().getSingularMaleName(loadedBody)))
+								?loadedBody.getSubspecies().getSingularFemaleName(loadedBody)
+								:loadedBody.getSubspecies().getSingularMaleName(loadedBody))
 					+ "</b>"
+					+ "<div class='subTitle' style='font-weight:normal; margin:0; padding:0; background:#00000000; width:100%;'>"
+							+ "<span style='color:"+Femininity.valueOf(loadedBody.getFemininity()).getColour().toWebHexString()+";'>"+Util.capitaliseSentence(Femininity.valueOf(loadedBody.getFemininity()).getName(false))+"</span>"
+							+" | "
+							+ "<span style='color:"+bodyShape.toWebHexStringColour()+";'>"+Util.capitaliseSentence(bodyShape.getName(false))+" body</span>"
+							+" | "
+							+(feral && !loadedBody.getSubspecies().getFeralAttributes(loadedBody).isSizeHeight()
+								?"[unit.sizeShort(" + loadedBody.getHeightValue()+ ")] long"
+								:"[unit.sizeShort(" + loadedBody.getHeightValue() + ")] tall")
+					+ "</div>"
 					+ "</div>");
 			
 				
@@ -1729,11 +1818,17 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 				tooltipSB.append(getBodyPartDiv(loadedBody, "Лицо", loadedBody.getFace()));
 			}
 			
-			tooltipSB.append(getBodyPartDiv(loadedBody, "Тело", loadedBody.getTorso(),
-					"<span>"
-					+(feral && !loadedBody.getSubspecies().getFeralAttributes(loadedBody).isSizeHeight()
-						?"Длинна: [unit.sizeShort(" + (loadedBody.getHeightValue())+ ")]</span>"
-						:"Высота: [unit.sizeShort(" + loadedBody.getHeightValue() + ")]</span>")));
+			tooltipSB.append(getBodyPartDiv(loadedBody, "Тело", loadedBody.getTorso()
+//					,
+//					"<span style='color:"+bodyShape.toWebHexStringColour()+";'>"+bodyShape.getName(false)+"</span>"
+//					+", "
+//					+(feral && !loadedBody.getSubspecies().getFeralAttributes(loadedBody).isSizeHeight()
+//							?"[unit.sizeShort(" + (loadedBody.getHeightValue())+ ")] long"
+//							:"[unit.sizeShort(" + loadedBody.getHeightValue() + ")] tall")
+//					+(feral && !loadedBody.getSubspecies().getFeralAttributes(loadedBody).isSizeHeight()
+//						?"Длинна: [unit.sizeShort(" + (loadedBody.getHeightValue())+ ")]"
+//						:"Высота: [unit.sizeShort(" + loadedBody.getHeightValue() + ")]")
+					));
 			
 			
 			// LESSER:
@@ -1853,7 +1948,9 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 						Util.capitaliseSentence(Util.intToString(Math.max(1, loadedBody.getBreastCrotch().getRows()*2)))+" "
 								+(loadedBody.getBreastCrotch().getRawSizeValue()>0?(loadedBody.getBreastCrotch().getSize().getCupSizeName() + "-чашка "):"плоско ")
 								+(loadedBody.getBreastCrotch().getShape()==BreastShape.UDDERS
-									?("вымя")
+									?(loadedBody.getBreastCrotch().getRows()==0
+										?"вымя"
+										:"вымени")
 									:"груди рядом с пахом")));
 			}
 		
@@ -1918,7 +2015,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 		}
 		
 		//  background-image:linear-gradient(to right bottom, " + primaryColour.toWebHexString() + " 50%, " + secondaryColour.toWebHexString() + " 50%);
-		return "<div class='subTitle' style='font-weight:normal; text-align:"+(passiveElemental?"center":"left")+"; margin-top:2px; white-space: nowrap;'>"
+		return "<div class='subTitle' style='font-weight:normal; text-align:"+(passiveElemental?"center":"left")+"; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;'>"
 					+ "<div style='width:10px; height:16px; padding:0; margin:0;'>"
 						+ "<div class='colour-box' style='width:8px; height:"+(displaySecondary?"8px; margin:0;":"8px; margin:4px 0 0 0;")+" border-radius:2px; padding:0;"
 						+ (primaryColour.isMetallic()
@@ -1977,7 +2074,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 		String coveringName = covering.getName(owner);
 		
 		//  background-image:linear-gradient(to right bottom, " + primaryColour.toWebHexString() + " 50%, " + secondaryColour.toWebHexString() + " 50%);
-		return "<div class='subTitle' style='font-weight:normal; text-align:left; margin-top:2px; white-space: nowrap;'>"
+		return "<div class='subTitle' style='font-weight:normal; text-align:left; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;'>"
 					+ "<div style='width:10px; height:16px; padding:0; margin:0;'>"
 						+ "<div class='colour-box' style='width:8px; height:"+(displaySecondary?"8px; margin:0;":"8px; margin:4px 0 0 0;")+" border-radius:2px; padding:0;"
 						+ (primaryColour.isMetallic()

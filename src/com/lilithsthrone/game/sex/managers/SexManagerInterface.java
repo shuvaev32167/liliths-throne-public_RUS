@@ -192,6 +192,10 @@ public interface SexManagerInterface {
 	
 	default boolean isSlotAvailable(GameCharacter character, SexSlot slot) {
 		if(character.isAsleep()) {
+			if((Main.sex.getSexPositionSlot(character).hasTag(SexSlotTag.LYING_DOWN) && slot.hasTag(SexSlotTag.LYING_DOWN_ON_FRONT))
+					|| Main.sex.getSexPositionSlot(character).hasTag(SexSlotTag.LYING_DOWN_ON_FRONT) && slot.hasTag(SexSlotTag.LYING_DOWN)) {
+				return true;
+			}
 			return slot==Main.sex.getSexPositionSlot(character); // If asleep, do not allow changing out of current slot
 		}
         return !slot.hasTag(SexSlotTag.MATING_PRESS) || Main.sex.getAllParticipants(false).stream().noneMatch(c -> c.isAsleep()); // DO not allow mating press if characters are sleeping

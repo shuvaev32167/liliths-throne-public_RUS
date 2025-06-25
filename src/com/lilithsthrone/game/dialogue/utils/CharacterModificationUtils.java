@@ -2087,7 +2087,7 @@ public class CharacterModificationUtils {
 								+ "<span style='color:"+ear.getRace().getColour().toWebHexString()+";'>"
 									+Util.capitaliseSentence(ear.getTransformName())
 									+(ear.isAbleToBeUsedAsHandlesInSex()?"*":"")
-									+(ear.getTags().contains(BodyPartTag.ECHO_LOCATION)?"+":"")
+									+(ear.getTags().contains(BodyPartTag.ECHO_LOCATION)?"&#8314;":"")
 								+"</span>"
 							+ "</div>");
 					
@@ -2097,7 +2097,7 @@ public class CharacterModificationUtils {
 								+ "<span style='color:"+ear.getRace().getColour().getShades()[0]+";'>"
 									+Util.capitaliseSentence(ear.getTransformName())
 									+(ear.isAbleToBeUsedAsHandlesInSex()?"*":"")
-									+(ear.getTags().contains(BodyPartTag.ECHO_LOCATION)?"+":"")
+									+(ear.getTags().contains(BodyPartTag.ECHO_LOCATION)?"&#8314;":"")
 								+"</span>"
 							+ "</div>");
 				}
@@ -2106,7 +2106,7 @@ public class CharacterModificationUtils {
 
 		return applyWrapper("Ears",
 				UtilText.parse(BodyChanging.getTarget(), "Change [npc.namePos] ear type."
-						+ "<br/><i>Ear type helps to determine subspecies identification. Some are long enough to be pulled during sex (marked by an asterisk), or can grant echo-location (marked by a plus).</i>"),
+						+ "<br/><i>Ear type helps to determine subspecies identification. Some are long enough to be pulled during sex (*), or can grant echo-location (&#8314;).</i>"),
 				"EAR_TYPE",
 				contentSB.toString(),
 				false);
@@ -2120,13 +2120,21 @@ public class CharacterModificationUtils {
 				if(BodyChanging.getTarget().getEyeType() == eye) {
 					contentSB.append(
 							"<div class='cosmetics-button active'>"
-								+ "<span style='color:"+eye.getRace().getColour().toWebHexString()+";'>"+Util.capitaliseSentence(eye.getTransformName())+(eye.getTags().contains(BodyPartTag.NIGHT_VISION)?"*":"")+"</span>"
+								+ "<span style='color:"+eye.getRace().getColour().toWebHexString()+";'>"
+									+Util.capitaliseSentence(eye.getTransformName())
+									+(eye.getTags().contains(BodyPartTag.NIGHT_VISION)?"*":"")
+									+(eye.getTags().contains(BodyPartTag.EYE_PERFECT_VISION)?"&#8314;":"")
+								+"</span>"
 							+ "</div>");
 					
 				} else {
 					contentSB.append(
 							"<div id='EYE_"+EyeType.getIdFromEyeType(eye)+"' class='cosmetics-button'>"
-								+ "<span style='color:"+eye.getRace().getColour().getShades()[0]+";'>"+Util.capitaliseSentence(eye.getTransformName())+(eye.getTags().contains(BodyPartTag.NIGHT_VISION)?"*":"")+"</span>"
+								+ "<span style='color:"+eye.getRace().getColour().getShades()[0]+";'>"
+									+Util.capitaliseSentence(eye.getTransformName())
+									+(eye.getTags().contains(BodyPartTag.NIGHT_VISION)?"*":"")
+									+(eye.getTags().contains(BodyPartTag.EYE_PERFECT_VISION)?"&#8314;":"")
+								+"</span>"
 							+ "</div>");
 				}
 			}
@@ -2134,7 +2142,8 @@ public class CharacterModificationUtils {
 
 		return applyWrapper("Eyes",
 				UtilText.parse(BodyChanging.getTarget(), "Change [npc.namePos] eye type."
-						+ "<br/><i>Eye type determines what iris and pupil shape characters spawn with, is used for subspecies identification, and can grant night vision capabilities (marked by an asterisk).</i>"),
+						+ "<br/><i>Eye type determines what iris and pupil shape characters spawn with, is used for subspecies identification,"
+						+ " and can grant night vision capabilities (*), or perfect vision (&#8314;).</i>"),
 				"EYE_TYPE",
 				contentSB.toString(),
 				true);

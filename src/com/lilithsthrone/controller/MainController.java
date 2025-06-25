@@ -1,9 +1,42 @@
 package com.lilithsthrone.controller;
 
+import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.TextStyle;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.ResourceBundle;
+import java.util.Set;
+
 import com.lilithsthrone.controller.eventListeners.InventorySelectedItemEventListener;
 import com.lilithsthrone.controller.eventListeners.SetContentEventListener;
-import com.lilithsthrone.controller.eventListeners.buttons.*;
-import com.lilithsthrone.controller.eventListeners.tooltips.*;
+import com.lilithsthrone.controller.eventListeners.buttons.ButtonCharactersEventListener;
+import com.lilithsthrone.controller.eventListeners.buttons.ButtonCopyDialogueEventListener;
+import com.lilithsthrone.controller.eventListeners.buttons.ButtonExportCharacterEventListener;
+import com.lilithsthrone.controller.eventListeners.buttons.ButtonInventoryEventHandler;
+import com.lilithsthrone.controller.eventListeners.buttons.ButtonJournalEventListener;
+import com.lilithsthrone.controller.eventListeners.buttons.ButtonMainMenuEventListener;
+import com.lilithsthrone.controller.eventListeners.buttons.ButtonMoneyOnFloorEventListener;
+import com.lilithsthrone.controller.eventListeners.buttons.ButtonMoveEastEventListener;
+import com.lilithsthrone.controller.eventListeners.buttons.ButtonMoveNorthEventListener;
+import com.lilithsthrone.controller.eventListeners.buttons.ButtonMoveSouthEventListener;
+import com.lilithsthrone.controller.eventListeners.buttons.ButtonMoveWestEventListener;
+import com.lilithsthrone.controller.eventListeners.buttons.ButtonQuickLoadEventListener;
+import com.lilithsthrone.controller.eventListeners.buttons.ButtonQuickSaveEventListener;
+import com.lilithsthrone.controller.eventListeners.buttons.ButtonZoomEventListener;
+import com.lilithsthrone.controller.eventListeners.tooltips.ClonedEventListener;
+import com.lilithsthrone.controller.eventListeners.tooltips.TooltipHideEventListener;
+import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInformationEventListener;
+import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInventoryEventListener;
+import com.lilithsthrone.controller.eventListeners.tooltips.TooltipMoveEventListener;
+import com.lilithsthrone.controller.eventListeners.tooltips.TooltipResponseDescriptionEventListener;
+import com.lilithsthrone.controller.eventListeners.tooltips.TooltipResponseMoveEventListener;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.CharacterChangeEventListener;
@@ -50,7 +83,21 @@ import com.lilithsthrone.game.dialogue.places.submission.dicePoker.DicePoker;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseSex;
 import com.lilithsthrone.game.dialogue.story.CharacterCreation;
-import com.lilithsthrone.game.dialogue.utils.*;
+import com.lilithsthrone.game.dialogue.utils.BodyChanging;
+import com.lilithsthrone.game.dialogue.utils.CharacterModificationUtils;
+import com.lilithsthrone.game.dialogue.utils.CharactersPresentDialogue;
+import com.lilithsthrone.game.dialogue.utils.CombatMovesSetup;
+import com.lilithsthrone.game.dialogue.utils.CosmeticsDialogue;
+import com.lilithsthrone.game.dialogue.utils.DebugDialogue;
+import com.lilithsthrone.game.dialogue.utils.EnchantmentDialogue;
+import com.lilithsthrone.game.dialogue.utils.GiftDialogue;
+import com.lilithsthrone.game.dialogue.utils.InventoryDialogue;
+import com.lilithsthrone.game.dialogue.utils.InventoryInteraction;
+import com.lilithsthrone.game.dialogue.utils.MiscDialogue;
+import com.lilithsthrone.game.dialogue.utils.OptionsDialogue;
+import com.lilithsthrone.game.dialogue.utils.PhoneDialogue;
+import com.lilithsthrone.game.dialogue.utils.SpellManagement;
+import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
@@ -59,7 +106,13 @@ import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
 import com.lilithsthrone.game.occupantManagement.MilkingRoom;
 import com.lilithsthrone.game.settings.KeyCodeWithModifiers;
 import com.lilithsthrone.game.settings.KeyboardAction;
-import com.lilithsthrone.game.sex.*;
+import com.lilithsthrone.game.sex.InitialSexActionInformation;
+import com.lilithsthrone.game.sex.SexAreaInterface;
+import com.lilithsthrone.game.sex.SexAreaOrifice;
+import com.lilithsthrone.game.sex.SexAreaPenetration;
+import com.lilithsthrone.game.sex.SexPace;
+import com.lilithsthrone.game.sex.SexParticipantType;
+import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotLyingDown;
@@ -103,12 +156,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.events.EventListener;
 import org.w3c.dom.events.EventTarget;
 
-import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.format.TextStyle;
-import java.util.*;
-import java.util.Map.Entry;
-
 import static com.lilithsthrone.utils.Constants.RUSSIAN_LOCALE;
 
 /**
@@ -118,230 +165,49 @@ import static com.lilithsthrone.utils.Constants.RUSSIAN_LOCALE;
  */
 public class MainController implements Initializable {
 
-    // Responses:
-    public static final int RESPONSE_COUNT = 15;
-    public static Document document, documentButtonsLeft, documentButtonsRight, documentAttributes, documentRight, documentInventory, documentMap, documentMapTitle;
-    static WebEngine webEngine;
-    static Colour flashMessageColour = null;
-    static String flashMessageText = null;
-    // Hotkey binding:
-    static KeyboardAction actionToBind;
-    static boolean primaryBinding;
-    // General tooltips:
-    static TooltipMoveEventListener moveTooltipListener = new TooltipMoveEventListener();
-    static TooltipHideEventListener hideTooltipListener = new TooltipHideEventListener();
-    // Buttons:
-    static ButtonCopyDialogueEventListener copyDialogueButtonListener = new ButtonCopyDialogueEventListener();
-    static ButtonCharactersEventListener charactersPresentButtonListener = new ButtonCharactersEventListener();
-    static ButtonInventoryEventHandler inventoryButtonListener = new ButtonInventoryEventHandler();
-    static ButtonJournalEventListener journalButtonListener = new ButtonJournalEventListener();
-    static ButtonMainMenuEventListener menuButtonListener = new ButtonMainMenuEventListener();
-    static ButtonZoomEventListener zoomButtonListener = new ButtonZoomEventListener();
-    static ButtonQuickSaveEventListener quickSaveButtonListener = new ButtonQuickSaveEventListener();
-    static ButtonQuickLoadEventListener quickLoadButtonListener = new ButtonQuickLoadEventListener();
-    static ButtonExportCharacterEventListener exportCharacterEventListener = new ButtonExportCharacterEventListener();
-    static ButtonMoneyOnFloorEventListener moneyOnFloorEventListener = new ButtonMoneyOnFloorEventListener();
-    // Responses:
-    static TooltipResponseMoveEventListener responseTooltipListener = new TooltipResponseMoveEventListener();
-    static SetContentEventListener nextResponsePageListener = new SetContentEventListener().nextPage();
-    static SetContentEventListener previousResponsePageListener = new SetContentEventListener().previousPage();
-    // Temporary ones to clear:
-    static Map<Document, List<EventListenerData>> EventListenerDataMap = new HashMap<>();
-    // Map movement:
-    private final ButtonMoveNorthEventListener moveNorthListener = new ButtonMoveNorthEventListener();
-    private final ButtonMoveSouthEventListener moveSouthListener = new ButtonMoveSouthEventListener();
-    private final ButtonMoveEastEventListener moveEastListener = new ButtonMoveEastEventListener();
-    private final ButtonMoveWestEventListener moveWestListener = new ButtonMoveWestEventListener();
-    private final boolean debugAllowListeners = true;
-    private final boolean useJavascriptToSetContent = true;
-    /**
-     * Sets up buttons and hotkeys.
-     */
-    public List<KeyCode> buttonsPressed = new ArrayList<>();
-    java.net.CookieManager cookieManager = new java.net.CookieManager();
-    // FXML elements:
-    @FXML
-    private GridPane mainPane;
-    @FXML
-    private ListView<AbstractCoreItem> listViewInventoryCell, listViewInventoryPlayer;
-    @FXML
-    private VBox vBoxLeft;
-    // UI-related elements:
-    @FXML
-    private WebView webViewMain, webViewAttributes, webViewRight, webViewButtonsLeft, webViewButtonsRight;
-    private WebEngine webEngineTooltip;
-    private WebEngine webEngineAttributes;
-    private WebEngine webEngineRight;
-    private WebEngine webEngineButtonsLeft;
-    private WebEngine webEngineButtonsRight;
+	// FXML elements:
+	@FXML
+	private GridPane mainPane;
+	@FXML
+	private ListView<AbstractCoreItem> listViewInventoryCell, listViewInventoryPlayer;
+	@FXML
+	private VBox vBoxLeft;
 
-    // Event listeners:
-    private WebView webviewTooltip;
-    private Tooltip tooltip;
-    private EventHandler<KeyEvent> actionKeyPressed, actionKeyReleased;
-    private int tooltipWidth = 0;
-    private int tooltipHeight = 0;
-    // Misc:
-    private boolean allowInput;
-    private KeyCode[] lastKeys;
+	// UI-related elements:
+	@FXML
+	private WebView webViewMain, webViewAttributes, webViewRight, webViewButtonsLeft, webViewButtonsRight;
 
-    static void addEventListener(Document document, String ID, String type, EventListener listener, boolean useCapture) {
-        final EventListener targetEventListener;
-        if (listener instanceof ClonedEventListener clonedListener) {
-            targetEventListener = clonedListener.newInstance();
-            var eventListenerData = EventListenerDataMap.getOrDefault(document, Collections.emptyList()).stream()
-                    .filter(event ->
-                            Objects.equals(event.ID, ID) && Objects.equals(event.type, type))
-                    .findFirst();
-            eventListenerData.ifPresent(event -> {
-                ((EventTarget) document.getElementById(ID))
-                        .removeEventListener(event.type, event.listener, event.useCapture);
-                EventListenerDataMap.get(document).remove(event);
-            });
-        } else {
-            targetEventListener = listener;
-        }
-        ((EventTarget) document.getElementById(ID)).addEventListener(type, targetEventListener, useCapture);
-        EventListenerDataMap.get(document).add(new EventListenerData(ID, type, targetEventListener, useCapture));
-    }
+	static WebEngine webEngine;
+	private WebEngine webEngineTooltip;
+	private WebEngine webEngineAttributes;
+	private WebEngine webEngineRight;
+	private WebEngine webEngineButtonsLeft;
+	private WebEngine webEngineButtonsRight;
+	private WebView webviewTooltip;
+	private Tooltip tooltip;
+	private EventHandler<KeyEvent> actionKeyPressed, actionKeyReleased;
 
-    public static void addTooltipListeners(String id, EventListener tooltip) {
-        addTooltipListeners(id, tooltip, null, false);
-    }
+	private int tooltipWidth = 0;
+	private int tooltipHeight = 0;
+	
+	// Responses:
+	public static final int RESPONSE_COUNT = 15;
+	
+	// Misc:
+	private boolean allowInput;
+	private KeyCode[] lastKeys;
+	
+	static Colour flashMessageColour = null;
+	static String flashMessageText = null;
 
-    public static void addTooltipListeners(String id, EventListener tooltip, EventListener click, boolean capture) {
-        addEventListener(document, id, "mousemove", moveTooltipListener, false);
-        addEventListener(document, id, "mouseleave", hideTooltipListener, false);
-        if (tooltip != null) {
-            addEventListener(document, id, "mouseenter", tooltip, false);
-        }
-        if (click != null) {
-            addEventListener(document, id, "click", click, capture);
-        }
-    }
+	java.net.CookieManager cookieManager = new java.net.CookieManager();
+	
+	// Hotkey binding:
+	static KeyboardAction actionToBind;
+	static boolean primaryBinding;
 
-    static void setInventoryPageLeft(int i) {
-        String id = "INV_PAGE_LEFT_" + i;
-        if (document.getElementById(id) != null) {
-            if (i != 5 || Main.game.getPlayer().isCarryingQuestItems()) {
-                ((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
-                    RenderingEngine.setPageLeft(i);
-                    Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
-                }, false);
-            }
-            if (i == 5) {
-                addEventListener(document, id, "mousemove", moveTooltipListener, false);
-                addEventListener(document, id, "mouseleave", hideTooltipListener, false);
-                TooltipInformationEventListener el2 = new TooltipInformationEventListener().setInformation("Уникальные вещи", "");
-                addEventListener(document, id, "mouseenter", el2, false);
-            }
-        }
-    }
-
-    public static void setResponseEventListeners() {
-
-        if (Main.game.getCurrentDialogueNode().getResponseTabTitle(0) != null && !Main.game.getCurrentDialogueNode().getResponseTabTitle(0).isEmpty()) {
-            int responsePageCounter = 0;
-            while (Main.game.getCurrentDialogueNode().getResponseTabTitle(responsePageCounter) != null) {
-                setResponseTabListeners(responsePageCounter);
-                responsePageCounter++;
-            }
-        }
-
-        // Responses:
-        for (int i = 0; i < RESPONSE_COUNT; i++) {
-            String id = "option_" + i;
-            if (document.getElementById(id) != null) {
-                SetContentEventListener el = new SetContentEventListener().setIndex(i);
-                ((EventTarget) document.getElementById(id)).addEventListener("click", el, false);
-
-                addEventListener(document, id, "mousemove", responseTooltipListener, false);
-                addEventListener(document, id, "mouseleave", hideTooltipListener, false);
-                TooltipResponseDescriptionEventListener el2 = new TooltipResponseDescriptionEventListener().setIndex(i);
-                addEventListener(document, id, "mouseenter", el2, false);
-            }
-        }
-        if (document.getElementById("switch_right") != null) {
-            addEventListener(document, "switch_right", "click", nextResponsePageListener, false);
-        }
-        if (document.getElementById("switch_left") != null) {
-            addEventListener(document, "switch_left", "click", previousResponsePageListener, false);
-        }
-    }
-
-    private static void setResponseTabListeners(int responsePageCounter) {
-        String id = "tab_" + responsePageCounter;
-
-        ((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
-            Main.game.setResponseTab(responsePageCounter);
-            Main.game.updateResponses();
-        }, false);
-    }
-
-    static void setInventoryPageRight(int i) {
-        String id = "INV_PAGE_RIGHT_" + i;
-        if (document.getElementById(id) != null) {
-            if (i != 5
-                    || (InventoryDialogue.getInventoryNPC() == null
-                    ? Main.game.getPlayer().getCell().getInventory().isAnyQuestItemPresent()
-                    : InventoryDialogue.getInventoryNPC().isCarryingQuestItems())) {
-                ((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
-                    RenderingEngine.setPageRight(i);
-                    Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
-                }, false);
-            }
-            if (i == 5) {
-                addEventListener(document, id, "mousemove", moveTooltipListener, false);
-                addEventListener(document, id, "mouseleave", hideTooltipListener, false);
-                TooltipInformationEventListener el2 = new TooltipInformationEventListener().setInformation("Уникальные вещи", "");
-                addEventListener(document, id, "mouseenter", el2, false);
-            }
-        }
-    }
-
-    public static void overrideAutoLocale() {
-        if (Main.getProperties().hasValue(PropertyValue.autoLocale)) {
-            Main.getProperties().setValue(PropertyValue.autoLocale, false);
-            Units.FORMATTER.updateNumberFormat(false);
-        }
-    }
-
-    private static void setStatusEffectSexTargetChangeListener(Document document, String id, GameCharacter character, SexAreaInterface si) {
-        ((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
-            GameCharacter target = Main.sex.getCharactersHavingOngoingActionWith(character, si).isEmpty()
-                    ? null
-                    : Main.sex.getCharactersHavingOngoingActionWith(character, si).get(0);
-            if (target != null && target instanceof NPC) {
-                Main.sex.setTargetedPartner(Main.game.getPlayer(), target);
-                Main.sex.recalculateSexActions();
-                updateUI();
-                Main.game.updateResponses();
-            }
-        }, false);
-    }
-
-    /**
-     * Updates every element of the UI.
-     */
-    public static void updateUI() {
-        if (Main.game.isRenderAttributesSection()) {
-            RenderingEngine.ENGINE.renderAttributesPanelLeft();
-            RenderingEngine.ENGINE.renderAttributesPanelRight();
-        }
-        updateUIButtons();
-    }
-
-    public static void updateUIButtons() {
-        RenderingEngine.ENGINE.renderButtonsLeft();
-        RenderingEngine.ENGINE.renderButtonsRight();
-    }
-
-    public static void updateUIRightPanel() {
-        RenderingEngine.ENGINE.renderAttributesPanelRight();
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
         allowInput = true;
         lastKeys = new KeyCode[5];
 
@@ -570,15 +436,20 @@ public class MainController implements Initializable {
             } else if (!Main.game.getCharactersPresent().isEmpty()) {
                 if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.NORMAL
 //						|| Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.OCCUPANT_MANAGEMENT
-                ) {
-                    Main.game.saveDialogueNode();
-                }
-
-                CharactersPresentDialogue.resetContent(characterViewed);
-                Main.game.setContent(new Response("", "", CharactersPresentDialogue.MENU));
-            }
-        }
-    }
+						) {
+					Main.game.saveDialogueNode();
+				}
+				
+				CharactersPresentDialogue.resetContent(characterViewed);
+				Main.game.setContent(new Response("", "", CharactersPresentDialogue.MENU));
+			}
+		}
+	}
+	
+	/**
+	 * Sets up buttons and hotkeys.
+	 */
+	public List<KeyCode> buttonsPressed = new ArrayList<>();
 
     private void setUpButtons() {
         // HOTKEYS:
@@ -1295,11 +1166,11 @@ public class MainController implements Initializable {
             }
         };
 
-        actionKeyReleased = new EventHandler<KeyEvent>() {
-            public void handle(KeyEvent event) {
+		actionKeyReleased = new EventHandler<KeyEvent>() {
+			public void handle(KeyEvent event) {
                 buttonsPressed.remove(event.getCode());
-            }
-        };
+			}
+		};
 
         Main.primaryStage.addEventFilter(KeyEvent.KEY_PRESSED, actionKeyPressed);
         Main.primaryStage.addEventFilter(KeyEvent.KEY_RELEASED, actionKeyReleased);
@@ -1318,7 +1189,39 @@ public class MainController implements Initializable {
         }
     }
 
-    private void unbindListeners(Document document) {
+	// Event listeners:
+	
+	// General tooltips:
+	static TooltipMoveEventListener moveTooltipListener = new TooltipMoveEventListener();
+	static TooltipHideEventListener hideTooltipListener = new TooltipHideEventListener();
+	
+	// Buttons:
+	static ButtonCopyDialogueEventListener copyDialogueButtonListener = new ButtonCopyDialogueEventListener();
+	static ButtonCharactersEventListener charactersPresentButtonListener = new ButtonCharactersEventListener();
+	static ButtonInventoryEventHandler inventoryButtonListener = new ButtonInventoryEventHandler();
+	static ButtonJournalEventListener journalButtonListener = new ButtonJournalEventListener();
+	static ButtonMainMenuEventListener menuButtonListener = new ButtonMainMenuEventListener();
+	static ButtonZoomEventListener zoomButtonListener = new ButtonZoomEventListener();
+    static ButtonQuickSaveEventListener quickSaveButtonListener = new ButtonQuickSaveEventListener();
+    static ButtonQuickLoadEventListener quickLoadButtonListener = new ButtonQuickLoadEventListener();
+    static ButtonMoneyOnFloorEventListener moneyOnFloorEventListener = new ButtonMoneyOnFloorEventListener();
+    static ButtonExportCharacterEventListener exportCharacterEventListener = new ButtonExportCharacterEventListener();
+
+	// Map movement:
+	private final ButtonMoveNorthEventListener moveNorthListener = new ButtonMoveNorthEventListener();
+	private final ButtonMoveSouthEventListener moveSouthListener = new ButtonMoveSouthEventListener();
+	private final ButtonMoveEastEventListener moveEastListener = new ButtonMoveEastEventListener();
+	private final ButtonMoveWestEventListener moveWestListener = new ButtonMoveWestEventListener();
+	
+	// Responses:
+	static TooltipResponseMoveEventListener responseTooltipListener = new TooltipResponseMoveEventListener();
+	static SetContentEventListener nextResponsePageListener = new SetContentEventListener().nextPage();
+	static SetContentEventListener previousResponsePageListener = new SetContentEventListener().previousPage();
+	
+	// Temporary ones to clear:
+	static Map<Document, List<EventListenerData>> EventListenerDataMap = new HashMap<>();
+	
+	private void unbindListeners(Document document) {
         cookieManager.getCookieStore().removeAll();
         if (document != null) {
             for (EventListenerData data : EventListenerDataMap.get(document)) {
@@ -1329,11 +1232,46 @@ public class MainController implements Initializable {
             EventListenerDataMap.remove(document);
         }
     }
+	
+	static void addEventListener(Document document, String ID, String type, EventListener listener, boolean useCapture) {
+        final EventListener targetEventListener;
+        if (listener instanceof ClonedEventListener clonedListener) {
+            targetEventListener = clonedListener.newInstance();
+            var eventListenerData = EventListenerDataMap.getOrDefault(document, Collections.emptyList()).stream()
+                    .filter(event ->
+                            Objects.equals(event.ID, ID) && Objects.equals(event.type, type))
+                    .findFirst();
+            eventListenerData.ifPresent(event -> {
+                ((EventTarget) document.getElementById(ID))
+                        .removeEventListener(event.type, event.listener, event.useCapture);
+                EventListenerDataMap.get(document).remove(event);
+            });
+        } else {
+            targetEventListener = listener;
+        }
+        ((EventTarget) document.getElementById(ID)).addEventListener(type, targetEventListener, useCapture);
+        EventListenerDataMap.get(document).add(new EventListenerData(ID, type, targetEventListener, useCapture));
+    }
+	
+	public static void addTooltipListeners(String id, EventListener tooltip) {
+        addTooltipListeners(id, tooltip, null, false);
+    }
 
-    /**
-     * Sets up all WebView EventListeners and WebEngines.
-     */
-    private void setUpWebViews() {
+    public static void addTooltipListeners(String id, EventListener tooltip, EventListener click, boolean capture) {
+        addEventListener(document, id, "mousemove", moveTooltipListener, false);
+        addEventListener(document, id, "mouseleave", hideTooltipListener, false);
+        addEventListener(document, id, "mouseenter", tooltip, false);
+        if (click != null) {
+            addEventListener(document, id, "click", click, capture);
+        }
+    }
+	
+	public static Document document, documentButtonsLeft, documentButtonsRight, documentAttributes, documentRight, documentInventory, documentMap, documentMapTitle;
+	private final boolean debugAllowListeners = true;
+	/**
+	 * Sets up all WebView EventListeners and WebEngines.
+	 */
+	private void setUpWebViews() {
 
         java.net.CookieHandler.setDefault(cookieManager);
 
@@ -1455,8 +1393,8 @@ public class MainController implements Initializable {
         }
 
     }
-
-    private void manageMainListeners() {
+	
+	private void manageMainListeners() {
         document = (Document) webEngine.executeScript("document");
         EventListenerDataMap.put(document, new ArrayList<>());
 
@@ -1698,235 +1636,316 @@ public class MainController implements Initializable {
 		} else if(currentNode.equals(LilayaDressingRoomDialogue.OUTFIT_EDITOR_ITEM_ENCHANT)) {
 			MiscController.initDressingRoomEnchantmentListeners();
 		} else if (currentNode.equals(CharacterCreation.BACKGROUND_SELECTION_MENU)) {
-            CreationController.initBackgroundSelectionListeners();
-        } else if (currentNode.equals(CompanionManagement.SLAVE_MANAGEMENT_COSMETICS_OTHER)) {
-            CoveringController.initBleachingListeners();
-            CoveringController.initAssHairListeners();
-            CoveringController.initFacialHairListeners();
-            CoveringController.initPubicHairListeners();
-            CoveringController.initUnderarmHairListeners();
-        } else if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_ASS)) {
-            CoveringController.initBleachingListeners();
-            CreationController.initAssSizeListeners(true);
-            CreationController.initHipSizeListeners(true);
-        } else if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_BREASTS)) {
-            CreationController.initAreolaeSizeListeners();
-            CreationController.initBreastShapeListeners();
-            CreationController.initBreastSizeListeners(true);
-            CreationController.initNipplePuffinessListeners();
-            CreationController.initNippleSizeListeners();
-            CreationController.initLactationCapacityListeners();
-        } else if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_BODY_HAIR)) {
-            CoveringController.initAssHairListeners();
-            CoveringController.initFacialHairListeners();
-            CoveringController.initPubicHairListeners();
-            CoveringController.initUnderarmHairListeners();
-        } else if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_CORE)) {
-            CreationController.initBodySizeListeners();
-            CreationController.initHeightListeners();
-            CreationController.initMuscleListeners();
-        } else if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_FACE)) {
-            CreationController.initLipSizeListeners();
-            CreationController.initLipPuffinessListeners();
-        } else if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_GENITALS)) {
-            if (Main.game.getPlayer().hasPenis()) {
-                CreationController.initPenisSizeListeners(true);
-                CreationController.initTesticleSizeListeners(true);
-                CreationController.initPenisCumProductionListeners();
-            } else {
-                CreationController.initClitorisSizeListeners(true);
-                CreationController.initLabiaSizeListeners();
-                CreationController.initVaginaCapacityListeners();
-            }
-        } else if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_HAIR)) {
-            CoveringController.initHairLengthListeners();
-            CoveringController.initHairStyleListeners();
-        } else if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_PIERCINGS)
-                || currentNode.equals(ScarlettsShop.HELENAS_SHOP_CUSTOM_SLAVE_BODY_PIERCINGS)
-                || currentNode.equals(CompanionManagement.SLAVE_MANAGEMENT_COSMETICS_PIERCINGS)
-                || currentNode.equals(SuccubisSecrets.SHOP_BEAUTY_SALON_PIERCINGS)) {
-            CoveringController.initPiercingsListeners();
-        } else if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_TATTOOS)
-                || currentNode.equals(CompanionManagement.SLAVE_MANAGEMENT_TATTOOS)
-                || currentNode.equals(CosmeticsDialogue.BEAUTICIAN_TATTOOS)
-                || currentNode.equals(SuccubisSecrets.SHOP_BEAUTY_SALON_TATTOOS)) {
-            CreationController.initTattooInfoListeners(currentNode);
-        } else if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_TATTOOS_ADD)
-                || currentNode.equals(CompanionManagement.SLAVE_MANAGEMENT_TATTOOS_ADD)
-                || currentNode.equals(CosmeticsDialogue.BEAUTICIAN_TATTOOS_ADD)
-                || currentNode.equals(SuccubisSecrets.SHOP_BEAUTY_SALON_TATTOOS_ADD)) {
-            CreationController.initTattooAddListeners();
-        } else if (currentNode.equals(CosmeticsDialogue.TATTOO_SAVE_LOAD)) {
-            FileController.initTattooSaveLoadListeners();
-        } else if (currentNode.equals(CharacterCreation.CHOOSE_APPEARANCE)) {
-            CreationController.initAgeListeners();
-            CreationController.initBirthdayListeners();
-            CreationController.initFemininityPresetListeners();
-            CreationController.initGenderListeners();
-            CreationController.initOrientationListeners();
-            CreationController.initPersonalityListeners();
-        } else if (currentNode.equals(CharacterCreation.CHOOSE_SEX_EXPERIENCE)
-                || currentNode.equals(ScarlettsShop.HELENAS_SHOP_CUSTOM_SLAVE_FINISH)) {
-            CreationController.initSexExperienceListeners();
-            CreationController.initFetishListeners();
-        } else if (currentNode.equals(CharacterCreation.IMPORT_CHOOSE)) {
-            FileController.initPlayerImportListeners();
-        } else if (currentNode.equals(CharactersPresentDialogue.MENU)) {
-            FileController.initArtworkListeners();
-            MiscController.initPerkListeners(currentNode);
-        } else if (currentNode.equals(CityHall.LODGER_IMPORT)) {
-            FileController.initLodgerImportListeners();
-        } else if (currentNode.equals(CityHall.CITY_HALL_WAITING_AREA_LODGER_LIST)) {
-            FileController.initLodgerWaitingListeners();
-        } else if (currentNode.equals(NightlifeDistrict.WATERING_HOLE_IMPORT)) {
-            FileController.initClubberImportListeners();
-        } else if (currentNode.equals(CombatMovesSetup.COMBAT_MOVES_CORE)) {
-            MiscController.initCombatMoveListeners();
-        } else if (currentNode.equals(CompanionManagement.OCCUPANT_CHOOSE_NAME)
-                || currentNode.equals(ElementalDialogue.ELEMENTAL_CHOOSE_NAME)) {
-            MiscController.initRenameListeners();
-        } else if (currentNode.equals(CompanionManagement.SLAVE_MANAGEMENT_INSPECT)
-                || currentNode.equals(PhoneDialogue.CONTACTS_CHARACTER)
-                || currentNode.equals(PhoneDialogue.CHARACTER_APPEARANCE)) {
-            FileController.initArtworkListeners();
-            MiscController.initPerkListeners(currentNode);
-        } else if (currentNode.equals(CompanionManagement.SLAVE_MANAGEMENT_JOBS)) {
-            OccupantController.initSlaveJobListeners();
-        } else if (currentNode.equals(CompanionManagement.SLAVE_MANAGEMENT_PERMISSIONS)) {
-            OccupantController.initSlavePermissionsListeners();
-        } else if (currentNode.equals(CharactersPresentDialogue.PERKS)
-                || currentNode.equals(CompanionManagement.SLAVE_MANAGEMENT_PERKS)
-                || currentNode.equals(ElementalDialogue.ELEMENTAL_PERKS)
-                || currentNode.equals(PhoneDialogue.CHARACTER_APPEARANCE)
-                || currentNode.equals(PhoneDialogue.CHARACTER_PERK_TREE)) {
-            MiscController.initPerkListeners(currentNode);
-        } else if (currentNode.equals(DebugDialogue.SPAWN_MENU)
-                || currentNode.equals(DebugDialogue.ITEM_VIEWER)) {
-            DebugController.initSpawnItemListeners();
-        } else if (currentNode.equals(DebugDialogue.SPAWN_MENU_SET)) {
-            DebugController.initSpawnSetListeners();
-        } else if (currentNode.equals(DebugDialogue.OUTFIT_VIEWER)) {
-            DebugController.initApplyOutfitListeners();
-        } else if (currentNode.equals(ElementalDialogue.ELEMENTAL_FETISHES)
-                || currentNode.equals(PhoneDialogue.CHARACTER_FETISHES)) {
-            MiscController.initFetishListeners();
-        } else if (currentNode.equals(EnchantmentDialogue.ENCHANTMENT_MENU)) {
-            EnchantmentController.initEnchantmentMenuListeners();
-        } else if (currentNode.equals(EnchantmentDialogue.ENCHANTMENT_SAVE_LOAD)) {
-            FileController.initEnchantmentSaveLoadListeners();
-        } else if (currentNode.equals(GenericOffspringDialogue.OFFSPRING_ENCOUNTER_CHOOSE_NAME)) {
-            MiscController.initFamilyRenameListeners();
-        } else if (currentNode.equals(GiftDialogue.GIFT_DIALOGUE)) {
-            MiscController.initGiftListeners();
-        } else if (currentNode.getDialogueNodeType() == DialogueNodeType.INVENTORY) {
-            if (currentNode.equals(InventoryDialogue.DYE_CLOTHING)
-                    || currentNode.equals(InventoryDialogue.DYE_CLOTHING_CHARACTER_CREATION)
-                    || currentNode.equals(InventoryDialogue.DYE_EQUIPPED_CLOTHING)
-                    || currentNode.equals(InventoryDialogue.DYE_EQUIPPED_CLOTHING_CHARACTER_CREATION)) {
-                InventoryController.initClothingDyeListeners();
-                InventoryController.initPatternListeners();
-                InventoryController.initPatternRecolourListeners();
-                InventoryController.initStickerListeners();
-            } else if (currentNode.equals(InventoryDialogue.DYE_WEAPON)
-                    || currentNode.equals(InventoryDialogue.DYE_EQUIPPED_WEAPON)) {
-                InventoryController.initWeaponDyeListeners();
-                InventoryController.initDamageTypeListeners();
-            } else {
-                InventoryController.initInventoryListeners();
-            }
-        } else if (currentNode.equals(Library.DOMINION_MAP)) {
-            MiscController.initMapListeners(WorldType.DOMINION, false);
-        } else if (currentNode.equals(LilayaMilkingRoomDialogue.MILKING_ROOM)) {
-            MilkingRoom room = Main.game.getOccupancyUtil().getMilkingRoom(Main.game.getPlayerCell().getType(), Main.game.getPlayerCell().getLocation());
-            for (FluidStored fluid : room.getFluidsStored()) {
-                OccupantController.fluidHandler(room, fluid);
-            }
-        } else if (currentNode.equals(OccupantManagementDialogue.ROOM_MANAGEMENT)) {
-            OccupantController.initRoomManagerListeners();
-        } else if (currentNode.equals(OccupantManagementDialogue.ROOM_UPGRADES)) {
-            OccupantController.initRoomUpgradesListeners();
-        } else if (currentNode.equals(OccupantManagementDialogue.SLAVE_LIST)
-                || currentNode.equals(OccupantManagementDialogue.SLAVE_LIST_MANAGEMENT)) {
-            OccupantController.initOccupantListListeners();
-            if (Main.game.getDialogueFlags().getSlaveTrader() != null) {
-                OccupantController.initSlaveTraderListeners();
-            }
-        } else if (currentNode.equals(OccupantManagementDialogue.OCCUPANT_OVERVIEW)) {
-            OccupantController.initOverviewListeners();
-        } else if (currentNode.equals(OptionsDialogue.AGE_PREFERENCE)) {
-            OptionsController.initAgeListeners();
-        } else if (currentNode.equals(OptionsDialogue.BODIES)) {
-            OptionsController.initBodiesListeners();
-        } else if (currentNode.equals(OptionsDialogue.GAMEPLAY)) {
-            OptionsController.initGameplayListeners();
-        } else if (currentNode.equals(OptionsDialogue.GENDER_PREFERENCE)) {
-            OptionsController.initGenderListeners();
-        } else if (currentNode.equals(OptionsDialogue.FETISH_PREFERENCE)) {
-            OptionsController.initFetishListeners();
-        } else if (currentNode.equals(OptionsDialogue.FURRY_PREFERENCE)) {
-            OptionsController.initFurryListeners();
-        } else if (currentNode.equals(OptionsDialogue.IMPORT_EXPORT)) {
-            FileController.initImportExportListeners();
-        } else if (currentNode.equals(OptionsDialogue.KEYBINDS)) {
-            OptionsController.initKeybindListeners();
-        } else if (currentNode.equals(OptionsDialogue.MISCELLANEOUS)) {
-            OptionsController.initMiscellaneousListeners();
-        } else if (currentNode.equals(OptionsDialogue.ORIENTATION_PREFERENCE)) {
-            OptionsController.initOrientationListeners();
-        } else if (currentNode.equals(OptionsDialogue.SAVE_LOAD)) {
-            FileController.initSaveLoadListeners();
-        } else if (currentNode.equals(OptionsDialogue.SEX)) {
-            OptionsController.initSexListeners();
-        } else if (currentNode.equals(OptionsDialogue.UNIT_PREFERENCE)) {
-            OptionsController.initUnitListeners();
-        } else if (currentNode.equals(PhoneDialogue.CLOTHING_CATALOGUE)) {
-            MiscController.initEncyclopediaClothingListeners();
-        } else if (currentNode.equals(PhoneDialogue.ITEM_CATALOGUE)) {
-            MiscController.initEncyclopediaItemListeners();
-        } else if (currentNode.equals(PhoneDialogue.MAP)) {
-            MiscController.initMapListeners(PhoneDialogue.worldTypeMap, true);
-        } else if (currentNode.equals(PhoneDialogue.WEAPON_CATALOGUE)) {
-            MiscController.initEncyclopediaWeaponListeners();
-        } else if (currentNode.equals(RoomPlayer.ROOM_SET_ALARM)) {
-            MiscController.initAlarmListeners();
-        } else if (currentNode.equals(ScarlettsShop.HELENAS_SHOP_CUSTOM_SLAVE_PERSONALITY)) {
-            CreationController.initAffectionListeners();
-            CreationController.initAgeListeners();
-            CreationController.initFetishListeners();
-            CreationController.initObedienceListeners();
-            CreationController.initOrientationListeners();
-            CreationController.initPersonalityListeners();
-            MiscController.initRenameListeners();
-        } else if (currentNode.equals(SlaverAlleyDialogue.AUCTION_BLOCK_LIST)) {
-            FileController.initAuctionListeners();
-        } else if (currentNode.equals(SlaverAlleyDialogue.AUCTION_IMPORT)) {
-            FileController.initSlaveImportListeners();
-        } else if (currentNode.equals(SpellManagement.CHARACTER_SPELLS_ARCANE)) {
-            MiscController.initSpellListeners(SpellSchool.ARCANE);
-        } else if (currentNode.equals(SpellManagement.CHARACTER_SPELLS_AIR)) {
-            MiscController.initSpellListeners(SpellSchool.AIR);
-        } else if (currentNode.equals(SpellManagement.CHARACTER_SPELLS_EARTH)) {
-            MiscController.initSpellListeners(SpellSchool.EARTH);
-        } else if (currentNode.equals(SpellManagement.CHARACTER_SPELLS_FIRE)) {
-            MiscController.initSpellListeners(SpellSchool.FIRE);
-        } else if (currentNode.equals(SpellManagement.CHARACTER_SPELLS_MISC)) {
-            MiscController.initSpellListeners(null);
-        } else if (currentNode.equals(SpellManagement.CHARACTER_SPELLS_WATER)) {
-            MiscController.initSpellListeners(SpellSchool.WATER);
-        } else if (currentNode.equals(SuccubisSecrets.SHOP_BEAUTY_SALON_OTHER)) {
-            CoveringController.initAssHairListeners();
-            CoveringController.initBleachingListeners();
-            CoveringController.initFacialHairListeners();
-            CoveringController.initPubicHairListeners();
-            CoveringController.initUnderarmHairListeners();
-        } else if (currentNode.equals(SuccubisSecrets.SHOP_BEAUTY_SALON_HAIR)) {
-            CoveringController.initHairLengthListeners();
-            CoveringController.initHairStyleListeners();
-        }
-        setResponseEventListeners();
-    }
+			CreationController.initBackgroundSelectionListeners();
+		} else if (currentNode.equals(CompanionManagement.SLAVE_MANAGEMENT_COSMETICS_OTHER)) {
+			CoveringController.initBleachingListeners();
+			CoveringController.initAssHairListeners();
+			CoveringController.initFacialHairListeners();
+			CoveringController.initPubicHairListeners();
+			CoveringController.initUnderarmHairListeners();
+		} else if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_ASS)) {
+			CoveringController.initBleachingListeners();
+			CreationController.initAssSizeListeners(true);
+			CreationController.initHipSizeListeners(true);
+		} else if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_BREASTS)) {
+			CreationController.initAreolaeSizeListeners();
+			CreationController.initBreastShapeListeners();
+			CreationController.initBreastSizeListeners(true);
+			CreationController.initNipplePuffinessListeners();
+			CreationController.initNippleSizeListeners();
+			CreationController.initLactationCapacityListeners();
+		} else if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_BODY_HAIR)) {
+			CoveringController.initAssHairListeners();
+			CoveringController.initFacialHairListeners();
+			CoveringController.initPubicHairListeners();
+			CoveringController.initUnderarmHairListeners();
+		} else if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_CORE)) {
+			CreationController.initBodySizeListeners();
+			CreationController.initHeightListeners();
+			CreationController.initMuscleListeners();
+		} else if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_FACE)) {
+			CreationController.initLipSizeListeners();
+			CreationController.initLipPuffinessListeners();
+		} else if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_GENITALS)) {
+			if (Main.game.getPlayer().hasPenis()) {
+				CreationController.initPenisSizeListeners(true);
+				CreationController.initTesticleSizeListeners(true);
+				CreationController.initPenisCumProductionListeners();
+			} else {
+				CreationController.initClitorisSizeListeners(true);
+				CreationController.initLabiaSizeListeners();
+				CreationController.initVaginaCapacityListeners();
+			}
+		} else if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_HAIR)) {
+			CoveringController.initHairLengthListeners();
+			CoveringController.initHairStyleListeners();
+		} else if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_PIERCINGS)
+				|| currentNode.equals(ScarlettsShop.HELENAS_SHOP_CUSTOM_SLAVE_BODY_PIERCINGS)
+				|| currentNode.equals(CompanionManagement.SLAVE_MANAGEMENT_COSMETICS_PIERCINGS)
+				|| currentNode.equals(SuccubisSecrets.SHOP_BEAUTY_SALON_PIERCINGS)) {
+			CoveringController.initPiercingsListeners();
+		} else if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_TATTOOS)
+				|| currentNode.equals(CompanionManagement.SLAVE_MANAGEMENT_TATTOOS)
+				|| currentNode.equals(CosmeticsDialogue.BEAUTICIAN_TATTOOS)
+				|| currentNode.equals(SuccubisSecrets.SHOP_BEAUTY_SALON_TATTOOS)) {
+			CreationController.initTattooInfoListeners(currentNode);
+		} else if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_TATTOOS_ADD)
+				|| currentNode.equals(CompanionManagement.SLAVE_MANAGEMENT_TATTOOS_ADD)
+				|| currentNode.equals(CosmeticsDialogue.BEAUTICIAN_TATTOOS_ADD)
+				|| currentNode.equals(SuccubisSecrets.SHOP_BEAUTY_SALON_TATTOOS_ADD)) {
+			CreationController.initTattooAddListeners();
+		} else if(currentNode.equals(CosmeticsDialogue.TATTOO_SAVE_LOAD)) {
+			FileController.initTattooSaveLoadListeners();
+		} else if (currentNode.equals(CharacterCreation.CHOOSE_APPEARANCE)) {
+			CreationController.initAgeListeners();
+			CreationController.initBirthdayListeners();
+			CreationController.initFemininityPresetListeners();
+			CreationController.initGenderListeners();
+			CreationController.initOrientationListeners();
+			CreationController.initPersonalityListeners();
+		} else if (currentNode.equals(CharacterCreation.CHOOSE_SEX_EXPERIENCE)
+				|| currentNode.equals(ScarlettsShop.HELENAS_SHOP_CUSTOM_SLAVE_FINISH)) {
+			CreationController.initSexExperienceListeners();
+			CreationController.initFetishListeners();
+		} else if (currentNode.equals(CharacterCreation.IMPORT_CHOOSE)) {
+			FileController.initPlayerImportListeners();
+		} else if (currentNode.equals(CharactersPresentDialogue.MENU)) {
+			FileController.initArtworkListeners();
+			MiscController.initPerkListeners(currentNode);
+		} else if (currentNode.equals(CityHall.LODGER_IMPORT)) {
+			FileController.initLodgerImportListeners();
+		} else if (currentNode.equals(CityHall.CITY_HALL_WAITING_AREA_LODGER_LIST)) {
+			FileController.initLodgerWaitingListeners();
+		} else if (currentNode.equals(NightlifeDistrict.WATERING_HOLE_IMPORT)) {
+			FileController.initClubberImportListeners();
+		} else if (currentNode.equals(CombatMovesSetup.COMBAT_MOVES_CORE)) {
+			MiscController.initCombatMoveListeners();
+		} else if (currentNode.equals(CompanionManagement.OCCUPANT_CHOOSE_NAME)
+				|| currentNode.equals(ElementalDialogue.ELEMENTAL_CHOOSE_NAME)) {
+			MiscController.initRenameListeners();
+		} else if (currentNode.equals(CompanionManagement.SLAVE_MANAGEMENT_INSPECT)
+				|| currentNode.equals(PhoneDialogue.CONTACTS_CHARACTER)
+				|| currentNode.equals(PhoneDialogue.CHARACTER_APPEARANCE)) {
+			FileController.initArtworkListeners();
+			MiscController.initPerkListeners(currentNode);
+		} else if (currentNode.equals(CompanionManagement.SLAVE_MANAGEMENT_JOBS)) {
+			OccupantController.initSlaveJobListeners();
+		} else if (currentNode.equals(CompanionManagement.SLAVE_MANAGEMENT_PERMISSIONS)) {
+			OccupantController.initSlavePermissionsListeners();
+		} else if (currentNode.equals(CharactersPresentDialogue.PERKS)
+				|| currentNode.equals(CompanionManagement.SLAVE_MANAGEMENT_PERKS)
+				|| currentNode.equals(ElementalDialogue.ELEMENTAL_PERKS)
+				|| currentNode.equals(PhoneDialogue.CHARACTER_APPEARANCE)
+				|| currentNode.equals(PhoneDialogue.CHARACTER_PERK_TREE)) {
+			MiscController.initPerkListeners(currentNode);
+		} else if (currentNode.equals(DebugDialogue.SPAWN_MENU)
+				|| currentNode.equals(DebugDialogue.ITEM_VIEWER)) {
+			DebugController.initSpawnItemListeners();
+		} else if (currentNode.equals(DebugDialogue.SPAWN_MENU_SET)) {
+			DebugController.initSpawnSetListeners();
+		} else if (currentNode.equals(DebugDialogue.OUTFIT_VIEWER)) {
+			DebugController.initApplyOutfitListeners();
+			} else if (currentNode.equals(ElementalDialogue.ELEMENTAL_FETISHES)
+				|| currentNode.equals(PhoneDialogue.CHARACTER_FETISHES)) {
+			MiscController.initFetishListeners();
+		} else if(currentNode.equals(PhoneDialogue.RACES)) {
+			MiscController.initEncyclopediaRaceListeners();
+		} else if (currentNode.equals(EnchantmentDialogue.ENCHANTMENT_MENU)) {
+			EnchantmentController.initEnchantmentMenuListeners();
+		} else if (currentNode.equals(EnchantmentDialogue.ENCHANTMENT_SAVE_LOAD)) {
+			FileController.initEnchantmentSaveLoadListeners();
+		} else if (currentNode.equals(GenericOffspringDialogue.OFFSPRING_ENCOUNTER_CHOOSE_NAME)) {
+			MiscController.initFamilyRenameListeners();
+		} else if (currentNode.equals(GiftDialogue.GIFT_DIALOGUE)) {
+			MiscController.initGiftListeners();
+		} else if (currentNode.getDialogueNodeType() == DialogueNodeType.INVENTORY) {
+			if (currentNode.equals(InventoryDialogue.DYE_CLOTHING)
+					|| currentNode.equals(InventoryDialogue.DYE_CLOTHING_CHARACTER_CREATION)
+					|| currentNode.equals(InventoryDialogue.DYE_EQUIPPED_CLOTHING)
+					|| currentNode.equals(InventoryDialogue.DYE_EQUIPPED_CLOTHING_CHARACTER_CREATION)) {
+				InventoryController.initClothingDyeListeners();
+				InventoryController.initPatternListeners();
+				InventoryController.initPatternRecolourListeners();
+				InventoryController.initStickerListeners();
+			} else if (currentNode.equals(InventoryDialogue.DYE_WEAPON)
+					|| currentNode.equals(InventoryDialogue.DYE_EQUIPPED_WEAPON)) {
+				InventoryController.initWeaponDyeListeners();
+				InventoryController.initDamageTypeListeners();
+			} else {
+				InventoryController.initInventoryListeners();
+			}
+		} else if (currentNode.equals(Library.DOMINION_MAP)) {
+			MiscController.initMapListeners(WorldType.DOMINION, false);
+		} else if (currentNode.equals(LilayaMilkingRoomDialogue.MILKING_ROOM)) {
+			MilkingRoom room = Main.game.getOccupancyUtil().getMilkingRoom(Main.game.getPlayerCell().getType(), Main.game.getPlayerCell().getLocation());
+			for (FluidStored fluid : room.getFluidsStored()) {
+				OccupantController.fluidHandler(room, fluid);
+			}
+		} else if (currentNode.equals(OccupantManagementDialogue.ROOM_MANAGEMENT)) {
+			OccupantController.initRoomManagerListeners();
+		} else if (currentNode.equals(OccupantManagementDialogue.ROOM_UPGRADES)) {
+			OccupantController.initRoomUpgradesListeners();
+		} else if (currentNode.equals(OccupantManagementDialogue.SLAVE_LIST)
+				|| currentNode.equals(OccupantManagementDialogue.SLAVE_LIST_MANAGEMENT)) {
+			OccupantController.initOccupantListListeners();
+			if (Main.game.getDialogueFlags().getSlaveTrader() != null) {
+				OccupantController.initSlaveTraderListeners();
+			}
+		} else if (currentNode.equals(OccupantManagementDialogue.OCCUPANT_OVERVIEW)) {
+			OccupantController.initOverviewListeners();
+		} else if (currentNode.equals(OptionsDialogue.AGE_PREFERENCE)) {
+			OptionsController.initAgeListeners();
+		} else if (currentNode.equals(OptionsDialogue.BODIES)) {
+			OptionsController.initBodiesListeners();
+		} else if (currentNode.equals(OptionsDialogue.GAMEPLAY)) {
+			OptionsController.initGameplayListeners();
+		} else if (currentNode.equals(OptionsDialogue.GENDER_PREFERENCE)) {
+			OptionsController.initGenderListeners();
+		} else if (currentNode.equals(OptionsDialogue.FETISH_PREFERENCE)) {
+			OptionsController.initFetishListeners();
+		} else if (currentNode.equals(OptionsDialogue.FURRY_PREFERENCE)) {
+			OptionsController.initFurryListeners();
+		} else if (currentNode.equals(OptionsDialogue.IMPORT_EXPORT)) {
+			FileController.initImportExportListeners();
+		} else if (currentNode.equals(OptionsDialogue.KEYBINDS)) {
+			OptionsController.initKeybindListeners();
+		} else if (currentNode.equals(OptionsDialogue.MISCELLANEOUS)) {
+			OptionsController.initMiscellaneousListeners();
+		} else if (currentNode.equals(OptionsDialogue.ORIENTATION_PREFERENCE)) {
+			OptionsController.initOrientationListeners();
+		} else if (currentNode.equals(OptionsDialogue.SAVE_LOAD)) {
+			FileController.initSaveLoadListeners();
+		} else if (currentNode.equals(OptionsDialogue.SEX)) {
+			OptionsController.initSexListeners();
+		} else if (currentNode.equals(OptionsDialogue.UNIT_PREFERENCE)) {
+			OptionsController.initUnitListeners();
+		} else if (currentNode.equals(PhoneDialogue.CLOTHING_CATALOGUE)) {
+			MiscController.initEncyclopediaClothingListeners();
+		} else if (currentNode.equals(PhoneDialogue.ITEM_CATALOGUE)) {
+			MiscController.initEncyclopediaItemListeners();
+		} else if (currentNode.equals(PhoneDialogue.MAP)) {
+			MiscController.initMapListeners(PhoneDialogue.worldTypeMap, true);
+		} else if (currentNode.equals(PhoneDialogue.WEAPON_CATALOGUE)) {
+			MiscController.initEncyclopediaWeaponListeners();
+		} else if (currentNode.equals(RoomPlayer.ROOM_SET_ALARM)) {
+			MiscController.initAlarmListeners();
+		} else if (currentNode.equals(ScarlettsShop.HELENAS_SHOP_CUSTOM_SLAVE_PERSONALITY)) {
+			CreationController.initAffectionListeners();
+			CreationController.initAgeListeners();
+			CreationController.initFetishListeners();
+			CreationController.initObedienceListeners();
+			CreationController.initOrientationListeners();
+			CreationController.initPersonalityListeners();
+			MiscController.initRenameListeners();
+		} else if (currentNode.equals(SlaverAlleyDialogue.AUCTION_BLOCK_LIST)) {
+			FileController.initAuctionListeners();
+		} else if (currentNode.equals(SlaverAlleyDialogue.AUCTION_IMPORT)) {
+			FileController.initSlaveImportListeners();
+		} else if (currentNode.equals(SpellManagement.CHARACTER_SPELLS_ARCANE)) {
+			MiscController.initSpellListeners(SpellSchool.ARCANE);
+		} else if (currentNode.equals(SpellManagement.CHARACTER_SPELLS_AIR)) {
+			MiscController.initSpellListeners(SpellSchool.AIR);
+		} else if (currentNode.equals(SpellManagement.CHARACTER_SPELLS_EARTH)) {
+			MiscController.initSpellListeners(SpellSchool.EARTH);
+		} else if (currentNode.equals(SpellManagement.CHARACTER_SPELLS_FIRE)) {
+			MiscController.initSpellListeners(SpellSchool.FIRE);
+		} else if (currentNode.equals(SpellManagement.CHARACTER_SPELLS_MISC)) {
+			MiscController.initSpellListeners(null);
+		} else if (currentNode.equals(SpellManagement.CHARACTER_SPELLS_WATER)) {
+			MiscController.initSpellListeners(SpellSchool.WATER);
+		} else if (currentNode.equals(SuccubisSecrets.SHOP_BEAUTY_SALON_OTHER)) {
+			CoveringController.initAssHairListeners();
+			CoveringController.initBleachingListeners();
+			CoveringController.initFacialHairListeners();
+			CoveringController.initPubicHairListeners();
+			CoveringController.initUnderarmHairListeners();
+		} else if (currentNode.equals(SuccubisSecrets.SHOP_BEAUTY_SALON_HAIR)) {
+			CoveringController.initHairLengthListeners();
+			CoveringController.initHairStyleListeners();
+		}
+		setResponseEventListeners();
+	}
+	
+	public static void setResponseEventListeners() {
 
-    private void manageButtonLeftListeners() {
+        if (Main.game.getCurrentDialogueNode().getResponseTabTitle(0) != null && !Main.game.getCurrentDialogueNode().getResponseTabTitle(0).isEmpty()) {
+            int responsePageCounter = 0;
+            while (Main.game.getCurrentDialogueNode().getResponseTabTitle(responsePageCounter) != null) {
+                setResponseTabListeners(responsePageCounter);
+                responsePageCounter++;
+            }
+        }
+
+        // Responses:
+        for (int i = 0; i < RESPONSE_COUNT; i++) {
+            String id = "option_" + i;
+            if (document.getElementById(id) != null) {
+                SetContentEventListener el = new SetContentEventListener().setIndex(i);
+                ((EventTarget) document.getElementById(id)).addEventListener("click", el, false);
+
+                addEventListener(document, id, "mousemove", responseTooltipListener, false);
+                addEventListener(document, id, "mouseleave", hideTooltipListener, false);
+                TooltipResponseDescriptionEventListener el2 = new TooltipResponseDescriptionEventListener().setIndex(i);
+                addEventListener(document, id, "mouseenter", el2, false);
+            }
+        }
+        if (document.getElementById("switch_right") != null) {
+            addEventListener(document, "switch_right", "click", nextResponsePageListener, false);
+        }
+        if (document.getElementById("switch_left") != null) {
+            addEventListener(document, "switch_left", "click", previousResponsePageListener, false);
+        }
+    }
+	
+	private static void setResponseTabListeners(int responsePageCounter) {
+        String id = "tab_" + responsePageCounter;
+
+        ((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
+            Main.game.setResponseTab(responsePageCounter);
+            Main.game.updateResponses();
+        }, false);
+    }
+	
+	static void setInventoryPageLeft(int i) {
+        String id = "INV_PAGE_LEFT_" + i;
+        if (document.getElementById(id) != null) {
+            if (i != 5 || Main.game.getPlayer().isCarryingQuestItems()) {
+                ((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
+                    RenderingEngine.setPageLeft(i);
+                    Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
+                }, false);
+            }
+            if (i == 5) {
+                addEventListener(document, id, "mousemove", moveTooltipListener, false);
+                addEventListener(document, id, "mouseleave", hideTooltipListener, false);
+                TooltipInformationEventListener el2 = new TooltipInformationEventListener().setInformation("Уникальные вещи", "");
+                addEventListener(document, id, "mouseenter", el2, false);
+            }
+        }
+    }
+	
+	static void setInventoryPageRight(int i) {
+        String id = "INV_PAGE_RIGHT_" + i;
+        if (document.getElementById(id) != null) {
+            if (i != 5
+                    || (InventoryDialogue.getInventoryNPC() == null
+                    ? Main.game.getPlayer().getCell().getInventory().isAnyQuestItemPresent()
+                    : InventoryDialogue.getInventoryNPC().isCarryingQuestItems())) {
+                ((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
+                    RenderingEngine.setPageRight(i);
+                    Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
+                }, false);
+            }
+            if (i == 5) {
+                addEventListener(document, id, "mousemove", moveTooltipListener, false);
+                addEventListener(document, id, "mouseleave", hideTooltipListener, false);
+                TooltipInformationEventListener el2 = new TooltipInformationEventListener().setInformation("Уникальные вещи", "");
+                addEventListener(document, id, "mouseenter", el2, false);
+            }
+        }
+    }
+	
+	private void manageButtonLeftListeners() {
         documentButtonsLeft = (Document) webEngineButtonsLeft.executeScript("document");
         EventListenerDataMap.put(documentButtonsLeft, new ArrayList<>());
 
@@ -1967,8 +1986,8 @@ public class MainController implements Initializable {
             addEventListener(documentButtonsLeft, "mapZoom", "mouseenter", new TooltipInformationEventListener().setInformation("Маштабирование миникарты" + (hotKey == null ? "" : " (" + hotKey.getFullName() + ")"), ""), false);
         }
     }
-
-    private void manageButtonRightListeners() {
+	
+	private void manageButtonRightListeners() {
         documentButtonsRight = (Document) webEngineButtonsRight.executeScript("document");
         EventListenerDataMap.put(documentButtonsRight, new ArrayList<>());
 
@@ -2466,7 +2485,28 @@ public class MainController implements Initializable {
 
     }
 
-    private void manageRightListeners() {
+	public static void overrideAutoLocale() {
+        if (Main.getProperties().hasValue(PropertyValue.autoLocale)) {
+            Main.getProperties().setValue(PropertyValue.autoLocale, false);
+            Units.FORMATTER.updateNumberFormat(false);
+        }
+    }
+
+	private static void setStatusEffectSexTargetChangeListener(Document document, String id, GameCharacter character, SexAreaInterface si) {
+        ((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
+            GameCharacter target = Main.sex.getCharactersHavingOngoingActionWith(character, si).isEmpty()
+                    ? null
+                    : Main.sex.getCharactersHavingOngoingActionWith(character, si).get(0);
+            if (target != null && target instanceof NPC) {
+                Main.sex.setTargetedPartner(Main.game.getPlayer(), target);
+                Main.sex.recalculateSexActions();
+                updateUI();
+                Main.game.updateResponses();
+            }
+        }, false);
+    }
+	
+	private void manageRightListeners() {
         documentRight = (Document) webEngineRight.executeScript("document");
         EventListenerDataMap.put(documentRight, new ArrayList<>());
 
@@ -2816,7 +2856,10 @@ public class MainController implements Initializable {
             }
         }
     }
-
+	
+	
+	private final boolean useJavascriptToSetContent = true;
+	
     private void setWebEngineContent(WebEngine engine, String content) {
         content = content.replaceAll("[\r\n]", "");
         content = content.replaceAll("\"", "'");
@@ -3138,8 +3181,28 @@ public class MainController implements Initializable {
         return lastKeys[0] == five && lastKeys[1] == four && lastKeys[2] == three && lastKeys[3] == two && lastKeys[4] == one;
     }
 
-    public void updateUILeftPanel() {
+	/**
+	 * Updates every element of the UI.
+	 */
+	public static void updateUI() {
+        if (Main.game.isRenderAttributesSection()) {
+            RenderingEngine.ENGINE.renderAttributesPanelLeft();
+            RenderingEngine.ENGINE.renderAttributesPanelRight();
+        }
+        updateUIButtons();
+    }
+	
+	public static void updateUIButtons() {
+        RenderingEngine.ENGINE.renderButtonsLeft();
+        RenderingEngine.ENGINE.renderButtonsRight();
+    }
+	
+	public void updateUILeftPanel() {
         RenderingEngine.ENGINE.renderAttributesPanelLeft();
+    }
+	
+	public static void updateUIRightPanel() {
+        RenderingEngine.ENGINE.renderAttributesPanelRight();
     }
 
     public void zoomMap() {
@@ -3253,7 +3316,8 @@ public class MainController implements Initializable {
         webviewTooltip.setPrefHeight(height);
 		tooltip.setMaxWidth(width);
 		tooltip.setPrefWidth(width);
-        tooltip.setMaxHeight(height);tooltip.setPrefHeight(height);
+		tooltip.setMaxHeight(height);
+		tooltip.setPrefHeight(height);
         tooltipWidth = width;
         tooltipHeight = height;
     }

@@ -648,11 +648,11 @@ public class UtilText {
 		return formatAsMoney(moneyString, "b", PresetColour.CURRENCY_COPPER);
 	}
 
-	public static String formatAsMoney(int money) {
+	public static String formatAsMoney(long money) {
 		return formatAsMoney(money, "b");
 	}
 
-	public static String formatAsMoneyUncoloured(int money, String tag) {
+	public static String formatAsMoneyUncoloured(long money, String tag) {
 		return formatAsMoney(money, tag, null);
 	}
 
@@ -660,7 +660,7 @@ public class UtilText {
 		return formatAsMoney(money, tag, null);
 	}
 
-	public static String formatAsMoney(int money, String tag) {
+	public static String formatAsMoney(long money, String tag) {
 		return formatAsMoney(money, tag, PresetColour.TEXT);
 	}
 
@@ -682,7 +682,7 @@ public class UtilText {
 		return formatAsMoney(money, tag, PresetColour.TEXT);
 	}
 
-	public static String formatAsMoney(int money, String tag, Colour amountColour) {
+	public static String formatAsMoney(long money, String tag, Colour amountColour) {
 		return formatAsMoney(Units.number(money), tag, amountColour);
 	}
 
@@ -1474,7 +1474,7 @@ public class UtilText {
                 "Formats the passed integer argument as a String.") {
             @Override
             public String parse(List<GameCharacter> specialNPCs, String command, String arguments, String target, GameCharacter character) {
-                return Util.intToString(Integer.valueOf(UtilText.parse(arguments)));
+                return Util.intToString(Long.valueOf(UtilText.parse(arguments)));
             }
         });
 

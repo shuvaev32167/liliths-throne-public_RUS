@@ -654,9 +654,10 @@ public class CharacterCreation {
 					}
 				};
 
-			} else if (index == 0) {
-				return new Response("Назад", "Возврат в главное меню.", OptionsDialogue.MENU);
 			}
+//            else if (index == 0) {
+//				return new Response("Назад", "Возврат в главное меню.", OptionsDialogue.MENU);
+//			}
 			return null;
 		}
 	};
