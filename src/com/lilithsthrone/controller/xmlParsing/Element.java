@@ -104,12 +104,12 @@ public class Element {
 	 */
 	public String getTextContent() {
 		try {
-			return innerElement.getTextContent();
+			return innerElement.getTextContent().replaceAll("(\\s{2,}|\\t)", " ").trim();
 			
 		} catch (DOMException ex) {
-			System.err.println(String.format("DOM exception: text content in element \"%s\" probably exceeds max allowed."
-			+ "XML parsing will try to continue with empty text content",
-			getTagName()));
+			System.err.printf("DOM exception: text content in element \"%s\" probably exceeds max allowed."
+			+ "XML parsing will try to continue with empty text content%n",
+			getTagName());
 			return "";
 		}
 	}

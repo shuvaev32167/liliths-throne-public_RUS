@@ -7,9 +7,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.w3c.dom.events.Event;
-import org.w3c.dom.events.EventListener;
-
 import com.lilithsthrone.controller.TooltipUpdateThread;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -80,6 +77,7 @@ import com.lilithsthrone.world.WorldType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.w3c.dom.events.Event;
 import ru.shuvaev.morpher.tools.enams.Numeration;
 
 import static com.lilithsthrone.utils.translate.russian.Morpher.convertGender;
@@ -1013,7 +1011,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 									owner.getBreastRace(),
 									owner.getBreastType().getNippleType().getBodyCoveringType(owner),
 									owner.isNippleFeral(),
-									Util.capitaliseSentence(Util.intToString(owner.getBreastRows()*2))+" "+(owner.getBreastRawSizeValue()>0?(owner.getBreastSize().getCupSizeName() + "-чашка грудей"):(owner.isFeminine()?"плоская грудь":"грудные мышцы"))));
+									Util.capitaliseSentence(Util.intToString(owner.getBreastRows()* 2L))+" "+(owner.getBreastRawSizeValue()>0?(owner.getBreastSize().getCupSizeName() + "-чашка грудей"):(owner.isFeminine()?"плоская грудь":"грудные мышцы"))));
 						}
 					}
 					if(owner.hasBreastsCrotch() && Main.game.getPlayer().isKnowsCharacterArea(CoverableArea.BREASTS_CROTCH, owner)) {
@@ -1159,7 +1157,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 						if(owner.isFeral() && !owner.getFeralAttributes().isArmsOrWingsPresent() && owner.getLegConfiguration()!=LegConfiguration.AVIAN) {
 							tooltipSB.append(getEmptyBodyPartDiv("Руки", "Нет"));
 						} else {
-							tooltipSB.append(getBodyPartDiv(owner, Util.capitaliseSentence(Util.intToString(owner.getArmRows()*2))+" руки", owner.getArmRace(), owner.getArmCovering(), owner.isArmFeral()));
+							tooltipSB.append(getBodyPartDiv(owner, Util.capitaliseSentence(Util.intToString(owner.getArmRows()* 2L))+" руки", owner.getArmRace(), owner.getArmCovering(), owner.isArmFeral()));
 						}
 						switch(owner.getLegConfiguration()) {
 							case ARACHNID:
@@ -1200,7 +1198,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 						if(!owner.isPlayer() && !owner.isAreaKnownByCharacter(CoverableArea.EYES, Main.game.getPlayer())) {
 							tooltipSB.append(getEmptyBodyPartDiv("Eyes", "Unknown!"));
 						} else {
-							tooltipSB.append(getBodyPartDiv(owner, Util.capitaliseSentence(Util.intToString(owner.getEyePairs()*2))+" глаза", owner.getEyeRace(), owner.getEyeCovering(), owner.isEyeFeral()));
+							tooltipSB.append(getBodyPartDiv(owner, Util.capitaliseSentence(Util.intToString(owner.getEyePairs()* 2L))+" глаза", owner.getEyeRace(), owner.getEyeCovering(), owner.isEyeFeral()));
 						}
 						tooltipSB.append(getBodyPartDiv(owner, "Уши", owner.getEarRace(), owner.getEarCovering(), owner.isEarFeral()));
 						tooltipSB.append(getBodyPartDiv(owner, "Язык", owner.getTongueRace(), owner.getTongueCovering(), owner.isTongueFeral()));
@@ -1212,7 +1210,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 						}
 						if (owner.getAntennaType() != AntennaType.NONE) {
 							//TODO might need changing if made like horn count:
-							tooltipSB.append(getBodyPartDiv(owner, Util.capitaliseSentence(Util.intToString(owner.getAntennaRows()*owner.getAntennaePerRow()))+" антенны", owner.getAntennaRace(), owner.getAntennaCovering(), owner.isAntennaFeral()));
+							tooltipSB.append(getBodyPartDiv(owner, Util.capitaliseSentence(Util.intToString((long) owner.getAntennaRows() *owner.getAntennaePerRow()))+" антенны", owner.getAntennaRace(), owner.getAntennaCovering(), owner.isAntennaFeral()));
 						} else {
 							tooltipSB.append(getEmptyBodyPartDiv("Антенны", "Нет"));
 						}
@@ -1275,7 +1273,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 							} else {
 								tooltipSB.append(getEmptyBodyPartDiv("Соски",
 										"Неизвестно!",
-										Util.capitaliseSentence(Util.intToString(owner.getBreastRows()*2))+" "+(owner.getBreastRawSizeValue()>0?(owner.getBreastSize().getCupSizeName() + "-чашка груди"):(owner.isFeminine()?"плоские груди":"грудные мышцы"))));
+										Util.capitaliseSentence(Util.intToString(owner.getBreastRows()* 2L))+" "+(owner.getBreastRawSizeValue()>0?(owner.getBreastSize().getCupSizeName() + "-чашка груди"):(owner.isFeminine()?"плоские груди":"грудные мышцы"))));
 							}
 						} else {
 							if(owner.isFeral() && !owner.getFeralAttributes().isBreastsPresent()) {
@@ -1285,7 +1283,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 										owner.getBreastRace(),
 										owner.getBreastType().getNippleType().getBodyCoveringType(owner),
 										owner.isNippleFeral(),
-										Util.capitaliseSentence(Util.intToString(owner.getBreastRows()*2))+" "+(owner.getBreastRawSizeValue()>0?(owner.getBreastSize().getCupSizeName() + "-чашка груди"):(owner.isFeminine()?"плоские груди":"грудные мышцы"))));
+										Util.capitaliseSentence(Util.intToString(owner.getBreastRows()* 2L))+" "+(owner.getBreastRawSizeValue()>0?(owner.getBreastSize().getCupSizeName() + "-чашка груди"):(owner.isFeminine()?"плоские груди":"грудные мышцы"))));
 							}
 						}
 						
@@ -1678,7 +1676,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 			}
 
 
-			Main.mainController.setTooltipSize(360, 180 + (yIncrease > 0 ? 32 : 0) + (teleport ? 8 + 48 : 0) + (yIncrease * LINE_HEIGHT) + 20);
+			Main.mainController.setTooltipSize(400, 180 + (yIncrease > 0 ? 40 : 0) + (teleport ? 8 + 52 : 0) + (yIncrease * (LINE_HEIGHT + 14)) + 40);
 			
 			String tooltipDesc = cell.getPlace().getPlaceType().getTooltipDescription();
 			
@@ -1835,7 +1833,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 			if(feral && !loadedBody.getSubspecies().getFeralAttributes(loadedBody).isArmsOrWingsPresent() && loadedBody.getLegConfiguration()!=LegConfiguration.AVIAN) {
 				tooltipSB.append(getEmptyBodyPartDiv("Руки", "Нет"));
 			} else {
-				tooltipSB.append(getBodyPartDiv(loadedBody, Util.capitaliseSentence(Util.intToString(loadedBody.getArm().getArmRows()*2))+" руки", loadedBody.getArm()));
+				tooltipSB.append(getBodyPartDiv(loadedBody, Util.capitaliseSentence(Util.intToString(loadedBody.getArm().getArmRows()* 2L))+" руки", loadedBody.getArm()));
 			}
 			switch(loadedBody.getLegConfiguration()) {
 				case ARACHNID:
@@ -1868,7 +1866,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 				tooltipSB.append(getBodyPartDiv(loadedBody, Util.capitaliseSentence(
 						loadedBody.getHair().getLength().getDescriptor())+" "+loadedBody.getHair().getStyle().getName(loadedBody)+" "+loadedBody.getHair().getName(owner), loadedBody.getHair()));
 			}
-			tooltipSB.append(getBodyPartDiv(loadedBody, Util.capitaliseSentence(Util.intToString(loadedBody.getEye().getEyePairs()*2))+" eyes", loadedBody.getEye()));
+			tooltipSB.append(getBodyPartDiv(loadedBody, Util.capitaliseSentence(Util.intToString(loadedBody.getEye().getEyePairs()* 2L))+" eyes", loadedBody.getEye()));
 			tooltipSB.append(getBodyPartDiv(loadedBody, "Уши", loadedBody.getEar()));
 			tooltipSB.append(getBodyPartDiv(loadedBody, "Язык", loadedBody.getFace().getTongue()));
 			if (loadedBody.getHornType() != HornType.NONE) {
@@ -1922,7 +1920,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 			} else {
 				tooltipSB.append(getBodyPartDiv(loadedBody, "Соски",
 						loadedBody.getBreast().getNipples(),
-						Util.capitaliseSentence(Util.intToString(loadedBody.getBreast().getRows()*2))+" "
+						Util.capitaliseSentence(Util.intToString(loadedBody.getBreast().getRows()* 2L))+" "
 								+(loadedBody.getBreast().getRawSizeValue()>0
 								?(loadedBody.getBreast().getSize().getCupSizeName() + "-чашка груди")
 								:(loadedBody.isFeminine()?"плоская грудь":"грудные мышцы"))));

@@ -844,24 +844,26 @@ public class UtilText {
 	 * @return The word, with an appropriate determiner (either 'a' or 'an' ) added in front of it.
 	 */
 	public static String addDeterminer(String word) {
-		return generateSingularDeterminer(word)+" "+word;
+//		return generateSingularDeterminer(word)+" "+word;
+		return word;
 	}
 
 	/**
 	 * @return 'a' or 'an'
 	 */
 	public static String generateSingularDeterminer(String word) {
-		if(word.isEmpty()) {
-			return "";
-		}
-		if ((isVowel(word.charAt(0)) || word.charAt(0)=='x' || word.charAt(0)=='X')
-				 && !word.startsWith("Uni") && !word.startsWith("uni")
-				 && !word.startsWith("Used") && !word.startsWith("used")) {
-			return "an";
-
-		} else {
-			return "a";
-		}
+//		if(word.isEmpty()) {
+//			return "";
+//		}
+//		if ((isVowel(word.charAt(0)) || word.charAt(0)=='x' || word.charAt(0)=='X')
+//				 && !word.startsWith("Uni") && !word.startsWith("uni")
+//				 && !word.startsWith("Used") && !word.startsWith("used")) {
+//			return "an";
+//
+//		} else {
+//			return "a";
+//		}
+		return "";
 	}
 
 	/**
@@ -939,7 +941,7 @@ public class UtilText {
 					Element e = (Element) (doc.getDocumentElement()).getElementsByTagName("htmlContent").item(i);
 
 					if(e.getAttribute("tag").equals(tag)) {
-						strings.add(e.getTextContent().replaceFirst("<!\\[CDATA\\[", "").replaceAll("\\]\\]>", "").replace('\t', ' ').replaceAll("  ", " "));
+						strings.add(e.getTextContent().replaceFirst("<!\\[CDATA\\[", "").replaceAll("\\]\\]>", "").replaceAll("(\\s{2,}|\\t)", " ").trim());
 					}
 				}
 
@@ -1490,7 +1492,7 @@ public class UtilText {
 
     private static final String[] lastDescriptors = new String[2];
     private static final Map<String, CompiledScript> memo = new HashMap<>();
-	private static final int memo_limit = 700;
+	private static final int memo_limit = 1000;
     public static StringBuilder nodeContentSB = new StringBuilder(4096);
     private static String modifiedSentence;
     private static List<ParserTag> parserTags;

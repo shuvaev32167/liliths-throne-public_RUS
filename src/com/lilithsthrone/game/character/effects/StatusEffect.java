@@ -113,7 +113,7 @@ public class StatusEffect {
 		}
 		@Override
 		public String getDescription(GameCharacter target) {
-            return UtilText.parse(target, "[npc.NameIsFull] incredibly weak. [npc.She] struggle to do much damage with [npc.her] wimpy little [npc.arms], and [npc.her] fragile body is particularly vulnerable to physical damage.");
+			return UtilText.parse(target, "[npc.NameIsFull] невероятно [npc.genderBasedWord(слаб, слаба)]. [npc.She] с трудом [npc.targetBasedWord(наносишь, наносит)] урон своими слабыми маленькими [pc.morphPluralInstr([npc.arms])], а [npc.targetBasedWord(твоё, [npc.her])] хрупкое тело особенно уязвимо для физического урона.");
 		}
 		@Override
 		public boolean isConditionsMet(GameCharacter target) {
@@ -142,7 +142,7 @@ public class StatusEffect {
 		}
 		@Override
 		public String getDescription(GameCharacter target) {
-            return UtilText.parse(target, "[npc.NameHasFull] средний уровень физической подготовки для своего размера тела.");
+			return UtilText.parse(target, "У [npc.targetBasedWord(тебя, [npc.morphSingleNameGene([npc.name])])] средний уровень физической подготовки для своего размера тела.");
 		}
 		@Override
 		public boolean isConditionsMet(GameCharacter target) {
@@ -172,7 +172,7 @@ public class StatusEffect {
 		}
 		@Override
 		public String getDescription(GameCharacter target) {
-			return UtilText.parse(target, "[npc.NameIsFull] stronger and fitter than [npc.her] body size would suggest, and [npc.is] able to inflict more physical damage as a result.");
+			return UtilText.parse(target, "[npc.NameIsFull] сильнее и выносливее, чем можно было бы предположить, глядя на [npc.targetBasedWord(твоё, [npc.her])] телосложение, и [npc.name] [npc.genderBasedWord(способен, способна)] наносить больше физического урона.");
 		}
 		@Override
 		public boolean isConditionsMet(GameCharacter target) {
@@ -202,7 +202,7 @@ public class StatusEffect {
 		}
 		@Override
 		public String getDescription(GameCharacter target) {
-			return UtilText.parse(target, "[npc.NameIsFull] considerably stronger and fitter than [npc.her] body size would suggest, and [npc.is] able to inflict a significant amount of physical damage as a result.");
+			return UtilText.parse(target, "[npc.NameIsFull] значительно сильнее и выносливее, чем можно было бы предположить, судя по [npc.targetBasedWord(твоему, [npc.her])] телосложению, и [npc.name] [npc.genderBasedWord(способен, способна)] нанести значительный физический ущерб.");
 		}
 		@Override
 		public boolean isConditionsMet(GameCharacter target) {
@@ -232,7 +232,7 @@ public class StatusEffect {
 		}
 		@Override
 		public String getDescription(GameCharacter target) {
-			return UtilText.parse(target, "[npc.Name] [npc.has] an exceptional level of fitness, and there are few who could ever hope to rival [npc.her] raw physical power.");
+			return UtilText.parse(target, "[npc.Name] [npc.targetBasedWord(обладаешь, обладает)] исключительной физической подготовкой, и лишь немногие могут сравниться с [npc.targetBasedWord(тобой, н[npc.morphSingleNameGene([npc.her])])] в силе и выносливости.");
 		}
 		@Override
 		public boolean isConditionsMet(GameCharacter target) {
@@ -262,7 +262,7 @@ public class StatusEffect {
 		}
 		@Override
 		public String getDescription(GameCharacter owner) {
-			return UtilText.parse(owner, "[npc.NamePos] body is the stuff of legend; mere mortals look upon [npc.herHim] in fear and awe!");
+			return UtilText.parse(owner, "[npc.TargetBasedWord(твоё, [npc.namePos])] — предмет легенд; простые смертные смотрят на [npc.targetBasedWord(тебя, [npc.herHim])] со страхом и трепетом!");
 		}
 		@Override
 		public boolean isConditionsMet(GameCharacter target) {
@@ -5535,7 +5535,7 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 	};
 
 	public static final AbstractStatusEffect MILK_PRODUCTION = new AbstractStatusEffect(80,
-			"Milk Production",
+			"Производство молока",
 			"milkProduction",
 			PresetColour.GENERIC_SEX,
 			true,
@@ -5551,9 +5551,9 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 			float milkRegenRate = target.getLactationRegenerationPerSecond(false) * 60;
 
 			return UtilText.parse(target,
-					"[npc.NamePos] breasts are producing [npc.milk] at an individual rate of "+Units.fluid(milkRegenRate)+"/minute,"
-							+ " totalling [style.colourGood("+Units.fluid(milkRegenRate * target.getBreastRows() * 2)+"/minute)] (as [npc.sheHasFull] [npc.totalBreasts] breasts)."
-					+ " They have stored "+Units.fluid(target.getBreastRawStoredMilkValue())+", out of a maximum of "+Units.fluid(target.getBreastRawMilkStorageValue())+".");
+					"[npc.TargetBasedWord(твои, [npc.namePos])] [npc.breasts] производят [npc.milk] по отдельности " + Units.fluid(milkRegenRate) + "/мин,"
+							+ " всего [style.colourGood(" + Units.fluid(milkRegenRate * target.getBreastRows() * 2) + "/мин)] (так как у [npc.targetBasedWord(тебя, н[npc.her])] [npc.totalBreasts] грудей)."
+							+ " Они хранят " + Units.fluid(target.getBreastRawStoredMilkValue()) + ", из максимума " + Units.fluid(target.getBreastRawMilkStorageValue()) + ".");
 		}
 		@Override
 		public boolean isConditionsMet(GameCharacter target) {
@@ -5566,7 +5566,7 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 	};
 
 	public static final AbstractStatusEffect MILK_FULL = new AbstractStatusEffect(80,
-			"Full Breasts",
+			"Полные груди",
 			"milkFull",
 			PresetColour.GENERIC_SEX,
 			true,
@@ -5581,9 +5581,9 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 			float milkRegenRate = target.getLactationRegenerationPerSecond(false) * 60;
 			//milkRegenRate+" |"+
 			return UtilText.parse(target,
-					"[npc.NamePos] [npc.breasts] are filled with "+Units.fluid(target.getBreastRawMilkStorageValue())+" of [npc.milk].<br/>"
-						+ "They produce more [npc.milk] at an individual rate of "+Units.fluid(milkRegenRate)+"/minute,"
-						+ " totalling [style.colourGood("+Units.fluid(milkRegenRate * target.getBreastRows() * 2)+"/minute)] (as [npc.sheHasFull] [npc.totalBreasts] breasts).");
+					"[npc.TargetBasedWord(твои, [npc.namePos])] [npc.breasts] заполнены " + Units.fluid(target.getBreastRawMilkStorageValue()) + " [pc.morphSingleInstr([npc.milk])].<br/>"
+							+ "Они производят [npc.milk] по отдельности " + Units.fluid(milkRegenRate) + "/мин,"
+							+ " всего [style.colourGood(" + Units.fluid(milkRegenRate * target.getBreastRows() * 2) + "/мин)] (так как у [npc.targetBasedWord(тебя, н[npc.her])] [npc.totalBreasts] грудей).");
 		}
 		@Override
 		public boolean isConditionsMet(GameCharacter target) {
