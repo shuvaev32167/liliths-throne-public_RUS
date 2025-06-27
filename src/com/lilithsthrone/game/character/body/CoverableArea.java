@@ -148,7 +148,7 @@ public enum CoverableArea {
 	},
 	
 	BREASTS(true,
-			"breasts",
+			"груди",
 			Util.newArrayListOfValues(
 					InventorySlot.CHEST,
 					InventorySlot.NIPPLE,
@@ -225,10 +225,10 @@ public enum CoverableArea {
 
 	
 	private boolean saveDiscoveredStatus;
-	private String name;
-	private List<InventorySlot> associatedInventorySlots;
+	private final String name;
+	private final List<InventorySlot> associatedInventorySlots;
 
-	private CoverableArea(boolean saveDiscoveredStatus, String name, List<InventorySlot> associatedInventorySlots) {
+	CoverableArea(boolean saveDiscoveredStatus, String name, List<InventorySlot> associatedInventorySlots) {
 		setSaveDiscoveredStatus(saveDiscoveredStatus);
 		this.name = name;
 		this.associatedInventorySlots = associatedInventorySlots;

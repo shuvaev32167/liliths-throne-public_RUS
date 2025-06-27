@@ -27,8 +27,8 @@ public class BreastType {
 			Race.NONE,
 			NippleType.HUMAN,
 			FluidType.MILK_HUMAN,
-			"breast",
-			"breasts",
+			"грудь",
+			"груди",
 			"[npc.She] no longer [npc.has] [style.boldShrink([npc.crotchBoobs])]!",
 			""){
 	};
@@ -194,9 +194,9 @@ public class BreastType {
 	};
 	
 	
-	private static List<AbstractBreastType> allBreastTypes;
-	private static Map<AbstractBreastType, String> breastToIdMap = new HashMap<>();
-	private static Map<String, AbstractBreastType> idToBreastMap = new HashMap<>();
+	private static final List<AbstractBreastType> allBreastTypes;
+	private static final Map<AbstractBreastType, String> breastToIdMap = new HashMap<>();
+	private static final Map<String, AbstractBreastType> idToBreastMap = new HashMap<>();
 	
 	static {
 		allBreastTypes = new ArrayList<>();
@@ -289,7 +289,7 @@ public class BreastType {
 		return allBreastTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractBreastType>> typesMap = new HashMap<>();
+	private static final Map<AbstractRace, List<AbstractBreastType>> typesMap = new HashMap<>();
 	public static List<AbstractBreastType> getBreastTypes(AbstractRace r) {
 		if(typesMap.containsKey(r)) {
 			return typesMap.get(r);

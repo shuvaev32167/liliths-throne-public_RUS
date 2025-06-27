@@ -22,7 +22,7 @@ public enum BodyPartType {
 	ANUS("anus"),
 
 	// Breasts:
-	BREAST("breasts"),
+	BREAST("груди"),
 	NIPPLES("nipples"),
 	MILK("milk"),
 	

@@ -1,5 +1,23 @@
 package com.lilithsthrone.main;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerFactory;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.lilithsthrone.controller.MainController;
 import com.lilithsthrone.controller.TooltipUpdateThread;
 import com.lilithsthrone.game.Game;
@@ -39,16 +57,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerFactory;
-import java.io.*;
-import java.nio.file.Paths;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @since 0.1.0
@@ -920,7 +928,7 @@ public class Main extends Application {
 	}
 
 	public static String checkFileName(String name) {
-		name = name.replace(" ", "_").replaceAll("[^\\wа-яА-ЯёЁ]+", "");
+		name = name.replace(" ", "_").replaceAll("[^\\wа-яА-ЯёЁ\\-]+", "");
 		if (name.length()==0) {
 			game.flashMessage(PresetColour.GENERIC_BAD, "Название слишком короткое!");
 			return "";

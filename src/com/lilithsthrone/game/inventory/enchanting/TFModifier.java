@@ -372,10 +372,10 @@ public enum TFModifier {
 			"modifier_circle_tf_ass",
 			PresetColour.TRANSFORMATION_SEXUAL,
 			Rarity.UNCOMMON),
-	
-	TF_BREASTS("breasts",
+
+	TF_BREASTS("груди",
 			"Applies a transformative effect to your breasts.",
-			"breasts",
+			"груди",
 			"modifier_circle_tf_breast",
 			PresetColour.TRANSFORMATION_SEXUAL,
 			Rarity.UNCOMMON),
@@ -1437,28 +1437,28 @@ public enum TFModifier {
 	TF_MOD_FETISH_SIZE_QUEEN(Fetish.FETISH_SIZE_QUEEN),
 	;
 
-	private static List<TFModifier> TFModStrengthList = new ArrayList<>();
-	private static List<TFModifier> TFModIntelligenceList = new ArrayList<>();
-	private static List<TFModifier> TFModCorruptionList = new ArrayList<>();
-	private static List<TFModifier> TFModSexualList = new ArrayList<>();
-	private static List<TFModifier> TFAttributeList = new ArrayList<>();
-	private static List<TFModifier> TFRacialBodyPartsList = new ArrayList<>();
-	private static List<TFModifier> TFBodyPartFetishList = new ArrayList<>();
-	private static List<TFModifier> TFBehaviouralFetishList = new ArrayList<>();
+	private static final List<TFModifier> TFModStrengthList = new ArrayList<>();
+	private static final List<TFModifier> TFModIntelligenceList = new ArrayList<>();
+	private static final List<TFModifier> TFModCorruptionList = new ArrayList<>();
+	private static final List<TFModifier> TFModSexualList = new ArrayList<>();
+	private static final List<TFModifier> TFAttributeList = new ArrayList<>();
+	private static final List<TFModifier> TFRacialBodyPartsList = new ArrayList<>();
+	private static final List<TFModifier> TFBodyPartFetishList = new ArrayList<>();
+	private static final List<TFModifier> TFBehaviouralFetishList = new ArrayList<>();
 
-	private static List<TFModifier> clothingPrimaryList = new ArrayList<>();
-	private static List<TFModifier> clothingAttributeList = new ArrayList<>();
-	private static List<TFModifier> clothingMajorAttributeList = new ArrayList<>();
-	private static List<TFModifier> clothingCreampieRetentionList = new ArrayList<>();
+	private static final List<TFModifier> clothingPrimaryList = new ArrayList<>();
+	private static final List<TFModifier> clothingAttributeList = new ArrayList<>();
+	private static final List<TFModifier> clothingMajorAttributeList = new ArrayList<>();
+	private static final List<TFModifier> clothingCreampieRetentionList = new ArrayList<>();
 	
-	private static List<TFModifier> tattooPrimaryList = new ArrayList<>();
+	private static final List<TFModifier> tattooPrimaryList = new ArrayList<>();
 
-	private static List<TFModifier> weaponPrimaryList = new ArrayList<>();
-	private static List<TFModifier> weaponAttributeList = new ArrayList<>();
-	private static List<TFModifier> weaponMajorAttributeList = new ArrayList<>();
+	private static final List<TFModifier> weaponPrimaryList = new ArrayList<>();
+	private static final List<TFModifier> weaponAttributeList = new ArrayList<>();
+	private static final List<TFModifier> weaponMajorAttributeList = new ArrayList<>();
 
-	private static List<TFModifier> dollPrimaryList = new ArrayList<>();
-	private static List<TFModifier> dollSecondaryList = new ArrayList<>();
+	private static final List<TFModifier> dollPrimaryList = new ArrayList<>();
+	private static final List<TFModifier> dollSecondaryList = new ArrayList<>();
 	
 	
 	static {
@@ -1672,23 +1672,23 @@ public enum TFModifier {
 	private enum AttributeCategory {
 		STRENGTH,
 		INTELLIGENCE,
-		CORRUPTION;
-	}
+		CORRUPTION
+    }
 	
 	private AttributeCategory attributeCategory;
 	private AbstractAttribute associatedAttribute;
 	
-	private String name;
-	private String description;
-	private String descriptor;
+	private final String name;
+	private final String description;
+	private final String descriptor;
 	private String path;
 	private String SVGString;
 	
-	private Colour colour;
-	private Rarity rarity;
+	private final Colour colour;
+	private final Rarity rarity;
 	private AbstractFetish fetish;
 	
-	private TFModifier(AttributeCategory attributeCategory, AbstractAttribute associatedAttribute, String description, String SVGString, Rarity rarity) {
+	TFModifier(AttributeCategory attributeCategory, AbstractAttribute associatedAttribute, String description, String SVGString, Rarity rarity) {
 		this.attributeCategory=attributeCategory;
 		this.associatedAttribute=associatedAttribute;
 		this.name = associatedAttribute.getName();
@@ -1701,7 +1701,7 @@ public enum TFModifier {
 		this.SVGString = null;
 	}
 	
-	private TFModifier(String name, String description, String descriptor, String SVGString, Colour colour, Rarity rarity) {
+	TFModifier(String name, String description, String descriptor, String SVGString, Colour colour, Rarity rarity) {
 		this.name = name;
 		this.description = description;
 		this.descriptor = descriptor;
@@ -1717,7 +1717,7 @@ public enum TFModifier {
 		this.SVGString = null;
 	}
 	
-	private TFModifier(AbstractFetish f) {
+	TFModifier(AbstractFetish f) {
 		this.name = f.getName(null);
 		this.description = "Applies an effect related to the "+name+" fetish. ("+Util.capitaliseSentence(f.getShortDescriptor(null))+".)";
 		this.descriptor = name;
@@ -1727,11 +1727,11 @@ public enum TFModifier {
 		this.SVGString = f.getSVGString(null);
 	}
 
-	private TFModifier(FluidFlavour flavour, String pathName) {
+	TFModifier(FluidFlavour flavour, String pathName) {
 		this(flavour, pathName, flavour.getColour());
 	}
 	
-	private TFModifier(FluidFlavour flavour, String pathName, Colour colour) {
+	TFModifier(FluidFlavour flavour, String pathName, Colour colour) {
 		this.name = flavour.getName()+(flavour==FluidFlavour.FLAVOURLESS?"":"-flavour");
 		this.description = "Applies an effect related to changing a fluid's flavour.";
 		this.descriptor = name;
@@ -1799,7 +1799,7 @@ public enum TFModifier {
 					if(is==null) {
 						System.err.println("Error! Subspecies background icon file does not exist (Trying to read from 'flavours/background')!");
 					}
-					SVGStringBackground = "<div style='width:80%;height:80%;position:absolute;left:10%;bottom:10%;'>"+SvgUtil.colourReplacement(this.toString()+"_B", this.getColour(), Util.inputStreamToString(is))+"</div>";
+					SVGStringBackground = "<div style='width:80%;height:80%;position:absolute;left:10%;bottom:10%;'>"+SvgUtil.colourReplacement(this +"_B", this.getColour(), Util.inputStreamToString(is))+"</div>";
 					
 					s = SVGStringBackground + "<div style='width:50%;height:50%;position:absolute;left:25%;bottom:25%;'>" + SvgUtil.colourReplacement(this.toString(), this.getColour(), s)+"</div>";
 					

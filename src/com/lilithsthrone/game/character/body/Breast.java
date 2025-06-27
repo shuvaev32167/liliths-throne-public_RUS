@@ -1,17 +1,23 @@
 package com.lilithsthrone.game.character.body;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractBreastType;
-import com.lilithsthrone.game.character.body.valueEnums.*;
+import com.lilithsthrone.game.character.body.valueEnums.AreolaeShape;
+import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
+import com.lilithsthrone.game.character.body.valueEnums.Capacity;
+import com.lilithsthrone.game.character.body.valueEnums.CupSize;
+import com.lilithsthrone.game.character.body.valueEnums.FluidRegeneration;
+import com.lilithsthrone.game.character.body.valueEnums.Lactation;
+import com.lilithsthrone.game.character.body.valueEnums.NippleShape;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.PresetColour;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @since 0.1.0
@@ -431,7 +437,7 @@ public class Breast implements BodyPartInterface {
 								?"lowest pair of [npc.breasts]"
 								:"lowest "+Util.intToString(rowsDifference)+" pairs of [npc.breasts]")
 							+ " rapidly shrink away and [style.boldShrink(disappear)] into the [npc.skin] of [npc.her] torso.<br/>"
-							+ "[npc.Name] now [npc.has] [style.boldSex("+ Util.intToString(rows) + " pair"+ (rows > 1 ? "s" : "") + " of " + (hasBreasts() ? "breasts" : "pecs") +")]!" 
+								+ "[npc.Name] now [npc.has] [style.boldSex(" + Util.intToString(rows) + " pair" + (rows > 1 ? "s" : "") + " of " + (hasBreasts() ? "груди" : "грудные мышцы") + ")]!"
 						+ "</p>");
 			
 		} else if (rows > getRows()) {
@@ -442,7 +448,7 @@ public class Breast implements BodyPartInterface {
 								?"an extra pair of [npc.breasts]"
 								:Util.intToString(rowsDifference)+" extra pairs of [npc.breasts]")
 							+ " rapidly [style.boldGrow(grow)] out of the [npc.skin] of [npc.her] torso.<br/>"
-							+ "[npc.Name] now [npc.has] [style.boldSex("+ Util.intToString(rows) + " pair"+ (rows > 1 ? "s" : "") + " of " + (hasBreasts() ? "breasts" : "pecs") +")]!" 
+								+ "[npc.Name] now [npc.has] [style.boldSex(" + Util.intToString(rows) + " pair" + (rows > 1 ? "s" : "") + " of " + (hasBreasts() ? "груди" : "грудные мышцы") + ")]!"
 						+ "</p>");
 		}
 
@@ -488,7 +494,7 @@ public class Breast implements BodyPartInterface {
                             + "[npc.Name] feel a strange tingling sensation running just beneath the surface of the [npc.breastSkin] that covers [npc.her] [npc.breasts]."
 						+ " A shocked gasp bursts from [npc.her] mouth as the force shoots up into [npc.her] [npc.nipples],"
                             + " and [npc.she] continue [npc.moaning] as some of them [style.boldShrink(shrink)] into the flesh of [npc.her] [npc.breasts].<br/>"
-						+ "[npc.Name] now [npc.has] [style.boldSex("+ Util.intToString(nippleCountPerBreast) + " "+ (nippleCountPerBreast > 1 ? "[npc.nipples]" : "[npc.nipple(true)]") + " on each of [npc.her] " + (hasBreasts() ? "breasts" : "pecs") +")]!" 
+							+ "[npc.Name] now [npc.has] [style.boldSex(" + Util.intToString(nippleCountPerBreast) + " " + (nippleCountPerBreast > 1 ? "[npc.nipples]" : "[npc.nipple(true)]") + " on each of [npc.her] " + (hasBreasts() ? "груди" : "грудные мышцы") + ")]!"
 					+ "</p>");
 			
 		} else if (nippleCountPerBreast > getNippleCountPerBreast()) {
@@ -497,7 +503,7 @@ public class Breast implements BodyPartInterface {
                             + "[npc.Name] feel a strange tingling sensation running just beneath the surface of the [npc.breastSkin] that covers [npc.her] [npc.breasts]."
 						+ " A shocked gasp bursts from [npc.her] mouth as the force shoots up into [npc.her] [npc.nipples],"
                             + " and [npc.she] continue [npc.moaning] as [npc.she] feels new ones [style.boldGrow(growing)] out of the flesh of [npc.her] [npc.breasts].<br/>"
-						+ "[npc.Name] now [npc.has] [style.boldSex("+ Util.intToString(nippleCountPerBreast) + " "+ (nippleCountPerBreast > 1 ? "[npc.nipples]" : "[npc.nipple(true)]") + " on each of [npc.her] " + (hasBreasts() ? "breasts" : "pecs") +")]!" 
+							+ "[npc.Name] now [npc.has] [style.boldSex(" + Util.intToString(nippleCountPerBreast) + " " + (nippleCountPerBreast > 1 ? "[npc.nipples]" : "[npc.nipple(true)]") + " on each of [npc.her] " + (hasBreasts() ? "груди" : "грудные мышцы") + ")]!"
 					+ "</p>");
 			
 		}

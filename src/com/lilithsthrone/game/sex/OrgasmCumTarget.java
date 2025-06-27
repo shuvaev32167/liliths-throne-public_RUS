@@ -73,7 +73,7 @@ public enum OrgasmCumTarget {
 			return CoverableArea.MOUND;
 		}
 	},
-	BREASTS("на грудь", "breasts", true) {
+	BREASTS("на грудь", "груди", true) {
 		@Override
 		public CoverableArea getRelatedCoverableArea(GameCharacter owner) {
 			return CoverableArea.BREASTS;
@@ -164,11 +164,11 @@ public enum OrgasmCumTarget {
 		}
 	};
 	
-	private String name;
-	private String simpleName;
-	private boolean requiresPartner;
+	private final String name;
+	private final String simpleName;
+	private final boolean requiresPartner;
 
-	private OrgasmCumTarget(String name, String simpleName, boolean requiresPartner) {
+	OrgasmCumTarget(String name, String simpleName, boolean requiresPartner) {
 		this.name = name;
 		this.simpleName = simpleName;
 		this.requiresPartner = requiresPartner;

@@ -1,5 +1,6 @@
 package com.lilithsthrone.game.character.effects;
 
+import javax.script.ScriptException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,10 +14,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
-
-import javax.script.ScriptException;
-
-import org.w3c.dom.Document;
 
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -43,6 +40,7 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+import org.w3c.dom.Document;
 
 /**
  * @since 0.3.8.2
@@ -273,11 +271,7 @@ public abstract class AbstractStatusEffect {
 				this.shortConditionalCheck = Boolean.valueOf(coreElement.getMandatoryFirstOf("applicationCondition").getAttribute("shortConditionalCheck"));
 				
 				this.applicationCondition = coreElement.getMandatoryFirstOf("applicationCondition").getTextContent();
-				if(this.applicationCondition.trim().equals("false")) {
-					requiresApplicationCheck = false;
-				} else {
-					requiresApplicationCheck = true;
-				}
+                requiresApplicationCheck = !this.applicationCondition.trim().equals("false");
 
 				if(coreElement.getOptionalFirstOf("applicationLength").isPresent()) {
 					this.applicationLength = Integer.valueOf(coreElement.getMandatoryFirstOf("applicationLength").getTextContent());
@@ -686,7 +680,7 @@ public abstract class AbstractStatusEffect {
 			}
 
 			if(Main.game.isPenetrationLimitationsEnabled() && orifice.isInternalOrifice()) {
-				if(!Main.sex.getCharactersPenetratingTooDeep(target, (SexAreaOrifice)orifice).isEmpty()) {
+				if(!Main.sex.getCharactersPenetratingTooDeep(target, orifice).isEmpty()) {
 					if(target.hasFetish(Fetish.FETISH_MASOCHIST) || target.hasFetish(Fetish.FETISH_SIZE_QUEEN)) { // Positive for masochist and size queen:
 						arousal += 2.5f;
 						
@@ -694,7 +688,7 @@ public abstract class AbstractStatusEffect {
 						arousal -= 10;
 					}
 					
-				} else if(!Main.sex.getCharactersPenetratingFarTooShallow(target, (SexAreaOrifice)orifice).isEmpty()) {
+				} else if(!Main.sex.getCharactersPenetratingFarTooShallow(target, orifice).isEmpty()) {
 					arousal -= 2;
 				}
 			}
@@ -830,7 +824,7 @@ public abstract class AbstractStatusEffect {
 			}
 
 			if(Main.game.isPenetrationLimitationsEnabled() && orifice.isInternalOrifice()) {
-				if(!Main.sex.getCharactersPenetratingTooDeep(target, (SexAreaOrifice)orifice).isEmpty()) {
+				if(!Main.sex.getCharactersPenetratingTooDeep(target, orifice).isEmpty()) {
 					if(target.hasFetish(Fetish.FETISH_MASOCHIST) || target.hasFetish(Fetish.FETISH_SIZE_QUEEN)) { // Positive for masochist and size queen:
 						modifiersList.add("+2.5 (<b style='color:"+target.getFemininity().getColour().toWebHexString()+";'>"+targetName+"</b> - [style.boldSex(Too deep)])");
 						
@@ -839,7 +833,7 @@ public abstract class AbstractStatusEffect {
 						
 					}
 					
-				} else if(!Main.sex.getCharactersPenetratingFarTooShallow(target, (SexAreaOrifice)orifice).isEmpty()) {
+				} else if(!Main.sex.getCharactersPenetratingFarTooShallow(target, orifice).isEmpty()) {
 					modifiersList.add("-2 (<b style='color:"+target.getFemininity().getColour().toWebHexString()+";'>"+targetName+"</b> - [style.boldBad(Too shallow)])");
 				}
 			}
@@ -1227,15 +1221,15 @@ public abstract class AbstractStatusEffect {
 		
 		return !Main.game.isInSex()
 				&& target.getLegConfiguration().isGenitalsExposed(target)
-				&& (requiresBreastsExposed?breastsExposed:!breastsExposed)
-				&& (requiresGenitalsExposed?genitalsExposed:!genitalsExposed);
+				&& (requiresBreastsExposed == breastsExposed)
+				&& (requiresGenitalsExposed == genitalsExposed);
 	}
 	
 	public static String getExposedPartsNamesList(GameCharacter owner) {
 		List<String> names = new ArrayList<>();
 		
 		if(owner.hasBreasts() && owner.isCoverableAreaVisible(CoverableArea.NIPPLES)) {
-			names.add("breasts");
+			names.add("груди");
 		} else if (owner.isFeminine() && owner.isCoverableAreaVisible(CoverableArea.NIPPLES)) {
 			names.add("nipples");
 		}

@@ -1828,7 +1828,7 @@ public class StatusEffect {
 	};
 
 	public static final AbstractStatusEffect DARKNESS = new AbstractStatusEffect(90,
-			"Darkness",
+			"Тьма",
 			"darkness",
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_RED,
@@ -1844,7 +1844,7 @@ public class StatusEffect {
 		public String getDescription(GameCharacter target) {
 			if(target!=null) {
 				return UtilText.parse(target,
-                        "The area which [npc.name] find [npc.herself] travelling through is very dark, and as [npc.she] lack any means of illuminating the area, [npc.she] [npc.is] struggling to see where [npc.sheIs] going!");
+						"Область, по которой [npc.name] путешествуе, очень тёмная, и поскольку [npc.she] не [npc.targetBasedWord(имеешь, имеет)] никаких средств для освещения этой области, [npc.she] с трудом [npc.targetBasedWord(видешь, видит)], куда [npc.sheIs] [npc.targetBasedWord(идёшь, идёт)]!");
 			}
 			return "";
 		}
@@ -1855,7 +1855,7 @@ public class StatusEffect {
 	};
 
 	public static final AbstractStatusEffect DARKNESS_NEGATED = new AbstractStatusEffect(90,
-			"Darkness (Negated)",
+			"Тьма (нейтрализована)",
 			"darkness_negated",
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_GREEN,
@@ -1871,7 +1871,7 @@ public class StatusEffect {
 		public String getDescription(GameCharacter target) {
 			if(target!=null) {
 				return UtilText.parse(target,
-                        "The area which [npc.name] find [npc.herself] travelling through is very dark, but despite this, [npc.she] [npc.is] able to see [#npc.getDescriptionInDarkness()].");
+						"Область, по которой [npc.name] путешествует, очень тёмная, но, несмотря на это, [npc.she] [npc.targetBasedWord(можетшь, может )] видеть [#npc.getDescriptionInDarkness()].");
 			}
 			return "";
 		}
@@ -7898,7 +7898,7 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 	};
 
 	public static final AbstractStatusEffect RECOVERING_AURA = new AbstractStatusEffect(80,
-			"Strengthened aura",
+			"Укрепление ауры",
 			"recoveringAura",
 			PresetColour.GENERIC_ARCANE,
 			false,
@@ -7907,11 +7907,11 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 		@Override
 		public String getDescription(GameCharacter target) {
 			if(target.isPlayer()) {
-				return "Due to a recent orgasm, your arcane aura has been temporarily strengthened."
-						+ " While in this state, you will no longer receive an arcane essence if you orgasm!";
+				return "Из-за недавнего оргазма твоя магическая аура временно усилилась."
+						+ " В этом состоянии ты больше не будешь получать магическую эссенцию при оргазме!";
 			} else {
-				return UtilText.parse(target, "Due to a recent orgasm, [npc.namePos] arcane aura has been temporarily strengthened."
-						+ " While [npc.she] remains in this state, you will not receive an arcane essence if [npc.she] orgasms in your presence!");
+				return UtilText.parse(target, "Из-за недавнего оргазма [npc.morphSingleNameGene([npc.namePos])] магическая аура временно усилилась."
+						+ " Пока [npc.she] находится в этом состоянии, ты не получишь магическую эссенцию, даже если [npc.she] достигнет оргазма в твоём присутствии!");
 			}
 		}
 		@Override
@@ -12248,7 +12248,7 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 	};
 
 	public static final AbstractStatusEffect ORGASM_COUNTER = new AbstractStatusEffect(80,
-			"Orgasms",
+			"Оргазмы",
 			"sexEffects/orgasms",
 			PresetColour.GENERIC_ARCANE,
 			false,
@@ -12258,13 +12258,13 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 		public String getDescription(GameCharacter target) {
 			StringBuilder sb = new StringBuilder();
 			if(target.isPlayer()) {
-				sb.append("Anyone with a strong arcane aura, such as yours, doesn't suffer from any sort of refractory period after orgasming...");
+				sb.append("Любой человек с сильной магической аурой, такой как у тебя, не испытывает никакого послеоргазменного периода...");
 
 			} else {
-				sb.append("Anyone in the presence of a strong arcane aura, such as yours, doesn't suffer from any sort of refractory period after orgasming...");
+				sb.append("Любой, кто находится в присутствии сильной магической ауры, такой как у тебя, не испытывает никакого послеоргазменного периода...");
 			}
 
-			sb.append("<br/>[npc.Name] [npc.verb(need)] to orgasm [style.boldSex(" + Util.intToCount(target.getOrgasmsBeforeSatisfied()) + ")] before [npc.sheIs] satisfied.");
+			sb.append("<br/>[npc.TargetBasedWord(тебе, [npc.morphSingleNameDativ([npc.name])])] тебе нужно достичь оргазма [style.boldSex(" + Util.intToCount(target.getOrgasmsBeforeSatisfied()) + ")], перед тем как [npc.sheIs] [npc.targetBasedWord(будешь, будет)] [npc.genderBasedWord(удовлетворён, удовлетворена)].");
 
 
 			return UtilText.parse(target, sb.toString());
@@ -12274,13 +12274,13 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 			List<Value<Integer, String>> additionalDescriptions = new ArrayList<>();
 
 			if(Main.sex.getNumberOfOrgasms(target)>=target.getOrgasmsBeforeSatisfied()) {
-				additionalDescriptions.add(new Value<>(1, UtilText.parse(target, "[npc.NameIsFull] [style.colourExcellent(satisfied)].")));
+				additionalDescriptions.add(new Value<>(1, UtilText.parse(target, "[npc.NameIsFull] [style.colourExcellent([npc.genderBasedWord(удовлетворён, удовлетворена)])].")));
 			} else {
-				additionalDescriptions.add(new Value<>(1, UtilText.parse(target, "[npc.NameIsFull] [style.colourTerrible(not satisfied yet)]!")));
+				additionalDescriptions.add(new Value<>(1, UtilText.parse(target, "[npc.NameIsFull] [style.colourTerrible(ещё не [npc.genderBasedWord(удовлетворён, удовлетворена)])]!")));
 			}
 
 			if(!target.isAbleToOrgasm()) {
-				additionalDescriptions.add(new Value<>(1, UtilText.parse(target, "[npc.NameIsFull] [style.colourTerrible(not able to orgasm)]!")));
+				additionalDescriptions.add(new Value<>(1, UtilText.parse(target, "[npc.NameIsFull] [style.colourTerrible(ещё не [npc.genderBasedWord(испытывал, испытывала)] оргазм)]!")));
 			}
 
 			int bonus = Main.sex.getNumberOfAdditionalOrgasms(target);
@@ -12310,24 +12310,24 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 				orgasmColour = RenderingEngine.orgasmColours[orgasms];
 			}
 
-			modList.add("<b style='color:"+orgasmColour.toWebHexString()+";'>"+orgasms+"</b> Orgasm"+(orgasms==1?"":"s"));
+			modList.add("<b style='color:" + orgasmColour.toWebHexString() + ";'>" + orgasms + "</b> " + Morpher.morphCountableNoun(orgasms, "Оргазм"));
 
 			int essences = Main.sex.getEssenceGeneration(target);
 			if(target.hasStatusEffect(StatusEffect.RECOVERING_AURA)) {
-				modList.add("Will produce [style.boldBad(0 essences)]");
-				modList.add("Caused by [style.boldBad('"+RECOVERING_AURA.getName(target)+"')] effect");
+				modList.add("Произведёт [style.boldBad(0 эссенций)]");
+				modList.add("Потому что действует эффект - [style.boldBad('" + RECOVERING_AURA.getName(target) + "')]");
 
 			} else {
 				if(target.hasTrait(Perk.NYMPHOMANIAC, true)) {
-					modList.add("Generates [style.boldArcane("+(essences)+" essences)] after sex");
-					modList.add("[style.boldExcellent(Doubled)] from [style.colourTrait("+Perk.NYMPHOMANIAC.getName(target)+" trait)]");
+					modList.add("Формирует [style.boldArcane(" + (essences) + " эссенций)] после секса");
+					modList.add("[style.boldExcellent(Удвоение)] от [style.colourTrait(навыка \"" + Perk.NYMPHOMANIAC.getName(target) + "\")]");
 
 				} else {
-					modList.add("Will produce [style.boldArcane("+(essences)+" essences)]");
+					modList.add("Произведёт [style.boldArcane(" + (essences) + " эссенций)]");
 				}
 
 				if(orgasms>=5) {
-					modList.add("[style.boldBad(Maximum essences reached)]");
+					modList.add("[style.boldBad(Максимальное количество эссенций достигнуто)]");
 				}
 			}
 			return modList;

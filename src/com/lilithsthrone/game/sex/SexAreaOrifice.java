@@ -1427,9 +1427,9 @@ public enum SexAreaOrifice implements SexAreaInterface {
 		public String getName(GameCharacter owner, boolean standardName) {
 			if(standardName) {
 				if(owner.hasBreasts()) {
-					return "breasts";
+					return "груди";
 				} else {
-					return "pecs";
+					return "грудные мышцы";
 				}
 			}
 			return owner.getBreastName();

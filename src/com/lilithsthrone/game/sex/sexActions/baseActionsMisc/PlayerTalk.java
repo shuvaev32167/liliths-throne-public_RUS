@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.baseActionsMisc;
 
+import java.util.List;
+
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
@@ -8,14 +10,17 @@ import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.sex.*;
+import com.lilithsthrone.game.sex.ArousalIncrease;
+import com.lilithsthrone.game.sex.SexAreaOrifice;
+import com.lilithsthrone.game.sex.SexAreaPenetration;
+import com.lilithsthrone.game.sex.SexPace;
+import com.lilithsthrone.game.sex.SexParticipantType;
+import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotTag;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-
-import java.util.List;
 
 /**
  * @since 0.1.79
@@ -988,7 +993,7 @@ public class PlayerTalk {
 			UtilText.nodeContentSB.append(getOfferResponse(
 					((NPC)Main.sex.getCharacterTargetedForSexAction(this)).getSexBehaviourDeniesRequests(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.BREAST)),
 					Main.sex.getSexPace(Main.sex.getCharacterTargetedForSexAction(this)),
-					"breasts"));
+					"груди"));
 			
 			return UtilText.nodeContentSB.toString();
 		}

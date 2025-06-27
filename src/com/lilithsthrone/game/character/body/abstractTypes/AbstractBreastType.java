@@ -1,5 +1,9 @@
 package com.lilithsthrone.game.character.body.abstractTypes;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
@@ -15,10 +19,6 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import org.w3c.dom.Document;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @since 0.3
@@ -250,7 +250,7 @@ public abstract class AbstractBreastType implements BodyPartTypeInterface {
 			
 		} else {
 			if(namesFlatPlural==null || namesFlatPlural.isEmpty()) {
-				return UtilText.returnStringAtRandom("pecs");
+				return UtilText.returnStringAtRandom("грудные мышцы");
 			}
 			return Util.randomItemFrom(namesFlatPlural);
 		}
