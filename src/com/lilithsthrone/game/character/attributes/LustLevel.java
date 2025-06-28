@@ -1,5 +1,8 @@
 package com.lilithsthrone.game.character.attributes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
@@ -13,9 +16,6 @@ import com.lilithsthrone.game.sex.SexPace;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @since 0.1.97
@@ -193,48 +193,48 @@ public enum LustLevel {
 			switch(this.getSexPace(consensual, character)) {
 				case DOM_GENTLE:
 					if(!character.isPlayer()) {
-						modifiersList.add("Prefers <b style='color: " + SexPace.DOM_GENTLE.getColour().toWebHexString() + "'>gentle</b> pace");
+						modifiersList.add("Предпочитает <b style='color: " + SexPace.DOM_GENTLE.getColour().toWebHexString() + "'>мягкий</b> темп");
 					}
 					break;
 				case DOM_NORMAL:
 					if(!character.isPlayer()) {
-						modifiersList.add("Prefers <b style='color: " + SexPace.DOM_NORMAL.getColour().toWebHexString() + "'>normal</b> pace");
+						modifiersList.add("Предпочитает <b style='color: " + SexPace.DOM_NORMAL.getColour().toWebHexString() + "'>нормальный</b> темп");
 					}
 					break;
 				case DOM_ROUGH:
 					if(!character.isPlayer()) {
 						if(!character.hasFetish(Fetish.FETISH_DOMINANT) && !character.hasFetish(Fetish.FETISH_SADIST)) {
-							modifiersList.add("Prefers <b style='color: " + SexPace.DOM_NORMAL.getColour().toWebHexString() + "'>normal</b> pace");
-							modifiersList.add("(<b style='color: " + SexPace.DOM_ROUGH.getColour().toWebHexString() + "'>Rough</b> pace requires "+Fetish.FETISH_DOMINANT.getName(character)
-													+", "+Fetish.FETISH_NON_CON_DOM.getName(character)+", or "+Fetish.FETISH_SADIST.getName(character)+" fetish)");
+							modifiersList.add("Предпочитает <b style='color: " + SexPace.DOM_NORMAL.getColour().toWebHexString() + "'>нормальный</b> темп");
+							modifiersList.add("(<b style='color: " + SexPace.DOM_ROUGH.getColour().toWebHexString() + "'>Грубый</b> темп требует " + Fetish.FETISH_DOMINANT.getName(character)
+									+ ", " + Fetish.FETISH_NON_CON_DOM.getName(character) + ", or " + Fetish.FETISH_SADIST.getName(character) + " фетиш)");
 						} else {
-							modifiersList.add("Prefers <b style='color: " + SexPace.DOM_ROUGH.getColour().toWebHexString() + "'>rough</b> pace");
+							modifiersList.add("Предпочитает <b style='color: " + SexPace.DOM_ROUGH.getColour().toWebHexString() + "'>грубый</b> темп");
 						}
 					}
 					break;
 				case SUB_EAGER:
 					if(!character.isPlayer()) {
-						modifiersList.add("Prefers <b style='color: " + SexPace.SUB_EAGER.getColour().toWebHexString() + "'>eager</b> pace");
+						modifiersList.add("Предпочитает <b style='color: " + SexPace.SUB_EAGER.getColour().toWebHexString() + "'>стремительный</b> темп");
 					}
 					break;
 				case SUB_NORMAL:
 					if(!character.isPlayer()) {
-						modifiersList.add("Prefers <b style='color: " + SexPace.SUB_NORMAL.getColour().toWebHexString() + "'>normal</b> pace");
+						modifiersList.add("Предпочитает <b style='color: " + SexPace.SUB_NORMAL.getColour().toWebHexString() + "'>нормальный</b> темп");
 					}
 					break;
 				case SUB_RESISTING:
 					if(!character.isPlayer()) {
 						if(character.hasFetish(Fetish.FETISH_NON_CON_SUB)) {
-							modifiersList.add("Always prefers <b style='color: " + SexPace.SUB_RESISTING.getColour().toWebHexString() + "'>resisting</b> pace due to "+Fetish.FETISH_NON_CON_SUB.getName(character)+" fetish");
+							modifiersList.add("Always prefers <b style='color: " + SexPace.SUB_RESISTING.getColour().toWebHexString() + "'>сопротивляющийся</b> темп из-за " + Fetish.FETISH_NON_CON_SUB.getName(character) + " фетиша");
 						} else {
-							modifiersList.add("Prefers <b style='color: " + SexPace.SUB_RESISTING.getColour().toWebHexString() + "'>resisting</b> pace");
+							modifiersList.add("Предпочитает <b style='color: " + SexPace.SUB_RESISTING.getColour().toWebHexString() + "'>сопротивляющийся</b> темп");
 						}
 					}
 					break;
 			}
 		
 			int gains = (int)(this.getArousalModifier()*100);
-			modifiersList.add((gains>=100?"[style.boldArousal("+gains+"%)]":"[style.boldBad("+gains+"%)]")+" arousal gains");
+			modifiersList.add((gains >= 100 ? "[style.boldArousal(" + gains + "%)]" : "[style.boldBad(" + gains + "%)]") + " роста возбуждения");
 			
 		}
 		
@@ -249,22 +249,22 @@ public enum LustLevel {
 				case DOM_GENTLE:
 					switch(this) {
 						case ZERO_COLD:
-                            sb.append("[npc.NameIsFull] not really interested in having sex at all right now, and as a result, [npc.she] want to take things slow and gentle.");
+							sb.append("[npc.NameIsFull] сейчас совсем не [npc.genderBasedWord(заинтересован, заинтересована)] в сексе, и в результате [npc.she] [npc.targetBasedWord(хочешь, хочет)], чтобы всё происходило медленно и нежно.");
 							break;
 						case ONE_HORNY:
-							sb.append("[npc.NameIsFull] currently quite horny, but [npc.is] still in control of [npc.her] lust, allowing [npc.herHim] to keep a cool head and concentrate on taking things slow and gentle.");
+							sb.append("[npc.NameIsFull] сейчас довольно [npc.genderBasedWord(возбуждён, возбуждена)], но всё ещё [npc.targetBasedWord(контролируешь, контролирует)] [npc.targetBasedWord(твою, [npc.her])] похоть, позволяя сохранять [npc.targetBasedWord(твоё, [npc.herHim])] хладнокровие и сосредоточиться на том, чтобы действовать медленно и нежно.");
 							break;
 						case TWO_AMOROUS:
-							sb.append("[npc.NameIsFull] currently feeling more than a little lustful, but [npc.is] still able to concentrate on taking things slow and gentle.");
+							sb.append("[npc.NameIsFull] в настоящее время [npc.targetBasedWord(испытываешь, испытывает)] более чем легкое влечение, но всё ещё [npc.genderBasedWord(способен, способна)] сосредоточиться на том, чтобы действовать медленно и осторожно.");
 							break;
 						case THREE_LUSTFUL:
-							sb.append("[npc.NameIsFull] currently burning with lust, but [npc.is] still able to concentrate on taking things slow and gentle.");
+							sb.append("[npc.NameIsFull] в настоящее время [npc.targetBasedWord(горишь, горит)] страстью, но всё ещё [npc.genderBasedWord(способен, способна)] сосредоточиться на том, чтобы действовать медленно и нежно.");
 							break;
 						case FOUR_IMPASSIONED:
-							sb.append("[npc.NameIsFull] completely burning with lust, but [npc.is] still able to concentrate on taking things slow and gentle.");
+							sb.append("[npc.NameIsFull] полностью [npc.genderBasedWord(охвачен, охвачена)] страстью, но всё ещё [npc.genderBasedWord(способен, способна)] сосредоточиться на том, чтобы действовать медленно и нежно.");
 							break;
 						case FIVE_BURNING:
-							sb.append("[npc.NameIsFull] completely overwhelmed with lust, but, somehow, [npc.is] still able to concentrate on taking things slow and gentle.");
+							sb.append("[npc.NameIsFull] полностью [npc.genderBasedWord(поглощён, поглощена)] страстью, но, тем не менее, по-прежнему [npc.genderBasedWord(способен, способна)] сосредоточиться на том, чтобы действовать медленно и нежно.");
 							break;
 					}
 					break;
@@ -272,22 +272,22 @@ public enum LustLevel {
 				case SUB_NORMAL:
 					switch(this) {
 						case ZERO_COLD:
-							sb.append("Although [npc.nameIsFull]n't really interested in having sex at all right now, [npc.she] [npc.is] still able to force [npc.herself] to act as though [npc.sheIs] turned on and horny.");
+							sb.append("Хотя [npc.nameIsFull] сейчас совсем не [npc.genderBasedWord(заинтересован, заинтересована)] в сексе, [npc.she] всё же [npc.genderBasedWord(способен, способна)] заставить себя вести себя так, как будто [npc.sheIs] [npc.genderBasedWord(возбуждён, возбуждена)] и хочет секса.");
 							break;
 						case ONE_HORNY:
-							sb.append("[npc.NameIsFull] currently quite horny, and [npc.is] more than happy to have sex at the moment.");
+							sb.append("[npc.NameIsFull] сейчас очень [npc.genderBasedWord(возбуждён, возбуждена)] и более чем [npc.genderBasedWord(счастлив, счастлива)] заняться сексом в данный момент.");
 							break;
 						case TWO_AMOROUS:
-							sb.append("[npc.NameIsFull] currently feeling more than a little lustful, and [npc.is] very happy to be having sex right at this moment.");
+							sb.append("[npc.NameIsFull] в данный момент [npc.targetBasedWord(испытываешь, испытывает)] более чем сильное влечение и очень [npc.genderBasedWord(рад, рада)] возможности заняться сексом прямо сейчас.");
 							break;
 						case THREE_LUSTFUL:
-							sb.append("[npc.NameIsFull] currently burning with lust, and [npc.is] ecstatic to be having sex right at this moment.");
+							sb.append("[npc.NameIsFull] в данный момент [npc.targetBasedWord(горишь, горит)] страстью и в восторге от того, что прямо сейчас [npc.targetBasedWord(занимаешься, занимается)] сексом.");
 							break;
 						case FOUR_IMPASSIONED:
-							sb.append("[npc.NameIsFull] completely burning with lust, but [npc.is] still able to prevent [npc.herself] from getting too carried away with things.");
+							sb.append("[npc.NameIsFull] полностью [npc.genderBasedWord(охвачен, охвачена)] страстью, но всё ещё [npc.genderBasedWord(способен, способна)] удержаться от того, чтобы слишком увлечься.");
 							break;
 						case FIVE_BURNING:
-							sb.append("[npc.NameIsFull] completely overwhelmed with lust, but, somehow, [npc.is] still able to prevent [npc.herself] from getting too carried away with things.");
+							sb.append("[npc.NameIsFull] полностью [npc.genderBasedWord(поглощён, поглощена)] страстью, но, тем не менее, всё ещё [npc.genderBasedWord(способен, способна)] удержаться от того, чтобы слишком увлечься.");
 							break;
 					}
 					break;
@@ -295,44 +295,44 @@ public enum LustLevel {
 				case SUB_EAGER:
 					switch(this) {
 						case ZERO_COLD:
-							sb.append("Although [npc.nameIsFull]n't really interested in having sex at all right now, [npc.she] [npc.is] still able to force [npc.herself] to act as though [npc.sheIs] extremely turned on.");
+							sb.append("Хотя [npc.nameIsFull] сейчас совсем не [npc.genderBasedWord(заинтересован, заинтересована)] в сексе, [npc.she] всё же [npc.genderBasedWord(способен, способна)] заставить себя вести себя так, как будто [npc.sheIs] чрезвычайно [npc.genderBasedWord(возбуждён, возбуждена)].");
 							break;
 						case ONE_HORNY:
-							sb.append("[npc.NameIsFull] currently quite horny, and [npc.is] more than happy to have sex at the moment.");
+							sb.append("[npc.NameIsFull] сейчас очень [npc.genderBasedWord(возбуждён, возбуждена)] и более чем [npc.genderBasedWord(счастлив, счастлива)] заняться сексом в данный момент.");
 							break;
 						case TWO_AMOROUS:
-							sb.append("[npc.NameIsFull] currently feeling more than a little lustful, and [npc.is] very happy to be having sex right at this moment.");
+							sb.append("[npc.NameIsFull] в данный момент [npc.targetBasedWord(испытываешь, испытывает)] более чем сильное влечение и очень [npc.genderBasedWord(рад, рада)] возможности заняться сексом прямо сейчас.");
 							break;
 						case THREE_LUSTFUL:
-							sb.append("[npc.NameIsFull] currently burning with lust, and [npc.is] ecstatic to be having sex right at this moment.");
+							sb.append("[npc.NameIsFull] в данный момент [npc.targetBasedWord(горишь, горит)] страстью и в восторге от того, что прямо сейчас [npc.targetBasedWord(занимаешься, занимается)] сексом.");
 							break;
 						case FOUR_IMPASSIONED:
-							sb.append("[npc.NameIsFull] completely burning with lust, and [npc.is] really starting to get carried away with things.");
+							sb.append("[npc.NameIsFull] полностью [npc.genderBasedWord(охвачен, охвачена)] страстью, и действительно [npc.targetBasedWord(начинаешь, начинает)] увлекаться.");
 							break;
 						case FIVE_BURNING:
-							sb.append("[npc.NameIsFull] completely overwhelmed with lust, and [npc.has] totally lost [npc.herself] to the pleasure of having sex.");
+							sb.append("[npc.NameIsFull] полностью [npc.genderBasedWord(поглощён, поглощена)] страстью, и полностью [npc.genderBasedWord(потерял, потеряла)] себя в удовольствии от секса.");
 							break;
 					}
 					break;
 				case SUB_RESISTING:
 					switch(this) {
 						case ZERO_COLD:
-							sb.append("[npc.NameIsFull] not at all interested in having sex right now, and [npc.is] desperately trying to resist what's currently happening to [npc.herHim].");
+							sb.append("[npc.NameIsFull] совершенно не [npc.genderBasedWord(заинтересован, заинтересована)] в сексе прямо сейчас, и отчаянно [npc.targetBasedWord(пытаешься, пытается)] сопротивляться тому, что сейчас происходит с [npc.targetBasedWord(тобой, н[npc.morphSingleNameInstr([npc.herHim])])].");
 							break;
 						case ONE_HORNY:
-							sb.append("[npc.NameIsFull] currently quite horny, but, despite this, [npc.sheIs] not at all happy with [npc.her] current situation, and [npc.is] desperately resisting sex.");
+							sb.append("[npc.NameIsFull] сейчас довольно [npc.genderBasedWord(возбуждён, возбуждена)], но, несмотря на это, [npc.sheIs] совсем не [npc.genderBasedWord(доволен, довольна)] [npc.targetBasedWord(твоей, [npc.her])] текущей ситуацией и отчаянно [npc.targetBasedWord(сопротивляешься, сопротивляется)] сексу.");
 							break;
 						case TWO_AMOROUS:
-							sb.append("[npc.NameIsFull] currently feeling more than a little lustful, but, despite this, [npc.sheIs] not at all happy with [npc.her] current situation, and [npc.is] desperately resisting sex.");
+							sb.append("[npc.NameIsFull] в настоящее время [npc.targetBasedWord(испытываешь, испытывает)] более чем лёгкое влечение, но, несмотря на это, [npc.sheIs] совсем не [npc.genderBasedWord(доволен, довольна)] [npc.targetBasedWord(твоей, [npc.her])] текущей ситуацией и отчаянно [npc.targetBasedWord(сопротивляешься, сопротивляется)] сексу.");
 							break;
 						case THREE_LUSTFUL:
-							sb.append("[npc.NameIsFull] currently burning with lust, but, despite this, [npc.sheIs] not at all happy with [npc.her] current situation, and [npc.is] desperately resisting sex.");
+							sb.append("[npc.NameIsFull] в настоящее время [npc.targetBasedWord(горишь, горит)] страстью, но, несмотря на это, [npc.sheIs] совсем не [npc.genderBasedWord(доволен, довольна)] [npc.targetBasedWord(твоей, [npc.her])] текущей ситуацией и отчаянно [npc.targetBasedWord(сопротивляешься, сопротивляется)] сексу.");
 							break;
 						case FOUR_IMPASSIONED:
-							sb.append("[npc.NameIsFull] completely burning with lust, but, despite this, [npc.sheIs] not at all happy with [npc.her] current situation, and [npc.is] desperately resisting sex.");
+							sb.append("[npc.NameIsFull] полностью [npc.genderBasedWord(охвачен, охвачена)] страстью, но, несмотря на это, [npc.sheIs] совсем не [npc.genderBasedWord(доволен, довольна)] [npc.targetBasedWord(твоей, [npc.her])] текущей ситуацией и отчаянно [npc.targetBasedWord(сопротивляешься, сопротивляется)] сексу.");
 							break;
 						case FIVE_BURNING:
-							sb.append("[npc.NameIsFull] completely overwhelmed with lust, but, despite this, [npc.sheIs] not at all happy with [npc.her] current situation, and [npc.is] desperately resisting sex.");
+							sb.append("[npc.NameIsFull] полностью [npc.genderBasedWord(поглощён, поглощена)] страстью, но, несмотря на это, [npc.sheIs] совсем не [npc.genderBasedWord(доволен, довольна)] [npc.targetBasedWord(твоей, [npc.her])] текущей ситуацией и отчаянно [npc.targetBasedWord(сопротивляешься, сопротивляется)] сексу.");
 							break;
 					}
 					break;

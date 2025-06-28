@@ -1,16 +1,16 @@
 package com.lilithsthrone.game.character.attributes;
 
-import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.race.AbstractRace;
-import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.colours.PresetColour;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.race.AbstractRace;
+import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.utils.Util;
+import com.lilithsthrone.utils.colours.PresetColour;
 
 /**
  * NOTE: Racial attributes are added at the bottom of the static block in Race.java!
@@ -288,7 +288,7 @@ public class Attribute {
 			0,
 			0,
 			100,
-			"arousal",
+			"возбуждение",
 			"Arousal",
 			"arousalIcon",
 			PresetColour.ATTRIBUTE_AROUSAL,
@@ -302,10 +302,10 @@ public class Attribute {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			if(owner.isPlayer())
-				return "How aroused you currently are. You will orgasm when your arousal maxes out.";
+				return "Насколько ты сейчас [pc.genderBasedWord(возбуждён, возбуждена)]. Ты достигнешь оргазма, когда твоё возбуждение достигнет максимума.";
 			else
 				return UtilText.parse(owner,
-						"How aroused [npc.name] is. [npc.She] will orgasm when [npc.her] arousal maxes out.");
+						"Насколько [npc.name] сейчас [pc.genderBasedWord(возбуждён, возбуждена)]. [npc.She] достигнет оргазма, когда [npc.her] возбуждение достигнет максимума.");
 		}
 		@Override
 		public int getOrderPriority() {

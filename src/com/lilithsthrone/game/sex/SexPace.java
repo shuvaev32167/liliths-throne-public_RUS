@@ -11,7 +11,7 @@ public enum SexPace {
 
 	SUB_RESISTING(false, "сопротивляется", BaseColour.CRIMSON),
 	SUB_NORMAL(false, "нормально", BaseColour.PINK),
-	SUB_EAGER(false, "подчиняется", BaseColour.PINK_DEEP),
+	SUB_EAGER(false, "жаждет", BaseColour.PINK_DEEP),
 	
 	DOM_GENTLE(true, "нежно", BaseColour.PINK_LIGHT),
 	DOM_NORMAL(true, "нормально", BaseColour.PINK),

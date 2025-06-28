@@ -778,9 +778,9 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter target) {
 			if (target.isPlayer())
-				return "You aren't aroused at all.";
+				return "Ты вообще не [pc.genderBasedWord(возбуждён, возбуждена)].";
 			else
-				return UtilText.parse(target, "[npc.NameIsFull]n't aroused at all.");
+				return UtilText.parse(target, "[npc.NameIsFull] вообще не [npc.genderBasedWord(возбуждён, возбуждена)]");
 		}
 		@Override
 		public boolean isConditionsMet(GameCharacter target) {
@@ -795,12 +795,12 @@ public class StatusEffect {
 			List<String> effects = new ArrayList<>();
 			if(Main.game.isInSex()) {
 				if(Main.sex.isInForeplay(target)) {
-					effects.add("[style.colourPinkLight(Foreplay)]");
-					effects.add("[style.colourMinorBad(-50%)] arousal gains");
+					effects.add("[style.colourPinkLight(Прелюдия)]");
+					effects.add("[style.colourMinorBad(-50%)] роста возбуждения");
 				} else {
-					effects.add("[style.colourPink(Main Sex)]");
-					effects.add("[style.colourMinorGood(Full)] arousal gains");
-					effects.add(UtilText.parse(target, "<i>Having already orgasmed, [npc.nameIsFull] no longer in foreplay at this arousal level</i>"));
+					effects.add("[style.colourPink(Основной секс)]");
+					effects.add("[style.colourMinorGood(Полный)] рост возбуждения");
+					effects.add(UtilText.parse(target, "<i>Уже достигнув оргазма, [npc.nameIsFull] больше не [npc.targetBasedWord(участвуешь, участвует)] в прелюдии на этом уровне возбуждения.</i>"));
 				}
 			}
 			return effects;
@@ -817,8 +817,8 @@ public class StatusEffect {
 			false,
 			null,
 			Util.newArrayListOfValues(
-					"[style.colourPinkLight(Foreplay)]",
-					"[style.colourMinorBad(-50%)] arousal gains")) {
+					"[style.colourPinkLight(Прелюдия)]",
+					"[style.colourMinorBad(-50%)] роста возбуждения")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(ArousalLevel.ONE_TURNED_ON.getName());
@@ -826,9 +826,9 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter target) {
 			if (target.isPlayer())
-				return "You're starting to get pretty turned on.";
+				return "Ты начинаешь возбуждаться.";
 			else
-				return UtilText.parse(target, "[npc.NameIsFull] starting to get turned on.");
+				return UtilText.parse(target, "[npc.NameIsFull] начинает возбуждаться.");
 		}
 		@Override
 		public boolean isConditionsMet(GameCharacter target) {
@@ -854,8 +854,8 @@ public class StatusEffect {
 			false,
 			null,
 			Util.newArrayListOfValues(
-					"[style.colourPink(Main Sex)]",
-					"[style.colourMinorGood(Full)] arousal gains")) {
+					"[style.colourPink(Основной секс)]",
+					"[style.colourMinorGood(Полный)] рост возбуждения")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(ArousalLevel.TWO_EXCITED.getName());
@@ -863,9 +863,9 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter target) {
 			if (target.isPlayer())
-				return "You're getting quite excited, and your thoughts are now focused on your sexual desires.";
+				return "Ты становишься довольно [pc.genderBasedWord(возбуждённым, возбуждённой)], и твои мысли теперь сосредоточены на твоих сексуальных желаниях.";
 			else
-				return UtilText.parse(target, "[npc.NameIsFull] getting quite excited.");
+				return UtilText.parse(target, "[npc.NameIsFull] начинает сильно возбуждаться.");
 		}
 		@Override
 		public boolean isConditionsMet(GameCharacter target) {
@@ -887,8 +887,8 @@ public class StatusEffect {
 			false,
 			null,
 			Util.newArrayListOfValues(
-					"[style.colourPink(Main Sex)]",
-					"[style.colourMinorGood(Full)] arousal gains")) {
+					"[style.colourPink(Основной секс)]",
+					"[style.colourMinorGood(Полный)] рост возбуждения")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(ArousalLevel.THREE_HEATED.getName());
@@ -896,9 +896,9 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter target) {
 			if (target.isPlayer())
-				return "Things are starting to get pretty heated. You can focus on nothing but the thought of sex.";
+				return "Ситуация начинает накаляться. Ты не можешь сосредоточиться ни на чём, кроме мыслей о сексе.";
 			else
-				return UtilText.parse(target, "[npc.Name] can no longer focus on anything but sex.");
+				return UtilText.parse(target, "[npc.Name] больше не может сосредоточиться ни на чём, кроме секса.");
 		}
 		@Override
 		public boolean isConditionsMet(GameCharacter target) {
@@ -920,8 +920,8 @@ public class StatusEffect {
 			false,
 			null,
 			Util.newArrayListOfValues(
-					"[style.colourPink(Main Sex)]",
-					"[style.colourMinorGood(Full)] arousal gains")) {
+					"[style.colourPink(Основной секс)]",
+					"[style.colourMinorGood(Полный)] рост возбуждения")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(ArousalLevel.FOUR_PASSIONATE.getName());
@@ -929,9 +929,9 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter target) {
 			if (target.isPlayer())
-				return "The only thing you want right now is to reach your climax.";
+				return "Единственное, чего ты сейчас хочешь, это достичь оргазма.";
 			else
-				return UtilText.parse(target, "[npc.NameIsFull] only concerned with reaching [npc.her] climax.");
+				return UtilText.parse(target, "[npc.NameIsFull] [npc.genderBasedWord(заинтересован, заинтересована)] только в достижении [npc.her] оргазма.");
 		}
 		@Override
 		public boolean isConditionsMet(GameCharacter target) {
@@ -953,8 +953,8 @@ public class StatusEffect {
 			false,
 			null,
 			Util.newArrayListOfValues(
-					"[style.colourPink(Main Sex)]",
-					"[style.colourMinorGood(Full)] arousal gains")) {
+					"[style.colourPink(Основной секс)]",
+					"[style.colourMinorGood(Полный)] рост возбуждения")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(ArousalLevel.FIVE_ORGASM_IMMINENT.getName());
@@ -962,9 +962,9 @@ public class StatusEffect {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			if (owner.isPlayer())
-				return "You feel your climax building. You know that it's only going to be a matter of seconds before you orgasm!";
+				return "Чувствуешь, как нарастает оргазм. Знаешь, что до него остались считанные секунды!";
 			else
-				return UtilText.parse(owner, "[npc.NameIsFull] about to reach [npc.her] climax!");
+				return UtilText.parse(owner, "[npc.NameIsFull] собирается достичь [npc.her] оргазма!");
 		}
 		@Override
 		public boolean isConditionsMet(GameCharacter target) {
@@ -1773,7 +1773,7 @@ public class StatusEffect {
 	};
 
 	public static final AbstractStatusEffect BLINDED = new AbstractStatusEffect(90,
-			"Blinded",
+			"Ослепление",
 			"blinded",
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_RED,
@@ -1790,7 +1790,7 @@ public class StatusEffect {
 		public String getDescription(GameCharacter target) {
 			if(target!=null) {
 				return UtilText.parse(target,
-						"[npc.NameHasFull] been effectively blinded, and as such [npc.she] [npc.is] struggling to navigate through [npc.her] surroundings. In this state [npc.she] will be extremely ineffective in combat!");
+						"[npc.NameHasFull] фактически [npc.genderBasedWord(ослеп, ослепла)], и поэтому [npc.she] с трудом [npc.targetBasedWord(ориентируешься, ориентируется)] в окружающей обстановке. В таком состоянии [npc.she] [npc.targetBasedWord(будешь, будет)] крайне неэффективен в бою!");
 			}
 			return "";
 		}
@@ -1801,7 +1801,7 @@ public class StatusEffect {
 	};
 
 	public static final AbstractStatusEffect BLINDED_NEGATED = new AbstractStatusEffect(90,
-			"Blinded (Echo location)",
+			"Ослепление (эхолокация)",
 			"blinded_negated",
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_GREEN,
@@ -1817,7 +1817,7 @@ public class StatusEffect {
 		public String getDescription(GameCharacter target) {
 			if(target!=null) {
 				return UtilText.parse(target,
-						"Although [npc.name] should be effectively blinded, [npc.she] [npc.is] able to effectively navigate through [npc.her] surroundings using [npc.her] echo location ability!");
+						"Хотя [npc.name] [npc.genderBasedWord(должен, должна)] быть фактически [npc.genderBasedWord(ослеплён, ослеплена)], [npc.she] [npc.genderBasedWord(способен, способна)] эффективно ориентироваться в окружающей среде, используя [npc.targetBasedWord(твою, [npc.her])] способность эхолокации!");
 			}
 			return "";
 		}
@@ -1883,7 +1883,7 @@ public class StatusEffect {
 
 
 	public static AbstractStatusEffect SHORT_SIGHTED = new AbstractStatusEffect(90,
-			"impaired vision",
+			"нарушение зрения",
 			"short_sighted",
 			PresetColour.BASE_BLACK,
 			PresetColour.GENERIC_TERRIBLE,
@@ -1898,7 +1898,7 @@ public class StatusEffect {
 		public String getDescription(GameCharacter target) {
 			if(target!=null) {
 				return UtilText.parse(target,
-						"[npc.Name] can't see very well without wearing prescription glasses...");
+						"[npc.Name] плохо [npc.targetBasedWord(видишь, видит)] без очков...");
 			}
 			return "";
 		}
@@ -1911,7 +1911,7 @@ public class StatusEffect {
 		}
 	};
 	public static AbstractStatusEffect ENCHANCED_VISION = new AbstractStatusEffect(90,
-			"enhanced vision",
+			"улучшенное зрение",
 			"perfect_vision",
 			PresetColour.BASE_BLACK,
 			PresetColour.GENERIC_EXCELLENT,
@@ -1926,10 +1926,10 @@ public class StatusEffect {
 			if(target!=null) {
 				if(target.hasPerkAnywhereInTree(Perk.SPECIAL_SHORT_SIGHTED)) {
 					return UtilText.parse(target,
-							"Thanks to the enchanted prescription lenses in [npc.her] glasses, not only is [npc.namePos] visual impairment no longer an issue, but [npc.she] [npc.is] also benefiting from enhanced eyesight!");
+							"Благодаря зачарованным линзам в [npc.targetBasedWord(твоих, [npc.her])] очках, [npc.namePos] больше не [npc.targetBasedWord(страдаешь, страдает)] от проблем со зрением, а [npc.she] даже [npc.genderBasedWord(улучшил, улучшила)] своё зрение!");
 				}
 				return UtilText.parse(target,
-						"Although [npc.she] [npc.do]n't suffer from any kind of visual impairment, the enchanted prescription lenses in [npc.namePos] glasses are enhancing [npc.her] eyesight!");
+						"Хотя [npc.she] не [npc.targetBasedWord(страдаешь, страдает)] никакими нарушениями зрения, зачарованные линзы в очках [npc.morphSingleNameGene([npc.namePos])] улучшают [npc.her] зрение!");
 			}
 			return "";
 		}
