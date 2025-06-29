@@ -1011,7 +1011,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 									owner.getBreastRace(),
 									owner.getBreastType().getNippleType().getBodyCoveringType(owner),
 									owner.isNippleFeral(),
-									Util.capitaliseSentence(Util.intToString(owner.getBreastRows()* 2L))+" "+(owner.getBreastRawSizeValue()>0?(owner.getBreastSize().getCupSizeName() + "-чашка грудей"):(owner.isFeminine()?"плоская грудь":"грудные мышцы"))));
+									Util.capitaliseSentence(Util.intToString(owner.getBreastRows() * 2L)) + " " + (owner.getBreastRawSizeValue() > 0 ? (owner.getBreastSize().getCupSizeName() + "-чашка грудей") : (owner.isFeminine() ? "плоская грудь" : "банки"))));
 						}
 					}
 					if(owner.hasBreastsCrotch() && Main.game.getPlayer().isKnowsCharacterArea(CoverableArea.BREASTS_CROTCH, owner)) {
@@ -1024,7 +1024,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 										+(owner.getBreastRawSizeValue()>0?(owner.getBreastCrotchSize().getCupSizeName() + "-cup "):"flat ")
 										+(owner.getBreastCrotchShape()==BreastShape.UDDERS
 											?("вымя")
-											:"груди рядом с пахом")));
+										: "пахогруди")));
 					}
 					if(Main.game.getPlayer().isKnowsCharacterArea(CoverableArea.PENIS, owner)) {
 						knownAreas++;
@@ -1273,7 +1273,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 							} else {
 								tooltipSB.append(getEmptyBodyPartDiv("Соски",
 										"Неизвестно!",
-										Util.capitaliseSentence(Util.intToString(owner.getBreastRows()* 2L))+" "+(owner.getBreastRawSizeValue()>0?(owner.getBreastSize().getCupSizeName() + "-чашка груди"):(owner.isFeminine()?"плоские груди":"грудные мышцы"))));
+										Util.capitaliseSentence(Util.intToString(owner.getBreastRows() * 2L)) + " " + (owner.getBreastRawSizeValue() > 0 ? (owner.getBreastSize().getCupSizeName() + "-чашка груди") : (owner.isFeminine() ? "плоские груди" : "банки"))));
 							}
 						} else {
 							if(owner.isFeral() && !owner.getFeralAttributes().isBreastsPresent()) {
@@ -1283,7 +1283,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 										owner.getBreastRace(),
 										owner.getBreastType().getNippleType().getBodyCoveringType(owner),
 										owner.isNippleFeral(),
-										Util.capitaliseSentence(Util.intToString(owner.getBreastRows()* 2L))+" "+(owner.getBreastRawSizeValue()>0?(owner.getBreastSize().getCupSizeName() + "-чашка груди"):(owner.isFeminine()?"плоские груди":"грудные мышцы"))));
+										Util.capitaliseSentence(Util.intToString(owner.getBreastRows() * 2L)) + " " + (owner.getBreastRawSizeValue() > 0 ? (owner.getBreastSize().getCupSizeName() + "-чашка груди") : (owner.isFeminine() ? "плоские груди" : "банки"))));
 							}
 						}
 						
@@ -1311,7 +1311,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 												+(owner.getBreastCrotchRawSizeValue()>0?(owner.getBreastCrotchSize().getCupSizeName() + "-чашка "):"плоско ")
 												+(owner.getBreastCrotchShape()==BreastShape.UDDERS
 													?("вымя")
-													:"груди перед промежностью")));
+												: "пахогруди")));
 							} else {
 								tooltipSB.append(getBodyPartDiv(owner, "Соски",
 										owner.getBreastCrotchRace(),
@@ -1321,7 +1321,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 												+(owner.getBreastCrotchRawSizeValue()>0?(owner.getBreastCrotchSize().getCupSizeName() + "-чашка "):"плоско ")
 												+(owner.getBreastCrotchShape()==BreastShape.UDDERS
 													?("вымя")
-													:"груди перед промежностью")));
+												: "пахогруди")));
 							}
 						}
 						
@@ -1923,7 +1923,7 @@ public class TooltipInformationEventListener implements ClonedEventListener<Tool
 						Util.capitaliseSentence(Util.intToString(loadedBody.getBreast().getRows()* 2L))+" "
 								+(loadedBody.getBreast().getRawSizeValue()>0
 								?(loadedBody.getBreast().getSize().getCupSizeName() + "-чашка груди")
-								:(loadedBody.isFeminine()?"плоская грудь":"грудные мышцы"))));
+								: (loadedBody.isFeminine() ? "плоская грудь" : "банки"))));
 			}
 			
 			if(spinneret) {

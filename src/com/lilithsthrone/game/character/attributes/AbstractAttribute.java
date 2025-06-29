@@ -8,6 +8,9 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.utils.SvgUtil;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
+import com.lilithsthrone.utils.translate.russian.Morpher;
+import ru.shuvaev.morpher.tools.enams.Case;
+import ru.shuvaev.morpher.tools.enams.Numeration;
 
 /**
  * @since 0.4
@@ -16,16 +19,16 @@ import com.lilithsthrone.utils.colours.Colour;
  */
 public abstract class AbstractAttribute implements Comparable<AbstractAttribute>{
 
-	private boolean percentage;
-	private int baseValue;
-	private	int lowerLimit;
-	private	int upperLimit;
-	private String name;
-	private String nameAbbreviation;
-	private String positiveEnchantment;
-	private String negativeEnchantment;
-	private Colour colour;
-	private List<String> extraEffects;
+	private final boolean percentage;
+	private final int baseValue;
+	private final int lowerLimit;
+	private final int upperLimit;
+	private final String name;
+	private final String nameAbbreviation;
+	private final String positiveEnchantment;
+	private final String negativeEnchantment;
+	private final Colour colour;
+	private final List<String> extraEffects;
 	private String SVGString;
 	
 	public AbstractAttribute(boolean percentage,
@@ -138,7 +141,7 @@ public abstract class AbstractAttribute implements Comparable<AbstractAttribute>
 			if(!this.getInfiniteDescription().isEmpty()) {
 				returnValue = this.getInfiniteDescription();
 			} else {
-				returnValue = "[style.colourExcellent(Infinite)] <span style='color: "+ this.getColour().toWebHexString()+ ";'>"+ Util.capitaliseSentence(this.getAbbreviatedName())+ "</span>";
+				returnValue = "[style.colourExcellent(Бесконечность>)] <span style='color: " + this.getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(Morpher.morphNoun(this.getAbbreviatedName(), Case.GENITIVUS, Numeration.SINGLE)) + "</span>";
 			}
 			
 		} else {
@@ -148,7 +151,7 @@ public abstract class AbstractAttribute implements Comparable<AbstractAttribute>
 				valueForDisplay = valueForDisplay+"%";
 			}
 			returnValue = (value>0?"[style.colour"+minorColour+"Good(+":"[style.colour"+minorColour+"Bad(")+valueForDisplay+")]"
-					+ " <span style='color:"+this.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(this.getAbbreviatedName())+"</span>";
+					+ " <span style='color:" + this.getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(Morpher.morphCountableNounParam(value, this.getAbbreviatedName())) + "</span>";
 		}
 		
 		if(htmlTag!=null) {

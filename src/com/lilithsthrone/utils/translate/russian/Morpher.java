@@ -1,5 +1,11 @@
 package com.lilithsthrone.utils.translate.russian;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.gender.PronounType;
@@ -8,12 +14,6 @@ import ru.shuvaev.morpher.tools.FactoryMorpherKt;
 import ru.shuvaev.morpher.tools.enams.Case;
 import ru.shuvaev.morpher.tools.enams.Numeration;
 import ru.shuvaev.morpher.tools.type.MorpherType;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.UnaryOperator;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class Morpher {
     private Morpher() {
@@ -24,6 +24,10 @@ public class Morpher {
 
     public static String morphNoun(String text, Case aCase, Numeration numeration) {
         return replaceBetweenHtmlTags(text, string -> WEB_MORPHER.morphNoun(string, aCase, numeration));
+    }
+
+    public static String morphNoun(String text, Case aCase) {
+        return replaceBetweenHtmlTags(text, string -> WEB_MORPHER.morphNoun(string, aCase, WEB_MORPHER.determineGenderAndNumber(string).getSecond()));
     }
 
     public static String morphGender(String text, ru.shuvaev.morpher.tools.enams.Gender gender, Numeration numeration) {
@@ -130,11 +134,32 @@ public class Morpher {
         return replaceBetweenHtmlTags(noun, string -> WEB_MORPHER.morphCountableNoun(count, string, Case.NOMINATIVUS));
     }
 
+    public static String morphCountableNounParam(Number count, String noun) {
+        return replaceBetweenHtmlTags(noun, string -> WEB_MORPHER.morphCountableNounParam(count, string));
+    }
+
     public static String morphParticipleToShortForm(String participle, ru.shuvaev.morpher.tools.enams.Gender gender, Numeration numeration) {
         return WEB_MORPHER.participleToShortForm(participle, gender, numeration);
     }
 
     public static String morphNoun(String world, GameCharacter owner) {
         return morphGender(world, convertGender(owner.getGender()), Numeration.SINGLE);
+    }
+
+    public static String morphGender(String noun, String owner) {
+        final String targetOwner;
+        if (owner.contains("[") && owner.contains("]")) {
+            var p = Pattern.compile(".*\\((.*)\\).*");
+            var m = p.matcher(owner);
+            if (m.find()) {
+                targetOwner = m.group(1);
+            } else {
+                targetOwner = owner;
+            }
+        } else {
+            targetOwner = owner;
+        }
+        final var genderAndNumeration = WEB_MORPHER.determineGenderAndNumber(targetOwner.trim());
+        return replaceBetweenHtmlTags(noun, string -> WEB_MORPHER.morphGender(string, genderAndNumeration.getFirst(), genderAndNumeration.getSecond()));
     }
 }

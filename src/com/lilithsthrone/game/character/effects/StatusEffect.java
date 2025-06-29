@@ -84,6 +84,8 @@ import com.lilithsthrone.world.WorldRegion;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.GenericPlace;
 import com.lilithsthrone.world.places.PlaceType;
+import ru.shuvaev.morpher.tools.enams.Case;
+import ru.shuvaev.morpher.tools.enams.Numeration;
 
 /**
  * @since 0.1.0
@@ -1978,17 +1980,17 @@ public class StatusEffect {
 		@Override
 		public String getName(GameCharacter target) {
 			if(target.isRaceConcealed()) {
-				return "Concealed subspecies bonus";
+				return "Бонус сокрытого подвида";
 			}
 			if(target.getSubspeciesOverride()!=null && target.getSubspeciesOverride()!=target.getSubspecies()) {
 				return target.getSubspeciesOverride().getName(null)+" ("+target.getSubspecies().getName(target.getBody())+")";
 			}
-			return (target.isFeral()?"[style.colourFeral(Feral)] ":"")+target.getSubspecies().getName(target.getBody());
+			return (target.isFeral() ? "[style.colourFeral(Дикий)] " : "") + target.getSubspecies().getName(target.getBody());
 		}
 		@Override
 		public String getDescription(GameCharacter target) {
 			if(target.isRaceConcealed()) {
-				return UtilText.parse(target, "Although [npc.namePos] race is concealed, they're still benefiting from the attribute modifiers...");
+				return UtilText.parse(target, "Хотя раса [npc.namePos] скрыта, [npc.genderBasedWord(он, она)] по-прежнему получают бонусы от модификаторов атрибутов...");
 			}
 			if(target.getSubspeciesOverride()!=null && target.getSubspeciesOverride()!=target.getSubspecies()) {
 				return target.getSubspeciesOverride().getStatusEffectDescription(target);
@@ -2008,7 +2010,7 @@ public class StatusEffect {
 								UtilText.parse(target,
 										"[npc.NameIsFull] "
 										+"<span style='color:"+target.getSubspeciesOverride().getColour(target).toWebHexString()+";'>"+UtilText.addDeterminer(target.getSubspeciesOverride().getName(null))+"</span>"
-										+ " but [npc.she] [npc.verb(appear)] to be "
+												+ " но [npc.she], [npc.genderBasedWord(похож, похожа)],  "
 										+"<span style='color:"+target.getSubspecies().getColour(target).toWebHexString()+";'>"+UtilText.addDeterminer(subspeciesName)+"</span>!")));
 			}
 
@@ -2092,7 +2094,7 @@ public class StatusEffect {
 	};
 
 	public static final AbstractStatusEffect AQUATIC_TAIL_POSITIVE = new AbstractStatusEffect(90,
-			"Aquatic harmony",
+			"Водная гармония",
 			"aquatic_positive",
 			PresetColour.GENERIC_GOOD,
 			PresetColour.BASE_BLUE_LIGHT,
@@ -2103,17 +2105,17 @@ public class StatusEffect {
 					new Value<>(Attribute.CRITICAL_DAMAGE, 15f),
 					new Value<>(Attribute.ENERGY_SHIELDING, 5f)),
 			Util.newArrayListOfValues(
-					"[style.boldBlueLight(Lost legs)]")) {
+					"[style.boldBlueLight(Отсутствующие ноги)]")) {
 		@Override
 		public String applyAdditionEffect(GameCharacter target) {
 			if(!target.isPlayer()) {
 				return "";
 			}
-			return "As you increase your proximity to the nearby body of water, you feel an intense tingling start to run up the length of your legs."
-					+ " Without any further warning of what's about to happen, your muscles involuntarily clench, pressing your legs together and causing you to let out a startled cry."
-					+ " Before you're able to react, your legs rapidly fuse together and transform, and within moments your lower body has assumed its true, tailed form!"
+			return "По мере приближения к ближайшему водоему ты чувствуешь, как по ногам начинает распространяться сильное покалывание."
+					+ " Без какого-либо предупреждения о том, что произойдет, твои мышцы непроизвольно напрягаются, сжимая ноги и заставляя тебя испуганно вскрикнуть."
+					+ " Прежде чем ты успеваешь отреагировать, твои ноги быстро срастаются и трансформируются, и через мгновение нижняя часть твоего тела принимает свою истинную, хвостатую форму!"
 					+ "<p style='text-align:center;'>"
-						+ "[style.italicsMinorBad(You can no longer equip clothing in your leg and foot slots!)]"
+					+ "[style.italicsMinorBad(Ты больше не можешь надевать одежду на ноги и ступни!)]"
 					+ "</p>"
 					+ target.postTransformationCalculation(); // To handle clothing removals
 		}
@@ -2876,7 +2878,7 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 	};
 
 	public static final AbstractStatusEffect WELL_RESTED = new AbstractStatusEffect(80,
-			"well rested",
+			"хорошо [npc.genderBasedWord(отдохнувший, отдохнувшая)]",
 			"wellRested",
 			PresetColour.ATTRIBUTE_HEALTH,
 			PresetColour.ATTRIBUTE_MANA,
@@ -2887,7 +2889,7 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 		@Override
 		public String getDescription(GameCharacter target) {
 			if(target!=null) {
-                return UtilText.parse(target, "After having a good rest, [npc.name] feel full of energy.");
+				return UtilText.parse(target, "После хорошего отдыха [npc.name] [npc.targetBasedWord(чувствуешь, чувствует)] прилив энергии.");
 			} else {
 				return "";
 			}
@@ -2895,7 +2897,7 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 	};
 
 	public static final AbstractStatusEffect WELL_RESTED_BOOSTED = new AbstractStatusEffect(80,
-			"well rested (boosted)",
+			"хорошо [npc.genderBasedWord(отдохнувший, отдохнувшая)] (усиленный)",
 			"wellRestedBoosted",
 			PresetColour.ATTRIBUTE_HEALTH,
 			PresetColour.ATTRIBUTE_MANA,
@@ -2907,9 +2909,9 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 		public String getDescription(GameCharacter target) {
 			if(target!=null) {
 				if(target.hasTrait(Perk.JOB_UNEMPLOYED, true)) {
-                    return UtilText.parse(target, "Thanks to using [npc.her] ability of knowing how to get the most out of a good rest, [npc.name] currently feel full of energy and vigour.");
+					return UtilText.parse(target, "Благодаря [npc.targetBasedWord(твоей, [npc.her])] способности максимально эффективно отдыхать, [npc.name] сейчас [npc.targetBasedWord(чувствуешь, чувствует)] себя [npc.genderBasedWord(полным, полной)] энергии и бодрости.");
 				} else {
-                    return UtilText.parse(target, "Thanks to the upgraded emperor-size bed in [npc.her] room, [npc.name] [npc.has] managed to get a very comfortable rest, and now feel full of energy and vigour.");
+					return UtilText.parse(target, "Благодаря обновленной кровати императорского размера в своей комнате, [npc.morphSingleNameGene([npc.name])] удалось очень комфортно отдохнуть и теперь [npc.targetBasedWord(чувствуешь, чувствует)] себя [npc.genderBasedWord(полным, полной)] энергии и бодрости.");
 				}
 			} else {
 				return "";
@@ -2918,7 +2920,7 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 	};
 
 	public static final AbstractStatusEffect WELL_RESTED_BOOSTED_EXTRA = new AbstractStatusEffect(80,
-			"well rested (extra boosted)",
+			"хорошо [npc.genderBasedWord(отдохнувший, отдохнувшая)] (экстра усиленный)",
 			"wellRestedBoostedExtra",
 			PresetColour.ATTRIBUTE_HEALTH,
 			PresetColour.ATTRIBUTE_MANA,
@@ -2931,7 +2933,7 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 		public String getDescription(GameCharacter target) {
 			if(target!=null) {
 				return UtilText.parse(target,
-                        "Thanks to the upgraded emperor-size bed in [npc.her] room, combined with [npc.her] ability of knowing how best to get a good rest, [npc.name] now feel as though [npc.sheIs] overflowing of energy and vigour.");
+						"Благодаря обновленной кровати императорского размера в своей комнате в сочетании с умением правильно отдыхать, [npc.name] теперь [npc.targetBasedWord(чувствуешь, чувствует)] себя [npc.genderBasedWord(полным, полной)] энергии и сил.");
 
 			} else {
 				return "";
@@ -5892,46 +5894,46 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 			StringBuilder sb = new StringBuilder();
 			
 			if(Main.game.isInSex()) {
-				sb.append("Stretched");
+				sb.append("Растяжение");
 			} else {
-				sb.append("Recovering");
+				sb.append("Восстановление");
 			}
 			
 			if (target.hasVagina() && target.getVaginaRawCapacityValue()!=target.getVaginaStretchedCapacity()){
-				sb.append(" Vagina");
+				sb.append(" вагины");
 				i++;
 			}
 			if (target.getAssRawCapacityValue()!=target.getAssStretchedCapacity()){
-				sb.append(" Anus");
+				sb.append(" ануса");
 				i++;
 			}
 			if (target.getNippleRawCapacityValue()!=target.getNippleStretchedCapacity()){
-				sb.append(" Nipples");
+				sb.append(" сосков");
 				i++;
 			}
 			if (target.hasBreastsCrotch()
 					&& target.getNippleCrotchRawCapacityValue()!=target.getNippleCrotchStretchedCapacity()){
-				sb.append(" Crotch Nipples");
+				sb.append(" паховых сосков");
 				i++;
 			}
 			if (target.hasPenis() && target.getPenisRawCapacityValue()!=target.getPenisStretchedCapacity()){
-				sb.append(" Penile Urethra");
+				sb.append(" уретры члена");
 				i++;
 			}
 			if (target.hasVagina() && target.getVaginaUrethraRawCapacityValue()!=target.getVaginaUrethraStretchedCapacity()){
-				sb.append(" Vaginal Urethra");
+				sb.append(" уретры вагины");
 				i++;
 			}
 			if (target.getFaceRawCapacityValue()!=target.getFaceStretchedCapacity()){
-				sb.append(" Throat");
+				sb.append(" горла");
 				i++;
 			}
 			
 			if(i>1) {
 				if(Main.game.isInSex()) {
-					return "Stretched Orifices";
+					return "Растяжение отверстий";
 				} else {
-					return "Recovering Orifices";
+					return "Восстановление отверстий";
 				}
 			} else {
 				return sb.toString();
@@ -6002,10 +6004,10 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 		private String getRecoveryText(float recoveryModifier) {
 			int minutes = (int) (1/recoveryModifier)/60;
 			int hours = minutes /60;
-			
-			return "Tightens "+Units.size(1)+" every "+(hours>=1
-                    ? (hours) + " hour" + (hours == 1 ? "" : "s") + (minutes % 60 > 0 ? " и " + (minutes % 60) + " minute" + (minutes == 1 ? "" : "s") : "")
-						:(minutes )+" minute"+(minutes==1?"":"s"));
+
+			return "Тугость увеличивается на " + Units.size(1) + (hours > 1 || minutes > 1 ? " каждые " : " каждый ") + (hours >= 1
+					? (hours) + " " + Morpher.morphCountableNoun(hours, "час") + (minutes % 60 > 0 ? " и " + (minutes % 60) + " " + Morpher.morphCountableNoun(minutes % 60, "минута") : "")
+					: (minutes) + " " + Morpher.morphCountableNoun(minutes, "минута"));
 		}
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -6013,65 +6015,65 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 
 			Set<SexAreaOrifice> stretchRecoveryPrevention = new HashSet<>(target.getSexToyOrificePreventingStretchRecovery().keySet());
 			stretchRecoveryPrevention.addAll(target.getSexToyOrificeStretching().keySet());
-			
-			String recoveringText = "recovering";
-			String from1 = "From";
-			String from2 = "to";
+
+			String recoveringText = "Восстановление";
+			String from1 = "От";
+			String from2 = "до";
 			
 			if(Main.game.isInSex()) {
-				recoveringText = "stretched";
-				from1 = "To";
-				from2 = "from";
+				recoveringText = "Растяжение";
+				from1 = "К";
+				from2 = "от";
 			}
 			
 			if (target.hasVagina() && target.getVaginaRawCapacityValue()!=target.getVaginaStretchedCapacity()){
-				recoveringEffects.add("[style.boldVagina(Vagina "+recoveringText+":)]");
+				recoveringEffects.add("[style.boldVagina(" + recoveringText + " вагины:)]");
 				recoveringEffects.add(from1+" [style.boldBad("+Units.size(target.getVaginaStretchedCapacity())+")] "+from2+" [style.boldGood("+Units.size(target.getVaginaRawCapacityValue())+")]");
 				if(stretchRecoveryPrevention.contains(SexAreaOrifice.VAGINA)) {
-					recoveringEffects.add("[style.boldBad(Sex toy preventing recovery!)]");
+					recoveringEffects.add("[style.boldBad(Секс-игрушка мешает восстановлению!)]");
 				} else {
 					recoveringEffects.add("[style.boldPlasticity("+getRecoveryText(target.getVaginaPlasticity().getRecoveryModifier())+")]");
 				}
 			}
 			if (target.getAssRawCapacityValue()!=target.getAssStretchedCapacity()){
-				recoveringEffects.add("[style.boldAsshole(Asshole "+recoveringText+":)]");
+				recoveringEffects.add("[style.boldAsshole(" + recoveringText + " анала:)]");
 				recoveringEffects.add(from1+" [style.boldBad("+Units.size(target.getAssStretchedCapacity())+")] "+from2+" [style.boldGood("+Units.size(target.getAssRawCapacityValue())+")]");
 				if(stretchRecoveryPrevention.contains(SexAreaOrifice.ANUS)) {
-					recoveringEffects.add("[style.boldBad(Sex toy preventing recovery!)]");
+					recoveringEffects.add("[style.boldBad(Секс-игрушка мешает восстановлению!)]");
 				} else {
 					recoveringEffects.add("[style.boldPlasticity("+getRecoveryText(target.getAssPlasticity().getRecoveryModifier())+")]");
 				}
 			}
 			if (target.getNippleRawCapacityValue()!=target.getNippleStretchedCapacity()){
-				recoveringEffects.add("[style.boldNipples(Nipples "+recoveringText+":)]");
+				recoveringEffects.add("[style.boldNipples(" + recoveringText + " сосков:)]");
 				recoveringEffects.add(from1+" [style.boldBad("+Units.size(target.getNippleStretchedCapacity())+")] "+from2+" [style.boldGood("+Units.size(target.getNippleRawCapacityValue())+")]");
 				if(stretchRecoveryPrevention.contains(SexAreaOrifice.NIPPLE)) {
-					recoveringEffects.add("[style.boldBad(Sex toy preventing recovery!)]");
+					recoveringEffects.add("[style.boldBad(Секс-игрушка мешает восстановлению!)]");
 				} else {
 					recoveringEffects.add("[style.boldPlasticity("+getRecoveryText(target.getNipplePlasticity().getRecoveryModifier())+")]");
 				}
 			}
 			if (target.getFaceRawCapacityValue()!=target.getFaceStretchedCapacity()){
-				recoveringEffects.add("[style.boldMouth(Throat "+recoveringText+":)]");
+				recoveringEffects.add("[style.boldMouth(" + recoveringText + " горла:)]");
 				recoveringEffects.add(from1+" [style.boldBad("+Units.size(target.getFaceStretchedCapacity())+")] "+from2+" [style.boldGood("+Units.size(target.getFaceRawCapacityValue())+")]");
 				if(stretchRecoveryPrevention.contains(SexAreaOrifice.MOUTH)) {
-					recoveringEffects.add("[style.boldBad(Sex toy preventing recovery!)]");
+					recoveringEffects.add("[style.boldBad(Секс-игрушка мешает восстановлению!)]");
 				} else {
 					recoveringEffects.add("[style.boldPlasticity("+getRecoveryText(target.getFacePlasticity().getRecoveryModifier())+")]");
 				}
 			}
 			if (target.hasBreastsCrotch() && target.hasBreastsCrotch() && target.getNippleCrotchRawCapacityValue()!=target.getNippleCrotchStretchedCapacity()){
-				recoveringEffects.add("[style.boldNipplesCrotch(Crotch nipples "+recoveringText+":)]");
+				recoveringEffects.add("[style.boldNipplesCrotch(" + recoveringText + " паховых сосков:)]");
 				recoveringEffects.add(from1+" [style.boldBad("+Units.size(target.getNippleCrotchStretchedCapacity())+")] "+from2+" [style.boldGood("+Units.size(target.getNippleCrotchRawCapacityValue())+")]");
 				recoveringEffects.add("[style.boldPlasticity("+getRecoveryText(target.getNippleCrotchPlasticity().getRecoveryModifier())+")]");
 			}
 			if (target.hasPenis() && target.getPenisRawCapacityValue()!=target.getPenisStretchedCapacity()){
-				recoveringEffects.add("[style.boldPenisUrethra(Penile Urethra "+recoveringText+":)]");
+				recoveringEffects.add("[style.boldPenisUrethra(" + recoveringText + " уретры члена:)]");
 				recoveringEffects.add(from1+" [style.boldBad("+Units.size(target.getPenisStretchedCapacity())+")] "+from2+" [style.boldGood("+Units.size(target.getPenisRawCapacityValue())+")]");
 				recoveringEffects.add("[style.boldPlasticity("+getRecoveryText(target.getUrethraPlasticity().getRecoveryModifier())+")]");
 			}
 			if (target.hasVagina() && target.getVaginaUrethraRawCapacityValue()!=target.getVaginaUrethraStretchedCapacity()){
-				recoveringEffects.add("[style.boldVaginaUrethra(Vaginal Urethra "+recoveringText+":)]");
+				recoveringEffects.add("[style.boldVaginaUrethra(" + recoveringText + " уретры вагины:)]");
 				recoveringEffects.add(from1+" [style.boldBad("+Units.size(target.getVaginaUrethraStretchedCapacity())+")] "+from2+" [style.boldGood("+Units.size(target.getVaginaUrethraRawCapacityValue())+")]");
 				recoveringEffects.add("[style.boldPlasticity("+getRecoveryText(target.getVaginaUrethraPlasticity().getRecoveryModifier())+")]");
 			}
@@ -6081,44 +6083,45 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 		}
 		@Override
 		public String getDescription(GameCharacter target) {
-			
-			StringBuilder descriptionSB = new StringBuilder("After being forced to accommodate");
+
+			StringBuilder descriptionSB = new StringBuilder("После вынужденного приспособления");
 			
 			List<String> orificesRecovering = new ArrayList<>();
 			boolean plural = false;
 			if (target.hasVagina() && target.getVaginaRawCapacityValue()!=target.getVaginaStretchedCapacity()){
-				orificesRecovering.add("[style.boldVagina(vagina)]");
+				orificesRecovering.add("[style.boldVagina(вагина)]");
 			}
 			if (target.getAssRawCapacityValue()!=target.getAssStretchedCapacity()){
-				orificesRecovering.add("[style.boldAnus(asshole)]");
+				orificesRecovering.add("[style.boldAnus(анал)]");
 			}
 			if (target.getFaceRawCapacityValue()!=target.getFaceStretchedCapacity()){
-				orificesRecovering.add("[style.boldMouth(throat)]");
+				orificesRecovering.add("[style.boldMouth(горло)]");
 			}
 			if (target.getNippleRawCapacityValue()!=target.getNippleStretchedCapacity()){
-				orificesRecovering.add("[style.boldNipple(nipples)]");
+				orificesRecovering.add("[style.boldNipple(соски)]");
 				plural = true;
 			}
 			if (target.hasBreastsCrotch() && target.getNippleCrotchRawCapacityValue()!=target.getNippleCrotchStretchedCapacity()){
-				orificesRecovering.add("[style.boldNipplesCrotch(crotch nipples)]");
+				orificesRecovering.add("[style.boldNipplesCrotch(паховые соски)]");
 				plural = true;
 			}
 			if (target.hasPenis() && target.getPenisRawCapacityValue()!=target.getPenisStretchedCapacity()){
-				orificesRecovering.add("[style.boldPenisUrethra(penile urethra)]");
+				orificesRecovering.add("[style.boldPenisUrethra(уретра члена)]");
 			}
 			if (target.hasVagina() && target.getVaginaUrethraRawCapacityValue()!=target.getVaginaUrethraStretchedCapacity()){
-				orificesRecovering.add("[style.boldVaginaUrethra(vaginal urethra)]");
+				orificesRecovering.add("[style.boldVaginaUrethra(уретра вагины)]");
 			}
+			final var isPlayer = target.isPlayer();
 			if(orificesRecovering.size()==1) {
-				descriptionSB.append(" an object that was far too big for "+(plural?"them":"it")+", [npc.namePos] "+orificesRecovering.get(0)+" "+(plural?"have":"has")
-						+" been stretched out, and "+(plural?"need":"needs")+" some time in which to recover all of "+(plural?"their":"its")+" natural tightness.");
+				descriptionSB.append(" к предмету, слишком большому для " + (isPlayer ? Morpher.morphGender("твой", orificesRecovering.get(0)) + " " : "") + Morpher.morphNoun(orificesRecovering.get(0), Case.GENITIVUS, plural ? Numeration.PLURAL : Numeration.SINGLE) + (isPlayer ? ", " : " [npc.morphSingleNameGene([npc.namePos])], ")
+						+ Morpher.morphGender("он был растянут", orificesRecovering.get(0)) + ", нужно время для восстановления естественной тугости.");
 			} else {
-				descriptionSB.append(" phallic objects that were far too big for them, [npc.namePos] "+Util.stringsToStringList(orificesRecovering, false)
-						+" have been stretched out, and need some time in which to recover all of their natural tightness.");
+				descriptionSB.append(" к фаллическим предметам, слишком большим для " + (isPlayer ? "твои " : "") + "[pc.morphAutoGent(" + Util.stringsToStringList(orificesRecovering, false) + ")]" + (isPlayer ? "," : " [npc.morphSingleNameGene([npc.namePos])],")
+						+ " они были растянуты, нужно время для восстановления естественной тугости.");
 			}
 
 			if(Main.game.isInSex()) {
-				descriptionSB.append(" [style.italicsBad(Orifices do not recover during sex scenes!)]");
+				descriptionSB.append(" [style.italicsBad(Отверстия не восстанавливаются во время сексуальных сцен!)]");
 			}
 			
 			return UtilText.parse(target, descriptionSB.toString());
@@ -12194,21 +12197,21 @@ public static final AbstractStatusEffect ORIENTATION_ANDROPHILIC = new AbstractS
 //				modList.add(UtilText.parse(target, "<b>[npc.NamePos] Preferences:</b>"));
 
 				modList.add(UtilText.parse(target, targetedCharacter,
-										"[style.italics"+(Main.sex.isInForeplay(target)?"PinkLight(<b>Foreplay</b>: ":"Disabled(Foreplay: ")
+						"[style.italics" + (Main.sex.isInForeplay(target) ? "PinkLight(<b>Прелюдия</b>: " : "Disabled(Прелюдия: ")
 											+ (foreplayPreference!=null
-													?"[npc.Her] "+foreplayPreference.getPerformingSexArea().getName(target, true)+" and [npc2.namePos] "+foreplayPreference.getTargetedSexArea().getName(targetedCharacter, true)+"."
-													:"[npc.She] [npc.has] no preference...")
+								? "[npc.TargetBasedWord(" + Morpher.morphGender("твой", foreplayPreference.getPerformingSexArea().getName(target, true)) + ", [npc.Her])] " + foreplayPreference.getPerformingSexArea().getName(target, true) + " и [npc2.targetBasedWord(" + Morpher.morphGender("твой", foreplayPreference.getTargetedSexArea().getName(targetedCharacter, true)) + " " + foreplayPreference.getTargetedSexArea().getName(targetedCharacter, true) + ", " + foreplayPreference.getTargetedSexArea().getName(targetedCharacter, true) + " [npc2.morphSingleNameGene([npc2.namePos])])]."
+								: "У [npc.targetBasedWord(тебя, н[npc.her])] нет предпочтений...")
 											+ ")]"));
 				modList.add(UtilText.parse(target, targetedCharacter,
-										"[style.italics"+(!Main.sex.isInForeplay(target)?"Pink(<b>Sex</b>: ":"Disabled(Sex: ")
+						"[style.italics" + (!Main.sex.isInForeplay(target) ? "Pink(<b>Секс</b>: " : "Disabled(Секс: ")
 											+ (mainPreference!=null
-													?"[npc.Her] "+mainPreference.getPerformingSexArea().getName(target, true)+" and [npc2.namePos] "+mainPreference.getTargetedSexArea().getName(targetedCharacter, true)+"."
-													:"[npc.She] [npc.has] no preference...")
+								? "[npc.TargetBasedWord(" + Morpher.morphGender("твой", mainPreference.getPerformingSexArea().getName(target, true)) + ", [npc.Her])] " + mainPreference.getPerformingSexArea().getName(target, true) + " и [npc2.targetBasedWord(" + Morpher.morphGender("твой", mainPreference.getTargetedSexArea().getName(targetedCharacter, true)) + " " + mainPreference.getTargetedSexArea().getName(targetedCharacter, true) + ", " + mainPreference.getTargetedSexArea().getName(targetedCharacter, true) + " [npc2.morphSingleNameGene([npc2.namePos])])]."
+								: "У [npc.targetBasedWord(тебя, н[npc.her])] нет предпочтений...")
 											+ ")]"));
 				modList.add(UtilText.parse(target, targetedCharacter,
 										Main.sex.isCharacterObeyingTarget(target, Main.game.getPlayer())
-										?"[style.italicsMinorGood([npc.She] will listen to your requests.)]"
-										:"[style.italicsMinorBad([npc.She] will ignore all of your requests.)]"));
+												? "[style.italicsMinorGood([npc.She] [npc.targetBasedWord(будешь, будет)] прислушиваться к [npc.targetBasedWord(своим, твоим)] просьбам.)]"
+												: "[style.italicsMinorBad([npc.She] [npc.targetBasedWord(будешь, будет)] игнорировать все твои просьбы.)]"));
 			}
 
 			return modList;

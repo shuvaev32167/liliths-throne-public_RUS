@@ -250,7 +250,7 @@ public abstract class AbstractBreastType implements BodyPartTypeInterface {
 			
 		} else {
 			if(namesFlatPlural==null || namesFlatPlural.isEmpty()) {
-				return UtilText.returnStringAtRandom("грудные мышцы");
+				return UtilText.returnStringAtRandom("банки");
 			}
 			return Util.randomItemFrom(namesFlatPlural);
 		}

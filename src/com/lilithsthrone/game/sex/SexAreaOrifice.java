@@ -24,7 +24,7 @@ public enum SexAreaOrifice implements SexAreaInterface {
 		@Override
 		public String getName(GameCharacter owner, boolean standardName) {
 			if(standardName) {
-				return "pussy";
+				return "киска";
 			}
 			return owner.getVaginaName(false);
 		}
@@ -340,7 +340,7 @@ public enum SexAreaOrifice implements SexAreaInterface {
 		@Override
 		public String getName(GameCharacter owner, boolean standardName) {
 			if(standardName) {
-				return "asshole";
+				return "анус";
 			}
 			return owner.getAnusName(false);
 		}
@@ -653,9 +653,9 @@ public enum SexAreaOrifice implements SexAreaInterface {
 		public String getName(GameCharacter owner, boolean standardName) {
 			// Changed from "ass cheeks" to "ass" in v0.4.10.8
 			if(standardName) {
-				return "ass";
+				return "жопа";
 			}
-			return "ass";
+			return "жопа";
 //			return owner.getAssName(false);
 		}
 		@Override
@@ -846,7 +846,7 @@ public enum SexAreaOrifice implements SexAreaInterface {
 		@Override
 		public String getName(GameCharacter owner, boolean standardName) {
 			if(standardName) {
-				return "mouth";
+				return "рот";
 			}
 			return owner.getMouthName(false);
 		}
@@ -1151,7 +1151,7 @@ public enum SexAreaOrifice implements SexAreaInterface {
 		@Override
 		public String getName(GameCharacter owner, boolean standardName) {
 			if(standardName) {
-				return "nipple";
+				return "сосок";
 			}
 			return owner.getNippleName();
 		}
@@ -1429,7 +1429,7 @@ public enum SexAreaOrifice implements SexAreaInterface {
 				if(owner.hasBreasts()) {
 					return "груди";
 				} else {
-					return "грудные мышцы";
+					return "банки";
 				}
 			}
 			return owner.getBreastName();
@@ -1656,7 +1656,7 @@ public enum SexAreaOrifice implements SexAreaInterface {
 		@Override
 		public String getName(GameCharacter owner, boolean standardName) {
 			if(standardName) {
-				return "teat";
+				return "пахососок";
 			}
 			return owner.getNippleCrotchName();
 		}
@@ -1933,7 +1933,7 @@ public enum SexAreaOrifice implements SexAreaInterface {
 		@Override
 		public String getName(GameCharacter owner, boolean standardName) {
 			if(standardName) {
-				return "crotch-boobs";
+				return "пахгруди";
 			}
 			return owner.getBreastCrotchName();
 		}
@@ -2163,9 +2163,9 @@ public enum SexAreaOrifice implements SexAreaInterface {
 		@Override
 		public String getName(GameCharacter owner, boolean standardName) {
 			if(standardName) {
-				return "thighs";
+				return "бёдра";
 			}
-			return "thighs";
+			return "бёдра";
 		}
 		@Override
 		public boolean isFree(GameCharacter owner) {
@@ -2283,9 +2283,9 @@ public enum SexAreaOrifice implements SexAreaInterface {
 		@Override
 		public String getName(GameCharacter owner, boolean standardName) {
 			if(standardName) {
-				return "armpits";
+				return "подмышки";
 			}
-			return "armpits";
+			return "подмышки";
 		}
 		@Override
 		public boolean isFree(GameCharacter owner) {
@@ -2441,9 +2441,9 @@ public enum SexAreaOrifice implements SexAreaInterface {
 		@Override
 		public String getName(GameCharacter owner, boolean standardName) {
 			if(standardName) {
-				return "vaginal urethra";
+				return "вагинальная уретра";
 			}
-			return "urethra";
+			return "уретра";
 		}
 		@Override
 		public boolean isFree(GameCharacter owner) {
@@ -2639,9 +2639,9 @@ public enum SexAreaOrifice implements SexAreaInterface {
 		@Override
 		public String getName(GameCharacter owner, boolean standardName) {
 			if(standardName) {
-				return "penile urethra";
+				return "уретра члена";
 			}
-			return "urethra";
+			return "уретра";
 		}
 		@Override
 		public boolean isFree(GameCharacter owner) {
@@ -2838,7 +2838,7 @@ public enum SexAreaOrifice implements SexAreaInterface {
 			true) {
 		@Override
 		public String getName(GameCharacter owner, boolean standardName) {
-			return "spinneret";
+			return "спиннерет";
 		}
 		@Override
 		public boolean isFree(GameCharacter owner) {

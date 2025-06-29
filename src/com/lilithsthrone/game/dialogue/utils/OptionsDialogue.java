@@ -1,5 +1,18 @@
 package com.lilithsthrone.game.dialogue.utils;
 
+import java.awt.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Properties;
+
 import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInformationEventListener;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
@@ -10,7 +23,11 @@ import com.lilithsthrone.game.character.body.valueEnums.Lactation;
 import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishPreference;
-import com.lilithsthrone.game.character.gender.*;
+import com.lilithsthrone.game.character.gender.AndrogynousIdentification;
+import com.lilithsthrone.game.character.gender.Gender;
+import com.lilithsthrone.game.character.gender.GenderNames;
+import com.lilithsthrone.game.character.gender.GenderPronoun;
+import com.lilithsthrone.game.character.gender.PronounType;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.persona.SexualOrientationPreference;
@@ -23,7 +40,12 @@ import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
 import com.lilithsthrone.game.dialogue.story.CharacterCreation;
-import com.lilithsthrone.game.settings.*;
+import com.lilithsthrone.game.settings.ContentPreferenceValue;
+import com.lilithsthrone.game.settings.DifficultyLevel;
+import com.lilithsthrone.game.settings.ForcedFetishTendency;
+import com.lilithsthrone.game.settings.ForcedTFTendency;
+import com.lilithsthrone.game.settings.KeyCodeWithModifiers;
+import com.lilithsthrone.game.settings.KeyboardAction;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.Artist;
 import com.lilithsthrone.rendering.ArtistWebsite;
@@ -34,15 +56,6 @@ import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
-
-import java.awt.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.*;
-import java.util.List;
-import java.util.Map.Entry;
 
 /**
  * @since 0.1.0
@@ -2805,8 +2818,8 @@ public class OptionsDialogue {
 			
 			UtilText.nodeContentSB.append(getContentPreferenceDiv("SEXUAL_UDDERS",
 					PresetColour.BASE_ORANGE_LIGHT,
-					"Грудь перед промежностью & вымя",
-					"Включает связанные секс действия и превращения. (Под `Грудь перед промежностью`, подразумеваются виды у которых грудь находится там же где и вымя у коровы).",
+					"Пахогрудь & вымя",
+					"Включает связанные секс действия и превращения. (Под `Пахогрудью`, подразумевается виды у которых грудь находится там же где и вымя у коровы).",
 					Main.getProperties().hasValue(PropertyValue.udderContent)));
 			
 			UtilText.nodeContentSB.append(getContentPreferenceDiv("URETHRAL",
@@ -2979,8 +2992,8 @@ public class OptionsDialogue {
 						+com.lilithsthrone.game.Properties.multiBreastsLabels[i]+")]</div>");
 			}
 			UtilText.nodeContentSB.append("</div></div>");
-			
-			UtilText.nodeContentSB.append(getCustomContentPreferenceDivStart(PresetColour.NIPPLES_CROTCH, "Грудь перед промежностью & Вымя", "Выберите будет ли вымя и грудь перед промежностью у фурри и тавров которые должны иметь их."));
+
+			UtilText.nodeContentSB.append(getCustomContentPreferenceDivStart(PresetColour.NIPPLES_CROTCH, "Пахогрудь & Вымя", "Выберите будет ли вымя и пахогрудь у фурри и тавров которые должны иметь их."));
 			for (int i = com.lilithsthrone.game.Properties.uddersLabels.length-1; i>=0; i--) {
 				UtilText.nodeContentSB.append("<div id='UDDER_PREFERENCE_"+i+"' class='normal-button"+(Main.getProperties().getUddersLevel() == i?" selected":"")+"' style='width:calc(33% - 8px); margin-right:8px; text-align:center; float:right;'>"
 						+(Main.getProperties().getUddersLevel() == i

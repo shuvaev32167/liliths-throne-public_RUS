@@ -437,7 +437,7 @@ public class Breast implements BodyPartInterface {
 								?"lowest pair of [npc.breasts]"
 								:"lowest "+Util.intToString(rowsDifference)+" pairs of [npc.breasts]")
 							+ " rapidly shrink away and [style.boldShrink(disappear)] into the [npc.skin] of [npc.her] torso.<br/>"
-								+ "[npc.Name] now [npc.has] [style.boldSex(" + Util.intToString(rows) + " pair" + (rows > 1 ? "s" : "") + " of " + (hasBreasts() ? "груди" : "грудные мышцы") + ")]!"
+								+ "[npc.Name] now [npc.has] [style.boldSex(" + Util.intToString(rows) + " pair" + (rows > 1 ? "s" : "") + " of " + (hasBreasts() ? "груди" : "банки") + ")]!"
 						+ "</p>");
 			
 		} else if (rows > getRows()) {
@@ -448,7 +448,7 @@ public class Breast implements BodyPartInterface {
 								?"an extra pair of [npc.breasts]"
 								:Util.intToString(rowsDifference)+" extra pairs of [npc.breasts]")
 							+ " rapidly [style.boldGrow(grow)] out of the [npc.skin] of [npc.her] torso.<br/>"
-								+ "[npc.Name] now [npc.has] [style.boldSex(" + Util.intToString(rows) + " pair" + (rows > 1 ? "s" : "") + " of " + (hasBreasts() ? "груди" : "грудные мышцы") + ")]!"
+								+ "[npc.Name] now [npc.has] [style.boldSex(" + Util.intToString(rows) + " pair" + (rows > 1 ? "s" : "") + " of " + (hasBreasts() ? "груди" : "банки") + ")]!"
 						+ "</p>");
 		}
 
@@ -494,7 +494,7 @@ public class Breast implements BodyPartInterface {
                             + "[npc.Name] feel a strange tingling sensation running just beneath the surface of the [npc.breastSkin] that covers [npc.her] [npc.breasts]."
 						+ " A shocked gasp bursts from [npc.her] mouth as the force shoots up into [npc.her] [npc.nipples],"
                             + " and [npc.she] continue [npc.moaning] as some of them [style.boldShrink(shrink)] into the flesh of [npc.her] [npc.breasts].<br/>"
-							+ "[npc.Name] now [npc.has] [style.boldSex(" + Util.intToString(nippleCountPerBreast) + " " + (nippleCountPerBreast > 1 ? "[npc.nipples]" : "[npc.nipple(true)]") + " on each of [npc.her] " + (hasBreasts() ? "груди" : "грудные мышцы") + ")]!"
+							+ "[npc.Name] now [npc.has] [style.boldSex(" + Util.intToString(nippleCountPerBreast) + " " + (nippleCountPerBreast > 1 ? "[npc.nipples]" : "[npc.nipple(true)]") + " on each of [npc.her] " + (hasBreasts() ? "груди" : "банки") + ")]!"
 					+ "</p>");
 			
 		} else if (nippleCountPerBreast > getNippleCountPerBreast()) {
@@ -503,7 +503,7 @@ public class Breast implements BodyPartInterface {
                             + "[npc.Name] feel a strange tingling sensation running just beneath the surface of the [npc.breastSkin] that covers [npc.her] [npc.breasts]."
 						+ " A shocked gasp bursts from [npc.her] mouth as the force shoots up into [npc.her] [npc.nipples],"
                             + " and [npc.she] continue [npc.moaning] as [npc.she] feels new ones [style.boldGrow(growing)] out of the flesh of [npc.her] [npc.breasts].<br/>"
-							+ "[npc.Name] now [npc.has] [style.boldSex(" + Util.intToString(nippleCountPerBreast) + " " + (nippleCountPerBreast > 1 ? "[npc.nipples]" : "[npc.nipple(true)]") + " on each of [npc.her] " + (hasBreasts() ? "груди" : "грудные мышцы") + ")]!"
+							+ "[npc.Name] now [npc.has] [style.boldSex(" + Util.intToString(nippleCountPerBreast) + " " + (nippleCountPerBreast > 1 ? "[npc.nipples]" : "[npc.nipple(true)]") + " on each of [npc.her] " + (hasBreasts() ? "груди" : "банки") + ")]!"
 					+ "</p>");
 			
 		}

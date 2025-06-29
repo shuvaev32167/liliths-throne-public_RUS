@@ -18,7 +18,7 @@ public enum SexAreaPenetration implements SexAreaInterface {
 		@Override
 		public String getName(GameCharacter owner, boolean standardName) {
 			if(standardName) {
-				return "cock";
+				return "елдак";
 			}
 			return owner.getPenisName();
 		}
@@ -962,7 +962,7 @@ public enum SexAreaPenetration implements SexAreaInterface {
 		@Override
 		public String getName(GameCharacter owner, boolean standardName) {
 			if(standardName) {
-				return "clit";
+				return "клитор";
 			}
 			return owner.getClitorisName(false);
 		}
@@ -1652,7 +1652,7 @@ public enum SexAreaPenetration implements SexAreaInterface {
 		@Override
 		public String getName(GameCharacter owner, boolean standardName) {
 			if(standardName) {
-				return "tongue";
+				return "язык";
 			}
 			return owner.getTongueName();
 		}
@@ -2102,7 +2102,7 @@ public enum SexAreaPenetration implements SexAreaInterface {
 		@Override
 		public String getName(GameCharacter owner, boolean standardName) {
 			if(standardName) {
-				return "fingers";
+				return "пальцы";
 			}
 			return owner.getArmType().getFingersNamePlural(owner);
 		}
@@ -2562,7 +2562,7 @@ public enum SexAreaPenetration implements SexAreaInterface {
 		@Override
 		public String getName(GameCharacter owner, boolean standardName) {
 			if(standardName) {
-				return "foot";
+				return "нога";
 			}
 			return owner.getLegType().getFootNameSingular(owner);
 		}
@@ -2740,7 +2740,7 @@ public enum SexAreaPenetration implements SexAreaInterface {
 		@Override
 		public String getName(GameCharacter owner, boolean standardName) {
 			if(standardName || owner.getLegConfiguration()==LegConfiguration.TAIL_LONG) {
-				return "tail";
+				return "хвост";
 			}
 			return owner.getTailName();
 		}
@@ -3244,7 +3244,7 @@ public enum SexAreaPenetration implements SexAreaInterface {
 		@Override
 		public String getName(GameCharacter owner, boolean standardName) {
 			if(standardName) {
-				return "tentacle";
+				return "щупальце";
 			}
 			return owner.getTentacleName(false);
 		}

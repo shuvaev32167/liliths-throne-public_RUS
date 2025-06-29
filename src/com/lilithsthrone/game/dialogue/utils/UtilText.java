@@ -647,7 +647,7 @@ public class UtilText {
 	public static String getRequirementsDescription(CorruptionLevel corruptionNeeded, AbstractPerk... perkRequired) {
 		descriptionSB.setLength(0);
 
-		descriptionSB.append("Тебе нужен уровень развращённсти -  <b style='color:" + corruptionNeeded.getColour().toWebHexString() + ";'>" + Morpher.morphNoun(corruptionNeeded.getName(), Main.game.getPlayer()) + "</b>");
+		descriptionSB.append("Тебе нужен уровень развращённости -  <b style='color:" + corruptionNeeded.getColour().toWebHexString() + ";'>" + Morpher.morphNoun(corruptionNeeded.getName(), Main.game.getPlayer()) + "</b>");
 		
 		if(perkRequired.length==0) {
 			descriptionSB.append(".");

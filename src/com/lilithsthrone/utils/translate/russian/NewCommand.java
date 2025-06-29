@@ -1,5 +1,11 @@
 package com.lilithsthrone.utils.translate.russian;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.BooleanSupplier;
+import java.util.stream.Collectors;
+
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.dialogue.utils.ParserCommand;
@@ -7,12 +13,6 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
 import ru.shuvaev.morpher.tools.enams.Case;
 import ru.shuvaev.morpher.tools.enams.Numeration;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.BooleanSupplier;
-import java.util.stream.Collectors;
 
 import static com.lilithsthrone.utils.translate.russian.Morpher.convertGender;
 
@@ -113,7 +113,7 @@ public class NewCommand {
                 true,
                 false,
                 "(word)",
-                "Слово во множественном числе, родитльского падежа") {
+                "Слово во множественном числе, родительского падежа") {
             @Override
             public String parse(List<GameCharacter> specialNPCs, String command, String arguments, String target, GameCharacter character) {
                 return Optional.ofNullable(arguments)
@@ -197,7 +197,7 @@ public class NewCommand {
                 true,
                 false,
                 "(word)",
-                "Слово в единственном числе, родитльского падежа") {
+                "Слово в единственном числе, родительского падежа") {
             @Override
             public String parse(List<GameCharacter> specialNPCs, String command, String arguments, String target, GameCharacter character) {
                 return Optional.ofNullable(arguments)
@@ -287,6 +287,27 @@ public class NewCommand {
                 return Optional.ofNullable(arguments)
                         .map(string -> Morpher.parseText(specialNPCs, command, arguments, target, character))
                         .map(string -> Morpher.morphNoun(string, Case.PRAEPOSITIONALIS, Numeration.SINGLE))
+                        .map(word -> {
+                            if (isCapitalise.getAsBoolean()) {
+                                return Util.capitaliseSentence(word);
+                            } else {
+                                return word;
+                            }
+                        }).orElse("");
+            }
+        });
+
+        UtilText.COMMANDS_LIST.add(new ParserCommand(
+                Util.newArrayListOfValues("morphAutoGent"),
+                true,
+                false,
+                "(word)",
+                "Слово в авторасчитанным числе, родительского падежа") {
+            @Override
+            public String parse(List<GameCharacter> specialNPCs, String command, String arguments, String target, GameCharacter character) {
+                return Optional.ofNullable(arguments)
+                        .map(string -> Morpher.parseText(specialNPCs, command, arguments, target, character))
+                        .map(string -> Morpher.morphNoun(string, Case.GENITIVUS))
                         .map(word -> {
                             if (isCapitalise.getAsBoolean()) {
                                 return Util.capitaliseSentence(word);
